@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="promptEvaluatorDetectionBug"><![CDATA[
+        If the detection of the operating system, SWFTOOLS or TYPO3 version isn't proper, please send a mail to
+        <a href="http://wildt.at.die-netzmacher.de/" 
+          alt="wildt.at.die-netzmacher.de"
+          title="wildt.at.die-netzmacher.de"
+          target="_blank">
+          Dirk Wildt (Die Netzmacher)</a>
+      ]]></label>
+      <label index="promptEvaluatorTYPO3version45smaller">Your are using a TYPO3 version smaller than 4.5. Flip it! isn't tested in this version. Try it!</label>
+      <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Please iclude the static template [+Flip it!: Basis for TYPO3 < 4.7 (obligate!)]]]></label>
+      <label index="promptEvaluatorTYPO3version46smaller">You are using TYPO3 4.5. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version47smaller">You are using TYPO3 4.6. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version48orGreater">You are using TYPO3 greater than 4.7. Flip it! isn't tested in this version. Try it!</label>
+      <label index="promptExternalLinksBody"><![CDATA[
+        <div>
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
+              width="130" 
+              height="130" 
+              alt="die-netzmacher.de" /></a><br />
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            Die Netzmacher - the developers of TYPO3 without PHP.</a>
+        </div>
+      ]]></label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="promptEvaluatorDetectionBug"><![CDATA[
+        Falls Flip it! das Betriebssystem, die SWFTOOLS oder TYPO3 nicht korrekt erkennt, sende bitte eine Mail an
+        <a href="http://wildt.at.die-netzmacher.de/" 
+          alt="wildt.at.die-netzmacher.de"
+          title="wildt.at.die-netzmacher.de"
+          target="_blank">
+          Dirk Wildt (Die Netzmacher)</a>
+      ]]></label>
+      <label index="promptEvaluatorSWFtools">Pardon, die SWF-Tools werden nicht noch nicht gepr<![CDATA[&auml;]]>ft.</label>
+      <label index="promptEvaluatorTYPO3version45smaller">Du verwendest eine TYPO3-Version, die kleiner ist als 4.5. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
+      <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Du musst das Static Template [+Flip it!: Basis fuer TYPO3 < 4.7 einbinden.]]]></label>
+      <label index="promptEvaluatorTYPO3version46smaller">Du verwendest TYPO3 4.5.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version47smaller">Du verwendest TYPO3 4.6.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version48orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 4.7. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
+      <label index="promptEvaluatorWindowsConf"><![CDATA[
+          Den Pfad zu den SWFTOOLS konfigurierst Du hier im Extension Manager. Kategorie [Windows]
+      ]]></label>
+      <label index="promptExternalLinksBody"><![CDATA[
+        <div>
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
+              width="130" 
+              height="130" 
+              alt="die-netzmacher.de" /></a><br />
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            Die Netzmacher - die Entwickler von TYPO3 ohne PHP</a>
+        </div>
+      ]]></label>
+    </languageKey>
+  </data>
+</T3locallang>
