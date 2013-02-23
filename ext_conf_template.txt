@@ -1,14 +1,14 @@
   # cat=evaluator/enable/103;              type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptEvaluatorTYPO3version]; label= TYPO3 version
 evaluatorTYPO3version  = Undefined error: Evaluation failed!
-  # cat=evaluator/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by
+  # cat=evaluator/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
 evaluatorExternalLinks = 1
 
   # cat=language/enable/100;            type=options[English,German]; label= Backend Langauge: Language for special backend labels like TypoScript static templates. Property has an effect in the backend only.
 beLanguage = English
-  # cat=language/others/199;            type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by
+  # cat=language/others/199;            type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
 beLanguageExternalLinks = 1
 
   # cat=debugging/enable/100;              type=options[Disabled,Enabled (for debugging only!)]; label= DRS - Development Reporting System: Messages will be written to DevLog (you need the extension devlog).
 debuggingDrs            = Disabled
-  # cat=debugging/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by
+  # cat=debugging/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
 debuggingExternalLinks = 1

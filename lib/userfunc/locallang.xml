@@ -32,13 +32,21 @@
       <label index="promptExternalLinksBody"><![CDATA[
         <div style="float:right;padding-left:1em;">
           <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
+            alt="Caddy is powered by die-netzmacher.de"
+            title="Caddy is powered by die-netzmacher.de"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/ext_icon.gif"
+              width="80" 
+              height="80" 
+              alt="Caddy is powered by die-netzmacher.de" /></a>
+          <a href="http://die-netzmacher.de/" 
+            alt="Caddy is powered by die-netzmacher.de"
+            title="Caddy is powered by die-netzmacher.de"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="70" 
-              height="70" 
-              alt="die-netzmacher.de" /></a>
+              width="80" 
+              height="80" 
+              alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
         <ul style="list-style:outside;">
           <li>
