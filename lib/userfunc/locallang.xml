@@ -35,7 +35,7 @@
             alt="Caddy is powered by die-netzmacher.de"
             title="Caddy is powered by die-netzmacher.de"
             target="_blank">
-            <img src="../../../../typo3conf/ext/caddy/ext_icon.gif"
+            <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
               width="80" 
               height="80" 
               alt="Caddy is powered by die-netzmacher.de" /></a>
