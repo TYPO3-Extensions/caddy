@@ -30,6 +30,96 @@
         </div>
       ]]></label>
     </languageKey>
+      <label index="promptExternalLinksBody"><![CDATA[
+        <div style="float:right;padding-left:1em;">
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
+              width="130" 
+              height="130" 
+              alt="die-netzmacher.de" /></a><br />
+          <a href="http://die-netzmacher.de/" 
+            alt="die-netzmacher.de"
+            title="die-netzmacher.de"
+            target="_blank">
+            Die Netzmacher - the developers of TYPO3 without PHP.</a>
+        </div>
+        <ul style="list-style:outside;">
+          <li>
+            TYPO3-Caddy website<br />
+            <a href="http://typo3-caddy.de/en"
+              style="text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">typo3-caddy.de/en</a>
+          </li>
+          <li>
+            TYPO3-Caddy forum<br />
+            <a href="http://typo3-caddy.de/forum/" 
+              style="text-decoration:underline;"
+              alt="TYPO3-Caddy - Forum"
+              title="TYPO3-Caddy - Forum"
+              target="_blank">typo3-caddy.de/forum</a>
+          </li>
+          <li>
+            TYPO3-Caddy developer<br />
+            <a href="http://die-netzmacher.de/" 
+              style="text-decoration:underline;"
+              alt="Die Netzmacher - the developers of TYPO3 without PHP."
+              title="Die Netzmacher - the developers of TYPO3 without PHP."
+              target="_blank">die-netzmacher.de</a>
+          </li>
+        </ul>
+        </div>
+        <p style="font-weight:bold;padding:1em 0;">
+          The TYPO3-Caddy project is sponsored by:
+        </p>
+        <a href="http://www.made-in-nature.de/"
+          alt="made in nature, Germany, sponsors the TYPO3-Caddy project"
+          title="made in nature, Germany, sponsors the TYPO3-Caddy project"
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/made-in-nature..de_120x90.gif"
+            width="120"
+            height="90"
+            alt="made in nature, Germany, sponsors the TYPO3-Caddy project" /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-blue.gif" 
+            width="120" 
+            height="90" 
+            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
+            width="120" 
+            height="90" 
+            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+        <p style="padding:0 0 1em 0;">
+          You like to subsidise the TYPO3-Caddy project?
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="text-decoration:underline;"
+            alt="Your logo with your URL. 120 x 90 pixel."
+            title="Your logo with your URL. 120 x 90 pixel."
+            target="_blank">
+            Further information</a>.
+        </p>
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
+            width="120" 
+            height="90" 
+            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+      ]]></label>
     <languageKey index="de" type="array">
       <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Du musst das Static Template [+Flip it!: Basis fuer TYPO3 < 4.7 einbinden.]]]></label>
       <label index="promptEvaluatorTYPO3version45smaller">Du verwendest eine TYPO3-Version, die kleiner ist als 4.5. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
