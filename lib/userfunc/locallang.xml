@@ -36,14 +36,9 @@
             title="die-netzmacher.de"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="65" 
-              height="65" 
-              alt="die-netzmacher.de" /></a><br />
-          <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
-            target="_blank">
-            Die Netzmacher - the developers of TYPO3 without PHP.</a>
+              width="70" 
+              height="70" 
+              alt="die-netzmacher.de" /></a>
         </div>
         <ul style="list-style:outside;">
           <li>
