@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="caddy_ll_title">Title</label>
+      <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_qty">#</label>
+      <label index="caddy_ll_price">Price</label>
+      <label index="caddy_ll_price_total">Total</label>
+      <label index="caddy_ll_tax">TAX</label>
+      <label index="caddy_ll_empty">Currently there are no products in the cart.</label>
+      <label index="caddy_ll_minprice">The minimum order value of %s has not been reached yet.</label>
+      <label index="caddy_ll_cart_net">Price (w/o tax)</label>
+      <label index="caddy_ll_gross_total">Price (w tax)</label>
+      <label index="caddy_ll_shipping">Shipping Options</label>
+      <label index="caddy_ll_service_from">from</label>
+      <label index="caddy_ll_service_each">each</label>
+      <label index="caddy_ll_shipping_free_from">free shipping from</label>
+      <label index="caddy_ll_shipping_free_until">free shipping until</label>
+      <label index="caddy_ll_shipping_available_from">shipping available from</label>
+      <label index="caddy_ll_shipping_available_until">shipping available until</label>
+      <label index="caddy_ll_payment">Service Options</label>
+      <label index="caddy_ll_payment_free_from">free service option from</label>
+      <label index="caddy_ll_payment_free_until">free service option until</label>
+      <label index="caddy_ll_payment_available_from">service option available from</label>
+      <label index="caddy_ll_payment_available_until">service option available until</label>
+      <label index="caddy_ll_special">Special Options</label>
+      <label index="caddy_ll_special_free_from">free special option from</label>
+      <label index="caddy_ll_special_free_until">free special option until</label>
+      <label index="caddy_ll_special_available_from">special option available from</label>
+      <label index="caddy_ll_special_available_until">special option available until</label>
+      <label index="caddy_ll_special_each">%s each</label>
+      <label index="caddy_ll_service_cost">Service- and Shipping costs</label>
+      <label index="error_noTemplate">No Template found (maybe no Static Template in Backend added)</label>
+      <label index="caddy_ll_delete">Remove this product from cart.</label>
+      <label index="caddy_ll_ordernumber">Order number</label>
+      <label index="caddy_ll_error_min">The minimum order quantity is %s.</label>
+      <label index="caddy_ll_error_max">The maximum order quantity is %s.</label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="caddy_ll_title">Bezeichnung</label>
+      <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_qty">#</label>
+      <label index="caddy_ll_price">Preis</label>
+      <label index="caddy_ll_price_total">Gesamt</label>
+      <label index="caddy_ll_tax">Mehrwertsteuer</label>
+      <label index="caddy_ll_empty">Derzeit befinden sich keine Produkte im Warenkorb.</label>
+      <label index="caddy_ll_minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
+      <label index="caddy_ll_cart_net">Gesamtsumme (netto)</label>
+      <label index="caddy_ll_gross_total">Gesamtsumme (brutto)</label>
+      <label index="caddy_ll_shipping">Versandoptionen</label>
+      <label index="caddy_ll_service_from">ab</label>
+      <label index="caddy_ll_service_each">je</label>
+      <label index="caddy_ll_shipping_free_from">versandkostenfrei ab</label>
+      <label index="caddy_ll_shipping_free_until">versandkostenfrei bis</label>
+      <label index="caddy_ll_shipping_available_from">verfügbar ab</label>
+      <label index="caddy_ll_shipping_available_until">verfügbar bis</label>
+      <label index="caddy_ll_payment">Serviceoptionen</label>
+      <label index="caddy_ll_service_cost">Service- und Versandkosten</label>
+      <label index="caddy_ll_payment_free_from">servicekostenfrei ab</label>
+      <label index="caddy_ll_payment_free_until">servicekostenfrei bis</label>
+      <label index="caddy_ll_payment_available_from">verfügbar ab</label>
+      <label index="caddy_ll_payment_available_until">verfügbar bis</label>
+      <label index="caddy_ll_special">Spezialoptionen</label>
+      <label index="caddy_ll_special_free_from">kostenfrei ab</label>
+      <label index="caddy_ll_special_free_until">kostenfrei bis</label>
+      <label index="caddy_ll_special_available_from">verfügbar ab</label>
+      <label index="caddy_ll_special_available_until">verfügbar bis</label>
+      <label index="caddy_ll_special_each">je %s</label>
+      <label index="error_noTemplate">Kein Template gefunden (Überprüfen ob das Static Template im Backend hinzugefügt wurde)</label>
+      <label index="caddy_ll_delete">Dieses Produkt aus dem Warenkorb entfernen.</label>
+      <label index="caddy_ll_ordernumber">Bestellnummer</label>
+      <label index="caddy_ll_error_min">Die minimale Bestellmenge beträgt %s.</label>
+      <label index="caddy_ll_error_max">Die maximale Bestellmenge beträgt %s.</label>
+    </languageKey>
+    <languageKey index="fr" type="array">
+      <label index="caddy_ll_title">Article</label>
+      <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_qty">Quantité</label>
+      <label index="caddy_ll_price">Prix unitaire</label>
+      <label index="caddy_ll_price_total">Total</label>
+      <label index="caddy_ll_tax">TVA</label>
+      <label index="caddy_ll_empty">Votre panier de commande est actuellement vide.</label>
+      <label index="caddy_ll_cart_net">Total (net)</label>
+      <label index="caddy_ll_gross_total">Total (brut)</label>
+      <label index="caddy_ll_shipping">Livraison</label>
+      <label index="caddy_ll_payment">Paiement</label>
+      <label index="caddy_ll_service_cost">Frais de services et de livraison</label>
+      <label index="error_noTemplate"></label>
+      <label index="caddy_ll_delete">Supprimer cet article du panier.</label>
+    </languageKey>
+  </data>
+</T3locallang>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'Caddy'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tt_content.list_type_pi1">Caddy : cart</label>
+			<label index="tt_content.list_type_pi2">Caddy : add to cart</label>
+			<label index="tt_content.list_type_pi3">Caddy : minicart</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tt_content.list_type_pi1">Caddy : Warenkorb</label>
+			<label index="tt_content.list_type_pi2">Caddy : Produkt in den Warenkorb</label>
+			<label index="tt_content.list_type_pi3">Caddy : Miniwarenkorb</label>
+		</languageKey>
+	</data>
+</T3locallang>
