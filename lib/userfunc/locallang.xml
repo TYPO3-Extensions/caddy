@@ -83,7 +83,15 @@
             width="120"
             height="90"
             alt="made in nature, Germany, sponsors the TYPO3-Caddy project" /></a>
-        &nbsp;&nbsp;
+        <p style="padding:0 0 1em 0;">
+          You like to subsidise the TYPO3-Caddy project?
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="text-decoration:underline;"
+            alt="Your logo with your URL. 120 x 90 pixel."
+            title="Your logo with your URL. 120 x 90 pixel."
+            target="_blank">
+            Further information</a>.
+        </p>
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
           title="Your logo with your URL. 120 x 90 pixel."
@@ -101,15 +109,7 @@
             width="120" 
             height="90" 
             alt="Your logo with your URL. 120 x 90 pixel." /></a>
-        <p style="padding:0 0 1em 0;">
-          You like to subsidise the TYPO3-Caddy project?
-          <a href="http://typo3-caddy.de/en/sponsoring/"
-            style="text-decoration:underline;"
-            alt="Your logo with your URL. 120 x 90 pixel."
-            title="Your logo with your URL. 120 x 90 pixel."
-            target="_blank">
-            Further information</a>.
-        </p>
+        &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
           title="Your logo with your URL. 120 x 90 pixel."
