@@ -1,7 +1,5 @@
   # cat=evaluator/enable/103;              type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptEvaluatorTYPO3version]; label= TYPO3 version
 evaluatorTYPO3version  = Undefined error: Evaluation failed!
-  # cat=evaluator/enable/198;              type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptEvaluatorDetectionBug]; label= Detection bug?
-evaluatorDetectionBug  = Undefined error: Evaluation failed!
   # cat=evaluator/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by
 evaluatorExternalLinks = 1
 

@@ -96,8 +96,8 @@ class tx_caddy_userfunc
 //   * pageWizard( ): Builds an input form that also includes the link popup wizard.
 //   * @param        array        Parameter array.  Contains fieldName and fieldValue.
 //   * @return        string        HTML output for form widget.
-//   * @version 0.0.1
-//   * @since   0.0.1
+//   * @version 2.0.0
+//   * @since   2.0.0
 //   */
 //  public function pageWizard( $params )
 //  {
@@ -116,38 +116,11 @@ class tx_caddy_userfunc
   
   
   /**
-   * promptEvaluatorDetectionBug(): Displays the quick start message.
-   *
-   * @return  string    message wrapped in HTML
-   * @version 0.0.1
-   * @since   0.0.1
-   */
-  public function promptEvaluatorDetectionBug()
-  {
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
-
-    $prompt = $prompt . '
-<div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
-  <div class="message-body">
-    ' . $GLOBALS['LANG']->sL('LLL:EXT:flipit/lib/userfunc/locallang.xml:promptEvaluatorDetectionBug'). '
-  </div>
-</div>';
-
-    return $prompt;
-  }
-
-  
-  
-  /**
    * promptEvaluatorTYPO3version(): Displays the quick start message.
    *
    * @return  string    message wrapped in HTML
-   * @version 0.0.1
-   * @since   0.0.1
+   * @version 2.0.0
+   * @since   2.0.0
    */
   public function promptEvaluatorTYPO3version()
   {
@@ -245,8 +218,8 @@ class tx_caddy_userfunc
    * promptExternalLinks(): Displays the quick start message.
    *
    * @return  string    message wrapped in HTML
-   * @version 0.0.1
-   * @since   0.0.1
+   * @version 2.0.0
+   * @since   2.0.0
    */
   public function promptExternalLinks()
   {
@@ -272,8 +245,8 @@ class tx_caddy_userfunc
  * set_TYPO3Version( ):
  *
  * @return  void
- * @version 0.0.1
- * @since 0.0.1
+ * @version 2.0.0
+ * @since 2.0.0
  */
   private function set_TYPO3Version( )
   {
