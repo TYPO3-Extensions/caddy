@@ -36,8 +36,8 @@
             title="die-netzmacher.de"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="130" 
-              height="130" 
+              width="100" 
+              height="100" 
               alt="die-netzmacher.de" /></a><br />
           <a href="http://die-netzmacher.de/" 
             alt="die-netzmacher.de"
@@ -79,7 +79,7 @@
           alt="made in nature, Germany, sponsors the TYPO3-Caddy project"
           title="made in nature, Germany, sponsors the TYPO3-Caddy project"
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/made-in-nature..de_120x90.gif"
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/made-in-nature.de_120x90.gif"
             width="120"
             height="90"
             alt="made in nature, Germany, sponsors the TYPO3-Caddy project" /></a>
