@@ -555,29 +555,29 @@ plugin.tx_caddy_pi1 {
       attach_sender_mail    = 0
       attach_recipient_mail = 1
 
-      template      = {$plugin.tx_caddy_pi1.pdf.orderpdf.template}
-      include_file  = {$plugin.tx_caddy_pi1.pdf.orderpdf.includepdf}
-      dir           = {$plugin.tx_caddy_pi1.pdf.orderpdf.dir}
+      template      = {$plugin.caddy.pdf.orderpdf.template}
+      include_file  = {$plugin.caddy.pdf.orderpdf.includepdf}
+      dir           = {$plugin.caddy.pdf.orderpdf.dir}
 
       filename < plugin.tx_wtcart_pi1.settings.overall.ordernumber
       filename.10 >
 
-      abortonerror  = {$plugin.tx_caddy_pi1.pdf.orderpdf.abortonerror}
+      abortonerror  = {$plugin.caddy.pdf.orderpdf.abortonerror}
 
-      orderaddress-position-x     = {$plugin.tx_caddy_pi1.pdf.orderpdf.orderaddress-position-x}
-      orderaddress-position-y     = {$plugin.tx_caddy_pi1.pdf.orderpdf.orderaddress-position-y}
+      orderaddress-position-x     = {$plugin.caddy.pdf.orderpdf.orderaddress-position-x}
+      orderaddress-position-y     = {$plugin.caddy.pdf.orderpdf.orderaddress-position-y}
 
-      shippingaddress-position-x  = {$plugin.tx_caddy_pi1.pdf.orderpdf.shippingaddress-position-x}
-      shippingaddress-position-y  = {$plugin.tx_caddy_pi1.pdf.orderpdf.shippingaddress-position-y}
+      shippingaddress-position-x  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-x}
+      shippingaddress-position-y  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-y}
 
-      ordernumber-position-x      = {$plugin.tx_caddy_pi1.pdf.orderpdf.ordernumber-position-x}
-      ordernumber-position-y      = {$plugin.tx_caddy_pi1.pdf.orderpdf.ordernumber-position-y}
+      ordernumber-position-x      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-x}
+      ordernumber-position-y      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-y}
       ordernumber < plugin.tx_wtcart_pi1.settings.overall.ordernumber
 
-      cart-position-x             = {$plugin.tx_caddy_pi1.pdf.orderpdf.cart-position-x}
-      cart-position-y             = {$plugin.tx_caddy_pi1.pdf.orderpdf.cart-position-y}
-      cart-width                  = {$plugin.tx_caddy_pi1.pdf.orderpdf.cart-width}
-      cart-height                 = {$plugin.tx_caddy_pi1.pdf.orderpdf.cart-height}
+      cart-position-x             = {$plugin.caddy.pdf.orderpdf.cart-position-x}
+      cart-position-y             = {$plugin.caddy.pdf.orderpdf.cart-position-y}
+      cart-width                  = {$plugin.caddy.pdf.orderpdf.cart-width}
+      cart-height                 = {$plugin.caddy.pdf.orderpdf.cart-height}
 
       additionaltextblocks {
         1 {
@@ -607,29 +607,29 @@ plugin.tx_caddy_pi1 {
       attach_sender_mail    = 0
       attach_recipient_mail = 1
 
-      template      = {$plugin.tx_caddy_pi1.pdf.orderpdf.template}
-      include_file  = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.includepdf}
-      dir           = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.dir}
+      template      = {$plugin.caddy.pdf.orderpdf.template}
+      include_file  = {$plugin.caddy.pdf.packinglistpdf.includepdf}
+      dir           = {$plugin.caddy.pdf.packinglistpdf.dir}
 
       filename < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
       filename.10 >
 
-      abortonerror = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.abortonerror}
+      abortonerror = {$plugin.caddy.pdf.packinglistpdf.abortonerror}
 
-      orderaddress-position-x       = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.orderaddress-position-x}
-      orderaddress-position-y       = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.orderaddress-position-y}
+      orderaddress-position-x       = {$plugin.caddy.pdf.packinglistpdf.orderaddress-position-x}
+      orderaddress-position-y       = {$plugin.caddy.pdf.packinglistpdf.orderaddress-position-y}
 
-      shippingaddress-position-x    = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.shippingaddress-position-x}
-      shippingaddress-position-y    = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.shippingaddress-position-y}
+      shippingaddress-position-x    = {$plugin.caddy.pdf.packinglistpdf.shippingaddress-position-x}
+      shippingaddress-position-y    = {$plugin.caddy.pdf.packinglistpdf.shippingaddress-position-y}
 
-      packinglistnumber-position-x  = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.packinglistnumber-position-x}
-      packinglistnumber-position-y  = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.packinglistnumber-position-y}
+      packinglistnumber-position-x  = {$plugin.caddy.pdf.packinglistpdf.packinglistnumber-position-x}
+      packinglistnumber-position-y  = {$plugin.caddy.pdf.packinglistpdf.packinglistnumber-position-y}
       packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
 
-      cart-position-x               = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.cart-position-x}
-      cart-position-y               = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.cart-position-y}
-      cart-width                    = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.cart-width}
-      cart-height                   = {$plugin.tx_caddy_pi1.pdf.packinglistpdf.cart-height}
+      cart-position-x               = {$plugin.caddy.pdf.packinglistpdf.cart-position-x}
+      cart-position-y               = {$plugin.caddy.pdf.packinglistpdf.cart-position-y}
+      cart-width                    = {$plugin.caddy.pdf.packinglistpdf.cart-width}
+      cart-height                   = {$plugin.caddy.pdf.packinglistpdf.cart-height}
 
       additionaltextblocks {
         1 {
