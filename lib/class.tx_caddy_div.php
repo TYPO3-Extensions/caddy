@@ -188,58 +188,59 @@ class tx_caddy_div extends tslib_pibase
         return $parray;
     }
 
-    /**
-    * Remove product from session with given uid
-    *
-    * @param array   $pobj: Parent Object
-    * @return  void
-    * @version 1.2.2
-    */
-    public function removeProductFromSession($pObj)
+ /**
+  * Remove product from session with given uid
+  *
+  * @param array   $pobj: Parent Object
+  * @return  void
+  * @version  2.0.0
+  * @since    1.4.6
+  */
+  public function removeProductFromSession($pObj)
+  {
+    // variants
+    // add variant key/value pairs from piVars
+    $arr_variant = $this->get_variant_from_piVars($pObj);
+    // add product id to variant array
+    $arr_variant['puid'] = $pObj->piVars['del'];
+
+    // get products from session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+    // loop every product
+    foreach ((array) $sesArray['products'] as $key => $value) 
     {
-        // variants
-        // add variant key/value pairs from piVars
-        $arr_variant = $this->get_variant_from_piVars($pObj);
-        // add product id to variant array
-        $arr_variant['puid'] = $pObj->piVars['del'];
+      //      if ($sesArray[$key]['puid'] == intval($uid)) { // uid fits
+      //        unset($sesArray[$key]); // delete old value
+      //      }
+      // Counter for condition
+      $int_counter = 0;
 
-        // get products from session array
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        // loop every product
-        foreach ((array) $sesArray['products'] as $key => $value) 
+      // loop through conditions
+      foreach($arr_variant as $key_variant => $value_variant)
+      {
+        // condition fits
+        if ($sesArray['products'][$key][$key_variant] == $value_variant) 
         {
-            //      if ($sesArray[$key]['puid'] == intval($uid)) { // uid fits
-            //        unset($sesArray[$key]); // delete old value
-            //      }
-            // Counter for condition
-            $int_counter = 0;
-
-            // loop through conditions
-            foreach($arr_variant as $key_variant => $value_variant)
-            {
-                // condition fits
-                if ($sesArray['products'][$key][$key_variant] == $value_variant) 
-                {
-                    $int_counter++;
-                }
-            }
-            // loop through conditions
-
-            // all conditions fit
-            if($int_counter == count($arr_variant))
-            {
-                // remove product from session
-                unset($sesArray['products'][$key]);
-            }
+            $int_counter++;
         }
-        // loop every product
+      }
+      // loop through conditions
 
-        // generate new session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id, $sesArray);
-        // save session
-        $GLOBALS['TSFE']->storeSessionData();
+      // all conditions fit
+      if($int_counter == count($arr_variant))
+      {
+        // remove product from session
+        unset($sesArray['products'][$key]);
+      }
     }
+    // loop every product
+
+    // generate new session
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // save session
+    $GLOBALS['TSFE']->storeSessionData();
+  }
 
     /**
     * Clear complete session

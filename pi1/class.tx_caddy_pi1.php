@@ -107,284 +107,21 @@ class tx_caddy_pi1 extends tslib_pibase
       // Update several order values
     $this->orderUpdate( );
 
-    // add further product to session
-    $this->newProduct = $this->div->getProductDetails($this->gpvar, $this); // get details from product
-    if ($this->newProduct !== false)
-    {
-      $this->newProduct['qty'] = $this->gpvar['qty'];
-      $this->newProduct['service_attribute_1'] = $this->gpvar['service_attribute_1'];
-      $this->newProduct['service_attribute_2'] = $this->gpvar['service_attribute_2'];
-      $this->newProduct['service_attribute_3'] = $this->gpvar['service_attribute_3'];
-      $this->div->addProduct2Session($this->newProduct, $this);
-    }
-
-    // read all products from session
-    $this->product = $this->div->getProductsFromSession();
-
-      // there are products in the session
-    if (count($this->product) > 0) 
-    {
-      // loop for every product in the session
-      foreach ((array) $this->product as $product) 
-      {
-              // clear marker array to avoid problems with error msg etc.
-              unset($this->markerArray);
-              // price total
-              $product['price_total'] = $product['price'] * $product['qty']; 
-              // enable .field in typoscript
-              $local_cObj->start($product, $this->conf['db.']['table']); 
-
-              foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
-              {
-                      if (!stristr($key, '.'))
-                      { // no .
-                              //$this->markerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']); // write to marker
-                              // name of the current field in the TypoScript
-                              $ts_key   = $this->conf['settings.']['fields.'][$key];
-                              // configuration array of the current field in the TypoScript
-                              $ts_conf  = $this->conf['settings.']['fields.'][$key . '.'];
-                              switch($key)
-                              {
-                                      case('delete'):
-                                              $ts_conf = $this->div->add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $this);
-                                              break;
-
-                                      default:
-                                              // nothing to do, there is no default now
-                              }
-                              $ts_rendered_value  = $local_cObj->cObjGetSingle($ts_key, $ts_conf);
-                              $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
-
-                              // adds the ###QTY_NAME### marker in case of variants
-                              $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
-                      }
-              }
-
-              // replace error msg
-              $this->markerArray['###ERROR_MSG###'] = '';
-              foreach ($product['error'] as $error) {
-                      $this->markerArray['###ERROR_MSG###'] .= sprintf($this->pi_getLL('caddy_ll_error_'.$error), $product[$error]);
-              }
-
-              $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['item'], $this->markerArray); // add inner html to variable
-
-              $cartGross += $product['price_total'];
-              $this->cartCount += $product['qty'];
-
-              $this->cartServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
-              $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max > $product['service_attribute_1'] ? $this->cartServiceAttribute1Max : $product['service_attribute_1'];
-              $this->cartServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
-              $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max > $product['service_attribute_2'] ? $this->cartServiceAttribute2Max : $product['service_attribute_2'];
-              $this->cartServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
-              $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max > $product['service_attribute_3'] ? $this->cartServiceAttribute3Max : $product['service_attribute_3'];
-
-              // get the formular with the markers ###TAX## for calculating tax
-              $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
-              // save the formular with marker, we need it later
-              $str_wrap_former = $str_wrap;
-              // replace the ###TAX### with current tax rate like 0.07 or 0.19
-              $str_wrap = str_replace('###TAX###', $product['tax'], $str_wrap);
-              // assign the forular with tax rates to TypoScript
-              $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
-
-              $cartNet += ( $product['price_total'] - $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
-
-              $curr_tax = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']);
-
-              switch($product['tax'])
-              {
-                      case(0):
-                              break;
-                      case(1):
-                      case($this->conf['tax.']['reducedCalc']):
-                              $cartTaxReduced += $curr_tax; // add tax from this product to overall
-                              break;
-                      case(2):
-                      case($this->conf['tax.']['normalCalc']):
-                              $cartTaxNormal += $curr_tax; // add tax from this product to overall
-                              break;
-                      default:
-                              echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy_pi1.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
-                              exit;
-              }
-              $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
-      }
-      // loop for every product in the session
-
-      // item for payment
-      $payment_id = $this->div->getPaymentFromSession();
-      if ($payment_id)
-      {
-              $this->markerArray['###QTY###'] = 1;
-              $this->markerArray['###TITLE###'] = $this->conf['payment.']['options.'][$payment_id . '.']['title'];
-              $this->markerArray['###PRICE###'] = $this->conf['payment.']['options.'][$payment_id . '.']['extra'];
-              $this->markerArray['###PRICE_TOTAL###'] = $this->conf['payment.']['options.'][$payment_id . '.']['extra'];
-              $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['special_item'], $this->markerArray); // add inner html to variable
-      }
-
-      $subpartArray['###CONTENT###'] = $content_item; // work on subpart 3
-      $subpartArray['###CONTENT###'] .= '<input type="hidden" name="tx_caddy_pi1[update_from_cart]" value="1">';
-
-      $this->cartGrossNoService = $cartGross;
-      $cartNetNoService = $cartNet;
-
-      // SHIPPING
-      $shipping_id = $this->div->getShippingFromSession();
-
-      if (!$shipping_id)
-      {
-              $shipping_id = intval($this->conf['shipping.']['preset']);
-              $this->div->changeShippingInSession($shipping_id);
-      }
-      // check if selected shipping option is available
-      if ($newshipping_id = $this->checkOptionIsNotAvailable('shipping', $shipping_id))
-      {
-              $shipping_id = $newshipping_id;
-              $this->div->changeShippingInSession($newshipping_id);
-      }
-
-      $shipping_values	= $this->calc->calculateOptionById($this->conf, 'shipping', $shipping_id, $this);
-      $shipping_net		= $shipping_values['net'];
-      $shipping_gross		= $shipping_values['gross'];
-      $cartNet			+= $shipping_values['net'];
-      $cartGross			+= $shipping_values['gross'];
-      if ($this->conf['shipping.']['options.'][$shipping_id . '.']['tax'] == 'reduced') {
-              $cartTaxReduced += $shipping_gross - $shipping_net;
-      } else {
-              $cartTaxNormal += $shipping_gross - $shipping_net;	
-      }
-
-      // PAYMENT
-      $payment_id = $this->div->getPaymentFromSession();
-
-      if (!$payment_id)
-      {
-              $payment_id = intval($this->conf['payment.']['preset']);
-              $this->div->changePaymentInSession($payment_id);
-      }
-      // check if selected payment option is available
-      if ($newpayment_id = $this->checkOptionIsNotAvailable('payment', $payment_id))
-      {
-              $payment_id = $newpayment_id;
-              $this->div->changePaymentInSession($newpayment_id);
-      }
-
-      $payment_values		= $this->calc->calculateOptionById($this->conf, 'payment', $payment_id, $this);
-      $payment_net		= $payment_values['net'];
-      $payment_gross		= $payment_values['gross'];
-      $cartNet			+= $payment_values['net'];
-      $cartGross			+= $payment_values['gross'];
-      if ($this->conf['payment.']['options.'][$payment_id . '.']['tax'] == 'reduced') {
-              $cartTaxReduced += $payment_gross - $payment_net;
-      } else {
-              $cartTaxNormal += $payment_gross - $payment_net;	
-      }
-
-      // SPECIAL
-      $special_ids = $this->div->getSpecialFromSession();
-
-      $overall_special_gross = 0.0;
-      $overall_special_net = 0.0;
-
-      foreach ($special_ids as $special_id)
-      {
-              $special_values		= $this->calc->calculateOptionById($this->conf, 'special', $special_id, $this);
-              $special_net		= $special_values['net'];
-              $special_gross		= $special_values['gross'];
-              $cartNet			+= $special_values['net'];
-              $cartGross			+= $special_values['gross'];
-              if ($this->conf['special.']['options.'][$special_id . '.']['tax'] == 'reduced') {
-                      $cartTaxReduced += $special_gross - $special_net;
-              } else {
-                      $cartTaxNormal += $special_gross - $special_net;	
-              }
-              $overall_special_gross += $special_gross;
-              $overall_special_net   += $special_net;
-      }
-
-      $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id);
-      $sesArray['service_cost_net'] = $shipping_net + $payment_net + $overall_special_net;
-      $sesArray['service_cost_gross'] = $shipping_gross + $payment_gross + $overall_special_gross;
-      $sesArray['cart_gross'] = $cartGross;
-      $sesArray['cart_gross_no_service'] = $this->cartGrossNoService;
-      $sesArray['cart_net'] = $cartNet;
-      $sesArray['cart_net_no_service'] = $cartNetNoService;
-      $sesArray['cart_tax_reduced'] = $cartTaxReduced;
-      $sesArray['cart_tax_normal'] = $cartTaxNormal;
-      $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id, $sesArray);
-
-      $outerArr = array(
-              'service_cost_net' => $sesArray['service_cost_net'], 
-              'service_cost_gross' => $sesArray['service_cost_gross'],
-              'cart_gross' => $cartGross,
-              'cart_gross_no_service' => $this->cartGrossNoService,
-              'cart_net' => $cartNet,
-              'cart_net_no_service' => $cartNetNoService,
-              'cart_tax_reduced' => $cartTaxReduced,
-              'cart_tax_normal' => $cartTaxNormal
-      );
-      $local_cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
-      foreach ((array) $this->conf['settings.']['overall.'] as $key => $value)
-      {
-              if (!stristr($key, '.'))
-              { // no .
-                      $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['overall.'][$key], $this->conf['settings.']['overall.'][$key . '.']);
-              }
-      }
-
-      if ($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value']))
-      {
-              $cartMinStr = $this->price_format($this->conf['cart.']['cartmin.']['value']);
-              $minPriceArray['###ERROR_MINPRICE###'] = sprintf($this->pi_getLL('caddy_ll_minprice'), $cartMinStr);
-              $subpartArray['###MINPRICE###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['minprice'], $minPriceArray);
-      }
-      if (!($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value'])) || (($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value'])) && (!$this->conf['cart.']['cartmin.']['hideifnotreached.']['service'])))
-      {
-              $shippingArray['###CONTENT###'] = $this->renderOptionList('shipping', $shipping_id);
-              if ($shippingArray['###CONTENT###'])
-              {
-                      $subpartArray['###SHIPPING_RADIO###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['shipping_all'], null, $shippingArray);
-              } else {
-                      $subpartArray['###SHIPPING_RADIO###'] = '';
-              }
-
-              $paymentArray['###CONTENT###'] = $this->renderOptionList('payment', $payment_id);
-              if ($paymentArray['###CONTENT###'])
-              {
-                      $subpartArray['###PAYMENT_RADIO###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['payment_all'], null, $paymentArray);
-              } else {
-                      $subpartArray['###PAYMENT_RADIO###'] = '';
-              }
-
-              $specialArray['###CONTENT###'] = $this->renderOptionList('special', $special_ids);
-              if ($specialArray['###CONTENT###'])
-              {
-                      $subpartArray['###SPECIAL_CHECKBOX###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['special_all'], null, $specialArray);
-              } else {
-                      $subpartArray['###SPECIAL_CHECKBOX###'] = '';
-              }
-      }
-    }
-      // there are products in the session
+      // Add a product
+    $this->productAdd( );
+    
+    $this->cart( );
 
 
-      // there isn't any product in the session
-    if( ! ( count( $this->product ) > 0 ) )
-    { 
-      if( ! empty ( $this->tmpl['all'] ) )
-      { // if template found
-        $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
-      }
-      else
-      { // no template - show error
-        $this->tmpl['all'] = $this->div->msg( $this->pi_getLL( 'error_noTemplate', 'No Template found' ) );
-      }
-    }
-
-    $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray); // Get html template
-    $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
-    $this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
-    return $this->pi_wrapInBaseClass($this->content);
+    $this->content = $this->cObj->substituteMarkerArrayCached
+                    (
+                      $this->tmpl['all'], 
+                      $this->outerMarkerArray, 
+                      $subpartArray
+                    );
+    $this->content = $this->dynamicMarkers->main( $this->content, $this ); // Fill dynamic locallang or typoscript markers
+    $this->content = preg_replace( '|###.*?###|i', '', $this->content ); // Finally clear not filled markers
+    return $this->pi_wrapInBaseClass( $this->content );
   }
   
   
@@ -421,6 +158,326 @@ class tx_caddy_pi1 extends tslib_pibase
     t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
     t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
       // output debug prompt
+  }
+
+  
+  
+  
+  
+  /***********************************************
+  *
+  * Cart
+  *
+  **********************************************/
+
+ /**
+  * cart( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cart( )
+  {
+      // read all products from session
+    $this->product = $this->div->getProductsFromSession();
+
+    switch( true )
+    {
+      case( count( $this->product ) > 0 ):
+        $this->cartWiProducts( );
+        break;
+      case( ! ( count( $this->product ) > 0 ) ):
+      default:
+        $this->cartWoProducts( );
+        break;
+    }
+  }
+
+ /**
+  * cartWiProducts( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWiProducts( )
+  {
+    //$this->cartWiProductsProduct( );
+      // FOREACH  : product 
+    foreach( ( array ) $this->product as $product ) 
+    {
+        // clear marker array to avoid problems with error msg etc.
+      unset( $this->markerArray );
+      
+        // price total
+      $product['price_total'] = $product['price'] * $product['qty']; 
+        
+        // enable .field in typoscript
+      $local_cObj->start( $product, $this->conf['db.']['table'] ); 
+
+        // FOREACH  : settings property
+      foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
+      {
+        if( stristr( $key, '.' ) )
+        { 
+          continue;
+        }
+
+          // name of the current field in the TypoScript
+        $ts_key   = $this->conf['settings.']['fields.'][$key];
+          // configuration array of the current field in the TypoScript
+        $ts_conf  = $this->conf['settings.']['fields.'][$key . '.'];
+        switch( $key )
+        {
+          case('delete'):
+            $ts_conf = $this->div->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
+            break;
+          default:
+            // nothing to do, there is no default now
+        }
+        $ts_rendered_value  = $local_cObj->cObjGetSingle( $ts_key, $ts_conf );
+        $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
+
+        // adds the ###QTY_NAME### marker in case of variants
+        $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
+      }
+        // FOREACH  : settings property
+
+      // replace error msg
+      $this->markerArray['###ERROR_MSG###'] = '';
+      foreach ($product['error'] as $error) {
+              $this->markerArray['###ERROR_MSG###'] .= sprintf($this->pi_getLL('caddy_ll_error_'.$error), $product[$error]);
+      }
+
+      $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['item'], $this->markerArray); // add inner html to variable
+
+      $cartGross += $product['price_total'];
+      $this->cartCount += $product['qty'];
+
+      $this->cartServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
+      $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max > $product['service_attribute_1'] ? $this->cartServiceAttribute1Max : $product['service_attribute_1'];
+      $this->cartServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
+      $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max > $product['service_attribute_2'] ? $this->cartServiceAttribute2Max : $product['service_attribute_2'];
+      $this->cartServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
+      $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max > $product['service_attribute_3'] ? $this->cartServiceAttribute3Max : $product['service_attribute_3'];
+
+      // get the formular with the markers ###TAX## for calculating tax
+      $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
+      // save the formular with marker, we need it later
+      $str_wrap_former = $str_wrap;
+      // replace the ###TAX### with current tax rate like 0.07 or 0.19
+      $str_wrap = str_replace('###TAX###', $product['tax'], $str_wrap);
+      // assign the forular with tax rates to TypoScript
+      $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
+
+      $cartNet += ( $product['price_total'] - $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
+
+      $curr_tax = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']);
+
+      switch($product['tax'])
+      {
+              case(0):
+                      break;
+              case(1):
+              case($this->conf['tax.']['reducedCalc']):
+                      $cartTaxReduced += $curr_tax; // add tax from this product to overall
+                      break;
+              case(2):
+              case($this->conf['tax.']['normalCalc']):
+                      $cartTaxNormal += $curr_tax; // add tax from this product to overall
+                      break;
+              default:
+                      echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy_pi1.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+                      exit;
+      }
+      $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
+    }
+      // FOREACH  : product 
+
+    
+    
+    
+    // item for payment
+    $payment_id = $this->div->getPaymentFromSession();
+    if ($payment_id)
+    {
+            $this->markerArray['###QTY###'] = 1;
+            $this->markerArray['###TITLE###'] = $this->conf['payment.']['options.'][$payment_id . '.']['title'];
+            $this->markerArray['###PRICE###'] = $this->conf['payment.']['options.'][$payment_id . '.']['extra'];
+            $this->markerArray['###PRICE_TOTAL###'] = $this->conf['payment.']['options.'][$payment_id . '.']['extra'];
+            $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['special_item'], $this->markerArray); // add inner html to variable
+    }
+
+    $subpartArray['###CONTENT###'] = $content_item; // work on subpart 3
+    $subpartArray['###CONTENT###'] .= '<input type="hidden" name="tx_caddy_pi1[update_from_cart]" value="1">';
+
+    $this->cartGrossNoService = $cartGross;
+    $cartNetNoService = $cartNet;
+
+    // SHIPPING
+    $shipping_id = $this->div->getShippingFromSession();
+
+    if (!$shipping_id)
+    {
+            $shipping_id = intval($this->conf['shipping.']['preset']);
+            $this->div->changeShippingInSession($shipping_id);
+    }
+    // check if selected shipping option is available
+    if ($newshipping_id = $this->checkOptionIsNotAvailable('shipping', $shipping_id))
+    {
+            $shipping_id = $newshipping_id;
+            $this->div->changeShippingInSession($newshipping_id);
+    }
+
+    $shipping_values	= $this->calc->calculateOptionById($this->conf, 'shipping', $shipping_id, $this);
+    $shipping_net		= $shipping_values['net'];
+    $shipping_gross		= $shipping_values['gross'];
+    $cartNet			+= $shipping_values['net'];
+    $cartGross			+= $shipping_values['gross'];
+    if ($this->conf['shipping.']['options.'][$shipping_id . '.']['tax'] == 'reduced') {
+            $cartTaxReduced += $shipping_gross - $shipping_net;
+    } else {
+            $cartTaxNormal += $shipping_gross - $shipping_net;	
+    }
+
+    // PAYMENT
+    $payment_id = $this->div->getPaymentFromSession();
+
+    if (!$payment_id)
+    {
+            $payment_id = intval($this->conf['payment.']['preset']);
+            $this->div->changePaymentInSession($payment_id);
+    }
+    // check if selected payment option is available
+    if ($newpayment_id = $this->checkOptionIsNotAvailable('payment', $payment_id))
+    {
+            $payment_id = $newpayment_id;
+            $this->div->changePaymentInSession($newpayment_id);
+    }
+
+    $payment_values		= $this->calc->calculateOptionById($this->conf, 'payment', $payment_id, $this);
+    $payment_net		= $payment_values['net'];
+    $payment_gross		= $payment_values['gross'];
+    $cartNet			+= $payment_values['net'];
+    $cartGross			+= $payment_values['gross'];
+    if ($this->conf['payment.']['options.'][$payment_id . '.']['tax'] == 'reduced') {
+            $cartTaxReduced += $payment_gross - $payment_net;
+    } else {
+            $cartTaxNormal += $payment_gross - $payment_net;	
+    }
+
+    // SPECIAL
+    $special_ids = $this->div->getSpecialFromSession();
+
+    $overall_special_gross = 0.0;
+    $overall_special_net = 0.0;
+
+    foreach ($special_ids as $special_id)
+    {
+            $special_values		= $this->calc->calculateOptionById($this->conf, 'special', $special_id, $this);
+            $special_net		= $special_values['net'];
+            $special_gross		= $special_values['gross'];
+            $cartNet			+= $special_values['net'];
+            $cartGross			+= $special_values['gross'];
+            if ($this->conf['special.']['options.'][$special_id . '.']['tax'] == 'reduced') {
+                    $cartTaxReduced += $special_gross - $special_net;
+            } else {
+                    $cartTaxNormal += $special_gross - $special_net;	
+            }
+            $overall_special_gross += $special_gross;
+            $overall_special_net   += $special_net;
+    }
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id);
+    $sesArray['service_cost_net'] = $shipping_net + $payment_net + $overall_special_net;
+    $sesArray['service_cost_gross'] = $shipping_gross + $payment_gross + $overall_special_gross;
+    $sesArray['cart_gross'] = $cartGross;
+    $sesArray['cart_gross_no_service'] = $this->cartGrossNoService;
+    $sesArray['cart_net'] = $cartNet;
+    $sesArray['cart_net_no_service'] = $cartNetNoService;
+    $sesArray['cart_tax_reduced'] = $cartTaxReduced;
+    $sesArray['cart_tax_normal'] = $cartTaxNormal;
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id, $sesArray);
+
+    $outerArr = array(
+            'service_cost_net' => $sesArray['service_cost_net'], 
+            'service_cost_gross' => $sesArray['service_cost_gross'],
+            'cart_gross' => $cartGross,
+            'cart_gross_no_service' => $this->cartGrossNoService,
+            'cart_net' => $cartNet,
+            'cart_net_no_service' => $cartNetNoService,
+            'cart_tax_reduced' => $cartTaxReduced,
+            'cart_tax_normal' => $cartTaxNormal
+    );
+    $local_cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
+    foreach ((array) $this->conf['settings.']['overall.'] as $key => $value)
+    {
+            if (!stristr($key, '.'))
+            { // no .
+                    $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['overall.'][$key], $this->conf['settings.']['overall.'][$key . '.']);
+            }
+    }
+
+    if ($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value']))
+    {
+            $cartMinStr = $this->price_format($this->conf['cart.']['cartmin.']['value']);
+            $minPriceArray['###ERROR_MINPRICE###'] = sprintf($this->pi_getLL('caddy_ll_minprice'), $cartMinStr);
+            $subpartArray['###MINPRICE###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['minprice'], $minPriceArray);
+    }
+    if (!($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value'])) || (($sesArray['cart_gross_no_service'] < floatval($this->conf['cart.']['cartmin.']['value'])) && (!$this->conf['cart.']['cartmin.']['hideifnotreached.']['service'])))
+    {
+            $shippingArray['###CONTENT###'] = $this->renderOptionList('shipping', $shipping_id);
+            if ($shippingArray['###CONTENT###'])
+            {
+                    $subpartArray['###SHIPPING_RADIO###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['shipping_all'], null, $shippingArray);
+            } else {
+                    $subpartArray['###SHIPPING_RADIO###'] = '';
+            }
+
+            $paymentArray['###CONTENT###'] = $this->renderOptionList('payment', $payment_id);
+            if ($paymentArray['###CONTENT###'])
+            {
+                    $subpartArray['###PAYMENT_RADIO###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['payment_all'], null, $paymentArray);
+            } else {
+                    $subpartArray['###PAYMENT_RADIO###'] = '';
+            }
+
+            $specialArray['###CONTENT###'] = $this->renderOptionList('special', $special_ids);
+            if ($specialArray['###CONTENT###'])
+            {
+                    $subpartArray['###SPECIAL_CHECKBOX###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl['special_all'], null, $specialArray);
+            } else {
+                    $subpartArray['###SPECIAL_CHECKBOX###'] = '';
+            }
+    }
+    // there are products in the session
+  }
+
+ /**
+  * cartWoProducts( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWoProducts( )
+  {
+      // there isn't any product in the session
+    if( ! ( count( $this->product ) > 0 ) )
+    { 
+      if( ! empty ( $this->tmpl['all'] ) )
+      { // if template found
+        $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
+      }
+      else
+      { // no template - show error
+        $this->tmpl['all'] = $this->div->msg( $this->pi_getLL( 'error_noTemplate', 'No Template found' ) );
+      }
+    }
   }
   
   
@@ -765,6 +822,28 @@ class tx_caddy_pi1 extends tslib_pibase
   * Product
   *
   **********************************************/
+
+ /**
+  * productAdd( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function productAdd( )
+  {
+    // add further product to session
+    $this->newProduct = $this->div->getProductDetails( $this->gpvar, $this );
+    if( $this->newProduct !== false )
+    {
+      $this->newProduct['qty']                  = $this->gpvar['qty'];
+      $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
+      $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
+      $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
+      $this->div->addProduct2Session( $this->newProduct, $this );
+    }
+  }
 
  /**
   * productRemove( )
