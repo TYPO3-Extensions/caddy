@@ -547,6 +547,8 @@ plugin.tx_caddy_pi1 {
     // orderpdf, packinglistpdf
   pdf =
   pdf {
+      // Configure your order PDF
+    orderpdf =
     orderpdf {
       font-size = 8
 
@@ -597,6 +599,8 @@ plugin.tx_caddy_pi1 {
         }
       }
     }
+      // Configure your packinglist PDF
+    packinglistpdf =
     packinglistpdf {
       font-size = 8
 
