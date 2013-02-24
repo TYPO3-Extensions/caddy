@@ -597,7 +597,7 @@ class tx_caddy_pi1 extends tslib_pibase
             There isn\'t any HTML template.
           </p>
           <p>
-            Please enable the DRS - the Development Reporting System. It tries to offer tze fix.
+            Please enable the DRS - the Development Reporting System. It tries to offer a fix.
           </p>
           <p>
             Caddy - the Shopping Cart
