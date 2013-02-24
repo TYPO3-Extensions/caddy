@@ -47,6 +47,10 @@ class tx_caddy_div extends tslib_pibase
 
     // Path to any file in pi1 for locallang
     public $extKey = 'caddy'; // The extension key.
+    
+      // #45775, 130224, dwildt, 2+
+      // Object: the parent cObject
+    public $cObj = null;
 
     /**
     * Add product to session
@@ -1117,7 +1121,7 @@ class tx_caddy_div extends tslib_pibase
     switch( true )
     {
       case( is_array( $cObj_conf ) ):
-        $value = $pObj->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
         break;
       case( ! ( is_array( $cObj_conf ) ) ):
       default:

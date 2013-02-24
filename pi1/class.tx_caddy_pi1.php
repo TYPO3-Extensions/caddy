@@ -599,6 +599,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initInstances( )
   {
     $this->div            = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+    $this->div->cObj      = $this->cObj;
     $this->calc           = t3lib_div::makeInstance('tx_caddy_calc'); // Create new instance for calculation functions
     $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers'); // Create new instance for dynamicmarker function
   }
