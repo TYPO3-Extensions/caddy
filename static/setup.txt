@@ -544,6 +544,8 @@ plugin.tx_caddy_pi1 {
   // plugin.tx_caddy_pi1.pdf
 
 plugin.tx_caddy_pi1 {
+    // orderpdf, packinglistpdf
+  pdf =
   pdf {
     orderpdf {
       font-size = 8
@@ -594,52 +596,52 @@ plugin.tx_caddy_pi1 {
           }
         }
       }
-      packinglistpdf {
-        font-size = 8
+    }
+    packinglistpdf {
+      font-size = 8
 
-        attach_sender_mail = 0
-        attach_recipient_mail = 1
+      attach_sender_mail = 0
+      attach_recipient_mail = 1
 
-        template = {$plugin.wtcart_orderpdf.orderpdf.template}
-        include_file = {$plugin.wtcart_orderpdf.packinglistpdf.includepdf}
-        dir = {$plugin.wtcart_orderpdf.packinglistpdf.dir}
+      template = {$plugin.wtcart_orderpdf.orderpdf.template}
+      include_file = {$plugin.wtcart_orderpdf.packinglistpdf.includepdf}
+      dir = {$plugin.wtcart_orderpdf.packinglistpdf.dir}
 
-        filename < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
-        filename.10 >
+      filename < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
+      filename.10 >
 
-        abortonerror = {$plugin.wtcart_orderpdf.packinglistpdf.abortonerror}
+      abortonerror = {$plugin.wtcart_orderpdf.packinglistpdf.abortonerror}
 
-        orderaddress-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.orderaddress-position-x}
-        orderaddress-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.orderaddress-position-y}
+      orderaddress-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.orderaddress-position-x}
+      orderaddress-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.orderaddress-position-y}
 
-        shippingaddress-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.shippingaddress-position-x}
-        shippingaddress-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.shippingaddress-position-y}
+      shippingaddress-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.shippingaddress-position-x}
+      shippingaddress-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.shippingaddress-position-y}
 
-        packinglistnumber-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.packinglistnumber-position-x}
-        packinglistnumber-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.packinglistnumber-position-y}
-        packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
+      packinglistnumber-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.packinglistnumber-position-x}
+      packinglistnumber-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.packinglistnumber-position-y}
+      packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
 
-        cart-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.cart-position-x}
-        cart-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.cart-position-y}
-        cart-width = {$plugin.wtcart_orderpdf.packinglistpdf.cart-width}
-        cart-height = {$plugin.wtcart_orderpdf.packinglistpdf.cart-height}
+      cart-position-x = {$plugin.wtcart_orderpdf.packinglistpdf.cart-position-x}
+      cart-position-y = {$plugin.wtcart_orderpdf.packinglistpdf.cart-position-y}
+      cart-width = {$plugin.wtcart_orderpdf.packinglistpdf.cart-width}
+      cart-height = {$plugin.wtcart_orderpdf.packinglistpdf.cart-height}
 
-        additionaltextblocks {
-          1 {
-            position-x = 120
-            position-y = 85
-            width = 65
-            align = R
-            content = COA
-            content {
-              10 = TEXT
-              10.value = Jena, den
-              10.noTrimWrap = || |
-              20 = TEXT
-              20 {
-                data = date : U
-                strftime = %d. %m. %Y
-              }
+      additionaltextblocks {
+        1 {
+          position-x = 120
+          position-y = 85
+          width = 65
+          align = R
+          content = COA
+          content {
+            10 = TEXT
+            10.value = Jena, den
+            10.noTrimWrap = || |
+            20 = TEXT
+            20 {
+              data = date : U
+              strftime = %d. %m. %Y
             }
           }
         }
