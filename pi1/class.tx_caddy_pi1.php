@@ -508,7 +508,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function cartWiProductsProductSettings( $product )
   {
       // FOREACH  : settings property
-    foreach( aray_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       { 
