@@ -31,45 +31,47 @@
  *
  *
  *
- *   93: class tx_caddy_pi1 extends tslib_pibase
- *  126:     public function main( $content, $conf )
- *
- *              SECTION: Debug
- *  187:     private function debugOutputBeforeRunning( )
+ *   95: class tx_caddy_pi1 extends tslib_pibase
+ *  128:     public function main( $content, $conf )
  *
  *              SECTION: Cart
- *  225:     private function cart( )
- *  254:     private function cartWiProducts( )
- *  420:     private function cartWiProductsItem( $contentItem )
- *  451:     private function cartWiProductsPayment( )
- *  495:     private function cartWiProductsProduct( )
- *  559:     private function cartWiProductsProductErrorMsg( $product )
- *  583:     private function cartWiProductsProductServiceAttributes( $product )
- *  645:     private function cartWiProductsProductSettings( $product )
- *  685:     private function cartWiProductsProductTax( $product )
- *  738:     private function cartWiProductsShipping( )
- *  782:     private function cartWiProductsSpecial( )
- *  827:     private function cartWoProducts( )
+ *  190:     private function cart( )
+ *  219:     private function cartWiProducts( )
+ *  385:     private function cartWiProductsItem( $contentItem )
+ *  416:     private function cartWiProductsPayment( )
+ *  460:     private function cartWiProductsProduct( )
+ *  524:     private function cartWiProductsProductErrorMsg( $product )
+ *  548:     private function cartWiProductsProductServiceAttributes( $product )
+ *  610:     private function cartWiProductsProductSettings( $product )
+ *  650:     private function cartWiProductsProductTax( $product )
+ *  703:     private function cartWiProductsShipping( )
+ *  747:     private function cartWiProductsSpecial( )
+ *  792:     private function cartWoProducts( )
+ *
+ *              SECTION: Debug
+ *  824:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  860:     private function init( )
- *  880:     private function initDrs( )
- *  919:     private function initGpVar( )
- *  975:     private function initGpVarCid( )
- * 1025:     private function initHtmlTemplate( )
- * 1107:     private function initInstances( )
- * 1123:     private function initServiceAttributes( )
+ *  861:     private function init( )
+ *  881:     private function initDrs( )
+ *  920:     private function initGpVar( )
+ *  976:     private function initGpVarCid( )
+ * 1026:     private function initHtmlTemplate( )
+ * 1108:     private function initInstances( )
+ * 1124:     private function initServiceAttributes( )
  *
  *              SECTION: Order
- * 1150:     private function orderUpdate( )
+ * 1151:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1194:     private function productAdd( )
- * 1216:     private function productRemove( )
- * 1238:     private function zz_getPriceForOption($type, $option_id)
- * 1289:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1320:     private function zz_renderOptionList($type, $option_id)
- * 1430:     private function zz_price_format($value)
+ * 1195:     private function productAdd( )
+ * 1217:     private function productRemove( )
+ *
+ *              SECTION: ZZ
+ * 1242:     private function zz_getPriceForOption($type, $option_id)
+ * 1293:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1324:     private function zz_renderOptionList($type, $option_id)
+ * 1434:     private function zz_price_format($value)
  *
  * TOTAL FUNCTIONS: 28
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -1231,12 +1233,12 @@ class tx_caddy_pi1 extends tslib_pibase
   **********************************************/
 
   /**
-    * Gets the price for a given type ('shipping', 'payment') method on the current cart
-    *
-    * @param	string		$type
-    * @param	int		$option_id
-    * @return	string
-    */
+ * Gets the price for a given type ('shipping', 'payment') method on the current cart
+ *
+ * @param	string		$type
+ * @param	int		$option_id
+ * @return	string
+ */
   private function zz_getPriceForOption($type, $option_id) {
           $optionIds = $this->conf[$type.'.']['options.'][$option_id.'.'];
 
@@ -1281,13 +1283,13 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
   /**
-    * Gets the option_id for a given type ('shipping', 'payment') method on the current cart and checks the
-    * availability. If available, return is 0. If not available the given fallback or preset will returns.
-    *
-    * @param	string		$type
-    * @param	int		$option_id
-    * @return	int
-    */
+ * Gets the option_id for a given type ('shipping', 'payment') method on the current cart and checks the
+ * availability. If available, return is 0. If not available the given fallback or preset will returns.
+ *
+ * @param	string		$type
+ * @param	int		$option_id
+ * @return	int
+ */
   private function zz_checkOptionIsNotAvailable($type, $option_id)
   {
           if ((isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']),2) > round($this->cartGrossNoService,2))) || (isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']),2) < round($this->cartGrossNoService,2))))
@@ -1313,12 +1315,12 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
   /**
-    * [Describe function...]
-    *
-    * @param	[type]		$type: ...
-    * @param	[type]		$option_id: ...
-    * @return	[type]		...
-    */
+ * [Describe function...]
+ *
+ * @param	[type]		$type: ...
+ * @param	[type]		$option_id: ...
+ * @return	[type]		...
+ */
   private function zz_renderOptionList($type, $option_id) {
           $radio_list = '';
           foreach ((array) $this->conf[$type.'.']['options.'] as $key => $value)
@@ -1424,11 +1426,11 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
   /**
-    * [Describe function...]
-    *
-    * @param	[type]		$value: ...
-    * @return	[type]		...
-    */
+ * [Describe function...]
+ *
+ * @param	[type]		$value: ...
+ * @return	[type]		...
+ */
   private function zz_price_format($value) {
           $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']; // get ts
 
