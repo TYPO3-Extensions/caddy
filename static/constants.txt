@@ -22,7 +22,7 @@ plugin.caddy {
   main.service_attribute_3_symbol =
   # cat=caddy - main//0090; type=text; label= Enter the uid of the page where caddy plugin resides (e.g. 10).
   main.pid =
-  # cat=Quick Shop/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by:die-netzmacher.de
+  # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=Powered by:die-netzmacher.de
   main.externalLinks = Click me!
 
   # cat=caddy - database//0200; type=text; label= Table name: Enter the correct table name where the products are stored (e.g. tx_database).
