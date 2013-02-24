@@ -8,6 +8,8 @@ includeLibs {
 }
 
 plugin.tx_caddy_pi1 {
+    // Minimum price
+  cart =
   cart {
     cartmin {
       # set a value for minimal price, this value will be compared with the gross price excluding service cost
@@ -20,7 +22,8 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
-  # constants
+    // template, currency properties, service attributes
+  main = 
   main {
     template        = {$plugin.caddy.main.template}
     decimal         = {$plugin.caddy.main.decimal}
@@ -34,6 +37,8 @@ plugin.tx_caddy_pi1 {
     service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
     pid              = {$plugin.caddy.main.pid}
   }
+    // qry, service attributes, puid, sku
+  gpvar =
   gpvar {
     qty   = {$plugin.caddy.gpvar.qty}
     service_attribute_1   = {$plugin.caddy.gpvar.service_attribute_1}
@@ -42,12 +47,16 @@ plugin.tx_caddy_pi1 {
     puid  = {$plugin.caddy.gpvar.puid}
     sku   = {$plugin.caddy.gpvar.sku}
   }
+    // reduced, normal
+  tax =
   tax {
     reduced     = {$plugin.caddy.tax.reduced}
     reducedCalc = {$plugin.caddy.tax.reducedCalc}
     normal      = {$plugin.caddy.tax.normal}
     normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
+    // table, title, price, tax, sku, min, max, service attributes
+  db =
   db {
     table = {$plugin.caddy.db.table}
     title = {$plugin.caddy.db.title}
@@ -60,12 +69,15 @@ plugin.tx_caddy_pi1 {
     service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
     service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
   }
+    // uid
+  powermailContent =
   powermailContent {
     uid = {$plugin.caddy.powermailContent.uid}
   }
   debug  = {$plugin.caddy.debug}
 
-  # main settings
+    // titel, price, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCart
+  settings =
   settings {
 
     # GET or POST param for title (if not empty: Overwrite values from db request with puid)
@@ -142,7 +154,8 @@ plugin.tx_caddy_pi1 {
       intval = 1
     }
 
-    # manipulate output of the fields in the cart
+      // titel, puid, qty, service attributes, min, max, sku, price, delete, tax
+    fields =
     fields {
       title = TEXT
       title.field = title
@@ -250,7 +263,8 @@ plugin.tx_caddy_pi1 {
       }
     }
 
-    # manipulate overall output of the fields in the bottom of the cart
+      // cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax
+    overall =
     overall {
       cart_net = COA
       cart_net {
@@ -439,7 +453,8 @@ plugin.tx_caddy_pi1 {
       }
     }
 
-    # for the userFunc
+      // for the userFunc
+    powermailCart =
     powermailCart {
       fields < plugin.tx_caddy_pi1.settings.fields
       overall < plugin.tx_caddy_pi1.settings.overall
@@ -460,11 +475,14 @@ plugin.tx_caddy_pi1 {
     }
   }
 
+    // preset, options
+  shipping =
   shipping {
     #set default shipping method
     preset = 1
+      // shipping method 1
+    options =
     options {
-      #shipping method 1
       1 {
         #title of shipping method
         title = Standard
@@ -476,9 +494,13 @@ plugin.tx_caddy_pi1 {
     }
   }
 
+    // preset, options
+  payment =
   payment {
     #set default payment method
     preset = 1
+      // payment method 1
+    options =
     options {
       #payment method 1
       1 {

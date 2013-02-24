@@ -31,7 +31,7 @@
       ]]></label>
       <label index="promptExternalLinksBody"><![CDATA[
         <div style="float:right;padding-left:1em;">
-          <a href="http://typo3-caddy.de/en/" 
+          <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by die-netzmacher.de"
             title="Caddy is powered by die-netzmacher.de"
             target="_blank">
