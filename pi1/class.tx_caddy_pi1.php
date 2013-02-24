@@ -110,7 +110,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Add a product
     $this->productAdd( );
     
-    $this->cart( );
+    $subpartArray = $this->cart( );
 
 
     $this->content = $this->cObj->substituteMarkerArrayCached
@@ -180,19 +180,23 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cart( )
   {
+    $subpartArray = null; 
+    
       // read all products from session
     $this->product = $this->div->getProductsFromSession();
 
     switch( true )
     {
       case( count( $this->product ) > 0 ):
-        $this->cartWiProducts( );
+        $subpartArray = $this->cartWiProducts( );
         break;
       case( ! ( count( $this->product ) > 0 ) ):
       default:
-        $this->cartWoProducts( );
+        $subpartArray = $this->cartWoProducts( );
         break;
     }
+    
+    return $subpartArray;
   }
 
  /**
@@ -205,6 +209,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWiProducts( )
   {
+    $subpartArray = null;
+    
     //$this->cartWiProductsProduct( );
       // FOREACH  : product 
     foreach( ( array ) $this->product as $product ) 
@@ -454,6 +460,8 @@ class tx_caddy_pi1 extends tslib_pibase
             }
     }
     // there are products in the session
+    
+    return $subpartArray;
   }
 
  /**
