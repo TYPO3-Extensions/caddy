@@ -31,47 +31,49 @@
  *
  *
  *
- *   95: class tx_caddy_pi1 extends tslib_pibase
- *  128:     public function main( $content, $conf )
+ *   97: class tx_caddy_pi1 extends tslib_pibase
+ *
+ *              SECTION: Main
+ *  139:     public function main( $content, $conf )
  *
  *              SECTION: Cart
- *  190:     private function cart( )
- *  219:     private function cartWiProducts( )
- *  385:     private function cartWiProductsItem( $contentItem )
- *  416:     private function cartWiProductsPayment( )
- *  460:     private function cartWiProductsProduct( )
- *  524:     private function cartWiProductsProductErrorMsg( $product )
- *  548:     private function cartWiProductsProductServiceAttributes( $product )
- *  610:     private function cartWiProductsProductSettings( $product )
- *  650:     private function cartWiProductsProductTax( $product )
- *  703:     private function cartWiProductsShipping( )
- *  747:     private function cartWiProductsSpecial( )
- *  792:     private function cartWoProducts( )
+ *  201:     private function cart( )
+ *  230:     private function cartWiProducts( )
+ *  396:     private function cartWiProductsItem( $contentItem )
+ *  427:     private function cartWiProductsPayment( )
+ *  471:     private function cartWiProductsProduct( )
+ *  535:     private function cartWiProductsProductErrorMsg( $product )
+ *  559:     private function cartWiProductsProductServiceAttributes( $product )
+ *  621:     private function cartWiProductsProductSettings( $product )
+ *  661:     private function cartWiProductsProductTax( $product )
+ *  714:     private function cartWiProductsShipping( )
+ *  758:     private function cartWiProductsSpecial( )
+ *  803:     private function cartWoProducts( )
  *
  *              SECTION: Debug
- *  824:     private function debugOutputBeforeRunning( )
+ *  835:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  861:     private function init( )
- *  881:     private function initDrs( )
- *  920:     private function initGpVar( )
- *  976:     private function initGpVarCid( )
- * 1026:     private function initHtmlTemplate( )
- * 1108:     private function initInstances( )
- * 1124:     private function initServiceAttributes( )
+ *  872:     private function init( )
+ *  892:     private function initDrs( )
+ *  931:     private function initGpVar( )
+ *  987:     private function initGpVarCid( )
+ * 1037:     private function initHtmlTemplate( )
+ * 1119:     private function initInstances( )
+ * 1135:     private function initServiceAttributes( )
  *
  *              SECTION: Order
- * 1151:     private function orderUpdate( )
+ * 1162:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1195:     private function productAdd( )
- * 1217:     private function productRemove( )
+ * 1206:     private function productAdd( )
+ * 1228:     private function productRemove( )
  *
  *              SECTION: ZZ
- * 1242:     private function zz_getPriceForOption($type, $option_id)
- * 1293:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1324:     private function zz_renderOptionList($type, $option_id)
- * 1434:     private function zz_price_format($value)
+ * 1253:     private function zz_getPriceForOption($type, $option_id)
+ * 1304:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1335:     private function zz_renderOptionList($type, $option_id)
+ * 1445:     private function zz_price_format($value)
  *
  * TOTAL FUNCTIONS: 28
  * (This index is automatically created/updated by the extension "extdeveval")
