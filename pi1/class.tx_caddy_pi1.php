@@ -31,34 +31,47 @@
  *
  *
  *
- *  102: class tx_browser_pi1 extends tslib_pibase
+ *   93: class tx_caddy_pi1 extends tslib_pibase
+ *  126:     public function main( $content, $conf )
  *
- *              SECTION: Main Process
- *  410:     public function main( $content, $conf )
+ *              SECTION: Debug
+ *  187:     private function debugOutputBeforeRunning( )
  *
- *              SECTION: DRS - Development Reporting System
- * 1145:     public function drs_debugTrail( $level = 1 )
- * 1181:     private function init_drs()
- * 1477:     public function dev_var_dump( $content )
-  //public function dev_var_dump( )
+ *              SECTION: Cart
+ *  225:     private function cart( )
+ *  254:     private function cartWiProducts( )
+ *  420:     private function cartWiProductsItem( $contentItem )
+ *  451:     private function cartWiProductsPayment( )
+ *  495:     private function cartWiProductsProduct( )
+ *  559:     private function cartWiProductsProductErrorMsg( $product )
+ *  583:     private function cartWiProductsProductServiceAttributes( $product )
+ *  645:     private function cartWiProductsProductSettings( $product )
+ *  685:     private function cartWiProductsProductTax( $product )
+ *  738:     private function cartWiProductsShipping( )
+ *  782:     private function cartWiProductsSpecial( )
+ *  827:     private function cartWoProducts( )
  *
- *              SECTION: Classes
- * 1548:     private function require_classes()
- * 1693:     private function init_classVars( )
+ *              SECTION: Init
+ *  860:     private function init( )
+ *  880:     private function initDrs( )
+ *  919:     private function initGpVar( )
+ *  975:     private function initGpVarCid( )
+ * 1025:     private function initHtmlTemplate( )
+ * 1107:     private function initInstances( )
+ * 1123:     private function initServiceAttributes( )
  *
- *              SECTION: Helper
- * 1934:     private function get_typo3version( )
- * 1976:     private function init_accessByIP( )
+ *              SECTION: Order
+ * 1150:     private function orderUpdate( )
  *
- *              SECTION: Time tracking
- * 2038:     private function timeTracking_init( )
- * 2076:     public function timeTracking_log( $method, $line, $prompt )
- * 2137:     public function timeTracking_prompt( $prompt )
+ *              SECTION: Product
+ * 1194:     private function productAdd( )
+ * 1216:     private function productRemove( )
+ * 1238:     private function getPriceForOption($type, $option_id)
+ * 1289:     private function checkOptionIsNotAvailable($type, $option_id)
+ * 1320:     private function renderOptionList($type, $option_id)
+ * 1430:     private function price_format($value)
  *
- *              SECTION: Template
- * 2180:     private function getTemplate( )
- *
- * TOTAL FUNCTIONS: 12
+ * TOTAL FUNCTIONS: 28
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
