@@ -81,7 +81,7 @@ class tx_caddy_pi1 extends tslib_pibase
     // config
     global $TSFE;
 
-    $local_cObj = $TSFE->cObj; // cObject
+    $this->cObj = $TSFE->cObj; // cObject
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -216,7 +216,7 @@ class tx_caddy_pi1 extends tslib_pibase
       $product['price_total'] = $product['price'] * $product['qty']; 
         
         // enable .field in typoscript
-      $local_cObj->start( $product, $this->conf['db.']['table'] ); 
+      $this->cObj->start( $product, $this->conf['db.']['table'] ); 
 
         // FOREACH  : settings property
       foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
@@ -238,7 +238,7 @@ class tx_caddy_pi1 extends tslib_pibase
           default:
             // nothing to do, there is no default now
         }
-        $ts_rendered_value  = $local_cObj->cObjGetSingle( $ts_key, $ts_conf );
+        $ts_rendered_value  = $this->cObj->cObjGetSingle( $ts_key, $ts_conf );
         $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
 
         // adds the ###QTY_NAME### marker in case of variants
@@ -273,9 +273,9 @@ class tx_caddy_pi1 extends tslib_pibase
       // assign the forular with tax rates to TypoScript
       $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
 
-      $cartNet += ( $product['price_total'] - $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
+      $cartNet += ( $product['price_total'] - $this->cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
 
-      $curr_tax = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']);
+      $curr_tax = $this->cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']);
 
       switch($product['tax'])
       {
@@ -412,12 +412,12 @@ class tx_caddy_pi1 extends tslib_pibase
             'cart_tax_reduced' => $cartTaxReduced,
             'cart_tax_normal' => $cartTaxNormal
     );
-    $local_cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
+    $this->cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
     foreach ((array) $this->conf['settings.']['overall.'] as $key => $value)
     {
             if (!stristr($key, '.'))
             { // no .
-                    $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['overall.'][$key], $this->conf['settings.']['overall.'][$key . '.']);
+                    $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $this->cObj->cObjGetSingle($this->conf['settings.']['overall.'][$key], $this->conf['settings.']['overall.'][$key . '.']);
             }
     }
 
