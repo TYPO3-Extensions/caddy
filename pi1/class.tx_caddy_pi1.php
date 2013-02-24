@@ -86,8 +86,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     $this->pi_USER_INT_obj = 1;
-    
-      // #45775, dwildt, 1+
+
+      // Init callses, DRS, gpvars, HTML template, service attributes
     $this->init( );
 
     $content_item   = '';
@@ -98,45 +98,14 @@ class tx_caddy_pi1 extends tslib_pibase
     
     $this->cartCount  = 0;
     
+      // Output debugging prompts in debug mode
+    $this->debugOutputBeforeRunning( );
 
-    // debug output
-    if( $this->conf['debug'] )
-    {
-      t3lib_div::debug($this->div->getProductsFromSession(), $this->extKey . ': ' . 'Values in session at the beginning');
-      t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
-      t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
-      t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
-    }
-
-    // remove product from session
-    if (isset($this->piVars['del']))
-    {
-      $this->div->removeProductFromSession($this); // remove product
-    }
-
-    // change qty
-    if (isset($this->piVars['qty']) && is_array($this->piVars['qty']))
-    {
-      $this->div->changeQtyInSession($this); // change qty
-    }
-
-    // change shipping
-    if (isset($this->piVars['shipping']))
-    {
-      $this->div->changeShippingInSession($this->piVars['shipping']); // change shipping
-    }
-
-    // change payment
-    if (isset($this->piVars['payment']))
-    {
-      $this->div->changePaymentInSession($this->piVars['payment']); // change payment
-    }
-
-    // change special
-    if (isset($this->piVars['special']))
-    {
-      $this->div->changeSpecialInSession($this->piVars['special']); // change payment
-    }
+      // Remove current product
+    $this->productRemove( );
+    
+      // Update several order values
+    $this->orderUpdate( );
 
     // add further product to session
     $this->newProduct = $this->div->getProductDetails($this->gpvar, $this); // get details from product
@@ -422,6 +391,43 @@ class tx_caddy_pi1 extends tslib_pibase
   
   /***********************************************
   *
+  * Debug
+  *
+  **********************************************/
+
+ /**
+  * debugOutputBeforeRunning( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function debugOutputBeforeRunning( )
+  {
+      // RETURN : Don't output debug prompt
+    if( ! $this->conf['debug'] )
+    {
+      return;
+    }
+      // RETURN : Don't output debug prompt
+      
+      // output debug prompt
+    t3lib_div::debug
+    (
+      $this->div->getProductsFromSession(), $this->extKey . ': ' . 'Values in session at the beginning'
+    );
+    t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
+    t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
+    t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
+      // output debug prompt
+  }
+  
+  
+  
+  
+  /***********************************************
+  *
   * Init
   *
   **********************************************/
@@ -495,61 +501,99 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initGpVar( )
   {
-    // read variables
-    $this->gpvar['title'] = $this->div->cObjGetSingle($this->conf['settings.']['title'], $this->conf['settings.']['title.']); // get title
-    $this->gpvar['price'] = $this->div->cObjGetSingle($this->conf['settings.']['price'], $this->conf['settings.']['price.']); // get price
-    $this->gpvar['qty'] = intval($this->div->cObjGetSingle($this->conf['settings.']['qty'], $this->conf['settings.']['qty.'])); // get qty
-    $this->gpvar['tax'] = $this->div->cObjGetSingle($this->conf['settings.']['tax'], $this->conf['settings.']['tax.']); // get tax
-    $this->gpvar['service_attribute_1'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_1'], $this->conf['settings.']['service_attribute_1.'])); // get service_attribute_1
-    $this->gpvar['service_attribute_2'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_2'], $this->conf['settings.']['service_attribute_2.'])); // get service_attribute_2
-    $this->gpvar['service_attribute_3'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_3'], $this->conf['settings.']['service_attribute_3.'])); // get service_attribute_3
-    $this->gpvar['puid'] = intval($this->div->cObjGetSingle($this->conf['settings.']['puid'], $this->conf['settings.']['puid.'])); // get puid
-    $this->gpvar['cid'] = intval($this->div->cObjGetSingle($this->conf['settings.']['cid'], $this->conf['settings.']['cid.'])); // get cuid
+    $conf = $this->conf;
+    
+      // read variables
+    $this->gpvar['title'] = $this->div->cObjGetSingle( $conf['settings.']['title'], $conf['settings.']['title.'] );
+    $this->gpvar['price'] = $this->div->cObjGetSingle( $conf['settings.']['price'], $conf['settings.']['price.'] );
+    $this->gpvar['qty']   = intval( $this->div->cObjGetSingle( $conf['settings.']['qty'], $conf['settings.']['qty.'] ) );
+    $this->gpvar['tax']   = $this->div->cObjGetSingle( $conf['settings.']['tax'], $conf['settings.']['tax.'] );
+    $this->gpvar['puid']  = intval( $this->div->cObjGetSingle( $conf['settings.']['puid'], $conf['settings.']['puid.'] ) );
+    $this->gpvar['cid']   = intval ($this->div->cObjGetSingle( $conf['settings.']['cid'], $conf['settings.']['cid.'] ) );
 
-    $this->gpvar['sku'] = $this->div->cObjGetSingle($this->conf['settings.']['sku'], $this->conf['settings.']['sku.']); // get sku
-    $this->gpvar['min'] = $this->div->cObjGetSingle($this->conf['settings.']['min'], $this->conf['settings.']['min.']); // get min
-    $this->gpvar['max'] = $this->div->cObjGetSingle($this->conf['settings.']['max'], $this->conf['settings.']['max.']); // get max
+    $this->gpvar['sku'] = $this->div->cObjGetSingle( $conf['settings.']['sku'], $conf['settings.']['sku.'] );
+    $this->gpvar['min'] = $this->div->cObjGetSingle( $conf['settings.']['min'], $conf['settings.']['min.'] );
+    $this->gpvar['max'] = $this->div->cObjGetSingle( $conf['settings.']['max'], $conf['settings.']['max.'] );
 
-    if( $this->gpvar['cid'] )
-    {
-      $row=$this->pi_getRecord('tt_content', $this->gpvar['cid']); 
-      $flexformData = t3lib_div::xml2array($row['pi_flexform']);
-
-      $this->gpvar['puid'] = $this->pi_getFFvalue($flexformData, 'puid', 'sDEF');
-      $this->gpvar['title'] = $this->pi_getFFvalue($flexformData, 'title', 'sDEF');
-      $this->gpvar['sku'] = $this->pi_getFFvalue($flexformData, 'sku', 'sDEF');
-      $this->gpvar['price'] = $this->pi_getFFvalue($flexformData, 'price', 'sDEF');
-      $this->gpvar['tax'] = $this->pi_getFFvalue($flexformData, 'tax', 'sDEF');
-
-      $attributes = split("\n", $this->pi_getFFvalue($flexformData, 'attributes', 'sDEF'));
-
-      foreach ( $attributes as $line )
-      {
-        list($key, $value) = explode("==", $line, 2);
-        switch ( $key ) 
-        {
-          case 'service_attribute_1':
-            $this->gpvar['service_attribute_1'] = floatval($value);
-            break;
-          case 'service_attribute_2':
-            $this->gpvar['service_attribute_2'] = floatval($value);
-            break;
-          case 'service_attribute_3':
-            $this->gpvar['service_attribute_3'] = floatval($value);
-            break;
-          case 'min':
-            $this->gpvar['min'] = intval($value);
-            break;
-          case 'max':
-            $this->gpvar['max'] = intval($value);
-            break;
-        }
-      }
-    }
+    $this->gpvar['service_attribute_1'] = floatval
+                                          ( 
+                                            $this->div->cObjGetSingle
+                                            ( 
+                                              $conf['settings.']['service_attribute_1'], 
+                                              $conf['settings.']['service_attribute_1.']
+                                            )
+                                          );
+    $this->gpvar['service_attribute_2'] = floatval
+                                          ( 
+                                            $this->div->cObjGetSingle
+                                            ( 
+                                              $conf['settings.']['service_attribute_2'], 
+                                              $conf['settings.']['service_attribute_2.']
+                                            )
+                                          );
+    $this->gpvar['service_attribute_3'] = floatval
+                                          ( 
+                                            $this->div->cObjGetSingle
+                                            ( 
+                                              $conf['settings.']['service_attribute_3'], 
+                                              $conf['settings.']['service_attribute_3.']
+                                            )
+                                          );
+    $this->initGpVarCid( );
 
     if ($this->gpvar['qty'] === 0)
-    { // if no qty given
-      $this->gpvar['qty'] = 1; // set to 1
+    { 
+      $this->gpvar['qty'] = 1;
+    }
+  }
+
+ /**
+  * initGpVarCid( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initGpVarCid( )
+  {
+    if( ! $this->gpvar['cid'] )
+    {
+      return;
+    }
+
+    $row=$this->pi_getRecord('tt_content', $this->gpvar['cid'] ); 
+    $flexformData = t3lib_div::xml2array($row['pi_flexform'] );
+
+    $this->gpvar['puid']  = $this->pi_getFFvalue( $flexformData, 'puid', 'sDEF' );
+    $this->gpvar['title'] = $this->pi_getFFvalue( $flexformData, 'title', 'sDEF' );
+    $this->gpvar['sku']   = $this->pi_getFFvalue( $flexformData, 'sku', 'sDEF' );
+    $this->gpvar['price'] = $this->pi_getFFvalue( $flexformData, 'price', 'sDEF' );
+    $this->gpvar['tax']   = $this->pi_getFFvalue( $flexformData, 'tax', 'sDEF' );
+
+    $attributes = split( "\n", $this->pi_getFFvalue( $flexformData, 'attributes', 'sDEF' ) );
+
+    foreach ( $attributes as $line )
+    {
+      list($key, $value) = explode("==", $line, 2);
+      switch ( $key ) 
+      {
+        case 'service_attribute_1':
+          $this->gpvar['service_attribute_1'] = floatval($value);
+          break;
+        case 'service_attribute_2':
+          $this->gpvar['service_attribute_2'] = floatval($value);
+          break;
+        case 'service_attribute_3':
+          $this->gpvar['service_attribute_3'] = floatval($value);
+          break;
+        case 'min':
+          $this->gpvar['min'] = intval($value);
+          break;
+        case 'max':
+          $this->gpvar['max'] = intval($value);
+          break;
+      }
     }
   }
 
@@ -588,6 +632,8 @@ class tx_caddy_pi1 extends tslib_pibase
           t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
         }
       }
+        // DRS
+
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
           <h1>
@@ -605,7 +651,6 @@ class tx_caddy_pi1 extends tslib_pibase
         </div>
         ';
       die( $prompt );
-        // DRS
     }
       // Die if there isn't any HTML template
     
@@ -667,6 +712,78 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->cartServiceAttribute3Sum = 0;
     $this->cartServiceAttribute3Max = 0;
   }
+  
+  
+  
+  
+  /***********************************************
+  *
+  * Order
+  *
+  **********************************************/
+
+ /**
+  * orderUpdate( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function orderUpdate( )
+  {
+      // change qty
+    if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
+    {
+      $this->div->changeQtyInSession($this); // change qty
+    }
+
+      // change shipping
+    if( isset( $this->piVars['shipping'] ) )
+    {
+      $this->div->changeShippingInSession($this->piVars['shipping']); // change shipping
+    }
+
+    // change payment
+    if( isset( $this->piVars['payment'] ) )
+    {
+      $this->div->changePaymentInSession($this->piVars['payment']); // change payment
+    }
+
+      // change special
+    if( isset( $this->piVars['special'] ) )
+    {
+      $this->div->changeSpecialInSession($this->piVars['special']); // change payment
+    }
+  }
+  
+  
+  
+  
+  /***********************************************
+  *
+  * Product
+  *
+  **********************************************/
+
+ /**
+  * productRemove( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function productRemove( )
+  {
+      // remove product from session
+    if( isset( $this->piVars['del'] ) )
+    {
+      $this->div->removeProductFromSession( $this );
+    }
+  }
+  
+  
   
   
 
