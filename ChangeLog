@@ -1,7 +1,10 @@
 2.0.0
   2013-02-23
   FORK
+  * #45792: DRS - Development Reporting System
   * #45775: Fork from wt_cart
+            * #45783: Proper Flexforms
+            * #45781: Proper extension manager
             * #45776: Move all labels from wt_cart to caddy
 
 1.4.6
