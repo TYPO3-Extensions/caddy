@@ -1103,6 +1103,31 @@ class tx_caddy_div extends tslib_pibase
         $pObj->conf['db.']['sql'] = 'TEXT';
         $pObj->conf['db.']['sql.']['value'] = $query;
     }
+  
+ /**
+  * cObjGetSingle( )
+  *
+  * @return  string
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function cObjGetSingle( $cObj_name, $cObj_conf )
+  {
+    switch( true )
+    {
+      case( is_array( $cObj_conf ) ):
+        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        break;
+      case( ! ( is_array( $cObj_conf ) ) ):
+      default:
+        $value = $cObj_name;
+        break;
+    }
+      
+    return $value;
+  }
+    
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_div.php'])

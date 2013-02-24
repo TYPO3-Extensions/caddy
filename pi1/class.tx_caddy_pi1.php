@@ -98,62 +98,6 @@ class tx_caddy_pi1 extends tslib_pibase
     
     $this->cartCount  = 0;
     
-    // read variables
-    $this->gpvar['title'] = $this->cObj->cObjGetSingle($this->conf['settings.']['title'], $this->conf['settings.']['title.']); // get title
-    $this->gpvar['price'] = $this->cObj->cObjGetSingle($this->conf['settings.']['price'], $this->conf['settings.']['price.']); // get price
-    $this->gpvar['qty'] = intval($this->cObj->cObjGetSingle($this->conf['settings.']['qty'], $this->conf['settings.']['qty.'])); // get qty
-    $this->gpvar['tax'] = $this->cObj->cObjGetSingle($this->conf['settings.']['tax'], $this->conf['settings.']['tax.']); // get tax
-    $this->gpvar['service_attribute_1'] = floatval($this->cObj->cObjGetSingle($this->conf['settings.']['service_attribute_1'], $this->conf['settings.']['service_attribute_1.'])); // get service_attribute_1
-    $this->gpvar['service_attribute_2'] = floatval($this->cObj->cObjGetSingle($this->conf['settings.']['service_attribute_2'], $this->conf['settings.']['service_attribute_2.'])); // get service_attribute_2
-    $this->gpvar['service_attribute_3'] = floatval($this->cObj->cObjGetSingle($this->conf['settings.']['service_attribute_3'], $this->conf['settings.']['service_attribute_3.'])); // get service_attribute_3
-    $this->gpvar['puid'] = intval($this->cObj->cObjGetSingle($this->conf['settings.']['puid'], $this->conf['settings.']['puid.'])); // get puid
-    $this->gpvar['cid'] = intval($this->cObj->cObjGetSingle($this->conf['settings.']['cid'], $this->conf['settings.']['cid.'])); // get cuid
-
-    $this->gpvar['sku'] = $this->cObj->cObjGetSingle($this->conf['settings.']['sku'], $this->conf['settings.']['sku.']); // get sku
-    $this->gpvar['min'] = $this->cObj->cObjGetSingle($this->conf['settings.']['min'], $this->conf['settings.']['min.']); // get min
-    $this->gpvar['max'] = $this->cObj->cObjGetSingle($this->conf['settings.']['max'], $this->conf['settings.']['max.']); // get max
-
-    if( $this->gpvar['cid'] )
-    {
-      $row=$this->pi_getRecord('tt_content', $this->gpvar['cid']); 
-      $flexformData = t3lib_div::xml2array($row['pi_flexform']);
-
-      $this->gpvar['puid'] = $this->pi_getFFvalue($flexformData, 'puid', 'sDEF');
-      $this->gpvar['title'] = $this->pi_getFFvalue($flexformData, 'title', 'sDEF');
-      $this->gpvar['sku'] = $this->pi_getFFvalue($flexformData, 'sku', 'sDEF');
-      $this->gpvar['price'] = $this->pi_getFFvalue($flexformData, 'price', 'sDEF');
-      $this->gpvar['tax'] = $this->pi_getFFvalue($flexformData, 'tax', 'sDEF');
-
-      $attributes = split("\n", $this->pi_getFFvalue($flexformData, 'attributes', 'sDEF'));
-
-      foreach ( $attributes as $line )
-      {
-        list($key, $value) = explode("==", $line, 2);
-        switch ( $key ) 
-        {
-          case 'service_attribute_1':
-            $this->gpvar['service_attribute_1'] = floatval($value);
-            break;
-          case 'service_attribute_2':
-            $this->gpvar['service_attribute_2'] = floatval($value);
-            break;
-          case 'service_attribute_3':
-            $this->gpvar['service_attribute_3'] = floatval($value);
-            break;
-          case 'min':
-            $this->gpvar['min'] = intval($value);
-            break;
-          case 'max':
-            $this->gpvar['max'] = intval($value);
-            break;
-        }
-      }
-    }
-
-    if ($this->gpvar['qty'] === 0)
-    { // if no qty given
-      $this->gpvar['qty'] = 1; // set to 1
-    }
 
     // debug output
     if( $this->conf['debug'] )
@@ -499,6 +443,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initInstances( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
+    $this->initGpVar( );
   }
   
  /**
@@ -538,6 +483,74 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_todo   = true;
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+  }
+
+ /**
+  * initGpVar( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initGpVar( )
+  {
+    // read variables
+    $this->gpvar['title'] = $this->div->cObjGetSingle($this->conf['settings.']['title'], $this->conf['settings.']['title.']); // get title
+    $this->gpvar['price'] = $this->div->cObjGetSingle($this->conf['settings.']['price'], $this->conf['settings.']['price.']); // get price
+    $this->gpvar['qty'] = intval($this->div->cObjGetSingle($this->conf['settings.']['qty'], $this->conf['settings.']['qty.'])); // get qty
+    $this->gpvar['tax'] = $this->div->cObjGetSingle($this->conf['settings.']['tax'], $this->conf['settings.']['tax.']); // get tax
+    $this->gpvar['service_attribute_1'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_1'], $this->conf['settings.']['service_attribute_1.'])); // get service_attribute_1
+    $this->gpvar['service_attribute_2'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_2'], $this->conf['settings.']['service_attribute_2.'])); // get service_attribute_2
+    $this->gpvar['service_attribute_3'] = floatval($this->div->cObjGetSingle($this->conf['settings.']['service_attribute_3'], $this->conf['settings.']['service_attribute_3.'])); // get service_attribute_3
+    $this->gpvar['puid'] = intval($this->div->cObjGetSingle($this->conf['settings.']['puid'], $this->conf['settings.']['puid.'])); // get puid
+    $this->gpvar['cid'] = intval($this->div->cObjGetSingle($this->conf['settings.']['cid'], $this->conf['settings.']['cid.'])); // get cuid
+
+    $this->gpvar['sku'] = $this->div->cObjGetSingle($this->conf['settings.']['sku'], $this->conf['settings.']['sku.']); // get sku
+    $this->gpvar['min'] = $this->div->cObjGetSingle($this->conf['settings.']['min'], $this->conf['settings.']['min.']); // get min
+    $this->gpvar['max'] = $this->div->cObjGetSingle($this->conf['settings.']['max'], $this->conf['settings.']['max.']); // get max
+
+    if( $this->gpvar['cid'] )
+    {
+      $row=$this->pi_getRecord('tt_content', $this->gpvar['cid']); 
+      $flexformData = t3lib_div::xml2array($row['pi_flexform']);
+
+      $this->gpvar['puid'] = $this->pi_getFFvalue($flexformData, 'puid', 'sDEF');
+      $this->gpvar['title'] = $this->pi_getFFvalue($flexformData, 'title', 'sDEF');
+      $this->gpvar['sku'] = $this->pi_getFFvalue($flexformData, 'sku', 'sDEF');
+      $this->gpvar['price'] = $this->pi_getFFvalue($flexformData, 'price', 'sDEF');
+      $this->gpvar['tax'] = $this->pi_getFFvalue($flexformData, 'tax', 'sDEF');
+
+      $attributes = split("\n", $this->pi_getFFvalue($flexformData, 'attributes', 'sDEF'));
+
+      foreach ( $attributes as $line )
+      {
+        list($key, $value) = explode("==", $line, 2);
+        switch ( $key ) 
+        {
+          case 'service_attribute_1':
+            $this->gpvar['service_attribute_1'] = floatval($value);
+            break;
+          case 'service_attribute_2':
+            $this->gpvar['service_attribute_2'] = floatval($value);
+            break;
+          case 'service_attribute_3':
+            $this->gpvar['service_attribute_3'] = floatval($value);
+            break;
+          case 'min':
+            $this->gpvar['min'] = intval($value);
+            break;
+          case 'max':
+            $this->gpvar['max'] = intval($value);
+            break;
+        }
+      }
+    }
+
+    if ($this->gpvar['qty'] === 0)
+    { // if no qty given
+      $this->gpvar['qty'] = 1; // set to 1
+    }
   }
 
  /**
