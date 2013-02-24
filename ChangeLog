@@ -1,5 +1,11 @@
 2.0.0
   2013-02-23
+  Feature
+  * #45808: PDF attachments: Bill and Shipping
+            Effected files:
+            * lib/pdf
+              * fpdi    ( new )
+              * tcpdf   ( new )
   FORK
   * #45792: DRS - Development Reporting System
   * #45775: Fork from wt_cart

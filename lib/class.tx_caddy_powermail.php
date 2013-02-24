@@ -121,6 +121,49 @@ class tx_caddy_powermail extends tslib_pibase {
 		$maildata['subject'] = str_replace('###ORDERNUMBER###', $ordernumber, $maildata['subject']);
 	}
 
+  public function PM_SubmitEmailHook2( &$subpart, &$htmlMail, &$parent )
+  {
+    //ensure that both UIDxx and Name vals are replaced ....
+    //$this->prepareMarkerArray($parent);
+    //make mailer accessable
+    $this->htmlMail     = $htmlMail;
+    //make parent accessable
+    $this->parent       = $parent;
+    //make subpart accessable
+    $this->subpart      = $subpart;
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', 'caddy_cart_' . $GLOBALS["TSFE"]->id);
+
+    $conf               = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['settings.']['overall.'];
+    $ordernumber        = $GLOBALS['TSFE']->cObj->cObjGetSingle($conf['ordernumber'], $conf['ordernumber.']);
+    $packinglistnumber  = $GLOBALS['TSFE']->cObj->cObjGetSingle($conf['packinglistnumber'], $conf['packinglistnumber.']);
+
+    // HOOK for ATTACHMENTS
+    $checkError = 0;
+    if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['caddy']['addAttachment'])) 
+    {
+      foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['caddy']['addAttachment'] as $userFunc) 
+      {
+        $params = array(
+          'subpart'           => $subpart,
+          'ordernumber'       => $ordernumber,
+          'packinglistnumber' => $packinglistnumber
+        );
+        $checkError = $checkError + t3lib_div::callUserFunction($userFunc, $params, $sesArray);
+      }
+    }
+    if ($checkError > 0) {
+      // TODO: do some error handling
+      return -1;
+    }
+
+    foreach( $sesArray['files'] as $filename => $filepath )
+    {
+      $this->attachFile( $filepath, $filename );
+    }
+  }
+
+
 	/**
 	 * Clear cart after submit
 	 *
@@ -140,6 +183,35 @@ class tx_caddy_powermail extends tslib_pibase {
 		{ // current content uid fits to given uid in constants
 			$div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
 			$products = $div->removeAllProductsFromSession(); // clear complete cart
+		}
+	}
+	/**
+	 * Add specified file in $path to the mail as $name    
+	 *
+	 * $path string path to the file
+	 * $name string alias of the file in the mail               
+	 */
+	private function attachFile($path,$name) {
+		//add file to mail
+		if(is_a($this->htmlMail,'t3lib_mail_Message')) {
+			//new way of adding a attachment
+			$attachment = Swift_Attachment::newInstance();
+			//use it with markers ;)
+			$attachment->setFilename($name);
+			$attachment->setBody(file_get_contents($path));
+			$this->htmlMail->attach($attachment);
+		} elseif(is_a($this->htmlMail,'t3lib_htmlmail')) {
+			//old mail api as fallback
+			#$this->htmlMail->addAttachment($this->outputFile);
+			$this->htmlMail->theParts['attach'][] = array(
+				'content'       => file_get_contents($path),
+				'content_type'  => 'application/octet-stream',
+				'filename'      => $name,
+				);
+		} elseif($this->htmlMail === null) {
+			//do nothing if no mailobject is attached
+		} else {
+			throw new Exception('Unknown mail object type');
 		}
 	}
 
