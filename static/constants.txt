@@ -3,8 +3,8 @@
 ##
 
 plugin.caddy {
-  # cat=plugin.caddy//0010; type=file[html,htm,tmpl,txt]; label= Template File: HTML-template file FE output (see EXT:caddy/files/templates/cart.html or EXT:caddy/files/templates/cart_table.html)
-  main.template = EXT:caddy/files/templates/cart.html
+  # cat=plugin.caddy//0010; type=file[html,htm,tmpl,txt]; label= Template File: HTML-template file FE output (see EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
+  main.template = EXT:caddy/files/templates/caddy.html
 
   # cat=plugin.caddy//0020; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
   main.decimal = 2
