@@ -3,12 +3,20 @@
   Feature
   * #45808: PDF attachments: Bill and Shipping
             Effected files:
-            * lib/pdf
-              * fpdi    ( new )
-              * tcpdf   ( new )
+            * lib
+              * pdf                             ( new )
+                * fpdi                          ( new )
+                * tcpdf                         ( new )
+                * class.tx_caddy_pdf.php        ( new )
+              * class.tx_caddy_powermail.php
+            * static
+              * constants.txt
+                plugin.wtcart_orderpdf.orderpdf
+              * setup.txt
+                tx_wtcart_orderpdf.orderpdf
   FORK
   * #45792: DRS - Development Reporting System
-  * #45775: Fork from wt_cart
+  * #45775: Fork from wt_cart 1.4.6
             * #45797: Consolidating code
             * #45783: Proper Flexforms
             * #45781: Proper extension manager

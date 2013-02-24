@@ -116,6 +116,15 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $gpvar = array();
 
+
+
+
+  /***********************************************
+  *
+  * Main
+  *
+  **********************************************/
+
  /**
   * the main method of the PlugIn
   *

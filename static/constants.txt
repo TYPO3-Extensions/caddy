@@ -1,49 +1,49 @@
 plugin.caddy {
 
-  # cat=caddy - main//0010; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
+  # cat=caddy - main//101; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
   main.template = EXT:caddy/files/templates/caddy.html
-  # cat=caddy - main//0020; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
+  # cat=caddy - main//102; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
   main.decimal = 2
-  # cat=caddy - main//0030; type=text; label= Decimal symbol (e.g. , or .). This setting will be used for formatting prices.
+  # cat=caddy - main//103; type=text; label= Decimal symbol (e.g. , or .). This setting will be used for formatting prices.
   main.dec_point = ,
-  # cat=caddy - main//0040; type=text; label= Thousands separator (e.g. , or .). This setting will be used for formatting prices.
+  # cat=caddy - main//104; type=text; label= Thousands separator (e.g. , or .). This setting will be used for formatting prices.
   main.thousands_sep = .
-  # cat=caddy - main//0050; type=text; label= Currency symbol (e.g. &euro or $).
+  # cat=caddy - main//105; type=text; label= Currency symbol (e.g. &euro or $).
   main.currencySymbol = &euro;
-  # cat=caddy - main//0055; type=boolean; label= Show currency symbol before price.
+  # cat=caddy - main//106; type=boolean; label= Show currency symbol before price.
   main.currencySymbolBeforePrice = 0
-  # cat=caddy - main//0060; type=text; label= Quantity symbol (e.g. St.).
+  # cat=caddy - main//107; type=text; label= Quantity symbol (e.g. St.).
   main.quantitySymbol = St.
-  # cat=caddy - main//0070; type=text; label= Service Attribute 1 symbol (e.g. Weight: g, kg, lbs).
+  # cat=caddy - main//108; type=text; label= Service Attribute 1 symbol (e.g. Weight: g, kg, lbs).
   main.service_attribute_1_symbol =
-  # cat=caddy - main//0071; type=text; label= Service Attribute 2 symbol (e.g. Volume: l, gal).
+  # cat=caddy - main//109; type=text; label= Service Attribute 2 symbol (e.g. Volume: l, gal).
   main.service_attribute_2_symbol =
-  # cat=caddy - main//0072; type=text; label= Service Attribute 3 symbol (e.g. Length: m, cm, inch).
+  # cat=caddy - main//110; type=text; label= Service Attribute 3 symbol (e.g. Length: m, cm, inch).
   main.service_attribute_3_symbol =
-  # cat=caddy - main//0090; type=text; label= Enter the uid of the page where caddy plugin resides (e.g. 10).
+  # cat=caddy - main//111; type=text; label= Enter the uid of the page where caddy plugin resides (e.g. 10).
   main.pid =
   # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   main.externalLinks = Click me!
 
-  # cat=caddy - database//0200; type=text; label= Table name: Enter the correct table name where the products are stored (e.g. tx_database).
+  # cat=caddy - database//200; type=text; label= Table name: Enter the correct table name where the products are stored (e.g. tx_database).
   db.table =
-  # cat=caddy - database//0210; type=text; label= Title column: Enter the correct column name of the table where the product titles are stored (e.g. title).
+  # cat=caddy - database//210; type=text; label= Title column: Enter the correct column name of the table where the product titles are stored (e.g. title).
   db.title = title
-  # cat=caddy - database//0220; type=text; label= Price column: Enter the correct column name of the table where the prices are stored (e.g. price).
+  # cat=caddy - database//220; type=text; label= Price column: Enter the correct column name of the table where the prices are stored (e.g. price).
   db.price = price
-  # cat=caddy - database//0230; type=text; label= Tax column: Enter the correct column name of the table where the tax categories are stored (e.g. tax).
+  # cat=caddy - database//230; type=text; label= Tax column: Enter the correct column name of the table where the tax categories are stored (e.g. tax).
   db.tax = tax
-  # cat=caddy - database//0240; type=text; label= SKU column: Enter the correct column name of the table where the SKUs are stored (e.g. sku).
+  # cat=caddy - database//240; type=text; label= SKU column: Enter the correct column name of the table where the SKUs are stored (e.g. sku).
   db.sku =
-  # cat=caddy - database//0241; type=text; label= MIN column: Enter the correct column name of the table where the MIN order quantities are stored (e.g. min).
+  # cat=caddy - database//241; type=text; label= MIN column: Enter the correct column name of the table where the MIN order quantities are stored (e.g. min).
   db.min =
-  # cat=caddy - database//0242; type=text; label= MAX column: Enter the correct column name of the table where the MAX order quantities are stored (e.g. max).
+  # cat=caddy - database//242; type=text; label= MAX column: Enter the correct column name of the table where the MAX order quantities are stored (e.g. max).
   db.max =
-  # cat=caddy - database//0250; type=text; label= Service Attribute 1 column: Enter the correct column name of the table where the service attribute 1 are stored (e.g. for weight).
+  # cat=caddy - database//250; type=text; label= Service Attribute 1 column: Enter the correct column name of the table where the service attribute 1 are stored (e.g. for weight).
   db.service_attribute_1 =
-  # cat=caddy - database//0251; type=text; label= Service Attribute 2 column: Enter the correct column name of the table where the service attribute 2 are stored (e.g. for volume).
+  # cat=caddy - database//251; type=text; label= Service Attribute 2 column: Enter the correct column name of the table where the service attribute 2 are stored (e.g. for volume).
   db.service_attribute_2 =
-  # cat=caddy - database//0252; type=text; label= Service Attribute 3 column: Enter the correct column name of the table where the service attribute 3 are stored (e.g. for length).
+  # cat=caddy - database//252; type=text; label= Service Attribute 3 column: Enter the correct column name of the table where the service attribute 3 are stored (e.g. for length).
   db.service_attribute_3 =
   # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   db.externalLinks = Click me!
@@ -53,51 +53,93 @@ plugin.caddy {
   # cat=caddy - debug/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   debug.externalLinks = Click me!
 
-  # cat=caddy - gpvar//0100; type=text; label= Param PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
+  # cat=caddy - gpvar//100; type=text; label= Param PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
   gpvar.puid =
-  # cat=caddy - gpvar//0105; type=text; label= Param CID: Enter the correct parameter name for the uid of the current tt_content element. This value is only needed if you want to add tt_content elements to your cart. The provided parameter must be equal to the name in your HTML template. Default: cid.
+  # cat=caddy - gpvar//105; type=text; label= Param CID: Enter the correct parameter name for the uid of the current tt_content element. This value is only needed if you want to add tt_content elements to your cart. The provided parameter must be equal to the name in your HTML template. Default: cid.
   gpvar.cid = cid
-  # cat=caddy - gpvar//0110; type=text; label= Param Quantity: Enter the correct parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
+  # cat=caddy - gpvar//110; type=text; label= Param Quantity: Enter the correct parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
   gpvar.qty = qty
-  # cat=caddy - gpvar//0115; type=text; label= Param Title: Enter the correct parameter name for the title field in your order form (e.g. title).
+  # cat=caddy - gpvar//115; type=text; label= Param Title: Enter the correct parameter name for the title field in your order form (e.g. title).
   gpvar.title = title
-  # cat=caddy - gpvar//0120; type=text; label= Param Price: Enter the correct parameter name for the price field in your order form (e.g. price).
+  # cat=caddy - gpvar//120; type=text; label= Param Price: Enter the correct parameter name for the price field in your order form (e.g. price).
   gpvar.price = price
-  # cat=caddy - gpvar//0121; type=text; label= Param Service Attribute 1: Enter the correct parameter name for the service attribute field 1 of your order form (e.g. weight).
+  # cat=caddy - gpvar//121; type=text; label= Param Service Attribute 1: Enter the correct parameter name for the service attribute field 1 of your order form (e.g. weight).
   gpvar.service_attribute_1 =
-  # cat=caddy - gpvar//0122; type=text; label= Param Service Attribute 2: Enter the correct parameter name for the service attribute field 2 of your order form (e.g. volume).
+  # cat=caddy - gpvar//122; type=text; label= Param Service Attribute 2: Enter the correct parameter name for the service attribute field 2 of your order form (e.g. volume).
   gpvar.service_attribute_2 =
-  # cat=caddy - gpvar//0123; type=text; label= Param Service Attribute 3: Enter the correct parameter name for the service attribute field 3 of your order form (e.g. length).
+  # cat=caddy - gpvar//123; type=text; label= Param Service Attribute 3: Enter the correct parameter name for the service attribute field 3 of your order form (e.g. length).
   gpvar.service_attribute_3 =
-  # cat=caddy - gpvar//0140; type=text; label= Param SKU: Enter the correct parameter name for your SKU (stock keeping unit).
+  # cat=caddy - gpvar//140; type=text; label= Param SKU: Enter the correct parameter name for your SKU (stock keeping unit).
   gpvar.sku =
   # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   gpvar.externalLinks = Click me!
 
-  # cat=caddy - powermail//0300; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
+  # cat=caddy - pdf//100; type=int+; label= Powermail content uid: Enter the uid of the pdf content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
+  pdfContent.uid =
+  # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdfContent.externalLinks = Click me!
+
+  # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
   # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   powermailContent.externalLinks = Click me!
 
-  # cat=caddy - ordernumber//0600; type=text; label= Prefix for Order Number.
+  # cat=caddy - ordernumber//100; type=text; label= Prefix for Order Number.
   ordernumber.prefix =
-  # cat=caddy - ordernumber//0610; type=text; label= Suffix for Order Number.
+  # cat=caddy - ordernumber//110; type=text; label= Suffix for Order Number.
   ordernumber.suffix =
-  # cat=caddy - ordernumber//0620; type=int+; label= Offset for Order Number: The offset is added to the order number (e.g. for offset 1000000 the first order number will be 1000001).
+  # cat=caddy - ordernumber//120; type=int+; label= Offset for Order Number: The offset is added to the order number (e.g. for offset 1000000 the first order number will be 1000001).
   ordernumber.offset =
   # cat=caddy - ordernumber/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   ordernumber.externalLinks = Click me!
 
-  # cat=caddy - tax//0150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
+  # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
-  # cat=caddy - tax//0155; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 0.07). Used for calculation.
+  # cat=caddy - tax//155; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 0.07). Used for calculation.
   tax.reducedCalc = 0.07
-  # cat=caddy - tax//0160; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 19). Value will be displayed.
+  # cat=caddy - tax//160; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 19). Value will be displayed.
   tax.normal = 19
-  # cat=caddy - tax//0165; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 0.19). Used for calculation.
+  # cat=caddy - tax//165; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 0.19). Used for calculation.
   tax.normalCalc = 0.19
   # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   tax.externalLinks = Click me!
+}
+
+plugin.caddy {
+  pdf {
+    orderpdf {
+      template                    = EXT:caddy/files/templates/pdf_table.html
+      includepdf                  = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
+      dir                         = fileadmin/wt_cart_orderpdf
+      abortonerror                = 0
+      orderaddress-position-x     = 20
+      orderaddress-position-y     = 45
+      shippingaddress-position-x  = 20
+      shippingaddress-position-y  = 65
+      ordernumber-position-x      = 20
+      ordernumber-position-y      = 90
+      cart-position-x             = 25
+      cart-position-y             = 110
+      cart-width                  = 160
+      cart-height                 = 00
+    }
+    packinglistpdf {
+      template                      = EXT:caddy/files/templates/pdf_table.html
+      includepdf                    = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf
+      dir                           = fileadmin/wt_cart_packinglistpdf
+      abortonerror                  = 0
+      orderaddress-position-x       = 20
+      orderaddress-position-y       = 45
+      shippingaddress-position-x    = 20
+      shippingaddress-position-y    = 45
+      packinglistnumber-position-x  = 20
+      packinglistnumber-position-y  = 90
+      cart-position-x               = 25
+      cart-position-y               = 110
+      cart-width                    = 160
+      cart-height                   = 200
+    }
+  }
 }
 
   // #45775, 130224, dwildt, 2-
