@@ -26,6 +26,43 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+/**
+ * [CLASS/FUNCTION INDEX of SCRIPT]
+ *
+ *
+ *
+ *  102: class tx_browser_pi1 extends tslib_pibase
+ *
+ *              SECTION: Main Process
+ *  410:     public function main( $content, $conf )
+ *
+ *              SECTION: DRS - Development Reporting System
+ * 1145:     public function drs_debugTrail( $level = 1 )
+ * 1181:     private function init_drs()
+ * 1477:     public function dev_var_dump( $content )
+  //public function dev_var_dump( )
+ *
+ *              SECTION: Classes
+ * 1548:     private function require_classes()
+ * 1693:     private function init_classVars( )
+ *
+ *              SECTION: Helper
+ * 1934:     private function get_typo3version( )
+ * 1976:     private function init_accessByIP( )
+ *
+ *              SECTION: Time tracking
+ * 2038:     private function timeTracking_init( )
+ * 2076:     public function timeTracking_log( $method, $line, $prompt )
+ * 2137:     public function timeTracking_prompt( $prompt )
+ *
+ *              SECTION: Template
+ * 2180:     private function getTemplate( )
+ *
+ * TOTAL FUNCTIONS: 12
+ * (This index is automatically created/updated by the extension "extdeveval")
+ *
+ */
+
 require_once(PATH_tslib . 'class.tslib_pibase.php');
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
