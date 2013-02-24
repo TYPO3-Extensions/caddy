@@ -1,4 +1,4 @@
-plugin.caddy {
+plugin.tx_caddy {
   _CSS_DEFAULT_STYLE (
     /* div based cart */
     div.caddy_cart { font-size:12px; border:1px solid #336699; background-color:#e7ebef; }

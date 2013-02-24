@@ -3,6 +3,7 @@
   FORK
   * #45792: DRS - Development Reporting System
   * #45775: Fork from wt_cart
+            * #45797: Consolidating code
             * #45783: Proper Flexforms
             * #45781: Proper extension manager
             * #45776: Move all labels from wt_cart to caddy

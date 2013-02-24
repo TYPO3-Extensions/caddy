@@ -90,13 +90,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Init callses, DRS, gpvars, HTML template, service attributes
     $this->init( );
 
-    $content_item   = '';
-    $cartNet        = 0;
-    $cartGross      = 0;
-    $cartTaxReduced = 0;
-    $cartTaxNormal  = 0;
-    
-    $this->cartCount  = 0;
+    $this->cartCount = 0;
     
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
@@ -110,14 +104,14 @@ class tx_caddy_pi1 extends tslib_pibase
       // Add a product
     $this->productAdd( );
     
-    $subpartArray = $this->cart( );
+    $cart = $this->cart( );
 
 
     $this->content = $this->cObj->substituteMarkerArrayCached
                     (
                       $this->tmpl['all'], 
                       $this->outerMarkerArray, 
-                      $subpartArray
+                      $cart
                     );
     $this->content = $this->dynamicMarkers->main( $this->content, $this ); // Fill dynamic locallang or typoscript markers
     $this->content = preg_replace( '|###.*?###|i', '', $this->content ); // Finally clear not filled markers
@@ -173,14 +167,14 @@ class tx_caddy_pi1 extends tslib_pibase
  /**
   * cart( )
   *
-  * @return  void
+  * @return  array    $cart : ...
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function cart( )
   {
-    $subpartArray = null; 
+    $cart = null; 
     
       // read all products from session
     $this->product = $this->div->getProductsFromSession();
@@ -188,15 +182,15 @@ class tx_caddy_pi1 extends tslib_pibase
     switch( true )
     {
       case( count( $this->product ) > 0 ):
-        $subpartArray = $this->cartWiProducts( );
+        $cart = $this->cartWiProducts( );
         break;
       case( ! ( count( $this->product ) > 0 ) ):
       default:
-        $subpartArray = $this->cartWoProducts( );
+        $cart = $this->cartWoProducts( );
         break;
     }
     
-    return $subpartArray;
+    return $cart;
   }
 
  /**
@@ -211,6 +205,12 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $subpartArray = null;
     
+    $content_item   = '';
+    $cartNet        = 0;
+    $cartGross      = 0;
+    $cartTaxReduced = 0;
+    $cartTaxNormal  = 0;
+    
     //$this->cartWiProductsProduct( );
       // FOREACH  : product 
     foreach( ( array ) $this->product as $product ) 
@@ -218,88 +218,34 @@ class tx_caddy_pi1 extends tslib_pibase
         // clear marker array to avoid problems with error msg etc.
       unset( $this->markerArray );
       
-        // price total
+        // calculate price total
       $product['price_total'] = $product['price'] * $product['qty']; 
         
         // enable .field in typoscript
       $this->cObj->start( $product, $this->conf['db.']['table'] ); 
 
-        // FOREACH  : settings property
-      foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
-      {
-        if( stristr( $key, '.' ) )
-        { 
-          continue;
-        }
+        // update settings
+      $this->cartWiProductsProductSettings( $product );
 
-          // name of the current field in the TypoScript
-        $ts_key   = $this->conf['settings.']['fields.'][$key];
-          // configuration array of the current field in the TypoScript
-        $ts_conf  = $this->conf['settings.']['fields.'][$key . '.'];
-        switch( $key )
-        {
-          case('delete'):
-            $ts_conf = $this->div->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
-            break;
-          default:
-            // nothing to do, there is no default now
-        }
-        $ts_rendered_value  = $this->cObj->cObjGetSingle( $ts_key, $ts_conf );
-        $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
+        // update error prompts
+      $this->cartWiProductsProductErrorMsg( $product );
 
-        // adds the ###QTY_NAME### marker in case of variants
-        $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
-      }
-        // FOREACH  : settings property
+         // add inner html to variable
+      $content_item .= $this->cObj->substituteMarkerArrayCached( $this->tmpl['item'], $this->markerArray );
 
-      // replace error msg
-      $this->markerArray['###ERROR_MSG###'] = '';
-      foreach ($product['error'] as $error) {
-              $this->markerArray['###ERROR_MSG###'] .= sprintf($this->pi_getLL('caddy_ll_error_'.$error), $product[$error]);
-      }
+        // update cart gross
+      $cartGross        = $cartGross + $product['price_total'];
+        // update number of products
+      $this->cartCount  = $this->cartCount + $product['qty'];
 
-      $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['item'], $this->markerArray); // add inner html to variable
+        // update service attributes
+      $this->cartWiProductsProductServiceAttributes( $product );
 
-      $cartGross += $product['price_total'];
-      $this->cartCount += $product['qty'];
-
-      $this->cartServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
-      $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max > $product['service_attribute_1'] ? $this->cartServiceAttribute1Max : $product['service_attribute_1'];
-      $this->cartServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
-      $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max > $product['service_attribute_2'] ? $this->cartServiceAttribute2Max : $product['service_attribute_2'];
-      $this->cartServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
-      $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max > $product['service_attribute_3'] ? $this->cartServiceAttribute3Max : $product['service_attribute_3'];
-
-      // get the formular with the markers ###TAX## for calculating tax
-      $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
-      // save the formular with marker, we need it later
-      $str_wrap_former = $str_wrap;
-      // replace the ###TAX### with current tax rate like 0.07 or 0.19
-      $str_wrap = str_replace('###TAX###', $product['tax'], $str_wrap);
-      // assign the forular with tax rates to TypoScript
-      $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
-
-      $cartNet += ( $product['price_total'] - $this->cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
-
-      $curr_tax = $this->cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']);
-
-      switch($product['tax'])
-      {
-              case(0):
-                      break;
-              case(1):
-              case($this->conf['tax.']['reducedCalc']):
-                      $cartTaxReduced += $curr_tax; // add tax from this product to overall
-                      break;
-              case(2):
-              case($this->conf['tax.']['normalCalc']):
-                      $cartTaxNormal += $curr_tax; // add tax from this product to overall
-                      break;
-              default:
-                      echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy_pi1.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
-                      exit;
-      }
-      $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
+        // update tax
+      $arrTax         = $this->cartWiProductsProductTax( $product );
+      $cartNet        = $cartNet        + $arrTax['cartNet'];
+      $cartTaxReduced = $cartTaxReduced + $arrTax['cartTaxReduced'];
+      $cartTaxNormal  = $cartTaxNormal  + $arrTax['cartTaxNormal'];
     }
       // FOREACH  : product 
 
@@ -462,6 +408,186 @@ class tx_caddy_pi1 extends tslib_pibase
     // there are products in the session
     
     return $subpartArray;
+  }
+
+ /**
+  * cartWiProductsProductErrorMsg( )
+  *
+  * @param    array   $product : 
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWiProductsProductErrorMsg( $product )
+  {
+      // unset error msg
+    $this->markerArray['###ERROR_MSG###'] = '';
+      
+      // FOREACH  : error messages per product
+    foreach( $product['error'] as $error ) 
+    {
+      $errMsg = sprintf( $this->pi_getLL( 'caddy_ll_error_' . $error ), $product[$error] );
+
+      $this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $errMsg;
+    }
+      // FOREACH  : error messages per product
+  }
+
+ /**
+  * cartWiProductsProductServiceAttributes( )
+  *
+  * @param    array   $product : 
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWiProductsProductServiceAttributes( $product )
+  {
+      // DRS
+    if( $this->b_drs_todo )
+    {
+      $prompt = 'Unproper formula? In case of an exceeded maximum of service attributes, max will updated, sum won\'t!';
+      t3lib_div::devlog( '[WARN/TODO] ' . $prompt, $this->extKey, 3 );
+      $prompt = 'The developer has to check the formula.';
+      t3lib_div::devlog( '[HELP/TODO] ' . $prompt, $this->extKey, 1 );
+    }
+      // DRS
+
+    $this->cartServiceAttribute1Sum = $this->cartServiceAttribute1Sum + 
+                                      $product['service_attribute_1'] * $product['qty'];
+    if( $this->cartServiceAttribute1Max > $product['service_attribute_1'] )
+    {
+      $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max;
+    }
+    else
+    {
+      $this->cartServiceAttribute1Max = $product['service_attribute_1'];
+    }
+      
+    $this->cartServiceAttribute2Sum = $this->cartServiceAttribute2Sum + 
+                                      $product['service_attribute_2'] * $product['qty'];
+    if( $this->cartServiceAttribute2Max > $product['service_attribute_2'] )
+    {
+      $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max;
+    }
+    else
+    {
+      $this->cartServiceAttribute2Max = $product['service_attribute_2'];
+    }
+      
+    $this->cartServiceAttribute3Sum = $this->cartServiceAttribute3Sum + 
+                                      $product['service_attribute_3'] * $product['qty'];
+    if( $this->cartServiceAttribute3Max > $product['service_attribute_3'] )
+    {
+      $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max;
+    }
+    else
+    {
+      $this->cartServiceAttribute3Max = $product['service_attribute_3'];
+    }
+      
+//    $this->cartServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
+//    $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max > $product['service_attribute_1'] ? $this->cartServiceAttribute1Max : $product['service_attribute_1'];
+//    $this->cartServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
+//    $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max > $product['service_attribute_2'] ? $this->cartServiceAttribute2Max : $product['service_attribute_2'];
+//    $this->cartServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
+//    $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max > $product['service_attribute_3'] ? $this->cartServiceAttribute3Max : $product['service_attribute_3'];
+  }
+
+ /**
+  * cartWiProductsProductSettings( )
+  *
+  * @param    array   $product : 
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWiProductsProductSettings( $product )
+  {
+      // FOREACH  : settings property
+    foreach( aray_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    {
+      if( stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+
+        // name of the current field in the TypoScript
+      $ts_key   = $this->conf['settings.']['fields.'][$key];
+        // configuration array of the current field in the TypoScript
+      $ts_conf  = $this->conf['settings.']['fields.'][$key . '.'];
+      switch( $key )
+      {
+        case('delete'):
+          $ts_conf = $this->div->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
+          break;
+        default:
+          // nothing to do, there is no default now
+      }
+      $ts_rendered_value  = $this->cObj->cObjGetSingle( $ts_key, $ts_conf );
+      $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
+
+      // adds the ###QTY_NAME### marker in case of variants
+      $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
+    }
+      // FOREACH  : settings property
+  }
+      
+ /**
+  * cartWiProductsProductTax( )
+  *
+  * @param    array   $product  : 
+  * @return   array   $tax      : cartNet, cartTaxReduced, cartTaxNormal
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cartWiProductsProductTax( $product )
+  {
+    $arrTax = null; 
+
+      // Handle HTML snippet
+      // get the formular with the markers ###TAX## for calculating tax
+    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
+      // save the formular with marker, we need it later
+    $str_wrap_former = $str_wrap;
+      // replace the ###TAX### with current tax rate like 0.07 or 0.19
+    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
+      // assign the formular with tax rates to TypoScript
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
+      // Handle HTML snippet
+
+      // tax within price grosso
+    $currTax = $this->cObj->cObjGetSingle
+           (
+              $this->conf['settings.']['fields.']['tax'], 
+              $this->conf['settings.']['fields.']['tax.']
+           );
+      // price netto
+    $arrTax['cartNet'] = $product['price_total'] - $currTax;
+
+    switch( $product['tax'] )
+    {
+      case( 0 ):
+        break;
+      case( 1 ):
+      case( $this->conf['tax.']['reducedCalc'] ):
+        $arrTax['cartTaxReduced'] = $currTax;
+        break;
+      case( 2 ):
+      case( $this->conf['tax.']['normalCalc'] ):
+        $arrTax['cartTaxNormal'] = $currTax;
+        break;
+      default:
+        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy_pi1.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+        exit;
+    }
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
+    
+    return $arrTax;
   }
 
  /**
