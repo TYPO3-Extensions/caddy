@@ -565,8 +565,10 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $htmlTemplate = $this->cObj->fileResource( $this->conf['main.']['template'] );
     
+      // Die if there isn't any HTML template
     if( empty ( $htmlTemplate ) )
     {
+        // DRS
       if( $this->b_drs_error )
       {
         if( empty ( $this->conf['main.']['template'] ) )
@@ -586,7 +588,26 @@ class tx_caddy_pi1 extends tslib_pibase
           t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
         }
       }
+      $prompt = '
+        <div style="border:1em solid red;color:red;padding:1em;text-align:center">
+          <h1>
+            ERROR: No HTML Template
+          </h1>
+          <p>
+            There isn\'t any HTML template.
+          </p>
+          <p>
+            Please enable the DRS - the Development Reporting System. It tries to offer tze fix.
+          </p>
+          <p>
+            Caddy - the Shopping Cart
+          </p>
+        </div>
+        ';
+      die( $prompt );
+        // DRS
     }
+      // Die if there isn't any HTML template
     
     $this->tmpl['all']      = $this->cObj->getSubpart( $htmlTemplate, '###CADDY###' );
     $this->tmpl['empty']    = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_EMPTY###' );
