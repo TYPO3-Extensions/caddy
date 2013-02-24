@@ -569,12 +569,22 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       if( $this->b_drs_error )
       {
-        $prompt = 'The HTML template is empty!';
-        t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
-        $prompt = 'Please check, if you have included the static template.';
-        t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
-        $prompt = 'Your TypoScript: plugin.caddy.main.template = ' . $this->conf['main.']['template'];
-        t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
+        if( empty ( $this->conf['main.']['template'] ) )
+        {
+          $prompt = 'The path to the HTML template is empty!';
+          t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
+          $prompt = 'Please check, if you have included the static template.';
+          t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
+        }
+        if( ! empty ( $this->conf['main.']['template'] ) )
+        {
+          $prompt = 'The path to your HTML template seem\'s to be unproper!';
+          t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
+          $prompt = 'Path is ' . $this->conf['main.']['template'];
+          t3lib_div::devlog( '[WARN/INIT] ' . $prompt, $this->extKey, 2 );
+          $prompt = 'Please check your TypoScript: plugin.caddy.main.template';
+          t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
+        }
       }
     }
     
