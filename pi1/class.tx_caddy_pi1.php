@@ -573,7 +573,7 @@ class tx_caddy_pi1 extends tslib_pibase
         t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
         $prompt = 'Please check, if you have included the static template.';
         t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
-        $prompt = 'Please check the property plugin.caddy.main.template of your TypoScript.';
+        $prompt = 'Your TypoScript: plugin.caddy.main.template = ' . $this->conf['main.']['template'];
         t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
       }
     }
