@@ -1,6 +1,6 @@
 plugin.caddy {
 
-  # cat=caddy - main//0010; type=file[html,htm,tmpl,txt]; label= Template File: HTML-template file FE output (see EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
+  # cat=caddy - main//0010; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
   main.template = EXT:caddy/files/templates/caddy.html
   # cat=caddy - main//0020; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
   main.decimal = 2

@@ -565,29 +565,42 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $htmlTemplate = $this->cObj->fileResource( $this->conf['main.']['template'] );
     
-    $this->tmpl['all']      = $this->cObj->getSubpart($htmlTemplate, '###CADDY###');
-    $this->tmpl['empty']    = $this->cObj->getSubpart($htmlTemplate, '###CADDY_EMPTY###');
-    $this->tmpl['minprice'] = $this->cObj->getSubpart($htmlTemplate, '###CADDY_MINPRICE###');
-    $this->tmpl['item']     = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###');
+    if( empty ( $htmlTemplate ) )
+    {
+      if( $this->b_drs_error )
+      {
+        $prompt = 'The HTML template is empty!';
+        t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
+        $prompt = 'Please check, if you have included the static template.';
+        t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
+        $prompt = 'Please check the property plugin.caddy.main.template of your TypoScript.';
+        t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
+      }
+    }
+    
+    $this->tmpl['all']      = $this->cObj->getSubpart( $htmlTemplate, '###CADDY###' );
+    $this->tmpl['empty']    = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_EMPTY###' );
+    $this->tmpl['minprice'] = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_MINPRICE###' );
+    $this->tmpl['item']     = $this->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
     // new for Shipping radiolist and Payment radiolist and Special checkboxlist
-    $this->tmpl['shipping_all']   = $this->cObj->getSubpart($htmlTemplate, '###CADDY_SHIPPING###');
-    $this->tmpl['shipping_item']  = $this->cObj->getSubpart($this->tmpl['shipping_all'], '###ITEM###');
+    $this->tmpl['shipping_all']   = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SHIPPING###' );
+    $this->tmpl['shipping_item']  = $this->cObj->getSubpart( $this->tmpl['shipping_all'], '###ITEM###' );
 
-    $this->tmpl['shipping_condition_all']   = $this->cObj->getSubpart($htmlTemplate, '###CADDY_SHIPPING_CONDITIONS###');
-    $this->tmpl['shipping_condition_item']  = $this->cObj->getSubpart($this->tmpl['shipping_condition_all'], '###ITEM###');
+    $this->tmpl['shipping_condition_all']   = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SHIPPING_CONDITIONS###' );
+    $this->tmpl['shipping_condition_item']  = $this->cObj->getSubpart( $this->tmpl['shipping_condition_all'], '###ITEM###' );
 
-    $this->tmpl['payment_all']  = $this->cObj->getSubpart($htmlTemplate, '###CADDY_PAYMENT###');
-    $this->tmpl['payment_item'] = $this->cObj->getSubpart($this->tmpl['payment_all'], '###ITEM###');
+    $this->tmpl['payment_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_PAYMENT###' );
+    $this->tmpl['payment_item'] = $this->cObj->getSubpart( $this->tmpl['payment_all'], '###ITEM###' );
 
-    $this->tmpl['payment_condition_all']  = $this->cObj->getSubpart($htmlTemplate, '###CADDY_PAYMENT_CONDITIONS###');
-    $this->tmpl['payment_condition_item'] = $this->cObj->getSubpart($this->tmpl['payment_condition_all'], '###ITEM###');
+    $this->tmpl['payment_condition_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_PAYMENT_CONDITIONS###' );
+    $this->tmpl['payment_condition_item'] = $this->cObj->getSubpart( $this->tmpl['payment_condition_all'], '###ITEM###' );
 
-    $this->tmpl['special_all']  = $this->cObj->getSubpart($htmlTemplate, '###CADDY_SPECIAL###');
-    $this->tmpl['special_item'] = $this->cObj->getSubpart($this->tmpl['special_all'], '###ITEM###');
+    $this->tmpl['special_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SPECIAL###' );
+    $this->tmpl['special_item'] = $this->cObj->getSubpart( $this->tmpl['special_all'], '###ITEM###' );
 
-    $this->tmpl['special_condition_all']  = $this->cObj->getSubpart($htmlTemplate, '###CADDY_SPECIAL_CONDITIONS###');
-    $this->tmpl['special_condition_item'] = $this->cObj->getSubpart($this->tmpl['special_condition_all'], '###ITEM###');
+    $this->tmpl['special_condition_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SPECIAL_CONDITIONS###' );
+    $this->tmpl['special_condition_item'] = $this->cObj->getSubpart( $this->tmpl['special_condition_all'], '###ITEM###' );
   }
 
  /**
