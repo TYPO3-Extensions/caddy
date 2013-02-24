@@ -86,35 +86,18 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     $this->pi_USER_INT_obj = 1;
-    $this->div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
-    $this->calc = t3lib_div::makeInstance('tx_caddy_calc'); // Create new instance for calculation functions
-    $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers'); // Create new instance for dynamicmarker function
-    $this->tmpl['all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY###'); // Load HTML Template
-    $this->tmpl['empty'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_EMPTY###'); // Load HTML Template
-    $this->tmpl['minprice'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINPRICE###'); // Load HTML Template
-    $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
-    $content_item = '';
-    $cartNet = $cartGross = $cartTaxReduced = $cartTaxNormal = $this->cartCount = $this->cartServiceAttribute1Sum = $this->cartServiceAttribute1Max = $this->cartServiceAttribute2Sum = $this->cartServiceAttribute2Max = $this->cartServiceAttribute3Sum = $this->cartServiceAttribute3Max = 0;
+    
+      // #45775, dwildt, 1+
+    $this->init( );
 
-    // new for Shipping radiolist and Payment radiolist and Special checkboxlist
-    $this->tmpl['shipping_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SHIPPING###'); // Load HTML Template
-    $this->tmpl['shipping_item'] = $this->cObj->getSubpart($this->tmpl['shipping_all'], '###ITEM###'); // work on subpart 2
-
-    $this->tmpl['shipping_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SHIPPING_CONDITIONS###'); // Load HTML Template
-    $this->tmpl['shipping_condition_item'] = $this->cObj->getSubpart($this->tmpl['shipping_condition_all'], '###ITEM###'); // work on subpart 2
-
-    $this->tmpl['payment_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_PAYMENT###');
-    $this->tmpl['payment_item'] = $this->cObj->getSubpart($this->tmpl['payment_all'], '###ITEM###'); // work on subpart 2
-
-    $this->tmpl['payment_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_PAYMENT_CONDITIONS###'); // Load HTML Template
-    $this->tmpl['payment_condition_item'] = $this->cObj->getSubpart($this->tmpl['payment_condition_all'], '###ITEM###'); // work on subpart 2
-
-    $this->tmpl['special_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SPECIAL###');
-    $this->tmpl['special_item'] = $this->cObj->getSubpart($this->tmpl['special_all'], '###ITEM###'); // work on subpart 2
-
-    $this->tmpl['special_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SPECIAL_CONDITIONS###'); // Load HTML Template
-    $this->tmpl['special_condition_item'] = $this->cObj->getSubpart($this->tmpl['special_condition_all'], '###ITEM###'); // work on subpart 2
-
+    $content_item   = '';
+    $cartNet        = 0;
+    $cartGross      = 0;
+    $cartTaxReduced = 0;
+    $cartTaxNormal  = 0;
+    
+    $this->cartCount  = 0;
+    
     // read variables
     $this->gpvar['title'] = $this->cObj->cObjGetSingle($this->conf['settings.']['title'], $this->conf['settings.']['title.']); // get title
     $this->gpvar['price'] = $this->cObj->cObjGetSingle($this->conf['settings.']['price'], $this->conf['settings.']['price.']); // get price
@@ -490,6 +473,144 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
     return $this->pi_wrapInBaseClass($this->content);
   }
+  
+  
+  
+  /***********************************************
+  *
+  * Init
+  *
+  **********************************************/
+
+ /**
+  * init( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function init( )
+  {
+      // Init extension configuration array
+    $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
+
+    $this->initDRS( );
+    $this->initInstances( );
+    $this->initHtmlTemplate( );
+    $this->initServiceAttributes( );
+  }
+  
+ /**
+  * initDrs( ): Init the DRS - Development Reportinmg System
+  *
+  * @return    void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDrs( )
+  {
+    
+      // Enable the DRS by TypoScript
+    switch( $this->arr_extConf['debuggingDrs'] )
+    {
+      case( 'Disabled' ):
+      case( null ):
+        return;
+        break;
+      case( 'Enabled (for debugging only!)' ):
+          // Follow the workflow
+        break;
+      default:
+        $prompt = 'Error: debuggingDrs is undefined.<br />
+          value is ' . $this->arr_extConf['debuggingDrs'] . '<br />
+          <br />
+          ' . __METHOD__ . ' line(' . __LINE__. ')';
+        die( $prompt );
+    }
+
+    $this->b_drs_error  = true;
+    $this->b_drs_warn   = true;
+    $this->b_drs_info   = true;
+    $this->b_drs_ok     = true;
+    $this->b_drs_init   = true;
+    $this->b_drs_todo   = true;
+    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+  }
+
+ /**
+  * initHtmlTemplate( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initHtmlTemplate( )
+  {
+    $this->tmpl['all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY###'); // Load HTML Template
+    $this->tmpl['empty'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_EMPTY###'); // Load HTML Template
+    $this->tmpl['minprice'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINPRICE###'); // Load HTML Template
+    $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+
+    // new for Shipping radiolist and Payment radiolist and Special checkboxlist
+    $this->tmpl['shipping_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SHIPPING###'); // Load HTML Template
+    $this->tmpl['shipping_item'] = $this->cObj->getSubpart($this->tmpl['shipping_all'], '###ITEM###'); // work on subpart 2
+
+    $this->tmpl['shipping_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SHIPPING_CONDITIONS###'); // Load HTML Template
+    $this->tmpl['shipping_condition_item'] = $this->cObj->getSubpart($this->tmpl['shipping_condition_all'], '###ITEM###'); // work on subpart 2
+
+    $this->tmpl['payment_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_PAYMENT###');
+    $this->tmpl['payment_item'] = $this->cObj->getSubpart($this->tmpl['payment_all'], '###ITEM###'); // work on subpart 2
+
+    $this->tmpl['payment_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_PAYMENT_CONDITIONS###'); // Load HTML Template
+    $this->tmpl['payment_condition_item'] = $this->cObj->getSubpart($this->tmpl['payment_condition_all'], '###ITEM###'); // work on subpart 2
+
+    $this->tmpl['special_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SPECIAL###');
+    $this->tmpl['special_item'] = $this->cObj->getSubpart($this->tmpl['special_all'], '###ITEM###'); // work on subpart 2
+
+    $this->tmpl['special_condition_all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_SPECIAL_CONDITIONS###'); // Load HTML Template
+    $this->tmpl['special_condition_item'] = $this->cObj->getSubpart($this->tmpl['special_condition_all'], '###ITEM###'); // work on subpart 2
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initInstances( )
+  {
+    $this->div            = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+    $this->calc           = t3lib_div::makeInstance('tx_caddy_calc'); // Create new instance for calculation functions
+    $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers'); // Create new instance for dynamicmarker function
+  }
+
+ /**
+  * initServiceAttributes( )
+  *
+  * @return  void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initServiceAttributes( )
+  {
+    $this->cartServiceAttribute1Sum = 0;
+    $this->cartServiceAttribute1Max = 0;
+    $this->cartServiceAttribute2Sum = 0;
+    $this->cartServiceAttribute2Max = 0;
+    $this->cartServiceAttribute3Sum = 0;
+    $this->cartServiceAttribute3Max = 0;
+  }
+  
+  
+
+  
 
 	/** 
 	 * Gets the price for a given type ('shipping', 'payment') method on the current cart
