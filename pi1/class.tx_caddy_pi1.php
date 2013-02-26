@@ -26,6 +26,11 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+require_once(PATH_tslib . 'class.tslib_pibase.php');
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
+
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
@@ -79,11 +84,6 @@
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-
-require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
 
 /**
  * plugin 'Cart to powermail' for the 'caddy' extension.

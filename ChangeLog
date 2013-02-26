@@ -1,6 +1,10 @@
 2.0.0
   2013-02-23
   Feature
+  Features
+  * #45863: Icons
+            Effected files
+            * files/img/*                       ( new) 
   * #45808: PDF attachments: Bill and Shipping
             Effected files:
             * lib
