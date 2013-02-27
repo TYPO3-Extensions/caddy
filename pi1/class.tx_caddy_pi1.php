@@ -141,16 +141,17 @@ class tx_caddy_pi1 extends tslib_pibase
       // #45775, dwildt, 1+
     unset( $content );
 
-    // config
-    global $TSFE;
+      // 130227, dwildt, 2-
+//    // config
+//    global $TSFE;
 
-var_dump( $this->cObj );
-    $this->cObj = $TSFE->cObj; // cObject
-var_dump( $this->cObj );
+      // 130227, dwildt, 1-
+    //$this->cObj = $TSFE->cObj; // cObject
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
-    $this->pi_USER_INT_obj = 1;
+      // 130227, dwildt, 1-
+    //$this->pi_USER_INT_obj = 1;
 
       // Init callses, DRS, gpvars, HTML template, service attributes
     $this->init( );
@@ -960,10 +961,9 @@ var_dump( $this->cObj );
   */
   private function initDrsByFlexform( )
   {
-$this->local_cObj = t3lib_div::makeInstance( 'tslib_cObj' );    
 $treeDat = $this->cObj->data['pi_flexform'];
 //$treeDat = t3lib_div :: resolveAllSheetsInDS($treeDat);
-var_dump( $treeDat, $this->local_cObj );
+var_dump( $treeDat );
     
       // sdefDrs
     $sheet                      = 'sDEF';
