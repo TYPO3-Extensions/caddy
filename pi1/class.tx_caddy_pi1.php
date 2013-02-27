@@ -877,6 +877,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initRequireClasses( );
     $this->initDRS( );
     $this->initInstances( );
+    $this->initFlexform( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
     $this->initGpVar( );
@@ -981,6 +982,19 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_todo     = true;
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+  }
+
+ /**
+  * initFlexform( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initFlexform( )
+  {
+    $this->objFlexform->main( );
   }
 
  /**
