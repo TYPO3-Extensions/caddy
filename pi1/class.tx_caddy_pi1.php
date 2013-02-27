@@ -118,6 +118,13 @@ class tx_caddy_pi1 extends tslib_pibase
   private $outerMarkerArray = array();
 
   private $gpvar = array();
+  
+  private $powermailUid        = null;
+  private $powermailTitle      = null;
+  private $powermailFfConfirm  = null;
+  private $powermailVersionInt = null;
+  private $powermailVersionStr = null;
+  
 
 
 
@@ -163,19 +170,8 @@ class tx_caddy_pi1 extends tslib_pibase
       // Prompt of the update wizard
     $content = $this->updateWizard( $content );
     
-    $this->cartCount = 0;
-
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
-
-      // Remove current product
-    $this->productRemove( );
-
-      // Update several order values
-    $this->orderUpdate( );
-
-      // Add a product
-    $this->productAdd( );
 
     $cart = $this->cart( );
 
@@ -212,6 +208,14 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $cart = null;
 
+    $this->cartCount = 0;
+      // Remove current product
+    $this->productRemove( );
+      // Update several order values
+    $this->orderUpdate( );
+      // Add a product
+    $this->productAdd( );
+
       // read all products from session
     $this->product = $this->div->getProductsFromSession();
 
@@ -239,6 +243,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWiProducts( )
   {
+      // Set the hidden field to false of the powermail form
+    $this->powermailFormShow( );
+
     $subpartArray   = null;
     $shippingArray  = null;
     $paymentArray   = null;
@@ -324,6 +331,10 @@ class tx_caddy_pi1 extends tslib_pibase
       'cart_tax_reduced'      => $cartTaxReduced,
       'cart_tax_normal'       => $cartTaxNormal
     );
+    
+      // BACKUP cObj->data
+    $cObjData   = $this->cObj->data;
+    $currRecord = $this->cObj->currentRecord;
     $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record
 
@@ -391,6 +402,9 @@ class tx_caddy_pi1 extends tslib_pibase
       }
     }
 
+      // RESET cObj->data
+    $this->cObj->data = $cObjData;
+    $this->cObj->currentRecord  = $currRecord;
     return $subpartArray;
   }
 
@@ -469,7 +483,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $arrReturn['net']   = $net;
     return $arrReturn;
   }
-
+  
  /**
   * cartWiProductsProduct( )
   *
@@ -496,6 +510,9 @@ class tx_caddy_pi1 extends tslib_pibase
         // calculate price total
       $product['price_total'] = $product['price'] * $product['qty'];
 
+        // BACKUP cObj->data
+      $cObjData   = $this->cObj->data;
+      $currRecord = $this->cObj->currentRecord;
         // cObject become current record
       $this->cObj->start( $product, $this->conf['db.']['table'] );
 
@@ -521,6 +538,10 @@ class tx_caddy_pi1 extends tslib_pibase
       $cartNet        = $cartNet        + $arrResult['cartNet'];
       $cartTaxReduced = $cartTaxReduced + $arrResult['cartTaxReduced'];
       $cartTaxNormal  = $cartTaxNormal  + $arrResult['cartTaxNormal'];
+
+        // RESET cObj->data
+      $this->cObj->data           = $cObjData;
+      $this->cObj->currentRecord  = $currRecord;
     }
       // FOREACH  : product
 
@@ -812,18 +833,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWoProducts( )
   {
-      // there isn't any product in the session
-    if( ! ( count( $this->product ) > 0 ) )
-    {
-      if( ! empty ( $this->tmpl['all'] ) )
-      { // if template found
-        $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
-      }
-      else
-      { // no template - show error
-        $this->tmpl['all'] = $this->div->msg( $this->pi_getLL( 'error_noTemplate', 'No Template found' ) );
-      }
-    }
+      // Set the hidden field to true of the powermail form
+    $this->powermailFormHide( );
+
+    $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
   }
 
 
@@ -889,6 +902,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
     $this->initGpVar( );
+    $this->initPowermail( );
   }
   
 /**
@@ -985,13 +999,14 @@ class tx_caddy_pi1 extends tslib_pibase
         die( $prompt );
     }
 
-    $this->b_drs_error    = true;
-    $this->b_drs_warn     = true;
-    $this->b_drs_info     = true;
-    $this->b_drs_ok       = true;
-    $this->b_drs_flexform = true;
-    $this->b_drs_init     = true;
-    $this->b_drs_todo     = true;
+    $this->b_drs_error      = true;
+    $this->b_drs_warn       = true;
+    $this->b_drs_info       = true;
+    $this->b_drs_ok         = true;
+    $this->b_drs_flexform   = true;
+    $this->b_drs_init       = true;
+    $this->b_drs_powermail  = true;
+    $this->b_drs_todo       = true;
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
@@ -1032,13 +1047,14 @@ class tx_caddy_pi1 extends tslib_pibase
         break;
     }
 
-    $this->b_drs_error    = true;
-    $this->b_drs_warn     = true;
-    $this->b_drs_info     = true;
-    $this->b_drs_ok       = true;
-    $this->b_drs_flexform = true;
-    $this->b_drs_init     = true;
-    $this->b_drs_todo     = true;
+    $this->b_drs_error      = true;
+    $this->b_drs_warn       = true;
+    $this->b_drs_info       = true;
+    $this->b_drs_ok         = true;
+    $this->b_drs_flexform   = true;
+    $this->b_drs_init       = true;
+    $this->b_drs_powermail  = true;
+    $this->b_drs_todo       = true;
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $str_header = $this->cObj->data['header'];
@@ -1266,6 +1282,19 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
+  * initPowermail( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initPowermail( )
+  {
+    $this->powermailInit( );
+  }
+  
+ /**
   * initRequireClasses( )
   *
   * @return	void
@@ -1341,6 +1370,239 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->div->changeSpecialInSession($this->piVars['special']); // change payment
     }
   }
+
+
+
+
+  /***********************************************
+  *
+  * Powermail
+  *
+  **********************************************/
+
+ /**
+  * powermailFormHide( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function powermailFormHide( )
+  {
+  }
+  
+ /**
+  * powermailFormShow( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function powermailFormShow( )
+  {
+  }
+
+ /**
+  * powermailInit( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function powermailInit( )
+  {
+    $arrResult = $this->powermailInitVersion( );
+    $this->powermailVersionInt = $arrResult['int'];
+    $this->powermailVersionStr = $arrResult['str'];
+
+    if( empty( $this->powermailVersionInt ) )
+    {
+        // DRS
+      if( $this->b_drs_error )
+      {
+        $prompt = 'Powermail version is 0!';
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+      }
+        // DRS
+      return;
+    }
+    
+      // DRS
+    if( $this->b_drs_powermail )
+    {
+      $prompt = 'Powermail version is ' . $this->powermailVersionStr . ' ' .
+                '(internal ' . $this->powermailVersionInt . ')';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    $arrResult = $this->powermailInitFields( );
+    $this->powermailUid        = $arrResult['uid'];
+    $this->powermailTitle      = $arrResult['title'];
+    $this->powermailFfConfirm  = $arrResult['ffConfirm'];
+    
+      // DRS
+    if( $this->b_drs_powermail )
+    {
+      $prompt = 'powermail.uid: ' . $this->powermailUid;
+      t3lib_div::devlog(' [INFO/FLEXFORM] '. $prompt, $this->extKey, 0 );
+      $prompt = 'powermail.title: ' . $this->powermailTitle;
+      t3lib_div::devlog(' [INFO/FLEXFORM] '. $prompt, $this->extKey, 0 );
+      $prompt = 'powermail.confirm: ' . $this->powermailConfirm;
+      t3lib_div::devlog(' [INFO/FLEXFORM] '. $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return;
+
+  }
+
+ /**
+  * powermailInitFields: 
+  *
+  * @return    array     $arr : uid, title, ffConfirm of the powermail form
+  * @access private
+  * @version 0.0.1
+  * @since 0.0.1
+  */
+  private function powermailInitFields( )
+  {
+    $arrReturn = null; 
+    
+      // Page uid
+    $pid = $this->cObj->data['pid'];
+    
+    if( ! $pid )
+    {
+      $prompt = 'ERROR: unexpected result<br />
+        pid is empty<br />
+        Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+        TYPO3 extension: powermail4dev';
+      die( $prompt );
+    }
+
+      // Query
+    $select_fields  = '*';
+    $from_table     = 'tt_content';
+      // Don't respect hidden!
+    $where_clause   = "pid = " . $pid . " AND deleted = 0";
+    switch( true )
+    {
+      case( $this->powermailVersionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: powermail4dev';
+        die( $prompt );
+        break;
+      case( $this->powermailVersionInt < 2000000 ):
+        $where_clause = $where_clause . " AND CType = 'powermail_pi1'";
+        break;
+      case( $this->powermailVersionInt < 3000000 ):
+        $where_clause = $where_clause . " AND list_type = 'powermail_pi1'";
+        break;
+      case( $this->powermailVersionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: powermail4dev';
+        die( $prompt );
+        break;
+    }
+    $groupBy        = '';
+    $orderBy        = 'sorting';
+    $limit          = '1';
+      // Query
+
+      // DRS
+    if( $this->pObj->b_drs_sql )
+    {
+      $query  = $GLOBALS['TYPO3_DB']->SELECTquery
+                (
+                  $select_fields,
+                  $from_table,
+                  $where_clause,
+                  $groupBy,
+                  $orderBy,
+                  $limit
+                );
+      $prompt = $query;
+      t3lib_div::devlog(' [INFO/SQL] '. $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+      
+      // Execute SELECT
+    $res =  $GLOBALS['TYPO3_DB']->exec_SELECTquery
+            (
+              $select_fields,
+              $from_table,
+              $where_clause,
+              $groupBy,
+              $orderBy,
+              $limit
+            );
+      // Execute SELECT
+
+      // Current powermail record
+    $pmRecord =  $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res );
+
+      // RETURN : no row
+    if( empty( $pmRecord ) )
+    {
+      if( $this->pObj->b_drs_error )
+      {
+        $prompt = 'Abort. SQL query is empty!';
+        t3lib_div::devlog(' [WARN/SQL] '. $prompt, $this->pObj->extKey, 2 );
+      }
+      return false;
+    }
+      // RETURN : no row
+      
+    $pmUid    = $pmRecord['uid'];  
+    $pmTitle  = $pmRecord['header'];  
+    switch( true )
+    {
+      case( $this->powermailVersionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: powermail4dev';
+        die( $prompt );
+        break;
+      case( $this->powermailVersionInt < 2000000 ):
+        $pmFfConfirm  = $pmRecord['tx_powermail_confirm'];
+        break;
+      case( $this->powermailVersionInt < 3000000 ):
+      default:
+        $pmFlexform         = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
+        $pmFfConfirm  = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
+        break;
+    }
+
+    $arrReturn['uid']       = $pmUid;
+    $arrReturn['title']     = $pmTitle;
+    $arrReturn['ffConfirm'] = $pmFfConfirm;
+
+    return $arrReturn;
+  }
+
+ /**
+  * powermailInitVersion( ): 
+  *
+  * @return    string        $prompt : A prompt in case of an error
+  * @access private
+  * @version 0.0.1
+  * @since   0.0.1
+  */
+  private function powermailInitVersion( )
+  {
+    return $this->userfunc->extMgmVersion( 'powermail' );
+  }
+
 
 
 

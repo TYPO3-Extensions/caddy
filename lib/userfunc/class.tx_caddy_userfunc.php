@@ -90,6 +90,48 @@ class tx_caddy_userfunc
     $this->pObj = $pObj;
   }
   
+  /***********************************************
+   *
+   * Extension Management
+   *
+   **********************************************/
+
+ /**
+  * extMgmVersion: 
+  *
+  * @param    string        $_EXTKEY  : extension key
+  * @return    integer      $version  : version of the given extension
+  * @access public
+  * @version 0.0.1
+  * @since 0.0.1
+  */
+  public function extMgmVersion( $_EXTKEY )
+  {
+    $arrReturn = null;
+    
+    if( ! t3lib_extMgm::isLoaded( $_EXTKEY ) )
+    {
+      $arrReturn['int'] = 0;
+      $arrReturn['str'] = 0;
+      return $arrReturn;
+    }
+
+      // Do not use require_once!
+    require( t3lib_extMgm::extPath( $_EXTKEY ) . 'ext_emconf.php');
+    $strVersion = $EM_CONF[$_EXTKEY]['version'];
+
+      // Set version as integer (sample: 4.7.7 -> 4007007)
+    list( $main, $sub, $bugfix ) = explode( '.', $strVersion );
+    $intVersion = ( ( int ) $main ) * 1000000;
+    $intVersion = $intVersion + ( ( int ) $sub ) * 1000;
+    $intVersion = $intVersion + ( ( int ) $bugfix ) * 1;
+      // Set version as integer (sample: 4.7.7 -> 4007007)
+    
+    $arrReturn['int'] = $intVersion;
+    $arrReturn['str'] = $strVersion;
+    return $arrReturn;
+  }
+  
   /**
    * pi1FfSdefReport(): Displays the quick start message.
    *
