@@ -110,7 +110,7 @@ class tx_caddy_userfunc
     $prompt = $prompt . '
       <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:sdefReportOk'). '
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk'). '
         </div>
       </div>
       ';
