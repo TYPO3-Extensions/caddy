@@ -1452,11 +1452,11 @@ class tx_caddy_pi1 extends tslib_pibase
       // DRS
     if( $this->b_drs_powermail )
     {
-      $prompt = 'powermail.uid: ' . $this->powermailUid;
+      $prompt = 'powermail.uid: "' . $this->powermailUid . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
-      $prompt = 'powermail.title: ' . $this->powermailTitle;
+      $prompt = 'powermail.title: "' . $this->powermailTitle . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
-      $prompt = 'powermail.confirm: ' . $this->powermailConfirm;
+      $prompt = 'powermail.confirm: "' . $this->powermailConfirm . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
     }
       // DRS
