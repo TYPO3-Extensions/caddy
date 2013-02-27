@@ -147,7 +147,7 @@ t3lib_SpriteManager::addTcaTypeIcon('pages', 'contains-caddy', '../typo3conf/ext
   // Methods for backend workflows
 
 //require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/flexform/class.tx_caddy_flexform.php');
-//require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/userfunc/class.tx_caddy_userfunc.php');
+require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/userfunc/class.tx_caddy_userfunc.php');
   // Methods for backend workflows
 
 
