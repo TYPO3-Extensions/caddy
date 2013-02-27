@@ -27,9 +27,6 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
 
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -1275,11 +1272,18 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initInstances( )
   {
-    $this->div            = t3lib_div::makeInstance('tx_caddy_div');
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
+    
+    require_once( $path2lib . 'class.tx_caddy_div.php' );
+    require_once( $path2lib . 'class.tx_caddy_calc.php' );
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+
+    $this->div            = t3lib_div::makeInstance( 'tx_caddy_div' );
     $this->div->cObj      = $this->cObj;
-    $this->calc           = t3lib_div::makeInstance('tx_caddy_calc');
-    $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers');
-    $this->userfunc       = t3lib_div::makeInstance('tx_caddy_userfunc');
+    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
+    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+    $this->userfunc       = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**
