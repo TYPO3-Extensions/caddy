@@ -955,7 +955,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initDrsByFlexform( )
   {
-$treeDat = $this->pObj->cObj->data['pi_flexform'];
+$treeDat = $this->cObj->data['pi_flexform'];
 $treeDat = t3lib_div :: resolveAllSheetsInDS($treeDat);
 var_dump(t3lib_div :: view_array($treeDat));
     
