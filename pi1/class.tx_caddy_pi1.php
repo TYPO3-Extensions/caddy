@@ -874,6 +874,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Init extension configuration array
     $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
 
+    $this->initRequireClasses( );
     $this->initDRS( );
     $this->initInstances( );
     $this->initHtmlTemplate( );
@@ -891,8 +892,28 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initDrs( )
   {
+    $this->initDrsByExtmngr( );
 
-      // Enable the DRS by TypoScript
+      // RETURN : DRS is enabled by the extension manager
+    if( $this->b_drs_ok )
+    {
+      return;
+    }
+      // RETURN : DRS is enabled by the extension manager
+
+    $this->initDrsByFlexform( );    
+  }
+
+ /**
+  * initDrsByExtmngr( ): Init the DRS - Development Reportinmg System
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDrsByExtmngr( )
+  {
     switch( $this->arr_extConf['debuggingDrs'] )
     {
       case( 'Disabled' ):
@@ -917,6 +938,47 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_init   = true;
     $this->b_drs_todo   = true;
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+    $prompt = 'The DRS is enabled by the extension manager.';
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+  }
+
+ /**
+  * initDrsByFlexform( ): Init the DRS - Development Reportinmg System
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDrsByFlexform( )
+  {
+      // sdefDrs
+    $sheet                      = 'sDEF';
+    $field                      = 'sdefDrs';
+    $this->objFlexform->sdefDrs = $this->objFlexform->zzFfValue( $sheet, $field, false );
+      // sdefDrs
+
+      // Enable the DRS by TypoScript
+    switch( $this->objFlexform->sdefDrs )
+    {
+      case( false ):
+      case( null ):
+        return;
+        break;
+      case( true ):
+      default:
+        break;
+    }
+
+    $this->b_drs_error    = true;
+    $this->b_drs_warn     = true;
+    $this->b_drs_info     = true;
+    $this->b_drs_ok       = true;
+    $this->b_drs_flexform = true;
+    $this->b_drs_init     = true;
+    $this->b_drs_todo     = true;
+    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
   }
 
@@ -1122,6 +1184,21 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->div->cObj      = $this->cObj;
     $this->calc           = t3lib_div::makeInstance('tx_caddy_calc'); // Create new instance for calculation functions
     $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers'); // Create new instance for dynamicmarker function
+  }
+
+ /**
+  * initRequireClasses( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initRequireClasses( )
+  {
+      // Class with methods for get flexform values
+    require_once( 'class.tx_caddy_pi1_flexform.php' );
+    $this->objFlexform = new tx_caddy_pi1_flexform( $this );
   }
 
  /**
