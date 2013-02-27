@@ -16,7 +16,7 @@ if( ! defined( 'TYPO3_MODE' ) )
   // Enables the Include Static Templates
   // Add pagetree icons
   // Methods for backend workflows
-  // TCA for tt_content
+  // Plugin Configuration
 
 
 
@@ -154,11 +154,12 @@ t3lib_SpriteManager::addTcaTypeIcon('pages', 'contains-caddy', '../typo3conf/ext
 
   ////////////////////////////////////////////////////////////////////////////
   //
-  // TCA for tt_content
+  // Plugin Configuration
 
 t3lib_div::loadTCA('tt_content');
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key,pages';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY.'_pi1'] = 'layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY.'_pi1']      ='pi_flexform';
 t3lib_extMgm::addPlugin(array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi1',
   $_EXTKEY . '_pi1',
@@ -182,6 +183,6 @@ t3lib_extMgm::addPlugin(array(
   t3lib_extMgm::extRelPath($_EXTKEY) . 'ext_icon.gif'
 ),'list_type');
 t3lib_extMgm::addPiFlexFormValue($_EXTKEY.'_pi3', 'FILE:EXT:'.$_EXTKEY.'/pi3/flexform_ds.xml');
-  // TCA for tt_content
+  // Plugin Configuration
 
 ?>
