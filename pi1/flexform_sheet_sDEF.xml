@@ -19,7 +19,7 @@
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>
           <config>
             <type>check</type>
-            <default>1</default>
+            <default>0</default>
           </config>
         </TCEforms>
       </drs>
@@ -28,7 +28,7 @@
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefUpdatewizard</label>
           <config>
             <type>check</type>
-            <default>1</default>
+            <default>0</default>
           </config>
         </TCEforms>
       </updateWizard>
