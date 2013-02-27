@@ -109,16 +109,6 @@ class tx_caddy_pi1_flexform
   function main()
   {
 
-      // DRS - Development Reporting System
-    if( $this->pObj->b_drs_flexform )
-    {
-      $str_header = $this->pObj->cObj->data['header'];
-      $int_uid = $this->pObj->cObj->data['uid'];
-      $int_pid = $this->pObj->cObj->data['pid'];
-      t3lib_div :: devlog('[INFO/FLEXFORM] \'' . $str_header . '\' (pid: ' . $int_pid . ', uid: ' . $int_uid . ')', $this->pObj->extKey, 0);
-    }
-      // DRS - Development Reporting System
-
       // Sheets
     $this->sheetSdef( );
       // Sheets

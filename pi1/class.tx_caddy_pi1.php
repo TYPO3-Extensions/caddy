@@ -949,6 +949,11 @@ class tx_caddy_pi1 extends tslib_pibase
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+    $str_header = $this->pObj->cObj->data['header'];
+    $int_uid    = $this->pObj->cObj->data['uid'];
+    $int_pid    = $this->pObj->cObj->data['pid'];
+    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
  /**
@@ -989,6 +994,11 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_todo     = true;
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+    $str_header = $this->pObj->cObj->data['header'];
+    $int_uid    = $this->pObj->cObj->data['uid'];
+    $int_pid    = $this->pObj->cObj->data['pid'];
+    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
  /**
