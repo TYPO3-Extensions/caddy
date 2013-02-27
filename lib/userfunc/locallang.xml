@@ -48,7 +48,7 @@
               height="80" 
               alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
-        <ul style="list-style:outside;">
+        <ul>
           <li>
             TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"
@@ -131,21 +131,97 @@
       <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version48orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 4.7. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptExternalLinksBody"><![CDATA[
-        <div>
+        <div style="float:right;padding-left:1em;">
+          <a href="http://typo3-caddy.de/en/" th
+            alt="Caddy is powered by die-netzmacher.de"
+            title="Caddy is powered by die-netzmacher.de"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
+              width="80" 
+              height="80" 
+              alt="Caddy is powered by die-netzmacher.de" /></a>
           <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
+            alt="Caddy is powered by die-netzmacher.de"
+            title="Caddy is powered by die-netzmacher.de"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="130" 
-              height="130" 
-              alt="die-netzmacher.de" /></a><br />
-          <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
-            target="_blank">
-            Die Netzmacher - die Entwickler von TYPO3 ohne PHP</a>
+              width="80" 
+              height="80" 
+              alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
+        <ul>
+          <li>
+            TYPO3-Caddy website<br />
+            <a href="http://typo3-caddy.de/en"
+              style="text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">typo3-caddy.de</a>
+          </li>
+          <li>
+            TYPO3-Caddy forum<br />
+            <a href="http://typo3-caddy.de/forum/" 
+              style="text-decoration:underline;"
+              alt="TYPO3-Caddy - Forum"
+              title="TYPO3-Caddy - Forum"
+              target="_blank">typo3-caddy.de/forum</a>
+          </li>
+          <li>
+            TYPO3-Caddy developer<br />
+            <a href="http://die-netzmacher.de/" 
+              style="text-decoration:underline;"
+              alt="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
+              title="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
+              target="_blank">die-netzmacher.de</a>
+          </li>
+        </ul>
+        </div>
+        <p style="font-weight:bold;padding:1em 0;">
+          Das TYPO3-Caddy-Projekt wird gesponsert von
+        </p>
+        <a href="http://www.made-in-nature.de/"
+          alt="made in nature, Deutschland, Sponsor des des TYPO3-Caddy-Projekts"
+          title="made in nature, Deutschland, Sponsor des des TYPO3-Caddy-Projekts"
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/made-in-nature.de_120x90.gif"
+            width="120"
+            height="90"
+            alt="made in nature, Deutschland, Sponsor des des TYPO3-Caddy-Projekts" /></a>
+        <p style="padding:0 0 1em 0;">
+          M&ouml;chtest Du das TYPO3-Caddy-Projekt unterst&uuml;tzen?
+          <a href="http://typo3-caddy.de/de/sponsoring/"
+            style="text-decoration:underline;"
+            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+            target="_blank">
+            Mehr Infos</a>.
+        </p>
+        <a href="http://typo3-caddy.de/de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-blue.gif" 
+            width="120" 
+            height="90" 
+            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
+            width="120" 
+            height="90" 
+            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
+            width="120" 
+            height="90" 
+            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
       ]]></label>
     </languageKey>
   </data>
