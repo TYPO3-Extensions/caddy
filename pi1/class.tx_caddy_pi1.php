@@ -961,7 +961,7 @@ class tx_caddy_pi1 extends tslib_pibase
 $this->local_cObj = t3lib_div::makeInstance( 'tslib_cObj' );    
 $treeDat = $this->cObj->data['pi_flexform'];
 //$treeDat = t3lib_div :: resolveAllSheetsInDS($treeDat);
-var_dump( $treeDat, $this->local_cObj->data );
+var_dump( $treeDat, $this->local_cObj );
     
       // sdefDrs
     $sheet                      = 'sDEF';
