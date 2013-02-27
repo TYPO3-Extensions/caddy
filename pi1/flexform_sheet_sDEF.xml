@@ -6,15 +6,15 @@
     </TCEforms>
     <type>array</type>
     <el>
-      <report>
+      <sdefReport>
         <TCEforms>
           <config>
             <type>user</type>
             <userFunc>tx_caddy_userfunc->pi1FfSdefReport</userFunc>
           </config>
         </TCEforms>
-      </report>
-      <drs>
+      </sdefReport>
+      <sdefDrs>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>
           <config>
@@ -22,8 +22,8 @@
             <default>0</default>
           </config>
         </TCEforms>
-      </drs>
-      <updateWizard>
+      </sdefDrs>
+      <sdefUpdatewizard>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefUpdatewizard</label>
           <config>
@@ -31,16 +31,16 @@
             <default>0</default>
           </config>
         </TCEforms>
-      </updateWizard>
-      <currIp>
+      </sdefUpdatewizard>
+      <sdefCurrip>
         <TCEforms>
           <config>
             <type>user</type>
             <userFunc>tx_caddy_userfunc->promptCurrIP</userFunc>
           </config>
         </TCEforms>
-      </currIp>
-      <csvAllowedIp>
+      </sdefCurrip>
+      <sdefCsvallowedip>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefCsvallowedip</label>
           <config>
@@ -51,8 +51,8 @@
             <default>127.0.0.1, 127.0.0.2</default>
           </config>
         </TCEforms>
-      </csvAllowedIp>
-      <externalLinks>
+      </sdefCsvallowedip>
+      <sdefExternallinks>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefExternallinks</label>
           <config>
@@ -60,7 +60,7 @@
             <userFunc>tx_caddy_userfunc->promptExternalLinks</userFunc>
           </config>
         </TCEforms>
-      </externalLinks>
+      </sdefExternallinks>
     </el>
   </ROOT>
 </T3DataStructure>
