@@ -953,7 +953,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $int_uid    = $this->pObj->cObj->data['uid'];
     $int_pid    = $this->pObj->cObj->data['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
   }
 
  /**
@@ -998,7 +998,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $int_uid    = $this->pObj->cObj->data['uid'];
     $int_pid    = $this->pObj->cObj->data['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
   }
 
  /**
