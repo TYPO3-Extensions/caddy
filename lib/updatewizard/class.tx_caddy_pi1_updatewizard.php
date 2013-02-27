@@ -54,7 +54,7 @@ class tx_caddy_pi1_updatewizard extends tslib_pibase {
 
   var $prefixId = 'tx_caddy_pi1_updatewizard';
   // Same as class name
-  var $scriptRelPath = 'pi2/class.tx_caddy_pi1_updatewizard.php';
+  var $scriptRelPath = 'lib/updatewizard/class.tx_caddy_pi1_updatewizard.php';
   // Path to this script relative to the extension dir.
   var $extKey = 'caddy';
   // The extension key.
@@ -119,13 +119,14 @@ class tx_caddy_pi1_updatewizard extends tslib_pibase {
     // Instantiate the pi2 classes
 
 
-
-    //////////////////////////////////////////////////////////////////////
-    //
-    // Make cObj instance
-
-    $this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
-    // Make cObj instance
+// 130227, dwildt, -
+//    //////////////////////////////////////////////////////////////////////
+//    //
+//    // Make cObj instance
+//
+//    $this->local_cObj = t3lib_div::makeInstance('tslib_cObj');
+//    // Make cObj instance
+// 130227, dwildt, -
 
 
 
@@ -144,7 +145,7 @@ class tx_caddy_pi1_updatewizard extends tslib_pibase {
     //
     // Return the result (HTML string)
 
-    return $this->pi_wrapInBaseClass($template);
+    return $content . $template;
     // Return the result (HTML string)
   }
 
