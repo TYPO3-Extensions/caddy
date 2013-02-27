@@ -2,18 +2,44 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:sDEF</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdef</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
-      <powermailForm>
+      <report>
         <TCEforms>
           <config>
             <type>user</type>
-            <userFunc>tx_caddy_userfunc->ffPowermailForm</userFunc>
+            <userFunc>tx_caddy_userfunc->pi1FfSdefReport</userFunc>
           </config>
         </TCEforms>
-      </powermailForm>
+      </report>
+      <drs>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>
+          <config>
+            <type>check</type>
+            <default>1</default>
+          </config>
+        </TCEforms>
+      </drs>
+      <updateWizard>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefUpdatewizard</label>
+          <config>
+            <type>check</type>
+            <default>1</default>
+          </config>
+        </TCEforms>
+      </updateWizard>
+      <externalLinks>
+        <TCEforms>
+          <config>
+            <type>user</type>
+            <userFunc>tx_caddy_userfunc->externalLinks</userFunc>
+          </config>
+        </TCEforms>
+      </externalLinks>
     </el>
   </ROOT>
 </T3DataStructure>

@@ -9,9 +9,9 @@
       <label index="config">Initiation</label>
       <label index="config.csvAllowedIp">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="prompts">Prompts</label>
-      <label index="prompts.gpvar">Display Get-/POST-parameters</label>
-      <label index="prompts.session">Display session data</label>
-      <label index="sDEF">Information</label>
+      <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
+      <label index="sdefUpdatewizard">Update Wizard: You will get a frontend report, if your IP match the list of allowed IP</label>
+      <label index="sdef">Check it!</label>
       <label index="sDEF.info"><![CDATA[
         <div>
           <p>
@@ -73,9 +73,9 @@
       <label index="config">Aktivierung</label>
       <label index="config.csvAllowedIp">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="prompts">Meldungen</label>
-      <label index="prompts.gpvar">Zeige GET-/POST-Parameter</label>
-      <label index="prompts.session">Zeige Session-Daten</label>
-      <label index="sDEF">Information</label>
+      <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
+      <label index="sdefUpdatewizard">Update Assistent: Du bekommst einen Bericht im Frontend, wenn Deine IP in der Liste der erlaubten IP eingetragen ist.</label>
+      <label index="sdef">Check it!</label>
       <label index="sDEF.info"><![CDATA[
         <div>
           <p>
