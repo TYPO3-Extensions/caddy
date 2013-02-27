@@ -1380,26 +1380,29 @@ class tx_caddy_pi1 extends tslib_pibase
  */
   private function zz_checkOptionIsNotAvailable($type, $option_id)
   {
-          if ((isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']),2) > round($this->cartGrossNoService,2))) || (isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']),2) < round($this->cartGrossNoService,2))))
-          {
-                  // check: fallback is given
-                  if (isset($this->conf[$type.'.']['options.'][$option_id.'.']['fallback']))
-                  {
-                          $fallback = $this->conf[$type.'.']['options.'][$option_id.'.']['fallback'];
-                          // check: fallback is defined; the availability of fallback will not tested yet
-                          if (isset($this->conf[$type.'.']['options.'][$fallback.'.']))
-                          {
-                                  $newoption_id = intval($fallback);
-                          } else {
-                                  $shippingId = intval($this->conf[$type.'.']['preset']);
-                          }
-                  } else {
-                          $newoption_id = intval($this->conf[$type.'.']['preset']);
-                  }
-                  return $newoption_id;
-          }
+    if ((isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']),2) > round($this->cartGrossNoService,2))) || (isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']),2) < round($this->cartGrossNoService,2))))
+    {
+      // check: fallback is given
+      if (isset($this->conf[$type.'.']['options.'][$option_id.'.']['fallback']))
+      {
+        $fallback = $this->conf[$type.'.']['options.'][$option_id.'.']['fallback'];
+        // check: fallback is defined; the availability of fallback will not tested yet
+        if (isset($this->conf[$type.'.']['options.'][$fallback.'.']))
+        {
+          $newoption_id = intval($fallback);
+        } else {
+// 130227, dwildt, 1-
+//                                  $shippingId = intval($this->conf[$type.'.']['preset']);
+// 130227, dwildt, 1+
+          $newoption_id = intval($this->conf[$type.'.']['preset']);
+        }
+      } else {
+        $newoption_id = intval($this->conf[$type.'.']['preset']);
+      }
+      return $newoption_id;
+    }
 
-          return 0;
+    return 0;
   }
 
   /**
