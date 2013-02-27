@@ -873,6 +873,9 @@ class tx_caddy_pi1 extends tslib_pibase
   {
       // Init extension configuration array
     $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
+    
+    $this->pi_initPIflexForm();
+
 
     $this->initRequireClasses( );
     $this->initDRS( );
