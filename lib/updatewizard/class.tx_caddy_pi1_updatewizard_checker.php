@@ -146,7 +146,7 @@ class tx_caddy_pi1_updatewizard_checker
     //
     // In case of any error and warning
 
-    if (is_array($arr_html_report))
+    if (is_array( $arr_html_report ) )
     {
       $template = implode('<hr />', $arr_html_report);
     }
@@ -162,7 +162,7 @@ class tx_caddy_pi1_updatewizard_checker
     {
       $str_img_info = '<img align="top" '.
                       'alt="OK" title="OK" '.
-                      'src="'.$this->get_image_path(PI2_STATUS_OK).'"/>';
+                      'src="'.$this->get_image_path(PI1_STATUS_OK).'"/>';
       $template = '
         <p>
           '.$str_img_info.' '.$this->pObj->pi_getLL('ok').'
@@ -215,27 +215,27 @@ class tx_caddy_pi1_updatewizard_checker
   {
     switch($int_status)
     {
-      case(PI2_STATUS_OK):
+      case(PI1_STATUS_OK):
         $str_gif  = 'icon_ok.gif';
         $int_w    = 18;
         $int_h    = 16;
         break;
-      case(PI2_STATUS_INFO):
+      case(PI1_STATUS_INFO):
         $str_gif  = 'info.gif';
         $int_w    = 17;
         $int_h    = 12;
         break;
-      case(PI2_STATUS_HELP):
+      case(PI1_STATUS_HELP):
         $str_gif  = 'icon_note.gif';
         $int_w    = 18;
         $int_h    = 16;
         break;
-      case(PI2_STATUS_WARN):
+      case(PI1_STATUS_WARN):
         $str_gif  = 'icon_warning.gif';
         $int_w    = 16;
         $int_h    = 16;
         break;
-      case(PI2_STATUS_ERROR):
+      case(PI1_STATUS_ERROR):
         $str_gif  = 'icon_fatalerror.gif';
         $int_w    = 14;
         $int_h    = 14;
@@ -368,7 +368,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -492,7 +492,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -615,7 +615,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -751,7 +751,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="' . $this->pObj->pi_getLL('ticket_phrase_todo') . '" '.
                           'title="' . $this->pObj->pi_getLL('ticket_phrase_todo') . '" '.
-                          'src="' . $this->get_image_path(PI2_STATUS_HELP) . '"/>';
+                          'src="' . $this->get_image_path(PI1_STATUS_HELP) . '"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -860,7 +860,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -966,7 +966,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
@@ -1072,7 +1072,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
       <p>
@@ -1193,7 +1193,7 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
     $str_html_return = '
       <h2>'.$str_img_status.' '.$str_h1.'</h2>
       <p>
@@ -1336,12 +1336,12 @@ class tx_caddy_pi1_updatewizard_checker
     $str_img_info       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_HELP).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_HELP).'"/>';
 
     $str_img_warn       = '<img align="top" '.
                           'alt="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
                           'title="'.$this->pObj->pi_getLL('ticket_phrase_todo').'" '.
-                          'src="'.$this->get_image_path(PI2_STATUS_WARN).'"/>';
+                          'src="'.$this->get_image_path(PI1_STATUS_WARN).'"/>';
 
     $str_html_return = '
       <p>
