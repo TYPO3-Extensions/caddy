@@ -105,7 +105,8 @@ class tx_caddy_pi1 extends tslib_pibase
   // path to this script relative to the extension dir.
   public $extKey = 'caddy';
 
-  // extension key
+  private $accessByIP = null;
+  
   private $product = array();
 
   private $newProduct = array();
@@ -138,8 +139,6 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   public function main( $content, $conf )
   {
-      // #45775, dwildt, 1+
-    unset( $content );
 
       // 130227, dwildt, 2-
 //    // config
@@ -150,12 +149,20 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
+      // Init extension configuration array
+    $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
+      // init flexform
+    $this->pi_initPIflexForm();
+
       // 130227, dwildt, 1-
     //$this->pi_USER_INT_obj = 1;
 
-      // Init callses, DRS, gpvars, HTML template, service attributes
+      // Init DRS, flexform, gpvars, HTML template, service attributes
     $this->init( );
 
+      // Prompt of the update wizard
+    $content = $this->updateWizard( $content );
+    
     $this->cartCount = 0;
 
       // Output debugging prompts in debug mode
@@ -173,7 +180,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $cart = $this->cart( );
 
 
-    $this->content = $this->cObj->substituteMarkerArrayCached
+    $this->content = $content . $this->cObj->substituteMarkerArrayCached
                     (
                       $this->tmpl['all'],
                       $this->outerMarkerArray,
@@ -874,19 +881,59 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function init( )
   {
-      // Init extension configuration array
-    $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
-    
-    $this->pi_initPIflexForm();
-
-
     $this->initRequireClasses( );
     $this->initDRS( );
     $this->initInstances( );
     $this->initFlexform( );
+    $this->initAccessByIp( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
     $this->initGpVar( );
+  }
+  
+/**
+ * initAccessByIp( ): Set the global $bool_accessByIP.
+ *
+ * @return    void
+ * @version 0.0.1
+ * @since   0.0.1
+ */
+  private function initAccessByIp( )
+  {
+      // No access by default
+    $this->accessByIP = false;
+
+      // Get list with allowed IPs
+    $csvIP      = $this->objFlexform->sdefCsvallowedip;
+    $currentIP  = t3lib_div :: getIndpEnv( 'REMOTE_ADDR' );
+
+      // Current IP is an element in the list
+    $pos = strpos( $csvIP, $currentIP );
+    if( ! ( $pos === false ) )
+    {
+      $this->accessByIP = true;
+    }
+      // Current IP is an element in the list
+      
+      // DRS
+    if( ! $this->b_drs_init )
+    {
+      return;
+    }
+    
+    switch( $this->accessByIP )
+    {
+      case( true ):
+        $prompt = 'Access: current IP matchs the list of allowed IP. Result will prompt to the frontend.';
+        t3lib_div::devlog(' [OK/INIT] '. $prompt, $this->extKey, -1 );
+        break;
+      case( false ):
+      default:
+        $prompt = 'No access: current IP doesn\'t match the list of allowed IP. Result won\'t prompt to the frontend.';
+        t3lib_div::devlog(' [WARN/INIT] '. $prompt, $this->extKey, 2 );
+        break;
+    }
+      // DRS
   }
 
  /**
@@ -1341,6 +1388,50 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $this->div->removeProductFromSession( $this );
     }
+  }
+
+
+
+
+  /***********************************************
+  *
+  * Update Wizard
+  *
+  **********************************************/
+
+ /**
+  * updateWizard( )
+  *
+  * @param      string    $content  : current content
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function updateWizard( $content )
+  {
+      // RETURN : update wizard is disabled
+    if( ! $this->objFlexform->sdefUpdatewizard )
+    {
+      return $content;
+    }
+      // RETURN : update wizard is disabled
+
+      // RETURN : current IP isn't part of list with allowed IP
+    if( $this->accessByIP )
+    {
+      return $content;
+    }
+      // RETURN : current IP isn't part of list with allowed IP
+
+    require_once( PATH_typo3conf . 'ext/' . $this->extKey . '/lib/updatewizard/class.tx_caddy_pi1_updatewizard.php' );
+
+      // Class with methods for Update Checking
+    $updatewizard = new tx_caddy_pi1_updatewizard( $this );
+    $content = $updatewizard->main( $content );
+      // Current IP has access
+
+    return $content;
   }
 
 

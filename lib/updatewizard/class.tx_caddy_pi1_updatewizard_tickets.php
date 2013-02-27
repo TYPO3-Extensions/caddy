@@ -23,11 +23,11 @@
  ***************************************************************/
 
 /**
- * The class tx_browser_pi2_tickets contains the array with the tickets
+ * The class tx_caddy_pi1_updatewizard_tickets contains the array with the tickets
  *
  * @author    Dirk Wildt http://wildt.at.die-netzmacher.de
  * @package    TYPO3
- * @subpackage  browser
+ * @subpackage  caddy
  * @version   3.9.6
  */
 
@@ -36,7 +36,7 @@
  *
  *
  *
- *   49: class tx_browser_pi2_tickets
+ *   49: class tx_caddy_pi1_updatewizard_tickets
  *   63:     function __construct($parentObj)
  *
  *              SECTION: Array with all Tickets
@@ -46,7 +46,7 @@
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-class tx_browser_pi2_tickets
+class tx_caddy_pi1_updatewizard_tickets
 {
 
 
@@ -217,7 +217,7 @@ class tx_browser_pi2_tickets
     $arr_release[$int_v][$int_t]['todo']                            = PI2_TODO_REMOVE_PLEASE;
     $arr_release[$int_v][$int_t]['function']                        = 'moved_from_ts_to_plugin';
     $arr_release[$int_v][$int_t]['version']                         = '2.6.7';
-    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'displayList.display.pagebrowser';
+    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'displayList.display.pagecaddy';
 
     $int_t++;
     $arr_release[$int_v][$int_t]['header']['default']               = 'Display empty List at Start';
@@ -232,9 +232,9 @@ class tx_browser_pi2_tickets
 
     $int_v++;
     $int_t++;
-    $arr_release[$int_v][$int_t]['header']['default']               = 'Pagebrowser results_at_a_time';
+    $arr_release[$int_v][$int_t]['header']['default']               = 'Pagecaddy results_at_a_time';
     $arr_release[$int_v][$int_t]['prompt']['default']               = 'This porperty is configured by the Plugin since version %version%. The TypoScript property is deleted.';
-    $arr_release[$int_v][$int_t]['header']['de']                    = 'Pagebrowser results_at_a_time';
+    $arr_release[$int_v][$int_t]['header']['de']                    = 'Pagecaddy results_at_a_time';
     $arr_release[$int_v][$int_t]['prompt']['de']                    = 'Die Eigenschaft wird seit Version %version% im Plugin gepflegt und nicht mehr in TypoScript.';
     $arr_release[$int_v][$int_t]['status']                          = PI2_STATUS_WARN;
     $arr_release[$int_v][$int_t]['todo']                            = PI2_TODO_REMOVE_PLEASE;
@@ -314,7 +314,7 @@ class tx_browser_pi2_tickets
 
     $int_t++;
     $arr_release[$int_v][$int_t]['header']['default']               = 'Pointer: don\'t display value in links to single view';
-    $arr_release[$int_v][$int_t]['prompt']['default']               = 'This porperty is configured by the Plugin since version %version%. Please remove the TypoScript code. Please configure the plugin: Marker & RealUrl > RealUrl: configured > Current page of page-browser';
+    $arr_release[$int_v][$int_t]['prompt']['default']               = 'This porperty is configured by the Plugin since version %version%. Please remove the TypoScript code. Please configure the plugin: Marker & RealUrl > RealUrl: configured > Current page of page-caddy';
     $arr_release[$int_v][$int_t]['header']['de']                    = 'Seite des Page-Browsers: in Links zur Detailansicht nicht anzeigen';
     $arr_release[$int_v][$int_t]['prompt']['de']                    = 'Die Eigenschaft wird ab Version %version% im Plugin gepflegt. Entferne bitte den TypoScript-Code. Und pflege das Plugin: Marker & RealUrl > RealUrl: konfiguriert > Aktuelle Seite des Datensatz- bzw. Page-Brwosers.';
     $arr_release[$int_v][$int_t]['status']                          = PI2_STATUS_WARN;
@@ -440,14 +440,14 @@ class tx_browser_pi2_tickets
     $arr_release[$int_v][$int_t]['function']                        = 'value_is_out_of_date';
     $arr_release[$int_v][$int_t]['version']                         = '3.9.6';
     $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.file';
-    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:browser/res/default.tmpl';
-    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:browser/res/html/default.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:caddy/res/default.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:caddy/res/html/default.tmpl';
     $arr_release[$int_v][$int_t]['expl']['prompt']['default']       = 'Please update your TypoScript: move template.file = ' .
-                                                                      'EXT:browser/res/default.tmpl to template.file = EXT:browser/res/html/default.tmpl. ' .
+                                                                      'EXT:caddy/res/default.tmpl to template.file = EXT:caddy/res/html/default.tmpl. ' .
                                                                       'Please update the Browser plugin. Tab [Templating]: Update the value of the ' .
                                                                       'template. Tab [General]: Update the value of the selected view.';
     $arr_release[$int_v][$int_t]['expl']['prompt']['de']            = 'Bitte &auml;ndere Dein TypoScript von template.file = ' .
-                                                                      'EXT:browser/res/default.tmpl zu template.file = EXT:browser/res/html/default.tmpl. ' .
+                                                                      'EXT:caddy/res/default.tmpl zu template.file = EXT:caddy/res/html/default.tmpl. ' .
                                                                       'Bitte &auml;ktualisiere Dein Browser Plugin. Reiter [Templating]: Aktualisiere den Wert des ' .
                                                                       'Felds template. Reiter [Allgemein]: Aktualisiere den Wert der augewählten View.';
 
@@ -460,15 +460,15 @@ class tx_browser_pi2_tickets
     $arr_release[$int_v][$int_t]['todo']                            = PI2_TODO_UPDATE_MUST;
     $arr_release[$int_v][$int_t]['function']                        = 'value_is_out_of_date';
     $arr_release[$int_v][$int_t]['version']                         = '3.9.6';
-    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.extensions.browser.table.file';
-    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:browser/res/default.tmpl';
-    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:browser/res/html/default.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.extensions.caddy.table.file';
+    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:caddy/res/default.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:caddy/res/html/default.tmpl';
     $arr_release[$int_v][$int_t]['expl']['prompt']['default']       = 'Please update your TypoScript: move template.file = ' .
-                                                                      'EXT:browser/res/default.tmpl to template.file = EXT:browser/res/html/default.tmpl. ' .
+                                                                      'EXT:caddy/res/default.tmpl to template.file = EXT:caddy/res/html/default.tmpl. ' .
                                                                       'Please update the Browser plugin. Tab [Templating]: Update the value of the ' .
                                                                       'template. Tab [General]: Update the value of the selected view.';
     $arr_release[$int_v][$int_t]['expl']['prompt']['de']            = 'Bitte &auml;ndere Dein TypoScript von template.file = ' .
-                                                                      'EXT:browser/res/default.tmpl zu template.file = EXT:browser/res/html/default.tmpl. ' .
+                                                                      'EXT:caddy/res/default.tmpl zu template.file = EXT:caddy/res/html/default.tmpl. ' .
                                                                       'Bitte &auml;ktualisiere Dein Browser Plugin. Reiter [Templating]: Aktualisiere den Wert des ' .
                                                                       'Felds template. Reiter [Allgemein]: Aktualisiere den Wert der augewählten View.';
 
@@ -481,15 +481,15 @@ class tx_browser_pi2_tickets
     $arr_release[$int_v][$int_t]['todo']                            = PI2_TODO_UPDATE_MUST;
     $arr_release[$int_v][$int_t]['function']                        = 'value_is_out_of_date';
     $arr_release[$int_v][$int_t]['version']                         = '3.9.6';
-    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.extensions.browser.list.file';
-    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:browser/res/default_ul.tmpl';
-    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:browser/res/html/default_ul.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.extensions.caddy.list.file';
+    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:caddy/res/default_ul.tmpl';
+    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:caddy/res/html/default_ul.tmpl';
     $arr_release[$int_v][$int_t]['expl']['prompt']['default']       = 'Please update your TypoScript: move template.file = ' .
-                                                                      'EXT:browser/res/default_ul.tmpl to template.file = EXT:browser/res/html/default_ul.tmpl. ' .
+                                                                      'EXT:caddy/res/default_ul.tmpl to template.file = EXT:caddy/res/html/default_ul.tmpl. ' .
                                                                       'Please update the Browser plugin. Tab [Templating]: Update the value of the ' .
                                                                       'template. Tab [General]: Update the value of the selected view.';
     $arr_release[$int_v][$int_t]['expl']['prompt']['de']            = 'Bitte &auml;ndere Dein TypoScript von template.file = ' .
-                                                                      'EXT:browser/res/default_ul.tmpl zu template.file = EXT:browser/res/html/default_ul.tmpl. ' .
+                                                                      'EXT:caddy/res/default_ul.tmpl zu template.file = EXT:caddy/res/html/default_ul.tmpl. ' .
                                                                       'Bitte &auml;ktualisiere Dein Browser Plugin. Reiter [Templating]: Aktualisiere den Wert des ' .
                                                                       'Felds template. Reiter [Allgemein]: Aktualisiere den Wert der augewählten View.';
 
@@ -502,13 +502,13 @@ class tx_browser_pi2_tickets
     $arr_release[$int_v][$int_t]['todo']                            = PI2_TODO_UPDATE_MUST;
     $arr_release[$int_v][$int_t]['function']                        = 'value_is_out_of_date';
     $arr_release[$int_v][$int_t]['version']                         = '3.9.6';
-    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.css.browser';
-    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:browser/res/default.css';
-    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:browser/res/html/default.css';
-    $arr_release[$int_v][$int_t]['expl']['prompt']['default']       = 'Please update your TypoScript: move template.css.browser = ' .
-                                                                      'EXT:browser/res/default.css to template.css.browser = EXT:browser/res/html/default.css.';
-    $arr_release[$int_v][$int_t]['expl']['prompt']['de']            = 'Bitte &auml;ndere Dein TypoScript von template.css.browser = ' .
-                                                                      'EXT:browser/res/default.css zu template.file = EXT:browser/res/html/default.css.';
+    $arr_release[$int_v][$int_t]['srce']['typoscript']['code']      = 'template.css.caddy';
+    $arr_release[$int_v][$int_t]['srce']['value_out_of_date']       = 'EXT:caddy/res/default.css';
+    $arr_release[$int_v][$int_t]['srce']['new_value']               = 'EXT:caddy/res/html/default.css';
+    $arr_release[$int_v][$int_t]['expl']['prompt']['default']       = 'Please update your TypoScript: move template.css.caddy = ' .
+                                                                      'EXT:caddy/res/default.css to template.css.caddy = EXT:caddy/res/html/default.css.';
+    $arr_release[$int_v][$int_t]['expl']['prompt']['de']            = 'Bitte &auml;ndere Dein TypoScript von template.css.caddy = ' .
+                                                                      'EXT:caddy/res/default.css zu template.file = EXT:caddy/res/html/default.css.';
 
     $int_t++;
     $arr_release[$int_v][$int_t]['header']['default']               = 'TypoScript array first_item.stdWrap is renamed';
@@ -673,8 +673,8 @@ class tx_browser_pi2_tickets
 
   }
 
-  if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2_tickets.php']) {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2_tickets.php']);
+  if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard_tickets.php']) {
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard_tickets.php']);
   }
 
 ?>

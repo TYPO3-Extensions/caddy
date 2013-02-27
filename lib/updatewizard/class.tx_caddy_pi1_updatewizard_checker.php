@@ -23,11 +23,11 @@
  ***************************************************************/
 
 /**
- * The class tx_browser_pi2_checker bundles classes for checking TypoScript update
+ * The class tx_caddy_pi1_updatewizard_checker bundles classes for checking TypoScript update
  *
  * @author    Dirk Wildt <wildt.at.die-netzmacher.de>
  * @package    TYPO3
- * @subpackage    browser
+ * @subpackage    caddy
  * @version 3.7.0
  */
 
@@ -36,7 +36,7 @@
  *
  *
  *
- *   61: class tx_browser_pi2_checker
+ *   61: class tx_caddy_pi1_updatewizard_checker
  *   76:     function __construct($parentObj)
  *
  *              SECTION: Main
@@ -58,7 +58,7 @@
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-class tx_browser_pi2_checker
+class tx_caddy_pi1_updatewizard_checker
 {
 
 
@@ -130,7 +130,7 @@ class tx_browser_pi2_checker
       foreach ($arr_tickets as $int_ticketNo => $arr_ticket)
       {
         // Call the user_func
-        $str_html_report = call_user_func(array('tx_browser_pi2_checker', $arr_ticket['function']), $int_release, $int_ticketNo, $arr_ticket, $arr_conf_oneDimension);
+        $str_html_report = call_user_func(array('tx_caddy_pi1_updatewizard_checker', $arr_ticket['function']), $int_release, $int_ticketNo, $arr_ticket, $arr_conf_oneDimension);
         if ($str_html_report)
         {
           $arr_html_report[] = $str_html_report;
@@ -1249,17 +1249,17 @@ class tx_browser_pi2_checker
 
     //////////////////////////////////////////////////////////
     //
-    // Get all browser plugins with uid, pid and hidden
+    // Get all caddy plugins with uid, pid and hidden
 
     $select_fields = '`uid`, `pid`, `header`, `hidden`';
     $from_table    = 'tt_content';
-    //$where_clause  = '`list_type` = \'browser_pi1\' AND `deleted` = 0 AND `pid` != '.$int_currentPage.' ';
-    $where_clause  = '`list_type` = \'browser_pi1\' AND `deleted` = 0 ';
+    //$where_clause  = '`list_type` = \'caddy_pi1\' AND `deleted` = 0 AND `pid` != '.$int_currentPage.' ';
+    $where_clause  = '`list_type` = \'caddy_pi1\' AND `deleted` = 0 ';
     $orderBy       = '`pid`';
 //    $query =        $GLOBALS['TYPO3_DB']->SELECTquery($select_fields,$from_table,$where_clause,$groupBy='',$orderBy,$limit='');
 //    var_dump($query);
     $rows = $GLOBALS['TYPO3_DB']->exec_SELECTgetRows($select_fields,$from_table,$where_clause,$groupBy='',$orderBy,$limit='',$uidIndexField='');
-    // Get all browser plugins with uid, pid and hidden
+    // Get all caddy plugins with uid, pid and hidden
 
 
 
@@ -1374,8 +1374,8 @@ class tx_browser_pi2_checker
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2_checker.php']) {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2_checker.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard_checker.php']) {
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard_checker.php']);
 }
 
 ?>

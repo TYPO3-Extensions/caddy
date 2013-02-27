@@ -25,11 +25,11 @@
 require_once(PATH_tslib.'class.tslib_pibase.php');
 
 /**
- * Plugin 'Browser' for the 'browser' extension - the fastest way for your data into the TYPO3 frontend.
+ * Plugin 'Browser' for the 'caddy' extension - the fastest way for your data into the TYPO3 frontend.
  *
  * @author    Dirk Wildt <dirk.wildt.at.die-netzmacher.de>
  * @package    TYPO3
- * @subpackage  browser
+ * @subpackage  caddy
  */
 
 /**
@@ -37,7 +37,7 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  *
  *
  *
- *   49: class tx_browser_pi2 extends tslib_pibase
+ *   49: class tx_caddy_pi1_updatewizard extends tslib_pibase
  *
  *              SECTION: Main Process
  *  109:     function main($content, $conf, $pObj)
@@ -46,20 +46,20 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-class tx_browser_pi2 extends tslib_pibase {
+class tx_caddy_pi1_updatewizard extends tslib_pibase {
 
   //////////////////////////////////////////////////////
   //
   // Variables set by this class
 
-  var $prefixId = 'tx_browser_pi2';
+  var $prefixId = 'tx_caddy_pi1_updatewizard';
   // Same as class name
-  var $scriptRelPath = 'pi2/class.tx_browser_pi2.php';
+  var $scriptRelPath = 'pi2/class.tx_caddy_pi1_updatewizard.php';
   // Path to this script relative to the extension dir.
-  var $extKey = 'browser';
+  var $extKey = 'caddy';
   // The extension key.
   var $arr_tickets = FALSE;
-  // [array] The Array with the Tiockets. Set by tx_browser_pi2_tickets.
+  // [array] The Array with the Tiockets. Set by tx_caddy_pi1_updatewizard_tickets.
   // Variables set by this class
 
 
@@ -69,23 +69,18 @@ class tx_browser_pi2 extends tslib_pibase {
 
   // Variables set by children classes
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  
+/**
+ * Constructor. The method initiate the parent object
+ *
+ * @param    object        The parent object
+ * @return    void
+ */
+  function __construct( $parentObj, $conf ) 
+  {
+    $this->pObj = $parentObj;
+    $this->conf = $parentObj->conf;
+  }
 
 
 
@@ -102,16 +97,10 @@ class tx_browser_pi2 extends tslib_pibase {
  * Main method of your PlugIn
  *
  * @param	string		$content: The content of the PlugIn
- * @param	array		$conf: The PlugIn Configuration
- * @param	array		$pObj: The parent object
  * @return	string		The content that should be displayed on the website
  */
-  function main($content, $conf, $pObj) {
-
-    //var_dump(get_defined_constants());
-
-    $this->conf = $conf;
-    $this->pObj = $pObj;
+  function main( $content ) 
+  {
 
     $this->pi_loadLL();
 
@@ -121,12 +110,12 @@ class tx_browser_pi2 extends tslib_pibase {
     //
     // Instantiate the pi2 classes
 
-    require_once('class.tx_browser_pi2_checker.php');
+    require_once('class.tx_caddy_pi1_updatewizard_checker.php');
     // Class with the functions for checking TypoScript update
-    $this->objCheck = new tx_browser_pi2_checker($this);
-    require_once('class.tx_browser_pi2_tickets.php');
+    $this->objCheck = new tx_caddy_pi1_updatewizard_checker($this);
+    require_once('class.tx_caddy_pi1_updatewizard_tickets.php');
     // Class with the Ticket array and defined constants
-    $this->objTickets = new tx_browser_pi2_tickets($this);
+    $this->objTickets = new tx_caddy_pi1_updatewizard_tickets($this);
     // Instantiate the pi2 classes
 
 
@@ -169,8 +158,8 @@ class tx_browser_pi2 extends tslib_pibase {
 
 
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2.php']) {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/browser/pi2/class.tx_browser_pi2.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard.php']) {
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi2/class.tx_caddy_pi1_updatewizard.php']);
 }
 
 ?>
