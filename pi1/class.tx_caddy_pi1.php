@@ -931,12 +931,13 @@ class tx_caddy_pi1 extends tslib_pibase
         die( $prompt );
     }
 
-    $this->b_drs_error  = true;
-    $this->b_drs_warn   = true;
-    $this->b_drs_info   = true;
-    $this->b_drs_ok     = true;
-    $this->b_drs_init   = true;
-    $this->b_drs_todo   = true;
+    $this->b_drs_error    = true;
+    $this->b_drs_warn     = true;
+    $this->b_drs_info     = true;
+    $this->b_drs_ok       = true;
+    $this->b_drs_flexform = true;
+    $this->b_drs_init     = true;
+    $this->b_drs_todo     = true;
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
