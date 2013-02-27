@@ -144,7 +144,9 @@ class tx_caddy_pi1 extends tslib_pibase
     // config
     global $TSFE;
 
+var_dump( $this->cObj );
     $this->cObj = $TSFE->cObj; // cObject
+var_dump( $this->cObj );
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
