@@ -172,7 +172,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][ $_EXTKEY . '_pi2']     
 t3lib_extMgm::addPlugin(array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi2',
   $_EXTKEY . '_pi2',
-  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_01.png'
+  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_050_01.png'
 ),'list_type');
 t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi2', 'FILE:EXT:' . $_EXTKEY . '/pi2/flexform_ds.xml' ); 
 
@@ -181,7 +181,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][ $_EXTKEY . '_pi3']     
 t3lib_extMgm::addPlugin(array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi3',
   $_EXTKEY . '_pi3',
-  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_03.png'
+  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_050_03.png'
 ),'list_type');
 t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/pi3/flexform.xml' );
   // Plugin Configuration
