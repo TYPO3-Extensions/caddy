@@ -260,7 +260,7 @@ class tx_caddy_userfunc
     
     $prompt = null;
 
-    $this->pi1FfSdefReportInit( $this->plugin );
+    $this->pi1FfSdefReportInit( );
 
     $prompt = $this->checkPowermail( );
 
@@ -298,8 +298,15 @@ class tx_caddy_userfunc
     $this->pi1FfSdefReportInitDrs( );
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
+    
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->plugin->row;
+
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
@@ -318,8 +325,8 @@ class tx_caddy_userfunc
   {
 var_dump( $this->plugin['row']['pi_flexform'] );    
     $sheet = 'sDEF';
-    $field = '';
-    $value = $this->pObj->pi_getFFvalue( $arr_piFlexform, $field, $sheet, 'lDEF', 'vDEF' );
+    $field = 'sdefDrs';
+    $value = $this->pObj->pi_getFFvalue( $this->plugin['row']['pi_flexform'], $field, $sheet, 'lDEF', 'vDEF' );
 
   }
 
