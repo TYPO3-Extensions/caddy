@@ -129,15 +129,8 @@ class tx_caddy_drs
         die( $prompt );
     }
 
-    $this->drsError      = true;
-    $this->drsWarn       = true;
-    $this->drsInfo       = true;
-    $this->drsOk         = true;
-    $this->drsFlexform   = true;
-    $this->drsInit       = true;
-    $this->drsPowermail  = true;
-    $this->drsSql        = true;
-    $this->drsTodo       = true;
+    $this->zzDrsPromptsTrue( );
+
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->pObj->arr_extConf['debuggingDrs'];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
@@ -167,26 +160,13 @@ class tx_caddy_drs
       // sdefDrs
 
       // Enable the DRS by TypoScript
-    switch( $this->pObj->flexform->sdefDrs )
+    if( empty( $this->pObj->flexform->sdefDrs ) )
     {
-      case( false ):
-      case( null ):
-        return;
-        break;
-      case( true ):
-      default:
-        break;
+      return;
     }
 
-    $this->drsError      = true;
-    $this->drsWarn       = true;
-    $this->drsInfo       = true;
-    $this->drsOk         = true;
-    $this->drsFlexform   = true;
-    $this->drsInit       = true;
-    $this->drsPowermail  = true;
-    $this->drsSql        = true;
-    $this->drsTodo       = true;
+    $this->zzDrsPromptsTrue( );
+
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
     $str_header = $this->row['header'];
@@ -196,6 +176,27 @@ class tx_caddy_drs
     t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
+ /**
+  * initByFlexform( ): Init the DRS - Development Reportinmg System
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function zzDrsPromptsTrue( )
+  {
+    $this->drsError      = true;
+    $this->drsWarn       = true;
+    $this->drsInfo       = true;
+    $this->drsOk         = true;
+    $this->drsFlexform   = true;
+    $this->drsInit       = true;
+    $this->drsPowermail  = true;
+    $this->drsSql        = true;
+    $this->drsTodo       = true;
+  }
+  
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/drs/class.tx_caddy_drs.php'])

@@ -330,7 +330,23 @@ class tx_caddy_userfunc
     $arr_xml  = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
     $sdefDrs  = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
     
-var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
+//var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
+    
+    if( empty( $sdefDrs ) )
+    {
+      return;
+    }
+    
+    $this->drs->zzDrsPromptsTrue( );
+
+    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+    $str_header = $this->plugin->row['header'];
+    $int_uid    = $this->plugin->row['uid'];
+    $int_pid    = $this->plugin->row['pid'];
+    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
+
 
   }
 
