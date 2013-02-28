@@ -286,6 +286,7 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
+var_dump( $arr_pluginConf['row']['pi_flexform'], $arr_pluginConf );    
 
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
