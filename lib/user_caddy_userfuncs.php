@@ -56,6 +56,7 @@ class user_caddy_userfuncs extends tslib_pibase
     */
   public function user_caddy_numberFormat( $content = '', $conf = array( ) )
   {
+var_dump( __METHOD__, __LINE__, $content, $conf );    
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
 
@@ -66,7 +67,7 @@ class user_caddy_userfuncs extends tslib_pibase
     }
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
-var_dump( __METHOD__, __LINE__, $content, $numberFormat );    
+var_dump( __METHOD__, __LINE__, $numberFormat );    
     return $numberFormat;
   }
 
