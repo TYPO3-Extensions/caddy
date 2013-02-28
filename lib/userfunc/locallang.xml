@@ -31,8 +31,8 @@
               height="80" 
               alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
-        <ul>
-          <li>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy online manual<br />
             <a href="http://typo3.org/extension-manuals/caddy/"
               style="text-decoration:underline;"
@@ -40,7 +40,7 @@
               title="Caddy - online manual"
               target="_blank">Manual at typo3-org.de</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy PDF manual<br />
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
@@ -48,7 +48,7 @@
               title="Caddy - PDF manual"
               target="_blank">manual.pdf</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
@@ -56,7 +56,7 @@
               title="Caddy - the Shopping Cart"
               target="_blank">typo3-caddy.de/en</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy forum<br />
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
@@ -64,7 +64,7 @@
               title="TYPO3-Caddy - Forum"
               target="_blank">typo3-caddy.de/forum</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy developer<br />
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
@@ -151,8 +151,24 @@
               height="80" 
               alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
-        <ul>
-          <li>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            TYPO3-Caddy Online-Handbuch<br />
+            <a href="http://typo3.org/extension-manuals/caddy/"
+              style="text-decoration:underline;"
+              alt="Caddy - Online-Handbuch"
+              title="Caddy - Online-Handbuch"
+              target="_blank">Handbuch auf typo3-org.de</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            TYPO3-Caddy PDF-handbuch<br />
+            <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
+              style="text-decoration:underline;"
+              alt="Caddy - PDF-handbuch"
+              title="Caddy - PDF-handbuch"
+              target="_blank">manual.pdf</a>
+          </li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
@@ -160,7 +176,7 @@
               title="Caddy - the Shopping Cart"
               target="_blank">typo3-caddy.de</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy forum<br />
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
@@ -168,7 +184,7 @@
               title="TYPO3-Caddy - Forum"
               target="_blank">typo3-caddy.de/forum</a>
           </li>
-          <li>
+          <li style="margin-bottom:.6em;">
             TYPO3-Caddy developer<br />
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
