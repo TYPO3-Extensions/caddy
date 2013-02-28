@@ -131,10 +131,10 @@ class tx_caddy_powermail
     if( empty( $this->powermailFormCss ) )
     {
         // DRS
-      if( $this->b_drs_powermail )
+      if( $this->pObj->b_drs_powermail )
       {
         $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ') is visible.';
-        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS
       return $content;
@@ -146,7 +146,7 @@ class tx_caddy_powermail
     {
       $prompt = 'CSS for powermail. The display property of the powermail form ' . 
                 '(uid ' . $this->powermailUid . ') is set to none.';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
     $content = $content . $this->powermailFormCss;
@@ -214,21 +214,21 @@ class tx_caddy_powermail
     if( empty( $this->powermailVersionInt ) )
     {
         // DRS
-      if( $this->b_drs_error )
+      if( $this->pObj->b_drs_error )
       {
         $prompt = 'Powermail version is 0!';
-        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
       }
         // DRS
       return;
     }
     
       // DRS
-    if( $this->b_drs_powermail )
+    if( $this->pObj->b_drs_powermail )
     {
       $prompt = 'Powermail version is ' . $this->powermailVersionStr . ' ' .
                 '(internal ' . $this->powermailVersionInt . ')';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
     
@@ -238,14 +238,14 @@ class tx_caddy_powermail
     $this->powermailFfConfirm  = $arrResult['ffConfirm'];
     
       // DRS
-    if( $this->b_drs_powermail )
+    if( $this->pObj->b_drs_powermail )
     {
       $prompt = 'powermail.uid: "' . $this->powermailUid . '"';
-      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
+      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
       $prompt = 'powermail.title: "' . $this->powermailTitle . '"';
-      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
+      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
       $prompt = 'powermail.confirm: "' . $this->powermailConfirm . '"';
-      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
+      t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
 
@@ -271,7 +271,7 @@ class tx_caddy_powermail
     $arrReturn = null; 
     
       // Page uid
-    $pid = $this->cObj->data['pid'];
+    $pid = $this->pObj->cObj->data['pid'];
     
     if( ! $pid )
     {
@@ -401,7 +401,7 @@ class tx_caddy_powermail
   */
   private function initVersion( )
   {
-    return $this->userfunc->extMgmVersion( 'powermail' );
+    return $this->pObj->userfunc->extMgmVersion( 'powermail' );
   }
 }
 
