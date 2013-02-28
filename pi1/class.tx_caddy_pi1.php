@@ -1287,12 +1287,13 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
 
-    $this->div            = t3lib_div::makeInstance( 'tx_caddy_div' );
-    $this->div->cObj      = $this->cObj;
-    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
-    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
-    $this->powermail      = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    $this->userfunc       = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    $this->div              = t3lib_div::makeInstance( 'tx_caddy_div' );
+    $this->div->cObj        = $this->cObj;
+    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+    $this->dynamicMarkers   = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+    $this->powermail->pObj  = $this;
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**

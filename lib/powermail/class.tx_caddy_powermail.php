@@ -97,6 +97,8 @@ class tx_caddy_powermail
   // path to this script relative to the extension dir.
   public $extKey = 'caddy';
 
+  public $pObj = null;
+
   public $powermailFormCss    = null;
   public $powermailUid        = null;
   public $powermailTitle      = null;
