@@ -54,7 +54,7 @@ class tx_caddy_userfunc
   *
   * @var string
   */
-  private $extKey = 'caddy';
+  public $extKey = 'caddy';
 
  /**
   * Extension configuration
