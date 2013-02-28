@@ -12,7 +12,7 @@
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
-      <label index="sdefReportEnable">Check it! report</label>
+      <label index="sdefReportEnable">Check it! report (performance costs!)</label>
       <label index="sdefUpdatewizard">Update Wizard: You will get a frontend report, if your IP match the list of allowed IP</label>
       <label index="sponsors">Sponsors</label>
     </languageKey>
@@ -22,7 +22,7 @@
       <label index="prompts">Meldungen</label>
       <label index="sdefCsvallowedip">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
-      <label index="sdefReportEnable">Check it!-Bericht</label>
+      <label index="sdefReportEnable">Check it!-Bericht (belastet die Performance!)</label>
       <label index="sdefUpdatewizard">Update Assistent: Du bekommst einen Bericht im Frontend, wenn Deine IP in der Liste der erlaubten IP eingetragen ist.</label>
       <label index="sdef">Check it!</label>
       <label index="sponsors">Sponsoren</label>
