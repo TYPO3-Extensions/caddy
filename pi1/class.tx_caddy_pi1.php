@@ -1410,7 +1410,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
       if( $this->b_drs_powermail )
       {
-        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ' is visible.';
+        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ') is visible.';
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -1422,7 +1422,7 @@ class tx_caddy_pi1 extends tslib_pibase
     if( $this->b_drs_powermail )
     {
       $prompt = 'CSS for powermail. The display property of the powermail form ' . 
-                '(uid ' . $this->powermailUid . ' is set to none.';
+                '(uid ' . $this->powermailUid . ') is set to none.';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -1443,7 +1443,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->powermailFormCss = '
       <style type="text/css">
-        c' . $this->powermailUid . ' {
+        #c' . $this->powermailUid . ' {
           display: none;
         }
       </style>
