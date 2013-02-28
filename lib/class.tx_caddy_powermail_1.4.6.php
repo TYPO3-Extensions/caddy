@@ -37,7 +37,7 @@ require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // 
  * @version     2.0.0
  * @since       1.4.6
  */
-class tx_caddy_powermail extends tslib_pibase {
+class tx_caddy_powermail_1.4.6 extends tslib_pibase {
 
 	/**
 	 * Don't show powermail form if session is empty
@@ -217,8 +217,8 @@ class tx_caddy_powermail extends tslib_pibase {
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_powermail.php'])
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_powermail_1.4.6.php'])
 {
-	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_powermail.php']);
+	include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_powermail_1.4.6.php']);
 }
 ?>
