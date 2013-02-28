@@ -168,7 +168,7 @@ class tx_caddy_drs
 
     $this->zzDrsPromptsTrue( );
 
-    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
+    $prompt = 'The DRS - Development Reporting System is enabled by the flexform (frontend mode).';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
     $str_header = $this->row['header'];
     $int_uid    = $this->row['uid'];

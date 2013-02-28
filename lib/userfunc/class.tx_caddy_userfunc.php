@@ -394,7 +394,7 @@ class tx_caddy_userfunc
     
     $this->drs->zzDrsPromptsTrue( );
 
-    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
+    $prompt = 'The DRS - Development Reporting System is enabled by the flexform (backend mode).';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $str_header = $this->plugin['row']['header'];
     $int_uid    = $this->plugin['row']['uid'];

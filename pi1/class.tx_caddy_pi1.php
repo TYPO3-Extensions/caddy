@@ -529,7 +529,11 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->cartWiProductsProductErrorMsg( $product );
 
          // add inner html to variable
-      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached( $this->tmpl['item'], $this->markerArray );
+var_dump( $this->markerArray );
+      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
+                                    ( 
+                                      $this->tmpl['item'], $this->markerArray 
+                                    );
 
         // update cart gross
       $cartGross        = $cartGross + $product['price_total'];
