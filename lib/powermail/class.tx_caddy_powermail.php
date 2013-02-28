@@ -65,12 +65,14 @@ class tx_caddy_powermail
 
   public $pObj = null;
 
-  public $powermailFormCss    = null;
-  public $powermailUid        = null;
-  public $powermailTitle      = null;
-  public $powermailFfConfirm  = null;
-  public $powermailVersionInt = null;
-  public $powermailVersionStr = null;
+  public $powermailFfConfirm      = null;
+  public $powermailffMailsender   = null;
+  public $powermailffMailreceiver = null;
+  public $powermailFormCss        = null;
+  public $powermailUid            = null;
+  public $powermailTitle          = null;
+  public $powermailVersionInt     = null;
+  public $powermailVersionStr     = null;
 
 
 
@@ -203,9 +205,11 @@ class tx_caddy_powermail
       // DRS
 
     $arrResult = $this->initFields( $row );
-    $this->powermailUid        = $arrResult['uid'];
-    $this->powermailTitle      = $arrResult['title'];
-    $this->powermailFfConfirm  = $arrResult['ffConfirm'];
+    $this->powermailUid             = $arrResult['uid'];
+    $this->powermailTitle           = $arrResult['title'];
+    $this->powermailFfConfirm       = $arrResult['ffConfirm'];
+    $this->powermailffMailsender    = $arrResult['ffMailsender'];
+    $this->powermailffMailreceiver  = $arrResult['ffMailreceiver'];
 
       // DRS
     if( $this->pObj->drs->drsPowermail )
@@ -343,18 +347,24 @@ class tx_caddy_powermail
         die( $prompt );
         break;
       case( $this->powermailVersionInt < 2000000 ):
-        $pmFfConfirm  = $pmRecord['tx_powermail_confirm'];
+        $pmFfConfirm      = $pmRecord['tx_powermail_confirm'];
+        $pmFfMailsender   = $pmRecord['tx_powermail_mailsender'];
+        $pmFfMailreceiver = $pmRecord['tx_powermail_mailreceiver'];
         break;
       case( $this->powermailVersionInt < 3000000 ):
       default:
-        $pmFlexform         = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
-        $pmFfConfirm  = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
+        $pmFlexform       = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
+        $pmFfConfirm      = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
+        $pmFfMailsender   = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.body']['vDEF'];
+        $pmFfMailreceiver = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.body']['vDEF'];
         break;
     }
 
-    $arrReturn['uid']       = $pmUid;
-    $arrReturn['title']     = $pmTitle;
-    $arrReturn['ffConfirm'] = $pmFfConfirm;
+    $arrReturn['uid']             = $pmUid;
+    $arrReturn['title']           = $pmTitle;
+    $arrReturn['ffConfirm']       = $pmFfConfirm;
+    $arrReturn['ffMailsender']    = $pmFfMailsender;
+    $arrReturn['ffMailreceiver']  = $pmFfMailreceiver;
 
     return $arrReturn;
   }

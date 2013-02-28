@@ -6,7 +6,14 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="powerMailNocontent"><![CDATA[
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        The Check it! report is disabled (for performance needs). 
+        If you have any unexpected result, enable the report below.
+      ]]></label>
+      <label index="pi1FfSdefReportOk"><![CDATA[
+        Congratulations: your configuration seem's to be proper!
+      ]]></label>
+      <label index="powermailNocontent"><![CDATA[
         There isn't any powermail form at the current page.<br />
         Sorry, but it isn't possible, to order products without a powermail form.<br /> 
         Please add the powermail form!
@@ -129,12 +136,16 @@
             height="90" 
             alt="Your logo with your URL. 120 x 90 pixel." /></a>
       ]]></label>
-      <label index="pi1FfSdefReportOk"><![CDATA[
-        Congratulations: your configuration seem's to be proper!
-      ]]></label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="powerMailNocontent"><![CDATA[
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance. 
+        Wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht unten ein.
+      ]]></label>
+      <label index="pi1FfSdefReportOk"><![CDATA[
+        Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
+      ]]></label>
+      <label index="powermailNocontent"><![CDATA[
         Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
         Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br /> 
         Bitte f&uuml;ge das Powermail Formular ein.
@@ -256,9 +267,6 @@
             width="120" 
             height="90" 
             alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
-      ]]></label>
-      <label index="pi1FfSdefReportOk"><![CDATA[
-        Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
       ]]></label>
     </languageKey>
   </data>

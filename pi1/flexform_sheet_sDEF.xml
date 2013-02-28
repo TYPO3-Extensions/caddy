@@ -6,6 +6,15 @@
     </TCEforms>
     <type>array</type>
     <el>
+      <sdefReportEnable>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReportEnable</label>
+          <config>
+            <type>check</type>
+            <default>0</default>
+          </config>
+        </TCEforms>
+      </sdefReportEnable>
       <sdefReport>
         <TCEforms>
           <config>

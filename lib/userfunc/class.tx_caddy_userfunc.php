@@ -121,21 +121,21 @@ class tx_caddy_userfunc
       return $prompt;
     }
         
-    $prompt = $this->checkPowermailCartMarker( );
+    $prompt = $this->checkPowermailCaddyMarker( );
 
     return $prompt;
   }
   
   
   /**
-   * checkPowermailCartMarker():
+   * checkPowermailCaddyMarker():
    *
    * @return  string    $prompt : message wrapped in HTML
    * @access  private
    * @version 2.0.0
    * @since   2.0.0
    */
-  private function checkPowermailCartMarker( )
+  private function checkPowermailCaddyMarker( )
   {
 //.message-notice
 //.message-information
@@ -182,7 +182,7 @@ class tx_caddy_userfunc
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:powerMailNocontent'). '
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:powermailNocontent'). '
         </div>
       </div>
       ';
@@ -260,7 +260,25 @@ class tx_caddy_userfunc
     
     $prompt = null;
 
-    $this->pi1FfSdefReportInit( );
+    $sheet = 'sDEF';
+    $field = 'sdefReportEnable';
+
+    $arr_xml          = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
+    $sdefReportEnable = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
+    if( empty ( $sdefReportEnable ) )
+    {
+      $prompt = '
+        <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportDisabled'). '
+          </div>
+        </div>
+        ';
+      return $prompt;
+    }
+//var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
+
+    $this->pi1FfSdefReportInit;
 
     $prompt = $this->checkPowermail( );
 
@@ -313,6 +331,8 @@ class tx_caddy_userfunc
 
     $this->powermail->pObj  = $this;
     $this->powermail->init( $this->plugin['row'] );
+
+    return true;
   }
   
   /**
@@ -326,7 +346,6 @@ class tx_caddy_userfunc
   {
     $sheet = 'sDEF';
     $field = 'sdefDrs';
-    //$value = $this->pObj->pi_getFFvalue( $this->plugin['row']['pi_flexform'], $field, $sheet, 'lDEF', 'vDEF' );
 
     $arr_xml  = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
     $sdefDrs  = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
