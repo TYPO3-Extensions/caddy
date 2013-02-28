@@ -79,8 +79,8 @@ class tx_caddy_powermail
   public  $markerSenderWtcart   = null;
   private $markerWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
 
-  public $versionInt          = null;
-  public $versionStr          = null;
+  public $versionInt  = null;
+  public $versionStr  = null;
 
 
 
@@ -211,11 +211,11 @@ class tx_caddy_powermail
       // DRS
 
     $arrResult = $this->initFields( $row );
-    $this->fieldUid             = $arrResult['uid'];
-    $this->fieldTitle           = $arrResult['title'];
     $this->fieldFfConfirm       = $arrResult['ffConfirm'];
-    $this->powermailFfMailsender    = $arrResult['ffMailsender'];
-    $this->powermailFfMailreceiver  = $arrResult['ffMailreceiver'];
+    $this->fieldFfMailreceiver  = $arrResult['ffMailreceiver'];
+    $this->fieldFfMailsender    = $arrResult['ffMailsender'];
+    $this->fieldTitle           = $arrResult['title'];
+    $this->fieldUid             = $arrResult['uid'];
 
       // DRS
     if( $this->pObj->drs->drsPowermail )
@@ -387,9 +387,89 @@ class tx_caddy_powermail
   */
   private function initMarker( )
   {
-    if( $this->powermailFfMailsender )
+    $this->initMarkerReceiver( );
+    $this->initMarkerReceiverWtcart( );
+    $this->initMarkerSender( );
+    $this->initMarkerSenderWtcart( );
+  }
+
+ /**
+  * initMarkerReceiver( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerReceiver( )
+  {
+    $this->markerReceiver = true;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfMailreceiver, $this->marker );
+    if( ! ( $pos === false ) )
     {
-      
+      $this->markerReceiver = true;
+    }
+  }
+
+ /**
+  * initMarkerReceiverWtcart( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerReceiverWtcart( )
+  {
+    $this->markerReceiverWtcart = true;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfMailreceiver, $this->markerWtcart );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerReceiverWtcart = true;
+    }
+  }
+
+ /**
+  * initMarkerSender( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerSender( )
+  {
+    $this->markerSender = true;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfMailsender, $this->marker );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerSender = true;
+    }
+  }
+
+ /**
+  * initMarkerSenderWtcart( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerSenderWtcart( )
+  {
+    $this->markerSenderWtcart = true;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfMailsender, $this->markerWtcart );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerSenderWtcart = true;
     }
   }
 

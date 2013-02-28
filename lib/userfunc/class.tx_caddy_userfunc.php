@@ -121,39 +121,10 @@ class tx_caddy_userfunc
       return $prompt;
     }
         
-    $prompt = $this->checkPowermailCaddyMarker( );
+    $prompt = $this->checkPowermailMarker( );
 
     return $prompt;
-  }
-  
-  
-  /**
-   * checkPowermailCaddyMarker():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function checkPowermailCaddyMarker( )
-  {
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
-
-    $prompt = '
-      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $this->powermail->versionInt . ' :::
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk' ) . '
-        </div>
-      </div>
-      ';
-    
-    return $prompt;
-  }
+  }  
   
   /**
    * checkPowermailContent():
@@ -191,6 +162,75 @@ class tx_caddy_userfunc
     return $prompt;
   }
   
+  
+  /**
+   * checkPowermailMarker():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function checkPowermailMarker( )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+    $prompt = null; 
+
+    if( ! $this->powermail->markerReceiver )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->versionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( $this->powermail->markerReceiverWtcart )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->versionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( ! $this->powermail->markerSender )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->versionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( $this->powermail->markerSenderWtcart )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->versionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    return $prompt;
+  }
+
   /***********************************************
    *
    * Extension Management
