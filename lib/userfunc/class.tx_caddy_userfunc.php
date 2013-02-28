@@ -256,15 +256,16 @@ class tx_caddy_userfunc
 //.message-warning
 //.message-error
 
-    $this->plugin = $plugin;
+    $this->plugin           = $plugin;
+    $this->pluginPiFlexform = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
     
     $prompt = null;
 
-    $sheet = 'sDEF';
-    $field = 'sdefReportEnable';
+    $sheet            = 'sDEF';
+    $field            = 'sdefReportEnable';
+    $sdefReportEnable = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
 
-    $arr_xml          = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
-    $sdefReportEnable = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
+      // RETURN : Check it! report is disabled
     if( empty ( $sdefReportEnable ) )
     {
       $prompt = '
@@ -276,9 +277,9 @@ class tx_caddy_userfunc
         ';
       return $prompt;
     }
-//var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
+      // RETURN : Check it! report is disabled
 
-    $this->pi1FfSdefReportInit;
+    $this->pi1FfSdefReportInit( );
 
     $prompt = $this->checkPowermail( );
 
@@ -344,11 +345,9 @@ class tx_caddy_userfunc
    */
   private function pi1FfSdefReportInitDrs( )
   {
-    $sheet = 'sDEF';
-    $field = 'sdefDrs';
-
-    $arr_xml  = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
-    $sdefDrs  = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $sheet    = 'sDEF';
+    $field    = 'sdefDrs';
+    $sdefDrs  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     
 //var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
     
