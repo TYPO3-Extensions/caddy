@@ -1302,7 +1302,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initPowermail( )
   {
-    $this->powermail->init( );
+    $this->powermail->init( $this->cObj->data );
   }
   
  /**
