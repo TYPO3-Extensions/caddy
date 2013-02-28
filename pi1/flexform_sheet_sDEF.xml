@@ -52,15 +52,6 @@
           </config>
         </TCEforms>
       </sdefCsvallowedip>
-      <sdefExternallinks>
-        <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefExternallinks</label>
-          <config>
-            <type>user</type>
-            <userFunc>tx_caddy_userfunc->promptExternalLinks</userFunc>
-          </config>
-        </TCEforms>
-      </sdefExternallinks>
     </el>
   </ROOT>
 </T3DataStructure>

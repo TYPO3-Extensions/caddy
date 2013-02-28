@@ -13,23 +13,6 @@
       <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version48orGreater">You are using TYPO3 greater than 4.7. Flip it! isn't tested in this version. Try it!</label>
       <label index="promptExternalLinksBody"><![CDATA[
-        <div>
-          <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
-            target="_blank">
-            <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="130" 
-              height="130" 
-              alt="die-netzmacher.de" /></a><br />
-          <a href="http://die-netzmacher.de/" 
-            alt="die-netzmacher.de"
-            title="die-netzmacher.de"
-            target="_blank">
-            Die Netzmacher - the developers of TYPO3 without PHP.</a>
-        </div>
-      ]]></label>
-      <label index="promptExternalLinksBody"><![CDATA[
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by die-netzmacher.de"
@@ -49,6 +32,22 @@
               alt="Caddy is powered by die-netzmacher.de" /></a>
         </div>
         <ul>
+          <li>
+            TYPO3-Caddy online manual<br />
+            <a href="http://typo3.org/extension-manuals/caddy/"
+              style="text-decoration:underline;"
+              alt="Caddy - online manual"
+              title="Caddy - online manual"
+              target="_blank">Manual at typo3-org.de</a>
+          </li>
+          <li>
+            TYPO3-Caddy PDF manual<br />
+            <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
+              style="text-decoration:underline;"
+              alt="Caddy - PDF manual"
+              title="Caddy - PDF manual"
+              target="_blank">manual.pdf</a>
+          </li>
           <li>
             TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"

@@ -116,11 +116,6 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $gpvar = array();
   
-  private $powermailUid        = null;
-  private $powermailTitle      = null;
-  private $powermailFfConfirm  = null;
-  private $powermailVersionInt = null;
-  private $powermailVersionStr = null;
   
 
 

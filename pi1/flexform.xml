@@ -7,5 +7,6 @@
     <sDEF>EXT:caddy/pi1/flexform_sheet_sDEF.xml</sDEF>
     <config>EXT:caddy/pi1/flexform_sheet_config.xml</config>
     <prompts>EXT:caddy/pi1/flexform_sheet_prompts.xml</prompts>
+    <help>EXT:caddy/pi1/flexform_sheet_help.xml</help>
   </sheets>
 </T3DataStructure>

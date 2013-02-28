@@ -152,14 +152,22 @@ class tx_caddy_userfunc
 
     $prompt = null;
 
-    $prompt = $prompt . '
-      <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk'). '
-        </div>
-      </div>
-      ';
+    
+//    $prompt = $this->checkPowermailCartMarker( $prompt );
         
+      // OK prompt, if there isn't any other prompt
+    if( empty( $prompt ) )
+    { 
+      $prompt = '
+        <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk'). '
+          </div>
+        </div>
+        ';
+    }
+      // OK prompt, if there isn't any other prompt
+    
     return $prompt;
   }
 
