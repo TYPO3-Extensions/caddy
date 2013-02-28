@@ -508,7 +508,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
         // calculate price total
       $product['price_total'] = $product['price'] * $product['qty'];
-
+var_dump( $product );
         // BACKUP cObj->data
       $cObjData   = $this->cObj->data;
       $currRecord = $this->cObj->currentRecord;
