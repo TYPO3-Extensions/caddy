@@ -65,16 +65,22 @@ class tx_caddy_powermail
 
   public $pObj = null;
 
-  public $powermailFfConfirm      = null;
-  public $powermailffMailsender   = null;
-  public $powermailffMailreceiver = null;
-  public $powermailFormCss        = null;
-  public $powermailUid            = null;
-  public $powermailTitle          = null;
-  public $powermailVersionInt     = null;
-  public $powermailVersionStr     = null;
+  public $fieldFfConfirm      = null;
+  public $fieldFfMailreceiver = null;
+  public $fieldFfMailsender   = null;
+  public $fieldFormCss        = null;
+  public $fieldUid            = null;
+  public $fieldTitle          = null;
 
+  private $marker               = '###POWERMAIL_TYPOSCRIPT_CADDY###';
+  public  $markerReceiver       = null;
+  public  $markerReceiverWtcart = null;
+  public  $markerSender         = null;
+  public  $markerSenderWtcart   = null;
+  private $markerWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
 
+  public $versionInt          = null;
+  public $versionStr          = null;
 
 
 
@@ -85,7 +91,7 @@ class tx_caddy_powermail
   **********************************************/
 
  /**
-  * formCss( ):  Returns $this->powermailFormCss.
+  * formCss( ):  Returns $this->fieldFormCss.
   *                       * The CSS will hide the powermail form
   *                       * CSS is empty, if powermail form should displayed
   *
@@ -99,12 +105,12 @@ class tx_caddy_powermail
   public function formCss( $content )
   {
       // RETURN : there isn't any CSS for powermail
-    if( empty( $this->powermailFormCss ) )
+    if( empty( $this->fieldFormCss ) )
     {
         // DRS
       if( $this->pObj->drs->drsPowermail )
       {
-        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ') is visible.';
+        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->fieldUid . ') is visible.';
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS
@@ -116,17 +122,17 @@ class tx_caddy_powermail
     if( $this->drs->drsPowermail )
     {
       $prompt = 'CSS for powermail. The display property of the powermail form ' .
-                '(uid ' . $this->powermailUid . ') is set to none.';
+                '(uid ' . $this->fieldUid . ') is set to none.';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    $content = $content . $this->powermailFormCss;
+    $content = $content . $this->fieldFormCss;
     return $content;
   }
 
  /**
   * formHide( ): Powermail form should be unvisible, CSS snippet is written to
-  *                       $this->powermailFormCss
+  *                       $this->fieldFormCss
   *
   * @return	void
   * @access public
@@ -136,9 +142,9 @@ class tx_caddy_powermail
   */
   public function formHide( )
   {
-    $this->powermailFormCss = '
+    $this->fieldFormCss = '
       <style type="text/css">
-        #c' . $this->powermailUid . ' {
+        #c' . $this->fieldUid . ' {
           display: none;
         }
       </style>
@@ -148,7 +154,7 @@ class tx_caddy_powermail
 
  /**
   * formShow( ): Powermail form should be visible, empty CSS snippet is written to
-  *                       $this->powermailFormCss
+  *                       $this->fieldFormCss
   *
   * @return	void
   * @access public
@@ -158,17 +164,17 @@ class tx_caddy_powermail
   */
   public function formShow( )
   {
-    $this->powermailFormCss = null;
+    $this->fieldFormCss = null;
   }
 
 
  /**
   * init( ): Global vars are initiated:
-  *                   * powermailVersionInt
-  *                   * powermailVersionStr
-  *                   * powermailUid
-  *                   * powermailTitle
-  *                   * powermailFfConfirm
+  *                   * versionInt
+  *                   * versionStr
+  *                   * fieldUid
+  *                   * fieldTitle
+  *                   * fieldFfConfirm
   *
   * @param	[type]		$$row: ...
   * @return	void
@@ -180,10 +186,10 @@ class tx_caddy_powermail
   public function init( $row )
   {
     $arrResult = $this->initVersion( );
-    $this->powermailVersionInt = $arrResult['int'];
-    $this->powermailVersionStr = $arrResult['str'];
+    $this->versionInt = $arrResult['int'];
+    $this->versionStr = $arrResult['str'];
 
-    if( empty( $this->powermailVersionInt ) )
+    if( empty( $this->versionInt ) )
     {
         // DRS
       if( $this->pObj->drs->drsError )
@@ -198,30 +204,32 @@ class tx_caddy_powermail
       // DRS
     if( $this->pObj->drs->drsPowermail )
     {
-      $prompt = 'Powermail version is ' . $this->powermailVersionStr . ' ' .
-                '(internal ' . $this->powermailVersionInt . ')';
+      $prompt = 'Powermail version is ' . $this->versionStr . ' ' .
+                '(internal ' . $this->versionInt . ')';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
 
     $arrResult = $this->initFields( $row );
-    $this->powermailUid             = $arrResult['uid'];
-    $this->powermailTitle           = $arrResult['title'];
-    $this->powermailFfConfirm       = $arrResult['ffConfirm'];
-    $this->powermailffMailsender    = $arrResult['ffMailsender'];
-    $this->powermailffMailreceiver  = $arrResult['ffMailreceiver'];
+    $this->fieldUid             = $arrResult['uid'];
+    $this->fieldTitle           = $arrResult['title'];
+    $this->fieldFfConfirm       = $arrResult['ffConfirm'];
+    $this->powermailFfMailsender    = $arrResult['ffMailsender'];
+    $this->powermailFfMailreceiver  = $arrResult['ffMailreceiver'];
 
       // DRS
     if( $this->pObj->drs->drsPowermail )
     {
-      $prompt = 'powermail.uid: "' . $this->powermailUid . '"';
+      $prompt = 'powermail.uid: "' . $this->fieldUid . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
-      $prompt = 'powermail.title: "' . $this->powermailTitle . '"';
+      $prompt = 'powermail.title: "' . $this->fieldTitle . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
-      $prompt = 'powermail.confirm: "' . $this->powermailFfConfirm . '"';
+      $prompt = 'powermail.confirm: "' . $this->fieldFfConfirm . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
+    
+    $this->initMarker( );
 
     return;
 
@@ -264,23 +272,23 @@ class tx_caddy_powermail
     $where_clause   = "pid = " . $pid . " AND hidden = 0 AND deleted = 0";
     switch( true )
     {
-      case( $this->powermailVersionInt < 1000000 ):
+      case( $this->versionInt < 1000000 ):
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->powermailVersionInt . '<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: powermail4dev';
         die( $prompt );
         break;
-      case( $this->powermailVersionInt < 2000000 ):
+      case( $this->versionInt < 2000000 ):
         $where_clause = $where_clause . " AND CType = 'powermail_pi1'";
         break;
-      case( $this->powermailVersionInt < 3000000 ):
+      case( $this->versionInt < 3000000 ):
         $where_clause = $where_clause . " AND list_type = 'powermail_pi1'";
         break;
-      case( $this->powermailVersionInt >= 3000000 ):
+      case( $this->versionInt >= 3000000 ):
       default:
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->powermailVersionInt . '<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: powermail4dev';
         die( $prompt );
@@ -339,19 +347,19 @@ class tx_caddy_powermail
     $pmTitle  = $pmRecord['header'];
     switch( true )
     {
-      case( $this->powermailVersionInt < 1000000 ):
+      case( $this->versionInt < 1000000 ):
         $prompt = 'ERROR: unexpected result<br />
           powermail version is below 1.0.0<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: powermail4dev';
         die( $prompt );
         break;
-      case( $this->powermailVersionInt < 2000000 ):
+      case( $this->versionInt < 2000000 ):
         $pmFfConfirm      = $pmRecord['tx_powermail_confirm'];
         $pmFfMailsender   = $pmRecord['tx_powermail_mailsender'];
         $pmFfMailreceiver = $pmRecord['tx_powermail_mailreceiver'];
         break;
-      case( $this->powermailVersionInt < 3000000 ):
+      case( $this->versionInt < 3000000 ):
       default:
         $pmFlexform       = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
         $pmFfConfirm      = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
@@ -367,6 +375,22 @@ class tx_caddy_powermail
     $arrReturn['ffMailreceiver']  = $pmFfMailreceiver;
 
     return $arrReturn;
+  }
+
+ /**
+  * initMarker( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarker( )
+  {
+    if( $this->powermailFfMailsender )
+    {
+      
+    }
   }
 
  /**

@@ -146,7 +146,7 @@ class tx_caddy_userfunc
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $this->powermail->powermailVersionInt . ' :::
+          ' . $this->powermail->versionInt . ' :::
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk' ) . '
         </div>
       </div>
@@ -172,7 +172,7 @@ class tx_caddy_userfunc
 //.message-warning
 //.message-error
       // RETURN : there is a powermial form
-    if( $this->powermail->powermailUid )
+    if( $this->powermail->fieldUid )
     {
       return null;
     }
