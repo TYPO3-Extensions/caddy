@@ -7,8 +7,8 @@
   <data type="array">
     <languageKey index="default" type="array">
       <label index="pi1FfSdefReportDisabled"><![CDATA[
-        The Check it! report is disabled and this ois proper for performance needs. 
-        If you have any unexpected result, enable the report above.
+        The Check it! report is disabled and this is proper for performance needs.<br />
+        But if you have any unexpected result, enable the report above.
       ]]></label>
       <label index="pi1FfSdefReportOk"><![CDATA[
         Congratulations: your configuration seem's to be proper!
@@ -139,8 +139,8 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="pi1FfSdefReportDisabled"><![CDATA[
-        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance. 
-        Wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht oben ein.
+        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br /> 
+        Aber wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht oben ein.
       ]]></label>
       <label index="pi1FfSdefReportOk"><![CDATA[
         Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
