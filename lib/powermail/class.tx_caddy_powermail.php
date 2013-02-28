@@ -100,7 +100,7 @@ class tx_caddy_powermail
     if( empty( $this->powermailFormCss ) )
     {
         // DRS
-      if( $this->pObj->b_drs_powermail )
+      if( $this->pObj->drs->drsPowermail )
       {
         $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ') is visible.';
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
@@ -111,7 +111,7 @@ class tx_caddy_powermail
       // RETURN : there isn't any CSS for powermail
 
       // DRS
-    if( $this->b_drs_powermail )
+    if( $this->drs->drsPowermail )
     {
       $prompt = 'CSS for powermail. The display property of the powermail form ' .
                 '(uid ' . $this->powermailUid . ') is set to none.';
@@ -184,7 +184,7 @@ class tx_caddy_powermail
     if( empty( $this->powermailVersionInt ) )
     {
         // DRS
-      if( $this->pObj->b_drs_error )
+      if( $this->pObj->drs->drsError )
       {
         $prompt = 'Powermail version is 0!';
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
@@ -194,7 +194,7 @@ class tx_caddy_powermail
     }
 
       // DRS
-    if( $this->pObj->b_drs_powermail )
+    if( $this->pObj->drs->drsPowermail )
     {
       $prompt = 'Powermail version is ' . $this->powermailVersionStr . ' ' .
                 '(internal ' . $this->powermailVersionInt . ')';
@@ -208,7 +208,7 @@ class tx_caddy_powermail
     $this->powermailFfConfirm  = $arrResult['ffConfirm'];
 
       // DRS
-    if( $this->pObj->b_drs_powermail )
+    if( $this->pObj->drs->drsPowermail )
     {
       $prompt = 'powermail.uid: "' . $this->powermailUid . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
@@ -288,7 +288,7 @@ class tx_caddy_powermail
       // Query
 
       // DRS
-    if( $this->pObj->b_drs_sql )
+    if( $this->pObj->drs->drsSql )
     {
       $query  = $GLOBALS['TYPO3_DB']->SELECTquery
                 (
@@ -322,7 +322,7 @@ class tx_caddy_powermail
       // RETURN : no row
     if( empty( $pmRecord ) )
     {
-      if( $this->pObj->b_drs_error )
+      if( $this->pObj->drs->drsError )
       {
         $prompt = 'Abort. SQL query is empty!';
         t3lib_div::devlog(' [WARN/SQL] '. $prompt, $this->pObj->extKey, 2 );
