@@ -33,47 +33,47 @@
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy online manual<br />
             <a href="http://typo3.org/extension-manuals/caddy/"
               style="text-decoration:underline;"
               alt="Caddy - online manual"
               title="Caddy - online manual"
-              target="_blank">Manual at typo3-org.de</a>
+              target="_blank">TYPO3-Caddy online manual</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy PDF manual<br />
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
               alt="Caddy - PDF manual"
               title="Caddy - PDF manual"
-              target="_blank">manual.pdf</a>
+              target="_blank">TYPO3-Caddy PDF manual</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">typo3-caddy.de/en</a>
+              target="_blank">TYPO3-Caddy website</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy forum<br />
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">typo3-caddy.de/forum</a>
+              target="_blank">TYPO3-Caddy forum</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy developer<br />
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Die Netzmacher - the developers of TYPO3 without PHP."
               title="Die Netzmacher - the developers of TYPO3 without PHP."
-              target="_blank">die-netzmacher.de</a>
+              target="_blank">Die Netzmacher - the developers of TYPO3-Caddy</a>
           </li>
         </ul>
         </div>
+      ]]></label>
+      <label index="promptSponsors"><![CDATA[
+        <h1>
+          Thanks!
+        </h1>
         <p style="font-weight:bold;padding:1em 0;">
           The TYPO3-Caddy project is sponsored by:
         </p>
@@ -133,6 +133,9 @@
       <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version48orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 4.7. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptExternalLinksBody"><![CDATA[
+        <h1>
+          Hilfreiche Links
+        </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by die-netzmacher.de"
@@ -153,47 +156,47 @@
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy Online-Handbuch<br />
             <a href="http://typo3.org/extension-manuals/caddy/"
               style="text-decoration:underline;"
               alt="Caddy - Online-Handbuch"
               title="Caddy - Online-Handbuch"
-              target="_blank">Handbuch auf typo3-org.de</a>
+              target="_blank">TYPO3-Caddy Online-Handbuch</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy PDF-handbuch<br />
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
-              alt="Caddy - PDF-handbuch"
-              title="Caddy - PDF-handbuch"
-              target="_blank">manual.pdf</a>
+              alt="Caddy - PDF-Handbuch"
+              title="Caddy - PDF-Handbuch"
+              target="_blank">TYPO3-Caddy PDF-Handbuch</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy website<br />
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">typo3-caddy.de</a>
+              target="_blank">TYPO3-Caddy Website</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy forum<br />
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">typo3-caddy.de/forum</a>
+              target="_blank">TYPO3-Caddy Forum</a>
           </li>
           <li style="margin-bottom:.6em;">
-            TYPO3-Caddy developer<br />
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
               title="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
-              target="_blank">die-netzmacher.de</a>
+              target="_blank">Die Netzmacher - die Entwickler von TYPO3-Caddy</a>
           </li>
         </ul>
         </div>
+      ]]></label>
+      <label index="promptSponsors"><![CDATA[
+        <h1>
+          Herzlichen Dank!
+        </h1>
         <p style="font-weight:bold;padding:1em 0;">
           Das TYPO3-Caddy-Projekt wird gesponsert von
         </p>
