@@ -97,10 +97,13 @@ class tx_caddy_userfunc
    **********************************************/
 
  /**
-  * extMgmVersion: 
+  * extMgmVersion( ): Returns the version of an extension as an interger and a string.
+  *                   I.e
+  *                   * int: 4007007
+  *                   * str: 4.7.7
   *
-  * @param    string        $_EXTKEY  : extension key
-  * @return    integer      $version  : version of the given extension
+  * @param    string        $_EXTKEY    : extension key
+  * @return    array        $arrReturn  : version as int (integer) and str (string)
   * @access public
   * @version 0.0.1
   * @since 0.0.1
