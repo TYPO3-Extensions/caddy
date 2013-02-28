@@ -181,6 +181,7 @@ class tx_caddy_userfunc
 
     $prompt = null;
 
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
