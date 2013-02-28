@@ -90,6 +90,35 @@ class tx_caddy_userfunc
     $this->pObj = $pObj;
   }
   
+  /**
+   * checkPowermailCartMarker():
+   *
+   * @param   string    $prompt
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function checkPowermailCartMarker( $prompt )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->powermailVersionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk' ) . '
+        </div>
+      </div>
+      ';
+    
+    return $prompt;
+  }
+  
   /***********************************************
    *
    * Extension Management
@@ -152,8 +181,12 @@ class tx_caddy_userfunc
 
     $prompt = null;
 
+    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
+    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+    $this->powermail->pObj  = $this;
+    $this->powermail->init( );
     
-//    $prompt = $this->checkPowermailCartMarker( $prompt );
+    $prompt = $this->checkPowermailCartMarker( $prompt );
         
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
