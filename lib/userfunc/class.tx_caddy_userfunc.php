@@ -295,7 +295,6 @@ class tx_caddy_userfunc
 //.message-warning
 //.message-error
     
-    $this->pi1FfSdefReportInitDrs( );
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
     
@@ -310,6 +309,8 @@ class tx_caddy_userfunc
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
+    $this->pi1FfSdefReportInitDrs( );
+
     $this->powermail->pObj  = $this;
     $this->powermail->init( $this->plugin['row'] );
   }

@@ -177,7 +177,7 @@ class tx_caddy_drs
   }
 
  /**
-  * initByFlexform( ): Init the DRS - Development Reportinmg System
+  * zzDrsPromptsTrue( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access     public
