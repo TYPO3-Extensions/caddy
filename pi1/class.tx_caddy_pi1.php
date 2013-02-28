@@ -923,7 +923,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->accessByIP = false;
 
       // Get list with allowed IPs
-    $csvIP      = $this->objFlexform->sdefCsvallowedip;
+    $csvIP      = $this->flexform->sdefCsvallowedip;
     $currentIP  = t3lib_div :: getIndpEnv( 'REMOTE_ADDR' );
 
       // Current IP is an element in the list
@@ -1038,11 +1038,11 @@ class tx_caddy_pi1 extends tslib_pibase
 //      // sdefDrs
 //    $sheet                      = 'sDEF';
 //    $field                      = 'sdefDrs';
-//    $this->objFlexform->sdefDrs = $this->objFlexform->zzFfValue( $sheet, $field, false );
+//    $this->flexform->sdefDrs = $this->flexform->zzFfValue( $sheet, $field, false );
 //      // sdefDrs
 //
 //      // Enable the DRS by TypoScript
-//    switch( $this->objFlexform->sdefDrs )
+//    switch( $this->flexform->sdefDrs )
 //    {
 //      case( false ):
 //      case( null ):
@@ -1081,7 +1081,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initFlexform( )
   {
-    $this->objFlexform->main( );
+    $this->flexform->main( );
   }
 
  /**
@@ -1296,10 +1296,12 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
 
       // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
-    $this->objFlexform = new tx_caddy_pi1_flexform( $this );
+    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
+    $this->flexform->pObj   = $this;
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
@@ -1455,7 +1457,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function updateWizard( $content )
   {
       // RETURN : update wizard is disabled
-    if( ! $this->objFlexform->sdefUpdatewizard )
+    if( ! $this->flexform->sdefUpdatewizard )
     {
       return $content;
     }

@@ -77,18 +77,8 @@ class tx_caddy_pi1_flexform
     // [string] csv list of allowed IP
   public $sdefCsvallowedip;
 
-  /**
- * Constructor. The method initiate the parent object
- *
- * @param    object        The parent object
- * @return    void
- */
-  function __construct( $parentObj ) 
-  {
-    // Set the Parent Object
-    $this->pObj = $parentObj;
-
-  }
+    // Parent object
+  public $pObj = null;
 
 
 

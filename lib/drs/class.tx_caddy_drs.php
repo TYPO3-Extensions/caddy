@@ -106,6 +106,9 @@ class tx_caddy_drs
   // path to this script relative to the extension dir.
   public $extKey = 'caddy';
 
+    // Parent object
+  public $pObj = null;
+
   public $drsError      = false;
   public $drsWarn       = false;
   public $drsInfo       = false;
@@ -205,11 +208,11 @@ class tx_caddy_drs
       // sdefDrs
     $sheet = 'sDEF';
     $field = 'sdefDrs';
-    $this->pObj->objFlexform->sdefDrs = $this->pObj->objFlexform->zzFfValue( $sheet, $field, false );
+    $this->pObj->flexform->sdefDrs = $this->pObj->flexform->zzFfValue( $sheet, $field, false );
       // sdefDrs
 
       // Enable the DRS by TypoScript
-    switch( $this->pObj->objFlexform->sdefDrs )
+    switch( $this->pObj->flexform->sdefDrs )
     {
       case( false ):
       case( null ):
