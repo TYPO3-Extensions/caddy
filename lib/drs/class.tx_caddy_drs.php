@@ -69,6 +69,7 @@ class tx_caddy_drs
   public $drsInfo       = false;
   public $drsOk         = false;
   public $drsFlexform   = false;
+  public $drsFormula    = false;
   public $drsInit       = false;
   public $drsPowermail  = false;
   public $drsSql        = false;
@@ -191,6 +192,7 @@ class tx_caddy_drs
     $this->drsInfo       = true;
     $this->drsOk         = true;
     $this->drsFlexform   = true;
+    $this->drsFormula    = true;
     $this->drsInit       = true;
     $this->drsPowermail  = true;
     $this->drsSql        = true;

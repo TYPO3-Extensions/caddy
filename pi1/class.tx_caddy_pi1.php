@@ -508,7 +508,14 @@ class tx_caddy_pi1 extends tslib_pibase
 
         // calculate price total
       $product['price_total'] = $product['price'] * $product['qty'];
-var_dump( $product );
+        // DRS
+      if( $this->drs->drsFormula )
+      {
+        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
+        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+        
         // BACKUP cObj->data
       $cObjData   = $this->cObj->data;
       $currRecord = $this->cObj->currentRecord;
