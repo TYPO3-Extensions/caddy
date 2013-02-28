@@ -126,11 +126,11 @@ class tx_caddy_drs
   * initDrs( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
-  * @access private
+  * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initDrs( )
+  public function initDrs( )
   {
     $this->initDrsByExtmngr( );
 
