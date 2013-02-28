@@ -177,7 +177,7 @@ class tx_caddy_powermail
   */
   public function init( $row )
   {
-    $arrResult = $this->initVersion( $row );
+    $arrResult = $this->initVersion( );
     $this->powermailVersionInt = $arrResult['int'];
     $this->powermailVersionStr = $arrResult['str'];
 
@@ -365,13 +365,12 @@ class tx_caddy_powermail
   *                           * int: 1006006
   *                           * str: 1.6.6
   *
-  * @param	[type]		$$row: ...
   * @return	array		$arrReturn  : version as int (integer) and str (string)
   * @access private
   * @version 2.0.0
   * @since   2.0.0
   */
-  private function initVersion( $row )
+  private function initVersion( )
   {
     return $this->pObj->userfunc->extMgmVersion( 'powermail' );
   }

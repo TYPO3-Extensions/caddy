@@ -89,7 +89,64 @@ class tx_caddy_userfunc
   {
     $this->pObj = $pObj;
   }
+
   
+  
+  /***********************************************
+   *
+   * Powermail
+   *
+   **********************************************/
+  
+  /**
+   * checkPowermail():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function checkPowermail( )
+  {
+    $prompt = $this->checkPowermailContent( );
+    if( $prompt )
+    {
+      return $prompt;
+    }
+        
+    $prompt = $this->checkPowermailCartMarker( );
+
+    return $prompt;
+  }
+  
+  
+  /**
+   * checkPowermailCartMarker():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function checkPowermailCartMarker( )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $this->powermail->powermailVersionInt . ' :::
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk' ) . '
+        </div>
+      </div>
+      ';
+    
+    return $prompt;
+  }
   /**
    * checkPowermailContent():
    *
@@ -106,7 +163,14 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
-
+      // RETURN : there is a powermial form
+    if( $this->powermailUid )
+    {
+      return null;
+    }
+      // RETURN : there is a powermial form
+    
+      // RETURN prompt : there isn't any powermial form
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
@@ -114,36 +178,7 @@ class tx_caddy_userfunc
         </div>
       </div>
       ';
-    
-    return $prompt;
-  }
-  
-  
-  /**
-   * checkPowermailCartMarker():
-   *
-   * @param   string    $prompt
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function checkPowermailCartMarker( $prompt )
-  {
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
-
-    $prompt = '
-      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $this->powermail->powermailVersionInt . ' :::
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk' ) . '
-        </div>
-      </div>
-      ';
+      // RETURN prompt : there isn't any powermial form
     
     return $prompt;
   }
@@ -194,9 +229,14 @@ class tx_caddy_userfunc
   }
   
   /**
-   * pi1FfSdefReport(): Displays the quick start message.
+   * pi1FfSdefReport()  : Check the configuration of
+   *                      * the plugin / flexform
+   *                      * the powermail form
+   *                      * the typoscript 
    *
-   * @return  string    message wrapped in HTML
+   * @param    array        $arr_pluginConf : Configuration of the plugin / flexform
+   * @return  string        $prompt         : Prompt
+   * @access  public
    * @version 2.0.0
    * @since   2.0.0
    */
@@ -210,23 +250,10 @@ class tx_caddy_userfunc
 
     $prompt = null;
 
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
-    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
-    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-    
-    $this->powermail->pObj  = $this;
-    $this->powermail->init( $arr_pluginConf['row'] );
+    $this->pi1FfSdefReportInit( $arr_pluginConf );
 
-    $prompt = $this->checkPowermailContent( );
-    if( $prompt )
-    {
-      return $prompt;
-    }
-        
-    $prompt = $this->checkPowermailCartMarker( $prompt );
-        
+    $prompt = $this->checkPowermail( );
+
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
     { 
@@ -241,6 +268,33 @@ class tx_caddy_userfunc
       // OK prompt, if there isn't any other prompt
     
     return $prompt;
+  }
+  
+  /**
+   * pi1FfSdefReportInit(): Displays the quick start message.
+   *
+   * @param    array        $arr_pluginConf : Configuration of the plugin / flexform
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function pi1FfSdefReportInit( $arr_pluginConf )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+    $this->pi1FfSdefReportInit( );
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
+    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
+    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    
+    $this->powermail->pObj  = $this;
+    $this->powermail->init( $arr_pluginConf['row'] );
   }
 
 
@@ -270,10 +324,11 @@ class tx_caddy_userfunc
    * promptCurrIP( ): Displays the IP of the current backend user
    *
    * @return    string        message wrapped in HTML
+   * @access  public
    * @version 0.0.1
    * @since   0.0.1
    */
-  function promptCurrIP( )
+  public function promptCurrIP( )
   {
       $prompt = null;
 
@@ -291,6 +346,7 @@ class tx_caddy_userfunc
    * promptEvaluatorTYPO3version(): Displays the quick start message.
    *
    * @return  string    message wrapped in HTML
+   * @access  public
    * @version 2.0.0
    * @since   2.0.0
    */
@@ -390,6 +446,7 @@ class tx_caddy_userfunc
    * promptExternalLinks(): Displays the quick start message.
    *
    * @return  string    message wrapped in HTML
+   * @access  public
    * @version 2.0.0
    * @since   2.0.0
    */
@@ -415,6 +472,7 @@ class tx_caddy_userfunc
    * promptSponsors( ): Displays the quick start message.
    *
    * @return  string    message wrapped in HTML
+   * @access  public
    * @version 2.0.0
    * @since   2.0.0
    */
@@ -438,13 +496,14 @@ class tx_caddy_userfunc
   
   
   
-/**
- * set_TYPO3Version( ):
- *
- * @return  void
- * @version 2.0.0
- * @since 2.0.0
- */
+  /**
+   * set_TYPO3Version( ):
+   *
+   * @return  void
+   * @access  private
+   * @version 2.0.0
+   * @since 2.0.0
+   */
   private function set_TYPO3Version( )
   {
       // RETURN : typo3Version is set
