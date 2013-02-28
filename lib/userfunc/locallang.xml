@@ -13,6 +13,9 @@
       <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version48orGreater">You are using TYPO3 greater than 4.7. Flip it! isn't tested in this version. Try it!</label>
       <label index="promptExternalLinksBody"><![CDATA[
+        <h1 style="text-align:left;">
+          Helpful Links
+        </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by die-netzmacher.de"
@@ -71,7 +74,7 @@
         </div>
       ]]></label>
       <label index="promptSponsors"><![CDATA[
-        <h1>
+        <h1 style="text-align:left;">
           Thanks!
         </h1>
         <p style="font-weight:bold;padding:1em 0;">
@@ -133,7 +136,7 @@
       <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version48orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 4.7. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptExternalLinksBody"><![CDATA[
-        <h1>
+        <h1 style="text-align:left;">
           Hilfreiche Links
         </h1>
         <div style="float:right;padding-left:1em;">
@@ -194,7 +197,7 @@
         </div>
       ]]></label>
       <label index="promptSponsors"><![CDATA[
-        <h1>
+        <h1 style="text-align:left;">
           Herzlichen Dank!
         </h1>
         <p style="font-weight:bold;padding:1em 0;">
