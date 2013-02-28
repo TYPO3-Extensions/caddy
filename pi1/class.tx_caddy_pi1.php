@@ -521,6 +521,7 @@ class tx_caddy_pi1 extends tslib_pibase
       $currRecord = $this->cObj->currentRecord;
         // cObject become current record
       $this->cObj->start( $product, $this->conf['db.']['table'] );
+var_dump( __METHOD__, __LINE__, $this->markerArray['###PRICE####'] );
 
         // update settings
       $this->cartWiProductsProductSettings( $product );
@@ -529,7 +530,7 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->cartWiProductsProductErrorMsg( $product );
 
          // add inner html to variable
-var_dump( $this->markerArray );
+var_dump( __METHOD__, __LINE__, $this->markerArray['###PRICE####'] );
       $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
                                     ( 
                                       $this->tmpl['item'], $this->markerArray 
