@@ -64,6 +64,7 @@ var_dump( __METHOD__, __LINE__, $content, $conf );
     {
       $conf     = $conf['userFunc.']; // TS configuration
       $content  = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
+var_dump( __METHOD__, __LINE__, $conf, $content );    
     }
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );

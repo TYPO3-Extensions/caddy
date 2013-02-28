@@ -660,7 +660,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWiProductsProductSettings( $product )
   {
-var_dump( __METHOD__, __LINE__, $this->cObj->data, array_keys( ( array ) $this->conf['settings.']['fields.'] ) );
+//var_dump( __METHOD__, __LINE__, $this->cObj->data, array_keys( ( array ) $this->conf['settings.']['fields.'] ) );
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
@@ -688,7 +688,7 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data, array_keys( ( array ) $this->
       $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
     }
       // FOREACH  : settings property
-var_dump( __METHOD__, __LINE__, $this->markerArray );
+//var_dump( __METHOD__, __LINE__, $this->markerArray );
   }
 
  /**
