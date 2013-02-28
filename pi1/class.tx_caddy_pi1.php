@@ -593,7 +593,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function cartWiProductsProductServiceAttributes( $product )
   {
       // DRS
-    if( $this->b_drs_todo )
+    if( $this->drs->drsTodo )
     {
       $prompt = 'Unproper formula? In case of an exceeded maximum of service attributes, max will updated, sum won\'t!';
       t3lib_div::devlog( '[WARN/TODO] ' . $prompt, $this->extKey, 3 );
@@ -900,9 +900,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function init( )
   {
-    $this->initRequireClasses( );
-    $this->initDRS( );
     $this->initInstances( );
+    $this->drs->initDRS( );
     $this->initFlexform( );
     $this->initAccessByIp( );
     $this->initHtmlTemplate( );
@@ -936,7 +935,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Current IP is an element in the list
 
       // DRS
-    if( ! $this->b_drs_init )
+    if( ! $this->drs->drsInit )
     {
       return;
     }
@@ -955,122 +954,122 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // DRS
   }
-
- /**
-  * initDrs( ): Init the DRS - Development Reportinmg System
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initDrs( )
-  {
-    $this->initDrsByExtmngr( );
-
-      // RETURN : DRS is enabled by the extension manager
-    if( $this->b_drs_ok )
-    {
-      return;
-    }
-      // RETURN : DRS is enabled by the extension manager
-
-    $this->initDrsByFlexform( );
-  }
-
- /**
-  * initDrsByExtmngr( ): Init the DRS - Development Reportinmg System
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initDrsByExtmngr( )
-  {
-    switch( $this->arr_extConf['debuggingDrs'] )
-    {
-      case( 'Disabled' ):
-      case( null ):
-        return;
-        break;
-      case( 'Enabled (for debugging only!)' ):
-          // Follow the workflow
-        break;
-      default:
-        $prompt = 'Error: debuggingDrs is undefined.<br />
-          value is ' . $this->arr_extConf['debuggingDrs'] . '<br />
-          <br />
-          ' . __METHOD__ . ' line(' . __LINE__. ')';
-        die( $prompt );
-    }
-
-    $this->b_drs_error      = true;
-    $this->b_drs_warn       = true;
-    $this->b_drs_info       = true;
-    $this->b_drs_ok         = true;
-    $this->b_drs_flexform   = true;
-    $this->b_drs_init       = true;
-    $this->b_drs_powermail  = true;
-    $this->b_drs_sql        = true;
-    $this->b_drs_todo       = true;
-    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $prompt = 'The DRS is enabled by the extension manager.';
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $str_header = $this->cObj->data['header'];
-    $int_uid    = $this->cObj->data['uid'];
-    $int_pid    = $this->cObj->data['pid'];
-    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
-  }
-
- /**
-  * initDrsByFlexform( ): Init the DRS - Development Reportinmg System
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initDrsByFlexform( )
-  {
-
-      // sdefDrs
-    $sheet                      = 'sDEF';
-    $field                      = 'sdefDrs';
-    $this->objFlexform->sdefDrs = $this->objFlexform->zzFfValue( $sheet, $field, false );
-      // sdefDrs
-
-      // Enable the DRS by TypoScript
-    switch( $this->objFlexform->sdefDrs )
-    {
-      case( false ):
-      case( null ):
-        return;
-        break;
-      case( true ):
-      default:
-        break;
-    }
-
-    $this->b_drs_error      = true;
-    $this->b_drs_warn       = true;
-    $this->b_drs_info       = true;
-    $this->b_drs_ok         = true;
-    $this->b_drs_flexform   = true;
-    $this->b_drs_init       = true;
-    $this->b_drs_powermail  = true;
-    $this->b_drs_sql        = true;
-    $this->b_drs_todo       = true;
-    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $str_header = $this->cObj->data['header'];
-    $int_uid    = $this->cObj->data['uid'];
-    $int_pid    = $this->cObj->data['pid'];
-    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
-  }
+//
+// /**
+//  * initDrs( ): Init the DRS - Development Reportinmg System
+//  *
+//  * @return	void
+//  * @access private
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//  private function initDrs( )
+//  {
+//    $this->initDrsByExtmngr( );
+//
+//      // RETURN : DRS is enabled by the extension manager
+//    if( $this->drs->drsOk )
+//    {
+//      return;
+//    }
+//      // RETURN : DRS is enabled by the extension manager
+//
+//    $this->initDrsByFlexform( );
+//  }
+//
+// /**
+//  * initDrsByExtmngr( ): Init the DRS - Development Reportinmg System
+//  *
+//  * @return	void
+//  * @access private
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//  private function initDrsByExtmngr( )
+//  {
+//    switch( $this->arr_extConf['debuggingDrs'] )
+//    {
+//      case( 'Disabled' ):
+//      case( null ):
+//        return;
+//        break;
+//      case( 'Enabled (for debugging only!)' ):
+//          // Follow the workflow
+//        break;
+//      default:
+//        $prompt = 'Error: debuggingDrs is undefined.<br />
+//          value is ' . $this->arr_extConf['debuggingDrs'] . '<br />
+//          <br />
+//          ' . __METHOD__ . ' line(' . __LINE__. ')';
+//        die( $prompt );
+//    }
+//
+//    $this->drs->drsError      = true;
+//    $this->drs->drsWarn       = true;
+//    $this->drs->drsInfo       = true;
+//    $this->drs->drsOk         = true;
+//    $this->drs->drsFlexform   = true;
+//    $this->drs->drsInit       = true;
+//    $this->drs->drsPowermail  = true;
+//    $this->drs->drsSql        = true;
+//    $this->drs->drsTodo       = true;
+//    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
+//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+//    $prompt = 'The DRS is enabled by the extension manager.';
+//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+//    $str_header = $this->cObj->data['header'];
+//    $int_uid    = $this->cObj->data['uid'];
+//    $int_pid    = $this->cObj->data['pid'];
+//    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
+//    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
+//  }
+//
+// /**
+//  * initDrsByFlexform( ): Init the DRS - Development Reportinmg System
+//  *
+//  * @return	void
+//  * @access private
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//  private function initDrsByFlexform( )
+//  {
+//
+//      // sdefDrs
+//    $sheet                      = 'sDEF';
+//    $field                      = 'sdefDrs';
+//    $this->objFlexform->sdefDrs = $this->objFlexform->zzFfValue( $sheet, $field, false );
+//      // sdefDrs
+//
+//      // Enable the DRS by TypoScript
+//    switch( $this->objFlexform->sdefDrs )
+//    {
+//      case( false ):
+//      case( null ):
+//        return;
+//        break;
+//      case( true ):
+//      default:
+//        break;
+//    }
+//
+//    $this->drs->drsError      = true;
+//    $this->drs->drsWarn       = true;
+//    $this->drs->drsInfo       = true;
+//    $this->drs->drsOk         = true;
+//    $this->drs->drsFlexform   = true;
+//    $this->drs->drsInit       = true;
+//    $this->drs->drsPowermail  = true;
+//    $this->drs->drsSql        = true;
+//    $this->drs->drsTodo       = true;
+//    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
+//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+//    $str_header = $this->cObj->data['header'];
+//    $int_uid    = $this->cObj->data['uid'];
+//    $int_pid    = $this->cObj->data['pid'];
+//    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
+//    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
+//  }
 
  /**
   * initFlexform( )
@@ -1207,7 +1206,7 @@ class tx_caddy_pi1 extends tslib_pibase
     if( empty ( $htmlTemplate ) )
     {
         // DRS
-      if( $this->b_drs_error )
+      if( $this->drs->drsError )
       {
         if( empty ( $this->conf['main.']['template'] ) )
         {
@@ -1285,18 +1284,28 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
-    require_once( $path2lib . 'class.tx_caddy_div.php' );
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
-    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
-    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
-    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
 
+    require_once( $path2lib . 'class.tx_caddy_div.php' );
     $this->div              = t3lib_div::makeInstance( 'tx_caddy_div' );
     $this->div->cObj        = $this->cObj;
-    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers   = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+
+      // Class with methods for get flexform values
+    require_once( 'class.tx_caddy_pi1_flexform.php' );
+    $this->objFlexform = new tx_caddy_pi1_flexform( $this );
+
+    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
+    
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
@@ -1312,21 +1321,6 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initPowermail( )
   {
     $this->powermail->init( $this->cObj->data );
-  }
-
- /**
-  * initRequireClasses( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initRequireClasses( )
-  {
-      // Class with methods for get flexform values
-    require_once( 'class.tx_caddy_pi1_flexform.php' );
-    $this->objFlexform = new tx_caddy_pi1_flexform( $this );
   }
 
  /**

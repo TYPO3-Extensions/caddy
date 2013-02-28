@@ -64,6 +64,13 @@ class tx_caddy_userfunc
   private $arr_extConf = null;
   
  /**
+  * Plugin / flexform configuration
+  *
+  * @var array
+  */
+  private $plugin = null;
+  
+ /**
   * Max width of div tags
   *
   * @var string
@@ -235,13 +242,13 @@ class tx_caddy_userfunc
    *                      * the powermail form
    *                      * the typoscript 
    *
-   * @param    array        $arr_pluginConf : Configuration of the plugin / flexform
+   * @param    array        $plugin : Configuration of the plugin / flexform
    * @return  string        $prompt         : Prompt
    * @access  public
    * @version 2.0.0
    * @since   2.0.0
    */
-  public function pi1FfSdefReport( $arr_pluginConf )
+  public function pi1FfSdefReport( $plugin )
   {
 //.message-notice
 //.message-information
@@ -249,9 +256,11 @@ class tx_caddy_userfunc
 //.message-warning
 //.message-error
 
+    $this->plugin = $plugin;
+    
     $prompt = null;
 
-    $this->pi1FfSdefReportInit( $arr_pluginConf );
+    $this->pi1FfSdefReportInit( $this->plugin );
 
     $prompt = $this->checkPowermail( );
 
@@ -272,22 +281,22 @@ class tx_caddy_userfunc
   }
   
   /**
-   * pi1FfSdefReportInit(): Displays the quick start message.
+   * pi1FfSdefReportInit( ): Displays the quick start message.
    *
-   * @param    array        $arr_pluginConf : Configuration of the plugin / flexform
    * @access  private
    * @version 2.0.0
    * @since   2.0.0
    */
-  private function pi1FfSdefReportInit( $arr_pluginConf )
+  private function pi1FfSdefReportInit( )
   {
 //.message-notice
 //.message-information
 //.message-ok
 //.message-warning
 //.message-error
-var_dump( $arr_pluginConf['row']['pi_flexform'], $arr_pluginConf );    
-
+    
+    $this->pi1FfSdefReportInitDrs( );
+    
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
@@ -295,7 +304,23 @@ var_dump( $arr_pluginConf['row']['pi_flexform'], $arr_pluginConf );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
     $this->powermail->pObj  = $this;
-    $this->powermail->init( $arr_pluginConf['row'] );
+    $this->powermail->init( $this->plugin['row'] );
+  }
+  
+  /**
+   * pi1FfSdefReportInitDrs( ): Displays the quick start message.
+   *
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function pi1FfSdefReportInitDrs( )
+  {
+var_dump( $this->plugin['row']['pi_flexform'] );    
+    $sheet = 'sDEF';
+    $field = '';
+    $value = $this->pObj->pi_getFFvalue( $arr_piFlexform, $field, $sheet, 'lDEF', 'vDEF' );
+
   }
 
 
