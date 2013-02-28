@@ -172,7 +172,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $cart = $this->cart( );
 
-
+    $content = $this->powermailCss( $content );
+    
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
                     (
                       $this->tmpl['all'],
@@ -833,9 +834,11 @@ class tx_caddy_pi1 extends tslib_pibase
   {
       // #45915, 130228
       // Set the hidden field to true of the powermail form
-    $this->powermailFormHide( );
+    $css = $this->powermailFormHide( );
 
     $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
+    
+    return $css;
   }
 
 
@@ -1391,6 +1394,43 @@ class tx_caddy_pi1 extends tslib_pibase
   **********************************************/
 
  /**
+  * powermailCss( )
+  *
+  * @return	void
+  * @access private
+  * @internal #45915
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function powermailCss( $content )
+  {
+      // RETURN : there isn't any CSS for powermail
+    if( empty( $this->powermailFormCss ) )
+    {
+        // DRS
+      if( $this->b_drs_powermail )
+      {
+        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->powermailUid . ' is visible.';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return $content;
+    }
+      // RETURN : there isn't any CSS for powermail
+    
+      // DRS
+    if( $this->b_drs_powermail )
+    {
+      $prompt = 'CSS for powermail. The display property of the powermail form ' . 
+                '(uid ' . $this->powermailUid . ' is set to none.';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    $content = $content . $this->powermailFormCss;
+    return $content;
+  }
+  
+ /**
   * powermailFormHide( )
   *
   * @return	void
@@ -1401,13 +1441,21 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function powermailFormHide( )
   {
-      // Build the query
-    $query = "
-      UPDATE `tt_content` 
-      SET    `hidden` = '1'
-      WHERE  `uid` = " . $this->powermailUid ;
-
-    $this->powermailFormSql( $query );
+    $this->powermailFormCss = '
+      <style type="text/css">
+        c' . $this->powermailUid . ' {
+          display: none;
+        }
+      </style>
+      ';
+    
+//      // Build the query
+//    $query = "
+//      UPDATE `tt_content` 
+//      SET    `hidden` = '1'
+//      WHERE  `uid` = " . $this->powermailUid ;
+//
+//    $this->powermailFormSql( $query );
   }
   
  /**
@@ -1421,68 +1469,69 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function powermailFormShow( )
   {
-      // Build the query
-    $query = "
-      UPDATE `tt_content` 
-      SET    `hidden` = '0'
-      WHERE  `uid` = " . $this->powermailUid ;
-
-    $this->powermailFormSql( $query );
+    $this->powermailFormCss = null;
+//      // Build the query
+//    $query = "
+//      UPDATE `tt_content` 
+//      SET    `hidden` = '0'
+//      WHERE  `uid` = " . $this->powermailUid ;
+//
+//    $this->powermailFormSql( $query );
   }
 
 
- /**
-  * powermailFormSql( )
-  *
-  * @return	void
-  * @access private
-  * @internal #45915
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function powermailFormSql( $query )
-  {
-      // DRS - Development Reporting System
-    if( $this->b_drs_sql )
-    {
-      $prompt = $query;
-      t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS - Development Reporting System
-
-      // Execute the query
-    $GLOBALS['TYPO3_DB']->sql_query( $query );
-
-      // Evaluate the query
-    $error = $GLOBALS['TYPO3_DB']->sql_error( );
-
-      // ERROR
-    if( $error )
-    {
-      $prompt = '
-        <div style="border:1em solid red;color:red;padding:1em;">
-          <h1>
-            SQL ERROR
-          </h1>
-          <p>
-            Query: ' . $query . '
-          </p>
-          <p>
-            Error: ' . $error . '
-          </p>
-          <p>
-            ' . $this->extKey . ': ' . __METHOD__ . ' (line ' . __LINE__ . ')
-          </p>
-          <p>
-            Sorry, for the trouble.
-          </p>
-        </div>
-        ';
-      die( $prompt );
-    }
-      // ERROR
-    
-  }
+// /**
+//  * powermailFormSql( )
+//  *
+//  * @return	void
+//  * @access private
+//  * @internal #45915
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//  private function powermailFormSql( $query )
+//  {
+//      // DRS - Development Reporting System
+//    if( $this->b_drs_sql )
+//    {
+//      $prompt = $query;
+//      t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
+//    }
+//      // DRS - Development Reporting System
+//
+//      // Execute the query
+//    $GLOBALS['TYPO3_DB']->sql_query( $query );
+//
+//      // Evaluate the query
+//    $error = $GLOBALS['TYPO3_DB']->sql_error( );
+//
+//      // ERROR
+//    if( $error )
+//    {
+//      $prompt = '
+//        <div style="border:1em solid red;color:red;padding:1em;">
+//          <h1>
+//            SQL ERROR
+//          </h1>
+//          <p>
+//            Query: ' . $query . '
+//          </p>
+//          <p>
+//            Error: ' . $error . '
+//          </p>
+//          <p>
+//            ' . $this->extKey . ': ' . __METHOD__ . ' (line ' . __LINE__ . ')
+//          </p>
+//          <p>
+//            Sorry, for the trouble.
+//          </p>
+//        </div>
+//        ';
+//      die( $prompt );
+//    }
+//      // ERROR
+//    
+//  }
 
  /**
   * powermailInit( )
