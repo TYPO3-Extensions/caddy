@@ -41,47 +41,49 @@ require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // 
 class user_caddy_userfuncs extends tslib_pibase
 {
 
-	public $prefixId = 'tx_caddy_pi1';
+  public $prefixId = 'tx_caddy_pi1';
 
-	// same as class name
-	public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+  // same as class name
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
-	// path to any file in pi1 for locallang
-	public $extKey = 'caddy'; // The extension key.
+  // path to any file in pi1 for locallang
+  public $extKey = 'caddy'; // The extension key.
 
-	/**
-	 * number Format for typoscript
-	 *
-	 * @return	string		formatted number
-	 */
-	public function user_caddy_numberFormat($content = '', $conf = array())
-	{
-		global $TSFE;
-		$local_cObj = $TSFE->cObj; // cObject
+  /**
+    * number Format for typoscript
+    *
+    * @return	string		formatted number
+    */
+  public function user_caddy_numberFormat( $content = '', $conf = array( ) )
+  {
+    global $TSFE;
+    $local_cObj = $TSFE->cObj; // cObject
 
-		if (!$content)
-		{
-			$conf = $conf['userFunc.']; // TS configuration
-			$content = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
-		}
+    if( ! $content )
+    {
+      $conf     = $conf['userFunc.']; // TS configuration
+      $content  = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
+    }
 
-		return number_format($content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep']);
-	}
+    $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
+var_dump( __METHOD__, __LINE__, $numberFormat );    
+    return $numberFormat;
+  }
 
-	/**
-	 * clear cart
-	 *
-	 * @return	void
-	 */
-	public function user_caddy_clearCart($content = '', $conf = array())
-	{
-		$div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
-		$div->removeAllProductsFromSession(); // clear cart now
-	}
+  /**
+    * clear cart
+    *
+    * @return	void
+    */
+  public function user_caddy_clearCart($content = '', $conf = array())
+  {
+    $div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+    $div->removeAllProductsFromSession(); // clear cart now
+  }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_userfuncs.php'])
 {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_userfuncs.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_userfuncs.php']);
 }
 ?>
