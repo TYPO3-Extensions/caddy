@@ -129,7 +129,7 @@ class tx_caddy_pi1_flexform
     $this->sdefCsvallowedip = $this->zzFfValue( $sheet, $field );
       // sdefCsvallowedip
 
-// @see pObj->initDrsByFlexform( )
+// @see pObj->initByFlexform( )
 //      // sdefDrs
 //    $field          = 'sdefDrs';
 //    $this->sdefDrs  = $this->zzFfValue( $sheet, $field, false );

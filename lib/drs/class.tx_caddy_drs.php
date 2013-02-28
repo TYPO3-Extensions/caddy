@@ -53,9 +53,9 @@
  *              SECTION: Init
  *  901:     private function init( )
  *  921:     private function initAccessByIp( )
- *  967:     private function initDrs( )
- *  989:     private function initDrsByExtmngr( )
- * 1036:     private function initDrsByFlexform( )
+ *  967:     private function init( )
+ *  989:     private function initByExtmngr( )
+ * 1036:     private function initByFlexform( )
  * 1083:     private function initFlexform( )
  * 1096:     private function initGpVar( )
  * 1152:     private function initGpVarCid( )
@@ -109,6 +109,9 @@ class tx_caddy_drs
     // Parent object
   public $pObj = null;
 
+    // Current row
+  public $row = null;
+
   public $drsError      = false;
   public $drsWarn       = false;
   public $drsInfo       = false;
@@ -126,16 +129,16 @@ class tx_caddy_drs
 
 
  /**
-  * initDrs( ): Init the DRS - Development Reportinmg System
+  * init( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function initDrs( )
+  public function init( )
   {
-    $this->initDrsByExtmngr( );
+    $this->initByExtmngr( );
 
       // RETURN : DRS is enabled by the extension manager
     if( $this->drsOk )
@@ -144,18 +147,18 @@ class tx_caddy_drs
     }
       // RETURN : DRS is enabled by the extension manager
 
-    $this->initDrsByFlexform( );
+    $this->initByFlexform( );
   }
 
  /**
-  * initDrsByExtmngr( ): Init the DRS - Development Reportinmg System
+  * initByExtmngr( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initDrsByExtmngr( )
+  private function initByExtmngr( )
   {
     switch( $this->pObj->arr_extConf['debuggingDrs'] )
     {
@@ -187,22 +190,22 @@ class tx_caddy_drs
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
-    $str_header = $this->pObj->cObj->data['header'];
-    $int_uid    = $this->pObj->cObj->data['uid'];
-    $int_pid    = $this->pObj->cObj->data['pid'];
+    $str_header = $this->row['header'];
+    $int_uid    = $this->row['uid'];
+    $int_pid    = $this->row['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
     t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
  /**
-  * initDrsByFlexform( ): Init the DRS - Development Reportinmg System
+  * initByFlexform( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initDrsByFlexform( )
+  private function initByFlexform( )
   {
 
       // sdefDrs
@@ -234,9 +237,9 @@ class tx_caddy_drs
     $this->drsTodo       = true;
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
-    $str_header = $this->pObj->cObj->data['header'];
-    $int_uid    = $this->pObj->cObj->data['uid'];
-    $int_pid    = $this->pObj->cObj->data['pid'];
+    $str_header = $this->row['header'];
+    $int_uid    = $this->row['uid'];
+    $int_pid    = $this->row['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
     t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }

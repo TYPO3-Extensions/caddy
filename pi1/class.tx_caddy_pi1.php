@@ -58,9 +58,9 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *              SECTION: Init
  *  901:     private function init( )
  *  921:     private function initAccessByIp( )
- *  967:     private function initDrs( )
- *  989:     private function initDrsByExtmngr( )
- * 1036:     private function initDrsByFlexform( )
+ *  967:     private function init( )
+ *  989:     private function initByExtmngr( )
+ * 1036:     private function initByFlexform( )
  * 1083:     private function initFlexform( )
  * 1096:     private function initGpVar( )
  * 1152:     private function initGpVarCid( )
@@ -901,7 +901,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function init( )
   {
     $this->initInstances( );
-    $this->drs->initDRS( );
+    $this->drs->init( );
     $this->initFlexform( );
     $this->initAccessByIp( );
     $this->initHtmlTemplate( );
@@ -956,16 +956,16 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 //
 // /**
-//  * initDrs( ): Init the DRS - Development Reportinmg System
+//  * init( ): Init the DRS - Development Reportinmg System
 //  *
 //  * @return	void
 //  * @access private
 //  * @version    2.0.0
 //  * @since      2.0.0
 //  */
-//  private function initDrs( )
+//  private function init( )
 //  {
-//    $this->initDrsByExtmngr( );
+//    $this->initByExtmngr( );
 //
 //      // RETURN : DRS is enabled by the extension manager
 //    if( $this->drs->drsOk )
@@ -974,18 +974,18 @@ class tx_caddy_pi1 extends tslib_pibase
 //    }
 //      // RETURN : DRS is enabled by the extension manager
 //
-//    $this->initDrsByFlexform( );
+//    $this->initByFlexform( );
 //  }
 //
 // /**
-//  * initDrsByExtmngr( ): Init the DRS - Development Reportinmg System
+//  * initByExtmngr( ): Init the DRS - Development Reportinmg System
 //  *
 //  * @return	void
 //  * @access private
 //  * @version    2.0.0
 //  * @since      2.0.0
 //  */
-//  private function initDrsByExtmngr( )
+//  private function initByExtmngr( )
 //  {
 //    switch( $this->arr_extConf['debuggingDrs'] )
 //    {
@@ -1025,14 +1025,14 @@ class tx_caddy_pi1 extends tslib_pibase
 //  }
 //
 // /**
-//  * initDrsByFlexform( ): Init the DRS - Development Reportinmg System
+//  * initByFlexform( ): Init the DRS - Development Reportinmg System
 //  *
 //  * @return	void
 //  * @access private
 //  * @version    2.0.0
 //  * @since      2.0.0
 //  */
-//  private function initDrsByFlexform( )
+//  private function initByFlexform( )
 //  {
 //
 //      // sdefDrs
@@ -1297,6 +1297,7 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
 
       // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
