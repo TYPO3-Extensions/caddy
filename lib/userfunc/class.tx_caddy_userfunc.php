@@ -172,7 +172,7 @@ class tx_caddy_userfunc
 //.message-warning
 //.message-error
       // RETURN : there is a powermial form
-    if( $this->powermailUid )
+    if( $this->powermail->powermailUid )
     {
       return null;
     }
