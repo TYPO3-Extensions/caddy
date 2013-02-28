@@ -339,6 +339,31 @@ class tx_caddy_userfunc
     return $prompt;
   }
   
+  /**
+   * promptSponsors( ): Displays the quick start message.
+   *
+   * @return  string    message wrapped in HTML
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  public function promptSponsors()
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+      $prompt = null;
+
+      $prompt = $prompt . '
+<div class="message-body" style="max-width:600px;">
+  ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptSponsors') . '
+</div>';
+
+    return $prompt;
+  }
+  
   
   
 /**
