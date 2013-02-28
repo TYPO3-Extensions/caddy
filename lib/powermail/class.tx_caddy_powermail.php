@@ -214,7 +214,7 @@ class tx_caddy_powermail
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
       $prompt = 'powermail.title: "' . $this->powermailTitle . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
-      $prompt = 'powermail.confirm: "' . $this->powermailConfirm . '"';
+      $prompt = 'powermail.confirm: "' . $this->powermailFfConfirm . '"';
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
