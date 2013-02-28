@@ -19,8 +19,8 @@
         Emails doesn't contain caddy values without this marker.
       ]]></label>
       <label index="pmReceiverMarkerWiWtcart"><![CDATA[
-        The Email-Text for the receiver in the powermail form contains a deprecated marker<br />
-        Please move ###POWERMAIL_TYPOSCRIPT_CADDY### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
+        The Email-Text for the receiver in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
       ]]></label>
       <label index="pmSenderMarkerWo"><![CDATA[
         No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
@@ -28,8 +28,8 @@
         Emails doesn't contain caddy values without this marker.
       ]]></label>
       <label index="pmSenderMarkerWiWtcart"><![CDATA[
-        The Email-Text for the sender in the powermail form contains a deprecated marker<br />
-        Please move ###POWERMAIL_TYPOSCRIPT_CADDY### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
+        The Email-Text for the sender in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         There isn't any powermail form at the current page.<br />
