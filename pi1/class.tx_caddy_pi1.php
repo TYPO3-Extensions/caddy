@@ -1454,8 +1454,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $GLOBALS['TYPO3_DB']->sql_query( $query );
 
       // Evaluate the query
-    $affected_rows  = $GLOBALS['TYPO3_DB']->sql_affected_rows( );
-    $error          = $GLOBALS['TYPO3_DB']->sql_error( );
+    $error = $GLOBALS['TYPO3_DB']->sql_error( );
 
       // ERROR
     if( $error )
@@ -1483,29 +1482,6 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // ERROR
     
-    if( $affected_rows < 1 )
-    {
-      $prompt = '
-        <div style="border:1em solid orange;color:red;padding:1em;">
-          <h1>
-            SQL WARNING
-          </h1>
-          <p>
-            Query: ' . $query . '
-          </p>
-          <p>
-            Warning: any row isn\'t affected.
-          </p>
-          <p>
-            ' . $this->extKey . ': ' . __METHOD__ . ' (line ' . __LINE__ . ')
-          </p>
-          <p>
-            Sorry, for the trouble.
-          </p>
-        </div>
-        ';
-      die( $prompt );
-    }    
   }
 
  /**
