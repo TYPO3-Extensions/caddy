@@ -28,60 +28,12 @@
  *
  *
  *
- *  103: class tx_caddy_drs extends tslib_pibase
+ *   50: class tx_caddy_drs
+ *   91:     public function init( )
+ *  113:     private function initByExtmngr( )
+ *  160:     private function initByFlexform( )
  *
- *              SECTION: Main
- *  148:     public function main( $content, $conf )
- *
- *              SECTION: Cart
- *  209:     private function cart( )
- *  246:     private function cartWiProducts( )
- *  423:     private function cartWiProductsItem( $contentItem )
- *  454:     private function cartWiProductsPayment( )
- *  498:     private function cartWiProductsProduct( )
- *  569:     private function cartWiProductsProductErrorMsg( $product )
- *  593:     private function cartWiProductsProductServiceAttributes( $product )
- *  655:     private function cartWiProductsProductSettings( $product )
- *  695:     private function cartWiProductsProductTax( $product )
- *  748:     private function cartWiProductsShipping( )
- *  792:     private function cartWiProductsSpecial( )
- *  837:     private function cartWoProducts( )
- *
- *              SECTION: Debug
- *  864:     private function debugOutputBeforeRunning( )
- *
- *              SECTION: Init
- *  901:     private function init( )
- *  921:     private function initAccessByIp( )
- *  967:     private function init( )
- *  989:     private function initByExtmngr( )
- * 1036:     private function initByFlexform( )
- * 1083:     private function initFlexform( )
- * 1096:     private function initGpVar( )
- * 1152:     private function initGpVarCid( )
- * 1202:     private function initHtmlTemplate( )
- * 1284:     private function initInstances( )
- * 1312:     private function initPowermail( )
- * 1325:     private function initRequireClasses( )
- * 1340:     private function initServiceAttributes( )
- *
- *              SECTION: Order
- * 1367:     private function orderUpdate( )
- *
- *              SECTION: Product
- * 1412:     private function productAdd( )
- * 1434:     private function productRemove( )
- *
- *              SECTION: Update Wizard
- * 1461:     private function updateWizard( $content )
- *
- *              SECTION: ZZ
- * 1503:     private function zz_getPriceForOption($type, $option_id)
- * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1588:     private function zz_renderOptionList($type, $option_id)
- * 1698:     private function zz_price_format($value)
- *
- * TOTAL FUNCTIONS: 35
+ * TOTAL FUNCTIONS: 3
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -132,7 +84,7 @@ class tx_caddy_drs
   * init( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */

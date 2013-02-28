@@ -33,60 +33,56 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  103: class tx_caddy_pi1 extends tslib_pibase
+ *   99: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  148:     public function main( $content, $conf )
+ *  144:     public function main( $content, $conf )
  *
  *              SECTION: Cart
- *  209:     private function cart( )
- *  246:     private function cartWiProducts( )
- *  423:     private function cartWiProductsItem( $contentItem )
- *  454:     private function cartWiProductsPayment( )
- *  498:     private function cartWiProductsProduct( )
- *  569:     private function cartWiProductsProductErrorMsg( $product )
- *  593:     private function cartWiProductsProductServiceAttributes( $product )
- *  655:     private function cartWiProductsProductSettings( $product )
- *  695:     private function cartWiProductsProductTax( $product )
- *  748:     private function cartWiProductsShipping( )
- *  792:     private function cartWiProductsSpecial( )
- *  837:     private function cartWoProducts( )
+ *  205:     private function cart( )
+ *  242:     private function cartWiProducts( )
+ *  419:     private function cartWiProductsItem( $contentItem )
+ *  450:     private function cartWiProductsPayment( )
+ *  494:     private function cartWiProductsProduct( )
+ *  565:     private function cartWiProductsProductErrorMsg( $product )
+ *  589:     private function cartWiProductsProductServiceAttributes( $product )
+ *  651:     private function cartWiProductsProductSettings( $product )
+ *  691:     private function cartWiProductsProductTax( $product )
+ *  744:     private function cartWiProductsShipping( )
+ *  788:     private function cartWiProductsSpecial( )
+ *  833:     private function cartWoProducts( )
  *
  *              SECTION: Debug
- *  864:     private function debugOutputBeforeRunning( )
+ *  860:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  901:     private function init( )
- *  921:     private function initAccessByIp( )
- *  967:     private function init( )
- *  989:     private function initByExtmngr( )
- * 1036:     private function initByFlexform( )
- * 1083:     private function initFlexform( )
- * 1096:     private function initGpVar( )
- * 1152:     private function initGpVarCid( )
- * 1202:     private function initHtmlTemplate( )
- * 1284:     private function initInstances( )
- * 1312:     private function initPowermail( )
- * 1325:     private function initRequireClasses( )
- * 1340:     private function initServiceAttributes( )
+ *  897:     private function init( )
+ *  916:     private function initAccessByIp( )
+ * 1078:     private function initFlexform( )
+ * 1091:     private function initGpVar( )
+ * 1147:     private function initGpVarCid( )
+ * 1197:     private function initHtmlTemplate( )
+ * 1279:     private function initInstances( )
+ * 1320:     private function initPowermail( )
+ * 1333:     private function initServiceAttributes( )
  *
  *              SECTION: Order
- * 1367:     private function orderUpdate( )
+ * 1360:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1412:     private function productAdd( )
- * 1434:     private function productRemove( )
+ * 1405:     private function productAdd( )
+ * 1427:     private function productRemove( )
  *
  *              SECTION: Update Wizard
- * 1461:     private function updateWizard( $content )
+ * 1454:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1503:     private function zz_getPriceForOption($type, $option_id)
- * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1588:     private function zz_renderOptionList($type, $option_id)
- * 1698:     private function zz_price_format($value)
+ * 1496:     private function zz_getPriceForOption($type, $option_id)
+ * 1547:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1581:     private function zz_renderOptionList($type, $option_id)
+ * 1691:     private function zz_price_format($value)
  *
- * TOTAL FUNCTIONS: 35
+ * TOTAL FUNCTIONS: 31
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -1307,7 +1303,7 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
-    
+
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
