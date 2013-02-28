@@ -342,9 +342,9 @@ class tx_caddy_userfunc
 
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $str_header = $this->plugin->row['header'];
-    $int_uid    = $this->plugin->row['uid'];
-    $int_pid    = $this->plugin->row['pid'];
+    $str_header = $this->plugin['row']['header'];
+    $int_uid    = $this->plugin['row']['uid'];
+    $int_pid    = $this->plugin['row']['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
     t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
 
