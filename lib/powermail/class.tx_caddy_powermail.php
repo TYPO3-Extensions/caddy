@@ -207,9 +207,9 @@ class tx_caddy_powermail
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function init( )
+  public function init( $row )
   {
-    $arrResult = $this->initVersion( );
+    $arrResult = $this->initVersion( $row );
     $this->powermailVersionInt = $arrResult['int'];
     $this->powermailVersionStr = $arrResult['str'];
 
@@ -234,7 +234,7 @@ class tx_caddy_powermail
     }
       // DRS
     
-    $arrResult = $this->initFields( );
+    $arrResult = $this->initFields( $row );
     $this->powermailUid        = $arrResult['uid'];
     $this->powermailTitle      = $arrResult['title'];
     $this->powermailFfConfirm  = $arrResult['ffConfirm'];
@@ -268,12 +268,13 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function initFields( )
+  private function initFields( $row )
   {
     $arrReturn = null; 
     
       // Page uid
-    $pid = $this->pObj->cObj->data['pid'];
+//    $pid = $this->pObj->cObj->data['pid'];
+    $pid = $row['pid'];
     
     if( ! $pid )
     {
@@ -401,7 +402,7 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  private function initVersion( )
+  private function initVersion( $row )
   {
     return $this->pObj->userfunc->extMgmVersion( 'powermail' );
   }

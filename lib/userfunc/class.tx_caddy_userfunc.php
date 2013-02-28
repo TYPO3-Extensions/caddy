@@ -171,7 +171,7 @@ class tx_caddy_userfunc
    * @version 2.0.0
    * @since   2.0.0
    */
-  public function pi1FfSdefReport()
+  public function pi1FfSdefReport( $arr_pluginConf )
   {
 //.message-notice
 //.message-information
@@ -188,7 +188,7 @@ class tx_caddy_userfunc
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
     $this->powermail->pObj  = $this;
-    $this->powermail->init( );
+    $this->powermail->init( $arr_pluginConf['row'] );
 
     $prompt = $this->checkPowermailCartMarker( $prompt );
         

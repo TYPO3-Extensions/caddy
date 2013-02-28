@@ -1488,7 +1488,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function powermailInit( )
   {
-    $arrResult = $this->powermailInitVersion( );
+    $arrResult = $this->powermailInitVersion( $this->cObj->data );
     $this->powermailVersionInt = $arrResult['int'];
     $this->powermailVersionStr = $arrResult['str'];
 
@@ -1513,7 +1513,7 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // DRS
     
-    $arrResult = $this->powermailInitFields( );
+    $arrResult = $this->powermailInitFields( $this->cObj->data );
     $this->powermailUid        = $arrResult['uid'];
     $this->powermailTitle      = $arrResult['title'];
     $this->powermailFfConfirm  = $arrResult['ffConfirm'];
