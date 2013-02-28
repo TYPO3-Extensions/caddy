@@ -14,16 +14,18 @@
         Congratulations: your configuration seem's to be proper!
       ]]></label>
       <label index="pmReceiverMarkerWo"><![CDATA[
-        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to<br />
-        the Email-Text for the receiver in the powermail form!
+        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
+        the Email-Text for the receiver in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
       ]]></label>
       <label index="pmReceiverMarkerWiWtcart"><![CDATA[
         The Email-Text for the receiver in the powermail form contains a deprecated marker<br />
         Please move ###POWERMAIL_TYPOSCRIPT_CADDY### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
       ]]></label>
       <label index="pmSenderMarkerWo"><![CDATA[
-        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to<br />
-        the Email-Text for the sender in the powermail form!
+        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
+        the Email-Text for the sender in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
       ]]></label>
       <label index="pmSenderMarkerWiWtcart"><![CDATA[
         The Email-Text for the sender in the powermail form contains a deprecated marker<br />
