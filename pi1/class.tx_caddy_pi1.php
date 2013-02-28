@@ -33,51 +33,60 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   97: class tx_caddy_pi1 extends tslib_pibase
+ *  103: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  139:     public function main( $content, $conf )
+ *  148:     public function main( $content, $conf )
  *
  *              SECTION: Cart
- *  201:     private function cart( )
- *  230:     private function cartWiProducts( )
- *  396:     private function cartWiProductsItem( $contentItem )
- *  427:     private function cartWiProductsPayment( )
- *  471:     private function cartWiProductsProduct( )
- *  535:     private function cartWiProductsProductErrorMsg( $product )
- *  559:     private function cartWiProductsProductServiceAttributes( $product )
- *  621:     private function cartWiProductsProductSettings( $product )
- *  661:     private function cartWiProductsProductTax( $product )
- *  714:     private function cartWiProductsShipping( )
- *  758:     private function cartWiProductsSpecial( )
- *  803:     private function cartWoProducts( )
+ *  209:     private function cart( )
+ *  246:     private function cartWiProducts( )
+ *  423:     private function cartWiProductsItem( $contentItem )
+ *  454:     private function cartWiProductsPayment( )
+ *  498:     private function cartWiProductsProduct( )
+ *  569:     private function cartWiProductsProductErrorMsg( $product )
+ *  593:     private function cartWiProductsProductServiceAttributes( $product )
+ *  655:     private function cartWiProductsProductSettings( $product )
+ *  695:     private function cartWiProductsProductTax( $product )
+ *  748:     private function cartWiProductsShipping( )
+ *  792:     private function cartWiProductsSpecial( )
+ *  837:     private function cartWoProducts( )
  *
  *              SECTION: Debug
- *  835:     private function debugOutputBeforeRunning( )
+ *  864:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  872:     private function init( )
- *  892:     private function initDrs( )
- *  931:     private function initGpVar( )
- *  987:     private function initGpVarCid( )
- * 1037:     private function initHtmlTemplate( )
- * 1119:     private function initInstances( )
- * 1135:     private function initServiceAttributes( )
+ *  901:     private function init( )
+ *  921:     private function initAccessByIp( )
+ *  967:     private function initDrs( )
+ *  989:     private function initDrsByExtmngr( )
+ * 1036:     private function initDrsByFlexform( )
+ * 1083:     private function initFlexform( )
+ * 1096:     private function initGpVar( )
+ * 1152:     private function initGpVarCid( )
+ * 1202:     private function initHtmlTemplate( )
+ * 1284:     private function initInstances( )
+ * 1312:     private function initPowermail( )
+ * 1325:     private function initRequireClasses( )
+ * 1340:     private function initServiceAttributes( )
  *
  *              SECTION: Order
- * 1162:     private function orderUpdate( )
+ * 1367:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1206:     private function productAdd( )
- * 1228:     private function productRemove( )
+ * 1412:     private function productAdd( )
+ * 1434:     private function productRemove( )
+ *
+ *              SECTION: Update Wizard
+ * 1461:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1253:     private function zz_getPriceForOption($type, $option_id)
- * 1304:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1335:     private function zz_renderOptionList($type, $option_id)
- * 1445:     private function zz_price_format($value)
+ * 1503:     private function zz_getPriceForOption($type, $option_id)
+ * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1588:     private function zz_renderOptionList($type, $option_id)
+ * 1698:     private function zz_price_format($value)
  *
- * TOTAL FUNCTIONS: 28
+ * TOTAL FUNCTIONS: 35
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -103,7 +112,7 @@ class tx_caddy_pi1 extends tslib_pibase
   public $extKey = 'caddy';
 
   private $accessByIP = null;
-  
+
   private $product = array();
 
   private $newProduct = array();
@@ -115,8 +124,8 @@ class tx_caddy_pi1 extends tslib_pibase
   private $outerMarkerArray = array();
 
   private $gpvar = array();
-  
-  
+
+
 
 
 
@@ -161,14 +170,14 @@ class tx_caddy_pi1 extends tslib_pibase
 
       // Prompt of the update wizard
     $content = $this->updateWizard( $content );
-    
+
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
 
     $cart = $this->cart( );
 
     $content = $this->powermail->formCss( $content );
-    
+
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
                     (
                       $this->tmpl['all'],
@@ -325,7 +334,7 @@ class tx_caddy_pi1 extends tslib_pibase
       'cart_tax_reduced'      => $cartTaxReduced,
       'cart_tax_normal'       => $cartTaxNormal
     );
-    
+
       // BACKUP cObj->data
     $cObjData   = $this->cObj->data;
     $currRecord = $this->cObj->currentRecord;
@@ -477,7 +486,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $arrReturn['net']   = $net;
     return $arrReturn;
   }
-  
+
  /**
   * cartWiProductsProduct( )
   *
@@ -832,7 +841,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $css = $this->powermail->FormHide( );
 
     $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
-    
+
     return $css;
   }
 
@@ -901,11 +910,11 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initGpVar( );
     $this->initPowermail( );
   }
-  
+
 /**
  * initAccessByIp( ): Set the global $bool_accessByIP.
  *
- * @return    void
+ * @return	void
  * @version 2.0.0
  * @since   2.0.0
  */
@@ -925,13 +934,13 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->accessByIP = true;
     }
       // Current IP is an element in the list
-      
+
       // DRS
     if( ! $this->b_drs_init )
     {
       return;
     }
-    
+
     switch( $this->accessByIP )
     {
       case( true ):
@@ -966,7 +975,7 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // RETURN : DRS is enabled by the extension manager
 
-    $this->initDrsByFlexform( );    
+    $this->initDrsByFlexform( );
   }
 
  /**
@@ -1026,7 +1035,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initDrsByFlexform( )
   {
-    
+
       // sdefDrs
     $sheet                      = 'sDEF';
     $field                      = 'sdefDrs';
@@ -1274,8 +1283,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initInstances( )
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
-    
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
     require_once( $path2lib . 'class.tx_caddy_div.php' );
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
@@ -1304,7 +1313,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->powermail->init( $this->cObj->data );
   }
-  
+
  /**
   * initRequireClasses( )
   *
@@ -1443,7 +1452,7 @@ class tx_caddy_pi1 extends tslib_pibase
  /**
   * updateWizard( )
   *
-  * @param      string    $content  : current content
+  * @param	string		$content  : current content
   * @return	void
   * @access private
   * @version    2.0.0

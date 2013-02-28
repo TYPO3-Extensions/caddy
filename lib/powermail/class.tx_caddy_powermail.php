@@ -28,51 +28,17 @@
  *
  *
  *
- *   97: class tx_caddy_pi1 extends tslib_pibase
+ *   55: class tx_caddy_powermail
  *
- *              SECTION: Main
- *  139:     public function main( $content, $conf )
+ *              SECTION: Powermail
+ *   97:     public function formCss( $content )
+ *  135:     public function formHide( )
+ *  157:     public function formShow( )
+ *  178:     public function init( $row )
+ *  240:     private function initFields( $row )
+ *  374:     private function initVersion( $row )
  *
- *              SECTION: Cart
- *  201:     private function cart( )
- *  230:     private function cartWiProducts( )
- *  396:     private function cartWiProductsItem( $contentItem )
- *  427:     private function cartWiProductsPayment( )
- *  471:     private function cartWiProductsProduct( )
- *  535:     private function cartWiProductsProductErrorMsg( $product )
- *  559:     private function cartWiProductsProductServiceAttributes( $product )
- *  621:     private function cartWiProductsProductSettings( $product )
- *  661:     private function cartWiProductsProductTax( $product )
- *  714:     private function cartWiProductsShipping( )
- *  758:     private function cartWiProductsSpecial( )
- *  803:     private function cartWoProducts( )
- *
- *              SECTION: Debug
- *  835:     private function debugOutputBeforeRunning( )
- *
- *              SECTION: Init
- *  872:     private function init( )
- *  892:     private function initDrs( )
- *  931:     private function initGpVar( )
- *  987:     private function initGpVarCid( )
- * 1037:     private function initHtmlTemplate( )
- * 1119:     private function initInstances( )
- * 1135:     private function initServiceAttributes( )
- *
- *              SECTION: Order
- * 1162:     private function orderUpdate( )
- *
- *              SECTION: Product
- * 1206:     private function productAdd( )
- * 1228:     private function productRemove( )
- *
- *              SECTION: ZZ
- * 1253:     private function zz_getPriceForOption($type, $option_id)
- * 1304:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1335:     private function zz_renderOptionList($type, $option_id)
- * 1445:     private function zz_price_format($value)
- *
- * TOTAL FUNCTIONS: 28
+ * TOTAL FUNCTIONS: 6
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -105,7 +71,7 @@ class tx_caddy_powermail
   public $powermailFfConfirm  = null;
   public $powermailVersionInt = null;
   public $powermailVersionStr = null;
-  
+
 
 
 
@@ -121,6 +87,7 @@ class tx_caddy_powermail
   *                       * The CSS will hide the powermail form
   *                       * CSS is empty, if powermail form should displayed
   *
+  * @param	[type]		$$content: ...
   * @return	void
   * @access public
   * @internal #45915
@@ -142,11 +109,11 @@ class tx_caddy_powermail
       return $content;
     }
       // RETURN : there isn't any CSS for powermail
-    
+
       // DRS
     if( $this->b_drs_powermail )
     {
-      $prompt = 'CSS for powermail. The display property of the powermail form ' . 
+      $prompt = 'CSS for powermail. The display property of the powermail form ' .
                 '(uid ' . $this->powermailUid . ') is set to none.';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
@@ -154,10 +121,10 @@ class tx_caddy_powermail
     $content = $content . $this->powermailFormCss;
     return $content;
   }
-  
+
  /**
-  * formHide( ): Powermail form should be unvisible, CSS snippet is written to 
-  *                       $this->powermailFormCss 
+  * formHide( ): Powermail form should be unvisible, CSS snippet is written to
+  *                       $this->powermailFormCss
   *
   * @return	void
   * @access public
@@ -174,12 +141,12 @@ class tx_caddy_powermail
         }
       </style>
       ';
-    
+
   }
-  
+
  /**
-  * formShow( ): Powermail form should be visible, empty CSS snippet is written to 
-  *                       $this->powermailFormCss 
+  * formShow( ): Powermail form should be visible, empty CSS snippet is written to
+  *                       $this->powermailFormCss
   *
   * @return	void
   * @access public
@@ -201,6 +168,7 @@ class tx_caddy_powermail
   *                   * powermailTitle
   *                   * powermailFfConfirm
   *
+  * @param	[type]		$$row: ...
   * @return	void
   * @access public
   * @internal   #45915
@@ -224,7 +192,7 @@ class tx_caddy_powermail
         // DRS
       return;
     }
-    
+
       // DRS
     if( $this->pObj->b_drs_powermail )
     {
@@ -233,12 +201,12 @@ class tx_caddy_powermail
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    
+
     $arrResult = $this->initFields( $row );
     $this->powermailUid        = $arrResult['uid'];
     $this->powermailTitle      = $arrResult['title'];
     $this->powermailFfConfirm  = $arrResult['ffConfirm'];
-    
+
       // DRS
     if( $this->pObj->b_drs_powermail )
     {
@@ -262,7 +230,8 @@ class tx_caddy_powermail
   *                         * title
   *                         * ffConfirm
   *
-  * @return    array        $arr : uid, title, ffConfirm of the powermail form
+  * @param	[type]		$$row: ...
+  * @return	array		$arr : uid, title, ffConfirm of the powermail form
   * @access private
   * @internal   #45915
   * @version 2.0.0
@@ -270,12 +239,12 @@ class tx_caddy_powermail
   */
   private function initFields( $row )
   {
-    $arrReturn = null; 
-    
+    $arrReturn = null;
+
       // Page uid
 //    $pid = $this->pObj->cObj->data['pid'];
     $pid = $row['pid'];
-    
+
     if( ! $pid )
     {
       $prompt = 'ERROR: unexpected result<br />
@@ -334,7 +303,7 @@ class tx_caddy_powermail
       t3lib_div::devlog(' [INFO/SQL] '. $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-      
+
       // Execute SELECT
     $res =  $GLOBALS['TYPO3_DB']->exec_SELECTquery
             (
@@ -361,9 +330,9 @@ class tx_caddy_powermail
       return false;
     }
       // RETURN : no row
-      
-    $pmUid    = $pmRecord['uid'];  
-    $pmTitle  = $pmRecord['header'];  
+
+    $pmUid    = $pmRecord['uid'];
+    $pmTitle  = $pmRecord['header'];
     switch( true )
     {
       case( $this->powermailVersionInt < 1000000 ):
@@ -396,7 +365,8 @@ class tx_caddy_powermail
   *                           * int: 1006006
   *                           * str: 1.6.6
   *
-  * @return    array          $arrReturn  : version as int (integer) and str (string)
+  * @param	[type]		$$row: ...
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
   * @access private
   * @version 2.0.0
   * @since   2.0.0
