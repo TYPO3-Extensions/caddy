@@ -521,7 +521,6 @@ class tx_caddy_pi1 extends tslib_pibase
       $currRecord = $this->cObj->currentRecord;
         // cObject become current record
       $this->cObj->start( $product, $this->conf['db.']['table'] );
-var_dump( __METHOD__, __LINE__, $product, $this->cObj->data );
 
         // update settings
       $this->cartWiProductsProductSettings( $product );
@@ -530,7 +529,6 @@ var_dump( __METHOD__, __LINE__, $product, $this->cObj->data );
       $this->cartWiProductsProductErrorMsg( $product );
 
          // add inner html to variable
-var_dump( __METHOD__, __LINE__, $this->markerArray['###PRICE###'] );
       $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
                                     ( 
                                       $this->tmpl['item'], $this->markerArray 
@@ -662,6 +660,7 @@ var_dump( __METHOD__, __LINE__, $this->markerArray['###PRICE###'] );
   */
   private function cartWiProductsProductSettings( $product )
   {
+var_dump( __METHOD__, __LINE__, $this->cObj->data, array_keys( ( array ) $this->conf['settings.']['fields.'] ) );
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
@@ -689,6 +688,7 @@ var_dump( __METHOD__, __LINE__, $this->markerArray['###PRICE###'] );
       $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
     }
       // FOREACH  : settings property
+var_dump( __METHOD__, __LINE__, $this->markerArray );
   }
 
  /**
