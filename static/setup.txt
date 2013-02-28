@@ -729,11 +729,15 @@ plugin.tx_caddy_pi3 {
 
 plugin.tx_powermail_pi1 {
   dynamicTyposcript {
-    cart = USER
-    cart.userFunc = user_caddy_powermailCart->showCart
+    caddy = USER
+    caddy {
+      userFunc = user_caddy_powermailCart->showCart
+    }
 
-    clearcart = USER
-    clearcart.userFunc = user_caddy_userfuncs->user_caddy_clearCart
+    clearcaddy = USER
+    clearcaddy {
+      userFunc = user_caddy_userfuncs->user_caddy_clearCart
+    }
   }
 }
   // plugin.tx_powermail_pi1
