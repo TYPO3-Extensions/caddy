@@ -1,7 +1,10 @@
 2.0.0
   2013-02-23
-  Feature
   Features
+  * #45915: Powermail Controller
+            Effected files
+            * pi1
+              * class.tx_caddy_pi1.php
   * #45863: Icons
             Effected files
             * files/img/*                       ( new) 

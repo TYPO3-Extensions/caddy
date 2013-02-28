@@ -240,6 +240,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWiProducts( )
   {
+      // #45915, 130228
       // Set the hidden field to false of the powermail form
     $this->powermailFormShow( );
 
@@ -830,6 +831,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWoProducts( )
   {
+      // #45915, 130228
       // Set the hidden field to true of the powermail form
     $this->powermailFormHide( );
 
@@ -906,8 +908,8 @@ class tx_caddy_pi1 extends tslib_pibase
  * initAccessByIp( ): Set the global $bool_accessByIP.
  *
  * @return    void
- * @version 0.0.1
- * @since   0.0.1
+ * @version 2.0.0
+ * @since   2.0.0
  */
   private function initAccessByIp( )
   {
@@ -1003,6 +1005,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_flexform   = true;
     $this->b_drs_init       = true;
     $this->b_drs_powermail  = true;
+    $this->b_drs_sql        = true;
     $this->b_drs_todo       = true;
     $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
@@ -1051,6 +1054,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->b_drs_flexform   = true;
     $this->b_drs_init       = true;
     $this->b_drs_powermail  = true;
+    $this->b_drs_sql        = true;
     $this->b_drs_todo       = true;
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
@@ -1291,6 +1295,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
+  * @internal   #45915
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1390,11 +1395,19 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
+  * @internal #45915
   * @version    2.0.0
   * @since      2.0.0
   */
   private function powermailFormHide( )
   {
+      // Build the query
+    $query = "
+      UPDATE `tt_content` 
+      SET    `hidden` = '1'
+      WHERE  `uid` = " . $this->powermailUid ;
+
+    $this->powermailFormSql( $query );
   }
   
  /**
@@ -1402,11 +1415,97 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
+  * @internal #45915
   * @version    2.0.0
   * @since      2.0.0
   */
   private function powermailFormShow( )
   {
+      // Build the query
+    $query = "
+      UPDATE `tt_content` 
+      SET    `hidden` = '0'
+      WHERE  `uid` = " . $this->powermailUid ;
+
+    $this->powermailFormSql( $query );
+  }
+
+
+ /**
+  * powermailFormSql( )
+  *
+  * @return	void
+  * @access private
+  * @internal #45915
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function powermailFormSql( $query )
+  {
+      // DRS - Development Reporting System
+    if( $this->b_drs_sql )
+    {
+      $prompt = $query;
+      t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS - Development Reporting System
+
+      // Execute the query
+    $GLOBALS['TYPO3_DB']->sql_query( $query );
+
+      // Evaluate the query
+    $affected_rows  = $GLOBALS['TYPO3_DB']->sql_affected_rows( );
+    $error          = $GLOBALS['TYPO3_DB']->sql_error( );
+
+      // ERROR
+    if( $error )
+    {
+      $prompt = '
+        <div style="border:1em solid red;color:red;padding:1em;">
+          <h1>
+            SQL ERROR
+          </h1>
+          <p>
+            Query: ' . $query . '
+          </p>
+          <p>
+            Error: ' . $error . '
+          </p>
+          <p>
+            ' . $this->extKey . ': ' . __METHOD__ . ' (line ' . __LINE__ . ')
+          </p>
+          <p>
+            Sorry, for the trouble.
+          </p>
+        </div>
+        ';
+      die( $prompt );
+    }
+      // ERROR
+    
+    if( $affected_rows < 1 )
+    {
+      $prompt = '
+        <div style="border:1em solid orange;color:red;padding:1em;">
+          <h1>
+            SQL WARNING
+          </h1>
+          <p>
+            Query: ' . $query . '
+          </p>
+          <p>
+            Warning: any row isn\'t affected.
+          </p>
+          <p>
+            ' . $this->extKey . ': ' . __METHOD__ . ' (line ' . __LINE__ . ')
+          </p>
+          <p>
+            Sorry, for the trouble.
+          </p>
+        </div>
+        ';
+      die( $prompt );
+    }    
   }
 
  /**
@@ -1414,6 +1513,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
+  * @internal   #45915
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1470,8 +1570,9 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return    array     $arr : uid, title, ffConfirm of the powermail form
   * @access private
-  * @version 0.0.1
-  * @since 0.0.1
+  * @internal   #45915
+  * @version 2.0.0
+  * @since 2.0.0
   */
   private function powermailInitFields( )
   {
@@ -1600,8 +1701,8 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return    string        $prompt : A prompt in case of an error
   * @access private
-  * @version 0.0.1
-  * @since   0.0.1
+  * @version 2.0.0
+  * @since   2.0.0
   */
   private function powermailInitVersion( )
   {
