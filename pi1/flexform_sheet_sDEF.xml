@@ -17,6 +17,7 @@
         </TCEforms>
       </sdefReportEnable>
       <sdefReport>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReport</label>
         <TCEforms>
           <config>
             <type>user</type>
