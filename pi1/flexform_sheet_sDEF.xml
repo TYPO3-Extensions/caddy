@@ -9,6 +9,7 @@
       <sdefReportEnable>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReportEnable</label>
+          <onChange>reload</onChange>
           <config>
             <type>check</type>
             <default>0</default>
