@@ -186,6 +186,8 @@ class tx_caddy_userfunc
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
     $this->powermail->init( );
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
     $prompt = $this->checkPowermailCartMarker( $prompt );
         
