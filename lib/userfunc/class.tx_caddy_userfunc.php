@@ -185,7 +185,6 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $this->powermail->versionInt . ' :::
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' ) . '
         </div>
       </div>
@@ -197,7 +196,6 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $this->powermail->versionInt . ' :::
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' ) . '
         </div>
       </div>
@@ -209,7 +207,6 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $this->powermail->versionInt . ' :::
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' ) . '
         </div>
       </div>
@@ -221,7 +218,6 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $this->powermail->versionInt . ' :::
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
         </div>
       </div>

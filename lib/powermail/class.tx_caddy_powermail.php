@@ -403,7 +403,7 @@ class tx_caddy_powermail
   */
   private function initMarkerReceiver( )
   {
-    $this->markerReceiver = true;
+    $this->markerReceiver = false;
 
       // Current IP is an element in the list
     $pos = strpos( $this->fieldFfMailreceiver, $this->marker );
@@ -423,7 +423,7 @@ class tx_caddy_powermail
   */
   private function initMarkerReceiverWtcart( )
   {
-    $this->markerReceiverWtcart = true;
+    $this->markerReceiverWtcart = false;
 
       // Current IP is an element in the list
     $pos = strpos( $this->fieldFfMailreceiver, $this->markerWtcart );
@@ -443,7 +443,7 @@ class tx_caddy_powermail
   */
   private function initMarkerSender( )
   {
-    $this->markerSender = true;
+    $this->markerSender = false;
 
       // Current IP is an element in the list
     $pos = strpos( $this->fieldFfMailsender, $this->marker );
@@ -463,7 +463,7 @@ class tx_caddy_powermail
   */
   private function initMarkerSenderWtcart( )
   {
-    $this->markerSenderWtcart = true;
+    $this->markerSenderWtcart = false;
 
       // Current IP is an element in the list
     $pos = strpos( $this->fieldFfMailsender, $this->markerWtcart );
