@@ -6,6 +6,10 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
+      <label index="powerMailNocontent"><![CDATA[
+        There isn't any powermail form at the current page.<br />
+        Sorry, but it isn't possible, to order products without a powermail form! 
+      ]]></label>
       <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Please iclude the static template [+Flip it!: Basis for TYPO3 < 4.7 (obligate!)]]]></label>
       <label index="promptEvaluatorTYPO3version45smaller">Your are using a TYPO3 version smaller than 4.5. Flip it! isn't tested in this version. Try it!</label>
       <label index="promptEvaluatorTYPO3version46smaller">You are using TYPO3 4.5. This is perfect!</label>

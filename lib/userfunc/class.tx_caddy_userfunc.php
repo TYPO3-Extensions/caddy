@@ -91,6 +91,35 @@ class tx_caddy_userfunc
   }
   
   /**
+   * checkPowermailContent():
+   *
+   * @param   string    $prompt
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function checkPowermailContent(  )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:powerMailNocontent'). '
+        </div>
+      </div>
+      ';
+    
+    return $prompt;
+  }
+  
+  
+  /**
    * checkPowermailCartMarker():
    *
    * @param   string    $prompt
@@ -190,6 +219,12 @@ class tx_caddy_userfunc
     $this->powermail->pObj  = $this;
     $this->powermail->init( $arr_pluginConf['row'] );
 
+    $prompt = $this->checkPowermailContent( );
+    if( $prompt )
+    {
+      return $prompt;
+    }
+        
     $prompt = $this->checkPowermailCartMarker( $prompt );
         
       // OK prompt, if there isn't any other prompt

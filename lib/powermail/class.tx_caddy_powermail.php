@@ -288,8 +288,7 @@ class tx_caddy_powermail
       // Query
     $select_fields  = '*';
     $from_table     = 'tt_content';
-      // Don't respect hidden!
-    $where_clause   = "pid = " . $pid . " AND deleted = 0";
+    $where_clause   = "pid = " . $pid . " AND hidden = 0 AND deleted = 0";
     switch( true )
     {
       case( $this->powermailVersionInt < 1000000 ):
