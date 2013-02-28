@@ -323,10 +323,14 @@ class tx_caddy_userfunc
    */
   private function pi1FfSdefReportInitDrs( )
   {
-var_dump( $this->plugin['row']['pi_flexform'] );    
     $sheet = 'sDEF';
     $field = 'sdefDrs';
-    $value = $this->pObj->pi_getFFvalue( $this->plugin['row']['pi_flexform'], $field, $sheet, 'lDEF', 'vDEF' );
+    //$value = $this->pObj->pi_getFFvalue( $this->plugin['row']['pi_flexform'], $field, $sheet, 'lDEF', 'vDEF' );
+
+    $arr_xml  = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
+    $sdefDrs  = $arr_xml['data'][$sheet]['lDEF'][$field]['vDEF'];
+    
+var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
 
   }
 
