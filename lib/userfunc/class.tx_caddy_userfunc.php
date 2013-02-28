@@ -184,11 +184,12 @@ class tx_caddy_userfunc
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    $this->powermail->pObj  = $this;
-    $this->powermail->init( );
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
+    $this->powermail->pObj  = $this;
+    $this->powermail->init( );
+
     $prompt = $this->checkPowermailCartMarker( $prompt );
         
       // OK prompt, if there isn't any other prompt
