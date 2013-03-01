@@ -66,7 +66,7 @@ $TCA['tx_caddy_order'] = array (
     ),
     'tax' => array (
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy</locallang_db.xml:tx_caddy_order.tax',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.tax',
       'config' => array (
         'type' => 'input',
         'size' => '30',
