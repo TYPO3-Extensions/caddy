@@ -79,6 +79,14 @@ class tx_caddy_powermail
   public  $markerSenderWtcart   = null;
   private $markerWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
 
+    // Current GET parameter
+  private $paramGet  = null;
+    // Current POST parameter
+  private $paramPost = null;
+
+    // True, if powermail form is sent
+  public $sent  = null;
+
   public $versionInt  = null;
   public $versionStr  = null;
 
@@ -236,6 +244,11 @@ class tx_caddy_powermail
     
     $this->initMarker( );
 
+      // GET- and POST-parameters
+    $this->initGetPost( );
+    
+    $this->initSend( );
+
     return;
 
   }
@@ -383,6 +396,20 @@ class tx_caddy_powermail
   }
 
  /**
+  * initGetPost( ):
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initGetPost( )
+  {
+    $this->paramGet  = t3lib_div::_GET( 'tx_powermail_pi1' );
+    $this->paramPost = t3lib_div::_POST( 'tx_powermail_pi1' );
+  }
+
+ /**
   * initMarker( ):
   *
   * @return	array		$arrReturn  : version as int (integer) and str (string)
@@ -476,6 +503,216 @@ class tx_caddy_powermail
     {
       $this->markerSenderWtcart = true;
     }
+  }
+
+ /**
+  * initSend( ): Set the global $send, if the powermail is sent
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend( )
+  {
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: powermail4dev';
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $this->initSend1x( );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $this->initSend2x( );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: powermail4dev';
+        die( $prompt );
+        break;
+    }
+    
+    return; 
+  }
+
+ /**
+  * initSend1x( ) : Set the global $send, if the powermail is sent
+  *                 for powermail version 1.x
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend1x( )
+  {
+    $this->sent = false;
+    switch( true )
+    {
+      case( ! $this->fieldFfConfirm ):
+          // Confirmation page is disabled
+        $this->initSend1xWoConfirm( );
+        break;
+      case( $this->fieldFfConfirm ):
+      default:
+          // Confirmation page is enabled
+        $this->initSend1xWiConfirm( );
+        break;
+    }
+    
+    return;
+  }
+
+ /**
+  * initSend1xWiConfirm( )  : Set the global $send, if the powermail is sent
+  *                           * for powermail version 1.x
+  *                           * and an enabled confirmation mode
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend1xWiConfirm( )
+  {
+    $this->sent = false;
+    if( ! empty( $this->paramGet['sendNow'] ) )
+    {
+      $this->sent = true;
+        // DRS
+      if( $this->pObj->drs->drsPowermail )
+      {
+        $prompt = 'Powermail form is sent. Version 1.x with confirmation mode and with $GET[sendNow].';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      }
+        // DRS
+      return;
+    }
+
+      // DRS
+    if( $this->pObj->drs->drsPowermail )
+    {
+      $prompt = 'Powermail form isn\'t sent. Version 1.x with confirmation mode but without any $GET[sendNow].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+    
+    return;
+  }
+
+ /**
+  * initSend1xWoConfirm( )  : Set the global $send, if the powermail is sent
+  *                           * for powermail version 1.x
+  *                           * and a disabled confirmation mode
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend1xWoConfirm( )
+  {
+    $this->sent = false;
+    if( ! empty( $this->paramGet['mailID'] ) )
+    {
+      $this->sent = true;
+        // DRS
+      if( $this->pObj->drs->drsPowermail )
+      {
+        $prompt = 'Powermail form is sent. Version 1.x without confirmation mode and with $GET[mailID].';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      }
+        // DRS
+      return;
+    }
+    
+      // DRS
+    if( $this->pObj->drs->drsPowermail )
+    {
+      $prompt = 'Powermail form isn\'t sent. Version 1.x without confirmation mode and without any $GET[mailID].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+
+    return;
+  }
+
+ /**
+  * initSend2x( ) : Set the global $send, if the powermail is sent
+  *                 for powermail version 2.x
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend2x( )
+  {
+    $this->sent = false;
+    switch( true )
+    {
+      case( ! $this->fieldFfConfirm ):
+          // Confirmation page is disabled
+        $this->initSend2xWoConfirm( );
+        break;
+      case( $this->fieldFfConfirm ):
+      default:
+          // Confirmation page is enabled
+        $this->initSend2xWiConfirm( );
+        break;
+    }
+    
+    return;
+  }
+
+ /**
+  * initSend2xWiConfirm( )  : Set the global $send, if the powermail is sent
+  *                           * for powermail version 2.x
+  *                           * and an enabled confirmation mode
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend2xWiConfirm( )
+  {
+    $this->sent = false;
+    if( ! empty( $this->paramGet['sendNow'] ) )
+    {
+      $this->sent = true;
+    }
+    
+    return;
+  }
+
+ /**
+  * initSend2xWoConfirm( )  : Set the global $send, if the powermail is sent
+  *                           * for powermail version 2.x
+  *                           * and a disabled confirmation mode
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initSend2xWoConfirm( )
+  {
+    $this->sent = false;
+    if( ! empty( $this->paramGet['mailID'] ) )
+    {
+      $this->sent = true;
+    }
+    
+    return;
   }
 
  /**
