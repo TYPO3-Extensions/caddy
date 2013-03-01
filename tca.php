@@ -19,18 +19,10 @@ if (!defined ('TYPO3_MODE'))  die ('Access denied.');
 $TCA['tx_caddy_item'] = array (
   'ctrl' => $TCA['tx_caddy_item']['ctrl'],
   'interface' => array (
-    'showRecordFieldList' => 'hidden,title'
+    'showRecordFieldList' => 'title'
   ),
   'feInterface' => $TCA['tx_caddy_item']['feInterface'],
   'columns' => array (
-    'hidden' => array (    
-      'exclude' => 1,
-      'label'   => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-      'config'  => array (
-        'type'    => 'check',
-        'default' => '0'
-      )
-    ),
     'title' => array (    
       'exclude' => 0,    
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item.title',
@@ -59,8 +51,7 @@ $TCA['tx_caddy_item'] = array (
 $TCA['tx_caddy_order'] = array (
   'ctrl' => $TCA['tx_caddy_order']['ctrl'],
   'interface' => array (
-    'showRecordFieldList' =>  'net,tax,gross,quantity,item' .
-                              'hidden,'
+    'showRecordFieldList' =>  'net,tax,gross,quantity,item' ,
   ),
   'feInterface' => $TCA['tx_caddy_order']['feInterface'],
   'columns' => array (
@@ -146,15 +137,6 @@ $TCA['tx_caddy_order'] = array (
           ),
         ),
       )
-    ),
-    'hidden'    => array (
-      'exclude'   => 0,
-      'l10n_mode' => 'exclude',
-      'label'     => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-      'config'    => array (
-        'type'    => 'check',
-        'default' => '0'
-      ),
     ),
   ),
   'types' => array (
