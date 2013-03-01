@@ -331,6 +331,8 @@ class tx_caddy_pi1 extends tslib_pibase
       // BACKUP cObj->data
     $cObjData   = $this->cObj->data;
     $currRecord = $this->cObj->currentRecord;
+    global $TSFE;
+    $this->cObj = $TSFE->cObj;
     $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
 var_dump( __METHOD__, __LINE__, $this->cObj->data, $TSFE );
       // cObject becomes current record
