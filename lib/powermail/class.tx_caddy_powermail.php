@@ -118,13 +118,13 @@ class tx_caddy_powermail
     }
       // RETURN : there isn't any CSS for powermail
 
-      // DRS
-    if( $this->pObj->drs->drsPowermail )
-    {
-      $prompt = 'Caddy is empty, powermail form will hidden.';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
+//      // DRS
+//    if( $this->pObj->drs->drsPowermail )
+//    {
+//      $prompt = 'Caddy is empty, powermail form will hidden.';
+//      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+//    }
+//      // DRS
     $content = $content . $this->fieldFormCss;
     return $content;
   }
