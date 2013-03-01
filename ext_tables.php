@@ -196,15 +196,12 @@ t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/
   // Items
 $TCA['tx_caddy_item'] = array (
   'ctrl' => array (
-    'title'     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
-    'label'     => 'title',  
-    'tstamp'    => 'tstamp',
-    'crdate'    => 'crdate',
-    'cruser_id' => 'cruser_id',
-    'delete'    => 'deleted',
-    'enablecolumns' => array (
-      'disabled' => 'hidden',
-    ),
+    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
+    'label'             => 'title',  
+    'tstamp'            => 'tstamp',
+    'crdate'            => 'crdate',
+    'cruser_id'         => 'cruser_id',
+    'delete'            => 'deleted',
     'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
     'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
   ),
@@ -214,15 +211,12 @@ $TCA['tx_caddy_item'] = array (
   // Orders
 $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
-    'title'                     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
-    'label'                     => 'title',  
-    'tstamp'                    => 'tstamp',
-    'crdate'                    => 'crdate',
-    'cruser_id'                 => 'cruser_id',
-    'delete'                    => 'deleted',  
-    'enablecolumns'             => array (
-      'disabled'  => 'hidden',
-    ),
+    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
+    'label'             => 'title',  
+    'tstamp'            => 'tstamp',
+    'crdate'            => 'crdate',
+    'cruser_id'         => 'cruser_id',
+    'delete'            => 'deleted',  
     'hideAtCopy'        => true,
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
