@@ -343,11 +343,11 @@ class tx_caddy_pi1 extends tslib_pibase
                   $this->conf['settings.']['overall.'][$key],
                   $this->conf['settings.']['overall.'][$key . '.']
                 );
-      $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $marker;
+      $this->outerMarkerArray['###' . strtoupper( $key ) . '###'] = $marker;
         // DRS
       if( $this->drs->drsMarker )
       {
-        $prompt = 'Overall - ###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        $prompt = 'Overall - ###' . strtoupper( $key ) . '### : "' . $marker . '"';
         t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -674,12 +674,12 @@ class tx_caddy_pi1 extends tslib_pibase
           // nothing to do, there is no default now
       }
       $ts_rendered_value  = $this->local_cObj->cObjGetSingle( $ts_key, $ts_conf );
-      $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
+      $this->markerArray['###' . strtoupper( $key ) . '###'] = $ts_rendered_value; // write to marker
 
         // DRS
       if( $this->drs->drsMarker )
       {
-        $prompt = 'Product - ###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        $prompt = 'Product - ###' . strtoupper( $key ) . '### : "' . $ts_rendered_value . '"';
         t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
