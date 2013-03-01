@@ -335,7 +335,10 @@ class tx_caddy_pi1 extends tslib_pibase
 //    $this->cObj = $TSFE->cObj;
 //    $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
     $this->cObj->data = $currRecord;
-//var_dump( __METHOD__, __LINE__, $this->cObj->data, $TSFE->cObj->data );
+    $GLOBALS['TSFE']->cObj->data = $this->cObj->data;
+    //$GLOBALS['TSFE']->currentRecord;
+
+var_dump( __METHOD__, __LINE__, $this->cObj->data );
       // cObject becomes current record
 
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
