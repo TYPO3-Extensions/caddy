@@ -160,9 +160,10 @@ class tx_caddy_pi1_flexform
  */
   public function zzFfValue( $sheet, $field, $drs=true )
   {
-    $arr_piFlexform = $this->pObj->cObj->data['pi_flexform'];
+    $plugin = $this->pObj->cObj->data['pi_flexform'];
+var_dump( __METHOD__, __LINE__, $plugin );      
 
-    $value = $this->pObj->pi_getFFvalue( $arr_piFlexform, $field, $sheet, 'lDEF', 'vDEF' );
+    $value = $this->pObj->pi_getFFvalue( $plugin, $field, $sheet, 'lDEF', 'vDEF' );
 
       // RETURN : Don't prompt to DRS
     if( ! $drs )
