@@ -921,13 +921,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cleanNumbers( )
   {
-      // DRS
-    if( $this->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, please clean up the caddy session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
+    $this->cleanNumbersInvoice( );
+    $this->cleanNumbersShippingticket( );
   }
 
  /**
