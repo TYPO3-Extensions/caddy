@@ -145,7 +145,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
 
     global $TSFE;
-    $this->cObj = $TSFE->cObj; // cObject
+    $this->cObj = $TSFE->cObj;
     
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
@@ -238,6 +238,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cartWiProducts( )
   {
+    global $TSFE;
+    $this->cObj = $TSFE->cObj;
+
       // #45915, 130228
       // Set the hidden field to false of the powermail form
     $this->powermail->formShow( );
@@ -491,6 +494,9 @@ var_dump( __METHOD__, __LINE__, '###' . strtoupper($key) . '###', $marker );
   */
   private function cartWiProductsProduct( )
   {
+    global $TSFE;
+    $this->cObj = $TSFE->cObj;
+
     $arrReturn      = null;
     $contentItem    = '';
     $cartNet        = 0;
