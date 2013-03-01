@@ -146,10 +146,10 @@ class tx_caddy_pi1 extends tslib_pibase
 
       // 130227, dwildt, 2-
 //    // config
-//    global $TSFE;
+    global $TSFE;
 
       // 130227, dwildt, 1-
-    //$this->cObj = $TSFE->cObj; // cObject
+    $this->cObj = $TSFE->cObj; // cObject
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
