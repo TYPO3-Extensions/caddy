@@ -906,8 +906,8 @@ class tx_caddy_pi1 extends tslib_pibase
   private function init( )
   {
     $this->initInstances( );
-    $this->drs->init( );
     $this->initFlexform( );
+    $this->drs->init( );
     $this->initAccessByIp( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
