@@ -79,6 +79,8 @@ class tx_caddy_pi1_flexform
 
     // Parent object
   public $pObj = null;
+    // Current row
+  public $row = null;
 
 
 
@@ -160,7 +162,7 @@ class tx_caddy_pi1_flexform
  */
   public function zzFfValue( $sheet, $field, $drs=true )
   {
-    $plugin = $this->pObj->cObj->data['pi_flexform'];
+    $plugin = $row['pi_flexform'];
 var_dump( __METHOD__, __LINE__, $plugin );      
 
     $value = $this->pObj->pi_getFFvalue( $plugin, $field, $sheet, 'lDEF', 'vDEF' );

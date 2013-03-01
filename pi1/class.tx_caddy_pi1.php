@@ -906,8 +906,8 @@ class tx_caddy_pi1 extends tslib_pibase
   private function init( )
   {
     $this->initInstances( );
-    $this->initFlexform( );
     $this->drs->init( );
+    $this->initFlexform( );
     $this->initAccessByIp( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
@@ -1308,6 +1308,8 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
     $this->flexform->pObj   = $this;
+    $this->flexform->row    = $this->cObj->data;
+var_dump( __METHOD__, __LINE__, $this->cObj );      
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
