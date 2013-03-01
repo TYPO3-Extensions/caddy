@@ -170,7 +170,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $this->powermail->formCss( $content );
     
-    $this->clean( );
+//    $this->clean( );
 
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
                     (
