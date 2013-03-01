@@ -1297,7 +1297,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
-var_dump( __METHOD__, __LINE__, $this->cObj->data );      
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
