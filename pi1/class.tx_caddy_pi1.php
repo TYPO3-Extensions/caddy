@@ -144,12 +144,9 @@ class tx_caddy_pi1 extends tslib_pibase
   public function main( $content, $conf )
   {
 
-      // 130227, dwildt, 2-
-//    // config
     global $TSFE;
-
-      // 130227, dwildt, 1-
     $this->cObj = $TSFE->cObj; // cObject
+    
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -350,6 +347,7 @@ class tx_caddy_pi1 extends tslib_pibase
                   $this->conf['settings.']['overall.'][$key],
                   $this->conf['settings.']['overall.'][$key . '.']
                 );
+var_dump( __METHOD__, __LINE__, '###' . strtoupper($key) . '###', $marker );
       $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $marker;
     }
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)

@@ -59,17 +59,13 @@ class user_caddy_userfuncs extends tslib_pibase
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
 
-var_dump( __METHOD__, __LINE__, $content, $conf, $local_cObj );    
-
     if( ! $content )
     {
       $conf     = $conf['userFunc.']; // TS configuration
       $content  = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
-var_dump( __METHOD__, __LINE__, $conf, $content );    
     }
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
-var_dump( __METHOD__, __LINE__, $numberFormat );    
     return $numberFormat;
   }
 
