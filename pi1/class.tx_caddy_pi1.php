@@ -347,7 +347,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
       if( $this->drs->drsMarker )
       {
-        $prompt = '###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        $prompt = 'Overall - ###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
         t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -679,7 +679,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
       if( $this->drs->drsMarker )
       {
-        $prompt = '###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        $prompt = 'Product - ###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
         t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
