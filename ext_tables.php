@@ -193,7 +193,7 @@ t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/
   //
   // TCA for tables
 
-  // Categories
+  // Items
 $TCA['tx_caddy_item'] = array (
   'ctrl' => array (
     'title'     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
@@ -209,9 +209,9 @@ $TCA['tx_caddy_item'] = array (
     'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
   ),
 );
-  // Categories
+  // Items
 
-  // Products
+  // Orders
 $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
     'title'                     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
@@ -229,6 +229,6 @@ $TCA['tx_caddy_order'] = array (
     'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
   ),
 );
-  // Products
+  // Orders
   // TCA for tables
 ?>
