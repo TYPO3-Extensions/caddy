@@ -329,7 +329,7 @@ class tx_caddy_pi1 extends tslib_pibase
     );
 
       // BACKUP cObj->data
-    $cObjData   = $this->cObj->data;
+    $cObjData       = $this->cObj->data;
     $cObjCurrRecord = $this->cObj->currentRecord;
     $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record

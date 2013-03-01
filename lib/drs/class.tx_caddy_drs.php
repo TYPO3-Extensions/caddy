@@ -163,6 +163,7 @@ class tx_caddy_drs
       // Enable the DRS by TypoScript
     if( empty( $this->pObj->flexform->sdefDrs ) )
     {
+var_dump( __METHOD__, __LINE__, $this->pObj->flexform->sdefDrs );      
       return;
     }
 
