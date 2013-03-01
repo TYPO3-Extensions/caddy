@@ -110,7 +110,7 @@ class tx_caddy_powermail
         // DRS
       if( $this->pObj->drs->drsPowermail )
       {
-        $prompt = 'Any CSS for powermail. The powermail form (uid ' . $this->fieldUid . ') is visible.';
+        $prompt = 'Caddy contains a product, powermail form will dislayed.';
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS
@@ -121,8 +121,7 @@ class tx_caddy_powermail
       // DRS
     if( $this->pObj->drs->drsPowermail )
     {
-      $prompt = 'CSS for powermail. The display property of the powermail form ' .
-                '(uid ' . $this->fieldUid . ') is set to none.';
+      $prompt = 'Caddy is empty, powermail form will hidden.';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
@@ -144,7 +143,7 @@ class tx_caddy_powermail
   {
     if( $this->pObj->drs->drsPowermail )
     {
-      $prompt = 'Caddy is empty, CSS is included: #c' . $this->fieldUid . ' {display: none;}';
+      $prompt = 'Caddy is empty, powermail form will hidden by CSS: #c' . $this->fieldUid . ' {display: none;}';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
 
