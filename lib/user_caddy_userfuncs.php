@@ -56,9 +56,10 @@ class user_caddy_userfuncs extends tslib_pibase
     */
   public function user_caddy_numberFormat( $content = '', $conf = array( ) )
   {
-var_dump( __METHOD__, __LINE__, $content, $conf );    
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
+
+var_dump( __METHOD__, __LINE__, $content, $conf, $local_cObj );    
 
     if( ! $content )
     {
