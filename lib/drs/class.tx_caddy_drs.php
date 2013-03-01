@@ -160,10 +160,10 @@ class tx_caddy_drs
     $this->pObj->flexform->sdefDrs = $this->pObj->flexform->zzFfValue( $sheet, $field, false );
       // sdefDrs
 
+var_dump( __METHOD__, __LINE__, $this->pObj->flexform->sdefDrs );      
       // Enable the DRS by TypoScript
     if( empty( $this->pObj->flexform->sdefDrs ) )
     {
-var_dump( __METHOD__, __LINE__, $this->pObj->flexform->sdefDrs );      
       return;
     }
 

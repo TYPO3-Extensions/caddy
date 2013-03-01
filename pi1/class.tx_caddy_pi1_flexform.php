@@ -163,7 +163,6 @@ class tx_caddy_pi1_flexform
   public function zzFfValue( $sheet, $field, $drs=true )
   {
     $pi_flexform = $this->row['pi_flexform'];
-var_dump( __METHOD__, __LINE__, $pi_flexform );      
 
     $value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
 
