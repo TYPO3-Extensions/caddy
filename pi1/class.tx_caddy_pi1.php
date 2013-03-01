@@ -344,6 +344,13 @@ class tx_caddy_pi1 extends tslib_pibase
                   $this->conf['settings.']['overall.'][$key . '.']
                 );
       $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $marker;
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        $prompt = '###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
     }
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
 
@@ -672,16 +679,8 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
       if( $this->drs->drsMarker )
       {
-        if( empty( $ts_rendered_value ) )
-        {
-          $prompt = '###' . strtoupper($key) . '### is empty. Maybe this is an unproper result.';
-          t3lib_div::devlog( '[WARN/MARKER] ' . $prompt, $this->extKey, 2 );
-        }
-        if( ! empty( $ts_rendered_value ) )
-        {
-          $prompt = '###' . strtoupper($key) . '### is "' . $ts_rendered_value . '"';
-          t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
-        }
+        $prompt = '###' . strtoupper($key) . '### : "' . $ts_rendered_value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
 
