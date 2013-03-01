@@ -170,7 +170,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $this->powermail->formCss( $content );
     
-//    $this->clean( );
+    $this->clean( );
 
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
                     (
@@ -859,6 +859,47 @@ class tx_caddy_pi1 extends tslib_pibase
 
   /***********************************************
   *
+  * Clean
+  *
+  **********************************************/
+
+ /**
+  * clean( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function clean( )
+  {
+      // RETURN : powermail form isn't sent. Nothing to clean
+    if( empty( $this->powermail->sent ) )
+    {
+        // DRS
+      if( $this->drs->drsClean )
+      {
+        $prompt = 'The powermail form isn\'t sent, nothing to clean up.';
+        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return;
+    }
+      // RETURN : powermail form isn't sent. Nothing to clean
+        
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up ...';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
+
+
+
+  /***********************************************
+  *
   * Debug
   *
   **********************************************/
@@ -964,122 +1005,6 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // DRS
   }
-//
-// /**
-//  * init( ): Init the DRS - Development Reportinmg System
-//  *
-//  * @return	void
-//  * @access private
-//  * @version    2.0.0
-//  * @since      2.0.0
-//  */
-//  private function init( )
-//  {
-//    $this->initByExtmngr( );
-//
-//      // RETURN : DRS is enabled by the extension manager
-//    if( $this->drs->drsOk )
-//    {
-//      return;
-//    }
-//      // RETURN : DRS is enabled by the extension manager
-//
-//    $this->initByFlexform( );
-//  }
-//
-// /**
-//  * initByExtmngr( ): Init the DRS - Development Reportinmg System
-//  *
-//  * @return	void
-//  * @access private
-//  * @version    2.0.0
-//  * @since      2.0.0
-//  */
-//  private function initByExtmngr( )
-//  {
-//    switch( $this->arr_extConf['debuggingDrs'] )
-//    {
-//      case( 'Disabled' ):
-//      case( null ):
-//        return;
-//        break;
-//      case( 'Enabled (for debugging only!)' ):
-//          // Follow the workflow
-//        break;
-//      default:
-//        $prompt = 'Error: debuggingDrs is undefined.<br />
-//          value is ' . $this->arr_extConf['debuggingDrs'] . '<br />
-//          <br />
-//          ' . __METHOD__ . ' line(' . __LINE__. ')';
-//        die( $prompt );
-//    }
-//
-//    $this->drs->drsError      = true;
-//    $this->drs->drsWarn       = true;
-//    $this->drs->drsInfo       = true;
-//    $this->drs->drsOk         = true;
-//    $this->drs->drsFlexform   = true;
-//    $this->drs->drsInit       = true;
-//    $this->drs->drsPowermail  = true;
-//    $this->drs->drsSql        = true;
-//    $this->drs->drsTodo       = true;
-//    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
-//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-//    $prompt = 'The DRS is enabled by the extension manager.';
-//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-//    $str_header = $this->cObj->data['header'];
-//    $int_uid    = $this->cObj->data['uid'];
-//    $int_pid    = $this->cObj->data['pid'];
-//    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-//    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
-//  }
-//
-// /**
-//  * initByFlexform( ): Init the DRS - Development Reportinmg System
-//  *
-//  * @return	void
-//  * @access private
-//  * @version    2.0.0
-//  * @since      2.0.0
-//  */
-//  private function initByFlexform( )
-//  {
-//
-//      // sdefDrs
-//    $sheet                      = 'sDEF';
-//    $field                      = 'sdefDrs';
-//    $this->flexform->sdefDrs = $this->flexform->zzFfValue( $sheet, $field, false );
-//      // sdefDrs
-//
-//      // Enable the DRS by TypoScript
-//    switch( $this->flexform->sdefDrs )
-//    {
-//      case( false ):
-//      case( null ):
-//        return;
-//        break;
-//      case( true ):
-//      default:
-//        break;
-//    }
-//
-//    $this->drs->drsError      = true;
-//    $this->drs->drsWarn       = true;
-//    $this->drs->drsInfo       = true;
-//    $this->drs->drsOk         = true;
-//    $this->drs->drsFlexform   = true;
-//    $this->drs->drsInit       = true;
-//    $this->drs->drsPowermail  = true;
-//    $this->drs->drsSql        = true;
-//    $this->drs->drsTodo       = true;
-//    $prompt = 'The DRS - Development Reporting System is enabled by the flexform.';
-//    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-//    $str_header = $this->cObj->data['header'];
-//    $int_uid    = $this->cObj->data['uid'];
-//    $int_pid    = $this->cObj->data['pid'];
-//    $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-//    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
-//  }
 
  /**
   * initFlexform( )

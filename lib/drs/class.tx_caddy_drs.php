@@ -68,6 +68,7 @@ class tx_caddy_drs
   public $drsWarn       = false;
   public $drsInfo       = false;
   public $drsOk         = false;
+  public $drsClean      = false;
   public $drsFlexform   = false;
   public $drsFormula    = false;
   public $drsInit       = false;
@@ -188,17 +189,18 @@ class tx_caddy_drs
   */
   public function zzDrsPromptsTrue( )
   {
-    $this->drsError      = true;
-    $this->drsWarn       = true;
-    $this->drsInfo       = true;
-    $this->drsOk         = true;
-    $this->drsFlexform   = true;
-    $this->drsFormula    = true;
-    $this->drsInit       = true;
-    $this->drsMarker     = true;
-    $this->drsPowermail  = true;
-    $this->drsSql        = true;
-    $this->drsTodo       = true;
+    $this->drsError     = true;
+    $this->drsWarn      = true;
+    $this->drsInfo      = true;
+    $this->drsOk        = true;
+    $this->drsClean     = true;
+    $this->drsFlexform  = true;
+    $this->drsFormula   = true;
+    $this->drsInit      = true;
+    $this->drsMarker    = true;
+    $this->drsPowermail = true;
+    $this->drsSql       = true;
+    $this->drsTodo      = true;
   }
   
 }
