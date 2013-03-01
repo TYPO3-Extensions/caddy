@@ -119,7 +119,7 @@ class tx_caddy_powermail
       // RETURN : there isn't any CSS for powermail
 
       // DRS
-    if( $this->drs->drsPowermail )
+    if( $this->pObj->drs->drsPowermail )
     {
       $prompt = 'CSS for powermail. The display property of the powermail form ' .
                 '(uid ' . $this->fieldUid . ') is set to none.';
@@ -142,6 +142,12 @@ class tx_caddy_powermail
   */
   public function formHide( )
   {
+    if( $this->pObj->drs->drsPowermail )
+    {
+      $prompt = 'Caddy is empty, CSS is included: #c' . $this->fieldUid . ' {display: none;}';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+
     $this->fieldFormCss = '
       <style type="text/css">
         #c' . $this->fieldUid . ' {
