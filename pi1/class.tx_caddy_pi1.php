@@ -669,6 +669,22 @@ class tx_caddy_pi1 extends tslib_pibase
       $ts_rendered_value  = $this->local_cObj->cObjGetSingle( $ts_key, $ts_conf );
       $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
 
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        if( empty( $ts_rendered_value ) )
+        {
+          $prompt = '###' . strtoupper($key) . '### is empty. Maybe this is an unproper result.';
+          t3lib_div::devlog( '[WARN/MARKER] ' . $prompt, $this->extKey, 2 );
+        }
+        if( ! empty( $ts_rendered_value ) )
+        {
+          $prompt = '###' . strtoupper($key) . '### is "' . $ts_rendered_value . '"';
+          t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+        }
+      }
+        // DRS
+
       // adds the ###QTY_NAME### marker in case of variants
       $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
     }

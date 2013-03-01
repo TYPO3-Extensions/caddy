@@ -71,6 +71,7 @@ class tx_caddy_drs
   public $drsFlexform   = false;
   public $drsFormula    = false;
   public $drsInit       = false;
+  public $drsMarker     = false;
   public $drsPowermail  = false;
   public $drsSql        = false;
   public $drsTodo       = false;
@@ -160,7 +161,6 @@ class tx_caddy_drs
     $this->pObj->flexform->sdefDrs = $this->pObj->flexform->zzFfValue( $sheet, $field, false );
       // sdefDrs
 
-var_dump( __METHOD__, __LINE__, $this->pObj->flexform->sdefDrs );      
       // Enable the DRS by TypoScript
     if( empty( $this->pObj->flexform->sdefDrs ) )
     {
@@ -195,6 +195,7 @@ var_dump( __METHOD__, __LINE__, $this->pObj->flexform->sdefDrs );
     $this->drsFlexform   = true;
     $this->drsFormula    = true;
     $this->drsInit       = true;
+    $this->drsMarker     = true;
     $this->drsPowermail  = true;
     $this->drsSql        = true;
     $this->drsTodo       = true;
