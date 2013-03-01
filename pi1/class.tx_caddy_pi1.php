@@ -305,7 +305,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // service
 
       // session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     $sesArray['service_cost_net']       = $serviceNet;
     $sesArray['service_cost_gross']     = $serviceGross;
     $sesArray['cart_gross']             = $caddyGross;
@@ -314,7 +314,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $sesArray['cart_net_no_service']    = $caddyNetNoService;
     $sesArray['cart_tax_reduced']       = $caddyTaxReduced;
     $sesArray['cart_tax_normal']        = $caddyTaxNormal;
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_cart_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
       // cObject becomes current record
