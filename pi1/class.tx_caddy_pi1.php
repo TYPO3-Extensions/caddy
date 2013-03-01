@@ -887,10 +887,101 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // RETURN : powermail form isn't sent. Nothing to clean
         
+    $this->cleanDatabase( );
+    $this->cleanSession( );
+    $this->cleanNumbers( );
+  }
+
+ /**
+  * cleanDatabase( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanDatabase( )
+  {
       // DRS
     if( $this->drs->drsClean )
     {
-      $prompt = 'The powermail form is sent, please clean up ...';
+      $prompt = 'The powermail form is sent, please clean up the caddy database.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
+
+ /**
+  * cleanNumbers( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanNumbers( )
+  {
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up the caddy session.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
+
+ /**
+  * cleanNumbersInvoice( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanNumbersInvoice( )
+  {
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up the invoice number.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
+  
+ /**
+  * cleanNumbersShippingticket( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanNumbersShippingticket( )
+  {
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up the shipping-ticket-number.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
+
+ /**
+  * cleanSession( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanSession( )
+  {
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up the caddy session.';
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
