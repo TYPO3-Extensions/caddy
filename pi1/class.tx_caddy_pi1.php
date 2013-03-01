@@ -330,13 +330,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
       // BACKUP cObj->data
     $cObjData   = $this->cObj->data;
-    $currRecord = $this->cObj->currentRecord;
-//    global $TSFE;
-//    $this->cObj = $TSFE->cObj;
-//    $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
-    $this->cObj->data = $currRecord;
-    $GLOBALS['TSFE']->cObj->data = $this->cObj->data;
-    //$GLOBALS['TSFE']->currentRecord;
+    $cObjCurrRecord = $this->cObj->currentRecord;
+    $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
 
 var_dump( __METHOD__, __LINE__, $this->cObj->data );
       // cObject becomes current record
@@ -408,7 +403,7 @@ var_dump( __METHOD__, __LINE__, '###CART_NET###', $this->outerMarkerArray['###CA
 
       // RESET cObj->data
     $this->cObj->data = $cObjData;
-    $this->cObj->currentRecord  = $currRecord;
+    $this->cObj->currentRecord  = $cObjCurrRecord;
     return $subpartArray;
   }
 
@@ -523,7 +518,7 @@ var_dump( __METHOD__, __LINE__, '###CART_NET###', $this->outerMarkerArray['###CA
         
         // BACKUP cObj->data
       $cObjData   = $this->cObj->data;
-      $currRecord = $this->cObj->currentRecord;
+      $cObjCurrRecord = $this->cObj->currentRecord;
         // cObject become current record
       $this->cObj->start( $product, $this->conf['db.']['table'] );
 
@@ -555,7 +550,7 @@ var_dump( __METHOD__, __LINE__, '###CART_NET###', $this->outerMarkerArray['###CA
 
         // RESET cObj->data
       $this->cObj->data           = $cObjData;
-      $this->cObj->currentRecord  = $currRecord;
+      $this->cObj->currentRecord  = $cObjCurrRecord;
     }
       // FOREACH  : product
 
