@@ -332,8 +332,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $cObjData   = $this->cObj->data;
     $cObjCurrRecord = $this->cObj->currentRecord;
     $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
-
-var_dump( __METHOD__, __LINE__, $this->cObj->data );
       // cObject becomes current record
 
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
@@ -351,7 +349,6 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
                 );
       $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $marker;
     }
-var_dump( __METHOD__, __LINE__, '###CART_NET###', $this->outerMarkerArray['###CART_NET###'] );
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
 
       // Set min price error
