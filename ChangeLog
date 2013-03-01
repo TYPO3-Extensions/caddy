@@ -1,6 +1,13 @@
 2.0.0
   2013-02-23
   Features
+  * #45954: Database
+            Effected files
+            * pi1
+              * class.tx_caddy_pi1.php
+            * ext_tables.php
+            * ext_tables.sql                    ( new )
+            * tca.php                           ( new )
   * #45915: Powermail Controller
             Effected files
             * lib/powermail

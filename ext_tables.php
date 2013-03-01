@@ -17,6 +17,7 @@ if( ! defined( 'TYPO3_MODE' ) )
   // Add pagetree icons
   // Methods for backend workflows
   // Plugin Configuration
+  // TCA for tables
 
 
 
@@ -186,4 +187,48 @@ t3lib_extMgm::addPlugin(array(
 t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/pi3/flexform.xml' );
   // Plugin Configuration
 
+
+
+  ////////////////////////////////////
+  //
+  // TCA for tables
+
+  // Categories
+$TCA['tx_caddy_item'] = array (
+  'ctrl' => array (
+    'title'     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
+    'label'     => 'title',  
+    'tstamp'    => 'tstamp',
+    'crdate'    => 'crdate',
+    'cruser_id' => 'cruser_id',
+    'delete'    => 'deleted',
+    'enablecolumns' => array (
+      'disabled' => 'hidden',
+    ),
+    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
+  ),
+);
+  // Categories
+
+  // Products
+$TCA['tx_caddy_order'] = array (
+  'ctrl' => array (
+    'title'                     => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
+    'label'                     => 'title',  
+    'tstamp'                    => 'tstamp',
+    'crdate'                    => 'crdate',
+    'cruser_id'                 => 'cruser_id',
+    'delete'                    => 'deleted',  
+    'enablecolumns'             => array (
+      'disabled'  => 'hidden',
+    ),
+    'hideAtCopy'        => true,
+    'dividers2tabs'     => true,
+    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
+  ),
+);
+  // Products
+  // TCA for tables
 ?>
