@@ -1,9 +1,28 @@
 #
 # INDEX
 #
+# tx_caddy_item
 # tx_caddy_order
 # tx_caddy_order_mm_tx_caddy_item
-# tx_caddy_item
+
+
+
+#
+# Table structure for table 'tx_caddy_item'
+#
+CREATE TABLE tx_caddy_item (
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) DEFAULT '0' NOT NULL,
+  tstamp int(11) DEFAULT '0' NOT NULL,
+  crdate int(11) DEFAULT '0' NOT NULL,
+  cruser_id int(11) DEFAULT '0' NOT NULL,
+  deleted tinyint(4) DEFAULT '0' NOT NULL,
+  title tinytext,
+  
+  PRIMARY KEY (uid),
+  KEY parent (pid)
+);
+
 
 
 #
@@ -40,22 +59,4 @@ CREATE TABLE tx_caddy_order_mm_tx_caddy_item (
   sorting int(11) DEFAULT '0' NOT NULL,
   KEY uid_local (uid_local),
   KEY uid_foreign (uid_foreign)
-);
-
-
-
-#
-# Table structure for table 'tx_caddy_item'
-#
-CREATE TABLE tx_caddy_item (
-  uid int(11) NOT NULL auto_increment,
-  pid int(11) DEFAULT '0' NOT NULL,
-  tstamp int(11) DEFAULT '0' NOT NULL,
-  crdate int(11) DEFAULT '0' NOT NULL,
-  cruser_id int(11) DEFAULT '0' NOT NULL,
-  deleted tinyint(4) DEFAULT '0' NOT NULL,
-  title tinytext,
-  
-  PRIMARY KEY (uid),
-  KEY parent (pid)
 );

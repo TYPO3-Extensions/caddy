@@ -896,8 +896,8 @@ class tx_caddy_pi1 extends tslib_pibase
       // DRS
 
     $this->cleanDatabase( );
-    $this->cleanSession( );
     $this->cleanNumbers( );
+    $this->cleanSession( );
   }
 
  /**
@@ -917,6 +917,15 @@ class tx_caddy_pi1 extends tslib_pibase
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+
+    $insertFields = array( 
+      'pid'       => '10',
+      'net'       => '100.00',
+      'tax'       => '19.00',
+      'gross'     => '119.00',
+      'quantity'  => '7',
+    );
+    $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
   }
 
  /**
