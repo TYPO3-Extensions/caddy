@@ -249,8 +249,8 @@ class tx_caddy_div extends tslib_pibase
     */
     public function removeAllProductsFromSession()
     {
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array()); // Generate new session with empty array
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
+//        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array()); // Generate new session with empty array
+//        $GLOBALS['TSFE']->storeSessionData(); // Save session
     }
 
     /**

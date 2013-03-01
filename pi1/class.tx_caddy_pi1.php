@@ -887,6 +887,14 @@ class tx_caddy_pi1 extends tslib_pibase
     }
       // RETURN : powermail form isn't sent. Nothing to clean
         
+      // DRS
+    if( $this->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent. Database, numbers and session will cleaned up.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
     $this->cleanDatabase( );
     $this->cleanSession( );
     $this->cleanNumbers( );
@@ -973,13 +981,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function cleanSession( )
   {
-      // DRS
-    if( $this->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, please clean up the caddy session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
+    $this->sessionDelete( );
   }
 
 
@@ -1457,6 +1459,35 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $this->div->removeProductFromSession( $this );
     }
+  }
+
+  /***********************************************
+  *
+  * Session
+  *
+  **********************************************/
+
+ /**
+  * sessionDelete( )
+  *
+  * @param	string		$content  : current content
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sessionDelete( )
+  {
+      // DRS
+    if( $this->drs->drsSession )
+    {
+      $prompt = 'Session is cleared.';
+      t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
 

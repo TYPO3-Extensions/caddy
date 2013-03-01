@@ -74,6 +74,7 @@ class tx_caddy_drs
   public $drsInit       = false;
   public $drsMarker     = false;
   public $drsPowermail  = false;
+  public $drsSession    = false;
   public $drsSql        = false;
   public $drsTodo       = false;
 
@@ -199,6 +200,7 @@ class tx_caddy_drs
     $this->drsInit      = true;
     $this->drsMarker    = true;
     $this->drsPowermail = true;
+    $this->drsSession   = true;
     $this->drsSql       = true;
     $this->drsTodo      = true;
   }
