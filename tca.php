@@ -70,7 +70,7 @@ $TCA['tx_caddy_order'] = array (
       'config' => array (
         'type' => 'input',
         'size' => '30',
-        'eval' => 'trim,required',
+        'eval' => 'trim',
       )
     ),
     'gross' => array (
