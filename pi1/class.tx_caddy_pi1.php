@@ -143,12 +143,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   public function main( $content, $conf )
   {
-var_dump( __METHOD__, __LINE__, $this->cObj->data );      
-
-    $this->cObj = $GLOBALS['TSFE']->cObj;
+      // page object
+    $this->local_cObj = $GLOBALS['TSFE']->cObj;
     
-var_dump( __METHOD__, __LINE__, $this->cObj->data );      
-
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -330,10 +327,7 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
       'cart_tax_normal'       => $cartTaxNormal
     );
 
-      // BACKUP cObj->data
-    $cObjData       = $this->cObj->data;
-    $cObjCurrRecord = $this->cObj->currentRecord;
-    $this->cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
+    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record
 
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
@@ -344,7 +338,7 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
         continue;
       }
 
-      $marker = $this->cObj->cObjGetSingle
+      $marker = $this->local_cObj->cObjGetSingle
                 (
                   $this->conf['settings.']['overall.'][$key],
                   $this->conf['settings.']['overall.'][$key . '.']
@@ -401,8 +395,6 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
     }
 
       // RESET cObj->data
-    $this->cObj->data = $cObjData;
-    $this->cObj->currentRecord  = $cObjCurrRecord;
     return $subpartArray;
   }
 
@@ -515,9 +507,6 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
       }
         // DRS
         
-        // BACKUP cObj->data
-      $cObjData   = $this->cObj->data;
-      $cObjCurrRecord = $this->cObj->currentRecord;
         // cObject become current record
       $this->cObj->start( $product, $this->conf['db.']['table'] );
 
@@ -547,9 +536,6 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
       $cartTaxReduced = $cartTaxReduced + $arrResult['cartTaxReduced'];
       $cartTaxNormal  = $cartTaxNormal  + $arrResult['cartTaxNormal'];
 
-        // RESET cObj->data
-      $this->cObj->data           = $cObjData;
-      $this->cObj->currentRecord  = $cObjCurrRecord;
     }
       // FOREACH  : product
 
@@ -680,7 +666,7 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
         default:
           // nothing to do, there is no default now
       }
-      $ts_rendered_value  = $this->cObj->cObjGetSingle( $ts_key, $ts_conf );
+      $ts_rendered_value  = $this->local_cObj->cObjGetSingle( $ts_key, $ts_conf );
       $this->markerArray['###' . strtoupper($key) . '###'] = $ts_rendered_value; // write to marker
 
       // adds the ###QTY_NAME### marker in case of variants
@@ -715,7 +701,7 @@ var_dump( __METHOD__, __LINE__, $this->cObj->data );
       // Handle HTML snippet
 
       // tax within price grosso
-    $currTax = $this->cObj->cObjGetSingle
+    $currTax = $this->local_cObj->cObjGetSingle
            (
               $this->conf['settings.']['fields.']['tax'],
               $this->conf['settings.']['fields.']['tax.']
