@@ -508,7 +508,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
         
         // cObject become current record
-      $this->cObj->start( $product, $this->conf['db.']['table'] );
+      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 
         // update settings
       $this->cartWiProductsProductSettings( $product );
