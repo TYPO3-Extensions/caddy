@@ -207,8 +207,6 @@ plugin.tx_caddy_pi1 {
 
       price = COA
       price {
-        //wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -228,8 +226,6 @@ plugin.tx_caddy_pi1 {
 
       price_total = COA
       price_total {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -299,8 +295,6 @@ plugin.tx_caddy_pi1 {
     overall {
       cart_net = COA
       cart_net {
-        //wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -320,8 +314,6 @@ plugin.tx_caddy_pi1 {
 
       cart_net_no_service = COA
       cart_net_no_service {
-        //wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -341,8 +333,6 @@ plugin.tx_caddy_pi1 {
 
       cart_gross = COA
       cart_gross {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -362,8 +352,6 @@ plugin.tx_caddy_pi1 {
 
       cart_gross_no_service = COA
       cart_gross_no_service {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -383,8 +371,6 @@ plugin.tx_caddy_pi1 {
 
       price_total_overall_without_service = COA
       price_total_overall_without_service {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -404,8 +390,6 @@ plugin.tx_caddy_pi1 {
 
       service_cost_net = COA
       service_cost_net {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -425,8 +409,6 @@ plugin.tx_caddy_pi1 {
 
       service_cost_gross = COA
       service_cost_gross {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -487,8 +469,6 @@ plugin.tx_caddy_pi1 {
       cart_tax_reduced = COA
       cart_tax_reduced {
         if.isTrue.field = cart_tax_reduced
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -509,8 +489,6 @@ plugin.tx_caddy_pi1 {
       cart_tax_normal = COA
       cart_tax_normal {
         if.isTrue.field = cart_tax_normal
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
@@ -758,8 +736,6 @@ plugin.tx_caddy_pi3 {
 
       minicart_gross = COA
       minicart_gross {
-//        wrap = |&nbsp;{$plugin.caddy.main.currencySymbol}
-
         10 = USER
         10.userFunc = user_caddy_userfuncs->user_caddy_numberFormat
         10.userFunc {
