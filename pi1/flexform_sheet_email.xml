@@ -49,15 +49,15 @@
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.disabled</numIndex>
                 <numIndex index="1">disabled</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="1" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.customer</numIndex>
                 <numIndex index="1">customer</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="2" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.vendor</numIndex>
                 <numIndex index="1">vendor</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="3" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.all</numIndex>
                 <numIndex index="1">all</numIndex>
               </numIndex>
@@ -90,15 +90,15 @@
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.disabled</numIndex>
                 <numIndex index="1">disabled</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="1" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.customer</numIndex>
                 <numIndex index="1">customer</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="2" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.vendor</numIndex>
                 <numIndex index="1">vendor</numIndex>
               </numIndex>
-              <numIndex index="0" type="array">
+              <numIndex index="3" type="array">
                 <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.all</numIndex>
                 <numIndex index="1">all</numIndex>
               </numIndex>
