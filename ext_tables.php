@@ -236,7 +236,7 @@ $TCA['tx_caddy_item'] = array (
 
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_item ');
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_order ');
-t3lib_extMgm::allowToInsertRecord( 'tx_caddy_item ');
-t3lib_extMgm::allowToInsertRecord( 'tx_caddy_order ');
+t3lib_extMgm::addToInsertRecord( 'tx_caddy_item ');
+t3lib_extMgm::addToInsertRecord( 'tx_caddy_order ');
   // Allow tables on pages
 ?>
