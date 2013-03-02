@@ -204,8 +204,8 @@ $TCA['tx_caddy_order'] = array (
     'delete'            => 'deleted',  
     'hideAtCopy'        => true,
     'dividers2tabs'     => true,
-    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
+    'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
+    'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
   ),
 );
   // Orders
@@ -219,8 +219,8 @@ $TCA['tx_caddy_item'] = array (
     'crdate'            => 'crdate',
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',
-    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
+    'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
+    'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_08.png',
   ),
 );
   // Items
