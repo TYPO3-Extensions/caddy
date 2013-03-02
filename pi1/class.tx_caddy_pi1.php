@@ -1056,13 +1056,13 @@ class tx_caddy_pi1 extends tslib_pibase
     $prompt = '
       <div style="border:1em solid red;color:red;padding:1em;text-align:center">
         <h1>
-          ERROR: table isn\'t porper
+          ERROR: table isn\'t proper
         </h1>
         <p>
           The name of the given table isn\'t proper "' . $table . '".
         </p>
         <p>
-          Please take care of a prper configuration of the typoscript property db.table.<br />
+          Please take care of a proper configuration of the typoscript property db.table.<br />
           See: constant editor > CADDY - DATABASE > table name
         </p>
         <p>
