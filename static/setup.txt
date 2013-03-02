@@ -19,8 +19,8 @@
 includeLibs {
   user_caddy_userfuncs      = EXT:caddy/lib/user_caddy_userfuncs.php
   user_caddy_powermailCart  = EXT:caddy/lib/user_caddy_powermailCart.php
-  tx_caddy_powermail        = EXT:caddy/lib/powermail/tx_caddy_powermail.php
-  tx_caddy_session          = EXT:caddy/lib/session/tx_caddy_session.php
+  tx_caddy_powermail        = EXT:caddy/lib/powermail/class.tx_caddy_powermail.php
+  tx_caddy_session          = EXT:caddy/lib/session/class.tx_caddy_session.php
 }
   // includeLibs
 
