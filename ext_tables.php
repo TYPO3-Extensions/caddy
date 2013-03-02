@@ -160,7 +160,7 @@ require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/userfunc/class.tx_caddy_userfu
 
 t3lib_div::loadTCA('tt_content');
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][ $_EXTKEY . '_pi1' ]  = 'layout,select_key';
+$TCA['tt_content']['types']['list']['subtypes_excludelist'][ $_EXTKEY . '_pi1' ]  = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][ $_EXTKEY . '_pi1' ]      = 'pi_flexform';
 t3lib_extMgm::addPlugin(array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi1',
@@ -206,6 +206,7 @@ $TCA['tx_caddy_order'] = array (
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',  
     'default_sortby'    => 'ORDER BY uid DESC',  
+    'readOnly'          => true,
     'hideAtCopy'        => true,
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
