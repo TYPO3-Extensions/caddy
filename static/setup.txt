@@ -775,7 +775,7 @@ plugin.tx_powermail_pi1 {
   }
   email {
     recipient_mail {
-      addAttachment {
+      XXX_addAttachment {
           // Caddy: Invoice
         45967 = USER
         45967 {
@@ -794,7 +794,7 @@ plugin.tx_powermail_pi1 {
       }
     }
     sender_mail {
-      addAttachment {
+      XXX_addAttachment {
           // Caddy: Invoice
         45967 = USER
         45967 {
