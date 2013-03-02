@@ -341,6 +341,7 @@ class tx_caddy_pi1 extends tslib_pibase
       'cart_tax_normal'       => $caddyTaxNormal
     );
 echo 'XXX';
+die( __METHOD__ . __LINE__ );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
 echo 'YYY';
 die( __METHOD__ . __LINE__ );
