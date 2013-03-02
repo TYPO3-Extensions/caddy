@@ -103,7 +103,7 @@
                 <numIndex index="1">all</numIndex>
               </numIndex>
             </items>
-            <default>all</default>
+            <default>vendor</default>
             <maxitems>1</maxitems>
             <size>1</size>
           </config>
