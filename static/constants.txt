@@ -1,26 +1,8 @@
-plugin.caddy {
+idplugin.caddy {
 
   # cat=caddy - main//101; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
   main.template = EXT:caddy/files/templates/caddy.html
-  # cat=caddy - main//102; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
-  main.decimal = 2
-  # cat=caddy - main//103; type=text; label= Decimal symbol (e.g. , or .). This setting will be used for formatting prices.
-  main.dec_point = ,
-  # cat=caddy - main//104; type=text; label= Thousands separator (e.g. , or .). This setting will be used for formatting prices.
-  main.thousands_sep = .
-  # cat=caddy - main//105; type=text; label= Currency symbol (e.g. &euro or $).
-  main.currencySymbol = &euro;
-  # cat=caddy - main//106; type=boolean; label= Show currency symbol before price.
-  main.currencySymbolBeforePrice = 0
-  # cat=caddy - main//107; type=text; label= Quantity symbol (e.g. St.).
-  main.quantitySymbol = St.
-  # cat=caddy - main//108; type=text; label= Service Attribute 1 symbol (e.g. Weight: g, kg, lbs).
-  main.service_attribute_1_symbol =
-  # cat=caddy - main//109; type=text; label= Service Attribute 2 symbol (e.g. Volume: l, gal).
-  main.service_attribute_2_symbol =
-  # cat=caddy - main//110; type=text; label= Service Attribute 3 symbol (e.g. Length: m, cm, inch).
-  main.service_attribute_3_symbol =
-  # cat=caddy - main//111; type=text; label= Uid of storage folder: id of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
+  # cat=caddy - main//111; type=text; label= Uid of storage folder: Uid of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
   main.pid =
   # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   main.externalLinks = Click me!
@@ -82,6 +64,21 @@ plugin.caddy {
   # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   gpvar.sponsors = Click me!
 
+  # cat=caddy - numberformat//102; type=text; label= Decimal (e.g. 2). This setting will be used for formatting prices.
+  main.decimal = 2
+  # cat=caddy - numberformat//103; type=text; label= Decimal symbol (e.g. , or .). This setting will be used for formatting prices.
+  main.dec_point = ,
+  # cat=caddy - numberformat//104; type=text; label= Thousands separator (e.g. , or .). This setting will be used for formatting prices.
+  main.thousands_sep = .
+  # cat=caddy - numberformat//105; type=text; label= Currency symbol (e.g. &euro or $).
+  main.currencySymbol = &euro;
+  # cat=caddy - numberformat//106; type=boolean; label= Show currency symbol before price.
+  main.currencySymbolBeforePrice = 0
+  # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  numberformat.externalLinks = Click me!
+  # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  numberformat.sponsors = Click me!
+
   # cat=caddy - pdf//101; type=string; label= PDF ordering file: Path to the PDF ordering file  
   pdf.orderpdf.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
   # cat=caddy - pdf//102; type=string; label= HTML for the PDF ordering file:Path to the HTML template
@@ -116,6 +113,19 @@ plugin.caddy {
   ordernumber.externalLinks = Click me!
   # cat=caddy - ordernumber/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   ordernumber.sponsors = Click me!
+
+  # cat=caddy - symbols//107; type=text; label= Quantity symbol (e.g. St.).
+  main.quantitySymbol = St.
+  # cat=caddy - symbols//108; type=text; label= Service Attribute 1 symbol (e.g. Weight: g, kg, lbs).
+  main.service_attribute_1_symbol =
+  # cat=caddy - symbols//109; type=text; label= Service Attribute 2 symbol (e.g. Volume: l, gal).
+  main.service_attribute_2_symbol =
+  # cat=caddy - symbols//110; type=text; label= Service Attribute 3 symbol (e.g. Length: m, cm, inch).
+  main.service_attribute_3_symbol =
+  # cat=caddy - symbols/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  symbols.externalLinks = Click me!
+  # cat=caddy - symbols/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  symbols.sponsors = Click me!
 
   # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
