@@ -875,31 +875,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function clean( )
   {
-      // RETURN : powermail form isn't sent. Nothing to clean
-    if( empty( $this->powermail->sent ) )
-    {
-        // DRS
-      if( $this->drs->drsClean )
-      {
-        $prompt = 'The powermail form isn\'t sent, nothing to clean up.';
-        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return;
-    }
-      // RETURN : powermail form isn't sent. Nothing to clean
-        
-      // DRS
-    if( $this->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent. Database, numbers and session will cleaned up.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-
-    $this->cleanDatabase( );
-    $this->cleanNumbers( );
-    $this->cleanSession( );
+    $this->clean->main( );
+//    $this->cleanNumbers( );
+//    $this->cleanSession( );
   }
 
  /**
@@ -921,7 +899,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // DRS
 
     $insertFields = array( 
-      'pid'       => '10',
+      'pid'       => $this->pid,
       'net'       => '100.00',
       'tax'       => '19.00',
       'gross'     => '119.00',
@@ -1360,6 +1338,12 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
     $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+
+      // Class with methods for get clean values
+    require_once( 'class.tx_caddy_pi1_clean.php' );
+    $this->clean            = t3lib_div::makeInstance( 'tx_caddy_pi1_clean' );
+    $this->clean->pObj      = $this;
+    $this->clean->row       = $this->cObj->data;
 
     require_once( $path2lib . 'class.tx_caddy_div.php' );
     $this->div              = t3lib_div::makeInstance( 'tx_caddy_div' );
