@@ -1507,11 +1507,11 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @param	string		$content  : current content
   * @return	void
-  * @access private
+  * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function sessionDelete( )
+  public function sessionDelete( )
   {
       // DRS
     if( $this->drs->drsSession )
