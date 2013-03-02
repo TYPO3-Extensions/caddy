@@ -7,6 +7,14 @@
   <data type="array">
     <languageKey index="default" type="array">
       <label index="email">Email</label>
+      <label index="email.invoiceMode">Invoice</label>
+      <label index="email.invoiceMode.disabled">Don't attach it.</label>
+      <label index="email.invoiceMode.customer">Attach it to the customer email.</label>
+      <label index="email.invoiceMode.vendor">Attach it to the vendor email.</label>
+      <label index="email.invoiceMode.all">Attach it to the customer email and the vendor email.</label>
+      <label index="email.invoicePath">Path to pdf file invoice</label>
+      <label index="email.termsMode">Attach "terms & conditions"</label>
+      <label index="email.termsPath">Path to pdf file "terms & conditions"</label>
       <label index="help">Help!</label>
       <label index="interface">Database</label>
       <label index="offsets">Offsets</label>

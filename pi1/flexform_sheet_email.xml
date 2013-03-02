@@ -6,24 +6,109 @@
     </TCEforms>
     <type>array</type>
     <el>
-      <gpvar>
+      <termsPath>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.gpvar</label>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsPath</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>EXT:caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf</default>
+          </config>
+        </TCEforms>
+      </termsPath>
+      <termsMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode</label>
           <config>
             <type>check</type>
             <default>1</default>
           </config>
         </TCEforms>
-      </gpvar>
-      <session>
+      </termsMode>
+      <invoicePath>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.session</label>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoicePath</label>
           <config>
-            <type>check</type>
-            <default>1</default>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>EXT:caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf</default>
           </config>
         </TCEforms>
-      </session>
+      </invoicePath>
+      <invoiceMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode</label>
+          <config>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>all</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </invoiceMode>
+      <deliveryorderPath>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderPath</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>EXT:caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf</default>
+          </config>
+        </TCEforms>
+      </deliveryorderPath>
+      <deliveryorderMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode</label>
+          <config>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>all</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </deliveryorderMode>
     </el>
   </ROOT>
 </T3DataStructure>
