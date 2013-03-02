@@ -65,8 +65,6 @@ class user_caddy_powermailCart extends tslib_pibase
   */
   public function showCart( $content = '', $conf = array( ) )
   {
-    return 'Hallo';
-    
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
     
