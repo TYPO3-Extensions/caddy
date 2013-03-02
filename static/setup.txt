@@ -783,6 +783,7 @@ plugin.tx_powermail_pi1 {
   email {
     recipient_mail {
       addAttachment {
+        10 >
           // Caddy: Invoice
         45967 = USER
         45967 {
