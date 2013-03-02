@@ -786,6 +786,11 @@ plugin.tx_powermail_pi1 {
         45967 {
           userFunc = tx_caddy_powermail->sendInvoiceToVendor
         }
+          // Caddy: Terms & Conditions
+        45969 = TEXT
+        45969 {
+          value = typo3conf/ext/quick_shop/res/files/de/typo3-quick-shop-agb_A4.pdf
+        }
       }
     }
   }
