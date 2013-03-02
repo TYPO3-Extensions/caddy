@@ -193,21 +193,6 @@ t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/
   //
   // TCA for tables
 
-  // Items
-$TCA['tx_caddy_item'] = array (
-  'ctrl' => array (
-    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
-    'label'             => 'title',  
-    'tstamp'            => 'tstamp',
-    'crdate'            => 'crdate',
-    'cruser_id'         => 'cruser_id',
-    'delete'            => 'deleted',
-    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
-    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
-  ),
-);
-  // Items
-
   // Orders
 $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
@@ -224,5 +209,31 @@ $TCA['tx_caddy_order'] = array (
   ),
 );
   // Orders
+
+  // Items
+$TCA['tx_caddy_item'] = array (
+  'ctrl' => array (
+    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
+    'label'             => 'title',  
+    'tstamp'            => 'tstamp',
+    'crdate'            => 'crdate',
+    'cruser_id'         => 'cruser_id',
+    'delete'            => 'deleted',
+    'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY).'tca.php',
+    'iconfile'          => t3lib_extMgm::extRelPath($_EXTKEY).'ext_icon.gif',
+  ),
+);
+  // Items
+
   // TCA for tables
+
+
+
+  ////////////////////////////////////
+  //
+  // Allow tables on pages
+
+t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_item ');
+t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_order ');
+  // Allow tables on pages
 ?>
