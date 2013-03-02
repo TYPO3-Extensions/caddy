@@ -19,12 +19,12 @@
       <label index="email.invoiceMode.vendor">Send it to the vendor</label>
       <label index="email.invoiceMode.all">Send it to the customer and the vendor (recommended)</label>
       <label index="email.invoicePath">Path to pdf draft: invoice</label>
-      <label index="email.termsMode"><![CDATA[terms & conditions]]></label>
+      <label index="email.termsMode"><![CDATA[Terms & Conditions]]></label>
       <label index="email.termsMode.disabled"><![CDATA[Don't send]]></label>
       <label index="email.termsMode.customer">Send it to the customer (recommended)</label>
       <label index="email.termsMode.vendor">Send it to the vendor</label>
       <label index="email.termsMode.all">Send it to the customer and the vendor</label>
-      <label index="email.termsPath"><![CDATA[Path to PDF draft: terms & conditions]]></label>
+      <label index="email.termsPath"><![CDATA[Path to PDF draft: Terms & Conditions]]></label>
       <label index="help">Help!</label>
       <label index="origin">Origin</label>
       <label index="origin.deliveryorder">Delivery Order</label>
