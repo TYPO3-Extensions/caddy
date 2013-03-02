@@ -97,7 +97,7 @@ plugin.tx_caddy_pi1 {
   powermailContent {
     uid = {$plugin.caddy.powermailContent.uid}
   }
-  debug  = {$plugin.caddy.debug}
+  debug  = {$plugin.caddy.debug.paramsAndTs}
 
     // titel, price, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCart
   settings =
@@ -218,6 +218,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -237,6 +239,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -306,6 +310,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -325,6 +331,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -344,6 +352,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -363,6 +373,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -382,6 +394,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -401,6 +415,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -420,6 +436,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -480,6 +498,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -500,6 +520,8 @@ plugin.tx_caddy_pi1 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -749,6 +771,8 @@ plugin.tx_caddy_pi3 {
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
           thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
         }
         20 = TEXT
         20 {
@@ -773,11 +797,17 @@ plugin.tx_powermail_pi1 {
     caddy = USER
     caddy {
       userFunc = user_caddy_powermailCart->showCaddy
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
     }
       // Clear the caddy session
     clearcaddysession = USER
     clearcaddysession {
       userFunc = tx_caddy_session->sessionDelete
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
     }
   }
   email {
@@ -787,16 +817,25 @@ plugin.tx_powermail_pi1 {
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendInvoiceToVendor
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
           // Caddy: Delivery Order
         45968 = USER
         45968 {
           userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
           // Caddy: Terms & Conditions
         45969 = USER
         45969 {
           userFunc = tx_caddy_powermail->sendTermsToVendor
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
       }
     }
@@ -806,16 +845,25 @@ plugin.tx_powermail_pi1 {
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendInvoiceToCustomer
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
           // Caddy: Delivery Order
         45968 = USER
         45968 {
           userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
           // Caddy: Terms & Conditions
         45969 = USER
         45969 {
           userFunc = tx_caddy_powermail->sendTermsToCustomer
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
         }
       }
     }
