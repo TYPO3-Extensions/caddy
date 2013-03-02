@@ -340,11 +340,7 @@ class tx_caddy_pi1 extends tslib_pibase
       'cart_tax_reduced'      => $caddyTaxReduced,
       'cart_tax_normal'       => $caddyTaxNormal
     );
-echo 'XXX';
-die( __METHOD__ . __LINE__ );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
-echo 'YYY';
-die( __METHOD__ . __LINE__ );
       // cObject becomes current record
 
       // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
@@ -956,6 +952,7 @@ die( __METHOD__ . __LINE__ );
     $this->initServiceAttributes( );
     $this->initGpVar( );
     $this->initPowermail( );
+    $this->initDatabase( );
   }
 
 /**
@@ -1042,6 +1039,41 @@ die( __METHOD__ . __LINE__ );
 
   }
 
+ /**
+  * initDatabase( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDatabase( )
+  {
+    $conf = $this->conf;
+
+    $table = $this->conf['db.']['table'];
+
+    $prompt = '
+      <div style="border:1em solid red;color:red;padding:1em;text-align:center">
+        <h1>
+          ERROR: table isn\'t porper
+        </h1>
+        <p>
+          The name of the given table isn\'t proper "' . $table . '".
+        </p>
+        <p>
+          Please take care of a prper configuration of the typoscript property db.table.<br />
+          See: constant editor > CADDY - DATABASE > table name
+        </p>
+        <p>
+          Caddy - the Shopping Cart
+        </p>
+      </div>
+      ';
+    die( $prompt );
+
+  }
+  
  /**
   * initFlexform( )
   *
