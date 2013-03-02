@@ -777,11 +777,31 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendDeliveryorderToCustomer( )
+  public function sendDeliveryorderToCustomer( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
+
   }
 
  /**
@@ -810,7 +830,7 @@ class tx_caddy_powermail
       // DRS
     if( $this->drs->drsSession || $drs )
     {
-      $prompt = 'return: ' . $path;
+      $prompt = __METHOD__ . ' returns: ' . $path;
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -826,11 +846,30 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendInvoiceToCustomer( )
+  public function sendInvoiceToCustomer( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
   }
 
  /**
@@ -841,11 +880,30 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendInvoiceToVendor( )
+  public function sendInvoiceToVendor( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
   }
 
  /**
@@ -856,11 +914,30 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendTermsToCustomer( )
+  public function sendTermsToCustomer( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
   }
 
  /**
@@ -871,11 +948,30 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendTermsToVendor( )
+  public function sendTermsToVendor( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
   }
 }
 
