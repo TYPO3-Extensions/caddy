@@ -8,7 +8,8 @@
     <languageKey index="default" type="array">
       <label index="dbTableEmpty"><![CDATA[
         The typoscript property db.table is empty.<br />
-        Please add the lable of the table, which delivers the products to caddy.
+        Please configure the table, which delivers the products to caddy.<br />
+        See: constant editor > CADDY - DATABASE > table name
       ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
         The Check it! report is disabled and this is proper for performance needs.<br />
@@ -168,6 +169,11 @@
       ]]></label>
     </languageKey>
     <languageKey index="de" type="array">
+      <label index="dbTableEmpty"><![CDATA[
+        Die Typoscript-Eigenscgaft db.table ist leer.<br />
+        Bitte gebe die Tabelle an, die die Produkte f&uumlR Caddy enth&auml;t.<br />
+        Siehe: Constant Editor > CADDY - DATABASE > table name
+      ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
         Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br /> 
         Aber wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht oben in der Check-Box ein.
