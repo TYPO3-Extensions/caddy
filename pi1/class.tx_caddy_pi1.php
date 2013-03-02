@@ -1492,7 +1492,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   public function sessionDelete( )
   {
-      // DRS
+return;
+    // DRS
     if( $this->drs->drsSession )
     {
       $prompt = 'Session is cleared.';

@@ -57,11 +57,13 @@ class user_caddy_powermailCart extends tslib_pibase
 
   private $markerArray = array();
 
-  /**
+ /**
   * read and return cart from session
   *
   * @return  string    cart content
-  * @version 1.2.2
+  * @access public
+  * @version 2.0.0
+  * @since  1.4.6
   */
   public function showCart( $content = '', $conf = array( ) )
   {
