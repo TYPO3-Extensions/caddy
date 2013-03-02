@@ -22,8 +22,28 @@
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode</label>
           <config>
-            <type>check</type>
-            <default>1</default>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="1" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="2" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="3" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>all</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
           </config>
         </TCEforms>
       </termsMode>
