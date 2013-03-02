@@ -1049,8 +1049,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initDatabase( )
   {
-    $conf = $this->conf;
+    $this->initDatabaseTable( );
+  }
 
+ /**
+  * initDatabaseTable( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDatabaseTable( )
+  {
     $table = $this->conf['db.']['table'];
 
     //echo $GLOBALS['TCA'][$table]['columns'] ) )
