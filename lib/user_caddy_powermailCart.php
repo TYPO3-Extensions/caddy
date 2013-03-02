@@ -26,11 +26,11 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_session.php'); // file for div functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_render.php'); // file for render functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
+require_once( PATH_tslib . 'class.tslib_pibase.php');
+//require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_session.php' );
+//require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
+//require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_render.php' );
+//require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_dynamicmarkers.php' );
 
 /**
  * plugin 'Cart' for the 'powermail' extension.
@@ -45,13 +45,10 @@ class user_caddy_powermailCart extends tslib_pibase
 {
   public $prefixId = 'tx_caddy_pi1';
 
-  // same as class name
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
-  // path to any file in pi1 for locallang
   public $extKey = 'caddy';
 
-  // extension key
   private $content;
 
   private $tmpl = array();
