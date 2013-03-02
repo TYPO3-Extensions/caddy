@@ -72,7 +72,7 @@ class user_caddy_powermailCart extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function sessionDelete( )
+  public function sessionDelete( $content = '', $conf = array( ) )
   {
     // DRS
     if( $this->drs->drsSession )
