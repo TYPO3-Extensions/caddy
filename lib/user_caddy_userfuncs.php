@@ -69,16 +69,16 @@ class user_caddy_userfuncs extends tslib_pibase
     return $numberFormat;
   }
 
-  /**
-    * clear cart
-    *
-    * @return	void
-    */
-  public function user_caddy_clearCart($content = '', $conf = array())
-  {
-    $div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
-    $div->removeAllProductsFromSession(); // clear cart now
-  }
+//  /**
+//    * clear cart
+//    *
+//    * @return	void
+//    */
+//  public function user_caddy_clearCart($content = '', $conf = array())
+//  {
+//    $div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+//    $div->removeAllProductsFromSession(); // clear cart now
+//  }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_userfuncs.php'])

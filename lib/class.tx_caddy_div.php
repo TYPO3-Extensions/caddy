@@ -242,16 +242,16 @@ class tx_caddy_div extends tslib_pibase
     $GLOBALS['TSFE']->storeSessionData();
   }
 
-    /**
-    * Clear complete session
-    *
-    * @return  void
-    */
-    public function removeAllProductsFromSession()
-    {
-//        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array()); // Generate new session with empty array
-//        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
+//    /**
+//    * Clear complete session
+//    *
+//    * @return  void
+//    */
+//    public function removeAllProductsFromSession()
+//    {
+////        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array()); // Generate new session with empty array
+////        $GLOBALS['TSFE']->storeSessionData(); // Save session
+//    }
 
     /**
     * Change quantity of a product in session
