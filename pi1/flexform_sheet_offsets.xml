@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+  <ROOT>
+    <TCEforms>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:offsets</sheetTitle>
+    </TCEforms>
+    <type>array</type>
+    <el>
+      <currIp>
+        <TCEforms>
+          <config>
+            <type>user</type>
+            <userFunc>tx_caddy_userfunc->promptCurrIP</userFunc>
+          </config>
+        </TCEforms>
+      </currIp>
+      <csvAllowedIp>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:offsets.csvAllowedIp</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>127.0.0.1, 127.0.0.2</default>
+          </config>
+        </TCEforms>
+      </csvAllowedIp>
+    </el>
+  </ROOT>
+</T3DataStructure>
