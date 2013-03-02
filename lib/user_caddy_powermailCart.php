@@ -102,6 +102,9 @@ class user_caddy_powermailCart extends tslib_pibase
       // read all products from session
     $this->product = $this->session->productsGet( );
     
+$prompt = var_export( $this->product, true );
+t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    
       // RETURN : empty content, no product in session
     if( count( $this->product ) < 1 )
     {
@@ -110,7 +113,7 @@ class user_caddy_powermailCart extends tslib_pibase
     }
       // RETURN : empty content, no product in session
 
-    foreach ((array) $this->product as $product)
+    foreach( ( array ) $this->product as $product )
     { // one loop for every product in session
       $product['price_total'] = $product['price'] * $product['qty']; // price total
       $local_cObj->start($product, $this->conf['db.']['table']); // enable .field in typoscript
