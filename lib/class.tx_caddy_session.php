@@ -888,8 +888,14 @@ class tx_caddy_session
   */
   public function sessionDelete( $content = '', $conf = array( ) )
   {
-    // DRS
-    if( $this->drs->drsSession )
+    unset( $content );
+    $drs = false;
+    if( $conf['userfunc.']['drs'] )
+    {
+      $drs = true;
+    }
+      // DRS
+    if( $this->drs->drsSession || $drs )
     {
       $prompt = 'Session is cleared.';
       t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
