@@ -766,13 +766,15 @@ plugin.tx_caddy_pi3 {
   //
   // plugin.tx_powermail_pi1
 
-XXX_plugin.tx_powermail_pi1 {
-  XXX_dynamicTyposcript {
+plugin.tx_powermail_pi1 {
+  dynamicTyposcript {
     caddy = USER
     caddy {
       userFunc = user_caddy_powermailCart->showCart
     }
   }
+}
+XXX_plugin.tx_powermail_pi1 {
   XXX_email {
     recipient_mail {
       addAttachment {
