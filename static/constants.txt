@@ -1,4 +1,4 @@
-idplugin.caddy {
+plugin.caddy {
 
   # cat=caddy - main//101; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/cart_table.html)
   main.template = EXT:caddy/files/templates/caddy.html
