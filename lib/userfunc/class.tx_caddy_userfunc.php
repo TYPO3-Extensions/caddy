@@ -224,6 +224,7 @@ class tx_caddy_userfunc
     $sheet            = 'sDEF';
     $field            = 'sdefReportEnable';
     $sdefReportEnable = null;
+var_dump( $this->pluginPiFlexform );
     if( ! empty ( $this->pluginPiFlexform ) )
     {
       $sdefReportEnable = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
