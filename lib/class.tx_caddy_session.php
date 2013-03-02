@@ -29,6 +29,65 @@
 require_once(PATH_tslib . 'class.tslib_pibase.php');
 
 /**
+ * [CLASS/FUNCTION INDEX of SCRIPT]
+ *
+ *
+ *
+ *   99: class tx_caddy_pi1 extends tslib_pibase
+ *
+ *              SECTION: Main
+ *  144:     public function main( $content, $conf )
+ *
+ *              SECTION: Cart
+ *  205:     private function caddy( )
+ *  242:     private function caddyWiProducts( )
+ *  419:     private function caddyWiProductsItem( $contentItem )
+ *  450:     private function caddyWiProductsPayment( )
+ *  494:     private function caddyWiProductsProduct( )
+ *  565:     private function caddyWiProductsProductErrorMsg( $product )
+ *  589:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  651:     private function caddyWiProductsProductSettings( $product )
+ *  691:     private function caddyWiProductsProductTax( $product )
+ *  744:     private function caddyWiProductsShipping( )
+ *  788:     private function caddyWiProductsSpecial( )
+ *  833:     private function caddyWoProducts( )
+ *
+ *              SECTION: Debug
+ *  860:     private function debugOutputBeforeRunning( )
+ *
+ *              SECTION: Init
+ *  897:     private function init( )
+ *  916:     private function initAccessByIp( )
+ * 1078:     private function initFlexform( )
+ * 1091:     private function initGpVar( )
+ * 1147:     private function initGpVarCid( )
+ * 1197:     private function initHtmlTemplate( )
+ * 1279:     private function initInstances( )
+ * 1320:     private function initPowermail( )
+ * 1333:     private function initServiceAttributes( )
+ *
+ *              SECTION: Order
+ * 1360:     private function orderUpdate( )
+ *
+ *              SECTION: Product
+ * 1405:     private function productAdd( )
+ * 1427:     private function productRemove( )
+ *
+ *              SECTION: Update Wizard
+ * 1454:     private function updateWizard( $content )
+ *
+ *              SECTION: ZZ
+ * 1496:     private function zz_getPriceForOption($type, $option_id)
+ * 1547:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1581:     private function zz_renderOptionList($type, $option_id)
+ * 1691:     private function zz_price_format($value)
+ *
+ * TOTAL FUNCTIONS: 31
+ * (This index is automatically created/updated by the extension "extdeveval")
+ *
+ */
+
+/**
  * Plugin 'Cart' for the 'caddy' extension.
  *
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
