@@ -888,23 +888,21 @@ class tx_caddy_session
   */
   public function sessionDelete( $content = '', $conf = array( ) )
   {
+      // DRS
     unset( $content );
     $drs = false;
     if( $conf['userFunc.']['drs'] )
     {
       $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
     }
-      // DRS
     if( $this->drs->drsSession || $drs )
     {
       $prompt = 'Session is cleared.';
       t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-$prompt = 'Session is cleared.';
-t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
-$prompt = var_export( $conf, true );
-t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
 
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );

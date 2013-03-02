@@ -792,11 +792,30 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendDeliveryorderToVendor( )
+  public function sendDeliveryorderToVendor( $content = '', $conf = array( ) )
   {
-    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = 'return: ' . $path;
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
   }
 
  /**
