@@ -8,7 +8,7 @@
     <languageKey index="default" type="array">
       <label index="email">Email</label>
       <label index="email.invoiceMode">Invoice</label>
-      <label index="email.invoiceMode.disabled">Don't attach it.</label>
+      <label index="email.invoiceMode.disabled"><![CDATA[Don't attach it.]]></label>
       <label index="email.invoiceMode.customer">Attach it to the customer email.</label>
       <label index="email.invoiceMode.vendor">Attach it to the vendor email.</label>
       <label index="email.invoiceMode.all">Attach it to the customer email and the vendor email.</label>
