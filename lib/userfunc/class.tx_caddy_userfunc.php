@@ -223,7 +223,11 @@ class tx_caddy_userfunc
 
     $sheet            = 'sDEF';
     $field            = 'sdefReportEnable';
-    $sdefReportEnable = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $sdefReportEnable = null;
+    if( ! empty ( $this->pluginPiFlexform ) )
+    {
+      $sdefReportEnable = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    }
 
       // RETURN : Check it! report is disabled
     if( empty ( $sdefReportEnable ) )
@@ -317,7 +321,11 @@ class tx_caddy_userfunc
   {
     $sheet    = 'sDEF';
     $field    = 'sdefDrs';
-    $sdefDrs  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $sdefDrs  = null;
+    if( ! empty ( $this->pluginPiFlexform ) )
+    {
+      $sdefDrs  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    }
     
 //var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
     
