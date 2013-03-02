@@ -68,6 +68,23 @@ class user_caddy_userfuncs extends tslib_pibase
     }
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
+
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $numberFormat;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
     return $numberFormat;
   }
 

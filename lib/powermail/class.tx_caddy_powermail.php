@@ -786,7 +786,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -796,7 +796,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     
@@ -821,7 +821,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -831,7 +831,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     
@@ -855,7 +855,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -865,7 +865,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     
@@ -889,7 +889,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -899,7 +899,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     
@@ -923,7 +923,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -933,7 +933,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     
@@ -957,7 +957,7 @@ class tx_caddy_powermail
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
@@ -967,7 +967,7 @@ class tx_caddy_powermail
     if( $this->drs->drsSession || $drs )
     {
       $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
     

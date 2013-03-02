@@ -104,12 +104,27 @@ class user_caddy_powermailCart extends tslib_pibase
       // read all products from session
     $this->product = $this->session->productsGet( );
     
-$prompt = var_export( $this->product, true );
-t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
       // RETURN : empty content, no product in session
     if( count( $this->product ) < 1 )
     {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null[userFunc.][drs].';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       $this->content = ''; // clear content
       return $this->content;
     }
@@ -248,6 +263,14 @@ t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray); // Get html template
     $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
     $this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns the caddy with products and calculation.';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
     return $this->content;
   }

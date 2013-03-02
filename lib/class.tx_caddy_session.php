@@ -895,7 +895,7 @@ class tx_caddy_session
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
     if( $this->drs->drsSession || $drs )
     {
