@@ -776,17 +776,17 @@ plugin.tx_powermail_pi1 {
   email {
     recipient_mail {
       addAttachment {
-          // Invoice
+          // Caddy: Invoice
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendInvoiceToVendor
         }
-          // Delivery Order
+          // Caddy: Delivery Order
         45968 = USER
         45968 {
           userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
         }
-          // Terms & Conditions
+          // Caddy: Terms & Conditions
         45969 = USER
         45969 {
           userFunc = tx_caddy_powermail->sendTermsToVendor
@@ -795,17 +795,17 @@ plugin.tx_powermail_pi1 {
     }
     sender_mail {
       addAttachment {
-          // Invoice
+          // Caddy: Invoice
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendInvoiceToCustomer
         }
-          // Delivery Order
+          // Caddy: Delivery Order
         45968 = USER
         45968 {
           userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
         }
-          // Terms & Conditions
+          // Caddy: Terms & Conditions
         45969 = USER
         45969 {
           userFunc = tx_caddy_powermail->sendTermsToCustomer
