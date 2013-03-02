@@ -31,28 +31,40 @@
  *
  *
  *
- *   73: class tx_caddy_session extends tslib_pibase
- *  104:     public function productAdd($parray, $pObj)
- *  208:     private function quantityCheckMinMax( $parray )
- *  238:     public function productDelete($pObj)
- *  302:     public function quantityUpdate($pObj)
- *  435:     public function shippingUpdate($value)
- *  450:     public function shippingGet( )
- *  463:     public function paymentUpdate($value)
- *  478:     public function paymentGet()
- *  491:     public function specialUpdate($special_arr)
- *  506:     public function specialGet()
- *  518:     public function productsGet()
- *  549:     public function productsGetGross($pid)
- *  567:     public function ordernumberGet()
- *  584:     public function productGetDetails($gpvar, $pObj)
- *  606:     private function productGetDetailsSql($gpvar, $pObj)
- *  660:     private function productGetDetailsTs($gpvar, $pObj)
- *  786:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- *  844:     private function productGetVariantTs($product, $pObj)
- *  884:     private function productGetVariantGpvar($pObj)
- *  921:     private function quantityGetVariant($pObj)
- * 1004:     private function zz_sqlReplaceMarker($gpvar, $pObj)
+ *   83: class tx_caddy_session
+ *
+ *              SECTION: Order number
+ *  130:     public function ordernumberGet()
+ *
+ *              SECTION: Payment
+ *  151:     public function paymentUpdate($value)
+ *  166:     public function paymentGet()
+ *
+ *              SECTION: Product
+ *  197:     public function productAdd( $parray, $pObj )
+ *  303:     public function productDelete($pObj)
+ *  359:     public function productGetDetails($gpvar, $pObj)
+ *  381:     private function productGetDetailsSql($gpvar, $pObj)
+ *  435:     private function productGetDetailsTs($gpvar, $pObj)
+ *  534:     private function productGetVariantGpvar( $pObj )
+ *  568:     private function productGetVariantTs($product, $pObj)
+ *  601:     public function productsGet()
+ *  615:     public function productsGetGross( $pid )
+ *  646:     private function quantityCheckMinMax( $parray )
+ *  680:     private function quantityGetVariant($pObj)
+ *  755:     public function quantityUpdate($pObj)
+ *
+ *              SECTION: Shipping
+ *  896:     public function shippingUpdate($value)
+ *  911:     public function shippingGet( )
+ *
+ *              SECTION: Special
+ *  932:     public function specialUpdate($special_arr)
+ *  947:     public function specialGet()
+ *
+ *              SECTION: ZZ
+ *  975:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ * 1037:     private function zz_sqlReplaceMarker( $pObj )
  *
  * TOTAL FUNCTIONS: 21
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -101,8 +113,8 @@ class tx_caddy_session
 //    }
 //
 
-    
-    
+
+
  /***********************************************
   *
   * Order number
@@ -122,8 +134,8 @@ class tx_caddy_session
         return $sesArray['ordernumber'];
     }
 
-    
-    
+
+
  /***********************************************
   *
   * Payment
@@ -158,8 +170,8 @@ class tx_caddy_session
         return $sesArray['payment'];
     }
 
-    
-    
+
+
  /***********************************************
   *
   * Product
@@ -185,7 +197,7 @@ class tx_caddy_session
     public function productAdd( $parray, $pObj )
     {
       $arr_variant = null;
-      
+
       // return without price or without title
       if (empty($parray['price']) || empty($parray['title']))
       {
@@ -592,7 +604,7 @@ class tx_caddy_session
 
         return $sesArray['products'];
     }
-    
+
    /**
  * Count gross price of all products in a cart
  * Is used by pi3 only
@@ -615,18 +627,19 @@ class tx_caddy_session
     }
 
 
-    
- /***********************************************
+
+ /**
+  * ********************************************
   *
   * Quantity
   *
-  **********************************************/
-
- /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  * *********************************************/
   *
-  * @param array
-  * @return  array
-  * @access  private
+  *  /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  *
+  * @param	array
+  * @return	array
+  * @access private
   * @version 2.0.0
   * @since 1.4.2
   */
@@ -867,7 +880,7 @@ class tx_caddy_session
     }
 
 
-    
+
  /***********************************************
   *
   * Shipping
@@ -903,7 +916,7 @@ class tx_caddy_session
     }
 
 
-   
+
  /***********************************************
   *
   * Special
@@ -939,7 +952,7 @@ class tx_caddy_session
     }
 
 
-   
+
  /***********************************************
   *
   * ZZ
@@ -1005,7 +1018,7 @@ class tx_caddy_session
             die($string); // die process and write message
         }
     }
-    
+
     /**
  * zz_sqlReplaceMarker(): Replace marker in the SQL query
  *                             MARKERS are
@@ -1023,8 +1036,8 @@ class tx_caddy_session
  */
     private function zz_sqlReplaceMarker( $pObj )
     {
-      $arr_result = null; 
-      
+      $arr_result = null;
+
       // set marker array with values from GET
       foreach (t3lib_div::_GET() as $table => $arr_fields)
       {
@@ -1109,9 +1122,9 @@ class tx_caddy_session
       $pObj->conf['db.']['sql.']['value'] = $query;
     }
 
-    
-    
-    
+
+
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_session.php'])
