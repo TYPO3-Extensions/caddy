@@ -27,7 +27,7 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_session.php'); // file for div functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_calc.php'); // file for calculation functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_render.php'); // file for render functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
@@ -74,7 +74,7 @@ class user_caddy_powermailCart extends tslib_pibase
 		$this->conf = array_merge((array) $this->conf, (array) $conf);
 		$this->tmpl['all'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_POWERMAIL###'); // Load HTML Template
 		$this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
-		$this->div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
 		$this->calc = t3lib_div::makeInstance('tx_caddy_calc'); // Create new instance for calculation functions
 		$this->render = t3lib_div::makeInstance('tx_caddy_render'); // Create new instance for render functions
 		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers'); // Create new instance for dynamicmarker function
@@ -85,7 +85,7 @@ class user_caddy_powermailCart extends tslib_pibase
 		
 
 		// read all products from session
-		$this->product = $this->div->getProductsFromSession();
+		$this->product = $this->session->getProductsFromSession();
 		if (count($this->product) > 0)
 		{ // if there are products in the session
 			foreach ((array) $this->product as $product)
@@ -127,7 +127,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			$cartNetNoService = $cartNet;
 
 			// calculate pice incl. shipping
-			$shipping_id = $this->div->getShippingFromSession();
+			$shipping_id = $this->session->getShippingFromSession();
 
 			if ($shipping_id) {
 				$shipping_values	= $this->calc->calculateOptionById($this->conf, 'shipping', $shipping_id, $this);
@@ -145,7 +145,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			}
 
 			// calculate pice incl. payment
-			$payment_id = $this->div->getPaymentFromSession();
+			$payment_id = $this->session->getPaymentFromSession();
 			
 			if ($payment_id) {
 				$payment_values		= $this->calc->calculateOptionById($this->conf, 'payment', $payment_id, $this);
@@ -166,7 +166,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			}
 
 			// calculate pice incl. specials
-			$special_ids = $this->div->getSpecialFromSession();
+			$special_ids = $this->session->getSpecialFromSession();
 			
 			$overall_special_gross = 0.0;
 			$overall_special_net = 0.0;
@@ -203,7 +203,7 @@ class user_caddy_powermailCart extends tslib_pibase
 				'shipping_option' => $shipping_option,
 				'payment_option' => $payment_option,
 				'special_option' => $overall_special_option,
-				'ordernumber' => $this->div->getOrderNumberFromSession()
+				'ordernumber' => $this->session->getOrderNumberFromSession()
 			);
 			$local_cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
 			

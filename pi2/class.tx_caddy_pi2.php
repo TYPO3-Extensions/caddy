@@ -27,7 +27,7 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_session.php'); // file for div functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
 
 /**
@@ -64,7 +64,7 @@ class tx_caddy_pi2 extends tslib_pibase
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-		$this->div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
 		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 		$this->tmpl['form'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_FORM###'); // Load FORM HTML Template
 

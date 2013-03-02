@@ -37,7 +37,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @version     2.0.0
  * @since       1.4.6
  */
-class tx_caddy_div extends tslib_pibase
+class tx_caddy_session extends tslib_pibase
 {
 
     public $prefixId = 'tx_caddy_pi1';
@@ -134,7 +134,7 @@ class tx_caddy_div extends tslib_pibase
             }
         }
 
-        $parray = $this->check($parray);
+        $parray = $this->checkQuantityMinMax($parray);
 
         if (isset($parray['price']))
         {
@@ -163,30 +163,35 @@ class tx_caddy_div extends tslib_pibase
         $GLOBALS['TSFE']->storeSessionData();
     }
 
-    /* Check requested quantity and set error message
-    *
-    * @param array
-    * @return  array
-    * @version 1.4.2
-    */
-    public function check($parray)
-    {
-        $parray['error'] = Array();
-        // check if min and max in range
-        if (!empty($parray['min'])) {
-            if ($parray['qty'] < $parray['min']) {
-                $parray['qty'] = $parray['min'];
-                $parray['error'][] = 'min';
-            }
+ /* checkQuantityMinMax( )  : check if min and max in quantity range and set error message
+  *
+  * @param array
+  * @return  array
+  * @access  private
+  * @version 2.0.0
+  * @since 1.4.2
+  */
+  private function checkQuantityMinMax( $parray )
+  {
+      $parray['error'] = array( );
+      if( ! empty( $parray['min'] ) )
+      {
+        if( $parray['qty'] < $parray['min'] )
+        {
+          $parray['qty'] = $parray['min'];
+          $parray['error'][] = 'min';
         }
-        if (!empty($parray['max'])) {
-            if ($parray['qty'] > $parray['max']) {
-                $parray['qty'] = $parray['max'];
-                $parray['error'][] = 'max';
-            }
+      }
+      if( ! empty($parray['max'] ) )
+      {
+        if( $parray['qty'] > $parray['max'] )
+        {
+          $parray['qty'] = $parray['max'];
+          $parray['error'][] = 'max';
         }
-        return $parray;
-    }
+      }
+      return $parray;
+  }
 
  /**
   * Remove product from session with given uid
@@ -292,7 +297,7 @@ class tx_caddy_div extends tslib_pibase
                         // update not from cart then add qty
                         $sesArray['products'][$key_session]['qty'] += $int_qty;
                     }
-                    $sesArray['products'][$key_session] = $this->check($sesArray['products'][$key_session]);
+                    $sesArray['products'][$key_session] = $this->checkQuantityMinMax($sesArray['products'][$key_session]);
                 } else {
                     // remove product from session
                     $this->removeProductFromSession($sesArray['products'][$key_session]['puid']);
@@ -699,33 +704,33 @@ class tx_caddy_div extends tslib_pibase
         }
     }
 
-    /**
-    * add flexform values to conf array
-    *
-    * @param array   $pobj: Parent Object
-    * @return  void
-    */
-    public function flex2conf(&$pObj)
-    {
-        if (is_array($pObj->cObj->data['pi_flexform']['data']))
-        { // if there are flexform values
-            foreach ($pObj->cObj->data['pi_flexform']['data'] as $key => $value)
-            { // every flexform category
-                if (count($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF']) > 0)
-                { // if there are flexform values
-                    foreach ($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF'] as $key2 => $value2)
-                    { // every flexform option
-                        if ($pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key))
-                        { // if value exists in flexform
-                            $pObj->conf[$key . '.'][$key2] = $pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key); // overwrite $conf
-                        }
-                    }
-                }
-            }
-        }
-    }
+//    /**
+//    * add flexform values to conf array
+//    *
+//    * @param array   $pobj: Parent Object
+//    * @return  void
+//    */
+//    public function flex2conf(&$pObj)
+//    {
+//        if (is_array($pObj->cObj->data['pi_flexform']['data']))
+//        { // if there are flexform values
+//            foreach ($pObj->cObj->data['pi_flexform']['data'] as $key => $value)
+//            { // every flexform category
+//                if (count($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF']) > 0)
+//                { // if there are flexform values
+//                    foreach ($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF'] as $key2 => $value2)
+//                    { // every flexform option
+//                        if ($pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key))
+//                        { // if value exists in flexform
+//                            $pObj->conf[$key . '.'][$key2] = $pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key); // overwrite $conf
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-    /**
+   /**
     * returns message with optical flair
     *
     * @param string    $str: Message to show
@@ -734,8 +739,11 @@ class tx_caddy_div extends tslib_pibase
     * @param boolean   $prefix: Activate or deactivate prefix "$extKey: "
     * @param string    $id: id to add to the message (maybe to do some javascript effects)
     * @return  string    $string: Manipulated string
+    * @access private
+    * @version 2.0.0
+    * @since 1.4.6
     */
-    public function msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+    private function msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
     {
         // config
         if ($prefix)
@@ -1108,35 +1116,11 @@ class tx_caddy_div extends tslib_pibase
         $pObj->conf['db.']['sql'] = 'TEXT';
         $pObj->conf['db.']['sql.']['value'] = $query;
     }
-  
- /**
-  * cObjGetSingle( )
-  *
-  * @return  string
-  * @access public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function cObjGetSingle( $cObj_name, $cObj_conf )
-  {
-    switch( true )
-    {
-      case( is_array( $cObj_conf ) ):
-        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
-        break;
-      case( ! ( is_array( $cObj_conf ) ) ):
-      default:
-        $value = $cObj_name;
-        break;
-    }
-      
-    return $value;
-  }
     
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_div.php'])
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_session.php'])
 {
-    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_div.php']);
+    include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_session.php']);
 }
 ?>

@@ -27,7 +27,7 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
+//require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
 
 /**
  * plugin 'Cart' for the 'caddy' extension.

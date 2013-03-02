@@ -215,7 +215,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // read all products from session
-    $this->product = $this->div->getProductsFromSession();
+    $this->product = $this->session->getProductsFromSession();
 
     switch( true )
     {
@@ -421,7 +421,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function caddyWiProductsItem( $contentItem )
   {
       // item for payment
-    $paymentId = $this->div->getPaymentFromSession( );
+    $paymentId = $this->session->getPaymentFromSession( );
     if( $paymentId )
     {
       $this->markerArray['###QTY###']         = 1;
@@ -453,19 +453,19 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $paymentId = $this->div->getPaymentFromSession();
+    $paymentId = $this->session->getPaymentFromSession();
 
     if( ! $paymentId )
     {
       $paymentId = intval( $this->conf['payment.']['preset'] );
-      $this->div->changePaymentInSession( $paymentId );
+      $this->session->changePaymentInSession( $paymentId );
     }
       // check if selected payment option is available
     $newpaymentId = $this->zz_checkOptionIsNotAvailable( 'payment', $paymentId );
     if( $newpaymentId )
     {
       $paymentId = $newpaymentId;
-      $this->div->changePaymentInSession( $newpaymentId );
+      $this->session->changePaymentInSession( $newpaymentId );
     }
 
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
@@ -672,7 +672,7 @@ class tx_caddy_pi1 extends tslib_pibase
       switch( $key )
       {
         case('delete'):
-          $ts_conf = $this->div->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
+          $ts_conf = $this->session->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
           break;
         default:
           // nothing to do, there is no default now
@@ -689,7 +689,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
 
       // adds the ###QTY_NAME### marker in case of variants
-      $this->markerArray = $this->div->add_qtyname_marker($product, $this->markerArray, $this);
+      $this->markerArray = $this->session->add_qtyname_marker($product, $this->markerArray, $this);
     }
       // FOREACH  : settings property
 //var_dump( __METHOD__, __LINE__, $this->markerArray );
@@ -761,19 +761,19 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $shippingId = $this->div->getShippingFromSession();
+    $shippingId = $this->session->getShippingFromSession();
 
     if( ! $shippingId )
     {
       $shippingId = intval( $this->conf['shipping.']['preset'] );
-      $this->div->changeShippingInSession( $shippingId );
+      $this->session->changeShippingInSession( $shippingId );
     }
       // check if selected shipping option is available
     $newshippingId = $this->zz_checkOptionIsNotAvailable( 'shipping', $shippingId );
     if( $newshippingId )
     {
       $shippingId = $newshippingId;
-      $this->div->changeShippingInSession( $newshippingId );
+      $this->session->changeShippingInSession( $newshippingId );
     }
 
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
@@ -805,7 +805,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $specialIds = $this->div->getSpecialFromSession( );
+    $specialIds = $this->session->getSpecialFromSession( );
 
     $caddyTaxReduced       = 0.0;
     $caddyTaxNormal        = 0.0;
@@ -907,7 +907,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // output debug prompt
     t3lib_div::debug
     (
-      $this->div->getProductsFromSession(), $this->extKey . ': ' . 'Values in session at the beginning'
+      $this->session->getProductsFromSession(), $this->extKey . ': ' . 'Values in session at the beginning'
     );
     t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
     t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
@@ -1055,20 +1055,20 @@ class tx_caddy_pi1 extends tslib_pibase
     $conf = $this->conf;
 
       // read variables
-    $this->gpvar['title'] = $this->div->cObjGetSingle( $conf['settings.']['title'], $conf['settings.']['title.'] );
-    $this->gpvar['price'] = $this->div->cObjGetSingle( $conf['settings.']['price'], $conf['settings.']['price.'] );
-    $this->gpvar['qty']   = intval( $this->div->cObjGetSingle( $conf['settings.']['qty'], $conf['settings.']['qty.'] ) );
-    $this->gpvar['tax']   = $this->div->cObjGetSingle( $conf['settings.']['tax'], $conf['settings.']['tax.'] );
-    $this->gpvar['puid']  = intval( $this->div->cObjGetSingle( $conf['settings.']['puid'], $conf['settings.']['puid.'] ) );
-    $this->gpvar['cid']   = intval ($this->div->cObjGetSingle( $conf['settings.']['cid'], $conf['settings.']['cid.'] ) );
+    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['settings.']['title'], $conf['settings.']['title.'] );
+    $this->gpvar['price'] = $this->zz_cObjGetSingle( $conf['settings.']['price'], $conf['settings.']['price.'] );
+    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['settings.']['qty'], $conf['settings.']['qty.'] ) );
+    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['settings.']['tax'], $conf['settings.']['tax.'] );
+    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['settings.']['puid'], $conf['settings.']['puid.'] ) );
+    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['settings.']['cid'], $conf['settings.']['cid.'] ) );
 
-    $this->gpvar['sku'] = $this->div->cObjGetSingle( $conf['settings.']['sku'], $conf['settings.']['sku.'] );
-    $this->gpvar['min'] = $this->div->cObjGetSingle( $conf['settings.']['min'], $conf['settings.']['min.'] );
-    $this->gpvar['max'] = $this->div->cObjGetSingle( $conf['settings.']['max'], $conf['settings.']['max.'] );
+    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['settings.']['sku'], $conf['settings.']['sku.'] );
+    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['settings.']['min'], $conf['settings.']['min.'] );
+    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['settings.']['max'], $conf['settings.']['max.'] );
 
     $this->gpvar['service_attribute_1'] = floatval
                                           (
-                                            $this->div->cObjGetSingle
+                                            $this->zz_cObjGetSingle
                                             (
                                               $conf['settings.']['service_attribute_1'],
                                               $conf['settings.']['service_attribute_1.']
@@ -1076,7 +1076,7 @@ class tx_caddy_pi1 extends tslib_pibase
                                           );
     $this->gpvar['service_attribute_2'] = floatval
                                           (
-                                            $this->div->cObjGetSingle
+                                            $this->zz_cObjGetSingle
                                             (
                                               $conf['settings.']['service_attribute_2'],
                                               $conf['settings.']['service_attribute_2.']
@@ -1084,7 +1084,7 @@ class tx_caddy_pi1 extends tslib_pibase
                                           );
     $this->gpvar['service_attribute_3'] = floatval
                                           (
-                                            $this->div->cObjGetSingle
+                                            $this->zz_cObjGetSingle
                                             (
                                               $conf['settings.']['service_attribute_3'],
                                               $conf['settings.']['service_attribute_3.']
@@ -1251,10 +1251,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->clean->pObj      = $this;
     $this->clean->row       = $this->cObj->data;
 
-    require_once( $path2lib . 'class.tx_caddy_div.php' );
-    $this->div              = t3lib_div::makeInstance( 'tx_caddy_div' );
-    $this->div->cObj        = $this->cObj;
-
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers   = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
 
@@ -1272,6 +1268,9 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
+
+    require_once( $path2lib . 'class.tx_caddy_session.php' );
+    $this->session           = t3lib_div::makeInstance( 'tx_caddy_session' );
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
@@ -1331,25 +1330,25 @@ class tx_caddy_pi1 extends tslib_pibase
       // change qty
     if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
     {
-      $this->div->changeQtyInSession($this); // change qty
+      $this->session->changeQtyInSession($this); // change qty
     }
 
       // change shipping
     if( isset( $this->piVars['shipping'] ) )
     {
-      $this->div->changeShippingInSession($this->piVars['shipping']); // change shipping
+      $this->session->changeShippingInSession($this->piVars['shipping']); // change shipping
     }
 
     // change payment
     if( isset( $this->piVars['payment'] ) )
     {
-      $this->div->changePaymentInSession($this->piVars['payment']); // change payment
+      $this->session->changePaymentInSession($this->piVars['payment']); // change payment
     }
 
       // change special
     if( isset( $this->piVars['special'] ) )
     {
-      $this->div->changeSpecialInSession($this->piVars['special']); // change payment
+      $this->session->changeSpecialInSession($this->piVars['special']); // change payment
     }
   }
 
@@ -1374,14 +1373,14 @@ class tx_caddy_pi1 extends tslib_pibase
   private function productAdd( )
   {
     // add further product to session
-    $this->newProduct = $this->div->getProductDetails( $this->gpvar, $this );
+    $this->newProduct = $this->session->getProductDetails( $this->gpvar, $this );
     if( $this->newProduct !== false )
     {
       $this->newProduct['qty']                  = $this->gpvar['qty'];
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->div->addProduct2Session( $this->newProduct, $this );
+      $this->session->addProduct2Session( $this->newProduct, $this );
     }
   }
 
@@ -1398,7 +1397,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // remove product from session
     if( isset( $this->piVars['del'] ) )
     {
-      $this->div->removeProductFromSession( $this );
+      $this->session->removeProductFromSession( $this );
     }
   }
 
@@ -1567,6 +1566,30 @@ class tx_caddy_pi1 extends tslib_pibase
     }
 
     return 0;
+  }
+  
+ /**
+  * zz_cObjGetSingle( )
+  *
+  * @return  string
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+  {
+    switch( true )
+    {
+      case( is_array( $cObj_conf ) ):
+        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        break;
+      case( ! ( is_array( $cObj_conf ) ) ):
+      default:
+        $value = $cObj_name;
+        break;
+    }
+      
+    return $value;
   }
 
   /**

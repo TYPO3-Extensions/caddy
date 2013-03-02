@@ -27,7 +27,7 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_div.php'); // file for div functions
+require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_session.php'); // file for div functions
 require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
 
 /**
@@ -58,7 +58,7 @@ class tx_caddy_pi3 extends tslib_pibase {
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-		$this->div = t3lib_div::makeInstance('tx_caddy_div'); // Create new instance for div functions
+		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
 		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 
 		$this->tmpl['minicart'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template
@@ -69,12 +69,12 @@ class tx_caddy_pi3 extends tslib_pibase {
 		$flexformData = t3lib_div::xml2array($row['pi_flexform']);
 		$pid = $this->pi_getFFvalue($flexformData, 'pid', 'sDEF');
 		
-		$count = $this->div->countProductsInCart($pid);
+		$count = $this->session->countProductsInCart($pid);
 		
 		if ($count) {
 			$outerArr = array(
 				'count' => $count,
-				'minicart_gross' => $this->div->getGrossPrice($pid)
+				'minicart_gross' => $this->session->getGrossPrice($pid)
 			);
 			$local_cObj->start($outerArr, $this->conf['db.']['table']);
 			foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
