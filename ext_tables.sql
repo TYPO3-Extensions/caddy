@@ -37,7 +37,7 @@ CREATE TABLE tx_caddy_order (
   deleted tinyint(4) DEFAULT '0' NOT NULL,
 
   net double(11,2) DEFAULT '0.00' NOT NULL,
-  tax int(11) DEFAULT '0' NOT NULL,
+  tax double(11) DEFAULT '0' NOT NULL,
   gross double(11,2) DEFAULT '0.00' NOT NULL,
   quantity int(11) DEFAULT '0' NOT NULL,
 
