@@ -766,7 +766,7 @@ plugin.tx_caddy_pi3 {
   //
   // plugin.tx_powermail_pi1
 
-plugin.tx_powermail_pi1 {
+XXX_plugin.tx_powermail_pi1 {
   XXX_dynamicTyposcript {
     caddy = USER
     caddy {
