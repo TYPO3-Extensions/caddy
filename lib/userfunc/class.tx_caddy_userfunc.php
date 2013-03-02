@@ -84,7 +84,7 @@ class tx_caddy_userfunc
   */
   public $typo3Version = null;
   
-  private $drs        = null;
+  public $drs        = null;
   private $pid        = null;
   private $pObj       = null;
   private $powermail  = null;
