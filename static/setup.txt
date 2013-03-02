@@ -775,7 +775,7 @@ plugin.tx_powermail_pi1 {
     }
     clearcart = USER
     clearcart {
-      userFunc = tx_caddy_session->sessionDelete
+      userFunc = user_caddy_powermailCart->sessionDelete
     }
   }
 }
