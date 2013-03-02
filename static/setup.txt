@@ -796,6 +796,10 @@ plugin.tx_powermail_pi1 {
           }
         }
         45967 >
+          45967 = USER
+          45967 {
+            userFunc = tx_caddy_powermail->sendInvoiceToVendor
+          }
       }
     }
   }
