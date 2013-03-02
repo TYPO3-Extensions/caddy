@@ -85,7 +85,7 @@ class user_caddy_powermailCart extends tslib_pibase
 		
 
 		// read all products from session
-		$this->product = $this->session->getProductsFromSession();
+		$this->product = $this->session->productsGet();
 		if (count($this->product) > 0)
 		{ // if there are products in the session
 			foreach ((array) $this->product as $product)
@@ -127,7 +127,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			$cartNetNoService = $cartNet;
 
 			// calculate pice incl. shipping
-			$shipping_id = $this->session->getShippingFromSession();
+			$shipping_id = $this->session->shippingGet();
 
 			if ($shipping_id) {
 				$shipping_values	= $this->calc->calculateOptionById($this->conf, 'shipping', $shipping_id, $this);
@@ -145,7 +145,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			}
 
 			// calculate pice incl. payment
-			$payment_id = $this->session->getPaymentFromSession();
+			$payment_id = $this->session->paymentGet();
 			
 			if ($payment_id) {
 				$payment_values		= $this->calc->calculateOptionById($this->conf, 'payment', $payment_id, $this);
@@ -166,7 +166,7 @@ class user_caddy_powermailCart extends tslib_pibase
 			}
 
 			// calculate pice incl. specials
-			$special_ids = $this->session->getSpecialFromSession();
+			$special_ids = $this->session->specialGet();
 			
 			$overall_special_gross = 0.0;
 			$overall_special_net = 0.0;
@@ -203,7 +203,7 @@ class user_caddy_powermailCart extends tslib_pibase
 				'shipping_option' => $shipping_option,
 				'payment_option' => $payment_option,
 				'special_option' => $overall_special_option,
-				'ordernumber' => $this->session->getOrderNumberFromSession()
+				'ordernumber' => $this->session->ordernumberGet()
 			);
 			$local_cObj->start($outerArr, $this->conf['db.']['table']); // enable .field in typoscript
 			

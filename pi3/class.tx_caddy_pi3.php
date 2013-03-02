@@ -74,7 +74,7 @@ class tx_caddy_pi3 extends tslib_pibase {
 		if ($count) {
 			$outerArr = array(
 				'count' => $count,
-				'minicart_gross' => $this->session->getGrossPrice($pid)
+				'minicart_gross' => $this->session->productsGetGross($pid)
 			);
 			$local_cObj->start($outerArr, $this->conf['db.']['table']);
 			foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)

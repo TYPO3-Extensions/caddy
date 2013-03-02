@@ -67,7 +67,7 @@ class tx_caddy_session extends tslib_pibase
     * @param array   $pobj: Parent Object
     * @return  void
     */
-    public function addProduct2Session($parray, $pObj)
+    public function productAdd($parray, $pObj)
     {
         // return without price or without title
         if (empty($parray['price']) || empty($parray['title'])) 
@@ -201,11 +201,11 @@ class tx_caddy_session extends tslib_pibase
   * @version  2.0.0
   * @since    1.4.6
   */
-  public function removeProductFromSession($pObj)
+  public function productDelete($pObj)
   {
     // variants
     // add variant key/value pairs from piVars
-    $arr_variant = $this->get_variant_from_piVars($pObj);
+    $arr_variant = $this->productGetVariantGpvar($pObj);
     // add product id to variant array
     $arr_variant['puid'] = $pObj->piVars['del'];
 
@@ -265,11 +265,11 @@ class tx_caddy_session extends tslib_pibase
     * @return  void
     * @version 1.2.2
     */
-    public function changeQtyInSession($pObj)
+    public function quantityUpdate($pObj)
     {
         // variants
         // add variant key/value pairs from piVars
-        $arr_variant = $this->get_variant_from_qty($pObj);
+        $arr_variant = $this->quantitityGetVariant($pObj);
 
         // get products from session
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
@@ -300,7 +300,7 @@ class tx_caddy_session extends tslib_pibase
                     $sesArray['products'][$key_session] = $this->checkQuantityMinMax($sesArray['products'][$key_session]);
                 } else {
                     // remove product from session
-                    $this->removeProductFromSession($sesArray['products'][$key_session]['puid']);
+                    $this->productDelete($sesArray['products'][$key_session]['puid']);
                     // remove product from current session array
                     unset($sesArray['products'][$key_session]);
                 }
@@ -373,7 +373,7 @@ class tx_caddy_session extends tslib_pibase
                             }
                         } else {
                             // remove product from session
-                            $this->removeProductFromSession($sesArray['products'][$key_session]['puid']);
+                            $this->productDelete($sesArray['products'][$key_session]['puid']);
                             // remove product from current session array
                             unset($sesArray['products'][$key_session]);
                         }
@@ -398,7 +398,7 @@ class tx_caddy_session extends tslib_pibase
     * @param array     $arr: array to change
     * @return  void
     */
-    public function changeShippingInSession($value)
+    public function shippingUpdate($value)
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -413,7 +413,7 @@ class tx_caddy_session extends tslib_pibase
     *
     * @return  integer
     */
-    public function getShippingFromSession()
+    public function shippingGet( )
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -426,7 +426,7 @@ class tx_caddy_session extends tslib_pibase
     * @param array     $arr: array to change
     * @return  void
     */
-    public function changePaymentInSession($value)
+    public function paymentUpdate($value)
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -441,7 +441,7 @@ class tx_caddy_session extends tslib_pibase
     *
     * @return  integer
     */
-    public function getPaymentFromSession()
+    public function paymentGet()
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -454,7 +454,7 @@ class tx_caddy_session extends tslib_pibase
     * @param array     $arr: array to change
     * @return  void
     */
-    public function changeSpecialInSession($special_arr)
+    public function specialChange($special_arr)
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -469,7 +469,7 @@ class tx_caddy_session extends tslib_pibase
     *
     * @return  integer
     */
-    public function getSpecialFromSession()
+    public function specialGet()
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -481,36 +481,37 @@ class tx_caddy_session extends tslib_pibase
     *
     * @return  array   $arr: array with all products from session
     */
-    public function getProductsFromSession()
+    public function productsGet()
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         return $sesArray['products'];
     }
     
-    /**
-    * Count products in a cart
-    *
-    * @return  integer
-    */
-    public function countProductsInCart($pid)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
-
-        $count = 0;
-        foreach ((array) $sesArray['products'] as $key => $val) {
-            $count += $val['qty'];
-        }
-
-        return $count;
-    }
-    
-    /**
+//    /**
+//    * Count products in a cart
+//    *
+//    * @return  integer
+//    */
+//    public function countProductsInCart($pid)
+//    {
+//        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
+//
+//        $count = 0;
+//        foreach ((array) $sesArray['products'] as $key => $val) {
+//            $count += $val['qty'];
+//        }
+//
+//        return $count;
+//    }
+//    
+   /**
     * Count gross price of all products in a cart
+    * Is used by pi3 only
     *
     * @return  integer
     */
-    public function getGrossPrice($pid)
+    public function productsGetGross($pid)
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
 
@@ -528,7 +529,7 @@ class tx_caddy_session extends tslib_pibase
     * @param array     $arr: array to change
     * @return  void
     */
-    public function getOrderNumberFromSession()
+    public function ordernumberGet()
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
@@ -537,7 +538,7 @@ class tx_caddy_session extends tslib_pibase
 
     /**
     * read product details (title, price from table)
-    * the method getProductDetails of version 1.2.1 became getProductDetails_ts from version 1.2.2
+    * the method productGetDetails of version 1.2.1 became productGetDetailsTs from version 1.2.2
     *
     * @param array   $gpvar: array with product uid, title, tax, etc...
     * @param array   $pobj: Parent Object
@@ -545,28 +546,29 @@ class tx_caddy_session extends tslib_pibase
     * @version 1.2.2
     * @since 1.2.2
     */
-    public function getProductDetails($gpvar, $pObj)
+    public function productGetDetails($gpvar, $pObj)
     {
         // build own sql query
         // handle query by db.sql
         if (!empty($pObj->conf['db.']['sql'])) {
-            return $this->getProductDetails_sql($gpvar, $pObj);
+            return $this->productGetDetailsSql($gpvar, $pObj);
         }
 
         // handle query by db.table and db.fields
-        return $this->getProductDetails_ts($gpvar, $pObj);
+        return $this->productGetDetailsTs($gpvar, $pObj);
     }
 
-    /**
+   /**
     * read product details by a manually configured sql query
     *
     * @param array   $gpvar: array with product uid, title, tax, etc...
     * @param array   $pobj: Parent Object
     * @return  array   $arr: array with title and price
-    * @version 1.4.5
-    * @since 1.2.2
+    * @access private
+    * @version 2.0.0
+    * @since 1.4.6
     */
-    public function getProductDetails_sql($gpvar, $pObj)
+    private function productGetDetailsSql($gpvar, $pObj)
     {
         if ((!t3lib_div::_GET()) && (!t3lib_div::_POST()))
         {
@@ -574,7 +576,7 @@ class tx_caddy_session extends tslib_pibase
         }
 
         // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
-        $this->_replace_marker_in_sql($gpvar, $pObj);
+        $this->sqlReplaceMarker($gpvar, $pObj);
                   // #42154, 101218, dwildt, 1-
                 //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
                   // #42154, 101218, dwildt, 1+
@@ -610,14 +612,17 @@ class tx_caddy_session extends tslib_pibase
         return false;
     }
 
-    /**
+   /**
     * read product details (title, price from table)
     *
     * @param array   $gpvar: array with product uid, title, tax, etc...
     * @param array   $pobj: Parent Object
     * @return  array   $arr: array with title and price
+    * @access private
+    * @version 2.0.0
+    * @since 1.4.6
     */
-    public function getProductDetails_ts($gpvar, $pObj)
+    private function productGetDetailsTs($gpvar, $pObj)
     {
         if (!empty($gpvar['title']) && !empty($gpvar['price']) && !empty($gpvar['tax']))
         { // all values already filled via POST or GET param
@@ -790,82 +795,9 @@ class tx_caddy_session extends tslib_pibase
         }
     }
     
-    /**
-    * add_variant_gpvar_to_imagelinkwrap():  Adds all table.field of the variant to
-    *                                          imageLinkWrap.typolink.additionalParams.wrap
-    *
-    * @param array   $product: array with product uid, title, tax, etc...
-    * @param string   $ts_key: key of the current TypoScript configuration array
-    * @param array   $ts_conf: the current TypoScript configuration array
-    * @param array   $pobj: Parent Object
-    * @return  array  $ts_conf: configuration array added with the varaition gpvars
-    * @version 1.2.2
-    * @since 1.2.2
-    */
-    public function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
-    {
-        // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
-        {
-            return $ts_conf;
-        }
-
-        // get all variant key/value pairs from the current product
-        $array_add_gpvar = $this->get_variant_from_product($product, $pObj);
-
-        // add variant key/value pairs to imageLinkWrap
-        foreach ((array) $array_add_gpvar as $key => $value)
-        {
-            $str_wrap = $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'];
-            $str_wrap = $str_wrap . '&' . $this->prefixId . '[' . $key . ']=' . $value;
-            $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'] = $str_wrap;
-        }
-
-        return $ts_conf;
-    }
 
     /**
-    * add_qty_marker():  Allocates to the global markerArray a value for ###QTY_NAME###
-    *                          in case of variant
-    *                          It returns in aray with hidden fields like
-    *                          <input type="hidden" 
-    *                                 name="tx_caddy_pi1[puid][20][]" 
-    *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
-    *
-    * @param array   $products: array with products with elements uid, title, tax, etc...
-    * @param array   $markerArray: current marker array
-    * @param array   $pobj: Parent Object
-    * @return  array   $markerArray: with added element ###VARIANTS### in case of variants
-    * @version 1.2.2
-    * @since 1.2.2
-    */
-    public function add_qtyname_marker($product, $markerArray, $pObj)
-    {
-        // default name for QTY. It is compatible with version 1.2.1
-        $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty][' . $product['puid'] . ']';
-
-        // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
-        {
-            return $markerArray;
-        }
-
-        $str_marker = null;
-        // get all variant key/value pairs from the current product
-        $array_add_gpvar = $this->get_variant_from_product($product, $pObj);
-        $array_add_gpvar['puid']  = $product['puid'];
-        // generate the marker array
-        foreach ((array) $array_add_gpvar as $key => $value)
-        {
-            $str_marker = $str_marker . '[' . $key . '=' . $value . ']';
-        }
-        $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty]'. $str_marker;
-
-        return $markerArray;
-    }
-
-    /**
-    * get_variant_from_product():  Get an array with the variant values
+    * productGetVariantTs():  Get an array with the variant values
     *                                out of the current product
     *
     * @param array   $product: array with product uid, title, tax, etc...
@@ -874,7 +806,7 @@ class tx_caddy_session extends tslib_pibase
     * @version 1.2.2
     * @since 1.2.2
     */
-    private function get_variant_from_product($product, $pObj)
+    private function productGetVariantTs($product, $pObj)
     {
         $arr_variants = null;
 
@@ -902,18 +834,19 @@ class tx_caddy_session extends tslib_pibase
         return $arr_variants;
     }
 
-    /**
-    * get_variant_from_piVars(): Get variant values from piVars
+   /**
+    * productGetVariantGpvar(): Get variant values from piVars
     *                              variant values have to be content of
     *                              ts array variant and of piVars
     *
     * @param array   $product: array with product uid, title, tax, etc...
     * @param array   $pobj: Parent Object
     * @return  array   $arr_variants: array with variant key/value pairs
-    * @version 1.2.2
-    * @since 1.2.2
+    * @access private
+    * @version 2.0.0
+    * @since 1.4.6
     */
-    private function get_variant_from_piVars($pObj)
+    private function productGetVariantGpvar($pObj)
     {
         $arr_variant = null;
 
@@ -938,18 +871,19 @@ class tx_caddy_session extends tslib_pibase
         return $arr_variant;
     }
 
-    /**
-    * get_variant_from_qty(): Get variant values out of the name of the qty field
+   /**
+    * quantitityGetVariant(): Get variant values out of the name of the qty field
     *                              variant values have to be content of
     *                              ts array variant and of qty field
     *
     * @param array   $product: array with product uid, title, tax, etc...
     * @param array   $pobj: Parent Object
     * @return  array   $arr_variants: array with variant key/value pairs
-    * @version 1.2.2
-    * @since 1.2.2
+    * @access private
+    * @version 2.0.0
+    * @since 1.4.6
     */
-    private function get_variant_from_qty($pObj)
+    private function quantitityGetVariant($pObj)
     {
         $arr_variant = null;
 
@@ -1017,7 +951,7 @@ class tx_caddy_session extends tslib_pibase
     }
 
     /**
-    * _replace_marker_in_sql(): Replace marker in the SQL query
+    * sqlReplaceMarker(): Replace marker in the SQL query
     *                             MARKERS are
     *                             - GET/POST markers
     *                             - enable_field markers
@@ -1032,7 +966,7 @@ class tx_caddy_session extends tslib_pibase
     * @version 1.4.5
     * @since 1.2.2
     */
-    private function _replace_marker_in_sql($gpvar, $pObj)
+    private function sqlReplaceMarker($gpvar, $pObj)
     {
         // set marker array with values from GET
         foreach (t3lib_div::_GET() as $table => $arr_fields) 

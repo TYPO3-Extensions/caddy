@@ -215,7 +215,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // read all products from session
-    $this->product = $this->session->getProductsFromSession();
+    $this->product = $this->session->productsGet();
 
     switch( true )
     {
@@ -421,7 +421,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function caddyWiProductsItem( $contentItem )
   {
       // item for payment
-    $paymentId = $this->session->getPaymentFromSession( );
+    $paymentId = $this->session->paymentGet( );
     if( $paymentId )
     {
       $this->markerArray['###QTY###']         = 1;
@@ -453,19 +453,19 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $paymentId = $this->session->getPaymentFromSession();
+    $paymentId = $this->session->paymentGet();
 
     if( ! $paymentId )
     {
       $paymentId = intval( $this->conf['payment.']['preset'] );
-      $this->session->changePaymentInSession( $paymentId );
+      $this->session->paymentUpdate( $paymentId );
     }
       // check if selected payment option is available
     $newpaymentId = $this->zz_checkOptionIsNotAvailable( 'payment', $paymentId );
     if( $newpaymentId )
     {
       $paymentId = $newpaymentId;
-      $this->session->changePaymentInSession( $newpaymentId );
+      $this->session->paymentUpdate( $newpaymentId );
     }
 
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
@@ -672,7 +672,7 @@ class tx_caddy_pi1 extends tslib_pibase
       switch( $key )
       {
         case('delete'):
-          $ts_conf = $this->session->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
+          $ts_conf = $this->add_variant_gpvar_to_imagelinkwrap( $product, $ts_key, $ts_conf, $this );
           break;
         default:
           // nothing to do, there is no default now
@@ -689,7 +689,7 @@ class tx_caddy_pi1 extends tslib_pibase
         // DRS
 
       // adds the ###QTY_NAME### marker in case of variants
-      $this->markerArray = $this->session->add_qtyname_marker($product, $this->markerArray, $this);
+      $this->markerArray = $this->add_qtyname_marker($product, $this->markerArray, $this);
     }
       // FOREACH  : settings property
 //var_dump( __METHOD__, __LINE__, $this->markerArray );
@@ -761,19 +761,19 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $shippingId = $this->session->getShippingFromSession();
+    $shippingId = $this->session->shippingGet();
 
     if( ! $shippingId )
     {
       $shippingId = intval( $this->conf['shipping.']['preset'] );
-      $this->session->changeShippingInSession( $shippingId );
+      $this->session->shippingUpdate( $shippingId );
     }
       // check if selected shipping option is available
     $newshippingId = $this->zz_checkOptionIsNotAvailable( 'shipping', $shippingId );
     if( $newshippingId )
     {
       $shippingId = $newshippingId;
-      $this->session->changeShippingInSession( $newshippingId );
+      $this->session->shippingUpdate( $newshippingId );
     }
 
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
@@ -805,7 +805,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = null;
 
-    $specialIds = $this->session->getSpecialFromSession( );
+    $specialIds = $this->session->specialGet( );
 
     $caddyTaxReduced       = 0.0;
     $caddyTaxNormal        = 0.0;
@@ -907,7 +907,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // output debug prompt
     t3lib_div::debug
     (
-      $this->session->getProductsFromSession(), $this->extKey . ': ' . 'Values in session at the beginning'
+      $this->session->productsGet(), $this->extKey . ': ' . 'Values in session at the beginning'
     );
     t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
     t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
@@ -1330,25 +1330,25 @@ class tx_caddy_pi1 extends tslib_pibase
       // change qty
     if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
     {
-      $this->session->changeQtyInSession($this); // change qty
+      $this->session->quantityUpdate($this); // change qty
     }
 
       // change shipping
     if( isset( $this->piVars['shipping'] ) )
     {
-      $this->session->changeShippingInSession($this->piVars['shipping']); // change shipping
+      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
     }
 
     // change payment
     if( isset( $this->piVars['payment'] ) )
     {
-      $this->session->changePaymentInSession($this->piVars['payment']); // change payment
+      $this->session->paymentUpdate($this->piVars['payment']); // change payment
     }
 
       // change special
     if( isset( $this->piVars['special'] ) )
     {
-      $this->session->changeSpecialInSession($this->piVars['special']); // change payment
+      $this->session->specialChange($this->piVars['special']); // change payment
     }
   }
 
@@ -1373,14 +1373,14 @@ class tx_caddy_pi1 extends tslib_pibase
   private function productAdd( )
   {
     // add further product to session
-    $this->newProduct = $this->session->getProductDetails( $this->gpvar, $this );
+    $this->newProduct = $this->session->productGetDetails( $this->gpvar, $this );
     if( $this->newProduct !== false )
     {
       $this->newProduct['qty']                  = $this->gpvar['qty'];
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->session->addProduct2Session( $this->newProduct, $this );
+      $this->session->productAdd( $this->newProduct, $this );
     }
   }
 
@@ -1397,7 +1397,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // remove product from session
     if( isset( $this->piVars['del'] ) )
     {
-      $this->session->removeProductFromSession( $this );
+      $this->session->productDelete( $this );
     }
   }
 
@@ -1566,6 +1566,82 @@ class tx_caddy_pi1 extends tslib_pibase
     }
 
     return 0;
+  }
+
+ /**
+  * add_qty_marker():  Allocates to the global markerArray a value for ###QTY_NAME###
+  *                          in case of variant
+  *                          It returns in aray with hidden fields like
+  *                          <input type="hidden" 
+  *                                 name="tx_caddy_pi1[puid][20][]" 
+  *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
+  *
+  * @param array   $products: array with products with elements uid, title, tax, etc...
+  * @param array   $markerArray: current marker array
+  * @param array   $pobj: Parent Object
+  * @return  array   $markerArray: with added element ###VARIANTS### in case of variants
+  * @access private 
+  * @version 2.0.0
+  * @since 1.4.6
+  */
+  private function add_qtyname_marker($product, $markerArray, $pObj)
+  {
+      // default name for QTY. It is compatible with version 1.2.1
+      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty][' . $product['puid'] . ']';
+
+      // return there isn't any variant
+      if (!is_array($pObj->conf['settings.']['variant.']))
+      {
+          return $markerArray;
+      }
+
+      $str_marker = null;
+      // get all variant key/value pairs from the current product
+      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+      $array_add_gpvar['puid']  = $product['puid'];
+      // generate the marker array
+      foreach ((array) $array_add_gpvar as $key => $value)
+      {
+          $str_marker = $str_marker . '[' . $key . '=' . $value . ']';
+      }
+      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty]'. $str_marker;
+
+      return $markerArray;
+  }
+  
+ /**
+  * add_variant_gpvar_to_imagelinkwrap():  Adds all table.field of the variant to
+  *                                          imageLinkWrap.typolink.additionalParams.wrap
+  *
+  * @param array   $product: array with product uid, title, tax, etc...
+  * @param string   $ts_key: key of the current TypoScript configuration array
+  * @param array   $ts_conf: the current TypoScript configuration array
+  * @param array   $pobj: Parent Object
+  * @return  array  $ts_conf: configuration array added with the varaition gpvars
+  * @access private
+  * @version 2.0.0
+  * @since 1.4.6
+  */
+  private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+  {
+      // return there isn't any variant
+      if (!is_array($pObj->conf['settings.']['variant.']))
+      {
+          return $ts_conf;
+      }
+
+      // get all variant key/value pairs from the current product
+      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+
+      // add variant key/value pairs to imageLinkWrap
+      foreach ((array) $array_add_gpvar as $key => $value)
+      {
+          $str_wrap = $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'];
+          $str_wrap = $str_wrap . '&' . $this->prefixId . '[' . $key . ']=' . $value;
+          $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'] = $str_wrap;
+      }
+
+      return $ts_conf;
   }
   
  /**
