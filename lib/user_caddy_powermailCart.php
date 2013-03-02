@@ -39,7 +39,7 @@
 class user_caddy_powermailCart 
 {
 
-  $extKey = 'gaksjfhöaskdjgbaögkjb';
+  public $extKey = 'gaksjfhöaskdjgbagkjb';
   
   /**
   * read and return cart from session
