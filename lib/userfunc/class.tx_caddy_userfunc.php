@@ -91,7 +91,7 @@ class tx_caddy_userfunc
   private $pageObject = null;
   private $pluginPiFlexform = null;
   private $typoscriptObject = null;
-  private $userfunc   = null;
+  public $userfunc   = null;
 
 
 
