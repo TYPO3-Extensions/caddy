@@ -793,7 +793,11 @@ plugin.tx_powermail_pi1 {
         45968 {
           userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
         }
-        45967 >
+          // Caddy: Terms & Conditions
+        45969 = USER
+        45969 {
+          userFunc = tx_caddy_powermail->sendTermsToVendor
+        }
       }
     }
   }
