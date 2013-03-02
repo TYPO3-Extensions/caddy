@@ -199,6 +199,7 @@ $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
     'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
     'label'             => 'uid',  
+    'label_alt'         => 'gross,net',  
     'tstamp'            => 'tstamp',
     'crdate'            => 'crdate',
     'cruser_id'         => 'cruser_id',
