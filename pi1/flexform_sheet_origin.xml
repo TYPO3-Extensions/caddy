@@ -6,14 +6,6 @@
     </TCEforms>
     <type>array</type>
     <el>
-      <currIp>
-        <TCEforms>
-          <config>
-            <type>user</type>
-            <userFunc>tx_caddy_userfunc->promptCurrIP</userFunc>
-          </config>
-        </TCEforms>
-      </currIp>
       <invoice>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.invoice</label>
@@ -22,7 +14,7 @@
             <size>10</size>
             <max>20</max>
             <eval>int</eval>
-            <default>0</default>
+            <default>1</default>
           </config>
         </TCEforms>
       </invoice>
@@ -34,7 +26,7 @@
             <size>10</size>
             <max>20</max>
             <eval>int</eval>
-            <default>0</default>
+            <default>1</default>
           </config>
         </TCEforms>
       </deliveryorder>
