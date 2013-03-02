@@ -109,17 +109,19 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $accessByIP = null;
 
-  private $product = array();
+  private $product = array( );
 
-  private $newProduct = array();
+  private $newProduct = array( );
 
-  private $template = array();
+  private $template = array( );
 
-  private $markerArray = array();
+  private $markerArray = array( );
 
-  private $outerMarkerArray = array();
+  private $outerMarkerArray = array( );
 
-  private $gpvar = array();
+  private $gpvar = array( );
+
+  private $pid = null;
 
 
 
@@ -1051,6 +1053,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initInstances( );
     $this->drs->init( );
     $this->initFlexform( );
+    $this->initPid( );
     $this->initAccessByIp( );
     $this->initHtmlTemplate( );
     $this->initServiceAttributes( );
@@ -1101,6 +1104,45 @@ class tx_caddy_pi1 extends tslib_pibase
         break;
     }
       // DRS
+  }
+
+
+/**
+ * initPid( ) :
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function initPid( )
+  {
+    $pid = ( int ) $this->conf['main']['pid'];
+    
+    switch( true )
+    {
+      case( ! empty( $pid ) ):
+        $this->pid = $pid;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'pid is taken from main.pid and is set to ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+      case( empty( $pid ) ):
+      default:
+        $this->pid = $GLOBALS['TSFE']->id;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'main.pid is empty. pid is set to the id of the current page: ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+    }
+
   }
 
  /**
