@@ -59,6 +59,7 @@ class tx_caddy_pi3 extends tslib_pibase {
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
 		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
+                $this->session->pObj    = $this;
 		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 
 		$this->tmpl['minicart'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template

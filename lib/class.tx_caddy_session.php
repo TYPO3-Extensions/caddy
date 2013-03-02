@@ -41,18 +41,18 @@
  *  166:     public function paymentGet()
  *
  *              SECTION: Product
- *  197:     public function productAdd( $parray, $pObj )
- *  303:     public function productDelete($pObj)
- *  359:     public function productGetDetails($gpvar, $pObj)
- *  381:     private function productGetDetailsSql($gpvar, $pObj)
- *  435:     private function productGetDetailsTs($gpvar, $pObj)
- *  534:     private function productGetVariantGpvar( $pObj )
- *  568:     private function productGetVariantTs($product, $pObj)
+ *  197:     public function productAdd( $parray,  )
+ *  303:     public function productDelete()
+ *  359:     public function productGetDetails($gpvar, )
+ *  381:     private function productGetDetailsSql($gpvar, )
+ *  435:     private function productGetDetailsTs($gpvar, )
+ *  534:     private function productGetVariantGpvar(  )
+ *  568:     private function productGetVariantTs($product, )
  *  601:     public function productsGet()
  *  615:     public function productsGetGross( $pid )
  *  646:     private function quantityCheckMinMax( $parray )
- *  680:     private function quantityGetVariant($pObj)
- *  755:     public function quantityUpdate($pObj)
+ *  680:     private function quantityGetVariant()
+ *  755:     public function quantityUpdate()
  *
  *              SECTION: Shipping
  *  896:     public function shippingUpdate($value)
@@ -64,7 +64,7 @@
  *
  *              SECTION: ZZ
  *  975:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1037:     private function zz_sqlReplaceMarker( $pObj )
+ * 1037:     private function zz_sqlReplaceMarker(  )
  *
  * TOTAL FUNCTIONS: 21
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -91,9 +91,8 @@ class tx_caddy_session
     // Path to any file in pi1 for locallang
     public $extKey = 'caddy'; // The extension key.
 
-      // #45775, 130224, dwildt, 2+
-      // Object: the parent cObject
-    public $cObj = null;
+      // Object: the parent object
+    public $pObj = null;
 
 //    /**
 //    * Count products in a cart
@@ -191,10 +190,9 @@ class tx_caddy_session
  *    )
  *
  * @param	array		$parray: product array like
- * @param	array		$pobj: Parent Object
  * @return	void
  */
-    public function productAdd( $parray, $pObj )
+    public function productAdd( $parray )
     {
       $arr_variant = null;
 
@@ -210,11 +208,11 @@ class tx_caddy_session
       $arr_variant['puid'] = $parray['puid'];
       // add variant keys from ts settings.variants array,
       //  if there is a corresponding key in GET or POST
-      if (is_array($pObj->conf['settings.']['variant.']))
+      if (is_array($this->pObj->conf['settings.']['variant.']))
       {
           $arr_get  = t3lib_div::_GET();
           $arr_post = t3lib_div::_POST();
-          foreach($pObj->conf['settings.']['variant.'] as $key => $tableField)
+          foreach($this->pObj->conf['settings.']['variant.'] as $key => $tableField)
           {
               list($table, $field) = explode('.', $tableField);
               if(isset($arr_get[$table][$field]))
@@ -295,18 +293,17 @@ class tx_caddy_session
  /**
   * Remove product from session with given uid
   *
-  * @param	array		$pobj: Parent Object
   * @return	void
   * @version  2.0.0
   * @since    1.4.6
   */
-  public function productDelete($pObj)
+  public function productDelete( )
   {
     // variants
     // add variant key/value pairs from piVars
-    $arr_variant = $this->productGetVariantGpvar($pObj);
+    $arr_variant = $this->productGetVariantGpvar( );
     // add product id to variant array
-    $arr_variant['puid'] = $pObj->piVars['del'];
+    $arr_variant['puid'] = $this->pObj->piVars['del'];
 
     // get products from session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
@@ -351,34 +348,32 @@ class tx_caddy_session
  * the method productGetDetails of version 1.2.1 became productGetDetailsTs from version 1.2.2
  *
  * @param	array		$gpvar: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr: array with title and price
  * @version 1.2.2
  * @since 1.2.2
  */
-    public function productGetDetails($gpvar, $pObj)
+    public function productGetDetails($gpvar)
     {
         // build own sql query
         // handle query by db.sql
-        if (!empty($pObj->conf['db.']['sql'])) {
-            return $this->productGetDetailsSql($gpvar, $pObj);
+        if (!empty($this->pObj->conf['db.']['sql'])) {
+            return $this->productGetDetailsSql($gpvar);
         }
 
         // handle query by db.table and db.fields
-        return $this->productGetDetailsTs($gpvar, $pObj);
+        return $this->productGetDetailsTs($gpvar);
     }
 
    /**
  * read product details by a manually configured sql query
  *
  * @param	array		$gpvar: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr: array with title and price
  * @access private
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function productGetDetailsSql($gpvar, $pObj)
+    private function productGetDetailsSql($gpvar)
     {
         if ((!t3lib_div::_GET()) && (!t3lib_div::_POST()))
         {
@@ -386,11 +381,11 @@ class tx_caddy_session
         }
 
         // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
-        $this->zz_sqlReplaceMarker( $pObj );
+        $this->zz_sqlReplaceMarker( );
                   // #42154, 101218, dwildt, 1-
                 //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
                   // #42154, 101218, dwildt, 1+
-                $query = $pObj->cObj->cObjGetSingle($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
+                $query = $this->pObj->cObj->cObjGetSingle($this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.']);
         // execute the query
         $res = $GLOBALS['TYPO3_DB']->sql_query($query);
         $error = $GLOBALS['TYPO3_DB']->sql_error();
@@ -426,13 +421,12 @@ class tx_caddy_session
  * read product details (title, price from table)
  *
  * @param	array		$gpvar: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr: array with title and price
  * @access private
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function productGetDetailsTs($gpvar, $pObj)
+    private function productGetDetailsTs($gpvar)
     {
         if (!empty($gpvar['title']) && !empty($gpvar['price']) && !empty($gpvar['tax']))
         { // all values already filled via POST or GET param
@@ -445,31 +439,31 @@ class tx_caddy_session
             return false;
         }
 
-        $table    = $pObj->conf['db.']['table'];
-        $select = $table . '.' . $pObj->conf['db.']['title'] . ', ' . $table . '.' . $pObj->conf['db.']['price'] . ', ' . $table . '.' . $pObj->conf['db.']['tax'];
-        if ($pObj->conf['db.']['sku'] != '' && $pObj->conf['db.']['sku'] != '{$plugin.caddy.db.sku}')
+        $table    = $this->pObj->conf['db.']['table'];
+        $select = $table . '.' . $this->pObj->conf['db.']['title'] . ', ' . $table . '.' . $this->pObj->conf['db.']['price'] . ', ' . $table . '.' . $this->pObj->conf['db.']['tax'];
+        if ($this->pObj->conf['db.']['sku'] != '' && $this->pObj->conf['db.']['sku'] != '{$plugin.caddy.db.sku}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['sku'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['sku'];
         }
-        if ($pObj->conf['db.']['min'] != '' && $pObj->conf['db.']['min'] != '{$plugin.caddy.db.min}')
+        if ($this->pObj->conf['db.']['min'] != '' && $this->pObj->conf['db.']['min'] != '{$plugin.caddy.db.min}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['min'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['min'];
         }
-        if ($pObj->conf['db.']['max'] != '' && $pObj->conf['db.']['max'] != '{$plugin.caddy.db.max}')
+        if ($this->pObj->conf['db.']['max'] != '' && $this->pObj->conf['db.']['max'] != '{$plugin.caddy.db.max}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['max'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['max'];
         }
-        if ($pObj->conf['db.']['service_attribute_1'] != '' && $pObj->conf['db.']['service_attribute_1'] != '{$plugin.caddy.db.service_attribute_1}')
+        if ($this->pObj->conf['db.']['service_attribute_1'] != '' && $this->pObj->conf['db.']['service_attribute_1'] != '{$plugin.caddy.db.service_attribute_1}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['service_attribute_1'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_1'];
         }
-        if ($pObj->conf['db.']['service_attribute_2'] != '' && $pObj->conf['db.']['service_attribute_2'] != '{$plugin.caddy.db.service_attribute_2}')
+        if ($this->pObj->conf['db.']['service_attribute_2'] != '' && $this->pObj->conf['db.']['service_attribute_2'] != '{$plugin.caddy.db.service_attribute_2}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['service_attribute_2'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_2'];
         }
-        if ($pObj->conf['db.']['service_attribute_3'] != '' && $pObj->conf['db.']['service_attribute_3'] != '{$plugin.caddy.db.service_attribute_3}')
+        if ($this->pObj->conf['db.']['service_attribute_3'] != '' && $this->pObj->conf['db.']['service_attribute_3'] != '{$plugin.caddy.db.service_attribute_3}')
         {
-            $select .= ', ' . $table . '.' . $pObj->conf['db.']['service_attribute_3'];
+            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_3'];
         }
         $where = ' ( ' . $table . '.uid = ' . $puid . ' OR l10n_parent = '.$puid . ' ) AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid;
         $where .= tslib_cObj::enableFields($table);
@@ -483,34 +477,34 @@ class tx_caddy_session
         {
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
             $arr = array (
-                'title' => $row[$pObj->conf['db.']['title']],
-                'price' => $row[$pObj->conf['db.']['price']],
-                'tax'   => $row[$pObj->conf['db.']['tax']],
+                'title' => $row[$this->pObj->conf['db.']['title']],
+                'price' => $row[$this->pObj->conf['db.']['price']],
+                'tax'   => $row[$this->pObj->conf['db.']['tax']],
                 'puid'  => $gpvar['puid']
             );
-            if ($row[$pObj->conf['db.']['sku']])
+            if ($row[$this->pObj->conf['db.']['sku']])
             {
-                $arr['sku'] = $row[$pObj->conf['db.']['sku']];
+                $arr['sku'] = $row[$this->pObj->conf['db.']['sku']];
             }
-            if ($row[$pObj->conf['db.']['min']])
+            if ($row[$this->pObj->conf['db.']['min']])
             {
-                $arr['min'] = $row[$pObj->conf['db.']['min']];
+                $arr['min'] = $row[$this->pObj->conf['db.']['min']];
             }
-            if ($row[$pObj->conf['db.']['max']])
+            if ($row[$this->pObj->conf['db.']['max']])
             {
-                $arr['max'] = $row[$pObj->conf['db.']['max']];
+                $arr['max'] = $row[$this->pObj->conf['db.']['max']];
             }
-            if ($row[$pObj->conf['db.']['service_attribute_1']])
+            if ($row[$this->pObj->conf['db.']['service_attribute_1']])
             {
-                $arr['service_attribute_1'] = $row[$pObj->conf['db.']['service_attribute_1']];
+                $arr['service_attribute_1'] = $row[$this->pObj->conf['db.']['service_attribute_1']];
             }
-            if ($row[$pObj->conf['db.']['service_attribute_2']])
+            if ($row[$this->pObj->conf['db.']['service_attribute_2']])
             {
-                $arr['service_attribute_2'] = $row[$pObj->conf['db.']['service_attribute_2']];
+                $arr['service_attribute_2'] = $row[$this->pObj->conf['db.']['service_attribute_2']];
             }
-            if ($row[$pObj->conf['db.']['service_attribute_3']])
+            if ($row[$this->pObj->conf['db.']['service_attribute_3']])
             {
-                $arr['service_attribute_3'] = $row[$pObj->conf['db.']['service_attribute_3']];
+                $arr['service_attribute_3'] = $row[$this->pObj->conf['db.']['service_attribute_3']];
             }
 
             return $arr;
@@ -525,30 +519,29 @@ class tx_caddy_session
  *                              ts array variant and of piVars
  *
  * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr_variants: array with variant key/value pairs
  * @access private
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function productGetVariantGpvar( $pObj )
+    private function productGetVariantGpvar( )
     {
       $arr_variant = null;
 
       // return there isn't any variant
-      if (!is_array($pObj->conf['settings.']['variant.']))
+      if (!is_array($this->pObj->conf['settings.']['variant.']))
       {
         return $arr_variant;
       }
       // return there isn't any variant
 
       // loop through ts variant array
-      foreach( $pObj->conf['settings.']['variant.'] as $tableField )
+      foreach( $this->pObj->conf['settings.']['variant.'] as $tableField )
       {
         // piVars contain variant key
-        if (!empty($pObj->piVars[$tableField]))
+        if (!empty($this->pObj->piVars[$tableField]))
         {
-          $arr_variant[$tableField] = mysql_escape_string($pObj->piVars[$tableField]);
+          $arr_variant[$tableField] = mysql_escape_string($this->pObj->piVars[$tableField]);
         }
       }
 
@@ -560,24 +553,23 @@ class tx_caddy_session
  *                                out of the current product
  *
  * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr_variants: array with variant key/value pairs
  * @version 1.2.2
  * @since 1.2.2
  */
-    private function productGetVariantTs($product, $pObj)
+    private function productGetVariantTs($product)
     {
         $arr_variants = null;
 
         // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
+        if (!is_array($this->pObj->conf['settings.']['variant.']))
         {
             return $arr_variants;
         }
         // return there isn't any variant
 
         // loop through ts array variant
-        foreach ($pObj->conf['settings.']['variant.'] as $key_variant)
+        foreach ($this->pObj->conf['settings.']['variant.'] as $key_variant)
         {
             // product contains variant key from ts
             if (in_array($key_variant, array_keys($product)))
@@ -671,26 +663,25 @@ class tx_caddy_session
  *                              ts array variant and of qty field
  *
  * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
  * @return	array		$arr_variants: array with variant key/value pairs
  * @access private
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function quantityGetVariant($pObj)
+    private function quantityGetVariant( )
     {
       $arr_variant  = null;
       $arr_qty      = null;
 
         // RETURN : there isn't any variant
-      if( ! is_array($pObj->conf['settings.']['variant.'] ) )
+      if( ! is_array($this->pObj->conf['settings.']['variant.'] ) )
       {
         return $arr_variant;
       }
         // RETURN : there isn't any variant
 
       $int_counter = 0;
-      foreach( $pObj->piVars['qty'] as $key => $value )
+      foreach( $this->pObj->piVars['qty'] as $key => $value )
       {
         $arr_qty[$int_counter]['qty'][$key] = $value;
         $int_counter++;
@@ -732,7 +723,7 @@ class tx_caddy_session
         }
 
         // loop through ts variant array
-        foreach( $pObj->conf['settings.']['variant.'] as $key_variant => $tableField )
+        foreach( $this->pObj->conf['settings.']['variant.'] as $key_variant => $tableField )
         {
           // piVars contain variant key
           if( ! empty($arr_from_qty[$key][$tableField] ) )
@@ -748,20 +739,19 @@ class tx_caddy_session
     /**
  * Change quantity of a product in session
  *
- * @param	array		$pobj: Parent Object
  * @return	void
  * @version 1.2.2
  */
-    public function quantityUpdate($pObj)
+    public function quantityUpdate( )
     {
         // variants
         // add variant key/value pairs from piVars
-        $arr_variant = $this->quantityGetVariant($pObj);
+        $arr_variant = $this->quantityGetVariant( );
 
         // get products from session
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
 
-        $is_cart = intval($pObj->piVars['update_from_cart']);
+        $is_cart = intval($this->pObj->piVars['update_from_cart']);
 
         // loop every product
         foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
@@ -772,7 +762,7 @@ class tx_caddy_session
             if(!is_array($arr_variant))
             {
                 // no variant, nothing to loop
-                $int_qty = intval($pObj->piVars['qty'][$session_puid]);
+                $int_qty = intval($this->pObj->piVars['qty'][$session_puid]);
 
                 if ($int_qty > 0)
                 {
@@ -799,7 +789,7 @@ class tx_caddy_session
                     if (!isset($arr_variant[$key_variant]['puid']))
                     {
                         // without variant
-                        $curr_puid = key($pObj->piVars['qty']);
+                        $curr_puid = key($this->pObj->piVars['qty']);
                     }
                     if (isset($arr_variant[$key_variant]['puid']))
                     {
@@ -808,7 +798,7 @@ class tx_caddy_session
                     if (!isset($arr_variant[$key_variant]['qty']))
                     {
                         // without variant
-                        $int_qty = intval($pObj->piVars['qty'][$curr_puid]);
+                        $int_qty = intval($this->pObj->piVars['qty'][$curr_puid]);
                     }
                     if (isset($arr_variant[$key_variant]['qty']))
                     {
@@ -1029,12 +1019,11 @@ class tx_caddy_session
  *                             - ###GP:TABLE.FIELD###
  *                             - ###ENABLE_FIELD:TABLE.FIELD###
  *
- * @param	array		$pobj: Parent Object
  * @return	void
  * @version 1.4.5
  * @since 1.2.2
  */
-    private function zz_sqlReplaceMarker( $pObj )
+    private function zz_sqlReplaceMarker( )
     {
       $arr_result = null;
 
@@ -1076,7 +1065,7 @@ class tx_caddy_session
         // #42154, 101218, dwildt, 1-
       //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
         // #42154, 101218, dwildt, 1+
-      $query = $pObj->cObj->cObjGetSingle($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
+      $query = $this->pObj->cObj->cObjGetSingle($this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.']);
 
       // get all gp:marker out of the query
       $arr_gpMarker = array();
@@ -1118,8 +1107,8 @@ class tx_caddy_session
       // #42154, 121203, dwildt, 1-
 //    $pObj->conf['db.']['sql'] = $query;
       // #42154, 121203, dwildt, 2+
-      $pObj->conf['db.']['sql'] = 'TEXT';
-      $pObj->conf['db.']['sql.']['value'] = $query;
+      $this->pObj->conf['db.']['sql'] = 'TEXT';
+      $this->pObj->conf['db.']['sql.']['value'] = $query;
     }
 
 

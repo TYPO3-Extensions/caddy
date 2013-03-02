@@ -225,7 +225,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // read all products from session
-    $this->product = $this->session->productsGet();
+    $this->product = $this->session->productsGet( );
 
     switch( true )
     {
@@ -1280,7 +1280,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->powermail->pObj  = $this;
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
-    $this->session           = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session->pObj    = $this;
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
@@ -1340,7 +1341,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // change qty
     if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
     {
-      $this->session->quantityUpdate($this); // change qty
+      $this->session->quantityUpdate( ); // change qty
     }
 
       // change shipping
@@ -1383,14 +1384,14 @@ class tx_caddy_pi1 extends tslib_pibase
   private function productAdd( )
   {
     // add further product to session
-    $this->newProduct = $this->session->productGetDetails( $this->gpvar, $this );
+    $this->newProduct = $this->session->productGetDetails( $this->gpvar );
     if( $this->newProduct !== false )
     {
       $this->newProduct['qty']                  = $this->gpvar['qty'];
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->session->productAdd( $this->newProduct, $this );
+      $this->session->productAdd( $this->newProduct );
     }
   }
 
@@ -1407,7 +1408,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // remove product from session
     if( isset( $this->piVars['del'] ) )
     {
-      $this->session->productDelete( $this );
+      $this->session->productDelete( );
     }
   }
 
