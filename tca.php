@@ -59,27 +59,27 @@ $TCA['tx_caddy_order'] = array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.net',
       'config' => array (
-        'type' => 'input',
-        'size' => '30',
-        'eval' => 'trim',
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'double2,nospace',
       )
     ),
     'tax' => array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.tax',
       'config' => array (
-        'type' => 'input',
-        'size' => '30',
-        'eval' => 'trim',
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'double2,nospace',
       )
     ),
     'gross' => array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.gross',
       'config' => array (
-        'type' => 'text',
-        'cols' => '30',  
-        'rows' => '5',
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'double2,nospace',
       )
     ),
     'quantity' => array (
