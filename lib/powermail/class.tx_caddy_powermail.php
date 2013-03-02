@@ -181,6 +181,13 @@ class tx_caddy_powermail
   }
 
 
+
+  /***********************************************
+  *
+  * Init
+  *
+  **********************************************/
+
  /**
   * init( ): Global vars are initiated:
   *                   * versionInt
@@ -729,6 +736,110 @@ class tx_caddy_powermail
   private function initVersion( )
   {
     return $this->pObj->userfunc->extMgmVersion( 'powermail' );
+  }
+
+
+
+  /***********************************************
+  *
+  * Send
+  *
+  **********************************************/
+
+ /**
+  * sendDeliveryorderToCustomer( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendDeliveryorderToCustomer( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf';
+  }
+
+ /**
+  * sendDeliveryorderToVendor( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendDeliveryorderToVendor( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf';
+  }
+
+ /**
+  * sendInvoiceToCustomer( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendInvoiceToCustomer( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf';
+  }
+
+ /**
+  * sendInvoiceToVendor( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendInvoiceToVendor( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf';
+  }
+
+ /**
+  * sendTermsToCustomer( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendTermsToCustomer( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf';
+  }
+
+ /**
+  * sendTermsToVendor( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access public
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  
+  public function sendTermsToVendor( )
+  {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf';
   }
 }
 
