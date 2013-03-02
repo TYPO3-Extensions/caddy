@@ -890,7 +890,7 @@ class tx_caddy_session
   {
     unset( $content );
     $drs = false;
-    if( $conf['userfunc.']['drs'] )
+    if( $conf['userFunc.']['drs'] )
     {
       $drs = true;
     }
