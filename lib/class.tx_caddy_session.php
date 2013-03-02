@@ -634,8 +634,8 @@ class tx_caddy_session
   * Quantity
   *
   * *********************************************/
-  *
-  *  /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  
+    /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
   *
   * @param	array
   * @return	array
