@@ -1053,6 +1053,15 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $table = $this->conf['db.']['table'];
 
+      // RETURN : TCA is loaded
+    echo $GLOBALS['TCA'][$table]; 
+
+    //echo $GLOBALS['TCA'][$table]['columns'] ) )
+    // RETURN : TCA is loaded
+    
+      // Load the TCA
+    t3lib_div::loadTCA($table);
+
     $prompt = '
       <div style="border:1em solid red;color:red;padding:1em;text-align:center">
         <h1>
