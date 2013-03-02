@@ -27,7 +27,7 @@
       <label index="email.termsPath"><![CDATA[Path to PDF draft: Terms & Conditions]]></label>
       <label index="help">Help!</label>
       <label index="origin">Origin</label>
-      <label index="origin.deliveryorder">Number for the first delivery order</label>
+      <label index="origin.deliveryorder">Number for the first delivery order (I.e: 1000. Numbers will becomde 1001, 1002, 1003, ...)</label>
       <label index="origin.invoice">Number for the first invoice</label>
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
