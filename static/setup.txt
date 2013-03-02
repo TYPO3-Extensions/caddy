@@ -773,7 +773,7 @@ plugin.tx_powermail_pi1 {
       userFunc = user_caddy_powermailCart->showCart
     }
   }
-  email {
+  XXX_email {
     recipient_mail {
       addAttachment {
           // Caddy: Invoice
