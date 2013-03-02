@@ -778,6 +778,17 @@ plugin.tx_powermail_pi1 {
       userFunc = tx_caddy_session->sessionDelete
     }
   }
+  email {
+    recipient_mail {
+      addAttachment {
+          // Caddy: Invoice
+        45967 = USER
+        45967 {
+          userFunc = tx_caddy_powermail->sendInvoiceToVendor
+        }
+      }
+    }
+  }
 }
 XXX_plugin.tx_powermail_pi1 {
   email {
