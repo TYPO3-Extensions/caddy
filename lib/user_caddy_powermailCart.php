@@ -47,6 +47,8 @@ class user_caddy_powermailCart
   */
   public function showCart( $content = '', $conf = array( ) )
   {
+    $prompt = __METHOD__ . ' (' . __LINE__ . ')';
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     return 'Hallo';
   }
 }
