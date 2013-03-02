@@ -827,7 +827,6 @@ class tx_caddy_powermail
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
     t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf';
-    return 'typo3conf/ext/quick_shop/res/files/de/typo3-quick-shop-agb_A4.pdf';
   }
 
  /**

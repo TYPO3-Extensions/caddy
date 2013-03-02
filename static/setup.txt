@@ -784,6 +784,10 @@ plugin.tx_powermail_pi1 {
     recipient_mail {
       addAttachment {
           // Caddy: Invoice
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendInvoiceToVendor
+          }
         45967 = COA
         45967 {
           10 = USER
@@ -791,6 +795,7 @@ plugin.tx_powermail_pi1 {
             userFunc = tx_caddy_powermail->sendInvoiceToVendor
           }
         }
+        45967 >
       }
     }
   }
