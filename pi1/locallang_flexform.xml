@@ -8,13 +8,19 @@
     <languageKey index="default" type="array">
       <label index="email">Email</label>
       <label index="email.invoiceMode">Invoice</label>
-      <label index="email.invoiceMode.disabled"><![CDATA[Don't attach it.]]></label>
-      <label index="email.invoiceMode.customer">Attach it to the customer email.</label>
-      <label index="email.invoiceMode.vendor">Attach it to the vendor email.</label>
-      <label index="email.invoiceMode.all">Attach it to the customer email and the vendor email.</label>
-      <label index="email.invoicePath">Path to pdf file invoice</label>
-      <label index="email.termsMode"><![CDATA[Attach "terms & conditions"]]></label>
-      <label index="email.termsPath"><![CDATA[Path to pdf file "terms & conditions"]]></label>
+      <label index="email.invoiceMode.disabled"><![CDATA[Don't attach it]]></label>
+      <label index="email.invoiceMode.customer">Attach it to the customer email</label>
+      <label index="email.invoiceMode.vendor">Attach it to the vendor email</label>
+      <label index="email.invoiceMode.all">Attach it to the customer email and the vendor email (recommended)</label>
+      <label index="email.invoicePath">Path to invoice pdf</label>
+      <label index="email.deliveryorderMode">Delivery Order</label>
+      <label index="email.deliveryorderMode.disabled"><![CDATA[Don't attach it]]></label>
+      <label index="email.deliveryorderMode.customer">Attach it to the customer email</label>
+      <label index="email.deliveryorderMode.vendor">Attach it to the vendor email</label>
+      <label index="email.deliveryorderMode.all">Attach it to the customer email and the vendor email (recommended)</label>
+      <label index="email.deliveryorderPath">Path to delivery-order-pdf</label>
+      <label index="email.termsMode"><![CDATA[Attach "terms & conditions" (recommended)]]></label>
+      <label index="email.termsPath"><![CDATA[Path to "terms & conditions"-pdf]]></label>
       <label index="help">Help!</label>
       <label index="interface">Database</label>
       <label index="offsets">Offsets</label>
