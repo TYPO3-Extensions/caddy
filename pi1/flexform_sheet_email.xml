@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:prompts</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:email</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <gpvar>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:prompts.gpvar</label>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.gpvar</label>
           <config>
             <type>check</type>
             <default>1</default>
@@ -17,7 +17,7 @@
       </gpvar>
       <session>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:prompts.session</label>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.session</label>
           <config>
             <type>check</type>
             <default>1</default>
