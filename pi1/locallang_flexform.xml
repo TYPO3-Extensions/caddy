@@ -9,7 +9,7 @@
       <label index="email">Email</label>
       <label index="help">Help!</label>
       <label index="interface">Database</label>
-      <label index="offset">Offsets</label>
+      <label index="offsets">Offsets</label>
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
