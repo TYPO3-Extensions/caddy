@@ -795,7 +795,7 @@ class tx_caddy_powermail
   public function sendDeliveryorderToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf';
   }
 
@@ -810,7 +810,7 @@ class tx_caddy_powermail
   public function sendInvoiceToCustomer( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf';
   }
 
@@ -825,7 +825,7 @@ class tx_caddy_powermail
   public function sendInvoiceToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf';
   }
 
@@ -840,7 +840,7 @@ class tx_caddy_powermail
   public function sendTermsToCustomer( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf';
   }
 
@@ -855,7 +855,7 @@ class tx_caddy_powermail
   public function sendTermsToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     return 'typo3conf/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf';
   }
 }
