@@ -54,6 +54,19 @@
  */
 class tx_caddy_pi1_flexform
 {
+    // Parent object
+  public $pObj = null;
+    // Current row
+  public $row = null;
+
+    // [email]
+  public $emailDeliveryorderMode  = null;
+  public $emailDeliveryorderPath  = null;
+  public $emailInvoiceMode        = null;
+  public $emailInvoicePath        = null;
+  public $emailTermsMode          = null;
+  public $emailTermsPath          = null;
+    // [email]
 
     // [sdef]
     // [boolean] enable DRS
@@ -62,11 +75,8 @@ class tx_caddy_pi1_flexform
   public $sdefUpdatewizard = null;
     // [string] csv list of allowed IP
   public $sdefCsvallowedip;
+    // [sdef]
 
-    // Parent object
-  public $pObj = null;
-    // Current row
-  public $row = null;
 
 
 
@@ -89,6 +99,7 @@ class tx_caddy_pi1_flexform
 
       // Sheets
     $this->sheetSdef( );
+    $this->sheetEmail( );
       // Sheets
 
   }
@@ -100,6 +111,50 @@ class tx_caddy_pi1_flexform
    * Sheets
    *
    **********************************************/
+
+/**
+ * sheetEmail: Configuration for evaluation
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sheetEmail( )
+  {
+    $sheet = 'email';
+
+      // emailDeliveryorderMode
+    $field                = 'deliveryorderMode';
+    $this->emailDeliveryorderMode = $this->zzFfValue( $sheet, $field );
+      // emailDeliveryorderMode
+
+      // emailDeliveryorderPath
+    $field                = 'deliveryorderPath';
+    $this->emailDeliveryorderPath = $this->zzFfValue( $sheet, $field );
+      // emailDeliveryorderPath
+
+      // emailInvoiceMode
+    $field                = 'invoiceMode';
+    $this->emailInvoiceMode = $this->zzFfValue( $sheet, $field );
+      // emailInvoiceMode
+
+      // emailInvoicePath
+    $field                = 'invoicePath';
+    $this->emailInvoicePath = $this->zzFfValue( $sheet, $field );
+      // emailInvoicePath
+
+      // emailTermsMode
+    $field                = 'termsMode';
+    $this->emailTermsMode = $this->zzFfValue( $sheet, $field );
+      // emailTermsMode
+
+      // emailTermsPath
+    $field                = 'termsPath';
+    $this->emailTermsPath = $this->zzFfValue( $sheet, $field );
+      // emailTermsPath
+
+    return;
+  }
 
 /**
  * sheetSdef: Configuration for evaluation
@@ -117,11 +172,11 @@ class tx_caddy_pi1_flexform
     $this->sdefCsvallowedip = $this->zzFfValue( $sheet, $field );
       // sdefCsvallowedip
 
+      // sdefDrs
 // @see pObj->initByFlexform( )
-//      // sdefDrs
 //    $field          = 'sdefDrs';
 //    $this->sdefDrs  = $this->zzFfValue( $sheet, $field, false );
-//      // sdefDrs
+      // sdefDrs
 
       // sdefUpdatewizard
     $field                  = 'sdefUpdatewizard';

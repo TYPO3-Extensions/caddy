@@ -182,6 +182,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $this->powermail->formCss( $content );
 
+    $this->send( );
+
     $this->clean( );
 
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
@@ -194,7 +196,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->content = preg_replace( '|###.*?###|i', '', $this->content ); // Finally clear not filled markers
     return $this->pi_wrapInBaseClass( $this->content );
   }
-
+ 
 
 
   /***********************************************
@@ -1475,6 +1477,208 @@ class tx_caddy_pi1 extends tslib_pibase
     }
   }
 
+
+
+  /***********************************************
+  *
+  * Send
+  *
+  **********************************************/
+
+ /**
+  * send( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function send( )
+  {
+    $this->sendCustomer( );
+    $this->sendVendor( );
+  }
+
+ /**
+  * sendCustomer( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendCustomer( )
+  {
+    $this->sendCustomerDeliveryorder( );
+    $this->sendCustomerInvoice( );
+    $this->sendCustomerTerms( );
+  }
+
+ /**
+  * sendCustomerDeliveryorder( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendCustomerDeliveryorder( )
+  {
+    switch( $this->flexform->emailDeliveryorderMode )
+    {
+      case( 'customer' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendCustomerDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+
+ /**
+  * sendCustomerInvoice( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendCustomerInvoice( )
+  {
+    switch( $this->flexform->emailInvoiceMode )
+    {
+      case( 'customer' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendCustomerInvoice'] = $this->flexform->emailInvoicePath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+
+ /**
+  * sendCustomerTerms( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendCustomerTerms( )
+  {
+    switch( $this->flexform->emailTermsMode )
+    {
+      case( 'customer' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendCustomerTerms'] = $this->flexform->emailTermsPath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+
+ /**
+  * sendVendor( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendVendor( )
+  {
+    $this->sendVendorDeliveryorder( );
+    $this->sendVendorInvoice( );
+    $this->sendVendorTerms( );
+  }
+
+ /**
+  * sendVendorDeliveryorder( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendVendorDeliveryorder( )
+  {
+    switch( $this->flexform->emailDeliveryorderMode )
+    {
+      case( 'vendor' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendVendorDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+
+ /**
+  * sendVendorInvoice( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendVendorInvoice( )
+  {
+    switch( $this->flexform->emailInvoiceMode )
+    {
+      case( 'vendor' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendVendorInvoice'] = $this->flexform->emailInvoicePath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+
+ /**
+  * sendVendorTerms( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendVendorTerms( )
+  {
+    switch( $this->flexform->emailTermsMode )
+    {
+      case( 'vendor' ):
+      case( 'all' ):
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray['sendVendorTerms'] = $this->flexform->emailTermsPath;
+        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+        $GLOBALS['TSFE']->storeSessionData( );
+        break;
+      default:
+          // Nothing to do
+        break;
+    }
+  }
+ 
   /***********************************************
   *
   * Session

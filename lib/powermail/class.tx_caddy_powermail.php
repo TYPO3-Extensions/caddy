@@ -818,7 +818,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendCustomerDeliveryorder'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
@@ -853,7 +866,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendVendorDeliveryorder'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
@@ -887,7 +913,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendCustomerInvoice'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
@@ -921,7 +960,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendVendorInvoice'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
@@ -955,7 +1007,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendCustomerTerms'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
@@ -989,7 +1054,20 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $path = 'typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf' . ',';
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendVendorTerms'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
 
       // DRS
     if( $this->drs->drsSession || $drs )
