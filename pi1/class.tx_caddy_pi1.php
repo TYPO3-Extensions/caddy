@@ -1053,16 +1053,16 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $table = $this->conf['db.']['table'];
 
-      // RETURN : TCA is loaded
-    echo 'A' . $GLOBALS['TCA'][$table] . 'B';
-
     //echo $GLOBALS['TCA'][$table]['columns'] ) )
     // RETURN : TCA is loaded
     
       // Load the TCA
     t3lib_div::loadTCA( $table );
 
-    echo 'X' . $GLOBALS['TCA'][$table] . 'Y';
+    if( ! empty ( $GLOBALS['TCA'][$table] ) ) 
+    { 
+      return;
+    }
 
     $prompt = '
       <div style="border:1em solid red;color:red;padding:1em;text-align:center">
