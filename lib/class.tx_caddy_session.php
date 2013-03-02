@@ -873,6 +873,39 @@ class tx_caddy_session
 
  /***********************************************
   *
+  * Session
+  *
+  **********************************************/
+
+ /**
+  * sessionDelete( )
+  *
+  * @param	string		$content  : current content
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function sessionDelete( )
+  {
+    // DRS
+    if( $this->drs->drsSession )
+    {
+      $prompt = 'Session is cleared.';
+      t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+$prompt = 'Session is cleared.';
+t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
+    $GLOBALS['TSFE']->storeSessionData( );
+  }
+
+
+
+ /***********************************************
+  *
   * Shipping
   *
   **********************************************/
