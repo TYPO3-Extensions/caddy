@@ -257,6 +257,11 @@ class tx_caddy_userfunc
             ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportOk'). '
           </div>
         </div>
+        <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportPerformance'). '
+          </div>
+        </div>
         ';
     }
       // OK prompt, if there isn't any other prompt

@@ -1072,6 +1072,13 @@ class tx_caddy_pi1 extends tslib_pibase
 
     if( ! empty ( $GLOBALS['TCA'][$table] ) ) 
     { 
+        // DRS
+      if( $this->drs->drsInit )
+      {
+        $prompt = $table . ' is an element of the $TCA.';
+        t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return;
     }
 

@@ -22,6 +22,9 @@
       <label index="pi1FfSdefReportOk"><![CDATA[
         Congratulations: your configuration seem's to be proper!
       ]]></label>
+      <label index="pi1FfSdefReportPerformance"><![CDATA[
+        Please disable the check it!-report. It costs performance!
+      ]]></label>
       <label index="pmReceiverMarkerWo"><![CDATA[
         No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
         the Email-Text for the receiver in the powermail form!<br />
@@ -180,6 +183,9 @@
       ]]></label>
       <label index="pi1FfSdefReportOk"><![CDATA[
         Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
+      ]]></label>
+      <label index="pi1FfSdefReportPerformance"><![CDATA[
+        itte schalte den Check it!-Bericht ab. Der Bericht belastet die Performance!
       ]]></label>
       <label index="pmReceiverMarkerWo"><![CDATA[
         Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
