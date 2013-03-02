@@ -91,16 +91,19 @@ class tx_caddy_powermail
   public $fieldFfConfirm      = null;
   public $fieldFfMailreceiver = null;
   public $fieldFfMailsender   = null;
+  public $fieldFfThanks       = null;
   public $fieldFormCss        = null;
   public $fieldUid            = null;
   public $fieldTitle          = null;
 
-  private $marker               = '###POWERMAIL_TYPOSCRIPT_CADDY###';
   public  $markerReceiver       = null;
   public  $markerReceiverWtcart = null;
   public  $markerSender         = null;
   public  $markerSenderWtcart   = null;
-  private $markerWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
+  public  $markerThanks         = null;
+  private $markerTsCaddy        = '###POWERMAIL_TYPOSCRIPT_CADDY###';
+  private $markerTsThanks       = '###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION###';
+  private $markerTsWtcart       = '###POWERMAIL_TYPOSCRIPT_CART###';
 
     // Current GET parameter
   private $paramGet  = null;
@@ -257,6 +260,7 @@ class tx_caddy_powermail
     $this->fieldFfConfirm       = $arrResult['ffConfirm'];
     $this->fieldFfMailreceiver  = $arrResult['ffMailreceiver'];
     $this->fieldFfMailsender    = $arrResult['ffMailsender'];
+    $this->fieldFfThanks        = $arrResult['ffThanks'];
     $this->fieldTitle           = $arrResult['title'];
     $this->fieldUid             = $arrResult['uid'];
 
@@ -406,6 +410,7 @@ class tx_caddy_powermail
         $pmFfConfirm      = $pmRecord['tx_powermail_confirm'];
         $pmFfMailsender   = $pmRecord['tx_powermail_mailsender'];
         $pmFfMailreceiver = $pmRecord['tx_powermail_mailreceiver'];
+        $pmFfThanks       = $pmRecord['tx_powermail_thanks'];         
         break;
       case( $this->versionInt < 3000000 ):
       default:
@@ -413,6 +418,7 @@ class tx_caddy_powermail
         $pmFfConfirm      = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
         $pmFfMailsender   = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.body']['vDEF'];
         $pmFfMailreceiver = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.body']['vDEF'];
+        $pmFfThanks       = $pmFlexform['data']['main']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
         break;
     }
 
@@ -421,6 +427,7 @@ class tx_caddy_powermail
     $arrReturn['ffConfirm']       = $pmFfConfirm;
     $arrReturn['ffMailsender']    = $pmFfMailsender;
     $arrReturn['ffMailreceiver']  = $pmFfMailreceiver;
+    $arrReturn['ffThanks']        = $pmFfThanks;
 
     return $arrReturn;
   }
@@ -453,6 +460,7 @@ class tx_caddy_powermail
     $this->initMarkerReceiverWtcart( );
     $this->initMarkerSender( );
     $this->initMarkerSenderWtcart( );
+    $this->initMarkerThanks( );
   }
 
  /**
@@ -468,7 +476,7 @@ class tx_caddy_powermail
     $this->markerReceiver = false;
 
       // Current IP is an element in the list
-    $pos = strpos( $this->fieldFfMailreceiver, $this->marker );
+    $pos = strpos( $this->fieldFfMailreceiver, $this->markerTsCaddy );
     if( ! ( $pos === false ) )
     {
       $this->markerReceiver = true;
@@ -488,7 +496,7 @@ class tx_caddy_powermail
     $this->markerReceiverWtcart = false;
 
       // Current IP is an element in the list
-    $pos = strpos( $this->fieldFfMailreceiver, $this->markerWtcart );
+    $pos = strpos( $this->fieldFfMailreceiver, $this->markerTsWtcart );
     if( ! ( $pos === false ) )
     {
       $this->markerReceiverWtcart = true;
@@ -508,7 +516,7 @@ class tx_caddy_powermail
     $this->markerSender = false;
 
       // Current IP is an element in the list
-    $pos = strpos( $this->fieldFfMailsender, $this->marker );
+    $pos = strpos( $this->fieldFfMailsender, $this->markerTsCaddy );
     if( ! ( $pos === false ) )
     {
       $this->markerSender = true;
@@ -528,10 +536,30 @@ class tx_caddy_powermail
     $this->markerSenderWtcart = false;
 
       // Current IP is an element in the list
-    $pos = strpos( $this->fieldFfMailsender, $this->markerWtcart );
+    $pos = strpos( $this->fieldFfMailsender, $this->markerTsWtcart );
     if( ! ( $pos === false ) )
     {
       $this->markerSenderWtcart = true;
+    }
+  }
+
+ /**
+  * initMarkerThanks( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerThanks( )
+  {
+    $this->markerThanks = false;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfMailsender, $this->markerTsThanks );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerThanks = true;
     }
   }
 
