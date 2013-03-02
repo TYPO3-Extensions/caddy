@@ -17,8 +17,9 @@
   // includeLibs
 
 includeLibs {
-  user_caddy_userfuncs     = EXT:caddy/lib/user_caddy_userfuncs.php
-  user_caddy_powermailCart = EXT:caddy/lib/user_caddy_powermailCart.php
+  user_caddy_userfuncs      = EXT:caddy/lib/user_caddy_userfuncs.php
+  user_caddy_powermailCart  = EXT:caddy/lib/user_caddy_powermailCart.php
+  tx_caddy_powermail        = EXT:caddy/lib/powermail/tx_caddy_powermail.php
 }
   // includeLibs
 
@@ -771,10 +772,45 @@ plugin.tx_powermail_pi1 {
     caddy {
       userFunc = user_caddy_powermailCart->showCart
     }
-
-    clearcaddy = USER
-    clearcaddy {
-      userFunc = user_caddy_userfuncs->user_caddy_clearCart
+  }
+  email {
+    recipient_mail {
+      addAttachment {
+          // Invoice
+        45967 = USER
+        45967 {
+          userFunc = tx_caddy_powermail->sendInvoiceToVendor
+        }
+          // Delivery Order
+        45968 = USER
+        45968 {
+          userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
+        }
+          // Terms & Conditions
+        45969 = USER
+        45969 {
+          userFunc = tx_caddy_powermail->sendTermsToVendor
+        }
+      }
+    }
+    sender_mail {
+      addAttachment {
+          // Invoice
+        45967 = USER
+        45967 {
+          userFunc = tx_caddy_powermail->sendInvoiceToCustomer
+        }
+          // Delivery Order
+        45968 = USER
+        45968 {
+          userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
+        }
+          // Terms & Conditions
+        45969 = USER
+        45969 {
+          userFunc = tx_caddy_powermail->sendTermsToCustomer
+        }
+      }
     }
   }
 }

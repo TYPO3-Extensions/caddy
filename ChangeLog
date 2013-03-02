@@ -18,6 +18,9 @@
             Effected files
             * files/img/*                       ( new) 
   * #45808: PDF attachments: Bill and Shipping
+            * #45967: Attachment Invoice
+            * #45968: Attachment Delivery Order
+            * #45969: Attachment Terms & Conditions
             Effected files:
             * lib
               * pdf                             ( new )
