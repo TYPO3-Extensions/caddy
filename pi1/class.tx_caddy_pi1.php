@@ -121,7 +121,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $gpvar = array( );
 
-  private $pid = null;
+  public $pid = null;
 
 
 
