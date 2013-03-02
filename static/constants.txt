@@ -62,9 +62,9 @@ plugin.caddy {
   # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   db.sponsors = Click me!
 
-  # cat=caddy - debug//100; type=boolean; label= Debug params and typoscript: Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
+  # cat=caddy - debug//100; type=boolean; label= Debug params and typoscript (frontend): Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
   debug.paramsAndTs = 0
-  # cat=caddy - debug//101; type=boolean; label= Debug user functions: Enable the DRS for user functions
+  # cat=caddy - debug//101; type=boolean; label= Debug user functions (backend): Enable the DRS for user functions
   debug.userfunc = 0
   # cat=caddy - debug/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   debug.externalLinks = Click me!
