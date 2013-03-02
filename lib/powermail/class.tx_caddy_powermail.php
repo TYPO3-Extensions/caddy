@@ -556,7 +556,7 @@ class tx_caddy_powermail
     $this->markerThanks = false;
 
       // Current IP is an element in the list
-    $pos = strpos( $this->fieldFfMailsender, $this->markerTsThanks );
+    $pos = strpos( $this->fieldFfThanks, $this->markerTsThanks );
     if( ! ( $pos === false ) )
     {
       $this->markerThanks = true;

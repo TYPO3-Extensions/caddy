@@ -44,7 +44,7 @@
         Please move ###POWERMAIL_TYPOSCRIPT_CART### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
       ]]></label>
       <label index="pmThanksMarkerWo"><![CDATA[
-        No caddy clear session marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDYCLEARSESSION### to
+        No caddy clear session marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### to
         the response text field in the powermail form!<br />
         The caddy session won't cleaned up without this marker.
       ]]></label>
