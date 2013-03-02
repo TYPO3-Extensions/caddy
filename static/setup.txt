@@ -800,63 +800,22 @@ plugin.tx_powermail_pi1 {
         }
       }
     }
-  }
-}
-XXX_plugin.tx_powermail_pi1 {
-  email {
-    recipient_mail {
-      addAttachment {
-          // Caddy: Invoice
-        45967 = COA
-        45967 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendInvoiceToVendor
-          }
-        }
-          // Caddy: Delivery Order
-        45968 = COA
-        45968 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
-          }
-        }
-          // Caddy: Terms & Conditions
-        45969 = COA
-        45969 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendTermsToVendor
-          }
-        }
-      }
-    }
     sender_mail {
       addAttachment {
           // Caddy: Invoice
-        45967 = COA
+        45967 = USER
         45967 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendInvoiceToCustomer
-          }
+          userFunc = tx_caddy_powermail->sendInvoiceToCustomer
         }
           // Caddy: Delivery Order
-        45968 = COA
+        45968 = USER
         45968 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
-          }
+          userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
         }
           // Caddy: Terms & Conditions
-        45969 = COA
+        45969 = USER
         45969 {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_powermail->sendTermsToCustomer
-          }
+          userFunc = tx_caddy_powermail->sendTermsToCustomer
         }
       }
     }
