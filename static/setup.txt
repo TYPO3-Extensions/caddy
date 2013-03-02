@@ -567,6 +567,8 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
+    // Never remove this property!
+  pluginCheck = dummy
 }
   // plugin.tx_caddy_pi1
 

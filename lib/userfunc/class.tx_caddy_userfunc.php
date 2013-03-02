@@ -705,7 +705,7 @@ class tx_caddy_userfunc
   {
     $this->typoscriptInit( );
 
-    if( ! empty( $this->typoscriptObject->setup['plugin.']['tx_caddy_pi1.']['dummy'] ) )
+    if( ! empty( $this->typoscriptObject->setup['plugin.']['tx_caddy_pi1.']['pluginCheck'] ) )
     {
       return;
     }
