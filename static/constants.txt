@@ -22,8 +22,10 @@ plugin.caddy {
   main.service_attribute_3_symbol =
   # cat=caddy - main//111; type=text; label= Uid of storage folder: id of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
   main.pid =
-  # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   main.externalLinks = Click me!
+  # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  main.sponsors = Click me!
 
   # cat=caddy - database//200; type=text; label= Table name: Enter the correct table name where the products are stored (e.g. tx_database).
   db.table =
@@ -45,13 +47,17 @@ plugin.caddy {
   db.service_attribute_2 =
   # cat=caddy - database//252; type=text; label= Service Attribute 3 column: Enter the correct column name of the table where the service attribute 3 are stored (e.g. for length).
   db.service_attribute_3 =
-  # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - database/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   db.externalLinks = Click me!
+  # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  db.sponsors = Click me!
 
-  # cat=caddy - debug//9999; type=boolean; label= Debug Mode: Enable or disable some debug output.
+  # cat=caddy - debug//100; type=boolean; label= Debug Mode: Enable or disable some debug output.
   debug = 0
-  # cat=caddy - debug/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - debug/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   debug.externalLinks = Click me!
+  # cat=caddy - debug/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  debug.sponsors = Click me!
 
   # cat=caddy - gpvar//100; type=text; label= Param PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
   gpvar.puid =
@@ -71,8 +77,10 @@ plugin.caddy {
   gpvar.service_attribute_3 =
   # cat=caddy - gpvar//140; type=text; label= Param SKU: Enter the correct parameter name for your SKU (stock keeping unit).
   gpvar.sku =
-  # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - gpvar/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   gpvar.externalLinks = Click me!
+  # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  gpvar.sponsors = Click me!
 
   # cat=caddy - pdf//101; type=string; label= PDF ordering file: Path to the PDF ordering file  
   pdf.orderpdf.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
@@ -86,13 +94,17 @@ plugin.caddy {
   pdf.packinglistpdf.template = EXT:caddy/files/templates/pdf_table.html
   # cat=caddy - pdf//203; type=string; label= Directory for packinglists:Path to the directory for the packinglist copies 
   pdf.packinglistpdf.dir = fileadmin/caddy/packinglists
-  # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdfContent.externalLinks = Click me!
+  # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.sponsors = Click me!
 
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
-  # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   powermailContent.externalLinks = Click me!
+  # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  powermail.sponsors = Click me!
 
   # cat=caddy - ordernumber//100; type=text; label= Prefix for Order Number.
   ordernumber.prefix =
@@ -100,8 +112,10 @@ plugin.caddy {
   ordernumber.suffix =
   # cat=caddy - ordernumber//120; type=int+; label= Offset for Order Number: The offset is added to the order number (e.g. for offset 1000000 the first order number will be 1000001).
   ordernumber.offset =
-  # cat=caddy - ordernumber/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - ordernumber/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   ordernumber.externalLinks = Click me!
+  # cat=caddy - ordernumber/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  ordernumber.sponsors = Click me!
 
   # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
@@ -111,8 +125,10 @@ plugin.caddy {
   tax.normal = 19
   # cat=caddy - tax//165; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 0.19). Used for calculation.
   tax.normalCalc = 0.19
-  # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - tax/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   tax.externalLinks = Click me!
+  # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  tax.sponsors = Click me!
 }
 
 plugin.caddy {
