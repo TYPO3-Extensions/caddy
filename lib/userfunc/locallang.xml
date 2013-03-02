@@ -6,6 +6,14 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
+      <label index="dbTableEmpty"><![CDATA[
+        The typoscript property db.table is empty.<br />
+        Please add the lable of the table, which delivers the products to caddy.
+      ]]></label>
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        The Check it! report is disabled and this is proper for performance needs.<br />
+        But if you have any unexpected result, enable the report by the check box above.
+      ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
         The Check it! report is disabled and this is proper for performance needs.<br />
         But if you have any unexpected result, enable the report by the check box above.
@@ -167,6 +175,24 @@
       <label index="pi1FfSdefReportOk"><![CDATA[
         Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
       ]]></label>
+      <label index="pmReceiverMarkerWo"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
+        Feld E-Mail-Text f&uuml;r den Empf&auml;nger in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmReceiverMarkerWiWtcart"><![CDATA[
+        Der E-Mail-Text im Empf&auml;nger-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmSenderMarkerWo"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
+        Feld E-Mail-Text f&uuml;r den Absnder in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmSenderMarkerWiWtcart"><![CDATA[
+        Der E-Mail-Text im Absender-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
       <label index="powermailNocontent"><![CDATA[
         Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
         Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br /> 
@@ -289,6 +315,10 @@
             width="120" 
             height="90" 
             alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+      ]]></label>
+      <label index="typoscriptMissing"><![CDATA[
+        Es gibt keine Typoscript f&uuml;r Caddy.<br />
+        Bitte f&uuml;ge das Include-Static-Template ein!
       ]]></label>
     </languageKey>
   </data>

@@ -84,6 +84,7 @@ class tx_caddy_userfunc
   */
   public $typo3Version = null;
   
+  private $conf       = null;
   public $drs        = null;
   private $pid        = null;
   private $pObj       = null;
@@ -104,6 +105,40 @@ class tx_caddy_userfunc
   function __construct( $pObj )
   {
     $this->pObj = $pObj;
+  }
+  
+  
+  
+  /***********************************************
+   *
+   * Database
+   *
+   **********************************************/
+    
+/**
+ * databaseCheck( ): 
+ *
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
+ */
+  private function databaseCheck( )
+  {
+    if( empty( $this->conf['db.']['table'] ) )
+    {
+      $prompt = '
+        <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:dbTableEmpty'). '
+          </div>
+        </div>
+        ';
+
+      return $prompt;
+    }
+
+    return;
   }
 
   
@@ -207,6 +242,8 @@ class tx_caddy_userfunc
     $this->pi1FfSdefReportInit( );
 
     $prompt = $this->typoscriptCheck( );
+
+    $prompt = $prompt . $this->databaseCheck( );
 
     $prompt = $prompt . $this->powermailCheck( );
 
@@ -696,16 +733,16 @@ class tx_caddy_userfunc
 /**
  * typoscriptCheck( ): 
  *
- * @param	array		$arr_pluginConf: Current plugin/flexform configuration
- * @return	boolean		TRUE: success. FALSE: error.
- * @since 3.4.5
- * @version 3.4.5
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
  */
   private function typoscriptCheck( )
   {
     $this->typoscriptInit( );
 
-    if( ! empty( $this->typoscriptObject->setup['plugin.']['tx_caddy_pi1.']['pluginCheck'] ) )
+    if( ! empty( $this->conf['pluginCheck'] ) )
     {
       return;
     }
@@ -722,12 +759,12 @@ class tx_caddy_userfunc
   }
    
 /**
- * init(): Initiate this class.
+ * typoscriptInit( ): 
  *
- * @param	array		$arr_pluginConf: Current plugin/flexform configuration
- * @return	boolean		TRUE: success. FALSE: error.
- * @since 3.4.5
- * @version 3.4.5
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
  */
   private function typoscriptInit( )
   {
@@ -741,17 +778,18 @@ class tx_caddy_userfunc
     $arr_rows_of_all_pages_inRootLine = $this->pageObject->getRootLine( $this->pid );
     if( empty( $arr_rows_of_all_pages_inRootLine ) )
     {
-      return false;
+      return;
     }
     $this->typoscriptInitTsObj( $arr_rows_of_all_pages_inRootLine );
 
-    return true;
+    $this->conf = $this->typoscriptObject->setup['plugin.']['tx_caddy_pi1.'];
+
+    return;
   }
 
 /**
  * typoscriptInitPageObj(): Initiate an page object.
  *
- * @param	array		$arr_pluginConf: Current plugin/flexform configuration
  * @return	void
  * @access    private
  * @version 2.0.0
@@ -774,7 +812,6 @@ class tx_caddy_userfunc
   /**
  * typoscriptInitPageUid(): Initiate the page uid.
  *
- * @param	array		$arr_pluginConf: Current plugin/flexform configuration
  * @return	void
  * @access    private
  * @version 2.0.0
