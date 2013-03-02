@@ -18,6 +18,7 @@ if( ! defined( 'TYPO3_MODE' ) )
   // Methods for backend workflows
   // Plugin Configuration
   // TCA for tables
+  // Allow tables on pages
 
 
 
@@ -220,7 +221,7 @@ $TCA['tx_caddy_item'] = array (
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
-    'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_08.png',
+    'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
   ),
 );
   // Items
@@ -235,5 +236,7 @@ $TCA['tx_caddy_item'] = array (
 
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_item ');
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_order ');
+t3lib_extMgm::allowToInsertRecord( 'tx_caddy_item ');
+t3lib_extMgm::allowToInsertRecord( 'tx_caddy_order ');
   // Allow tables on pages
 ?>
