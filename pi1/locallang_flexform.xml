@@ -13,8 +13,8 @@
       <label index="email.invoiceMode.vendor">Attach it to the vendor email.</label>
       <label index="email.invoiceMode.all">Attach it to the customer email and the vendor email.</label>
       <label index="email.invoicePath">Path to pdf file invoice</label>
-      <label index="email.termsMode">Attach "terms & conditions"</label>
-      <label index="email.termsPath">Path to pdf file "terms & conditions"</label>
+      <label index="email.termsMode"><![CDATA[Attach "terms & conditions"]]></label>
+      <label index="email.termsPath"><![CDATA[Path to pdf file "terms & conditions"]]></label>
       <label index="help">Help!</label>
       <label index="interface">Database</label>
       <label index="offsets">Offsets</label>
