@@ -8,7 +8,7 @@
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
  *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
- * 
+ *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -50,10 +50,12 @@ class user_caddy_userfuncs extends tslib_pibase
   public $extKey = 'caddy'; // The extension key.
 
   /**
-    * number Format for typoscript
-    *
-    * @return	string		formatted number
-    */
+ * number Format for typoscript
+ *
+ * @param	[type]		$$content: ...
+ * @param	[type]		$conf: ...
+ * @return	string		formatted number
+ */
   public function user_caddy_numberFormat( $content = '', $conf = array( ) )
   {
     global $TSFE;

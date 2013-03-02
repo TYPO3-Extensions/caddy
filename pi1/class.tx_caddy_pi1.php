@@ -33,56 +33,66 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   99: class tx_caddy_pi1 extends tslib_pibase
+ *  109: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  144:     public function main( $content, $conf )
+ *  156:     public function main( $content, $conf )
  *
  *              SECTION: Cart
- *  205:     private function caddy( )
- *  242:     private function caddyWiProducts( )
- *  419:     private function caddyWiProductsItem( $contentItem )
- *  450:     private function caddyWiProductsPayment( )
- *  494:     private function caddyWiProductsProduct( )
- *  565:     private function caddyWiProductsProductErrorMsg( $product )
- *  589:     private function caddyWiProductsProductServiceAttributes( $product )
- *  651:     private function caddyWiProductsProductSettings( $product )
- *  691:     private function caddyWiProductsProductTax( $product )
- *  744:     private function caddyWiProductsShipping( )
- *  788:     private function caddyWiProductsSpecial( )
- *  833:     private function caddyWoProducts( )
+ *  215:     private function caddy( )
+ *  252:     private function caddyWiProducts( )
+ *  431:     private function caddyWiProductsItem( $contentItem )
+ *  462:     private function caddyWiProductsPayment( )
+ *  506:     private function caddyWiProductsProduct( )
+ *  581:     private function caddyWiProductsProductErrorMsg( $product )
+ *  605:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  667:     private function caddyWiProductsProductSettings( $product )
+ *  717:     private function caddyWiProductsProductTax( $product )
+ *  770:     private function caddyWiProductsShipping( )
+ *  814:     private function caddyWiProductsSpecial( )
+ *  859:     private function caddyWoProducts( )
+ *
+ *              SECTION: Clean
+ *  886:     private function clean( )
  *
  *              SECTION: Debug
- *  860:     private function debugOutputBeforeRunning( )
+ *  908:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  897:     private function init( )
- *  916:     private function initAccessByIp( )
- * 1078:     private function initFlexform( )
- * 1091:     private function initGpVar( )
- * 1147:     private function initGpVarCid( )
- * 1197:     private function initHtmlTemplate( )
- * 1279:     private function initInstances( )
- * 1320:     private function initPowermail( )
- * 1333:     private function initServiceAttributes( )
+ *  945:     private function init( )
+ *  965:     private function initAccessByIp( )
+ * 1011:     private function initPid( )
+ * 1050:     private function initFlexform( )
+ * 1063:     private function initGpVar( )
+ * 1119:     private function initGpVarCid( )
+ * 1169:     private function initHtmlTemplate( )
+ * 1251:     private function initInstances( )
+ * 1298:     private function initPowermail( )
+ * 1311:     private function initServiceAttributes( )
  *
  *              SECTION: Order
- * 1360:     private function orderUpdate( )
+ * 1338:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1405:     private function productAdd( )
- * 1427:     private function productRemove( )
+ * 1383:     private function productAdd( )
+ * 1405:     private function productRemove( )
+ *
+ *              SECTION: Session
+ * 1429:     public function sessionDelete( )
  *
  *              SECTION: Update Wizard
- * 1454:     private function updateWizard( $content )
+ * 1461:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1496:     private function zz_getPriceForOption($type, $option_id)
- * 1547:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1581:     private function zz_renderOptionList($type, $option_id)
- * 1691:     private function zz_price_format($value)
+ * 1503:     private function zz_getPriceForOption($type, $option_id)
+ * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1597:     private function add_qtyname_marker($product, $markerArray, $pObj)
+ * 1635:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ * 1667:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1690:     private function zz_renderOptionList($type, $option_id)
+ * 1800:     private function zz_price_format($value)
  *
- * TOTAL FUNCTIONS: 31
+ * TOTAL FUNCTIONS: 37
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -147,7 +157,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
       // page object
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
-    
+
     $this->conf = $conf;
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -171,7 +181,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $caddy = $this->caddy( );
 
     $content = $this->powermail->formCss( $content );
-    
+
     $this->clean( );
 
     $this->content = $content . $this->cObj->substituteMarkerArrayCached
@@ -517,7 +527,7 @@ class tx_caddy_pi1 extends tslib_pibase
         t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
-        
+
         // cObject become current record
       $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 
@@ -529,8 +539,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
          // add inner html to variable
       $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
-                                    ( 
-                                      $this->tmpl['item'], $this->markerArray 
+                                    (
+                                      $this->tmpl['item'], $this->markerArray
                                     );
 
         // update cart gross
@@ -1001,7 +1011,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initPid( )
   {
     $pid = ( int ) $this->conf['main']['pid'];
-    
+
     switch( true )
     {
       case( ! empty( $pid ) ):
@@ -1412,7 +1422,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @param	string		$content  : current content
   * @return	void
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1425,7 +1435,7 @@ class tx_caddy_pi1 extends tslib_pibase
       t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );
   }
@@ -1572,15 +1582,15 @@ class tx_caddy_pi1 extends tslib_pibase
   * add_qty_marker():  Allocates to the global markerArray a value for ###QTY_NAME###
   *                          in case of variant
   *                          It returns in aray with hidden fields like
-  *                          <input type="hidden" 
-  *                                 name="tx_caddy_pi1[puid][20][]" 
+  *                          <input type="hidden"
+  *                                 name="tx_caddy_pi1[puid][20][]"
   *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
   *
-  * @param array   $products: array with products with elements uid, title, tax, etc...
-  * @param array   $markerArray: current marker array
-  * @param array   $pobj: Parent Object
-  * @return  array   $markerArray: with added element ###VARIANTS### in case of variants
-  * @access private 
+  * @param	array		$products: array with products with elements uid, title, tax, etc...
+  * @param	array		$markerArray: current marker array
+  * @param	array		$pobj: Parent Object
+  * @return	array		$markerArray: with added element ###VARIANTS### in case of variants
+  * @access private
   * @version 2.0.0
   * @since 1.4.6
   */
@@ -1608,16 +1618,16 @@ class tx_caddy_pi1 extends tslib_pibase
 
       return $markerArray;
   }
-  
+
  /**
   * add_variant_gpvar_to_imagelinkwrap():  Adds all table.field of the variant to
   *                                          imageLinkWrap.typolink.additionalParams.wrap
   *
-  * @param array   $product: array with product uid, title, tax, etc...
-  * @param string   $ts_key: key of the current TypoScript configuration array
-  * @param array   $ts_conf: the current TypoScript configuration array
-  * @param array   $pobj: Parent Object
-  * @return  array  $ts_conf: configuration array added with the varaition gpvars
+  * @param	array		$product: array with product uid, title, tax, etc...
+  * @param	string		$ts_key: key of the current TypoScript configuration array
+  * @param	array		$ts_conf: the current TypoScript configuration array
+  * @param	array		$pobj: Parent Object
+  * @return	array		$ts_conf: configuration array added with the varaition gpvars
   * @access private
   * @version 2.0.0
   * @since 1.4.6
@@ -1643,11 +1653,13 @@ class tx_caddy_pi1 extends tslib_pibase
 
       return $ts_conf;
   }
-  
+
  /**
   * zz_cObjGetSingle( )
   *
-  * @return  string
+  * @param	[type]		$$cObj_name: ...
+  * @param	[type]		$cObj_conf: ...
+  * @return	string
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -1664,7 +1676,7 @@ class tx_caddy_pi1 extends tslib_pibase
         $value = $cObj_name;
         break;
     }
-      
+
     return $value;
   }
 

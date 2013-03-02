@@ -28,30 +28,16 @@
  *
  *
  *
- *   69: class tx_caddy_pi1_flexform
- *  195:     function __construct($parentObj)
- *  217:     function main()
- *
- *              SECTION: piVars
- *  337:     function prepare_piVars()
- *  521:     function prepare_mode()
- *
- *              SECTION: Fields with Priority
- *  573:     function sheet_sDEF_views()
+ *   55: class tx_caddy_pi1_flexform
+ *   87:     function main()
  *
  *              SECTION: Sheets
- *  903:     function sheet_advanced()
- * 1058:     function sheet_evaluate( )
- * 1117:     function sheet_extend( )
- * 1198:     function sheet_javascript()
- * 1500:     function sheet_sDEF( )
- * 2141:     function sheet_socialmedia()
- * 2205:     function sheet_tca()
- * 2266:     function sheet_templating()
- * 2531:     function sheet_viewList( )
- * 3352:     function sheet_viewSingle()
+ *  111:     private function sheetSdef( )
  *
- * TOTAL FUNCTIONS: 15
+ *              SECTION: Zz
+ *  152:     public function zzFfValue( $sheet, $field, $drs=true )
+ *
+ * TOTAL FUNCTIONS: 3
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -66,7 +52,7 @@
  * @version 2.0.0
  * @since   2.0.0
  */
-class tx_caddy_pi1_flexform 
+class tx_caddy_pi1_flexform
 {
 
     // [sdef]
@@ -95,7 +81,7 @@ class tx_caddy_pi1_flexform
  *          Process each sheet.
  *          Allocates values to TypoScript.
  *
- * @return    void
+ * @return	void
  * @version 4.1.10
  */
   function main()
@@ -107,8 +93,8 @@ class tx_caddy_pi1_flexform
 
   }
 
-  
-  
+
+
   /***********************************************
    *
    * Sheets
@@ -118,7 +104,7 @@ class tx_caddy_pi1_flexform
 /**
  * sheetSdef: Configuration for evaluation
  *
- * @return    void
+ * @return	void
  * @version 2.0.0
  * @since   2.0.0
  */
@@ -145,8 +131,8 @@ class tx_caddy_pi1_flexform
     return;
   }
 
-  
-  
+
+
   /***********************************************
    *
    * Zz
@@ -154,9 +140,12 @@ class tx_caddy_pi1_flexform
    **********************************************/
 
 /**
- * zzFfValue: Returns the value of the given flexform field 
+ * zzFfValue: Returns the value of the given flexform field
  *
- * @return    mixed   $value  : Value from the flexform field
+ * @param	[type]		$$sheet: ...
+ * @param	[type]		$field: ...
+ * @param	[type]		$drs: ...
+ * @return	mixed		$value  : Value from the flexform field
  * @version 2.0.0
  * @since   2.0.0
  */
@@ -169,10 +158,10 @@ class tx_caddy_pi1_flexform
       // RETURN : Don't prompt to DRS
     if( ! $drs )
     {
-      return $value;    
+      return $value;
     }
       // RETURN : Don't prompt to DRS
-    
+
       // RETURN : DRS is disabled
     if( ! $this->pObj->b_drs_flexform )
     {
