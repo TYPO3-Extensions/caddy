@@ -788,6 +788,7 @@ plugin.tx_powermail_pi1 {
           10 {
             userFunc = tx_caddy_powermail->sendInvoiceToVendor
           }
+10 >
         45967 = COA
         45967 {
           10 = USER
