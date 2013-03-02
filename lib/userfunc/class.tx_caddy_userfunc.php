@@ -83,6 +83,15 @@ class tx_caddy_userfunc
   * @var string
   */
   public $typo3Version = null;
+  
+  private $drs        = null;
+  private $pid        = null;
+  private $pObj       = null;
+  private $powermail  = null;
+  private $pageObject = null;
+  private $pluginPiFlexform = null;
+  private $typoscriptObject = null;
+  private $userfunc   = null;
 
 
 
@@ -99,134 +108,6 @@ class tx_caddy_userfunc
 
   
   
-  /***********************************************
-   *
-   * Powermail
-   *
-   **********************************************/
-  
-  /**
-   * checkPowermail():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function checkPowermail( )
-  {
-    $prompt = $this->checkPowermailContent( );
-    if( $prompt )
-    {
-      return $prompt;
-    }
-        
-    $prompt = $this->checkPowermailMarker( );
-
-    return $prompt;
-  }  
-  
-  /**
-   * checkPowermailContent():
-   *
-   * @param   string    $prompt
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function checkPowermailContent(  )
-  {
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
-      // RETURN : there is a powermial form
-    if( $this->powermail->fieldUid )
-    {
-      return null;
-    }
-      // RETURN : there is a powermial form
-    
-      // RETURN prompt : there isn't any powermial form
-    $prompt = '
-      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:powermailNocontent'). '
-        </div>
-      </div>
-      ';
-      // RETURN prompt : there isn't any powermial form
-    
-    return $prompt;
-  }
-  
-  
-  /**
-   * checkPowermailMarker():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function checkPowermailMarker( )
-  {
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
-    $prompt = null; 
-
-    if( ! $this->powermail->markerReceiver )
-    {
-      $prompt = $prompt . '
-      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' ) . '
-        </div>
-      </div>
-      ';
-    }
-    
-    if( $this->powermail->markerReceiverWtcart )
-    {
-      $prompt = $prompt . '
-      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' ) . '
-        </div>
-      </div>
-      ';
-    }
-    
-    if( ! $this->powermail->markerSender )
-    {
-      $prompt = $prompt . '
-      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' ) . '
-        </div>
-      </div>
-      ';
-    }
-    
-    if( $this->powermail->markerSenderWtcart )
-    {
-      $prompt = $prompt . '
-      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
-        </div>
-      </div>
-      ';
-    }
-    
-    return $prompt;
-  }
-
   /***********************************************
    *
    * Extension Management
@@ -272,6 +153,14 @@ class tx_caddy_userfunc
     return $arrReturn;
   }
   
+  
+  
+  /***********************************************
+   *
+   * Plugin 1 report
+   *
+   **********************************************/    
+
   /**
    * pi1FfSdefReport()  : Check the configuration of
    *                      * the plugin / flexform
@@ -317,7 +206,10 @@ class tx_caddy_userfunc
 
     $this->pi1FfSdefReportInit( );
 
-    $prompt = $this->checkPowermail( );
+    $prompt = $this->typoscriptCheck( );
+
+    $prompt = $prompt . $this->powermailCheck( );
+
 
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
@@ -427,6 +319,144 @@ class tx_caddy_userfunc
 //
 //    return $input.$wizard;
 //  }
+ 
+  
+  
+  /***********************************************
+   *
+   * Powermail
+   *
+   **********************************************/
+  
+  /**
+   * powermailCheck():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function powermailCheck( )
+  {
+    $prompt = $this->powermailCheckContent( );
+    if( $prompt )
+    {
+      return $prompt;
+    }
+        
+    $prompt = $this->powermailCheckMarker( );
+
+    return $prompt;
+  }  
+  
+  /**
+   * powermailCheckContent():
+   *
+   * @param   string    $prompt
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function powermailCheckContent(  )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+      // RETURN : there is a powermial form
+    if( $this->powermail->fieldUid )
+    {
+      return null;
+    }
+      // RETURN : there is a powermial form
+    
+      // RETURN prompt : there isn't any powermial form
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:powermailNocontent'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any powermial form
+    
+    return $prompt;
+  }
+  
+  
+  /**
+   * powermailCheckMarker():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function powermailCheckMarker( )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+    $prompt = null; 
+
+    if( ! $this->powermail->markerReceiver )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( $this->powermail->markerReceiverWtcart )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( ! $this->powermail->markerSender )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( $this->powermail->markerSenderWtcart )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    return $prompt;
+  }
+ 
+  
+  
+  /***********************************************
+   *
+   * Prompts
+   *
+   **********************************************/    
 
   /**
    * promptCurrIP( ): Displays the IP of the current backend user
@@ -601,10 +631,16 @@ class tx_caddy_userfunc
 
     return $prompt;
   }
+   
   
   
-  
-  /**
+  /***********************************************
+   *
+   * TYPO3
+   *
+   **********************************************/    
+
+ /**
    * set_TYPO3Version( ):
    *
    * @return  void
@@ -648,7 +684,161 @@ class tx_caddy_userfunc
       die ( $prompt );
     }
   }
+  
+  
+  
+  /***********************************************
+   *
+   * Typoscript
+   *
+   **********************************************/
+    
+/**
+ * typoscriptCheck( ): 
+ *
+ * @param	array		$arr_pluginConf: Current plugin/flexform configuration
+ * @return	boolean		TRUE: success. FALSE: error.
+ * @since 3.4.5
+ * @version 3.4.5
+ */
+  private function typoscriptCheck( )
+  {
+    $this->typoscriptInit( );
 
+    if( ! empty( $this->typoscriptObject->setup['plugin.']['tx_caddy_pi1.']['dummy'] ) )
+    {
+      return;
+    }
+
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:typoscriptMissing'). '
+        </div>
+      </div>
+      ';
+    
+    return $prompt;
+  }
+   
+/**
+ * init(): Initiate this class.
+ *
+ * @param	array		$arr_pluginConf: Current plugin/flexform configuration
+ * @return	boolean		TRUE: success. FALSE: error.
+ * @since 3.4.5
+ * @version 3.4.5
+ */
+  private function typoscriptInit( )
+  {
+    //$this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']; // get ts
+
+      // Init page id and the page object
+    $this->typoscriptInitPageUid( );
+    $this->typoscriptInitPageObj( );
+
+      // Init agregrated TypoScript
+    $arr_rows_of_all_pages_inRootLine = $this->pageObject->getRootLine( $this->pid );
+    if( empty( $arr_rows_of_all_pages_inRootLine ) )
+    {
+      return false;
+    }
+    $this->typoscriptInitTsObj( $arr_rows_of_all_pages_inRootLine );
+
+    return true;
+  }
+
+/**
+ * typoscriptInitPageObj(): Initiate an page object.
+ *
+ * @param	array		$arr_pluginConf: Current plugin/flexform configuration
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
+ */
+  private function typoscriptInitPageObj( )
+  {
+    if( ! empty( $this->pageObject ) )
+    {
+      return;
+    }
+
+      // Set current page object
+    require_once( PATH_t3lib . 'class.t3lib_page.php' );
+    $this->pageObject = t3lib_div::makeInstance( 't3lib_pageSelect' );
+
+    return;
+  }
+
+  /**
+ * typoscriptInitPageUid(): Initiate the page uid.
+ *
+ * @param	array		$arr_pluginConf: Current plugin/flexform configuration
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
+ */
+  private function typoscriptInitPageUid( )
+  {
+    if( ! empty( $this->pid ) )
+    {
+      return;
+    }
+
+      // Update: Get current page id from the plugin
+    $int_pid = false;
+    if( $this->row['pid'] > 0 )
+    {
+      $int_pid = $this->row['pid'];
+    }
+      // Update: Get current page id from the plugin
+
+      // New: Get current page id from the current URL
+    if( ! $int_pid )
+    {
+        // Get backend URL - something like .../alt_doc.php?returnUrl=db_list.php&id%3D2926%26table%3D%26imagemode%3D1&edit[tt_content][1734]=edit
+      $str_url = $_GET['returnUrl'];
+        // Get curent page id
+      $int_pid = intval( substr( $str_url, strpos( $str_url, 'id=' ) + 3 ) );
+    }
+      // New: Get current page id from the current URL
+
+      // Set current page id
+    $this->pid = $int_pid;
+
+    return;
+  }
+
+  /**
+ * typoscriptInitTsObj(): Initiate the TypoScript of the current page.
+ *
+ * @param	array		$arr_rows_of_all_pages_inRootLine: Agregate the TypoScript of all pages in the rootline
+ * @return	void
+ * @access    private
+ * @version 2.0.0
+ * @since 2.0.0
+ */
+  private function typoscriptInitTsObj( $arr_rows_of_all_pages_inRootLine )
+  {
+    if( ! empty( $this->typoscriptObject ) )
+    {
+      return;
+    }
+
+    require_once( PATH_t3lib . 'class.t3lib_tstemplate.php' );
+    require_once( PATH_t3lib . 'class.t3lib_tsparser_ext.php' );
+
+    $this->typoscriptObject = t3lib_div::makeInstance( 't3lib_tsparser_ext' );
+    $this->typoscriptObject->tt_track = 0;
+    $this->typoscriptObject->init( );
+    $this->typoscriptObject->runThroughTemplates( $arr_rows_of_all_pages_inRootLine );
+    $this->typoscriptObject->generateConfig( );
+
+    return;
+  }
+  
 
 
 }

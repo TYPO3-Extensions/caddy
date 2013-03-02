@@ -154,6 +154,10 @@
             height="90" 
             alt="Your logo with your URL. 120 x 90 pixel." /></a>
       ]]></label>
+      <label index="typoscriptMissing"><![CDATA[
+        There isn't any typoscript template for caddy.<br />
+        Please add the include static template!
+      ]]></label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="pi1FfSdefReportDisabled"><![CDATA[
