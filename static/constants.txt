@@ -20,7 +20,7 @@ plugin.caddy {
   main.service_attribute_2_symbol =
   # cat=caddy - main//110; type=text; label= Service Attribute 3 symbol (e.g. Length: m, cm, inch).
   main.service_attribute_3_symbol =
-  # cat=caddy - main//111; type=text; label= Enter the uid of the page where caddy plugin resides (e.g. 10).
+  # cat=caddy - main//111; type=text; label= Uid of storage folder: id of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
   main.pid =
   # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   main.externalLinks = Click me!
