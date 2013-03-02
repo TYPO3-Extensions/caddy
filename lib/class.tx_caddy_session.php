@@ -886,7 +886,7 @@ class tx_caddy_session
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function sessionDelete( )
+  public function sessionDelete( $content = '', $conf = array( ) )
   {
     // DRS
     if( $this->drs->drsSession )
@@ -896,6 +896,8 @@ class tx_caddy_session
     }
       // DRS
 $prompt = 'Session is cleared.';
+t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+$prompt = var_export( $conf, true );
 t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
 
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );

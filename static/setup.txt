@@ -769,77 +769,73 @@ plugin.tx_caddy_pi3 {
 
 plugin.tx_powermail_pi1 {
   dynamicTyposcript {
+      // Display the content of the caddy
     caddy = USER
     caddy {
-      userFunc = user_caddy_powermailCart->showCart
+      userFunc = user_caddy_powermailCart->showCaddy
     }
-    clearcart = USER
-    clearcart {
+      // Clear the caddy session
+    clearcaddysession = USER
+    clearcaddysession {
       userFunc = tx_caddy_session->sessionDelete
     }
   }
+}
+plugin.tx_powermail_pi1 {
   email {
     recipient_mail {
       addAttachment {
           // Caddy: Invoice
-        45967 = USER
-        45967 {
-          userFunc = tx_caddy_powermail->sendInvoiceToVendor
-        }
-        45967 >
         45967 = COA
         45967 {
-          45967 = TEXT
-          45967 {
-            value = typo3conf/ext/quick_shop/res/files/de/typo3-quick-shop-agb_A4.pdf
-          }
-          45967 >
-          45967 = USER
-          45967 {
+          10 = USER
+          10 {
             userFunc = tx_caddy_powermail->sendInvoiceToVendor
           }
         }
-      }
-    }
-  }
-}
-XXX_plugin.tx_powermail_pi1 {
-  email {
-    recipient_mail {
-      addAttachment {
-          // Caddy: Invoice
-        45967 = USER
-        45967 {
-          userFunc = tx_caddy_powermail->sendInvoiceToVendor
-        }
           // Caddy: Delivery Order
-        45968 = USER
+        45968 = COA
         45968 {
-          userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
+          }
         }
           // Caddy: Terms & Conditions
-        45969 = USER
+        45969 = COA
         45969 {
-          userFunc = tx_caddy_powermail->sendTermsToVendor
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendTermsToVendor
+          }
         }
       }
     }
     sender_mail {
       addAttachment {
           // Caddy: Invoice
-        45967 = USER
+        45967 = COA
         45967 {
-          userFunc = tx_caddy_powermail->sendInvoiceToCustomer
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendInvoiceToCustomer
+          }
         }
           // Caddy: Delivery Order
-        45968 = USER
+        45968 = COA
         45968 {
-          userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
+          }
         }
           // Caddy: Terms & Conditions
-        45969 = USER
+        45969 = COA
         45969 {
-          userFunc = tx_caddy_powermail->sendTermsToCustomer
+          10 = USER
+          10 {
+            userFunc = tx_caddy_powermail->sendTermsToCustomer
+          }
         }
       }
     }
