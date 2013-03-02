@@ -26,8 +26,6 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_tslib . 'class.tslib_pibase.php');
-
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
  *
@@ -35,14 +33,14 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *   73: class tx_caddy_session extends tslib_pibase
  *  104:     public function productAdd($parray, $pObj)
- *  208:     private function checkQuantityMinMax( $parray )
+ *  208:     private function quantityCheckMinMax( $parray )
  *  238:     public function productDelete($pObj)
  *  302:     public function quantityUpdate($pObj)
  *  435:     public function shippingUpdate($value)
  *  450:     public function shippingGet( )
  *  463:     public function paymentUpdate($value)
  *  478:     public function paymentGet()
- *  491:     public function specialChange($special_arr)
+ *  491:     public function specialUpdate($special_arr)
  *  506:     public function specialGet()
  *  518:     public function productsGet()
  *  549:     public function productsGetGross($pid)
@@ -50,11 +48,11 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  584:     public function productGetDetails($gpvar, $pObj)
  *  606:     private function productGetDetailsSql($gpvar, $pObj)
  *  660:     private function productGetDetailsTs($gpvar, $pObj)
- *  786:     private function msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ *  786:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
  *  844:     private function productGetVariantTs($product, $pObj)
  *  884:     private function productGetVariantGpvar($pObj)
- *  921:     private function quantitityGetVariant($pObj)
- * 1004:     private function sqlReplaceMarker($gpvar, $pObj)
+ *  921:     private function quantityGetVariant($pObj)
+ * 1004:     private function zz_sqlReplaceMarker($gpvar, $pObj)
  *
  * TOTAL FUNCTIONS: 21
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -70,7 +68,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @version     2.0.0
  * @since       1.4.6
  */
-class tx_caddy_session extends tslib_pibase
+class tx_caddy_session
 {
 
     public $prefixId = 'tx_caddy_pi1';
@@ -84,6 +82,89 @@ class tx_caddy_session extends tslib_pibase
       // #45775, 130224, dwildt, 2+
       // Object: the parent cObject
     public $cObj = null;
+
+//    /**
+//    * Count products in a cart
+//    *
+//    * @return  integer
+//    */
+//    public function countProductsInCart($pid)
+//    {
+//        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
+//
+//        $count = 0;
+//        foreach ((array) $sesArray['products'] as $key => $val) {
+//            $count += $val['qty'];
+//        }
+//
+//        return $count;
+//    }
+//
+
+    
+    
+ /***********************************************
+  *
+  * Order number
+  *
+  **********************************************/
+
+    /**
+ * get the order number from session
+ *
+ * @param	array		$arr: array to change
+ * @return	void
+ */
+    public function ordernumberGet()
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        return $sesArray['ordernumber'];
+    }
+
+    
+    
+ /***********************************************
+  *
+  * Payment
+  *
+  **********************************************/
+
+    /**
+ * Change the payment method in session
+ *
+ * @param	array		$arr: array to change
+ * @return	void
+ */
+    public function paymentUpdate($value)
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        $sesArray['payment'] = intval($value); // overwrite with new qty
+
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->storeSessionData(); // Save session
+    }
+
+    /**
+ * get the payment method from session
+ *
+ * @return	integer
+ */
+    public function paymentGet()
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        return $sesArray['payment'];
+    }
+
+    
+    
+ /***********************************************
+  *
+  * Product
+  *
+  **********************************************/
 
     /**
  * Add product to session
@@ -101,131 +182,103 @@ class tx_caddy_session extends tslib_pibase
  * @param	array		$pobj: Parent Object
  * @return	void
  */
-    public function productAdd($parray, $pObj)
+    public function productAdd( $parray, $pObj )
     {
-        // return without price or without title
-        if (empty($parray['price']) || empty($parray['title']))
-        {
-            return false;
-        }
+      $arr_variant = null;
+      
+      // return without price or without title
+      if (empty($parray['price']) || empty($parray['title']))
+      {
+          return false;
+      }
 
-        // return without price or without title
+      // return without price or without title
 
-        // variants
-        $arr_variant['puid'] = $parray['puid'];
-        // add variant keys from ts settings.variants array,
-        //  if there is a corresponding key in GET or POST
-        if (is_array($pObj->conf['settings.']['variant.']))
-        {
-            $arr_get  = t3lib_div::_GET();
-            $arr_post = t3lib_div::_POST();
-            foreach($pObj->conf['settings.']['variant.'] as $key => $tableField)
-            {
-                list($table, $field) = explode('.', $tableField);
-                if(isset($arr_get[$table][$field]))
-                {
-                    $arr_variant[$tableField] = mysql_escape_string($arr_get[$table][$field]);
-                }
-                if(isset($arr_post[$table][$field]))
-                {
-                    $arr_variant[$tableField] = mysql_escape_string($arr_post[$table][$field]);
-                }
-            }
-            // add variant keys from ts settings.variants array,
-        }
-        // variants
+      // variants
+      $arr_variant['puid'] = $parray['puid'];
+      // add variant keys from ts settings.variants array,
+      //  if there is a corresponding key in GET or POST
+      if (is_array($pObj->conf['settings.']['variant.']))
+      {
+          $arr_get  = t3lib_div::_GET();
+          $arr_post = t3lib_div::_POST();
+          foreach($pObj->conf['settings.']['variant.'] as $key => $tableField)
+          {
+              list($table, $field) = explode('.', $tableField);
+              if(isset($arr_get[$table][$field]))
+              {
+                  $arr_variant[$tableField] = mysql_escape_string($arr_get[$table][$field]);
+              }
+              if(isset($arr_post[$table][$field]))
+              {
+                  $arr_variant[$tableField] = mysql_escape_string($arr_post[$table][$field]);
+              }
+          }
+          // add variant keys from ts settings.variants array,
+      }
+      // variants
 
-        $sesArray = array();
-        // get already exting products from session
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
+      $sesArray = array();
+      // get already exting products from session
+      $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
 
-        // check if this puid already exists and when delete it
-        foreach ((array) $sesArray['products'] as $key => $value)
-        { // one loop for every product
-            if (is_array($value))
-            {
-                // counter for condition. Every condition has to be true
-                $int_counter = 0;
+      // check if this puid already exists and when delete it
+      foreach ((array) $sesArray['products'] as $key => $value)
+      { // one loop for every product
+          if (is_array($value))
+          {
+              // counter for condition. Every condition has to be true
+              $int_counter = 0;
 
-                // loop every condition
-                foreach($arr_variant as $key_variant => $value_variant)
-                {
-                    // condition fits
-                    if ($value[$key_variant] == $value_variant)
-                    {
-                        $int_counter++;
-                    }
-                }
-                // loop every condition
+              // loop every condition
+              foreach($arr_variant as $key_variant => $value_variant)
+              {
+                  // condition fits
+                  if ($value[$key_variant] == $value_variant)
+                  {
+                      $int_counter++;
+                  }
+              }
+              // loop every condition
 
-                // all conditions fit
-                if($int_counter == count($arr_variant))
-                {
-                    // remove product
-                    $parray['qty'] = $sesArray['products'][$key]['qty'] + $parray['qty'];
-                    unset($sesArray['products'][$key]);
-                }
-            }
-        }
+              // all conditions fit
+              if($int_counter == count($arr_variant))
+              {
+                  // remove product
+                  $parray['qty'] = $sesArray['products'][$key]['qty'] + $parray['qty'];
+                  unset($sesArray['products'][$key]);
+              }
+          }
+      }
 
-        $parray = $this->checkQuantityMinMax($parray);
+      $parray = $this->quantityCheckMinMax($parray);
 
-        if (isset($parray['price']))
-        {
-            $parray['price'] = str_replace(',', '.', $parray['price']); // comma to point
-        }
+      if (isset($parray['price']))
+      {
+          $parray['price'] = str_replace(',', '.', $parray['price']); // comma to point
+      }
 
-        // remove puid from variant array
-        unset($arr_variant[0]);
+      // remove puid from variant array
+      unset( $arr_variant[0] );
 
-        // add variant key/value pairs to the current product
-        if (!empty($arr_variant))
-        {
-            foreach ($arr_variant as $key_variant => $value_variant)
-            {
-                $parray[$key_variant] = $value_variant;
-            }
-        }
-        // add variant key/value pairs to the current product
+      // add variant key/value pairs to the current product
+      if (!empty($arr_variant))
+      {
+          foreach ($arr_variant as $key_variant => $value_variant)
+          {
+              $parray[$key_variant] = $value_variant;
+          }
+      }
+      // add variant key/value pairs to the current product
 
-        // add product to the session array
-        $sesArray['products'][] = $parray;
+      // add product to the session array
+      $sesArray['products'][] = $parray;
 
-        // generate session with session array
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
-        // save session
-        $GLOBALS['TSFE']->storeSessionData();
+      // generate session with session array
+      $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+      // save session
+      $GLOBALS['TSFE']->storeSessionData();
     }
-
- /* checkQuantityMinMax( )  : check if min and max in quantity range and set error message
-  *
-  * @param array
-  * @return  array
-  * @access  private
-  * @version 2.0.0
-  * @since 1.4.2
-  */
-  private function checkQuantityMinMax( $parray )
-  {
-      $parray['error'] = array( );
-      if( ! empty( $parray['min'] ) )
-      {
-        if( $parray['qty'] < $parray['min'] )
-        {
-          $parray['qty'] = $parray['min'];
-          $parray['error'][] = 'min';
-        }
-      }
-      if( ! empty($parray['max'] ) )
-      {
-        if( $parray['qty'] > $parray['max'] )
-        {
-          $parray['qty'] = $parray['max'];
-          $parray['error'][] = 'max';
-        }
-      }
-      return $parray;
-  }
 
  /**
   * Remove product from session with given uid
@@ -247,7 +300,7 @@ class tx_caddy_session extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
     // loop every product
-    foreach ((array) $sesArray['products'] as $key => $value)
+    foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
     {
       //      if ($sesArray[$key]['puid'] == intval($uid)) { // uid fits
       //        unset($sesArray[$key]); // delete old value
@@ -280,296 +333,6 @@ class tx_caddy_session extends tslib_pibase
     // save session
     $GLOBALS['TSFE']->storeSessionData();
   }
-
-//    /**
-//    * Clear complete session
-//    *
-//    * @return  void
-//    */
-//    public function removeAllProductsFromSession()
-//    {
-////        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array()); // Generate new session with empty array
-////        $GLOBALS['TSFE']->storeSessionData(); // Save session
-//    }
-
-    /**
- * Change quantity of a product in session
- *
- * @param	array		$pobj: Parent Object
- * @return	void
- * @version 1.2.2
- */
-    public function quantityUpdate($pObj)
-    {
-        // variants
-        // add variant key/value pairs from piVars
-        $arr_variant = $this->quantitityGetVariant($pObj);
-
-        // get products from session
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
-
-        $is_cart = intval($pObj->piVars['update_from_cart']);
-
-        // loop every product
-        foreach ((array) $sesArray['products'] as $key_session => $value)
-        {
-            // current product id
-            $session_puid = $sesArray['products'][$key_session]['puid'];
-
-            if(!is_array($arr_variant))
-            {
-                // no variant, nothing to loop
-                $int_qty = intval($pObj->piVars['qty'][$session_puid]);
-
-                if ($int_qty > 0)
-                {
-                    // update quantity
-                    if ($is_cart) {
-                        // update from cart then set new qty
-                        $sesArray['products'][$key_session]['qty'] = $int_qty;
-                    } else {
-                        // update not from cart then add qty
-                        $sesArray['products'][$key_session]['qty'] += $int_qty;
-                    }
-                    $sesArray['products'][$key_session] = $this->checkQuantityMinMax($sesArray['products'][$key_session]);
-                } else {
-                    // remove product from session
-                    $this->productDelete($sesArray['products'][$key_session]['puid']);
-                    // remove product from current session array
-                    unset($sesArray['products'][$key_session]);
-                }
-            } else {
-                // loop for every variant
-                $arr_variant_backup = $arr_variant;
-                foreach($arr_variant as $key_variant => $arr_condition)
-                {
-                    if (!isset($arr_variant[$key_variant]['puid']))
-                    {
-                        // without variant
-                        $curr_puid = key($pObj->piVars['qty']);
-                    }
-                    if (isset($arr_variant[$key_variant]['puid']))
-                    {
-                        $curr_puid = $arr_variant[$key_variant]['puid'];
-                    }
-                    if (!isset($arr_variant[$key_variant]['qty']))
-                    {
-                        // without variant
-                        $int_qty = intval($pObj->piVars['qty'][$curr_puid]);
-                    }
-                    if (isset($arr_variant[$key_variant]['qty']))
-                    {
-                        $int_qty = intval($arr_variant[$key_variant]['qty']);
-                    }
-
-                    // counter for condition
-                    $int_counter = 0;
-                    // puid: condition fits
-                    if ($session_puid == $curr_puid)
-                    {
-                        $int_counter++;
-                    }
-
-                    // loop through conditions
-                    foreach($arr_condition as $key_condition => $value_condition)
-                    {
-                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-                        if (in_array($key_condition, array('qty', 'puid')))
-                        {
-                            // workaround: puid and qty should fit in every case
-                            $int_counter++;
-                        }
-                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-                        if (!in_array($key_condition, array('qty', 'puid')))
-                        {
-                            // variants: condition fits
-                            if ($sesArray['products'][$key_session][$key_condition] == $value_condition)
-                            {
-                                //$prompt_315[] = 'div 315: true - session_key : ' . $key_session . ', ' . $key_condition . ' : ' . $value_condition;
-                                $int_counter++;
-                            }
-                        }
-                    }
-                    // loop through conditions
-
-                    // all conditions fit
-                    if($int_counter == (count($arr_condition) + 1))
-                    {
-                        if ($int_qty > 0)
-                        {
-                            if ($is_cart)
-                            {
-                                // update from cart then set new qty
-                                $sesArray['products'][$key_session]['qty'] = $int_qty;
-                            } else {
-                                // update not from cart then add qty
-                                $sesArray['products'][$key_session]['qty'] += $int_qty;
-                            }
-                        } else {
-                            // remove product from session
-                            $this->productDelete($sesArray['products'][$key_session]['puid']);
-                            // remove product from current session array
-                            unset($sesArray['products'][$key_session]);
-                        }
-                    }
-
-                }
-                $arr_variant = $arr_variant_backup;
-                // loop every variant
-            }
-        }
-        // loop every product
-
-        // generate new session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
-        // save session
-        $GLOBALS['TSFE']->storeSessionData();
-    }
-
-    /**
- * Change the shipping method in session
- *
- * @param	array		$arr: array to change
- * @return	void
- */
-    public function shippingUpdate($value)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        $sesArray['shipping'] = intval($value); // overwrite with new qty
-
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
-
-    /**
- * get the shipping method from session
- *
- * @return	integer
- */
-    public function shippingGet( )
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        return $sesArray['shipping'];
-    }
-
-    /**
- * Change the payment method in session
- *
- * @param	array		$arr: array to change
- * @return	void
- */
-    public function paymentUpdate($value)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        $sesArray['payment'] = intval($value); // overwrite with new qty
-
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
-
-    /**
- * get the payment method from session
- *
- * @return	integer
- */
-    public function paymentGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        return $sesArray['payment'];
-    }
-
-    /**
- * Change the special method in session
- *
- * @param	array		$arr: array to change
- * @return	void
- */
-    public function specialChange($special_arr)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        $sesArray['special'] = $special_arr; // overwrite with new qty
-
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
-
-    /**
- * get the special method from session
- *
- * @return	integer
- */
-    public function specialGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        return $sesArray['special'];
-    }
-
-    /**
- * Read products from session
- *
- * @return	array		$arr: array with all products from session
- */
-    public function productsGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        return $sesArray['products'];
-    }
-
-//    /**
-//    * Count products in a cart
-//    *
-//    * @return  integer
-//    */
-//    public function countProductsInCart($pid)
-//    {
-//        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
-//
-//        $count = 0;
-//        foreach ((array) $sesArray['products'] as $key => $val) {
-//            $count += $val['qty'];
-//        }
-//
-//        return $count;
-//    }
-//
-   /**
- * Count gross price of all products in a cart
- * Is used by pi3 only
- *
- * @param	[type]		$pid: ...
- * @return	integer
- */
-    public function productsGetGross($pid)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
-
-        $gross = 0;
-        foreach ((array) $sesArray['products'] as $key => $val) {
-            $gross += $val['price'] * $val['qty'];
-        }
-
-        return $gross;
-    }
-
-    /**
- * get the order number from session
- *
- * @param	array		$arr: array to change
- * @return	void
- */
-    public function ordernumberGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
-
-        return $sesArray['ordernumber'];
-    }
 
     /**
  * read product details (title, price from table)
@@ -611,7 +374,7 @@ class tx_caddy_session extends tslib_pibase
         }
 
         // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
-        $this->sqlReplaceMarker($gpvar, $pObj);
+        $this->zz_sqlReplaceMarker( $pObj );
                   // #42154, 101218, dwildt, 1-
                 //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
                   // #42154, 101218, dwildt, 1+
@@ -626,7 +389,7 @@ class tx_caddy_session extends tslib_pibase
             $str = '<h1>caddy: SQL-Error</h1>';
             $str .= '<p>'.$error.'</p>';
             $str .= '<p>'.$query.'</p>';
-            $this->msg($str, 0, 1, 1);
+            $this->zz_msg($str, 0, 1, 1);
         }
 
         // ToDo: @dwildt: optimization highly needed
@@ -744,31 +507,444 @@ class tx_caddy_session extends tslib_pibase
         }
     }
 
-//    /**
-//    * add flexform values to conf array
-//    *
-//    * @param array   $pobj: Parent Object
-//    * @return  void
-//    */
-//    public function flex2conf(&$pObj)
-//    {
-//        if (is_array($pObj->cObj->data['pi_flexform']['data']))
-//        { // if there are flexform values
-//            foreach ($pObj->cObj->data['pi_flexform']['data'] as $key => $value)
-//            { // every flexform category
-//                if (count($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF']) > 0)
-//                { // if there are flexform values
-//                    foreach ($pObj->cObj->data['pi_flexform']['data'][$key]['lDEF'] as $key2 => $value2)
-//                    { // every flexform option
-//                        if ($pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key))
-//                        { // if value exists in flexform
-//                            $pObj->conf[$key . '.'][$key2] = $pObj->pi_getFFvalue($pObj->cObj->data['pi_flexform'], $key2, $key); // overwrite $conf
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
+   /**
+ * productGetVariantGpvar(): Get variant values from piVars
+ *                              variant values have to be content of
+ *                              ts array variant and of piVars
+ *
+ * @param	array		$product: array with product uid, title, tax, etc...
+ * @param	array		$pobj: Parent Object
+ * @return	array		$arr_variants: array with variant key/value pairs
+ * @access private
+ * @version 2.0.0
+ * @since 1.4.6
+ */
+    private function productGetVariantGpvar( $pObj )
+    {
+      $arr_variant = null;
+
+      // return there isn't any variant
+      if (!is_array($pObj->conf['settings.']['variant.']))
+      {
+        return $arr_variant;
+      }
+      // return there isn't any variant
+
+      // loop through ts variant array
+      foreach( $pObj->conf['settings.']['variant.'] as $tableField )
+      {
+        // piVars contain variant key
+        if (!empty($pObj->piVars[$tableField]))
+        {
+          $arr_variant[$tableField] = mysql_escape_string($pObj->piVars[$tableField]);
+        }
+      }
+
+      return $arr_variant;
+    }
+
+    /**
+ * productGetVariantTs():  Get an array with the variant values
+ *                                out of the current product
+ *
+ * @param	array		$product: array with product uid, title, tax, etc...
+ * @param	array		$pobj: Parent Object
+ * @return	array		$arr_variants: array with variant key/value pairs
+ * @version 1.2.2
+ * @since 1.2.2
+ */
+    private function productGetVariantTs($product, $pObj)
+    {
+        $arr_variants = null;
+
+        // return there isn't any variant
+        if (!is_array($pObj->conf['settings.']['variant.']))
+        {
+            return $arr_variants;
+        }
+        // return there isn't any variant
+
+        // loop through ts array variant
+        foreach ($pObj->conf['settings.']['variant.'] as $key_variant)
+        {
+            // product contains variant key from ts
+            if (in_array($key_variant, array_keys($product)))
+            {
+                $arr_variants[$key_variant] = $product[$key_variant];
+                if (empty($arr_variants[$key_variant]))
+                {
+                    unset($arr_variants[$key_variant]);
+                }
+            }
+        }
+
+        return $arr_variants;
+    }
+
+    /**
+ * Read products from session
+ *
+ * @return	array		$arr: array with all products from session
+ */
+    public function productsGet()
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        return $sesArray['products'];
+    }
+    
+   /**
+ * Count gross price of all products in a cart
+ * Is used by pi3 only
+ *
+ * @param	[type]		$pid: ...
+ * @return	integer
+ */
+    public function productsGetGross( $pid )
+    {
+        // get already exting products from session
+      $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $pid );
+
+      $gross = 0;
+      foreach( ( array ) $sesArray['products'] as  $val )
+      {
+          $gross += $val['price'] * $val['qty'];
+      }
+
+      return $gross;
+    }
+
+
+    
+ /***********************************************
+  *
+  * Quantity
+  *
+  **********************************************/
+
+ /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  *
+  * @param array
+  * @return  array
+  * @access  private
+  * @version 2.0.0
+  * @since 1.4.2
+  */
+  private function quantityCheckMinMax( $parray )
+  {
+      $parray['error'] = array( );
+      if( ! empty( $parray['min'] ) )
+      {
+        if( $parray['qty'] < $parray['min'] )
+        {
+          $parray['qty'] = $parray['min'];
+          $parray['error'][] = 'min';
+        }
+      }
+      if( ! empty($parray['max'] ) )
+      {
+        if( $parray['qty'] > $parray['max'] )
+        {
+          $parray['qty'] = $parray['max'];
+          $parray['error'][] = 'max';
+        }
+      }
+      return $parray;
+  }
+
+/**
+ * quantityGetVariant(): Get variant values out of the name of the qty field
+ *                              variant values have to be content of
+ *                              ts array variant and of qty field
+ *
+ * @param	array		$product: array with product uid, title, tax, etc...
+ * @param	array		$pobj: Parent Object
+ * @return	array		$arr_variants: array with variant key/value pairs
+ * @access private
+ * @version 2.0.0
+ * @since 1.4.6
+ */
+    private function quantityGetVariant($pObj)
+    {
+      $arr_variant  = null;
+      $arr_qty      = null;
+
+        // RETURN : there isn't any variant
+      if( ! is_array($pObj->conf['settings.']['variant.'] ) )
+      {
+        return $arr_variant;
+      }
+        // RETURN : there isn't any variant
+
+      $int_counter = 0;
+      foreach( $pObj->piVars['qty'] as $key => $value )
+      {
+        $arr_qty[$int_counter]['qty'][$key] = $value;
+        $int_counter++;
+      }
+
+      foreach ( $arr_qty as $key => $piVarsQty )
+      {
+        // iterator object
+        $data     = new RecursiveArrayIterator( $piVarsQty['qty'] );
+        $iterator = new RecursiveIteratorIterator( $data, true );
+        // top level of ecursive array
+        $iterator->rewind();
+
+        // get all variant key/value pairs from qty name
+        foreach ($iterator as $key_iterator => $value_iterator)
+        {
+          // i.e for a key: tx_org_calentrance.uid=4
+          list($key_variant, $value_variant) = explode('=', $key_iterator);
+          if ($key_variant == 'puid')
+          {
+            $arr_variant[$key]['puid'] = $value_variant;
+          }
+          // i.e arr_var[tx_org_calentrance.uid] = 4
+          $arr_from_qty[$key][$key_variant] = $value_variant;
+          if (is_array($value_iterator))
+          {
+            list($key_variant, $value_variant) = explode('=', key($value_iterator));
+            if ($key_variant == 'puid')
+            {
+              $arr_variant[$key]['puid'] = $value_variant;
+            }
+            $arr_from_qty[$key][$key_variant] = $value_variant;
+          }
+          // value is the value of the field qty in every case
+          if (!is_array($value_iterator))
+          {
+            $arr_variant[$key]['qty'] = $value_iterator;
+          }
+        }
+
+        // loop through ts variant array
+        foreach( $pObj->conf['settings.']['variant.'] as $key_variant => $tableField )
+        {
+          // piVars contain variant key
+          if( ! empty($arr_from_qty[$key][$tableField] ) )
+          {
+            $arr_variant[$key][$tableField] = mysql_escape_string( $arr_from_qty[$key][$tableField] );
+          }
+        }
+      }
+
+      return $arr_variant;
+    }
+
+    /**
+ * Change quantity of a product in session
+ *
+ * @param	array		$pobj: Parent Object
+ * @return	void
+ * @version 1.2.2
+ */
+    public function quantityUpdate($pObj)
+    {
+        // variants
+        // add variant key/value pairs from piVars
+        $arr_variant = $this->quantityGetVariant($pObj);
+
+        // get products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
+
+        $is_cart = intval($pObj->piVars['update_from_cart']);
+
+        // loop every product
+        foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
+        {
+            // current product id
+            $session_puid = $sesArray['products'][$key_session]['puid'];
+
+            if(!is_array($arr_variant))
+            {
+                // no variant, nothing to loop
+                $int_qty = intval($pObj->piVars['qty'][$session_puid]);
+
+                if ($int_qty > 0)
+                {
+                    // update quantity
+                    if ($is_cart) {
+                        // update from cart then set new qty
+                        $sesArray['products'][$key_session]['qty'] = $int_qty;
+                    } else {
+                        // update not from cart then add qty
+                        $sesArray['products'][$key_session]['qty'] += $int_qty;
+                    }
+                    $sesArray['products'][$key_session] = $this->quantityCheckMinMax($sesArray['products'][$key_session]);
+                } else {
+                    // remove product from session
+                    $this->productDelete($sesArray['products'][$key_session]['puid']);
+                    // remove product from current session array
+                    unset($sesArray['products'][$key_session]);
+                }
+            } else {
+                // loop for every variant
+                $arr_variant_backup = $arr_variant;
+                foreach($arr_variant as $key_variant => $arr_condition)
+                {
+                    if (!isset($arr_variant[$key_variant]['puid']))
+                    {
+                        // without variant
+                        $curr_puid = key($pObj->piVars['qty']);
+                    }
+                    if (isset($arr_variant[$key_variant]['puid']))
+                    {
+                        $curr_puid = $arr_variant[$key_variant]['puid'];
+                    }
+                    if (!isset($arr_variant[$key_variant]['qty']))
+                    {
+                        // without variant
+                        $int_qty = intval($pObj->piVars['qty'][$curr_puid]);
+                    }
+                    if (isset($arr_variant[$key_variant]['qty']))
+                    {
+                        $int_qty = intval($arr_variant[$key_variant]['qty']);
+                    }
+
+                    // counter for condition
+                    $int_counter = 0;
+                    // puid: condition fits
+                    if ($session_puid == $curr_puid)
+                    {
+                        $int_counter++;
+                    }
+
+                    // loop through conditions
+                    foreach($arr_condition as $key_condition => $value_condition)
+                    {
+                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
+                        if (in_array($key_condition, array('qty', 'puid')))
+                        {
+                            // workaround: puid and qty should fit in every case
+                            $int_counter++;
+                        }
+                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
+                        if (!in_array($key_condition, array('qty', 'puid')))
+                        {
+                            // variants: condition fits
+                            if ($sesArray['products'][$key_session][$key_condition] == $value_condition)
+                            {
+                                //$prompt_315[] = 'div 315: true - session_key : ' . $key_session . ', ' . $key_condition . ' : ' . $value_condition;
+                                $int_counter++;
+                            }
+                        }
+                    }
+                    // loop through conditions
+
+                    // all conditions fit
+                    if($int_counter == (count($arr_condition) + 1))
+                    {
+                        if ($int_qty > 0)
+                        {
+                            if ($is_cart)
+                            {
+                                // update from cart then set new qty
+                                $sesArray['products'][$key_session]['qty'] = $int_qty;
+                            } else {
+                                // update not from cart then add qty
+                                $sesArray['products'][$key_session]['qty'] += $int_qty;
+                            }
+                        } else {
+                            // remove product from session
+                            $this->productDelete($sesArray['products'][$key_session]['puid']);
+                            // remove product from current session array
+                            unset($sesArray['products'][$key_session]);
+                        }
+                    }
+
+                }
+                $arr_variant = $arr_variant_backup;
+                // loop every variant
+            }
+        }
+        // loop every product
+
+        // generate new session
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+        // save session
+        $GLOBALS['TSFE']->storeSessionData();
+    }
+
+
+    
+ /***********************************************
+  *
+  * Shipping
+  *
+  **********************************************/
+
+    /**
+ * Change the shipping method in session
+ *
+ * @param	array		$arr: array to change
+ * @return	void
+ */
+    public function shippingUpdate($value)
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        $sesArray['shipping'] = intval($value); // overwrite with new qty
+
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->storeSessionData(); // Save session
+    }
+
+    /**
+ * get the shipping method from session
+ *
+ * @return	integer
+ */
+    public function shippingGet( )
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        return $sesArray['shipping'];
+    }
+
+
+   
+ /***********************************************
+  *
+  * Special
+  *
+  **********************************************/
+
+    /**
+ * Change the special method in session
+ *
+ * @param	array		$arr: array to change
+ * @return	void
+ */
+    public function specialUpdate($special_arr)
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        $sesArray['special'] = $special_arr; // overwrite with new qty
+
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->storeSessionData(); // Save session
+    }
+
+    /**
+ * get the special method from session
+ *
+ * @return	integer
+ */
+    public function specialGet()
+    {
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+
+        return $sesArray['special'];
+    }
+
+
+   
+ /***********************************************
+  *
+  * ZZ
+  *
+  **********************************************/
 
    /**
  * returns message with optical flair
@@ -783,7 +959,7 @@ class tx_caddy_session extends tslib_pibase
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+    private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
     {
         // config
         if ($prefix)
@@ -829,164 +1005,9 @@ class tx_caddy_session extends tslib_pibase
             die($string); // die process and write message
         }
     }
-
-
+    
     /**
- * productGetVariantTs():  Get an array with the variant values
- *                                out of the current product
- *
- * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
- * @return	array		$arr_variants: array with variant key/value pairs
- * @version 1.2.2
- * @since 1.2.2
- */
-    private function productGetVariantTs($product, $pObj)
-    {
-        $arr_variants = null;
-
-        // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
-        {
-            return $arr_variants;
-        }
-        // return there isn't any variant
-
-        // loop through ts array variant
-        foreach ($pObj->conf['settings.']['variant.'] as $key_variant)
-        {
-            // product contains variant key from ts
-            if (in_array($key_variant, array_keys($product)))
-            {
-                $arr_variants[$key_variant] = $product[$key_variant];
-                if (empty($arr_variants[$key_variant]))
-                {
-                    unset($arr_variants[$key_variant]);
-                }
-            }
-        }
-
-        return $arr_variants;
-    }
-
-   /**
- * productGetVariantGpvar(): Get variant values from piVars
- *                              variant values have to be content of
- *                              ts array variant and of piVars
- *
- * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
- * @return	array		$arr_variants: array with variant key/value pairs
- * @access private
- * @version 2.0.0
- * @since 1.4.6
- */
-    private function productGetVariantGpvar($pObj)
-    {
-        $arr_variant = null;
-
-        // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
-        {
-            return $arr_variant;
-        }
-        // return there isn't any variant
-
-        // loop through ts variant array
-        foreach ($pObj->conf['settings.']['variant.'] as $key => $tableField)
-        {
-            list($table, $field) = explode('.', $tableField);
-            // piVars contain variant key
-            if (!empty($pObj->piVars[$tableField]))
-            {
-                $arr_variant[$tableField] = mysql_escape_string($pObj->piVars[$tableField]);
-            }
-        }
-
-        return $arr_variant;
-    }
-
-   /**
- * quantitityGetVariant(): Get variant values out of the name of the qty field
- *                              variant values have to be content of
- *                              ts array variant and of qty field
- *
- * @param	array		$product: array with product uid, title, tax, etc...
- * @param	array		$pobj: Parent Object
- * @return	array		$arr_variants: array with variant key/value pairs
- * @access private
- * @version 2.0.0
- * @since 1.4.6
- */
-    private function quantitityGetVariant($pObj)
-    {
-        $arr_variant = null;
-
-        // return there isn't any variant
-        if (!is_array($pObj->conf['settings.']['variant.']))
-        {
-            return $arr_variant;
-        }
-
-        $int_counter = 0;
-        foreach ($pObj->piVars['qty'] as $key => $value)
-        {
-            $arr_qty[$int_counter]['qty'][$key] = $value;
-            $int_counter++;
-        }
-
-        foreach ($arr_qty as $key => $piVarsQty)
-        {
-            // iterator object
-            $data     = new RecursiveArrayIterator( $piVarsQty['qty'] );
-            $iterator = new RecursiveIteratorIterator( $data, true );
-            // top level of ecursive array
-            $iterator->rewind();
-
-            // get all variant key/value pairs from qty name
-            foreach ($iterator as $key_iterator => $value_iterator)
-            {
-                // i.e for a key: tx_org_calentrance.uid=4
-                list($key_variant, $value_variant) = explode('=', $key_iterator);
-                if ($key_variant == 'puid')
-                {
-                    $arr_variant[$key]['puid'] = $value_variant;
-                }
-                // i.e arr_var[tx_org_calentrance.uid] = 4
-                $arr_from_qty[$key][$key_variant] = $value_variant;
-                if (is_array($value_iterator))
-                {
-                    list($key_variant, $value_variant) = explode('=', key($value_iterator));
-                    if ($key_variant == 'puid')
-                    {
-                        $arr_variant[$key]['puid'] = $value_variant;
-                    }
-                    $arr_from_qty[$key][$key_variant] = $value_variant;
-                }
-                // value is the value of the field qty in every case
-                if (!is_array($value_iterator))
-                {
-                    $arr_variant[$key]['qty'] = $value_iterator;
-                }
-            }
-
-            // loop through ts variant array
-            foreach ($pObj->conf['settings.']['variant.'] as $key_variant => $tableField)
-            {
-                list($table, $field) = explode('.', $tableField);
-                // piVars contain variant key
-                if (!empty($arr_from_qty[$key][$tableField]))
-                {
-                    $arr_variant[$key][$tableField] = mysql_escape_string($arr_from_qty[$key][$tableField]);
-                }
-            }
-        }
-
-        return $arr_variant;
-    }
-
-    /**
- * sqlReplaceMarker(): Replace marker in the SQL query
+ * zz_sqlReplaceMarker(): Replace marker in the SQL query
  *                             MARKERS are
  *                             - GET/POST markers
  *                             - enable_field markers
@@ -995,97 +1016,102 @@ class tx_caddy_session extends tslib_pibase
  *                             - ###GP:TABLE.FIELD###
  *                             - ###ENABLE_FIELD:TABLE.FIELD###
  *
- * @param	array		$gpvar: array with product uid, title, tax, etc...
  * @param	array		$pobj: Parent Object
  * @return	void
  * @version 1.4.5
  * @since 1.2.2
  */
-    private function sqlReplaceMarker($gpvar, $pObj)
+    private function zz_sqlReplaceMarker( $pObj )
     {
-        // set marker array with values from GET
-        foreach (t3lib_div::_GET() as $table => $arr_fields)
+      $arr_result = null; 
+      
+      // set marker array with values from GET
+      foreach (t3lib_div::_GET() as $table => $arr_fields)
+      {
+        if (is_array($arr_fields))
         {
-            if (is_array($arr_fields))
-            {
-                foreach($arr_fields as $field => $value)
-                {
-                    $tableField = strtoupper($table . '.' . $field);
-                    $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
-                }
-            }
-            if (!is_array($arr_fields))
-            {
-                $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
-            }
+          foreach($arr_fields as $field => $value)
+          {
+            $tableField = strtoupper($table . '.' . $field);
+            $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
+          }
         }
-
-        // set and overwrite marker array with values from POST
-        foreach (t3lib_div::_POST() as $table => $arr_fields)
+        if (!is_array($arr_fields))
         {
-            if (is_array($arr_fields))
-            {
-                foreach ($arr_fields as $field => $value)
-                {
-                    $tableField = strtoupper($table . '.' . $field);
-                    $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
-                }
-            }
-            if (!is_array($arr_fields))
-            {
-                $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
-            }
+          $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
         }
+      }
 
-        // get the SQL query from ts, allow stdWrap
-                  // #42154, 101218, dwildt, 1-
-                //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
-                  // #42154, 101218, dwildt, 1+
-                $query = $pObj->cObj->cObjGetSingle($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
-
-        // get all gp:marker out of the query
-        $arr_gpMarker = array();
-        preg_match_all('|###GP\:(.*)###|U', $query, $arr_result, PREG_PATTERN_ORDER);
-        if (isset($arr_result[0]))
+      // set and overwrite marker array with values from POST
+      foreach (t3lib_div::_POST() as $table => $arr_fields)
+      {
+        if (is_array($arr_fields))
         {
-            $arr_gpMarker = $arr_result[0];
+          foreach ($arr_fields as $field => $value)
+          {
+            $tableField = strtoupper($table . '.' . $field);
+            $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
+          }
         }
-
-        // get all enable_fields:marker out of the query
-        $arr_efMarker = array();
-        preg_match_all('|###ENABLE_FIELDS\:(.*)###|U', $query, $arr_result, PREG_PATTERN_ORDER);
-        if (isset($arr_result[0]))
+        if (!is_array($arr_fields))
         {
-            $arr_efMarker = $arr_result[0];
+          $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
         }
+      }
 
-        // replace gp:marker
-        foreach($arr_gpMarker as $str_gpMarker)
+      // get the SQL query from ts, allow stdWrap
+        // #42154, 101218, dwildt, 1-
+      //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
+        // #42154, 101218, dwildt, 1+
+      $query = $pObj->cObj->cObjGetSingle($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
+
+      // get all gp:marker out of the query
+      $arr_gpMarker = array();
+      preg_match_all('|###GP\:(.*)###|U', $query, $arr_result, PREG_PATTERN_ORDER);
+      if (isset($arr_result[0]))
+      {
+        $arr_gpMarker = $arr_result[0];
+      }
+
+      // get all enable_fields:marker out of the query
+      $arr_efMarker = array();
+      preg_match_all('|###ENABLE_FIELDS\:(.*)###|U', $query, $arr_result, PREG_PATTERN_ORDER);
+      if (isset($arr_result[0]))
+      {
+        $arr_efMarker = $arr_result[0];
+      }
+
+      // replace gp:marker
+      foreach($arr_gpMarker as $str_gpMarker)
+      {
+        $value = null;
+        if (isset($marker[$str_gpMarker]))
         {
-            $value = null;
-            if (isset($marker[$str_gpMarker]))
-            {
-                $value = $marker[$str_gpMarker];
-            }
-            $query = str_replace($str_gpMarker, $value, $query);
+          $value = $marker[$str_gpMarker];
         }
+        $query = str_replace($str_gpMarker, $value, $query);
+      }
 
-        // replace enable_fields:marker
-        foreach($arr_efMarker as $str_efMarker)
-        {
-            $str_efTable = trim(strtolower($str_efMarker), '#');
-            list($dummy, $str_efTable) = explode(':', $str_efTable);
-            $andWhere_ef = tslib_cObj::enableFields($str_efTable);
-            $query = str_replace($str_efMarker, $andWhere_ef, $query);
-        }
+      // replace enable_fields:marker
+      foreach($arr_efMarker as $str_efMarker)
+      {
+        $str_efTable = trim(strtolower($str_efMarker), '#');
+        list( $dummy, $str_efTable ) = explode(':', $str_efTable);
+        unset( $dummy );
+        $andWhere_ef = tslib_cObj::enableFields($str_efTable);
+        $query = str_replace($str_efMarker, $andWhere_ef, $query);
+      }
 
-                  // #42154, 121203, dwildt, 1-
-//        $pObj->conf['db.']['sql'] = $query;
-                  // #42154, 121203, dwildt, 2+
-        $pObj->conf['db.']['sql'] = 'TEXT';
-        $pObj->conf['db.']['sql.']['value'] = $query;
+      // #42154, 121203, dwildt, 1-
+//    $pObj->conf['db.']['sql'] = $query;
+      // #42154, 121203, dwildt, 2+
+      $pObj->conf['db.']['sql'] = 'TEXT';
+      $pObj->conf['db.']['sql.']['value'] = $query;
     }
 
+    
+    
+    
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_session.php'])
