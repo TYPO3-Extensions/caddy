@@ -51,7 +51,7 @@ $TCA['tx_caddy_item'] = array (
 $TCA['tx_caddy_order'] = array (
   'ctrl' => $TCA['tx_caddy_order']['ctrl'],
   'interface' => array (
-    'showRecordFieldList' =>  'net,tax,gross,quantity,item' ,
+    'showRecordFieldList' =>  'net,tax,gross,quantity,items' ,
   ),
   'feInterface' => $TCA['tx_caddy_order']['feInterface'],
   'columns' => array (
@@ -91,10 +91,10 @@ $TCA['tx_caddy_order'] = array (
         'eval' => 'int',
       )
     ),
-    'item' => array (
+    'items' => array (
       'l10n_mode' => 'exclude',
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.item',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.items',
       'config' => array (
         'type' => 'select',  
         'foreign_table' => 'tx_caddy_item',  
@@ -142,7 +142,7 @@ $TCA['tx_caddy_order'] = array (
   'types' => array (
     '0' => array(
       'showitem' => 
-        'net,tax,gross,item,quantity,hidden,',
+        'net,tax,gross,items,quantity,hidden,',
       ),
   ),
   'palettes' => array (

@@ -41,7 +41,7 @@ CREATE TABLE tx_caddy_order (
   gross double(11,2) DEFAULT '0.00' NOT NULL,
   quantity int(11) DEFAULT '0' NOT NULL,
 
-  items int(11) DEFAULT '0' NOT NULL,
+  items tinytext,
 
   PRIMARY KEY (uid),
   KEY parent (pid)
