@@ -28,17 +28,40 @@
  *
  *
  *
- *   55: class tx_caddy_powermail
+ *   78: class tx_caddy_powermail
  *
  *              SECTION: Powermail
- *   97:     public function formCss( $content )
- *  135:     public function formHide( )
- *  157:     public function formShow( )
- *  178:     public function init( $row )
- *  240:     private function initFields( $row )
- *  374:     private function initVersion( $row )
+ *  136:     public function formCss( $content )
+ *  173:     public function formHide( )
+ *  201:     public function formShow( )
  *
- * TOTAL FUNCTIONS: 6
+ *              SECTION: Init
+ *  229:     public function init( $row )
+ *  300:     private function initFields( $row )
+ *  436:     private function initGetPost( )
+ *  450:     private function initMarker( )
+ *  466:     private function initMarkerReceiver( )
+ *  486:     private function initMarkerReceiverWtcart( )
+ *  506:     private function initMarkerSender( )
+ *  526:     private function initMarkerSenderWtcart( )
+ *  546:     private function initSend( )
+ *  585:     private function initSend1x( )
+ *  614:     private function initSend1xWiConfirm( )
+ *  651:     private function initSend1xWoConfirm( )
+ *  687:     private function initSend2x( )
+ *  716:     private function initSend2xWiConfirm( )
+ *  737:     private function initSend2xWoConfirm( )
+ *  759:     private function initVersion( )
+ *
+ *              SECTION: Send
+ *  780:     public function sendDeliveryorderToCustomer( )
+ *  795:     public function sendDeliveryorderToVendor( )
+ *  810:     public function sendInvoiceToCustomer( )
+ *  825:     public function sendInvoiceToVendor( )
+ *  840:     public function sendTermsToCustomer( )
+ *  855:     public function sendTermsToVendor( )
+ *
+ * TOTAL FUNCTIONS: 25
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -248,12 +271,12 @@ class tx_caddy_powermail
       t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    
+
     $this->initMarker( );
 
       // GET- and POST-parameters
     $this->initGetPost( );
-    
+
     $this->initSend( );
 
     return;
@@ -546,8 +569,8 @@ class tx_caddy_powermail
         die( $prompt );
         break;
     }
-    
-    return; 
+
+    return;
   }
 
  /**
@@ -574,7 +597,7 @@ class tx_caddy_powermail
         $this->initSend1xWiConfirm( );
         break;
     }
-    
+
     return;
   }
 
@@ -611,7 +634,7 @@ class tx_caddy_powermail
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    
+
     return;
   }
 
@@ -640,7 +663,7 @@ class tx_caddy_powermail
         // DRS
       return;
     }
-    
+
       // DRS
     if( $this->pObj->drs->drsPowermail )
     {
@@ -676,7 +699,7 @@ class tx_caddy_powermail
         $this->initSend2xWiConfirm( );
         break;
     }
-    
+
     return;
   }
 
@@ -697,7 +720,7 @@ class tx_caddy_powermail
     {
       $this->sent = true;
     }
-    
+
     return;
   }
 
@@ -718,7 +741,7 @@ class tx_caddy_powermail
     {
       $this->sent = true;
     }
-    
+
     return;
   }
 
@@ -754,7 +777,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendDeliveryorderToCustomer( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
@@ -770,7 +792,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendDeliveryorderToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
@@ -786,7 +807,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendInvoiceToCustomer( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
@@ -802,7 +822,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendInvoiceToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
@@ -818,7 +837,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendTermsToCustomer( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
@@ -834,7 +852,6 @@ class tx_caddy_powermail
   * @version 2.0.0
   * @since   2.0.0
   */
-  
   public function sendTermsToVendor( )
   {
     $prompt = __METHOD__ . ' (' . __LINE__ . ')';
