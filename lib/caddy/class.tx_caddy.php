@@ -101,7 +101,7 @@ class tx_caddy extends tslib_pibase
 
   // [object] parent DRS object
   private $calc     = null;
-  private $drs      = null;
+  public  $drs      = null;
   private $userfunc = null;
 
   // [object] parent object
