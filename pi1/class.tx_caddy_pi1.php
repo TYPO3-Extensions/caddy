@@ -65,7 +65,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * 1050:     private function initFlexform( )
  * 1063:     private function initGpVar( )
  * 1119:     private function initGpVarCid( )
- * 1169:     private function initHtmlTemplateSubparts( )
+ * 1169:     private function initTemplate( )
  * 1251:     private function initInstances( )
  * 1298:     private function initPowermail( )
  * 1311:     private function initServiceAttributes( )
@@ -315,7 +315,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initFlexform( );
     $this->initPid( );
     $this->initAccessByIp( );
-    $this->initHtmlTemplateSubparts( );
+    $this->initTemplate( );
     $this->initGpVar( );
     $this->initPowermail( );
     $this->initDatabase( );
@@ -589,87 +589,16 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
-  * initHtmlTemplateSubparts( )
+  * initTemplate( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initHtmlTemplateSubparts( )
+  private function initTemplate( )
   {
     $this->tmpl = $this->template->main( );
-    return;
-    $htmlTemplate = $this->cObj->fileResource( $this->conf['main.']['template'] );
-
-      // Die if there isn't any HTML template
-    if( empty ( $htmlTemplate ) )
-    {
-        // DRS
-      if( $this->drs->drsError )
-      {
-        if( empty ( $this->conf['main.']['template'] ) )
-        {
-          $prompt = 'The path to the HTML template is empty!';
-          t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
-          $prompt = 'Please check, if you have included the static template.';
-          t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
-        }
-        if( ! empty ( $this->conf['main.']['template'] ) )
-        {
-          $prompt = 'The path to your HTML template seem\'s to be unproper!';
-          t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
-          $prompt = 'Path is ' . $this->conf['main.']['template'];
-          t3lib_div::devlog( '[WARN/INIT] ' . $prompt, $this->extKey, 2 );
-          $prompt = 'Please check your TypoScript: plugin.caddy.main.template';
-          t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
-        }
-      }
-        // DRS
-
-      $prompt = '
-        <div style="border:1em solid red;color:red;padding:1em;text-align:center">
-          <h1>
-            ERROR: No HTML Template
-          </h1>
-          <p>
-            There isn\'t any HTML template.
-          </p>
-          <p>
-            Please enable the DRS - the Development Reporting System. It tries to offer a fix.
-          </p>
-          <p>
-            Caddy - the Shopping Cart
-          </p>
-        </div>
-        ';
-      die( $prompt );
-    }
-      // Die if there isn't any HTML template
-
-    $this->tmpl['all']      = $this->cObj->getSubpart( $htmlTemplate, '###CADDY###' );
-    $this->tmpl['empty']    = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_EMPTY###' );
-    $this->tmpl['minprice'] = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_MINPRICE###' );
-    $this->tmpl['item']     = $this->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
-
-    // new for Shipping radiolist and Payment radiolist and Special checkboxlist
-    $this->tmpl['shipping_all']   = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SHIPPING###' );
-    $this->tmpl['shipping_item']  = $this->cObj->getSubpart( $this->tmpl['shipping_all'], '###ITEM###' );
-
-    $this->tmpl['shipping_condition_all']   = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SHIPPING_CONDITIONS###' );
-    $this->tmpl['shipping_condition_item']  = $this->cObj->getSubpart( $this->tmpl['shipping_condition_all'], '###ITEM###' );
-
-    $this->tmpl['payment_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_PAYMENT###' );
-    $this->tmpl['payment_item'] = $this->cObj->getSubpart( $this->tmpl['payment_all'], '###ITEM###' );
-
-    $this->tmpl['payment_condition_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_PAYMENT_CONDITIONS###' );
-    $this->tmpl['payment_condition_item'] = $this->cObj->getSubpart( $this->tmpl['payment_condition_all'], '###ITEM###' );
-
-    $this->tmpl['special_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SPECIAL###' );
-    $this->tmpl['special_item'] = $this->cObj->getSubpart( $this->tmpl['special_all'], '###ITEM###' );
-
-    $this->tmpl['special_condition_all']  = $this->cObj->getSubpart( $htmlTemplate, '###CADDY_SPECIAL_CONDITIONS###' );
-    $this->tmpl['special_condition_item'] = $this->cObj->getSubpart( $this->tmpl['special_condition_all'], '###ITEM###' );
   }
 
  /**
