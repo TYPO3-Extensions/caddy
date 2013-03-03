@@ -226,7 +226,9 @@ class tx_caddy_pdf extends tslib_pibase
     {
       $prompt = 'uploads/tx_caddy' . '/' . $filename . ' exists!<br />
         ' .__METHOD__. ' (' . __LINE__ . ')';
-      die( $prompt );
+//      die( $prompt );
+      echo $prompt;
+      return;
     }
 
     $fpdi = new FPDI( );
