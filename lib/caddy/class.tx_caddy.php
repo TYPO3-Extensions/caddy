@@ -231,54 +231,59 @@ class tx_caddy extends tslib_pibase
     $paymentArray   = null;
     $specialArray   = null;
 
+    $sumNet         = 0.00;
+    $sumGross       = 0.00;
+    $sumTaxReduced  = 0.00;
+    $sumTaxNormal   = 0.00;
+
       // handle the current product
-    $arrResult        = $this->calcProduct( );
-    $contentItem      = $arrResult['contentItem'];
-    $caddyNet         = $arrResult['net'];
-    $caddyGross       = $arrResult['gross'];
-    $caddyTaxReduced  = $arrResult['taxReduced'];
-    $caddyTaxNormal   = $arrResult['taxNormal'];
+    $arrResult      = $this->calcProduct( );
+    $contentItem    = $arrResult['contentItem'];
+    $sumNet         = $arrResult['net'];
+    $sumGross       = $arrResult['gross'];
+    $sumTaxReduced  = $arrResult['taxReduced'];
+    $sumTaxNormal   = $arrResult['taxNormal'];
     unset( $arrResult );
       // handle the current product
 
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
-    $this->caddyGrossNoService = $caddyGross;
-    $caddyNetNoService         = $caddyNet;
+    $this->caddyGrossNoService = $sumGross;
+    $sumNetNoService         = $sumNet;
 
       // option shipping : calculate tax, net and gross
-    $arrResult        = $this->calcOptionsShipping( );
-    $shippingId       = $arrResult['id'];
-    $shippingNet      = $arrResult['net'];
-    $shippingGross    = $arrResult['gross'];
-    $caddyNet         = $caddyNet        + $shippingNet;
-    $caddyGross       = $caddyGross      + $shippingGross;
-    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
-    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
+    $arrResult      = $this->calcOptionsShipping( );
+    $shippingId     = $arrResult['id'];
+    $shippingNet    = $arrResult['net'];
+    $shippingGross  = $arrResult['gross'];
+    $sumNet         = $sumNet        + $shippingNet;
+    $sumGross       = $sumGross      + $shippingGross;
+    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
       // option shipping : calculate tax, net and gross
 
       // option payment : calculate tax, net and gross
-    $arrResult        = $this->calcOptionsPayment( );
-    $paymentId        = $arrResult['id'];
-    $paymentNet       = $arrResult['net'];
-    $paymentGross     = $arrResult['gross'];
-    $caddyNet         = $caddyNet        + $paymentNet;
-    $caddyGross       = $caddyGross      + $paymentGross;
-    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
-    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
+    $arrResult      = $this->calcOptionsPayment( );
+    $paymentId      = $arrResult['id'];
+    $paymentNet     = $arrResult['net'];
+    $paymentGross   = $arrResult['gross'];
+    $sumNet         = $sumNet        + $paymentNet;
+    $sumGross       = $sumGross      + $paymentGross;
+    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
       // option payment : calculate tax, net and gross
 
       // option special : calculate tax, net and gross
-    $arrResult        = $this->calcOptionsSpecial( );
-    $specialIds       = $arrResult['ids'];
-    $specialNet       = $arrResult['net'];
-    $specialGross     = $arrResult['gross'];
-    $caddyNet         = $caddyNet        + $specialNet;
-    $caddyGross       = $caddyGross      + $specialGross;
-    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
-    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
+    $arrResult      = $this->calcOptionsSpecial( );
+    $specialIds     = $arrResult['ids'];
+    $specialNet     = $arrResult['net'];
+    $specialGross   = $arrResult['gross'];
+    $sumNet         = $sumNet        + $specialNet;
+    $sumGross       = $sumGross      + $specialGross;
+    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
       // option special : calculate tax, net and gross
 
@@ -289,27 +294,27 @@ class tx_caddy extends tslib_pibase
 
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-    $sesArray['optionsNet']             = $optionsNet;
-    $sesArray['optionsGross']           = $optionsGross;
-    $sesArray['cart_gross']             = $caddyGross;
+    $sesArray['service_cost_net']       = $optionsNet;
+    $sesArray['service_cost_gross']     = $optionsGross;
+    $sesArray['cart_gross']             = $sumGross;
     $sesArray['cart_gross_no_service']  = $this->caddyGrossNoService;
-    $sesArray['cart_net']               = $caddyNet;
-    $sesArray['cart_net_no_service']    = $caddyNetNoService;
-    $sesArray['cart_tax_reduced']       = $caddyTaxReduced;
-    $sesArray['cart_tax_normal']        = $caddyTaxNormal;
+    $sesArray['cart_net']               = $sumNet;
+    $sesArray['cart_net_no_service']    = $sumNetNoService;
+    $sesArray['cart_tax_reduced']       = $sumTaxReduced;
+    $sesArray['cart_tax_normal']        = $sumTaxNormal;
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
       // cObject becomes current record
     $currRecord = array(
-      'optionsNet'            => $optionsNet,
-      'optionsGross'          => $optionsGross,
-      'cart_gross'            => $caddyGross,
+      'service_cost_net'      => $optionsNet,
+      'service_cost_gross'    => $optionsGross,
+      'cart_gross'            => $sumGross,
       'cart_gross_no_service' => $this->caddyGrossNoService,
-      'cart_net'              => $caddyNet,
-      'cart_net_no_service'   => $caddyNetNoService,
-      'cart_tax_reduced'      => $caddyTaxReduced,
-      'cart_tax_normal'       => $caddyTaxNormal
+      'cart_net'              => $sumNet,
+      'cart_net_no_service'   => $sumNetNoService,
+      'cart_tax_reduced'      => $sumTaxReduced,
+      'cart_tax_normal'       => $sumTaxNormal
     );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record
@@ -598,6 +603,11 @@ class tx_caddy extends tslib_pibase
 
     $paymentId = $this->session->paymentGet();
 
+    $taxReduced   = 0.0;
+    $taxNormal    = 0.0;
+    $specialGross = 0.0;
+    $specialNet   = 0.0;
+
     if( ! $paymentId )
     {
       $paymentId = intval( $this->conf['payment.']['preset'] );
@@ -686,33 +696,33 @@ class tx_caddy extends tslib_pibase
 
     $specialIds = $this->session->specialGet( );
 
-    $caddyTaxReduced       = 0.0;
-    $caddyTaxNormal        = 0.0;
-    $overall_specialGross = 0.0;
-    $overall_specialNet   = 0.0;
+    $taxReduced   = 0.0;
+    $taxNormal    = 0.0;
+    $gross        = 0.0;
+    $net          = 0.0;
+    $sumNet       = 0.0;
+    $sumGross     = 0.0;
 
     foreach( $specialIds as $specialId )
     {
-      list( $specialGross, $specialNet ) = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
-      $caddyNet    = $caddyNet    + $specialNet;
-      $caddyGross  = $caddyGross  + $specialGross;
+      list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
+      $sumNet    = $sumNet    + $net;
+      $sumGross  = $sumGross  + $gross;
       if( $this->conf['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
       {
-        $caddyTaxReduced = $caddyTaxReduced + $specialGross - $specialNet;
+        $taxReduced = $taxReduced + $gross - $net;
       }
       else
       {
-        $caddyTaxNormal = $caddyTaxNormal + $specialGross - $specialNet;
+        $taxNormal = $taxNormal + $gross - $net;
       }
-      $overall_specialGross = $overall_specialGross + $specialGross;
-      $overall_specialNet   = $overall_specialNet   + $specialNet;
     }
 
-    $arrReturn['ids']             = $specialIds;
-    $arrReturn['net']             = $overall_specialNet;
-    $arrReturn['gross']           = $overall_specialGross;
-    $arrReturn['taxReduced']  = $caddyTaxReduced;
-    $arrReturn['taxNormal']   = $caddyTaxNormal;
+    $arrReturn['ids']         = $specialIds;
+    $arrReturn['net']         = $sumNet;
+    $arrReturn['gross']       = $sumGross;
+    $arrReturn['taxReduced']  = $taxReduced;
+    $arrReturn['taxNormal']   = $taxNormal;
 
     return $arrReturn;
   }
