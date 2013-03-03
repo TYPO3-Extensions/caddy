@@ -96,16 +96,16 @@ class tx_caddy_userfunc
 
 
 
-/**
- * Constructor. The method initiate the parent object
- *
- * @param    object        The parent object
- * @return    void
- */
-  function __construct( $pObj )
-  {
-    $this->pObj = $pObj;
-  }
+///**
+// * Constructor. The method initiate the parent object
+// *
+// * @param    object        The parent object
+// * @return    void
+// */
+//  function __construct( $pObj )
+//  {
+//    $this->pObj = $pObj;
+//  }
   
   
   

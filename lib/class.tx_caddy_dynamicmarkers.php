@@ -52,14 +52,14 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
 		'caddy_ts_' // prefix for typoscript part
 	);
 
-	function __construct($path) {
-		parent::__construct();
-		
-		// constructor for t3lib_div::makeInstance; the first parameter overwrites public $scriptRelPath to load the correct translation file
-		if ($path) {
-			$this->scriptRelPath = $path;
-		}
-	}
+//	function __construct($path) {
+//		parent::__construct();
+//		
+//		// constructor for t3lib_div::makeInstance; the first parameter overwrites public $scriptRelPath to load the correct translation file
+//		if ($path) {
+//			$this->scriptRelPath = $path;
+//		}
+//	}
 
 	// Function main() to replace typoscript- and locallang markers
 	function main($content, $pObj) {
