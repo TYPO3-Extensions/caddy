@@ -354,7 +354,7 @@ class tx_caddy_pdf extends tslib_pibase
                   }
           }
 
-          $subpartArray['###WTCART_LL_CART_NET###'] = $this->pi_getLL('wtcartorderpdf_ll_cart_net');
+          $subpartArray['###WTCART_LL_SUMNET###'] = $this->pi_getLL('wtcartorderpdf_ll_cart_net');
           $subpartArray['###WTCART_LL_SERVICE_COST###'] = $this->pi_getLL('wtcartorderpdf_ll_service_cost');
           $subpartArray['###WTCART_LL_TAX###'] = $this->pi_getLL('wtcartorderpdf_ll_tax');
           $subpartArray['###WTCART_LL_GROSS_TOTAL###'] = $this->pi_getLL('wtcartorderpdf_ll_gross_total');

@@ -22,13 +22,13 @@ VERSION 1.2.2
 
 --- Markers outside ------------------------------------------------------------
 
-  ###CART_NET###                                  ###CADDY_LL_CART_NET###
-  ###CART_GROSS###                                ###CADDY_LL_CART_GROSS###
+  ###SUMNET###                                  ###CADDY_LL_SUMNET###
+  ###SUMGROSS###                                ###CADDY_LL_SUMGROSS###
   ###CART_SERVICE_COST###                         ###CADDY_LL_CART_SERVICE_COST###
-  ###CART_GROSS_NO_SERVICE###
+  ###PRODUCTSGROSS###
 
-  ###CART_TAX_NORMAL###
-  ###CART_TAX_REDUCED###
+  ###SUMTAXNORMAL###
+  ###SUMTAXREDUCED###
 
   ###TAXRATE_NORMAL_STRING###
   ###TAXRATE_REDUCED_STRING###
@@ -72,20 +72,20 @@ VERSION 1.2.2
         <!-- ###ITEM### -->
         <!-- ###CONTENT### -->
         <div class="caddy_cart_footer">
-            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_CART_NET###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###CART_NET_NO_SERVICE###</div>
+            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_SUMNET###</div>
+            <div class="caddy_cart_col caddy_cart_col3_4">###PRODUCTSNET###</div>
             <div class="caddy_cleaner"></div>
             <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_SERVICE_COST###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###SERVICE_COST_NET###</div>
+            <div class="caddy_cart_col caddy_cart_col3_4">###OPTIONSNET###</div>
             <div class="caddy_cleaner"></div>
             <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_TAX###</div>
             <div class="caddy_cart_col caddy_cart_col3_4"></div>
             <div class="caddy_cleaner"></div>
             <div class="caddy_cart_col caddy_cart_col1_2">###TAXRATE_NORMAL_STRING###<br />###TAXRATE_REDUCED_STRING###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###CART_TAX_NORMAL###<br />###CART_TAX_REDUCED###</div>
+            <div class="caddy_cart_col caddy_cart_col3_4">###SUMTAXNORMAL###<br />###SUMTAXREDUCED###</div>
             <div class="caddy_cleaner"></div>
             <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_GROSS_TOTAL###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###CART_GROSS###</div>
+            <div class="caddy_cart_col caddy_cart_col3_4">###SUMGROSS###</div>
             <div class="caddy_cleaner"></div>
         </div>
         ###SHIPPING_RADIO###
@@ -196,10 +196,10 @@ VERSION 1.2.2
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
                     <td colspan="2">
-                    	###CADDY_LL_CART_NET###
+                    	###CADDY_LL_SUMNET###
 					</td>
                     <td>&nbsp;</td>
-                    <td>###CART_NET_NO_SERVICE###</td>
+                    <td>###PRODUCTSNET###</td>
                 </tr>
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
@@ -207,7 +207,7 @@ VERSION 1.2.2
                     	###CADDY_LL_SERVICE_COST###
 					</td>
                     <td>&nbsp;</td>
-                    <td>###SERVICE_COST_NET###</td>
+                    <td>###OPTIONSNET###</td>
                 </tr>
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
@@ -223,7 +223,7 @@ VERSION 1.2.2
                     	###TAXRATE_NORMAL_STRING###
 					</td>
                     <td>&nbsp;</td>
-                    <td>###CART_TAX_NORMAL###</td>
+                    <td>###SUMTAXNORMAL###</td>
                 </tr>
                 <tr style="font-weight: bold;">
                     <td width="30">&nbsp;</td>
@@ -231,7 +231,7 @@ VERSION 1.2.2
                     	###TAXRATE_REDUCED_STRING###
 					</td>
                     <td>&nbsp;</td>
-                    <td>###CART_TAX_REDUCED###</td>
+                    <td>###SUMTAXREDUCED###</td>
                 </tr>
                 <tr style="font-weight: bold;">
                     <td width="30">&nbsp;</td>
@@ -239,7 +239,7 @@ VERSION 1.2.2
                     	###CADDY_LL_GROSS_TOTAL###
 					</td>
                     <td>&nbsp;</td>
-                    <td>###CART_GROSS###</td>
+                    <td>###SUMGROSS###</td>
                 </tr>
             </table>
         </td>
@@ -289,7 +289,7 @@ VERSION 1.2.2
 <!-- ###CADDY_MINICART### begin --> 
 <div class="caddy_minicart">
 	<div>###MINICART_COUNT### ###CADDY_LL_COUNT_PRODUCTS_IN_CART###</div>
-	<div>###MINICART_GROSS###</div>
+	<div>###MINISUMGROSS###</div>
 	<div>###MINICART_LINK###</div>
 </div>
 <!-- ###CADDY_MINICART### end -->
