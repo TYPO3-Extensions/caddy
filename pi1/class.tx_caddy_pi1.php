@@ -199,12 +199,12 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->clean( );
 
     $content = $content . $this->cObj->substituteMarkerArrayCached
-                    (
-                      $this->tmpl['all'],
-                      $this->outerMarkerArray,
-                      $caddy
-                    );
-var_dump( __METHOD__, __LINE__ , $this->tmpl['all'] ) ;      
+                          (
+                            $this->tmpl['all'],
+                            $this->outerMarkerArray,
+                            $caddy
+                          );
+//var_dump( __METHOD__, __LINE__ , $this->tmpl['all'] ) ;      
 
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
