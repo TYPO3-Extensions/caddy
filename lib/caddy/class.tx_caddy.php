@@ -665,7 +665,6 @@ class tx_caddy extends tslib_pibase
       $this->session->shippingUpdate( $newshippingId );
     }
 
-var_dump( __METHOD__, __LINE__ , $this->conf, $shippingId );    
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
 
     if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
@@ -680,7 +679,6 @@ var_dump( __METHOD__, __LINE__ , $this->conf, $shippingId );
     $arrReturn['id']    = $shippingId;
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
-var_dump( __METHOD__, __LINE__ , $arrReturn );    
     return $arrReturn;
   }
 
@@ -881,6 +879,7 @@ var_dump( __METHOD__, __LINE__ , $arrReturn );
 
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
     $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+    //$this->calc->pObj       = $this;
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
