@@ -224,8 +224,8 @@ class tx_caddy_pdf extends tslib_pibase
       // CHECK: Is PDF already created?
     if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
     {
-      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' exists!<br />
-        ' .__METHOD__. ' (' . __LINE__ . ')';
+      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' exists!<br />' .  PHP_EOL .
+        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
 //      die( $prompt );
       echo $prompt;
       return;
