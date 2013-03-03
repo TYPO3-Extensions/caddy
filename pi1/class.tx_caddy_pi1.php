@@ -121,7 +121,19 @@ class tx_caddy_pi1 extends tslib_pibase
 
   public $pid = null;
 
+  private $caddy            = null;
+  private $clean            = null;
+  private $dynamicMarkers   = null;
+  private $drs              = null;
+  private $flexform         = null;
+  private $powermail        = null;
+  private $session          = null;
+  private $template         = null;
 
+  private $local_cObj       = null;
+  public  $conf             = null;
+  private $arr_extConf      = null;
+  private $tmpl             = null;
 
 
 
@@ -427,45 +439,6 @@ class tx_caddy_pi1 extends tslib_pibase
       // DRS
   }
 
-
-/**
- * initPid( ) :
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function initPid( )
-  {
-    $pid = ( int ) $this->conf['main']['pid'];
-
-    switch( true )
-    {
-      case( ! empty( $pid ) ):
-        $this->pid = $pid;
-          // DRS
-        if( $this->drs->drsInit )
-        {
-          $prompt = 'pid is taken from main.pid and is set to ' . $this->pid;
-          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
-      case( empty( $pid ) ):
-      default:
-        $this->pid = $GLOBALS['TSFE']->id;
-          // DRS
-        if( $this->drs->drsInit )
-        {
-          $prompt = 'main.pid is empty. pid is set to the id of the current page: ' . $this->pid;
-          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
-    }
-
-  }
-
  /**
   * initDatabase( )
   *
@@ -650,19 +623,6 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
-  * initTemplate( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initTemplate( )
-  {
-    $this->tmpl = $this->template->main( );
-  }
-
- /**
   * initInstances( )
   *
   * @return	void
@@ -713,6 +673,43 @@ class tx_caddy_pi1 extends tslib_pibase
 
   }
 
+/**
+ * initPid( ) :
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function initPid( )
+  {
+    $pid = ( int ) $this->conf['main']['pid'];
+
+    switch( true )
+    {
+      case( ! empty( $pid ) ):
+        $this->pid = $pid;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'pid is taken from main.pid and is set to ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+      case( empty( $pid ) ):
+      default:
+        $this->pid = $GLOBALS['TSFE']->id;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'main.pid is empty. pid is set to the id of the current page: ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+    }
+  }
+
  /**
   * initPowermail( )
   *
@@ -725,6 +722,19 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initPowermail( )
   {
     $this->powermail->init( $this->cObj->data );
+  }
+
+ /**
+  * initTemplate( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initTemplate( )
+  {
+    $this->tmpl = $this->template->main( );
   }
 
 
