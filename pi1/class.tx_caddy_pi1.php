@@ -186,8 +186,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // Get the caddy
-$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );   
-var_dump( __METHOD__, __LINE__, $sesArray );
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );   
+//var_dump( __METHOD__, __LINE__, $sesArray );
     $arrResult              = $this->caddy( );
     $caddy                  = $arrResult['caddy']; 
     $this->tmpl             = $arrResult['tmpl']; 
