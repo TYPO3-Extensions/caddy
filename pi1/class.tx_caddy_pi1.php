@@ -123,7 +123,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private $clean            = null;
   private $dynamicMarkers   = null;
   private $drs              = null;
-  private $flexform         = null;
+  public  $flexform         = null;
   private $powermail        = null;
   private $session          = null;
   private $template         = null;
