@@ -665,6 +665,7 @@ class tx_caddy extends tslib_pibase
       $this->session->shippingUpdate( $newshippingId );
     }
 
+var_dump( __METHOD__, __LINE__ , $this->conf, $shippingId );    
     list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
 
     if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
