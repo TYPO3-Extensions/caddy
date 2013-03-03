@@ -975,6 +975,117 @@ class tx_caddy extends tslib_pibase
     return 0;
   }
 
+  /**
+ * [Describe function...]
+ *
+ * @param	[type]		$type: ...
+ * @param	[type]		$option_id: ...
+ * @return	[type]		...
+ */
+  private function zz_renderOptionList($type, $option_id) {
+          $radio_list = '';
+          foreach ((array) $this->conf[$type.'.']['options.'] as $key => $value)
+          {
+                  // hide option if not available by cartGrossNoService
+                  $show = true;
+                  if ((isset($value['available_from']) && (round(floatval($value['available_from']),2) > round($this->caddyGrossNoService,2))) || (isset($value['available_until']) && (round(floatval($value['available_until']),2) < round($this->caddyGrossNoService,2))))
+                  {
+                          $show = false;
+                  }
+
+                  if ($show || $this->conf[$type.'.']['show_all_disabled'])
+                  {
+                          $disabled = $show ? '' : 'disabled="disabled"';
+
+                          $condition_list = array();
+
+                          if (isset($value['free_from']))
+                          {
+                                  $pmarkerArray['###CONDITION###'] = $this->pi_getLL('caddy_ll_'.$type.'_free_from').' '.$this->zz_price_format($value['free_from']);
+                                  $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_item'], $pmarkerArray);
+                          }
+                          if (isset($value['free_until']))
+                          {
+                                  $pmarkerArray['###CONDITION###'] = $this->pi_getLL('caddy_ll_'.$type.'_free_until').' '.$this->zz_price_format($value['free_until']);
+                                  $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_item'], $pmarkerArray);
+                          }
+
+                          if (!$show)
+                          {
+                                  if (isset($value['available_from']))
+                                  {
+                                          $pmarkerArray['###CONDITION###'] = $this->pi_getLL('caddy_ll_'.$type.'_available_from').' '.$this->zz_price_format($value['available_from']);
+                                          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_item'], $pmarkerArray);
+                                  }
+                                  if (isset($value['available_until']))
+                                  {
+                                          $pmarkerArray['###CONDITION###'] = $this->pi_getLL('caddy_ll_'.$type.'_available_until').' '.$this->zz_price_format($value['available_until']);
+                                          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_item'], $pmarkerArray);
+                                  }
+                          }
+
+          switch ($value['extra']) {
+                                  case 'by_price':
+                                          $unit = $this->conf['main.']['currencySymbol'];
+                                          break;
+                                  case 'by_quantity':
+                  $unit = $this->conf['main.']['quantitySymbol'];
+                                          break;
+                                  case 'by_service_attribute_1_sum':
+                                  case 'by_service_attribute_1_max':
+                                          $unit = $this->conf['main.']['service_attribute_1_symbol'];
+                                          break;
+                                  case 'by_service_attribute_2_sum':
+                                  case 'by_service_attribute_2_max':
+                                          $unit = $this->conf['main.']['service_attribute_2_symbol'];
+                                          break;
+                                  case 'by_service_attribute_3_sum':
+                                  case 'by_service_attribute_3_max':
+                                          $unit = $this->conf['main.']['service_attribute_3_symbol'];
+                                          break;
+                                  default:
+                                          $unit = '';
+                          }
+
+                          if ($value['extra'] != 'each') {
+                                  foreach ($value['extra.'] as $extra)
+                                  {
+                                          $pmarkerArray['###CONDITION###'] = $this->pi_getLL('caddy_ll_service_from') . ' ' . $extra['value'] . ' ' . $unit . ' : ' .$this->zz_price_format($extra['extra']);
+                                          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_item'], $pmarkerArray);
+                                  }
+
+                                  $show_price = $this->zz_price_format(floatval($this->zz_getPriceForOption($type, intval($key))));
+                          } else {
+                                  $show_price = sprintf($this->pi_getLL('caddy_ll_special_each'), $this->zz_price_format($value['extra.']['1.']['extra']));
+                          }
+
+                          $upperType = strtoupper($type);
+
+                          if ($type != 'special') {
+                                  $checkradio = intval($key) == $option_id ? 'checked="checked"' : '';
+                                  $this->smarkerArray['###'.$upperType.'_RADIO###'] = '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1['.$type.']" id="tx_caddy_pi1_'.$type.'_' . intval($key) . '"  value="' . intval($key) . '"  ' . $checkradio . $disabled . '/>'; // write to marker
+                          } else {
+                                  $checkbox = in_array( intval($key) , $option_id ) ? 'checked="checked"' : '';
+                                  $this->smarkerArray['###'.$upperType.'_CHECKBOX###'] = '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1['.$type.'][]" id="tx_caddy_pi1_'.$type.'_' . intval($key) . '"  value="' . intval($key) . '"  ' . $checkbox . $disabled . '/>'; // write to marker
+                          }
+
+                          // TODO: In braces the actual Price for Payment should be displayed, not the first one.
+
+                          $this->smarkerArray['###'.$upperType.'_TITLE###'] = '<label for="tx_caddy_pi1_'.$type.'_' . intval($key) . '">' . $value['title'] . ' (' . $show_price . ')</label>'; // write to marker
+
+                          if (isset($condition_list['###CONTENT###']))
+                          {
+                                  $this->smarkerArray['###'.$upperType.'_CONDITION###'] = $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_condition_all'], null, $condition_list);
+                          } else {
+                                  $this->smarkerArray['###'.$upperType.'_CONDITION###'] = '';
+                          }
+                          $radio_list .= $this->cObj->substituteMarkerArrayCached($this->tmpl[$type.'_item'], $this->smarkerArray);
+                  }
+          }
+
+          return $radio_list;
+  }
+
 
   
   
