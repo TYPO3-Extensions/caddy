@@ -859,10 +859,92 @@ class tx_caddy extends tslib_pibase
 
     return $css;
   }
+
+  
+  
+ /**
+  * add_qty_marker():  Allocates to the global markerArray a value for ###QTY_NAME###
+  *                          in case of variant
+  *                          It returns in aray with hidden fields like
+  *                          <input type="hidden"
+  *                                 name="tx_caddy_pi1[puid][20][]"
+  *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
+  *
+  * @param	array		$products: array with products with elements uid, title, tax, etc...
+  * @param	array		$markerArray: current marker array
+  * @param	array		$pobj: Parent Object
+  * @return	array		$markerArray: with added element ###VARIANTS### in case of variants
+  * @access private
+  * @version 2.0.0
+  * @since 1.4.6
+  */
+  private function add_qtyname_marker($product, $markerArray, $pObj)
+  {
+      // default name for QTY. It is compatible with version 1.2.1
+      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty][' . $product['puid'] . ']';
+
+      // return there isn't any variant
+      if (!is_array($pObj->conf['settings.']['variant.']))
+      {
+          return $markerArray;
+      }
+
+      $str_marker = null;
+      // get all variant key/value pairs from the current product
+      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+      $array_add_gpvar['puid']  = $product['puid'];
+      // generate the marker array
+      foreach ((array) $array_add_gpvar as $key => $value)
+      {
+          $str_marker = $str_marker . '[' . $key . '=' . $value . ']';
+      }
+      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty]'. $str_marker;
+
+      return $markerArray;
+  }
+
+ /**
+  * add_variant_gpvar_to_imagelinkwrap():  Adds all table.field of the variant to
+  *                                          imageLinkWrap.typolink.additionalParams.wrap
+  *
+  * @param	array		$product: array with product uid, title, tax, etc...
+  * @param	string		$ts_key: key of the current TypoScript configuration array
+  * @param	array		$ts_conf: the current TypoScript configuration array
+  * @param	array		$pobj: Parent Object
+  * @return	array		$ts_conf: configuration array added with the varaition gpvars
+  * @access private
+  * @version 2.0.0
+  * @since 1.4.6
+  */
+  private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+  {
+      // return there isn't any variant
+      if (!is_array($pObj->conf['settings.']['variant.']))
+      {
+          return $ts_conf;
+      }
+
+      // get all variant key/value pairs from the current product
+      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+
+      // add variant key/value pairs to imageLinkWrap
+      foreach ((array) $array_add_gpvar as $key => $value)
+      {
+          $str_wrap = $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'];
+          $str_wrap = $str_wrap . '&' . $this->prefixId . '[' . $key . ']=' . $value;
+          $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'] = $str_wrap;
+      }
+
+      return $ts_conf;
+  }
+
+
+  
+  
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php'])
 {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php']);
 }
 ?>
