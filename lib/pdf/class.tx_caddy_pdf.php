@@ -288,7 +288,7 @@ class tx_caddy_pdf extends tslib_pibase
     if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
     {
       $prompt = 'uploads/tx_caddy' . '/' . $filename . ' is written!<br />' . PHP_EOL .
-        . __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
+        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
       die( $prompt );
     }
     $sesArray['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
