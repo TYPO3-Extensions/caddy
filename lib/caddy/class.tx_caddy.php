@@ -182,7 +182,7 @@ class tx_caddy extends tslib_pibase
     
 //    $this->powermail  = $this->pObj->powermail;
 //    $this->session    = $this->pObj->session;
-//    $this->tmpl       = $this->pObj->tmpl;
+    $this->tmpl       = $this->pObj->tmpl;
     
       // read all products from session
     $this->product = $this->session->productsGet( );
