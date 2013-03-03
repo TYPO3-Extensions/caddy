@@ -661,6 +661,22 @@ plugin.tx_caddy_pi1 {
       shippingaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-x}
       shippingaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-y}
 
+      packinglistnumber = COA
+      packinglistnumber {
+        10 = TEXT
+        10 {
+          value = Delivery Order
+          lang {
+            de = Lieferschein
+            en = Delivery Order
+          }
+        }
+        20 = TEXT
+        20 {
+          field       = packinglistnumber
+          noTrimWrap  = | ||
+        }
+      }
       packinglistnumber-position-x  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-x}
       packinglistnumber-position-y  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-y}
       packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
