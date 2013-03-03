@@ -340,6 +340,7 @@ class tx_caddy extends tslib_pibase
       }
         // DRS
     }
+var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );    
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
       // Set min price error
@@ -388,7 +389,6 @@ class tx_caddy extends tslib_pibase
           $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
       }
     }
-var_dump( __METHOD__, __LINE__, $subpartArray );    
 
       // RESET cObj->data
     return $subpartArray;
