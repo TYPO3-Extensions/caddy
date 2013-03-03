@@ -55,7 +55,7 @@
             <size>40</size>
             <max>255</max>
             <eval>trim</eval>
-            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf</default>
+            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf</default>
           </config>
         </TCEforms>
       </invoicePath>
@@ -96,7 +96,7 @@
             <size>40</size>
             <max>255</max>
             <eval>trim</eval>
-            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf</default>
+            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf</default>
           </config>
         </TCEforms>
       </deliveryorderPath>
