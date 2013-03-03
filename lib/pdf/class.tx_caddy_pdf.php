@@ -70,7 +70,7 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      1.4.6
   */
-  public function createPdf( &$session ) 
+  public function createPdf( &$session=null ) 
   {
     $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->confSettings = $this->conf['settings.'];
@@ -107,7 +107,7 @@ class tx_caddy_pdf extends tslib_pibase
 //    $errorcnt += $this->renderOrderPdf($session);
     
     //$this->conf = $this->confPdf['deliveryorder.'];
-    $errorcnt += $this->renderPackinglistPdf( $session );
+    $errorcnt += $this->renderPackinglistPdf( );
 
     return $errorcnt;
   }
@@ -119,7 +119,7 @@ class tx_caddy_pdf extends tslib_pibase
           $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
           // CHECK: Is directory for PDF available?
-          if (!is_dir($this->conf['dir'])) {
+          if (!is_dir('uploads/tx_caddy')) {
                   $session['error'][] = 'directory for order pdf is not valid';
 
                   $erroremailaddress = $this->conf['erroremailaddress'];
@@ -139,7 +139,7 @@ class tx_caddy_pdf extends tslib_pibase
                   }
           }
           // CHECK: Is PDF already created?
-          if (!file_exists($this->conf['dir'].'/'.$filename)) {
+          if (!file_exists('uploads/tx_caddy'.'/'.$filename)) {
                   $fpdi = new FPDI();
                   $fpdi->AddPage();
 
@@ -156,8 +156,6 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->renderOrderNumber($fpdi);
                   $this->renderAdditionalTextblocks($fpdi);
 
-                  $cartitems = '';
-
                   $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
                   foreach ($session['products'] as $key => $product) {
                           $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
@@ -171,11 +169,11 @@ class tx_caddy_pdf extends tslib_pibase
 
                   $this->renderPaymentOption($fpdi, $session['payment']);
 
-                  $fpdi->Output($this->conf['dir'].'/'.$filename, 'F');
+                  $fpdi->Output('uploads/tx_caddy'.'/'.$filename, 'F');
           }
 
           // CHECK: Was PDF not created, send E-Mail and exit with error.
-          if (!file_exists($this->conf['dir'].'/'.$filename)) {
+          if (!file_exists('uploads/tx_caddy'.'/'.$filename)) {
                   $erroremailaddress = $this->conf['erroremailaddress'];
                   if ($erroremailaddress) {
                           $mailheader = $this->pi_getLL('error.mailheader.orderpdf');
@@ -188,18 +186,17 @@ class tx_caddy_pdf extends tslib_pibase
                   }
                   return 1;
           }
-          $session['files'][$filename] = $this->conf['dir'].'/'.$filename;
+          $session['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
   }
 
  /**
   * renderPackinglistPdf( ) : 
   *
-  * @param	array		$session : 
   * @return	boolean		true, in case of en arror. false, if all is proper
   * @version    2.0.0
   * @since      1.4.6
   */
-  private function renderPackinglistPdf( &$session )
+  private function renderPackinglistPdf( )
   {
     $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
@@ -217,64 +214,74 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
     // CHECK: Is directory for PDF available?
-    if( ! is_dir( $this->conf['dir'] ) )
+    if( ! is_dir( 'uploads/tx_caddy' ) )
     {
+      $prompt = 'uploads/tx_caddy/ not found<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
       die( $prompt );
     }
 
-    // CHECK: Is PDF already created?
-    if( ! file_exists( $this->conf['dir'] . '/' . $filename ) ) 
+      // CHECK: Is PDF already created?
+    if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
     {
-      $fpdi = new FPDI( );
-      $fpdi->AddPage( );
-
-      if( $this->conf['include_file'] ) 
-      {
-        $fpdi->setSourceFile($this->conf['include_file']);
-        $tplIdx = $fpdi->importPage( 1 );
-        $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
-      }
-
-      $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
-
-      $this->renderShippingAddress( $fpdi, true );
-      $this->renderPackinglistNumber( $fpdi );
-      $this->renderAdditionalTextblocks( $fpdi );
-
-      $fpdi->SetY( $this->conf['cart-position-y'] );
-
-      $cartitems = '';
-
-      $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
-      foreach ($session['products'] as $key => $product) {
-              $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
-      }
-      $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray);
-
-      $fpdi->writeHTMLCell($this->conf['cart-width'], 0, $this->conf['cart-position-x'], $this->conf['cart-position-y'], $html, 0, 2);
-
-      $fpdi->Output($this->conf['dir'].'/'.$filename, 'F');
-
-
+      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' exists!<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
     }
+
+    $fpdi = new FPDI( );
+    $fpdi->AddPage( );
+
+    if( $this->conf['include_file'] ) 
+    {
+      $fpdi->setSourceFile($this->conf['include_file']);
+      $tplIdx = $fpdi->importPage( 1 );
+      $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
+    }
+
+    $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
+
+    $this->renderShippingAddress( $fpdi, true );
+    $this->renderPackinglistNumber( $fpdi );
+    $this->renderAdditionalTextblocks( $fpdi );
+
+    $fpdi->SetY( $this->conf['cart-position-y'] );
+
+    //$outerMarkerArray .= $this->renderCartHeadline($subpartArray);
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+
+    foreach( $sesArray['products'] as $product ) 
+    {
+      $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $this->renderCartProduct( $product );
+    }
+    
+    $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+            (
+              $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
+            );
+
+    $fpdi->writeHTMLCell
+    (
+      $this->conf['cart-width'], 
+      0, 
+      $this->conf['cart-position-x'], 
+      $this->conf['cart-position-y'], 
+      $html, 
+      0, 
+      2
+    );
+
+    $fpdi->Output( 'uploads/tx_caddy' . '/' . $filename, 'F' );
+
 
     // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if (!file_exists($this->conf['dir'].'/'.$filename)) {
-            $erroremailaddress = $this->conf['erroremailaddress'];
-            if ($erroremailaddress) {
-                    $mailheader = $this->pi_getLL('error.mailheader.deliveryorder');
-                    $mailbody = $this->pi_getLL('error.mailbody.cannotcreate');
-                    $mailbody .= $this->pi_getLL('error.mailbody.cannotwrite');
-                    if ($abortonerror) {
-                            $mailbody .= $this->pi_getLL('error.mailbody.abort');
-                    }
-                    t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody, $headers='', $enc='', $charset='', $dontEncodeHeader=false);
-            }
-            if ($abortonerror) {
-                    return 1;
-            }
+    if( ! file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
+    {
+      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' could not written!<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
     }
-    $session['files'][$filename] = $this->conf['dir'].'/'.$filename;
+    $sesArray['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
   }
 
   private function renderOrderAddress( &$fpdi )
@@ -372,16 +379,16 @@ class tx_caddy_pdf extends tslib_pibase
           global $TSFE;
 
           $outerArr = array(
-                  'optionsNet' => $session['optionsNet'], 
-                  'optionsGross' => $session['optionsGross'],
-                  'sumGross' => $session['sumGross'],
-                  'productsGross' => $session['productsGross'],
-                  'sumNet' => $session['sumNet'],
-                  'productsNet' => $session['productsNet'],
-                  'sumTaxReduced' => $session['sumTaxReduced'],
-                  'sumTaxNormal' => $session['sumTaxNormal'],
-                  'ordernumber' => $session['ordernumber'],
-                  'packinglistnumber' => $session['packinglistnumber']
+                  'optionsGross'      => $session['optionsGross'],
+                  'optionsNet'        => $session['optionsNet'], 
+                  'ordernumber'       => $session['ordernumber'],
+                  'packinglistnumber' => $session['packinglistnumber'],
+                  'productsGross'     => $session['productsGross'],
+                  'productsNet'       => $session['productsNet'],
+                  'sumGross'          => $session['sumGross'],
+                  'sumNet'            => $session['sumNet'],
+                  'sumTaxReduced'     => $session['sumTaxReduced'],
+                  'sumTaxNormal'      => $session['sumTaxNormal']
           );
 
           $local_cObj = $GLOBALS['TSFE']->cObj;
