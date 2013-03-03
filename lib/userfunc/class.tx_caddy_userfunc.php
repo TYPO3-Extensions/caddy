@@ -187,6 +187,45 @@ class tx_caddy_userfunc
     $arrReturn['str'] = $strVersion;
     return $arrReturn;
   }
+
+  /**
+ * number Format for typoscript
+ *
+ * @param	[type]		$$content: ...
+ * @param	[type]		$conf: ...
+ * @return	string		formatted number
+ */
+  public function numberformat( $content = '', $conf = array( ) )
+  {
+    global $TSFE;
+    $local_cObj = $TSFE->cObj; // cObject
+
+    if( ! $content )
+    {
+      $conf     = $conf['userFunc.']; // TS configuration
+      $content  = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
+    }
+
+    $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
+
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $numberFormat;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $numberFormat;
+  }
   
   
   
