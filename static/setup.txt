@@ -598,7 +598,7 @@ plugin.tx_caddy_pi1 {
       include_file  = {$plugin.caddy.pdf.orderpdf.includepdf}
       dir           = {$plugin.caddy.pdf.orderpdf.dir}
 
-      filename < plugin.tx_wtcart_pi1.settings.overall.ordernumber
+      filename < plugin.tx_caddy_pi1.settings.overall.ordernumber
       filename.10 >
 
       abortonerror  = {$plugin.caddy.pdf.orderpdf.abortonerror}
@@ -609,9 +609,9 @@ plugin.tx_caddy_pi1 {
       shippingaddress-position-x  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-x}
       shippingaddress-position-y  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-y}
 
+      ordernumber < plugin.tx_caddy_pi1.settings.overall.ordernumber
       ordernumber-position-x      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-x}
       ordernumber-position-y      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-y}
-      ordernumber < plugin.tx_wtcart_pi1.settings.overall.ordernumber
 
       cart-position-x             = {$plugin.caddy.pdf.orderpdf.cart-position-x}
       cart-position-y             = {$plugin.caddy.pdf.orderpdf.cart-position-y}
@@ -650,7 +650,7 @@ plugin.tx_caddy_pi1 {
       include_file  = {$plugin.caddy.pdf.deliveryorder.includepdf}
       dir           = {$plugin.caddy.pdf.deliveryorder.dir}
 
-      filename < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
+      filename < plugin.tx_caddy_pi1.settings.overall.packinglistnumber
       filename.10 >
 
       abortonerror = {$plugin.caddy.pdf.deliveryorder.abortonerror}
@@ -661,8 +661,8 @@ plugin.tx_caddy_pi1 {
       shippingaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-x}
       shippingaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-y}
 
-      packinglistnumber = COA
-      packinglistnumber {
+      XXX_packinglistnumber = COA
+      XXX_packinglistnumber {
         10 = TEXT
         10 {
           value = Delivery Order
@@ -677,9 +677,9 @@ plugin.tx_caddy_pi1 {
           noTrimWrap  = | ||
         }
       }
+      packinglistnumber < plugin.tx_caddy_pi1.settings.overall.packinglistnumber
       packinglistnumber-position-x  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-x}
       packinglistnumber-position-y  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-y}
-      packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
 
       cart-position-x               = {$plugin.caddy.pdf.deliveryorder.cart-position-x}
       cart-position-y               = {$plugin.caddy.pdf.deliveryorder.cart-position-y}
