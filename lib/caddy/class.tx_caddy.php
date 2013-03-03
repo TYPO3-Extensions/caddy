@@ -33,33 +33,35 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   78: class tx_caddy extends tslib_pibase
+ *   80: class tx_caddy extends tslib_pibase
  *
  *              SECTION: Caddy
- *  148:     public function caddy( )
- *  194:     public function caddyByUserfunc( $content = '', $conf = array( ) )
- *  226:     private function caddyWiProducts( )
- *  404:     private function caddyWiProductsItem( $contentItem )
- *  435:     private function calcOptionsPayment( )
- *  479:     private function caddyWiProductsProduct( )
- *  554:     private function caddyWiProductsProductErrorMsg( $product )
- *  578:     private function caddyWiProductsProductServiceAttributes( $product )
- *  640:     private function caddyWiProductsProductSettings( $product )
- *  690:     private function caddyWiProductsProductTax( $product )
- *  743:     private function calcOptionsShipping( )
- *  787:     private function calcOptionsSpecial( )
- *  832:     private function caddyWoProducts( )
+ *  145:     public function caddy( )
+ *  191:     public function caddyByUserfunc( $content = '', $conf = array( ) )
+ *  223:     private function caddyWiProducts( )
+ *  401:     private function caddyWiProductsItem( $contentItem )
+ *  432:     private function caddyWiProductsProduct( )
+ *  507:     private function caddyWiProductsProductErrorMsg( $product )
+ *  531:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  593:     private function caddyWiProductsProductSettings( $product )
+ *  643:     private function caddyWiProductsProductTax( $product )
+ *  696:     private function caddyWoProducts( )
+ *
+ *              SECTION: Caddy
+ *  723:     private function calcOptionsPayment( )
+ *  767:     private function calcOptionsShipping( )
+ *  811:     private function calcOptionsSpecial( )
  *
  *              SECTION: Init
- *  859:     private function initInstances( )
+ *  864:     private function initInstances( )
  *
  *              SECTION: ZZ
- *  907:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
- *  945:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- *  975:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1009:     private function zz_getPriceForOption($type, $option_id)
- * 1059:     private function zz_price_format($value)
- * 1081:     private function zz_renderOptionList($type, $option_id)
+ *  912:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
+ *  950:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ *  980:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1014:     private function zz_getPriceForOption($type, $option_id)
+ * 1064:     private function zz_price_format($value)
+ * 1086:     private function zz_renderOptionList($type, $option_id)
  *
  * TOTAL FUNCTIONS: 20
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -709,7 +711,7 @@ class tx_caddy extends tslib_pibase
   * Caddy
   *
   **********************************************/
-  
+
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
