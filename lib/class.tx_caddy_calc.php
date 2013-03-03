@@ -103,6 +103,7 @@ class tx_caddy_calc extends tslib_pibase
 
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
+var_dump( __METHOD__, __LINE__, $type, $arrReturn );    
     return $arrReturn;
   }
 	
@@ -116,7 +117,6 @@ class tx_caddy_calc extends tslib_pibase
   */
   public function calculateOption( $conf, $type, $option_id, $gross, $obj ) 
   {
-var_dump( __METHOD__, __LINE__, $gross );    
     $arrReturn = null; 
 
     $free_from  = $conf[$type.'.']['options.'][$option_id . '.']['free_from'];
@@ -150,7 +150,6 @@ var_dump( __METHOD__, __LINE__, $gross );
 
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
-var_dump( __METHOD__, __LINE__, $arrReturn );    
     return $arrReturn;
   }
 
