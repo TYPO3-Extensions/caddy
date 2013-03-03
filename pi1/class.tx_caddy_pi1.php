@@ -717,8 +717,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->pObj    = $this;
 
-//    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-//    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**
