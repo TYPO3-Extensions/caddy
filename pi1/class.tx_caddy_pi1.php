@@ -33,67 +33,58 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  110: class tx_caddy_pi1 extends tslib_pibase
+ *  101: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  157:     public function main( $content, $conf )
+ *  148:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  231:     private function caddy( )
+ *  222:     private function caddy( )
  *
  *              SECTION: Clean
- *  253:     private function clean( )
+ *  244:     private function clean( )
  *
  *              SECTION: Debug
- *  275:     private function debugOutputBeforeRunning( )
+ *  266:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  312:     private function init( )
- *  332:     private function initAccessByIp( )
- *  378:     private function initPid( )
- *  417:     private function initDatabase( )
- *  430:     private function initDatabaseTable( )
- *  481:     private function initFlexform( )
- *  494:     private function initGpVar( )
- *  550:     private function initGpVarCid( )
- *  600:     private function initTemplate( )
- *  613:     private function initInstances( )
- *  665:     private function initPowermail( )
+ *  303:     private function init( )
+ *  323:     private function initAccessByIp( )
+ *  369:     private function initPid( )
+ *  408:     private function initDatabase( )
+ *  421:     private function initDatabaseTable( )
+ *  472:     private function initFlexform( )
+ *  485:     private function initGpVar( )
+ *  541:     private function initGpVarCid( )
+ *  591:     private function initTemplate( )
+ *  604:     private function initInstances( )
+ *  656:     private function initPowermail( )
  *
  *              SECTION: Order
- *  686:     private function orderUpdate( )
+ *  677:     private function orderUpdate( )
  *
  *              SECTION: Product
- *  731:     private function productAdd( )
- *  753:     private function productRemove( )
+ *  722:     private function productAdd( )
+ *  744:     private function productRemove( )
  *
  *              SECTION: Send
- *  778:     private function send( )
- *  792:     private function sendCustomer( )
- *  807:     private function sendCustomerDeliveryorder( )
- *  832:     private function sendCustomerInvoice( )
- *  857:     private function sendCustomerTerms( )
- *  882:     private function sendVendor( )
- *  897:     private function sendVendorDeliveryorder( )
- *  922:     private function sendVendorInvoice( )
- *  947:     private function sendVendorTerms( )
- *
- *              SECTION: Session
- *  979:     public function sessionDelete( )
+ *  769:     private function send( )
+ *  783:     private function sendCustomer( )
+ *  798:     private function sendCustomerDeliveryorder( )
+ *  823:     private function sendCustomerInvoice( )
+ *  848:     private function sendCustomerTerms( )
+ *  873:     private function sendVendor( )
+ *  888:     private function sendVendorDeliveryorder( )
+ *  913:     private function sendVendorInvoice( )
+ *  938:     private function sendVendorTerms( )
  *
  *              SECTION: Update Wizard
- * 1012:     private function updateWizard( $content )
+ *  972:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1054:     private function zz_getPriceForOption($type, $option_id)
- * 1105:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1148:     private function add_qtyname_marker($product, $markerArray, $pObj)
- * 1186:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- * 1218:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
- * 1241:     private function zz_renderOptionList($type, $option_id)
- * 1351:     private function zz_price_format($value)
+ * 1017:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
- * TOTAL FUNCTIONS: 36
+ * TOTAL FUNCTIONS: 29
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -1039,8 +1030,8 @@ class tx_caddy_pi1 extends tslib_pibase
     return $value;
   }
 
-  
-  
+
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1.php'])
