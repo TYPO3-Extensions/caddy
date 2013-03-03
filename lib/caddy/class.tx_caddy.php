@@ -124,7 +124,7 @@ class tx_caddy extends tslib_pibase
   private $caddyServiceAttribute3Sum  = null;
 
     // [array] current typoscript configuration
-  private $conf = null;
+  public $conf = null;
 
   private $markerArray = array( );
 
