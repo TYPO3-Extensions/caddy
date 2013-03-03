@@ -162,10 +162,12 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( count( $this->products ) > 0 ):
+var_dump( __METHOD__, __LINE__, $this->products );
         $caddy = $this->caddyWiProducts( );
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
+var_dump( __METHOD__, __LINE__, $this->products );
         $caddy = $this->caddyWoProducts( );
         break;
     }
@@ -197,7 +199,6 @@ class tx_caddy extends tslib_pibase
 
       // read all products from session
     $this->products = $this->session->productsGet( );
-var_dump( __METHOD__, __LINE__, $this->products );
     switch( true )
     {
       case( count( $this->products ) > 0 ):
