@@ -94,6 +94,7 @@ var_dump( __METHOD__, __LINE__ , strtolower( $this->locallangmarker_prefix[1] . 
     if( ! empty( $array[1] ) )
     {
       $string = $this->pi_getLL( strtolower( $this->locallangmarker_prefix[1] . $array[1] ), '<i>' . strtolower($array[1]) . '</i>'); 
+var_dump( __METHOD__, __LINE__ , $string ) ;      
     }
 
     if( ! empty( $string ) )
