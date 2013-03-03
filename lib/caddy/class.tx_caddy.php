@@ -33,29 +33,33 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   74: class tx_caddy extends tslib_pibase
+ *   78: class tx_caddy extends tslib_pibase
  *
  *              SECTION: Caddy
- *  137:     public function caddy( )
- *  183:     public function caddyByUserfunc( $content = '', $conf = array( ) )
- *  215:     private function caddyWiProducts( )
- *  393:     private function caddyWiProductsItem( $contentItem )
- *  424:     private function caddyWiProductsPayment( )
- *  468:     private function caddyWiProductsProduct( )
- *  543:     private function caddyWiProductsProductErrorMsg( $product )
- *  567:     private function caddyWiProductsProductServiceAttributes( $product )
- *  629:     private function caddyWiProductsProductSettings( $product )
- *  679:     private function caddyWiProductsProductTax( $product )
- *  732:     private function caddyWiProductsShipping( )
- *  776:     private function caddyWiProductsSpecial( )
- *  821:     private function caddyWoProducts( )
- *  850:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
- *  888:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- *  918:     private function initInstances( )
- *  950:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- *  984:     private function zz_getPriceForOption($type, $option_id)
- * 1034:     private function zz_price_format($value)
- * 1056:     private function zz_renderOptionList($type, $option_id)
+ *  148:     public function caddy( )
+ *  194:     public function caddyByUserfunc( $content = '', $conf = array( ) )
+ *  226:     private function caddyWiProducts( )
+ *  404:     private function caddyWiProductsItem( $contentItem )
+ *  435:     private function caddyWiProductsPayment( )
+ *  479:     private function caddyWiProductsProduct( )
+ *  554:     private function caddyWiProductsProductErrorMsg( $product )
+ *  578:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  640:     private function caddyWiProductsProductSettings( $product )
+ *  690:     private function caddyWiProductsProductTax( $product )
+ *  743:     private function caddyWiProductsShipping( )
+ *  787:     private function caddyWiProductsSpecial( )
+ *  832:     private function caddyWoProducts( )
+ *
+ *              SECTION: Init
+ *  859:     private function initInstances( )
+ *
+ *              SECTION: ZZ
+ *  907:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
+ *  945:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ *  975:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1009:     private function zz_getPriceForOption($type, $option_id)
+ * 1059:     private function zz_price_format($value)
+ * 1081:     private function zz_renderOptionList($type, $option_id)
  *
  * TOTAL FUNCTIONS: 20
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -99,7 +103,9 @@ class tx_caddy extends tslib_pibase
   private $userfunc = null;
 
   // [object] parent object
-  public $pObj = null;
+  public  $pObj = null;
+  public  $cObj       = null;
+  private $local_cObj = null;
 
   // [object] parent powermail object
   private $powermail = null;
@@ -117,9 +123,7 @@ class tx_caddy extends tslib_pibase
 
   private $tmpl         = null;
   private $smarkerArray = null;
-  
-  private $cObj       = null;
-  private $local_cObj = null;
+
 
 
 
