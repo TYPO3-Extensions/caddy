@@ -299,46 +299,24 @@ plugin.tx_caddy_pi1 {
       // sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax
     overall =
     overall {
-      sumNet = COA
-      sumNet {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumNet
 
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
+      ordernumber = COA
+      ordernumber {
+        10 = TEXT
+        10.data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
+        10.noTrimWrap = ||: |
 
-          drs = {$plugin.caddy.debug.userfunc}
-        }
         20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
+        20.value = {$plugin.caddy.ordernumber.prefix}
 
-      sumGross = COA
-      sumGross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumGross
+        30 = TEXT
+        30.current = 1
+        30.setCurrent.field = ordernumber
+        30.setCurrent.wrap = | + {$plugin.caddy.ordernumber.offset}
+        30.prioriCalc = intval
 
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
+        30 = TEXT
+        30.value = {$plugin.caddy.ordernumber.suffix}
       }
 
       price_total_overall_without_service = COA
@@ -446,54 +424,34 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      ordernumber = COA
-      ordernumber {
-        10 = TEXT
-        10.data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
-        10.noTrimWrap = ||: |
-
-        20 = TEXT
-        20.value = {$plugin.caddy.ordernumber.prefix}
-
-        30 = TEXT
-        30.current = 1
-        30.setCurrent.field = ordernumber
-        30.setCurrent.wrap = | + {$plugin.caddy.ordernumber.offset}
-        30.prioriCalc = intval
-
-        30 = TEXT
-        30.value = {$plugin.caddy.ordernumber.suffix}
-      }
-
-      target = TEXT
-      target {
-        value = x
-        typolink.parameter.data = page:alias//TSFE:id
-        typolink.returnLast = url
-      }
-
-      taxrate_reduced_string = COA
-      taxrate_reduced_string {
-        value = Mehrwertsteuer reduziert
-        if.isTrue.field = sumTaxReduced
-        wrap = |&nbsp;{$plugin.caddy.tax.reduced}&nbsp;%
-      }
-
-      taxrate_normal_string = COA
-      taxrate_normal_string {
-        value = Mehrwertsteuer normal
-        if.isTrue.field = sumTaxNormal
-        wrap = |&nbsp;{$plugin.caddy.tax.normal}&nbsp;%
-      }
-
-      sumTaxReduced = COA
-      sumTaxReduced {
-        if.isTrue.field = sumTaxReduced
+      sumNet = COA
+      sumNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = sumTaxReduced
+          number.field = sumNet
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      sumGross = COA
+      sumGross {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = sumGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -528,6 +486,49 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
+      }
+
+      sumTaxReduced = COA
+      sumTaxReduced {
+        if.isTrue.field = sumTaxReduced
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = sumTaxReduced
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      target = TEXT
+      target {
+        value = x
+        typolink.parameter.data = page:alias//TSFE:id
+        typolink.returnLast = url
+      }
+
+      taxrate_reduced_string = COA
+      taxrate_reduced_string {
+        value = Mehrwertsteuer reduziert
+        if.isTrue.field = sumTaxReduced
+        wrap = |&nbsp;{$plugin.caddy.tax.reduced}&nbsp;%
+      }
+
+      taxrate_normal_string = COA
+      taxrate_normal_string {
+        value = Mehrwertsteuer normal
+        if.isTrue.field = sumTaxNormal
+        wrap = |&nbsp;{$plugin.caddy.tax.normal}&nbsp;%
       }
     }
 
