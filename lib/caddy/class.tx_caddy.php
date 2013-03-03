@@ -181,7 +181,7 @@ class tx_caddy extends tslib_pibase
     $this->initInstances( );
     
     //$this->calc       = $this->pObj->calc;
-    $this->drs        = $this->pObj->drs;
+//    $this->drs        = $this->pObj->drs;
     $this->powermail  = $this->pObj->powermail;
     $this->session    = $this->pObj->session;
     $this->tmpl       = $this->pObj->tmpl;
@@ -957,11 +957,11 @@ class tx_caddy extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
     $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
 
-//    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-//    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-//    $this->drs->pObj        = $this;
-//    $this->drs->row         = $this->cObj->data;
-//
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
+
 //    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
 //    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
 //    $this->powermail->pObj  = $this;
