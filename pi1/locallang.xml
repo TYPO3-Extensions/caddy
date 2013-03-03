@@ -6,12 +6,10 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="caddy_ll_sumNet">Price (w/o tax)</label>
       <label index="caddy_ll_delete">Remove this product from cart.</label>
       <label index="caddy_ll_empty">Currently there are no products in the cart.</label>
       <label index="caddy_ll_error_min">The minimum order quantity is %s.</label>
       <label index="caddy_ll_error_max">The maximum order quantity is %s.</label>
-      <label index="caddy_ll_gross_total">Price (w tax)</label>
       <label index="caddy_ll_minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="caddy_ll_ordernumber">Order number</label>
       <label index="caddy_ll_payment">Service Options</label>
@@ -37,20 +35,19 @@
       <label index="caddy_ll_special_each">%s each</label>
       <label index="caddy_ll_special_free_from">free special option from</label>
       <label index="caddy_ll_special_free_until">free special option until</label>
+      <label index="caddy_ll_sumgross">Price (w tax)</label>
+      <label index="caddy_ll_sumNet">Price (w/o tax)</label>
       <label index="caddy_ll_title">Title</label>
       <label index="caddy_ll_tax">TAX</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="caddy_ll_sumNet">Gesamtsumme (netto)</label>
       <label index="caddy_ll_delete">Dieses Produkt aus dem Warenkorb entfernen.</label>
       <label index="caddy_ll_empty">Derzeit befinden sich keine Produkte im Warenkorb.</label>
       <label index="caddy_ll_error_min">Die minimale Bestellmenge betr<![CDATA[&auml;]]>gt %s.</label>
       <label index="caddy_ll_error_max">Die maximale Bestellmenge betr<![CDATA[&auml;]]>gt %s.</label>
-      <label index="caddy_ll_gross_total">Gesamtsumme (brutto)</label>
       <label index="caddy_ll_minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="caddy_ll_ordernumber">Bestellnummer</label>
-      <label index="caddy_ll_qty">#</label>
       <label index="caddy_ll_payment">Serviceoptionen</label>
       <label index="caddy_ll_payment_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
       <label index="caddy_ll_payment_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
@@ -58,6 +55,7 @@
       <label index="caddy_ll_payment_free_until">servicekostenfrei bis</label>
       <label index="caddy_ll_price">Preis</label>
       <label index="caddy_ll_price_total">Gesamt</label>
+      <label index="caddy_ll_qty">#</label>
       <label index="caddy_ll_service_cost">Service- und Versandkosten</label>
       <label index="caddy_ll_service_each">je</label>
       <label index="caddy_ll_service_from">ab</label>
@@ -73,22 +71,24 @@
       <label index="caddy_ll_special_each">je %s</label>
       <label index="caddy_ll_special_free_from">kostenfrei ab</label>
       <label index="caddy_ll_special_free_until">kostenfrei bis</label>
+      <label index="caddy_ll_sumgross">Gesamtsumme (brutto)</label>
+      <label index="caddy_ll_sumNet">Gesamtsumme (netto)</label>
       <label index="caddy_ll_tax">Mehrwertsteuer</label>
       <label index="caddy_ll_title">Bezeichnung</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
     </languageKey>
     <languageKey index="fr" type="array">
-      <label index="caddy_ll_sumNet">Total (net)</label>
       <label index="caddy_ll_delete">Supprimer cet article du panier.</label>
       <label index="caddy_ll_empty">Votre panier de commande est actuellement vide.</label>
-      <label index="caddy_ll_gross_total">Total (brut)</label>
-      <label index="caddy_ll_qty">Quantité</label>
       <label index="caddy_ll_payment">Paiement</label>
       <label index="caddy_ll_price">Prix unitaire</label>
       <label index="caddy_ll_price_total">Total</label>
+      <label index="caddy_ll_qty">Quantité</label>
       <label index="caddy_ll_service_cost">Frais de services et de livraison</label>
       <label index="caddy_ll_shipping">Livraison</label>
       <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_sumgross">Total (brut)</label>
+      <label index="caddy_ll_sumNet">Total (net)</label>
       <label index="caddy_ll_title">Article</label>
       <label index="caddy_ll_tax">TVA</label>
     </languageKey>

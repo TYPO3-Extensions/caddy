@@ -304,7 +304,6 @@ class tx_caddy extends tslib_pibase
     $sesArray['sumTaxReduced']  = $sumTaxReduced;
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
-var_dump( __METHOD__, __LINE__, $sesArray );    
 
       // cObject becomes current record
     $currRecord = array(
@@ -389,6 +388,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
           $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
       }
     }
+var_dump( __METHOD__, __LINE__, $subpartArray );    
 
       // RESET cObj->data
     return $subpartArray;
