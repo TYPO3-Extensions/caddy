@@ -40,7 +40,6 @@
       <label index="caddy_ll_title">Title</label>
       <label index="caddy_ll_tax">TAX</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
-      <label index="caddy_ll_test">Test en</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddy_ll_delete">Dieses Produkt aus dem Warenkorb entfernen.</label>
@@ -74,11 +73,9 @@
       <label index="caddy_ll_special_free_until">kostenfrei bis</label>
       <label index="caddy_ll_sumgross">Gesamtsumme (brutto)</label>
       <label index="caddy_ll_sumnet">Gesamtsumme (netto)</label>
-      <label index="caddy_ll_sumnet22">Gesamtsumme (netto)</label>
       <label index="caddy_ll_tax">Mehrwertsteuer</label>
       <label index="caddy_ll_title">Bezeichnung</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
-      <label index="caddy_ll_test">Test de</label>
     </languageKey>
     <languageKey index="fr" type="array">
       <label index="caddy_ll_delete">Supprimer cet article du panier.</label>
