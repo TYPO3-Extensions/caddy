@@ -115,7 +115,7 @@ class tx_caddy extends tslib_pibase
   // [object] parent session object
   private $session = null;
 
-  private $product = array( );
+  private $products = array( );
 
 
   private $outerMarkerArray = array( );
@@ -155,16 +155,16 @@ class tx_caddy extends tslib_pibase
     $this->tmpl       = $this->pObj->tmpl;
 
       // read all products from session
-    $this->product = $this->session->productsGet( );
+    $this->products = $this->session->productsGet( );
 
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
     switch( true )
     {
-      case( count( $this->product ) > 0 ):
+      case( count( $this->products ) > 0 ):
         $caddy = $this->caddyWiProducts( );
         break;
-      case( ! ( count( $this->product ) > 0 ) ):
+      case( ! ( count( $this->products ) > 0 ) ):
       default:
         $caddy = $this->caddyWoProducts( );
         break;
@@ -173,7 +173,7 @@ class tx_caddy extends tslib_pibase
     $arrReturn['caddy']             = $caddy;
     $arrReturn['tmpl']              = $this->tmpl;
     $arrReturn['outerMarkerArray']  = $this->outerMarkerArray;
-//var_dump( __METHOD__, __LINE__, $this->product, $arrReturn );
+//var_dump( __METHOD__, __LINE__, $this->products, $arrReturn );
     return $arrReturn;
   }
 
@@ -196,14 +196,14 @@ class tx_caddy extends tslib_pibase
     $this->conf = $this->pObj->conf;
 
       // read all products from session
-    $this->product = $this->session->productsGet( );
+    $this->products = $this->session->productsGet( );
 
     switch( true )
     {
-      case( count( $this->product ) > 0 ):
+      case( count( $this->products ) > 0 ):
         $caddy = $this->caddyWiProducts( );
         break;
-      case( ! ( count( $this->product ) > 0 ) ):
+      case( ! ( count( $this->products ) > 0 ) ):
       default:
         $caddy = $this->caddyWoProducts( );
         break;
@@ -234,8 +234,8 @@ class tx_caddy extends tslib_pibase
       // handle the current product
     $arrResult        = $this->caddyWiProductsProduct( );
     $contentItem      = $arrResult['contentItem'];
-    $caddyNet         = $arrResult['cartNet'];
-    $caddyGross       = $arrResult['cartNet'];
+    $caddyNet         = $arrResult['net'];
+    $caddyGross       = $arrResult['gross'];
     $caddyTaxReduced  = $arrResult['taxReduced'];
     $caddyTaxNormal   = $arrResult['taxNormal'];
     unset( $arrResult );
@@ -431,15 +431,16 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiProductsProduct( )
   {
-    $arrReturn      = null;
-    $contentItem    = '';
-    $caddyNet        = 0;
-    $caddyGross      = 0;
-    $caddyTaxReduced = 0;
-    $caddyTaxNormal  = 0;
+    $arrReturn    = null;
+    $contentItem  = '';
+    
+    $productsNet        = 0;
+    $productsGross      = 0;
+    $productsTaxReduced = 0;
+    $productsTaxNormal  = 0;
 
       // FOREACH  : product
-    foreach( ( array ) $this->product as $product )
+    foreach( ( array ) $this->products as $product )
     {
         // clear marker array to avoid problems with error msg etc.
       unset( $this->markerArray );
@@ -470,7 +471,7 @@ class tx_caddy extends tslib_pibase
                                     );
 
         // update cart gross
-      $caddyGross        = $caddyGross + $product['price_total'];
+      $productsGross        = $productsGross + $product['price_total'];
         // update number of products
       $this->caddyCount  = $this->caddyCount + $product['qty'];
 
@@ -479,18 +480,18 @@ class tx_caddy extends tslib_pibase
 
         // calculate tax
       $arrResult      = $this->caddyWiProductsProductTax( $product );
-      $caddyNet        = $caddyNet        + $arrResult['cartNet'];
-      $caddyTaxReduced = $caddyTaxReduced + $arrResult['taxReduced'];
-      $caddyTaxNormal  = $caddyTaxNormal  + $arrResult['taxNormal'];
+      $productsNet        = $productsNet        + $arrResult['cartNet'];
+      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
+      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
 
     }
       // FOREACH  : product
 
-    $arrReturn['contentItem']     = $contentItem;
-    $arrReturn['cartNet']         = $caddyNet;
-    $arrReturn['cartGross']       = $caddyGross;
-    $arrReturn['taxReduced']  = $caddyTaxReduced;
-    $arrReturn['taxNormal']   = $caddyTaxNormal;
+    $arrReturn['contentItem'] = $contentItem;
+    $arrReturn['net']         = $productsNet;
+    $arrReturn['gross']       = $productsGross;
+    $arrReturn['taxReduced']  = $productsTaxReduced;
+    $arrReturn['taxNormal']   = $productsTaxNormal;
 
     return $arrReturn;
   }
@@ -708,7 +709,7 @@ class tx_caddy extends tslib_pibase
 
   /***********************************************
   *
-  * Caddy
+  * Calc
   *
   **********************************************/
 
@@ -922,7 +923,7 @@ class tx_caddy extends tslib_pibase
 
       $str_marker = null;
       // get all variant key/value pairs from the current product
-      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+      $array_add_gpvar = $this->productsGetVariantTs($product, $pObj);
       $array_add_gpvar['puid']  = $product['puid'];
       // generate the marker array
       foreach ((array) $array_add_gpvar as $key => $value)
@@ -956,7 +957,7 @@ class tx_caddy extends tslib_pibase
       }
 
       // get all variant key/value pairs from the current product
-      $array_add_gpvar = $this->productGetVariantTs($product, $pObj);
+      $array_add_gpvar = $this->productsGetVariantTs($product, $pObj);
 
       // add variant key/value pairs to imageLinkWrap
       foreach ((array) $array_add_gpvar as $key => $value)
