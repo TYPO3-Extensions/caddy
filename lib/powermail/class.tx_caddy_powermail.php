@@ -189,6 +189,7 @@ class tx_caddy_powermail
       </style>
       ';
 
+    return $this->fieldFormCss;
   }
 
  /**
