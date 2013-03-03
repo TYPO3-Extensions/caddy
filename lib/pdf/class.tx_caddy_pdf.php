@@ -329,12 +329,12 @@ class tx_caddy_pdf extends tslib_pibase
           $outerArr = array(
                   'service_cost_net' => $session['service_cost_net'], 
                   'service_cost_gross' => $session['service_cost_gross'],
-                  'cart_gross' => $session['cart_gross'],
-                  'cart_gross_no_service' => $session['cart_gross_no_service'],
-                  'cart_net' => $session['cart_net'],
-                  'cart_net_no_service' => $session['cart_net_no_service'],
-                  'cart_tax_reduced' => $session['cart_tax_reduced'],
-                  'cart_tax_normal' => $session['cart_tax_normal'],
+                  'sumGross' => $session['sumGross'],
+                  'productsSumGross' => $session['productsSumGross'],
+                  'sumNet' => $session['sumNet'],
+                  'productsSumNet' => $session['productsSumNet'],
+                  'sumTaxReduced' => $session['sumTaxReduced'],
+                  'sumTaxNormal' => $session['sumTaxNormal'],
                   'ordernumber' => $session['ordernumber'],
                   'packinglistnumber' => $session['packinglistnumber']
           );

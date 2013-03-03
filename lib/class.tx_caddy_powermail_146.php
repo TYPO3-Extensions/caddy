@@ -68,7 +68,7 @@ class tx_caddy_powermail_146 extends tslib_pibase {
 
 			$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', 'caddy_cart_' . $GLOBALS["TSFE"]->id);
 			$cartmin = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['cart.']['cartmin.'];
-			if ((floatval($sesArray['cart_gross_no_service']) < floatval($cartmin['value'])) && ($cartmin['hideifnotreached.']['powermail']))
+			if ((floatval($sesArray['productsSumGross']) < floatval($cartmin['value'])) && ($cartmin['hideifnotreached.']['powermail']))
 			{
 				$pObj->content = ''; // clear content
 			}
@@ -80,7 +80,7 @@ class tx_caddy_powermail_146 extends tslib_pibase {
 		$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', 'caddy_cart_' . $GLOBALS["TSFE"]->id);
 
 		$min = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['cart.']['cartmin.']['value'];
-		if (floatval($sesArray['cart_gross_no_service']) < floatval($min))
+		if (floatval($sesArray['productsSumGross']) < floatval($min))
 		{
 			$obj->error = 1;
 			// ToDo: better error handling, localized and beautiful

@@ -320,13 +320,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      cart_net_no_service = COA
-      cart_net_no_service {
+      productsSumNet = COA
+      productsSumNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_net_no_service
+          number.field = productsSumNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -362,13 +362,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      cart_gross_no_service = COA
-      cart_gross_no_service {
+      productsSumGross = COA
+      productsSumGross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_gross_no_service
+          number.field = productsSumGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
