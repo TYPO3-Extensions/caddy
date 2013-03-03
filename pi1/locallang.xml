@@ -57,7 +57,7 @@
       <label index="caddy_ll_price">Preis</label>
       <label index="caddy_ll_price_total">Gesamt</label>
       <label index="caddy_ll_qty">#</label>
-      <label index="caddy_ll_service_cost">Service- und Versandkosten 2345</label>
+      <label index="caddy_ll_service_cost">Service- und Versandkosten</label>
       <label index="caddy_ll_service_each">je</label>
       <label index="caddy_ll_service_from">ab</label>
       <label index="caddy_ll_shipping">Versandoptionen</label>
