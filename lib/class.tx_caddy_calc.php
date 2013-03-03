@@ -120,28 +120,33 @@ var_dump( __METHOD__, __LINE__, $gross );
     $arrReturn = null; 
 
     $free_from  = $conf[$type.'.']['options.'][$option_id . '.']['free_from'];
-    $free_until = $conf[$type.'.']['options.'][$option_id . '.']['free_until'];
+    $free_to    = $conf[$type.'.']['options.'][$option_id . '.']['free_until'];
     
-    if( 
-        ( isset( $free_from ) && ( floatval( $free_from ) <= $obj->cartGrossNoService ) )
-        || 
-        ( isset( $free_until ) && ( floatval( $free_until ) >= $obj->cartGrossNoService ) ) 
-      ) 
+    switch( true )
     {
-      $gross  = 0.0;
-      $net    = 0.0;
+      case( isset( $free_from ) && ( floatval( $free_from ) <= $obj->cartGrossNoService ) ):
+      case( isset( $free_to ) && ( floatval( $free_to ) >= $obj->cartGrossNoService ) ):
+        $arrReturn['gross'] = 0.00;
+        $arrReturn['net']   = 0.00;
+        return $arrReturn;
+        break;
+      default;
+        break;
+    }
+    
+    unset( $free_from );
+    unset( $free_to );
+    
+      // calc net
+    if( $conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced' )
+    {
+      $net = $gross / ( 1.0 + $conf['tax.']['reducedCalc'] );
     } 
     else 
     {
-      if( $conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced' )
-      { // reduced tax
-        $net = $gross / ( 1.0 + $conf['tax.']['reducedCalc'] ); // add tax from this product to overall
-      } 
-      else 
-      { // normal tax
-        $net = $gross / ( 1.0 + $conf['tax.']['normalCalc'] ); // add tax from this product to overall
-      }
+      $net = $gross / ( 1.0 + $conf['tax.']['normalCalc'] );
     }
+      // calc net
 
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
