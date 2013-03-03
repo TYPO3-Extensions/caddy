@@ -314,7 +314,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initPid( );
     $this->initAccessByIp( );
     $this->initHtmlTemplateSubparts( );
-    $this->initServiceAttributes( );
     $this->initGpVar( );
     $this->initPowermail( );
     $this->initDatabase( );
@@ -681,9 +680,6 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
-//    require_once( $path2lib . 'class.tx_caddy_calc.php' );
-//    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
-
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
     $this->caddy->pObj      = $this;
@@ -717,8 +713,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->pObj    = $this;
 
-    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**
@@ -734,25 +728,6 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->powermail->init( $this->cObj->data );
   }
-
- /**
-  * initServiceAttributes( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initServiceAttributes( )
-  {
-    $this->caddyServiceAttribute1Sum = 0;
-    $this->caddyServiceAttribute1Max = 0;
-    $this->caddyServiceAttribute2Sum = 0;
-    $this->caddyServiceAttribute2Max = 0;
-    $this->caddyServiceAttribute3Sum = 0;
-    $this->caddyServiceAttribute3Max = 0;
-  }
-
 
 
 

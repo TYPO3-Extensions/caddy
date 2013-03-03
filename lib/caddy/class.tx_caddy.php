@@ -115,13 +115,13 @@ class tx_caddy extends tslib_pibase
 
   
   private $caddyCount                 = 0;
-  private $caddyGrossNoService        = null;
-  private $caddyServiceAttribute1Max  = null;
-  private $caddyServiceAttribute1Sum  = null;
-  private $caddyServiceAttribute2Max  = null;
-  private $caddyServiceAttribute2Sum  = null;
-  private $caddyServiceAttribute3Max  = null;
-  private $caddyServiceAttribute3Sum  = null;
+  private $caddyGrossNoService        = 0;
+  private $caddyServiceAttribute1Max  = 0;
+  private $caddyServiceAttribute1Sum  = 0;
+  private $caddyServiceAttribute2Max  = 0;
+  private $caddyServiceAttribute2Sum  = 0;
+  private $caddyServiceAttribute3Max  = 0;
+  private $caddyServiceAttribute3Sum  = 0;
 
     // [array] current typoscript configuration
   public $conf = null;
