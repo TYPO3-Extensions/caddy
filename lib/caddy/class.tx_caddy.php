@@ -603,10 +603,10 @@ class tx_caddy extends tslib_pibase
 
     $paymentId = $this->session->paymentGet();
 
+    $gross        = 0.0;
+    $net          = 0.0;
     $taxReduced   = 0.0;
     $taxNormal    = 0.0;
-    $specialGross = 0.0;
-    $specialNet   = 0.0;
 
     if( ! $paymentId )
     {
@@ -621,20 +621,24 @@ class tx_caddy extends tslib_pibase
       $this->session->paymentUpdate( $newpaymentId );
     }
 
-    list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
+    $arrResult  = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
+    $net        = $arrResult['net'];  
+    $gross      = $arrResult['gross'];  
 
     if( $this->conf['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
     {
-      $arrReturn['taxReduced'] = $paymentGross - $paymentNet;
+      $taxReduced = $gross - $net;
     }
     else
     {
-      $arrReturn['taxNormal'] = $paymentGross - $paymentNet;
+      $taxNormal = $gross - $net;
     }
 
-    $arrReturn['id']    = $paymentId;
-    $arrReturn['gross'] = $gross;
-    $arrReturn['net']   = $net;
+    $arrReturn['id']          = $paymentId;
+    $arrReturn['gross']       = $gross;
+    $arrReturn['net']         = $net;
+    $arrReturn['taxReduced']  = $taxReduced;
+    $arrReturn['taxNormal']   = $taxNormal;
     return $arrReturn;
   }
 
@@ -652,6 +656,11 @@ class tx_caddy extends tslib_pibase
 
     $shippingId = $this->session->shippingGet();
 
+    $gross        = 0.0;
+    $net          = 0.0;
+    $taxReduced   = 0.0;
+    $taxNormal    = 0.0;
+
     if( ! $shippingId )
     {
       $shippingId = intval( $this->conf['shipping.']['preset'] );
@@ -665,20 +674,24 @@ class tx_caddy extends tslib_pibase
       $this->session->shippingUpdate( $newshippingId );
     }
 
-    list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
+    $arrResult = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
+    $net      = $arrResult['net'];  
+    $gross    = $arrResult['gross'];  
 
     if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
-      $arrReturn['taxReduced'] = $shippingGross - $shippingNet;
+      $taxReduced = $gross - $net;
     }
     else
     {
-      $arrReturn['taxNormal'] = $shippingGross - $shippingNet;
+      $taxNormal = $gross - $net;
     }
 
-    $arrReturn['id']    = $shippingId;
-    $arrReturn['gross'] = $gross;
-    $arrReturn['net']   = $net;
+    $arrReturn['id']          = $shippingId;
+    $arrReturn['net']         = $net;
+    $arrReturn['gross']       = $gross;
+    $arrReturn['taxReduced']  = $taxReduced;
+    $arrReturn['taxNormal']   = $taxNormal;
     return $arrReturn;
   }
 
@@ -696,18 +709,20 @@ class tx_caddy extends tslib_pibase
 
     $specialIds = $this->session->specialGet( );
 
-    $taxReduced   = 0.0;
-    $taxNormal    = 0.0;
     $gross        = 0.0;
     $net          = 0.0;
-    $sumNet       = 0.0;
     $sumGross     = 0.0;
+    $sumNet       = 0.0;
+    $taxReduced   = 0.0;
+    $taxNormal    = 0.0;
 
     foreach( $specialIds as $specialId )
     {
-      list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
-      $sumNet    = $sumNet    + $net;
-      $sumGross  = $sumGross  + $gross;
+      $arrResult = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
+      $net      = $arrResult['net'];  
+      $gross    = $arrResult['gross'];  
+      $sumNet   = $sumNet    + $net;
+      $sumGross = $sumGross  + $arrResult['gross'];
       if( $this->conf['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
       {
         $taxReduced = $taxReduced + $gross - $net;
