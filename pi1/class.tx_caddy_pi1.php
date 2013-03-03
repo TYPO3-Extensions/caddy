@@ -130,7 +130,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $local_cObj       = null;
   public  $conf             = null;
-  private $arr_extConf      = null;
+  public  $arr_extConf      = null;
   private $tmpl             = null;
 
 
