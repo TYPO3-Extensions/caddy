@@ -33,66 +33,67 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  109: class tx_caddy_pi1 extends tslib_pibase
+ *  110: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  156:     public function main( $content, $conf )
+ *  157:     public function main( $content, $conf )
  *
- *              SECTION: Cart
- *  215:     private function caddy( )
- *  252:     private function caddyWiProducts( )
- *  431:     private function caddyWiProductsItem( $contentItem )
- *  462:     private function caddyWiProductsPayment( )
- *  506:     private function caddyWiProductsProduct( )
- *  581:     private function caddyWiProductsProductErrorMsg( $product )
- *  605:     private function caddyWiProductsProductServiceAttributes( $product )
- *  667:     private function caddyWiProductsProductSettings( $product )
- *  717:     private function caddyWiProductsProductTax( $product )
- *  770:     private function caddyWiProductsShipping( )
- *  814:     private function caddyWiProductsSpecial( )
- *  859:     private function caddyWoProducts( )
+ *              SECTION: Caddy
+ *  231:     private function caddy( )
  *
  *              SECTION: Clean
- *  886:     private function clean( )
+ *  253:     private function clean( )
  *
  *              SECTION: Debug
- *  908:     private function debugOutputBeforeRunning( )
+ *  275:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  945:     private function init( )
- *  965:     private function initAccessByIp( )
- * 1011:     private function initPid( )
- * 1050:     private function initFlexform( )
- * 1063:     private function initGpVar( )
- * 1119:     private function initGpVarCid( )
- * 1169:     private function initTemplate( )
- * 1251:     private function initInstances( )
- * 1298:     private function initPowermail( )
- * 1311:     private function initServiceAttributes( )
+ *  312:     private function init( )
+ *  332:     private function initAccessByIp( )
+ *  378:     private function initPid( )
+ *  417:     private function initDatabase( )
+ *  430:     private function initDatabaseTable( )
+ *  481:     private function initFlexform( )
+ *  494:     private function initGpVar( )
+ *  550:     private function initGpVarCid( )
+ *  600:     private function initTemplate( )
+ *  613:     private function initInstances( )
+ *  665:     private function initPowermail( )
  *
  *              SECTION: Order
- * 1338:     private function orderUpdate( )
+ *  686:     private function orderUpdate( )
  *
  *              SECTION: Product
- * 1383:     private function productAdd( )
- * 1405:     private function productRemove( )
+ *  731:     private function productAdd( )
+ *  753:     private function productRemove( )
+ *
+ *              SECTION: Send
+ *  778:     private function send( )
+ *  792:     private function sendCustomer( )
+ *  807:     private function sendCustomerDeliveryorder( )
+ *  832:     private function sendCustomerInvoice( )
+ *  857:     private function sendCustomerTerms( )
+ *  882:     private function sendVendor( )
+ *  897:     private function sendVendorDeliveryorder( )
+ *  922:     private function sendVendorInvoice( )
+ *  947:     private function sendVendorTerms( )
  *
  *              SECTION: Session
- * 1429:     public function sessionDelete( )
+ *  979:     public function sessionDelete( )
  *
  *              SECTION: Update Wizard
- * 1461:     private function updateWizard( $content )
+ * 1012:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1503:     private function zz_getPriceForOption($type, $option_id)
- * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1597:     private function add_qtyname_marker($product, $markerArray, $pObj)
- * 1635:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- * 1667:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
- * 1690:     private function zz_renderOptionList($type, $option_id)
- * 1800:     private function zz_price_format($value)
+ * 1054:     private function zz_getPriceForOption($type, $option_id)
+ * 1105:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ * 1148:     private function add_qtyname_marker($product, $markerArray, $pObj)
+ * 1186:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ * 1218:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1241:     private function zz_renderOptionList($type, $option_id)
+ * 1351:     private function zz_price_format($value)
  *
- * TOTAL FUNCTIONS: 37
+ * TOTAL FUNCTIONS: 36
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -186,12 +187,12 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // Get the caddy
-//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );   
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
     $arrResult              = $this->caddy( );
-    $caddy                  = $arrResult['caddy']; 
-    $this->tmpl             = $arrResult['tmpl']; 
-    $this->outerMarkerArray = $arrResult['outerMarkerArray']; 
+    $caddy                  = $arrResult['caddy'];
+    $this->tmpl             = $arrResult['tmpl'];
+    $this->outerMarkerArray = $arrResult['outerMarkerArray'];
     unset( $arrResult );
 
     $content = $this->powermail->formCss( $content );
@@ -210,7 +211,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
     return $this->pi_wrapInBaseClass( $content );
   }
- 
+
 
 
   /***********************************************
@@ -432,12 +433,12 @@ class tx_caddy_pi1 extends tslib_pibase
 
     //echo $GLOBALS['TCA'][$table]['columns'] ) )
     // RETURN : TCA is loaded
-    
+
       // Load the TCA
     t3lib_div::loadTCA( $table );
 
-    if( ! empty ( $GLOBALS['TCA'][$table] ) ) 
-    { 
+    if( ! empty ( $GLOBALS['TCA'][$table] ) )
+    {
         // DRS
       if( $this->drs->drsInit )
       {
@@ -468,7 +469,7 @@ class tx_caddy_pi1 extends tslib_pibase
     die( $prompt );
 
   }
-  
+
  /**
   * initFlexform( )
   *
@@ -959,7 +960,7 @@ class tx_caddy_pi1 extends tslib_pibase
         break;
     }
   }
- 
+
   /***********************************************
   *
   * Session

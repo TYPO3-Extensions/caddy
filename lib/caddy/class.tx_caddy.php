@@ -33,66 +33,31 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  109: class tx_caddy extends tslib_pibase
+ *   74: class tx_caddy extends tslib_pibase
  *
- *              SECTION: Main
- *  156:     public function main( $content, $conf )
+ *              SECTION: Caddy
+ *  137:     public function caddy( )
+ *  183:     public function caddyByUserfunc( $content = '', $conf = array( ) )
+ *  215:     private function caddyWiProducts( )
+ *  393:     private function caddyWiProductsItem( $contentItem )
+ *  424:     private function caddyWiProductsPayment( )
+ *  468:     private function caddyWiProductsProduct( )
+ *  543:     private function caddyWiProductsProductErrorMsg( $product )
+ *  567:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  629:     private function caddyWiProductsProductSettings( $product )
+ *  679:     private function caddyWiProductsProductTax( $product )
+ *  732:     private function caddyWiProductsShipping( )
+ *  776:     private function caddyWiProductsSpecial( )
+ *  821:     private function caddyWoProducts( )
+ *  850:     private function add_qtyname_marker($product, $markerArray, $pObj)
+ *  888:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ *  918:     private function initInstances( )
+ *  950:     private function zz_checkOptionIsNotAvailable($type, $option_id)
+ *  984:     private function zz_getPriceForOption($type, $option_id)
+ * 1034:     private function zz_price_format($value)
+ * 1056:     private function zz_renderOptionList($type, $option_id)
  *
- *              SECTION: Cart
- *  215:     private function caddy( )
- *  252:     private function caddyWiProducts( )
- *  431:     private function caddyWiProductsItem( $contentItem )
- *  462:     private function caddyWiProductsPayment( )
- *  506:     private function caddyWiProductsProduct( )
- *  581:     private function caddyWiProductsProductErrorMsg( $product )
- *  605:     private function caddyWiProductsProductServiceAttributes( $product )
- *  667:     private function caddyWiProductsProductSettings( $product )
- *  717:     private function caddyWiProductsProductTax( $product )
- *  770:     private function caddyWiProductsShipping( )
- *  814:     private function caddyWiProductsSpecial( )
- *  859:     private function caddyWoProducts( )
- *
- *              SECTION: Clean
- *  886:     private function clean( )
- *
- *              SECTION: Debug
- *  908:     private function debugOutputBeforeRunning( )
- *
- *              SECTION: Init
- *  945:     private function init( )
- *  965:     private function initAccessByIp( )
- * 1011:     private function initPid( )
- * 1050:     private function initFlexform( )
- * 1063:     private function initGpVar( )
- * 1119:     private function initGpVarCid( )
- * 1169:     private function initHtmlTemplate( )
- * 1251:     private function initInstances( )
- * 1298:     private function initPowermail( )
- * 1311:     private function initServiceAttributes( )
- *
- *              SECTION: Order
- * 1338:     private function orderUpdate( )
- *
- *              SECTION: Product
- * 1383:     private function productAdd( )
- * 1405:     private function productRemove( )
- *
- *              SECTION: Session
- * 1429:     public function sessionDelete( )
- *
- *              SECTION: Update Wizard
- * 1461:     private function updateWizard( $content )
- *
- *              SECTION: ZZ
- * 1503:     private function zz_getPriceForOption($type, $option_id)
- * 1554:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1597:     private function add_qtyname_marker($product, $markerArray, $pObj)
- * 1635:     private function add_variant_gpvar_to_imagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- * 1667:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
- * 1690:     private function zz_renderOptionList($type, $option_id)
- * 1800:     private function zz_price_format($value)
- *
- * TOTAL FUNCTIONS: 37
+ * TOTAL FUNCTIONS: 20
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -113,7 +78,7 @@ class tx_caddy extends tslib_pibase
   public $prefixId = 'tx_caddy_pi1';
   public $scriptRelPath = 'lib/caddy/class.tx_caddy.php';
 
-  
+
   private $caddyCount                 = 0;
   private $caddyGrossNoService        = 0;
   private $caddyServiceAttribute1Max  = 0;
@@ -142,14 +107,14 @@ class tx_caddy extends tslib_pibase
 
   private $product = array( );
 
-  
+
   private $outerMarkerArray = array( );
-  
+
     // [array] current tt_content row or current pi_flexform row
   public $row  = null;
-  
+
   private $tmpl;
-  
+
 
 
 
@@ -164,8 +129,8 @@ class tx_caddy extends tslib_pibase
  /**
   * caddy( )
   *
-  * @return	string    $caddy  : HTML caddy
-  * @access     public
+  * @return	string		$caddy  : HTML caddy
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -177,14 +142,14 @@ class tx_caddy extends tslib_pibase
     $this->conf       = $this->pObj->conf;
     $this->cObj       = $this->pObj->cObj;
     $this->local_cObj = $this->pObj->local_cObj;
-    
+
     $this->initInstances( );
     $this->tmpl       = $this->pObj->tmpl;
-    
+
       // read all products from session
     $this->product = $this->session->productsGet( );
 
-//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );   
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
     switch( true )
     {
@@ -198,18 +163,20 @@ class tx_caddy extends tslib_pibase
     }
 
     $arrReturn['caddy']             = $caddy;
-    $arrReturn['tmpl']              = $this->tmpl; 
-    $arrReturn['outerMarkerArray']  = $this->outerMarkerArray; 
+    $arrReturn['tmpl']              = $this->tmpl;
+    $arrReturn['outerMarkerArray']  = $this->outerMarkerArray;
 //var_dump( __METHOD__, __LINE__, $this->product, $arrReturn );
     return $arrReturn;
   }
 
-  
+
  /**
   * caddyByUserfunc( )
   *
-  * @return	string    $caddy  : HTML caddy
-  * @access     public
+  * @param	[type]		$$content: ...
+  * @param	[type]		$conf: ...
+  * @return	string		$caddy  : HTML caddy
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -219,7 +186,7 @@ class tx_caddy extends tslib_pibase
 
       // Set the current typoscript configuration
     $this->conf = $this->pObj->conf;
-    
+
       // read all products from session
     $this->product = $this->session->productsGet( );
 
@@ -862,8 +829,8 @@ class tx_caddy extends tslib_pibase
     return $css;
   }
 
-  
-  
+
+
  /**
   * add_qty_marker():  Allocates to the global markerArray a value for ###QTY_NAME###
   *                          in case of variant
@@ -1191,8 +1158,8 @@ class tx_caddy extends tslib_pibase
   }
 
 
-  
-  
+
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php'])

@@ -31,42 +31,10 @@
  *
  *
  *
- *   83: class tx_caddy_session
+ *   51: class tx_caddy_template
+ *   70:     public function main( )
  *
- *              SECTION: Order number
- *  130:     public function ordernumberGet()
- *
- *              SECTION: Payment
- *  151:     public function paymentUpdate($value)
- *  166:     public function paymentGet()
- *
- *              SECTION: Product
- *  197:     public function productAdd( $parray,  )
- *  303:     public function productDelete()
- *  359:     public function productGetDetails($gpvar, )
- *  381:     private function productGetDetailsSql($gpvar, )
- *  435:     private function productGetDetailsTs($gpvar, )
- *  534:     private function productGetVariantGpvar(  )
- *  568:     private function productGetVariantTs($product, )
- *  601:     public function productsGet()
- *  615:     public function productsGetGross( $pid )
- *  646:     private function quantityCheckMinMax( $parray )
- *  680:     private function quantityGetVariant()
- *  755:     public function quantityUpdate()
- *
- *              SECTION: Shipping
- *  896:     public function shippingUpdate($value)
- *  911:     public function shippingGet( )
- *
- *              SECTION: Special
- *  932:     public function specialUpdate($special_arr)
- *  947:     public function specialGet()
- *
- *              SECTION: ZZ
- *  975:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1037:     private function zz_sqlReplaceMarker(  )
- *
- * TOTAL FUNCTIONS: 21
+ * TOTAL FUNCTIONS: 1
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -83,7 +51,7 @@
 class tx_caddy_template
 {
     public $extKey = 'caddy';
-    
+
     public $prefixId = 'tx_caddy_template';
 
     public $scriptRelPath = 'lib/class.tx_caddy_template.php';
@@ -94,7 +62,7 @@ class tx_caddy_template
  /**
   * main( ): Returns template subparts
   *
-  * @return	array     $tmplSubparts : array with template subparts;
+  * @return	array		$tmplSubparts : array with template subparts;
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -103,7 +71,7 @@ class tx_caddy_template
   {
     $cObj = $this->pObj->cObj;
     $conf = $this->pObj->conf;
-    
+
     $tmplSubparts = null;
     $template     = $cObj->fileResource( $conf['main.']['template'] );
 
@@ -175,10 +143,10 @@ class tx_caddy_template
 
     $tmplSubparts['special_condition_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIAL_CONDITIONS###' );
     $tmplSubparts['special_condition_item'] = $cObj->getSubpart( $tmplSubparts['special_condition_all'], '###ITEM###' );
-  
+
     return $tmplSubparts;
   }
-  
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_template.php'])
