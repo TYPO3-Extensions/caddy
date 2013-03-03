@@ -939,6 +939,41 @@ class tx_caddy extends tslib_pibase
       return $ts_conf;
   }
 
+  /**
+ * Gets the option_id for a given type ('shipping', 'payment') method on the current cart and checks the
+ * availability. If available, return is 0. If not available the given fallback or preset will returns.
+ *
+ * @param	string		$type
+ * @param	int		$option_id
+ * @return	int
+ */
+  private function zz_checkOptionIsNotAvailable($type, $option_id)
+  {
+    if ((isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_from']),2) > round($this->caddyGrossNoService,2))) || (isset($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']) && (round(floatval($this->conf[$type.'.']['options.'][$option_id.'.']['available_until']),2) < round($this->caddyGrossNoService,2))))
+    {
+      // check: fallback is given
+      if (isset($this->conf[$type.'.']['options.'][$option_id.'.']['fallback']))
+      {
+        $fallback = $this->conf[$type.'.']['options.'][$option_id.'.']['fallback'];
+        // check: fallback is defined; the availability of fallback will not tested yet
+        if (isset($this->conf[$type.'.']['options.'][$fallback.'.']))
+        {
+          $newoption_id = intval($fallback);
+        } else {
+// 130227, dwildt, 1-
+//                                  $shippingId = intval($this->conf[$type.'.']['preset']);
+// 130227, dwildt, 1+
+          $newoption_id = intval($this->conf[$type.'.']['preset']);
+        }
+      } else {
+        $newoption_id = intval($this->conf[$type.'.']['preset']);
+      }
+      return $newoption_id;
+    }
+
+    return 0;
+  }
+
 
   
   

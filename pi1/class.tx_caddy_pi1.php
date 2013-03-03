@@ -229,7 +229,6 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = $this->caddy->caddy( );
     return $arrReturn;
-    
     $arrReturn = null;
 
     $this->caddyCount = 0;
