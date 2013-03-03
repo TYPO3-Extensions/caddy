@@ -145,6 +145,7 @@ var_dump( __METHOD__, __LINE__, $gross );
 
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
+var_dump( __METHOD__, __LINE__, $arrReturn );    
     return $arrReturn;
   }
 
