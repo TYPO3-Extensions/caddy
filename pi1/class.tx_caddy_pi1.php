@@ -681,8 +681,8 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
-    require_once( $path2lib . 'class.tx_caddy_calc.php' );
-    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+//    require_once( $path2lib . 'class.tx_caddy_calc.php' );
+//    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
@@ -717,8 +717,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->pObj    = $this;
 
-    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+//    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+//    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**
