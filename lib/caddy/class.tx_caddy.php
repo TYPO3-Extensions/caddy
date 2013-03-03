@@ -187,6 +187,8 @@ class tx_caddy extends tslib_pibase
       // read all products from session
     $this->product = $this->session->productsGet( );
 
+$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );   
+var_dump( __METHOD__, __LINE__, $sesArray );
     switch( true )
     {
       case( count( $this->product ) > 0 ):
