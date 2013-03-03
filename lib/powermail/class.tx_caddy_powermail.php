@@ -317,7 +317,7 @@ class tx_caddy_powermail
       $prompt = 'ERROR: unexpected result<br />
         pid is empty<br />
         Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-        TYPO3 extension: powermail4dev';
+        TYPO3 extension: ' . $this->extKey;
       die( $prompt );
     }
 
@@ -331,7 +331,7 @@ class tx_caddy_powermail
         $prompt = 'ERROR: unexpected result<br />
           powermail version is below 1.0.0: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: powermail4dev';
+          TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
@@ -345,7 +345,7 @@ class tx_caddy_powermail
         $prompt = 'ERROR: unexpected result<br />
           powermail version is 3.x: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: powermail4dev';
+          TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
     }
@@ -406,7 +406,7 @@ class tx_caddy_powermail
         $prompt = 'ERROR: unexpected result<br />
           powermail version is below 1.0.0<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: powermail4dev';
+          TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
@@ -598,7 +598,7 @@ class tx_caddy_powermail
         $prompt = 'ERROR: unexpected result<br />
           powermail version is below 1.0.0: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: powermail4dev';
+          TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
@@ -612,7 +612,7 @@ class tx_caddy_powermail
         $prompt = 'ERROR: unexpected result<br />
           powermail version is 3.x: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: powermail4dev';
+          TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
     }
