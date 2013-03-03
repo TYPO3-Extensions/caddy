@@ -607,6 +607,7 @@ class tx_caddy_powermail
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
     {
+      $this->pdf->drsUserfunc = true;
       $prompt = __METHOD__ . ': PDF object is initiated.';
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
@@ -932,6 +933,7 @@ class tx_caddy_powermail
     }
 
     $this->initPdf( );
+    $this->pdf->createPdf( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )

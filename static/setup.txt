@@ -583,7 +583,7 @@ plugin.tx_caddy_pi1 {
   // plugin.tx_caddy_pi1.pdf
 
 plugin.tx_caddy_pi1 {
-    // orderpdf, packinglistpdf
+    // orderpdf, deliveryorder
   pdf =
   pdf {
       // Configure your order PDF
@@ -639,36 +639,36 @@ plugin.tx_caddy_pi1 {
       }
     }
       // Configure your packinglist PDF
-    packinglistpdf =
-    packinglistpdf {
+    deliveryorder =
+    deliveryorder {
       font-size = 8
 
       attach_sender_mail    = 0
       attach_recipient_mail = 1
 
       template      = {$plugin.caddy.pdf.orderpdf.template}
-      include_file  = {$plugin.caddy.pdf.packinglistpdf.includepdf}
-      dir           = {$plugin.caddy.pdf.packinglistpdf.dir}
+      include_file  = {$plugin.caddy.pdf.deliveryorder.includepdf}
+      dir           = {$plugin.caddy.pdf.deliveryorder.dir}
 
       filename < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
       filename.10 >
 
-      abortonerror = {$plugin.caddy.pdf.packinglistpdf.abortonerror}
+      abortonerror = {$plugin.caddy.pdf.deliveryorder.abortonerror}
 
-      orderaddress-position-x       = {$plugin.caddy.pdf.packinglistpdf.orderaddress-position-x}
-      orderaddress-position-y       = {$plugin.caddy.pdf.packinglistpdf.orderaddress-position-y}
+      orderaddress-position-x       = {$plugin.caddy.pdf.deliveryorder.orderaddress-position-x}
+      orderaddress-position-y       = {$plugin.caddy.pdf.deliveryorder.orderaddress-position-y}
 
-      shippingaddress-position-x    = {$plugin.caddy.pdf.packinglistpdf.shippingaddress-position-x}
-      shippingaddress-position-y    = {$plugin.caddy.pdf.packinglistpdf.shippingaddress-position-y}
+      shippingaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-x}
+      shippingaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-y}
 
-      packinglistnumber-position-x  = {$plugin.caddy.pdf.packinglistpdf.packinglistnumber-position-x}
-      packinglistnumber-position-y  = {$plugin.caddy.pdf.packinglistpdf.packinglistnumber-position-y}
+      packinglistnumber-position-x  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-x}
+      packinglistnumber-position-y  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-y}
       packinglistnumber < plugin.tx_wtcart_pi1.settings.overall.packinglistnumber
 
-      cart-position-x               = {$plugin.caddy.pdf.packinglistpdf.cart-position-x}
-      cart-position-y               = {$plugin.caddy.pdf.packinglistpdf.cart-position-y}
-      cart-width                    = {$plugin.caddy.pdf.packinglistpdf.cart-width}
-      cart-height                   = {$plugin.caddy.pdf.packinglistpdf.cart-height}
+      cart-position-x               = {$plugin.caddy.pdf.deliveryorder.cart-position-x}
+      cart-position-y               = {$plugin.caddy.pdf.deliveryorder.cart-position-y}
+      cart-width                    = {$plugin.caddy.pdf.deliveryorder.cart-width}
+      cart-height                   = {$plugin.caddy.pdf.deliveryorder.cart-height}
 
       additionaltextblocks {
         1 {

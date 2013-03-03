@@ -50,6 +50,8 @@ class tx_caddy_pdf extends tslib_pibase
 
   public $scriptRelPath = 'lib/pdf/class.tx_caddy_pdf.php';
   public $extKey        = 'caddy';
+  
+  public $drsUserfunc   = null;
 
 
 
@@ -62,13 +64,13 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * the main method of the PlugIn
   *
-  * @param	string		$content: The PlugIn content
-  * @param	array		$conf: The PlugIn configuration
-  * @return	The		content that is displayed on the website
+  * @param	string		$content  : The PlugIn content
+  * @param	array		$conf     : The PlugIn configuration
+  * @return	string		$errorcnt : Error prompt
   * @version    2.0.0
   * @since      1.4.6
   */
-  public function createPdf( &$params, &$session ) 
+  public function createPdf( &$session ) 
   {
     $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->confSettings = $this->conf['settings.'];
@@ -79,32 +81,38 @@ class tx_caddy_pdf extends tslib_pibase
     // CHECK: Should PDF attached to mail?
     unset($session['files']);
 
-    $this->ofilename = $GLOBALS['TSFE']->cObj->cObjGetSingle($this->confPdf['orderpdf.']['filename'], $this->confPdf['orderpdf.']['filename.']);
-    $this->pfilename = $GLOBALS['TSFE']->cObj->cObjGetSingle($this->confPdf['packinglistpdf.']['filename'], $this->confPdf['packinglistpdf.']['filename.']);
+//    $this->ofilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+//                        (
+//                          $this->confPdf['orderpdf.']['filename'], 
+//                          $this->confPdf['orderpdf.']['filename.']
+//                        );
+    $this->pfilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+                        (
+                          $this->confPdf['deliveryorder.']['filename'], 
+                          $this->confPdf['deliveryorder.']['filename.']
+                        );
 
-    $this->onumber = $GLOBALS['TSFE']->cObj->cObjGetSingle($this->confPdf['orderpdf.']['ordernumber'], $this->confPdf['orderpdf.']['ordernumber.']);
-    $this->pnumber = $GLOBALS['TSFE']->cObj->cObjGetSingle($this->confPdf['packinglistpdf.']['packinglistnumber'], $this->confPdf['packinglistpdf.']['packinglistnumber.']);
+//    $this->onumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+//                      (
+//                        $this->confPdf['orderpdf.']['ordernumber'], 
+//                        $this->confPdf['orderpdf.']['ordernumber.']
+//                      );
+    $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+                      (
+                        $this->confPdf['deliveryorder.']['packinglistnumber'], 
+                        $this->confPdf['deliveryorder.']['packinglistnumber.']
+                      );
 
-    if (($params['subpart']=='recipient_mail') && ($this->confPdf['orderpdf.']['attach_recipient_mail'] == 1)) {
-      $this->conf = $this->confPdf['orderpdf.'];
-      $errorcnt += $this->renderOrderPdf($session);
-    }
-    if (($params['subpart']=='sender_mail') && ($this->confPdf['orderpdf.']['attach_sender_mail'] == 1)) {
-      $this->conf = $this->confPdf['orderpdf.'];
-      $errorcnt += $this->renderOrderPdf($session);
-    }
-    if (($params['subpart']=='recipient_mail') && ($this->confPdf['packinglistpdf.']['attach_recipient_mail'] == 1)) {
-      $this->conf = $this->confPdf['packinglistpdf.'];
-      $errorcnt += $this->renderPackinglistPdf($session);
-    }
-    if (($params['subpart']=='sender_mail') && ($this->confPdf['packinglistpdf.']['attach_sender_mail'] == 1)) {
-      $this->conf = $this->confPdf['packinglistpdf.'];
-      $errorcnt += $this->renderPackinglistPdf($session);
-    }
+//    $this->conf = $this->confPdf['orderpdf.'];
+//    $errorcnt += $this->renderOrderPdf($session);
+    
+    //$this->conf = $this->confPdf['deliveryorder.'];
+    $errorcnt += $this->renderPackinglistPdf($session);
+
     return $errorcnt;
   }
 
-  private function renderOrderPdf(&$session) {
+  private function renderOrderPdf( &$session ) {
           $filename = $this->concatFileName($this->ofilename);
 
           $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###WTCART_ORDERPDF###'); // Load HTML Template
@@ -183,84 +191,103 @@ class tx_caddy_pdf extends tslib_pibase
           $session['files'][$filename] = $this->conf['dir'].'/'.$filename;
   }
 
-  private function renderPackinglistPdf(&$session) {
-          $filename = $this->concatFileName($this->pfilename);
+ /**
+  * renderPackinglistPdf( ) : 
+  *
+  * @param	array		$session : 
+  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function renderPackinglistPdf( &$session )
+  {
+    $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
-          $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###WTCART_PACKINGLISTPDF###'); // Load HTML Template
-          $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+    $filename = $this->concatFileName($this->pfilename);
 
-          // CHECK: Is directory for PDF available?
-          if (!is_dir($this->conf['dir'])) {
-                  $session['error'][] = 'directory for packinglist pdf is not valid';
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
+                          (
+                            $GLOBALS['TSFE']->cObj->fileResource
+                            (
+                              $this->conf['template']
+                            ), 
+                            '###WTCART_PACKINGLISTPDF###'
+                          );
+    
+    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
-                  $erroremailaddress = $this->conf['erroremailaddress'];
-                  if ($erroremailaddress) {
-                          $mailheader = $this->pi_getLL('wtcartorderpdf.error.mailheader.packinglistpdf');
-                          $mailbody = $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotcreate');
-                          $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.dirnotfound');
-                          if ($abortonerror) {
-                                  $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.abort');
-                          }
-                          t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody ,$headers='',$enc='',$charset='',$dontEncodeHeader=false);
-                  }
-                  if ($abortonerror) {
-                          return 1;
-                  } else {
-                          return 0;
-                  }
-          }
+    // CHECK: Is directory for PDF available?
+    if (!is_dir($this->conf['dir'])) {
+            $session['error'][] = 'directory for packinglist pdf is not valid';
 
-          // CHECK: Is PDF already created?
-          if (!file_exists($this->conf['dir'].'/'.$filename)) {
-                  $pdf = new FPDI();
-                  $pdf->AddPage();
+            $erroremailaddress = $this->conf['erroremailaddress'];
+            if ($erroremailaddress) {
+                    $mailheader = $this->pi_getLL('wtcartorderpdf.error.mailheader.deliveryorder');
+                    $mailbody = $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotcreate');
+                    $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.dirnotfound');
+                    if ($abortonerror) {
+                            $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.abort');
+                    }
+                    t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody ,$headers='',$enc='',$charset='',$dontEncodeHeader=false);
+            }
+            if ($abortonerror) {
+                    return 1;
+            } else {
+                    return 0;
+            }
+    }
 
-                  if ($this->conf['include_file']) {
-                          $pdf->setSourceFile($this->conf['include_file']);
-                          $tplIdx = $pdf->importPage(1);
-                          $pdf->useTemplate($tplIdx, 0, 0, 210);
-                  }
+    // CHECK: Is PDF already created?
+    if (!file_exists($this->conf['dir'].'/'.$filename)) {
+            $pdf = new FPDI();
+            $pdf->AddPage();
 
-                  $pdf->SetFont('Helvetica','',$this->conf['font-size']);
+            if ($this->conf['include_file']) {
+                    $pdf->setSourceFile($this->conf['include_file']);
+                    $tplIdx = $pdf->importPage(1);
+                    $pdf->useTemplate($tplIdx, 0, 0, 210);
+            }
 
-                  $this->renderShippingAddress($pdf, true);
-                  $this->renderPackinglistNumber($pdf);
-                  $this->renderAdditionalTextblocks($pdf);
+            $pdf->SetFont('Helvetica','',$this->conf['font-size']);
 
-                  $pdf->SetY($this->conf['cart-position-y']);
+            $this->renderShippingAddress($pdf, true);
+            $this->renderPackinglistNumber($pdf);
+            $this->renderAdditionalTextblocks($pdf);
 
-                  $cartitems = '';
+            $pdf->SetY($this->conf['cart-position-y']);
 
-                  $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
-                  foreach ($session['products'] as $key => $product) {
-                          $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
-                  }
-                  $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray);
+            $cartitems = '';
 
-                  $pdf->writeHTMLCell($this->conf['cart-width'], 0, $this->conf['cart-position-x'], $this->conf['cart-position-y'], $html, 0, 2);
+            $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
+            foreach ($session['products'] as $key => $product) {
+                    $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
+            }
+            $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray);
 
-                  $pdf->Output($this->conf['dir'].'/'.$filename, 'F');
+            $pdf->writeHTMLCell($this->conf['cart-width'], 0, $this->conf['cart-position-x'], $this->conf['cart-position-y'], $html, 0, 2);
+
+            $pdf->Output($this->conf['dir'].'/'.$filename, 'F');
 
 
-          }
+    }
 
-          // CHECK: Was PDF not created, send E-Mail and exit with error.
-          if (!file_exists($this->conf['dir'].'/'.$filename)) {
-                  $erroremailaddress = $this->conf['erroremailaddress'];
-                  if ($erroremailaddress) {
-                          $mailheader = $this->pi_getLL('wtcartorderpdf.error.mailheader.packinglistpdf');
-                          $mailbody = $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotcreate');
-                          $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotwrite');
-                          if ($abortonerror) {
-                                  $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.abort');
-                          }
-                          t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody, $headers='', $enc='', $charset='', $dontEncodeHeader=false);
-                  }
-                  if ($abortonerror) {
-                          return 1;
-                  }
-          }
-          $session['files'][$filename] = $this->conf['dir'].'/'.$filename;
+    // CHECK: Was PDF not created, send E-Mail and exit with error.
+    if (!file_exists($this->conf['dir'].'/'.$filename)) {
+            $erroremailaddress = $this->conf['erroremailaddress'];
+            if ($erroremailaddress) {
+                    $mailheader = $this->pi_getLL('wtcartorderpdf.error.mailheader.deliveryorder');
+                    $mailbody = $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotcreate');
+                    $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.cannotwrite');
+                    if ($abortonerror) {
+                            $mailbody .= $this->pi_getLL('wtcartorderpdf.error.mailbody.abort');
+                    }
+                    t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody, $headers='', $enc='', $charset='', $dontEncodeHeader=false);
+            }
+            if ($abortonerror) {
+                    return 1;
+            }
+    }
+    $session['files'][$filename] = $this->conf['dir'].'/'.$filename;
   }
 
   private function renderOrderAddress(&$pdf) {
@@ -405,12 +432,21 @@ class tx_caddy_pdf extends tslib_pibase
           }
   } 
 
-  private function concatFileName($filename) {
-          $date = date("Ymd");
+ /**
+  * concatFileName( ) : Wii prefix the given filename with the current date
+  *
+  * @param	string		$filename : current filename 
+  * @return	string		$filename : prefixed filename
+  * @access     private
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+ private function concatFileName( $filename )
+  {
+    $date     = date( 'Ymd' );
+    $filename = $date . '-' . $filename . '.pdf';
 
-          $pathfilename = $date.'-'.$filename.'.pdf';
-
-          return $pathfilename;
+    return $filename;
   }
 
 }
