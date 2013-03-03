@@ -199,6 +199,12 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function renderPackinglistPdf( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+var_dump( __METHOD__, __LINE__, $sesArray );
+    if( empty( $sesArray ) )
+    {
+      return;
+    }
     $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
     $filename = time( ) . $this->concatFileName($this->pfilename);
@@ -251,7 +257,6 @@ class tx_caddy_pdf extends tslib_pibase
     $fpdi->SetY( $this->conf['cart-position-y'] );
 
     //$outerMarkerArray .= $this->renderCartHeadline($subpartArray);
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 
     foreach( $sesArray['products'] as $product ) 
     {
