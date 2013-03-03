@@ -74,35 +74,32 @@ class tx_caddy_calc extends tslib_pibase
       {
         if( floatval( $extra['value'] ) <= $filterArr[$optionIds['extra']] ) 
         {
-          list( $gross, $net ) = $this->calculateOption($conf, $type, $option_id, floatval($extra['extra']), $obj);
+          $arrReturn = $this->calculateOption($conf, $type, $option_id, floatval($extra['extra']), $obj);
         }
         else
         {
           break;
         }
       }
+      return $arrReturn;
     } 
-    else 
+
+    switch( $optionIds['extra'] )
     {
-      switch( $optionIds['extra'] )
-      {
-        case 'each':
-          $gross  = floatval($optionIds['extra.']['1.']['extra'])*$obj->cartCount;
-          list( $gross, $net ) =  $this->calculateOption
-                                  ( 
-                                    $conf, $type, $option_id, $gross, $obj 
-                                  );
-          break;
-        default:
-          list( $gross, $net ) =  $this->calculateOption
-                                  ( 
-                                    $conf, $type, $option_id, floatval( $optionIds['extra'] ), $obj 
-                                  );
-      }
+      case 'each':
+        $gross  = floatval($optionIds['extra.']['1.']['extra'])*$obj->cartCount;
+        $arrReturn =  $this->calculateOption
+                      ( 
+                        $conf, $type, $option_id, $gross, $obj 
+                      );
+        break;
+      default:
+        $arrReturn =  $this->calculateOption
+                      ( 
+                        $conf, $type, $option_id, floatval( $optionIds['extra'] ), $obj 
+                      );
     }
 
-    $arrReturn['gross'] = $gross;
-    $arrReturn['net']   = $net;
 var_dump( __METHOD__, __LINE__, $type, $arrReturn );    
     return $arrReturn;
   }
