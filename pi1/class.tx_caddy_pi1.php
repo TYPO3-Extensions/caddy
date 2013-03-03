@@ -995,11 +995,11 @@ class tx_caddy_pi1 extends tslib_pibase
   * @param	[type]		$$cObj_name: ...
   * @param	[type]		$cObj_conf: ...
   * @return	string
-  * @access public
+  * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+  private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
   {
     switch( true )
     {
