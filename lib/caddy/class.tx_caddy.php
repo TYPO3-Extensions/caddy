@@ -203,7 +203,7 @@ class tx_caddy extends tslib_pibase
     $arrReturn['caddy']             = $caddy;
     $arrReturn['tmpl']              = $this->tmpl; 
     $arrReturn['outerMarkerArray']  = $this->outerMarkerArray; 
-var_dump( __METHOD__, __LINE__, $this->product, $arrReturn );
+//var_dump( __METHOD__, __LINE__, $this->product, $arrReturn );
     return $arrReturn;
   }
 

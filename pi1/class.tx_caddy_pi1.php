@@ -598,6 +598,8 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initHtmlTemplateSubparts( )
   {
+    $this->tmpl = $this->template->main( );
+    return;
     $htmlTemplate = $this->cObj->fileResource( $this->conf['main.']['template'] );
 
       // Die if there isn't any HTML template
@@ -714,6 +716,10 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->pObj    = $this;
+
+    require_once( $path2lib . 'class.tx_caddy_template.php' );
+    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
+    $this->template->pObj   = $this;
 
   }
 
