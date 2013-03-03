@@ -884,8 +884,6 @@ class tx_caddy_powermail
       return null;
     }
     
-    $this->initPdf( );
-
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
     {
@@ -932,6 +930,8 @@ class tx_caddy_powermail
         // DRS
       return null;
     }
+
+    $this->initPdf( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
