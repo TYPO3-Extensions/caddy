@@ -178,6 +178,14 @@ class tx_caddy_pi1 extends tslib_pibase
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
 
+      // Remove current product
+    $this->productRemove( );
+      // Update several order values
+    $this->orderUpdate( );
+      // Add a product
+    $this->productAdd( );
+
+      // Get the caddy
     $caddy = $this->caddy( );
 
     $content = $this->powermail->formCss( $content );
@@ -218,12 +226,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $caddy = null;
 
     $this->caddyCount = 0;
-      // Remove current product
-    $this->productRemove( );
-      // Update several order values
-    $this->orderUpdate( );
-      // Add a product
-    $this->productAdd( );
 
       // read all products from session
     $this->product = $this->session->productsGet( );
@@ -1319,6 +1321,11 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
     $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
+
+    require_once( $path2lib . 'caddy/class.tx_caddy.php' );
+    $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
+    $this->caddy->pObj      = $this;
+    $this->caddy->row       = $this->cObj->data;
 
       // Class with methods for get clean values
     require_once( 'class.tx_caddy_pi1_clean.php' );
