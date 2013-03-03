@@ -61,11 +61,11 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  656:     private function initPowermail( )
  *
  *              SECTION: Order
- *  677:     private function orderUpdate( )
+ *  677:     private function caddyOrderUpdate( )
  *
  *              SECTION: Product
- *  722:     private function productAdd( )
- *  744:     private function productRemove( )
+ *  722:     private function caddyProductAdd( )
+ *  744:     private function caddyProductRemove( )
  *
  *              SECTION: Send
  *  769:     private function send( )
@@ -171,16 +171,16 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->debugOutputBeforeRunning( );
 
       // Remove current product
-    $this->productRemove( );
+    $this->caddyProductRemove( );
       // Update several order values
-    $this->orderUpdate( );
+    $this->caddyOrderUpdate( );
       // Add a product
-    $this->productAdd( );
+    $this->caddyProductAdd( );
 
       // Get the caddy
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
-    $arrResult              = $this->caddy( );
+    $arrResult              = $this->caddyRendered( );
     $caddy                  = $arrResult['caddy'];
     $this->tmpl             = $arrResult['tmpl'];
     $this->outerMarkerArray = $arrResult['outerMarkerArray'];
@@ -212,14 +212,87 @@ class tx_caddy_pi1 extends tslib_pibase
   **********************************************/
 
  /**
-  * caddy( )
+  * caddyOrderUpdate( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyOrderUpdate( )
+  {
+      // change qty
+    if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
+    {
+      $this->session->quantityUpdate( ); // change qty
+    }
+
+      // change shipping
+    if( isset( $this->piVars['shipping'] ) )
+    {
+      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
+    }
+
+    // change payment
+    if( isset( $this->piVars['payment'] ) )
+    {
+      $this->session->paymentUpdate($this->piVars['payment']); // change payment
+    }
+
+      // change special
+    if( isset( $this->piVars['special'] ) )
+    {
+      $this->session->specialUpdate($this->piVars['special']); // change payment
+    }
+  }
+  
+ /**
+  * caddyProductAdd( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyProductAdd( )
+  {
+    // add further product to session
+    $this->newProduct = $this->session->productGetDetails( $this->gpvar );
+    if( $this->newProduct !== false )
+    {
+      $this->newProduct['qty']                  = $this->gpvar['qty'];
+      $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
+      $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
+      $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
+      $this->session->caddyProductAdd( $this->newProduct );
+    }
+  }
+
+ /**
+  * caddyProductRemove( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyProductRemove( )
+  {
+      // remove product from session
+    if( isset( $this->piVars['del'] ) )
+    {
+      $this->session->productDelete( );
+    }
+  }
+ /**
+  * caddyRendered( )
   *
   * @return	array		$caddy : ...
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddy( )
+  private function caddyRendered( )
   {
     $arrReturn = $this->caddy->caddy( );
     return $arrReturn;
@@ -656,98 +729,6 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initPowermail( )
   {
     $this->powermail->init( $this->cObj->data );
-  }
-
-
-
-  /***********************************************
-  *
-  * Order
-  *
-  **********************************************/
-
- /**
-  * orderUpdate( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function orderUpdate( )
-  {
-      // change qty
-    if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
-    {
-      $this->session->quantityUpdate( ); // change qty
-    }
-
-      // change shipping
-    if( isset( $this->piVars['shipping'] ) )
-    {
-      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
-    }
-
-    // change payment
-    if( isset( $this->piVars['payment'] ) )
-    {
-      $this->session->paymentUpdate($this->piVars['payment']); // change payment
-    }
-
-      // change special
-    if( isset( $this->piVars['special'] ) )
-    {
-      $this->session->specialUpdate($this->piVars['special']); // change payment
-    }
-  }
-
-
-
-
-
-  /***********************************************
-  *
-  * Product
-  *
-  **********************************************/
-
- /**
-  * productAdd( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function productAdd( )
-  {
-    // add further product to session
-    $this->newProduct = $this->session->productGetDetails( $this->gpvar );
-    if( $this->newProduct !== false )
-    {
-      $this->newProduct['qty']                  = $this->gpvar['qty'];
-      $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
-      $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
-      $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->session->productAdd( $this->newProduct );
-    }
-  }
-
- /**
-  * productRemove( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function productRemove( )
-  {
-      // remove product from session
-    if( isset( $this->piVars['del'] ) )
-    {
-      $this->session->productDelete( );
-    }
   }
 
 
