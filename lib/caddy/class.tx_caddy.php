@@ -40,14 +40,14 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  194:     public function caddyByUserfunc( $content = '', $conf = array( ) )
  *  226:     private function caddyWiProducts( )
  *  404:     private function caddyWiProductsItem( $contentItem )
- *  435:     private function caddyWiProductsPayment( )
+ *  435:     private function calcOptionsPayment( )
  *  479:     private function caddyWiProductsProduct( )
  *  554:     private function caddyWiProductsProductErrorMsg( $product )
  *  578:     private function caddyWiProductsProductServiceAttributes( $product )
  *  640:     private function caddyWiProductsProductSettings( $product )
  *  690:     private function caddyWiProductsProductTax( $product )
- *  743:     private function caddyWiProductsShipping( )
- *  787:     private function caddyWiProductsSpecial( )
+ *  743:     private function calcOptionsShipping( )
+ *  787:     private function calcOptionsSpecial( )
  *  832:     private function caddyWoProducts( )
  *
  *              SECTION: Init
@@ -123,11 +123,6 @@ class tx_caddy extends tslib_pibase
 
   private $tmpl         = null;
   private $smarkerArray = null;
-
-
-
-
-
 
 
 
@@ -235,12 +230,12 @@ class tx_caddy extends tslib_pibase
     $specialArray   = null;
 
       // handle the current product
-    $arrResult      = $this->caddyWiProductsProduct( );
-    $contentItem    = $arrResult['contentItem'];
-    $caddyNet        = $arrResult['cartNet'];
-    $caddyGross      = $arrResult['cartNet'];
-    $caddyTaxReduced = $arrResult['cartTaxReduced'];
-    $caddyTaxNormal  = $arrResult['cartTaxNormal'];
+    $arrResult        = $this->caddyWiProductsProduct( );
+    $contentItem      = $arrResult['contentItem'];
+    $caddyNet         = $arrResult['cartNet'];
+    $caddyGross       = $arrResult['cartNet'];
+    $caddyTaxReduced  = $arrResult['taxReduced'];
+    $caddyTaxNormal   = $arrResult['taxNormal'];
     unset( $arrResult );
       // handle the current product
 
@@ -249,51 +244,51 @@ class tx_caddy extends tslib_pibase
     $this->caddyGrossNoService = $caddyGross;
     $caddyNetNoService         = $caddyNet;
 
-      // shipping
-    $arrResult      = $this->caddyWiProductsShipping( );
-    $shippingId     = $arrResult['id'];
-    $shippingNet    = $arrResult['net'];
-    $shippingGross  = $arrResult['gross'];
-    $caddyNet        = $caddyNet        + $shippingNet;
-    $caddyGross      = $caddyGross      + $shippingGross;
-    $caddyTaxReduced = $caddyTaxReduced + $arrResult['cartTaxReduced'];
-    $caddyTaxNormal  = $caddyTaxNormal  + $arrResult['cartTaxNormal'];
+      // option shipping : calculate tax, net and gross
+    $arrResult        = $this->calcOptionsShipping( );
+    $shippingId       = $arrResult['id'];
+    $shippingNet      = $arrResult['net'];
+    $shippingGross    = $arrResult['gross'];
+    $caddyNet         = $caddyNet        + $shippingNet;
+    $caddyGross       = $caddyGross      + $shippingGross;
+    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
+    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
-      // shipping
+      // option shipping : calculate tax, net and gross
 
-      // payment
-    $arrResult      = $this->caddyWiProductsPayment( );
-    $paymentId      = $arrResult['id'];
-    $paymentNet     = $arrResult['net'];
-    $paymentGross   = $arrResult['gross'];
-    $caddyNet        = $caddyNet        + $paymentNet;
-    $caddyGross      = $caddyGross      + $paymentGross;
-    $caddyTaxReduced = $caddyTaxReduced + $arrResult['cartTaxReduced'];
-    $caddyTaxNormal  = $caddyTaxNormal  + $arrResult['cartTaxNormal'];
+      // option payment : calculate tax, net and gross
+    $arrResult        = $this->calcOptionsPayment( );
+    $paymentId        = $arrResult['id'];
+    $paymentNet       = $arrResult['net'];
+    $paymentGross     = $arrResult['gross'];
+    $caddyNet         = $caddyNet        + $paymentNet;
+    $caddyGross       = $caddyGross      + $paymentGross;
+    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
+    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
-      // payment
+      // option payment : calculate tax, net and gross
 
-      // special
-    $arrResult            = $this->caddyWiProductsSpecial( );
-    $specialIds           = $arrResult['ids'];
-    $overall_specialNet   = $arrResult['net'];
-    $overall_specialGross = $arrResult['gross'];
-    $caddyNet              = $caddyNet        + $overall_specialNet;
-    $caddyGross            = $caddyGross      + $overall_specialGross;
-    $caddyTaxReduced       = $caddyTaxReduced + $arrResult['cartTaxReduced'];
-    $caddyTaxNormal        = $caddyTaxNormal  + $arrResult['cartTaxNormal'];
+      // option special : calculate tax, net and gross
+    $arrResult        = $this->calcOptionsSpecial( );
+    $specialIds       = $arrResult['ids'];
+    $specialNet       = $arrResult['net'];
+    $specialGross     = $arrResult['gross'];
+    $caddyNet         = $caddyNet        + $specialNet;
+    $caddyGross       = $caddyGross      + $specialGross;
+    $caddyTaxReduced  = $caddyTaxReduced + $arrResult['taxReduced'];
+    $caddyTaxNormal   = $caddyTaxNormal  + $arrResult['taxNormal'];
     unset( $arrResult );
-      // special
+      // option special : calculate tax, net and gross
 
-      // service
-    $serviceNet   = $shippingNet    + $paymentNet   + $overall_specialNet;
-    $serviceGross = $shippingGross  + $paymentGross + $overall_specialGross;
-      // service
+      // sum of options
+    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
+    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
+      // sum of options
 
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-    $sesArray['service_cost_net']       = $serviceNet;
-    $sesArray['service_cost_gross']     = $serviceGross;
+    $sesArray['optionsNet']             = $optionsNet;
+    $sesArray['optionsGross']           = $optionsGross;
     $sesArray['cart_gross']             = $caddyGross;
     $sesArray['cart_gross_no_service']  = $this->caddyGrossNoService;
     $sesArray['cart_net']               = $caddyNet;
@@ -305,8 +300,8 @@ class tx_caddy extends tslib_pibase
 
       // cObject becomes current record
     $currRecord = array(
-      'service_cost_net'      => $serviceNet,
-      'service_cost_gross'    => $serviceGross,
+      'optionsNet'            => $optionsNet,
+      'optionsGross'          => $optionsGross,
       'cart_gross'            => $caddyGross,
       'cart_gross_no_service' => $this->caddyGrossNoService,
       'cart_net'              => $caddyNet,
@@ -425,50 +420,6 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsPayment( )
-  *
-  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWiProductsPayment( )
-  {
-    $arrReturn = null;
-
-    $paymentId = $this->session->paymentGet();
-
-    if( ! $paymentId )
-    {
-      $paymentId = intval( $this->conf['payment.']['preset'] );
-      $this->session->paymentUpdate( $paymentId );
-    }
-      // check if selected payment option is available
-    $newpaymentId = $this->zz_checkOptionIsNotAvailable( 'payment', $paymentId );
-    if( $newpaymentId )
-    {
-      $paymentId = $newpaymentId;
-      $this->session->paymentUpdate( $newpaymentId );
-    }
-
-    list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
-
-    if( $this->conf['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
-    {
-      $arrReturn['cartTaxReduced'] = $paymentGross - $paymentNet;
-    }
-    else
-    {
-      $arrReturn['cartTaxNormal'] = $paymentGross - $paymentNet;
-    }
-
-    $arrReturn['id']    = $paymentId;
-    $arrReturn['gross'] = $gross;
-    $arrReturn['net']   = $net;
-    return $arrReturn;
-  }
-
- /**
   * caddyWiProductsProduct( )
   *
   * @return	void
@@ -527,8 +478,8 @@ class tx_caddy extends tslib_pibase
         // calculate tax
       $arrResult      = $this->caddyWiProductsProductTax( $product );
       $caddyNet        = $caddyNet        + $arrResult['cartNet'];
-      $caddyTaxReduced = $caddyTaxReduced + $arrResult['cartTaxReduced'];
-      $caddyTaxNormal  = $caddyTaxNormal  + $arrResult['cartTaxNormal'];
+      $caddyTaxReduced = $caddyTaxReduced + $arrResult['taxReduced'];
+      $caddyTaxNormal  = $caddyTaxNormal  + $arrResult['taxNormal'];
 
     }
       // FOREACH  : product
@@ -536,8 +487,8 @@ class tx_caddy extends tslib_pibase
     $arrReturn['contentItem']     = $contentItem;
     $arrReturn['cartNet']         = $caddyNet;
     $arrReturn['cartGross']       = $caddyGross;
-    $arrReturn['cartTaxReduced']  = $caddyTaxReduced;
-    $arrReturn['cartTaxNormal']   = $caddyTaxNormal;
+    $arrReturn['taxReduced']  = $caddyTaxReduced;
+    $arrReturn['taxNormal']   = $caddyTaxNormal;
 
     return $arrReturn;
   }
@@ -717,11 +668,11 @@ class tx_caddy extends tslib_pibase
         break;
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
-        $arrReturn['cartTaxReduced'] = $currTax;
+        $arrReturn['taxReduced'] = $currTax;
         break;
       case( 2 ):
       case( $this->conf['tax.']['normalCalc'] ):
-        $arrReturn['cartTaxNormal'] = $currTax;
+        $arrReturn['taxNormal'] = $currTax;
         break;
       default:
         echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
@@ -733,14 +684,85 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsShipping( )
+  * caddyWoProducts( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWoProducts( )
+  {
+      // #45915, 130228
+      // Set the hidden field to true of the powermail form
+    $css = $this->powermail->FormHide( );
+
+    $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
+
+    return $css;
+  }
+
+
+
+  /***********************************************
+  *
+  * Caddy
+  *
+  **********************************************/
+  
+ /**
+  * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
   * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProductsShipping( )
+  private function calcOptionsPayment( )
+  {
+    $arrReturn = null;
+
+    $paymentId = $this->session->paymentGet();
+
+    if( ! $paymentId )
+    {
+      $paymentId = intval( $this->conf['payment.']['preset'] );
+      $this->session->paymentUpdate( $paymentId );
+    }
+      // check if selected payment option is available
+    $newpaymentId = $this->zz_checkOptionIsNotAvailable( 'payment', $paymentId );
+    if( $newpaymentId )
+    {
+      $paymentId = $newpaymentId;
+      $this->session->paymentUpdate( $newpaymentId );
+    }
+
+    list( $gross, $net ) = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
+
+    if( $this->conf['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
+    {
+      $arrReturn['taxReduced'] = $paymentGross - $paymentNet;
+    }
+    else
+    {
+      $arrReturn['taxNormal'] = $paymentGross - $paymentNet;
+    }
+
+    $arrReturn['id']    = $paymentId;
+    $arrReturn['gross'] = $gross;
+    $arrReturn['net']   = $net;
+    return $arrReturn;
+  }
+
+ /**
+  * calcOptionsShipping( ) : calculate tax, net and gross for the option shipping
+  *
+  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcOptionsShipping( )
   {
     $arrReturn = null;
 
@@ -763,11 +785,11 @@ class tx_caddy extends tslib_pibase
 
     if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
-      $arrReturn['cartTaxReduced'] = $shippingGross - $shippingNet;
+      $arrReturn['taxReduced'] = $shippingGross - $shippingNet;
     }
     else
     {
-      $arrReturn['cartTaxNormal'] = $shippingGross - $shippingNet;
+      $arrReturn['taxNormal'] = $shippingGross - $shippingNet;
     }
 
     $arrReturn['id']    = $shippingId;
@@ -777,14 +799,14 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsSpecial( )
+  * calcOptionsSpecial( ) : calculate tax, net and gross for the option special
   *
   * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProductsSpecial( )
+  private function calcOptionsSpecial( )
   {
     $arrReturn = null;
 
@@ -815,29 +837,10 @@ class tx_caddy extends tslib_pibase
     $arrReturn['ids']             = $specialIds;
     $arrReturn['net']             = $overall_specialNet;
     $arrReturn['gross']           = $overall_specialGross;
-    $arrReturn['cartTaxReduced']  = $caddyTaxReduced;
-    $arrReturn['cartTaxNormal']   = $caddyTaxNormal;
+    $arrReturn['taxReduced']  = $caddyTaxReduced;
+    $arrReturn['taxNormal']   = $caddyTaxNormal;
 
     return $arrReturn;
-  }
-
- /**
-  * caddyWoProducts( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWoProducts( )
-  {
-      // #45915, 130228
-      // Set the hidden field to true of the powermail form
-    $css = $this->powermail->FormHide( );
-
-    $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
-
-    return $css;
   }
 
 

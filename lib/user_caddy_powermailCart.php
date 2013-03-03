@@ -27,10 +27,6 @@
  ***************************************************************/
 
 require_once( PATH_tslib . 'class.tslib_pibase.php');
-require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_session.php' );
-require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
-require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_render.php' );
-require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_dynamicmarkers.php' );
 
 /**
  * plugin 'Cart' for the 'powermail' extension.
@@ -80,10 +76,14 @@ class user_caddy_powermailCart extends tslib_pibase
     $this->tmpl['all']  = $this->cObj->getSubpart( $this->cObj->fileResource( $this->conf['main.']['template'] ), '###CADDY_POWERMAIL###' );
     $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
-    $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
     $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
-    $this->render         = t3lib_div::makeInstance( 'tx_caddy_render' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_render.php' );
+    $this->render         = t3lib_div::makeInstance( 'tx_caddy_render' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_session.php' );
+    $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
     
     $content_item     = '';
     $shipping_option  = '';
