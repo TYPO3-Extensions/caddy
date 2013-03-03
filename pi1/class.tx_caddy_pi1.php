@@ -39,7 +39,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  144:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  218:     private function caddyOrderUpdate( )
+ *  218:     private function caddyUpdate( )
  *  253:     private function caddyProductAdd( )
  *  275:     private function caddyProductDelete( )
  *  291:     private function caddyRendered( )
@@ -169,7 +169,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Remove current product
     $this->caddyProductDelete( );
       // Update several order values
-    $this->caddyOrderUpdate( );
+    $this->caddyUpdate( );
       // Add a product
     $this->caddyProductAdd( );
 
@@ -206,41 +206,6 @@ class tx_caddy_pi1 extends tslib_pibase
   * Caddy
   *
   **********************************************/
-
- /**
-  * caddyOrderUpdate( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyOrderUpdate( )
-  {
-      // change qty
-    if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
-    {
-      $this->session->quantityUpdate( ); // change qty
-    }
-
-      // change shipping
-    if( isset( $this->piVars['shipping'] ) )
-    {
-      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
-    }
-
-    // change payment
-    if( isset( $this->piVars['payment'] ) )
-    {
-      $this->session->paymentUpdate($this->piVars['payment']); // change payment
-    }
-
-      // change special
-    if( isset( $this->piVars['special'] ) )
-    {
-      $this->session->specialUpdate($this->piVars['special']); // change payment
-    }
-  }
 
  /**
   * caddyProductAdd( )
@@ -292,6 +257,41 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $arrReturn = $this->caddy->caddy( );
     return $arrReturn;
+  }
+
+ /**
+  * caddyUpdate( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyUpdate( )
+  {
+      // change qty
+    if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
+    {
+      $this->session->quantityUpdate( ); // change qty
+    }
+
+      // change shipping
+    if( isset( $this->piVars['shipping'] ) )
+    {
+      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
+    }
+
+    // change payment
+    if( isset( $this->piVars['payment'] ) )
+    {
+      $this->session->paymentUpdate($this->piVars['payment']); // change payment
+    }
+
+      // change special
+    if( isset( $this->piVars['special'] ) )
+    {
+      $this->session->specialUpdate($this->piVars['special']); // change payment
+    }
   }
 
 
