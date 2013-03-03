@@ -170,7 +170,8 @@ var_dump( __METHOD__, __LINE__, $this->products );
       case( ! ( count( $this->products ) > 0 ) ):
       default:
 var_dump( __METHOD__, __LINE__, $this->products );
-        $caddy = $this->caddyWoProducts( );
+        $this->caddyWoProducts( );
+        $caddy = null;
         break;
     }
 
@@ -577,12 +578,11 @@ var_dump( __METHOD__, __LINE__, $this->products );
   {
       // #45915, 130228
       // Set the hidden field to true of the powermail form
-    $css = $this->powermail->formHide( );
+    $this->powermail->formHide( );
 //var_dump( __METHOD__, __LINE__, $css );
 
     $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
 
-    return $css;
   }
 
 
