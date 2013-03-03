@@ -153,7 +153,7 @@ class tx_caddy extends tslib_pibase
 
     $this->initInstances( );
 
-    $this->powermail->init( $this->row );
+    //$this->powermail->init( $this->row );
     $this->tmpl       = $this->pObj->tmpl;
 
       // read all products from session
@@ -905,13 +905,17 @@ var_dump( __METHOD__, __LINE__, $css );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
 
-//    if(is_object ( $this->pObj->powermail ) )
-//    {
-//      
-//    }
-    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
-    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    $this->powermail->pObj  = $this;
+    if(is_object ( $this->pObj->powermail ) )
+    {
+      $this->powermail = $this->pObj->powermail;
+    }
+    else
+    {
+        // DANGEROUS: todo: powermail must init!
+      require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
+      $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+      $this->powermail->pObj  = $this;
+    }
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
