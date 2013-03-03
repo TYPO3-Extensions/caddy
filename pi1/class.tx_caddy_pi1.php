@@ -186,7 +186,11 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->productAdd( );
 
       // Get the caddy
-    $caddy = $this->caddy( );
+    $arrResult              = $this->caddy( );
+    $caddy                  = $arrResult['caddy']; 
+    $this->tmpl             = $arrResult['tmpl']; 
+    $this->outerMarkerArray = $arrResult['outerMarkerArray']; 
+    unset( $arrResult );
 
     $content = $this->powermail->formCss( $content );
 
@@ -194,15 +198,15 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $this->clean( );
 
-    $this->content = $content . $this->cObj->substituteMarkerArrayCached
+    $content = $content . $this->cObj->substituteMarkerArrayCached
                     (
                       $this->tmpl['all'],
                       $this->outerMarkerArray,
                       $caddy
                     );
-    $this->content = $this->dynamicMarkers->main( $this->content, $this ); // Fill dynamic locallang or typoscript markers
-    $this->content = preg_replace( '|###.*?###|i', '', $this->content ); // Finally clear not filled markers
-    return $this->pi_wrapInBaseClass( $this->content );
+    $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
+    $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
+    return $this->pi_wrapInBaseClass( $content );
   }
  
 
@@ -223,7 +227,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddy( )
   {
-    $caddy = null;
+    $arrReturn = null;
 
     $this->caddyCount = 0;
 
@@ -241,7 +245,10 @@ class tx_caddy_pi1 extends tslib_pibase
         break;
     }
 
-    return $caddy;
+    $arrReturn['caddy']             = $caddy;
+    $arrReturn['tmpl']              = $this->tmpl; 
+    $arrReturn['outerMarkerArray']  = $this->outerMarkerArray; 
+    return $arrReturn;
   }
 
  /**
@@ -264,12 +271,12 @@ class tx_caddy_pi1 extends tslib_pibase
     $specialArray   = null;
 
       // handle the current product
-    $arrResult      = $this->caddyWiProductsProduct( );
-    $contentItem    = $arrResult['contentItem'];
-    $caddyNet        = $arrResult['cartNet'];
-    $caddyGross      = $arrResult['cartNet'];
-    $caddyTaxReduced = $arrResult['cartTaxReduced'];
-    $caddyTaxNormal  = $arrResult['cartTaxNormal'];
+    $arrResult        = $this->caddyWiProductsProduct( );
+    $contentItem      = $arrResult['contentItem'];
+    $caddyNet         = $arrResult['cartNet'];
+    $caddyGross       = $arrResult['cartNet'];
+    $caddyTaxReduced  = $arrResult['cartTaxReduced'];
+    $caddyTaxNormal   = $arrResult['cartTaxNormal'];
     unset( $arrResult );
       // handle the current product
 
