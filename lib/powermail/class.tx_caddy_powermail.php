@@ -786,7 +786,12 @@ class tx_caddy_powermail
   */
   private function initVersion( )
   {
-    return $this->pObj->userfunc->extMgmVersion( 'powermail' );
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    
+    return $this->userfunc->extMgmVersion( 'powermail' );
   }
 
 
