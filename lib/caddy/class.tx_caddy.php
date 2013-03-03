@@ -109,20 +109,11 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
 class tx_caddy extends tslib_pibase
 {
 
+  public $extKey = 'caddy';
   public $prefixId = 'tx_caddy_pi1';
-
-  // same as class name
   public $scriptRelPath = 'lib/caddy/class.tx_caddy.php';
 
-  // path to this script relative to the extension dir.
-  public $extKey = 'caddy';
   
-    // [object] parent object
-  public $pObj = null;
-
-    // [array] current tt_content row or current pi_flexform row
-  public $row  = null;
-
   private $caddyCount                 = 0;
   private $caddyGrossNoService        = null;
   private $caddyServiceAttribute1Max  = null;
@@ -132,11 +123,30 @@ class tx_caddy extends tslib_pibase
   private $caddyServiceAttribute3Max  = null;
   private $caddyServiceAttribute3Sum  = null;
 
-  private $product = array( );
+    // [array] current typoscript configuration
+  private $conf = null;
 
   private $markerArray = array( );
 
+  // [object] parent DRS object
+  private $drs = null;
+
+  // [object] parent object
+  public $pObj = null;
+
+  // [object] parent powermail object
+  private $powermail = null;
+
+  // [object] parent session object
+  private $session = null;
+
+  private $product = array( );
+
+  
   private $outerMarkerArray = array( );
+  
+    // [array] current tt_content row or current pi_flexform row
+  public $row  = null;
   
   private $tmpl;
   
@@ -161,11 +171,12 @@ class tx_caddy extends tslib_pibase
   */
   public function caddy( )
   {
-    $caddy = null;
+    $arrReturn = null;
 
       // Set the current typoscript configuration
     $this->conf = $this->pObj->conf;
     
+    $this->drs        = $this->pObj->drs;
     $this->powermail  = $this->pObj->powermail;
     $this->session    = $this->pObj->session;
     $this->tmpl       = $this->pObj->tmpl;
@@ -184,8 +195,10 @@ class tx_caddy extends tslib_pibase
         break;
     }
 
-    $this->pObj->tmpl = $this->tmpl;
-    return $caddy;
+    $arrReturn['caddy']             = $caddy;
+    $arrReturn['tmpl']              = $this->tmpl; 
+    $arrReturn['outerMarkerArray']  = $this->outerMarkerArray; 
+    return $arrReturn;
   }
 
   
