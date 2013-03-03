@@ -73,6 +73,7 @@
       <label index="caddy_ll_special_free_until">kostenfrei bis</label>
       <label index="caddy_ll_sumgross">Gesamtsumme (brutto)</label>
       <label index="caddy_ll_sumnet">Gesamtsumme (netto)</label>
+      <label index="caddy_ll_sumnet22">Gesamtsumme (netto)</label>
       <label index="caddy_ll_tax">Mehrwertsteuer</label>
       <label index="caddy_ll_title">Bezeichnung</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
