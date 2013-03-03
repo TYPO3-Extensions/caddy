@@ -111,8 +111,6 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $newProduct = array( );
 
-  private $template = array( );
-
   private $markerArray = array( );
 
   private $outerMarkerArray = array( );
