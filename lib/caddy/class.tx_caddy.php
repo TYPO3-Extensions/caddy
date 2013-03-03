@@ -319,7 +319,7 @@ class tx_caddy extends tslib_pibase
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record
 
-      // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
+      // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
     foreach( array_keys( ( array ) $this->conf['settings.']['overall.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
@@ -341,7 +341,7 @@ class tx_caddy extends tslib_pibase
       }
         // DRS
     }
-      // FOREACH  : setting (cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax)
+      // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
       // Set min price error
     if( $sesArray['productsSumGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )

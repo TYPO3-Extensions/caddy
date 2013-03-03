@@ -296,16 +296,16 @@ plugin.tx_caddy_pi1 {
       }
     }
 
-      // cart_net, cart_gross, price_total, service_costs, odernumber, target, taxrates, tax
+      // sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax
     overall =
     overall {
-      cart_net = COA
-      cart_net {
+      sumNet = COA
+      sumNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_net
+          number.field = sumNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -320,13 +320,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      productsSumNet = COA
-      productsSumNet {
+      sumGross = COA
+      sumGross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = productsSumNet
+          number.field = sumGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -341,13 +341,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      cart_gross = COA
-      cart_gross {
+      price_total_overall_without_service = COA
+      price_total_overall_without_service {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_gross
+          number.field = price_total_overall_without_service
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -383,13 +383,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      price_total_overall_without_service = COA
-      price_total_overall_without_service {
+      productsSumNet = COA
+      productsSumNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = price_total_overall_without_service
+          number.field = productsSumNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -475,25 +475,25 @@ plugin.tx_caddy_pi1 {
       taxrate_reduced_string = COA
       taxrate_reduced_string {
         value = Mehrwertsteuer reduziert
-        if.isTrue.field = cart_tax_reduced
+        if.isTrue.field = sumTaxReduced
         wrap = |&nbsp;{$plugin.caddy.tax.reduced}&nbsp;%
       }
 
       taxrate_normal_string = COA
       taxrate_normal_string {
         value = Mehrwertsteuer normal
-        if.isTrue.field = cart_tax_normal
+        if.isTrue.field = sumTaxNormal
         wrap = |&nbsp;{$plugin.caddy.tax.normal}&nbsp;%
       }
 
-      cart_tax_reduced = COA
-      cart_tax_reduced {
-        if.isTrue.field = cart_tax_reduced
+      sumTaxReduced = COA
+      sumTaxReduced {
+        if.isTrue.field = sumTaxReduced
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_tax_reduced
+          number.field = sumTaxReduced
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -508,14 +508,14 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      cart_tax_normal = COA
-      cart_tax_normal {
-        if.isTrue.field = cart_tax_normal
+      sumTaxNormal = COA
+      sumTaxNormal {
+        if.isTrue.field = sumTaxNormal
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = cart_tax_normal
+          number.field = sumTaxNormal
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -760,13 +760,13 @@ plugin.tx_caddy_pi3 {
       minicart_count = TEXT
       minicart_count.field = count
 
-      minicart_gross = COA
-      minicart_gross {
+      minisumGross = COA
+      minisumGross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = minicart_gross
+          number.field = minisumGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
