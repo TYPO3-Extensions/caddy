@@ -236,12 +236,12 @@ class user_caddy_powermailCart extends tslib_pibase
 
     $outerArr = array
                 (
-                  'service_cost_net' => $shipping_net + $payment_net + $overall_special_net,
-                  'service_cost_gross' => $shipping_gross + $payment_gross+ $overall_special_gross,
+                  'optionsNet' => $shipping_net + $payment_net + $overall_special_net,
+                  'optionsGross' => $shipping_gross + $payment_gross+ $overall_special_gross,
                   'sumGross' => $cartGross,
-                  'productsSumGross' => $cartGrossNoService,
+                  'productsGross' => $cartGrossNoService,
                   'sumNet' => $cartNet,
-                  'productsSumNet' => $cartNetNoService,
+                  'productsNet' => $cartNetNoService,
                   'sumTaxReduced' => $cartTaxReduced,
                   'sumTaxNormal' => $cartTaxNormal,
                   'payment_note' => $paymentNote,

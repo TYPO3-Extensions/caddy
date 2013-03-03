@@ -86,7 +86,7 @@ class tx_caddy extends tslib_pibase
 
 
   private $caddyCount                 = 0;
-  private $productsSumGross           = 0;
+  private $productsGross           = 0;
   private $caddyServiceAttribute1Max  = 0;
   private $caddyServiceAttribute1Sum  = 0;
   private $caddyServiceAttribute2Max  = 0;
@@ -248,8 +248,8 @@ class tx_caddy extends tslib_pibase
 
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
-    $this->productsSumGross = $sumGross;
-    $productsSumNet        = $sumNet;
+    $this->productsGross = $sumGross;
+    $productsNet        = $sumNet;
 
       // option shipping : calculate tax, net and gross
     $arrResult      = $this->calcOptionsShipping( );
@@ -294,10 +294,10 @@ class tx_caddy extends tslib_pibase
 
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-    $sesArray['productsSumGross']   = $this->productsSumGross;
-    $sesArray['productsSumNet']     = $productsSumNet;
-    $sesArray['service_cost_net']   = $optionsNet;
-    $sesArray['service_cost_gross'] = $optionsGross;
+    $sesArray['productsGross']   = $this->productsGross;
+    $sesArray['productsNet']     = $productsNet;
+    $sesArray['optionsNet']   = $optionsNet;
+    $sesArray['optionsGross'] = $optionsGross;
     $sesArray['sumGross']           = $sumGross;
     $sesArray['sumNet']             = $sumNet;
     $sesArray['sumTaxNormal']       = $sumTaxNormal;
@@ -307,10 +307,10 @@ class tx_caddy extends tslib_pibase
 
       // cObject becomes current record
     $currRecord = array(
-      'productsSumGross'    => $this->productsSumGross,
-      'productsSumNet'      => $productsSumNet,
-      'service_cost_net'    => $optionsNet,
-      'service_cost_gross'  => $optionsGross,
+      'productsGross'    => $this->productsGross,
+      'productsNet'      => $productsNet,
+      'optionsNet'    => $optionsNet,
+      'optionsGross'  => $optionsGross,
       'sumGross'            => $sumGross,
       'sumNet'              => $sumNet,
       'sumTaxReduced'       => $sumTaxReduced,
@@ -344,7 +344,7 @@ class tx_caddy extends tslib_pibase
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
       // Set min price error
-    if( $sesArray['productsSumGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
+    if( $sesArray['productsGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
     {
       $caddyMinStr                             = $this->zz_price_format($this->conf['cart.']['cartmin.']['value']);
       $minPriceArray['###ERROR_MINPRICE###']  = sprintf($this->pi_getLL('caddy_ll_minprice'), $caddyMinStr);
@@ -356,10 +356,10 @@ class tx_caddy extends tslib_pibase
       // Set shipping radio, payment radio and special checkbox
     if
     (
-      ! ( $sesArray['productsSumGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
+      ! ( $sesArray['productsGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
       ||
       (
-        ( $sesArray['productsSumGross'] < floatval($this->conf['cart.']['cartmin.']['value'] ) )
+        ( $sesArray['productsGross'] < floatval($this->conf['cart.']['cartmin.']['value'] ) )
         &&
         ( ! $this->conf['cart.']['cartmin.']['hideifnotreached.']['service'] )
       )
@@ -1015,7 +1015,7 @@ class tx_caddy extends tslib_pibase
         ( 
           round( floatval( $this->conf[$type.'.']['options.'][$option_id.'.']['available_from'] ), 2 )
           > 
-          round( $this->productsSumGross, 2 ) 
+          round( $this->productsGross, 2 ) 
         ) 
       ) 
       ||
@@ -1025,7 +1025,7 @@ class tx_caddy extends tslib_pibase
         ( 
           round( floatval( $this->conf[$type.'.']['options.'][$option_id.'.']['available_until'] ), 2 ) 
           < 
-          round( $this->productsSumGross, 2 ) 
+          round( $this->productsGross, 2 ) 
         )
        )
      )
@@ -1069,8 +1069,8 @@ class tx_caddy extends tslib_pibase
 
     switch( true )
     {
-      case( isset(  $free_from ) && ( floatval( $free_from ) <= $this->productsSumGross ) ):
-      case( isset( $free_until ) && ( floatval( $free_until ) >= $this->productsSumGross ) ):
+      case( isset(  $free_from ) && ( floatval( $free_from ) <= $this->productsGross ) ):
+      case( isset( $free_until ) && ( floatval( $free_until ) >= $this->productsGross ) ):
         return '0.00';
         break;
       default:
@@ -1079,7 +1079,7 @@ class tx_caddy extends tslib_pibase
     }
 
     $filterArr = array(
-                        'by_price' => $this->productsSumGross,
+                        'by_price' => $this->productsGross,
                         'by_quantity' => $this->caddyCount,
                         'by_service_attribute_1_sum' => $this->caddyServiceAttribute1Sum,
                         'by_service_attribute_1_max' => $this->caddyServiceAttribute1Max,
@@ -1170,13 +1170,13 @@ class tx_caddy extends tslib_pibase
           isset( $value['available_from'] ) 
           && 
           (
-            round( floatval( $value['available_from'] ), 2 ) > round( $this->productsSumGross, 2 ) 
+            round( floatval( $value['available_from'] ), 2 ) > round( $this->productsGross, 2 ) 
           ) 
         )
         ||
         (
           isset( $value['available_until'] ) 
-          && ( round( floatval( $value['available_until'] ), 2 ) < round( $this->productsSumGross, 2 ) )
+          && ( round( floatval( $value['available_until'] ), 2 ) < round( $this->productsGross, 2 ) )
         )
       )
       {

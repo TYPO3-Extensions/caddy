@@ -319,13 +319,13 @@ plugin.tx_caddy_pi1 {
         30.value = {$plugin.caddy.ordernumber.suffix}
       }
 
-      productsSumGross = COA
-      productsSumGross {
+      productsGross = COA
+      productsGross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = productsSumGross
+          number.field = productsGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -340,13 +340,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      productsSumNet = COA
-      productsSumNet {
+      productsNet = COA
+      productsNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = productsSumNet
+          number.field = productsNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -361,13 +361,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      service_cost_net = COA
-      service_cost_net {
+      optionsNet = COA
+      optionsNet {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = service_cost_net
+          number.field = optionsNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -382,13 +382,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      service_cost_gross = COA
-      service_cost_gross {
+      optionsGross = COA
+      optionsGross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = service_cost_gross
+          number.field = optionsGross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
