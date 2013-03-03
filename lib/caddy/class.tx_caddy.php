@@ -153,7 +153,7 @@ class tx_caddy extends tslib_pibase
 
     $this->initInstances( );
 
-    $this->powermail->init( );
+    $this->powermail->init( $this->row );
     $this->tmpl       = $this->pObj->tmpl;
 
       // read all products from session
