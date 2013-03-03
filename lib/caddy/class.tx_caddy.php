@@ -679,6 +679,7 @@ class tx_caddy extends tslib_pibase
     $arrReturn['id']    = $shippingId;
     $arrReturn['gross'] = $gross;
     $arrReturn['net']   = $net;
+var_dump( __METHOD__, __LINE__ $arrReturn );    
     return $arrReturn;
   }
 
