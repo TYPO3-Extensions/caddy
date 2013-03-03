@@ -976,6 +976,57 @@ class tx_caddy extends tslib_pibase
   }
 
   /**
+ * Gets the price for a given type ('shipping', 'payment') method on the current cart
+ *
+ * @param	string		$type
+ * @param	int		$option_id
+ * @return	string
+ */
+  private function zz_getPriceForOption($type, $option_id) {
+          $optionIds = $this->conf[$type.'.']['options.'][$option_id.'.'];
+
+          $free_from = $optionIds['free_from'];
+          $free_until = $optionIds['free_until'];
+
+          if ((isset($free_from) && (floatval($free_from) <= $this->caddyGrossNoService)) ||
+                  (isset($free_until) && (floatval($free_until) >= $this->caddyGrossNoService))) {
+                  return '0.00';
+          }
+
+          $filterArr = array(
+                  'by_price' => $this->caddyGrossNoService,
+                  'by_quantity' => $this->caddyCount,
+                  'by_service_attribute_1_sum' => $this->caddyServiceAttribute1Sum,
+                  'by_service_attribute_1_max' => $this->caddyServiceAttribute1Max,
+                  'by_service_attribute_2_sum' => $this->caddyServiceAttribute2Sum,
+                  'by_service_attribute_2_max' => $this->caddyServiceAttribute2Max,
+                  'by_service_attribute_3_sum' => $this->caddyServiceAttribute3Sum,
+                  'by_service_attribute_3_max' => $this->caddyServiceAttribute3Max
+          );
+
+          if (array_key_exists($optionIds['extra'], $filterArr)) {
+                  foreach ($optionIds['extra.'] as $extra) {
+                          if (floatval($extra['value']) <= $filterArr[$optionIds['extra']]) {
+                                  $price = $extra['extra'];
+                          } else {
+                                  break;
+                          }
+                  }
+          } else {
+                  switch ($optionIds['extra']) {
+                          case 'each':
+                                  $price = floatval($optionIds['extra.']['1.']['extra'])*$this->caddyCount;
+                                  break;
+                          default:
+                                  $price = $optionIds['extra'];
+                  }
+          }
+
+          return $price;
+  }
+
+
+  /**
  * [Describe function...]
  *
  * @param	[type]		$value: ...
