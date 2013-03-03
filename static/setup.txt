@@ -319,48 +319,6 @@ plugin.tx_caddy_pi1 {
         30.value = {$plugin.caddy.ordernumber.suffix}
       }
 
-      productsGross = COA
-      productsGross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = productsGross
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      productsNet = COA
-      productsNet {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = productsNet
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
       optionsNet = COA
       optionsNet {
         10 = USER
@@ -389,6 +347,48 @@ plugin.tx_caddy_pi1 {
         10.userFunc {
           number = TEXT
           number.field = optionsGross
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      productsGross = COA
+      productsGross {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = productsGross
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      productsNet = COA
+      productsNet {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = productsNet
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
