@@ -180,11 +180,9 @@ class tx_caddy extends tslib_pibase
     
     $this->initInstances( );
     
-    //$this->calc       = $this->pObj->calc;
-//    $this->drs        = $this->pObj->drs;
-    $this->powermail  = $this->pObj->powermail;
-    $this->session    = $this->pObj->session;
-    $this->tmpl       = $this->pObj->tmpl;
+//    $this->powermail  = $this->pObj->powermail;
+//    $this->session    = $this->pObj->session;
+//    $this->tmpl       = $this->pObj->tmpl;
     
       // read all products from session
     $this->product = $this->session->productsGet( );
@@ -962,16 +960,16 @@ class tx_caddy extends tslib_pibase
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
 
-//    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
-//    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-//    $this->powermail->pObj  = $this;
-//
-//    require_once( $path2lib . 'class.tx_caddy_session.php' );
-//    $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
-//    $this->session->pObj    = $this;
-//
-//    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-//    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
+    $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
+    $this->powermail->pObj  = $this;
+
+    require_once( $path2lib . 'class.tx_caddy_session.php' );
+    $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session->pObj    = $this;
+
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
   /**
