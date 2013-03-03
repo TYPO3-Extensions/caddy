@@ -100,7 +100,6 @@ class tx_caddy_calc extends tslib_pibase
                       );
     }
 
-var_dump( __METHOD__, __LINE__, $type, $arrReturn );    
     return $arrReturn;
   }
 	

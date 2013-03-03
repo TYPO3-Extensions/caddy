@@ -294,27 +294,27 @@ class tx_caddy extends tslib_pibase
 
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-    $sesArray['productsGross']   = $this->productsGross;
-    $sesArray['productsNet']     = $productsNet;
-    $sesArray['optionsNet']   = $optionsNet;
-    $sesArray['optionsGross'] = $optionsGross;
-    $sesArray['sumGross']           = $sumGross;
-    $sesArray['sumNet']             = $sumNet;
-    $sesArray['sumTaxNormal']       = $sumTaxNormal;
-    $sesArray['sumTaxReduced']      = $sumTaxReduced;
+    $sesArray['productsGross']  = $this->productsGross;
+    $sesArray['productsNet']    = $productsNet;
+    $sesArray['optionsNet']     = $optionsNet;
+    $sesArray['optionsGross']   = $optionsGross;
+    $sesArray['sumGross']       = $sumGross;
+    $sesArray['sumNet']         = $sumNet;
+    $sesArray['sumTaxNormal']   = $sumTaxNormal;
+    $sesArray['sumTaxReduced']  = $sumTaxReduced;
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
+var_dump( __METHOD__, __LINE__, $sesArray );    
 
       // cObject becomes current record
     $currRecord = array(
-      'productsGross'    => $this->productsGross,
-      'productsNet'      => $productsNet,
+      'productsGross' => $this->productsGross,
+      'productsNet'   => $productsNet,
       'optionsNet'    => $optionsNet,
       'optionsGross'  => $optionsGross,
-      'sumGross'            => $sumGross,
-      'sumNet'              => $sumNet,
-      'sumTaxReduced'       => $sumTaxReduced,
-      'sumTaxNormal'        => $sumTaxNormal
+      'sumGross'      => $sumGross,
+      'sumNet'        => $sumNet,
+      'sumTaxReduced' => $sumTaxReduced,
     );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
       // cObject becomes current record
