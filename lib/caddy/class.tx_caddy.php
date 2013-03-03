@@ -40,11 +40,11 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  191:     public function caddyByUserfunc( $content = '', $conf = array( ) )
  *  223:     private function caddyWiProducts( )
  *  401:     private function caddyWiProductsItem( $contentItem )
- *  432:     private function caddyWiProductsProduct( )
+ *  432:     private function calcProduct( )
  *  507:     private function caddyWiProductsProductErrorMsg( $product )
  *  531:     private function caddyWiProductsProductServiceAttributes( $product )
  *  593:     private function caddyWiProductsProductSettings( $product )
- *  643:     private function caddyWiProductsProductTax( $product )
+ *  643:     private function calcProductTax( $product )
  *  696:     private function caddyWoProducts( )
  *
  *              SECTION: Caddy
@@ -232,7 +232,7 @@ class tx_caddy extends tslib_pibase
     $specialArray   = null;
 
       // handle the current product
-    $arrResult        = $this->caddyWiProductsProduct( );
+    $arrResult        = $this->calcProduct( );
     $contentItem      = $arrResult['contentItem'];
     $caddyNet         = $arrResult['net'];
     $caddyGross       = $arrResult['gross'];
@@ -422,81 +422,6 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsProduct( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWiProductsProduct( )
-  {
-    $arrReturn    = null;
-    $contentItem  = '';
-    
-    $productsNet        = 0;
-    $productsGross      = 0;
-    $productsTaxReduced = 0;
-    $productsTaxNormal  = 0;
-
-      // FOREACH  : product
-    foreach( ( array ) $this->products as $product )
-    {
-        // clear marker array to avoid problems with error msg etc.
-      unset( $this->markerArray );
-
-        // calculate price total
-      $product['price_total'] = $product['price'] * $product['qty'];
-        // DRS
-      if( $this->drs->drsFormula )
-      {
-        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
-        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-
-        // cObject become current record
-      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
-
-        // update settings
-      $this->caddyWiProductsProductSettings( $product );
-
-        // update error prompts
-      $this->caddyWiProductsProductErrorMsg( $product );
-
-         // add inner html to variable
-      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
-                                    (
-                                      $this->tmpl['item'], $this->markerArray
-                                    );
-
-        // update cart gross
-      $productsGross        = $productsGross + $product['price_total'];
-        // update number of products
-      $this->caddyCount  = $this->caddyCount + $product['qty'];
-
-        // update service attributes
-      $this->caddyWiProductsProductServiceAttributes( $product );
-
-        // calculate tax
-      $arrResult      = $this->caddyWiProductsProductTax( $product );
-      $productsNet        = $productsNet        + $arrResult['cartNet'];
-      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
-      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
-
-    }
-      // FOREACH  : product
-
-    $arrReturn['contentItem'] = $contentItem;
-    $arrReturn['net']         = $productsNet;
-    $arrReturn['gross']       = $productsGross;
-    $arrReturn['taxReduced']  = $productsTaxReduced;
-    $arrReturn['taxNormal']   = $productsTaxNormal;
-
-    return $arrReturn;
-  }
-
- /**
   * caddyWiProductsProductErrorMsg( )
   *
   * @param	array		$product :
@@ -630,60 +555,6 @@ class tx_caddy extends tslib_pibase
     }
       // FOREACH  : settings property
 //var_dump( __METHOD__, __LINE__, $this->markerArray );
-  }
-
- /**
-  * caddyWiProductsProductTax( )
-  *
-  * @param	array		$product  :
-  * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWiProductsProductTax( $product )
-  {
-    $arrReturn = null;
-
-      // Handle HTML snippet
-      // get the formular with the markers ###TAX## for calculating tax
-    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
-      // save the formular with marker, we need it later
-    $str_wrap_former = $str_wrap;
-      // replace the ###TAX### with current tax rate like 0.07 or 0.19
-    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
-      // assign the formular with tax rates to TypoScript
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
-      // Handle HTML snippet
-
-      // tax within price grosso
-    $currTax = $this->local_cObj->cObjGetSingle
-           (
-              $this->conf['settings.']['fields.']['tax'],
-              $this->conf['settings.']['fields.']['tax.']
-           );
-      // price netto
-    $arrReturn['cartNet'] = $product['price_total'] - $currTax;
-
-    switch( $product['tax'] )
-    {
-      case( 0 ):
-        break;
-      case( 1 ):
-      case( $this->conf['tax.']['reducedCalc'] ):
-        $arrReturn['taxReduced'] = $currTax;
-        break;
-      case( 2 ):
-      case( $this->conf['tax.']['normalCalc'] ):
-        $arrReturn['taxNormal'] = $currTax;
-        break;
-      default:
-        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
-        exit;
-    }
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
-
-    return $arrReturn;
   }
 
  /**
@@ -842,6 +713,136 @@ class tx_caddy extends tslib_pibase
     $arrReturn['gross']           = $overall_specialGross;
     $arrReturn['taxReduced']  = $caddyTaxReduced;
     $arrReturn['taxNormal']   = $caddyTaxNormal;
+
+    return $arrReturn;
+  }
+
+ /**
+  * calcProduct( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcProduct( )
+  {
+    $arrReturn    = null;
+    $contentItem  = '';
+    
+    $productsNet        = 0;
+    $productsGross      = 0;
+    $productsTaxReduced = 0;
+    $productsTaxNormal  = 0;
+
+      // FOREACH  : products
+    foreach( ( array ) $this->products as $product )
+    {
+        // clear marker array to avoid problems with error msg etc.
+      unset( $this->markerArray );
+
+        // calculate price total
+      $product['price_total'] = $product['price'] * $product['qty'];
+
+      // DRS
+      if( $this->drs->drsFormula )
+      {
+        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
+        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
+        // cObject become current record
+      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
+
+        // update product settings
+      $this->caddyWiProductsProductSettings( $product );
+
+        // update error prompts
+      $this->caddyWiProductsProductErrorMsg( $product );
+
+         // add inner html to variable
+      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
+                                    (
+                                      $this->tmpl['item'], $this->markerArray
+                                    );
+
+        // update product gross
+      $productsGross        = $productsGross + $product['price_total'];
+        // update number of products
+      $this->caddyCount  = $this->caddyCount + $product['qty'];
+
+        // update service attributes
+      $this->caddyWiProductsProductServiceAttributes( $product );
+
+        // calculate tax
+      $arrResult           = $this->calcProductTax( $product );
+      $productsNet        = $productsNet        + $arrResult['cartNet'];
+      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
+      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
+
+    }
+      // FOREACH  : products
+
+    $arrReturn['contentItem'] = $contentItem;
+    $arrReturn['net']         = $productsNet;
+    $arrReturn['gross']       = $productsGross;
+    $arrReturn['taxReduced']  = $productsTaxReduced;
+    $arrReturn['taxNormal']   = $productsTaxNormal;
+
+    return $arrReturn;
+  }
+
+ /**
+  * calcProductTax( )
+  *
+  * @param	array		$product  :
+  * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcProductTax( $product )
+  {
+    $arrReturn = null;
+
+      // Handle HTML snippet
+      // get the formular with the markers ###TAX## for calculating tax
+    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
+      // save the formular with marker, we need it later
+    $str_wrap_former = $str_wrap;
+      // replace the ###TAX### with current tax rate like 0.07 or 0.19
+    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
+      // assign the formular with tax rates to TypoScript
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
+      // Handle HTML snippet
+
+      // tax within price grosso
+    $currTax = $this->local_cObj->cObjGetSingle
+           (
+              $this->conf['settings.']['fields.']['tax'],
+              $this->conf['settings.']['fields.']['tax.']
+           );
+      // price netto
+    $arrReturn['cartNet'] = $product['price_total'] - $currTax;
+
+    switch( $product['tax'] )
+    {
+      case( 0 ):
+        break;
+      case( 1 ):
+      case( $this->conf['tax.']['reducedCalc'] ):
+        $arrReturn['taxReduced'] = $currTax;
+        break;
+      case( 2 ):
+      case( $this->conf['tax.']['normalCalc'] ):
+        $arrReturn['taxNormal'] = $currTax;
+        break;
+      default:
+        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+        exit;
+    }
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
 
     return $arrReturn;
   }
