@@ -574,7 +574,7 @@ class tx_caddy extends tslib_pibase
   {
       // #45915, 130228
       // Set the hidden field to true of the powermail form
-    $css = $this->powermail->FormHide( );
+    $css = $this->powermail->formHide( );
 
     $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
 
