@@ -48,7 +48,8 @@ require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/fpdi/fpdi.php' );
 class tx_caddy_pdf extends tslib_pibase 
 {
 
-  public $scriptRelPath = 'lib/pdf/class.tx_caddy_pdf.php';
+    // path for localisation file
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
   public $extKey        = 'caddy';
   
   public $drsUserfunc   = null;
@@ -200,7 +201,7 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
-    $filename = $this->concatFileName($this->pfilename);
+    $filename = time( ) . $this->concatFileName($this->pfilename);
 
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
                           (
@@ -281,6 +282,13 @@ class tx_caddy_pdf extends tslib_pibase
     {
       $prompt = 'uploads/tx_caddy' . '/' . $filename . ' could not written!<br />
         ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+    // CHECK: Was PDF not created, send E-Mail and exit with error.
+    if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
+    {
+      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' is written!<br />' . PHP_EOL .
+        . __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
       die( $prompt );
     }
     $sesArray['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
