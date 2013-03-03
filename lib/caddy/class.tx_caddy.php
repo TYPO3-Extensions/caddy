@@ -178,6 +178,7 @@ class tx_caddy extends tslib_pibase
     $this->cObj       = $this->pObj->cObj;
     $this->local_cObj = $this->pObj->local_cObj;
     
+    $this->calc       = $this->pObj->calc;
     $this->drs        = $this->pObj->drs;
     $this->powermail  = $this->pObj->powermail;
     $this->session    = $this->pObj->session;
