@@ -101,7 +101,6 @@ class tx_caddy_pi1_clean
 
     $this->cleanDatabase( );
     $this->cleanNumbers( );
-    $this->cleanSession( );
   }
 
  /**
@@ -184,18 +183,6 @@ class tx_caddy_pi1_clean
       // DRS
   }
 
- /**
-  * cleanSession( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function cleanSession( )
-  {
-    $this->pObj->sessionDelete( );
-  }
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_clean.php'])
