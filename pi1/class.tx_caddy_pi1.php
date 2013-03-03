@@ -78,7 +78,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  957:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1002:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1002:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
  * TOTAL FUNCTIONS: 29
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -995,7 +995,7 @@ class tx_caddy_pi1 extends tslib_pibase
   * @param	[type]		$$cObj_name: ...
   * @param	[type]		$cObj_conf: ...
   * @return	string
-  * @access     private
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
