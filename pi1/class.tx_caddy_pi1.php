@@ -33,56 +33,52 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  101: class tx_caddy_pi1 extends tslib_pibase
+ *   97: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  148:     public function main( $content, $conf )
+ *  144:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  222:     private function caddy( )
+ *  218:     private function caddyOrderUpdate( )
+ *  253:     private function caddyProductAdd( )
+ *  275:     private function caddyProductDelete( )
+ *  291:     private function caddyRendered( )
  *
  *              SECTION: Clean
- *  244:     private function clean( )
+ *  313:     private function clean( )
  *
  *              SECTION: Debug
- *  266:     private function debugOutputBeforeRunning( )
+ *  335:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  303:     private function init( )
- *  323:     private function initAccessByIp( )
- *  369:     private function initPid( )
- *  408:     private function initDatabase( )
- *  421:     private function initDatabaseTable( )
- *  472:     private function initFlexform( )
- *  485:     private function initGpVar( )
- *  541:     private function initGpVarCid( )
- *  591:     private function initTemplate( )
- *  604:     private function initInstances( )
- *  656:     private function initPowermail( )
- *
- *              SECTION: Order
- *  677:     private function caddyOrderUpdate( )
- *
- *              SECTION: Product
- *  722:     private function caddyProductAdd( )
- *  744:     private function caddyProductDelete( )
+ *  372:     private function init( )
+ *  392:     private function initAccessByIp( )
+ *  438:     private function initPid( )
+ *  477:     private function initDatabase( )
+ *  490:     private function initDatabaseTable( )
+ *  541:     private function initFlexform( )
+ *  554:     private function initGpVar( )
+ *  610:     private function initGpVarCid( )
+ *  660:     private function initTemplate( )
+ *  673:     private function initInstances( )
+ *  725:     private function initPowermail( )
  *
  *              SECTION: Send
- *  769:     private function send( )
- *  783:     private function sendCustomer( )
- *  798:     private function sendCustomerDeliveryorder( )
- *  823:     private function sendCustomerInvoice( )
- *  848:     private function sendCustomerTerms( )
- *  873:     private function sendVendor( )
- *  888:     private function sendVendorDeliveryorder( )
- *  913:     private function sendVendorInvoice( )
- *  938:     private function sendVendorTerms( )
+ *  746:     private function send( )
+ *  760:     private function sendCustomer( )
+ *  775:     private function sendCustomerDeliveryorder( )
+ *  800:     private function sendCustomerInvoice( )
+ *  825:     private function sendCustomerTerms( )
+ *  850:     private function sendVendor( )
+ *  865:     private function sendVendorDeliveryorder( )
+ *  890:     private function sendVendorInvoice( )
+ *  915:     private function sendVendorTerms( )
  *
  *              SECTION: Update Wizard
- *  972:     private function updateWizard( $content )
+ *  949:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1017:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ *  994:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
  * TOTAL FUNCTIONS: 29
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -245,7 +241,7 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->session->specialUpdate($this->piVars['special']); // change payment
     }
   }
-  
+
  /**
   * caddyProductAdd( )
   *
