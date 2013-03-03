@@ -39,10 +39,10 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  144:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  218:     private function caddyUpdate( )
- *  253:     private function caddyProductAdd( )
- *  275:     private function caddyProductDelete( )
- *  291:     private function caddyRendered( )
+ *  218:     private function caddyProductAdd( )
+ *  240:     private function caddyProductDelete( )
+ *  256:     private function caddyRendered( )
+ *  270:     private function caddyUpdate( )
  *
  *              SECTION: Clean
  *  313:     private function clean( )
