@@ -340,7 +340,7 @@ class tx_caddy extends tslib_pibase
       }
         // DRS
     }
-var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );    
+//var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );    
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
       // Set min price error

@@ -90,6 +90,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
 	// Function DynamicLocalLangMarker() to get automaticly a marker from locallang.xml (###LOCALLANG_BLABLA### from locallang.xml: locallangmarker_blabla)
   function DynamicLocalLangMarker( $array ) 
   {
+var_dump( __METHOD__, __LINE__ , $array[1] );      
     if( ! empty( $array[1] ) )
     {
       $string = $this->pi_getLL(strtolower($this->locallangmarker_prefix[1] . $array[1]), '<i>' . strtolower($array[1]) . '</i>'); 
