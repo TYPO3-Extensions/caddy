@@ -65,7 +65,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *              SECTION: Product
  *  722:     private function caddyProductAdd( )
- *  744:     private function caddyProductRemove( )
+ *  744:     private function caddyProductDelete( )
  *
  *              SECTION: Send
  *  769:     private function send( )
@@ -171,7 +171,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->debugOutputBeforeRunning( );
 
       // Remove current product
-    $this->caddyProductRemove( );
+    $this->caddyProductDelete( );
       // Update several order values
     $this->caddyOrderUpdate( );
       // Add a product
@@ -264,19 +264,19 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->session->caddyProductAdd( $this->newProduct );
+      $this->session->productAdd( $this->newProduct );
     }
   }
 
  /**
-  * caddyProductRemove( )
+  * caddyProductDelete( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyProductRemove( )
+  private function caddyProductDelete( )
   {
       // remove product from session
     if( isset( $this->piVars['del'] ) )
