@@ -175,6 +175,7 @@ class tx_caddy extends tslib_pibase
 
       // Set the current typoscript configuration
     $this->conf       = $this->pObj->conf;
+    $this->cObj       = $this->pObj->cObj;
     $this->local_cObj = $this->pObj->local_cObj;
     
     $this->drs        = $this->pObj->drs;
