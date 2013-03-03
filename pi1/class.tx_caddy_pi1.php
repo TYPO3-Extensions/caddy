@@ -36,49 +36,49 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *   97: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  144:     public function main( $content, $conf )
+ *  154:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  218:     private function caddyProductAdd( )
- *  240:     private function caddyProductDelete( )
- *  256:     private function caddyRendered( )
- *  270:     private function caddyUpdate( )
+ *  228:     private function caddyProductAdd( )
+ *  250:     private function caddyProductDelete( )
+ *  266:     private function caddyRendered( )
+ *  280:     private function caddyUpdate( )
  *
  *              SECTION: Clean
- *  313:     private function clean( )
+ *  323:     private function clean( )
  *
  *              SECTION: Debug
- *  335:     private function debugOutputBeforeRunning( )
+ *  345:     private function debugOutputBeforeRunning( )
  *
  *              SECTION: Init
- *  372:     private function init( )
- *  392:     private function initAccessByIp( )
- *  438:     private function initPid( )
- *  477:     private function initDatabase( )
- *  490:     private function initDatabaseTable( )
- *  541:     private function initFlexform( )
- *  554:     private function initGpVar( )
- *  610:     private function initGpVarCid( )
- *  660:     private function initTemplate( )
- *  673:     private function initInstances( )
- *  725:     private function initPowermail( )
+ *  382:     private function init( )
+ *  402:     private function initAccessByIp( )
+ *  448:     private function initDatabase( )
+ *  461:     private function initDatabaseTable( )
+ *  512:     private function initFlexform( )
+ *  525:     private function initGpVar( )
+ *  581:     private function initGpVarCid( )
+ *  631:     private function initInstances( )
+ *  681:     private function initPid( )
+ *  720:     private function initPowermail( )
+ *  733:     private function initTemplate( )
  *
  *              SECTION: Send
- *  746:     private function send( )
- *  760:     private function sendCustomer( )
- *  775:     private function sendCustomerDeliveryorder( )
- *  800:     private function sendCustomerInvoice( )
- *  825:     private function sendCustomerTerms( )
- *  850:     private function sendVendor( )
- *  865:     private function sendVendorDeliveryorder( )
- *  890:     private function sendVendorInvoice( )
- *  915:     private function sendVendorTerms( )
+ *  754:     private function send( )
+ *  768:     private function sendCustomer( )
+ *  783:     private function sendCustomerDeliveryorder( )
+ *  808:     private function sendCustomerInvoice( )
+ *  833:     private function sendCustomerTerms( )
+ *  858:     private function sendVendor( )
+ *  873:     private function sendVendorDeliveryorder( )
+ *  898:     private function sendVendorInvoice( )
+ *  923:     private function sendVendorTerms( )
  *
  *              SECTION: Update Wizard
- *  949:     private function updateWizard( $content )
+ *  957:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- *  994:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1002:     public function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
  * TOTAL FUNCTIONS: 29
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -124,14 +124,14 @@ class tx_caddy_pi1 extends tslib_pibase
   private $dynamicMarkers   = null;
   public  $drs              = null;
   public  $flexform         = null;
-  private $powermail        = null;
+  public  $powermail        = null;
   private $session          = null;
   private $template         = null;
 
-  private $local_cObj       = null;
+  public  $local_cObj       = null;
   public  $conf             = null;
   public  $arr_extConf      = null;
-  private $tmpl             = null;
+  public  $tmpl             = null;
 
 
 
