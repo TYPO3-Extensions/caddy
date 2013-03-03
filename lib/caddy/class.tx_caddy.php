@@ -978,6 +978,27 @@ class tx_caddy extends tslib_pibase
   /**
  * [Describe function...]
  *
+ * @param	[type]		$value: ...
+ * @return	[type]		...
+ */
+  private function zz_price_format($value) {
+          $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']; // get ts
+
+          $currencySymbol = $this->conf['main.']['currencySymbol'];
+          $price = number_format($value, $this->conf['main.']['decimal'], $this->conf['main.']['dec_point'], $this->conf['main.']['thousands_sep']);
+          // print currency symbol before or after price
+          if ($this->conf['main.']['currencySymbolBeforePrice']) {
+                  $price = $currencySymbol . ' ' . $price;
+          } else {
+                  $price = $price . ' ' . $currencySymbol;
+          }
+
+          return $price;
+  }
+
+  /**
+ * [Describe function...]
+ *
  * @param	[type]		$type: ...
  * @param	[type]		$option_id: ...
  * @return	[type]		...
