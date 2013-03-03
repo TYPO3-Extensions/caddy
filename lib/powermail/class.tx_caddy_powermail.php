@@ -231,6 +231,8 @@ class tx_caddy_powermail
   */
   public function init( $row )
   {
+    $this->initInstances( );
+    
     $arrResult = $this->initVersion( );
     $this->versionInt = $arrResult['int'];
     $this->versionStr = $arrResult['str'];
@@ -444,6 +446,22 @@ class tx_caddy_powermail
   {
     $this->paramGet  = t3lib_div::_GET( 'tx_powermail_pi1' );
     $this->paramPost = t3lib_div::_POST( 'tx_powermail_pi1' );
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initInstances( )
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
  /**
@@ -785,12 +803,7 @@ class tx_caddy_powermail
   * @since   2.0.0
   */
   private function initVersion( )
-  {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-
-    require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-    
+  {   
     return $this->userfunc->extMgmVersion( 'powermail' );
   }
 
