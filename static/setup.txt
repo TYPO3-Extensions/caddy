@@ -300,25 +300,6 @@ plugin.tx_caddy_pi1 {
     overall =
     overall {
 
-      ordernumber = COA
-      ordernumber {
-        10 = TEXT
-        10.data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
-        10.noTrimWrap = ||: |
-
-        20 = TEXT
-        20.value = {$plugin.caddy.ordernumber.prefix}
-
-        30 = TEXT
-        30.current = 1
-        30.setCurrent.field = ordernumber
-        30.setCurrent.wrap = | + {$plugin.caddy.ordernumber.offset}
-        30.prioriCalc = intval
-
-        30 = TEXT
-        30.value = {$plugin.caddy.ordernumber.suffix}
-      }
-
       optionsNet = COA
       optionsNet {
         10 = USER
@@ -609,7 +590,27 @@ plugin.tx_caddy_pi1 {
       shippingaddress-position-x  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-x}
       shippingaddress-position-y  = {$plugin.caddy.pdf.orderpdf.shippingaddress-position-y}
 
-      ordernumber < plugin.tx_caddy_pi1.settings.overall.ordernumber
+      ordernumber = COA
+      ordernumber {
+        10 = TEXT
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
+          noTrimWrap = ||: |
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.ordernumber.prefix}
+        }
+        30 = TEXT
+        30 {
+          current           = 1
+          setCurrent.field  = ordernumber
+          setCurrent.wrap   = | + {$plugin.caddy.ordernumber.offset}
+          prioriCalc        = intval
+          value             = {$plugin.caddy.ordernumber.suffix}        
+        }
+      }
+
       ordernumber-position-x      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-x}
       ordernumber-position-y      = {$plugin.caddy.pdf.orderpdf.ordernumber-position-y}
 
@@ -661,23 +662,27 @@ plugin.tx_caddy_pi1 {
       shippingaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-x}
       shippingaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-y}
 
-      XXX_packinglistnumber = COA
-      XXX_packinglistnumber {
+      packinglistnumber = COA
+      packinglistnumber {
         10 = TEXT
         10 {
-          value = Delivery Order
-          lang {
-            de = Lieferschein
-            en = Delivery Order
-          }
+          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+          noTrimWrap = ||: |
         }
         20 = TEXT
         20 {
-          field       = packinglistnumber
-          noTrimWrap  = | ||
+          value = {$plugin.caddy.ordernumber.prefix}
+        }
+        30 = TEXT
+        30 {
+          current           = 1
+          setCurrent.field  = ordernumber
+          setCurrent.wrap   = | + {$plugin.caddy.ordernumber.offset}
+          prioriCalc        = intval
+          value             = {$plugin.caddy.ordernumber.suffix}        
         }
       }
-      packinglistnumber < plugin.tx_caddy_pi1.settings.overall.packinglistnumber
+
       packinglistnumber-position-x  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-x}
       packinglistnumber-position-y  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-y}
 

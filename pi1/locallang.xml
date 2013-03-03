@@ -7,9 +7,11 @@
   <data type="array">
     <languageKey index="default" type="array">
       <label index="caddy_ll_delete">Remove this product from cart.</label>
+      <label index="caddy_ll_deliverynumber">Delivery number</label>
       <label index="caddy_ll_empty">Currently there are no products in the cart.</label>
       <label index="caddy_ll_error_min">The minimum order quantity is %s.</label>
       <label index="caddy_ll_error_max">The maximum order quantity is %s.</label>
+      <label index="caddy_ll_invoicenumber">Invoice number</label>
       <label index="caddy_ll_minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="caddy_ll_ordernumber">Order number</label>
       <label index="caddy_ll_payment">Service Options</label>
@@ -43,9 +45,11 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddy_ll_delete">Dieses Produkt aus dem Warenkorb entfernen.</label>
+      <label index="caddy_ll_deliverynumber">Lieferscheinnummer</label>
       <label index="caddy_ll_empty">Derzeit befinden sich keine Produkte im Warenkorb.</label>
       <label index="caddy_ll_error_min">Die minimale Bestellmenge betr<![CDATA[&auml;]]>gt %s.</label>
       <label index="caddy_ll_error_max">Die maximale Bestellmenge betr<![CDATA[&auml;]]>gt %s.</label>
+      <label index="caddy_ll_invoicenumber">Rechnungsnummer</label>
       <label index="caddy_ll_minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="caddy_ll_ordernumber">Bestellnummer</label>
       <label index="caddy_ll_payment">Serviceoptionen</label>
