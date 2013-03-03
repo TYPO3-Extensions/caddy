@@ -88,13 +88,18 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
 	}
 
 	// Function DynamicLocalLangMarker() to get automaticly a marker from locallang.xml (###LOCALLANG_BLABLA### from locallang.xml: locallangmarker_blabla)
-	function DynamicLocalLangMarker($array) {
-		if (!empty($array[1]))
-			$string = $this->pi_getLL(strtolower($this->locallangmarker_prefix[1] . $array[1]), '<i>' . strtolower($array[1]) . '</i>'); // search for a fitting entry in locallang.xml or typoscript
+  function DynamicLocalLangMarker( $array ) 
+  {
+    if( ! empty( $array[1] ) )
+    {
+      $string = $this->pi_getLL(strtolower($this->locallangmarker_prefix[1] . $array[1]), '<i>' . strtolower($array[1]) . '</i>'); 
+    }
 
-			if (!empty($string))
-			return $string;
-	}
+    if( ! empty( $string ) )
+    {
+      return $string;
+    }
+  }
 
 	// Function DynamicTyposcriptMarker() to get automaticly a marker from typoscript
 	function DynamicTyposcriptMarker($array) {
