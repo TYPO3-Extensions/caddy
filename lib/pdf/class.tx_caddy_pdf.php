@@ -116,7 +116,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function renderOrderPdf( &$session ) {
           $filename = $this->concatFileName($this->ofilename);
 
-          $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###WTCART_ORDERPDF###'); // Load HTML Template
+          $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###CADDY_ORDERPDF###'); // Load HTML Template
           $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
           // CHECK: Is directory for PDF available?
@@ -215,7 +215,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
                             (
                               $this->conf['template']
                             ), 
-                            '###WTCART_PACKINGLISTPDF###'
+                            '###CADDY_PACKINGLISTPDF###'
                           );
     
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
@@ -364,7 +364,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
           { 
                   if (!stristr($key, '.'))
                   { 
-                          $subpartArray['###WTCART_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('wtcartorderpdf_ll_' . $key);
+                          $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('wtcartorderpdf_ll_' . $key);
                   }
           }
 
@@ -421,13 +421,13 @@ var_dump( __METHOD__, __LINE__, $sesArray );
                   }
           }
 
-          $subpartArray['###WTCART_LL_SUMNET###'] = $this->pi_getLL('wtcartorderpdf_ll_cart_net');
-          $subpartArray['###WTCART_LL_SERVICE_COST###'] = $this->pi_getLL('wtcartorderpdf_ll_service_cost');
-          $subpartArray['###WTCART_LL_TAX###'] = $this->pi_getLL('wtcartorderpdf_ll_tax');
-          $subpartArray['###WTCART_LL_SUMGROSS###'] = $this->pi_getLL('wtcartorderpdf_ll_gross_total');
-          $subpartArray['###WTCART_LL_SHIPPING###'] = $this->pi_getLL('wtcartorderpdf_ll_shipping');
-          $subpartArray['###WTCART_LL_PAYMENT###'] = $this->pi_getLL('wtcartorderpdf_ll_payment');
-          $subpartArray['###WTCART_LL_SPECIAL###'] = $this->pi_getLL('wtcartorderpdf_ll_special');
+          $subpartArray['###CADDY_LL_SUMNET###'] = $this->pi_getLL('wtcartorderpdf_ll_cart_net');
+          $subpartArray['###CADDY_LL_SERVICE_COST###'] = $this->pi_getLL('wtcartorderpdf_ll_service_cost');
+          $subpartArray['###CADDY_LL_TAX###'] = $this->pi_getLL('wtcartorderpdf_ll_tax');
+          $subpartArray['###CADDY_LL_SUMGROSS###'] = $this->pi_getLL('wtcartorderpdf_ll_gross_total');
+          $subpartArray['###CADDY_LL_SHIPPING###'] = $this->pi_getLL('wtcartorderpdf_ll_shipping');
+          $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('wtcartorderpdf_ll_payment');
+          $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('wtcartorderpdf_ll_special');
 
           $subpartArray['###SHIPPING_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
           $subpartArray['###PAYMENT_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
