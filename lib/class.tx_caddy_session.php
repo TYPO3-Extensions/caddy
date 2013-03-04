@@ -914,10 +914,58 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+      // Increase numbers
+    $this->sessionDeleteIncreaseNumbers( $drs );
 
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );
   }
+
+ /**
+  * sessionDeleteIncreaseNumbers( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sessionDeleteIncreaseNumbers( $drs )
+  {
+    $registry =  t3lib_div::makeInstance('t3lib_Registry');
+    $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+
+      // Get current numbers
+    $numberDeliveryorder  = ( int ) $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
+    $numberInvoice        = ( int ) $registry->get( 'tx_caddy', $prefix . 'invoice' );
+    $numberOrder          = ( int ) $registry->get( 'tx_caddy', $prefix . 'order' );
+      // Get current numbers
+
+      // Increase current numbers
+    $numberDeliveryorder  = $numberDeliveryorder  + 1;
+    $numberInvoice        = $numberInvoice        + 1;
+    $numberOrder          = $numberOrder          + 1;
+      // Increase current numbers
+
+      // Set current numbers
+    $registry->set('tx_caddy', $prefix . 'deliveryorder', $numberDeliveryorder );
+    $registry->set('tx_caddy', $prefix . 'invoice',       $numberInvoice );
+    $registry->set('tx_caddy', $prefix . 'order',         $numberOrder );
+      // Set current numbers
+      
+      // DRS
+    if( $drs )
+    {
+      $prompt = 'New delivery order number: ' . $numberDeliveryorder;
+      t3lib_div::devlog(' [INFO/SESSION] '. $prompt, $this->extKey, 0 );
+      $prompt = 'New invoice number: ' .        $numberInvoice;
+      t3lib_div::devlog(' [INFO/SESSION] '. $prompt, $this->extKey, 0 );
+      $prompt = 'New order number: ' .          $numberOrder;
+      t3lib_div::devlog(' [INFO/SESSION] '. $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+}
 
 
 
