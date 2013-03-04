@@ -211,7 +211,7 @@ $TCA['tx_caddy_order'] = array (
     ),
     'sumTaxReduced' => array (
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxNormal',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxReduced',
       'config' => array (
         'type' => 'input',  
         'size' => '10',  

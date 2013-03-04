@@ -315,6 +315,7 @@ class tx_caddy extends tslib_pibase
       'optionsGross'  => $optionsGross,
       'sumGross'      => $sumGross,
       'sumNet'        => $sumNet,
+      'sumTaxNormal'  => $sumTaxNormal,
       'sumTaxReduced' => $sumTaxReduced,
     );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
