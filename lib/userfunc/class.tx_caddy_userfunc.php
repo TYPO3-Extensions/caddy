@@ -268,7 +268,7 @@ class tx_caddy_userfunc
   {
     $sheet = 'email';
     $field = 'customerEmail';
-    $customerEmail = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $customerEmail = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
 
       // RETURN : there is a flexform form
     if( $customerEmail )
@@ -310,37 +310,37 @@ class tx_caddy_userfunc
       // Sheet deliveryorder
     $sheet = 'deliveryorder';
     $field = 'company';
-    $deliveryorderCompany = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderCompany   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'firstname';
-    $deliveryorderFirstname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderFirstname = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'lastName';
-    $deliveryorderLastname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderLastname  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'address';
-    $deliveryorderAddress = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderAddress   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'zip';
-    $deliveryorderZip = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderZip       = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'city';
-    $deliveryorderCity = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderCity      = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'country';
-    $deliveryorderCountry = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $deliveryorderCountry   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
       // Sheet deliveryorder
       
       // Sheet invoice
     $sheet = 'invoice';
     $field = 'company';
-    $invoiceCompany = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceCompany         = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'firstname';
-    $invoiceFirstname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceFirstname       = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'lastName';
-    $invoiceLastname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceLastname        = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'address';
-    $invoiceAddress = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceAddress         = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'zip';
-    $invoiceZip = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceZip             = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'city';
-    $invoiceCity = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceCity            = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'country';
-    $invoiceCountry = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $invoiceCountry         = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
       // Sheet invoice
 
     switch( true )
