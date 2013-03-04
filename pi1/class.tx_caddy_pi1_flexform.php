@@ -69,7 +69,9 @@ class tx_caddy_pi1_flexform
     // [email]
 
     // [origin]
-  public $originDeliveryorderMode  = null;
+  public $originDeliveryorder   = null;
+  public $originInvoice         = null;
+  public $originOrder           = null;
     // [origin]
 
     // [sdef]
@@ -104,6 +106,7 @@ class tx_caddy_pi1_flexform
       // Sheets
     $this->sheetSdef( );
     $this->sheetEmail( );
+    $this->sheetOrigin( );
       // Sheets
 
   }
@@ -156,6 +159,35 @@ class tx_caddy_pi1_flexform
     $field                = 'termsPath';
     $this->emailTermsPath = $this->zzFfValue( $sheet, $field );
       // emailTermsPath
+
+    return;
+  }
+
+/**
+ * sheetOrigin: Configuration for evaluation
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sheetOrigin( )
+  {
+    $sheet = 'origin';
+
+      // originDeliveryorder
+    $field                      = 'deliveryorder';
+    $this->originDeliveryorder  = ( int ) $this->zzFfValue( $sheet, $field );
+      // originDeliveryorder
+
+      // originInvoice
+    $field                = 'invoice';
+    $this->originInvoice  = ( int ) $this->zzFfValue( $sheet, $field );
+      // originInvoice
+
+      // originOrder
+    $field              = 'invoice';
+    $this->originOrder  = ( int ) $this->zzFfValue( $sheet, $field );
+      // originOrder
 
     return;
   }

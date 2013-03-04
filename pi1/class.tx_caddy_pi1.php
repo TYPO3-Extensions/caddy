@@ -538,18 +538,35 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
     $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
-    $this->numberOrderRegistry          =  $registry->get( 'tx_caddy', $prefix . 'order' );
-    $this->numberInvoiceRegistry        =  $registry->get( 'tx_caddy', $prefix . 'invoice' );
-    $this->numberDeliveryorderRegistry  =  $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
 
+    $this->numberDeliveryorderRegistry  = $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
+    $this->numberOrderRegistry          = $registry->get( 'tx_caddy', $prefix . 'order' );
+    $this->numberInvoiceRegistry        = $registry->get( 'tx_caddy', $prefix . 'invoice' );
+
+    $this->numberDeliveryorderCurrent   = $this->numberDeliveryorderRegistry
+                                        + $this->flexform->originDeliveryorder
+                                        + 1;
+    $this->numberInvoiceCurrent         = $this->numberInvoiceRegistry
+                                        + $this->flexform->originInvoice
+                                        + 1;
+    $this->numberOrderCurrent           = $this->numberOrderRegistry
+                                        + $this->flexform->originOrder
+                                        + 1;
+    
       // DRS
     if( $this->drs->drsInit )
     {
+      $prompt = 'Delivery order number form registry: ' . $this->numberDeliveryorderRegistry;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
       $prompt = 'Order number form registry: ' .          $this->numberOrderRegistry;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
       $prompt = 'Invoice number form registry: ' .        $this->numberInvoiceRegistry;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-      $prompt = 'Delivery order number form registry: ' . $this->numberDeliveryorderRegistry;
+      $prompt = 'Current delivery order number: ' .       $this->numberDeliveryorderCurrent;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+      $prompt = 'Current invoice number: ' .              $this->numberInvoiceCurrent;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+      $prompt = 'Current order number: ' .                $this->numberOrderCurrent;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
     }
       // DRS
