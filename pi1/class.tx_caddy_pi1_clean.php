@@ -126,9 +126,11 @@ class tx_caddy_pi1_clean
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 //var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
 
+      // Initiate files
     $fileDeliveryorder  = null;
     $fileInvoice        = null;
     $fileTerms          = null;
+      // Initiate files
     
       // Get numbers
     $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
@@ -172,6 +174,7 @@ class tx_caddy_pi1_clean
     }
       // Get pdf is sent to ...
     
+      // Set files
     switch( true )
     {
       case( $pdfDeliveryorderToCustomer ):
@@ -181,7 +184,8 @@ class tx_caddy_pi1_clean
                                 $this->pObj->conf['pdf.']['deliveryorder.']['filename'],
                                 $this->pObj->conf['pdf.']['deliveryorder.']['filename.']
                               );
-        break;
+var_dump( __METHOD__, __LINE__, $this->pObj->conf['pdf.']['deliveryorder.']['filename.'], $fileDeliveryorder );    
+//        break;
       case( $pdfInvoiceToCustomer ):
       case( $pdfInvoiceToVendor ):
         $fileInvoice  = $this->local_cObj->cObjGetSingle
@@ -189,7 +193,7 @@ class tx_caddy_pi1_clean
                           $this->pObj->conf['pdf.']['invoice.']['filename'],
                           $this->pObj->conf['pdf.']['invoice.']['filename.']
                         );
-        break;
+//        break;
       case( $pdfTermsToCustomer ):
       case( $pdfTermsToVendor ):
         $fileTerms  = $this->local_cObj->cObjGetSingle
@@ -199,6 +203,7 @@ class tx_caddy_pi1_clean
                       );
         break;
     }
+      // Set files
 
       // Get total sum
     $sumGross       = $sesArray['sumGross'];
