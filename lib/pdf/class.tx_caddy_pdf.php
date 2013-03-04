@@ -87,11 +87,6 @@ class tx_caddy_pdf extends tslib_pibase
 //                          $this->confPdf['invoice.']['filename'], 
 //                          $this->confPdf['invoice.']['filename.']
 //                        );
-    $this->pfilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-                        (
-                          $this->confPdf['deliveryorder.']['filename'], 
-                          $this->confPdf['deliveryorder.']['filename.']
-                        );
 
 //    $this->onumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
 //                      (
@@ -105,15 +100,15 @@ class tx_caddy_pdf extends tslib_pibase
                       );
 
 //    $this->conf = $this->confPdf['invoice.'];
-//    $errorcnt += $this->renderOrderPdf($session);
+//    $errorcnt += $this->renderInvoicePdf($session);
     
     //$this->conf = $this->confPdf['deliveryorder.'];
-    $errorcnt += $this->renderPackinglistPdf( );
+    $errorcnt += $this->renderDeliveryorderPdf( );
 
     return $errorcnt;
   }
 
-  private function renderOrderPdf( &$session ) {
+  private function renderInvoicePdf( &$session ) {
           $filename = $this->concatFileName($this->ofilename);
 
           $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###CADDY_ORDERPDF###'); // Load HTML Template
@@ -154,7 +149,7 @@ class tx_caddy_pdf extends tslib_pibase
 
                   $this->renderInvoiceAddress($fpdi);
                   $this->renderDeliveryAddress($fpdi);
-                  $this->renderOrderNumber($fpdi);
+                  $this->renderInvoiceNumber($fpdi);
                   $this->renderAdditionalTextblocks($fpdi);
 
                   $subpartArray = $this->renderCartHeadline( $subpartArray );
@@ -192,16 +187,22 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * renderPackinglistPdf( ) : 
+  * renderDeliveryorderPdf( ) : 
   *
   * @return	boolean		true, in case of en arror. false, if all is proper
   * @version    2.0.0
   * @since      1.4.6
   */
-  private function renderPackinglistPdf( )
+  private function renderDeliveryorderPdf( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-var_dump( __METHOD__, __LINE__, $sesArray );
+
+    $this->pfilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+                        (
+                          $this->confPdf['deliveryorder.']['filename'], 
+                          $this->confPdf['deliveryorder.']['filename.']
+                        );
+var_dump( __METHOD__, __LINE__, $sesArray, $this->pfilename );
 die( );
     if( empty( $sesArray['products'] ) )
     {
@@ -258,7 +259,7 @@ die( );
     $fpdi->SetKeywords('TYPO3, caddy');    
 
     $this->renderDeliveryAddress( $fpdi, true );
-    $this->renderPackinglistNumber( $fpdi );
+    $this->renderDeliveryorderNumber( $fpdi );
     $this->renderAdditionalTextblocks( $fpdi );
 
     $fpdi->SetY( $this->conf['body-position-y'] );
@@ -450,13 +451,13 @@ die( );
           }
   }
 
-  private function renderOrderNumber(&$fpdi) {
+  private function renderInvoiceNumber(&$fpdi) {
           $fpdi->SetXY($this->conf['invoicenumber-position-x'], $this->conf['invoicenumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->onumber);
   }
 
-  private function renderPackinglistNumber(&$fpdi) {
+  private function renderDeliveryorderNumber(&$fpdi) {
           $fpdi->SetXY($this->conf['deliveryordernumber-position-x'], $this->conf['deliveryordernumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->pnumber);
