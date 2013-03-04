@@ -38,6 +38,7 @@
       <label index="tx_caddy_order.sumGross">gross</label>                        
       <label index="tx_caddy_order.sumTaxNormal">tax (normal)</label>                        
       <label index="tx_caddy_order.sumTaxReduced">tax (reduced)</label>                        
+      <label index="tx_caddy_order.tstamp">Sent at</label>                        
     </languageKey>
     <languageKey index="de" type="array">
       <label index="tt_content.list_type_pi1">Caddy : Warenkorb</label>
@@ -72,6 +73,7 @@
       <label index="tx_caddy_order.sumGross">Brutto</label>                        
       <label index="tx_caddy_order.sumTaxNormal">MWSt. (normal)</label>                        
       <label index="tx_caddy_order.sumTaxReduced">MWSt. (reduziert)</label>                        
+      <label index="tx_caddy_order.tstamp">Gesendet am</label>                        
     </languageKey>
   </data>
 </T3locallang>
