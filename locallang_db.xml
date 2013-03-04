@@ -19,7 +19,6 @@
       <label index="tx_caddy_order.fileInvoice">Invoice</label>                        
       <label index="tx_caddy_order.fileTerms"><![CDATA[Terms & Conditions]]></label>                        
       <label index="tx_caddy_order.item">Items</label>                        
-      <label index="tx_caddy_order.label">Order (Delivery Order, Invoice)</label>                        
       <label index="tx_caddy_order.numberDeliveryorder">Delivery order</label>                        
       <label index="tx_caddy_order.numberInvoice">Invoice</label>                        
       <label index="tx_caddy_order.numberOrder">Order</label>                        
@@ -54,7 +53,6 @@
       <label index="tx_caddy_order.fileInvoice">Rechnung</label>                        
       <label index="tx_caddy_order.fileTerms">AGB</label>                        
       <label index="tx_caddy_order.item">Artikel</label>                        
-      <label index="tx_caddy_order.label">Bestellung (Lieferschein, Rechnung)</label>                        
       <label index="tx_caddy_order.numberDeliveryorder">Lieferschein</label>                        
       <label index="tx_caddy_order.numberInvoice">Rechnung</label>                        
       <label index="tx_caddy_order.numberOrder">Bestellung</label>                        

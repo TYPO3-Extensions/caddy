@@ -197,7 +197,7 @@ t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/
   // Orders
 $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
-    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.label',
+    'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
     'label'             => 'numberOrder',  
     'label_alt'         => 'numberDeliveryorder,numberInvoice',  
     'label_alt_force'   => true,  
