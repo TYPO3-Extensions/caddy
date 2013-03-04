@@ -202,6 +202,7 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 var_dump( __METHOD__, __LINE__, $sesArray );
+die( );
     if( empty( $sesArray['products'] ) )
     {
       return;
