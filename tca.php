@@ -68,8 +68,8 @@ $TCA['tx_caddy_order'] = array (
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.customerEmail',
       'config' => array (
         'type' => 'input',  
-        'size' => '10',  
-        'eval' => 'int',
+        'size' => '40',  
+        'eval' => '',
       )
     ),
     'fileDeliveryorder' => array (
