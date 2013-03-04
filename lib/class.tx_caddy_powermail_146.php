@@ -136,7 +136,7 @@ class tx_caddy_powermail_146 extends tslib_pibase {
 
     $conf               = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['settings.']['overall.'];
     $ordernumber        = $GLOBALS['TSFE']->cObj->cObjGetSingle($conf['ordernumber'], $conf['ordernumber.']);
-    $packinglistnumber  = $GLOBALS['TSFE']->cObj->cObjGetSingle($conf['packinglistnumber'], $conf['packinglistnumber.']);
+    $deliveryordernumber  = $GLOBALS['TSFE']->cObj->cObjGetSingle($conf['deliveryordernumber'], $conf['deliveryordernumber.']);
 
     // HOOK for ATTACHMENTS
     $checkError = 0;
@@ -147,7 +147,7 @@ class tx_caddy_powermail_146 extends tslib_pibase {
         $params = array(
           'subpart'           => $subpart,
           'ordernumber'       => $ordernumber,
-          'packinglistnumber' => $packinglistnumber
+          'deliveryordernumber' => $deliveryordernumber
         );
         $checkError = $checkError + t3lib_div::callUserFunction($userFunc, $params, $sesArray);
       }

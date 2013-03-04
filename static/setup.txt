@@ -613,14 +613,14 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      orderaddress-position-x       = {$plugin.caddy.pdf.deliveryorder.orderaddress-position-x}
-      orderaddress-position-y       = {$plugin.caddy.pdf.deliveryorder.orderaddress-position-y}
+      invoiceaddress-position-x       = {$plugin.caddy.pdf.deliveryorder.invoiceaddress-position-x}
+      invoiceaddress-position-y       = {$plugin.caddy.pdf.deliveryorder.invoiceaddress-position-y}
 
-      shippingaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-x}
-      shippingaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.shippingaddress-position-y}
+      deliveryaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.deliveryaddress-position-x}
+      deliveryaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.deliveryaddress-position-y}
 
-      packinglistnumber = COA
-      packinglistnumber {
+      deliveryordernumber = COA
+      deliveryordernumber {
         10 = TEXT
         10 {
           data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
@@ -640,13 +640,12 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      packinglistnumber-position-x  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-x}
-      packinglistnumber-position-y  = {$plugin.caddy.pdf.deliveryorder.packinglistnumber-position-y}
+      deliveryordernumber-position-x  = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-x}
+      deliveryordernumber-position-y  = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-y}
 
-      cart-position-x               = {$plugin.caddy.pdf.deliveryorder.cart-position-x}
-      cart-position-y               = {$plugin.caddy.pdf.deliveryorder.cart-position-y}
-      cart-width                    = {$plugin.caddy.pdf.deliveryorder.cart-width}
-      cart-height                   = {$plugin.caddy.pdf.deliveryorder.cart-height}
+      body-position-x               = {$plugin.caddy.pdf.deliveryorder.body-position-x}
+      body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
+      body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
 
       additionaltextblocks {
         1 {
@@ -714,11 +713,11 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      orderaddress-position-x     = {$plugin.caddy.pdf.invoice.orderaddress-position-x}
-      orderaddress-position-y     = {$plugin.caddy.pdf.invoice.orderaddress-position-y}
+      invoiceaddress-position-x     = {$plugin.caddy.pdf.invoice.invoiceaddress-position-x}
+      invoiceaddress-position-y     = {$plugin.caddy.pdf.invoice.invoiceaddress-position-y}
 
-      shippingaddress-position-x  = {$plugin.caddy.pdf.invoice.shippingaddress-position-x}
-      shippingaddress-position-y  = {$plugin.caddy.pdf.invoice.shippingaddress-position-y}
+      deliveryaddress-position-x  = {$plugin.caddy.pdf.invoice.deliveryaddress-position-x}
+      deliveryaddress-position-y  = {$plugin.caddy.pdf.invoice.deliveryaddress-position-y}
 
       ordernumber = COA
       ordernumber {
@@ -741,13 +740,12 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      ordernumber-position-x      = {$plugin.caddy.pdf.invoice.ordernumber-position-x}
-      ordernumber-position-y      = {$plugin.caddy.pdf.invoice.ordernumber-position-y}
+      invoicenumber-position-x      = {$plugin.caddy.pdf.invoice.invoicenumber-position-x}
+      invoicenumber-position-y      = {$plugin.caddy.pdf.invoice.invoicenumber-position-y}
 
-      cart-position-x             = {$plugin.caddy.pdf.invoice.cart-position-x}
-      cart-position-y             = {$plugin.caddy.pdf.invoice.cart-position-y}
-      cart-width                  = {$plugin.caddy.pdf.invoice.cart-width}
-      cart-height                 = {$plugin.caddy.pdf.invoice.cart-height}
+      body-position-x             = {$plugin.caddy.pdf.invoice.body-position-x}
+      body-position-y             = {$plugin.caddy.pdf.invoice.body-position-y}
+      body-width                  = {$plugin.caddy.pdf.invoice.body-width}
 
       additionaltextblocks {
         1 {

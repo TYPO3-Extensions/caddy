@@ -110,17 +110,6 @@ plugin.caddy {
   # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   powermail.sponsors = Click me!
 
-  # cat=caddy - ordernumber//100; type=text; label= Prefix for Order Number.
-  ordernumber.prefix =
-  # cat=caddy - ordernumber//110; type=text; label= Suffix for Order Number.
-  ordernumber.suffix =
-  # cat=caddy - ordernumber//120; type=int+; label= Offset for Order Number: The offset is added to the order number (e.g. for offset 1000000 the first order number will be 1000001).
-  ordernumber.offset =
-  # cat=caddy - ordernumber/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
-  ordernumber.externalLinks = Click me!
-  # cat=caddy - ordernumber/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  ordernumber.sponsors = Click me!
-
   # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
   # cat=caddy - tax//155; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 0.07). Used for calculation.
@@ -138,29 +127,26 @@ plugin.caddy {
 plugin.caddy {
   pdf {
     invoice {
-      abortonerror                = 0
-      orderaddress-position-x     = 20
-      orderaddress-position-y     = 45
-      shippingaddress-position-x  = 20
-      shippingaddress-position-y  = 65
-      ordernumber-position-x      = 20
-      ordernumber-position-y      = 90
-      cart-position-x             = 25
-      cart-position-y             = 110
-      cart-width                  = 160
-      cart-height                 = 00
+      invoiceaddress-position-x     = 20
+      invoiceaddress-position-y     = 45
+      deliveryaddress-position-x  = 20
+      deliveryaddress-position-y  = 65
+      invoicenumber-position-x      = 20
+      invoicenumber-position-y      = 90
+      body-position-x             = 25
+      body-position-y             = 110
+      body-width                  = 160
     }
     deliveryorder {
-      orderaddress-position-x       = 20
-      orderaddress-position-y       = 45
-      shippingaddress-position-x    = 20
-      shippingaddress-position-y    = 45
-      packinglistnumber-position-x  = 20
-      packinglistnumber-position-y  = 90
-      cart-position-x               = 25
-      cart-position-y               = 110
-      cart-width                    = 160
-      cart-height                   = 200
+      invoiceaddress-position-x       = 20
+      invoiceaddress-position-y       = 45
+      deliveryaddress-position-x    = 20
+      deliveryaddress-position-y    = 45
+      deliveryordernumber-position-x  = 20
+      deliveryordernumber-position-y  = 90
+      body-position-x               = 25
+      body-position-y               = 110
+      body-width                    = 160
     }
   }
 }

@@ -100,8 +100,8 @@ class tx_caddy_pdf extends tslib_pibase
 //                      );
     $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                       (
-                        $this->confPdf['deliveryorder.']['packinglistnumber'], 
-                        $this->confPdf['deliveryorder.']['packinglistnumber.']
+                        $this->confPdf['deliveryorder.']['deliveryordernumber'], 
+                        $this->confPdf['deliveryorder.']['deliveryordernumber.']
                       );
 
 //    $this->conf = $this->confPdf['invoice.'];
@@ -152,8 +152,8 @@ class tx_caddy_pdf extends tslib_pibase
 
                   $fpdi->SetFont('Helvetica','',$this->conf['font-size']);
 
-                  $this->renderOrderAddress($fpdi);
-                  $this->renderShippingAddress($fpdi);
+                  $this->renderInvoiceAddress($fpdi);
+                  $this->renderDeliveryAddress($fpdi);
                   $this->renderOrderNumber($fpdi);
                   $this->renderAdditionalTextblocks($fpdi);
 
@@ -167,7 +167,7 @@ class tx_caddy_pdf extends tslib_pibase
                   $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached($this->tmpl['all'], $outerMarkerArray, $subpartArray);
 
                   $fpdi->SetLineWidth(1);
-                  $fpdi->writeHTMLCell($this->conf['cart-width'], 0, $this->conf['cart-position-x'], $this->conf['cart-position-y'], $html, 0, 2);
+                  $fpdi->writeHTMLCell($this->conf['body-width'], 0, $this->conf['body-position-x'], $this->conf['body-position-y'], $html, 0, 2);
 
                   $this->renderPaymentOption($fpdi, $session['payment']);
 
@@ -256,11 +256,11 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     $fpdf->SetSubject('Lieferschein Subject');
     $fpdf->SetKeywords('TYPO3, caddy');    
 
-    $this->renderShippingAddress( $fpdi, true );
+    $this->renderDeliveryAddress( $fpdi, true );
     $this->renderPackinglistNumber( $fpdi );
     $this->renderAdditionalTextblocks( $fpdi );
 
-    $fpdi->SetY( $this->conf['cart-position-y'] );
+    $fpdi->SetY( $this->conf['body-position-y'] );
 
     $subpartArray = null;
     $subpartArray = $this->renderCartHeadline( $subpartArray );
@@ -277,10 +277,10 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
     $fpdi->writeHTMLCell
     (
-      $this->conf['cart-width'], 
+      $this->conf['body-width'], 
       0, 
-      $this->conf['cart-position-x'], 
-      $this->conf['cart-position-y'], 
+      $this->conf['body-position-x'], 
+      $this->conf['body-position-y'], 
       $html, 
       0, 
       2
@@ -306,62 +306,62 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     $sesArray['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
   }
 
-  private function renderOrderAddress( &$fpdi )
+  private function renderInvoiceAddress( &$fpdi )
   {
-    $orderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
+    $invoiceaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
                     (
-                      $this->conf['orderaddress'], $this->conf['orderaddress.']
+                      $this->conf['invoiceaddress'], $this->conf['invoiceaddress.']
                     );
-    if( ! empty( $orderaddress ) )
+    if( ! empty( $invoiceaddress ) )
     {
-      $orderaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
+      $invoiceaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
                               (
-                                $this->conf['orderaddress.']['0'], $this->conf['orderaddress.']['0.']
+                                $this->conf['invoiceaddress.']['0'], $this->conf['invoiceaddress.']['0.']
                               );
-      if( $orderaddressheadline )
+      if( $invoiceaddressheadline )
       {
-        $orderaddress = $orderaddressheadline . $orderaddress;
+        $invoiceaddress = $invoiceaddressheadline . $invoiceaddress;
       }
       $fpdi->writeHtmlCell
       (
         160, 
         0, 
-        $this->conf['orderaddress-position-x'], 
-        $this->conf['orderaddress-position-y'], 
-        $orderaddress
+        $this->conf['invoiceaddress-position-x'], 
+        $this->conf['invoiceaddress-position-y'], 
+        $invoiceaddress
       );
     }
   }
 
-  private function renderShippingAddress( &$fpdi, $fallback=false )
+  private function renderDeliveryAddress( &$fpdi, $fallback=false )
   {
-    $shippingaddress =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+    $deliveryaddress =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                         (
-                          $this->conf['shippingaddress'], $this->conf['shippingaddress.']
+                          $this->conf['deliveryaddress'], $this->conf['deliveryaddress.']
                         );
 
-    if ( ! empty( $shippingaddress ) )
+    if ( ! empty( $deliveryaddress ) )
     {
-      $shippingaddressheadline =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+      $deliveryaddressheadline =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                                   (
-                                    $this->conf['shippingaddress.']['0'], $this->conf['shippingaddress.']['0.']
+                                    $this->conf['deliveryaddress.']['0'], $this->conf['deliveryaddress.']['0.']
                                   );
-      if( $shippingaddressheadline )
+      if( $deliveryaddressheadline )
       {
-        $shippingaddress = $shippingaddressheadline . $shippingaddress;
+        $deliveryaddress = $deliveryaddressheadline . $deliveryaddress;
       }
       $fpdi->writeHtmlCell
       (
         160, 
         0, 
-        $this->conf['shippingaddress-position-x'],
-        $this->conf['shippingaddress-position-y'], 
-        $shippingaddress
+        $this->conf['deliveryaddress-position-x'],
+        $this->conf['deliveryaddress-position-y'], 
+        $deliveryaddress
       );
     }
     elseif ( $fallback ) 
     {
-      $this->renderOrderAddress( $fpdi );
+      $this->renderInvoiceAddress( $fpdi );
     }
   }
 
@@ -406,7 +406,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
                   'optionsGross'      => $session['optionsGross'],
                   'optionsNet'        => $session['optionsNet'], 
                   'ordernumber'       => $session['ordernumber'],
-                  'packinglistnumber' => $session['packinglistnumber'],
+                  'deliveryordernumber' => $session['deliveryordernumber'],
                   'productsGross'     => $session['productsGross'],
                   'productsNet'       => $session['productsNet'],
                   'sumGross'          => $session['sumGross'],
@@ -450,13 +450,13 @@ var_dump( __METHOD__, __LINE__, $sesArray );
   }
 
   private function renderOrderNumber(&$fpdi) {
-          $fpdi->SetXY($this->conf['ordernumber-position-x'], $this->conf['ordernumber-position-y']);
+          $fpdi->SetXY($this->conf['invoicenumber-position-x'], $this->conf['invoicenumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->onumber);
   }
 
   private function renderPackinglistNumber(&$fpdi) {
-          $fpdi->SetXY($this->conf['packinglistnumber-position-x'], $this->conf['packinglistnumber-position-y']);
+          $fpdi->SetXY($this->conf['deliveryordernumber-position-x'], $this->conf['deliveryordernumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->pnumber);
   }
@@ -474,9 +474,9 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
           if ($payment_option['note']) {
                   $fpdi->SetY($fpdi->GetY()+20);
-                  $fpdi->SetX($this->conf['cart-position-x']);
+                  $fpdi->SetX($this->conf['body-position-x']);
                   $fpdi->Cell('150', '5', $payment_option['title'], 0, 1);
-                  $fpdi->SetX($this->conf['cart-position-x']);
+                  $fpdi->SetX($this->conf['body-position-x']);
                   $fpdi->Cell('150', '5', $payment_option['note'], 0, 1);
           }
   } 
