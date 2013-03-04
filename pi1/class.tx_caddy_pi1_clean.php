@@ -143,31 +143,32 @@ class tx_caddy_pi1_clean
     
       // Get pdf is sent to ...
     $pdfDeliveryorderToCustomer = false;
+    $pdfDeliveryorderToVendor   = false;
+    $pdfInvoiceToCustomer       = false;
+    $pdfInvoiceToVendor         = false;
+    $pdfTermsToCustomer         = false;
+    $pdfTermsToVendor           = false;
+
     if( ! empty ( $sesArray['sendCustomerDeliveryorder'] ) ) 
     {
       $pdfDeliveryorderToCustomer = true;
     }
-    $pdfDeliveryorderToVendor = false;
     if( ! empty ( $sesArray['sendVendorDeliveryorder'] ) ) 
     {
       $pdfDeliveryorderToVendor = true;
     }
-    $pdfInvoiceToCustomer = false;
     if( ! empty ( $sesArray['sendCustomerInvoice'] ) ) 
     {
       $pdfInvoiceToCustomer = true;
     }
-    $pdfInvoiceToVendor = false;
     if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
     {
       $pdfInvoiceToVendor = true;
     }
-    $pdfTermsToCustomer = false;
     if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
     {
       $pdfTermsToCustomer = true;
     }
-    $pdfTermsToVendor = false;
     if( ! empty ( $sesArray['sendVendorTerms'] ) ) 
     {
       $pdfTermsToVendor = true;
@@ -184,8 +185,10 @@ class tx_caddy_pi1_clean
                                 $this->pObj->conf['pdf.']['deliveryorder.']['filename'],
                                 $this->pObj->conf['pdf.']['deliveryorder.']['filename.']
                               );
-var_dump( __METHOD__, __LINE__, $this->pObj->conf['pdf.']['deliveryorder.']['filename.'], $fileDeliveryorder );    
-//        break;
+        break;
+    }
+    switch( true )
+    {
       case( $pdfInvoiceToCustomer ):
       case( $pdfInvoiceToVendor ):
         $fileInvoice  = $this->local_cObj->cObjGetSingle
@@ -193,7 +196,10 @@ var_dump( __METHOD__, __LINE__, $this->pObj->conf['pdf.']['deliveryorder.']['fil
                           $this->pObj->conf['pdf.']['invoice.']['filename'],
                           $this->pObj->conf['pdf.']['invoice.']['filename.']
                         );
-//        break;
+        break;
+    }
+    switch( true )
+    {
       case( $pdfTermsToCustomer ):
       case( $pdfTermsToVendor ):
         $fileTerms  = $this->local_cObj->cObjGetSingle

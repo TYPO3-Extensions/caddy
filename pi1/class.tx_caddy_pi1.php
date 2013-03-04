@@ -924,19 +924,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerTerms( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailTermsMode )
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendCustomerTerms'] = $this->flexform->emailTermsPath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendCustomerTerms'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
