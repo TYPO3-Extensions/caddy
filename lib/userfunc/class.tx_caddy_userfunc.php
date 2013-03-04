@@ -308,7 +308,6 @@ class tx_caddy_userfunc
       
       // Sheet deliveryorder
     $sheet = 'deliveryorder';
-var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] );
     $field = 'company';
     $deliveryorderCompany   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'firstName';
@@ -327,7 +326,6 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] 
       
       // Sheet invoice
     $sheet = 'invoice';
-var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] );
     $field = 'company';
     $invoiceCompany         = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'firstName';
@@ -503,13 +501,17 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] 
 
     $prompt = $prompt . $this->flexformCheck( );
 
-    $prompt = $prompt . '
-      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportPerformance'). '
+    if( $prompt )
+    {
+      $prompt = $prompt . '
+        <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportPerformance'). '
+          </div>
         </div>
-      </div>
-      ';
+        ';
+      return $prompt;    
+    }
 
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
