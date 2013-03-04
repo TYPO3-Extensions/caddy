@@ -32,6 +32,9 @@
             <foreign_table>
               tx_powermail_fields
             </foreign_table>
+            <foreign_table_where>
+              ORDER BY tx_powermail_fields.uid
+            </foreign_table_where>
             <minitems>0</minitems>
             <default>customer</default>
             <maxitems>1</maxitems>
