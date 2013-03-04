@@ -157,7 +157,8 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->renderOrderNumber($fpdi);
                   $this->renderAdditionalTextblocks($fpdi);
 
-                  $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
+                  $subpartArray = $this->renderCartHeadline( $subpartArray );
+                  $outerMarkerArray = $outerMarkerArray . $subpartArray;
                   foreach ($session['products'] as $key => $product) {
                     $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
                   }
@@ -249,6 +250,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     }
 
     $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
+    $fpdi->SetTextColor( 255, 255, 255 );
 
     $this->renderShippingAddress( $fpdi, true );
     $this->renderPackinglistNumber( $fpdi );
@@ -257,7 +259,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     $fpdi->SetY( $this->conf['cart-position-y'] );
 
     $subpartArray = null;
-    $this->renderCartHeadline( $subpartArray );
+    $subpartArray = $this->renderCartHeadline( $subpartArray );
 
     foreach( $sesArray['products'] as $product ) 
     {
@@ -359,7 +361,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     }
   }
 
-  private function renderCartHeadline( &$subpartArray )
+  private function renderCartHeadline( $subpartArray )
   {
     foreach( array_keys ( ( array ) $this->confSettings['powermailCart.']['fields.'] ) as $key )
     { 
@@ -368,6 +370,8 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('caddy_ll_' . $key);
       }
     }
+    
+    return $subpartArray;
 
   }
 
