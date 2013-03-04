@@ -874,19 +874,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerDeliveryorder( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailDeliveryorderMode )
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendCustomerDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendCustomerDeliveryorder'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
@@ -899,19 +899,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerInvoice( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailInvoiceMode )
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendCustomerInvoice'] = $this->flexform->emailInvoicePath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendCustomerInvoice'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
