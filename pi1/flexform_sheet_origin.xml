@@ -6,6 +6,18 @@
     </TCEforms>
     <type>array</type>
     <el>
+      <order>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.order</label>
+          <config>
+            <type>input</type>
+            <size>10</size>
+            <max>20</max>
+            <eval>int</eval>
+            <default>0</default>
+          </config>
+        </TCEforms>
+      </order>
       <invoice>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.invoice</label>
@@ -14,7 +26,7 @@
             <size>10</size>
             <max>20</max>
             <eval>int</eval>
-            <default>1</default>
+            <default>0</default>
           </config>
         </TCEforms>
       </invoice>
@@ -26,7 +38,7 @@
             <size>10</size>
             <max>20</max>
             <eval>int</eval>
-            <default>1</default>
+            <default>0</default>
           </config>
         </TCEforms>
       </deliveryorder>

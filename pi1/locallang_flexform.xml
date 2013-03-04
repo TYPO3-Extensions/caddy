@@ -27,8 +27,9 @@
       <label index="email.termsPath"><![CDATA[Path to PDF draft: Terms & Conditions]]></label>
       <label index="help">Help!</label>
       <label index="origin">Origin</label>
-      <label index="origin.deliveryorder">Number for the first delivery order (i.e: 1000. Numbers will become 1000, 1001, 1002, ...)</label>
-      <label index="origin.invoice">Number for the first invoice (i.e: 1000. Numbers will become 1000, 1001, 1002, ...)</label>
+      <label index="origin.deliveryorder">Increase delivery order number with</label>
+      <label index="origin.invoice">Increase invoice number with</label>
+      <label index="origin.order">Increase order number with</label>
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
@@ -59,8 +60,9 @@
       <label index="email.termsPath">Pfad zur PDF-Vorlage: AGB</label>
       <label index="help">Hilfe!</label>      
       <label index="origin">Ausgangspunkt</label>
-      <label index="origin.deliveryorder">Die erste Lieferscheinnummer (Beispiel: 1000. Nummern werden dann 1000, 1001, 1002, ...)</label>
-      <label index="origin.invoice">Die erste Rechnungsnummer (Beispiel: 1000. Nummern werden dann 1000, 1001, 1002, ...)</label>
+      <label index="origin.deliveryorder"><![CDATA[Erh&ouml;he die Lieferscheinnummer um]]></label>
+      <label index="origin.invoice"><![CDATA[Erh&ouml;he die Rechnungsnummer um]]></label>
+      <label index="origin.order"><![CDATA[Erh&ouml;he die Bestellnummer um]]></label>
       <label index="sdefCsvallowedip">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
       <label index="sdefReport">Check it!-Bericht</label>

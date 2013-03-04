@@ -133,6 +133,14 @@ class tx_caddy_pi1 extends tslib_pibase
   public  $arr_extConf      = null;
   public  $tmpl             = null;
 
+  private $numberDeliveryorderCurrent   =  null;
+  private $numberDeliveryorderRegistry  =  null;
+  private $numberInvoiceCurrent         =  null;
+  private $numberInvoiceRegistry        =  null;
+  private $numberOrderCurrent           =  null;
+  private $numberOrderRegistry          =  null;
+
+  
 
 
 
@@ -392,6 +400,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initGpVar( );
     $this->initPowermail( );
     $this->initDatabase( );
+    $this->initNumbers( );
   }
 
 /**
@@ -515,6 +524,36 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->flexform->main( );
   }
+
+
+ /**
+  * initNumbers( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initNumbers( )
+  {
+    $registry =  t3lib_div::makeInstance('t3lib_Registry');
+    $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+    $this->numberOrderRegistry          =  $registry->get( 'tx_caddy', $prefix . 'order' );
+    $this->numberInvoiceRegistry        =  $registry->get( 'tx_caddy', $prefix . 'invoice' );
+    $this->numberDeliveryorderRegistry  =  $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
+
+      // DRS
+    if( $this->drs->drsInit )
+    {
+      $prompt = 'Order number form registry: ' .          $this->numberOrderRegistry;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+      $prompt = 'Invoice number form registry: ' .        $this->numberInvoiceRegistry;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+      $prompt = 'Delivery order number form registry: ' . $this->numberDeliveryorderRegistry;
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+    }
+      // DRS
+}
 
  /**
   * initGpVar( )

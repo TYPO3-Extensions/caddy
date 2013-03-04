@@ -68,6 +68,10 @@ class tx_caddy_pi1_flexform
   public $emailTermsPath          = null;
     // [email]
 
+    // [origin]
+  public $originDeliveryorderMode  = null;
+    // [origin]
+
     // [sdef]
     // [boolean] enable DRS
   public $sdefDrs = null;

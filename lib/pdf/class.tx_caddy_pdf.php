@@ -250,7 +250,11 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     }
 
     $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
-    $fpdi->SetTextColor( 255, 255, 255 );
+    //$fpdi->SetTextColor( 255, 255, 255 );
+    $fpdf->SetAuthor('TYPO3 Caddy');
+    $fpdf->SetTitle('Lieferschein');
+    $fpdf->SetSubject('Lieferschein Subject');
+    $fpdf->SetKeywords('TYPO3, caddy');    
 
     $this->renderShippingAddress( $fpdi, true );
     $this->renderPackinglistNumber( $fpdi );
