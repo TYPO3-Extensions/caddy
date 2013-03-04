@@ -185,7 +185,7 @@ class tx_caddy_pi1_flexform
       // originInvoice
 
       // originOrder
-    $field              = 'invoice';
+    $field              = 'order';
     $this->originOrder  = ( int ) $this->zzFfValue( $sheet, $field );
       // originOrder
 
