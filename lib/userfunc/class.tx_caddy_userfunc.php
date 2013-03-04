@@ -305,7 +305,76 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
-    return null;
+      
+
+      // Sheet deliveryorder
+    $sheet = 'deliveryorder';
+    $field = 'company';
+    $deliveryorderCompany = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'firstname';
+    $deliveryorderFirstname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'lastName';
+    $deliveryorderLastname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'address';
+    $deliveryorderAddress = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'zip';
+    $deliveryorderZip = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'city';
+    $deliveryorderCity = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'country';
+    $deliveryorderCountry = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+      // Sheet deliveryorder
+      
+      // Sheet invoice
+    $sheet = 'invoice';
+    $field = 'company';
+    $invoiceCompany = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'firstname';
+    $invoiceFirstname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'lastName';
+    $invoiceLastname = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'address';
+    $invoiceAddress = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'zip';
+    $invoiceZip = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'city';
+    $invoiceCity = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+    $field = 'country';
+    $invoiceCountry = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+      // Sheet invoice
+
+    switch( true )
+    {
+      case( empty( $deliveryorderCompany ) ):
+      case( empty( $deliveryorderFirstname ) ):
+      case( empty( $deliveryorderLastname ) ):
+      case( empty( $deliveryorderAddress ) ):
+      case( empty( $deliveryorderZip ) ):
+      case( empty( $deliveryorderCity ) ):
+      case( empty( $deliveryorderCountry ) ):
+      case( empty( $invoiceCompany ) ):
+      case( empty( $invoiceFirstname ) ):
+      case( empty( $invoiceLastname ) ):
+      case( empty( $invoiceAddress ) ):
+      case( empty( $invoiceZip ) ):
+      case( empty( $invoiceCity ) ):
+      case( empty( $invoiceCountry ) ):
+        break;
+      default:
+        return null;
+    }
+    
+      // RETURN prompt : there isn't any flexform form
+    $prompt = '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckPowermailOtherFields'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any flexform form
+    
+    return $prompt;
   }
  
   

@@ -15,6 +15,11 @@
         The customer e-mail is missing in the sheet [email].<br />
         Any e-mail can't sent without this address. Please upate the sheet!
       ]]></label>
+      <label index="flexformCheckPowermailOtherFields"><![CDATA[
+        Some fields in the sheets [delivery order address] and [billing address] aren't set.<br />
+        Please update your configuration, if values are missing in the delivery order address
+        or the billing address.
+      ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         This flexform is never saved. Please save it.<br />
         Without saving you will get unproper results!
@@ -193,6 +198,11 @@
       <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
         Du hast keine Kunden E-Mail im Blatt [E-Mail] angegeben.<br />
         Ohne die Adresse kann keine E-Mail zugestellt werden. Bitte korrigiere die Einstellung!
+      ]]></label>
+      <label index="flexformCheckPowermailOtherFields"><![CDATA[
+        Einige Felder in den Bl&auml;ttern [Lieferadresse] und [Rechnungsadresse] sind leer.<br />
+        Pr&uuml;fe Deine Einstellungen, wenn Angaben in der Lieferadresse oder der rechnungsadresse 
+        fehlen sollten.
       ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         Diese Flexform wurde nie gespeichert. Bitte speichere die Form einmal ab.<br />

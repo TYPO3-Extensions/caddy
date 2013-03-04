@@ -58,15 +58,15 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="deliveryorder">Lieferadresse</label>
-      <label index="deliveryorder.company">Firma (Feld in Powermail)</label>
-      <label index="deliveryorder.firstName">Vorname (Feld in Powermail)</label>
-      <label index="deliveryorder.lastName">Nachname (Feld in Powermail)</label>
-      <label index="deliveryorder.address">Straße (Feld in Powermail)</label>
-      <label index="deliveryorder.zip">PLZ (Feld in Powermail)</label>
-      <label index="deliveryorder.city">Stadt (Feld in Powermail)</label>
-      <label index="deliveryorder.country">Land (Feld in Powermail)</label>
+      <label index="deliveryorder.company">Firma (Feld von Powermail)</label>
+      <label index="deliveryorder.firstName">Vorname (Feld von Powermail)</label>
+      <label index="deliveryorder.lastName">Nachname (Feld von Powermail)</label>
+      <label index="deliveryorder.address">Straße (Feld von Powermail)</label>
+      <label index="deliveryorder.zip">PLZ (Feld von Powermail)</label>
+      <label index="deliveryorder.city">Stadt (Feld von Powermail)</label>
+      <label index="deliveryorder.country">Land (Feld von Powermail)</label>
       <label index="email">E-Mail</label>
-      <label index="email.customerEmail">Kunden E-Mail (Feld in Powermail)</label>
+      <label index="email.customerEmail">Kunden E-Mail (Feld von Powermail)</label>
       <label index="email.deliveryorderMode">PDF-Lieferschein</label>
       <label index="email.deliveryorderMode.disabled">Nicht versenden</label>
       <label index="email.deliveryorderMode.customer">An den Kunden senden</label>
@@ -84,13 +84,13 @@
       <label index="email.termsMode.all">An den Kunden und den Anbieter senden</label>
       <label index="help">Hilfe!</label>      
       <label index="invoice">Rechnungsadresse</label>
-      <label index="invoice.company">Firma (Feld in Powermail)</label>
-      <label index="invoice.firstName">Vorname (Feld in Powermail)</label>
-      <label index="invoice.lastName">Naxchname (Feld in Powermail)</label>
-      <label index="invoice.address">Straße (Feld in Powermail)</label>
-      <label index="invoice.zip">PLZ (Feld in Powermail)</label>
-      <label index="invoice.city">Stadt (Feld in Powermail)</label>
-      <label index="invoice.country">Land (Feld in Powermail)</label>
+      <label index="invoice.company">Firma (Feld von Powermail)</label>
+      <label index="invoice.firstName">Vorname (Feld von Powermail)</label>
+      <label index="invoice.lastName">Naxchname (Feld von Powermail)</label>
+      <label index="invoice.address">Straße (Feld von Powermail)</label>
+      <label index="invoice.zip">PLZ (Feld von Powermail)</label>
+      <label index="invoice.city">Stadt (Feld von Powermail)</label>
+      <label index="invoice.country">Land (Feld von Powermail)</label>
       <label index="origin">Nummern</label>
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
