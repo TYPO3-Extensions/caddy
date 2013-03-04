@@ -94,18 +94,10 @@ plugin.caddy {
   # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   gpvar.sponsors = Click me!
 
-  # cat=caddy - pdf//101; type=string; label= PDF ordering file: Path to the PDF ordering file  
-  pdf.invoice.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
-  # cat=caddy - pdf//102; type=string; label= HTML for the PDF ordering file:Path to the HTML template
+  # cat=caddy - pdf//101; type=string; label= HTML for the PDF ordering file:Path to the HTML template
   pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
-  # cat=caddy - pdf//103; type=string; label= Directory for orderings:Path to the directory for the ordering copies 
-  pdf.invoice.dir = fileadmin/caddy/orders
-  # cat=caddy - pdf//201; type=string; label= PDF packinglist file: Path to the PDF packinglist file  
-  pdf.deliveryorder.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf
-  # cat=caddy - pdf//202; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
+  # cat=caddy - pdf//102; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
   pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
-  # cat=caddy - pdf//203; type=string; label= Directory for packinglists:Path to the directory for the packinglist copies 
-  pdf.deliveryorder.dir = fileadmin/caddy/packinglists
   # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdfContent.externalLinks = Click me!
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
