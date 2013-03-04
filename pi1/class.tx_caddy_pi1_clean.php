@@ -271,7 +271,39 @@ class tx_caddy_pi1_clean
   {
     $sesArray               = $this->pObj->powermail->sessionData( );
     $uidFieldCustomerEmail  = $this->pObj->flexform->emailCustomerEmail;
-var_dump( __METHOD__, __LINE__, $sesArray, $uidFieldCustomerEmail );    
+    $powermailVersionInt    = $this->pObj->powermail->versionInt;
+
+    switch( true )
+    {
+      case( $powermailVersionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $powermailVersionInt < 2000000 ):
+        $uidEmail = 'uid' . $uidFieldCustomerEmail;
+        $customerEmail = $sesArray[$uidEmail];
+        break;
+      case( $powermailVersionInt < 3000000 ):
+        $prompt = 'TODO: powermail 2.x<br />
+          Please maintain the code!<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $powermailVersionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+var_dump( __METHOD__, __LINE__, $sesArray, $uidFieldCustomerEmail, $customerEmail );    
 die( );
 
       // DRS
