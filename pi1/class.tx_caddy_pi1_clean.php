@@ -247,9 +247,6 @@ class tx_caddy_pi1_clean
       // Insert record
     $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
 
-var_dump( __METHOD__, __LINE__, $sesArray );    
-die( );  
-
       // DRS
     if( $this->pObj->drs->drsClean )
     {
