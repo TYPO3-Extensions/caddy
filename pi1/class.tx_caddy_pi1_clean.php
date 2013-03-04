@@ -120,7 +120,7 @@ class tx_caddy_pi1_clean
     
     $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
     $numberInvoice        = $sesArray['numberInvoiceCurrent'];
-    $numberOrder          = $sesArray['numberOrder'];
+    $numberOrder          = $sesArray['numberOrderCurrent'];
 
     $quantity = count( $sesArray['products'] );
     
@@ -155,10 +155,10 @@ class tx_caddy_pi1_clean
       $pdfTermsToVendor = true;
     }
     
-    $sumGross       = count( $sesArray['sumGross'] );
-    $sumNet         = count( $sesArray['sumNet'] );
-    $sumTaxNormal   = count( $sesArray['sumTaxNormal'] );
-    $sumTaxReduced  = count( $sesArray['sumTaxReduced'] );
+    $sumGross       = $sesArray['sumGross'];
+    $sumNet         = $sesArray['sumNet'];
+    $sumTaxNormal   = $sesArray['sumTaxNormal'];
+    $sumTaxReduced  = $sesArray['sumTaxReduced'];
 
     $insertFields = array(
       'pid'                         => $this->pObj->pid,
