@@ -317,9 +317,9 @@ $TCA['tx_caddy_order'] = array (
     ),
     'numbers' => array (
       'showitem' => 
+        'numberOrder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberOrder,' .
         'numberDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberDeliveryorder,' .
         'numberInvoice;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberInvoice,' .
-        'numberOrder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberOrder,' .
         '',
       'canNotCollapse' => 1,
     ),
