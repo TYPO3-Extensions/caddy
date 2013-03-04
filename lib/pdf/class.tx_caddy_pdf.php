@@ -361,7 +361,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
   private function renderCartHeadline( &$subpartArray )
   {
-    foreach( array_keys ( ( array ) $this->confSettings['powermailCart.']['fields.'] as $key ) )
+    foreach( array_keys ( ( array ) $this->confSettings['powermailCart.']['fields.'] ) as $key )
     { 
       if (!stristr($key, '.'))
       { 
