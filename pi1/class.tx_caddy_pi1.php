@@ -539,9 +539,9 @@ class tx_caddy_pi1 extends tslib_pibase
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
     $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
 
-    $this->numberDeliveryorderRegistry  = $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
-    $this->numberOrderRegistry          = $registry->get( 'tx_caddy', $prefix . 'order' );
-    $this->numberInvoiceRegistry        = $registry->get( 'tx_caddy', $prefix . 'invoice' );
+    $this->numberDeliveryorderRegistry  = ( int ) $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
+    $this->numberOrderRegistry          = ( int ) $registry->get( 'tx_caddy', $prefix . 'order' );
+    $this->numberInvoiceRegistry        = ( int ) $registry->get( 'tx_caddy', $prefix . 'invoice' );
 
     $this->numberDeliveryorderCurrent   = $this->numberDeliveryorderRegistry
                                         + $this->flexform->originDeliveryorder
@@ -556,11 +556,11 @@ class tx_caddy_pi1 extends tslib_pibase
       // DRS
     if( $this->drs->drsInit )
     {
-      $prompt = 'Delivery order number form registry: ' . $this->numberDeliveryorderRegistry;
+      $prompt = 'Delivery order number from registry: ' . $this->numberDeliveryorderRegistry;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-      $prompt = 'Order number form registry: ' .          $this->numberOrderRegistry;
+      $prompt = 'Order number from registry: ' .          $this->numberOrderRegistry;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-      $prompt = 'Invoice number form registry: ' .        $this->numberInvoiceRegistry;
+      $prompt = 'Invoice number from registry: ' .        $this->numberInvoiceRegistry;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
       $prompt = 'Current delivery order number: ' .       $this->numberDeliveryorderCurrent;
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
