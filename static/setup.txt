@@ -1,4 +1,5 @@
 
+
   ///////////////////////////////////////////////////////////////
   //
   // INDEX
@@ -477,18 +478,26 @@ plugin.tx_caddy_pi1 {
         typolink.returnLast = url
       }
 
-      taxrate_reduced_string = COA
+      taxrate_reduced_string = TEXT
       taxrate_reduced_string {
         value = Mehrwertsteuer reduziert
-        if.isTrue.field = sumTaxReduced
-        wrap = |&nbsp;{$plugin.caddy.tax.reduced}&nbsp;%
+        if {
+          isTrue {
+            field = sumTaxReduced
+          }
+        }
+        noTrimWrap = || {$plugin.caddy.tax.reduced}% |
       }
 
-      taxrate_normal_string = COA
+      taxrate_normal_string = TEXT
       taxrate_normal_string {
         value = Mehrwertsteuer normal
-        if.isTrue.field = sumTaxNormal
-        wrap = |&nbsp;{$plugin.caddy.tax.normal}&nbsp;%
+        if {
+          isTrue {
+            field = sumTaxNormal
+          }
+        }
+        noTrimWrap = || {$plugin.caddy.tax.normal}% |
       }
     }
 
