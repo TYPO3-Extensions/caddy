@@ -795,7 +795,6 @@ plugin.tx_caddy_pi1 {
             de = AGB
             en = terms
           }
-          wrap = |-
         }
           // extension pdf
         50 = TEXT
