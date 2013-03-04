@@ -30,7 +30,7 @@
       <label index="caddy_ll_shipping_available_until">shipping available until</label>
       <label index="caddy_ll_shipping_free_from">free shipping from</label>
       <label index="caddy_ll_shipping_free_until">free shipping until</label>
-      <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_sku">Stock Keeping Unit (SKU)</label>
       <label index="caddy_ll_special">Special Options</label>
       <label index="caddy_ll_special_available_from">special option available from</label>
       <label index="caddy_ll_special_available_until">special option available until</label>
@@ -68,7 +68,7 @@
       <label index="caddy_ll_shipping_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
       <label index="caddy_ll_shipping_free_from">versandkostenfrei ab</label>
       <label index="caddy_ll_shipping_free_until">versandkostenfrei bis</label>
-      <label index="caddy_ll_sku">SKU</label>
+      <label index="caddy_ll_sku">Artikelnummer (SKU)</label>
       <label index="caddy_ll_special">Spezialoptionen</label>
       <label index="caddy_ll_special_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
       <label index="caddy_ll_special_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
@@ -90,7 +90,6 @@
       <label index="caddy_ll_qty">Quantité</label>
       <label index="caddy_ll_service_cost">Frais de services et de livraison</label>
       <label index="caddy_ll_shipping">Livraison</label>
-      <label index="caddy_ll_sku">SKU</label>
       <label index="caddy_ll_sumgross">Total (brut)</label>
       <label index="caddy_ll_sumnet">Total (net)</label>
       <label index="caddy_ll_title">Article</label>
