@@ -8,7 +8,7 @@
     <el>
       <test>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:test</label>
+          <label>Test</label>
           <config>
             <type>select</type>
             <items type="array">
