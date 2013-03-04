@@ -198,7 +198,7 @@
         Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
       ]]></label>
       <label index="pi1FfSdefReportPerformance"><![CDATA[
-        itte schalte den Check it!-Bericht ab. Der Bericht belastet die Performance!
+        Bitte schalte den Check it!-Bericht ab. Der Bericht belastet die Performance!
       ]]></label>
       <label index="pmReceiverMarkerWo"><![CDATA[
         Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im

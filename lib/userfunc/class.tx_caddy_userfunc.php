@@ -231,7 +231,109 @@ class tx_caddy_userfunc
     $arrReturn['str'] = $strVersion;
     return $arrReturn;
   }
+ 
+  
+  
+  /***********************************************
+   *
+   * Flexform
+   *
+   **********************************************/
+  
+  /**
+   * flexformCheck():
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function flexformCheck( )
+  {
+    $prompt = $this->flexformCheckPowermailCustomerEmail( );
+    $prompt = $prompt . $this->flexformCheckPowermailOtherFields( );
 
+    return $prompt;
+  }  
+  
+  /**
+   * flexformCheckPowermailCustomerEmail( ):
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function flexformCheckPowermailCustomerEmail( )
+  {
+var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform );    
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+      // RETURN : there is a flexform form
+    if( $this->flexform->fieldUid )
+    {
+      return null;
+    }
+      // RETURN : there is a flexform form
+    
+      // RETURN prompt : there isn't any flexform form
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformNocontent'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any flexform form
+    
+    return $prompt;
+  }
+  /**
+   * flexformCheckPowermailOtherFields( ):
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function flexformCheckPowermailOtherFields( )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+      // RETURN : there is a flexform form
+    if( $this->flexform->fieldUid )
+    {
+      return null;
+    }
+      // RETURN : there is a flexform form
+    
+      // RETURN prompt : there isn't any flexform form
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformNocontent'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any flexform form
+    
+    return $prompt;
+  }
+ 
+  
+  
+  /***********************************************
+   *
+   * Numberformat
+   *
+   **********************************************/
+  
   /**
  * number Format for typoscript
  *
@@ -339,6 +441,8 @@ class tx_caddy_userfunc
     $prompt = $prompt . $this->databaseCheck( );
 
     $prompt = $prompt . $this->powermailCheck( );
+
+    $prompt = $prompt . $this->flexformCheck( );
 
 
       // OK prompt, if there isn't any other prompt
