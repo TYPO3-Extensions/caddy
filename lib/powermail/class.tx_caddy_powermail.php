@@ -467,6 +467,14 @@ class tx_caddy_powermail
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
+
+
+  /***********************************************
+  *
+  * Init Marker
+  *
+  **********************************************/
+
  /**
   * initMarker( ):
   *
@@ -584,6 +592,14 @@ class tx_caddy_powermail
     }
   }
 
+
+
+  /***********************************************
+  *
+  * Init PDF
+  *
+  **********************************************/
+
  /**
   * initPdf( )
   *
@@ -615,6 +631,13 @@ class tx_caddy_powermail
     
   }
 
+
+
+  /***********************************************
+  *
+  * Init Send
+  *
+  **********************************************/
 
  /**
   * initSend( ): Set the global $send, if the powermail is sent
@@ -825,6 +848,14 @@ class tx_caddy_powermail
 
     return;
   }
+
+
+
+  /***********************************************
+  *
+  * Init Version
+  *
+  **********************************************/
 
  /**
   * initVersion( ):  Returns the version of powermail as an interger and a string.
@@ -1128,6 +1159,118 @@ class tx_caddy_powermail
       // DRS
     
     return $path;
+  }
+
+
+
+  /***********************************************
+  *
+  * Session
+  *
+  **********************************************/
+
+
+/**
+ * sessionData( ):
+ *
+ * @return    string        The content that should be displayed on the website
+ * @access  public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  public function sessionData(  )
+  {
+    $content = null; 
+
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $content = $this->sessionDataVers1( );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $content = $this->sessionDataVers2( );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $content;
+  }
+
+/**
+ * sessionDataVers1( ):
+ *
+ * @return    string        The content that should be displayed on the website
+ * @access  private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sessionDataVers1(  )
+  {
+      // Get the Powermail session data
+    $uid  = $this->fieldUid;
+    $key  = 'powermail_';
+    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key . $uid );
+
+      // RETURN: no session data
+    if( empty( $sessionData ) )
+    {
+      if( $this->pObj->drsPowermail )
+      {
+        $prompt = 'There isn\'t any powermail session data (powermail 1.x)!';
+        t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
+      }
+      return null;
+    }
+      // RETURN: no session data
+
+    return $sessionData;
+  }
+
+/**
+ * sessionDataVers2( ):
+ *
+ * @return    string        The content that should be displayed on the website
+ * @access  private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sessionDataVers2(  )
+  {
+    $content = null; 
+    
+      // Get the Powermail session data
+    $post = t3lib_div::_POST( 'tx_powermail_pi1' );
+    $uid  = $post['form'];
+    $key  = 'powermailFormstart';
+    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key . $uid );
+
+      // RETURN: no session data
+    if( empty( $sessionData ) )
+    {
+      if( $this->pObj->drsPowermail )
+      {
+        $prompt = 'There isn\'t any powermail session data (powermail 2.x)!';
+        t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
+      }
+      return null;
+    }
+      // RETURN: no session data
+    
+    return $sessionData;
   }
 }
 

@@ -59,7 +59,18 @@ class tx_caddy_pi1_flexform
     // Current row
   public $row = null;
 
+    // [deliveryorder]
+  public $deliveryorderCompany    = null;
+  public $deliveryorderFirstname  = null;
+  public $deliveryorderLastname   = null;
+  public $deliveryorderAddress    = null;
+  public $deliveryorderZip        = null;
+  public $deliveryorderCity       = null;
+  public $deliveryorderCountry    = null;
+    // [deliveryorder]
+
     // [email]
+  public $emailCustomerEmail      = null;
   public $emailDeliveryorderMode  = null;
   public $emailDeliveryorderPath  = null;
   public $emailInvoiceMode        = null;
@@ -67,6 +78,16 @@ class tx_caddy_pi1_flexform
   public $emailTermsMode          = null;
   public $emailTermsPath          = null;
     // [email]
+
+    // [invoice]
+  public $invoiceCompany    = null;
+  public $invoiceFirstname  = null;
+  public $invoiceLastname   = null;
+  public $invoiceAddress    = null;
+  public $invoiceZip        = null;
+  public $invoiceCity       = null;
+  public $invoiceCountry    = null;
+    // [invoice]
 
     // [origin]
   public $originDeliveryorder   = null;
@@ -106,6 +127,8 @@ class tx_caddy_pi1_flexform
       // Sheets
     $this->sheetSdef( );
     $this->sheetEmail( );
+    $this->sheetDeliveryorder ( );
+    $this->sheetInvoice( );
     $this->sheetOrigin( );
       // Sheets
 
@@ -120,7 +143,57 @@ class tx_caddy_pi1_flexform
    **********************************************/
 
 /**
- * sheetEmail: Configuration for evaluation
+ * sheetDeliveryorder( )  :
+ *
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sheetDeliveryorder( )
+  {
+    $sheet = 'company';
+
+      // deliveryorderCompany
+    $field                        = 'company';
+    $this->deliveryorderCompany   = $this->zzFfValue( $sheet, $field );
+      // deliveryorderCompany
+
+      // deliveryorderFirstname
+    $field                        = 'firstName';
+    $this->deliveryorderFirstname = $this->zzFfValue( $sheet, $field );
+      // deliveryorderFirstname
+
+      // deliveryorderLastname
+    $field                        = 'lastName';
+    $this->deliveryorderLastname  = $this->zzFfValue( $sheet, $field );
+      // deliveryorderLastname
+
+      // deliveryorderAddress
+    $field                        = 'address';
+    $this->deliveryorderAddress   = $this->zzFfValue( $sheet, $field );
+      // deliveryorderAddress
+
+      // deliveryorderZip
+    $field                        = 'zip';
+    $this->deliveryorderZip       = $this->zzFfValue( $sheet, $field );
+      // deliveryorderZip
+
+      // deliveryorderCity
+    $field                        = 'city';
+    $this->deliveryorderCity      = $this->zzFfValue( $sheet, $field );
+      // deliveryorderCity
+
+      // deliveryorderCountry
+    $field                        = 'country';
+    $this->deliveryorderCountry   = $this->zzFfValue( $sheet, $field );
+      // deliveryorderCountry
+
+    return;
+  }
+
+/**
+ * sheetEmail( )  :
  *
  * @return	void
  * @version 2.0.0
@@ -130,41 +203,96 @@ class tx_caddy_pi1_flexform
   {
     $sheet = 'email';
 
+      // emailCustomerEmail
+    $field                        = 'customerEmail';
+    $this->emailCustomerEmail     = $this->zzFfValue( $sheet, $field );
+      // emailCustomerEmail
+
       // emailDeliveryorderMode
-    $field                = 'deliveryorderMode';
+    $field                        = 'deliveryorderMode';
     $this->emailDeliveryorderMode = $this->zzFfValue( $sheet, $field );
       // emailDeliveryorderMode
 
       // emailDeliveryorderPath
-    $field                = 'deliveryorderPath';
+    $field                        = 'deliveryorderPath';
     $this->emailDeliveryorderPath = $this->zzFfValue( $sheet, $field );
       // emailDeliveryorderPath
 
       // emailInvoiceMode
-    $field                = 'invoiceMode';
-    $this->emailInvoiceMode = $this->zzFfValue( $sheet, $field );
+    $field                        = 'invoiceMode';
+    $this->emailInvoiceMode       = $this->zzFfValue( $sheet, $field );
       // emailInvoiceMode
 
       // emailInvoicePath
-    $field                = 'invoicePath';
-    $this->emailInvoicePath = $this->zzFfValue( $sheet, $field );
+    $field                        = 'invoicePath';
+    $this->emailInvoicePath       = $this->zzFfValue( $sheet, $field );
       // emailInvoicePath
 
       // emailTermsMode
-    $field                = 'termsMode';
-    $this->emailTermsMode = $this->zzFfValue( $sheet, $field );
+    $field                        = 'termsMode';
+    $this->emailTermsMode         = $this->zzFfValue( $sheet, $field );
       // emailTermsMode
 
       // emailTermsPath
-    $field                = 'termsPath';
-    $this->emailTermsPath = $this->zzFfValue( $sheet, $field );
+    $field                        = 'termsPath';
+    $this->emailTermsPath         = $this->zzFfValue( $sheet, $field );
       // emailTermsPath
 
     return;
   }
 
 /**
- * sheetOrigin: Configuration for evaluation
+ * sheetInvoice( )  :
+ *
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sheetInvoice( )
+  {
+    $sheet = 'company';
+
+      // invoiceCompany
+    $field                  = 'company';
+    $this->invoiceCompany   = $this->zzFfValue( $sheet, $field );
+      // invoiceCompany
+
+      // invoiceFirstname
+    $field                  = 'firstName';
+    $this->invoiceFirstname = $this->zzFfValue( $sheet, $field );
+      // invoiceFirstname
+
+      // invoiceLastname
+    $field                  = 'lastName';
+    $this->invoiceLastname  = $this->zzFfValue( $sheet, $field );
+      // invoiceLastname
+
+      // invoiceAddress
+    $field                  = 'address';
+    $this->invoiceAddress   = $this->zzFfValue( $sheet, $field );
+      // invoiceAddress
+
+      // invoiceZip
+    $field                  = 'zip';
+    $this->invoiceZip       = $this->zzFfValue( $sheet, $field );
+      // invoiceZip
+
+      // invoiceCity
+    $field                  = 'city';
+    $this->invoiceCity      = $this->zzFfValue( $sheet, $field );
+      // invoiceCity
+
+      // invoiceCountry
+    $field                  = 'country';
+    $this->invoiceCountry   = $this->zzFfValue( $sheet, $field );
+      // invoiceCountry
+
+    return;
+  }
+
+/**
+ * sheetOrigin( ) :
  *
  * @return	void
  * @version 2.0.0
@@ -180,20 +308,20 @@ class tx_caddy_pi1_flexform
       // originDeliveryorder
 
       // originInvoice
-    $field                = 'invoice';
-    $this->originInvoice  = ( int ) $this->zzFfValue( $sheet, $field );
+    $field                      = 'invoice';
+    $this->originInvoice        = ( int ) $this->zzFfValue( $sheet, $field );
       // originInvoice
 
       // originOrder
-    $field              = 'order';
-    $this->originOrder  = ( int ) $this->zzFfValue( $sheet, $field );
+    $field                      = 'order';
+    $this->originOrder          = ( int ) $this->zzFfValue( $sheet, $field );
       // originOrder
 
     return;
   }
 
 /**
- * sheetSdef: Configuration for evaluation
+ * sheetSdef( ) :
  *
  * @return	void
  * @version 2.0.0

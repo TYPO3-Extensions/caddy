@@ -124,7 +124,8 @@ class tx_caddy_pi1_clean
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
-//var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
+    
+    $customerEmail = $this->cleanDatabaseCustomerEmail( );
 
       // Initiate files
     $fileDeliveryorder  = null;
@@ -223,6 +224,7 @@ class tx_caddy_pi1_clean
       'pid'                         => $this->pObj->pid,
       'tstamp'                      => $time,
       'crdate'                      => $time,
+      'customerEmail'               => $customerEmail,
       'fileDeliveryorder'           => $fileDeliveryorder,
       'fileInvoice'                 => $fileInvoice,
       'fileTerms'                   => $fileTerms,
@@ -254,6 +256,33 @@ class tx_caddy_pi1_clean
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
+    
+  }
+
+ /**
+  * cleanDatabaseCustomerEmail( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanDatabaseCustomerEmail( )
+  {
+    $sesArray               = $this->pObj->powermail->sessionData( );
+    $uidFieldCustomerEmail  = $this->pObj->flexform->emailCustomerEmail;
+var_dump( __METHOD__, __LINE__, $sesArray, $uidFieldCustomerEmail );    
+die( );
+
+      // DRS
+    if( $this->pObj->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+    
+    return $customerEmail;
     
   }
 
