@@ -278,7 +278,8 @@ $TCA['tx_caddy_order'] = array (
     '0' => array(
       'showitem' => 
         '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.email,' .
-          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.issent;issent,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToCustomer;isSentToCustomer,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToVendor;isSentToVendor,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.files;files,' .
         '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.numbers,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.numbers;numbers,' .
@@ -298,13 +299,18 @@ $TCA['tx_caddy_order'] = array (
         '',
       'canNotCollapse' => 1,
     ),
-    'issent' => array (
+    'isSentToCustomer' => array (
       'showitem' => 
         'pdfDeliveryorderToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToCustomer,' .
-        'pdfDeliveryorderToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToVendor,' .
         'pdfInvoiceToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToCustomer,' .
-        'pdfInvoiceToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor,' .
         'pdfTermsToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToCustomer,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
+    'isSentToVendor' => array (
+      'showitem' => 
+        'pdfDeliveryorderToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToVendor,' .
+        'pdfInvoiceToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor,' .
         'pdfTermsToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToVendor,' .
         '',
       'canNotCollapse' => 1,
