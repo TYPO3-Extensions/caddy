@@ -964,19 +964,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorDeliveryorder( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailDeliveryorderMode )
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendVendorDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendVendorDeliveryorder'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
@@ -989,19 +989,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorInvoice( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailInvoiceMode )
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendVendorInvoice'] = $this->flexform->emailInvoicePath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendVendorInvoice'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
@@ -1014,19 +1014,19 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorTerms( )
   {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     switch( $this->flexform->emailTermsMode )
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
         $sesArray['sendVendorTerms'] = $this->flexform->emailTermsPath;
-        $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
-        $GLOBALS['TSFE']->storeSessionData( );
         break;
       default:
-          // Nothing to do
+        unset( $sesArray['sendVendorTerms'] );
         break;
     }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
 
