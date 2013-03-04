@@ -468,6 +468,13 @@ class tx_caddy_userfunc
     $prompt = $this->emptyCheck( );
     if( $prompt )
     {
+      $prompt = $prompt . '
+        <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+          <div class="message-body">
+            ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportPerformance'). '
+          </div>
+        </div>
+        ';
       return $prompt;    
     }
 
@@ -495,6 +502,13 @@ class tx_caddy_userfunc
 
     $prompt = $prompt . $this->flexformCheck( );
 
+    $prompt = $prompt . '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:pi1FfSdefReportPerformance'). '
+        </div>
+      </div>
+      ';
 
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
