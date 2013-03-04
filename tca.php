@@ -292,7 +292,6 @@ $TCA['tx_caddy_order'] = array (
     'files' => array (
       'showitem' => 
         'fileDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder,' .
-        '--linebreak--,' . 
         'fileInvoice;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileInvoice,' .
         '--linebreak--,' . 
         'fileTerms;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileTerms,' .
