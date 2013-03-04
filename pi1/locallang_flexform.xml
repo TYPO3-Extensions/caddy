@@ -7,6 +7,13 @@
   <data type="array">
     <languageKey index="default" type="array">
       <label index="deliveryorder">Delivery Address</label>
+      <label index="deliveryorder.company">Company (from Powermail)</label>
+      <label index="deliveryorder.firstName">First name (from Powermail)</label>
+      <label index="deliveryorder.lastName">Last name (from Powermail)</label>
+      <label index="deliveryorder.address">Address (from Powermail)</label>
+      <label index="deliveryorder.zip">Zip (from Powermail)</label>
+      <label index="deliveryorder.city">City (from Powermail)</label>
+      <label index="deliveryorder.country">Country (from Powermail)</label>
       <label index="email">Email</label>
       <label index="email.customerEmail">Customer E-mail (from Powermail)</label>
       <label index="email.deliveryorderMode">PDF Delivery Order</label>
@@ -26,7 +33,14 @@
       <label index="email.termsMode.all">Send it to the customer and the vendor</label>
       <label index="help">Help!</label>
       <label index="invoice">Billing Address</label>
-      <label index="origin">Origin</label>
+      <label index="invoice.company">Company (from Powermail)</label>
+      <label index="invoice.firstName">First name (from Powermail)</label>
+      <label index="invoice.lastName">Last name (from Powermail)</label>
+      <label index="invoice.address">Address (from Powermail)</label>
+      <label index="invoice.zip">Zip (from Powermail)</label>
+      <label index="invoice.city">City (from Powermail)</label>
+      <label index="invoice.country">Country (from Powermail)</label>
+      <label index="origin">Numbers</label>
       <label index="origin.deliveryorder">Increase delivery order number with</label>
       <label index="origin.invoice">Increase invoice number with</label>
       <label index="origin.order">Increase order number with</label>
@@ -44,6 +58,13 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="deliveryorder">Lieferadresse</label>
+      <label index="deliveryorder.company">Firma (von Powermail)</label>
+      <label index="deliveryorder.firstName">Vorname (von Powermail)</label>
+      <label index="deliveryorder.lastName">Nachname (von Powermail)</label>
+      <label index="deliveryorder.address">Straße (von Powermail)</label>
+      <label index="deliveryorder.zip">PLZ (von Powermail)</label>
+      <label index="deliveryorder.city">Stadt (von Powermail)</label>
+      <label index="deliveryorder.country">Land (von Powermail)</label>
       <label index="email">E-Mail</label>
       <label index="email.customerEmail">Kunden Email (von Powermail)</label>
       <label index="email.deliveryorderMode">PDF-Lieferschein</label>
@@ -63,7 +84,14 @@
       <label index="email.termsMode.all">An den Kunden und den Anbieter senden</label>
       <label index="help">Hilfe!</label>      
       <label index="invoice">Rechnungsadresse</label>
-      <label index="origin">Startnummern</label>
+      <label index="invoice.company">Firma (von Powermail)</label>
+      <label index="invoice.firstName">Vorname (von Powermail)</label>
+      <label index="invoice.lastName">Naxchname (von Powermail)</label>
+      <label index="invoice.address">Straße (von Powermail)</label>
+      <label index="invoice.zip">PLZ (von Powermail)</label>
+      <label index="invoice.city">Stadt (von Powermail)</label>
+      <label index="invoice.country">Land (von Powermail)</label>
+      <label index="origin">Nummern</label>
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
       <label index="origin.order"><![CDATA[Erhöhe die Bestellnummer um]]></label>
