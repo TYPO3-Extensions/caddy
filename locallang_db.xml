@@ -11,24 +11,37 @@
       <label index="tt_content.list_type_pi3">Caddy : minicart</label>
       <label index="tx_caddy_item">tx_caddy_item</label>                        
       <label index="tx_caddy_item.title">tx_caddy_item.title</label>                        
-      <label index="tx_caddy_order">tx_caddy_order</label>                        
-      <label index="tx_caddy_order.gross">tx_caddy_order.gross</label>                        
-      <label index="tx_caddy_order.item">tx_caddy_order.item</label>                        
-      <label index="tx_caddy_order.net">tx_caddy_order.net</label>                        
-      <label index="tx_caddy_order.quantity">tx_caddy_order.quantity</label>                        
-      <label index="tx_caddy_order.tax">tx_caddy_order.tax</label>                        
+      <label index="tx_caddy_order">Order</label>                        
+      <label index="tx_caddy_order.div.email">E-mail</label>                        
+      <label index="tx_caddy_order.div.numbers">Numbers</label>                        
+      <label index="tx_caddy_order.div.sum">Sum</label>                        
+      <label index="tx_caddy_order.fileDeliveryorder">Delivery order</label>                        
+      <label index="tx_caddy_order.fileInvoice">Invoice</label>                        
+      <label index="tx_caddy_order.fileOrder">Order</label>                        
+      <label index="tx_caddy_order.item">Order items</label>                        
+      <label index="tx_caddy_order.numberDeliveryorder">Delivery order number</label>                        
+      <label index="tx_caddy_order.numberInvoice">Invoice number</label>                        
+      <label index="tx_caddy_order.numberOrder">Order number</label>                        
+      <label index="tx_caddy_order.palette.issent">Is sent</label>                        
+      <label index="tx_caddy_order.palette.files">Files</label>                        
+      <label index="tx_caddy_order.palette.numbers">Numbers</label>                        
+      <label index="tx_caddy_order.palette.sum">Sum</label>                        
+      <label index="tx_caddy_order.pdfDeliveryorderToCustomer">Delivery order is sent to customer</label>                        
+      <label index="tx_caddy_order.pdfDeliveryorderToVendor">Delivery order is sent to vendor</label>                        
+      <label index="tx_caddy_order.pdfInvoiceToCustomer">Invoice is sent to customer</label>                        
+      <label index="tx_caddy_order.pdfInvoiceToVendor">Invoice is sent to vendor</label>                        
+      <label index="tx_caddy_order.pdfOrderToCustomer">Order is sent to customer</label>                        
+      <label index="tx_caddy_order.pdfOrderToVendor">Order is sent to vendor</label>                        
+      <label index="tx_caddy_order.quantity">Number of products</label>                        
+      <label index="tx_caddy_order.sumNet">net</label>                        
+      <label index="tx_caddy_order.sumGross">gross</label>                        
+      <label index="tx_caddy_order.sumTaxNormal">tax (normal)</label>                        
+      <label index="tx_caddy_order.sumTaxReduced">tax (reduced)</label>                        
     </languageKey>
     <languageKey index="de" type="array">
       <label index="tt_content.list_type_pi1">Caddy : Warenkorb</label>
       <label index="tt_content.list_type_pi2">Caddy : Produkt in den Warenkorb</label>
       <label index="tt_content.list_type_pi3">Caddy : Miniwarenkorb</label>
-      <label index="tx_caddy_item">tx_caddy_item</label>                        
-      <label index="tx_caddy_item.title">tx_caddy_item.title</label>                        
-      <label index="tx_caddy_order.gross">tx_caddy_order.gross</label>                        
-      <label index="tx_caddy_order.item">tx_caddy_order.item</label>                        
-      <label index="tx_caddy_order.net">tx_caddy_order.net</label>                        
-      <label index="tx_caddy_order.quantity">tx_caddy_order.quantity</label>                        
-      <label index="tx_caddy_order.tax">tx_caddy_order.tax</label>                        
     </languageKey>
   </data>
 </T3locallang>

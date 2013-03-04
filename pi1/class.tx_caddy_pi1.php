@@ -570,7 +570,41 @@ class tx_caddy_pi1 extends tslib_pibase
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
     }
       // DRS
-}
+    
+    $this->initNumbersSession( );
+  }
+
+ /**
+  * initNumbersSession( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initNumbersSession( )
+  {
+    $sesArray = array( );
+      // get already exting session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
+  
+    $sesArray['numberDeliveryorderCurrent']  = $this->numberDeliveryorderCurrent  ;
+    $sesArray['numberInvoiceCurrent']        = $this->numberInvoiceCurrent  ;
+    $sesArray['numberOrderCurrent']          = $this->numberOrderCurrent  ;
+    
+      // generate session with session array
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+      // save session
+    $GLOBALS['TSFE']->storeSessionData();
+
+      // DRS
+    if( $this->drs->drsInit )
+    {
+      $prompt = 'Current numbers are stored in the session.';
+      t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+    }
+      // DRS
+  }
 
  /**
   * initGpVar( )

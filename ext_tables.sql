@@ -36,12 +36,29 @@ CREATE TABLE tx_caddy_order (
   cruser_id int(11) DEFAULT '0' NOT NULL,
   deleted tinyint(4) DEFAULT '0' NOT NULL,
 
-  net double(11,2) DEFAULT '0.00' NOT NULL,
-  tax double(11,2) DEFAULT '0.00' NOT NULL,
-  gross double(11,2) DEFAULT '0.00' NOT NULL,
-  quantity int(11) DEFAULT '0' NOT NULL,
+  fileDeliveryorder text,
+  fileInvoice text,
+  fileTerms text,
 
   items tinytext,
+
+  numberDeliveryorder int(11) DEFAULT '0' NOT NULL,
+  numberInvoice int(11) DEFAULT '0' NOT NULL,
+  numberOrder int(11) DEFAULT '0' NOT NULL,
+
+  pdfDeliveryorderToCustomer tinyint(4) DEFAULT '0' NOT NULL,
+  pdfDeliveryorderToVendor tinyint(4) DEFAULT '0' NOT NULL,
+  pdfInvoiceToCustomer tinyint(4) DEFAULT '0' NOT NULL,
+  pdfInvoiceToVendor tinyint(4) DEFAULT '0' NOT NULL,
+  pdfTermsToCustomer tinyint(4) DEFAULT '0' NOT NULL,
+  pdfTermsToVendor tinyint(4) DEFAULT '0' NOT NULL,
+
+  quantity int(11) DEFAULT '0' NOT NULL,
+
+  sumNet double(11,2) DEFAULT '0.00' NOT NULL,
+  sumGross double(11,2) DEFAULT '0.00' NOT NULL,
+  sumTaxNormal double(11,2) DEFAULT '0.00' NOT NULL,
+  sumTaxReduced double(11,2) DEFAULT '0.00' NOT NULL,
 
   PRIMARY KEY (uid),
   KEY parent (pid)

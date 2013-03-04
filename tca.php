@@ -51,31 +51,166 @@ $TCA['tx_caddy_item'] = array (
 $TCA['tx_caddy_order'] = array (
   'ctrl' => $TCA['tx_caddy_order']['ctrl'],
   'interface' => array (
-    'showRecordFieldList' =>  'net,tax,gross,quantity,items' ,
+    'showRecordFieldList' =>  'fileDeliveryorder,fileInvoice,fileTerms,' . 
+                              'items,' . 
+                              'numberDeliveryorder,numberInvoice,numberOrder,' . 
+                              'pdfDeliveryorderToCustomer,pdfDeliveryorderToVendor,pdfInvoiceToCustomer,' .
+                              'pdfInvoiceToVendor,pdfTermsToCustomer,pdfTermsToVendor,' .
+                              'quantity,' . 
+                              'sumGross,sumNet,sumTaxReduced,sumTaxNormal',
   ),
   'feInterface' => $TCA['tx_caddy_order']['feInterface'],
   'columns' => array (
-    'net' => array (
+    'fileDeliveryorder' => array (
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.net',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder',
+      'config' => array (
+        'type' => 'group',
+        'internal_type' => 'file',
+        'allowed' => 'pdf',  
+        'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],  
+        'uploadfolder' => 'uploads/tx_caddy',
+        'show_thumbs' => 1,  
+        'size' => 1,  
+        'minitems' => 0,
+        'maxitems' => 1,
+      )
+    ),
+    'fileInvoice' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileInvoice',
+      'config' => array (
+        'type' => 'group',
+        'internal_type' => 'file',
+        'allowed' => 'pdf',  
+        'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],  
+        'uploadfolder' => 'uploads/tx_caddy',
+        'show_thumbs' => 1,  
+        'size' => 1,  
+        'minitems' => 0,
+        'maxitems' => 1,
+      )
+    ),
+    'fileTerms' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileTerms',
+      'config' => array (
+        'type' => 'group',
+        'internal_type' => 'file',
+        'allowed' => 'pdf',  
+        'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],  
+        'uploadfolder' => 'uploads/tx_caddy',
+        'show_thumbs' => 1,  
+        'size' => 1,  
+        'minitems' => 0,
+        'maxitems' => 1,
+      )
+    ),
+    'numberDeliveryorder' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberDeliveryorder',
+      'config' => array (
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'int',
+      )
+    ),
+    'numberInvoice' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberInvoice',
+      'config' => array (
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'int',
+      )
+    ),
+    'numberOrder' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberOrder',
+      'config' => array (
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'int',
+      )
+    ),
+    'pdfDeliveryorderToCustomer' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToCustomer',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfDeliveryorderToVendor' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToVendor',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfInvoiceToCustomer' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToCustomer',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfInvoiceToVendor' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfTermsToCustomer' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToCustomer',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfTermsToVendor' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToVendor',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'sumGross' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumGross',
       'config' => array (
         'type' => 'input',  
         'size' => '10',  
         'eval' => 'double2,nospace',
       )
     ),
-    'tax' => array (
+    'sumNet' => array (
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.tax',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumNet',
       'config' => array (
         'type' => 'input',  
         'size' => '10',  
         'eval' => 'double2,nospace',
       )
     ),
-    'gross' => array (
+    'sumTaxNormal' => array (
       'exclude' => 0,
-      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.gross',
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxNormal',
+      'config' => array (
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'double2,nospace',
+      )
+    ),
+    'sumTaxReduced' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxNormal',
       'config' => array (
         'type' => 'input',  
         'size' => '10',  
@@ -142,11 +277,58 @@ $TCA['tx_caddy_order'] = array (
   'types' => array (
     '0' => array(
       'showitem' => 
-        'net,tax,gross,items,quantity,hidden,',
+        '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.email,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.issent;issent,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.files;files,' .
+        '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.numbers,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.numbers;numbers,' .
+        '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.sum,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.sum;sum,' .
+        '',
       ),
   ),
   'palettes' => array (
-    '1' => array('showitem' => ''),
+    'files' => array (
+      'showitem' => 
+        'fileDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder,' .
+        '--linebreak--,' . 
+        'fileInvoice;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileInvoice,' .
+        '--linebreak--,' . 
+        'fileTerms;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileTerms,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
+    'issent' => array (
+      'showitem' => 
+        'pdfDeliveryorderToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToCustomer,' .
+        'pdfDeliveryorderToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToVendor,' .
+        'pdfInvoiceToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToCustomer,' .
+        'pdfInvoiceToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor,' .
+        'pdfTermsToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToCustomer,' .
+        'pdfTermsToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToVendor,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
+    'numbers' => array (
+      'showitem' => 
+        'numberDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberDeliveryorder,' .
+        'numberInvoice;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberInvoice,' .
+        'numberOrder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.numberOrder,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
+    'sum' => array (
+      'showitem' => 
+        'sumNet;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumNet,' .
+        '--linebreak--,' . 
+        'sumTaxReduced;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxReduced,' .
+        '--linebreak--,' . 
+        'sumTaxNormal;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumTaxNormal,' .
+        '--linebreak--,' . 
+        'sumGross;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.sumGross,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
   )
 );
   // tx_caddy_order
