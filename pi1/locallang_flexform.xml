@@ -8,7 +8,7 @@
     <languageKey index="default" type="array">
       <label index="deliveryorder">Delivery Address</label>
       <label index="email">Email</label>
-      <label index="email.customerEmail">Customer E-mail</label>
+      <label index="email.customerEmail">Customer E-mail (from Powermail)</label>
       <label index="email.deliveryorderMode">PDF Delivery Order</label>
       <label index="email.deliveryorderMode.disabled"><![CDATA[Don't send]]></label>
       <label index="email.deliveryorderMode.customer">Send it to the customer</label>
@@ -45,7 +45,7 @@
     <languageKey index="de" type="array">
       <label index="deliveryorder">Lieferadresse</label>
       <label index="email">E-Mail</label>
-      <label index="email.customerEmail">Kunden Email</label>
+      <label index="email.customerEmail">Kunden Email (von Powermail)</label>
       <label index="email.deliveryorderMode">PDF-Lieferschein</label>
       <label index="email.deliveryorderMode.disabled">Nicht versenden</label>
       <label index="email.deliveryorderMode.customer">An den Kunden senden</label>
