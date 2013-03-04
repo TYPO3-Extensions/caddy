@@ -57,7 +57,8 @@ $TCA['tx_caddy_order'] = array (
                               'pdfDeliveryorderToCustomer,pdfDeliveryorderToVendor,pdfInvoiceToCustomer,' .
                               'pdfInvoiceToVendor,pdfTermsToCustomer,pdfTermsToVendor,' .
                               'quantity,' . 
-                              'sumGross,sumNet,sumTaxReduced,sumTaxNormal',
+                              'sumGross,sumNet,sumTaxReduced,sumTaxNormal,' . 
+                              'tstamp',
   ),
   'feInterface' => $TCA['tx_caddy_order']['feInterface'],
   'columns' => array (
@@ -273,11 +274,25 @@ $TCA['tx_caddy_order'] = array (
         ),
       )
     ),
+    'tstamp' => array (
+      'exclude'   => 0,
+      'l10n_mode' => 'exclude',
+      'label'     => 'LLL:EXT:org/locallang_db.xml:tx_org_cal.datetime',
+      'config'    => array (
+        'type'    => 'input',
+        'size'    => '10',
+        'max'     => '20',
+        'eval'    => 'datetime',
+        'default' => mktime(date('H'),date('i'),0,date('m'),date('d'),date('Y')),
+      ),
+    ),
+      
   ),
   'types' => array (
     '0' => array(
       'showitem' => 
         '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.email,' .
+          'tstamp,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToCustomer;isSentToCustomer,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToVendor;isSentToVendor,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.files;files,' .
