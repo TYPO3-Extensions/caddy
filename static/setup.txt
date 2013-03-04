@@ -480,7 +480,11 @@ plugin.tx_caddy_pi1 {
 
       taxrate_reduced_string = TEXT
       taxrate_reduced_string {
-        value = Mehrwertsteuer reduziert
+        value = including
+        lang { 
+          de = inklusive 
+          en = including
+        }
         if {
           isTrue {
             field = sumTaxReduced
@@ -491,7 +495,11 @@ plugin.tx_caddy_pi1 {
 
       taxrate_normal_string = TEXT
       taxrate_normal_string {
-        value = Mehrwertsteuer normal
+        value = including
+        lang { 
+          de = inklusive 
+          en = including
+        }
         if {
           isTrue {
             field = sumTaxNormal
