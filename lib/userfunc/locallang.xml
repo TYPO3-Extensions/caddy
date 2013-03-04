@@ -11,6 +11,10 @@
         Please configure the table, which delivers the products to caddy.<br />
         See: constant editor > CADDY - DATABASE > table name
       ]]></label>
+      <label index="flexformIsEmpty"><![CDATA[
+        This flexform is never saved. Please save it.<br />
+        Without saving you will get unproper results!
+      ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
         The Check it! report is disabled and this is proper for performance needs.<br />
         But if you have any unexpected result, enable the report by the check box above.
@@ -181,6 +185,10 @@
         Die Typoscript-Eigenscgaft db.table ist leer.<br />
         Bitte gebe die Tabelle an, die die Produkte f&uumlR Caddy enth&auml;t.<br />
         Siehe: Constant Editor > CADDY - DATABASE > table name
+      ]]></label>
+      <label index="flexformIsEmpty"><![CDATA[
+        Diese Flexform wurde nie gespeichert. Bitte speichere die Form einmal ab.<br />
+        Mit einer nie gespeicherten Flexform bekommst Du fehlerhafte Ergebnisse!
       ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
         Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br /> 

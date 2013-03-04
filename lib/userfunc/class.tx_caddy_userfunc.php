@@ -140,6 +140,50 @@ class tx_caddy_userfunc
 
     return;
   }
+ 
+  
+  
+  /***********************************************
+   *
+   * Empty
+   *
+   **********************************************/
+  
+  /**
+   * emptyCheck():
+   *
+   * @param   string    $prompt
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function emptyCheck( )
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+      // RETURN : flexform isn't empty
+    if( ! empty ( $this->pluginPiFlexform ) )
+    {
+      return null;
+    }
+      // RETURN : flexform isn't empty
+    
+      // RETURN prompt : felxform is empty
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformIsEmpty'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : felxform is empty
+    
+    return $prompt;
+  }
 
   
   
@@ -283,6 +327,12 @@ class tx_caddy_userfunc
       // RETURN : Check it! report is disabled
 
     $this->pi1FfSdefReportInit( );
+
+    $prompt = $this->emptyCheck( );
+    if( $prompt )
+    {
+      return $prompt;    
+    }
 
     $prompt = $this->typoscriptCheck( );
 
@@ -447,21 +497,21 @@ class tx_caddy_userfunc
    * @version 2.0.0
    * @since   2.0.0
    */
-  private function powermailCheckContent(  )
+  private function powermailCheckContent( )
   {
 //.message-notice
 //.message-information
 //.message-ok
 //.message-warning
 //.message-error
-      // RETURN : there is a powermial form
+      // RETURN : there is a powermail form
     if( $this->powermail->fieldUid )
     {
       return null;
     }
-      // RETURN : there is a powermial form
+      // RETURN : there is a powermail form
     
-      // RETURN prompt : there isn't any powermial form
+      // RETURN prompt : there isn't any powermail form
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
@@ -469,7 +519,7 @@ class tx_caddy_userfunc
         </div>
       </div>
       ';
-      // RETURN prompt : there isn't any powermial form
+      // RETURN prompt : there isn't any powermail form
     
     return $prompt;
   }
