@@ -65,6 +65,8 @@ class tx_caddy_pi1_clean
   public $pObj = null;
     // Current row
   public $row = null;
+  
+  private $local_cObj = null;
 
 
  /**
@@ -77,6 +79,8 @@ class tx_caddy_pi1_clean
   */
   public function main( )
   {
+    $this->local_cObj = $this->pObj->local_cObj;
+
       // RETURN : powermail form isn't sent. Nothing to clean
     if( empty( $this->pObj->powermail->sent ) )
     {
@@ -113,17 +117,26 @@ class tx_caddy_pi1_clean
   */
   private function cleanDatabase( )
   {
-    $sesArray = null;;
+    $sesArray = null;
     $time     = time( );
 
+      // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     
+var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
+
+      // Get numbers
     $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
     $numberInvoice        = $sesArray['numberInvoiceCurrent'];
     $numberOrder          = $sesArray['numberOrderCurrent'];
+      // Get numbers
 
+      // Get quantity
     $quantity = count( $sesArray['products'] );
     
+      // Get pdf is sent to ...
     $pdfDeliveryorderToCustomer = false;
     if( ! empty ( $sesArray['sendCustomerDeliveryorder'] ) ) 
     {
@@ -154,12 +167,16 @@ class tx_caddy_pi1_clean
     {
       $pdfTermsToVendor = true;
     }
+      // Get pdf is sent to ...
     
+      // Get total sum
     $sumGross       = $sesArray['sumGross'];
     $sumNet         = $sesArray['sumNet'];
     $sumTaxNormal   = $sesArray['sumTaxNormal'];
     $sumTaxReduced  = $sesArray['sumTaxReduced'];
+      // Get total sum
 
+      // Set record
     $insertFields = array(
       'pid'                         => $this->pObj->pid,
       'tstamp'                      => $time,
@@ -183,7 +200,11 @@ class tx_caddy_pi1_clean
       'sumTaxNormal'                => $sumTaxNormal,
       'sumTaxReduced'               => $sumTaxReduced,
     );
+      // Set record
+
+      // Insert record
     $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
+
 var_dump( __METHOD__, __LINE__, $sesArray );    
 die( );  
 
