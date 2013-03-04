@@ -123,10 +123,13 @@ class tx_caddy_pi1_clean
       // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
     
-var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
-var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
+//var_dump( __METHOD__, __LINE__, $this->local_cObj->data );    
 
+    $fileDeliveryorder  = null;
+    $fileInvoice        = null;
+    $fileTerms          = null;
+    
       // Get numbers
     $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
     $numberInvoice        = $sesArray['numberInvoiceCurrent'];
@@ -142,16 +145,6 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
     {
       $pdfDeliveryorderToCustomer = true;
     }
-    $pdfInvoiceToVendor = false;
-    if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
-    {
-      $pdfInvoiceToVendor = true;
-    }
-    $pdfTermsToCustomer = false;
-    if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
-    {
-      $pdfTermsToCustomer = true;
-    }
     $pdfDeliveryorderToVendor = false;
     if( ! empty ( $sesArray['sendVendorDeliveryorder'] ) ) 
     {
@@ -162,6 +155,16 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
     {
       $pdfInvoiceToCustomer = true;
     }
+    $pdfInvoiceToVendor = false;
+    if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
+    {
+      $pdfInvoiceToVendor = true;
+    }
+    $pdfTermsToCustomer = false;
+    if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
+    {
+      $pdfTermsToCustomer = true;
+    }
     $pdfTermsToVendor = false;
     if( ! empty ( $sesArray['sendVendorTerms'] ) ) 
     {
@@ -169,6 +172,34 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
     }
       // Get pdf is sent to ...
     
+    switch( true )
+    {
+      case( $pdfDeliveryorderToCustomer ):
+      case( $pdfDeliveryorderToVendor ):
+        $fileDeliveryorder  = $this->local_cObj->cObjGetSingle
+                              (
+                                $this->pObj->conf['pdf.']['deliveryorder.']['filename'],
+                                $this->pObj->conf['pdf.']['deliveryorder.']['filename.']
+                              );
+        break;
+      case( $pdfInvoiceToCustomer ):
+      case( $pdfInvoiceToVendor ):
+        $fileInvoice  = $this->local_cObj->cObjGetSingle
+                        (
+                          $this->pObj->conf['pdf.']['invoice.']['filename'],
+                          $this->pObj->conf['pdf.']['invoice.']['filename.']
+                        );
+        break;
+      case( $pdfTermsToCustomer ):
+      case( $pdfTermsToVendor ):
+        $fileTerms  = $this->local_cObj->cObjGetSingle
+                      (
+                        $this->pObj->conf['pdf.']['terms.']['filename'],
+                        $this->pObj->conf['pdf.']['terms.']['filename.']
+                      );
+        break;
+    }
+
       // Get total sum
     $sumGross       = $sesArray['sumGross'];
     $sumNet         = $sesArray['sumNet'];
@@ -181,9 +212,9 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
       'pid'                         => $this->pObj->pid,
       'tstamp'                      => $time,
       'crdate'                      => $time,
-      'fileDeliveryorder'           => '',
-      'fileInvoice'                 => '',
-      'fileTerms'                   => '',
+      'fileDeliveryorder'           => $fileDeliveryorder,
+      'fileInvoice'                 => $fileInvoice,
+      'fileTerms'                   => $fileTerms,
       'items'                       => '',
       'numberDeliveryorder'         => $numberDeliveryorder,
       'numberInvoice'               => $numberInvoice,
