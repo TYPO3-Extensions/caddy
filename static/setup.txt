@@ -572,8 +572,7 @@ plugin.tx_caddy_pi1 {
     deliveryorder {
       font-size = 8
 
-      template      = {$plugin.caddy.pdf.deliveryorder.template}
-      include_file  = {$plugin.caddy.pdf.deliveryorder.includepdf}
+      template = {$plugin.caddy.pdf.deliveryorder.template}
 
         // order number - page id - label - delivery order number . pdf
       filename = COA
@@ -672,8 +671,7 @@ plugin.tx_caddy_pi1 {
     invoice {
       font-size = 8
 
-      template      = {$plugin.caddy.pdf.invoice.template}
-      include_file  = {$plugin.caddy.pdf.invoice.includepdf}
+      template = {$plugin.caddy.pdf.invoice.template}
 
         // order number - page id - label - invoice number . pdf
       filename = COA
