@@ -26,7 +26,7 @@
       <label index="tx_caddy_order.palette.isSentToVendor">Is sent to vendor</label>                        
       <label index="tx_caddy_order.palette.files">Files</label>                        
       <label index="tx_caddy_order.palette.numbers">Numbers</label>                        
-      <label index="tx_caddy_order.palette.sum">total</label>                        
+      <label index="tx_caddy_order.palette.sum">Total</label>                        
       <label index="tx_caddy_order.pdfDeliveryorderToCustomer">Delivery order</label>                        
       <label index="tx_caddy_order.pdfDeliveryorderToVendor">Delivery order</label>                        
       <label index="tx_caddy_order.pdfInvoiceToCustomer">Invoice</label>                        

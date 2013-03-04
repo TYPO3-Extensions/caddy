@@ -113,22 +113,45 @@ class tx_caddy_pi1_clean
   */
   private function cleanDatabase( )
   {
+    $sesArray = null;;
+    $time     = time( );
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+var_dump( __METHOD__, __LINE__, $sesArray );    
+die( );  
+    $insertFields = array(
+      'pid'                         => $this->pObj->pid,
+      'tstamp'                      => $time,
+      'crdate'                      => $time,
+      'fileDeliveryorder'           => '',
+      'fileInvoice'                 => '',
+      'fileTerms'                   => '',
+      'items'                       => '',
+      'numberDeliveryorder'         => '',
+      'numberInvoice'               => '',
+      'numberOrder'                 => '',
+      'pdfDeliveryorderToCustomer'  => '',
+      'pdfDeliveryorderToVendor'    => '',
+      'pdfInvoiceToCustomer'        => '',
+      'pdfInvoiceToVendor'          => '',
+      'pdfTermsToCustomer'          => '',
+      'pdfTermsToVendor'            => '',
+      'quantity'                    => '',
+      'sumGross'                    => '',
+      'sumNet'                      => '',
+      'sumTaxNormal'                => '',
+      'sumTaxReduced'               => '',
+    );
+    $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
+
       // DRS
     if( $this->pObj->drs->drsClean )
     {
-      $prompt = 'The powermail form is sent, please clean up the caddy database.';
+      $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-
-    $insertFields = array(
-      'pid'       => $this->pObj->pid,
-      'net'       => '100.00',
-      'tax'       => '19.00',
-      'gross'     => '119.00',
-      'quantity'  => '7',
-    );
-    $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
+    
   }
 
  /**
