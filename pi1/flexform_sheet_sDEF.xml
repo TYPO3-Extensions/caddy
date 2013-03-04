@@ -30,10 +30,10 @@
               </numIndex>
             </items>
             <foreign_table>
-              tx_powermail_fields
+              tx_caddy_order
             </foreign_table>
             <foreign_table_where>
-              ORDER BY tx_powermail_fields.uid
+              ORDER BY tx_caddy_order.uid
             </foreign_table_where>
             <minitems>0</minitems>
             <default>customer</default>
