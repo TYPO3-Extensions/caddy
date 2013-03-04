@@ -12,6 +12,7 @@
       <label index="tx_caddy_item">Item</label>                        
       <label index="tx_caddy_item.title">Title</label>                        
       <label index="tx_caddy_order">Order</label>                        
+      <label index="tx_caddy_order.customerEmail">Sent to</label>                        
       <label index="tx_caddy_order.div.email">E-mail</label>                        
       <label index="tx_caddy_order.div.numbers">Numbers</label>                        
       <label index="tx_caddy_order.div.sum">Sum</label>                        
@@ -22,6 +23,7 @@
       <label index="tx_caddy_order.numberDeliveryorder">Delivery order</label>                        
       <label index="tx_caddy_order.numberInvoice">Invoice</label>                        
       <label index="tx_caddy_order.numberOrder">Order</label>                        
+      <label index="tx_caddy_order.palette.emailDate">Sent at</label>                        
       <label index="tx_caddy_order.palette.isSentToCustomer">Is sent to customer</label>                        
       <label index="tx_caddy_order.palette.isSentToVendor">Is sent to vendor</label>                        
       <label index="tx_caddy_order.palette.files">Files</label>                        
@@ -47,6 +49,7 @@
       <label index="tx_caddy_item">Artikel</label>                        
       <label index="tx_caddy_item.title">Titel</label>                        
       <label index="tx_caddy_order">Bestellung</label>                        
+      <label index="tx_caddy_order.customerEmail">Gesendet ans</label>                        
       <label index="tx_caddy_order.div.email">E-Mail</label>                        
       <label index="tx_caddy_order.div.numbers">Nummern</label>                        
       <label index="tx_caddy_order.div.sum">Summe</label>                        
@@ -57,6 +60,7 @@
       <label index="tx_caddy_order.numberDeliveryorder">Lieferschein</label>                        
       <label index="tx_caddy_order.numberInvoice">Rechnung</label>                        
       <label index="tx_caddy_order.numberOrder">Bestellung</label>                        
+      <label index="tx_caddy_order.palette.emailDate">Gesendet an</label>                        
       <label index="tx_caddy_order.palette.isSentToCustomer">An Kunden gesendet</label>                        
       <label index="tx_caddy_order.palette.isSentToVendor">An Anbieter gesendet</label>                        
       <label index="tx_caddy_order.palette.files">Dateien</label>                        

@@ -51,7 +51,8 @@ $TCA['tx_caddy_item'] = array (
 $TCA['tx_caddy_order'] = array (
   'ctrl' => $TCA['tx_caddy_order']['ctrl'],
   'interface' => array (
-    'showRecordFieldList' =>  'fileDeliveryorder,fileInvoice,fileTerms,' . 
+    'showRecordFieldList' =>  'customerEmail,' . 
+                              'fileDeliveryorder,fileInvoice,fileTerms,' . 
                               'items,' . 
                               'numberDeliveryorder,numberInvoice,numberOrder,' . 
                               'pdfDeliveryorderToCustomer,pdfDeliveryorderToVendor,pdfInvoiceToCustomer,' .
@@ -62,6 +63,15 @@ $TCA['tx_caddy_order'] = array (
   ),
   'feInterface' => $TCA['tx_caddy_order']['feInterface'],
   'columns' => array (
+    'customerEmail' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.customerEmail',
+      'config' => array (
+        'type' => 'input',  
+        'size' => '10',  
+        'eval' => 'int',
+      )
+    ),
     'fileDeliveryorder' => array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder',
@@ -292,7 +302,7 @@ $TCA['tx_caddy_order'] = array (
     '0' => array(
       'showitem' => 
         '--div--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.div.email,' .
-          'tstamp,' .
+          '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.emailDate;emailDate,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToCustomer;isSentToCustomer,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.isSentToVendor;isSentToVendor,' .
           '--palette--;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.palette.files;files,' .
@@ -304,6 +314,13 @@ $TCA['tx_caddy_order'] = array (
       ),
   ),
   'palettes' => array (
+    'emailDate' => array (
+      'showitem' => 
+        'customerEmail;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.customerEmail,' .
+        'tstamp;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.tstamp,' .
+        '',
+      'canNotCollapse' => 1,
+    ),
     'files' => array (
       'showitem' => 
         'fileDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder,' .

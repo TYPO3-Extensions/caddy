@@ -540,8 +540,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
 
     $this->numberDeliveryorderRegistry  = ( int ) $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
-    $this->numberOrderRegistry          = ( int ) $registry->get( 'tx_caddy', $prefix . 'order' );
     $this->numberInvoiceRegistry        = ( int ) $registry->get( 'tx_caddy', $prefix . 'invoice' );
+    $this->numberOrderRegistry          = ( int ) $registry->get( 'tx_caddy', $prefix . 'order' );
 
     $this->numberDeliveryorderCurrent   = $this->numberDeliveryorderRegistry
                                         + $this->flexform->originDeliveryorder

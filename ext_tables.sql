@@ -36,6 +36,8 @@ CREATE TABLE tx_caddy_order (
   cruser_id int(11) DEFAULT '0' NOT NULL,
   deleted tinyint(4) DEFAULT '0' NOT NULL,
 
+  customerEmail text,
+
   fileDeliveryorder text,
   fileInvoice text,
   fileTerms text,
