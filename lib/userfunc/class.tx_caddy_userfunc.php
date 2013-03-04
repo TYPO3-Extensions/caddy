@@ -311,7 +311,7 @@ class tx_caddy_userfunc
 var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] );
     $field = 'company';
     $deliveryorderCompany   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
-    $field = 'firstname';
+    $field = 'firstName';
     $deliveryorderFirstname = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'lastName';
     $deliveryorderLastname  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
@@ -330,7 +330,7 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] 
 var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform['data'][$sheet]['lDEF'] );
     $field = 'company';
     $invoiceCompany         = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
-    $field = 'firstname';
+    $field = 'firstName';
     $invoiceFirstname       = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     $field = 'lastName';
     $invoiceLastname        = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
