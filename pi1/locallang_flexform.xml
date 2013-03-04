@@ -6,6 +6,7 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
+      <label index="deliveryorder">Delivery Address</label>
       <label index="email">Email</label>
       <label index="email.customerEmail">Customer E-mail</label>
       <label index="email.deliveryorderMode">PDF Delivery Order</label>
@@ -24,14 +25,15 @@
       <label index="email.termsMode.vendor">Send it to the vendor</label>
       <label index="email.termsMode.all">Send it to the customer and the vendor</label>
       <label index="help">Help!</label>
+      <label index="invoice">Billing Address</label>
       <label index="origin">Origin</label>
       <label index="origin.deliveryorder">Increase delivery order number with</label>
       <label index="origin.invoice">Increase invoice number with</label>
       <label index="origin.order">Increase order number with</label>
       <label index="paths">PDF</label>
-      <label index="paths.deliveryorder">Path to PDF draft: delivery order</label>
-      <label index="paths.invoice">Path to pdf draft: invoice</label>
-      <label index="paths.terms"><![CDATA[Path to PDF draft: Terms & Conditions]]></label>
+      <label index="paths.deliveryorder">PDF draft: delivery order</label>
+      <label index="paths.invoice">PDF draft: invoice</label>
+      <label index="paths.terms"><![CDATA[PDF file: Terms & Conditions]]></label>
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
@@ -41,6 +43,7 @@
       <label index="sponsors">Sponsors</label>
     </languageKey>
     <languageKey index="de" type="array">
+      <label index="deliveryorder">Lieferadresse</label>
       <label index="email">E-Mail</label>
       <label index="email.customerEmail">Kunden Email</label>
       <label index="email.deliveryorderMode">PDF-Lieferschein</label>
@@ -58,15 +61,16 @@
       <label index="email.termsMode.customer">An den Kunden senden (empfohlen)</label>
       <label index="email.termsMode.vendor">An den Anbieter senden</label>
       <label index="email.termsMode.all">An den Kunden und den Anbieter senden</label>
-      <label index="paths">PDF</label>
-      <label index="paths.deliveryorder">Pfad zur PDF-Vorlage: Lieferschein</label>
-      <label index="paths.invoice">Pfad zur PDF-Vorlage: Rechnung</label>
-      <label index="paths.terms">Pfad zur PDF-Vorlage: AGB</label>
       <label index="help">Hilfe!</label>      
-      <label index="origin">Ausgangspunkt</label>
+      <label index="invoice">Rechnungsadresse</label>
+      <label index="origin">Startnummern</label>
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
       <label index="origin.order"><![CDATA[Erhöhe die Bestellnummer um]]></label>
+      <label index="paths">PDF</label>
+      <label index="paths.deliveryorder">PDF-Vorlage: Lieferschein</label>
+      <label index="paths.invoice">PDF-Vorlage: Rechnung</label>
+      <label index="paths.terms">PDF-Datei: AGB</label>
       <label index="sdefCsvallowedip">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
       <label index="sdefReport">Check it!-Bericht</label>
