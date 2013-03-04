@@ -303,17 +303,6 @@ class tx_caddy_pi1_clean
         break;
     }
 
-var_dump( __METHOD__, __LINE__, $sesArray, $uidFieldCustomerEmail, $customerEmail );    
-die( );
-
-      // DRS
-    if( $this->pObj->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
-    
     return $customerEmail;
     
   }
