@@ -33,7 +33,7 @@
  *  115:     private function cleanDatabase( )
  *  143:     private function cleanNumbers( )
  *  157:     private function cleanNumbersInvoice( )
- *  176:     private function cleanNumbersShippingticket( )
+ *  176:     private function cleanNumbersDeliveryorder( )
  *  195:     private function cleanSession( )
  *
  * TOTAL FUNCTIONS: 6
@@ -117,8 +117,49 @@ class tx_caddy_pi1_clean
     $time     = time( );
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-var_dump( __METHOD__, __LINE__, $sesArray );    
-die( );  
+    
+    $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
+    $numberInvoice        = $sesArray['numberInvoiceCurrent'];
+    $numberOrder          = $sesArray['numberOrder'];
+
+    $quantity = count( $sesArray['products'] );
+    
+    $pdfDeliveryorderToCustomer = false;
+    if( ! empty ( $sesArray['sendCustomerDeliveryorder'] ) ) 
+    {
+      $pdfDeliveryorderToCustomer = true;
+    }
+    $pdfInvoiceToVendor = false;
+    if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
+    {
+      $pdfInvoiceToVendor = true;
+    }
+    $pdfTermsToCustomer = false;
+    if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
+    {
+      $pdfTermsToCustomer = true;
+    }
+    $pdfDeliveryorderToVendor = false;
+    if( ! empty ( $sesArray['sendVendorDeliveryorder'] ) ) 
+    {
+      $pdfDeliveryorderToVendor = true;
+    }
+    $pdfInvoiceToCustomer = false;
+    if( ! empty ( $sesArray['sendCustomerInvoice'] ) ) 
+    {
+      $pdfInvoiceToCustomer = true;
+    }
+    $pdfTermsToVendor = false;
+    if( ! empty ( $sesArray['sendVendorTerms'] ) ) 
+    {
+      $pdfTermsToVendor = true;
+    }
+    
+    $sumGross       = count( $sesArray['sumGross'] );
+    $sumNet         = count( $sesArray['sumNet'] );
+    $sumTaxNormal   = count( $sesArray['sumTaxNormal'] );
+    $sumTaxReduced  = count( $sesArray['sumTaxReduced'] );
+
     $insertFields = array(
       'pid'                         => $this->pObj->pid,
       'tstamp'                      => $time,
@@ -127,22 +168,24 @@ die( );
       'fileInvoice'                 => '',
       'fileTerms'                   => '',
       'items'                       => '',
-      'numberDeliveryorder'         => '',
-      'numberInvoice'               => '',
-      'numberOrder'                 => '',
-      'pdfDeliveryorderToCustomer'  => '',
-      'pdfDeliveryorderToVendor'    => '',
-      'pdfInvoiceToCustomer'        => '',
-      'pdfInvoiceToVendor'          => '',
-      'pdfTermsToCustomer'          => '',
-      'pdfTermsToVendor'            => '',
-      'quantity'                    => '',
-      'sumGross'                    => '',
-      'sumNet'                      => '',
-      'sumTaxNormal'                => '',
-      'sumTaxReduced'               => '',
+      'numberDeliveryorder'         => $numberDeliveryorder,
+      'numberInvoice'               => $numberInvoice,
+      'numberOrder'                 => $numberOrder,
+      'pdfDeliveryorderToCustomer'  => $pdfDeliveryorderToCustomer,
+      'pdfDeliveryorderToVendor'    => $pdfDeliveryorderToVendor,
+      'pdfInvoiceToCustomer'        => $pdfInvoiceToCustomer,
+      'pdfInvoiceToVendor'          => $pdfInvoiceToVendor,
+      'pdfTermsToCustomer'          => $pdfTermsToCustomer,
+      'pdfTermsToVendor'            => $pdfTermsToVendor,
+      'quantity'                    => $quantity,
+      'sumGross'                    => $sumGross,
+      'sumNet'                      => $sumNet,
+      'sumTaxNormal'                => $sumTaxNormal,
+      'sumTaxReduced'               => $sumTaxReduced,
     );
     $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
+var_dump( __METHOD__, __LINE__, $sesArray );    
+die( );  
 
       // DRS
     if( $this->pObj->drs->drsClean )
@@ -165,7 +208,26 @@ die( );
   private function cleanNumbers( )
   {
     $this->cleanNumbersInvoice( );
-    $this->cleanNumbersShippingticket( );
+    $this->cleanNumbersDeliveryorder( );
+  }
+
+ /**
+  * cleanNumbersDeliveryorder( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function cleanNumbersDeliveryorder( )
+  {
+      // DRS
+    if( $this->pObj->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, please clean up the delivery order number.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
@@ -188,19 +250,19 @@ die( );
   }
 
  /**
-  * cleanNumbersShippingticket( )
+  * cleanNumbersOrder( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanNumbersShippingticket( )
+  private function cleanNumbersOrder( )
   {
       // DRS
     if( $this->pObj->drs->drsClean )
     {
-      $prompt = 'The powermail form is sent, please clean up the shipping-ticket-number.';
+      $prompt = 'The powermail form is sent, please clean up the order number.';
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
