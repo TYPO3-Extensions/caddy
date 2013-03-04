@@ -595,7 +595,7 @@ plugin.tx_caddy_pi1 {
         30 {
           value = deliveryorder
           lang {
-            de = lieferschein
+            de = Lieferschein
             en = deliveryorder
           }
           wrap = |-
@@ -691,13 +691,13 @@ plugin.tx_caddy_pi1 {
           data = TSFE:id
           wrap  = |-
         }
-          // label: deliveryorder
+          // label: invoice
         30 = TEXT
         30 {
-          value = deliveryorder
+          value = invoice
           lang {
-            de = lieferschein
-            en = deliveryorder
+            de = Rechnung
+            en = invoice
           }
           wrap = |-
         }
@@ -787,20 +787,15 @@ plugin.tx_caddy_pi1 {
           data = TSFE:id
           wrap  = |-
         }
-          // label: deliveryorder
+          // label: terms
         30 = TEXT
         30 {
-          value = deliveryorder
+          value = terms
           lang {
-            de = lieferschein
-            en = deliveryorder
+            de = AGB
+            en = terms
           }
           wrap = |-
-        }
-          // invoice number
-        40 = TEXT
-        40 {
-          field = numberInvoiceCurrent
         }
           // extension pdf
         50 = TEXT
