@@ -159,7 +159,7 @@ class tx_caddy_pdf extends tslib_pibase
 
                   $outerMarkerArray .= $this->renderCartHeadline($subpartArray);
                   foreach ($session['products'] as $key => $product) {
-                          $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
+                    $subpartArray['###CONTENT###'] .= $this->renderCartProduct($product);
                   }
                   $this->renderCartSum($outerMarkerArray, $session);
 
@@ -256,7 +256,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
     $fpdi->SetY( $this->conf['cart-position-y'] );
 
-    //$outerMarkerArray .= $this->renderCartHeadline($subpartArray);
+    $this->renderCartHeadline($subpartArray);
 
     foreach( $sesArray['products'] as $product ) 
     {
@@ -358,15 +358,15 @@ var_dump( __METHOD__, __LINE__, $sesArray );
     }
   }
 
-  private function renderCartHeadline(&$subpartArray) {
-
-          foreach ((array) $this->confSettings['powermailCart.']['fields.'] as $key => $value)
-          { 
-                  if (!stristr($key, '.'))
-                  { 
-                          $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('wtcartorderpdf_ll_' . $key);
-                  }
-          }
+  private function renderCartHeadline( &$subpartArray )
+  {
+    foreach ((array) $this->confSettings['powermailCart.']['fields.'] as $key => $value)
+    { 
+      if (!stristr($key, '.'))
+      { 
+        $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('wtcartorderpdf_ll_' . $key);
+      }
+    }
 
   }
 
