@@ -256,7 +256,8 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
     $fpdi->SetY( $this->conf['cart-position-y'] );
 
-    $this->renderCartHeadline($subpartArray);
+    $subpartArray = null;
+    $this->renderCartHeadline( $subpartArray );
 
     foreach( $sesArray['products'] as $product ) 
     {
@@ -360,11 +361,11 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
   private function renderCartHeadline( &$subpartArray )
   {
-    foreach ((array) $this->confSettings['powermailCart.']['fields.'] as $key => $value)
+    foreach( array_keys ( ( array ) $this->confSettings['powermailCart.']['fields.'] as $key ) )
     { 
       if (!stristr($key, '.'))
       { 
-        $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('wtcartorderpdf_ll_' . $key);
+        $subpartArray['###CADDY_LL_' . strtoupper($key) . '###'] = $this->pi_getLL('caddy_ll_' . $key);
       }
     }
 
@@ -421,13 +422,13 @@ var_dump( __METHOD__, __LINE__, $sesArray );
                   }
           }
 
-          $subpartArray['###CADDY_LL_SUMNET###'] = $this->pi_getLL('wtcartorderpdf_ll_cart_net');
-          $subpartArray['###CADDY_LL_SERVICE_COST###'] = $this->pi_getLL('wtcartorderpdf_ll_service_cost');
-          $subpartArray['###CADDY_LL_TAX###'] = $this->pi_getLL('wtcartorderpdf_ll_tax');
-          $subpartArray['###CADDY_LL_SUMGROSS###'] = $this->pi_getLL('wtcartorderpdf_ll_gross_total');
-          $subpartArray['###CADDY_LL_SHIPPING###'] = $this->pi_getLL('wtcartorderpdf_ll_shipping');
-          $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('wtcartorderpdf_ll_payment');
-          $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('wtcartorderpdf_ll_special');
+          $subpartArray['###CADDY_LL_SUMNET###'] = $this->pi_getLL('caddy_ll_cart_net');
+          $subpartArray['###CADDY_LL_SERVICE_COST###'] = $this->pi_getLL('caddy_ll_service_cost');
+          $subpartArray['###CADDY_LL_TAX###'] = $this->pi_getLL('caddy_ll_tax');
+          $subpartArray['###CADDY_LL_SUMGROSS###'] = $this->pi_getLL('caddy_ll_gross_total');
+          $subpartArray['###CADDY_LL_SHIPPING###'] = $this->pi_getLL('caddy_ll_shipping');
+          $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('caddy_ll_payment');
+          $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('caddy_ll_special');
 
           $subpartArray['###SHIPPING_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
           $subpartArray['###PAYMENT_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
