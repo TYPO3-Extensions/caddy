@@ -95,11 +95,11 @@ plugin.caddy {
   gpvar.sponsors = Click me!
 
   # cat=caddy - pdf//101; type=string; label= PDF ordering file: Path to the PDF ordering file  
-  pdf.orderpdf.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
+  pdf.invoice.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf
   # cat=caddy - pdf//102; type=string; label= HTML for the PDF ordering file:Path to the HTML template
-  pdf.orderpdf.template = EXT:caddy/files/templates/pdf_table.html
+  pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
   # cat=caddy - pdf//103; type=string; label= Directory for orderings:Path to the directory for the ordering copies 
-  pdf.orderpdf.dir = fileadmin/caddy/orders
+  pdf.invoice.dir = fileadmin/caddy/orders
   # cat=caddy - pdf//201; type=string; label= PDF packinglist file: Path to the PDF packinglist file  
   pdf.deliveryorder.includepdf = typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf
   # cat=caddy - pdf//202; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
@@ -145,7 +145,7 @@ plugin.caddy {
 
 plugin.caddy {
   pdf {
-    orderpdf {
+    invoice {
       abortonerror                = 0
       orderaddress-position-x     = 20
       orderaddress-position-y     = 45

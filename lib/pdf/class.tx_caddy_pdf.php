@@ -84,8 +84,8 @@ class tx_caddy_pdf extends tslib_pibase
 
 //    $this->ofilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
 //                        (
-//                          $this->confPdf['orderpdf.']['filename'], 
-//                          $this->confPdf['orderpdf.']['filename.']
+//                          $this->confPdf['invoice.']['filename'], 
+//                          $this->confPdf['invoice.']['filename.']
 //                        );
     $this->pfilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                         (
@@ -95,8 +95,8 @@ class tx_caddy_pdf extends tslib_pibase
 
 //    $this->onumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
 //                      (
-//                        $this->confPdf['orderpdf.']['ordernumber'], 
-//                        $this->confPdf['orderpdf.']['ordernumber.']
+//                        $this->confPdf['invoice.']['ordernumber'], 
+//                        $this->confPdf['invoice.']['ordernumber.']
 //                      );
     $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                       (
@@ -104,7 +104,7 @@ class tx_caddy_pdf extends tslib_pibase
                         $this->confPdf['deliveryorder.']['packinglistnumber.']
                       );
 
-//    $this->conf = $this->confPdf['orderpdf.'];
+//    $this->conf = $this->confPdf['invoice.'];
 //    $errorcnt += $this->renderOrderPdf($session);
     
     //$this->conf = $this->confPdf['deliveryorder.'];
@@ -125,7 +125,7 @@ class tx_caddy_pdf extends tslib_pibase
 
                   $erroremailaddress = $this->conf['erroremailaddress'];
                   if ($erroremailaddress) {
-                          $mailheader = $this->pi_getLL('error.mailheader.orderpdf');
+                          $mailheader = $this->pi_getLL('error.mailheader.invoice');
                           $mailbody = $this->pi_getLL('error.mailbody.cannotcreate');
                           $mailbody .= $this->pi_getLL('error.mailbody.dirnotfound');
                           if ($abortonerror) {
@@ -178,7 +178,7 @@ class tx_caddy_pdf extends tslib_pibase
           if (!file_exists('uploads/tx_caddy'.'/'.$filename)) {
                   $erroremailaddress = $this->conf['erroremailaddress'];
                   if ($erroremailaddress) {
-                          $mailheader = $this->pi_getLL('error.mailheader.orderpdf');
+                          $mailheader = $this->pi_getLL('error.mailheader.invoice');
                           $mailbody = $this->pi_getLL('error.mailbody.cannotcreate');
                           $mailbody .= $this->pi_getLL('error.mailbody.cannotwrite');
                           if ($abortonerror) {
