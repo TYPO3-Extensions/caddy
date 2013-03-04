@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+  <ROOT>
+    <TCEforms>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths</sheetTitle>
+    </TCEforms>
+    <type>array</type>
+    <el>
+      <terms>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.terms</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-agb_A4.pdf</default>
+          </config>
+        </TCEforms>
+      </terms>
+      <invoice>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.invoice</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-rechnung_A4.pdf</default>
+          </config>
+        </TCEforms>
+      </invoice>
+      <deliveryorder>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.deliveryorder</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>typo3conf/ext/caddy/files/pdf/default/typo3-quick-shop-lieferschein_A4.pdf</default>
+          </config>
+        </TCEforms>
+      </deliveryorder>
+    </el>
+  </ROOT>
+</T3DataStructure>

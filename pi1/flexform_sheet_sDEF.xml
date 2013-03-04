@@ -6,22 +6,6 @@
     </TCEforms>
     <type>array</type>
     <el>
-      <test>
-        <TCEforms>
-          <label>Test</label>
-          <config>
-            <type>group</type>
-            <internal_type>db</internal_type>
-            <allowed>
-              tx_powermail_fields
-            </allowed>
-            <minitems>0</minitems>
-            <maxitems>1</maxitems>
-            <size>1</size>
-            <show_thumbs>1</show_thumbs>
-          </config>
-        </TCEforms>
-      </test>
       <sdefReportEnable>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReportEnable</label>
