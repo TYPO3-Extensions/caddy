@@ -312,6 +312,12 @@ class tx_caddy_userfunc
       $sdefReportEnable = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     }
 
+    $prompt = $this->emptyCheck( );
+    if( $prompt )
+    {
+      return $prompt;    
+    }
+
       // RETURN : Check it! report is disabled
     if( empty ( $sdefReportEnable ) )
     {
@@ -327,12 +333,6 @@ class tx_caddy_userfunc
       // RETURN : Check it! report is disabled
 
     $this->pi1FfSdefReportInit( );
-
-    $prompt = $this->emptyCheck( );
-    if( $prompt )
-    {
-      return $prompt;    
-    }
 
     $prompt = $this->typoscriptCheck( );
 
