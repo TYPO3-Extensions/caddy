@@ -1303,10 +1303,34 @@ plugin.tx_caddy_pi3 {
 
 plugin.tx_powermail_pi1 {
   dynamicTyposcript {
-      // Display the content of the caddy
+      // The caddy content
     caddy = USER
     caddy {
       userFunc = user_caddy_powermailCart->showCaddy
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Delivery order number
+    caddydeliveryordernumber = USER
+    caddydeliveryordernumber {
+      userFunc = tx_caddy_session->getNumberDeliveryorder
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Invoice number
+    caddyinvoicenumber = USER
+    caddyinvoicenumber {
+      userFunc = tx_caddy_session->getNumberInvoice
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Order number
+    caddyordernumber = USER
+    caddyordernumber {
+      userFunc = tx_caddy_session->getNumberOrder
       userFunc {
         drs = {$plugin.caddy.debug.userfunc}
       }

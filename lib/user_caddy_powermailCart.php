@@ -236,19 +236,19 @@ class user_caddy_powermailCart extends tslib_pibase
 
     $outerArr = array
                 (
-                  'optionsNet' => $shipping_net + $payment_net + $overall_special_net,
-                  'optionsGross' => $shipping_gross + $payment_gross+ $overall_special_gross,
-                  'sumGross' => $cartGross,
-                  'productsGross' => $cartGrossNoService,
-                  'sumNet' => $cartNet,
-                  'productsNet' => $cartNetNoService,
-                  'sumTaxReduced' => $cartTaxReduced,
-                  'sumTaxNormal' => $cartTaxNormal,
-                  'payment_note' => $paymentNote,
+                  'optionsNet'      => $shipping_net + $payment_net + $overall_special_net,
+                  'optionsGross'    => $shipping_gross + $payment_gross+ $overall_special_gross,
+                  'sumGross'        => $cartGross,
+                  'productsGross'   => $cartGrossNoService,
+                  'sumNet'          => $cartNet,
+                  'productsNet'     => $cartNetNoService,
+                  'sumTaxReduced'   => $cartTaxReduced,
+                  'sumTaxNormal'    => $cartTaxNormal,
+                  'payment_note'    => $paymentNote,
                   'shipping_option' => $shipping_option,
-                  'payment_option' => $payment_option,
-                  'special_option' => $overall_special_option,
-                  'ordernumber' => $this->session->ordernumberGet()
+                  'payment_option'  => $payment_option,
+                  'special_option'  => $overall_special_option,
+                  'ordernumber'     => $this->session->getNumberOrder()
                 );
     $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 
@@ -278,6 +278,6 @@ class user_caddy_powermailCart extends tslib_pibase
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCart.php'])
 {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCart.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCart.php']);
 }
 ?>

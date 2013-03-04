@@ -83,55 +83,66 @@
 class tx_caddy_session
 {
 
-    public $prefixId = 'tx_caddy_pi1';
+  public $extKey        = 'caddy';
+  public $prefixId      = 'tx_caddy_pi1';
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
-    // Same as class name
-    public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+    // Object: the parent object
+  public $pObj = null;
 
-    // Path to any file in pi1 for locallang
-    public $extKey = 'caddy'; // The extension key.
-
-      // Object: the parent object
-    public $pObj = null;
-
-//    /**
-//    * Count products in a cart
-//    *
-//    * @return  integer
-//    */
-//    public function countProductsInCart($pid)
-//    {
-//        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $pid); // get already exting products from session
-//
-//        $count = 0;
-//        foreach ((array) $sesArray['products'] as $key => $val) {
-//            $count += $val['qty'];
-//        }
-//
-//        return $count;
-//    }
-//
 
 
 
  /***********************************************
   *
-  * Order number
+  * Get numbers
   *
   **********************************************/
 
-    /**
- * get the order number from session
+/**
+ * getNumberDeliveryorder( )  : Get the current order number
  *
- * @param	array		$arr: array to change
- * @return	void
+ * @return	string
+ * @access      public  
+ * @version     2.0.0
+ * @since       2.0.0
  */
-    public function ordernumberGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function getNumberDeliveryorder( )
+  {
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $currentNumber  = $sesArray['numberDeliveryorderCurrent'];
+    return $currentNumber;
+  }
 
-        return $sesArray['ordernumber'];
-    }
+/**
+ * getNumberInvoice( )  : Get the current order number
+ *
+ * @return	string
+ * @access      public  
+ * @version     2.0.0
+ * @since       2.0.0
+ */
+  public function getNumberInvoice( )
+  {
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $currentNumber  = $sesArray['numberInvoiceCurrent'];
+    return $currentNumber;
+  }
+
+/**
+ * getNumberOrder( )  : Get the current order number
+ *
+ * @return	string
+ * @access      public  
+ * @version     2.0.0
+ * @since       2.0.0
+ */
+  public function getNumberOrder( )
+  {
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $currentNumber  = $sesArray['numberOrderCurrent'];
+    return $currentNumber;
+  }
 
 
 
