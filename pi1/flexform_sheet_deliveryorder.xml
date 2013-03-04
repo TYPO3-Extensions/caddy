@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:email</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:deliveryorder</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <customerEmail>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.customerEmail</label>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:deliveryorder.customerEmail</label>
           <config>
             <type>group</type>
             <internal_type>db</internal_type>
