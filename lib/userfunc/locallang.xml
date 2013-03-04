@@ -11,6 +11,10 @@
         Please configure the table, which delivers the products to caddy.<br />
         See: constant editor > CADDY - DATABASE > table name
       ]]></label>
+      <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
+        The customer e-mail is missing in the sheet [email].<br />
+        Any e-mail can't sent without this address. Please upate the sheet!
+      ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         This flexform is never saved. Please save it.<br />
         Without saving you will get unproper results!
@@ -185,6 +189,10 @@
         Die Typoscript-Eigenscgaft db.table ist leer.<br />
         Bitte gebe die Tabelle an, die die Produkte f&uumlR Caddy enth&auml;t.<br />
         Siehe: Constant Editor > CADDY - DATABASE > table name
+      ]]></label>
+      <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
+        Du hast keine Kunden E-Mail im Blatt [E-Mail] angegeben.<br />
+        Ohne die Adresse kann keine E-Mail zugestellt werden. Bitte korrigiere die Einstellung!
       ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         Diese Flexform wurde nie gespeichert. Bitte speichere die Form einmal ab.<br />

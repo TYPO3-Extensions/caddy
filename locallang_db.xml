@@ -47,7 +47,7 @@
       <label index="tx_caddy_item">Artikel</label>                        
       <label index="tx_caddy_item.title">Titel</label>                        
       <label index="tx_caddy_order">Bestellung</label>                        
-      <label index="tx_caddy_order.div.email">Email</label>                        
+      <label index="tx_caddy_order.div.email">E-Mail</label>                        
       <label index="tx_caddy_order.div.numbers">Nummern</label>                        
       <label index="tx_caddy_order.div.sum">Summe</label>                        
       <label index="tx_caddy_order.fileDeliveryorder">Lieferschein</label>                        

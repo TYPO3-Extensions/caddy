@@ -266,14 +266,12 @@ class tx_caddy_userfunc
    */
   private function flexformCheckPowermailCustomerEmail( )
   {
-var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform );    
-//.message-notice
-//.message-information
-//.message-ok
-//.message-warning
-//.message-error
+    $sheet = 'email';
+    $field = 'customerEmail';
+    $customerEmail = $pmFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+
       // RETURN : there is a flexform form
-    if( $this->flexform->fieldUid )
+    if( $customerEmail )
     {
       return null;
     }
@@ -283,7 +281,7 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform );
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformNocontent'). '
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckPowermailCustomerEmail'). '
         </div>
       </div>
       ';
@@ -291,6 +289,7 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform );
     
     return $prompt;
   }
+  
   /**
    * flexformCheckPowermailOtherFields( ):
    *
@@ -306,24 +305,7 @@ var_dump( __METHOD__, __LINE__, $this->pluginPiFlexform );
 //.message-ok
 //.message-warning
 //.message-error
-      // RETURN : there is a flexform form
-    if( $this->flexform->fieldUid )
-    {
-      return null;
-    }
-      // RETURN : there is a flexform form
-    
-      // RETURN prompt : there isn't any flexform form
-    $prompt = '
-      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformNocontent'). '
-        </div>
-      </div>
-      ';
-      // RETURN prompt : there isn't any flexform form
-    
-    return $prompt;
+    return null;
   }
  
   

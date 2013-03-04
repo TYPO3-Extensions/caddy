@@ -66,7 +66,7 @@
       <label index="deliveryorder.city">Stadt (Feld in Powermail)</label>
       <label index="deliveryorder.country">Land (Feld in Powermail)</label>
       <label index="email">E-Mail</label>
-      <label index="email.customerEmail">Kunden Email (Feld in Powermail)</label>
+      <label index="email.customerEmail">Kunden E-Mail (Feld in Powermail)</label>
       <label index="email.deliveryorderMode">PDF-Lieferschein</label>
       <label index="email.deliveryorderMode.disabled">Nicht versenden</label>
       <label index="email.deliveryorderMode.customer">An den Kunden senden</label>
