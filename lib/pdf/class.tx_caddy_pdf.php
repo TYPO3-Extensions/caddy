@@ -175,8 +175,8 @@ class tx_caddy_pdf extends tslib_pibase
                           $tplIdx = $fpdi->importPage(1);
                           $fpdi->useTemplate($tplIdx, 0, 0, 210);
                   }
-
-                  $fpdi->SetFont('Helvetica','',$this->conf['font-size']);
+//http://www.tcpdf.org/doc/code/classTCPDF.html
+                  $fpdi->SetFont( 'Helvetica', '' , $this->conf['font-size'] );
 
                   $this->renderInvoiceAddress($fpdi);
                   $this->renderDeliveryorderAddress($fpdi);
@@ -419,6 +419,7 @@ class tx_caddy_pdf extends tslib_pibase
     $tplIdx = $fpdi->importPage( 1 );
     $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
 
+//http://www.tcpdf.org/doc/code/classTCPDF.html
     $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
     //$fpdi->SetTextColor( 255, 255, 255 );
     $fpdi->SetAuthor('TYPO3 Caddy');
@@ -483,12 +484,6 @@ class tx_caddy_pdf extends tslib_pibase
                               $this->confPdf['deliveryorder.']['deliveryorderaddress.']
                             );
 var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $deliveryorderaddress );
-    $deliveryorderaddress = $this->local_cObj->cObjGetSingle
-                            (
-                              $this->confPdf['deliveryorder.']['deliveryorderaddress'], 
-                              $this->confPdf['deliveryorder.']['deliveryorderaddress.']
-                            );
-var_dump( __METHOD__, __LINE__, $deliveryorderaddress );
 die ( );
 
     if ( ! empty( $deliveryorderaddress ) )

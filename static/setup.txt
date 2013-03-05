@@ -633,67 +633,119 @@ plugin.tx_caddy_pi1 {
       body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
       body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
 
-      deliveryorderaddress = COA
+        // priperties, comntent
+      deliveryorderaddress = 
       deliveryorderaddress {
-          // Label
-        10 = TEXT
-        10 {
-          value = Lieferaddresse
-          lang {
-            de = Lieferaddresse
-            en = delivery address
+        properties =
+        properties {
+            // font, position
+          header =
+          header {
+              // color, family, size, style
+            font =
+            font {
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              color = 0
+                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Courier
+                // [Integer] Font size in points
+              size  = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =  
+            }
+              // x, y
+            position {
+                // [INTEGER] Position from left in millimeter 
+              x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
+                // [INTEGER] Position from top in millimeter 
+              y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+            }
           }
-          wrap      = |<br>
-          required  = 1
+            // font, position
+          body =
+          body {
+              // color, family, size, style
+            font {
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              color = 0
+                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Arial
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
+            }
+              // x, y
+            position {
+                // [INTEGER] Position from left in millimeter 
+              x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
+                // [INTEGER] Position from top in millimeter 
+              y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+            }
+          }
         }
-          // Company
-        20 = TEXT
-        20 {
-          stdWrap {
-            ifEmpty {
-              data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.company}
+        content =
+        content {
+            // Label
+          header = TEXT
+          header {
+            value = Lieferaddresse
+            lang {
+              de = Lieferaddresse
+              en = delivery address
             }
             wrap      = |<br>
-            required  = 1
           }
-        }
-          // First name and last name
-        30 = TEXT
-        30 {
-          stdWrap {
-            ifEmpty {
-              dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.last_name}}
+            // Address: company, first name, last name, street, zip, city, country
+          body = COA
+          body {
+              // Company
+            20 = TEXT
+            20 {
+              stdWrap {
+                ifEmpty {
+                  data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.company}
+                }
+                wrap      = |<br>
+                required  = 1
+              }
             }
-            wrap      = |<br>
-            required  = 1
-          }
-        }
-          // Address
-        40 = TEXT
-        40 {
-          stdWrap {
-            ifEmpty {
-              data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.address}
+              // First name and last name
+            30 = TEXT
+            30 {
+              stdWrap {
+                ifEmpty {
+                  dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.last_name}}
+                }
+                wrap      = |<br>
+                required  = 1
+              }
             }
-            wrap      = |<br>
-            required  = 1
-          }
-        }
-          // ZIP and city
-        50 = TEXT
-        50 {
-          stdWrap {
-            ifEmpty {
-              dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.city}}
+              // Address
+            40 = TEXT
+            40 {
+              stdWrap {
+                ifEmpty {
+                  data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.address}
+                }
+                wrap      = |<br>
+                required  = 1
+              }
             }
-            wrap      = |<br>
-            required  = 1
+              // ZIP and city
+            50 = TEXT
+            50 {
+              stdWrap {
+                ifEmpty {
+                  dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.city}}
+                }
+                wrap      = |<br>
+                required  = 1
+              }
+            }
           }
         }
       }
-
-      deliveryorderaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
-      deliveryorderaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
 
       deliveryordernumber = COA
       deliveryordernumber {
