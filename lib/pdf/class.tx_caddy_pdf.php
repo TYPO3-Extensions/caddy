@@ -56,6 +56,34 @@ class tx_caddy_pdf extends tslib_pibase
 
 
 
+
+  /***********************************************
+  *
+  * Check Directory
+  *
+  **********************************************/
+
+ /**
+  * checkDir( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function checkDir( )
+  {
+      // CHECK: Is directory for PDF available?
+    if( ! is_dir( 'uploads/tx_caddy' ) )
+    {
+      $prompt = 'FATAL ERROR: uploads/tx_caddy not found!<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+  }
+  
+  
+
   /***********************************************
   *
   * Main
@@ -195,22 +223,55 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function renderDeliveryorderPdf( )
   {
+    $return = null;
+
+      // Die, if there is an unproper directory
+    $this->checkDir( );
+
+      // Get the caddy session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
 
-    $this->pfilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+    if( empty( $sesArray['products'] ) )
+    {
+      $prompt = 'FATAL ERROR: products are empty!<br />' . PHP_EOL . 
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+    
+      // RETURN : any pdf is requested
+    switch( true )
+    {
+      case( ! empty( $sesArray['sendCustomerDeliveryorder'] ) ):
+      case( ! empty( $sesArray['sendVendorDeliveryorder'] ) ):
+        $return = false;
+        break;
+      default:
+        $return = true;
+        break;
+    }
+    if( $return )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return;
+    }
+      // RETURN : any pdf is requested
+
+    $destFile =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                         (
                           $this->confPdf['deliveryorder.']['filename'], 
                           $this->confPdf['deliveryorder.']['filename.']
                         );
-var_dump( __METHOD__, __LINE__, $sesArray, $this->pfilename );
-die( );
-    if( empty( $sesArray['products'] ) )
-    {
-      return;
-    }
-    $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
-    $filename = time( ) . $this->concatFileName($this->pfilename);
+var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
+//die( );
+
+    $this->conf = $this->conf['pdf.']['deliveryorder.'];
 
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
                           (
@@ -218,23 +279,15 @@ die( );
                             (
                               $this->conf['template']
                             ), 
-                            '###CADDY_PACKINGLISTPDF###'
+                            '###CADDY_DELIVERYORDERPDF###'
                           );
     
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
-    // CHECK: Is directory for PDF available?
-    if( ! is_dir( 'uploads/tx_caddy' ) )
-    {
-      $prompt = 'uploads/tx_caddy/ not found<br />
-        ' .__METHOD__. ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-
       // CHECK: Is PDF already created?
-    if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
-      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' exists!<br />' .  PHP_EOL .
+      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
         __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
 //      die( $prompt );
       echo $prompt;
@@ -244,12 +297,10 @@ die( );
     $fpdi = new FPDI( );
     $fpdi->AddPage( );
 
-    if( $this->conf['include_file'] ) 
-    {
-      $fpdi->setSourceFile($this->conf['include_file']);
-      $tplIdx = $fpdi->importPage( 1 );
-      $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
-    }
+    $srceFile = $sesArray['sendVendorDeliveryorder'];
+    $fpdi->setSourceFile( $srceFile );
+    $tplIdx = $fpdi->importPage( 1 );
+    $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
 
     $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
     //$fpdi->SetTextColor( 255, 255, 255 );
@@ -288,24 +339,23 @@ die( );
       2
     );
 
-    $fpdi->Output( 'uploads/tx_caddy' . '/' . $filename, 'F' );
+    $fpdi->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
 
 
     // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( ! file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
+    if( ! file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
-      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' could not written!<br />
+      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' could not written!<br />
         ' .__METHOD__. ' (' . __LINE__ . ')';
       die( $prompt );
     }
     // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( file_exists( 'uploads/tx_caddy' . '/' . $filename ) ) 
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
-      $prompt = 'uploads/tx_caddy' . '/' . $filename . ' is written!<br />' . PHP_EOL .
+      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' is written!<br />' . PHP_EOL .
         __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
       echo $prompt;
     }
-    $sesArray['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
   }
 
   private function renderInvoiceAddress( &$fpdi )
