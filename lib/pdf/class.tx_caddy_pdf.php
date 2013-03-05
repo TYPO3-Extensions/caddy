@@ -176,7 +176,7 @@ class tx_caddy_pdf extends tslib_pibase
                   $fpdi->SetFont('Helvetica','',$this->conf['font-size']);
 
                   $this->renderInvoiceAddress($fpdi);
-                  $this->renderDeliveryAddress($fpdi);
+                  $this->renderDeliveryorderAddress($fpdi);
                   $this->renderInvoiceNumber($fpdi);
                   $this->renderAdditionalTextblocks($fpdi);
 
@@ -312,7 +312,7 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
     $fpdi->SetSubject('Lieferschein Subject');
     $fpdi->SetKeywords('TYPO3, caddy');    
 
-    $this->renderDeliveryAddress( $fpdi, true );
+    $this->renderDeliveryorderAddress( $fpdi, true );
     $this->renderDeliveryorderNumber( $fpdi );
     $this->renderAdditionalTextblocks( $fpdi );
 
@@ -388,30 +388,30 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
     }
   }
 
-  private function renderDeliveryAddress( &$fpdi, $fallback=false )
+  private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
   {
     $deliveryaddress =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                         (
-                          $this->conf['deliveryaddress'], $this->conf['deliveryaddress.']
+                          $this->conf['deliveryorderaddress'], $this->conf['deliveryorderaddress.']
                         );
 
-    if ( ! empty( $deliveryaddress ) )
+    if ( ! empty( $deliveryorderaddress ) )
     {
-      $deliveryaddressheadline =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+      $deliveryorderaddressheadline =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                                   (
-                                    $this->conf['deliveryaddress.']['0'], $this->conf['deliveryaddress.']['0.']
+                                    $this->conf['deliveryorderaddress.']['0'], $this->conf['deliveryorderaddress.']['0.']
                                   );
-      if( $deliveryaddressheadline )
+      if( $deliveryorderaddressheadline )
       {
-        $deliveryaddress = $deliveryaddressheadline . $deliveryaddress;
+        $deliveryorderaddress = $deliveryorderaddressheadline . $deliveryorderaddress;
       }
       $fpdi->writeHtmlCell
       (
         160, 
         0, 
-        $this->conf['deliveryaddress-position-x'],
-        $this->conf['deliveryaddress-position-y'], 
-        $deliveryaddress
+        $this->conf['deliveryorderaddress-position-x'],
+        $this->conf['deliveryorderaddress-position-y'], 
+        $deliveryorderaddress
       );
     }
     elseif ( $fallback ) 
