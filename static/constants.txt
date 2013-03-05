@@ -129,8 +129,8 @@ plugin.caddy {
     invoice {
       invoiceaddress-position-x     = 20
       invoiceaddress-position-y     = 45
-      deliveryaddress-position-x  = 20
-      deliveryaddress-position-y  = 65
+      deliveryorderaddress-position-x  = 20
+      deliveryorderaddress-position-y  = 65
       invoicenumber-position-x      = 20
       invoicenumber-position-y      = 90
       body-position-x             = 25
@@ -140,8 +140,8 @@ plugin.caddy {
     deliveryorder {
       invoiceaddress-position-x       = 20
       invoiceaddress-position-y       = 45
-      deliveryaddress-position-x    = 20
-      deliveryaddress-position-y    = 45
+      deliveryorderaddress-position-x    = 20
+      deliveryorderaddress-position-y    = 45
       deliveryordernumber-position-x  = 20
       deliveryordernumber-position-y  = 90
       body-position-x               = 25

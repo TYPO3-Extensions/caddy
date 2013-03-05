@@ -707,8 +707,8 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      deliveryaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.deliveryaddress-position-x}
-      deliveryaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.deliveryaddress-position-y}
+      deliveryorderaddress-position-x    = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
+      deliveryorderaddress-position-y    = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
 
       deliveryordernumber = COA
       deliveryordernumber {
@@ -1010,8 +1010,8 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      deliveryaddress-position-x  = {$plugin.caddy.pdf.invoice.deliveryaddress-position-x}
-      deliveryaddress-position-y  = {$plugin.caddy.pdf.invoice.deliveryaddress-position-y}
+      deliveryorderaddress-position-x  = {$plugin.caddy.pdf.invoice.deliveryorderaddress-position-x}
+      deliveryorderaddress-position-y  = {$plugin.caddy.pdf.invoice.deliveryorderaddress-position-y}
 
       invoiceaddress = COA
       invoiceaddress {
