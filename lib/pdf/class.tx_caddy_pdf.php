@@ -385,24 +385,19 @@ class tx_caddy_pdf extends tslib_pibase
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
-    $destFile =  $this->local_cObj->cObjGetSingle
-                        (
-                          $this->confPdf['deliveryorder.']['filename'], 
-                          $this->confPdf['deliveryorder.']['filename.']
-                        );
+    $destFile = $this->local_cObj->cObjGetSingle
+                (
+                  $this->confPdf['deliveryorder.']['filename'], 
+                  $this->confPdf['deliveryorder.']['filename.']
+                );
 
 //var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
 //die( );
 
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
-                          (
-                            $GLOBALS['TSFE']->cObj->fileResource
-                            (
-                              $this->confPdf['deliveryorder.']['template']
-                            ), 
-                            '###CADDY_DELIVERYORDERPDF###'
-                          );
-var_dump( __METHOD__, __LINE__, $this->tmpl );
+    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] ); 
+
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDERPDF###' );
+//var_dump( __METHOD__, __LINE__, $this->tmpl );
     
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
@@ -488,6 +483,12 @@ var_dump( __METHOD__, __LINE__, $this->tmpl );
                               $this->confPdf['deliveryorder.']['deliveryorderaddress.']
                             );
 var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $deliveryorderaddress );
+    $deliveryorderaddress = $this->local_cObj->cObjGetSingle
+                            (
+                              $this->confPdf['deliveryorder.']['deliveryorderaddress'], 
+                              $this->confPdf['deliveryorder.']['deliveryorderaddress.']
+                            );
+var_dump( __METHOD__, __LINE__, $deliveryorderaddress );
 die ( );
 
     if ( ! empty( $deliveryorderaddress ) )

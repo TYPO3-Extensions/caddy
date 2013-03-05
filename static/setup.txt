@@ -636,73 +636,58 @@ plugin.tx_caddy_pi1 {
       deliveryorderaddress = COA
       deliveryorderaddress {
           // Label
-        0 = COA
-        0 {
-          10 = TEXT
-          10 {
-            value = Lieferaddresse
-            lang {
-              de = Lieferaddresse
-              en = delivery address
+        10 = TEXT
+        10 {
+          value = Lieferaddresse
+          lang {
+            de = Lieferaddresse
+            en = delivery address
+          }
+          wrap      = |<br>
+          required  = 1
+        }
+          // Company
+        20 = TEXT
+        20 {
+          stdWrap {
+            ifEmpty {
+              data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.company}
             }
             wrap      = |<br>
             required  = 1
           }
         }
-          // Company
-        1 = COA
-        1 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.company}
-              }
-              wrap      = |<br>
-              required  = 1
-            }
-          }
-        }
           // First name and last name
-        2 = COA
-        2 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.last_name}}
-              }
-              wrap      = |<br>
-              required  = 1
+        30 = TEXT
+        30 {
+          stdWrap {
+            ifEmpty {
+              dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.last_name}}
             }
+            wrap      = |<br>
+            required  = 1
           }
         }
           // Address
-        3 = COA
-        3 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.address}
-              }
-              wrap      = |<br>
-              required  = 1
+        40 = TEXT
+        40 {
+          stdWrap {
+            ifEmpty {
+              data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.address}
             }
+            wrap      = |<br>
+            required  = 1
           }
         }
           // ZIP and city
-        4 = COA
-        4 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.city}}
-              }
-              wrap      = |<br>
-              required  = 1
+        50 = TEXT
+        50 {
+          stdWrap {
+            ifEmpty {
+              dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.city}}
             }
+            wrap      = |<br>
+            required  = 1
           }
         }
       }
