@@ -633,7 +633,7 @@ plugin.tx_caddy_pi1 {
       body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
       body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
 
-        // properties, comntent
+        // properties, content
       deliveryorderaddress = 
       deliveryorderaddress {
           // header, body
@@ -702,48 +702,58 @@ plugin.tx_caddy_pi1 {
           body = COA
           body {
               // Company
-            20 = TEXT
-            20 {
-              stdWrap {
-                ifEmpty {
-                  data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.company}
-                }
-                wrap      = |<br>
-                required  = 1
-              }
+            10 = TEXT
+            10 {
+              field     = deliverorderCompany
+              required  = 1
             }
               // First name and last name
-            30 = TEXT
-            30 {
-              stdWrap {
-                ifEmpty {
-                  dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.last_name}}
-                }
-                wrap      = |<br>
-                required  = 1
+            20 = COA
+            20 {
+              // First name
+              10 = TEXT
+              10 {
+                field     = deliverorderFirstname
               }
+                // Last name
+              20 = TEXT
+              20 {
+                field       = deliverorderLastname
+                noTrimWrap  = | ||
+              }
+              wrap      = <br />|
+              required  = 1
             }
               // Address
-            40 = TEXT
-            40 {
-              stdWrap {
-                ifEmpty {
-                  data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.address}
-                }
-                wrap      = |<br>
-                required  = 1
-              }
+            30 = TEXT
+            30 {
+              field     = deliverorderAddress
+              wrap      = <br />|
+              required  = 1
             }
               // ZIP and city
+            40 = COA
+            40 {
+                // ZIP
+              10 = TEXT
+              10 {
+                field = deliverorderZip
+              }
+                // City
+              20 = TEXT
+              20 {
+                field       = deliverorderCity
+                noTrimWrap  = | ||
+              }
+              wrap      = <br />|
+              required  = 1
+            }
+              // Country
             50 = TEXT
             50 {
-              stdWrap {
-                ifEmpty {
-                  dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_packing_slip.default.city}}
-                }
-                wrap      = |<br>
-                required  = 1
-              }
+              field     = deliverorderCountry
+              wrap      = <br />|
+              required  = 1
             }
           }
         }
