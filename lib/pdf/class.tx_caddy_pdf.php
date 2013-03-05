@@ -262,7 +262,10 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // RETURN : any pdf is requested
 
-    $destFile =  $GLOBALS['TSFE']->cObj->cObjGetSingle
+    $this->local_cObj = $GLOBALS['TSFE']->cObj;
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+
+    $destFile =  $this->local_cObj->cObjGetSingle
                         (
                           $this->confPdf['deliveryorder.']['filename'], 
                           $this->confPdf['deliveryorder.']['filename.']
