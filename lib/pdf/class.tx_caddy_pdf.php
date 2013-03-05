@@ -53,6 +53,9 @@ class tx_caddy_pdf extends tslib_pibase
   public $extKey        = 'caddy';
   
   public $drsUserfunc   = null;
+  
+  private $local_cObj = null;
+  private $tmpl = null;
 
 
 
@@ -214,153 +217,6 @@ class tx_caddy_pdf extends tslib_pibase
           $session['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
   }
 
- /**
-  * renderDeliveryorder( ) : 
-  *
-  * @return	boolean		true, in case of en arror. false, if all is proper
-  * @version    2.0.0
-  * @since      1.4.6
-  */
-  private function renderDeliveryorder( )
-  {
-    $return = null;
-
-      // Die, if there is an unproper directory
-    $this->checkDir( );
-
-      // Get the caddy session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
-
-    if( empty( $sesArray['products'] ) )
-    {
-      $prompt = 'FATAL ERROR: products are empty!<br />' . PHP_EOL . 
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-    
-      // RETURN : any pdf is requested
-    switch( true )
-    {
-      case( ! empty( $sesArray['sendCustomerDeliveryorder'] ) ):
-      case( ! empty( $sesArray['sendVendorDeliveryorder'] ) ):
-        $return = false;
-        break;
-      default:
-        $return = true;
-        break;
-    }
-    if( $return )
-    {
-        // DRS
-      if( $this->pObj->drsUserfunc )
-      {
-        $prompt = __METHOD__ . ' returns null.';
-        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return;
-    }
-      // RETURN : any pdf is requested
-
-    $this->local_cObj = $GLOBALS['TSFE']->cObj;
-    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
-
-    $destFile =  $this->local_cObj->cObjGetSingle
-                        (
-                          $this->confPdf['deliveryorder.']['filename'], 
-                          $this->confPdf['deliveryorder.']['filename.']
-                        );
-
-var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
-//die( );
-
-    $this->confPdf = $this->conf['pdf.']['deliveryorder.'];
-
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
-                          (
-                            $GLOBALS['TSFE']->cObj->fileResource
-                            (
-                              $this->confPdf['template']
-                            ), 
-                            '###CADDY_DELIVERYORDERPDF###'
-                          );
-    
-    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
-
-      // CHECK: Is PDF already created?
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
-    {
-      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
-        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
-//      die( $prompt );
-      echo $prompt;
-      return;
-    }
-
-    $fpdi = new FPDI( );
-    $fpdi->AddPage( );
-
-    $srceFile = $sesArray['sendVendorDeliveryorder'];
-    $fpdi->setSourceFile( $srceFile );
-    $tplIdx = $fpdi->importPage( 1 );
-    $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
-
-    $fpdi->SetFont( 'Helvetica','',$this->confPdf['font-size'] );
-    //$fpdi->SetTextColor( 255, 255, 255 );
-    $fpdi->SetAuthor('TYPO3 Caddy');
-    $fpdi->SetTitle('Lieferschein');
-    $fpdi->SetSubject('Lieferschein Subject');
-    $fpdi->SetKeywords('TYPO3, caddy');    
-
-    $this->renderDeliveryorderAddress( $fpdi, true );
-    $this->renderDeliveryorderNumber( $fpdi );
-    $this->renderAdditionalTextblocks( $fpdi );
-
-    $fpdi->SetY( $this->confPdf['body-position-y'] );
-
-    $subpartArray = null;
-    $subpartArray = $this->renderCartHeadline( $subpartArray );
-
-    foreach( $sesArray['products'] as $product ) 
-    {
-      $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $this->renderCartProduct( $product );
-    }
-    
-    $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-            (
-              $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
-            );
-
-    $fpdi->writeHTMLCell
-    (
-      $this->confPdf['body-width'], 
-      0, 
-      $this->confPdf['body-position-x'], 
-      $this->confPdf['body-position-y'], 
-      $html, 
-      0, 
-      2
-    );
-
-    $fpdi->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
-
-
-    // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( ! file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
-    {
-      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' could not written!<br />
-        ' .__METHOD__. ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-    // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
-    {
-      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' is written!<br />' . PHP_EOL .
-        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
-      echo $prompt;
-    }
-  }
-
   private function renderInvoiceAddress( &$fpdi )
   {
     $invoiceaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
@@ -385,40 +241,6 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
         $this->conf['invoiceaddress-position-y'], 
         $invoiceaddress
       );
-    }
-  }
-
-  private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
-  {
-    $deliveryorderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
-                            (
-                              $this->confPdf['deliveryorderaddress'], 
-                              $this->confPdf['deliveryorderaddress.']
-                            );
-
-    if ( ! empty( $deliveryorderaddress ) )
-    {
-      $deliveryorderaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
-                                      (
-                                        $this->confPdf['deliveryorderaddress.']['0'], 
-                                        $this->confPdf['deliveryorderaddress.']['0.']
-                                      );
-      if( $deliveryorderaddressheadline )
-      {
-        $deliveryorderaddress = $deliveryorderaddressheadline . $deliveryorderaddress;
-      }
-      $fpdi->writeHtmlCell
-      (
-        160, 
-        0, 
-        $this->confPdf['deliveryorderaddress-position-x'],
-        $this->confPdf['deliveryorderaddress-position-y'], 
-        $deliveryorderaddress
-      );
-    }
-    elseif ( $fallback ) 
-    {
-      $this->renderInvoiceAddress( $fpdi );
     }
   }
 
@@ -512,8 +334,188 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
           $fpdi->Cell('150', '6', $this->onumber);
   }
 
+ /**
+  * renderDeliveryorder( ) : 
+  *
+  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function renderDeliveryorder( )
+  {
+    $return = null;
+
+      // Die, if there is an unproper directory
+    $this->checkDir( );
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+
+    if( empty( $sesArray['products'] ) )
+    {
+      $prompt = 'FATAL ERROR: products are empty!<br />' . PHP_EOL . 
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+    
+      // RETURN : any pdf is requested
+    switch( true )
+    {
+      case( ! empty( $sesArray['sendCustomerDeliveryorder'] ) ):
+      case( ! empty( $sesArray['sendVendorDeliveryorder'] ) ):
+        $return = false;
+        break;
+      default:
+        $return = true;
+        break;
+    }
+    if( $return )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return;
+    }
+      // RETURN : any pdf is requested
+
+    $this->local_cObj = $GLOBALS['TSFE']->cObj;
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+
+    $destFile =  $this->local_cObj->cObjGetSingle
+                        (
+                          $this->confPdf['deliveryorder.']['filename'], 
+                          $this->confPdf['deliveryorder.']['filename.']
+                        );
+
+//var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
+//die( );
+
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
+                          (
+                            $GLOBALS['TSFE']->cObj->fileResource
+                            (
+                              $this->confPdf['deliveryorder.']['template']
+                            ), 
+                            '###CADDY_DELIVERYORDERPDF###'
+                          );
+    
+    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
+
+      // CHECK: Is PDF already created?
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
+    {
+      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
+        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
+//      die( $prompt );
+      echo $prompt;
+      return;
+    }
+
+    $fpdi = new FPDI( );
+    $fpdi->AddPage( );
+
+    $srceFile = $sesArray['sendVendorDeliveryorder'];
+    $fpdi->setSourceFile( $srceFile );
+    $tplIdx = $fpdi->importPage( 1 );
+    $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
+
+    $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
+    //$fpdi->SetTextColor( 255, 255, 255 );
+    $fpdi->SetAuthor('TYPO3 Caddy');
+    $fpdi->SetTitle('Lieferschein');
+    $fpdi->SetSubject('Lieferschein Subject');
+    $fpdi->SetKeywords('TYPO3, caddy');    
+
+    $this->renderDeliveryorderAddress( $fpdi, true );
+    $this->renderDeliveryorderNumber( $fpdi );
+    $this->renderAdditionalTextblocks( $fpdi );
+
+    $fpdi->SetY( $this->confPdf['deliveryorder.']['body-position-y'] );
+
+    $subpartArray = null;
+    $subpartArray = $this->renderCartHeadline( $subpartArray );
+
+    foreach( $sesArray['products'] as $product ) 
+    {
+      $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $this->renderCartProduct( $product );
+    }
+    
+    $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+            (
+              $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
+            );
+
+    $fpdi->writeHTMLCell
+    (
+      $this->confPdf['deliveryorder.']['body-width'], 
+      0, 
+      $this->confPdf['deliveryorder.']['body-position-x'], 
+      $this->confPdf['deliveryorder.']['body-position-y'], 
+      $html, 
+      0, 
+      2
+    );
+
+    $fpdi->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
+
+
+    // CHECK: Was PDF not created, send E-Mail and exit with error.
+    if( ! file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
+    {
+      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' could not written!<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+    // CHECK: Was PDF not created, send E-Mail and exit with error.
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
+    {
+      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' is written!<br />' . PHP_EOL .
+        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
+      echo $prompt;
+    }
+  }
+
+  private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
+  {
+    $deliveryorderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                            (
+                              $this->confPdf['deliveryorder.']['deliveryorderaddress'], 
+                              $this->confPdf['deliveryorder.']['deliveryorderaddress.']
+                            );
+var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $deliveryorderaddress );
+
+    if ( ! empty( $deliveryorderaddress ) )
+    {
+      $deliveryorderaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                                      (
+                                        $this->confPdf['deliveryorder.']['deliveryorderaddress.']['0'], 
+                                        $this->confPdf['deliveryorder.']['deliveryorderaddress.']['0.']
+                                      );
+      if( $deliveryorderaddressheadline )
+      {
+        $deliveryorderaddress = $deliveryorderaddressheadline . $deliveryorderaddress;
+      }
+      $fpdi->writeHtmlCell
+      (
+        160, 
+        0, 
+        $this->confPdf['deliveryorder.']['deliveryorderaddress-position-x'],
+        $this->confPdf['deliveryorder.']['deliveryorderaddress-position-y'], 
+        $deliveryorderaddress
+      );
+    }
+    elseif ( $fallback ) 
+    {
+      $this->renderInvoiceAddress( $fpdi );
+    }
+  }
+
   private function renderDeliveryorderNumber(&$fpdi) {
-          $fpdi->SetXY($this->confPdf['deliveryordernumber-position-x'], $this->confPdf['deliveryordernumber-position-y']);
+          $fpdi->SetXY($this->confPdf['deliveryorder.']['deliveryordernumber-position-x'], $this->confPdf['deliveryorder.']['deliveryordernumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->pnumber);
   }
