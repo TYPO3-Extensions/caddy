@@ -633,9 +633,10 @@ plugin.tx_caddy_pi1 {
       body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
       body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
 
-        // priperties, comntent
+        // properties, comntent
       deliveryorderaddress = 
       deliveryorderaddress {
+          // header, body
         properties =
         properties {
             // font, position
@@ -684,6 +685,7 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
+          // header, body
         content =
         content {
             // Label
