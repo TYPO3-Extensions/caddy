@@ -128,15 +128,15 @@ class tx_caddy_pdf extends tslib_pibase
                       );
 
 //    $this->conf = $this->confPdf['invoice.'];
-//    $errorcnt += $this->renderInvoicePdf($session);
+//    $errorcnt += $this->renderInvoice($session);
     
     //$this->conf = $this->confPdf['deliveryorder.'];
-    $errorcnt += $this->renderDeliveryorderPdf( );
+    $errorcnt += $this->renderDeliveryorder( );
 
     return $errorcnt;
   }
 
-  private function renderInvoicePdf( &$session ) {
+  private function renderInvoice( &$session ) {
           $filename = $this->concatFileName($this->ofilename);
 
           $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###CADDY_ORDERPDF###'); // Load HTML Template
@@ -215,13 +215,13 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * renderDeliveryorderPdf( ) : 
+  * renderDeliveryorder( ) : 
   *
   * @return	boolean		true, in case of en arror. false, if all is proper
   * @version    2.0.0
   * @since      1.4.6
   */
-  private function renderDeliveryorderPdf( )
+  private function renderDeliveryorder( )
   {
     $return = null;
 
@@ -274,13 +274,13 @@ class tx_caddy_pdf extends tslib_pibase
 var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
 //die( );
 
-    $this->conf = $this->conf['pdf.']['deliveryorder.'];
+    $this->confPdf = $this->conf['pdf.']['deliveryorder.'];
 
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart
                           (
                             $GLOBALS['TSFE']->cObj->fileResource
                             (
-                              $this->conf['template']
+                              $this->confPdf['template']
                             ), 
                             '###CADDY_DELIVERYORDERPDF###'
                           );
@@ -305,7 +305,7 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
     $tplIdx = $fpdi->importPage( 1 );
     $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
 
-    $fpdi->SetFont( 'Helvetica','',$this->conf['font-size'] );
+    $fpdi->SetFont( 'Helvetica','',$this->confPdf['font-size'] );
     //$fpdi->SetTextColor( 255, 255, 255 );
     $fpdi->SetAuthor('TYPO3 Caddy');
     $fpdi->SetTitle('Lieferschein');
@@ -316,7 +316,7 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
     $this->renderDeliveryorderNumber( $fpdi );
     $this->renderAdditionalTextblocks( $fpdi );
 
-    $fpdi->SetY( $this->conf['body-position-y'] );
+    $fpdi->SetY( $this->confPdf['body-position-y'] );
 
     $subpartArray = null;
     $subpartArray = $this->renderCartHeadline( $subpartArray );
@@ -333,10 +333,10 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
 
     $fpdi->writeHTMLCell
     (
-      $this->conf['body-width'], 
+      $this->confPdf['body-width'], 
       0, 
-      $this->conf['body-position-x'], 
-      $this->conf['body-position-y'], 
+      $this->confPdf['body-position-x'], 
+      $this->confPdf['body-position-y'], 
       $html, 
       0, 
       2
@@ -390,17 +390,19 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
 
   private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
   {
-    $deliveryaddress =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-                        (
-                          $this->conf['deliveryorderaddress'], $this->conf['deliveryorderaddress.']
-                        );
+    $deliveryorderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                            (
+                              $this->confPdf['deliveryorderaddress'], 
+                              $this->confPdf['deliveryorderaddress.']
+                            );
 
     if ( ! empty( $deliveryorderaddress ) )
     {
-      $deliveryorderaddressheadline =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-                                  (
-                                    $this->conf['deliveryorderaddress.']['0'], $this->conf['deliveryorderaddress.']['0.']
-                                  );
+      $deliveryorderaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                                      (
+                                        $this->confPdf['deliveryorderaddress.']['0'], 
+                                        $this->confPdf['deliveryorderaddress.']['0.']
+                                      );
       if( $deliveryorderaddressheadline )
       {
         $deliveryorderaddress = $deliveryorderaddressheadline . $deliveryorderaddress;
@@ -409,8 +411,8 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
       (
         160, 
         0, 
-        $this->conf['deliveryorderaddress-position-x'],
-        $this->conf['deliveryorderaddress-position-y'], 
+        $this->confPdf['deliveryorderaddress-position-x'],
+        $this->confPdf['deliveryorderaddress-position-y'], 
         $deliveryorderaddress
       );
     }
@@ -511,13 +513,13 @@ var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
   }
 
   private function renderDeliveryorderNumber(&$fpdi) {
-          $fpdi->SetXY($this->conf['deliveryordernumber-position-x'], $this->conf['deliveryordernumber-position-y']);
+          $fpdi->SetXY($this->confPdf['deliveryordernumber-position-x'], $this->confPdf['deliveryordernumber-position-y']);
 
           $fpdi->Cell('150', '6', $this->pnumber);
   }
 
   private function renderAdditionalTextblocks(&$fpdi) {
-          foreach ($this->conf['additionaltextblocks.'] as $key => $value) {
+          foreach ($this->confPdf['additionaltextblocks.'] as $key => $value) {
                   $html = $GLOBALS['TSFE']->cObj->cObjGetSingle($value['content'], $value['content.']);
 
                   $fpdi->writeHTMLCell($value['width'], $value['height'], $value['position-x'], $value['position-y'], $html, 0, 2, 0, true, $value['align'] ? $value['align'] : 'L', true);
