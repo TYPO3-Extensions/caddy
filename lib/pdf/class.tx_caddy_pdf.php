@@ -481,7 +481,7 @@ class tx_caddy_pdf extends tslib_pibase
 
   private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
   {
-    $deliveryorderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
+    $deliveryorderaddress = $this->local_cObj->cObjGetSingle
                             (
                               $this->confPdf['deliveryorder.']['deliveryorderaddress'], 
                               $this->confPdf['deliveryorder.']['deliveryorderaddress.']
