@@ -402,6 +402,7 @@ class tx_caddy_pdf extends tslib_pibase
                             ), 
                             '###CADDY_DELIVERYORDERPDF###'
                           );
+var_dump( __METHOD__, __LINE__, $this->tmpl );
     
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
@@ -481,12 +482,13 @@ class tx_caddy_pdf extends tslib_pibase
 
   private function renderDeliveryorderAddress( &$fpdi, $fallback=false )
   {
-    $deliveryorderaddress = $this->local_cObj->cObjGetSingle
+    $deliveryorderaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
                             (
                               $this->confPdf['deliveryorder.']['deliveryorderaddress'], 
                               $this->confPdf['deliveryorder.']['deliveryorderaddress.']
                             );
 var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $deliveryorderaddress );
+die ( );
 
     if ( ! empty( $deliveryorderaddress ) )
     {
