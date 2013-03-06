@@ -644,24 +644,24 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Height of content in millimeter 
               height = 0
                 // [INTEGER] Width of content in millimeter 
-              width = {$plugin.caddy.pdf.deliveryorder.body-width}
+              width = {$plugin.caddy.pdf.caddy.width}
                 // [INTEGER] Position from left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.body-position-x}
+              x = {$plugin.caddy.pdf.caddy.x}
                 // [INTEGER] Position from top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.body-position-y}
+              y = {$plugin.caddy.pdf.caddy.y}
             }
               // family, size, style
             font =
             font {
                 // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
+              family = {$plugin.caddy.pdfGeneral.fontfamily}
                 // [Integer] Font size in points
-              size = 12
+              size = {$plugin.caddy.pdf.caddy.fontsize}
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = 0
+            textColor = {$plugin.caddy.pdfGeneral.textColor}
           }
         }
       }
@@ -682,22 +682,22 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Width of content in millimeter 
               width = 0
                 // [INTEGER] Position from the page margin left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
+              x = {$plugin.caddy.pdf.deliveryorder.address.y}
                 // [INTEGER] Position from the page margin top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+              y = {$plugin.caddy.pdf.deliveryorder.address.y}
             }
               // family, size, style
             font =
             font {
                 // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Courier
+              family = {$plugin.caddy.pdfGeneral.fontfamily}
                 // [Integer] Font size in points
-              size  = 10
+              size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =  
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = 0
+            textColor = {$plugin.caddy.pdfGeneral.textColor}
           }
             // label for delivery order address
           content = TEXT
@@ -725,22 +725,22 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Width of content in millimeter 
               width = 0
                 // [INTEGER] Position from left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
+              x = {$plugin.caddy.pdf.deliveryorder.address.x}
                 // [INTEGER] Position from top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+              y = {$plugin.caddy.pdf.deliveryorder.address.y}
             }
               // family, size, style
             font =
             font {
-                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
+                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = {$plugin.caddy.pdfGeneral.fontfamily}
                 // [Integer] Font size in points
-              size = 14
+              size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style = 
+              style =  
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = 0
+            textColor = {$plugin.caddy.pdfGeneral.textColor}
           }
             // Address: company, first name and last name, street, zip and city, country
           content = COA
@@ -821,22 +821,22 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Width of content in millimeter 
               width = 0
                 // [INTEGER] Position from left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-x}
+              x = {$plugin.caddy.pdf.deliveryorder.number.x}
                 // [INTEGER] Position from top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-y}
+              y = {$plugin.caddy.pdf.deliveryorder.number.y}
             }
               // family, size, style
             font =
             font {
-                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
+                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = {$plugin.caddy.pdfGeneral.fontfamily}
                 // [Integer] Font size in points
-              size = 24
+              size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style = 
+              style =  
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = 0
+            textColor = {$plugin.caddy.pdfGeneral.textColor}
           }
             // label, prefix, ordernumber
           content = COA
@@ -850,7 +850,7 @@ plugin.tx_caddy_pi1 {
               // prefix
             20 = TEXT
             20 {
-              value = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-prefix}
+              value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
             }
               // ordernumber
             30 = TEXT

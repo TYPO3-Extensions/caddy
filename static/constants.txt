@@ -89,19 +89,83 @@ plugin.caddy {
   gpvar.service_attribute_3 =
   # cat=caddy - gpvar//140; type=text; label= Param SKU: Enter the correct parameter name for your SKU (stock keeping unit).
   gpvar.sku =
-  # cat=caddy - gpvar/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - gpvar/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   gpvar.externalLinks = Click me!
-  # cat=caddy - gpvar/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - gpvar/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   gpvar.sponsors = Click me!
 
-  # cat=caddy - pdf//101; type=string; label= HTML for the PDF ordering file:Path to the HTML template
-  pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
-  # cat=caddy - pdf//102; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
-  pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
+  # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
+  pdfGeneral.fontfamily = Helvetica
+  # cat=caddy - pdf//101;          type=string;  label= Text color: Grey: 0 - 100. RGB: 0 0 0 - 255 255 255, CMYK: 0 0 0 0 - 100 100 100 100
+  pdfGeneral.textColor = 0 0 0
   # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
-  pdfContent.externalLinks = Click me!
+  pdfGeneral.externalLinks = Click me!
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  pdf.sponsors = Click me!
+  pdfGeneral.sponsors = Click me!
+
+  # cat=caddy - pdf delivery order//101; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
+  pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
+  # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the address from the left margin in millimeters
+  pdf.deliveryorder.address.x = 25
+  # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the address from the top margin in millimeters
+  pdf.deliveryorder.address.y = 55
+  # cat=caddy - pdf delivery order//204; type=int+; label= Address font-size: Font-size of the address in points
+  pdf.deliveryorder.address.fontsize = 14
+  # cat=caddy - pdf delivery order//304; type=int+; label= Number position left: Position of the delivery number from the left margin in millimeters
+  pdf.deliveryorder.number.x = 25
+  # cat=caddy - pdf delivery order//305; type=int+; label= Number position top: Position of the delivery number from the top margin in millimeters
+  pdf.deliveryorder.number.y = 110
+  # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
+  pdf.deliveryorder.number.fontsize = 24
+  # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number
+  pdf.deliveryorder.number.prefix = quick-shop-
+  # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.deliveryorder.externalLinks = Click me!
+  # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.deliveryorder.sponsors = Click me!
+
+  # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
+  pdf.caddy.x = 25
+  # cat=caddy - pdf caddy//103; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
+  pdf.caddy.y = 55
+  # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
+  pdf.caddy.width = 165
+  # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
+  pdf.caddy.fontsize = 14
+  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.caddy.externalLinks = Click me!
+  # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.caddy.sponsors = Click me!
+
+  # cat=caddy - pdf invoice//101; type=string; label= HTML for the PDF ordering file:Path to the HTML template
+  pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
+plugin.caddy {
+  pdf {
+    deliveryorder {
+      invoiceaddress-position-x       = 25
+      invoiceaddress-position-y       = 55
+      deliveryorderaddress-position-x = 25
+      deliveryorderaddress-position-y = 55
+      deliveryordernumber-position-x  = 25
+      deliveryordernumber-position-y  = 110
+      deliveryordernumber-prefix      = L-
+      body-position-x               = 25
+      body-position-y               = 130
+      body-width                    = 165
+    }
+    invoice {
+      invoiceaddress-position-x     = 20
+      invoiceaddress-position-y     = 45
+      deliveryorderaddress-position-x  = 20
+      deliveryorderaddress-position-y  = 65
+      invoicenumber-position-x      = 20
+      invoicenumber-position-y      = 90
+      body-position-x             = 25
+      body-position-y             = 110
+      body-width                  = 160
+    }
+  }
+}
 
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
@@ -124,30 +188,3 @@ plugin.caddy {
   tax.sponsors = Click me!
 }
 
-plugin.caddy {
-  pdf {
-    invoice {
-      invoiceaddress-position-x     = 20
-      invoiceaddress-position-y     = 45
-      deliveryorderaddress-position-x  = 20
-      deliveryorderaddress-position-y  = 65
-      invoicenumber-position-x      = 20
-      invoicenumber-position-y      = 90
-      body-position-x             = 25
-      body-position-y             = 110
-      body-width                  = 160
-    }
-    deliveryorder {
-      invoiceaddress-position-x       = 25
-      invoiceaddress-position-y       = 55
-      deliveryorderaddress-position-x = 25
-      deliveryorderaddress-position-y = 55
-      deliveryordernumber-position-x  = 25
-      deliveryordernumber-position-y  = 110
-      deliveryordernumber-prefix      = L-
-      body-position-x               = 25
-      body-position-y               = 130
-      body-width                    = 165
-    }
-  }
-}
