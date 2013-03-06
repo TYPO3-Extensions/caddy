@@ -270,52 +270,9 @@ class tx_caddy_pi1_clean
   private function cleanDatabaseCustomerEmail( )
   {
     $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
-    $value            = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
-var_dump( __METHOD__, __LINE__, $uidCustomerEmail, $value );
-die( );
-    $customerEmail    = $this->pObj->powermail->sessionValueById( $uidCustomerEmail );
-var_dump( __METHOD__, __LINE__, $uidCustomerEmail, $customerEmail );
-    $sesArray             = $this->pObj->powermail->sessionData( );
-var_dump( __METHOD__, __LINE__, $sesArray );
-die( );
+    $customerEmail    = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
     return $customerEmail;
-    
-    $sesArray             = $this->pObj->powermail->sessionData( );
-    $uidCustomerEmail     = $this->pObj->flexform->emailCustomerEmail;
-    $powermailVersionInt  = $this->pObj->powermail->versionInt;
 
-    switch( true )
-    {
-      case( $powermailVersionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $powermailVersionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $powermailVersionInt < 2000000 ):
-        $uidEmail = 'uid' . $uidCustomerEmail;
-        $customerEmail = $sesArray[$uidEmail];
-        break;
-      case( $powermailVersionInt < 3000000 ):
-        $prompt = 'TODO: powermail 2.x<br />
-          Please maintain the code!<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $powermailVersionInt >= 3000000 ):
-      default:
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $powermailVersionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-    }
-
-    return $customerEmail;
-    
   }
 
  /**

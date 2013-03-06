@@ -1286,7 +1286,8 @@ var_dump( __METHOD__, __LINE__, $sessionData );
   }
 
  /**
-  * paramGetById( ) : Return the value of the given uid
+  * paramGetById( ) :  Return the value of the given uid from the GET params.
+  *                     The uid is the uid only - without any prefix!
   *
   * @param      integer     $uid    : The uid of the value, which should returned
   * @return	string      $value  : The value of the given uid
@@ -1338,7 +1339,8 @@ var_dump( __METHOD__, __LINE__, $sessionData );
   }
 
  /**
-  * paramPostById( ) : Return the value of the given uid
+  * paramPostById( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
   *
   * @param      integer     $uid    : The uid of the value, which should returned
   * @return	string      $value  : The value of the given uid
@@ -1348,10 +1350,9 @@ var_dump( __METHOD__, __LINE__, $sessionData );
   */
   public function paramPostById( $uid )
   {
-var_dump( __METHOD__, __LINE__, $this->paramPost );
     if( empty( $uid ) )
     {
-      $prompt = 'FATAL ERROR: paramGetById( $uid ) is called with an empty uid<br />
+      $prompt = 'FATAL ERROR: paramPostById( $uid ) is called with an empty uid<br />
                 Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
                 TYPO3 extension: ' . $this->extKey;
       die( $prompt );
@@ -1386,7 +1387,6 @@ var_dump( __METHOD__, __LINE__, $this->paramPost );
         die( $prompt );
         break;
     }
-var_dump( __METHOD__, __LINE__, $this->paramPost, $uidVersion1, $value );
 
     return $value;
   }
