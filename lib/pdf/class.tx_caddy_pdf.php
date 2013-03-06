@@ -453,7 +453,8 @@ class tx_caddy_pdf extends tslib_pibase
   */
   public function deliveryorder( )
   {
-    $attachments = null;
+    $destFile = null;
+    $destPath = null;
 
       // Init caddy pdf
     $this->init( );
@@ -465,34 +466,34 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // RETURN : any pdf is requested
 
-    $this->local_cObj = $GLOBALS['TSFE']->cObj;
-
       // Get the caddy session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Add session data to the local cObj
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
-      // name of the destination file
+      // Get the path of the destination file
     $destFile = $this->local_cObj->cObjGetSingle
                 (
                   $this->confPdf['deliveryorder.']['filename'], 
                   $this->confPdf['deliveryorder.']['filename.']
                 );
+    $destPath = 'uploads/tx_caddy/' . $destFile;
+      // Get the path of the destination file
 
-      // RETURN : PDF file already exists
+      // RETURN : destination file already exists
     if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
         // DRS
       if( $this->pObj->drsUserfunc )
       {
         $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
-        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
       }
         // DRS
-      return $destFile;
+      return $destPath;
     }
-      // RETURN : PDF file already exists
+      // RETURN : destination file already exists
 
       // HTML template
     $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] ); 
@@ -505,36 +506,22 @@ class tx_caddy_pdf extends tslib_pibase
       // Init tcpdf
     $this->tcpdf = $this->tcpdfInit( $srceFile );
 
+      // Write the delivery order address
     $fallBackToInvoiceAddress = true;
     $this->deliveryorderAddress( $fallBackToInvoiceAddress );
 
-return $destFile;
-    
+      // Write the delivery order number
     $this->deliveryorderNumber( );
     //$this->renderAdditionalTextblocks( $this->tcpdf );
 
-    //$this->tcpdf->SetY( $this->confPdf['deliveryorder.']['body-position-y'] );
-
+      // Write the caddy
     $this->caddy( );
 
-    $this->tcpdfOutput( $destFile );
-    $this->tcpdf->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
+      // Create the PDF
+    $this->tcpdfOutput( $destPath );
 
-
-    // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( ! file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
-    {
-      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' could not written!<br />
-        ' .__METHOD__. ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-    // CHECK: Was PDF not created, send E-Mail and exit with error.
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
-    {
-      $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' is written!<br />' . PHP_EOL .
-        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
-      echo $prompt;
-    }
+      // RETURN : 
+    return $destPath;
   }
   
  /**
@@ -706,6 +693,9 @@ return $destFile;
     $this->confSettings = $this->conf['settings.'];
     $this->confPdf      = $this->conf['pdf.'];
 
+    $this->local_cObj   = $GLOBALS['TSFE']->cObj;
+
+
     $this->pi_loadLL();
 
       // DIE  : if there is an unproper directory
@@ -839,32 +829,32 @@ return $destFile;
  /**
   * tcpdfOutput( ) : 
   *
-  * @param      string    $destFile : name of the destination file
+  * @param      string    $destPath : path of the destination file
   * @return	void
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */ 
-  private function tcpdfOutput( $destFile ) 
+  private function tcpdfOutput( $destPath ) 
   {
   
-    $this->tcpdf->Output( 'uploads/tx_caddy/' . $destFile, 'F' );
+    $this->tcpdf->Output( $destPath, 'F' );
 
       // DIE  : PDF could not written
-    if( ! file_exists( 'uploads/tx_caddy/' . $destFile ) ) 
+    if( ! file_exists( $destPath ) ) 
     {
-      $prompt = 'uploads/tx_caddy/' . $destFile . ' could not written!<br />
+      $prompt = $destPath . ' could not written!<br />
         ' .__METHOD__. ' (' . __LINE__ . ')';
       die( $prompt );
     }
       // DIE  : PDF could not written
     
       // DRS
-    if( file_exists( 'uploads/tx_caddy/' . $destFile ) ) 
+    if( file_exists( $destPath ) ) 
     {
       if( $this->pObj->drsUserfunc )
       {
-        $prompt = 'uploads/tx_caddy/' . $destFile . ' is written.';
+        $prompt = $destPath . ' is written.';
         t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
       }
     }
