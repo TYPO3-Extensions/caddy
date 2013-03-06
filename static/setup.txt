@@ -652,8 +652,6 @@ plugin.tx_caddy_pi1 {
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =  
             }
-              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = 0
               // x, y
             position {
                 // [INTEGER] Position from left in millimeter 
@@ -661,6 +659,8 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Position from top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
             }
+              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+            textColor = 0
           }
             // font, position
           body =
@@ -668,8 +668,6 @@ plugin.tx_caddy_pi1 {
               // color, family, size, style
             font =
             font {
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-              color = 0
                 // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
               family = Arial
                 // [Integer] Font size in points
@@ -685,6 +683,8 @@ plugin.tx_caddy_pi1 {
                 // [INTEGER] Position from top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
             }
+              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+            textColor = 0
           }
         }
           // header, body
