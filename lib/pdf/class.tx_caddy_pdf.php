@@ -135,7 +135,9 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $subpartArray = null;
     $subpartArray = $this->caddyTablehead( $subpartArray );
+var_dump( __METHOD__, __LINE__, $subpartArray );    
     $subpartArray = $this->caddyTablebody( $subpartArray );
+var_dump( __METHOD__, __LINE__, $subpartArray );    
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $products = $sesArray['products'];
@@ -146,7 +148,6 @@ class tx_caddy_pdf extends tslib_pibase
     {
       $content =  $content . $this->caddyProduct( $product );
     }
-var_dump( __METHOD__, __LINE__, $content );    
       // LOOP : products
     
       // Update the marker content
@@ -230,21 +231,8 @@ var_dump( __METHOD__, __LINE__, $body, $htmlContent );
     }
       // LOOP : products
     
-    $htmlContent =  $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-                    (
-                      $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
-                    );
-
-    $this->tcpdf->writeHTMLCell
-    (
-      $this->confPdf['deliveryorder.']['body-width'], 
-      0, 
-      $this->confPdf['deliveryorder.']['body-position-x'], 
-      $this->confPdf['deliveryorder.']['body-position-y'], 
-      $htmlContent, 
-      0, 
-      2
-    );
+    return $subpartArray;
+    
   }
   
  /**
@@ -258,6 +246,7 @@ var_dump( __METHOD__, __LINE__, $body, $htmlContent );
   private function caddyTablehead( $subpartArray )
   {
     $fields = $this->confSettings['powermailCaddy.']['fields.'];
+var_dump( __METHOD__, __LINE__, $fields );    
 
       // LOOP : fields, the elements of a product
     foreach( array_keys ( ( array ) $fields ) as $key )
