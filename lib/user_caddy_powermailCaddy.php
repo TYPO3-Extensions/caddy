@@ -33,11 +33,11 @@ require_once( PATH_tslib . 'class.tslib_pibase.php');
  *
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package  TYPO3
- * @subpackage  user_caddy_powermailCart
+ * @subpackage  user_caddy_powermailCaddy
  * @version     2.0.0
  * @since       1.4.6
  */
-class user_caddy_powermailCart extends tslib_pibase
+class user_caddy_powermailCaddy extends tslib_pibase
 {
   public $prefixId = 'tx_caddy_pi1';
 
@@ -134,11 +134,11 @@ class user_caddy_powermailCart extends tslib_pibase
     { // one loop for every product in session
       $product['price_total'] = $product['price'] * $product['qty']; // price total
       $local_cObj->start($product, $this->conf['db.']['table']); // enable .field in typoscript
-      foreach ((array) $this->conf['settings.']['powermailCart.']['fields.'] as $key => $value)
+      foreach ((array) $this->conf['settings.']['powermailCaddy.']['fields.'] as $key => $value)
       { // one loop for every param of the current product
         if (!stristr($key, '.'))
         { // no .
-          $this->markerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCart.']['fields.'][$key], $this->conf['settings.']['powermailCart.']['fields.'][$key . '.']); // write to marker
+          $this->markerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCaddy.']['fields.'][$key], $this->conf['settings.']['powermailCaddy.']['fields.'][$key . '.']); // write to marker
         }
       }
       $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['item'], $this->markerArray); // add inner html to variable
@@ -252,11 +252,11 @@ class user_caddy_powermailCart extends tslib_pibase
                 );
     $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 
-    foreach ((array) $this->conf['settings.']['powermailCart.']['overall.'] as $key => $value)
+    foreach ((array) $this->conf['settings.']['powermailCaddy.']['overall.'] as $key => $value)
     {
       if (!stristr($key, '.'))
       { // no .
-        $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCart.']['overall.'][$key], $this->conf['settings.']['powermailCart.']['overall.'][$key . '.']);
+        $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCaddy.']['overall.'][$key], $this->conf['settings.']['powermailCaddy.']['overall.'][$key . '.']);
       }
     }
 
@@ -276,8 +276,8 @@ class user_caddy_powermailCart extends tslib_pibase
   }
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCart.php'])
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCaddy.php'])
 {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCart.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/user_caddy_powermailCaddy.php']);
 }
 ?>

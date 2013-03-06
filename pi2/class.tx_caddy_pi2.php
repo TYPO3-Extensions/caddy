@@ -105,7 +105,7 @@ class tx_caddy_pi2 extends tslib_pibase
 
 		// get marker for all fields defined in plugin pi from caddy
 		$conf_pi1 = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-		$conf_pi1_fields = $conf_pi1['settings.']['powermailCart.']['fields.'];
+		$conf_pi1_fields = $conf_pi1['settings.']['powermailCaddy.']['fields.'];
 		foreach ((array) $conf_pi1_fields as $key => $value)
 		{
 			if (!stristr($key, '.'))
