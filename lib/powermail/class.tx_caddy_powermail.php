@@ -877,6 +877,127 @@ class tx_caddy_powermail
 
   /***********************************************
   *
+  * params
+  *
+  **********************************************/
+
+ /**
+  * paramGetByKey( ) :  Return the value of the given key from the GET params.
+  *
+  * @param      string      $key    : The key of the value, which should returned
+  * @return	string      $value  : The value of the given key
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  * 
+  */
+  public function paramGetByKey( $key )
+  {
+    $value = null;
+    
+    if( empty( $key ) )
+    {
+      $prompt = 'FATAL ERROR: paramGetByKey( $key ) is called with an empty uid<br />
+                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+                TYPO3 extension: ' . $this->extKey;
+      die( $prompt );
+    }
+    
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $prompt = 'TODO: powermail 2.x<br />
+          Please maintain the code!<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $prompt = 'TODO: powermail 2.x<br />
+          Please maintain the code!<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $value;
+  }
+
+ /**
+  * paramPostById( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function paramPostById( $uid )
+  {
+    $value = null;
+    
+    if( empty( $uid ) )
+    {
+      $prompt = 'FATAL ERROR: paramPostById( $uid ) is called with an empty uid<br />
+                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+                TYPO3 extension: ' . $this->extKey;
+      die( $prompt );
+    }
+    
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $uidVersion1 = 'uid' . $uid;
+        $value = $this->paramPost[$uidVersion1];
+        break;
+      case( $this->versionInt < 3000000 ):
+        $prompt = 'TODO: powermail 2.x<br />
+          Please maintain the code!<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $value;
+  }
+
+
+
+  /***********************************************
+  *
   * Send
   *
   **********************************************/
@@ -1283,112 +1404,6 @@ var_dump( __METHOD__, __LINE__, $sessionData );
       // RETURN: no session data
     
     return $sessionData;
-  }
-
- /**
-  * paramGetById( ) :  Return the value of the given uid from the GET params.
-  *                     The uid is the uid only - without any prefix!
-  *
-  * @param      integer     $uid    : The uid of the value, which should returned
-  * @return	string      $value  : The value of the given uid
-  * @access     public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function paramGetById( $uid )
-  {
-    if( empty( $uid ) )
-    {
-      $prompt = 'FATAL ERROR: paramGetById( $uid ) is called with an empty uid<br />
-                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-                TYPO3 extension: ' . $this->extKey;
-      die( $prompt );
-    }
-    
-    switch( true )
-    {
-      case( $this->versionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt < 2000000 ):
-        $uidVersion1 = 'uid' . $uid;
-        $value = $this->paramGet[$uidVersion1];
-        break;
-      case( $this->versionInt < 3000000 ):
-        $prompt = 'TODO: powermail 2.x<br />
-          Please maintain the code!<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt >= 3000000 ):
-      default:
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-    }
-
-    return $value;
-  }
-
- /**
-  * paramPostById( ) :  Return the value of the given uid from the POST params.
-  *                     The uid is the uid only - without any prefix!
-  *
-  * @param      integer     $uid    : The uid of the value, which should returned
-  * @return	string      $value  : The value of the given uid
-  * @access     public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function paramPostById( $uid )
-  {
-    if( empty( $uid ) )
-    {
-      $prompt = 'FATAL ERROR: paramPostById( $uid ) is called with an empty uid<br />
-                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-                TYPO3 extension: ' . $this->extKey;
-      die( $prompt );
-    }
-    
-    switch( true )
-    {
-      case( $this->versionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt < 2000000 ):
-        $uidVersion1 = 'uid' . $uid;
-        $value = $this->paramPost[$uidVersion1];
-        break;
-      case( $this->versionInt < 3000000 ):
-        $prompt = 'TODO: powermail 2.x<br />
-          Please maintain the code!<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt >= 3000000 ):
-      default:
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-    }
-
-    return $value;
   }
   
 }
