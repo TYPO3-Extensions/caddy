@@ -1348,6 +1348,7 @@ var_dump( __METHOD__, __LINE__, $sessionData );
   */
   public function paramPostById( $uid )
   {
+var_dump( __METHOD__, __LINE__, $this->paramPost );
     if( empty( $uid ) )
     {
       $prompt = 'FATAL ERROR: paramGetById( $uid ) is called with an empty uid<br />
