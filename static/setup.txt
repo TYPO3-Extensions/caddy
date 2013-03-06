@@ -652,11 +652,15 @@ plugin.tx_caddy_pi1 {
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =  
             }
-              // x, y
-            position {
-                // [INTEGER] Position from left in millimeter 
+              // height, width, x, y
+            cell {
+                // [INTEGER] Height of content in millimeter 
+              height = 0
+                // [INTEGER] Width of content in millimeter 
+              width = 0
+                // [INTEGER] Position from the page margin left in millimeter 
               x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
-                // [INTEGER] Position from top in millimeter 
+                // [INTEGER] Position from the page margin top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
@@ -689,9 +693,12 @@ plugin.tx_caddy_pi1 {
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =
             }
-              // x, y
-            position =
-            position {
+              // height, width, x, y
+            cell {
+                // [INTEGER] Height of content in millimeter 
+              height = 0
+                // [INTEGER] Width of content in millimeter 
+              width = 0
                 // [INTEGER] Position from left in millimeter 
               x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
                 // [INTEGER] Position from top in millimeter 
@@ -706,14 +713,7 @@ plugin.tx_caddy_pi1 {
               // Company
             10 = TEXT
             10 {
-              value = Company
-              lang {
-                de = Firma
-                en = Company
-              }
-              override {
-                field     = deliveryorderCompany
-              }
+              field     = deliveryorderCompany
               required  = 1
             }
               // First name and last name
@@ -1416,27 +1416,28 @@ plugin.tx_powermail_pi1 {
           // Caddy: Invoice
         45967 = USER
         45967 {
-          userFunc = tx_caddy_powermail->sendInvoiceToVendor
+//          userFunc = tx_caddy_powermail->sendInvoiceToVendor
+          userFunc = tx_caddy_powermail->sendToVendor
           userFunc {
             drs = {$plugin.caddy.debug.userfunc}
           }
         }
-          // Caddy: Delivery Order
-        45968 = USER
-        45968 {
-          userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
-          userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
-          }
-        }
-          // Caddy: Terms & Conditions
-        45969 = USER
-        45969 {
-          userFunc = tx_caddy_powermail->sendTermsToVendor
-          userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
-          }
-        }
+//          // Caddy: Delivery Order
+//        45968 = USER
+//        45968 {
+//          userFunc = tx_caddy_powermail->sendDeliveryorderToVendor
+//          userFunc {
+//            drs = {$plugin.caddy.debug.userfunc}
+//          }
+//        }
+//          // Caddy: Terms & Conditions
+//        45969 = USER
+//        45969 {
+//          userFunc = tx_caddy_powermail->sendTermsToVendor
+//          userFunc {
+//            drs = {$plugin.caddy.debug.userfunc}
+//          }
+//        }
       }
     }
     sender_mail {

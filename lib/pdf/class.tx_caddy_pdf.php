@@ -52,38 +52,14 @@ class tx_caddy_pdf extends tslib_pibase
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
   public $extKey        = 'caddy';
   
-  public $drsUserfunc   = null;
+  public $drsUserfunc = null;
+  
   
   private $local_cObj = null;
-  private $tmpl = null;
+    // [Object]
+  private $tcpdf      = null;
+  private $tmpl       = null;
 
-
-
-
-  /***********************************************
-  *
-  * Check Directory
-  *
-  **********************************************/
-
- /**
-  * checkDir( ) : 
-  *
-  * @return	void
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function checkDir( )
-  {
-      // CHECK: Is directory for PDF available?
-    if( ! is_dir( 'uploads/tx_caddy' ) )
-    {
-      $prompt = 'FATAL ERROR: uploads/tx_caddy not found!<br />
-        ' .__METHOD__. ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-  }
   
   
 
@@ -342,105 +318,77 @@ class tx_caddy_pdf extends tslib_pibase
   *
   **********************************************/
 
-
  /**
   * deliveryorder( ) : 
   *
   * @return	boolean		true, in case of en arror. false, if all is proper
+  * @access     public
   * @version    2.0.0
-  * @since      1.4.6
+  * @since      2.0.0
   */
-  private function deliveryorder( )
+  public function deliveryorder( )
   {
-    $return = null;
+    $attachments = null;
 
-      // Die, if there is an unproper directory
-    $this->checkDir( );
-
-      // Get the caddy session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
-    if( empty( $sesArray['products'] ) )
-    {
-      $prompt = 'FATAL ERROR: products are empty!<br />' . PHP_EOL . 
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
+      // Init caddy pdf
+    $this->init( );
     
       // RETURN : any pdf is requested
-    switch( true )
+    if( ! $this->deliveryorderInit( ) )
     {
-      case( ! empty( $sesArray['sendCustomerDeliveryorder'] ) ):
-      case( ! empty( $sesArray['sendVendorDeliveryorder'] ) ):
-        $return = false;
-        break;
-      default:
-        $return = true;
-        break;
-    }
-    if( $return )
-    {
-        // DRS
-      if( $this->pObj->drsUserfunc )
-      {
-        $prompt = __METHOD__ . ' returns null.';
-        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
       return;
     }
       // RETURN : any pdf is requested
 
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Add session data to the local cObj
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
+      // name of the destination file
     $destFile = $this->local_cObj->cObjGetSingle
                 (
                   $this->confPdf['deliveryorder.']['filename'], 
                   $this->confPdf['deliveryorder.']['filename.']
                 );
 
-//var_dump( __METHOD__, __LINE__, $sesArray, $destFile );
-//die( );
-
-    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] ); 
-
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDERPDF###' );
-//var_dump( __METHOD__, __LINE__, $this->tmpl );
-    
-    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
-
-      // CHECK: Is PDF already created?
+      // RETURN : PDF file already exists
     if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
-      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
-        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
-//      die( $prompt );
-      echo $prompt;
+//      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
+//        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
+//      echo $prompt;
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return;
     }
+      // RETURN : PDF file already exists
 
-    $fpdi = new FPDI( );
-    $fpdi->AddPage( );
+      // HTML template
+    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] ); 
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDERPDF###' );
+    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
+      // PDF source file
     $srceFile = $sesArray['sendVendorDeliveryorder'];
-    $fpdi->setSourceFile( $srceFile );
-    $tplIdx = $fpdi->importPage( 1 );
-    $fpdi->useTemplate( $tplIdx, 0, 0, 210 );
 
-//http://www.tcpdf.org/doc/code/classTCPDF.html
-    $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
-    //$fpdi->SetTextColor( 255, 255, 255 );
-    $fpdi->SetAuthor('TYPO3 Caddy');
-    $fpdi->SetTitle('Lieferschein');
-    $fpdi->SetSubject('Lieferschein Subject');
-    $fpdi->SetKeywords('TYPO3, caddy');    
+      // Init tcpdf
+    $this->tcpdf = $this->tcpdfInit( $srceFile );
 
-    $this->deliveryorderAddress( $fpdi, true );
-    $this->deliveryorderNumber( $fpdi );
-    $this->renderAdditionalTextblocks( $fpdi );
+    $fallBackToInvoiceAddress = true;
+    $this->deliveryorderAddress( $fallBackToInvoiceAddress );
+    $this->deliveryorderNumber( $this->tcpdf );
+    $this->renderAdditionalTextblocks( $this->tcpdf );
 
-    $fpdi->SetY( $this->confPdf['deliveryorder.']['body-position-y'] );
+    $this->tcpdf->SetY( $this->confPdf['deliveryorder.']['body-position-y'] );
 
     $subpartArray = null;
     $subpartArray = $this->renderCartHeadline( $subpartArray );
@@ -455,7 +403,7 @@ class tx_caddy_pdf extends tslib_pibase
               $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
             );
 
-    $fpdi->writeHTMLCell
+    $this->tcpdf->writeHTMLCell
     (
       $this->confPdf['deliveryorder.']['body-width'], 
       0, 
@@ -466,7 +414,7 @@ class tx_caddy_pdf extends tslib_pibase
       2
     );
 
-    $fpdi->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
+    $this->tcpdf->Output( 'uploads/tx_caddy' . '/' . $destFile, 'F' );
 
 
     // CHECK: Was PDF not created, send E-Mail and exit with error.
@@ -484,47 +432,215 @@ class tx_caddy_pdf extends tslib_pibase
       echo $prompt;
     }
   }
-
-  private function deliveryorderAddress( &$fpdi, $fallback=false )
+  
+ /**
+  * deliveryorderAddress( ) : 
+  *
+  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @access     public
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
   {
-//http://www.tcpdf.org/doc/code/classTCPDF.html
-    $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
-    
-    $body   = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
-    //$fpdi->SetTextColor( 255, 255, 255 );
-    
-    $content = $GLOBALS['TSFE']->cObj->cObjGetSingle
-            (
-              $body['content'], 
-              $body['content.'] 
-            );
-//die ( );
-      // RETURN : delivery order address is given
-    if ( ! empty( $body ) )
+      // Get the body content
+    $body           = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
+    $bodyContent    = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+    $bodyProperties = $body['properties.'];
+      // Get the body content
+      
+    switch( true )
     {
-      //$this->header( );
-      $textColor = $body['properties.']['textColor'];
-      $this->pdfSetTextColor( $fpdi, $textColor );
-      $font = $body['properties.']['font.'];
-      $this->pdfSetFont( $fpdi, $font );
-      $w      = 0;
-      $h      = 0;
-      $x      = $body['properties.']['position.']['x'];
-      $y      = $body['properties.']['position.']['y'];
-      $fpdi->writeHtmlCell( $w, $h, $x, $y, $content );
-      return;
+      case( ! empty( $bodyContent ) ):
+        //$this->header( );
+        $this->deliveryorderAddressSet( $bodyProperties, $bodyContent );
+        break;
+      case( empty( $bodyContent ) ):
+      default:
+          // RETURN : take the invoice address
+        if( $fallBackToInvoiceAddress ) 
+        {
+          $this->renderInvoiceAddress( $fpdi );
+        }
+          // RETURN : take the invoice address
+        break;
     }
-      // RETURN : delivery order address is given
-    
-      // RETURN : take the invoice address
-    if( $fallback ) 
-    {
-      $this->renderInvoiceAddress( $fpdi );
-    }
-      // RETURN : take the invoice address
+
+    return;
+  }
+  
+ /**
+  * deliveryorderAddressSet( ) : 
+  *
+  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @access     public
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function deliveryorderAddressSet( $bodyProperties, $bodyContent )
+  {
+      // Set textColor
+    $textColor = $bodyProperties['textColor'];
+    $this->pdfSetTextColor( $fpdi, $textColor );
+
+      // Set font
+    $font = $bodyProperties['font.'];
+    $this->pdfSetFont( $fpdi, $font );
+
+      // Write HTML cell
+    $w      = 0;
+    $h      = 0;
+    $x      = $bodyProperties['position.']['x'];
+    $y      = $bodyProperties['position.']['y'];
+    $fpdi->writeHtmlCell( $w, $h, $x, $y, $bodyContent );
     return;
   }
 
+ /**
+  * deliveryorderInit( ) : 
+  *
+  * @return	boolean		false, if delivery order isn't needed
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function deliveryorderInit( )
+  {
+    $deliveryorderInit = null;
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // RETURN : any pdf is requested
+    switch( true )
+    {
+      case( ! empty( $sesArray['sendCustomerDeliveryorder'] ) ):
+      case( ! empty( $sesArray['sendVendorDeliveryorder'] ) ):
+        $deliveryorderInit = true;
+        break;
+      default:
+        $deliveryorderInit = false;
+        break;
+    }
+    
+    if( ! $deliveryorderInit )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+      // RETURN : any pdf is requested
+
+    return $deliveryorderInit;
+  }
+
+
+
+  /***********************************************
+  *
+  * init
+  *
+  **********************************************/
+
+ /**
+  * init( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */ 
+  private function init( ) 
+  {
+    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+    $this->confSettings = $this->conf['settings.'];
+    $this->confPdf      = $this->conf['pdf.'];
+
+    $this->pi_loadLL();
+
+      // DIE  : if there is an unproper directory
+    $this->initCheckDir( );
+
+      // DIE  : if there is an unproper directory
+    $this->initCheckProducts( );
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+    if( empty( $sesArray['products'] ) )
+    {
+      $prompt = 'ERROR: products are empty!<br />' . PHP_EOL . 
+                'Please go back to the page you visited before.<br />' . PHP_EOL . 
+                'Sorry for the trouble.<br />' . PHP_EOL . 
+                'TYPO3 Caddy<br />' . PHP_EOL . 
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }  
+  }
+  
+ /**
+  * initCheckDir( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initCheckDir( )
+  {
+      // CHECK: Is directory for PDF available?
+    if( ! is_dir( 'uploads/tx_caddy' ) )
+    {
+      $prompt = 'FATAL ERROR: uploads/tx_caddy not found!<br />
+        ' .__METHOD__. ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+  }
+ 
+ /**
+  * initCheckProducts( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initCheckProducts( )
+  {
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+    if( empty( $sesArray['products'] ) )
+    {
+      $prompt = 'ERROR: products are empty!<br />' . PHP_EOL . 
+                'Please go back to the page you visited before.<br />' . PHP_EOL . 
+                'Sorry for the trouble.<br />' . PHP_EOL . 
+                'TYPO3 Caddy<br />' . PHP_EOL . 
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }  
+  }
+
+
+
+  /***********************************************
+  *
+  * pdf
+  *
+  **********************************************/
+
+ /**
+  * pdfSetFont( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */ 
   private function pdfSetFont( $fpdi, $font ) 
   {
     $family = $font['family'];
@@ -533,6 +649,14 @@ class tx_caddy_pdf extends tslib_pibase
     $fpdi->SetFont( $family, $style , $size );
   }
 
+ /**
+  * pdfSetTextColor( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */ 
   private function pdfSetTextColor( $fpdi, $textColor ) 
   {
     $colors = explode( ' ', $textColor );
@@ -599,6 +723,35 @@ class tx_caddy_pdf extends tslib_pibase
     $filename = $date . '-' . $filename . '.pdf';
 
     return $filename;
+  }
+
+ /**
+  * tcpdfInit( ) : 
+  *
+  * @param	string		$filename : current filename 
+  * @return	string		$filename : prefixed filename
+  * @access     private
+  * @internal   http://www.tcpdf.org/doc/code/classTCPDF.html
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function tcpdfInit( $srceFile )
+  {
+    $tcpdf = new FPDI( );
+    $tcpdf->AddPage( );
+
+    $tcpdf->setSourceFile( $srceFile );
+    $tmplId = $tcpdf->importPage( 1 );
+    $tcpdf->useTemplate( $tmplId, 0, 0, 210 );
+
+    $tcpdf->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
+    //$tcpdf->SetTextColor( 255, 255, 255 );
+    $tcpdf->SetAuthor('TYPO3 Caddy');
+    $tcpdf->SetTitle('Lieferschein');
+    $tcpdf->SetSubject('Lieferschein Subject');
+    $tcpdf->SetKeywords('TYPO3, caddy');    
+    
+    return $tcpdf;
   }
 
 }

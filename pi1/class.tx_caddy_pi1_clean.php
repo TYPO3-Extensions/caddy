@@ -134,7 +134,7 @@ class tx_caddy_pi1_clean
     
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
     
-    $customerEmail = $this->getPmFieldCustomerEmail( );
+    $customerEmail = $this->getPmFieldEmailCustomerEmail( );
 
       // Initiate files
     $fileDeliveryorder  = null;
@@ -277,70 +277,6 @@ class tx_caddy_pi1_clean
   **********************************************/
 
  /**
-  * getPmFieldCustomerEmail( )  : Get the customer e-mail from powermail POST params
-  *
-  * @return	string          $value  : the value
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function getPmFieldCustomerEmail( )
-  {
-    $pmUid  = $this->pObj->flexform->emailCustomerEmail;
-var_dump( __METHOD__, __LINE__, $pmUid );
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-    return $value;
-  }
-
- /**
-  * getDeliveryorderCompany( )  : Get the delivery order Company from powermail POST params
-  *
-  * @return	string          $value  : the value
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function getPmFieldDeliveryorderCompany( )
-  {                                  
-    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
-var_dump( __METHOD__, __LINE__, $pmUid );
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-    return $value;
-  }
-
- /**
-  * getDeliveryorderFirstname( )  : Get the delivery order Firstname from powermail POST params
-  *
-  * @return	string          $value  : the value
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function getPmFieldDeliveryorderFirstname( )
-  {
-    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
-var_dump( __METHOD__, __LINE__, $pmUid );
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-    return $value;
-  }
-
- /**
-  * getDeliveryorderLastname( )  : Get the delivery order Lastname from powermail POST params
-  *
-  * @return	string          $value  : the value
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function getPmFieldDeliveryorderLastname( )
-  {
-    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
-var_dump( __METHOD__, __LINE__, $pmUid );
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-    return $value;
-  }
-
- /**
   * getDeliveryorderAddress( )  : Get the delivery order Address from powermail POST params
   *
   * @return	string          $value  : the value
@@ -351,23 +287,6 @@ var_dump( __METHOD__, __LINE__, $pmUid );
   private function getPmFieldDeliveryorderAddress( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderAddress;
-var_dump( __METHOD__, __LINE__, $pmUid );
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-    return $value;
-  }
-
- /**
-  * getDeliveryorderZip( )  : Get the delivery order Zip from powermail POST params
-  *
-  * @return	string          $value  : the value
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function getPmFieldDeliveryorderZip( )
-  {
-    $pmUid  = $this->pObj->flexform->deliveryorderZip;
-var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -383,7 +302,21 @@ var_dump( __METHOD__, __LINE__, $pmUid );
   private function getPmFieldDeliveryorderCity( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCity;
-var_dump( __METHOD__, __LINE__, $pmUid );
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderCompany( )  : Get the delivery order Company from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderCompany( )
+  {                                  
+    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -399,7 +332,171 @@ var_dump( __METHOD__, __LINE__, $pmUid );
   private function getPmFieldDeliveryorderCountry( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCountry;
-var_dump( __METHOD__, __LINE__, $pmUid );
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderFirstname( )  : Get the delivery order Firstname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderFirstname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderLastname( )  : Get the delivery order Lastname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderLastname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderZip( )  : Get the delivery order Zip from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderZip( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderZip;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getPmFieldEmailCustomerEmail( )  : Get the customer e-mail from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldEmailCustomerEmail( )
+  {
+    $pmUid  = $this->pObj->flexform->emailCustomerEmail;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceAddress( )  : Get the invoice Address from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceAddress( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderAddress;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceCity( )  : Get the invoice City from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceCity( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderCity;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceCompany( )  : Get the invoice Company from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceCompany( )
+  {                                  
+    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceCountry( )  : Get the invoice Country from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceCountry( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderCountry;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceFirstname( )  : Get the invoice Firstname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceFirstname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceLastname( )  : Get the invoice Lastname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceLastname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getInvoiceZip( )  : Get the invoice Zip from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldInvoiceZip( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderZip;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -524,6 +621,39 @@ var_dump( __METHOD__, __LINE__, $pmUid );
     $sesArray['deliveryorderZip']       = $this->getPmFieldDeliveryorderZip( );
     $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
     $sesArray['deliveryorderCountry']   = $this->getPmFieldDeliveryorderCountry( );
+    
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    $GLOBALS['TSFE']->storeSessionData(); // Save session
+
+      // DRS
+    if( $this->pObj->drs->drsClean )
+    {
+      $prompt = 'Delivery order data are added to the session.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+  }
+
+ /**
+  * sessionUpdateInvoice( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sessionUpdateInvoice( )
+  {
+      // Get the session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    
+    $sesArray['invoiceCompany']   = $this->getPmFieldInvoiceCompany( );
+    $sesArray['invoiceFirstname'] = $this->getPmFieldInvoiceFirstname( );
+    $sesArray['invoiceLastname']  = $this->getPmFieldInvoiceLastname( );
+    $sesArray['invoiceAddress']   = $this->getPmFieldInvoiceAddress( );
+    $sesArray['invoiceZip']       = $this->getPmFieldInvoiceZip( );
+    $sesArray['invoiceCity']      = $this->getPmFieldInvoiceCity( );
+    $sesArray['invoiceCountry']   = $this->getPmFieldInvoiceCountry( );
     
     $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
     $GLOBALS['TSFE']->storeSessionData(); // Save session

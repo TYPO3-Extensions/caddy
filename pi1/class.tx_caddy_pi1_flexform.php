@@ -251,7 +251,7 @@ class tx_caddy_pi1_flexform
  */
   private function sheetInvoice( )
   {
-    $sheet = 'company';
+    $sheet = 'invoice';
 
       // invoiceCompany
     $field                  = 'company';

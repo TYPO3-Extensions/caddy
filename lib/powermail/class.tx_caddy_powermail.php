@@ -54,12 +54,12 @@
  *  759:     private function initVersion( )
  *
  *              SECTION: Send
- *  780:     public function sendDeliveryorderToCustomer( )
- *  795:     public function sendDeliveryorderToVendor( )
- *  810:     public function sendInvoiceToCustomer( )
- *  825:     public function sendInvoiceToVendor( )
- *  840:     public function sendTermsToCustomer( )
- *  855:     public function sendTermsToVendor( )
+ *  780:     public function sendToCustomerDeliveryorder( )
+ *  795:     public function sendToVendorDeliveryorder( )
+ *  810:     public function sendToCustomerInvoice( )
+ *  825:     public function sendToVendorInvoice( )
+ *  840:     public function sendToCustomerTerms( )
+ *  855:     public function sendToVendorTerms( )
  *
  * TOTAL FUNCTIONS: 25
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -87,7 +87,9 @@ class tx_caddy_powermail
   public $extKey = 'caddy';
 
   public $pObj = null;
-  
+  public $conf = null;
+
+
   private $drsUserfunc = false;
 
   public  $fieldFfConfirm      = null;
@@ -117,6 +119,11 @@ class tx_caddy_powermail
 
   public $versionInt  = null;
   public $versionStr  = null;
+  
+    // [Object]
+  private $pdf      = null;
+    // [Object]
+  private $userfunc = null;
 
 
 
@@ -1003,18 +1010,24 @@ class tx_caddy_powermail
   **********************************************/
 
  /**
-  * sendDeliveryorderToCustomer( ):
+  * sendToCustomer( ):
   *
   * @return	string		$path : path to the attachment, which should send
   * @access public
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendDeliveryorderToCustomer( $content = '', $conf = array( ) )
+  public function sendToCustomer( $content = '', $conf = array( ) )
   {
-      // DRS
+    $path   = null;
+    $paths  = null;
+    
     unset( $content );
-    if( $conf['userFunc.']['drs'] )
+    
+    $this->conf = $conf;
+    
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
     {
       $this->drsUserfunc = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
@@ -1022,6 +1035,33 @@ class tx_caddy_powermail
     }
       // DRS
       
+    $paths[] = $this->sendToCustomerDeliveryorder( );
+//    $paths[] = $this->sendToCustomerInvoice( );
+//    $paths[] = $this->sendToCustomerTerms( );
+    
+    if( empty( $paths ) ) 
+    {
+      return null;
+    }
+    
+    $path = implode( ',', $paths );
+    
+    $path = ',' . $path . ',';
+    
+    return $path;
+    
+  }
+
+ /**
+  * sendToCustomerDeliveryorder( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToCustomerDeliveryorder( )
+  {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerDeliveryorder'] . ',';
     
@@ -1036,56 +1076,12 @@ class tx_caddy_powermail
         // DRS
       return null;
     }
-    
-      // DRS
-    if( $this->drs->drsSession || $this->drsUserfunc )
-    {
-      $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-    
-    return $path;
-
-  }
-
- /**
-  * sendDeliveryorderToVendor( ):
-  *
-  * @return	string		$path : path to the attachment, which should send
-  * @access public
-  * @version 2.0.0
-  * @since   2.0.0
-  */
-  public function sendDeliveryorderToVendor( $content = '', $conf = array( ) )
-  {
-      // DRS
-    unset( $content );
-    if( $conf['userFunc.']['drs'] )
-    {
-      $this->drsUserfunc = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendVendorDeliveryorder'] . ',';
-    
-    if( empty ( $path ) )
-    {
-        // DRS
-      if( $this->drs->drsSession || $this->drsUserfunc )
-      {
-        $prompt = __METHOD__ . ' returns null.';
-        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return null;
-    }
 
     $this->initPdf( );
-    $this->pdf->createPdf( );
+    $this->pdf->pObj  = $this;
+    $path = $this->pdf->deliveryorder( );
+var_dump( __METHOD__, __LINE__, $path );
+die( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
@@ -1096,28 +1092,19 @@ class tx_caddy_powermail
       // DRS
     
     return $path;
+
   }
 
  /**
-  * sendInvoiceToCustomer( ):
+  * sendToCustomerInvoice( ):
   *
   * @return	string		$path : path to the attachment, which should send
-  * @access public
+  * @access private
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendInvoiceToCustomer( $content = '', $conf = array( ) )
+  private function sendToCustomerInvoice( )
   {
-      // DRS
-    unset( $content );
-    if( $conf['userFunc.']['drs'] )
-    {
-      $this->drsUserfunc = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerInvoice'] . ',';
     
@@ -1145,24 +1132,130 @@ class tx_caddy_powermail
   }
 
  /**
-  * sendInvoiceToVendor( ):
+  * sendToCustomerTerms( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToCustomerTerms( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendCustomerTerms'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $this->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
+
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
+  }
+  
+ /**
+  * sendToVendor( ):
   *
   * @return	string		$path : path to the attachment, which should send
   * @access public
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendInvoiceToVendor( $content = '', $conf = array( ) )
+  public function sendToVendor( $content = '', $conf = array( ) )
   {
-      // DRS
+    $path   = null;
+    $paths  = null;
+    
     unset( $content );
-    if( $conf['userFunc.']['drs'] )
+    
+    $this->conf = $conf;
+    
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
     {
       $this->drsUserfunc = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+      
+    $paths[] = $this->sendToVendorDeliveryorder( );
+    $paths[] = $this->sendToVendorInvoice( );
+    $paths[] = $this->sendToVendorTerms( );
+    
+    if( empty( $paths ) ) 
+    {
+      return null;
+    }
+    
+    $path = implode( ',', $paths );
+    
+    $path = ',' . $path . ',';
+    
+    return $path;
+    
+  }
+  
+ /**
+  * sendToVendorDeliveryorder( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToVendorDeliveryorder( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendVendorDeliveryorder'] . ',';
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $this->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
+
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
+  }
+
+ /**
+  * sendToVendorInvoice( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToVendorInvoice( )
+  {
       
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorInvoice'] . ',';
@@ -1191,71 +1284,15 @@ class tx_caddy_powermail
   }
 
  /**
-  * sendTermsToCustomer( ):
+  * sendToVendorTerms( ):
   *
   * @return	string		$path : path to the attachment, which should send
-  * @access public
+  * @access private
   * @version 2.0.0
   * @since   2.0.0
   */
-  public function sendTermsToCustomer( $content = '', $conf = array( ) )
-  {
-      // DRS
-    unset( $content );
-    if( $conf['userFunc.']['drs'] )
-    {
-      $this->drsUserfunc = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendCustomerTerms'] . ',';
-    
-    if( empty ( $path ) )
-    {
-        // DRS
-      if( $this->drs->drsSession || $this->drsUserfunc )
-      {
-        $prompt = __METHOD__ . ' returns null.';
-        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return null;
-    }
-
-      // DRS
-    if( $this->drs->drsSession || $this->drsUserfunc )
-    {
-      $prompt = __METHOD__ . ' returns: ' . $path;
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-    
-    return $path;
-  }
-
- /**
-  * sendTermsToVendor( ):
-  *
-  * @return	string		$path : path to the attachment, which should send
-  * @access public
-  * @version 2.0.0
-  * @since   2.0.0
-  */
-  public function sendTermsToVendor( $content = '', $conf = array( ) )
-  {
-      // DRS
-    unset( $content );
-    if( $conf['userFunc.']['drs'] )
-    {
-      $this->drsUserfunc = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
+  private function sendToVendorTerms( )
+  {      
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorTerms'] . ',';
     
@@ -1357,7 +1394,6 @@ class tx_caddy_powermail
     $key  = 'powermail_';
     $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key . $uid );
 
-var_dump( __METHOD__, __LINE__, $sessionData );
       // RETURN: no session data
     if( empty( $sessionData ) )
     {
@@ -1383,8 +1419,6 @@ var_dump( __METHOD__, __LINE__, $sessionData );
  */
   private function sessionDataVers2(  )
   {
-    $content = null; 
-    
       // Get the Powermail session data
     $post = t3lib_div::_POST( 'tx_powermail_pi1' );
     $uid  = $post['form'];
