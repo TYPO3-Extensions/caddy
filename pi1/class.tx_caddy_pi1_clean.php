@@ -271,7 +271,7 @@ class tx_caddy_pi1_clean
   {
     $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
     $customerEmail    = $this->pObj->powermail->sessionValueById( $uidCustomerEmail );
-var_dump( __METHOD__, __LINE__, $customerEmail );
+var_dump( __METHOD__, __LINE__, $uidCustomerEmail, $customerEmail );
 die( );
     return $customerEmail;
     
