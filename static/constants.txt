@@ -144,7 +144,7 @@ plugin.caddy {
       deliveryorderaddress-position-y = 60
       deliveryordernumber-position-x  = 77
       deliveryordernumber-position-y  = 25
-      deliveryordernumber-prefix
+      deliveryordernumber-prefix      = L-
       body-position-x               = 25
       body-position-y               = 130
       body-width                    = 160
