@@ -875,6 +875,14 @@ class tx_caddy_pdf extends tslib_pibase
     $size   = $font['size'];
     $style  = $font['style'];
     $fpdi->SetFont( $family, $style , $size );
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $prompt = 'SetFont( "' . $family . '", "' . $style . '", ' . $size . ' )';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
@@ -894,20 +902,30 @@ class tx_caddy_pdf extends tslib_pibase
       case( count( $colors ) == 1 ):
           // grey
         $fpdi->SetTextColor( $colors[0] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ')';
         break;
       case( count( $colors ) == 3 ):
           // rgb
         $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ')';
         break;
       case( count( $colors ) == 4 ):
           // cmyk
         $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ', '. $colors[3] . ')';
         break;
       default:
         $prompt = 'FATAL ERROR: textColor<br />
           ' . __METHOD__ . ' (line ' . __LINE__ . ')';
         break;
     }
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
   
  /**
@@ -947,7 +965,7 @@ class tx_caddy_pdf extends tslib_pibase
     if( $this->pObj->drsUserfunc )
     {
       $prompt = 'writeHtmlCell( ' . $w . ', ' . $h . ', ' . $x . ', '. $y . ', $htmlContent )';
-      t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
   }
