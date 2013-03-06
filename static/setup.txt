@@ -855,7 +855,7 @@ plugin.tx_caddy_pi1 {
               // ordernumber
             30 = TEXT
             30 {
-              field = deliveryorderNumber
+              field = numberDeliveryorderCurrent
             }
           }
         }
