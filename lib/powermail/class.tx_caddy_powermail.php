@@ -1239,7 +1239,7 @@ die( );
     $this->pdf->pObj  = $this;
     $path = $this->pdf->deliveryorder( );
 var_dump( __METHOD__, __LINE__, $path );
-die( );
+//die( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )

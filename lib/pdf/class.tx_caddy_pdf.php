@@ -942,6 +942,14 @@ class tx_caddy_pdf extends tslib_pibase
 
       // Write HTML cell
     $this->tcpdf->writeHtmlCell( $w, $h, $x, $y, $htmlContent );
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $prompt = 'writeHtmlCell( ' . $w . ', ' . $h . ', ' . $x . ', '. $y . ', $htmlContent )';
+      t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
+    }
+      // DRS
   }
 
 }
