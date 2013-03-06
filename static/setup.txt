@@ -635,19 +635,9 @@ plugin.tx_caddy_pi1 {
           // properties
         body =
         body {
-            // font, position, textColor
+            // cell, font, textColor
           properties =
           properties {
-              // family, size, style
-            font =
-            font {
-                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
-                // [Integer] Font size in points
-              size = 10
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =
-            }
               // height, width, x, y
             cell {
                 // [INTEGER] Height of content in millimeter 
@@ -658,6 +648,16 @@ plugin.tx_caddy_pi1 {
               x = {$plugin.caddy.pdf.deliveryorder.body-position-x}
                 // [INTEGER] Position from top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.body-position-y}
+            }
+              // family, size, style
+            font =
+            font {
+                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Helvetica
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -670,19 +670,9 @@ plugin.tx_caddy_pi1 {
           // properties, content
         header =
         header {
-            // font, position, textColor
+            // cell, font, textColor
           properties =
           properties {
-              // family, size, style
-            font =
-            font {
-                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Courier
-                // [Integer] Font size in points
-              size  = 10
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =  
-            }
               // height, width, x, y
             cell {
                 // [INTEGER] Height of content in millimeter 
@@ -693,6 +683,16 @@ plugin.tx_caddy_pi1 {
               x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
                 // [INTEGER] Position from the page margin top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+            }
+              // family, size, style
+            font =
+            font {
+                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Courier
+                // [Integer] Font size in points
+              size  = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =  
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -711,19 +711,9 @@ plugin.tx_caddy_pi1 {
           // properties, content
         body =
         body {
-            // font, position, textColor
+            // cell, font, textColor
           properties =
           properties {
-              // family, size, style
-            font =
-            font {
-                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
-                // [Integer] Font size in points
-              size = 10
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =
-            }
               // height, width, x, y
             cell {
                 // [INTEGER] Height of content in millimeter 
@@ -734,6 +724,16 @@ plugin.tx_caddy_pi1 {
               x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
                 // [INTEGER] Position from top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-y}
+            }
+              // family, size, style
+            font =
+            font {
+                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Helvetica
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -805,19 +805,9 @@ plugin.tx_caddy_pi1 {
           // properties, content
         body =
         body {
-            // font, position, textColor
+            // cell, font, textColor
           properties =
           properties {
-              // family, size, style
-            font =
-            font {
-                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = Helvetica
-                // [Integer] Font size in points
-              size = 10
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =
-            }
               // height, width, x, y
             cell {
                 // [INTEGER] Height of content in millimeter 
@@ -828,6 +818,16 @@ plugin.tx_caddy_pi1 {
               x = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-x}
                 // [INTEGER] Position from top in millimeter 
               y = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-y}
+            }
+              // family, size, style
+            font =
+            font {
+                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Helvetica
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
