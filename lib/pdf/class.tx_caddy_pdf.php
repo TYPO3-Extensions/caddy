@@ -358,9 +358,6 @@ class tx_caddy_pdf extends tslib_pibase
       // RETURN : PDF file already exists
     if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
     {
-//      $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!<br />' .  PHP_EOL .
-//        __METHOD__. ' (' . __LINE__ . ')<br />' . PHP_EOL;
-//      echo $prompt;
         // DRS
       if( $this->pObj->drsUserfunc )
       {
@@ -368,7 +365,7 @@ class tx_caddy_pdf extends tslib_pibase
         t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
-      return;
+      return $destFile;
     }
       // RETURN : PDF file already exists
 
@@ -385,8 +382,11 @@ class tx_caddy_pdf extends tslib_pibase
 
     $fallBackToInvoiceAddress = true;
     $this->deliveryorderAddress( $fallBackToInvoiceAddress );
-    $this->deliveryorderNumber( $this->tcpdf );
-    $this->renderAdditionalTextblocks( $this->tcpdf );
+
+return $destFile;
+    
+    $this->deliveryorderNumber( );
+    //$this->renderAdditionalTextblocks( $this->tcpdf );
 
     $this->tcpdf->SetY( $this->confPdf['deliveryorder.']['body-position-y'] );
 
@@ -444,18 +444,18 @@ class tx_caddy_pdf extends tslib_pibase
   private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
   {
       // Get the body content
-    $body           = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
-    $bodyContent    = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-    $bodyProperties = $body['properties.'];
+    $body         = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
       // Get the body content
       
     switch( true )
     {
-      case( ! empty( $bodyContent ) ):
-        //$this->header( );
-        $this->deliveryorderAddressSet( $bodyProperties, $bodyContent );
+      case( ! empty( $htmlContent ) ):
+        $header = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
+        $this->header( $header );
+        $this->tcpdfWrite( $body['properties.'], $htmlContent );
         break;
-      case( empty( $bodyContent ) ):
+      case( empty( $htmlContent ) ):
       default:
           // RETURN : take the invoice address
         if( $fallBackToInvoiceAddress ) 
@@ -466,33 +466,6 @@ class tx_caddy_pdf extends tslib_pibase
         break;
     }
 
-    return;
-  }
-  
- /**
-  * deliveryorderAddressSet( ) : 
-  *
-  * @return	boolean		true, in case of en arror. false, if all is proper
-  * @access     public
-  * @version    2.0.0
-  * @since      1.4.6
-  */
-  private function deliveryorderAddressSet( $bodyProperties, $bodyContent )
-  {
-      // Set textColor
-    $textColor = $bodyProperties['textColor'];
-    $this->pdfSetTextColor( $fpdi, $textColor );
-
-      // Set font
-    $font = $bodyProperties['font.'];
-    $this->pdfSetFont( $fpdi, $font );
-
-      // Write HTML cell
-    $w      = 0;
-    $h      = 0;
-    $x      = $bodyProperties['position.']['x'];
-    $y      = $bodyProperties['position.']['y'];
-    $fpdi->writeHtmlCell( $w, $h, $x, $y, $bodyContent );
     return;
   }
 
@@ -522,6 +495,7 @@ class tx_caddy_pdf extends tslib_pibase
         $deliveryorderInit = false;
         break;
     }
+    unset( $sesArray );
     
     if( ! $deliveryorderInit )
     {
@@ -536,6 +510,74 @@ class tx_caddy_pdf extends tslib_pibase
       // RETURN : any pdf is requested
 
     return $deliveryorderInit;
+  }
+
+ /**
+  * deliveryorderNumber( ) : 
+  *
+  * @return	boolean		false, if delivery order isn't needed
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+
+  private function deliveryorderNumber( )
+  {
+      // Get the body content
+    $body         = $this->confPdf['deliveryorder.']['deliveryordernumber.']['body.'];
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+      // Get the body content
+      
+    if( empty( $htmlContent ) )
+    {
+      return;
+    }
+
+    $header = $this->confPdf['deliveryorder.']['deliveryordernumber.']['header.'];
+    $this->header( $header );
+    $this->tcpdfWrite( $body['properties.'], $htmlContent );
+
+    return;
+  }
+
+
+
+
+  /***********************************************
+  *
+  * header
+  *
+  **********************************************/
+  
+ /**
+  * header( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function header( $header )
+  {
+        // RETURN : there is no header
+    if( empty ( $header ) )
+    {
+      return;
+    }
+        // RETURN : there is no header
+    
+      // Get the header content
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $header['content'], $header['content.'] );
+
+      // RETURN : there isn't any content
+    if( empty ( $htmlContent) )
+    {
+      return;
+    }
+      // RETURN : there isn't any content
+
+      // Render the content
+    $this->tcpdfWrite( $header['properties.'], $htmlContent );
   }
 
 
@@ -624,70 +666,6 @@ class tx_caddy_pdf extends tslib_pibase
       die( $prompt );
     }  
   }
-
-
-
-  /***********************************************
-  *
-  * pdf
-  *
-  **********************************************/
-
- /**
-  * pdfSetFont( ) : 
-  *
-  * @return	void
-  * @access     public
-  * @version    2.0.0
-  * @since      2.0.0
-  */ 
-  private function pdfSetFont( $fpdi, $font ) 
-  {
-    $family = $font['family'];
-    $size   = $font['size'];
-    $style  = $font['style'];
-    $fpdi->SetFont( $family, $style , $size );
-  }
-
- /**
-  * pdfSetTextColor( ) : 
-  *
-  * @return	void
-  * @access     public
-  * @version    2.0.0
-  * @since      2.0.0
-  */ 
-  private function pdfSetTextColor( $fpdi, $textColor ) 
-  {
-    $colors = explode( ' ', $textColor );
-    
-    switch( true )
-    {
-      case( count( $colors ) == 1 ):
-          // grey
-        $fpdi->SetTextColor( $colors[0] );
-        break;
-      case( count( $colors ) == 3 ):
-          // rgb
-        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2] );
-        break;
-      case( count( $colors ) == 4 ):
-          // cmyk
-        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
-        break;
-      default:
-        $prompt = 'FATAL ERROR: textColor<br />
-          ' . __METHOD__ . ' (line ' . __LINE__ . ')';
-        break;
-    }
-  }
-
-  private function deliveryorderNumber(&$fpdi) {
-          $fpdi->SetXY($this->confPdf['deliveryorder.']['deliveryordernumber-position-x'], $this->confPdf['deliveryorder.']['deliveryordernumber-position-y']);
-
-          $fpdi->Cell('150', '6', $this->pnumber);
-  }
-
   private function renderAdditionalTextblocks(&$fpdi) {
           foreach ($this->confPdf['additionaltextblocks.'] as $key => $value) {
                   $html = $GLOBALS['TSFE']->cObj->cObjGetSingle($value['content'], $value['content.']);
@@ -752,6 +730,89 @@ class tx_caddy_pdf extends tslib_pibase
     $tcpdf->SetKeywords('TYPO3, caddy');    
     
     return $tcpdf;
+  }
+
+ /**
+  * tcpdfSetFont( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */ 
+  private function tcpdfSetFont( $fpdi, $font ) 
+  {
+    $family = $font['family'];
+    $size   = $font['size'];
+    $style  = $font['style'];
+    $fpdi->SetFont( $family, $style , $size );
+  }
+
+ /**
+  * tcpdfSetTextColor( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */ 
+  private function tcpdfSetTextColor( $fpdi, $textColor ) 
+  {
+    $colors = explode( ' ', $textColor );
+    
+    switch( true )
+    {
+      case( count( $colors ) == 1 ):
+          // grey
+        $fpdi->SetTextColor( $colors[0] );
+        break;
+      case( count( $colors ) == 3 ):
+          // rgb
+        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2] );
+        break;
+      case( count( $colors ) == 4 ):
+          // cmyk
+        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
+        break;
+      default:
+        $prompt = 'FATAL ERROR: textColor<br />
+          ' . __METHOD__ . ' (line ' . __LINE__ . ')';
+        break;
+    }
+  }
+  
+ /**
+  * tcpdfWrite( ) : Writes the content to the PDF. Dimensions, font and textColor are taken
+  *                 from the properties
+  *
+  * @param      array           $properties   : Array with the properties font, textColor and cell 
+  * @param      string          $htmlContent  : Current HTML content
+  * @return	void
+  * @internal   Supported tags are: a, b, blockquote, br, dd, del, div, dl, dt, em, font, h1, h2, h3, h4, h5, h6, 
+  *                                 hr, i, img, li, ol, p, pre, small, span, strong, sub, sup, table, tcpdf, 
+  *                                 td, th, thead, tr, tt, u, ul 
+  *             NOTE: all the HTML attributes must be enclosed in double-quote
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function tcpdfWrite( $properties, $htmlContent )
+  {
+      // Set textColor
+    $this->tcpdfSetTextColor( $this->tcpdf, $properties['textColor'] );
+
+      // Set font
+    $this->tcpdfSetFont( $this->tcpdf, $properties['font'] );
+
+      // Get properties for the HTML cell
+    $w      = $properties['cell.']['width'];
+    $h      = $properties['cell.']['height'];
+    $x      = $properties['cell.']['x'];
+    $y      = $properties['cell.']['y'];
+      // Get properties for the HTML cell
+
+      // Write HTML cell
+    $this->tcpdf->writeHtmlCell( $w, $h, $x, $y, $htmlContent );
   }
 
 }

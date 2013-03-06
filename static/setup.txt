@@ -629,10 +629,41 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      body-position-x               = {$plugin.caddy.pdf.deliveryorder.body-position-x}
-      body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
-      body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
-
+        // body
+      caddy = 
+      caddy {
+          // properties
+        body =
+        body {
+            // font, position, textColor
+          properties =
+          properties {
+              // family, size, style
+            font =
+            font {
+                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Helvetica
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
+            }
+              // height, width, x, y
+            cell {
+                // [INTEGER] Height of content in millimeter 
+              height = 0
+                // [INTEGER] Width of content in millimeter 
+              width = {$plugin.caddy.pdf.deliveryorder.body-width}
+                // [INTEGER] Position from left in millimeter 
+              x = {$plugin.caddy.pdf.deliveryorder.body-position-x}
+                // [INTEGER] Position from top in millimeter 
+              y = {$plugin.caddy.pdf.deliveryorder.body-position-y}
+            }
+              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+            textColor = 0
+          }
+        }
+      }
         // header, body
       deliveryorderaddress = 
       deliveryorderaddress {
@@ -768,29 +799,61 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      deliveryordernumber = COA
+        // body
+      deliveryordernumber = 
       deliveryordernumber {
-        10 = TEXT
-        10 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
-          noTrimWrap = ||: |
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.ordernumber.prefix}
-        }
-        30 = TEXT
-        30 {
-          current           = 1
-          setCurrent.field  = ordernumber
-          setCurrent.wrap   = | + {$plugin.caddy.ordernumber.offset}
-          prioriCalc        = intval
-          value             = {$plugin.caddy.ordernumber.suffix}        
+          // properties, content
+        body =
+        body {
+            // font, position, textColor
+          properties =
+          properties {
+              // family, size, style
+            font =
+            font {
+                // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+              family = Helvetica
+                // [Integer] Font size in points
+              size = 10
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+              style =
+            }
+              // height, width, x, y
+            cell {
+                // [INTEGER] Height of content in millimeter 
+              height = 0
+                // [INTEGER] Width of content in millimeter 
+              width = 0
+                // [INTEGER] Position from left in millimeter 
+              x = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-x}
+                // [INTEGER] Position from top in millimeter 
+              y = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-y}
+            }
+              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+            textColor = 0
+          }
+            // label, prefix, ordernumber
+          content = COA
+          content {
+              // label
+            10 = TEXT
+            10 {
+              data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+              noTrimWrap = ||: |
+            }
+              // prefix
+            20 = TEXT
+            20 {
+              value = {$plugin.caddy.ordernumber.prefix}
+            }
+              // ordernumber
+            30 = TEXT
+            30 {
+              field = deliveryorderNumber
+            }
+          }
         }
       }
-
-      deliveryordernumber-position-x  = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-x}
-      deliveryordernumber-position-y  = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-position-y}
 
       invoiceaddress = COA
       invoiceaddress {
