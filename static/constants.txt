@@ -143,10 +143,10 @@ plugin.caddy {
       deliveryorderaddress-position-x = 25
       deliveryorderaddress-position-y = 55
       deliveryordernumber-position-x  = 25
-      deliveryordernumber-position-y  = 90
+      deliveryordernumber-position-y  = 110
       deliveryordernumber-prefix      = L-
       body-position-x               = 25
-      body-position-y               = 110
+      body-position-y               = 130
       body-width                    = 165
     }
   }

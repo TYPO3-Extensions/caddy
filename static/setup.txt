@@ -737,7 +737,7 @@ plugin.tx_caddy_pi1 {
                 // [Integer] Font size in points
               size = 14
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style = B
+              style = 
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -750,6 +750,7 @@ plugin.tx_caddy_pi1 {
             10 {
               field     = deliveryorderCompany
               required  = 1
+              wrap      = <b>|</b>
             }
               // First name and last name
             20 = COA
@@ -844,7 +845,7 @@ plugin.tx_caddy_pi1 {
             10 = TEXT
             10 {
               data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
-              noTrimWrap = ||: |
+              noTrimWrap = || |
             }
               // prefix
             20 = TEXT
