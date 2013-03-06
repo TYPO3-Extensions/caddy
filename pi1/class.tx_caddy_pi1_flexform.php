@@ -152,11 +152,12 @@ class tx_caddy_pi1_flexform
  */
   private function sheetDeliveryorder( )
   {
-    $sheet = 'company';
+    $sheet = 'deliveryorder';
 
       // deliveryorderCompany
     $field                        = 'company';
     $this->deliveryorderCompany   = $this->zzFfValue( $sheet, $field );
+var_dump( __METHOD__, __LINE__, $this->deliveryorderCompany );
       // deliveryorderCompany
 
       // deliveryorderFirstname
