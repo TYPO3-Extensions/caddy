@@ -108,9 +108,9 @@ class tx_caddy_powermail
   private $markerTsWtcart       = '###POWERMAIL_TYPOSCRIPT_CART###';
 
     // Current GET parameter
-  private $paramGet  = null;
+  public $paramGet  = null;
     // Current POST parameter
-  private $paramPost = null;
+  public $paramPost = null;
 
     // True, if powermail form is sent
   public $sent  = null;
