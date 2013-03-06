@@ -270,7 +270,7 @@ class tx_caddy_pi1_clean
   private function cleanDatabaseCustomerEmail( )
   {
     $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
-    $value            = $this->pObj->powermail->paramPostById[$uidCustomerEmail];
+    $value            = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
 var_dump( __METHOD__, __LINE__, $uidCustomerEmail, $value );
 die( );
     $customerEmail    = $this->pObj->powermail->sessionValueById( $uidCustomerEmail );
