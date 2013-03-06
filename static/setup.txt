@@ -633,7 +633,7 @@ plugin.tx_caddy_pi1 {
       body-position-y               = {$plugin.caddy.pdf.deliveryorder.body-position-y}
       body-width                    = {$plugin.caddy.pdf.deliveryorder.body-width}
 
-        // properties, content
+        // header, body
       deliveryorderaddress = 
       deliveryorderaddress {
           // properties, content
@@ -662,7 +662,7 @@ plugin.tx_caddy_pi1 {
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
           }
-            // content
+            // label for delivery order address
           content = TEXT
           content {
             value = Lieferaddresse
@@ -701,7 +701,7 @@ plugin.tx_caddy_pi1 {
             textColor = 0
           }
             // Address: company, first name and last name, street, zip and city, country
-          content =
+          content = COA
           content {
               // Company
             10 = TEXT
