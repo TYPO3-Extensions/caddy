@@ -139,15 +139,15 @@ plugin.caddy {
     }
     deliveryorder {
       invoiceaddress-position-x       = 25
-      invoiceaddress-position-y       = 60
+      invoiceaddress-position-y       = 55
       deliveryorderaddress-position-x = 25
-      deliveryorderaddress-position-y = 60
-      deliveryordernumber-position-x  = 77
-      deliveryordernumber-position-y  = 25
+      deliveryorderaddress-position-y = 55
+      deliveryordernumber-position-x  = 25
+      deliveryordernumber-position-y  = 90
       deliveryordernumber-prefix      = L-
       body-position-x               = 25
-      body-position-y               = 130
-      body-width                    = 160
+      body-position-y               = 110
+      body-width                    = 165
     }
   }
 }

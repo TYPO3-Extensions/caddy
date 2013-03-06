@@ -734,7 +734,6 @@ plugin.tx_caddy_pi1 {
             font {
                 // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
               family = Helvetica
-              family = Courier
                 // [Integer] Font size in points
               size = 14
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
@@ -850,7 +849,7 @@ plugin.tx_caddy_pi1 {
               // prefix
             20 = TEXT
             20 {
-              value = {$plugin.caddy.deliveryorder.deliveryordernumber-prefix}
+              value = {$plugin.caddy.pdf.deliveryorder.deliveryordernumber-prefix}
             }
               // ordernumber
             30 = TEXT
