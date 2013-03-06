@@ -160,7 +160,7 @@ class tx_caddy_pdf extends tslib_pibase
 
       // write the HTML content
     $body = $this->confPdf['caddy.']['body.'];
-    $this->tcpdfWrite( $body['properties.'], $htmlContent );
+    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
   }
 
  /**
@@ -544,7 +544,7 @@ class tx_caddy_pdf extends tslib_pibase
       case( ! empty( $htmlContent ) ):
         $header = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
         $this->header( $header );
-        $this->tcpdfWrite( $body['properties.'], $htmlContent );
+        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
       case( empty( $htmlContent ) ):
       default:
@@ -626,7 +626,7 @@ class tx_caddy_pdf extends tslib_pibase
 
     $header = $this->confPdf['deliveryorder.']['deliveryordernumber.']['header.'];
     $this->header( $header );
-    $this->tcpdfWrite( $body['properties.'], $htmlContent );
+    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderNumber' );
 
     return;
   }
@@ -668,7 +668,7 @@ class tx_caddy_pdf extends tslib_pibase
       // RETURN : there isn't any content
 
       // Render the content
-    $this->tcpdfWrite( $header['properties.'], $htmlContent );
+    $this->tcpdfWrite( $header['properties.'], $htmlContent, 'header' );
   }
 
 
@@ -934,6 +934,7 @@ class tx_caddy_pdf extends tslib_pibase
   *
   * @param      array           $properties   : Array with the properties font, textColor and cell 
   * @param      string          $htmlContent  : Current HTML content
+  * @param      string          $drsLabel     : Label for teh DRS prompt. Usually the name of the calling method
   * @return	void
   * @internal   Supported tags are: a, b, blockquote, br, dd, del, div, dl, dt, em, font, h1, h2, h3, h4, h5, h6, 
   *                                 hr, i, img, li, ol, p, pre, small, span, strong, sub, sup, table, tcpdf, 
@@ -943,7 +944,7 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function tcpdfWrite( $properties, $htmlContent )
+  private function tcpdfWrite( $properties, $htmlContent, $drsLabel )
   {
       // Set textColor
     $this->tcpdfSetTextColor( $properties['textColor'] );
@@ -964,7 +965,7 @@ class tx_caddy_pdf extends tslib_pibase
       // DRS
     if( $this->pObj->drsUserfunc )
     {
-      $prompt = 'writeHtmlCell( ' . $w . ', ' . $h . ', ' . $x . ', '. $y . ', $htmlContent )';
+      $prompt = 'writeHtmlCell( ' . $w . ', ' . $h . ', ' . $x . ', '. $y . ', ' . $drsLabel . ' )';
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
