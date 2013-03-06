@@ -135,24 +135,22 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $subpartArray = null;
     $subpartArray = $this->caddyTablehead( $subpartArray );
-var_dump( __METHOD__, __LINE__, $subpartArray );    
     $subpartArray = $this->caddyTablebody( $subpartArray );
-var_dump( __METHOD__, __LINE__, $subpartArray );    
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $products = $sesArray['products'];
-    
+var_dump( __METHOD__, __LINE__, $products );    
       // LOOP : products
     $content = null;
     foreach( $products as $product ) 
     {
       $content =  $content . $this->caddyProduct( $product );
     }
+var_dump( __METHOD__, __LINE__, $content );    
       // LOOP : products
     
       // Update the marker content
     $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $content;
-var_dump( __METHOD__, __LINE__, $subpartArray );    
     
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
@@ -163,7 +161,6 @@ var_dump( __METHOD__, __LINE__, $subpartArray );
 
       // write the HTML content
     $body = $this->confPdf['deliveryorder.']['caddy.']['body.'];
-var_dump( __METHOD__, __LINE__, $body, $htmlContent );    
     $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
   }
 
@@ -191,20 +188,20 @@ var_dump( __METHOD__, __LINE__, $body, $htmlContent );
           continue;
         }
         
-        $currProduct[$key] = $this->local_cObj->cObjGetSingle( $fields[$key], $fields[$key . '.'] );
-        $currProduct[$key] = str_replace( '&euro;', '€', $currProduct[$key] );
-        $currProduct[$key] = str_replace( '&nbsp;', ' ', $currProduct[$key] );
+        $currProduct = $this->local_cObj->cObjGetSingle( $fields[$key], $fields[$key . '.'] );
+        $currProduct = str_replace( '&euro;', '€', $currProduct );
+        $currProduct = str_replace( '&nbsp;', ' ', $currProduct );
 
         $marker = '###' . strtoupper($key) . '###';
-        $value  = $currProduct[$key];
-        $this->markerArray[$marker] = $value;
+        $value  = $currProduct;
+        $markerArray[$marker] = $value;
       }
         // LOOP : fields, the elements of a product
 
       $content =  $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
                   (
                     $this->tmpl['item'], 
-                    $this->markerArray
+                    $markerArray
                   );
       return $content;
   }
@@ -246,7 +243,6 @@ var_dump( __METHOD__, __LINE__, $body, $htmlContent );
   private function caddyTablehead( $subpartArray )
   {
     $fields = $this->confSettings['powermailCaddy.']['fields.'];
-var_dump( __METHOD__, __LINE__, $fields );    
 
       // LOOP : fields, the elements of a product
     foreach( array_keys ( ( array ) $fields ) as $key )
