@@ -12,6 +12,7 @@ if( ! defined( 'TYPO3_MODE' ) )
 
   // Set TYPO3 version
   // Configuration by the extension manager
+  //    Database read only
   //    Localization support
   // Enables the Include Static Templates
   // Add pagetree icons
@@ -206,7 +207,7 @@ $TCA['tx_caddy_order'] = array (
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',  
     'default_sortby'    => 'ORDER BY numberOrder DESC, tstamp DESC',  
-    'readOnly'          => true,
+    'readOnly'          => $confArr['databaseReadonly'],
     'hideAtCopy'        => true,
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
@@ -227,6 +228,7 @@ $TCA['tx_caddy_item'] = array (
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',
     'default_sortby'    => 'ORDER BY uid DESC',  
+    'readOnly'          => $confArr['databaseReadonly'],
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
     'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
