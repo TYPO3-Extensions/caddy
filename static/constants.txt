@@ -96,20 +96,20 @@ plugin.caddy {
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
-  # cat=caddy - pdf//101;          type=string;  label= Text color: Grey: 0 - 100. RGB: 0 0 0 - 255 255 255, CMYK: 0 0 0 0 - 100 100 100 100
+  # cat=caddy - pdf//101;          type=string;  label= Text color: Examples: Grey: 0 - 100. RGB: 0 0 0 - 255 255 255, CMYK: 0 0 0 0 - 100 100 100 100
   pdfGeneral.textColor = 0 0 0
   # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdfGeneral.externalLinks = Click me!
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdfGeneral.sponsors = Click me!
 
-  # cat=caddy - pdf delivery order//101; type=string; label= HTML for the PDF packinglist file:Path to the HTML template
+  # cat=caddy - pdf delivery order//101; type=string; label= HTML for the caddy (items):Path to the HTML template
   pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
-  # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the address from the left margin in millimeters
+  # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
   pdf.deliveryorder.address.x = 25
-  # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the address from the top margin in millimeters
+  # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
   pdf.deliveryorder.address.y = 55
-  # cat=caddy - pdf delivery order//204; type=int+; label= Address font-size: Font-size of the address in points
+  # cat=caddy - pdf delivery order//204; type=int+; label= Address font-size: Font-size of the receiving address in points
   pdf.deliveryorder.address.fontsize = 14
   # cat=caddy - pdf delivery order//304; type=int+; label= Number position left: Position of the delivery number from the left margin in millimeters
   pdf.deliveryorder.number.x = 25
@@ -126,7 +126,7 @@ plugin.caddy {
 
   # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
   pdf.caddy.x = 25
-  # cat=caddy - pdf caddy//103; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
+  # cat=caddy - pdf caddy//102; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
   pdf.caddy.y = 130
   # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
   pdf.caddy.width = 165
