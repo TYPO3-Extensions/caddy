@@ -495,23 +495,14 @@ var_dump( __METHOD__, __LINE__, $content );
     if ( ! empty( $body ) )
     {
       //$this->header( );
-      $textColor  = explode( ' ', $body['properties.']['textColor'] );
-//      $fpdi->SetTextColor( $color[0], $color[1], $color[2], $color[3] );
-//      $fpdi->SetTextColor( 255, 255, 255 );
-      $fpdi->SetTextColor( $textColor[0] );
-var_dump( __METHOD__, __LINE__, $textColor[0] );
-      $family = $body['properties.']['font.']['family'];
-      $size   = $body['properties.']['font.']['size'];
-      $style  = $body['properties.']['font.']['style'];
-var_dump( __METHOD__, __LINE__, $family, $style , $size );
-      $fpdi->SetFont( $family, $style , $size );
+      $textColor = $body['properties.']['textColor'];
+      $this->pdfSetTextColor( $fpdi, $textColor );
+      $font = $body['properties.']['font.'];
+      $this->pdfSetFont( $fpdi, $font );
       $w      = 0;
       $h      = 0;
       $x      = $body['properties.']['position.']['x'];
       $y      = $body['properties.']['position.']['y'];
-          // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
-var_dump( __METHOD__, __LINE__, $w, $h, $x, $y, $content );
-//die( );
       $fpdi->writeHtmlCell( $w, $h, $x, $y, $content );
       return;
     }
@@ -524,6 +515,39 @@ var_dump( __METHOD__, __LINE__, $w, $h, $x, $y, $content );
     }
       // RETURN : take the invoice address
     return;
+  }
+
+  private function pdfSetFont( $fpdi, $font ) 
+  {
+    $family = $font['family'];
+    $size   = $font['size'];
+    $style  = $font['style'];
+    $fpdi->SetFont( $family, $style , $size );
+  }
+
+  private function pdfSetTextColor( $fpdi, $textColor ) 
+  {
+    $colors = explode( ' ', $textColor );
+    
+    switch( true )
+    {
+      case( count( $colors ) == 1 ):
+          // grey
+        $fpdi->SetTextColor( $colors[0] );
+        break;
+      case( count( $colors ) == 3 ):
+          // rgb
+        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2] );
+        break;
+      case( count( $colors ) == 4 ):
+          // cmyk
+        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
+        break;
+      default:
+        $prompt = 'FATAL ERROR: textColor<br />
+          ' . __METHOD__ . ' (line ' . __LINE__ . ')';
+        break;
+    }
   }
 
   private function deliveryorderNumber(&$fpdi) {
