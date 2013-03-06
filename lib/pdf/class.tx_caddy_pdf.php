@@ -154,9 +154,9 @@ var_dump( __METHOD__, __LINE__, $content );
     
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-            (
-              $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
-            );
+                  (
+                    $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
+                  );
       // render the marker
 
       // write the HTML content
