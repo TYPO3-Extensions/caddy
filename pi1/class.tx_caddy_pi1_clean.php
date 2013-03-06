@@ -287,6 +287,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldCustomerEmail( )
   {
     $pmUid  = $this->pObj->flexform->emailCustomerEmail;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -302,6 +303,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCompany( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCompany;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -317,6 +319,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderFirstname( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -332,6 +335,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderLastname( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -347,6 +351,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderAddress( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderAddress;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -362,6 +367,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderZip( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderZip;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -377,6 +383,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCity( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCity;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -392,6 +399,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCountry( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCountry;
+var_dump( __METHOD__, __LINE__, $pmUid );
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
