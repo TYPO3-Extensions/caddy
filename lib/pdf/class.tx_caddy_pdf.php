@@ -481,38 +481,34 @@ class tx_caddy_pdf extends tslib_pibase
 //http://www.tcpdf.org/doc/code/classTCPDF.html
     $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
     
-    $confProperties = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['properties.'];
-    $confContent    = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['content.'];
+    $body   = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
     //$fpdi->SetTextColor( 255, 255, 255 );
     
-    $body = $GLOBALS['TSFE']->cObj->cObjGetSingle
+    $content = $GLOBALS['TSFE']->cObj->cObjGetSingle
             (
-              $confContent['body'], 
-              $confContent['body.']
+              $body['content'], 
+              $body['content.'] 
             );
-var_dump( __METHOD__, __LINE__, $confProperties['body.'], $confContent['body.'], $body );
+var_dump( __METHOD__, __LINE__, $body, $content );
 //die ( );
       // RETURN : delivery order address is given
     if ( ! empty( $body ) )
     {
       //$this->header( );
-      $textColor  = explode( ' ', $confProperties['body.']['textColor'] );
+      $textColor  = explode( ' ', $body['properties.']['textColor'] );
 //      $fpdi->SetTextColor( $color[0], $color[1], $color[2], $color[3] );
 //      $fpdi->SetTextColor( 255, 255, 255 );
       $fpdi->SetTextColor( $textColor[0] );
-      $family = $confProperties['body.']['font.']['family'];
-      $size   = $confProperties['body.']['font.']['size'];
-      $style  = $confProperties['body.']['font.']['style'];
+      $family = $body['properties.']['font.']['family'];
+      $size   = $body['properties.']['font.']['size'];
+      $style  = $body['properties.']['font.']['style'];
       $fpdi->SetFont( $family, $style , $size );
+      $w      = 0;
+      $h      = 0;
+      $x      = $body['properties.']['position.']['x'];
+      $y      = $body['properties.']['position.']['y'];
           // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
-      $fpdi->writeHtmlCell
-      (
-        0, 
-        0, 
-        $confProperties['body.']['position.']['x'],
-        $confProperties['body.']['position.']['Y'],
-        $body
-      );
+      $fpdi->writeHtmlCell( $w, $h, $x, $y, $content );
       return;
     }
       // RETURN : delivery order address is given
