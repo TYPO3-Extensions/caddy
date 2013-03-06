@@ -548,12 +548,16 @@ class tx_caddy_pdf extends tslib_pibase
         break;
       case( empty( $htmlContent ) ):
       default:
-          // RETURN : take the invoice address
+          // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
-          $this->renderInvoiceAddress( $fpdi );
+          $body         = $this->confPdf['deliveryorder.']['invoiceaddress.']['body.'];
+          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+          $header = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
+          $this->header( $header );
+          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         }
-          // RETURN : take the invoice address
+          // FALLBACK : take the invoice address
         break;
     }
 
