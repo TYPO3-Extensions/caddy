@@ -1272,6 +1272,54 @@ class tx_caddy_powermail
     
     return $sessionData;
   }
+
+ /**
+  * sessionValueById( ) : Return the value of the given uid
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function sessionValueById( $uid )
+  {
+    $sesArray             = $this->sessionData( );
+    $powermailVersionInt  = $this->pObj->powermail->versionInt;
+
+    switch( true )
+    {
+      case( $powermailVersionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $powermailVersionInt < 2000000 ):
+        $uidVersion1 = 'uid' . $uid;
+        $value = $sesArray[$uidVersion1];
+        break;
+      case( $powermailVersionInt < 3000000 ):
+        $prompt = 'TODO: powermail 2.x<br />
+          Please maintain the code!<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $powermailVersionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $powermailVersionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $value;
+  }
+  
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/powermail/class.tx_caddy_powermail.php'])

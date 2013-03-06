@@ -269,9 +269,15 @@ class tx_caddy_pi1_clean
   */
   private function cleanDatabaseCustomerEmail( )
   {
-    $sesArray               = $this->pObj->powermail->sessionData( );
-    $uidFieldCustomerEmail  = $this->pObj->flexform->emailCustomerEmail;
-    $powermailVersionInt    = $this->pObj->powermail->versionInt;
+    $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
+    $customerEmail    = $this->pObj->powermail->sessionValueById( $uidCustomerEmail );
+var_dump( __METHOD__, __LINE__, $customerEmail );
+die( );
+    return $customerEmail;
+    
+    $sesArray             = $this->pObj->powermail->sessionData( );
+    $uidCustomerEmail     = $this->pObj->flexform->emailCustomerEmail;
+    $powermailVersionInt  = $this->pObj->powermail->versionInt;
 
     switch( true )
     {
@@ -283,7 +289,7 @@ class tx_caddy_pi1_clean
         die( $prompt );
         break;
       case( $powermailVersionInt < 2000000 ):
-        $uidEmail = 'uid' . $uidFieldCustomerEmail;
+        $uidEmail = 'uid' . $uidCustomerEmail;
         $customerEmail = $sesArray[$uidEmail];
         break;
       case( $powermailVersionInt < 3000000 ):
