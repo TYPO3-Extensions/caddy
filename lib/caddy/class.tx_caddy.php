@@ -159,7 +159,7 @@ class tx_caddy extends tslib_pibase
       // read all products from session
     $this->products = $this->session->productsGet( );
 
-//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
     switch( true )
     {
@@ -295,7 +295,7 @@ class tx_caddy extends tslib_pibase
       // sum of options
 
       // session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['productsGross']  = $this->productsGross;
     $sesArray['productsNet']    = $productsNet;
     $sesArray['optionsNet']     = $optionsNet;
@@ -304,7 +304,7 @@ class tx_caddy extends tslib_pibase
     $sesArray['sumNet']         = $sumNet;
     $sesArray['sumTaxNormal']   = $sumTaxNormal;
     $sesArray['sumTaxReduced']  = $sumTaxReduced;
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
       // cObject becomes current record

@@ -358,7 +358,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->checkDir( );
 
       // Get the caddy session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
     if( empty( $sesArray['products'] ) )
     {

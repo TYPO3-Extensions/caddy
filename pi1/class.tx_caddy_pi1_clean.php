@@ -103,6 +103,7 @@ class tx_caddy_pi1_clean
     }
       // DRS
 
+    $this->sessionUpdate( );
     $this->database( );
     $this->numbers( );
   }
@@ -129,7 +130,7 @@ class tx_caddy_pi1_clean
     $time     = time( );
 
       // Get the session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
     
@@ -271,6 +272,134 @@ class tx_caddy_pi1_clean
 
   /***********************************************
   *
+  * Get powermail fields
+  *
+  **********************************************/
+
+ /**
+  * getPmFieldCustomerEmail( )  : Get the customer e-mail from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldCustomerEmail( )
+  {
+    $pmUid  = $this->pObj->flexform->emailCustomerEmail;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderCompany( )  : Get the delivery order Company from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderCompany( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderFirstname( )  : Get the delivery order Firstname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderFirstname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderLastname( )  : Get the delivery order Lastname from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderLastname( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderAddress( )  : Get the delivery order Address from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderAddress( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderAddress;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderZip( )  : Get the delivery order Zip from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderZip( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderZip;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderCity( )  : Get the delivery order City from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderCity( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderCity;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+
+ /**
+  * getDeliveryorderCountry( )  : Get the delivery order Country from powermail POST params
+  *
+  * @return	string          $value  : the value
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldDeliveryorderCountry( )
+  {
+    $pmUid  = $this->pObj->flexform->deliveryorderCountry;
+    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    return $value;
+  }
+  
+
+
+  /***********************************************
+  *
   * Numbers
   *
   **********************************************/
@@ -345,35 +474,65 @@ class tx_caddy_pi1_clean
     }
       // DRS
   }
-
+  
 
 
   /***********************************************
   *
-  * Get powermail fields
+  * Session
   *
   **********************************************/
 
  /**
-  * getPmFieldCustomerEmail( )
+  * sessionUpdate( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function getPmFieldCustomerEmail( )
+  private function sessionUpdate( )
   {
-    $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
-    $customerEmail    = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
-    return $customerEmail;
+    $this->sessionUpdateDeliveryorder( );
+  }
 
+ /**
+  * sessionUpdateDeliveryorder( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sessionUpdateDeliveryorder( )
+  {
+      // Get the session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    
+    $sesArray['deliveryorderCompany']   = $this->getPmFieldDeliveryorderCompany( );
+    $sesArray['deliveryorderFirstname'] = $this->getPmFieldDeliveryorderFirstname( );
+    $sesArray['deliveryorderLastname']  = $this->getPmFieldDeliveryorderLastname( );
+    $sesArray['deliveryorderAddress']   = $this->getPmFieldDeliveryorderAddress( );
+    $sesArray['deliveryorderZip']       = $this->getPmFieldDeliveryorderZip( );
+    $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
+    $sesArray['deliveryorderCountry']   = $this->getPmFieldDeliveryorderCountry( );
+    
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    $GLOBALS['TSFE']->storeSessionData(); // Save session
+
+      // DRS
+    if( $this->pObj->drs->drsClean )
+    {
+      $prompt = 'Delivery order data are added to the session.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
   }
 
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_clean.php'])
 {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_clean.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_clean.php']);
 }
 ?>

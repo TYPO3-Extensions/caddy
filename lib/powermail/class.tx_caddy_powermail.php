@@ -1022,7 +1022,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerDeliveryorder'] . ',';
     
     if( empty ( $path ) )
@@ -1069,7 +1069,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorDeliveryorder'] . ',';
     
     if( empty ( $path ) )
@@ -1118,7 +1118,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerInvoice'] . ',';
     
     if( empty ( $path ) )
@@ -1164,7 +1164,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorInvoice'] . ',';
     
     if( empty ( $path ) )
@@ -1210,7 +1210,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerTerms'] . ',';
     
     if( empty ( $path ) )
@@ -1256,7 +1256,7 @@ class tx_caddy_powermail
     }
       // DRS
       
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorTerms'] . ',';
     
     if( empty ( $path ) )

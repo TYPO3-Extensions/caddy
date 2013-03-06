@@ -712,7 +712,7 @@ plugin.tx_caddy_pi1 {
                 en = Company
               }
               override {
-                field     = deliverorderCompany
+                field     = deliveryorderCompany
               }
               required  = 1
             }
@@ -722,12 +722,12 @@ plugin.tx_caddy_pi1 {
               // First name
               10 = TEXT
               10 {
-                field     = deliverorderFirstname
+                field     = deliveryorderFirstname
               }
                 // Last name
               20 = TEXT
               20 {
-                field       = deliverorderLastname
+                field       = deliveryorderLastname
                 noTrimWrap  = | ||
               }
               wrap      = <br />|
@@ -736,7 +736,7 @@ plugin.tx_caddy_pi1 {
               // Address
             30 = TEXT
             30 {
-              field     = deliverorderAddress
+              field     = deliveryorderAddress
               wrap      = <br />|
               required  = 1
             }
@@ -746,12 +746,12 @@ plugin.tx_caddy_pi1 {
                 // ZIP
               10 = TEXT
               10 {
-                field = deliverorderZip
+                field = deliveryorderZip
               }
                 // City
               20 = TEXT
               20 {
-                field       = deliverorderCity
+                field       = deliveryorderCity
                 noTrimWrap  = | ||
               }
               wrap      = <br />|
@@ -760,7 +760,7 @@ plugin.tx_caddy_pi1 {
               // Country
             50 = TEXT
             50 {
-              field     = deliverorderCountry
+              field     = deliveryorderCountry
               wrap      = <br />|
               required  = 1
             }

@@ -109,7 +109,7 @@ class tx_caddy_session
  */
   public function getNumberDeliveryorder( )
   {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $currentNumber  = $sesArray['numberDeliveryorderCurrent'];
     return $currentNumber;
   }
@@ -124,7 +124,7 @@ class tx_caddy_session
  */
   public function getNumberInvoice( )
   {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $currentNumber  = $sesArray['numberInvoiceCurrent'];
     return $currentNumber;
   }
@@ -139,7 +139,7 @@ class tx_caddy_session
  */
   public function getNumberOrder( )
   {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $currentNumber  = $sesArray['numberOrderCurrent'];
     return $currentNumber;
   }
@@ -160,11 +160,11 @@ class tx_caddy_session
  */
     public function paymentUpdate($value)
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         $sesArray['payment'] = intval($value); // overwrite with new qty
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
         $GLOBALS['TSFE']->storeSessionData(); // Save session
     }
 
@@ -175,7 +175,7 @@ class tx_caddy_session
  */
     public function paymentGet()
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         return $sesArray['payment'];
     }
@@ -241,7 +241,7 @@ class tx_caddy_session
 
       $sesArray = array();
       // get already exting products from session
-      $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
+      $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
 
       // check if this puid already exists and when delete it
       foreach ((array) $sesArray['products'] as $key => $value)
@@ -296,7 +296,7 @@ class tx_caddy_session
       $sesArray['products'][] = $parray;
 
       // generate session with session array
-      $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+      $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
       // save session
       $GLOBALS['TSFE']->storeSessionData();
     }
@@ -317,7 +317,7 @@ class tx_caddy_session
     $arr_variant['puid'] = $this->pObj->piVars['del'];
 
     // get products from session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
     // loop every product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
@@ -349,7 +349,7 @@ class tx_caddy_session
     // loop every product
 
     // generate new session
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
     // save session
     $GLOBALS['TSFE']->storeSessionData();
   }
@@ -603,7 +603,7 @@ class tx_caddy_session
  */
     public function productsGet()
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id );
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
         return $sesArray['products'];
     }
@@ -618,7 +618,7 @@ class tx_caddy_session
     public function productsGetGross( $pid )
     {
         // get already exting products from session
-      $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_caddy_' . $pid );
+      $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
       $gross = 0;
       foreach( ( array ) $sesArray['products'] as  $val )
@@ -760,7 +760,7 @@ class tx_caddy_session
         $arr_variant = $this->quantityGetVariant( );
 
         // get products from session
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id);
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
 
         $is_cart = intval($this->pObj->piVars['update_from_cart']);
 
@@ -875,7 +875,7 @@ class tx_caddy_session
         // loop every product
 
         // generate new session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray);
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
         // save session
         $GLOBALS['TSFE']->storeSessionData();
     }
@@ -918,7 +918,7 @@ class tx_caddy_session
       // Increase numbers
     $this->sessionDeleteIncreaseNumbers( $drs );
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, array( ) );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -983,11 +983,11 @@ class tx_caddy_session
  */
     public function shippingUpdate($value)
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         $sesArray['shipping'] = intval($value); // overwrite with new qty
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
         $GLOBALS['TSFE']->storeSessionData(); // Save session
     }
 
@@ -998,7 +998,7 @@ class tx_caddy_session
  */
     public function shippingGet( )
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         return $sesArray['shipping'];
     }
@@ -1019,11 +1019,11 @@ class tx_caddy_session
  */
     public function specialUpdate($special_arr)
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         $sesArray['special'] = $special_arr; // overwrite with new qty
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
         $GLOBALS['TSFE']->storeSessionData(); // Save session
     }
 
@@ -1034,7 +1034,7 @@ class tx_caddy_session
  */
     public function specialGet()
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_caddy_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
         return $sesArray['special'];
     }
