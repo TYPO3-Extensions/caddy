@@ -493,8 +493,9 @@ class tx_caddy_pdf extends tslib_pibase
 var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $body );
 die ( );
       // RETURN : delivery order address is given
-    if ( ! empty( $deliveryorderaddress ) )
+    if ( ! empty( $body ) )
     {
+      //$this->header( );
       $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
       //$fpdi->SetTextColor( 255, 255, 255 );
           // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)

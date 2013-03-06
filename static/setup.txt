@@ -666,6 +666,7 @@ plugin.tx_caddy_pi1 {
           body =
           body {
               // color, family, size, style
+            font =
             font {
                 // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
               color = 0
@@ -677,6 +678,7 @@ plugin.tx_caddy_pi1 {
               style =
             }
               // x, y
+            position =
             position {
                 // [INTEGER] Position from left in millimeter 
               x = {$plugin.caddy.pdf.deliveryorder.deliveryorderaddress-position-x}
