@@ -511,7 +511,7 @@ var_dump( __METHOD__, __LINE__, $family, $style , $size );
       $y      = $body['properties.']['position.']['y'];
           // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
 var_dump( __METHOD__, __LINE__, $w, $h, $x, $y, $content );
-die( );
+//die( );
       $fpdi->writeHtmlCell( $w, $h, $x, $y, $content );
       return;
     }
