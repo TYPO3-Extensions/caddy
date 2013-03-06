@@ -490,8 +490,8 @@ class tx_caddy_pdf extends tslib_pibase
               $confContent['body'], 
               $confContent['body.']
             );
-var_dump( __METHOD__, __LINE__, $confContent['body.'], $body );
-die ( );
+var_dump( __METHOD__, __LINE__, $confProperties['body.'], $confContent['body.'], $body );
+//die ( );
       // RETURN : delivery order address is given
     if ( ! empty( $body ) )
     {

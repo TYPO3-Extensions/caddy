@@ -636,13 +636,13 @@ plugin.tx_caddy_pi1 {
         // properties, content
       deliveryorderaddress = 
       deliveryorderaddress {
-          // header, body
-        properties =
-        properties {
-            // font, position
-          header =
-          header {
-              // color, family, size, style
+          // properties, content
+        header =
+        header {
+            // font, position, textColor
+          properties =
+          properties {
+              // family, size, style
             font =
             font {
                 // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
@@ -662,10 +662,24 @@ plugin.tx_caddy_pi1 {
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
           }
-            // font, position
-          body =
-          body {
-              // color, family, size, style
+            // content
+          content = TEXT
+          content {
+            value = Lieferaddresse
+            lang {
+              de = Lieferaddresse
+              en = delivery address
+            }
+            wrap      = |<br>
+          }
+        }
+          // properties, content
+        body =
+        body {
+            // font, position, textColor
+          properties =
+          properties {
+              // family, size, style
             font =
             font {
                 // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
@@ -686,23 +700,9 @@ plugin.tx_caddy_pi1 {
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
           }
-        }
-          // header, body
-        content =
-        content {
-            // Label
-          header = TEXT
-          header {
-            value = Lieferaddresse
-            lang {
-              de = Lieferaddresse
-              en = delivery address
-            }
-            wrap      = |<br>
-          }
             // Address: company, first name and last name, street, zip and city, country
-          body = COA
-          body {
+          content =
+          content {
               // Company
             10 = TEXT
             10 {
