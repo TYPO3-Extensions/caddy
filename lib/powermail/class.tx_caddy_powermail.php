@@ -1221,6 +1221,7 @@ class tx_caddy_powermail
   private function sessionDataVers1(  )
   {
       // DIE  : $fieldUid is empty
+var_dump( __METHOD__, __LINE__, $this->fieldUid );
     if( empty( $this->fieldUid ) )
     {
       $prompt = 'FATAL ERROR: powermail->fieldUid is empty.<br />
