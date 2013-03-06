@@ -489,7 +489,7 @@ class tx_caddy_pdf extends tslib_pibase
               $body['content'], 
               $body['content.'] 
             );
-var_dump( __METHOD__, __LINE__, $body, $content );
+var_dump( __METHOD__, __LINE__, $content );
 //die ( );
       // RETURN : delivery order address is given
     if ( ! empty( $body ) )
@@ -499,15 +499,19 @@ var_dump( __METHOD__, __LINE__, $body, $content );
 //      $fpdi->SetTextColor( $color[0], $color[1], $color[2], $color[3] );
 //      $fpdi->SetTextColor( 255, 255, 255 );
       $fpdi->SetTextColor( $textColor[0] );
+var_dump( __METHOD__, __LINE__, $textColor[0] );
       $family = $body['properties.']['font.']['family'];
       $size   = $body['properties.']['font.']['size'];
       $style  = $body['properties.']['font.']['style'];
+var_dump( __METHOD__, __LINE__, $family, $style , $size );
       $fpdi->SetFont( $family, $style , $size );
       $w      = 0;
       $h      = 0;
       $x      = $body['properties.']['position.']['x'];
       $y      = $body['properties.']['position.']['y'];
           // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
+var_dump( __METHOD__, __LINE__, $w, $h, $x, $y, $content );
+die( );
       $fpdi->writeHtmlCell( $w, $h, $x, $y, $content );
       return;
     }
