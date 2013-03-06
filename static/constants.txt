@@ -131,7 +131,7 @@ plugin.caddy {
   # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
   pdf.caddy.width = 165
   # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
-  pdf.caddy.fontsize = 14
+  pdf.caddy.fontsize = 12
   # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.caddy.externalLinks = Click me!
   # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -139,20 +139,9 @@ plugin.caddy {
 
   # cat=caddy - pdf invoice//101; type=string; label= HTML for the PDF ordering file:Path to the HTML template
   pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
+
 plugin.caddy {
   pdf {
-    deliveryorder {
-      invoiceaddress-position-x       = 25
-      invoiceaddress-position-y       = 55
-      deliveryorderaddress-position-x = 25
-      deliveryorderaddress-position-y = 55
-      deliveryordernumber-position-x  = 25
-      deliveryordernumber-position-y  = 110
-      deliveryordernumber-prefix      = L-
-      body-position-x               = 25
-      body-position-y               = 130
-      body-width                    = 165
-    }
     invoice {
       invoiceaddress-position-x     = 20
       invoiceaddress-position-y     = 45

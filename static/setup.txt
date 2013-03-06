@@ -861,68 +861,9 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      invoiceaddress = COA
+      invoiceaddress < .deliveryorderaddress
       invoiceaddress {
-          // Company
-        1 = COA
-        1 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.company}
-              }
-              wrap      = |<br>
-              required  = 1
-            }
-          }
-        }
-          // First name and last name
-        2 = COA
-        2 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.first_name}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.last_name}}
-              }
-              wrap      = |<br>
-              required  = 1
-            }
-          }
-        }
-          // Address
-        3 = COA
-        3 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                data = TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.address}
-              }
-              wrap      = |<br>
-              required  = 1
-            }
-          }
-        }
-          // ZIP and city
-        4 = COA
-        4 {
-          10 = TEXT
-          10 {
-            stdWrap {
-              ifEmpty {
-                dataWrap = {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.zip}} {TSFE:fe_user|sesData|powermail_{$quick_shop.powermail.ids.form.default}|uid{$quick_shop.powermail.ids.address_order.default.city}}
-              }
-              wrap      = |<br>
-              required  = 1
-            }
-          }
-        }
       }
-
-      invoiceaddress-position-x       = {$plugin.caddy.pdf.deliveryorder.invoiceaddress-position-x}
-      invoiceaddress-position-y       = {$plugin.caddy.pdf.deliveryorder.invoiceaddress-position-y}
 
       additionaltextblocks {
           // date
