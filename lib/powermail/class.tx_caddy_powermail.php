@@ -90,7 +90,7 @@ class tx_caddy_powermail
   public $conf = null;
 
 
-  private $drsUserfunc = false;
+  public  $drsUserfunc = false;
 
   public  $fieldFfConfirm      = null;
   public  $fieldFfMailreceiver = null;
