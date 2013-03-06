@@ -146,10 +146,12 @@ class tx_caddy_pdf extends tslib_pibase
     {
       $content =  $content . $this->caddyProduct( $product );
     }
+var_dump( __METHOD__, __LINE__, $content );    
       // LOOP : products
     
       // Update the marker content
     $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $content;
+var_dump( __METHOD__, __LINE__, $subpartArray );    
     
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
@@ -160,6 +162,7 @@ class tx_caddy_pdf extends tslib_pibase
 
       // write the HTML content
     $body = $this->confPdf['caddy.']['body.'];
+var_dump( __METHOD__, __LINE__, $body, $htmlContent );    
     $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
   }
 
