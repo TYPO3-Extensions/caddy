@@ -1367,7 +1367,7 @@ var_dump( __METHOD__, __LINE__, $sessionData );
         break;
       case( $powermailVersionInt < 2000000 ):
         $uidVersion1 = 'uid' . $uid;
-        $value = $this->paramGet[$uidVersion1];
+        $value = $this->paramPost[$uidVersion1];
         break;
       case( $powermailVersionInt < 3000000 ):
         $prompt = 'TODO: powermail 2.x<br />
