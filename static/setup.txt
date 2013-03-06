@@ -656,7 +656,7 @@ plugin.tx_caddy_pi1 {
                 // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
               family = Helvetica
                 // [Integer] Font size in points
-              size = 10
+              size = 12
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =
             }
@@ -736,9 +736,9 @@ plugin.tx_caddy_pi1 {
               family = Helvetica
               family = Courier
                 // [Integer] Font size in points
-              size = 12
+              size = 14
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style = BI
+              style = B
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -831,9 +831,9 @@ plugin.tx_caddy_pi1 {
                 // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
               family = Helvetica
                 // [Integer] Font size in points
-              size = 10
+              size = 24
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =
+              style = B
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
@@ -850,7 +850,7 @@ plugin.tx_caddy_pi1 {
               // prefix
             20 = TEXT
             20 {
-              value = {$plugin.caddy.ordernumber.prefix}
+              value = {$plugin.caddy.deliveryorder.deliveryordernumber-prefix}
             }
               // ordernumber
             30 = TEXT

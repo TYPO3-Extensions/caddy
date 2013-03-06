@@ -138,19 +138,16 @@ plugin.caddy {
       body-width                  = 160
     }
     deliveryorder {
-      invoiceaddress-position-x       = 20
-      invoiceaddress-position-y       = 45
-      deliveryorderaddress-position-x    = 20
-      deliveryorderaddress-position-y    = 45
-      deliveryordernumber-position-x  = 20
-      deliveryordernumber-position-y  = 90
+      invoiceaddress-position-x       = 25
+      invoiceaddress-position-y       = 60
+      deliveryorderaddress-position-x = 25
+      deliveryorderaddress-position-y = 60
+      deliveryordernumber-position-x  = 77
+      deliveryordernumber-position-y  = 25
+      deliveryordernumber-prefix
       body-position-x               = 25
-      body-position-y               = 110
+      body-position-y               = 130
       body-width                    = 160
     }
   }
 }
-
-  // #45775, 130224, dwildt, 2-
-//#clear powermail session data
-//plugin.powermail.clear.session = 1
