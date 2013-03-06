@@ -833,7 +833,7 @@ plugin.tx_caddy_pi1 {
                 // [Integer] Font size in points
               size = 24
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style = B
+              style = 
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = 0
