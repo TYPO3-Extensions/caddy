@@ -1285,7 +1285,7 @@ class tx_caddy_powermail
   public function sessionValueById( $uid )
   {
     $sesArray             = $this->sessionData( );
-    $powermailVersionInt  = $this->pObj->powermail->versionInt;
+    $powermailVersionInt  = $this->versionInt;
 
     switch( true )
     {
@@ -1317,6 +1317,7 @@ class tx_caddy_powermail
         break;
     }
 
+var_dump( __METHOD__, __LINE__, $powermailVersionInt, $sesArray, $uidVersion1, $value );
     return $value;
   }
   
