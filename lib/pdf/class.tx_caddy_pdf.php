@@ -137,21 +137,6 @@ class tx_caddy_pdf extends tslib_pibase
     $subpartArray = $this->caddyTablehead( $subpartArray );
     $subpartArray = $this->caddyTablebody( $subpartArray );
 
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $products = $sesArray['products'];
-var_dump( __METHOD__, __LINE__, $products );    
-      // LOOP : products
-    $content = null;
-    foreach( $products as $product ) 
-    {
-      $content =  $content . $this->caddyProduct( $product );
-    }
-var_dump( __METHOD__, __LINE__, $content );    
-      // LOOP : products
-    
-      // Update the marker content
-    $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $content;
-    
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
                   (
@@ -217,6 +202,8 @@ var_dump( __METHOD__, __LINE__, $content );
   */
   private function caddyTablebody( $subpartArray )
   {
+    $content = null;
+
       // Get products
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $products = $sesArray['products'];
@@ -224,12 +211,16 @@ var_dump( __METHOD__, __LINE__, $content );
       // LOOP : products
     foreach( $products as $product ) 
     {
-      $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $this->caddyProduct( $product );
+      $content =  $content . $this->caddyProduct( $product );
     }
       // LOOP : products
     
+      // Update the marker content
+    $subpartArray['###CONTENT###'] = $subpartArray['###CONTENT###'] . $content;
+
+      // Return the marker content
     return $subpartArray;
-    
+
   }
   
  /**
