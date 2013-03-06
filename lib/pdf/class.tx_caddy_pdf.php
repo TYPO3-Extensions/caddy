@@ -490,22 +490,28 @@ class tx_caddy_pdf extends tslib_pibase
               $confContent['body'], 
               $confContent['body.']
             );
-var_dump( __METHOD__, __LINE__, $this->confPdf['deliveryorder.']['deliveryorderaddress.'], $body );
+var_dump( __METHOD__, __LINE__, $confContent['body.'], $body );
 die ( );
       // RETURN : delivery order address is given
     if ( ! empty( $body ) )
     {
       //$this->header( );
-      $fpdi->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
-      //$fpdi->SetTextColor( 255, 255, 255 );
+      $textColor  = explode( ' ', $confProperties['body.']['textColor'] );
+//      $fpdi->SetTextColor( $color[0], $color[1], $color[2], $color[3] );
+//      $fpdi->SetTextColor( 255, 255, 255 );
+      $fpdi->SetTextColor( $textColor[0] );
+      $family = $confProperties['body.']['font.']['family'];
+      $size   = $confProperties['body.']['font.']['size'];
+      $style  = $confProperties['body.']['font.']['style'];
+      $fpdi->SetFont( $family, $style , $size );
           // ($w, $h, $x, $y, $html='', $border=0, $ln=0, $fill=false, $reseth=true, $align='', $autopadding=true)
       $fpdi->writeHtmlCell
       (
-        160, 
         0, 
-        $this->confPdf['deliveryorder.']['deliveryorderaddress-position-x'],
-        $this->confPdf['deliveryorder.']['deliveryorderaddress-position-y'], 
-        $deliveryorderaddress
+        0, 
+        $confProperties['body.']['position.']['x'],
+        $confProperties['body.']['position.']['Y'],
+        $body
       );
       return;
     }
