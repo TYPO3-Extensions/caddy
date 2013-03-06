@@ -103,6 +103,19 @@ plugin.caddy {
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdfGeneral.sponsors = Click me!
 
+  # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
+  pdf.caddy.x = 25
+  # cat=caddy - pdf caddy//102; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
+  pdf.caddy.y = 130
+  # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
+  pdf.caddy.width = 165
+  # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
+  pdf.caddy.fontsize = 12
+  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.caddy.externalLinks = Click me!
+  # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.caddy.sponsors = Click me!
+
   # cat=caddy - pdf delivery order//101; type=string; label= HTML for the caddy (items):Path to the HTML template
   pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
   # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
@@ -124,21 +137,26 @@ plugin.caddy {
   # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.deliveryorder.sponsors = Click me!
 
-  # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
-  pdf.caddy.x = 25
-  # cat=caddy - pdf caddy//102; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
-  pdf.caddy.y = 130
-  # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
-  pdf.caddy.width = 165
-  # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
-  pdf.caddy.fontsize = 12
-  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
-  pdf.caddy.externalLinks = Click me!
-  # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  pdf.caddy.sponsors = Click me!
-
-  # cat=caddy - pdf invoice//101; type=string; label= HTML for the PDF ordering file:Path to the HTML template
+  # cat=caddy - pdf invoice//101; type=string; label= HTML for the caddy (items):Path to the HTML template
   pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
+  # cat=caddy - pdf invoice//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
+  pdf.invoice.address.x = 25
+  # cat=caddy - pdf invoice//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
+  pdf.invoice.address.y = 55
+  # cat=caddy - pdf invoice//204; type=int+; label= Address font-size: Font-size of the receiving address in points
+  pdf.invoice.address.fontsize = 14
+  # cat=caddy - pdf invoice//304; type=int+; label= Number position left: Position of the invoice number from the left margin in millimeters
+  pdf.invoice.number.x = 25
+  # cat=caddy - pdf invoice//305; type=int+; label= Number position top: Position of the invoice number from the top margin in millimeters
+  pdf.invoice.number.y = 110
+  # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
+  pdf.invoice.number.fontsize = 24
+  # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number
+  pdf.invoice.number.prefix = quick-shop-
+  # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.invoice.externalLinks = Click me!
+  # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.invoice.sponsors = Click me!
 
 plugin.caddy {
   pdf {
