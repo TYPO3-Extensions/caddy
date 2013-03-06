@@ -710,6 +710,7 @@ plugin.tx_caddy_pi1 {
             wrap      = |<br>
           }
         }
+        header >
           // properties, content
         body =
         body {
