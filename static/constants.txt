@@ -127,7 +127,7 @@ plugin.caddy {
   # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
   pdf.caddy.x = 25
   # cat=caddy - pdf caddy//103; type=int+; label= Caddy position top: Position of the caddy (items) from the top margin in millimeters
-  pdf.caddy.y = 55
+  pdf.caddy.y = 130
   # cat=caddy - pdf caddy//103; type=int+; label= Caddy width: Width of the caddy (items) in millimeters
   pdf.caddy.width = 165
   # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
