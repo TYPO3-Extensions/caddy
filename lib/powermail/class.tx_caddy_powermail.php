@@ -1306,28 +1306,28 @@ var_dump( __METHOD__, __LINE__, $sessionData );
     
     switch( true )
     {
-      case( $powermailVersionInt < 1000000 ):
+      case( $this->versionInt < 1000000 ):
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $powermailVersionInt . '<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
-      case( $powermailVersionInt < 2000000 ):
+      case( $this->versionInt < 2000000 ):
         $uidVersion1 = 'uid' . $uid;
         $value = $this->paramGet[$uidVersion1];
         break;
-      case( $powermailVersionInt < 3000000 ):
+      case( $this->versionInt < 3000000 ):
         $prompt = 'TODO: powermail 2.x<br />
           Please maintain the code!<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
-      case( $powermailVersionInt >= 3000000 ):
+      case( $this->versionInt >= 3000000 ):
       default:
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $powermailVersionInt . '<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
@@ -1358,28 +1358,28 @@ var_dump( __METHOD__, __LINE__, $sessionData );
     
     switch( true )
     {
-      case( $powermailVersionInt < 1000000 ):
+      case( $this->versionInt < 1000000 ):
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $powermailVersionInt . '<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
-      case( $powermailVersionInt < 2000000 ):
+      case( $this->versionInt < 2000000 ):
         $uidVersion1 = 'uid' . $uid;
         $value = $this->paramPost[$uidVersion1];
         break;
-      case( $powermailVersionInt < 3000000 ):
+      case( $this->versionInt < 3000000 ):
         $prompt = 'TODO: powermail 2.x<br />
           Please maintain the code!<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
         break;
-      case( $powermailVersionInt >= 3000000 ):
+      case( $this->versionInt >= 3000000 ):
       default:
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $powermailVersionInt . '<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
