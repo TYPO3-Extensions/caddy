@@ -869,12 +869,12 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */ 
-  private function tcpdfSetFont( $fpdi, $font ) 
+  private function tcpdfSetFont( $font ) 
   {
     $family = $font['family'];
     $size   = $font['size'];
     $style  = $font['style'];
-    $fpdi->SetFont( $family, $style , $size );
+    $this->tcpdf->SetFont( $family, $style , $size );
 
       // DRS
     if( $this->pObj->drsUserfunc )
@@ -893,7 +893,7 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */ 
-  private function tcpdfSetTextColor( $fpdi, $textColor ) 
+  private function tcpdfSetTextColor( $textColor ) 
   {
     $colors = explode( ' ', $textColor );
     
@@ -901,18 +901,18 @@ class tx_caddy_pdf extends tslib_pibase
     {
       case( count( $colors ) == 1 ):
           // grey
-        $fpdi->SetTextColor( $colors[0] );
-        $prompt = 'SetTextColor( ' . $colors[0] . ')';
+        $this->tcpdf->SetTextColor( $colors[0] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ' )';
         break;
       case( count( $colors ) == 3 ):
           // rgb
-        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2] );
-        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ')';
+        $this->tcpdf->SetTextColor( $colors[0], $colors[1], $colors[2] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ' )';
         break;
       case( count( $colors ) == 4 ):
           // cmyk
-        $fpdi->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
-        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ', '. $colors[3] . ')';
+        $this->tcpdf->SetTextColor( $colors[0], $colors[1], $colors[2], $colors[3] );
+        $prompt = 'SetTextColor( ' . $colors[0] . ', ' . $colors[1] . ', ' . $colors[2] . ', '. $colors[3] . ' )';
         break;
       default:
         $prompt = 'FATAL ERROR: textColor<br />
@@ -946,10 +946,10 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfWrite( $properties, $htmlContent )
   {
       // Set textColor
-    $this->tcpdfSetTextColor( $this->tcpdf, $properties['textColor'] );
+    $this->tcpdfSetTextColor( $properties['textColor'] );
 
       // Set font
-    $this->tcpdfSetFont( $this->tcpdf, $properties['font'] );
+    $this->tcpdfSetFont( $properties['font.'] );
 
       // Get properties for the HTML cell
     $w      = $properties['cell.']['width'];
