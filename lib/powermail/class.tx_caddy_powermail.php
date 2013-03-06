@@ -146,7 +146,7 @@ class tx_caddy_powermail
         // DRS
       if( $this->pObj->drs->drsPowermail )
       {
-        $prompt = 'Caddy contains a product, powermail form will dislayed.';
+        $prompt = 'Caddy contains a product, powermail form will displayed.';
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS

@@ -274,7 +274,7 @@ class tx_caddy_pi1_clean
 var_dump( __METHOD__, __LINE__, $uidCustomerEmail, $customerEmail );
     $sesArray             = $this->pObj->powermail->sessionData( );
 var_dump( __METHOD__, __LINE__, $sesArray );
-die( );
+//die( );
     return $customerEmail;
     
     $sesArray             = $this->pObj->powermail->sessionData( );
