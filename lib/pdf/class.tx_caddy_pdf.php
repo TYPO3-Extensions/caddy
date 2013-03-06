@@ -334,6 +334,15 @@ class tx_caddy_pdf extends tslib_pibase
           $fpdi->Cell('150', '6', $this->onumber);
   }
 
+
+
+  /***********************************************
+  *
+  * Delivery Order
+  *
+  **********************************************/
+
+
  /**
   * deliveryorder( ) : 
   *

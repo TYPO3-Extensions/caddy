@@ -30,10 +30,10 @@
  *
  *   53: class tx_caddy_pi1_clean
  *   78:     public function main( )
- *  115:     private function cleanDatabase( )
- *  143:     private function cleanNumbers( )
- *  157:     private function cleanNumbersInvoice( )
- *  176:     private function cleanNumbersDeliveryorder( )
+ *  115:     private function database( )
+ *  143:     private function numbers( )
+ *  157:     private function numbersInvoice( )
+ *  176:     private function numbersDeliveryorder( )
  *  195:     private function cleanSession( )
  *
  * TOTAL FUNCTIONS: 6
@@ -103,19 +103,27 @@ class tx_caddy_pi1_clean
     }
       // DRS
 
-    $this->cleanDatabase( );
-    $this->cleanNumbers( );
+    $this->database( );
+    $this->numbers( );
   }
 
+
+
+  /***********************************************
+  *
+  * Database
+  *
+  **********************************************/
+
  /**
-  * cleanDatabase( )
+  * database( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanDatabase( )
+  private function database( )
   {
     $sesArray = null;
     $time     = time( );
@@ -125,7 +133,7 @@ class tx_caddy_pi1_clean
     
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
     
-    $customerEmail = $this->cleanDatabaseCustomerEmail( );
+    $customerEmail = $this->getPmFieldCustomerEmail( );
 
       // Initiate files
     $fileDeliveryorder  = null;
@@ -259,45 +267,37 @@ class tx_caddy_pi1_clean
     
   }
 
+
+
+  /***********************************************
+  *
+  * Numbers
+  *
+  **********************************************/
+
  /**
-  * cleanDatabaseCustomerEmail( )
+  * numbers( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanDatabaseCustomerEmail( )
+  private function numbers( )
   {
-    $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
-    $customerEmail    = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
-    return $customerEmail;
-
+    $this->numbersInvoice( );
+    $this->numbersDeliveryorder( );
   }
 
  /**
-  * cleanNumbers( )
+  * numbersDeliveryorder( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanNumbers( )
-  {
-    $this->cleanNumbersInvoice( );
-    $this->cleanNumbersDeliveryorder( );
-  }
-
- /**
-  * cleanNumbersDeliveryorder( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function cleanNumbersDeliveryorder( )
+  private function numbersDeliveryorder( )
   {
       // DRS
     if( $this->pObj->drs->drsClean )
@@ -309,14 +309,14 @@ class tx_caddy_pi1_clean
   }
 
  /**
-  * cleanNumbersInvoice( )
+  * numbersInvoice( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanNumbersInvoice( )
+  private function numbersInvoice( )
   {
       // DRS
     if( $this->pObj->drs->drsClean )
@@ -328,14 +328,14 @@ class tx_caddy_pi1_clean
   }
 
  /**
-  * cleanNumbersOrder( )
+  * numbersOrder( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function cleanNumbersOrder( )
+  private function numbersOrder( )
   {
       // DRS
     if( $this->pObj->drs->drsClean )
@@ -344,6 +344,30 @@ class tx_caddy_pi1_clean
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
+  }
+
+
+
+  /***********************************************
+  *
+  * Get powermail fields
+  *
+  **********************************************/
+
+ /**
+  * getPmFieldCustomerEmail( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPmFieldCustomerEmail( )
+  {
+    $uidCustomerEmail = $this->pObj->flexform->emailCustomerEmail;
+    $customerEmail    = $this->pObj->powermail->paramPostById( $uidCustomerEmail );
+    return $customerEmail;
+
   }
 
 }
