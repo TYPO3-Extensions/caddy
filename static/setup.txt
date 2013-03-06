@@ -639,6 +639,7 @@ plugin.tx_caddy_pi1 {
           properties =
           properties {
               // height, width, x, y
+            cell =
             cell {
                 // [INTEGER] Height of content in millimeter 
               height = 0
@@ -674,6 +675,7 @@ plugin.tx_caddy_pi1 {
           properties =
           properties {
               // height, width, x, y
+            cell =
             cell {
                 // [INTEGER] Height of content in millimeter 
               height = 0
@@ -715,6 +717,7 @@ plugin.tx_caddy_pi1 {
           properties =
           properties {
               // height, width, x, y
+            cell =
             cell {
                 // [INTEGER] Height of content in millimeter 
               height = 0
@@ -809,6 +812,7 @@ plugin.tx_caddy_pi1 {
           properties =
           properties {
               // height, width, x, y
+            cell =
             cell {
                 // [INTEGER] Height of content in millimeter 
               height = 0
