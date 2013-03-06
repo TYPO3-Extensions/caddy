@@ -134,6 +134,15 @@ class tx_caddy_pi1_clean
     
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
     
+      // DRS
+    if( $this->pObj->drs->drsCobj )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
     $customerEmail = $this->getPmFieldEmailCustomerEmail( );
 
       // Initiate files

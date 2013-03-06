@@ -69,6 +69,7 @@ class tx_caddy_drs
   public $drsInfo       = false;
   public $drsOk         = false;
   public $drsClean      = false;
+  public $drsCobj       = false;
   public $drsFlexform   = false;
   public $drsFormula    = false;
   public $drsInit       = false;
@@ -195,6 +196,7 @@ class tx_caddy_drs
     $this->drsInfo      = true;
     $this->drsOk        = true;
     $this->drsClean     = true;
+    $this->drsCobj      = false;
     $this->drsFlexform  = true;
     $this->drsFormula   = true;
     $this->drsInit      = true;

@@ -170,6 +170,15 @@ class tx_caddy_pdf extends tslib_pibase
       
       $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $data   = var_export( $this->local_cObj->data, true );
+        $prompt = 'cObj->data: ' . $data;
+        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
       $fields = $this->confSettings['powermailCaddy.']['fields.'];
 
         // LOOP : fields, the elements of a product
@@ -384,6 +393,7 @@ class tx_caddy_pdf extends tslib_pibase
           $local_cObj = $GLOBALS['TSFE']->cObj;
           $local_cObj->start($outerArr, $this->conf['db.']['table']);
 
+          
           foreach ((array) $this->confSettings['powermailCaddy.']['overall.'] as $key => $value)
           { // one loop for every param of the current product
                   if (!stristr($key, '.'))
@@ -458,6 +468,15 @@ class tx_caddy_pdf extends tslib_pibase
       // Add session data to the local cObj
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // Get the path of the destination file
     $destFile = $this->local_cObj->cObjGetSingle
                 (

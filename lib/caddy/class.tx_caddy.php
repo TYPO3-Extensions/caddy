@@ -318,8 +318,17 @@ class tx_caddy extends tslib_pibase
       'sumTaxNormal'  => $sumTaxNormal,
       'sumTaxReduced' => $sumTaxReduced,
     );
-    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] ); // enable .field in typoscript
+    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] );
       // cObject becomes current record
+    
+      // DRS
+    if( $this->drs->drsCobj )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
     foreach( array_keys( ( array ) $this->conf['settings.']['overall.'] ) as $key )
@@ -783,6 +792,15 @@ class tx_caddy extends tslib_pibase
         // cObject become current record
       $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 
+        // DRS
+      if( $this->drs->drsCobj )
+      {
+        $data   = var_export( $this->local_cObj->data, true );
+        $prompt = 'cObj->data: ' . $data;
+        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+        
         // update product settings
       $this->caddyWiProductsProductSettings( $product );
 
