@@ -1220,6 +1220,17 @@ class tx_caddy_powermail
  */
   private function sessionDataVers1(  )
   {
+      // DIE  : $fieldUid is empty
+    if( empty( $this->fieldUid ) )
+    {
+      $prompt = 'FATAL ERROR: powermail->fieldUid is empty.<br />
+        Probably powermail->init( ) wasn\'t called.<br />
+        Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+        TYPO3 extension: ' . $this->extKey;
+      die( $prompt );
+    }
+      // DIE  : $fieldUid is empty
+
       // Get the Powermail session data
     $uid  = $this->fieldUid;
     $key  = 'powermail_';
