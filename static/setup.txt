@@ -665,7 +665,7 @@ plugin.tx_caddy_pi1 {
           }
         }
       }
-        // header, body
+        // body
       deliveryorderaddress = 
       deliveryorderaddress {
           // properties, content
@@ -861,8 +861,39 @@ plugin.tx_caddy_pi1 {
         }
       }
 
+        // body
       invoiceaddress < .deliveryorderaddress
       invoiceaddress {
+        body {
+          content = COA
+          content {
+            10 {
+              field = invoiceCompany
+            }
+            20 {
+              10 {
+                field = invoiceFirstname
+              }
+              20 {
+                field = invoiceLastname
+              }
+            }
+            30 {
+              field = invoiceAddress
+            }
+            40 {
+              10 {
+                field = invoiceZip
+              }
+              20 {
+                field = invoiceCity
+              }
+            }
+            50 {
+              field = invoiceCountry
+            }
+          }
+        }
       }
 
       additionaltextblocks {
