@@ -162,7 +162,7 @@ var_dump( __METHOD__, __LINE__, $subpartArray );
       // render the marker
 
       // write the HTML content
-    $body = $this->confPdf['caddy.']['body.'];
+    $body = $this->confPdf['deliveryorder.']['caddy.']['body.'];
 var_dump( __METHOD__, __LINE__, $body, $htmlContent );    
     $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
   }
