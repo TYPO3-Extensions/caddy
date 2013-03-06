@@ -138,9 +138,16 @@ class tx_caddy_pdf extends tslib_pibase
     $subpartArray = $this->caddyTablebody( $subpartArray );
 
       // render the marker
-    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+//    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+//                  (
+//                    $this->tmpl['all'], 
+//                    $this->outerMarkerArray, 
+//                    $subpartArray
+//                  );
+    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArray
                   (
-                    $this->tmpl['all'], $this->outerMarkerArray, $subpartArray
+                    $this->tmpl['all'], 
+                    $subpartArray
                   );
       // render the marker
 
