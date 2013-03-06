@@ -5,7 +5,7 @@ evaluatorExternalLinks = 1
   # cat=evaluator/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
 evaluatorSponsors = 1
 
-  # cat=database/enable/100;           type=boolean; label= Read only: Caddy records can't edited and can\'t removed (recommended).
+  # cat=database/enable/100;           type=boolean; label= Read only: Caddy records can't edited and can't removed (recommended).
 databaseReadonly      = 1
   # cat=database/others/198;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
 databaseExternalLinks = 1

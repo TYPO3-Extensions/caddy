@@ -62,7 +62,7 @@ if( $typo3Version < 3000000 )
   //
   // Configuration by the extension manager
 
-$confArr  = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['flipit']);
+$confArr  = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['caddy']);
 
   // Language for labels of static templates and page tsConfig
 $beLanguage = $confArr['beLanguage'];
