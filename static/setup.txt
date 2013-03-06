@@ -698,13 +698,20 @@ plugin.tx_caddy_pi1 {
             }
             wrap      = |<br>
           }
-            // Address: company, first name, last name, street, zip, city, country
+            // Address: company, first name and last name, street, zip and city, country
           body = COA
           body {
               // Company
             10 = TEXT
             10 {
-              field     = deliverorderCompany
+              value = Company
+              lang {
+                de = Firma
+                en = Company
+              }
+              override {
+                field     = deliverorderCompany
+              }
               required  = 1
             }
               // First name and last name
