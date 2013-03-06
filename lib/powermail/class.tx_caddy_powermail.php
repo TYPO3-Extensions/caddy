@@ -1385,7 +1385,7 @@ var_dump( __METHOD__, __LINE__, $sessionData );
         die( $prompt );
         break;
     }
-var_dump( __METHOD__, __LINE__, $this->paramPost,$uidVersion1], $value );
+var_dump( __METHOD__, __LINE__, $this->paramPost, $uidVersion1, $value );
 
     return $value;
   }
