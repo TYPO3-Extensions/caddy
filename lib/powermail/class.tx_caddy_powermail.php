@@ -1139,7 +1139,6 @@ class tx_caddy_powermail
   */
   private function sendToCustomerTerms( )
   {
-var_dump( __METHOD__, __LINE__);    
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerTerms'] . ',';
     
@@ -1156,6 +1155,7 @@ var_dump( __METHOD__, __LINE__);
     }
 
       // Add session data to the local cObj
+    $this->local_cObj   = $GLOBALS['TSFE']->cObj;
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
       // DRS
