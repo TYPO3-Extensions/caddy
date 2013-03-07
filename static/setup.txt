@@ -702,8 +702,6 @@ plugin.tx_caddy_pi1 {
                   10 = TEXT
                   10 {
                     field     = deliveryorderFirstname
-                    required  = 1
-                    wrap      = <br />|
                   }
                     // Last name
                   20 = TEXT
@@ -712,6 +710,7 @@ plugin.tx_caddy_pi1 {
                     noTrimWrap  = | ||
                     required    = 1
                   }
+                  wrap      = <br />|
                 }
                   // Address
                 30 = TEXT
@@ -727,8 +726,6 @@ plugin.tx_caddy_pi1 {
                   10 = TEXT
                   10 {
                     field     = deliveryorderZip
-                    required  = 1
-                    wrap      = <br />|
                   }
                     // City
                   20 = TEXT
@@ -737,6 +734,7 @@ plugin.tx_caddy_pi1 {
                     noTrimWrap  = | ||
                     required    = 1
                   }
+                  wrap      = <br />|
                 }
                   // Country
                 50 = TEXT
@@ -1154,8 +1152,6 @@ plugin.tx_caddy_pi1 {
                   10 = TEXT
                   10 {
                     field     = deliveryorderFirstname
-                    required  = 1
-                    wrap      = <br />|
                   }
                     // Last name
                   20 = TEXT
@@ -1164,6 +1160,7 @@ plugin.tx_caddy_pi1 {
                     noTrimWrap  = | ||
                     required    = 1
                   }
+                  wrap      = <br />|
                 }
                   // Address
                 30 = TEXT
@@ -1179,8 +1176,6 @@ plugin.tx_caddy_pi1 {
                   10 = TEXT
                   10 {
                     field     = deliveryorderZip
-                    required  = 1
-                    wrap      = <br />|
                   }
                     // City
                   20 = TEXT
@@ -1189,6 +1184,7 @@ plugin.tx_caddy_pi1 {
                     noTrimWrap  = | ||
                     required    = 1
                   }
+                  wrap      = <br />|
                 }
                   // Country
                 50 = TEXT

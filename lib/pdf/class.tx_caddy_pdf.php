@@ -618,11 +618,14 @@ class tx_caddy_pdf extends tslib_pibase
       // Get the body content
     $body         = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.']['body.'];
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+    $content      = strip_tags( $htmlContent );
+    $content      = trim( $content );
+    $content      = str_replace( ' ', null, $content );
     // Get the body content
       
     switch( true )
     {
-      case( ! empty( $htmlContent ) ):
+      case( ! empty( $content ) ):
         $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
         break;
