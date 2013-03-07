@@ -1112,13 +1112,13 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from left in millimeter 
                   x = TEXT
                   x {
-                    value       = {$plugin.caddy.pdf.invoice.address.x} - 5
+                    value       = {$plugin.caddy.pdf.invoice.address.x} + 100
                     prioriCalc  = 1
                   }
                     // [INTEGER] Position from top in millimeter 
                   y = TEXT
                   y {
-                    value       = {$plugin.caddy.pdf.invoice.address.y} + 100
+                    value       = {$plugin.caddy.pdf.invoice.address.y} - 5
                     prioriCalc  = 1
                   }
                 }
