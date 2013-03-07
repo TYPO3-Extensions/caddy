@@ -863,11 +863,11 @@ plugin.tx_caddy_pi1 {
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
-                size = TEXT
-                size {
-                  value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
-                  prioriCalc  = intval
-                }
+                //size = TEXT
+                //size {
+                //  value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
+                //  prioriCalc  = 1
+                //}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
