@@ -169,7 +169,7 @@ plugin.caddy {
   # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
   pdf.invoice.number.fontsize = 24
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number
-  pdf.invoice.number.prefix = quick-shop-
+  pdf.invoice.number.prefix = 
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.invoice.externalLinks = Click me!
   # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -190,6 +190,13 @@ plugin.caddy {
     }
   }
 }
+
+  # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number
+  pdf.order.number.prefix = 
+  # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.order.externalLinks = Click me!
+  # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.order.sponsors = Click me!
 
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =

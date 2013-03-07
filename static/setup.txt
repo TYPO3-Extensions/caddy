@@ -940,24 +940,54 @@ plugin.tx_caddy_pi1 {
                 // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
-              // label, prefix, ordernumber
+              // ordernumber 
             content = COA
             content {
-                // label
-              10 = TEXT
+                // label, prefix, ordernumber
+              10 = COA
               10 {
-                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
-                noTrimWrap = || |
+                  // label
+                10 = TEXT
+                10 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
+                  noTrimWrap = || |
+                }
+                  // prefix
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.pdf.order.number.prefix}
+                }
+                  // ordernumber
+                30 = TEXT
+                30 {
+                  field = numberOrderCurrent
+                }
               }
-                // prefix
+                // devider
               20 = TEXT
-              20 {
-                value = {$plugin.caddy.pdf.order.number.prefix}
+              10 {
+                value       = |
+                noTrimWrap  = | | |
               }
-                // ordernumber
-              30 = TEXT
+                // label, prefix, invoicenumber
+              30 = COA
               30 {
-                field = numberOrderCurrent
+                  // label
+                10 = TEXT
+                10 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_invoicenumber
+                  noTrimWrap = || |
+                }
+                  // prefix
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.pdf.invoice.number.prefix}
+                }
+                  // invoicenumber
+                30 = TEXT
+                30 {
+                  field = numberInvoiceCurrent
+                }
               }
             }
           }
