@@ -555,7 +555,7 @@ class tx_caddy_pdf extends tslib_pibase
           $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
           $header = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
           $this->header( $header );
-          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
+          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }
           // FALLBACK : take the invoice address
         break;

@@ -608,6 +608,7 @@ class tx_caddy_pi1_clean
   private function sessionUpdate( )
   {
     $this->sessionUpdateDeliveryorder( );
+    $this->sessionUpdateInvoice( );
   }
 
  /**
