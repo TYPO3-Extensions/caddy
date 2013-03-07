@@ -13,7 +13,7 @@ plugin.tx_caddy_pi1 {
       padding:0 5px 5px 5px; 
     }
     div.caddy_cart_footer { 
-      padding:0 0 0 5px; 
+      padding:1em 0 0 5px; 
     }
     div.caddy_cart_product { 
       padding:5px; 
@@ -26,6 +26,7 @@ plugin.tx_caddy_pi1 {
       font-weight: bold;
     }
     div.caddy_cart_col1 { 
+      height: 1.8em;
       width:4em; 
     }
     div.caddy_cart_footer .caddy_cart_col1 { 
