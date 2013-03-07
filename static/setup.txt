@@ -6,7 +6,9 @@
   //
   // includeLibs
   // plugin.tx_caddy_pi1
-  // plugin.tx_caddy_pi1.pdf
+  // plugin.tx_caddy_pi1.pdf.deliveryorder
+  // plugin.tx_caddy_pi1.pdf.invoice
+  // plugin.tx_caddy_pi1.pdf.terms
   // plugin.tx_caddy_pi2
   // plugin.tx_caddy_pi3
   // plugin.tx_powermail_pi1
@@ -578,7 +580,7 @@ plugin.tx_caddy_pi1 {
 
   ///////////////////////////////////////////////////////////////
   //
-  // plugin.tx_caddy_pi1.pdf
+  // plugin.tx_caddy_pi1.pdf.deliveryorder
 
 plugin.tx_caddy_pi1 {
     // invoice, deliveryorder
@@ -828,60 +830,65 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // body
-      deliveryordernumber = 
-      deliveryordernumber {
-          // properties, content
-        body =
-        body {
-            // cell, font, textColor
-          properties =
-          properties {
-              // align, height, width, x, y
-            cell =
-            cell {
-                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
-              align = 
-                // [INTEGER] Height of content in millimeter 
-              height = 0
-                // [INTEGER] Width of content in millimeter 
-              width = 0
-                // [INTEGER] Position from left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.number.x}
-                // [INTEGER] Position from top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.number.y}
+        // deliveryorder, invoice, order
+      numbers = 
+      numbers {
+          // body
+        deliveryorder = 
+        deliveryorder {
+            // properties, content
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.deliveryorder.number.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.deliveryorder.number.y}
+              }
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
-              // family, size, style
-            font =
-            font {
-                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = {$plugin.caddy.pdfGeneral.fontfamily}
-                // [Integer] Font size in points
-              size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =  
-            }
-              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = {$plugin.caddy.pdfGeneral.textColor}
-          }
-            // label, prefix, ordernumber
-          content = COA
-          content {
-              // label
-            10 = TEXT
-            10 {
-              data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
-              noTrimWrap = || |
-            }
-              // prefix
-            20 = TEXT
-            20 {
-              value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
-            }
-              // ordernumber
-            30 = TEXT
-            30 {
-              field = numberDeliveryorderCurrent
+              // label, prefix, ordernumber
+            content = COA
+            content {
+                // label
+              10 = TEXT
+              10 {
+                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+                noTrimWrap = || |
+              }
+                // prefix
+              20 = TEXT
+              20 {
+                value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
+              }
+                // ordernumber
+              30 = TEXT
+              30 {
+                field = numberDeliveryorderCurrent
+              }
             }
           }
         }
@@ -1068,6 +1075,20 @@ plugin.tx_caddy_pi1 {
       }
       additionaltextblocks >
     }
+  }
+}
+  // plugin.tx_caddy_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1.pdf.invoice
+
+plugin.tx_caddy_pi1 {
+    // invoice, deliveryorder
+  pdf =
+  pdf {
       // invoice PDF
     invoice =
     invoice {
@@ -1373,7 +1394,20 @@ plugin.tx_caddy_pi1 {
         }
       }
     }
+  }
+}
+  // plugin.tx_caddy_pi1
 
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1.pdf.terms
+
+plugin.tx_caddy_pi1 {
+    // invoice, deliveryorder
+  pdf =
+  pdf {
       // terms PDF
     terms =
     terms {

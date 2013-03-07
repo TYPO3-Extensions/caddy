@@ -102,8 +102,8 @@ class tx_caddy_pdf extends tslib_pibase
 //                      );
     $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                       (
-                        $this->confPdf['deliveryorder.']['deliveryordernumber'], 
-                        $this->confPdf['deliveryorder.']['deliveryordernumber.']
+                        $this->confPdf['deliveryorder.']['numbers.']['deliveryorder'], 
+                        $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']
                       );
 
 //    $this->conf = $this->confPdf['invoice.'];
@@ -114,7 +114,6 @@ class tx_caddy_pdf extends tslib_pibase
 
     return $errorcnt;
   }
-
   
   
 
@@ -376,7 +375,7 @@ class tx_caddy_pdf extends tslib_pibase
                   'optionsGross'      => $session['optionsGross'],
                   'optionsNet'        => $session['optionsNet'], 
                   'ordernumber'       => $session['ordernumber'],
-                  'deliveryordernumber' => $session['deliveryordernumber'],
+                  'numbers' => $session['numbers.']['deliveryorder'],
                   'productsGross'     => $session['productsGross'],
                   'productsNet'       => $session['productsNet'],
                   'sumGross'          => $session['sumGross'],
@@ -532,10 +531,10 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * deliveryorderAdditionalTextblocks( ) : 
   *
-  * @return	boolean		true, in case of en arror. false, if all is proper
-  * @access     public
+  * @return	void
+  * @access     private
   * @version    2.0.0
-  * @since      1.4.6
+  * @since      2.0.0
   */
   private function deliveryorderAdditionalTextblocks( )
   {
@@ -548,15 +547,8 @@ class tx_caddy_pdf extends tslib_pibase
       { 
         continue;
       }
-//var_dump( __METHOD__, __LINE__, $key );      
-      $additionalTextblock = $additionalTextblocks[$key . '.'];
-//var_dump( __METHOD__, __LINE__, $additionalTextblock );      
-      $body         = $additionalTextblock['body.'];
-      $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-      $header       = $additionalTextblock['header.'];
-      $htmlContent  = $this->header( $header ) . $htmlContent;
-//var_dump( __METHOD__, __LINE__, $body['properties.'] );      
-      $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAdditionalTextblocks' );
+      
+      $this->writeTextblock( $additionalTextblock, 'deliveryorderAdditionalTextblocks' );
     }
         
   }
@@ -579,24 +571,29 @@ class tx_caddy_pdf extends tslib_pibase
     switch( true )
     {
       case( ! empty( $htmlContent ) ):
-        $header       = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
-        $htmlContent  = $this->header( $header ) . $htmlContent;
-        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
+        $invoiceaddress = $this->confPdf['deliveryorder.']['deliveryorderaddress.'];
+        $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
+//        $header       = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
+//        $htmlContent  = $this->header( $header ) . $htmlContent;
+//        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
       case( empty( $htmlContent ) ):
       default:
           // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
-          $body         = $this->confPdf['deliveryorder.']['invoiceaddress.']['body.'];
-          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-          $header       = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
-          $htmlContent  = $this->header( $header ) . $htmlContent;
-          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
+          $invoiceaddress = $this->confPdf['deliveryorder.']['invoiceaddress.'];
+          $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
+//          $body         = $this->confPdf['deliveryorder.']['invoiceaddress.']['body.'];
+//          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+//          $header       = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
+//          $htmlContent  = $this->header( $header ) . $htmlContent;
+//          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }
           // FALLBACK : take the invoice address
         break;
     }
+    unset( $htmlContent );
 
     return;
   }
@@ -612,21 +609,23 @@ class tx_caddy_pdf extends tslib_pibase
 
   private function deliveryorderDate( )
   {
-      // Get the body content
-    $body         = $this->confPdf['deliveryorder.']['date.']['body.'];
-    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-      // Get the body content
-      
-    if( empty( $htmlContent ) )
-    {
-      return;
-    }
-
-    $header       = $this->confPdf['deliveryorder.']['date.']['header.'];
-    $htmlContent  = $this->header( $header ) . $htmlContent;
-    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderDate' );
-
-    return;
+    $date = $this->confPdf['deliveryorder.']['date.'];
+    $this->writeTextblock( $date, 'deliveryorderDate' );
+//      // Get the body content
+//    $body         = $this->confPdf['deliveryorder.']['date.']['body.'];
+//    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+//      // Get the body content
+//      
+//    if( empty( $htmlContent ) )
+//    {
+//      return;
+//    }
+//
+//    $header       = $this->confPdf['deliveryorder.']['date.']['header.'];
+//    $htmlContent  = $this->header( $header ) . $htmlContent;
+//    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderDate' );
+//
+//    return;
   }
 
  /**
@@ -671,34 +670,59 @@ class tx_caddy_pdf extends tslib_pibase
 
     return $deliveryorderInit;
   }
-
+  
  /**
-  * deliveryorderNumber( ) : 
+  * deliveryorderNumbers( ) : 
   *
-  * @return	boolean		false, if delivery order isn't needed
+  * @return	void
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */
-
-  private function deliveryorderNumber( )
+  private function deliveryorderNumbers( )
   {
-      // Get the body content
-    $body         = $this->confPdf['deliveryorder.']['deliveryordernumber.']['body.'];
-    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-      // Get the body content
+    $numbers = $this->confPdf['deliveryorder.']['numbers.'];
+
+      // LOOP : fields, the elements of a product
+    foreach( array_keys ( ( array ) $numbers ) as $key )
+    { 
+      if( stristr( $key, '.' ) )
+      { 
+        continue;
+      }
       
-    if( empty( $htmlContent ) )
-    {
-      return;
+      $this->writeTextblock( $numbers, 'deliveryorderNumbers' );
     }
-
-    $header       = $this->confPdf['deliveryorder.']['deliveryordernumber.']['header.'];
-    $htmlContent  = $this->header( $header ) . $htmlContent;
-    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderNumber' );
-
-    return;
+        
   }
+
+// /**
+//  * deliveryorderNumber( ) : 
+//  *
+//  * @return	boolean		false, if delivery order isn't needed
+//  * @access     private
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//
+//  private function deliveryorderNumber( )
+//  {
+//      // Get the body content
+//    $body         = $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']['body.'];
+//    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+//      // Get the body content
+//      
+//    if( empty( $htmlContent ) )
+//    {
+//      return;
+//    }
+//
+//    $header       = $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']['header.'];
+//    $htmlContent  = $this->header( $header ) . $htmlContent;
+//    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'numbers' );
+//
+//    return;
+//  }
 
 
 
@@ -857,6 +881,14 @@ class tx_caddy_pdf extends tslib_pibase
 
     return $filename;
   }
+  
+  
+
+  /***********************************************
+  *
+  * TCPDF
+  *
+  **********************************************/
 
  /**
   * tcpdfInit( ) : 
@@ -1036,6 +1068,43 @@ class tx_caddy_pdf extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+  }
+  
+  
+
+  /***********************************************
+  *
+  * write
+  *
+  **********************************************/
+  
+ /**
+  * writeTextblock( ) : 
+  *
+  * @param      array     $textBlock  : the additional text block
+  * @param      string    $drsLabel   : label for the drs prompt. Usually name of the calling function.
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function writeTextblock( $textBlock, $drsLabel )
+  {
+//var_dump( __METHOD__, __LINE__, $textBlock );      
+    $body         = $textBlock['body.'];
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+
+      // RETURN : HTML content is empty
+    if( empty( $htmlContent ) )
+    {
+      return;
+    }
+      // RETURN : HTML content is empty
+
+    $header       = $textBlock['header.'];
+    $htmlContent  = $this->header( $header ) . $htmlContent;
+//var_dump( __METHOD__, __LINE__, $body['properties.'] );      
+    $this->tcpdfWrite( $body['properties.'], $htmlContent, $drsLabel );
   }
 
 }
