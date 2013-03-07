@@ -1070,7 +1070,7 @@ class tx_caddy_powermail
   private function sendToCustomerDeliveryorder( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendCustomerDeliveryorder'] . ',';
+    $path     = $sesArray['sendCustomerDeliveryorder'];
     
     if( empty ( $path ) )
     {
@@ -1111,7 +1111,7 @@ class tx_caddy_powermail
   private function sendToCustomerInvoice( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendCustomerInvoice'] . ',';
+    $path     = $sesArray['sendCustomerInvoice'];
     
     if( empty ( $path ) )
     {
@@ -1151,7 +1151,7 @@ class tx_caddy_powermail
   private function sendToCustomerTerms( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendCustomerTerms'] . ',';
+    $path     = $sesArray['sendCustomerTerms'];
     
     if( empty ( $path ) )
     {
@@ -1241,7 +1241,7 @@ class tx_caddy_powermail
   private function sendToVendorDeliveryorder( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendVendorDeliveryorder'] . ',';
+    $path     = $sesArray['sendVendorDeliveryorder'];
     
     if( empty ( $path ) )
     {
@@ -1282,7 +1282,7 @@ class tx_caddy_powermail
   {
       
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendVendorInvoice'] . ',';
+    $path     = $sesArray['sendVendorInvoice'];
     
     if( empty ( $path ) )
     {
@@ -1323,7 +1323,7 @@ class tx_caddy_powermail
   private function sendToVendorTerms( )
   {      
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $path     = $sesArray['sendVendorTerms'] . ',';
+    $path     = $sesArray['sendVendorTerms'];
     
     if( empty ( $path ) )
     {
