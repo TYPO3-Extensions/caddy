@@ -121,11 +121,11 @@ plugin.caddy {
   # cat=date - pdf date//101; type=int+; label= Date position left: Position of the date from the left margin in millimeters
   pdf.date.x = 175
   # cat=date - pdf date//102; type=int+; label= Date position top: Position of the date from the top margin in millimeters
-  pdf.date.y = 104
+  pdf.date.y = 103
   # cat=date - pdf date//103; type=int+; label= Date width: Width of the date in millimeters
   pdf.date.width = 25
   # cat=date - pdf date//104; type=int+; label= Date font-size: Font-size of the date in points
-  pdf.date.fontsize = 12
+  pdf.date.fontsize = 10
   # cat=date - pdf date//104; type=string; label= Date format: Format of the date. Examples: %Y-m-%d, %d. %M %Y
   pdf.date.strftime = %Y-%m-%d
   # cat=date - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
