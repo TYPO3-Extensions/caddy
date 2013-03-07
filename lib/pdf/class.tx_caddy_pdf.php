@@ -71,29 +71,39 @@ class tx_caddy_pdf extends tslib_pibase
 
  /**
   * caddy( ) :
-  *
+  * 
+  * @param      boolean   $invoice  : true: render caddy for the invoice. false: render caddy for the delivery order
   * @return	void
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddy( )
+  private function caddy( $invoice = false )
   {
     $subpartArray = null;
     $subpartArray = $this->caddyTablehead( $subpartArray );
     $subpartArray = $this->caddyTablebody( $subpartArray );
 
+    $outerMarkerArray = null;
+    if( $invoice )
+    {
+      $outerMarkerArray = $this->renderCartSum( );
+    }
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
                   (
                     $this->tmpl['all'], 
-                    null, 
+                    $outerMarkerArray, 
                     $subpartArray
                   );
       // render the marker
 
       // write the HTML content
     $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
-    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
+    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
+
+    
+    //$this->renderPaymentOption($fpdi, $session['payment']);
+
   }
 
  /**
@@ -104,49 +114,132 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-   private function caddyProduct( $product ) 
-   {
-      $product['price_total'] = $product['price'] * $product['qty'];
-      
-      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
+  private function caddyProduct( $product ) 
+  {
+    $product['price_total'] = $product['price'] * $product['qty'];
 
-        // DRS
-      if( $this->pObj->drsUserfunc )
-      {
-        $data   = var_export( $this->local_cObj->data, true );
-        $prompt = 'cObj->data: ' . $data;
-        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
+    $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 
-      $fields = $this->confSettings['powermailCaddy.']['fields.'];
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
-        // LOOP : fields, the elements of a product
-      foreach( array_keys ( ( array ) $fields ) as $key )
+    $fields = $this->confSettings['powermailCaddy.']['fields.'];
+
+      // LOOP : fields, the elements of a product
+    foreach( array_keys ( ( array ) $fields ) as $key )
+    { 
+      if( stristr( $key, '.' ) )
       { 
-        if( stristr( $key, '.' ) )
-        { 
-          continue;
-        }
-        
-        $currProduct = $this->local_cObj->cObjGetSingle( $fields[$key], $fields[$key . '.'] );
-        $currProduct = str_replace( '&euro;', '€', $currProduct );
-        $currProduct = str_replace( '&nbsp;', ' ', $currProduct );
-
-        $marker = '###' . strtoupper($key) . '###';
-        $value  = $currProduct;
-        $markerArray[$marker] = $value;
+        continue;
       }
-        // LOOP : fields, the elements of a product
 
-      $content =  $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-                  (
-                    $this->tmpl['item'], 
-                    $markerArray
-                  );
-      return $content;
+      $currProduct = $this->local_cObj->cObjGetSingle( $fields[$key], $fields[$key . '.'] );
+      $currProduct = str_replace( '&euro;', '€', $currProduct );
+      $currProduct = str_replace( '&nbsp;', ' ', $currProduct );
+
+      $marker = '###' . strtoupper($key) . '###';
+      $value  = $currProduct;
+      $markerArray[$marker] = $value;
+    }
+      // LOOP : fields, the elements of a product
+
+    $content =  $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+                (
+                  $this->tmpl['item'], 
+                  $markerArray
+                );
+    return $content;
   }
+
+ /**
+  * caddySum( ) :
+  *
+  * @param	array		$subpartArray : 
+  * @return	array		$subpartArray : 
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function  caddySum( $subpartArray )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+    $outerArr = array
+                (
+                  'productsGross' => $sesArray['productsGross'],
+                  'productsNet'   => $sesArray['productsNet'],
+                  'optionsGross'  => $sesArray['optionsGross'],
+                  'optionsNet'    => $sesArray['optionsNet'], 
+                  'sumGross'      => $sesArray['sumGross'],
+                  'sumNet'        => $sesArray['sumNet'],
+                  'sumTaxReduced' => $sesArray['sumTaxReduced'],
+                  'sumTaxNormal'  => $sesArray['sumTaxNormal']
+                );
+
+    $local_cObj = $GLOBALS['TSFE']->cObj;
+    $local_cObj->start($outerArr, $this->conf['db.']['table']);
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $data   = var_export( $local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+      // FOREACH  : overall item
+    foreach( array_keys( ( array ) $this->confSettings['powermailCaddy.']['overall.'] ) as $key )
+    { 
+      if( stristr( $key, '.') )
+      {
+        continue;
+      }
+      
+      $name = $this->confSettings['powermailCaddy.']['overall.'][$key];
+      $conf = $this->confSettings['powermailCaddy.']['overall.'][$key . '.'];
+
+      $value = $local_cObj->cObjGetSingle( $name, $conf ); 
+      $value = str_replace('&euro;', '€', $value);
+      $value = str_replace('&nbsp;', ' ', $value);
+      
+      $marker = '###' . strtoupper($key) . '###';
+
+      $subpartArray[$marker] = $value;
+    }
+      // FOREACH  : overall item
  
+    $subpartArray['###CADDY_LL_SUMNET###']        = $this->pi_getLL('caddy_ll_cart_net');
+    $subpartArray['###CADDY_LL_SERVICE_COST###']  = $this->pi_getLL('caddy_ll_service_cost');
+    $subpartArray['###CADDY_LL_TAX###']           = $this->pi_getLL('caddy_ll_tax');
+    $subpartArray['###CADDY_LL_SUMGROSS###']      = $this->pi_getLL('caddy_ll_gross_total');
+    $subpartArray['###CADDY_LL_SHIPPING###']      = $this->pi_getLL('caddy_ll_shipping');
+    $subpartArray['###CADDY_LL_PAYMENT###']       = $this->pi_getLL('caddy_ll_payment');
+    $subpartArray['###CADDY_LL_SPECIAL###']       = $this->pi_getLL('caddy_ll_special');
+
+    $subpartArray['###SHIPPING_OPTION###'] = 
+    $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
+    $subpartArray['###PAYMENT_OPTION###'] = 
+    $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
+
+    $subpartArray['###SPECIAL_OPTION###'] = '';
+    if (isset($session['special'])) 
+    {
+      foreach ($session['special'] as $special_id) 
+      {
+        $subpartArray['###SPECIAL_OPTION###'] = $subpartArray['###SPECIAL_OPTION###'] .
+          $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'][$special_id.'.']['title'];
+      }
+    }
+    
+    return $subpartArray;
+  }
+
 
  /**
   * caddyTablebody( ) :
@@ -859,7 +952,8 @@ class tx_caddy_pdf extends tslib_pibase
     $this->invoiceAdditionalTextblocks( );
 
       // Write the caddy
-    $this->caddy( );
+    $invoice = true;
+    $this->caddy( $invoice );
 
       // Create the PDF
     $this->tcpdfOutput( $destPath );
@@ -1078,7 +1172,7 @@ class tx_caddy_pdf extends tslib_pibase
 
     $tcpdf->SetAuthor( $author );
     $tcpdf->SetTitle( $title );
-//    $tcpdf->SetSubject('Lieferschein Subject');
+//    $tcpdf->SetSubject('TYPO3 Caddy Order Subject');
 //    $tcpdf->SetKeywords('TYPO3, caddy');    
     
     return $tcpdf;
@@ -1188,7 +1282,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * tcpdfWrite( ) : Writes the content to the PDF. Dimensions, font and textColor are taken
+  * tcpdfWriteHtmlCell( ) : Writes the content to the PDF. Dimensions, font and textColor are taken
   *                 from the properties
   *
   * @param      array           $properties   : Array with the properties font, textColor and cell 
@@ -1203,7 +1297,7 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function tcpdfWrite( $properties, $htmlContent, $drsLabel )
+  private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
   {
       // Set textColor
     $this->tcpdfSetTextColor( $properties );
@@ -1530,7 +1624,7 @@ var_dump( __METHOD__, __LINE__, $destPath );
     $header       = $textBlock['header.'];
     $htmlContent  = $this->header( $header ) . $htmlContent;
 //var_dump( __METHOD__, __LINE__, $body['properties.'] );      
-    $this->tcpdfWrite( $body['properties.'], $htmlContent, $drsLabel );
+    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, $drsLabel );
   }
 
 
