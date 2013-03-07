@@ -36,16 +36,18 @@ plugin.tx_caddy_pi1 {
     div.caddy_cart_col2 { 
       width:12em; 
     }
-    div.caddy_cart_col2_3 { 
-      width:32em; 
+    div.caddy_cart_col2_4 { 
+      width:37em; 
     }
     div.caddy_cart_col3 { 
       width:20em; 
     }
     div.caddy_cart_col4 { 
+      text-align:right;
       width:5em; 
     }
     div.caddy_cart_col5 { 
+      text-align:right;
       width:7em; 
     }
     div.caddy_cart_col6 { 
