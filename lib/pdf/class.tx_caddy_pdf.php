@@ -1665,6 +1665,7 @@ var_dump( __METHOD__, __LINE__, $destPath );
     $rgb = array( $r, $g, $b );
     
     $textColor = implode( ' ', $rgb );
+var_dump( __METHOD__, __LINE__, $hex, $textColor );    
     return $textColor;
   }
 
