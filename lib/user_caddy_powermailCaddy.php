@@ -216,7 +216,7 @@ class user_caddy_powermailCaddy extends tslib_pibase
     $overall_special_net = 0.0;
     $overall_special_option = '';
 
-    foreach ($special_ids as $special_id)
+    foreach( ( array ) $special_ids as $special_id )
     {
       $special_values		= $this->calc->calculateOptionById($this->conf, 'special', $special_id, $this);
       $special_net		= $special_values['net'];

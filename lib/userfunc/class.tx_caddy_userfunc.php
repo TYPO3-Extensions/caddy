@@ -399,7 +399,7 @@ class tx_caddy_userfunc
     if( ! $content )
     {
       $conf     = $conf['userFunc.']; // TS configuration
-      $content  = $local_cObj->cObjGetSingle($conf['number'], $conf['number.']); // get number
+      $content  = ( double ) $local_cObj->cObjGetSingle( $conf['number'], $conf['number.'] ); // get number
     }
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );

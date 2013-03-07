@@ -86,7 +86,7 @@ class tx_caddy_pdf extends tslib_pibase
     $outerMarkerArray = null;
     if( $invoice )
     {
-      $outerMarkerArray = $this->renderCartSum( );
+      $outerMarkerArray = $this->caddySum( );
     }
       // render the marker
     $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
