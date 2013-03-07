@@ -682,6 +682,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function deliveryorderNumbers( )
   {
     $numbers = $this->confPdf['deliveryorder.']['numbers.'];
+var_dump( __METHOD__, __LINE__, $numbers );      
 
       // LOOP : fields, the elements of a product
 //    foreach( array_keys ( ( array ) $numbers ) as $key )
