@@ -728,7 +728,7 @@ class tx_caddy extends tslib_pibase
     $taxReduced   = 0.0;
     $taxNormal    = 0.0;
 
-    foreach( $specialIds as $specialId )
+    foreach( ( array ) $specialIds as $specialId )
     {
       $arrResult = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
       $net      = $arrResult['net'];  
@@ -1295,7 +1295,7 @@ class tx_caddy extends tslib_pibase
 
       if( $value['extra'] != 'each' )
       {
-        foreach( $value['extra.'] as $extra )
+        foreach( ( array ) $value['extra.'] as $extra )
         {
           $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_service_from' ) . 
                                               ' ' . $extra['value'] . ' ' . $unit . ' : ' .
