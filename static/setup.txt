@@ -641,6 +641,8 @@ plugin.tx_caddy_pi1 {
               // height, width, x, y
             cell =
             cell {
+                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+              align = 
                 // [INTEGER] Height of content in millimeter 
               height = 0
                 // [INTEGER] Width of content in millimeter 
@@ -665,26 +667,29 @@ plugin.tx_caddy_pi1 {
           }
         }
       }
+
         // body
-      deliveryorderaddress = 
-      deliveryorderaddress {
+      date = 
+      date {
           // properties, content
-        header =
-        header {
+        body =
+        body {
             // cell, font, textColor
           properties =
           properties {
               // height, width, x, y
             cell =
             cell {
+                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+              align = {$plugin.caddy.pdf.date.align} 
                 // [INTEGER] Height of content in millimeter 
               height = 0
                 // [INTEGER] Width of content in millimeter 
               width = 0
-                // [INTEGER] Position from the page margin left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.address.y}
-                // [INTEGER] Position from the page margin top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.address.y}
+                // [INTEGER] Position from left in millimeter 
+              x = {$plugin.caddy.pdf.date.x}
+                // [INTEGER] Position from top in millimeter 
+              y = {$plugin.caddy.pdf.date.y}
             }
               // family, size, style
             font =
@@ -692,13 +697,28 @@ plugin.tx_caddy_pi1 {
                 // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
               family = {$plugin.caddy.pdfGeneral.fontfamily}
                 // [Integer] Font size in points
-              size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+              size  = {$plugin.caddy.pdf.date.fontsize}
                 // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
               style =  
             }
               // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
             textColor = {$plugin.caddy.pdfGeneral.textColor}
           }
+            // label, prefix, ordernumber
+          content = TEXT
+          content {
+            data      = date : U
+            strftime  = {$plugin.caddy.pdf.date.strftime} 
+          }
+        }
+      }
+
+        // body
+      deliveryorderaddress = 
+      deliveryorderaddress {
+          // properties, content
+        header =
+        header {
             // label for delivery order address
           content = TEXT
           content {
@@ -720,6 +740,8 @@ plugin.tx_caddy_pi1 {
               // height, width, x, y
             cell =
             cell {
+                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+              align = 
                 // [INTEGER] Height of content in millimeter 
               height = 0
                 // [INTEGER] Width of content in millimeter 
@@ -818,6 +840,8 @@ plugin.tx_caddy_pi1 {
               // height, width, x, y
             cell =
             cell {
+                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+              align = 
                 // [INTEGER] Height of content in millimeter 
               height = 0
                 // [INTEGER] Width of content in millimeter 

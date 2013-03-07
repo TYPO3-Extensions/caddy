@@ -510,6 +510,9 @@ class tx_caddy_pdf extends tslib_pibase
     $fallBackToInvoiceAddress = true;
     $this->deliveryorderAddress( $fallBackToInvoiceAddress );
 
+      // Write the delivery order date
+    $this->deliveryorderDate( );
+
       // Write the delivery order number
     $this->deliveryorderNumber( );
     //$this->renderAdditionalTextblocks( $this->tcpdf );
@@ -543,8 +546,8 @@ var_dump( __METHOD__, __LINE__, $htmlContent );
     switch( true )
     {
       case( ! empty( $htmlContent ) ):
-        $header = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
-        $this->header( $header );
+        $header       = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
+        $htmlContent  = $this->header( $header ) . $htmlContent;
         $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
       case( empty( $htmlContent ) ):
@@ -554,14 +557,42 @@ var_dump( __METHOD__, __LINE__, $htmlContent );
         {
           $body         = $this->confPdf['deliveryorder.']['invoiceaddress.']['body.'];
           $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-          $header = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
-          $this->header( $header );
+          $header       = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
+          $htmlContent  = $this->header( $header ) . $htmlContent;
           $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
 var_dump( __METHOD__, __LINE__, $htmlContent );
         }
           // FALLBACK : take the invoice address
         break;
     }
+
+    return;
+  }
+
+ /**
+  * deliveryorderDate( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+
+  private function deliveryorderDate( )
+  {
+      // Get the body content
+    $body         = $this->confPdf['deliveryorder.']['date.']['body.'];
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+      // Get the body content
+      
+    if( empty( $htmlContent ) )
+    {
+      return;
+    }
+
+    $header       = $this->confPdf['deliveryorder.']['date.']['header.'];
+    $htmlContent  = $this->header( $header ) . $htmlContent;
+    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderDate' );
 
     return;
   }
@@ -630,8 +661,8 @@ var_dump( __METHOD__, __LINE__, $htmlContent );
       return;
     }
 
-    $header = $this->confPdf['deliveryorder.']['deliveryordernumber.']['header.'];
-    $this->header( $header );
+    $header       = $this->confPdf['deliveryorder.']['deliveryordernumber.']['header.'];
+    $htmlContent  = $this->header( $header ) . $htmlContent;
     $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderNumber' );
 
     return;
@@ -666,15 +697,7 @@ var_dump( __METHOD__, __LINE__, $htmlContent );
       // Get the header content
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $header['content'], $header['content.'] );
 
-      // RETURN : there isn't any content
-    if( empty ( $htmlContent) )
-    {
-      return;
-    }
-      // RETURN : there isn't any content
-
-      // Render the content
-    $this->tcpdfWrite( $header['properties.'], $htmlContent, 'header' );
+    return $htmlContent;
   }
 
 
@@ -959,14 +982,20 @@ var_dump( __METHOD__, __LINE__, $htmlContent );
     $this->tcpdfSetFont( $properties['font.'] );
 
       // Get properties for the HTML cell
-    $w      = $properties['cell.']['width'];
-    $h      = $properties['cell.']['height'];
-    $x      = $properties['cell.']['x'];
-    $y      = $properties['cell.']['y'];
+    $w            = $properties['cell.']['width'];
+    $h            = $properties['cell.']['height'];
+    $x            = $properties['cell.']['x'];
+    $y            = $properties['cell.']['y'];
+    $border       = 0;
+    $ln           = 0;
+    $fill         = false;
+    $reseth       = true;
+    $align        = $properties['cell.']['align'];
+    $autopadding  = true;
       // Get properties for the HTML cell
 
       // Write HTML cell
-    $this->tcpdf->writeHtmlCell( $w, $h, $x, $y, $htmlContent );
+    $this->tcpdf->writeHtmlCell( $w, $h, $x, $y, $htmlContent, $border, $ln, $fill, $reseth, $align, $autopadding );
 
       // DRS
     if( $this->pObj->drsUserfunc )

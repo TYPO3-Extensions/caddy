@@ -116,6 +116,21 @@ plugin.caddy {
   # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.caddy.sponsors = Click me!
 
+  # cat=date - pdf date//101; type=options[,L,C,R];  label= Date alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
+  pdf.date.align = L
+  # cat=date - pdf date//101; type=int+; label= Caddy position left: Position of the date (items) from the left margin in millimeters
+  pdf.date.x = 175
+  # cat=date - pdf date//102; type=int+; label= Caddy position top: Position of the date (items) from the top margin in millimeters
+  pdf.date.y = 104
+  # cat=date - pdf date//103; type=int+; label= Caddy width: Width of the date (items) in millimeters
+  pdf.date.width = 25
+  # cat=date - pdf date//104; type=int+; label= Caddy font-size: Font-size of the date (items) in points
+  pdf.date.fontsize = 12
+  # cat=date - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.date.externalLinks = Click me!
+  # cat=date - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.date.sponsors = Click me!
+
   # cat=caddy - pdf delivery order//101; type=string; label= HTML for the caddy (items):Path to the HTML template
   pdf.deliveryorder.template = EXT:caddy/files/templates/pdf_table.html
   # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
