@@ -1170,11 +1170,11 @@ class tx_caddy_powermail
       // Get the path of the destination file
     $destFile = $this->local_cObj->cObjGetSingle
                 (
-                  $this->confPdf['deliveryorder.']['filename'], 
-                  $this->confPdf['deliveryorder.']['filename.']
+                  $this->confPdf['terms.']['filename'], 
+                  $this->confPdf['terms.']['filename.']
                 );
     $destPath = 'uploads/tx_caddy/' . $destFile;
-var_dump( __METHOD__, __LINE__, $destPath );    
+var_dump( __METHOD__, __LINE__, $path, $destPath );    
 die( );
       // Get the path of the destination file
 
