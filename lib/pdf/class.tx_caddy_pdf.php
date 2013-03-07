@@ -102,14 +102,14 @@ class tx_caddy_pdf extends tslib_pibase
 //                      );
     $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
                       (
-                        $this->confPdf['deliveryorder.']['numbers.']['deliveryorder'], 
-                        $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']
+                        $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder'], 
+                        $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']
                       );
 
 //    $this->conf = $this->confPdf['invoice.'];
 //    $errorcnt += $this->renderInvoice($session);
     
-    //$this->conf = $this->confPdf['deliveryorder.'];
+    //$this->conf = $this->confPdf['deliveryorder.']['content.'];
     $errorcnt += $this->deliveryorder( );
 
     return $errorcnt;
@@ -146,7 +146,7 @@ class tx_caddy_pdf extends tslib_pibase
       // render the marker
 
       // write the HTML content
-    $body = $this->confPdf['deliveryorder.']['caddy.']['body.'];
+    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
     $this->tcpdfWrite( $body['properties.'], $htmlContent, 'caddy' );
   }
 
@@ -538,7 +538,7 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function deliveryorderAdditionalTextblocks( )
   {
-    $additionalTextblocks = $this->confPdf['deliveryorder.']['additionaltextblocks.'];
+    $additionalTextblocks = $this->confPdf['deliveryorder.']['content.']['additionaltextblocks.'];
 
       // LOOP : fields, the elements of a product
     foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
@@ -564,16 +564,16 @@ class tx_caddy_pdf extends tslib_pibase
   private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
   {
       // Get the body content
-    $body         = $this->confPdf['deliveryorder.']['address.']['deliveryorder.']['body.'];
+    $body         = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.']['body.'];
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
     // Get the body content
       
     switch( true )
     {
       case( ! empty( $htmlContent ) ):
-        $invoiceaddress = $this->confPdf['deliveryorder.']['address.']['deliveryorder.'];
+        $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
-//        $header       = $this->confPdf['deliveryorder.']['address.']['deliveryorder.']['header.'];
+//        $header       = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.']['header.'];
 //        $htmlContent  = $this->header( $header ) . $htmlContent;
 //        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
@@ -582,11 +582,11 @@ class tx_caddy_pdf extends tslib_pibase
           // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
-          $invoiceaddress = $this->confPdf['deliveryorder.']['address.']['invoice.'];
+          $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.'];
           $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
-//          $body         = $this->confPdf['deliveryorder.']['address.']['invoice.']['body.'];
+//          $body         = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.']['body.'];
 //          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//          $header       = $this->confPdf['deliveryorder.']['address.']['invoice.']['header.'];
+//          $header       = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.']['header.'];
 //          $htmlContent  = $this->header( $header ) . $htmlContent;
 //          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }
@@ -609,10 +609,10 @@ class tx_caddy_pdf extends tslib_pibase
 
   private function deliveryorderDate( )
   {
-    $date = $this->confPdf['deliveryorder.']['date.'];
+    $date = $this->confPdf['deliveryorder.']['content.']['date.'];
     $this->writeTextblock( $date, 'deliveryorderDate' );
 //      // Get the body content
-//    $body         = $this->confPdf['deliveryorder.']['date.']['body.'];
+//    $body         = $this->confPdf['deliveryorder.']['content.']['date.']['body.'];
 //    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
 //      // Get the body content
 //      
@@ -621,7 +621,7 @@ class tx_caddy_pdf extends tslib_pibase
 //      return;
 //    }
 //
-//    $header       = $this->confPdf['deliveryorder.']['date.']['header.'];
+//    $header       = $this->confPdf['deliveryorder.']['content.']['date.']['header.'];
 //    $htmlContent  = $this->header( $header ) . $htmlContent;
 //    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderDate' );
 //
@@ -681,7 +681,7 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function deliveryorderNumbers( )
   {
-    $numbers = $this->confPdf['deliveryorder.']['numbers.'];
+    $numbers = $this->confPdf['deliveryorder.']['content.']['numbers.'];
 
       // LOOP : fields, the elements of a product
     foreach( array_keys ( ( array ) $numbers ) as $key )
@@ -708,7 +708,7 @@ class tx_caddy_pdf extends tslib_pibase
 //  private function deliveryorderNumber( )
 //  {
 //      // Get the body content
-//    $body         = $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']['body.'];
+//    $body         = $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']['body.'];
 //    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
 //      // Get the body content
 //      
@@ -717,7 +717,7 @@ class tx_caddy_pdf extends tslib_pibase
 //      return;
 //    }
 //
-//    $header       = $this->confPdf['deliveryorder.']['numbers.']['deliveryorder.']['header.'];
+//    $header       = $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']['header.'];
 //    $htmlContent  = $this->header( $header ) . $htmlContent;
 //    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'numbers' );
 //
@@ -909,8 +909,6 @@ class tx_caddy_pdf extends tslib_pibase
     $tmplId = $tcpdf->importPage( 1 );
     $tcpdf->useTemplate( $tmplId, 0, 0, 210 );
 
-    $tcpdf->SetFont( 'Helvetica', '' , $this->confPdf['deliveryorder.']['font-size'] );
-    //$tcpdf->SetTextColor( 255, 255, 255 );
     $tcpdf->SetAuthor('TYPO3 Caddy');
     $tcpdf->SetTitle('Lieferschein');
     $tcpdf->SetSubject('Lieferschein Subject');

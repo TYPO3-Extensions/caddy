@@ -630,7 +630,7 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // addess, caddy, date, numbers, additionaltextblock
+        // addess, caddy, date, numbers, additionaltextblocks
       content = 
       content {
           // deliveryorder, invoice
