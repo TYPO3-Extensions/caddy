@@ -759,6 +759,7 @@ plugin.tx_caddy_pi1 {
               10 = TEXT
               10 {
                 field     = deliveryorderFirstname
+                required  = 1
                 wrap      = <br />|
               }
                 // Last name
@@ -782,7 +783,8 @@ plugin.tx_caddy_pi1 {
                 // ZIP
               10 = TEXT
               10 {
-                field = deliveryorderZip
+                field     = deliveryorderZip
+                required  = 1
                 wrap      = <br />|
               }
                 // City
