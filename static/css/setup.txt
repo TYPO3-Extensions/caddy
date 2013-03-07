@@ -2,10 +2,10 @@ plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
     /* div based cart */
     #caddy_payment {
-      background:brown;
+      padding: 0.4em 0 0 4.3em;
     }
     #caddy_shipping {
-      background:yellow;
+      padding: 1em 0 0 4.3em;
     }
     div.caddy_cart_header {
       font-weight:bold; 
