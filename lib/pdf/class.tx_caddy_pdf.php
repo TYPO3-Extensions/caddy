@@ -684,14 +684,16 @@ class tx_caddy_pdf extends tslib_pibase
     $numbers = $this->confPdf['deliveryorder.']['numbers.'];
 
       // LOOP : fields, the elements of a product
-    foreach( array_keys ( ( array ) $numbers ) as $key )
+//    foreach( array_keys ( ( array ) $numbers ) as $key )
+    foreach( ( array ) $numbers as $key => $number )
     { 
       if( stristr( $key, '.' ) )
       { 
         continue;
       }
+var_dump( __METHOD__, __LINE__, $number, $key );      
       
-      $this->writeTextblock( $numbers[$key], 'deliveryorderNumbers' );
+      $this->writeTextblock( $number[$key . '.'], 'deliveryorder.numbers.' . $key . '.' );
     }
         
   }
