@@ -1711,23 +1711,7 @@ plugin.tx_powermail_pi1 {
           // Caddy: Invoice
         45967 = USER
         45967 {
-          userFunc = tx_caddy_powermail->sendInvoiceToCustomer
-          userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
-          }
-        }
-          // Caddy: Delivery Order
-        45968 = USER
-        45968 {
-          userFunc = tx_caddy_powermail->sendDeliveryorderToCustomer
-          userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
-          }
-        }
-          // Caddy: Terms & Conditions
-        45969 = USER
-        45969 {
-          userFunc = tx_caddy_powermail->sendTermsToCustomer
+          userFunc = tx_caddy_powermail->sendToCustomer
           userFunc {
             drs = {$plugin.caddy.debug.userfunc}
           }
