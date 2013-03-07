@@ -1035,152 +1035,6 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
-
-          // date, 
-        additionaltextblocks =
-        additionaltextblocks {
-            // body
-          date =
-          date {
-              // properties, content
-            body =
-            body {
-                // cell, font, textColor
-              properties =
-              properties {
-                  // align, height, width, x, y
-                cell =
-                cell {
-                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
-                  align = R
-                    // [INTEGER] Height of content in millimeter 
-                  height = 0
-                    // [INTEGER] Width of content in millimeter 
-                  width = 30
-                    // [INTEGER] Position from left in millimeter 
-                  x = 180
-                    // [INTEGER] Position from top in millimeter 
-                  y = 90
-                }
-                  // family, size, style
-                font =
-                font {
-                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-                  family = {$plugin.caddy.pdfGeneral.fontfamily}
-                    // [Integer] Font size in points
-                  size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
-                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-                  style =  
-                }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
-              }
-                // label, prefix, ordernumber
-              content = TEXT
-              content {
-                data = date : U
-                strftime = %d.%m.%Y
-              }
-            }
-          }
-            // order line
-          orderline =
-          orderline {
-              // properties, content
-            body =
-            body {
-                // cell, font, textColor
-              properties =
-              properties {
-                  // align, height, width, x, y
-                cell =
-                cell {
-                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
-                  align = R
-                    // [INTEGER] Height of content in millimeter 
-                  height = 0
-                    // [INTEGER] Width of content in millimeter 
-                  width = 210
-                    // [INTEGER] Position from left in millimeter 
-                  x = 0
-                    // [INTEGER] Position from top in millimeter 
-                  y = 200
-                }
-                  // family, size, style
-                font =
-                font {
-                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-                  family = {$plugin.caddy.pdfGeneral.fontfamily}
-                    // [Integer] Font size in points
-                  size  = 144
-                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-                  style = B 
-                }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-                textColor = 0 255 0
-              }
-                  // label, prefix, ordernumber
-              content = COA
-              content {
-                  // prepended string
-                10 = TEXT
-                10 {
-                  value = Ihre Bestellung vom
-                  lang {
-                    de = Ihre Bestellung vom
-                    en = Your order at
-                  }
-                  noTrimWrap = || |
-                }
-                  // date
-                20 = TEXT
-                20 {
-                  data = date : U
-                  strftime = %d.%m.%Y
-                  noTrimWrap = || |
-                }
-                  // appended string
-                30 = TEXT
-                30 {
-                  value = bei typo3-quick-shop.de
-                  lang {
-                    de = bei typo3-quick-shop.de
-                    en = on typo3-quick-shop.de
-                  }
-                }
-                  // delivery number
-                40 = COA
-                40 {
-                  // (
-                  10 = TEXT
-                  10 {
-                    value   = (
-                    noTrimWrap = | ||
-                  }
-                    // label
-                  20 {
-                    value = Rechnungsnummer
-                    lang {
-                      de = Rechnungsnummer
-                      en = invoice number
-                    }
-                  }
-                    // number
-                  30 = TEXT
-                  30 {
-                    value   =  Hier soll die Nr rein
-                  }
-                  40 = TEXT
-                  40 {
-                    value   = )
-                    noTrimWrap = || |
-                  }
-                }
-              }
-            }
-          }
-        }
-        additionaltextblocks >
       }
 
     }
@@ -1550,6 +1404,208 @@ plugin.tx_caddy_pi1 {
           value = pdf
           wrap  = .|
         }
+      }
+        // addess, date, additionaltextblocks
+      content = 
+      content {
+          // invoice
+        address = 
+        address {
+            // body
+          invoice = TEXT
+          invoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.invoice.address.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.invoice.address.y}
+                }
+                  // family, size, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                textColor = {$plugin.caddy.pdfGeneral.textColor}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = invoiceCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = invoiceFirstname
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = invoiceLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = invoiceAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = invoiceZip
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = invoiceCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = invoiceCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+        }
+
+          // body
+        date = 
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = {$plugin.caddy.pdf.date.align} 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.date.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.date.y}
+              }
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.date.fontsize}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = {$plugin.caddy.pdfGeneral.textColor}
+            }
+              // label, prefix, ordernumber
+            content = TEXT
+            content {
+              data      = date : U
+              strftime  = {$plugin.caddy.pdf.date.strftime} 
+            }
+          }
+        }
+
+          // terms
+        additionaltextblocks =
+        additionaltextblocks {
+            // body
+          terms =
+          terms {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = {$plugin.caddy.pdf.terms.align} 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.terms.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.terms.y}
+                }
+                  // family, size, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.terms.fontsize}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                textColor = {$plugin.caddy.pdfGeneral.textColor}
+              }
+                // label, prefix, ordernumber
+              content < styles.content.get
+              content {
+                //data = date : U
+                //strftime = %d.%m.%Y
+              }
+            }
+          }
+        }
+
       }
     }
   }

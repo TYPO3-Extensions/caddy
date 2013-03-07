@@ -198,6 +198,21 @@ plugin.caddy {
   # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.order.sponsors = Click me!
 
+  # cat=caddy - pdf terms//101; type=options[,L,C,R];  label= Terms alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
+  pdf.terms.align = 
+  # cat=caddy - pdf terms//101; type=int+; label= Terms position left: Position of the terms from the left margin in millimeters
+  pdf.terms.x = 175
+  # cat=caddy - pdf terms//102; type=int+; label= Terms position top: Position of the terms from the top margin in millimeters
+  pdf.terms.y = 104
+  # cat=caddy - pdf terms//103; type=int+; label= Terms width: Width of the terms in millimeters
+  pdf.terms.width = 25
+  # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points
+  pdf.terms.fontsize = 14
+  # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.terms.externalLinks = Click me!
+  # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.terms.sponsors = Click me!
+
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
   # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de

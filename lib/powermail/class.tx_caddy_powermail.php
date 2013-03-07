@@ -1154,30 +1154,9 @@ class tx_caddy_powermail
       return null;
     }
 
-      // Add session data to the local cObj
-    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-    $this->local_cObj   = $GLOBALS['TSFE']->cObj;
-    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
-
-      // DRS
-    if( $this->drsUserfunc )
-    {
-      $data   = var_export( $this->local_cObj->data, true );
-      $prompt = 'cObj->data: ' . $data;
-      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-      // Get the path of the destination file
-    $destFile = $this->local_cObj->cObjGetSingle
-                (
-                  $this->conf['pdf.']['terms.']['filename'], 
-                  $this->conf['pdf.']['terms.']['filename.']
-                );
-    $destPath = 'uploads/tx_caddy/' . $destFile;
-var_dump( __METHOD__, __LINE__, $path, $destPath );    
-die( );
-      // Get the path of the destination file
+    $this->initPdf( );
+    $this->pdf->pObj  = $this;
+    $path = $this->pdf->terms( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
