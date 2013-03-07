@@ -226,39 +226,47 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // FOREACH  : overall item
  
-    $subpartArray['###CADDY_LL_SUMNET###']        = $this->pi_getLL('caddy_ll_sumnet');
-    $subpartArray['###CADDY_LL_SERVICE_COST###']  = $this->pi_getLL('caddy_ll_service_cost');
-    $subpartArray['###CADDY_LL_TAX###']           = $this->pi_getLL('caddy_ll_tax');
-    $subpartArray['###CADDY_LL_SUMGROSS###']      = $this->pi_getLL('caddy_ll_sumgross');
+    $subpartArray['###CADDY_LL_PRODUCTSNET###'] = $this->pi_getLL('caddy_ll_productsnet');
+    $subpartArray['###CADDY_LL_OPTIONSNET###']  = $this->pi_getLL('caddy_ll_optionsnet');
+    $subpartArray['###CADDY_LL_TAX###']         = $this->pi_getLL('caddy_ll_tax');
+    $subpartArray['###CADDY_LL_SUMGROSS###']    = $this->pi_getLL('caddy_ll_sumgross');
 
-//    if( $sesArray['payment'] )
-//    {
-      $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('caddy_ll_payment');
-      $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
-      $paymentLabel       = $confPaymentOptions[ $sesArray['payment'] . '.' ]['title'];
-      $subpartArray['###PAYMENT_OPTION###'] = $paymentLabel;
-//    }
-//      
-//    if( $sesArray['shipping'] )
-//    {
-      $subpartArray['###CADDY_LL_SHIPPING###']  = $this->pi_getLL('caddy_ll_shipping');
-      $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
-      $shippingLabel        = $confShippingOptions[ $sesArray['shipping'] . '.' ]['title'];
-      $subpartArray['###SHIPPING_OPTION###'] = $shippingLabel;
-//    }
+      // Payment label
+    $subpartArray['###CADDY_LL_PAYMENTNET###'] = $this->pi_getLL('caddy_ll_paymentnet');
+      
+      // Payment value
+    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
+    $key    = $sesArray['payment'] . '.';
+    $name   = $confPaymentOptions[ $key ]['title'];
+    $conf   = $confPaymentOptions[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    $subpartArray['###PAYMENTNET###'] = $value;
+      // Payment value
+      
+      // Shipping label
+    $subpartArray['###CADDY_LL_SHIPPINGNET###']  = $this->pi_getLL('caddy_ll_shippingnet');
+      
+      // Shipping value
+    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
+    $key    = $sesArray['shipping'] . '.';
+    $name   = $confShippingOptions[ $key ]['title'];
+    $conf   = $confShippingOptions[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    $subpartArray['###SHIPPINGNET###'] = $value;
+      // Shipping value
 
+      // Special label
+    $subpartArray['###CADDY_LL_SPECIALNET###'] = $this->pi_getLL('caddy_ll_specialnet');
+
+      // Special value
     $specialOptions = null;
     $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
     foreach( ( array ) $sesArray['special'] as $special_id ) 
     {
       $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
     }
-    
-//    if( $specialOptions )
-//    {
-      $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('caddy_ll_special');
-      $subpartArray['###SPECIAL_OPTION###']   = $specialOptions;
-//    }
+    $subpartArray['###SPECIALNET###'] = $specialOptions;
+      // Special value
     
     return $subpartArray;
   }
@@ -462,21 +470,21 @@ class tx_caddy_pdf extends tslib_pibase
                   }
           }
 
-          $subpartArray['###CADDY_LL_SUMNET###'] = $this->pi_getLL('caddy_ll_cart_net');
-          $subpartArray['###CADDY_LL_SERVICE_COST###'] = $this->pi_getLL('caddy_ll_service_cost');
+          $subpartArray['###CADDY_LL_PRODUCTSNET###'] = $this->pi_getLL('caddy_ll_cart_net');
+          $subpartArray['###CADDY_LL_OPTIONSNET###'] = $this->pi_getLL('caddy_ll_optionsnet');
           $subpartArray['###CADDY_LL_TAX###'] = $this->pi_getLL('caddy_ll_tax');
           $subpartArray['###CADDY_LL_SUMGROSS###'] = $this->pi_getLL('caddy_ll_gross_total');
-          $subpartArray['###CADDY_LL_SHIPPING###'] = $this->pi_getLL('caddy_ll_shipping');
-          $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('caddy_ll_payment');
-          $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('caddy_ll_special');
+          $subpartArray['###CADDY_LL_SHIPPINGNET###'] = $this->pi_getLL('caddy_ll_shippingnet');
+          $subpartArray['###CADDY_LL_PAYMENTNET###'] = $this->pi_getLL('caddy_ll_paymentnet');
+          $subpartArray['###CADDY_LL_SPECIALNET###'] = $this->pi_getLL('caddy_ll_specialnet');
 
-          $subpartArray['###SHIPPING_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
-          $subpartArray['###PAYMENT_OPTION###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
+          $subpartArray['###SHIPPINGNET###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
+          $subpartArray['###PAYMENTNET###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
 
-          $subpartArray['###SPECIAL_OPTION###'] = '';
+          $subpartArray['###SPECIALNET###'] = '';
           if (isset($session['special'])) {
                   foreach ($session['special'] as $special_id) {
-                          $subpartArray['###SPECIAL_OPTION###'] .= $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'][$special_id.'.']['title'];
+                          $subpartArray['###SPECIALNET###'] .= $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'][$special_id.'.']['title'];
                   }
           }
   }
