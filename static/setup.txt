@@ -919,7 +919,7 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = TEXT
                 y {
-                  value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 20
+                  value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 10
                   prioriCalc  = intval
                 }
               }
@@ -929,11 +929,10 @@ plugin.tx_caddy_pi1 {
                   // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
-                size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
                 size = TEXT
                 size {
                   value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
-                  prioriCalc  = intval
+                  prioriCalc  = 1
                 }
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
@@ -947,18 +946,18 @@ plugin.tx_caddy_pi1 {
                 // label
               10 = TEXT
               10 {
-                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
                 noTrimWrap = || |
               }
                 // prefix
               20 = TEXT
               20 {
-                value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
+                value = {$plugin.caddy.pdf.order.number.prefix}
               }
                 // ordernumber
               30 = TEXT
               30 {
-                field = numberDeliveryorderCurrent
+                field = numberOrderCurrent
               }
             }
           }
