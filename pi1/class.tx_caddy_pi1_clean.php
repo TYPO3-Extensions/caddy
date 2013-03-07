@@ -415,7 +415,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceAddress( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderAddress;
+    $pmUid  = $this->pObj->flexform->invoiceAddress;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -430,7 +430,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCity( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderCity;
+    $pmUid  = $this->pObj->flexform->invoiceCity;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -445,7 +445,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCompany( )
   {                                  
-    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
+    $pmUid  = $this->pObj->flexform->invoiceCompany;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -460,7 +460,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCountry( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderCountry;
+    $pmUid  = $this->pObj->flexform->invoiceCountry;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -475,7 +475,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceFirstname( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+    $pmUid  = $this->pObj->flexform->invoiceFirstname;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -490,7 +490,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceLastname( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+    $pmUid  = $this->pObj->flexform->invoiceLastname;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -505,7 +505,7 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceZip( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderZip;
+    $pmUid  = $this->pObj->flexform->invoiceZip;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
@@ -624,13 +624,13 @@ class tx_caddy_pi1_clean
       // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     
+    $sesArray['deliveryorderAddress']   = $this->getPmFieldDeliveryorderAddress( );
+    $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
     $sesArray['deliveryorderCompany']   = $this->getPmFieldDeliveryorderCompany( );
+    $sesArray['deliveryorderCountry']   = $this->getPmFieldDeliveryorderCountry( );
     $sesArray['deliveryorderFirstname'] = $this->getPmFieldDeliveryorderFirstname( );
     $sesArray['deliveryorderLastname']  = $this->getPmFieldDeliveryorderLastname( );
-    $sesArray['deliveryorderAddress']   = $this->getPmFieldDeliveryorderAddress( );
     $sesArray['deliveryorderZip']       = $this->getPmFieldDeliveryorderZip( );
-    $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
-    $sesArray['deliveryorderCountry']   = $this->getPmFieldDeliveryorderCountry( );
     
     $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
     $GLOBALS['TSFE']->storeSessionData(); // Save session
@@ -657,13 +657,13 @@ class tx_caddy_pi1_clean
       // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     
+    $sesArray['invoiceAddress']   = $this->getPmFieldInvoiceAddress( );
+    $sesArray['invoiceCity']      = $this->getPmFieldInvoiceCity( );
     $sesArray['invoiceCompany']   = $this->getPmFieldInvoiceCompany( );
+    $sesArray['invoiceCountry']   = $this->getPmFieldInvoiceCountry( );
     $sesArray['invoiceFirstname'] = $this->getPmFieldInvoiceFirstname( );
     $sesArray['invoiceLastname']  = $this->getPmFieldInvoiceLastname( );
-    $sesArray['invoiceAddress']   = $this->getPmFieldInvoiceAddress( );
     $sesArray['invoiceZip']       = $this->getPmFieldInvoiceZip( );
-    $sesArray['invoiceCity']      = $this->getPmFieldInvoiceCity( );
-    $sesArray['invoiceCountry']   = $this->getPmFieldInvoiceCountry( );
     
     $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
     $GLOBALS['TSFE']->storeSessionData(); // Save session
