@@ -10,7 +10,7 @@ VERSION 2.0.0
   ###TARGET###            Link to the same page
 
   ###UID###               Product UID
-  ###TITLE###             Producttitle            ###CADDY_LL_TITLE###
+  ###TITLE###             Producttitle            ###CADDY_LL_ITEM###
   ###QTY###               Quantity                ###CADDY_LL_QTY###
   ###QTY_NAME###          With key/field pairs in case of variants
   ###PRICE###             Price (Gross)           ###CADDY_LL_PRICE###
@@ -50,7 +50,7 @@ VERSION 2.0.0
     <div class="caddy_cart_header">
       <div class="caddy_cart_col caddy_cart_col1">###CADDY_LL_QTY###</div>
       <div class="caddy_cart_col caddy_cart_col2">###CADDY_LL_SKU###</div>
-      <div class="caddy_cart_col caddy_cart_col3">###CADDY_LL_TITLE###</div>
+      <div class="caddy_cart_col caddy_cart_col3">###CADDY_LL_ITEM###</div>
       <div class="caddy_cart_col caddy_cart_col4">###CADDY_LL_PRICE###</div>
       <div class="caddy_cart_col caddy_cart_col5">###CADDY_LL_PRICE_TOTAL###</div>
       <div class="caddy_cleaner"></div>
@@ -72,18 +72,23 @@ VERSION 2.0.0
     <!-- ###ITEM### -->
     <!-- ###CONTENT### -->
     <div class="caddy_cart_footer">                        
+      <div class="caddy_cart_col caddy_cart_col1">&nbsp;</div>
       <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_PRODUCTSNET###</div>
       <div class="caddy_cart_col caddy_cart_col5">###PRODUCTSNET###</div>
       <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col1">&nbsp;</div>
       <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_OPTIONSNET###</div>
       <div class="caddy_cart_col caddy_cart_col5">###OPTIONSNET###</div>
       <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col1">&nbsp;</div>
       <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_TAX###</div>
       <div class="caddy_cart_col caddy_cart_col5"></div>
       <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col1">&nbsp;</div>
       <div class="caddy_cart_col caddy_cart_col2_3">###TAXRATE_NORMAL_STRING###<br />###TAXRATE_REDUCED_STRING###</div>
       <div class="caddy_cart_col caddy_cart_col5">###SUMTAXNORMAL###<br />###SUMTAXREDUCED###</div>
       <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col1">&nbsp;</div>
       <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_SUMGROSS###</div>
       <div class="caddy_cart_col caddy_cart_col5">###SUMGROSS###</div>
     <div class="caddy_cleaner"></div>
@@ -175,7 +180,7 @@ VERSION 2.0.0
   <tr style="font-weight: bold;">
     <td>###CADDY_LL_QTY###</td>
     <td>###CADDY_LL_SKU###</td>
-    <td>###CADDY_LL_TITLE###</td>
+    <td>###CADDY_LL_ITEM###</td>
     <td>###CADDY_LL_PRICE###</td>
     <td>###CADDY_LL_PRICE_TOTAL###</td>
   </tr>

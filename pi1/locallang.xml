@@ -17,6 +17,7 @@
       <label index="caddy_ll_error_max">The maximum order quantity is %s.</label>
       <label index="caddy_ll_invoice">Invoice</label>
       <label index="caddy_ll_invoicenumber">Invoice number</label>
+      <label index="caddy_ll_item">Item</label>
       <label index="caddy_ll_minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="caddy_ll_optionsnet">Service- and Shipping costs</label>
       <label index="caddy_ll_order">Order</label>
@@ -45,7 +46,6 @@
       <label index="caddy_ll_special_free_from">free special option from</label>
       <label index="caddy_ll_special_free_until">free special option until</label>
       <label index="caddy_ll_sumgross">Price (w tax)</label>
-      <label index="caddy_ll_title">Title</label>
       <label index="caddy_ll_tax">TAX</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
     </languageKey>
@@ -61,6 +61,7 @@
       <label index="caddy_ll_error_max">Die maximale Bestellmenge betr<![CDATA[&auml;]]>gt %s.</label>
       <label index="caddy_ll_invoice">Rechnung</label>
       <label index="caddy_ll_invoicenumber">Rechnungsnummer</label>
+      <label index="caddy_ll_item">Artikel</label>
       <label index="caddy_ll_minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="caddy_ll_optionsnet">Service- und Versandkosten</label>
       <label index="caddy_ll_order">Bestellung</label>
@@ -90,12 +91,12 @@
       <label index="caddy_ll_special_free_until">kostenfrei bis</label>
       <label index="caddy_ll_sumgross">Gesamtsumme (brutto)</label>
       <label index="caddy_ll_tax">Mehrwertsteuer</label>
-      <label index="caddy_ll_title">Bezeichnung</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
     </languageKey>
     <languageKey index="fr" type="array">
       <label index="caddy_ll_delete">Supprimer cet article du panier.</label>
       <label index="caddy_ll_empty">Votre panier de commande est actuellement vide.</label>
+      <label index="caddy_ll_item">Article</label>
       <label index="caddy_ll_optionsnet">Frais de services et de livraison</label>
       <label index="caddy_ll_paymentnet">Paiement</label>
       <label index="caddy_ll_price">Prix unitaire</label>
@@ -104,7 +105,6 @@
       <label index="caddy_ll_qty">Quantité</label>
       <label index="caddy_ll_shippingnet">Livraison</label>
       <label index="caddy_ll_sumgross">Total (brut)</label>
-      <label index="caddy_ll_title">Article</label>
       <label index="caddy_ll_tax">TVA</label>
     </languageKey>
   </data>
