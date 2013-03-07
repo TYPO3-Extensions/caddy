@@ -638,7 +638,7 @@ plugin.tx_caddy_pi1 {
             // cell, font, textColor
           properties =
           properties {
-              // height, width, x, y
+              // align, height, width, x, y
             cell =
             cell {
                 // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -677,7 +677,7 @@ plugin.tx_caddy_pi1 {
             // cell, font, textColor
           properties =
           properties {
-              // height, width, x, y
+              // align, height, width, x, y
             cell =
             cell {
                 // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -737,7 +737,7 @@ plugin.tx_caddy_pi1 {
             // cell, font, textColor
           properties =
           properties {
-              // height, width, x, y
+              // align, height, width, x, y
             cell =
             cell {
                 // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -837,7 +837,7 @@ plugin.tx_caddy_pi1 {
             // cell, font, textColor
           properties =
           properties {
-              // height, width, x, y
+              // align, height, width, x, y
             cell =
             cell {
                 // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL

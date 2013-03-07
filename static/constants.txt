@@ -118,14 +118,16 @@ plugin.caddy {
 
   # cat=date - pdf date//101; type=options[,L,C,R];  label= Date alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
   pdf.date.align = L
-  # cat=date - pdf date//101; type=int+; label= Caddy position left: Position of the date (items) from the left margin in millimeters
+  # cat=date - pdf date//101; type=int+; label= Date position left: Position of the date from the left margin in millimeters
   pdf.date.x = 175
-  # cat=date - pdf date//102; type=int+; label= Caddy position top: Position of the date (items) from the top margin in millimeters
+  # cat=date - pdf date//102; type=int+; label= Date position top: Position of the date from the top margin in millimeters
   pdf.date.y = 104
-  # cat=date - pdf date//103; type=int+; label= Caddy width: Width of the date (items) in millimeters
+  # cat=date - pdf date//103; type=int+; label= Date width: Width of the date in millimeters
   pdf.date.width = 25
-  # cat=date - pdf date//104; type=int+; label= Caddy font-size: Font-size of the date (items) in points
+  # cat=date - pdf date//104; type=int+; label= Date font-size: Font-size of the date in points
   pdf.date.fontsize = 12
+  # cat=date - pdf date//104; type=string; label= Date format: Format of the date. Examples: %Y-m-%d, %d. %M %Y
+  pdf.date.strftime = %Y-%m-%d
   # cat=date - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.date.externalLinks = Click me!
   # cat=date - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
