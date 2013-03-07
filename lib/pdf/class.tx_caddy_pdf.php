@@ -102,9 +102,21 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
 
     
-    //$this->renderPaymentOption($fpdi, $session['payment']);
+    //$this->caddyPaymentOption($fpdi, $session['payment']);
 
   }
+
+  private function caddyPaymentOption(&$fpdi, $payment_id) {
+          $payment_option = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$payment_id . '.'];
+
+          if ($payment_option['note']) {
+                  $fpdi->SetY($fpdi->GetY()+20);
+                  $fpdi->SetX($this->conf['body-position-x']);
+                  $fpdi->Cell('150', '5', $payment_option['title'], 0, 1);
+                  $fpdi->SetX($this->conf['body-position-x']);
+                  $fpdi->Cell('150', '5', $payment_option['note'], 0, 1);
+          }
+  } 
 
  /**
   * caddyProduct( ) :
@@ -222,20 +234,21 @@ class tx_caddy_pdf extends tslib_pibase
     $subpartArray['###CADDY_LL_PAYMENT###']       = $this->pi_getLL('caddy_ll_payment');
     $subpartArray['###CADDY_LL_SPECIAL###']       = $this->pi_getLL('caddy_ll_special');
 
-    $subpartArray['###SHIPPING_OPTION###'] = 
-    $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
-    $subpartArray['###PAYMENT_OPTION###'] = 
-    $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
+    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
+    $paymentLabel       = $confPaymentOptions[$sesArray['payment'].'.']['title'];
+    $subpartArray['###PAYMENT_OPTION###'] = $paymentLabel;
 
-    $subpartArray['###SPECIAL_OPTION###'] = '';
-    if (isset($session['special'])) 
+    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
+    $shippingLabel        = $confShippingOptions[$sesArray['shipping'].'.']['title'];
+    $subpartArray['###SHIPPING_OPTION###'] = $shippingLabel;
+
+    $options = null;
+    $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
+    foreach( ( array ) $sesArray['special'] as $special_id ) 
     {
-      foreach ($session['special'] as $special_id) 
-      {
-        $subpartArray['###SPECIAL_OPTION###'] = $subpartArray['###SPECIAL_OPTION###'] .
-          $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'][$special_id.'.']['title'];
-      }
+      $options = $options . $confSpecialOptions[$special_id.'.']['title'];
     }
+    $subpartArray['###SPECIAL_OPTION###'] = $options;
     
     return $subpartArray;
   }
@@ -626,13 +639,13 @@ class tx_caddy_pdf extends tslib_pibase
     switch( true )
     {
       case( ! empty( $content ) ):
-var_dump( __METHOD__, __LINE__, $content );
+//var_dump( __METHOD__, __LINE__, $content );
         $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
         break;
       case( empty( $content ) ):
       default:
-var_dump( __METHOD__, __LINE__, $content );
+//var_dump( __METHOD__, __LINE__, $content );
           // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
