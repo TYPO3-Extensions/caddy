@@ -515,7 +515,9 @@ class tx_caddy_pdf extends tslib_pibase
 
       // Write the delivery order number
     $this->deliveryorderNumber( );
-    //$this->renderAdditionalTextblocks( $this->tcpdf );
+
+      // Write additional textblocks
+    $this->deliveryorderAdditionalTextblocks( );
 
       // Write the caddy
     $this->caddy( );
@@ -525,6 +527,36 @@ class tx_caddy_pdf extends tslib_pibase
 
       // RETURN : 
     return $destPath;
+  }
+  
+ /**
+  * deliveryorderAdditionalTextblocks( ) : 
+  *
+  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @access     public
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function deliveryorderAdditionalTextblocks( )
+  {
+    $additionalTextblocks = $this->confPdf['deliveryorder.']['additionaltextblocks.'];
+
+      // LOOP : fields, the elements of a product
+    foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
+    { 
+      if( stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+      
+      $additionalTextblock = $additionalTextblocks[$key];
+      $body         = $additionalTextblock['body.'];
+      $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
+      $header       = $additionalTextblock['header.'];
+      $htmlContent  = $this->header( $header ) . $htmlContent;
+      $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAdditionalTextblocks' );
+    }
+        
   }
   
  /**

@@ -922,90 +922,145 @@ plugin.tx_caddy_pi1 {
         }
       }
 
+        // date, 
+      additionaltextblocks =
       additionaltextblocks {
-          // date
-        1 =
-        1 {
-          position-x  = 175
-          position-y  = 104
-          width       = 25
-          align       = L
-          content = COA
-          content {
-              // prefix
-            10 = TEXT
-            10 {
-              value =
-              noTrimWrap = || |
+          // body
+        date =
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = R
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 30
+                  // [INTEGER] Position from left in millimeter 
+                x = 180
+                  // [INTEGER] Position from top in millimeter 
+                y = 90
+              }
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
-              // date
-            20 = TEXT
-            20 {
+              // label, prefix, ordernumber
+            content = TEXT
+            content {
               data = date : U
-              strftime = %Y-%m-%d
+              strftime = %d.%m.%Y
             }
           }
         }
           // order line
-        2 =
-        2 {
-          position-x  =  69
-          position-y  = 114
-          width       = 160
-          content = COA
-          content {
-              // prepended string
-            10 = TEXT
-            10 {
-              value = Ihre Bestellung vom
-              lang {
-                de = Ihre Bestellung vom
-                en = Your order at
+        orderline =
+        orderline {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = R
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 210
+                  // [INTEGER] Position from left in millimeter 
+                x = 0
+                  // [INTEGER] Position from top in millimeter 
+                y = 200
               }
-              noTrimWrap = || |
-            }
-              // date
-            20 = TEXT
-            20 {
-              data = date : U
-              strftime = %d.%m.%Y
-              noTrimWrap = || |
-            }
-              // appended string
-            30 = TEXT
-            30 {
-              value = bei typo3-quick-shop.de
-              lang {
-                de = bei typo3-quick-shop.de
-                en = on typo3-quick-shop.de
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = 144
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style = B 
               }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = 0 255 0
             }
-              // delivery number
-            40 = COA
-            40 {
-              // (
+                // label, prefix, ordernumber
+            content = COA
+            content {
+                // prepended string
               10 = TEXT
               10 {
-                value   = (
-                noTrimWrap = | ||
-              }
-                // label
-              20 {
-                value = Rechnungsnummer
+                value = Ihre Bestellung vom
                 lang {
-                  de = Rechnungsnummer
-                  en = invoice number
+                  de = Ihre Bestellung vom
+                  en = Your order at
                 }
+                noTrimWrap = || |
               }
-                // number
+                // date
+              20 = TEXT
+              20 {
+                data = date : U
+                strftime = %d.%m.%Y
+                noTrimWrap = || |
+              }
+                // appended string
               30 = TEXT
               30 {
-                value   =  Hier soll die Nr rein
+                value = bei typo3-quick-shop.de
+                lang {
+                  de = bei typo3-quick-shop.de
+                  en = on typo3-quick-shop.de
+                }
               }
-              40 = TEXT
+                // delivery number
+              40 = COA
               40 {
-                value   = )
-                noTrimWrap = || |
+                // (
+                10 = TEXT
+                10 {
+                  value   = (
+                  noTrimWrap = | ||
+                }
+                  // label
+                20 {
+                  value = Rechnungsnummer
+                  lang {
+                    de = Rechnungsnummer
+                    en = invoice number
+                  }
+                }
+                  // number
+                30 = TEXT
+                30 {
+                  value   =  Hier soll die Nr rein
+                }
+                40 = TEXT
+                40 {
+                  value   = )
+                  noTrimWrap = || |
+                }
               }
             }
           }
