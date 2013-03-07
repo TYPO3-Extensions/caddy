@@ -121,7 +121,7 @@ plugin.caddy {
   # cat=caddy - pdf date//101; type=int+; label= Date position left: Position of the date from the left margin in millimeters
   pdf.date.x = 175
   # cat=caddy - pdf date//102; type=int+; label= Date position top: Position of the date from the top margin in millimeters
-  pdf.date.y = 103
+  pdf.date.y = 104
   # cat=caddy - pdf date//103; type=int+; label= Date width: Width of the date in millimeters
   pdf.date.width = 25
   # cat=caddy - pdf date//104; type=int+; label= Date font-size: Font-size of the date in points
