@@ -1155,6 +1155,7 @@ class tx_caddy_powermail
     }
 
       // Add session data to the local cObj
+    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->local_cObj   = $GLOBALS['TSFE']->cObj;
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
