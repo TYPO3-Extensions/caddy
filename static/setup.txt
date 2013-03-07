@@ -589,7 +589,6 @@ plugin.tx_caddy_pi1 {
       // delivery order PDF
     deliveryorder =
     deliveryorder {
-      font-size = 10
 
       template = {$plugin.caddy.pdf.deliveryorder.template}
 
@@ -715,116 +714,153 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // body
-      deliveryorderaddress = 
-      deliveryorderaddress {
-          // properties, content
-        header =
-        header {
-            // label for delivery order address
-          content = TEXT
-          content {
-            value = Lieferaddresse
-            lang {
-              de = Lieferaddresse
-              en = delivery address
+        // deliveryorder, invoice
+      address = 
+      address {
+        deliveryorder = 
+        deliveryorder {
+            // properties, content
+          header =
+          header {
+              // label for delivery order address
+            content = TEXT
+            content {
+              value = Lieferaddresse
+              lang {
+                de = Lieferaddresse
+                en = delivery address
+              }
+              wrap      = |<br>
             }
-            wrap      = |<br>
+          }
+          header >
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.deliveryorder.address.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.deliveryorder.address.y}
+              }
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = {$plugin.caddy.pdfGeneral.textColor}
+            }
+              // Address: company, first name and last name, street, zip and city, country
+            content = COA
+            content {
+                // Company
+              10 = TEXT
+              10 {
+                field     = deliveryorderCompany
+                required  = 1
+                wrap      = <b>|</b>
+              }
+                // First name and last name
+              20 = COA
+              20 {
+                // First name
+                10 = TEXT
+                10 {
+                  field     = deliveryorderFirstname
+                  required  = 1
+                  wrap      = <br />|
+                }
+                  // Last name
+                20 = TEXT
+                20 {
+                  field       = deliveryorderLastname
+                  noTrimWrap  = | ||
+                  required    = 1
+                }
+              }
+                // Address
+              30 = TEXT
+              30 {
+                field     = deliveryorderAddress
+                wrap      = <br />|
+                required  = 1
+              }
+                // ZIP and city
+              40 = COA
+              40 {
+                  // ZIP
+                10 = TEXT
+                10 {
+                  field     = deliveryorderZip
+                  required  = 1
+                  wrap      = <br />|
+                }
+                  // City
+                20 = TEXT
+                20 {
+                  field       = deliveryorderCity
+                  noTrimWrap  = | ||
+                  required    = 1
+                }
+              }
+                // Country
+              50 = TEXT
+              50 {
+                field     = deliveryorderCountry
+                wrap      = <br />|
+                required  = 1
+              }
+            }
           }
         }
-        header >
-          // properties, content
-        body =
-        body {
-            // cell, font, textColor
-          properties =
-          properties {
-              // align, height, width, x, y
-            cell =
-            cell {
-                // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
-              align = 
-                // [INTEGER] Height of content in millimeter 
-              height = 0
-                // [INTEGER] Width of content in millimeter 
-              width = 0
-                // [INTEGER] Position from left in millimeter 
-              x = {$plugin.caddy.pdf.deliveryorder.address.x}
-                // [INTEGER] Position from top in millimeter 
-              y = {$plugin.caddy.pdf.deliveryorder.address.y}
-            }
-              // family, size, style
-            font =
-            font {
-                // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
-              family = {$plugin.caddy.pdfGeneral.fontfamily}
-                // [Integer] Font size in points
-              size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
-                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
-              style =  
-            }
-              // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
-            textColor = {$plugin.caddy.pdfGeneral.textColor}
-          }
-            // Address: company, first name and last name, street, zip and city, country
-          content = COA
-          content {
-              // Company
-            10 = TEXT
-            10 {
-              field     = deliveryorderCompany
-              required  = 1
-              wrap      = <b>|</b>
-            }
-              // First name and last name
-            20 = COA
-            20 {
-              // First name
-              10 = TEXT
+          // body
+        invoice < .deliveryorder
+        invoice {
+          body {
+            content = COA
+            content {
               10 {
-                field     = deliveryorderFirstname
-                required  = 1
-                wrap      = <br />|
+                field = invoiceCompany
               }
-                // Last name
-              20 = TEXT
               20 {
-                field       = deliveryorderLastname
-                noTrimWrap  = | ||
-                required    = 1
+                10 {
+                  field = invoiceFirstname
+                }
+                20 {
+                  field = invoiceLastname
+                }
               }
-            }
-              // Address
-            30 = TEXT
-            30 {
-              field     = deliveryorderAddress
-              wrap      = <br />|
-              required  = 1
-            }
-              // ZIP and city
-            40 = COA
-            40 {
-                // ZIP
-              10 = TEXT
-              10 {
-                field     = deliveryorderZip
-                required  = 1
-                wrap      = <br />|
+              30 {
+                field = invoiceAddress
               }
-                // City
-              20 = TEXT
-              20 {
-                field       = deliveryorderCity
-                noTrimWrap  = | ||
-                required    = 1
+              40 {
+                10 {
+                  field = invoiceZip
+                }
+                20 {
+                  field = invoiceCity
+                }
               }
-            }
-              // Country
-            50 = TEXT
-            50 {
-              field     = deliveryorderCountry
-              wrap      = <br />|
-              required  = 1
+              50 {
+                field = invoiceCountry
+              }
             }
           }
         }
@@ -916,7 +952,7 @@ plugin.tx_caddy_pi1 {
                 width = 0
                   // [INTEGER] Position from left in millimeter 
                 x = {$plugin.caddy.pdf.deliveryorder.number.x}
-                  // [INTEGER] Position from top in millimeter 
+                  // [INTEGER] Position from top in millimeter relative to delivery order number
                 y = TEXT
                 y {
                   value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 10
@@ -928,12 +964,14 @@ plugin.tx_caddy_pi1 {
               font {
                   // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
-                  // [Integer] Font size in points
+                  // [Integer] Font size in points, taken from caddy.fontsize
                 size = TEXT
                 size {
                   value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
                   prioriCalc  = 1
                 }
+                size >
+                size = {$plugin.caddy.pdf.caddy.fontsize}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
@@ -989,41 +1027,6 @@ plugin.tx_caddy_pi1 {
                   field = numberInvoiceCurrent
                 }
               }
-            }
-          }
-        }
-      }
-
-        // body
-      invoiceaddress < .deliveryorderaddress
-      invoiceaddress {
-        body {
-          content = COA
-          content {
-            10 {
-              field = invoiceCompany
-            }
-            20 {
-              10 {
-                field = invoiceFirstname
-              }
-              20 {
-                field = invoiceLastname
-              }
-            }
-            30 {
-              field = invoiceAddress
-            }
-            40 {
-              10 {
-                field = invoiceZip
-              }
-              20 {
-                field = invoiceCity
-              }
-            }
-            50 {
-              field = invoiceCountry
             }
           }
         }

@@ -343,13 +343,13 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $invoiceaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
                     (
-                      $this->conf['invoiceaddress'], $this->conf['invoiceaddress.']
+                      $this->conf['invoiceaddress'], $this->conf['address.']['invoice.']
                     );
     if( ! empty( $invoiceaddress ) )
     {
       $invoiceaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
                               (
-                                $this->conf['invoiceaddress.']['0'], $this->conf['invoiceaddress.']['0.']
+                                $this->conf['address.']['invoice.']['0'], $this->conf['address.']['invoice.']['0.']
                               );
       if( $invoiceaddressheadline )
       {
@@ -564,16 +564,16 @@ class tx_caddy_pdf extends tslib_pibase
   private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
   {
       // Get the body content
-    $body         = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['body.'];
+    $body         = $this->confPdf['deliveryorder.']['address.']['deliveryorder.']['body.'];
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
     // Get the body content
       
     switch( true )
     {
       case( ! empty( $htmlContent ) ):
-        $invoiceaddress = $this->confPdf['deliveryorder.']['deliveryorderaddress.'];
+        $invoiceaddress = $this->confPdf['deliveryorder.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
-//        $header       = $this->confPdf['deliveryorder.']['deliveryorderaddress.']['header.'];
+//        $header       = $this->confPdf['deliveryorder.']['address.']['deliveryorder.']['header.'];
 //        $htmlContent  = $this->header( $header ) . $htmlContent;
 //        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
@@ -582,11 +582,11 @@ class tx_caddy_pdf extends tslib_pibase
           // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
-          $invoiceaddress = $this->confPdf['deliveryorder.']['invoiceaddress.'];
+          $invoiceaddress = $this->confPdf['deliveryorder.']['address.']['invoice.'];
           $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
-//          $body         = $this->confPdf['deliveryorder.']['invoiceaddress.']['body.'];
+//          $body         = $this->confPdf['deliveryorder.']['address.']['invoice.']['body.'];
 //          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//          $header       = $this->confPdf['deliveryorder.']['invoiceaddress.']['header.'];
+//          $header       = $this->confPdf['deliveryorder.']['address.']['invoice.']['header.'];
 //          $htmlContent  = $this->header( $header ) . $htmlContent;
 //          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }

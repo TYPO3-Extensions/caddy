@@ -147,7 +147,7 @@ plugin.caddy {
   pdf.deliveryorder.number.y = 110
   # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
   pdf.deliveryorder.number.fontsize = 24
-  # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number
+  # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
   pdf.deliveryorder.number.prefix = quick-shop-
   # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.deliveryorder.externalLinks = Click me!
@@ -168,7 +168,7 @@ plugin.caddy {
   pdf.invoice.number.y = 110
   # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
   pdf.invoice.number.fontsize = 24
-  # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number
+  # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
   pdf.invoice.number.prefix = 
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.invoice.externalLinks = Click me!
@@ -191,7 +191,7 @@ plugin.caddy {
   }
 }
 
-  # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number
+  # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number. Example : O-
   pdf.order.number.prefix = 
   # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.order.externalLinks = Click me!
