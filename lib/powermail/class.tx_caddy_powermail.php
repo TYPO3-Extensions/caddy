@@ -1037,7 +1037,7 @@ class tx_caddy_powermail
       
     $paths[] = $this->sendToCustomerDeliveryorder( );
 //    $paths[] = $this->sendToCustomerInvoice( );
-//    $paths[] = $this->sendToCustomerTerms( );
+    $paths[] = $this->sendToCustomerTerms( );
     
     if( empty( $paths ) ) 
     {
