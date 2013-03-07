@@ -1045,8 +1045,15 @@ class tx_caddy_powermail
     }
     
     $path = implode( ',', $paths );
-    
     $path = ',' . $path . ',';
+    
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
     
     return $path;
     
@@ -1117,6 +1124,10 @@ class tx_caddy_powermail
         // DRS
       return null;
     }
+
+    $this->initPdf( );
+    $this->pdf->pObj  = $this;
+    $path = $this->pdf->invoice( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
@@ -1205,8 +1216,15 @@ class tx_caddy_powermail
     }
     
     $path = implode( ',', $paths );
-    
     $path = ',' . $path . ',';
+    
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
     
     return $path;
     
@@ -1277,6 +1295,11 @@ class tx_caddy_powermail
         // DRS
       return null;
     }
+
+    $this->initPdf( );
+    $this->pdf->pObj  = $this;
+    $path = $this->pdf->invoice( );
+
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )

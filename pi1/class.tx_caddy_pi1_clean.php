@@ -105,7 +105,6 @@ class tx_caddy_pi1_clean
 
     $this->sessionUpdate( );
     $this->database( );
-    $this->numbers( );
   }
 
 
@@ -509,86 +508,7 @@ class tx_caddy_pi1_clean
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
     return $value;
   }
-  
-
-
-  /***********************************************
-  *
-  * Numbers
-  *
-  **********************************************/
-
- /**
-  * numbers( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function numbers( )
-  {
-    $this->numbersInvoice( );
-    $this->numbersDeliveryorder( );
-  }
-
- /**
-  * numbersDeliveryorder( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function numbersDeliveryorder( )
-  {
-      // DRS
-    if( $this->pObj->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, please clean up the delivery order number.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
-  }
-
- /**
-  * numbersInvoice( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function numbersInvoice( )
-  {
-      // DRS
-    if( $this->pObj->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, please clean up the invoice number.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
-  }
-
- /**
-  * numbersOrder( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function numbersOrder( )
-  {
-      // DRS
-    if( $this->pObj->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, please clean up the order number.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
-  }
-  
+    
 
 
   /***********************************************
@@ -671,7 +591,7 @@ class tx_caddy_pi1_clean
       // DRS
     if( $this->pObj->drs->drsClean )
     {
-      $prompt = 'Delivery order data are added to the session.';
+      $prompt = 'Invoice data are added to the session.';
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
