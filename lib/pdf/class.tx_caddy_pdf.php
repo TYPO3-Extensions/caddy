@@ -1653,14 +1653,23 @@ var_dump( __METHOD__, __LINE__, $destPath );
       case( $hex == 'aqua' ):
         $hex = '#00FFFF';
         break;
+      case( $hex == 'beige' ):
+        $hex = '#F5F5DC';
+        break;
       case( $hex == 'black' ):
         $hex = '#000000';
         break;
       case( $hex == 'blue' ):
         $hex = '#0000FF';
         break;
+      case( $hex == 'brown' ):
+        $hex = '#A52A2A';
+        break;
       case( $hex == 'fuchsia' ):
         $hex = '#FF00FF';
+        break;
+      case( $hex == 'gold' ):
+        $hex = '#FFD700';
         break;
       case( $hex == 'gray' ):
         $hex = '#808080';
@@ -1680,6 +1689,9 @@ var_dump( __METHOD__, __LINE__, $destPath );
       case( $hex == 'olive' ):
         $hex = '#808000';
         break;
+      case( $hex == 'orange' ):
+        $hex = '#FFA500';
+        break;
       case( $hex == 'purple' ):
         $hex = '#800080';
         break;
@@ -1688,6 +1700,9 @@ var_dump( __METHOD__, __LINE__, $destPath );
         break;
       case( $hex == 'silver' ):
         $hex = '#C0C0C0';
+        break;
+      case( $hex == 'tan' ):
+        $hex = '#D2B48C';
         break;
       case( $hex == 'teal' ):
         $hex = '#008080';
