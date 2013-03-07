@@ -1062,7 +1062,7 @@ plugin.tx_caddy_pi1 {
           data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_invoice
           wrap = |-
         }
-          // deliver order number
+          // invoicenumber
         40 = TEXT
         40 {
           field = numberInvoiceCurrent
@@ -1112,7 +1112,7 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from left in millimeter 
                   x = TEXT
                   x {
-                    value       = {$plugin.caddy.pdf.invoice.address.y} - 10
+                    value       = {$plugin.caddy.pdf.invoice.address.x} - 5
                     prioriCalc  = 1
                   }
                     // [INTEGER] Position from top in millimeter 

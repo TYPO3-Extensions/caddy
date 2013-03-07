@@ -904,8 +904,21 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function invoiceAddress( )
   {
-    $invoiceaddress = $this->confPdf['invoice.']['content.']['address.']['invoice.'];
-    $this->writeTextblock( $invoiceaddress, 'invoiceaddress' );
+//    $invoiceaddress = $this->confPdf['invoice.']['content.']['address.']['invoice.'];
+//    $this->writeTextblock( $invoiceaddress, 'invoiceaddress' );
+    $invoiceaddress = $this->confPdf['invoice.']['content.']['address.'];
+
+      // LOOP : additional textblocks
+    foreach( array_keys ( ( array ) $invoiceaddress ) as $key )
+    { 
+      if( ! stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+      
+      $this->writeTextblock( $invoiceaddress[$key], 'invoice.address.' . $key );
+    }
+      // LOOP : additional textblocks
   }
 
  /**
