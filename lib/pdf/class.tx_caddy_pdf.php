@@ -501,6 +501,18 @@ class tx_caddy_pdf extends tslib_pibase
 
       // PDF source file
     $srceFile = $sesArray['sendVendorDeliveryorder'];
+    if( empty ( $srceFile ) )
+    {
+      $srceFile = $sesArray['sendCustomerDeliveryorder'];
+    }
+    if( empty ( $srceFile ) )
+    {
+      $prompt = 'Can\'t get source file from session data ' . 
+                'sendCustomerDeliveryorder/sendVendorDeliveryorder<br />' . PHP .
+                __METHOD__ . '(line ' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // PDF source file
 
       // Init tcpdf
     $this->tcpdf = $this->tcpdfInit( $srceFile );
@@ -1125,6 +1137,18 @@ var_dump( __METHOD__, __LINE__, $destPath );
 
       // PDF source file
     $srceFile = $sesArray['sendVendorTerms'];
+    if( empty ( $srceFile ) )
+    {
+      $srceFile = $sesArray['sendCustomerTerms'];
+    }
+    if( empty ( $srceFile ) )
+    {
+      $prompt = 'Can\'t get source file from session data ' . 
+                'sendCustomerTerms/sendVendorTerms<br />' . PHP .
+                __METHOD__ . '(line ' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // PDF source file
 var_dump( __METHOD__, __LINE__, $srceFile );
 
       // Init tcpdf
