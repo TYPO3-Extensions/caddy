@@ -573,9 +573,6 @@ class tx_caddy_pdf extends tslib_pibase
       case( ! empty( $htmlContent ) ):
         $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
-//        $header       = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.']['header.'];
-//        $htmlContent  = $this->header( $header ) . $htmlContent;
-//        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderAddress' );
         break;
       case( empty( $htmlContent ) ):
       default:
@@ -584,11 +581,6 @@ class tx_caddy_pdf extends tslib_pibase
         {
           $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.'];
           $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
-//          $body         = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.']['body.'];
-//          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//          $header       = $this->confPdf['deliveryorder.']['content.']['address.']['invoice.']['header.'];
-//          $htmlContent  = $this->header( $header ) . $htmlContent;
-//          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }
           // FALLBACK : take the invoice address
         break;
@@ -611,21 +603,6 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $date = $this->confPdf['deliveryorder.']['content.']['date.'];
     $this->writeTextblock( $date, 'deliveryorderDate' );
-//      // Get the body content
-//    $body         = $this->confPdf['deliveryorder.']['content.']['date.']['body.'];
-//    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//      // Get the body content
-//      
-//    if( empty( $htmlContent ) )
-//    {
-//      return;
-//    }
-//
-//    $header       = $this->confPdf['deliveryorder.']['content.']['date.']['header.'];
-//    $htmlContent  = $this->header( $header ) . $htmlContent;
-//    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'deliveryorderDate' );
-//
-//    return;
   }
 
  /**
@@ -1165,7 +1142,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->termsAdditionalTextblocks( );
 
       // Write the caddy
-    $this->caddy( );
+//    $this->caddy( );
 
       // Create the PDF
     $this->tcpdfOutput( $destPath );
@@ -1212,16 +1189,13 @@ class tx_caddy_pdf extends tslib_pibase
       // Get the body content
     $body         = $this->confPdf['terms.']['content.']['address.']['deliveryorder.']['body.'];
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-    // Get the body content
+      // Get the body content
       
     switch( true )
     {
       case( ! empty( $htmlContent ) ):
         $invoiceaddress = $this->confPdf['terms.']['content.']['address.']['deliveryorder.'];
         $this->writeTextblock( $invoiceaddress, 'termsaddress' );
-//        $header       = $this->confPdf['terms.']['content.']['address.']['deliveryorder.']['header.'];
-//        $htmlContent  = $this->header( $header ) . $htmlContent;
-//        $this->tcpdfWrite( $body['properties.'], $htmlContent, 'termsAddress' );
         break;
       case( empty( $htmlContent ) ):
       default:
@@ -1230,11 +1204,6 @@ class tx_caddy_pdf extends tslib_pibase
         {
           $invoiceaddress = $this->confPdf['terms.']['content.']['address.']['invoice.'];
           $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
-//          $body         = $this->confPdf['terms.']['content.']['address.']['invoice.']['body.'];
-//          $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//          $header       = $this->confPdf['terms.']['content.']['address.']['invoice.']['header.'];
-//          $htmlContent  = $this->header( $header ) . $htmlContent;
-//          $this->tcpdfWrite( $body['properties.'], $htmlContent, 'invoiceAddress' );
         }
           // FALLBACK : take the invoice address
         break;
@@ -1257,21 +1226,6 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $date = $this->confPdf['terms.']['content.']['date.'];
     $this->writeTextblock( $date, 'termsDate' );
-//      // Get the body content
-//    $body         = $this->confPdf['terms.']['content.']['date.']['body.'];
-//    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//      // Get the body content
-//      
-//    if( empty( $htmlContent ) )
-//    {
-//      return;
-//    }
-//
-//    $header       = $this->confPdf['terms.']['content.']['date.']['header.'];
-//    $htmlContent  = $this->header( $header ) . $htmlContent;
-//    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'termsDate' );
-//
-//    return;
   }
 
  /**
