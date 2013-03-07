@@ -688,13 +688,13 @@ var_dump( __METHOD__, __LINE__, $numbers );
 //    foreach( array_keys ( ( array ) $numbers ) as $key )
     foreach( ( array ) $numbers as $key => $number )
     { 
-      if( stristr( $key, '.' ) )
+      if( ! stristr( $key, '.' ) )
       { 
         continue;
       }
-var_dump( __METHOD__, __LINE__, $number, $key );      
+var_dump( __METHOD__, __LINE__, $numbers[$key], $key );      
       
-      $this->writeTextblock( $number[$key . '.'], 'deliveryorder.numbers.' . $key . '.' );
+      $this->writeTextblock( $numbers[$key], 'deliveryorder.numbers.' . $key );
     }
         
   }
