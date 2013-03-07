@@ -765,6 +765,7 @@ plugin.tx_caddy_pi1 {
               20 {
                 field       = deliveryorderLastname
                 noTrimWrap  = | ||
+                required    = 1
               }
               wrap      = <br />|
               required  = 1
@@ -789,6 +790,7 @@ plugin.tx_caddy_pi1 {
               20 {
                 field       = deliveryorderCity
                 noTrimWrap  = | ||
+                required    = 1
               }
               wrap      = <br />|
               required  = 1
