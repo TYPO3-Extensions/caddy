@@ -1,27 +1,19 @@
 plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
     /* div based cart */
-    div.caddy_cart { 
-      background-color:#e7ebef;
-      border:1px solid #336699;
-      font-size:12px; 
+    #caddy_payment {
+      background:brown;
+    }
+    #caddy_shipping {
+      background:yellow;
     }
     div.caddy_cart_header {
-      border-bottom:1px solid #336699; 
-      background-color:#cedbde; 
       font-weight:bold; 
       margin-bottom:5px; 
-      padding:5px; 
-      padding-bottom:5px; 
+      padding:0 5px 5px 5px; 
     }
     div.caddy_cart_footer { 
-      background-color:#336699; 
-      border-top:1px solid #336699; 
-      color:#fff; 
-      margin-top:5px; 
-      padding:5px; 
-      padding-top:5px; 
-      font-weight:bold; 
+      padding:0 0 0 5px; 
     }
     div.caddy_cart_product { 
       padding:5px; 
@@ -51,7 +43,8 @@ plugin.tx_caddy_pi1 {
       width:7em; 
     }
     div.caddy_cart_col6 { 
-      width:18px; 
+      text-align:right;
+      width:2em; 
     }
     div.caddy_cart_error { 
       color:#e10004; 
@@ -64,7 +57,8 @@ plugin.tx_caddy_pi1 {
       margin:5px 0; 
     }
     div.caddy_cart_col input { 
-      width:22px; 
+      text-align:right;
+      width:2em; 
     }
     div.caddy_cleaner { 
       clear: both; 
