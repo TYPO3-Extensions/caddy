@@ -96,8 +96,8 @@ plugin.caddy {
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
-  # cat=caddy - pdf//101;          type=string;  label= Text color: Examples: Grey: 0 - 100. RGB: 0 0 0 - 255 255 255, CMYK: 0 0 0 0 - 100 100 100 100
-  pdfGeneral.textColor = 0 0 0
+  # cat=caddy - pdf//101;          type=color;  label= Text color: font color
+  pdfGeneral.textColor = #000
   # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdfGeneral.externalLinks = Click me!
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
