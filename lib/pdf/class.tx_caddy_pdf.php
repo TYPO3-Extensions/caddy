@@ -548,7 +548,7 @@ class tx_caddy_pdf extends tslib_pibase
         continue;
       }
       
-      $this->writeTextblock( $additionalTextblock, 'deliveryorderAdditionalTextblocks' );
+      $this->writeTextblock( $additionalTextblock[$key], 'deliveryorderAdditionalTextblocks' );
     }
         
   }
@@ -691,7 +691,7 @@ class tx_caddy_pdf extends tslib_pibase
         continue;
       }
       
-      $this->writeTextblock( $numbers, 'deliveryorderNumbers' );
+      $this->writeTextblock( $numbers[$key], 'deliveryorderNumbers' );
     }
         
   }
