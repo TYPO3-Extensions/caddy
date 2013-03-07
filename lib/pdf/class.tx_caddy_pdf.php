@@ -621,6 +621,7 @@ class tx_caddy_pdf extends tslib_pibase
     $content      = strip_tags( $htmlContent );
     $content      = trim( $content );
     $content      = str_replace( ' ', null, $content );
+var_dump( __METHOD__, __LINE__, $content );
     // Get the body content
       
     switch( true )
