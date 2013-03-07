@@ -964,9 +964,9 @@ class tx_caddy_pdf extends tslib_pibase
   */ 
   private function tcpdfSetFont( $font ) 
   {
-    $family = $font['family'];
-    $size   = $font['size'];
-    $style  = $font['style'];
+    $family = $this->zz_cObjGetSingle( $font['family'], $font['family.'] );
+    $size   = $this->zz_cObjGetSingle( $font['size'],   $font['size.'] );
+    $style  = $this->zz_cObjGetSingle( $font['style'],  $font['style.'] );
     $this->tcpdf->SetFont( $family, $style , $size );
 
       // DRS
@@ -986,9 +986,10 @@ class tx_caddy_pdf extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */ 
-  private function tcpdfSetTextColor( $textColor ) 
+  private function tcpdfSetTextColor( $properties ) 
   {
-    $colors = explode( ' ', $textColor );
+    $textColor  = $this->zz_cObjGetSingle( $properties['textColor'], $properties['textColor.'] );
+    $colors     = explode( ' ', $textColor );
     
     switch( true )
     {
@@ -1040,7 +1041,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfWrite( $properties, $htmlContent, $drsLabel )
   {
       // Set textColor
-    $this->tcpdfSetTextColor( $properties['textColor'] );
+    $this->tcpdfSetTextColor( $properties );
 
       // Set font
     $this->tcpdfSetFont( $properties['font.'] );

@@ -830,13 +830,12 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // deliveryorder, invoice, order
+        // deliveryorder, invoice and order
       numbers = 
       numbers {
           // body
         deliveryorder = 
         deliveryorder {
-            // properties, content
             // properties, content
           body =
           body {
@@ -864,6 +863,78 @@ plugin.tx_caddy_pi1 {
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                size = TEXT
+                size {
+                  value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
+                  prioriCalc  = intval
+                }
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+              textColor = {$plugin.caddy.pdfGeneral.textColor}
+            }
+              // label, prefix, ordernumber
+            content = COA
+            content {
+                // label
+              10 = TEXT
+              10 {
+                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+                noTrimWrap = || |
+              }
+                // prefix
+              20 = TEXT
+              20 {
+                value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
+              }
+                // ordernumber
+              30 = TEXT
+              30 {
+                field = numberDeliveryorderCurrent
+              }
+            }
+          }
+        }
+          // body
+        invoiceAndOrder = 
+        invoiceAndOrder {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.deliveryorder.number.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = TEXT
+                y {
+                  value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 20
+                  prioriCalc  = intval
+                }
+              }
+                // family, size, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                size = TEXT
+                size {
+                  value       = {$plugin.caddy.pdf.deliveryorder.number.fontsize} / 2
+                  prioriCalc  = intval
+                }
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
