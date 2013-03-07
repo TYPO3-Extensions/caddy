@@ -1640,7 +1640,7 @@ var_dump( __METHOD__, __LINE__, $destPath );
  /**
   * zz_hexToRgb( )
   *
-  * @param	string		$hex        : color in HTML notation like #FFF or #CC00CC
+  * @param	string		$hex        : color in HTML notation like #FFF or #CC00CC or CSS color name
   * @return	string          $textColor  : color in RGB format like 255 255 255 or 144 0 144 
   * @access private
   * @version    2.0.0
@@ -1648,6 +1648,57 @@ var_dump( __METHOD__, __LINE__, $destPath );
   */
   private function zz_hexToRgb( $hex )
   {
+    switch( true )
+    {
+      case( $hex == 'aqua' ):
+        $hex = '#00FFFF';
+        break;
+      case( $hex == 'black' ):
+        $hex = '#000000';
+        break;
+      case( $hex == 'blue' ):
+        $hex = '#0000FF';
+        break;
+      case( $hex == 'fuchsia' ):
+        $hex = '#FF00FF';
+        break;
+      case( $hex == 'gray' ):
+        $hex = '#808080';
+        break;
+      case( $hex == 'green' ):
+        $hex = '#008000';
+        break;
+      case( $hex == 'lime' ):
+        $hex = '#00FF00';
+        break;
+      case( $hex == 'maroon' ):
+        $hex = '#800000';
+        break;
+      case( $hex == 'navy' ):
+        $hex = '#000080';
+        break;
+      case( $hex == 'olive' ):
+        $hex = '#808000';
+        break;
+      case( $hex == 'purple' ):
+        $hex = '#800080';
+        break;
+      case( $hex == 'red' ):
+        $hex = '#FF0000';
+        break;
+      case( $hex == 'silver' ):
+        $hex = '#C0C0C0';
+        break;
+      case( $hex == 'teal' ):
+        $hex = '#008080';
+        break;
+      case( $hex == 'white' ):
+        $hex = '#FFFFFF';
+        break;
+      case( $hex == 'yellow' ):
+        $hex = '#FFFF00';
+        break;
+    }
     $hex = str_replace( '#', null, $hex );
 
     if( strlen( $hex ) == 3 )
