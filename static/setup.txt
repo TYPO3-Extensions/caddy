@@ -940,7 +940,7 @@ plugin.tx_caddy_pi1 {
                 // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
-              // ordernumber 
+              // ordernumber devider invoicenumber
             content = COA
             content {
                 // label, prefix, ordernumber
@@ -965,7 +965,7 @@ plugin.tx_caddy_pi1 {
               }
                 // devider
               20 = TEXT
-              10 {
+              20 {
                 value       = |
                 noTrimWrap  = | | |
               }
