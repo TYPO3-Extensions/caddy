@@ -1248,6 +1248,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfSetTextColor( $properties ) 
   {
     $textColor  = $this->zz_cObjGetSingle( $properties['textColor'], $properties['textColor.'] );
+    $textColor  = $this->zz_hexToRgb( $textColor );
     $colors     = explode( ' ', $textColor );
     
     switch( true )
@@ -1635,6 +1636,37 @@ var_dump( __METHOD__, __LINE__, $destPath );
   * ZZ
   *
   **********************************************/
+
+ /**
+  * zz_hexToRgb( )
+  *
+  * @param	string		$hex        : color in HTML notation like #FFF or #CC00CC
+  * @return	string          $textColor  : color in RGB format like 255 255 255 or 144 0 144 
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function zz_hexToRgb( $hex )
+  {
+    $hex = str_replace( '#', null, $hex );
+
+    if( strlen( $hex ) == 3 )
+    {
+      $r = hexdec( substr( $hex, 0, 1) . substr( $hex, 0, 1 ) );
+      $g = hexdec( substr( $hex, 1, 1) . substr( $hex, 1, 1 ) );
+      $b = hexdec( substr( $hex, 2, 1) . substr( $hex, 2, 1 ) );
+    } 
+    else
+    {
+      $r = hexdec( substr( $hex, 0, 2 ) );
+      $g = hexdec( substr( $hex, 2, 2 ) );
+      $b = hexdec( substr( $hex, 4, 2 ) );
+    }
+    $rgb = array( $r, $g, $b );
+    
+    $textColor = implode( ' ', $rgb );
+    return $textColor;
+  }
 
  /**
   * zz_cObjGetSingle( )

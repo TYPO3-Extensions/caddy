@@ -682,7 +682,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
@@ -817,7 +817,7 @@ plugin.tx_caddy_pi1 {
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =
               }
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
           }
@@ -856,7 +856,7 @@ plugin.tx_caddy_pi1 {
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
               // label, prefix, ordernumber
@@ -904,7 +904,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // label, prefix, ordernumber
@@ -966,7 +966,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // ordernumber devider invoicenumber
@@ -1134,7 +1134,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
@@ -1233,7 +1233,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
@@ -1334,7 +1334,7 @@ plugin.tx_caddy_pi1 {
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =
               }
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
           }
@@ -1373,7 +1373,7 @@ plugin.tx_caddy_pi1 {
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
               // label, prefix, ordernumber
@@ -1421,7 +1421,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // label, prefix, ordernumber
@@ -1483,7 +1483,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // ordernumber devider deliveryordernumber
@@ -1627,7 +1627,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
@@ -1728,7 +1728,7 @@ plugin.tx_caddy_pi1 {
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
-                // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdfGeneral.textColor}
             }
               // label, prefix, ordernumber
@@ -1776,7 +1776,7 @@ plugin.tx_caddy_pi1 {
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
-                  // [Integer/String] Examples: grey: 50; rgb: 255 0 255; cmyk: 100 80 60 0 
+                  // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdfGeneral.textColor}
               }
                 // label, prefix, ordernumber
