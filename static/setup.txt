@@ -759,6 +759,7 @@ plugin.tx_caddy_pi1 {
               10 = TEXT
               10 {
                 field     = deliveryorderFirstname
+                wrap      = <br />|
               }
                 // Last name
               20 = TEXT
@@ -767,8 +768,6 @@ plugin.tx_caddy_pi1 {
                 noTrimWrap  = | ||
                 required    = 1
               }
-              wrap      = <br />|
-              required  = 1
             }
               // Address
             30 = TEXT
@@ -784,6 +783,7 @@ plugin.tx_caddy_pi1 {
               10 = TEXT
               10 {
                 field = deliveryorderZip
+                wrap      = <br />|
               }
                 // City
               20 = TEXT
@@ -792,8 +792,6 @@ plugin.tx_caddy_pi1 {
                 noTrimWrap  = | ||
                 required    = 1
               }
-              wrap      = <br />|
-              required  = 1
             }
               // Country
             50 = TEXT
