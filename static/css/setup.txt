@@ -33,23 +33,23 @@ plugin.tx_caddy_pi1 {
     div.caddy_cart_col1 { 
       width:4em; 
     }
-    div.caddy_cart_col2_3 { 
-      width:230px; 
-    }
     div.caddy_cart_col2 { 
       width:12em; 
     }
-    div.caddy_cart_col3 { 
-      width:60px; 
+    div.caddy_cart_col2_3 { 
+      width:32em; 
     }
-    div.caddy_cart_col3_4 { 
-      width:120px; 
+    div.caddy_cart_col3 { 
+      width:20em; 
+    }
+    div.caddy_cart_col4 { 
+      width:5em; 
     }
     div.caddy_cart_col5 { 
-      width:60px; 
+      width:7em; 
     }
     div.caddy_cart_col6 { 
-      width:30px; 
+      width:18px; 
     }
     div.caddy_cart_error { 
       color:#e10004; 
