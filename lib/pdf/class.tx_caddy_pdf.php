@@ -549,7 +549,7 @@ class tx_caddy_pdf extends tslib_pibase
         continue;
       }
 var_dump( __METHOD__, __LINE__, $key );      
-      $additionalTextblock = $additionalTextblocks[$key];
+      $additionalTextblock = $additionalTextblocks[$key . '.'];
 var_dump( __METHOD__, __LINE__, $additionalTextblock );      
       $body         = $additionalTextblock['body.'];
       $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
