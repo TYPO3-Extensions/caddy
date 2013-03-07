@@ -1,6 +1,6 @@
 Caddy HTML Template for Frontend output
 
-VERSION 1.2.2
+VERSION 2.0.0
 
   ###CADDY_LL_EMPTY###
 
@@ -44,117 +44,117 @@ VERSION 1.2.2
 
 <!-- ###CADDY### begin --> 
 <div class="caddy_cart">
-	###MINPRICE###
-    <form name="cart" id="cart" action="###TARGET###" method="post">
-        ###VARIANTS###
-        <div class="caddy_cart_header">
-            <div class="caddy_cart_col caddy_cart_col1">###CADDY_LL_QTY###</div>
-	        <div class="caddy_cart_col caddy_cart_col2">###CADDY_LL_SKU###</div>
-            <div class="caddy_cart_col caddy_cart_col2">###CADDY_LL_TITLE###</div>
-            <div class="caddy_cart_col caddy_cart_col3">###CADDY_LL_PRICE###</div>
-            <div class="caddy_cart_col caddy_cart_col4">###CADDY_LL_PRICE_TOTAL###</div>
-            <div class="caddy_cleaner"></div>
-        </div>
-        <!-- ###CONTENT### -->
-        <!-- ###ITEM### -->
-        <div class="caddy_cart_product">
-            <div class="caddy_cart_col caddy_cart_col1">
-              <input  type="text" value="###QTY###" name="###QTY_NAME###" onchange="this.form.submit()" />
-            </div>
-	        <div class="caddy_cart_col caddy_cart_col2">###SKU###</div>
-            <div class="caddy_cart_col caddy_cart_col2">###TITLE###</div>
-            <div class="caddy_cart_col caddy_cart_col3">###PRICE###</div>
-            <div class="caddy_cart_col caddy_cart_col4">###PRICE_TOTAL###</div>
-            <div class="caddy_cart_col caddy_cart_col5">###DELETE###</div>
-            <div class="caddy_cleaner"></div>
-			<div class="caddy_cart_error">###ERROR_MSG###</div>
-        </div>
-        <!-- ###ITEM### -->
-        <!-- ###CONTENT### -->
-        <div class="caddy_cart_footer">                        
-            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_PRODUCTSNET###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###PRODUCTSNET###</div>
-            <div class="caddy_cleaner"></div>
-            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_OPTIONSNET###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###OPTIONSNET###</div>
-            <div class="caddy_cleaner"></div>
-            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_TAX###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4"></div>
-            <div class="caddy_cleaner"></div>
-            <div class="caddy_cart_col caddy_cart_col1_2">###TAXRATE_NORMAL_STRING###<br />###TAXRATE_REDUCED_STRING###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###SUMTAXNORMAL###<br />###SUMTAXREDUCED###</div>
-            <div class="caddy_cleaner"></div>
-            <div class="caddy_cart_col caddy_cart_col1_2">###CADDY_LL_SUMGROSS###</div>
-            <div class="caddy_cart_col caddy_cart_col3_4">###SUMGROSS###</div>
-            <div class="caddy_cleaner"></div>
-        </div>
-        ###SHIPPING_RADIO###
-        ###PAYMENT_RADIO###
-        ###SPECIAL_CHECKBOX###
-    </form>
+  ###MINPRICE###
+  <form name="cart" id="cart" action="###TARGET###" method="post">
+    ###VARIANTS###
+    <div class="caddy_cart_header">
+      <div class="caddy_cart_col caddy_cart_col1">###CADDY_LL_QTY###</div>
+      <div class="caddy_cart_col caddy_cart_col2">###CADDY_LL_SKU###</div>
+      <div class="caddy_cart_col caddy_cart_col2">###CADDY_LL_TITLE###</div>
+      <div class="caddy_cart_col caddy_cart_col3">###CADDY_LL_PRICE###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###CADDY_LL_PRICE_TOTAL###</div>
+      <div class="caddy_cleaner"></div>
+    </div>
+    <!-- ###CONTENT### -->
+    <!-- ###ITEM### -->
+    <div class="caddy_cart_product">
+      <div class="caddy_cart_col caddy_cart_col1">
+        <input  type="text" value="###QTY###" name="###QTY_NAME###" onchange="this.form.submit()" />
+      </div>
+      <div class="caddy_cart_col caddy_cart_col2">###SKU###</div>
+      <div class="caddy_cart_col caddy_cart_col3">###TITLE###</div>
+      <div class="caddy_cart_col caddy_cart_col4">###PRICE###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###PRICE_TOTAL###</div>
+      <div class="caddy_cart_col caddy_cart_col6">###DELETE###</div>
+      <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_error">###ERROR_MSG###</div>
+    </div>
+    <!-- ###ITEM### -->
+    <!-- ###CONTENT### -->
+    <div class="caddy_cart_footer">                        
+      <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_PRODUCTSNET###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###PRODUCTSNET###</div>
+      <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_OPTIONSNET###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###OPTIONSNET###</div>
+      <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_TAX###</div>
+      <div class="caddy_cart_col caddy_cart_col5"></div>
+      <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col2_3">###TAXRATE_NORMAL_STRING###<br />###TAXRATE_REDUCED_STRING###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###SUMTAXNORMAL###<br />###SUMTAXREDUCED###</div>
+      <div class="caddy_cleaner"></div>
+      <div class="caddy_cart_col caddy_cart_col2_3">###CADDY_LL_SUMGROSS###</div>
+      <div class="caddy_cart_col caddy_cart_col5">###SUMGROSS###</div>
+    <div class="caddy_cleaner"></div>
+    </div>
+    ###SHIPPING_RADIO###
+    ###PAYMENT_RADIO###
+    ###SPECIAL_CHECKBOX###
+  </form>
 </div>
 <!-- ###CADDY### end -->
 
 
 <!-- ###CADDY_SHIPPING### begin -->
 <div id="caddy_shipping">
-    <fieldset>
-        <legend>###CADDY_LL_SHIPPINGNET###</legend>
-        <!-- ###CONTENT### --><!-- ###ITEM### -->
-        <div class="caddy_cart_fieldwrap_radio">###SHIPPING_RADIO### ###SHIPPING_TITLE### ###SHIPPING_CONDITION###</div>
-        <!-- ###ITEM### --><!-- ###CONTENT### -->
-    </fieldset>
+  <fieldset>
+    <legend>###CADDY_LL_SHIPPINGNET###</legend>
+    <!-- ###CONTENT### --><!-- ###ITEM### -->
+    <div class="caddy_cart_fieldwrap_radio">###SHIPPING_RADIO### ###SHIPPING_TITLE### ###SHIPPING_CONDITION###</div>
+    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  </fieldset>
 </div>
 <!-- ###CADDY_SHIPPING### end -->
 
 
 <!-- ###CADDY_SHIPPING_CONDITIONS### begin -->
 <ul class="caddy_shipping_conditions">
-	<!-- ###CONTENT### --><!-- ###ITEM### -->
-    <li>###CONDITION###</li>
-    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  <!-- ###CONTENT### --><!-- ###ITEM### -->
+  <li>###CONDITION###</li>
+  <!-- ###ITEM### --><!-- ###CONTENT### -->
 </ul>
 <!-- ###CADDY_SHIPPING_CONDITIONS### end -->
 
 
 <!-- ###CADDY_PAYMENT### begin -->
 <div id="caddy_payment">
-    <fieldset>
-        <legend>###CADDY_LL_PAYMENTNET###</legend>
-        <!-- ###CONTENT### --><!-- ###ITEM### -->
-        <div class="caddy_cart_fieldwrap_radio">###PAYMENT_RADIO### ###PAYMENT_TITLE### ###PAYMENT_CONDITION###</div>
-        <!-- ###ITEM### --><!-- ###CONTENT### -->
-    </fieldset>
+  <fieldset>
+    <legend>###CADDY_LL_PAYMENTNET###</legend>
+    <!-- ###CONTENT### --><!-- ###ITEM### -->
+    <div class="caddy_cart_fieldwrap_radio">###PAYMENT_RADIO### ###PAYMENT_TITLE### ###PAYMENT_CONDITION###</div>
+    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  </fieldset>
 </div>
 <!-- ###CADDY_PAYMENT### end -->
 
 
 <!-- ###CADDY_PAYMENT_CONDITIONS### begin -->
 <ul class="caddy_payment_conditions">
-	<!-- ###CONTENT### --><!-- ###ITEM### -->
-    <li>###CONDITION###</li>
-    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  <!-- ###CONTENT### --><!-- ###ITEM### -->
+  <li>###CONDITION###</li>
+  <!-- ###ITEM### --><!-- ###CONTENT### -->
 </ul>
 <!-- ###CADDY_PAYMENT_CONDITIONS### end -->
 
 
 <!-- ###CADDY_SPECIAL### begin -->
 <div id="caddy_special">
-    <fieldset>
-        <legend>###CADDY_LL_SPECIALNET###</legend>
-        <!-- ###CONTENT### --><!-- ###ITEM### -->
-        <div class="caddy_cart_fieldwrap_checkbox">###SPECIAL_CHECKBOX### ###SPECIAL_TITLE### ###SPECIAL_CONDITION###</div>
-        <!-- ###ITEM### --><!-- ###CONTENT### -->
-    </fieldset>
+  <fieldset>
+    <legend>###CADDY_LL_SPECIALNET###</legend>
+    <!-- ###CONTENT### --><!-- ###ITEM### -->
+    <div class="caddy_cart_fieldwrap_checkbox">###SPECIAL_CHECKBOX### ###SPECIAL_TITLE### ###SPECIAL_CONDITION###</div>
+    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  </fieldset>
 </div>
 <!-- ###CADDY_SPECIAL### end -->
 
 
 <!-- ###CADDY_SPECIAL_CONDITIONS### begin -->
 <ul class="caddy_special_conditions">
-	<!-- ###CONTENT### --><!-- ###ITEM### -->
-    <li>###CONDITION###</li>
-    <!-- ###ITEM### --><!-- ###CONTENT### -->
+  <!-- ###CONTENT### --><!-- ###ITEM### -->
+  <li>###CONDITION###</li>
+  <!-- ###ITEM### --><!-- ###CONTENT### -->
 </ul>
 <!-- ###CADDY_SPECIAL_CONDITIONS### end -->
 
@@ -172,102 +172,102 @@ VERSION 1.2.2
 <!-- ###CADDY_POWERMAIL### begin -->
 ###ORDERNUMBER###
 <table width="500" cellpadding="3" cellspacing="0" bgcolor="cccccc" border="1">
-    <tr style="font-weight: bold;">
-        <td>###CADDY_LL_QTY###</td>
-	    <td>###CADDY_LL_SKU###</td>
-        <td>###CADDY_LL_TITLE###</td>
-        <td>###CADDY_LL_PRICE###</td>
-        <td>###CADDY_LL_PRICE_TOTAL###</td>
-    </tr>
-    <!-- ###CONTENT### -->
-    <!-- ###ITEM### -->
-    <tr>
-        <td>###QTY###</td>
-		<td>###SKU###</td>
-        <td>###TITLE###</td>
-        <td>###PRICE###</td>
-        <td>###PRICE_TOTAL###</td>
-    </tr>
-    <!-- ###ITEM### -->
-    <!-- ###CONTENT### -->
-    <tr>
-        <td colspan="5">
-            <table cellpadding="0" cellspacing="0" width="100%">
-                <tr style="font-weight: bold;">
-                    <td>&nbsp;</td>
-                    <td colspan="2">
-                    	###CADDY_LL_PRODUCTSNET###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>###PRODUCTSNET###</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td>&nbsp;</td>
-                    <td colspan="2">
-                    	###CADDY_LL_OPTIONSNET###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>###OPTIONSNET###</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td>&nbsp;</td>
-                    <td colspan="2">
-                    	###CADDY_LL_TAX###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td>&nbsp;</td>
-                    <td colspan="2">
-                    	###TAXRATE_NORMAL_STRING###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>###SUMTAXNORMAL###</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td width="30">&nbsp;</td>
-                    <td colspan="2">
-                    	###TAXRATE_REDUCED_STRING###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>###SUMTAXREDUCED###</td>
-                </tr>
-                <tr style="font-weight: bold;">
-                    <td width="30">&nbsp;</td>
-                    <td colspan="2">
-                    	###CADDY_LL_SUMGROSS###
-					</td>
-                    <td>&nbsp;</td>
-                    <td>###SUMGROSS###</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            ###CADDY_LL_SHIPPINGNET###
-        </td>
-        <td colspan="3">
-            ###SHIPPINGNET###
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            ###CADDY_LL_PAYMENTNET###
-        </td>
-        <td colspan="3">
-            ###PAYMENTNET###
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            ###CADDY_LL_SPECIALNET###
-        </td>
-        <td colspan="3">
-            ###SPECIALNET###
-        </td>
-    </tr>
+  <tr style="font-weight: bold;">
+    <td>###CADDY_LL_QTY###</td>
+    <td>###CADDY_LL_SKU###</td>
+    <td>###CADDY_LL_TITLE###</td>
+    <td>###CADDY_LL_PRICE###</td>
+    <td>###CADDY_LL_PRICE_TOTAL###</td>
+  </tr>
+  <!-- ###CONTENT### -->
+  <!-- ###ITEM### -->
+  <tr>
+    <td>###QTY###</td>
+    <td>###SKU###</td>
+    <td>###TITLE###</td>
+    <td>###PRICE###</td>
+    <td>###PRICE_TOTAL###</td>
+  </tr>
+  <!-- ###ITEM### -->
+  <!-- ###CONTENT### -->
+  <tr>
+    <td colspan="5">
+      <table cellpadding="0" cellspacing="0" width="100%">
+        <tr style="font-weight: bold;">
+          <td>&nbsp;</td>
+          <td colspan="2">
+          ###CADDY_LL_PRODUCTSNET###
+          </td>
+          <td>&nbsp;</td>
+          <td>###PRODUCTSNET###</td>
+        </tr>
+        <tr style="font-weight: bold;">
+          <td>&nbsp;</td>
+          <td colspan="2">
+          ###CADDY_LL_OPTIONSNET###
+          </td>
+          <td>&nbsp;</td>
+          <td>###OPTIONSNET###</td>
+        </tr>
+        <tr style="font-weight: bold;">
+          <td>&nbsp;</td>
+          <td colspan="2">
+          ###CADDY_LL_TAX###
+          </td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr style="font-weight: bold;">
+          <td>&nbsp;</td>
+          <td colspan="2">
+          ###TAXRATE_NORMAL_STRING###
+          </td>
+          <td>&nbsp;</td>
+          <td>###SUMTAXNORMAL###</td>
+        </tr>
+        <tr style="font-weight: bold;">
+          <td width="30">&nbsp;</td>
+          <td colspan="2">
+          ###TAXRATE_REDUCED_STRING###
+          </td>
+          <td>&nbsp;</td>
+          <td>###SUMTAXREDUCED###</td>
+        </tr>
+        <tr style="font-weight: bold;">
+          <td width="30">&nbsp;</td>
+          <td colspan="2">
+          ###CADDY_LL_SUMGROSS###
+          </td>
+          <td>&nbsp;</td>
+          <td>###SUMGROSS###</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+    ###CADDY_LL_SHIPPINGNET###
+    </td>
+    <td colspan="3">
+    ###SHIPPINGNET###
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+    ###CADDY_LL_PAYMENTNET###
+    </td>
+    <td colspan="3">
+    ###PAYMENTNET###
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+    ###CADDY_LL_SPECIALNET###
+    </td>
+    <td colspan="3">
+    ###SPECIALNET###
+    </td>
+  </tr>
 </table>
 <br />
 ###PAYMENT_NOTE###
@@ -276,21 +276,21 @@ VERSION 1.2.2
 
 <!-- ###CADDY_FORM### begin --> 
 <div class="caddy_form">
-	<form action="###CADDY_FORM_ACTION###">
-		<input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid">
-		<input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id">
-		<input type="text" value="1" name="qty">
-		<input type="submit" value="###CADDY_LL_FORM_SUBMIT###">
-	</form>
+  <form action="###CADDY_FORM_ACTION###">
+    <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid">
+    <input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id">
+    <input type="text" value="1" name="qty">
+    <input type="submit" value="###CADDY_LL_FORM_SUBMIT###">
+  </form>
 </div>
 <!-- ###CADDY_FORM### end -->
 
 
 <!-- ###CADDY_MINICART### begin --> 
 <div class="caddy_minicart">
-	<div>###MINICART_COUNT### ###CADDY_LL_COUNT_PRODUCTS_IN_CART###</div>
-	<div>###MINISUMGROSS###</div>
-	<div>###MINICART_LINK###</div>
+  <div>###MINICART_COUNT### ###CADDY_LL_COUNT_PRODUCTS_IN_CART###</div>
+  <div>###MINISUMGROSS###</div>
+  <div>###MINICART_LINK###</div>
 </div>
 <!-- ###CADDY_MINICART### end -->
 

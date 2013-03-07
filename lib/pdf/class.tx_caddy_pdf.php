@@ -1423,7 +1423,6 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['terms.']['filename.']
                 );
     $destPath = 'uploads/tx_caddy/' . $destFile;
-var_dump( __METHOD__, __LINE__, $destPath );
       // Get the path of the destination file
 
       // RETURN : destination file already exists
