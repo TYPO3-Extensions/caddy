@@ -65,60 +65,6 @@ class tx_caddy_pdf extends tslib_pibase
 
   /***********************************************
   *
-  * Main
-  *
-  **********************************************/
-
- /**
-  * the main method of the PlugIn
-  *
-  * @param	string		$content  : The PlugIn content
-  * @param	array		$conf     : The PlugIn configuration
-  * @return	string		$errorcnt : Error prompt
-  * @version    2.0.0
-  * @since      1.4.6
-  */
-  public function createPdf( &$session=null ) 
-  {
-    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-    $this->confSettings = $this->conf['settings.'];
-    $this->confPdf      = $this->conf['pdf.'];
-
-    $this->pi_loadLL();
-    $errorcnt = 0;
-    // CHECK: Should PDF attached to mail?
-    unset($session['files']);
-
-//    $this->ofilename =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-//                        (
-//                          $this->confPdf['invoice.']['filename'], 
-//                          $this->confPdf['invoice.']['filename.']
-//                        );
-
-//    $this->onumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-//                      (
-//                        $this->confPdf['invoice.']['ordernumber'], 
-//                        $this->confPdf['invoice.']['ordernumber.']
-//                      );
-    $this->pnumber =  $GLOBALS['TSFE']->cObj->cObjGetSingle
-                      (
-                        $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder'], 
-                        $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']
-                      );
-
-//    $this->conf = $this->confPdf['invoice.'];
-//    $errorcnt += $this->renderInvoice($session);
-    
-    //$this->conf = $this->confPdf['deliveryorder.']['content.'];
-    $errorcnt += $this->deliveryorder( );
-
-    return $errorcnt;
-  }
-  
-  
-
-  /***********************************************
-  *
   * Caddy
   *
   **********************************************/
@@ -436,7 +382,7 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * deliveryorder( ) : 
   *
-  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @return	string		$path : path to the rendered pdf file
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
@@ -496,7 +442,7 @@ class tx_caddy_pdf extends tslib_pibase
 
       // HTML template
     $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] ); 
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDERPDF###' );
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDER###' );
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
       // PDF source file
@@ -552,7 +498,7 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $additionalTextblocks = $this->confPdf['deliveryorder.']['content.']['additionaltextblocks.'];
 
-      // LOOP : fields, the elements of a product
+      // LOOP : additional textblocks
     foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
     { 
       if( ! stristr( $key, '.' ) )
@@ -562,13 +508,14 @@ class tx_caddy_pdf extends tslib_pibase
       
       $this->writeTextblock( $additionalTextblocks[$key], 'deliveryorder.additionaltextblocks.' . $key );
     }
+      // LOOP : additional textblocks
         
   }
   
  /**
   * deliveryorderAddress( ) : 
   *
-  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @return	void
   * @access     public
   * @version    2.0.0
   * @since      1.4.6
@@ -684,35 +631,6 @@ class tx_caddy_pdf extends tslib_pibase
     }
         
   }
-
-// /**
-//  * deliveryorderNumber( ) : 
-//  *
-//  * @return	boolean		false, if delivery order isn't needed
-//  * @access     private
-//  * @version    2.0.0
-//  * @since      2.0.0
-//  */
-//
-//  private function deliveryorderNumber( )
-//  {
-//      // Get the body content
-//    $body         = $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']['body.'];
-//    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-//      // Get the body content
-//      
-//    if( empty( $htmlContent ) )
-//    {
-//      return;
-//    }
-//
-//    $header       = $this->confPdf['deliveryorder.']['content.']['numbers.']['deliveryorder.']['header.'];
-//    $htmlContent  = $this->header( $header ) . $htmlContent;
-//    $this->tcpdfWrite( $body['properties.'], $htmlContent, 'numbers' );
-//
-//    return;
-//  }
-
 
 
 
@@ -834,6 +752,249 @@ class tx_caddy_pdf extends tslib_pibase
       die( $prompt );
     }  
   }
+
+
+
+  /***********************************************
+  *
+  * Invoice
+  *
+  **********************************************/
+
+ /**
+  * invoice( ) : 
+  *
+  * @return	string		$path : path to the rendered pdf file
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function invoice( )
+  {
+    $destFile = null;
+    $destPath = null;
+
+      // Init caddy pdf
+    $this->init( );
+    
+      // RETURN : any pdf is requested
+    if( ! $this->invoiceInit( ) )
+    {
+      return;
+    }
+      // RETURN : any pdf is requested
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Add session data to the local cObj
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+      // Get the path of the destination file
+    $destFile = $this->local_cObj->cObjGetSingle
+                (
+                  $this->confPdf['invoice.']['filename'], 
+                  $this->confPdf['invoice.']['filename.']
+                );
+    $destPath = 'uploads/tx_caddy/' . $destFile;
+      // Get the path of the destination file
+
+      // RETURN : destination file already exists
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) ) 
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
+      }
+        // DRS
+      return $destPath;
+    }
+      // RETURN : destination file already exists
+
+      // HTML template
+    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['invoice.']['template'] ); 
+    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_INVOICE###' );
+    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
+
+      // PDF source file
+    $srceFile = $sesArray['sendVendorInvoice'];
+    if( empty ( $srceFile ) )
+    {
+      $srceFile = $sesArray['sendCustomerInvoice'];
+    }
+    if( empty ( $srceFile ) )
+    {
+      $prompt = 'Can\'t get source file from session data ' . 
+                'sendCustomerInvoice/sendVendorInvoice<br />' . PHP .
+                __METHOD__ . '(line ' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // PDF source file
+
+      // Init tcpdf
+    $this->tcpdf = $this->tcpdfInit( $srceFile );
+
+      // Write the delivery order address
+    $fallBackToInvoiceAddress = false;
+    $this->invoiceAddress( $fallBackToInvoiceAddress );
+
+      // Write the delivery order date
+    $this->invoiceDate( );
+
+      // Write the delivery order number
+    $this->invoiceNumbers( );
+
+      // Write additional textblocks
+    $this->invoiceAdditionalTextblocks( );
+
+      // Write the caddy
+    $this->caddy( );
+
+      // Create the PDF
+    $this->tcpdfOutput( $destPath );
+
+      // RETURN : 
+    return $destPath;
+  }
+  
+ /**
+  * invoiceAdditionalTextblocks( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function invoiceAdditionalTextblocks( )
+  {
+    $additionalTextblocks = $this->confPdf['invoice.']['content.']['additionaltextblocks.'];
+
+      // LOOP : additional textblocks
+    foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
+    { 
+      if( ! stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+      
+      $this->writeTextblock( $additionalTextblocks[$key], 'invoice.additionaltextblocks.' . $key );
+    }
+      // LOOP : additional textblocks
+        
+  }
+  
+ /**
+  * invoiceAddress( ) : 
+  *
+  * @return	void
+  * @access     public
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function invoiceAddress( )
+  {
+    $invoiceaddress = $this->confPdf['invoice.']['content.']['address.']['invoice.'];
+    $this->writeTextblock( $invoiceaddress, 'invoiceaddress' );
+  }
+
+ /**
+  * invoiceDate( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+
+  private function invoiceDate( )
+  {
+    $date = $this->confPdf['invoice.']['content.']['date.'];
+    $this->writeTextblock( $date, 'invoiceDate' );
+  }
+
+ /**
+  * invoiceInit( ) : 
+  *
+  * @return	boolean		false, if delivery order isn't needed
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function invoiceInit( )
+  {
+    $invoiceInit = null;
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // RETURN : any pdf is requested
+    switch( true )
+    {
+      case( ! empty( $sesArray['sendCustomerInvoice'] ) ):
+      case( ! empty( $sesArray['sendVendorInvoice'] ) ):
+        $invoiceInit = true;
+        break;
+      default:
+        $invoiceInit = false;
+        break;
+    }
+    unset( $sesArray );
+    
+    if( ! $invoiceInit )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+      // RETURN : any pdf is requested
+
+    return $invoiceInit;
+  }
+  
+ /**
+  * invoiceNumbers( ) : 
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function invoiceNumbers( )
+  {
+    $numbers = $this->confPdf['invoice.']['content.']['numbers.'];
+
+      // LOOP : fields, the elements of a product
+    foreach( array_keys ( ( array ) $numbers ) as $key )
+    { 
+      if( ! stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+      
+      $this->writeTextblock( $numbers[$key], 'invoice.numbers.' . $key );
+    }
+        
+  }
+
+
+
+
+
   private function renderAdditionalTextblocks(&$fpdi) {
           foreach ($this->confPdf['additionaltextblocks.'] as $key => $value) {
                   $html = $GLOBALS['TSFE']->cObj->cObjGetSingle($value['content'], $value['content.']);
@@ -1076,7 +1237,7 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * terms( ) : 
   *
-  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @return	string		$path : path to the rendered pdf file
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
@@ -1149,7 +1310,6 @@ var_dump( __METHOD__, __LINE__, $destPath );
       die( $prompt );
     }
       // PDF source file
-var_dump( __METHOD__, __LINE__, $srceFile );
 
       // Init tcpdf
     $this->tcpdf = $this->tcpdfInit( $srceFile );
@@ -1174,7 +1334,6 @@ var_dump( __METHOD__, __LINE__, $srceFile );
     $this->tcpdfOutput( $destPath );
 
       // RETURN : 
-var_dump( __METHOD__, __LINE__, $destPath );
     return $destPath;
   }
   
@@ -1190,7 +1349,7 @@ var_dump( __METHOD__, __LINE__, $destPath );
   {
     $additionalTextblocks = $this->confPdf['terms.']['content.']['additionaltextblocks.'];
 
-      // LOOP : fields, the elements of a product
+      // LOOP : additional textblocks
     foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
     { 
       if( ! stristr( $key, '.' ) )
@@ -1200,13 +1359,14 @@ var_dump( __METHOD__, __LINE__, $destPath );
       
       $this->writeTextblock( $additionalTextblocks[$key], 'terms.additionaltextblocks.' . $key );
     }
+      // LOOP : additional textblocks
         
   }
   
  /**
   * termsAddress( ) : 
   *
-  * @return	boolean		true, in case of en arror. false, if all is proper
+  * @return	void
   * @access     public
   * @version    2.0.0
   * @since      1.4.6

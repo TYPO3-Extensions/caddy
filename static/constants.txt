@@ -203,7 +203,7 @@ plugin.caddy {
   # cat=caddy - pdf terms//101; type=int+; label= Terms position left: Position of the terms from the left margin in millimeters
   pdf.terms.x = 25
   # cat=caddy - pdf terms//102; type=int+; label= Terms position top: Position of the terms from the top margin in millimeters
-  pdf.terms.y = 110
+  pdf.terms.y = 100
   # cat=caddy - pdf terms//103; type=int+; label= Terms width: Width of the terms in millimeters
   pdf.terms.width = 165
   # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points

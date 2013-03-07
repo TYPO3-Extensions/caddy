@@ -1036,7 +1036,7 @@ class tx_caddy_powermail
       // DRS
       
     $paths[] = $this->sendToCustomerDeliveryorder( );
-//    $paths[] = $this->sendToCustomerInvoice( );
+    $paths[] = $this->sendToCustomerInvoice( );
     $paths[] = $this->sendToCustomerTerms( );
     
     if( empty( $paths ) ) 
