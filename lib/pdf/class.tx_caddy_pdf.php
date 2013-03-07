@@ -543,12 +543,12 @@ class tx_caddy_pdf extends tslib_pibase
       // LOOP : fields, the elements of a product
     foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
     { 
-      if( stristr( $key, '.' ) )
+      if( ! stristr( $key, '.' ) )
       { 
         continue;
       }
       
-      $this->writeTextblock( $additionalTextblock[$key], 'deliveryorderAdditionalTextblocks' );
+      $this->writeTextblock( $additionalTextblocks[$key], 'deliveryorder.additionaltextblocks.' . $key );
     }
         
   }
@@ -682,17 +682,14 @@ class tx_caddy_pdf extends tslib_pibase
   private function deliveryorderNumbers( )
   {
     $numbers = $this->confPdf['deliveryorder.']['numbers.'];
-var_dump( __METHOD__, __LINE__, $numbers );      
 
       // LOOP : fields, the elements of a product
-//    foreach( array_keys ( ( array ) $numbers ) as $key )
-    foreach( ( array ) $numbers as $key => $number )
+    foreach( array_keys ( ( array ) $numbers ) as $key )
     { 
       if( ! stristr( $key, '.' ) )
       { 
         continue;
       }
-var_dump( __METHOD__, __LINE__, $numbers[$key], $key );      
       
       $this->writeTextblock( $numbers[$key], 'deliveryorder.numbers.' . $key );
     }
@@ -1048,16 +1045,19 @@ var_dump( __METHOD__, __LINE__, $numbers[$key], $key );
       // Set font
     $this->tcpdfSetFont( $properties['font.'] );
 
+      // short variable
+    $cell = $properties['cell.'];
+
       // Get properties for the HTML cell
-    $w            = $properties['cell.']['width'];
-    $h            = $properties['cell.']['height'];
-    $x            = $properties['cell.']['x'];
-    $y            = $properties['cell.']['y'];
+    $w            = $this->zz_cObjGetSingle( $cell['width'], $cell['width.'] );
+    $h            = $this->zz_cObjGetSingle( $cell['height'], $cell['height.'] );
+    $x            = $this->zz_cObjGetSingle( $cell['x'], $cell['x.'] );$cell['x'];
+    $y            = $this->zz_cObjGetSingle( $cell['y'], $cell['y.'] );$cell['y'];
     $border       = 0;
     $ln           = 0;
     $fill         = false;
     $reseth       = true;
-    $align        = $properties['cell.']['align'];
+    $align        = $this->zz_cObjGetSingle( $cell['align'], $cell['align.'] );
     $autopadding  = true;
       // Get properties for the HTML cell
 
@@ -1108,6 +1108,41 @@ var_dump( __METHOD__, __LINE__, $numbers[$key], $key );
     $htmlContent  = $this->header( $header ) . $htmlContent;
 //var_dump( __METHOD__, __LINE__, $body['properties.'] );      
     $this->tcpdfWrite( $body['properties.'], $htmlContent, $drsLabel );
+  }
+
+
+
+
+  /***********************************************
+  *
+  * ZZ
+  *
+  **********************************************/
+
+ /**
+  * zz_cObjGetSingle( )
+  *
+  * @param	[type]		$$cObj_name: ...
+  * @param	[type]		$cObj_conf: ...
+  * @return	string
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+  {
+    switch( true )
+    {
+      case( is_array( $cObj_conf ) ):
+        $value = $GLOBALS['TSFE']->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        break;
+      case( ! ( is_array( $cObj_conf ) ) ):
+      default:
+        $value = $cObj_name;
+        break;
+    }
+
+    return $value;
   }
 
 }
