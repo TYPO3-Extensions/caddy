@@ -513,7 +513,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->deliveryorderDate( );
 
       // Write the delivery order number
-    $this->deliveryorderNumber( );
+    $this->deliveryorderNumbers( );
 
       // Write additional textblocks
     $this->deliveryorderAdditionalTextblocks( );
