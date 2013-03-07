@@ -226,29 +226,39 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // FOREACH  : overall item
  
-    $subpartArray['###CADDY_LL_SUMNET###']        = $this->pi_getLL('caddy_ll_cart_net');
+    $subpartArray['###CADDY_LL_SUMNET###']        = $this->pi_getLL('caddy_ll_sumnet');
     $subpartArray['###CADDY_LL_SERVICE_COST###']  = $this->pi_getLL('caddy_ll_service_cost');
     $subpartArray['###CADDY_LL_TAX###']           = $this->pi_getLL('caddy_ll_tax');
-    $subpartArray['###CADDY_LL_SUMGROSS###']      = $this->pi_getLL('caddy_ll_gross_total');
-    $subpartArray['###CADDY_LL_SHIPPING###']      = $this->pi_getLL('caddy_ll_shipping');
-    $subpartArray['###CADDY_LL_PAYMENT###']       = $this->pi_getLL('caddy_ll_payment');
-    $subpartArray['###CADDY_LL_SPECIAL###']       = $this->pi_getLL('caddy_ll_special');
+    $subpartArray['###CADDY_LL_SUMGROSS###']      = $this->pi_getLL('caddy_ll_sumgross');
 
-    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
-    $paymentLabel       = $confPaymentOptions[$sesArray['payment'].'.']['title'];
-    $subpartArray['###PAYMENT_OPTION###'] = $paymentLabel;
+//    if( $sesArray['payment'] )
+//    {
+      $subpartArray['###CADDY_LL_PAYMENT###'] = $this->pi_getLL('caddy_ll_payment');
+      $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
+      $paymentLabel       = $confPaymentOptions[ $sesArray['payment'] . '.' ]['title'];
+      $subpartArray['###PAYMENT_OPTION###'] = $paymentLabel;
+//    }
+//      
+//    if( $sesArray['shipping'] )
+//    {
+      $subpartArray['###CADDY_LL_SHIPPING###']  = $this->pi_getLL('caddy_ll_shipping');
+      $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
+      $shippingLabel        = $confShippingOptions[ $sesArray['shipping'] . '.' ]['title'];
+      $subpartArray['###SHIPPING_OPTION###'] = $shippingLabel;
+//    }
 
-    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
-    $shippingLabel        = $confShippingOptions[$sesArray['shipping'].'.']['title'];
-    $subpartArray['###SHIPPING_OPTION###'] = $shippingLabel;
-
-    $options = null;
+    $specialOptions = null;
     $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
     foreach( ( array ) $sesArray['special'] as $special_id ) 
     {
-      $options = $options . $confSpecialOptions[$special_id.'.']['title'];
+      $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
     }
-    $subpartArray['###SPECIAL_OPTION###'] = $options;
+    
+//    if( $specialOptions )
+//    {
+      $subpartArray['###CADDY_LL_SPECIAL###'] = $this->pi_getLL('caddy_ll_special');
+      $subpartArray['###SPECIAL_OPTION###']   = $specialOptions;
+//    }
     
     return $subpartArray;
   }

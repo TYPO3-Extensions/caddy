@@ -8,16 +8,28 @@ INDEX
 <!-- ###CADDY_DELIVERYORDER### begin -->
 <table border="1" cellpadding="3" cellspacing="0" width="100%">
   <tr style="font-weight: bold;">
-    <td>###CADDY_LL_QTY###</td>
-    <td>###CADDY_LL_SKU###</td>
-    <td>###CADDY_LL_TITLE###</td>
+    <td style="width:10%;">
+      ###CADDY_LL_QTY###
+    </td>
+    <td>
+      ###CADDY_LL_SKU###
+    </td>
+    <td>
+      ###CADDY_LL_TITLE###
+    </td>
   </tr>
   <!-- ###CONTENT### -->
   <!-- ###ITEM### -->
   <tr>
-    <td>###QTY###</td>
-    <td>###SKU###</td>
-    <td>###TITLE###</td>
+    <td style="width:10%;">
+      ###QTY###
+    </td>
+    <td>
+      ###SKU###
+    </td>
+    <td>
+      ###TITLE###
+    </td>
   </tr>
   <!-- ###ITEM### -->
   <!-- ###CONTENT### -->
@@ -27,87 +39,149 @@ INDEX
 <!-- ###CADDY_INVOICE### begin -->
 <table border="1" cellpadding="3" cellspacing="0" width="100%">
   <tr style="font-weight: bold;">
-    <td>###CADDY_LL_QTY###</td>
-    <td>###CADDY_LL_SKU###</td>
-    <td>###CADDY_LL_TITLE###</td>
-    <td>###CADDY_LL_PRICE###</td>
-    <td>###CADDY_LL_PRICE_TOTAL###</td>
+    <td style="width:10%;">
+      ###CADDY_LL_QTY###
+    </td>
+    <td style="width:30%;">
+      ###CADDY_LL_SKU###
+    </td>
+    <td style="width:30%;">
+      ###CADDY_LL_TITLE###
+    </td>
+    <td style="width:15%;">
+      ###CADDY_LL_PRICE###
+    </td>
+    <td style="width:15%;">
+      ###CADDY_LL_PRICE_TOTAL###
+    </td>
   </tr>
   <!-- ###CONTENT### -->
   <!-- ###ITEM### -->
   <tr>
-    <td>###QTY###</td>
-    <td>###SKU###</td>
-    <td>###TITLE###</td>
-    <td align="right">###PRICE###</td>
-    <td align="right">###PRICE_TOTAL###</td>
+    <td>
+      ###QTY###
+    </td>
+    <td>
+      ###SKU###
+    </td>
+    <td>
+      ###TITLE###
+    </td>
+    <td align="right">
+      ###PRICE###
+    </td>
+    <td align="right">
+      ###PRICE_TOTAL###
+    </td>
   </tr>
   <!-- ###ITEM### -->
   <!-- ###CONTENT### -->
-  <tr>
-    <td colspan="5">
-      <table border="0" cellpadding="1" cellspacing="0" width="100%">
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###CADDY_LL_SUMNET###</td>
-          <td>&nbsp;</td>
-          <td align="right">###PRODUCTSNET###</td>
-        </tr>
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###CADDY_LL_SERVICE_COST###</td>
-          <td>&nbsp;</td>
-          <td align="right">###OPTIONSNET###</td>
-        </tr>
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###CADDY_LL_TAX###</td>
-          <td>&nbsp;</td>
-          <td align="right">&nbsp;</td>
-        </tr>
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###TAXRATE_NORMAL_STRING###</td>
-          <td>&nbsp;</td>
-          <td align="right">###SUMTAXNORMAL###</td>
-        </tr>
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###TAXRATE_REDUCED_STRING###</td>
-          <td>&nbsp;</td>
-          <td align="right">###SUMTAXREDUCED###</td>
-        </tr>
-        <tr style="font-weight: bold;">
-          <td>&nbsp;</td>
-          <td colspan="2" align="left">###CADDY_LL_SUMGROSS###</td>
-          <td>&nbsp;</td>
-          <td align="right">###SUMGROSS###</td>
-        </tr>
-      </table>
+  <tr style="font-weight: bold;">
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###CADDY_LL_SUMNET###
+    </td>
+    <td align="right">
+      ###PRODUCTSNET###
     </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###CADDY_LL_SERVICE_COST###
+    </td>
+    <td align="right">
+      ###OPTIONSNET###
+    </td>
+  </tr>
+  <tr>
+    <td>
+      1
+    </td>
+    <td>
       ###CADDY_LL_SHIPPING###
     </td>
-    <td colspan="3">
+    <td>
       ###SHIPPING_OPTION###
     </td>
+    <td colspan="2">
+      &nbsp;
+    </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td>
+      1
+    </td>
+    <td>
       ###CADDY_LL_PAYMENT###
     </td>
-    <td colspan="3">
+    <td>
       ###PAYMENT_OPTION###
+    </td>
+    <td colspan="2">
+      &nbsp;
     </td>
   </tr>
   <tr>
-    <td colspan="2">
+    <td>
+      1
+    </td>
+    <td>
       ###CADDY_LL_SPECIAL###
     </td>
-    <td colspan="3">
+    <td>
       ###SPECIAL_OPTION###
+    </td>
+    <td colspan="2">
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###CADDY_LL_TAX###
+    </td>
+    <td align="right">
+      &nbsp;
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###TAXRATE_NORMAL_STRING###
+    </td>
+    <td align="right">
+      ###SUMTAXNORMAL###
+    </td>
+  </tr>
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###TAXRATE_REDUCED_STRING###
+    </td>
+    <td align="right">
+      ###TAXRATE_REDUCED_STRING###
+    </td>
+  </tr>
+  <tr style="font-weight: bold;">
+    <td>
+      &nbsp;
+    </td>
+    <td colspan="3">
+      ###CADDY_LL_SUMGROSS###
+    </td>
+    <td align="right">
+      ###SUMGROSS###
     </td>
   </tr>
 </table>
