@@ -1106,6 +1106,7 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['terms.']['filename.']
                 );
     $destPath = 'uploads/tx_caddy/' . $destFile;
+var_dump( __METHOD__, __LINE__, $destPath );
       // Get the path of the destination file
 
       // RETURN : destination file already exists
@@ -1124,6 +1125,7 @@ class tx_caddy_pdf extends tslib_pibase
 
       // PDF source file
     $srceFile = $sesArray['sendVendorTerms'];
+var_dump( __METHOD__, __LINE__, $srceFile );
 
       // Init tcpdf
     $this->tcpdf = $this->tcpdfInit( $srceFile );
@@ -1148,6 +1150,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tcpdfOutput( $destPath );
 
       // RETURN : 
+var_dump( __METHOD__, __LINE__, $destPath );
     return $destPath;
   }
   
