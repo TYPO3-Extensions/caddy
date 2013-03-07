@@ -27,7 +27,7 @@
       <label index="caddy_ll_payment_available_until">service option available until</label>
       <label index="caddy_ll_price">Price</label>
       <label index="caddy_ll_price_total">Total</label>
-      <label index="caddy_ll_qty">#</label>
+      <label index="caddy_ll_qty">Amount</label>
       <label index="caddy_ll_service_cost">Service- and Shipping costs</label>
       <label index="caddy_ll_service_each">each</label>
       <label index="caddy_ll_service_from">from</label>
@@ -71,7 +71,7 @@
       <label index="caddy_ll_payment_free_until">servicekostenfrei bis</label>
       <label index="caddy_ll_price">Preis</label>
       <label index="caddy_ll_price_total">Gesamt</label>
-      <label index="caddy_ll_qty">#</label>
+      <label index="caddy_ll_qty">Anzahl</label>
       <label index="caddy_ll_service_cost">Service- und Versandkosten</label>
       <label index="caddy_ll_service_each">je</label>
       <label index="caddy_ll_service_from">ab</label>
