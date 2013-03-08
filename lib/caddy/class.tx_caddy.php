@@ -1107,19 +1107,104 @@ class tx_caddy extends tslib_pibase
 
   /***********************************************
   *
-  * Getter
+  * Getting methods
   *
   **********************************************/
+
+ /**
+  * getPaymentOptionLabelBySessionId( )
+  *
+  * @return	array
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getPaymentOptionLabelBySessionId( )
+  {
+      // Get session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Get configuration
+    $conf = $this->conf['payment.']['options.'];
+    
+      // Get key for the option 
+    $key    = $sesArray['payment'] . '.';
+
+      // Render the option label
+    $name   = $conf[ $key ]['title'];
+    $conf   = $conf[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    
+    return $value;
+  }
+
+ /**
+  * getShippingOptionLabelBySessionId( )
+  *
+  * @return	array
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getShippingOptionLabelBySessionId( )
+  {
+      // Get session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Get configuration
+    $conf = $this->conf['shipping.']['options.'];
+    
+      // Get key for option 
+    $key    = $sesArray['shipping'] . '.';
+
+      // Render the option label
+    $name   = $conf[ $key ]['title'];
+    $conf   = $conf[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    
+    return $value;
+  }
+
+ /**
+  * getSpecialOptionLabelsBySessionId( )
+  *
+  * @return	array
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getSpecialOptionLabelsBySessionId( )
+  {
+      // Get session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Get configuration
+    $conf = $this->conf['special.']['options.'];
+    
+      // Get key for the option 
+
+      // Render the option label
+    $value = null;
+    foreach( ( array ) $sesArray['special'] as $key )
+    {
+      $name   = $conf[ $key ]['title'];
+      $conf   = $conf[ $key ]['title.'];
+      $value  = $value
+              . $this->zz_cObjGetSingle( $name, $conf );
+    }
+
+    return $value;
+  }
 
  /**
   * getServiceAttributes( )
   *
   * @return	array
-  * @access     public
+  * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function getServiceAttributes( )
+  private function getServiceAttributes( )
   {
     $arrResult =  array
                   (
@@ -1243,7 +1328,7 @@ class tx_caddy extends tslib_pibase
 
   /***********************************************
   *
-  * Setter
+  * Setting methods
   *
   **********************************************/
 

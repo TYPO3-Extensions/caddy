@@ -273,39 +273,42 @@ class tx_caddy_pdf extends tslib_pibase
       // Payment label
     $subpartArray['###CADDY_LL_PAYMENTNET###'] = $this->pi_getLL('caddy_ll_paymentnet');
 
-      // Payment value
-    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
-    $key    = $sesArray['payment'] . '.';
-    $name   = $confPaymentOptions[ $key ]['title'];
-    $conf   = $confPaymentOptions[ $key ]['title.'];
-    $value  = $this->zz_cObjGetSingle( $name, $conf );
-    $subpartArray['###PAYMENTNET###'] = $value;
-      // Payment value
+      // Payment option label
+//    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
+//    $key    = $sesArray['payment'] . '.';
+//    $name   = $confPaymentOptions[ $key ]['title'];
+//    $conf   = $confPaymentOptions[ $key ]['title.'];
+//    $value  = $this->zz_cObjGetSingle( $name, $conf );
+//    $subpartArray['###PAYMENTNET###'] = $value;
+    $subpartArray['###PAYMENTNET###'] = $this->caddy->getPaymentOptionLabelBySessionId( );
+      // Payment option label
 
       // Shipping label
     $subpartArray['###CADDY_LL_SHIPPINGNET###']  = $this->pi_getLL('caddy_ll_shippingnet');
 
-      // Shipping value
-    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
-    $key    = $sesArray['shipping'] . '.';
-    $name   = $confShippingOptions[ $key ]['title'];
-    $conf   = $confShippingOptions[ $key ]['title.'];
-    $value  = $this->zz_cObjGetSingle( $name, $conf );
-    $subpartArray['###SHIPPINGNET###'] = $value;
-      // Shipping value
+      // Shipping option label
+//    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
+//    $key    = $sesArray['shipping'] . '.';
+//    $name   = $confShippingOptions[ $key ]['title'];
+//    $conf   = $confShippingOptions[ $key ]['title.'];
+//    $value  = $this->zz_cObjGetSingle( $name, $conf );
+//    $subpartArray['###SHIPPINGNET###'] = $value;
+    $subpartArray['###SHIPPINGNET###'] = $this->caddy->getShippingOptionLabelBySessionId( );
+      // Shipping option label
 
       // Special label
     $subpartArray['###CADDY_LL_SPECIALNET###'] = $this->pi_getLL('caddy_ll_specialnet');
 
-      // Special value
-    $specialOptions = null;
-    $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
-    foreach( ( array ) $sesArray['special'] as $special_id )
-    {
-      $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
-    }
-    $subpartArray['###SPECIALNET###'] = $specialOptions;
-      // Special value
+//      // Special option label
+//    $specialOptions = null;
+//    $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
+//    foreach( ( array ) $sesArray['special'] as $special_id )
+//    {
+//      $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
+//    }
+//    $subpartArray['###SPECIALNET###'] = $specialOptions;
+    $subpartArray['###SPECIALNET###'] = $this->caddy->getSpecialOptionLabelsBySessionId( );
+      // Special option label
 
     return $subpartArray;
   }
@@ -645,7 +648,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * init( ) : Init some global variables.
+  * init( ) : Init some global variables and some classes
   *           Dies in case
   *           * of an unproper dir
   *           * of no products
@@ -671,6 +674,8 @@ class tx_caddy_pdf extends tslib_pibase
 
       // DIE  : if there isn't any product
     $this->initCheckProducts( );
+    
+    $this->initInstances( );
 
   }
 
@@ -717,6 +722,25 @@ class tx_caddy_pdf extends tslib_pibase
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
     }
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initInstances( )
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'caddy/class.tx_caddy.php' );
+    $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
+
+    require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
+    require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
   }
 
 
@@ -988,8 +1012,6 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function tcpdfInit( $srceFile )
   {
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/tcpdf/tcpdf.php' );
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/fpdi/fpdi.php' );
     $tcpdf = new FPDI( );
     $tcpdf->AddPage( );
 
