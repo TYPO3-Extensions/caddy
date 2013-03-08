@@ -66,6 +66,8 @@
  *
  */
 
+require_once( PATH_tslib . 'class.tslib_pibase.php');
+
 /**
  * powermail controlling for the 'caddy' extension.
  *
@@ -75,7 +77,7 @@
  * @version	2.0.0
  * @since       2.0.0
  */
-class tx_caddy_powermail
+class tx_caddy_powermail extends tslib_pibase
 {
 
   public $prefixId = 'tx_caddy_powermail';
