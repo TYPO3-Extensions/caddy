@@ -129,12 +129,12 @@ class tx_caddy_powermail extends tslib_pibase
   
     // caddyForEmail
   public  $cartCount                = 0;
-  private $cartServiceAttribute1Sum = 0;
-  private $cartServiceAttribute1Max = 0;
-  private $cartServiceAttribute2Sum = 0;
-  private $cartServiceAttribute2Max = 0; 
-  private $cartServiceAttribute3Sum = 0;
-  private $cartServiceAttribute3Max = 0;
+  public  $cartServiceAttribute1Sum = 0;
+  public  $cartServiceAttribute1Max = 0;
+  public  $cartServiceAttribute2Sum = 0;
+  public  $cartServiceAttribute2Max = 0; 
+  public  $cartServiceAttribute3Sum = 0;
+  public  $cartServiceAttribute3Max = 0;
   private $content                  = null;
   private $markerArray              = null;
   private $outerMarkerArray         = null;
