@@ -958,6 +958,17 @@ die ( );
       die( $prompt );
     }
       // DIE  : $pObj isn't initiated
+
+      // DIE  : $local_cObj isn't initiated
+    if( ! is_object( $this->local_cObj ) )
+    {
+      $prompt = 'ERROR: no local_cObj!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );     
+    }
+      // DIE  : $local_cObj isn't initiated
   }
 
  /**
@@ -1073,6 +1084,16 @@ die ( );
       
     }
     $this->cObj       = $pObj->cObj;
+
+    if( ! is_object( $pObj->local_cObj ) )
+    {
+      $prompt = 'ERROR: no local_cObj!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
     $this->local_cObj = $pObj->local_cObj;
 
     if( ! is_array( $pObj->tmpl ) || empty( $pObj->tmpl ) )
