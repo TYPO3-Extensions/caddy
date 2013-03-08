@@ -105,7 +105,7 @@ class tx_caddy extends tslib_pibase
   private $userfunc = null;
 
   // [object] parent object
-  public  $pObj = null;
+  private $pObj       = null;
   public  $cObj       = null;
   private $local_cObj = null;
 
@@ -146,15 +146,18 @@ class tx_caddy extends tslib_pibase
   {
     $arrReturn = null;
 
-      // Set the current typoscript configuration
-    $this->conf       = $this->pObj->conf;
-    $this->cObj       = $this->pObj->cObj;
-    $this->local_cObj = $this->pObj->local_cObj;
+      // DIE  : $pObj isn't initiated
+    if( ! is_object( $this->pObj ) )
+    {
+      $prompt = 'ERROR: no object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // DIE  : $pObj isn't initiated
 
     $this->initInstances( );
-
-    //$this->powermail->init( $this->row );
-    $this->tmpl       = $this->pObj->tmpl;
 
       // get products from session
     $this->products = $this->session->productsGet( );
@@ -961,6 +964,44 @@ die ( );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
+
+
+  /***********************************************
+  *
+  * Setter
+  *
+  **********************************************/
+
+ /**
+  * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
+  *
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function setParentObject( $pObj )
+  {
+    if( ! is_object( $pObj ) )
+    {
+      $prompt = 'ERROR: no object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->pObj       = $pObj;
+
+      // Set the current typoscript configuration
+    $this->conf       = $pObj->conf;
+
+    $this->cObj       = $pObj->cObj;
+    $this->local_cObj = $pObj->local_cObj;
+
+    $this->tmpl       = $pObj->tmpl;
+  }
+  
 
 
   /***********************************************

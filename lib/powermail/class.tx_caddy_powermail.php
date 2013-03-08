@@ -166,33 +166,33 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  1.4.6
   */
   public function caddyForEmail( $content = '', $conf = array( ) )
-  {
-    global $TSFE;
-    $local_cObj = $TSFE->cObj; // cObject
-    
+  {   
     unset( $content );
     
     $this->pi_loadLL();
-    
-    $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-    $this->conf = array_merge( ( array ) $this->conf, ( array ) $conf );
-    
-    $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
-    $marker   = '###CADDY_POWERMAIL###';
-    $this->tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
-    
-    $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
-    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_dynamicmarkers.php' );
-    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_render.php' );
-    $this->render         = t3lib_div::makeInstance( 'tx_caddy_render' );
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_session.php' );
-    $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
+      // DRS
+    if( $conf['userFunc.']['drs'] )
+    {
+      $this->drsUserfunc = true;
+      $drs               = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+      // Get the typoscript configuration of the caddy plugin 1
+    $this->conf = $this->caddyForEmailInitConf( );
+      // Get the HTML template for CADDY_POWERMAIL
+    $this->tmpl = $this->caddyForEmailInitTemplate( );
     
-    $content_item     = '';
+    $this->cObj = $GLOBALS['TSFE']->cObj;
+    $local_cObj = $GLOBALS['TSFE']->cObj;
+
+      // Init instances
+    $this->caddyForEmailInstances( );
+    
+
     $shipping_option  = '';
     $payment_option   = '';
     $cartNet                        = 0; 
@@ -200,20 +200,12 @@ class tx_caddy_powermail extends tslib_pibase
     $cartTaxReduced                 = 0;
     $cartTaxNormal                  = 0;
 
+    $arrResult = $this->caddyForEmailProducts( );
+    $content_item     = '';
+
       // read all products from session
     $this->product = $this->session->productsGet( );
     
-      // DRS
-    unset( $content );
-    $drs = false;
-    if( $conf['userFunc.']['drs'] )
-    {
-      $drs = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-
       // RETURN : empty content, no product in session
     if( count( $this->product ) < 1 )
     {
@@ -229,8 +221,9 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
 
+      // LOOP : products
     foreach( ( array ) $this->product as $product )
-    { // one loop for every product in session
+    {
       $product['price_total'] = $product['price'] * $product['qty']; // price total
       $local_cObj->start($product, $this->conf['db.']['table']); // enable .field in typoscript
       foreach ((array) $this->conf['settings.']['powermailCaddy.']['fields.'] as $key => $value)
@@ -261,6 +254,7 @@ class tx_caddy_powermail extends tslib_pibase
         $cartTaxNormal += $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']); // add tax from this product to overall
       }
     }
+      // LOOP : products
 
     $subpartArray['###CONTENT###'] = $content_item; // work on subpart 3
 
@@ -370,6 +364,70 @@ class tx_caddy_powermail extends tslib_pibase
 
     return $this->content;
   }
+  
+ /**
+  * caddyForEmailInitConf( )  : Take the conf from plugin.tx_caddy_pi1
+  *
+  * @access private
+  * @version 2.0.0
+  * @since  2.0.0
+  */
+  private function caddyForEmailInitConf( )
+  {   
+    $conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+    $conf = array_merge( ( array ) $this->conf, ( array ) $conf );
+    
+    return $conf;
+  }
+  
+ /**
+  * caddyForEmailInitTemplate( )  : Get teh template CADDY_POWERMAIL
+  *
+  * @access private
+  * @version 2.0.0
+  * @since  2.0.0
+  */
+  private function caddyForEmailInitTemplate( )
+  {   
+    $template     = $this->cObj->fileResource( $this->conf['main.']['template'] );
+    $marker       = '###CADDY_POWERMAIL###';
+
+    $tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
+    $tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+    
+    return $tmpl;
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyForEmailInstances( )
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'caddy/class.tx_caddy.php' );
+    $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
+    $this->caddy->setParentObject( $this );
+    $this->caddy->setContentRow( $this->cObj->data );
+
+    require_once( $path2lib . 'class.tx_caddy_calc.php' );
+    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
+
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
+    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+    
+    require_once( $path2lib . 'class.tx_caddy_render.php' );
+    $this->render         = t3lib_div::makeInstance( 'tx_caddy_render' );
+    
+    require_once( $path2lib . 'class.tx_caddy_session.php' );
+    $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
+    
+  } 
 
   
   
@@ -717,7 +775,7 @@ class tx_caddy_powermail extends tslib_pibase
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-    $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+    $this->userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
 
 
