@@ -200,7 +200,7 @@ class tx_caddy_powermail extends tslib_pibase
     $cartTaxReduced                 = 0;
     $cartTaxNormal                  = 0;
 
-    $arrResult = $this->caddyForEmailProducts( );
+//    $arrResult = $this->caddyForEmailProducts( );
     $content_item     = '';
 
       // read all products from session
