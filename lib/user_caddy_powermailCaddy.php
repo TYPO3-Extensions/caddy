@@ -265,7 +265,7 @@ class user_caddy_powermailCaddy extends tslib_pibase
 
     $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray); // Get html template
     $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
-    $this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
+    $this->content = preg_replace('|###.*?###|i', '&nbsp;', $this->content); // Finally clear not filled markers
 
       // DRS
     if( $this->drs->drsSession || $drs )
