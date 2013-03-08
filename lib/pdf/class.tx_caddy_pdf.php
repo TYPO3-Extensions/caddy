@@ -665,6 +665,7 @@ die( );
     $this->confSettings = $this->conf['settings.'];
     $this->confPdf      = $this->conf['pdf.'];
 
+    $this->cObj         = $GLOBALS['TSFE']->cObj;
     $this->local_cObj   = $GLOBALS['TSFE']->cObj;
 
 
@@ -738,9 +739,9 @@ die( );
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
-    $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
-    $this->caddy->conf      = $this->conf;
-    $this->caddy->cObj      = $this->cObj;
+    $this->caddy        = t3lib_div::makeInstance( 'tx_caddy' );
+    $this->caddy->conf  = $this->conf;
+    $this->caddy->cObj  = $this->cObj;
 
     require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
