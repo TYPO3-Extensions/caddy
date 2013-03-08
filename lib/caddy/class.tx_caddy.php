@@ -191,18 +191,21 @@ class tx_caddy extends tslib_pibase
     $specialArray   = null;
 
     $arrResult = $this->calc( );
-    $contentItem    = $arrResult['contentItem']; // <- !!!!!!!!!!!!!!!!!!!!!
-    $productsGross  = $arrResult['productsGross'];
-    $productsNet    = $arrResult['productsNet'];
-    $optionsNet     = $arrResult['optionsNet'];
-    $optionsGross   = $arrResult['optionsGross'];
-    $paymentId      = $arrResult['paymentId'];
-    $shippingId     = $arrResult['shippingId'];
-    $specialIds     = $arrResult['specialIds'];
-    $sumGross       = $arrResult['sumGross'];
-    $sumNet         = $arrResult['sumNet'];
-    $sumTaxNormal   = $arrResult['sumTaxNormal'];
-    $sumTaxReduced  = $arrResult['sumTaxReduced'];
+    $contentItem      = $arrResult['contentItem'];
+    $payment_option   = $arrResult['payment_options'];
+    $paymentId        = $arrResult['paymentId'];
+    $productsGross    = $arrResult['productsGross'];
+    $productsNet      = $arrResult['productsNet'];
+    $optionsNet       = $arrResult['optionsNet'];
+    $optionsGross     = $arrResult['optionsGross'];
+    $shipping_option  = $arrResult['shipping_options'];
+    $shippingId       = $arrResult['shippingId'];
+    $special_options  = $arrResult['special_options'];
+    $specialIds       = $arrResult['specialIds'];
+    $sumGross         = $arrResult['sumGross'];
+    $sumNet           = $arrResult['sumNet'];
+    $sumTaxNormal     = $arrResult['sumTaxNormal'];
+    $sumTaxReduced    = $arrResult['sumTaxReduced'];
 
     unset( $arrResult );
     unset( $productsGross );
@@ -270,12 +273,15 @@ class tx_caddy extends tslib_pibase
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['payment_option']   = $payment_option;
+    $sesArray['paymentId']        = $paymentId;
     $sesArray['productsGross']    = $this->productsGross;
     $sesArray['productsNet']      = $productsNet;
     $sesArray['optionsNet']       = $optionsNet;
     $sesArray['optionsGross']     = $optionsGross;
     $sesArray['shipping_option']  = $shipping_option;
+    $sesArray['shippingId']       = $shippingId;
     $sesArray['special_options']  = $special_options;
+    $sesArray['specialIds']       = $specialIds;
     $sesArray['sumGross']         = $sumGross;
     $sesArray['sumNet']           = $sumNet;
     $sesArray['sumTaxNormal']     = $sumTaxNormal;
@@ -283,22 +289,26 @@ class tx_caddy extends tslib_pibase
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
-      // cObject becomes current record
-    $currRecord = array
-                  (
-                    'payment_option'  => $payment_option,
-                    'productsGross'   => $this->productsGross,
-                    'productsNet'     => $productsNet,
-                    'optionsNet'      => $optionsNet,
-                    'optionsGross'    => $optionsGross,
-                    'shipping_option' => $shipping_option,
-                    'special_option'  => $special_options,
-                    'sumGross'        => $sumGross,
-                    'sumNet'          => $sumNet,
-                    'sumTaxNormal'    => $sumTaxNormal,
-                    'sumTaxReduced'   => $sumTaxReduced
-                  );
-    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] );
+//      // cObject becomes current record
+//    $currRecord = array
+//                  (
+//                    'payment_option'  => $payment_option,
+//                    'paymentId'       => $paymentId,
+//                    'productsGross'   => $this->productsGross,
+//                    'productsNet'     => $productsNet,
+//                    'optionsNet'      => $optionsNet,
+//                    'optionsGross'    => $optionsGross,
+//                    'shipping_option' => $shipping_option,
+//                    'shippingID'      => $shippingId,
+//                    'special_option'  => $special_options,
+//                    'specialId'       => $specialIds,
+//                    'sumGross'        => $sumGross,
+//                    'sumNet'          => $sumNet,
+//                    'sumTaxNormal'    => $sumTaxNormal,
+//                    'sumTaxReduced'   => $sumTaxReduced
+//                  );
+//    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] );
+    $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
       // cObject becomes current record
     
       // DRS
@@ -663,15 +673,15 @@ class tx_caddy extends tslib_pibase
     $arrReturn =  array
                   ( 
                     'contentItem'       => $contentItem,
+                    'paymentId'         => $paymentId,
+                    'payment_option'    => $payment_option,
                     'productsGross'     => $this->productsGross,
                     'productsNet'       => $productsNet,
                     'optionsNet'        => $optionsNet,
                     'optionsGross'      => $optionsGross,
-                    'paymentId'         => $paymentId,
-                    'payment_option'    => $payment_option,
                     'serviceattributes' => $serviceattributes,
                     'shippingId'        => $shippingId,
-                    'shipping_options'  => $shipping_option,
+                    'shipping_option'   => $shipping_option,
                     'specialIds'        => $specialIds,
                     'special_options'   => $special_options,
                     'sumGross'          => $sumGross,

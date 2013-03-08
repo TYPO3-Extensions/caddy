@@ -218,14 +218,17 @@ class tx_caddy_powermail extends tslib_pibase
     
       // Handle the result
     $contentItem        = $arrResult['contentItem']; 
+    $payment_option     = $arrResult['payment_option'];
+    $paymentId          = $arrResult['paymentId'];
     $productsGross      = $arrResult['productsGross'];
     $productsNet        = $arrResult['productsNet'];
     $optionsNet         = $arrResult['optionsNet'];
     $optionsGross       = $arrResult['optionsGross'];
-    $payment_option     = $arrResult['payment_option'];
     $serviceattributes  = $arrResult['serviceattributes'];
     $shipping_option    = $arrResult['shipping_option'];
+    $shippingId         = $arrResult['shippingId'];
     $special_options    = $arrResult['special_options'];
+    $specialIds         = $arrResult['specialIds'];
     $sumGross           = $arrResult['sumGross'];
     $sumNet             = $arrResult['sumNet'];
     $sumTaxNormal       = $arrResult['sumTaxNormal'];
@@ -247,16 +250,19 @@ class tx_caddy_powermail extends tslib_pibase
     $outerArr = array
                 (
                   'payment_option'  => $payment_option,
-                  'productsGross'   => $productsGross,
+                  'paymentId'       => $paymentId,
+                  'productsGross'   => $this->productsGross,
                   'productsNet'     => $productsNet,
-                  'optionsGross'    => $optionsGross,
                   'optionsNet'      => $optionsNet,
+                  'optionsGross'    => $optionsGross,
                   'shipping_option' => $shipping_option,
+                  'shippingID'      => $shippingId,
                   'special_option'  => $special_options,
+                  'specialId'       => $specialIds,
                   'sumGross'        => $sumGross,
                   'sumNet'          => $sumNet,
-                  'sumTaxReduced'   => $sumTaxReduced,
-                  'sumTaxNormal'    => $sumTaxNormal
+                  'sumTaxNormal'    => $sumTaxNormal,
+                  'sumTaxReduced'   => $sumTaxReduced
                 );
 var_dump( __METHOD__, __LINE__, $outerArr );
     
