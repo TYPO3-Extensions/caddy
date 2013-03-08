@@ -191,6 +191,17 @@ class tx_caddy extends tslib_pibase
   public function caddyByUserfunc( $content = '', $conf = array( ) )
   {
     $caddy = null;
+    $arrReturn = null;
+
+      // Set the current typoscript configuration
+    $this->conf       = $this->pObj->conf;
+    $this->cObj       = $this->pObj->cObj;
+    $this->local_cObj = $this->pObj->local_cObj;
+
+    $this->initInstances( );
+
+    //$this->powermail->init( $this->row );
+    $this->tmpl       = $this->pObj->tmpl;
 
       // Set the current typoscript configuration
     $this->conf = $this->pObj->conf;
