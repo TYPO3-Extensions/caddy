@@ -834,7 +834,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $payment_option = $this->render->renderOptionById( $this->conf, 'payment', $payment_id, $this );
+//    $payment_option = $this->render->renderOptionById( $this->conf, 'payment', $payment_id, $this );
 
     $arrReturn['id']          = $paymentId;
     $arrReturn['gross']       = $gross;
@@ -890,7 +890,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $option = $this->render->renderOptionById( $this->conf, 'shipping', $shippingId, $this );
+//    $option = $this->render->renderOptionById( $this->conf, 'shipping', $shippingId, $this );
 
     $arrReturn['id']          = $shippingId;
     $arrReturn['net']         = $net;
@@ -939,7 +939,7 @@ class tx_caddy extends tslib_pibase
         $taxNormal = $taxNormal + $gross - $net;
       }
       $special_options  = $special_options
-                        . $this->render->renderOptionById( $this->conf, 'special', $special_id, $this );
+//                        . $this->render->renderOptionById( $this->conf, 'special', $special_id, $this );
     }
 
     $arrReturn['ids']         = $specialIds;
