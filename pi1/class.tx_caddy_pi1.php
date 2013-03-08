@@ -732,8 +732,8 @@ var_dump( __METHOD__, __LINE__, $this->tmpl );
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
-    $this->caddy->setParentObject( $this );
-    $this->caddy->setContentRow( $this->cObj->data );
+//    $this->caddy->setParentObject( $this );
+//    $this->caddy->setContentRow( $this->cObj->data );
 //    $this->caddy->pObj      = $this;
 //    $this->caddy->row       = $this->cObj->data;
 
