@@ -399,7 +399,7 @@ die( );
     $marker   = '###CADDY_POWERMAIL###';
 
     $tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
-    $tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+    $tmpl['item'] = $this->cObj->getSubpart( $tmpl['all'], '###ITEM###'); // work on subpart 2
     
     return $tmpl;
   }
