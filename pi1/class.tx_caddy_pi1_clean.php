@@ -141,6 +141,8 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         $prompt = 'There won\'t added any new record to the database.';
         t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
       }
+unset( $_GET( 'tx_powermail_pi1' ) );
+unset( $_POST( 'tx_powermail_pi1' ) );
       return;
     }
       // RETURN : any product, don't increase numbers!
