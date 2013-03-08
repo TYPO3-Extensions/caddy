@@ -6,8 +6,6 @@
  *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
- *  (c) 2012 - Version 1.4.6 - Daniel Lorenz <info@capsicum-ug.de>
- * 
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -40,7 +38,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package	TYPO3
  * @subpackage	tx_caddy
  * @version     2.0.0
- * @since       1.4.6
+ * @since       2.0.0
  */
 
 class tx_caddy_pdf extends tslib_pibase 
@@ -72,7 +70,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * caddy( ) :
+  * caddy( ) : Generates the HTML caddy and write it to tcpdf
   * 
   * @param      boolean   $invoice  : true: render caddy for the invoice. false: render caddy for the delivery order
   * @return	void
@@ -102,29 +100,13 @@ class tx_caddy_pdf extends tslib_pibase
       // write the HTML content
     $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
     $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
-
-    
-    //$this->caddyPaymentOption($fpdi, $session['payment']);
-
   }
-
-  private function caddyPaymentOption(&$fpdi, $payment_id) {
-          $payment_option = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$payment_id . '.'];
-
-          if ($payment_option['note']) {
-                  $fpdi->SetY($fpdi->GetY()+20);
-                  $fpdi->SetX($this->conf['body-position-x']);
-                  $fpdi->Cell('150', '5', $payment_option['title'], 0, 1);
-                  $fpdi->SetX($this->conf['body-position-x']);
-                  $fpdi->Cell('150', '5', $payment_option['note'], 0, 1);
-          }
-  } 
 
  /**
   * caddyProduct( ) :
   *
-  * @param	array		$subpartArray : 
-  * @return	string		$content      : the rendered product 
+  * @param	array		$product : current product 
+  * @return	string		$content : the rendered product 
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -172,7 +154,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * caddySum( ) :
+  * caddySum( ) : Calculate the caddy sum for products, options, tax
   *
   * @param	array		$subpartArray : 
   * @return	array		$subpartArray : 
@@ -273,9 +255,8 @@ class tx_caddy_pdf extends tslib_pibase
     return $subpartArray;
   }
 
-
  /**
-  * caddyTablebody( ) :
+  * caddyTablebody( ) : HTML table body of the caddy
   *
   * @param	array		$subpartArray : 
   * @return	array		$subpartArray : 
@@ -302,11 +283,10 @@ class tx_caddy_pdf extends tslib_pibase
 
       // Return the marker content
     return $subpartArray;
-
   }
   
  /**
-  * caddyTablehead( ) :
+  * caddyTablehead( ) : HTML table head of the caddy
   *
   * @param	array		$subpartArray : 
   * @return	array		$subpartArray : 
@@ -329,8 +309,11 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // LOOP : fields, the elements of a product
     
-    return $subpartArray;
+    $marker = '###CADDY_LL_ITEM###';
+    $value  = $this->pi_getLL( 'caddy_ll_item' );
+    $subpartArray[$marker] = $value;
 
+    return $subpartArray;
   }
 
 
@@ -342,7 +325,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * deliveryorder( ) : 
+  * deliveryorder( ) : Generates the PDF delivery order and returns the path to the PDF file
   *
   * @return	string		$path : path to the rendered pdf file
   * @access     public
@@ -449,7 +432,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * deliveryorderAdditionalTextblocks( ) : 
+  * deliveryorderAdditionalTextblocks( ) : Write addional text blocks
   *
   * @return	void
   * @access     private
@@ -471,16 +454,16 @@ class tx_caddy_pdf extends tslib_pibase
       $this->writeTextblock( $additionalTextblocks[$key], 'deliveryorder.additionaltextblocks.' . $key );
     }
       // LOOP : additional textblocks
-        
   }
   
  /**
-  * deliveryorderAddress( ) : 
+  * deliveryorderAddress( ) : Write the delivery address. If delivery address isn't given,
+  *                           take the invoice address
   *
   * @return	void
-  * @access     public
+  * @access     private
   * @version    2.0.0
-  * @since      1.4.6
+  * @since      2.0.0
   */
   private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
   {
@@ -490,18 +473,18 @@ class tx_caddy_pdf extends tslib_pibase
     $content      = strip_tags( $htmlContent );
     $content      = trim( $content );
     $content      = str_replace( ' ', null, $content );
-    // Get the body content
+      // Get the body content
       
     switch( true )
     {
       case( ! empty( $content ) ):
-//var_dump( __METHOD__, __LINE__, $content );
-        $invoiceaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
-        $this->writeTextblock( $invoiceaddress, 'deliveryorderaddress' );
+var_dump( __METHOD__, __LINE__, $content );
+        $deliveryorderaddress = $this->confPdf['deliveryorder.']['content.']['address.']['deliveryorder.'];
+        $this->writeTextblock( $deliveryorderaddress, 'deliveryorderaddress' );
         break;
       case( empty( $content ) ):
       default:
-//var_dump( __METHOD__, __LINE__, $content );
+var_dump( __METHOD__, __LINE__, $content );
           // FALLBACK : take the invoice address
         if( $fallBackToInvoiceAddress ) 
         {
@@ -517,7 +500,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * deliveryorderDate( ) : 
+  * deliveryorderDate( ) : Write the current date 
   *
   * @return	void
   * @access     private
@@ -532,9 +515,10 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * deliveryorderInit( ) : 
+  * deliveryorderInit( ) :  Return false, if delivery order should not sent to the customer or
+  *                         the vendor
   *
-  * @return	boolean		false, if delivery order isn't needed
+  * @return	boolean     $deliveryorderInit: false, if delivery order should not sent
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
@@ -575,7 +559,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * deliveryorderNumbers( ) : 
+  * deliveryorderNumbers( ) : Write the delivery order number and maybe numbers for invoice and order
   *
   * @return	void
   * @access     private
@@ -603,46 +587,18 @@ class tx_caddy_pdf extends tslib_pibase
 
   /***********************************************
   *
-  * header
-  *
-  **********************************************/
-  
- /**
-  * header( ) : 
-  *
-  * @return	void
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function header( $header )
-  {
-        // RETURN : there is no header
-    if( empty ( $header ) )
-    {
-      return;
-    }
-        // RETURN : there is no header
-    
-      // Get the header content
-    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $header['content'], $header['content.'] );
-
-    return $htmlContent;
-  }
-
-
-
-  /***********************************************
-  *
   * init
   *
   **********************************************/
 
  /**
-  * init( ) : 
+  * init( ) : Init some global variables. 
+  *           Dies in case
+  *           * of an unproper dir
+  *           * of no products
   *
   * @return	void
-  * @access     public
+  * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */ 
@@ -660,25 +616,14 @@ class tx_caddy_pdf extends tslib_pibase
       // DIE  : if there is an unproper directory
     $this->initCheckDir( );
 
-      // DIE  : if there is an unproper directory
+      // DIE  : if there isn't any product
     $this->initCheckProducts( );
 
-      // Get the caddy session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
-    if( empty( $sesArray['products'] ) )
-    {
-      $prompt = 'ERROR: products are empty!<br />' . PHP_EOL . 
-                'Please go back to the page you visited before.<br />' . PHP_EOL . 
-                'Sorry for the trouble.<br />' . PHP_EOL . 
-                'TYPO3 Caddy<br />' . PHP_EOL . 
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }  
   }
   
  /**
-  * initCheckDir( ) : 
+  * initCheckDir( ) : Checks if uploads/tx_caddy is a directory.
+  *                   And dies, if not, 
   *
   * @return	void
   * @access     private
@@ -697,7 +642,8 @@ class tx_caddy_pdf extends tslib_pibase
   }
  
  /**
-  * initCheckProducts( ) : 
+  * initCheckProducts( ) :  Checks, if there is one product at least.
+  *                         And dies, if not, 
   *
   * @return	void
   * @access     private
@@ -729,7 +675,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * invoice( ) : 
+  * invoice( ) : Generates the PDF invoice and returns the path to the PDF file
   *
   * @return	string		$path : path to the rendered pdf file
   * @access     public
@@ -837,7 +783,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * invoiceAdditionalTextblocks( ) : 
+  * invoiceAdditionalTextblocks( ) : Write addional text blocks
   *
   * @return	void
   * @access     private
@@ -863,17 +809,15 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * invoiceAddress( ) : 
+  * invoiceAddress( ) : Write the invoice address
   *
   * @return	void
-  * @access     public
+  * @access     private
   * @version    2.0.0
-  * @since      1.4.6
+  * @since      2.0.0
   */
   private function invoiceAddress( )
   {
-//    $invoiceaddress = $this->confPdf['invoice.']['content.']['address.']['invoice.'];
-//    $this->writeTextblock( $invoiceaddress, 'invoiceaddress' );
     $invoiceaddress = $this->confPdf['invoice.']['content.']['address.'];
 
       // LOOP : additional textblocks
@@ -890,7 +834,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * invoiceDate( ) : 
+  * invoiceDate( ) : Write the current date 
   *
   * @return	void
   * @access     private
@@ -905,9 +849,9 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * invoiceInit( ) : 
+  * invoiceInit( ) : Return false, if invoice should not sent to the customer or the vendor
   *
-  * @return	boolean		false, if delivery order isn't needed
+  * @return	boolean     $invoiceInit  : false, if invoice should not sent
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
@@ -948,7 +892,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * invoiceNumbers( ) : 
+  * invoiceNumbers( ) : Write the delivery order number and maybe numbers for invoice and order
   *
   * @return	void
   * @access     private
@@ -981,17 +925,16 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * tcpdfInit( ) : 
+  * tcpdfInit( ) : Init a TCPDF object and returns ist
   *
   * @param	string		$filename : current filename 
-  * @param	string		$docTitle : Title of the pdf document
-  * @return	string		$filename : prefixed filename
+  * @return	object		$tcpdf    : TCPDF object
   * @access     private
   * @internal   http://www.tcpdf.org/doc/code/classTCPDF.html
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function tcpdfInit( $srceFile, $docTitle='TYPO3 Quick Shop' )
+  private function tcpdfInit( $srceFile )
   {
     require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/tcpdf/tcpdf.php' );
     require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/fpdi/fpdi.php' );
@@ -1014,7 +957,8 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * tcpdfOutput( ) : 
+  * tcpdfOutput( ) :  Write the PDF file to the given path.
+  *                   Dies, if file could written.
   *
   * @param      string    $destPath : path of the destination file
   * @return	void
@@ -1049,7 +993,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * tcpdfSetFont( ) : 
+  * tcpdfSetFont( ) : Set the font properties family, size and style
   *
   * @return	void
   * @access     private
@@ -1073,7 +1017,9 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * tcpdfSetTextColor( ) : 
+  * tcpdfSetTextColor( ) :  Set the text color.
+  *                         Given color must be in a hex notation like #FFF or #1200A3
+  *                         Hex format becomes a rgb format like "255 255 255"
   *
   * @return	void
   * @access     private
@@ -1119,11 +1065,11 @@ class tx_caddy_pdf extends tslib_pibase
   
  /**
   * tcpdfWriteHtmlCell( ) : Writes the content to the PDF. Dimensions, font and textColor are taken
-  *                 from the properties
+  *                         from the properties
   *
   * @param      array           $properties   : Array with the properties font, textColor and cell 
   * @param      string          $htmlContent  : Current HTML content
-  * @param      string          $drsLabel     : Label for teh DRS prompt. Usually the name of the calling method
+  * @param      string          $drsLabel     : Label for teh DRS prompt. Usually the path of the used typoscript
   * @return	void
   * @internal   Supported tags are: a, b, blockquote, br, dd, del, div, dl, dt, em, font, h1, h2, h3, h4, h5, h6, 
   *                                 hr, i, img, li, ol, p, pre, small, span, strong, sub, sup, table, tcpdf, 
@@ -1147,8 +1093,8 @@ class tx_caddy_pdf extends tslib_pibase
       // Get properties for the HTML cell
     $w            = $this->zz_cObjGetSingle( $cell['width'], $cell['width.'] );
     $h            = $this->zz_cObjGetSingle( $cell['height'], $cell['height.'] );
-    $x            = $this->zz_cObjGetSingle( $cell['x'], $cell['x.'] );$cell['x'];
-    $y            = $this->zz_cObjGetSingle( $cell['y'], $cell['y.'] );$cell['y'];
+    $x            = $this->zz_cObjGetSingle( $cell['x'], $cell['x.'] );
+    $y            = $this->zz_cObjGetSingle( $cell['y'], $cell['y.'] );
     $border       = 0;
     $ln           = 0;
     $fill         = false;
@@ -1178,7 +1124,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * terms( ) : 
+  * terms( ) : Generates the PDF terms and returns the path to the PDF file
   *
   * @return	string		$path : path to the rendered pdf file
   * @access     public
@@ -1257,14 +1203,10 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tcpdf = $this->tcpdfInit( $srceFile );
 
       // Write the delivery order address
-    $fallBackToInvoiceAddress = true;
-    $this->termsAddress( $fallBackToInvoiceAddress );
+    $this->termsAddress( );
 
       // Write the delivery order date
     $this->termsDate( );
-
-      // Write the delivery order number
-    $this->termsNumbers( );
 
       // Write additional textblocks
     $this->termsAdditionalTextblocks( );
@@ -1280,7 +1222,7 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * termsAdditionalTextblocks( ) : 
+  * termsAdditionalTextblocks( ) : Write addional text blocks
   *
   * @return	void
   * @access     private
@@ -1306,44 +1248,21 @@ class tx_caddy_pdf extends tslib_pibase
   }
   
  /**
-  * termsAddress( ) : 
+  * termsAddress( ) :  Write the invoice address
   *
   * @return	void
-  * @access     public
+  * @access     private
   * @version    2.0.0
-  * @since      1.4.6
+  * @since      2.0.0
   */
-  private function termsAddress( $fallBackToInvoiceAddress=false )
+  private function termsAddress( )
   {
-      // Get the body content
-    $body         = $this->confPdf['terms.']['content.']['address.']['deliveryorder.']['body.'];
-    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
-      // Get the body content
-      
-    switch( true )
-    {
-      case( ! empty( $htmlContent ) ):
-        $invoiceaddress = $this->confPdf['terms.']['content.']['address.']['deliveryorder.'];
-        $this->writeTextblock( $invoiceaddress, 'termsaddress' );
-        break;
-      case( empty( $htmlContent ) ):
-      default:
-          // FALLBACK : take the invoice address
-        if( $fallBackToInvoiceAddress ) 
-        {
-          $invoiceaddress = $this->confPdf['terms.']['content.']['address.']['invoice.'];
-          $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
-        }
-          // FALLBACK : take the invoice address
-        break;
-    }
-    unset( $htmlContent );
-
-    return;
+    $invoiceaddress = $this->confPdf['terms.']['content.']['address.']['invoice.'];
+    $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
   }
 
  /**
-  * termsDate( ) : 
+  * termsDate( ) : Write the current date 
   *
   * @return	void
   * @access     private
@@ -1358,9 +1277,9 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * termsInit( ) : 
+  * termsInit( ) : Return false, if terms should not sent to the customer or the vendor
   *
-  * @return	boolean		false, if delivery order isn't needed
+  * @return	boolean     $termsInit  : false, if invoice should not sent
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
@@ -1399,32 +1318,7 @@ class tx_caddy_pdf extends tslib_pibase
 
     return $termsInit;
   }
-  
- /**
-  * termsNumbers( ) : 
-  *
-  * @return	void
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function termsNumbers( )
-  {
-    $numbers = $this->confPdf['terms.']['content.']['numbers.'];
-
-      // LOOP : fields, the elements of a product
-    foreach( array_keys ( ( array ) $numbers ) as $key )
-    { 
-      if( ! stristr( $key, '.' ) )
-      { 
-        continue;
-      }
-      
-      $this->writeTextblock( $numbers[$key], 'terms.numbers.' . $key );
-    }
-        
-  }
-  
+    
   
 
   /***********************************************
@@ -1434,7 +1328,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
   
  /**
-  * writeTextblock( ) : 
+  * writeTextblock( ) : Write a texblock. If textblock has a header, prepend it to the body / content
   *
   * @param      array     $textBlock  : the additional text block
   * @param      string    $drsLabel   : label for the drs prompt. Usually name of the calling function.
@@ -1445,7 +1339,6 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function writeTextblock( $textBlock, $drsLabel )
   {
-//var_dump( __METHOD__, __LINE__, $textBlock );      
     $body         = $textBlock['body.'];
     $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $body['content'], $body['content.'] );
 
@@ -1457,9 +1350,33 @@ class tx_caddy_pdf extends tslib_pibase
       // RETURN : HTML content is empty
 
     $header       = $textBlock['header.'];
-    $htmlContent  = $this->header( $header ) . $htmlContent;
-//var_dump( __METHOD__, __LINE__, $body['properties.'] );      
+    $htmlContent  = $this->writeTextblockAddHeader( $header ) . $htmlContent;
     $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, $drsLabel );
+  }
+
+
+
+ /**
+  * writeTextblockAddHeader( ) : Returns a HTML rendered header
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function writeTextblockAddHeader( $header )
+  {
+        // RETURN : there is no header
+    if( empty ( $header ) )
+    {
+      return;
+    }
+        // RETURN : there is no header
+    
+      // Get the header content
+    $htmlContent  = $GLOBALS['TSFE']->cObj->cObjGetSingle( $header['content'], $header['content.'] );
+
+    return $htmlContent;
   }
 
 
@@ -1472,10 +1389,11 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * zz_hexToRgb( )
+  * zz_hexToRgb( )  : Returns the rgb notation for the given value - a CSS color name or
+  *                   a color in a hex notation.
   *
   * @param	string		$hex        : color in HTML notation like #FFF or #CC00CC or CSS color name
-  * @return	string          $textColor  : color in RGB format like 255 255 255 or 144 0 144 
+  * @return	string          $textColor  : color in RGB format like "255 255 255" or "144 0 144"
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1570,11 +1488,12 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * zz_cObjGetSingle( )
+  * zz_cObjGetSingle( ) : Renders a typoscript property with cObjGetSingle, if it is an array.
+  *                       Otherwise returns the property unchanged.
   *
-  * @param	[type]		$$cObj_name: ...
-  * @param	[type]		$cObj_conf: ...
-  * @return	string
+  * @param	string		$cObj_name  : value or the name of the property like TEXT, COA, IMAGE, ...
+  * @param	array		$cObj_conf  : null or the configuration of the property
+  * @return	string          $value      : unchanged value or rendered typoscript property
   * @access private
   * @version    2.0.0
   * @since      2.0.0
