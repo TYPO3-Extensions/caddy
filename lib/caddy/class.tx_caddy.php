@@ -682,6 +682,112 @@ class tx_caddy extends tslib_pibase
 
     return $arrReturn;
   }
+	
+ /**
+  * calcOptionById( )
+  *
+  * @return   array   $array : gross, net
+  * @access     private
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+  private function calcOptionById( $conf, $type, $option_id, &$obj ) 
+  {
+    $arrReturn = null; 
+    
+    $optionIds = $conf[$type . '.']['options.'][$option_id . '.'];
+
+    $filterArr = array(
+      'by_price'                    => $obj->cartGrossNoService,
+      'by_quantity'                 => $obj->cartCount,
+      'by_service_attribute_1_sum'  => $obj->cartServiceAttribute1Sum,
+      'by_service_attribute_1_max'  => $obj->cartServiceAttribute1Max,
+      'by_service_attribute_2_sum'  => $obj->cartServiceAttribute2Sum,
+      'by_service_attribute_2_max'  => $obj->cartServiceAttribute2Max,
+      'by_service_attribute_3_sum'  => $obj->cartServiceAttribute3Sum,
+      'by_service_attribute_3_max'  => $obj->cartServiceAttribute3Max
+    );
+
+    if( array_key_exists( $optionIds['extra'], $filterArr ) ) 
+    {
+      foreach( $optionIds['extra.'] as $extra ) 
+      {
+        if( floatval( $extra['value'] ) <= $filterArr[$optionIds['extra']] ) 
+        {
+          $arrReturn = $this->calcOption($conf, $type, $option_id, floatval($extra['extra']), $obj);
+        }
+        else
+        {
+          break;
+        }
+      }
+      return $arrReturn;
+    } 
+
+    switch( $optionIds['extra'] )
+    {
+      case 'each':
+        $gross  = floatval($optionIds['extra.']['1.']['extra'])*$obj->cartCount;
+        $arrReturn =  $this->calcOption
+                      ( 
+                        $conf, $type, $option_id, $gross, $obj 
+                      );
+        break;
+      default:
+        $arrReturn =  $this->calcOption
+                      ( 
+                        $conf, $type, $option_id, floatval( $optionIds['extra'] ), $obj 
+                      );
+    }
+
+    return $arrReturn;
+  }
+	
+ /**
+  * calcOption( )
+  *
+  * @return   array   $array : gross, net
+  * @access   private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcOption( $conf, $type, $option_id, $gross, $obj ) 
+  {
+    $arrReturn = null; 
+
+    $free_from  = $conf[$type.'.']['options.'][$option_id . '.']['free_from'];
+    $free_to    = $conf[$type.'.']['options.'][$option_id . '.']['free_until'];
+    
+    switch( true )
+    {
+      case( isset( $free_from ) && ( floatval( $free_from ) <= $obj->cartGrossNoService ) ):
+      case( isset( $free_to ) && ( floatval( $free_to ) >= $obj->cartGrossNoService ) ):
+        $arrReturn['gross'] = 0.00;
+        $arrReturn['net']   = 0.00;
+        return $arrReturn;
+        break;
+      default;
+        break;
+    }
+    
+    unset( $free_from );
+    unset( $free_to );
+    
+      // calc net
+    if( $conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced' )
+    {
+      $net = $gross / ( 1.0 + $conf['tax.']['reducedCalc'] );
+    } 
+    else 
+    {
+      $net = $gross / ( 1.0 + $conf['tax.']['normalCalc'] );
+    }
+      // calc net
+
+    $arrReturn['gross'] = $gross;
+    $arrReturn['net']   = $net;
+    return $arrReturn;
+  }
 
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
@@ -715,7 +821,7 @@ class tx_caddy extends tslib_pibase
       $this->session->paymentUpdate( $newpaymentId );
     }
 
-    $arrResult  = $this->calc->calculateOptionById( $this->conf, 'payment', $paymentId, $this );
+    $arrResult  = $this->calcOptionById( $this->conf, 'payment', $paymentId, $this );
     $net        = $arrResult['net'];  
     $gross      = $arrResult['gross'];  
 
@@ -771,7 +877,7 @@ class tx_caddy extends tslib_pibase
       $this->session->shippingUpdate( $newshippingId );
     }
 
-    $arrResult = $this->calc->calculateOptionById( $this->conf, 'shipping', $shippingId, $this );
+    $arrResult = $this->calcOptionById( $this->conf, 'shipping', $shippingId, $this );
     $net      = $arrResult['net'];  
     $gross    = $arrResult['gross'];  
 
@@ -819,7 +925,7 @@ class tx_caddy extends tslib_pibase
     
     foreach( ( array ) $specialIds as $specialId )
     {
-      $arrResult = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
+      $arrResult = $this->calcOptionById( $this->conf, 'special', $specialId, $this );
       $net      = $arrResult['net'];  
       $gross    = $arrResult['gross'];  
       $sumNet   = $sumNet    + $net;
@@ -1108,10 +1214,6 @@ class tx_caddy extends tslib_pibase
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
-    require_once( $path2lib . 'class.tx_caddy_calc.php' );
-    $this->calc             = t3lib_div::makeInstance( 'tx_caddy_calc' );
-    //$this->calc->pObj       = $this;
-
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
@@ -1129,9 +1231,6 @@ class tx_caddy extends tslib_pibase
       $this->powermail->pObj  = $this;
     }
     
-    require_once( $path2lib . 'class.tx_caddy_render.php' );
-    $this->render           = t3lib_div::makeInstance( 'tx_caddy_render' );
-
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->pObj    = $this;
