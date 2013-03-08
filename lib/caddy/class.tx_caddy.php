@@ -938,7 +938,7 @@ class tx_caddy extends tslib_pibase
       {
         $taxNormal = $taxNormal + $gross - $net;
       }
-      $special_options  = $special_options
+//      $special_options  = $special_options
 //                        . $this->render->renderOptionById( $this->conf, 'special', $special_id, $this );
     }
 
