@@ -1143,9 +1143,7 @@ class tx_caddy extends tslib_pibase
       // Render the option label
     $name  = $optionsConf[ $key ]['title'];
     $conf  = $optionsConf[ $key ]['title.'];
-    $value      = $this->zz_cObjGetSingle( $name, $conf );
-var_dump( __METHOD__, __LINE__, $sesArray, $this->conf, $value );
-die( );    
+    $value = $this->zz_cObjGetSingle( $name, $conf );
     return $value;
   }
 
@@ -1163,15 +1161,15 @@ die( );
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $conf = $this->conf['shipping.']['options.'];
+    $optionsConf = $this->conf['shipping.']['options.'];
     
       // Get key for option 
     $key    = $sesArray['shippingId'] . '.';
 
       // Render the option label
-    $name   = $conf[ $key ]['title'];
-    $conf   = $conf[ $key ]['title.'];
-    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    $name   = $optionsConf[ $key ]['title'];
+    $conf   = $optionsConf[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $optionsConf );
     
     return $value;
   }
@@ -1190,7 +1188,7 @@ die( );
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $conf = $this->conf['special.']['options.'];
+    $optionsConf = $this->conf['special.']['options.'];
     
       // Get key for the option 
 
@@ -1198,8 +1196,8 @@ die( );
     $value = null;
     foreach( ( array ) $sesArray['specialIds'] as $key )
     {
-      $name   = $conf[ $key ]['title'];
-      $conf   = $conf[ $key ]['title.'];
+      $name   = $optionsConf[ $key ]['title'];
+      $conf   = $optionsConf[ $key ]['title.'];
       $value  = $value
               . $this->zz_cObjGetSingle( $name, $conf );
     }
