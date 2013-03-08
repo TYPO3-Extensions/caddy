@@ -848,7 +848,7 @@ die ( );
       $this->caddyWiProductsProductServiceAttributes( $product );
 
         // calculate tax
-      $arrResult           = $this->calcProductTax( $product );
+      $arrResult          = $this->calcProductTax( $product );
       $productsNet        = $productsNet        + $arrResult['cartNet'];
       $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
       $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
@@ -918,6 +918,46 @@ die ( );
     $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
 
     return $arrReturn;
+  }
+
+
+
+  /***********************************************
+  *
+  * Getter
+  *
+  **********************************************/
+
+ /**
+  * getServiceAttributes( )
+  *
+  * @return	array
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getServiceAttributes( )
+  {
+    $arrResult =  array
+                  (
+                    '1' =>  array
+                            (
+                              'max' => $this->caddyServiceAttribute1Max,
+                              'sum' => $this->caddyServiceAttribute1Sum
+                            ),
+                    '2' =>  array
+                            (
+                              'max' => $this->caddyServiceAttribute2Max,
+                              'sum' => $this->caddyServiceAttribute2Sum
+                            ),
+                    '3' =>  array
+                            (
+                              'max' => $this->caddyServiceAttribute3Max,
+                              'sum' => $this->caddyServiceAttribute3Sum
+                            )
+                  );
+    
+    return $arrResult;
   }
 
 
