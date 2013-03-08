@@ -203,9 +203,6 @@ class tx_caddy extends tslib_pibase
     //$this->powermail->init( $this->row );
     $this->tmpl       = $this->pObj->tmpl;
 
-      // Set the current typoscript configuration
-    $this->conf = $this->pObj->conf;
-
       // get products from session
     $this->products = $this->session->productsGet( );
     switch( true )
@@ -218,7 +215,7 @@ class tx_caddy extends tslib_pibase
         $caddy = $this->caddyWoProducts( );
         break;
     }
-var_dump( __METHOD__, __LINE__, $caddy );
+var_dump( __METHOD__, __LINE__, $this->products, $caddy );
 die ( );
     return $caddy;
   }
