@@ -771,11 +771,11 @@ die ( );
   * calcProduct( )
   *
   * @return	void
-  * @access private
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function calcProduct( )
+  public function calcProduct( )
   {
     $arrReturn    = null;
     $contentItem  = '';
@@ -848,7 +848,6 @@ die ( );
     $arrReturn['gross']       = $productsGross;
     $arrReturn['taxReduced']  = $productsTaxReduced;
     $arrReturn['taxNormal']   = $productsTaxNormal;
-var_dump( __METHOD__, __LINE__, $this->tmpl, $this->products, $arrReturn );
 
     return $arrReturn;
   }
