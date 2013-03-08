@@ -190,8 +190,8 @@ class tx_caddy extends tslib_pibase
   */
   public function caddyByUserfunc( $content = '', $conf = array( ) )
   {
+    unset( $content );
     $caddy = null;
-    $arrReturn = null;
 
       // Set the current typoscript configuration
     $this->conf       = $conf;
@@ -201,7 +201,11 @@ class tx_caddy extends tslib_pibase
     $this->initInstances( );
 
     //$this->powermail->init( $this->row );
-    $this->tmpl       = $this->pObj->tmpl;
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    require_once( $path2lib . 'class.tx_caddy_template.php' );
+    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
+    $this->template->pObj   = $this;
+    $this->tmpl = $this->template->main( );
 
       // get products from session
     $this->products = $this->session->productsGet( );
@@ -212,7 +216,7 @@ class tx_caddy extends tslib_pibase
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
-        $caddy = $this->caddyWoProducts( );
+        $this->caddyWoProducts( );
         break;
     }
 var_dump( __METHOD__, __LINE__, $this->products, $caddy );
