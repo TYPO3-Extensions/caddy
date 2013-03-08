@@ -351,9 +351,6 @@ die( );
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
 
-    require_once( $path2lib . 'class.tx_caddy_calc.php' );
-    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
-
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
     
