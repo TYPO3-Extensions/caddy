@@ -128,6 +128,7 @@ class tx_caddy_powermail extends tslib_pibase
   private $userfunc = null;
   
     // caddyForEmail
+  private $calc                     = null;
   public  $cartCount                = 0;
   public  $cartServiceAttribute1Sum = 0;
   public  $cartServiceAttribute1Max = 0;
@@ -136,14 +137,13 @@ class tx_caddy_powermail extends tslib_pibase
   public  $cartServiceAttribute3Sum = 0;
   public  $cartServiceAttribute3Max = 0;
   private $content                  = null;
+  private $dynamicMarkers           = null;
   private $markerArray              = null;
   private $outerMarkerArray         = null;
-  private $tmpl                     = null;
-  private $calc                     = null;
-  private $dynamicMarkers           = null;
+  private $product                  = null;
   private $render                   = null;
   private $session                  = null;
-  private $product                  = null;
+  public  $tmpl                     = null;
 
 
   
