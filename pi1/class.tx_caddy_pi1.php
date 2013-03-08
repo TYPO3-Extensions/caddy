@@ -402,6 +402,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initDatabase( );
     $this->initNumbers( );
     
+var_dump( __METHOD__, __LINE__, $this->tmpl );
+    
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
     
