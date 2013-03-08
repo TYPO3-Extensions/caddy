@@ -75,7 +75,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @package	TYPO3
  * @subpackage	tx_caddy
  * @version	2.0.0
- * @since       1.4.6
+ * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
 {
@@ -86,7 +86,7 @@ class tx_caddy extends tslib_pibase
 
 
   private $caddyCount                 = 0;
-  private $productsGross           = 0;
+  private $productsGross              = 0;
   private $caddyServiceAttribute1Max  = 0;
   private $caddyServiceAttribute1Sum  = 0;
   private $caddyServiceAttribute2Max  = 0;
@@ -137,7 +137,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddy( )
   *
-  * @return	string		$caddy  : HTML caddy
+  * @return	array		$arrReturn  : array with elements caddy, tmpl, outerMarkerArray
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -156,11 +156,9 @@ class tx_caddy extends tslib_pibase
     //$this->powermail->init( $this->row );
     $this->tmpl       = $this->pObj->tmpl;
 
-      // read all products from session
+      // get products from session
     $this->products = $this->session->productsGet( );
 
-//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-//var_dump( __METHOD__, __LINE__, $sesArray );
     switch( true )
     {
       case( count( $this->products ) > 0 ):
@@ -176,7 +174,6 @@ class tx_caddy extends tslib_pibase
     $arrReturn['caddy']             = $caddy;
     $arrReturn['tmpl']              = $this->tmpl;
     $arrReturn['outerMarkerArray']  = $this->outerMarkerArray;
-//var_dump( __METHOD__, __LINE__, $this->products, $arrReturn );
     return $arrReturn;
   }
 
@@ -198,7 +195,7 @@ class tx_caddy extends tslib_pibase
       // Set the current typoscript configuration
     $this->conf = $this->pObj->conf;
 
-      // read all products from session
+      // get products from session
     $this->products = $this->session->productsGet( );
     switch( true )
     {
@@ -210,7 +207,8 @@ class tx_caddy extends tslib_pibase
         $caddy = $this->caddyWoProducts( );
         break;
     }
-
+var_dump( __METHOD__, __LINE__, $caddy );
+die ( );
     return $caddy;
   }
 
