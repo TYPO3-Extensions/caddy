@@ -130,7 +130,6 @@ class tx_caddy_pi1_clean
 
       // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-var_dump( __METHOD__, __LINE__, $sesArray );
       // RETURN : any product, don't increase numbers!
     if( empty( $sesArray['products'] ) )
     {
@@ -140,9 +139,11 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
         $prompt = 'There won\'t added any new record to the database.';
         t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+        $prompt = 'GET/POST tx_powermail_pi1 will removed! This prevents another e-mail.';
+        t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
       }
-unset( $_GET[ 'tx_powermail_pi1' ] );
-unset( $_POST[ 'tx_powermail_pi1' ] );
+      unset( $_GET[ 'tx_powermail_pi1' ] );
+      unset( $_POST[ 'tx_powermail_pi1' ] );
       return;
     }
       // RETURN : any product, don't increase numbers!
