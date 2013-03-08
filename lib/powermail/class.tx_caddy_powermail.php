@@ -81,7 +81,7 @@ class tx_caddy_powermail
   public $prefixId = 'tx_caddy_powermail';
 
   // same as class name
-  public $scriptRelPath = 'lib/powermail/class.tx_caddy_powermail.php';
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
   // path to this script relative to the extension dir.
   public $extKey = 'caddy';
@@ -124,10 +124,254 @@ class tx_caddy_powermail
   private $pdf      = null;
     // [Object]
   private $userfunc = null;
+  
+    // caddyForEmail
+  private $cartCount                = 0;
+  private $cartServiceAttribute1Sum = 0;
+  private $cartServiceAttribute1Max = 0;
+  private $cartServiceAttribute2Sum = 0;
+  private $cartServiceAttribute2Max = 0; 
+  private $cartServiceAttribute3Sum = 0;
+  private $cartServiceAttribute3Max = 0;
+  private $content                  = null;
+  private $markerArray              = null;
+  private $outerMarkerArray         = null;
+  private $tmpl                     = null;
+  private $calc                     = null;
+  private $dynamicMarkers           = null;
+  private $render                   = null;
+  private $session                  = null;
+  private $product                  = null;
+
+
+  
+  
+ /***********************************************
+  *
+  * Caddy
+  *
+  **********************************************/
 
 
 
-  /***********************************************
+
+ /**
+  * caddyForEmail( )  : Returns a caddy rendered for an e-mail
+  *
+  * @return  string    cart content
+  * @access public
+  * @version 2.0.0
+  * @since  1.4.6
+  */
+  public function caddyForEmail( $content = '', $conf = array( ) )
+  {
+    global $TSFE;
+    $local_cObj = $TSFE->cObj; // cObject
+    
+    unset( $content );
+    
+    $this->pi_loadLL();
+    
+    $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+    $this->conf = array_merge( ( array ) $this->conf, ( array ) $conf );
+    
+    $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
+    $marker   = '###CADDY_POWERMAIL###';
+    $this->tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
+    
+    $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
+    $this->calc           = t3lib_div::makeInstance( 'tx_caddy_calc' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_dynamicmarkers.php' );
+    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_render.php' );
+    $this->render         = t3lib_div::makeInstance( 'tx_caddy_render' );
+    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_session.php' );
+    $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
+    
+    $content_item     = '';
+    $shipping_option  = '';
+    $payment_option   = '';
+    $cartNet                        = 0; 
+    $cartGross                      = 0;
+    $cartTaxReduced                 = 0;
+    $cartTaxNormal                  = 0;
+
+      // read all products from session
+    $this->product = $this->session->productsGet( );
+    
+      // DRS
+    unset( $content );
+    $drs = false;
+    if( $conf['userFunc.']['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+      // RETURN : empty content, no product in session
+    if( count( $this->product ) < 1 )
+    {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = __METHOD__ . ' returns null[userFunc.][drs].';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      $this->content = ''; // clear content
+      return $this->content;
+    }
+      // RETURN : empty content, no product in session
+
+    foreach( ( array ) $this->product as $product )
+    { // one loop for every product in session
+      $product['price_total'] = $product['price'] * $product['qty']; // price total
+      $local_cObj->start($product, $this->conf['db.']['table']); // enable .field in typoscript
+      foreach ((array) $this->conf['settings.']['powermailCaddy.']['fields.'] as $key => $value)
+      { // one loop for every param of the current product
+        if (!stristr($key, '.'))
+        { // no .
+          $this->markerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCaddy.']['fields.'][$key], $this->conf['settings.']['powermailCaddy.']['fields.'][$key . '.']); // write to marker
+        }
+      }
+      $content_item .= $this->cObj->substituteMarkerArrayCached($this->tmpl['item'], $this->markerArray); // add inner html to variable
+
+      $cartGross += $product['price_total'];
+      $this->cartCount += $product['qty'];
+
+      $this->cartServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
+      $this->cartServiceAttribute1Max = $this->cartServiceAttribute1Max > $product['service_attribute_1'] ? $this->cartServiceAttribute1Max : $product['service_attribute_1'];
+      $this->cartServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
+      $this->cartServiceAttribute2Max = $this->cartServiceAttribute2Max > $product['service_attribute_2'] ? $this->cartServiceAttribute2Max : $product['service_attribute_2'];
+      $this->cartServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
+      $this->cartServiceAttribute3Max = $this->cartServiceAttribute3Max > $product['service_attribute_3'] ? $this->cartServiceAttribute3Max : $product['service_attribute_3'];
+
+      $cartNet += ( $product['price_total'] - $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']));
+
+      if ($product['tax'] == 1)
+      { // reduced tax
+        $cartTaxReduced += $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']); // add tax from this product to overall
+      } else { // normal tax
+        $cartTaxNormal += $local_cObj->cObjGetSingle($this->conf['settings.']['fields.']['tax'], $this->conf['settings.']['fields.']['tax.']); // add tax from this product to overall
+      }
+    }
+
+    $subpartArray['###CONTENT###'] = $content_item; // work on subpart 3
+
+    $cartGrossNoService = $cartGross;
+    $cartNetNoService = $cartNet;
+
+    // calculate pice incl. shipping
+    $shipping_id = $this->session->shippingGet();
+
+    if ($shipping_id) 
+    {
+      $shipping_values	= $this->calc->calculateOptionById($this->conf, 'shipping', $shipping_id, $this);
+      $shipping_net		= $shipping_values['net'];
+      $shipping_gross		= $shipping_values['gross'];
+      $cartNet			+= $shipping_values['net'];
+      $cartGross			+= $shipping_values['gross'];
+      if ($this->conf['shipping.']['options.'][$shipping_id . '.']['tax'] == 'reduced') {
+        $cartTaxReduced += $shipping_gross - $shipping_net;
+      } else {
+        $cartTaxNormal	+= $shipping_gross - $shipping_net;	
+      }
+
+      $shipping_option	= $this->render->renderOptionById($this->conf, 'shipping', $shipping_id, $this);
+    }
+
+    // calculate pice incl. payment
+    $payment_id = $this->session->paymentGet();
+
+    if ($payment_id)
+    {
+      $payment_values		= $this->calc->calculateOptionById($this->conf, 'payment', $payment_id, $this);
+      $payment_net		= $payment_values['net'];
+      $payment_gross		= $payment_values['gross'];
+      $cartNet			+= $payment_values['net'];
+      $cartGross                += $payment_values['gross'];
+      if ($this->conf['payment.']['options.'][$payment_id . '.']['tax'] == 'reduced') {
+              $cartTaxReduced += $payment_gross - $payment_net;
+      } else {
+              $cartTaxNormal += $payment_gross - $payment_net;	
+      }
+
+      $payment_option 	= $this->render->renderOptionById($this->conf, 'payment', $payment_id, $this);
+
+    }
+
+    // calculate pice incl. specials
+    $special_ids = $this->session->specialGet();
+
+    $overall_special_gross = 0.0;
+    $overall_special_net = 0.0;
+    $overall_special_option = '';
+
+    foreach( ( array ) $special_ids as $special_id )
+    {
+      $special_values		= $this->calc->calculateOptionById($this->conf, 'special', $special_id, $this);
+      $special_net		= $special_values['net'];
+      $special_gross		= $special_values['gross'];
+      $cartNet			+= $special_values['net'];
+      $cartGross			+= $special_values['gross'];
+      if ($this->conf['special.']['options.'][$special_id . '.']['tax'] == 'reduced') {
+              $cartTaxReduced += $special_gross - $special_net;
+      } else {
+              $cartTaxNormal += $special_gross - $special_net;	
+      }
+      $overall_special_gross += $special_gross;
+      $overall_special_net   += $special_net;
+
+      $overall_special_option .= $this->render->renderOptionById($this->conf, 'special', $special_id, $this);
+    }
+
+    $outerArr = array
+                (
+                  'optionsNet'      => ( double ) ( $shipping_net + $payment_net + $overall_special_net ),
+                  'optionsGross'    => ( double ) ( $shipping_gross + $payment_gross+ $overall_special_gross ),
+                  'sumGross'        => ( double ) $cartGross,
+                  'productsGross'   => ( double ) $cartGrossNoService,
+                  'sumNet'          => ( double ) $cartNet,
+                  'productsNet'     => ( double ) $cartNetNoService,
+                  'sumTaxReduced'   => ( double ) $cartTaxReduced,
+                  'sumTaxNormal'    => ( double ) $cartTaxNormal,
+                  'shipping_option' => $shipping_option,
+                  'payment_option'  => $payment_option,
+                  'special_option'  => $overall_special_option,
+                  'ordernumber'     => $this->session->getNumberOrder()
+                );
+    $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+
+    foreach ((array) $this->conf['settings.']['powermailCaddy.']['overall.'] as $key => $value)
+    {
+      if (!stristr($key, '.'))
+      { // no .
+        $this->outerMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['powermailCaddy.']['overall.'][$key], $this->conf['settings.']['powermailCaddy.']['overall.'][$key . '.']);
+      }
+    }
+
+    $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['all'], $this->outerMarkerArray, $subpartArray); // Get html template
+    $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
+    $this->content = preg_replace('|###.*?###|i', '&nbsp;', $this->content); // Finally clear not filled markers
+
+      // DRS
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns the caddy with products and calculation.';
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $this->content;
+  }
+
+  
+  
+ /***********************************************
   *
   * Powermail
   *

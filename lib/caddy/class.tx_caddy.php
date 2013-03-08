@@ -135,7 +135,7 @@ class tx_caddy extends tslib_pibase
   **********************************************/
 
  /**
-  * caddy( )
+  * caddy( )  : Returns a caddy with HTML form and HTML options among others
   *
   * @return	array		$arrReturn  : array with elements caddy, tmpl, outerMarkerArray
   * @access public
@@ -179,10 +179,12 @@ class tx_caddy extends tslib_pibase
 
 
  /**
-  * caddyByUserfunc( )
+  * caddyByUserfunc( )  : Call the caddy by a userfunc i.e for place in an e-mail
+  * 
+  * UNDER DEVELOPMENT! DOESN'T WORK!
   *
-  * @param	[type]		$$content: ...
-  * @param	[type]		$conf: ...
+  * @param	string		$$content : current content (usually empty)
+  * @param	array		$conf     : typoscript configuration of the userfunc
   * @return	string		$caddy  : HTML caddy
   * @access public
   * @version    2.0.0
@@ -226,9 +228,9 @@ die ( );
   }
 
  /**
-  * caddyWiProducts( )
+  * caddyWiProducts( )  : Workflow for a caddy, whoch contains products
   *
-  * @return	void
+  * @return	array   : $subpartArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -418,10 +420,10 @@ die ( );
   }
 
  /**
-  * caddyWiProductsItem( )
+  * caddyWiProductsItem( )  : Render the item (product)
   *
-  * @param	[type]		$$contentItem: ...
-  * @return	string		$contentItem  : current content
+  * @param	string		$contentItem : current item
+  * @return	string		$contentItem : rendered item
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -453,9 +455,9 @@ die ( );
   }
 
  /**
-  * caddyWiProductsProductErrorMsg( )
+  * caddyWiProductsProductErrorMsg( ) : 
   *
-  * @param	array		$product :
+  * @param	array		$product : the current item / product
   * @return	void
   * @access private
   * @version    2.0.0
@@ -497,8 +499,12 @@ die ( );
     }
       // DRS
 
-    $this->caddyServiceAttribute1Sum = $this->caddyServiceAttribute1Sum +
-                                      $product['service_attribute_1'] * $product['qty'];
+    $this->caddyServiceAttribute1Sum  = $this->caddyServiceAttribute1Sum 
+                                      + (
+                                            $product['service_attribute_1'] 
+                                          * $product['qty']
+                                        )
+                                      ;
     if( $this->caddyServiceAttribute1Max > $product['service_attribute_1'] )
     {
       $this->caddyServiceAttribute1Max = $this->caddyServiceAttribute1Max;
@@ -508,8 +514,12 @@ die ( );
       $this->caddyServiceAttribute1Max = $product['service_attribute_1'];
     }
 
-    $this->caddyServiceAttribute2Sum = $this->caddyServiceAttribute2Sum +
-                                      $product['service_attribute_2'] * $product['qty'];
+    $this->caddyServiceAttribute2Sum  = $this->caddyServiceAttribute2Sum 
+                                      + (
+                                            $product['service_attribute_2'] 
+                                          * $product['qty']
+                                        )
+                                      ;
     if( $this->caddyServiceAttribute2Max > $product['service_attribute_2'] )
     {
       $this->caddyServiceAttribute2Max = $this->caddyServiceAttribute2Max;
@@ -519,8 +529,12 @@ die ( );
       $this->caddyServiceAttribute2Max = $product['service_attribute_2'];
     }
 
-    $this->caddyServiceAttribute3Sum = $this->caddyServiceAttribute3Sum +
-                                      $product['service_attribute_3'] * $product['qty'];
+    $this->caddyServiceAttribute3Sum  = $this->caddyServiceAttribute3Sum 
+                                      + (
+                                            $product['service_attribute_3'] 
+                                          * $product['qty']
+                                        )
+                                      ;
     if( $this->caddyServiceAttribute3Max > $product['service_attribute_3'] )
     {
       $this->caddyServiceAttribute3Max = $this->caddyServiceAttribute3Max;
@@ -529,13 +543,6 @@ die ( );
     {
       $this->caddyServiceAttribute3Max = $product['service_attribute_3'];
     }
-
-//    $this->caddyServiceAttribute1Sum += $product['service_attribute_1'] * $product['qty'];
-//    $this->caddyServiceAttribute1Max = $this->caddyServiceAttribute1Max > $product['service_attribute_1'] ? $this->caddyServiceAttribute1Max : $product['service_attribute_1'];
-//    $this->caddyServiceAttribute2Sum += $product['service_attribute_2'] * $product['qty'];
-//    $this->caddyServiceAttribute2Max = $this->caddyServiceAttribute2Max > $product['service_attribute_2'] ? $this->caddyServiceAttribute2Max : $product['service_attribute_2'];
-//    $this->caddyServiceAttribute3Sum += $product['service_attribute_3'] * $product['qty'];
-//    $this->caddyServiceAttribute3Max = $this->caddyServiceAttribute3Max > $product['service_attribute_3'] ? $this->caddyServiceAttribute3Max : $product['service_attribute_3'];
   }
 
  /**
@@ -549,7 +556,6 @@ die ( );
   */
   private function caddyWiProductsProductSettings( $product )
   {
-//var_dump( __METHOD__, __LINE__, $this->cObj->data, array_keys( ( array ) $this->conf['settings.']['fields.'] ) );
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
@@ -585,11 +591,10 @@ die ( );
       $this->markerArray = $this->zz_addQtynameMarker($product, $this->markerArray, $this);
     }
       // FOREACH  : settings property
-//var_dump( __METHOD__, __LINE__, $this->markerArray );
   }
 
  /**
-  * caddyWoProducts( )
+  * caddyWoProducts( )  : Render a caddy, which doesn't contain any product
   *
   * @return	void
   * @access private
@@ -601,9 +606,9 @@ die ( );
       // #45915, 130228
       // Set the hidden field to true of the powermail form
     $this->powermail->formHide( );
-//var_dump( __METHOD__, __LINE__, $css );
 
-    $this->tmpl['all'] = $this->tmpl['empty']; // overwrite normal template with empty template
+      // overwrite default template with empty template
+    $this->tmpl['all'] = $this->tmpl['empty'];
 
   }
 
@@ -1020,35 +1025,40 @@ die ( );
   */
   private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
   {
-      // return there isn't any variant
-      if (!is_array($pObj->conf['settings.']['variant.']))
-      {
-          return $ts_conf;
-      }
+    unset( $ts_key );
+    
+      // RETURN : there isn't any variant
+    if( ! is_array($pObj->conf['settings.']['variant.'] ) )
+    {
+      return $ts_conf;
+    }
+      // RETURN : there isn't any variant
 
       // get all variant key/value pairs from the current product
-      $array_add_gpvar = $this->productsGetVariantTs($product, $pObj);
+    $array_add_gpvar = $this->productsGetVariantTs( $product, $pObj );
 
       // add variant key/value pairs to imageLinkWrap
-      foreach ((array) $array_add_gpvar as $key => $value)
-      {
-          $str_wrap = $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'];
-          $str_wrap = $str_wrap . '&' . $this->prefixId . '[' . $key . ']=' . $value;
-          $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'] = $str_wrap;
-      }
+    foreach( ( array ) $array_add_gpvar as $key => $value )
+    {
+      $str_wrap = $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'];
+      $str_wrap = $str_wrap . '&' . $this->prefixId . '[' . $key . ']=' . $value;
+      $ts_conf['imageLinkWrap.']['typolink.']['additionalParams.']['wrap'] = $str_wrap;
+    }
 
-      return $ts_conf;
+    return $ts_conf;
   }
 
-  /**
- * Gets the option_id for a given type ('shipping', 'payment') method on the current cart and checks the
- * availability. If available, return is 0. If not available the given fallback or preset will returns.
+/**
+ * zz_checkOptionIsNotAvailable( )  : Gets the option_id for a given type ('shipping', 'payment') 
+ *                                    method on the current cart and checks the availability. 
+ *                                    If available, return is 0. If not available the given fallback 
+ *                                    or preset will returns.
  *
  * @param	string		$type
  * @param	int		$option_id
  * @return	int
  */
-  private function zz_checkOptionIsNotAvailable($type, $option_id)
+  private function zz_checkOptionIsNotAvailable( $type, $option_id )
   {
     if
     ( 
@@ -1097,11 +1107,12 @@ die ( );
   }
 
  /**
-  * zz_cObjGetSingle( )
+  * zz_cObjGetSingle( ) : Renders a typoscript property with cObjGetSingle, if it is an array.
+  *                       Otherwise returns the property unchanged.
   *
-  * @param	[type]		$$cObj_name: ...
-  * @param	[type]		$cObj_conf: ...
-  * @return	string
+  * @param	string		$cObj_name  : value or the name of the property like TEXT, COA, IMAGE, ...
+  * @param	array		$cObj_conf  : null or the configuration of the property
+  * @return	string		$value      : unchanged value or rendered typoscript property
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1146,6 +1157,9 @@ die ( );
           // Follow the workflow
         break;
     }
+    
+    unset( $free_from );
+    unset( $free_until );
 
     $filterArr = array(
                         'by_price' => $this->productsGross,

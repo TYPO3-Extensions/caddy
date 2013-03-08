@@ -1082,11 +1082,12 @@ class tx_caddy_pi1 extends tslib_pibase
   **********************************************/
 
  /**
-  * zz_cObjGetSingle( )
+  * zz_cObjGetSingle( ) : Renders a typoscript property with cObjGetSingle, if it is an array.
+  *                       Otherwise returns the property unchanged.
   *
-  * @param	[type]		$$cObj_name: ...
-  * @param	[type]		$cObj_conf: ...
-  * @return	string
+  * @param	string		$cObj_name  : value or the name of the property like TEXT, COA, IMAGE, ...
+  * @param	array		$cObj_conf  : null or the configuration of the property
+  * @return	string		$value      : unchanged value or rendered typoscript property
   * @access private
   * @version    2.0.0
   * @since      2.0.0

@@ -20,8 +20,7 @@
   // includeLibs
 
 includeLibs {
-  user_caddy_powermailCaddy  = EXT:caddy/lib/user_caddy_powermailCaddy.php
-  tx_caddy                  = EXT:caddy/lib/caddy/class.tx_caddy.php
+//  user_caddy_powermailCaddy  = EXT:caddy/lib/user_caddy_powermailCaddy.php
   tx_caddy_powermail        = EXT:caddy/lib/powermail/class.tx_caddy_powermail.php
   tx_caddy_session          = EXT:caddy/lib/class.tx_caddy_session.php
   tx_caddy_userfunc         = EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php
@@ -1920,8 +1919,8 @@ plugin.tx_powermail_pi1 {
       // The caddy content
     caddy = USER
     caddy {
-      //userFunc = user_caddy_powermailCaddy->showCaddy
-      userFunc = tx_caddy->caddyByUserfunc
+      userFunc = user_caddy_powermailCaddy->showCaddy
+      userFunc = tx_caddy_powermail->caddyForEmail
       userFunc {
         drs = {$plugin.caddy.debug.userfunc}
       }
