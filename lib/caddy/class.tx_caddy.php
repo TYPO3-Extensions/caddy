@@ -926,7 +926,7 @@ die ( );
   private function initDie( )
   {
       // DIE  : $row is empty
-    if( ! is_array( $this->row ) || empty( $$this->row ) )
+    if( ! is_array( $this->row ) || empty( $this->row ) )
     {
       $prompt = 'ERROR: row is empty or isn\'t an array!<br />' . PHP_EOL .
                 'Sorry for the trouble.<br />' . PHP_EOL .
