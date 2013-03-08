@@ -1191,6 +1191,11 @@ class tx_caddy extends tslib_pibase
       // LOOP each option
     foreach( ( array ) $this->conf[$type.'.']['options.'] as $key => $value )
     {
+      if( ! stristr( $key, '.' ) )
+      { 
+        continue;
+      }
+
         // hide option if not available by cartGrossNoService
       $show = true;
       if
