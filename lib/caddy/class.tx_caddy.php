@@ -157,13 +157,11 @@ class tx_caddy extends tslib_pibase
     {
       case( count( $this->products ) > 0 ):
         $caddy = $this->caddyWiProducts( );
-var_dump( __METHOD__, __LINE__, $caddy );
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
         $this->caddyWoProducts( );
         $caddy = null;
-var_dump( __METHOD__, __LINE__, $caddy );
         break;
     }
 
@@ -249,6 +247,7 @@ die ( );
 
       // handle the current product
     $arrResult      = $this->calcProduct( );
+var_dump( __METHOD__, __LINE__, $arrResult );
     $contentItem    = $arrResult['contentItem'];
     $sumNet         = $arrResult['net'];
     $sumGross       = $arrResult['gross'];
