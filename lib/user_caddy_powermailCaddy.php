@@ -76,6 +76,7 @@ class user_caddy_powermailCaddy extends tslib_pibase
     $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
     $marker   = '###CADDY_POWERMAIL###';
     $this->tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
+    
     $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
     require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );
@@ -238,15 +239,15 @@ class user_caddy_powermailCaddy extends tslib_pibase
 
     $outerArr = array
                 (
-                  'optionsNet'      => $shipping_net + $payment_net + $overall_special_net,
-                  'optionsGross'    => $shipping_gross + $payment_gross+ $overall_special_gross,
-                  'sumGross'        => $cartGross,
-                  'productsGross'   => $cartGrossNoService,
-                  'sumNet'          => $cartNet,
-                  'productsNet'     => $cartNetNoService,
-                  'sumTaxReduced'   => $cartTaxReduced,
-                  'sumTaxNormal'    => $cartTaxNormal,
-                  'payment_note'    => $paymentNote,
+                  'optionsNet'      => ( double ) ( $shipping_net + $payment_net + $overall_special_net ),
+                  'optionsGross'    => ( double ) ( $shipping_gross + $payment_gross+ $overall_special_gross ),
+                  'sumGross'        => ( double ) $cartGross,
+                  'productsGross'   => ( double ) $cartGrossNoService,
+                  'sumNet'          => ( double ) $cartNet,
+                  'productsNet'     => ( double ) $cartNetNoService,
+                  'sumTaxReduced'   => ( double ) $cartTaxReduced,
+                  'sumTaxNormal'    => ( double ) $cartTaxNormal,
+                  'payment_note'    => ( double ) $paymentNote,
                   'shipping_option' => $shipping_option,
                   'payment_option'  => $payment_option,
                   'special_option'  => $overall_special_option,
