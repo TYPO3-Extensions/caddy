@@ -121,7 +121,7 @@ class tx_caddy extends tslib_pibase
   private $outerMarkerArray = array( );
 
     // [array] current tt_content row or current pi_flexform row
-  public $row  = null;
+  private $row  = null;
 
   private $tmpl         = null;
   private $smarkerArray = null;
@@ -146,17 +146,9 @@ class tx_caddy extends tslib_pibase
   {
     $arrReturn = null;
 
-      // DIE  : $pObj isn't initiated
-    if( ! is_object( $this->pObj ) )
-    {
-      $prompt = 'ERROR: no object!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-                __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-      // DIE  : $pObj isn't initiated
-
+      // DIE  : if pObj or row isn't initiated
+    $this->initDie( );
+    
     $this->initInstances( );
 
       // get products from session
@@ -922,6 +914,39 @@ die ( );
   * Init
   *
   **********************************************/
+  
+ /**
+  * initDie( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDie( )
+  {
+      // DIE  : $row is empty
+    if( ! is_array( $this->row ) || empty( $$this->row ) )
+    {
+      $prompt = 'ERROR: row is empty or isn\'t an array!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // DIE  : $row is empty
+
+      // DIE  : $pObj isn't initiated
+    if( ! is_object( $this->pObj ) )
+    {
+      $prompt = 'ERROR: no object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // DIE  : $pObj isn't initiated
+  }
 
  /**
   * initInstances( )
@@ -963,7 +988,7 @@ die ( );
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
   }
-
+  
 
 
   /***********************************************
@@ -971,6 +996,28 @@ die ( );
   * Setter
   *
   **********************************************/
+
+ /**
+  * setContentRow( )  : Set $row with cObj->data
+  *
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function setContentRow( $row )
+  {
+    if( ! is_array( $row ) || empty( $row ) )
+    {
+      $prompt = 'ERROR: row is empty or isn\'t an array!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->row = $row;
+  }
 
  /**
   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
