@@ -1128,7 +1128,7 @@ class tx_caddy extends tslib_pibase
     $conf = $this->conf['payment.']['options.'];
     
       // Get key for the option 
-    $key    = $sesArray['payment'] . '.';
+    $key    = $sesArray['paymentId'] . '.';
 
       // Render the option label
     $name   = $conf[ $key ]['title'];
@@ -1155,7 +1155,7 @@ class tx_caddy extends tslib_pibase
     $conf = $this->conf['shipping.']['options.'];
     
       // Get key for option 
-    $key    = $sesArray['shipping'] . '.';
+    $key    = $sesArray['shippingId'] . '.';
 
       // Render the option label
     $name   = $conf[ $key ]['title'];
@@ -1185,7 +1185,7 @@ class tx_caddy extends tslib_pibase
 
       // Render the option label
     $value = null;
-    foreach( ( array ) $sesArray['special'] as $key )
+    foreach( ( array ) $sesArray['specialIds'] as $key )
     {
       $name   = $conf[ $key ]['title'];
       $conf   = $conf[ $key ]['title.'];
