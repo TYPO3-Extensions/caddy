@@ -418,6 +418,7 @@ die( );
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
+    $this->local_cObj       = $this->cObj;
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
 
