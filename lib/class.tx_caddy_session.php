@@ -918,6 +918,7 @@ class tx_caddy_session
       // Increase numbers
     $this->sessionDeleteIncreaseNumbers( $drs );
 
+      // Delete the session
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );
   }
@@ -937,6 +938,11 @@ class tx_caddy_session
       // RETURN : any product, don't increase numbers!
     if( empty( $products ) )
     {
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = 'Session is empty! Maybe powermail form is sent twice!';
+        t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+      }
       return;
     }
       // RETURN : any product, don't increase numbers!
