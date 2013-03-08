@@ -247,7 +247,7 @@ die ( );
 
       // handle the current product
     $arrResult      = $this->calcProduct( );
-var_dump( __METHOD__, __LINE__, $arrResult );
+var_dump( __METHOD__, __LINE__, $this->products, $arrResult );
     $contentItem    = $arrResult['contentItem'];
     $sumNet         = $arrResult['net'];
     $sumGross       = $arrResult['gross'];
