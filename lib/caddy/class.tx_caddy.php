@@ -247,7 +247,6 @@ die ( );
 
       // handle the current product
     $arrResult      = $this->calcProduct( );
-var_dump( __METHOD__, __LINE__, $this->products, $arrResult );
     $contentItem    = $arrResult['contentItem'];
     $sumNet         = $arrResult['net'];
     $sumGross       = $arrResult['gross'];
@@ -849,6 +848,7 @@ var_dump( __METHOD__, __LINE__, $this->products, $arrResult );
     $arrReturn['gross']       = $productsGross;
     $arrReturn['taxReduced']  = $productsTaxReduced;
     $arrReturn['taxNormal']   = $productsTaxNormal;
+var_dump( __METHOD__, __LINE__, $this->tmpl, $this->products, $arrReturn );
 
     return $arrReturn;
   }
