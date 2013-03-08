@@ -1038,15 +1038,42 @@ var_dump( __METHOD__, __LINE__, $this->tmpl, $this->products, $arrReturn );
       die( $prompt );
       
     }
-    $this->pObj       = $pObj;
+    $this->pObj = $pObj;
 
-      // Set the current typoscript configuration
-    $this->conf       = $pObj->conf;
+    if( ! is_array( $pObj->conf ) || empty( $pObj->conf ) )
+    {
+      $prompt = 'ERROR: no configuration!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->conf = $pObj->conf;
 
+    if( ! is_object( $pObj->cObj ) )
+    {
+      $prompt = 'ERROR: no cObject!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
     $this->cObj       = $pObj->cObj;
     $this->local_cObj = $pObj->local_cObj;
 
-    $this->tmpl       = $pObj->tmpl;
+    if( ! is_array( $pObj->tmpl ) || empty( $pObj->tmpl ) )
+    {
+      $prompt = 'ERROR: no template!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+
+    $this->tmpl = $pObj->tmpl;
   }
   
 
