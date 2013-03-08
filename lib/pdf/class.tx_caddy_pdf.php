@@ -740,6 +740,7 @@ die( );
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
     $this->caddy->conf      = $this->conf;
+    $this->caddy->cObj      = $this->cObj;
 
     require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
