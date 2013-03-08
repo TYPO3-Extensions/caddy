@@ -1615,7 +1615,7 @@ die( );
     switch( true )
     {
       case( is_array( $cObj_conf ) ):
-        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        $value = $this->local_cObj->cObjGetSingle( $cObj_name, $cObj_conf );
         break;
       case( ! ( is_array( $cObj_conf ) ) ):
       default:
