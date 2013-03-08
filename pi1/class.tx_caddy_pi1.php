@@ -401,6 +401,10 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initPowermail( );
     $this->initDatabase( );
     $this->initNumbers( );
+    
+    $this->caddy->setParentObject( $this );
+    $this->caddy->setContentRow( $this->cObj->data );
+    
   }
 
 /**
