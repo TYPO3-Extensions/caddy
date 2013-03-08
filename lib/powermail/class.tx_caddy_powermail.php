@@ -205,6 +205,7 @@ class tx_caddy_powermail extends tslib_pibase
 
       // read all products from session
     $this->products = $this->session->productsGet( );
+
     
       // RETURN : empty content, no product in session
     if( count( $this->products ) < 1 )
@@ -221,6 +222,7 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
 
+    $this->caddy->setProducts( $this->products );
     $arrResult = $this->caddy->calcProduct( );
 var_dump( __METHOD__, __LINE__, $arrResult );
 die( );

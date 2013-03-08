@@ -1088,6 +1088,28 @@ die ( );
     $this->tmpl = $pObj->tmpl;
   }
   
+ /**
+  * setProducts( )  :
+  *
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function setProducts( $products )
+  {
+    if( ! is_array( $products ) || empty( $products ) )
+    {
+      $prompt = 'ERROR: there isn\'t any product!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->products = $products;
+  }
+  
 
 
   /***********************************************
