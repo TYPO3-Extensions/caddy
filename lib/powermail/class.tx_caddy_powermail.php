@@ -210,9 +210,13 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
 
+      // Set products
     $this->caddy->setProducts( $this->products );
     
+      // Calculate the caddy
     $arrResult          = $this->caddy->calc( );
+    
+      // Handle the result
     $contentItem        = $arrResult['contentItem']; 
     $productsGross      = $arrResult['productsGross'];
     $productsNet        = $arrResult['productsNet'];

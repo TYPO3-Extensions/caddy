@@ -80,6 +80,7 @@ class tx_caddy_render extends tslib_pibase {
 					$option = $conf[$type.'.']['options.'][$option_id . '.']['title'] . ' (' . str_replace('.', ',', $conf[$type.'.']['options.'][$option_id . '.']['extra']) . ' ' . $conf['main.']['currencySymbol'] . ') <br />';
 			}
 		}
+var_dump( __METHOD__, __LINE__, $option_id, $option );
 		
 		return $option;
 	}
