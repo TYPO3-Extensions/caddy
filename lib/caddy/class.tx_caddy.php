@@ -422,7 +422,10 @@ class tx_caddy extends tslib_pibase
     if( $paymentId )
     {
       $this->markerArray['###QTY###']         = 1;
-      $this->markerArray['###TITLE###']       = $this->conf['payment.']['options.'][$paymentId . '.']['title'];
+      $name   = $this->conf['payment.']['options.'][$paymentId . '.']['title'];
+      $conf   = $this->conf['payment.']['options.'][$paymentId . '.']['title.'];
+      $title  = $this->zz_cObjGetSingle( $name, $conf );
+      $this->markerArray['###TITLE###']       = $title;
       $this->markerArray['###PRICE###']       = $this->conf['payment.']['options.'][$paymentId . '.']['extra'];
       $this->markerArray['###PRICE_TOTAL###'] = $this->conf['payment.']['options.'][$paymentId . '.']['extra'];
          // add inner html to variable
@@ -1082,6 +1085,32 @@ class tx_caddy extends tslib_pibase
     return 0;
   }
 
+ /**
+  * zz_cObjGetSingle( )
+  *
+  * @param	[type]		$$cObj_name: ...
+  * @param	[type]		$cObj_conf: ...
+  * @return	string
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+  {
+    switch( true )
+    {
+      case( is_array( $cObj_conf ) ):
+        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        break;
+      case( ! ( is_array( $cObj_conf ) ) ):
+      default:
+        $value = $cObj_name;
+        break;
+    }
+
+    return $value;
+  }
+
   /**
  * Gets the price for a given type ('shipping', 'payment') method on the current cart
  *
@@ -1343,9 +1372,10 @@ class tx_caddy extends tslib_pibase
 
       // TODO: In braces the actual Price for Payment should be displayed, not the first one.
 
+      $title = $this->zz_cObjGetSingle( $value['title'], $value['title.'] );
       $this->smarkerArray['###'.$upperType.'_TITLE###'] = 
         '<label for="tx_caddy_pi1_' . $type . '_' . intval( $key ) . '">' . 
-        $value['title'] . ' (' . $show_price . ')</label>';
+        $title . ' (' . $show_price . ')</label>';
 
       if( isset( $condition_list['###CONTENT###'] ) )
       {
