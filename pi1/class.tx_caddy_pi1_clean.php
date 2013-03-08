@@ -130,7 +130,7 @@ class tx_caddy_pi1_clean
 
       // Get the session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
+var_dump( __METHOD__, __LINE__, $sesArray );
       // RETURN : any product, don't increase numbers!
     if( empty( $sesArray ) )
     {
