@@ -598,6 +598,8 @@ class tx_caddy extends tslib_pibase
   public function calc( )
   {
     $this->initDie( );
+    
+    $this->initInstances( );
 
       // handle the current product
     $arrResult      = $this->calcProduct( );
@@ -848,11 +850,11 @@ class tx_caddy extends tslib_pibase
   * calcProduct( )
   *
   * @return	void
-  * @access public
+  * @access     private
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function calcProduct( )
+  private function calcProduct( )
   {   
       // DIE  : $row is empty
     if( empty( $this->products ) )
@@ -1097,6 +1099,13 @@ class tx_caddy extends tslib_pibase
   */
   private function initInstances( )
   {
+    if( ! ( $this->initInstances === null ) )
+    {
+      return;
+    }
+    
+    $this->initInstances = true;
+    
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'class.tx_caddy_calc.php' );
