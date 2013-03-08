@@ -932,6 +932,15 @@ class tx_caddy_session
   */
   private function sessionDeleteIncreaseNumbers( $drs )
   {
+    $products = $this->productsGet( );
+    
+      // RETURN : any product, don't increase numbers!
+    if( empty( $products ) )
+    {
+      return;
+    }
+      // RETURN : any product, don't increase numbers!
+    
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
     $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
 
