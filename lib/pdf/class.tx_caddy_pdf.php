@@ -280,7 +280,7 @@ class tx_caddy_pdf extends tslib_pibase
 //    $conf   = $confPaymentOptions[ $key ]['title.'];
 //    $value  = $this->zz_cObjGetSingle( $name, $conf );
 //    $subpartArray['###PAYMENTNET###'] = $value;
-    $subpartArray['###PAYMENTNET###'] = $this->caddy->getPaymentOptionLabelBySessionId( $this->conf );
+    $subpartArray['###PAYMENTNET###'] = $this->caddy->getPaymentOptionLabelBySessionId( );
       // Payment option label
 
       // Shipping label

@@ -1119,22 +1119,22 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function getPaymentOptionLabelBySessionId( $conf )
+  public function getPaymentOptionLabelBySessionId( )
   {
       // Get session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $optionsConf = $conf['payment.']['options.'];
+    $optionsConf = $this->conf['payment.']['options.'];
     
       // Get key for the option 
     $key    = $sesArray['paymentId'] . '.';
 
       // Render the option label
-    $titleName  = $optionsConf[ $key ]['title'];
-    $titleConf  = $optionsConf[ $key ]['title.'];
-    $value      = $this->zz_cObjGetSingle( $titleName, $titleConf );
-var_dump( __METHOD__, __LINE__, $sesArray, $conf, $value );
+    $name  = $optionsConf[ $key ]['title'];
+    $conf  = $optionsConf[ $key ]['title.'];
+    $value      = $this->zz_cObjGetSingle( $name, $conf );
+var_dump( __METHOD__, __LINE__, $sesArray, $this->conf, $value );
 die( );    
     return $value;
   }
