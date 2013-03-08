@@ -194,7 +194,8 @@ class tx_caddy extends tslib_pibase
     $caddy = null;
 
       // Set the current typoscript configuration
-    $this->conf       = $conf;
+//    $this->conf       = $conf;
+    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->cObj       = $GLOBALS['TSFE']->cObj;
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
 
