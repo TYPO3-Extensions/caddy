@@ -32,6 +32,8 @@
  */
 
 require_once( PATH_tslib . 'class.tslib_pibase.php' );
+require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/tcpdf/tcpdf.php' );
+require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/fpdi/fpdi.php' );
 
 /**
  * Class 'pdf' for the 'caddy' extension.
@@ -53,10 +55,6 @@ class tx_caddy_pdf extends tslib_pibase
   public $drsUserfunc = null;
   
   
-  public  $conf         = null;
-  private $confSettings = null;
-  private $confPdf      = null;
-
   private $local_cObj = null;
     // [Object]
   private $tcpdf      = null;
@@ -331,6 +329,170 @@ class tx_caddy_pdf extends tslib_pibase
     
     return $subpartArray;
 
+  }
+
+  private function renderInvoice( &$session ) {
+          $filename = $this->concatFileName($this->ofilename);
+
+          $this->tmpl['all'] = $GLOBALS['TSFE']->cObj->getSubpart($GLOBALS['TSFE']->cObj->fileResource($this->conf['template']), '###CADDY_ORDERPDF###'); // Load HTML Template
+          $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
+
+          // CHECK: Is directory for PDF available?
+          if (!is_dir('uploads/tx_caddy')) {
+                  $session['error'][] = 'directory for order pdf is not valid';
+
+                  $erroremailaddress = $this->conf['erroremailaddress'];
+                  if ($erroremailaddress) {
+                          $mailheader = $this->pi_getLL('error.mailheader.invoice');
+                          $mailbody = $this->pi_getLL('error.mailbody.cannotcreate');
+                          $mailbody .= $this->pi_getLL('error.mailbody.dirnotfound');
+                          if ($abortonerror) {
+                                  $mailbody .= $this->pi_getLL('error.mailbody.abort');
+                          }
+                          t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody ,$headers='',$enc='',$charset='',$dontEncodeHeader=false);
+                  }
+                  if ($abortonerror) {
+                          return 1;
+                  } else {
+                          return 0;
+                  }
+          }
+          // CHECK: Is PDF already created?
+          if (!file_exists('uploads/tx_caddy'.'/'.$filename)) {
+                  $fpdi = new FPDI();
+                  $fpdi->AddPage();
+
+                  if ($this->conf['include_file']) {
+                          $fpdi->setSourceFile($this->conf['include_file']);
+                          $tplIdx = $fpdi->importPage(1);
+                          $fpdi->useTemplate($tplIdx, 0, 0, 210);
+                  }
+//http://www.tcpdf.org/doc/code/classTCPDF.html
+                  $fpdi->SetFont( 'Helvetica', '' , $this->conf['font-size'] );
+
+                  $this->renderInvoiceAddress($fpdi);
+                  $this->deliveryorderAddress($fpdi);
+                  $this->renderInvoiceNumber($fpdi);
+                  $this->renderAdditionalTextblocks($fpdi);
+
+                  $subpartArray = $this->caddyTablehead( $subpartArray );
+                  $outerMarkerArray = $outerMarkerArray . $subpartArray;
+                  foreach ($session['products'] as $key => $product) {
+                    $subpartArray['###CONTENT###'] .= $this->caddyProduct($product);
+                  }
+                  $this->renderCartSum($outerMarkerArray, $session);
+
+                  $html = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached($this->tmpl['all'], $outerMarkerArray, $subpartArray);
+
+                  $fpdi->SetLineWidth(1);
+                  $fpdi->writeHTMLCell($this->conf['body-width'], 0, $this->conf['body-position-x'], $this->conf['body-position-y'], $html, 0, 2);
+
+                  $this->renderPaymentOption($fpdi, $session['payment']);
+
+                  $fpdi->Output('uploads/tx_caddy'.'/'.$filename, 'F');
+          }
+
+          // CHECK: Was PDF not created, send E-Mail and exit with error.
+          if (!file_exists('uploads/tx_caddy'.'/'.$filename)) {
+                  $erroremailaddress = $this->conf['erroremailaddress'];
+                  if ($erroremailaddress) {
+                          $mailheader = $this->pi_getLL('error.mailheader.invoice');
+                          $mailbody = $this->pi_getLL('error.mailbody.cannotcreate');
+                          $mailbody .= $this->pi_getLL('error.mailbody.cannotwrite');
+                          if ($abortonerror) {
+                                  $mailbody .= $this->pi_getLL('error.mailbody.abort');
+                          }
+                          t3lib_div::plainMailEncoded($erroremailaddress, $mailheader, $mailbody, $headers='', $enc='', $charset='', $dontEncodeHeader=false);
+                  }
+                  return 1;
+          }
+          $session['files'][$filename] = 'uploads/tx_caddy'.'/'.$filename;
+  }
+
+  private function renderInvoiceAddress( &$fpdi )
+  {
+    $invoiceaddress = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                    (
+                      $this->conf['invoiceaddress'], $this->conf['address.']['invoice.']
+                    );
+    if( ! empty( $invoiceaddress ) )
+    {
+      $invoiceaddressheadline = $GLOBALS['TSFE']->cObj->cObjGetSingle
+                              (
+                                $this->conf['address.']['invoice.']['0'], $this->conf['address.']['invoice.']['0.']
+                              );
+      if( $invoiceaddressheadline )
+      {
+        $invoiceaddress = $invoiceaddressheadline . $invoiceaddress;
+      }
+      $fpdi->writeHtmlCell
+      (
+        160, 
+        0, 
+        $this->conf['invoiceaddress-position-x'], 
+        $this->conf['invoiceaddress-position-y'], 
+        $invoiceaddress
+      );
+    }
+  }
+
+
+
+  private function renderCartSum(&$subpartArray, $session) {
+          global $TSFE;
+
+          $outerArr = array(
+                  'optionsGross'      => $session['optionsGross'],
+                  'optionsNet'        => $session['optionsNet'], 
+                  'ordernumber'       => $session['ordernumber'],
+                  'numbers' => $session['numbers.']['deliveryorder'],
+                  'productsGross'     => $session['productsGross'],
+                  'productsNet'       => $session['productsNet'],
+                  'sumGross'          => $session['sumGross'],
+                  'sumNet'            => $session['sumNet'],
+                  'sumTaxReduced'     => $session['sumTaxReduced'],
+                  'sumTaxNormal'      => $session['sumTaxNormal']
+          );
+
+          $local_cObj = $GLOBALS['TSFE']->cObj;
+          $local_cObj->start($outerArr, $this->conf['db.']['table']);
+
+          
+          foreach ((array) $this->confSettings['powermailCaddy.']['overall.'] as $key => $value)
+          { // one loop for every param of the current product
+                  if (!stristr($key, '.'))
+                  { // no .
+                          $out = $local_cObj->cObjGetSingle($this->confSettings['powermailCaddy.']['overall.'][$key], $this->confSettings['powermailCaddy.']['overall.'][$key . '.']); // write to marker
+                          $out = str_replace('&euro;', '€', $out);
+                          $out = str_replace('&nbsp;', ' ', $out);
+
+                          $subpartArray['###' . strtoupper($key) . '###'] = $out;
+                  }
+          }
+
+          $subpartArray['###CADDY_LL_PRODUCTSNET###'] = $this->pi_getLL('caddy_ll_cart_net');
+          $subpartArray['###CADDY_LL_OPTIONSNET###'] = $this->pi_getLL('caddy_ll_optionsnet');
+          $subpartArray['###CADDY_LL_TAX###'] = $this->pi_getLL('caddy_ll_tax');
+          $subpartArray['###CADDY_LL_SUMGROSS###'] = $this->pi_getLL('caddy_ll_gross_total');
+          $subpartArray['###CADDY_LL_SHIPPINGNET###'] = $this->pi_getLL('caddy_ll_shippingnet');
+          $subpartArray['###CADDY_LL_PAYMENTNET###'] = $this->pi_getLL('caddy_ll_paymentnet');
+          $subpartArray['###CADDY_LL_SPECIALNET###'] = $this->pi_getLL('caddy_ll_specialnet');
+
+          $subpartArray['###SHIPPINGNET###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'][$session['shipping'].'.']['title'];
+          $subpartArray['###PAYMENTNET###'] = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$session['payment'].'.']['title'];
+
+          $subpartArray['###SPECIALNET###'] = '';
+          if (isset($session['special'])) {
+                  foreach ($session['special'] as $special_id) {
+                          $subpartArray['###SPECIALNET###'] .= $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'][$special_id.'.']['title'];
+                  }
+          }
+  }
+
+  private function renderInvoiceNumber(&$fpdi) {
+          $fpdi->SetXY($this->conf['invoicenumber-position-x'], $this->conf['invoicenumber-position-y']);
+
+          $fpdi->Cell('150', '6', $this->onumber);
   }
 
 
@@ -971,6 +1133,47 @@ class tx_caddy_pdf extends tslib_pibase
     }
         
   }
+
+
+
+
+
+  private function renderAdditionalTextblocks(&$fpdi) {
+          foreach ($this->confPdf['additionaltextblocks.'] as $key => $value) {
+                  $html = $GLOBALS['TSFE']->cObj->cObjGetSingle($value['content'], $value['content.']);
+
+                  $fpdi->writeHTMLCell($value['width'], $value['height'], $value['position-x'], $value['position-y'], $html, 0, 2, 0, true, $value['align'] ? $value['align'] : 'L', true);
+          }
+  }
+
+  private function renderPaymentOption(&$fpdi, $payment_id) {
+          $payment_option = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'][$payment_id . '.'];
+
+          if ($payment_option['note']) {
+                  $fpdi->SetY($fpdi->GetY()+20);
+                  $fpdi->SetX($this->conf['body-position-x']);
+                  $fpdi->Cell('150', '5', $payment_option['title'], 0, 1);
+                  $fpdi->SetX($this->conf['body-position-x']);
+                  $fpdi->Cell('150', '5', $payment_option['note'], 0, 1);
+          }
+  } 
+
+ /**
+  * concatFileName( ) : Wii prefix the given filename with the current date
+  *
+  * @param	string		$filename : current filename 
+  * @return	string		$filename : prefixed filename
+  * @access     private
+  * @version    2.0.0
+  * @since      1.4.6
+  */
+ private function concatFileName( $filename )
+  {
+    $date     = date( 'Ymd' );
+    $filename = $date . '-' . $filename . '.pdf';
+
+    return $filename;
+  }
   
   
 
@@ -993,8 +1196,6 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function tcpdfInit( $srceFile, $docTitle='TYPO3 Quick Shop' )
   {
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/tcpdf/tcpdf.php' );
-    require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/pdf/fpdi/fpdi.php' );
     $tcpdf = new FPDI( );
     $tcpdf->AddPage( );
 

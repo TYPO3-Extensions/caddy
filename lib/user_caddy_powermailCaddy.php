@@ -247,7 +247,6 @@ class user_caddy_powermailCaddy extends tslib_pibase
                   'productsNet'     => ( double ) $cartNetNoService,
                   'sumTaxReduced'   => ( double ) $cartTaxReduced,
                   'sumTaxNormal'    => ( double ) $cartTaxNormal,
-                  'payment_note'    => ( double ) $paymentNote,
                   'shipping_option' => $shipping_option,
                   'payment_option'  => $payment_option,
                   'special_option'  => $overall_special_option,

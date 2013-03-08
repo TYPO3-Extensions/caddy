@@ -520,9 +520,6 @@ plugin.tx_caddy_pi1 {
       overall < plugin.tx_caddy_pi1.settings.overall
 
       overall {
-        payment_note = TEXT
-        payment_note.field = payment_note
-
         shipping_option = TEXT
         shipping_option.field = shipping_option
 
