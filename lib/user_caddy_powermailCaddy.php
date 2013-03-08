@@ -73,7 +73,9 @@ class user_caddy_powermailCaddy extends tslib_pibase
     $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->conf = array_merge( ( array ) $this->conf, ( array ) $conf );
     
-    $this->tmpl['all']  = $this->cObj->getSubpart( $this->cObj->fileResource( $this->conf['main.']['template'] ), '###CADDY_POWERMAIL###' );
+    $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
+    $marker   = '###CADDY_POWERMAIL###';
+    $this->tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
     $this->tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
 
     require_once( t3lib_extMgm::extPath( 'caddy' ) . 'lib/class.tx_caddy_calc.php' );

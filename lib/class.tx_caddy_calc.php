@@ -55,7 +55,7 @@ class tx_caddy_calc extends tslib_pibase
   {
     $arrReturn = null; 
     
-    $optionIds = $conf[$type.'.']['options.'][$option_id.'.'];
+    $optionIds = $conf[$type . '.']['options.'][$option_id . '.'];
 
     $filterArr = array(
       'by_price'                    => $obj->cartGrossNoService,
