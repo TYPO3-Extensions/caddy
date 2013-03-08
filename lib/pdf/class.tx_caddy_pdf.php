@@ -279,8 +279,8 @@ class tx_caddy_pdf extends tslib_pibase
 //    $name   = $confPaymentOptions[ $key ]['title'];
 //    $conf   = $confPaymentOptions[ $key ]['title.'];
 //    $value  = $this->zz_cObjGetSingle( $name, $conf );
-//    $subpartArray['###PAYMENTNET###'] = $value;
-    $subpartArray['###PAYMENTNET###'] = $this->caddy->getPaymentOptionLabelBySessionId( );
+//    $subpartArray['###PAYMENTOPTIONLABEL###'] = $value;
+    $subpartArray['###PAYMENTOPTIONLABEL###'] = $this->caddy->getPaymentOptionLabelBySessionId( );
       // Payment option label
 
       // Shipping label
@@ -292,8 +292,8 @@ class tx_caddy_pdf extends tslib_pibase
 //    $name   = $confShippingOptions[ $key ]['title'];
 //    $conf   = $confShippingOptions[ $key ]['title.'];
 //    $value  = $this->zz_cObjGetSingle( $name, $conf );
-//    $subpartArray['###SHIPPINGNET###'] = $value;
-    $subpartArray['###SHIPPINGNET###'] = $this->caddy->getShippingOptionLabelBySessionId( );
+//    $subpartArray['###SHIPPINGOPTIONLABEL###'] = $value;
+    $subpartArray['###SHIPPINGOPTIONLABEL###'] = $this->caddy->getShippingOptionLabelBySessionId( );
       // Shipping option label
 
       // Special label
@@ -306,8 +306,8 @@ class tx_caddy_pdf extends tslib_pibase
 //    {
 //      $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
 //    }
-//    $subpartArray['###SPECIALNET###'] = $specialOptions;
-    $subpartArray['###SPECIALNET###'] = $this->caddy->getSpecialOptionLabelsBySessionId( );
+//    $subpartArray['###SPECIALOPTIONLABELS###'] = $specialOptions;
+    $subpartArray['###SPECIALOPTIONLABELS###'] = $this->caddy->getSpecialOptionLabelsBySessionId( );
       // Special option label
 var_dump( __METHOD__, __LINE__, $subpartArray );
 die( );

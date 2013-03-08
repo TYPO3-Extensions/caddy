@@ -1169,8 +1169,9 @@ class tx_caddy extends tslib_pibase
       // Render the option label
     $name   = $optionsConf[ $key ]['title'];
     $conf   = $optionsConf[ $key ]['title.'];
-    $value  = $this->zz_cObjGetSingle( $name, $optionsConf );
-    
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+var_dump( __METHOD__, __LINE__, $sesArray, $key )    ;
+die( );
     return $value;
   }
 
