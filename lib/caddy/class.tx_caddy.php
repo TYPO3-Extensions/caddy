@@ -1115,11 +1115,11 @@ class tx_caddy extends tslib_pibase
   * getPaymentOptionLabelBySessionId( )
   *
   * @return	array
-  * @access     private
+  * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function getPaymentOptionLabelBySessionId( )
+  public function getPaymentOptionLabelBySessionId( )
   {
       // Get session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -1142,11 +1142,11 @@ class tx_caddy extends tslib_pibase
   * getShippingOptionLabelBySessionId( )
   *
   * @return	array
-  * @access     private
+  * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function getShippingOptionLabelBySessionId( )
+  public function getShippingOptionLabelBySessionId( )
   {
       // Get session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -1169,11 +1169,11 @@ class tx_caddy extends tslib_pibase
   * getSpecialOptionLabelsBySessionId( )
   *
   * @return	array
-  * @access     private
+  * @access     public
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function getSpecialOptionLabelsBySessionId( )
+  public function getSpecialOptionLabelsBySessionId( )
   {
       // Get session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
