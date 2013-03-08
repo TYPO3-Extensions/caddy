@@ -861,6 +861,7 @@ die ( );
     $arrReturn['gross']       = $productsGross;
     $arrReturn['taxReduced']  = $productsTaxReduced;
     $arrReturn['taxNormal']   = $productsTaxNormal;
+var_dump( __METHOD__, __LINE__, $this->tmpl['item'] );
 
     return $arrReturn;
   }
