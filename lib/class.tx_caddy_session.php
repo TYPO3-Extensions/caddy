@@ -937,12 +937,6 @@ class tx_caddy_session
       // RETURN : any product, don't increase numbers!
     if( empty( $products ) )
     {
-      $prompt = 'ERROR: products are empty!<br />' . PHP_EOL . 
-                'Please go back to the page you visited before.<br />' . PHP_EOL . 
-                'Sorry for the trouble.<br />' . PHP_EOL . 
-                'TYPO3 Caddy<br />' . PHP_EOL . 
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
       return;
     }
       // RETURN : any product, don't increase numbers!
