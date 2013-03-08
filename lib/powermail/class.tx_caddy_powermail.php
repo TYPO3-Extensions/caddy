@@ -226,6 +226,8 @@ class tx_caddy_powermail extends tslib_pibase
     $sumNet             = $arrResult['sumNet'];
     $sumTaxNormal       = $arrResult['sumTaxNormal'];
     $sumTaxReduced      = $arrResult['sumTaxReduced'];
+var_dump( __METHOD__, __LINE__, $arrResult );
+die( );
     unset( $arrResult );
 
     $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
@@ -234,8 +236,6 @@ class tx_caddy_powermail extends tslib_pibase
     $this->cartServiceAttribute2Sum = $serviceattributes['2']['sum'];
     $this->cartServiceAttribute3Max = $serviceattributes['3']['max'];
     $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
-var_dump( __METHOD__, __LINE__, $arrResult );
-die( );
 
     $subpartArray['###CONTENT###'] = $contentItem; // work on subpart 3
 
