@@ -777,6 +777,8 @@ die ( );
   */
   public function calcProduct( )
   {
+    $this->initDie( );
+    
     $arrReturn    = null;
     $contentItem  = '';
     
