@@ -221,6 +221,9 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
 
+    $arrResult = $this->caddy->calcProduct( );
+var_dump( __METHOD__, __LINE__, $arrResult );
+die( );
       // LOOP : products
     foreach( ( array ) $this->product as $product )
     {
@@ -389,8 +392,9 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function caddyForEmailInitTemplate( )
   {   
-    $template     = $this->cObj->fileResource( $this->conf['main.']['template'] );
-    $marker       = '###CADDY_POWERMAIL###';
+    $tmpl     = null;
+    $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
+    $marker   = '###CADDY_POWERMAIL###';
 
     $tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
     $tmpl['item'] = $this->cObj->getSubpart($this->tmpl['all'], '###ITEM###'); // work on subpart 2
