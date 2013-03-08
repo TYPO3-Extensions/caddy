@@ -171,56 +171,6 @@ class tx_caddy extends tslib_pibase
     return $arrReturn;
   }
 
-
- /**
-  * caddyByUserfunc( )  : Call the caddy by a userfunc i.e for place in an e-mail
-  * 
-  * UNDER DEVELOPMENT! DOESN'T WORK!
-  *
-  * @param	string		$$content : current content (usually empty)
-  * @param	array		$conf     : typoscript configuration of the userfunc
-  * @return	string		$caddy  : HTML caddy
-  * @access public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function caddyByUserfunc( $content = '', $conf = array( ) )
-  {
-    unset( $content );
-    $caddy = null;
-
-      // Set the current typoscript configuration
-//    $this->conf       = $conf;
-    $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-    $this->cObj       = $GLOBALS['TSFE']->cObj;
-    $this->local_cObj = $GLOBALS['TSFE']->cObj;
-
-    $this->initInstances( );
-
-    //$this->powermail->init( $this->row );
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-    require_once( $path2lib . 'class.tx_caddy_template.php' );
-    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
-    $this->template->pObj   = $this;
-    $this->tmpl = $this->template->main( );
-
-      // get products from session
-    $this->products = $this->session->productsGet( );
-    switch( true )
-    {
-      case( count( $this->products ) > 0 ):
-        $caddy = $this->caddyWiProducts( );
-        break;
-      case( ! ( count( $this->products ) > 0 ) ):
-      default:
-        $this->caddyWoProducts( );
-        break;
-    }
-var_dump( __METHOD__, __LINE__, $this->products, $caddy );
-die ( );
-    return $caddy;
-  }
-
  /**
   * caddyWiProducts( )  : Workflow for a caddy, whoch contains products
   *
@@ -240,91 +190,114 @@ die ( );
     $paymentArray   = null;
     $specialArray   = null;
 
-    $sumNet         = 0.00;
-    $sumGross       = 0.00;
-    $sumTaxReduced  = 0.00;
-    $sumTaxNormal   = 0.00;
+    $arrResult = $this->calc( );
+    $contentItem    = $arrResult['contentItem']; // <- !!!!!!!!!!!!!!!!!!!!!
+    $productsGross  = $arrResult['productsGross'];
+    $productsNet    = $arrResult['productsNet'];
+    $optionsNet     = $arrResult['optionsNet'];
+    $optionsGross   = $arrResult['optionsGross'];
+    $paymentId      = $arrResult['paymentId'];
+    $shippingId     = $arrResult['shippingId'];
+    $specialIds     = $arrResult['specialIds'];
+    $sumGross       = $arrResult['sumGross'];
+    $sumNet         = $arrResult['sumNet'];
+    $sumTaxNormal   = $arrResult['sumTaxNormal'];
+    $sumTaxReduced  = $arrResult['sumTaxReduced'];
 
-      // handle the current product
-    $arrResult      = $this->calcProduct( );
-    $contentItem    = $arrResult['contentItem'];
-    $sumNet         = $arrResult['net'];
-    $sumGross       = $arrResult['gross'];
-    $sumTaxReduced  = $arrResult['taxReduced'];
-    $sumTaxNormal   = $arrResult['taxNormal'];
     unset( $arrResult );
-      // handle the current product
-
+    unset( $productsGross );
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
-    $this->productsGross = $sumGross;
-    $productsNet        = $sumNet;
+    
+//      // handle the current product
+//    $arrResult      = $this->calcProduct( );
+//    $contentItem    = $arrResult['contentItem'];
+//    $sumNet         = $arrResult['net'];
+//    $sumGross       = $arrResult['gross'];
+//    $sumTaxReduced  = $arrResult['taxReduced'];
+//    $sumTaxNormal   = $arrResult['taxNormal'];
+//    unset( $arrResult );
+//      // handle the current product
+//
+//    $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
+//
+//    $this->productsGross = $sumGross;
+//    $productsNet        = $sumNet;
+//
+//      // option shipping : calculate tax, net and gross
+//    $arrResult      = $this->calcOptionsShipping( );
+//    $shippingId     = $arrResult['id'];
+//    $shippingNet    = $arrResult['net'];
+//    $shippingGross  = $arrResult['gross'];
+//    $sumNet         = $sumNet        + $shippingNet;
+//    $sumGross       = $sumGross      + $shippingGross;
+//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
+//    unset( $arrResult );
+//      // option shipping : calculate tax, net and gross
+//
+//      // option payment : calculate tax, net and gross
+//    $arrResult      = $this->calcOptionsPayment( );
+//    $paymentId      = $arrResult['id'];
+//    $paymentNet     = $arrResult['net'];
+//    $paymentGross   = $arrResult['gross'];
+//    $sumNet         = $sumNet        + $paymentNet;
+//    $sumGross       = $sumGross      + $paymentGross;
+//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
+//    unset( $arrResult );
+//      // option payment : calculate tax, net and gross
+//
+//      // option special : calculate tax, net and gross
+//    $arrResult      = $this->calcOptionsSpecial( );
+//    $specialIds     = $arrResult['ids'];
+//    $specialNet     = $arrResult['net'];
+//    $specialGross   = $arrResult['gross'];
+//    $sumNet         = $sumNet        + $specialNet;
+//    $sumGross       = $sumGross      + $specialGross;
+//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
+//    unset( $arrResult );
+//      // option special : calculate tax, net and gross
+//
+//      // sum of options
+//    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
+//    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
+//      // sum of options
 
-      // option shipping : calculate tax, net and gross
-    $arrResult      = $this->calcOptionsShipping( );
-    $shippingId     = $arrResult['id'];
-    $shippingNet    = $arrResult['net'];
-    $shippingGross  = $arrResult['gross'];
-    $sumNet         = $sumNet        + $shippingNet;
-    $sumGross       = $sumGross      + $shippingGross;
-    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option shipping : calculate tax, net and gross
-
-      // option payment : calculate tax, net and gross
-    $arrResult      = $this->calcOptionsPayment( );
-    $paymentId      = $arrResult['id'];
-    $paymentNet     = $arrResult['net'];
-    $paymentGross   = $arrResult['gross'];
-    $sumNet         = $sumNet        + $paymentNet;
-    $sumGross       = $sumGross      + $paymentGross;
-    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option payment : calculate tax, net and gross
-
-      // option special : calculate tax, net and gross
-    $arrResult      = $this->calcOptionsSpecial( );
-    $specialIds     = $arrResult['ids'];
-    $specialNet     = $arrResult['net'];
-    $specialGross   = $arrResult['gross'];
-    $sumNet         = $sumNet        + $specialNet;
-    $sumGross       = $sumGross      + $specialGross;
-    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option special : calculate tax, net and gross
-
-      // sum of options
-    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
-    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
-      // sum of options
-
+########################################################
+    
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $sesArray['productsGross']  = $this->productsGross;
-    $sesArray['productsNet']    = $productsNet;
-    $sesArray['optionsNet']     = $optionsNet;
-    $sesArray['optionsGross']   = $optionsGross;
-    $sesArray['sumGross']       = $sumGross;
-    $sesArray['sumNet']         = $sumNet;
-    $sesArray['sumTaxNormal']   = $sumTaxNormal;
-    $sesArray['sumTaxReduced']  = $sumTaxReduced;
+    $sesArray['payment_option']   = $payment_option;
+    $sesArray['productsGross']    = $this->productsGross;
+    $sesArray['productsNet']      = $productsNet;
+    $sesArray['optionsNet']       = $optionsNet;
+    $sesArray['optionsGross']     = $optionsGross;
+    $sesArray['shipping_option']  = $shipping_option;
+    $sesArray['special_options']  = $special_options;
+    $sesArray['sumGross']         = $sumGross;
+    $sesArray['sumNet']           = $sumNet;
+    $sesArray['sumTaxNormal']     = $sumTaxNormal;
+    $sesArray['sumTaxReduced']    = $sumTaxReduced;
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
       // cObject becomes current record
-    $currRecord = array(
-      'productsGross' => $this->productsGross,
-      'productsNet'   => $productsNet,
-      'optionsNet'    => $optionsNet,
-      'optionsGross'  => $optionsGross,
-      'sumGross'      => $sumGross,
-      'sumNet'        => $sumNet,
-      'sumTaxNormal'  => $sumTaxNormal,
-      'sumTaxReduced' => $sumTaxReduced,
-    );
+    $currRecord = array
+                  (
+                    'payment_option'  => $payment_option,
+                    'productsGross'   => $this->productsGross,
+                    'productsNet'     => $productsNet,
+                    'optionsNet'      => $optionsNet,
+                    'optionsGross'    => $optionsGross,
+                    'shipping_option' => $shipping_option,
+                    'special_option'  => $special_options,
+                    'sumGross'        => $sumGross,
+                    'sumNet'          => $sumNet,
+                    'sumTaxNormal'    => $sumTaxNormal,
+                    'sumTaxReduced'   => $sumTaxReduced
+                  );
     $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] );
       // cObject becomes current record
     
@@ -615,6 +588,100 @@ die ( );
   **********************************************/
 
  /**
+  * calc( )  : 
+  *
+  * @return	array   : 
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function calc( )
+  {
+    $this->initDie( );
+
+      // handle the current product
+    $arrResult      = $this->calcProduct( );
+    $contentItem    = $arrResult['contentItem'];
+    $sumNet         = $arrResult['net'];
+    $sumGross       = $arrResult['gross'];
+    $sumTaxReduced  = $arrResult['taxReduced'];
+    $sumTaxNormal   = $arrResult['taxNormal'];
+    unset( $arrResult );
+      // handle the current product
+
+    $this->productsGross = $sumGross;
+    $productsNet        = $sumNet;
+
+      // option shipping : calculate tax, net and gross
+    $arrResult        = $this->calcOptionsShipping( );
+    $shippingId       = $arrResult['id'];
+    $shippingNet      = $arrResult['net'];
+    $shippingGross    = $arrResult['gross'];
+    $shipping_option  = $arrResult['option'];
+    $sumNet           = $sumNet        + $shippingNet;
+    $sumGross         = $sumGross      + $shippingGross;
+    $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal     = $sumTaxNormal  + $arrResult['taxNormal'];
+    unset( $arrResult );
+      // option shipping : calculate tax, net and gross
+
+      // option payment : calculate tax, net and gross
+    $arrResult      = $this->calcOptionsPayment( );
+    $paymentId      = $arrResult['id'];
+    $paymentNet     = $arrResult['net'];
+    $paymentGross   = $arrResult['gross'];
+    $payment_option = $arrResult['option'];
+    $sumNet         = $sumNet        + $paymentNet;
+    $sumGross       = $sumGross      + $paymentGross;
+    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
+    unset( $arrResult );
+      // option payment : calculate tax, net and gross
+
+      // option special : calculate tax, net and gross
+    $arrResult        = $this->calcOptionsSpecial( );
+    $specialIds       = $arrResult['ids'];
+    $specialNet       = $arrResult['net'];
+    $specialGross     = $arrResult['gross'];
+    $special_options  = $arrResult['options'];
+    $sumNet           = $sumNet        + $specialNet;
+    $sumGross         = $sumGross      + $specialGross;
+    $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
+    $sumTaxNormal     = $sumTaxNormal  + $arrResult['taxNormal'];
+    unset( $arrResult );
+      // option special : calculate tax, net and gross
+
+      // sum of options
+    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
+    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
+      // sum of options
+
+    $serviceattributes = $this->getServiceAttributes( );
+
+    $arrReturn =  array
+                  ( 
+                    'contentItem'       => $contentItem,
+                    'productsGross'     => $this->productsGross,
+                    'productsNet'       => $productsNet,
+                    'optionsNet'        => $optionsNet,
+                    'optionsGross'      => $optionsGross,
+                    'paymentId'         => $paymentId,
+                    'payment_option'    => $payment_option,
+                    'serviceattributes' => $serviceattributes,
+                    'shippingId'        => $shippingId,
+                    'shipping_options'  => $shipping_option,
+                    'specialIds'        => $specialIds,
+                    'special_options'   => $special_options,
+                    'sumGross'          => $sumGross,
+                    'sumNet'            => $sumNet,
+                    'sumTaxNormal'      => $sumTaxNormal,
+                    'sumTaxReduced'     => $sumTaxReduced
+                  );
+
+    return $arrReturn;
+  }
+
+ /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
   * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
@@ -659,8 +726,11 @@ die ( );
       $taxNormal = $gross - $net;
     }
 
+    $payment_option = $this->render->renderOptionById( $this->conf, 'payment', $payment_id, $this );
+
     $arrReturn['id']          = $paymentId;
     $arrReturn['gross']       = $gross;
+    $arrReturn['option']      = $payment_option;
     $arrReturn['net']         = $net;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
@@ -712,9 +782,12 @@ die ( );
       $taxNormal = $gross - $net;
     }
 
+    $option = $this->render->renderOptionById( $this->conf, 'shipping', $shippingId, $this );
+
     $arrReturn['id']          = $shippingId;
     $arrReturn['net']         = $net;
     $arrReturn['gross']       = $gross;
+    $arrReturn['option']      = $option;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
     return $arrReturn;
@@ -740,7 +813,8 @@ die ( );
     $sumNet       = 0.0;
     $taxReduced   = 0.0;
     $taxNormal    = 0.0;
-
+    $special_options = null;
+    
     foreach( ( array ) $specialIds as $specialId )
     {
       $arrResult = $this->calc->calculateOptionById( $this->conf, 'special', $specialId, $this );
@@ -756,11 +830,14 @@ die ( );
       {
         $taxNormal = $taxNormal + $gross - $net;
       }
+      $special_options  = $special_options
+                        . $this->render->renderOptionById( $this->conf, 'special', $special_id, $this );
     }
 
     $arrReturn['ids']         = $specialIds;
     $arrReturn['net']         = $sumNet;
     $arrReturn['gross']       = $sumGross;
+    $arrReturn['options']     = $special_options;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
 
@@ -776,9 +853,7 @@ die ( );
   * @since      2.0.0
   */
   public function calcProduct( )
-  {
-    $this->initDie( );
-    
+  {   
       // DIE  : $row is empty
     if( empty( $this->products ) )
     {
@@ -1044,6 +1119,9 @@ die ( );
       $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
       $this->powermail->pObj  = $this;
     }
+    
+    require_once( $path2lib . 'class.tx_caddy_render.php' );
+    $this->render           = t3lib_div::makeInstance( 'tx_caddy_render' );
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
