@@ -779,6 +779,17 @@ die ( );
   {
     $this->initDie( );
     
+      // DIE  : $row is empty
+    if( empty( $this->products ) )
+    {
+      $prompt = 'ERROR: there isn\'t any product!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // DIE  : $row is empty
+
     $arrReturn    = null;
     $contentItem  = '';
     

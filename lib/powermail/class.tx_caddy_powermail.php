@@ -204,10 +204,10 @@ class tx_caddy_powermail extends tslib_pibase
     $content_item     = '';
 
       // read all products from session
-    $this->product = $this->session->productsGet( );
+    $this->products = $this->session->productsGet( );
     
       // RETURN : empty content, no product in session
-    if( count( $this->product ) < 1 )
+    if( count( $this->products ) < 1 )
     {
         // DRS
       if( $this->drs->drsSession || $drs )
@@ -225,7 +225,7 @@ class tx_caddy_powermail extends tslib_pibase
 var_dump( __METHOD__, __LINE__, $arrResult );
 die( );
       // LOOP : products
-    foreach( ( array ) $this->product as $product )
+    foreach( ( array ) $this->products as $product )
     {
       $product['price_total'] = $product['price'] * $product['qty']; // price total
       $local_cObj->start($product, $this->conf['db.']['table']); // enable .field in typoscript
