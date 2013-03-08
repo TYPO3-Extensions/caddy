@@ -41,44 +41,44 @@
  *  390:     public function deliveryorder( )
  *  497:     private function deliveryorderAdditionalTextblocks( )
  *  524:     private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
- *  566:     private function deliveryorderDate( )
- *  581:     private function deliveryorderInit( )
- *  624:     private function deliveryorderNumbers( )
+ *  564:     private function deliveryorderDate( )
+ *  579:     private function deliveryorderInit( )
+ *  622:     private function deliveryorderNumbers( )
  *
- *              SECTION: init
- *  660:     private function init( )
- *  688:     private function initCheckDir( )
- *  708:     private function initCheckProducts( )
+ *              SECTION: Init
+ *  658:     private function init( )
+ *  686:     private function initCheckDir( )
+ *  706:     private function initCheckProducts( )
  *
  *              SECTION: Invoice
- *  740:     public function invoice( )
- *  848:     private function invoiceAdditionalTextblocks( )
- *  874:     private function invoiceAddress( )
- *  899:     private function invoiceDate( )
- *  913:     private function invoiceInit( )
- *  956:     private function invoiceNumbers( )
+ *  738:     public function invoice( )
+ *  846:     private function invoiceAdditionalTextblocks( )
+ *  872:     private function invoiceAddress( )
+ *  897:     private function invoiceDate( )
+ *  911:     private function invoiceInit( )
+ *  954:     private function invoiceNumbers( )
  *
  *              SECTION: TCPDF
- *  991:     private function tcpdfInit( $srceFile )
- * 1023:     private function tcpdfOutput( $destPath )
- * 1058:     private function tcpdfSetFont( $font )
- * 1085:     private function tcpdfSetTextColor( $properties )
- * 1139:     private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
+ *  989:     private function tcpdfInit( $srceFile )
+ * 1021:     private function tcpdfOutput( $destPath )
+ * 1056:     private function tcpdfSetFont( $font )
+ * 1083:     private function tcpdfSetTextColor( $properties )
+ * 1137:     private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
  *
  *              SECTION: Terms
- * 1191:     public function terms( )
- * 1289:     private function termsAdditionalTextblocks( )
- * 1315:     private function termsAddress( )
- * 1329:     private function termsDate( )
- * 1343:     private function termsInit( )
+ * 1189:     public function terms( )
+ * 1287:     private function termsAdditionalTextblocks( )
+ * 1313:     private function termsAddress( )
+ * 1327:     private function termsDate( )
+ * 1341:     private function termsInit( )
  *
- *              SECTION: write
- * 1396:     private function writeTextblock( $textBlock, $drsLabel )
- * 1424:     private function writeTextblockAddHeader( $header )
+ *              SECTION: Write
+ * 1394:     private function writeTextblock( $textBlock, $drsLabel )
+ * 1426:     private function writeTextblockAddHeader( $header )
  *
  *              SECTION: ZZ
- * 1458:     private function zz_hexToRgb( $hex )
- * 1558:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1460:     private function zz_hexToRgb( $hex )
+ * 1560:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
  * TOTAL FUNCTIONS: 34
  * (This index is automatically created/updated by the extension "extdeveval")
