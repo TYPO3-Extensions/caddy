@@ -309,8 +309,7 @@ class tx_caddy_pdf extends tslib_pibase
 //    $subpartArray['###SPECIALOPTIONLABELS###'] = $specialOptions;
     $subpartArray['###SPECIALOPTIONLABELS###'] = $this->caddy->getSpecialOptionLabelsBySessionId( );
       // Special option label
-var_dump( __METHOD__, __LINE__, $subpartArray );
-die( );
+
     return $subpartArray;
   }
 

@@ -724,7 +724,7 @@ class tx_caddy extends tslib_pibase
       {
         if( floatval( $extra['value'] ) <= $filterArr[$optionIds['extra']] ) 
         {
-          $arrReturn = $this->calcOption($conf, $type, $option_id, floatval($extra['extra']), $obj);
+          $arrReturn = $this->calcOption($conf, $type, $option_id, floatval( $extra['extra'] ), $obj );
         }
         else
         {
@@ -771,7 +771,7 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( isset( $free_from ) && ( floatval( $free_from ) <= $obj->cartGrossNoService ) ):
-      case( isset( $free_to ) && ( floatval( $free_to ) >= $obj->cartGrossNoService ) ):
+      case( isset( $free_to )   && ( floatval( $free_to )   >= $obj->cartGrossNoService ) ):
         $arrReturn['gross'] = 0.00;
         $arrReturn['net']   = 0.00;
         return $arrReturn;
@@ -782,6 +782,7 @@ class tx_caddy extends tslib_pibase
     
     unset( $free_from );
     unset( $free_to );
+    unset( $obj );
     
       // calc net
     if( $conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced' )
