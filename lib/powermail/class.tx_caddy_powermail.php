@@ -256,7 +256,7 @@ class tx_caddy_powermail extends tslib_pibase
                   'optionsNet'      => $optionsNet,
                   'optionsGross'    => $optionsGross,
                   'shipping_option' => $shipping_option,
-                  'shippingID'      => $shippingId,
+                  'shippingId'      => $shippingId,
                   'special_option'  => $special_options,
                   'specialId'       => $specialIds,
                   'sumGross'        => $sumGross,
@@ -264,7 +264,7 @@ class tx_caddy_powermail extends tslib_pibase
                   'sumTaxNormal'    => $sumTaxNormal,
                   'sumTaxReduced'   => $sumTaxReduced
                 );
-//var_dump( __METHOD__, __LINE__, $outerArr );
+var_dump( __METHOD__, __LINE__, $outerArr );
     
     $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 
@@ -301,7 +301,7 @@ class tx_caddy_powermail extends tslib_pibase
       // DRS
 
 var_dump( __METHOD__, __LINE__, $this->content );
-//die( );
+die( );
     return $this->content;
   }
   
