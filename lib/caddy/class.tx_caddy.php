@@ -689,7 +689,7 @@ class tx_caddy extends tslib_pibase
                     'sumTaxNormal'      => $sumTaxNormal,
                     'sumTaxReduced'     => $sumTaxReduced
                   );
-var_dump( __METHOD__, __LINE__, $arrReturn );
+//var_dump( __METHOD__, __LINE__, $arrReturn );
 
     return $arrReturn;
   }

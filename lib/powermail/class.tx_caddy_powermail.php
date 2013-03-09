@@ -300,8 +300,8 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
 
-var_dump( __METHOD__, __LINE__, $this->content );
-die( );
+//var_dump( __METHOD__, __LINE__, $this->content );
+//die( );
     return $this->content;
   }
   
