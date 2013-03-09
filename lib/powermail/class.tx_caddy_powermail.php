@@ -233,6 +233,7 @@ class tx_caddy_powermail extends tslib_pibase
     $sumNet             = $arrResult['sumNet'];
     $sumTaxNormal       = $arrResult['sumTaxNormal'];
     $sumTaxReduced      = $arrResult['sumTaxReduced'];
+    unset( $productsGross );
     unset( $arrResult );
 
     $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
@@ -243,9 +244,6 @@ class tx_caddy_powermail extends tslib_pibase
     $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
 
     $subpartArray['###CONTENT###'] = $contentItem; // work on subpart 3
-
-    $sumGross = $productsGross;
-    $sumNet   = $productsNet;
 
     $outerArr = array
                 (
@@ -264,7 +262,7 @@ class tx_caddy_powermail extends tslib_pibase
                   'sumTaxNormal'    => $sumTaxNormal,
                   'sumTaxReduced'   => $sumTaxReduced
                 );
-//var_dump( __METHOD__, __LINE__, $outerArr );
+var_dump( __METHOD__, __LINE__, $outerArr );
     
     $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 
@@ -300,8 +298,8 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
 
-//var_dump( __METHOD__, __LINE__, $this->content );
-//die( );
+var_dump( __METHOD__, __LINE__, $this->content );
+die( );
     return $this->content;
   }
   
