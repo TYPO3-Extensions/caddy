@@ -36,7 +36,7 @@
       <label index="caddy_ll_qty">Amount</label>
       <label index="caddy_ll_service_each">each</label>
       <label index="caddy_ll_service_from">from</label>
-      <label index="caddy_ll_shippingnet">Shipping Options</label>
+      <label index="caddy_ll_shippingnet">Shipping</label>
       <label index="caddy_ll_shippingoption_01">Post</label>
       <label index="caddy_ll_shippingoption_02">Post express</label>      
       <label index="caddy_ll_shipping_available_from">shipping available from</label>
@@ -71,7 +71,7 @@
       <label index="caddy_ll_optionsnet">Service- und Versandkosten</label>
       <label index="caddy_ll_order">Bestellung</label>
       <label index="caddy_ll_ordernumber">Bestellnummer</label>
-      <label index="caddy_ll_paymentnet">Rechnungsart</label>
+      <label index="caddy_ll_paymentnet">Zahlung per</label>
       <label index="caddy_ll_paymentoption_01">Vorkasse</label>
       <label index="caddy_ll_paymentoption_02">Nachname</label>      
       <label index="caddy_ll_paymentoption_03">Rechnung</label>
@@ -85,7 +85,7 @@
       <label index="caddy_ll_qty">Anzahl</label>
       <label index="caddy_ll_service_each">je</label>
       <label index="caddy_ll_service_from">ab</label>
-      <label index="caddy_ll_shippingnet">Versandoptionen</label>
+      <label index="caddy_ll_shippingnet">Versand</label>
       <label index="caddy_ll_shippingoption_01">DHL Standard</label>
       <label index="caddy_ll_shippingoption_02">DHL Express</label>      
       <label index="caddy_ll_shipping_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
