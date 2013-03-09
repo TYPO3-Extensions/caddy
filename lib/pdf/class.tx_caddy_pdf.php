@@ -271,44 +271,20 @@ class tx_caddy_pdf extends tslib_pibase
     $subpartArray['###CADDY_LL_SUMGROSS###']    = $this->pi_getLL('caddy_ll_sumgross');
 
       // Payment label
-    $subpartArray['###CADDY_LL_PAYMENTNET###'] = $this->pi_getLL('caddy_ll_paymentnet');
-
+    $subpartArray['###CADDY_LL_PAYMENTNET###']  = $this->pi_getLL('caddy_ll_paymentnet');
       // Payment option label
-//    $confPaymentOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['payment.']['options.'];
-//    $key    = $sesArray['payment'] . '.';
-//    $name   = $confPaymentOptions[ $key ]['title'];
-//    $conf   = $confPaymentOptions[ $key ]['title.'];
-//    $value  = $this->zz_cObjGetSingle( $name, $conf );
-//    $subpartArray['###PAYMENTOPTIONLABEL###'] = $value;
-    $subpartArray['###PAYMENTOPTIONLABEL###'] = $this->caddy->getPaymentOptionLabelBySessionId( );
+    $subpartArray['###PAYMENTOPTIONLABEL###']   = $this->caddy->getPaymentOptionLabelBySessionId( );
       // Payment option label
 
       // Shipping label
-    $subpartArray['###CADDY_LL_SHIPPINGNET###']  = $this->pi_getLL('caddy_ll_shippingnet');
-
+    $subpartArray['###CADDY_LL_SHIPPINGNET###'] = $this->pi_getLL('caddy_ll_shippingnet');
       // Shipping option label
-//    $confShippingOptions  = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['shipping.']['options.'];
-//    $key    = $sesArray['shipping'] . '.';
-//    $name   = $confShippingOptions[ $key ]['title'];
-//    $conf   = $confShippingOptions[ $key ]['title.'];
-//    $value  = $this->zz_cObjGetSingle( $name, $conf );
-//    $subpartArray['###SHIPPINGOPTIONLABEL###'] = $value;
-    $subpartArray['###SHIPPINGOPTIONLABEL###'] = $this->caddy->getShippingOptionLabelBySessionId( );
-      // Shipping option label
+    $subpartArray['###SHIPPINGOPTIONLABEL###']  = $this->caddy->getShippingOptionLabelBySessionId( );
 
       // Special label
-    $subpartArray['###CADDY_LL_SPECIALNET###'] = $this->pi_getLL('caddy_ll_specialnet');
-
-//      // Special option label
-//    $specialOptions = null;
-//    $confSpecialOptions = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']['special.']['options.'];
-//    foreach( ( array ) $sesArray['special'] as $special_id )
-//    {
-//      $specialOptions = $specialOptions . $confSpecialOptions[$special_id.'.']['title'];
-//    }
-//    $subpartArray['###SPECIALOPTIONLABELS###'] = $specialOptions;
-    $subpartArray['###SPECIALOPTIONLABELS###'] = $this->caddy->getSpecialOptionLabelsBySessionId( );
+    $subpartArray['###CADDY_LL_SPECIALNET###']  = $this->pi_getLL('caddy_ll_specialnet');
       // Special option label
+    $subpartArray['###SPECIALOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
 
     return $subpartArray;
   }

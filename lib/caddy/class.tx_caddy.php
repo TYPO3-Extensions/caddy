@@ -846,11 +846,11 @@ var_dump( __METHOD__, __LINE__, $arrReturn );
       $taxNormal = $gross - $net;
     }
 
-    $payment_option = $this->getPaymentOptionLabelBySessionId( );
+    $option = $this->getPaymentOptionLabelBySessionId( );
 
     $arrReturn['id']          = $paymentId;
     $arrReturn['gross']       = $gross;
-    $arrReturn['option']      = $payment_option;
+    $arrReturn['option']      = $option;
     $arrReturn['net']         = $net;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
@@ -902,7 +902,7 @@ var_dump( __METHOD__, __LINE__, $arrReturn );
       $taxNormal = $gross - $net;
     }
 
-//    $option = $this->render->renderOptionById( $this->conf, 'shipping', $shippingId, $this );
+    $option = $this->getShippingOptionLabelBySessionId( );
 
     $arrReturn['id']          = $shippingId;
     $arrReturn['net']         = $net;
@@ -933,7 +933,7 @@ var_dump( __METHOD__, __LINE__, $arrReturn );
     $sumNet       = 0.0;
     $taxReduced   = 0.0;
     $taxNormal    = 0.0;
-    $special_options = null;
+    $options      = null;
     
     foreach( ( array ) $specialIds as $specialId )
     {
@@ -954,10 +954,12 @@ var_dump( __METHOD__, __LINE__, $arrReturn );
 //                        . $this->render->renderOptionById( $this->conf, 'special', $special_id, $this );
     }
 
+    $options = $this->getSpecialOptionLabelsBySessionId( );
+
     $arrReturn['ids']         = $specialIds;
     $arrReturn['net']         = $sumNet;
     $arrReturn['gross']       = $sumGross;
-    $arrReturn['options']     = $special_options;
+    $arrReturn['options']     = $options;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
 

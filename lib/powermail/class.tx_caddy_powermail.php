@@ -264,7 +264,7 @@ class tx_caddy_powermail extends tslib_pibase
                   'sumTaxNormal'    => $sumTaxNormal,
                   'sumTaxReduced'   => $sumTaxReduced
                 );
-var_dump( __METHOD__, __LINE__, $outerArr );
+//var_dump( __METHOD__, __LINE__, $outerArr );
     
     $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 
