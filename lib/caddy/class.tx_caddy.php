@@ -846,7 +846,7 @@ var_dump( __METHOD__, __LINE__, $arrReturn );
       $taxNormal = $gross - $net;
     }
 
-//    $payment_option = $this->render->renderOptionById( $this->conf, 'payment', $payment_id, $this );
+    $payment_option = $this->getPaymentOptionLabelBySessionId( );
 
     $arrReturn['id']          = $paymentId;
     $arrReturn['gross']       = $gross;
