@@ -658,8 +658,77 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
-    $product = $this->quantityCheckMinMaxMin( $product);
-    $product = $this->quantityCheckMinMaxMax( $product);
+    $product = $this->quantityCheckMinMaxItemsMin( $product );
+    $product = $this->quantityCheckMinMaxItemsMax( $product );
+
+    $product = $this->quantityCheckMinMaxMin( $product );
+    $product = $this->quantityCheckMinMaxMax( $product );
+
+    return $product;
+  }
+  
+ /* quantityCheckMinMaxItemsMin( )  :
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemsMin( $product )
+  { 
+    $product['error']['itemsMin']  = true;
+    return $product;
+
+    if( empty( $product['min'] ) )
+    {
+      return $product;
+    }
+
+    switch( true )
+    {
+      case( $product['qty'] < $product['min'] ):
+        $product['qty']           = $product['min'];
+        $product['error']['min']  = true;
+        break;    
+      case( $product['qty'] >= $product['min'] ):
+      default:
+        unset( $product['error']['min'] );
+        break;    
+    }
+
+    return $product;
+  }
+  
+ /* quantityCheckMinMaxItemsMax( )  :
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemsMax( $product )
+  { 
+    $product['error']['itemsMax']  = true;
+    return $product;
+
+    if( empty( $product['max'] ) )
+    {
+      return $product;
+    }
+
+    switch( true )
+    {
+      case( $product['qty'] > $product['max'] ):
+        $product['qty']           = $product['max'];
+        $product['error']['max']  = true;
+        break;    
+      case( $product['qty'] <= $product['max'] ):
+      default:
+        unset( $product['error']['max'] );
+        break;    
+    }
 
     return $product;
   }
