@@ -66,7 +66,7 @@ plugin.tx_caddy_pi1 {
     }
     div.caddy_cart_col input { 
       text-align:right;
-      width:3em; 
+      width:2em; 
     }
     div.caddy_cleaner { 
       clear: both; 
