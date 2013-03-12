@@ -794,7 +794,7 @@ class tx_caddy_session
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
                           + $this->pObj->gpvar['qty']
-                          + 1;
+                          ;
     
 var_dump( __METHOD__, __LINE__, $product['qty'], $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
