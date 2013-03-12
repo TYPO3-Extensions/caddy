@@ -715,7 +715,7 @@ class tx_caddy_session
         $product['qty']           = $product['max'];
         $product['error']['max']  = true;
         break;    
-      case( $product['qty'] <= $product['min'] ):
+      case( $product['qty'] <= $product['max'] ):
       default:
         unset( $product['error']['max'] );
         break;    
