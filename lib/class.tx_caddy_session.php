@@ -712,6 +712,7 @@ class tx_caddy_session
       case( $this->pObj->piVars['qty'] ):
         break;
       default:
+        $product = $this->quantityCheckMinMaxItemsMax2( $product );
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
                   'Sorry for the trouble.<br />' . PHP_EOL .
                   'TYPO3 Caddy<br />' . PHP_EOL .
@@ -787,7 +788,7 @@ class tx_caddy_session
                     + $this->pObj->gpvar['qty']
                     ;
 
-var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
+//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
 
       // RETURN : max quantity for all items isn't overrun
     if( $itemsQuantity <= $itemsQuantityMax )
@@ -800,7 +801,7 @@ var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
                           - $itemsQuantityMax
                           ;
     
-var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
+//var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
@@ -819,7 +820,67 @@ var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
 
-var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
+//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
+
+    return $product;
+  }
+  
+ /* quantityCheckMinMaxItemsMax2( )  :
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemsMax2( $product )
+  { 
+
+      // RETURN : max quantity for all items is unlimited
+    $itemsQuantityMax = $this->pObj->flexform->originMax;   
+    if( empty( $itemsQuantityMax ) )
+    {
+      return $product;
+    }
+      // RETURN : max quantity for all items is unlimited
+  
+    $itemsQuantity  = $this->getQuantityItems( )
+                    + $this->pObj->gpvar['qty']
+                    ;
+
+var_dump( __METHOD__, __LINE__, $this->getQuantityItems( ), $this->pObj->piVars['qty'] );
+
+      // RETURN : max quantity for all items isn't overrun
+    if( $itemsQuantity <= $itemsQuantityMax )
+    {
+      return $product;
+    }
+      // RETURN : max quantity for all items isn't overrun
+
+    $itemsQuantityOverrun = $itemsQuantity
+                          - $itemsQuantityMax
+                          ;
+    
+//var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
+    $product['qty'] = $product['qty']
+                    - $itemsQuantityOverrun;
+    
+    if( $product['qty'] < 0 )
+    {
+      $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+
+    $llKey    = 'caddy_ll_error_itemsMax';
+    $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
+    $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
+    $product['error']['itemsMax'] = $llPrompt;
+
+//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
     return $product;
   }
