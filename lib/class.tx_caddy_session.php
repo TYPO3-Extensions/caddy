@@ -846,7 +846,7 @@ class tx_caddy_session
   
     $itemsQuantity  = $this->getQuantityItems( );
 
-var_dump( __METHOD__, __LINE__, $this->getQuantityItems( ), $this->pObj->piVars['qty'] );
+var_dump( __METHOD__, __LINE__, $itemsQuantity );
 
       // RETURN : max quantity for all items isn't overrun
     if( $itemsQuantity <= $itemsQuantityMax )
@@ -859,7 +859,7 @@ var_dump( __METHOD__, __LINE__, $this->getQuantityItems( ), $this->pObj->piVars[
                           - $itemsQuantityMax
                           ;
     
-//var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
+var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
