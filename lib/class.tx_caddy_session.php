@@ -800,14 +800,13 @@ class tx_caddy_session
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
 
-    $llKey          = 'caddy_ll_error_itemsMax';
-    $llAlt          = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
-    $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
-    $llPrompt       = sprintf( $llPrompt, $itemsQuantityMax );
+    $llKey    = 'caddy_ll_error_itemsMax';
+    $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
+    $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
-    $product['error']['itemsMax']  = true;
 
-    var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQuantity, $itemsQuantityMax );
+    var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
     return $product;
   }

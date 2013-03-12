@@ -439,24 +439,24 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiProductsProductErrorMsg( $product )
   {
-    $error_prompt = null;
+    $prompt = null;
 
       // FOREACH  : error messages per product
-    foreach( ( array ) $product['error'] as $prompt )
+    foreach( ( array ) $product['error'] as $productError )
     {
-      if( ! $prompt )
+      if( ! $productError )
       {
         continue;
       }
 
-      $error_prompt = $error_prompt 
-                    . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $prompt );
+      $prompt = $prompt 
+              . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $productError );
     }
       // FOREACH  : error messages per product
     
-    if( $error_prompt )
+    if( $prompt )
     {
-      $this->markerArray['###ITEM_ERROR###'] = $error_prompt;
+      $this->markerArray['###ITEM_ERROR###'] = $prompt;
     }
   }
 
