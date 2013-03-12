@@ -803,8 +803,8 @@ class tx_caddy_session
     $llAlt          = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
     $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
     $llPrompt       = sprintf( $llPrompt, $itemsQuantityMax );
-    $product['error']['min'] = $llPrompt;
-    $product['error']['min']  = true;
+    $product['error']['itemsMax'] = $llPrompt;
+    $product['error']['itemsMax']  = true;
 
     var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQuantity, $itemsQuantityMax );
 
