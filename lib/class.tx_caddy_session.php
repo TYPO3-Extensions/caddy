@@ -712,7 +712,7 @@ class tx_caddy_session
       case( $this->pObj->piVars['qty'] ):
         break;
       default:
-        $prompt = 'ERROR: no vavlue for switch' . PHP_EOL .
+        $prompt = 'ERROR: no value for switch' . PHP_EOL .
                   'Sorry for the trouble.<br />' . PHP_EOL .
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
@@ -803,6 +803,15 @@ class tx_caddy_session
 var_dump( __METHOD__, __LINE__, $product['qty'], $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
+    
+    if( $product['qty'] < 0 )
+    {
+      $prompt = 'ERROR: product quantity is below zero' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
 
     $llKey    = 'caddy_ll_error_itemsMax';
     $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';

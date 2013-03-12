@@ -229,25 +229,6 @@ var_dump( __METHOD__, __LINE__, $this->products );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
-//      // cObject becomes current record
-//    $currRecord = array
-//                  (
-//                    'payment_option'  => $payment_option,
-//                    'paymentId'       => $paymentId,
-//                    'productsGross'   => $this->productsGross,
-//                    'productsNet'     => $productsNet,
-//                    'optionsNet'      => $optionsNet,
-//                    'optionsGross'    => $optionsGross,
-//                    'shipping_option' => $shipping_option,
-//                    'shippingID'      => $shippingId,
-//                    'special_option'  => $special_options,
-//                    'specialId'       => $specialIds,
-//                    'sumGross'        => $sumGross,
-//                    'sumNet'          => $sumNet,
-//                    'sumTaxNormal'    => $sumTaxNormal,
-//                    'sumTaxReduced'   => $sumTaxReduced
-//                  );
-//    $this->local_cObj->start( $currRecord, $this->conf['db.']['table'] );
     $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
       // cObject becomes current record
     
