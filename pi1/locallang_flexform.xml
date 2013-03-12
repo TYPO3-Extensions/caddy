@@ -40,7 +40,7 @@
       <label index="invoice.zip">Zip (field from powermail)</label>
       <label index="invoice.city">City (field from powermail)</label>
       <label index="invoice.country">Country (field from powermail)</label>
-      <label index="origin">Numbers</label>
+      <label index="origin">Caddy</label>
       <label index="origin.deliveryorder">Increase delivery order number with</label>
       <label index="origin.invoice">Increase invoice number with</label>
       <label index="origin.min">The minimum order quantity</label>
@@ -93,7 +93,7 @@
       <label index="invoice.zip">PLZ (Feld von Powermail)</label>
       <label index="invoice.city">Stadt (Feld von Powermail)</label>
       <label index="invoice.country">Land (Feld von Powermail)</label>
-      <label index="origin">Nummern</label>
+      <label index="origin">Warenkorb</label>
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
       <label index="origin.min">Mindestmenge zu bestellender Artikel</label>
