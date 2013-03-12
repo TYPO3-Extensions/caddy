@@ -654,37 +654,70 @@ class tx_caddy_session
   * @return	array
   * @access private
   * @version 2.0.0
-  * @since 1.4.2
+  * @since 2.0.0
   */
   private function quantityCheckMinMax( $product )
   {
-    if( ! empty( $product['min'] ) )
-    {
-      if( $product['qty'] < $product['min'] )
-      {
-        $product['qty'] = $product['min'];
-        $product['error']['min'] = true;
-      }
-      else
-      {
-        unset( $product['error']['min'] );
-      }  
-    }
-
-    if( ! empty($product['max'] ) )
-    {
-      if( $product['qty'] > $product['max'] )
-      {
-        $product['qty'] = $product['max'];
-        $product['error']['max'] = true;
-      }
-      else
-      {
-        unset( $product['error']['max'] );
-      }  
-    }
+    $product = $this->quantityCheckMinMaxMin( $product);
+    $product = $this->quantityCheckMinMaxMax( $product);
 
     return $product;
+  }
+  
+ /* quantityCheckMinMaxMin( )  :
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxMin( $product )
+  { 
+    if( empty( $product['min'] ) )
+    {
+      return $product;
+    }
+
+    switch( true )
+    {
+      case( $product['qty'] < $product['min'] ):
+        $product['qty']           = $product['min'];
+        $product['error']['min']  = true;
+        break;    
+      case( $product['qty'] >= $product['min'] ):
+      default:
+        unset( $product['error']['min'] );
+        break;    
+    }
+  }
+  
+ /* quantityCheckMinMaxMax( )  :
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxMax( $product )
+  { 
+    if( empty( $product['min'] ) )
+    {
+      return $product;
+    }
+
+    switch( true )
+    {
+      case( $product['qty'] < $product['min'] ):
+        $product['qty']           = $product['max'];
+        $product['error']['max']  = true;
+        break;    
+      case( $product['qty'] >= $product['min'] ):
+      default:
+        unset( $product['error']['max'] );
+        break;    
+    }
   }
 
 /**
