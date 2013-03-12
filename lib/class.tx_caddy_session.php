@@ -852,7 +852,11 @@ var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQ
     {
       case( $product['qty'] > $product['max'] ):
         $product['qty']           = $product['max'];
-        $product['error']['max']  = true;
+        $llKey    = 'caddy_ll_error_max';
+        $llAlt    = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
+        $llPrompt = sprintf( $llPrompt, $product['max'] );
+        $product['error']['max'] = $llPrompt;
         break;    
       case( $product['qty'] <= $product['max'] ):
       default:

@@ -442,21 +442,17 @@ class tx_caddy extends tslib_pibase
     $error_prompt = null;
 
       // FOREACH  : error messages per product
-    foreach( array_keys( $product['error'] ) as $error )
+    foreach( ( array ) $product['error'] as $prompt )
     {
-      if( ! $error )
+      if( ! $prompt )
       {
         continue;
       }
 
-      $llKey    = 'caddy_ll_error_' . $error;
-      $llAlt    = 'No value for caddy_ll_error_' . $error . ' in ' . __METHOD__ . ' (' . __LINE__ .')';
-      $llPrompt = $this->pi_getLL( $llKey, $llAlt );
-      $llPrompt = sprintf( $llPrompt, $product[$error] );
-
-      //$this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $llPrompt;
       $error_prompt = $error_prompt 
-                    . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $llPrompt );
+                    . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $prompt );
+      $error_prompt = $error_prompt 
+                    . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $prompt );
     }
       // FOREACH  : error messages per product
     
