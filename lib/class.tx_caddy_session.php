@@ -158,33 +158,40 @@ class tx_caddy_session
   *
   **********************************************/
 
-    /**
- * Change the payment method in session
+/**
+ * paymentUpdate( ) : Change the payment method in session
  *
- * @param	array		$arr: array to change
+ * @param	integer		$value
  * @return	void
+ * @access public
+ * @version     2.0.0
+ * @since       1.4.6
  */
-    public function paymentUpdate($value)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function paymentUpdate( $value )
+  {
+      // get already exting products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); 
 
-        $sesArray['payment'] = intval($value); // overwrite with new qty
+    $sesArray['payment'] = intval( $value ); 
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    $GLOBALS['TSFE']->storeSessionData();
+  }
 
-    /**
- * get the payment method from session
+/**
+ * paymentGet( )  : get the payment method from session
  *
  * @return	integer
+ * @access public
+ * @version     2.0.0
+ * @since       1.4.6
  */
-    public function paymentGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function paymentGet( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
-        return $sesArray['payment'];
-    }
+    return $sesArray['payment'];
+  }
 
 
 
@@ -195,7 +202,7 @@ class tx_caddy_session
   **********************************************/
 
 /**
- * Add product to session
+ * productAdd( )  : Add product to session
  *
  *    array (
  *      'title' => 'this is the title',
@@ -206,106 +213,107 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array		$product: product array like
+ * @param	array		$product: 
  * @return	void
+ * @version     2.0.0
+ * @since       1.4.6
  */
-    public function productAdd( $product )
+  public function productAdd( $product )
+  {
+    $arr_variant = null;
+
+      // RETURN : without price or without title
+    if( empty( $product['price'] ) || empty( $product['title'] ) )
     {
-      $arr_variant = null;
+      return false;
+    }
+      // RETURN : without price or without title
 
-      // return without price or without title
-      if (empty($product['price']) || empty($product['title']))
+    // variants
+    $arr_variant['puid'] = $product['puid'];
+    // add variant keys from ts settings.variants array,
+    //  if there is a corresponding key in GET or POST
+    if( is_array( $this->pObj->conf['settings.']['variant.'] ) )
+    {
+      $arr_get  = t3lib_div::_GET( );
+      $arr_post = t3lib_div::_POST( );
+      foreach( $this->pObj->conf['settings.']['variant.'] as $key => $tableField )
       {
-          return false;
+        list( $table, $field ) = explode( '.', $tableField );
+        if( isset( $arr_get[$table][$field] ) )
+        {
+          $arr_variant[$tableField] = mysql_escape_string( $arr_get[$table][$field] );
+        }
+        if( isset( $arr_post[$table][$field] ) )
+        {
+          $arr_variant[$tableField] = mysql_escape_string( $arr_post[$table][$field] );
+        }
       }
-
-      // return without price or without title
-
-      // variants
-      $arr_variant['puid'] = $product['puid'];
       // add variant keys from ts settings.variants array,
-      //  if there is a corresponding key in GET or POST
-      if (is_array($this->pObj->conf['settings.']['variant.']))
+    }
+    // variants
+
+    $sesArray = array( );
+    // get already exting products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+    // check if this puid already exists and when delete it
+    foreach( ( array ) $sesArray['products'] as $key => $value )
+    { // one loop for every product
+      if( is_array( $value ) )
       {
-          $arr_get  = t3lib_div::_GET();
-          $arr_post = t3lib_div::_POST();
-          foreach($this->pObj->conf['settings.']['variant.'] as $key => $tableField)
+        // counter for condition. Every condition has to be true
+        $int_counter = 0;
+
+        // loop every condition
+        foreach( $arr_variant as $key_variant => $value_variant )
+        {
+          // condition fits
+          if( $value[$key_variant] == $value_variant )
           {
-              list($table, $field) = explode('.', $tableField);
-              if(isset($arr_get[$table][$field]))
-              {
-                  $arr_variant[$tableField] = mysql_escape_string($arr_get[$table][$field]);
-              }
-              if(isset($arr_post[$table][$field]))
-              {
-                  $arr_variant[$tableField] = mysql_escape_string($arr_post[$table][$field]);
-              }
+            $int_counter++;
           }
-          // add variant keys from ts settings.variants array,
+        }
+        // loop every condition
+
+        // all conditions fit
+        if( $int_counter == count( $arr_variant ) )
+        {
+          // remove product
+          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
+          unset( $sesArray['products'][$key] );
+        }
       }
-      // variants
+    }
 
-      $sesArray = array();
-      // get already exting products from session
-      $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    $product = $this->quantityCheckMinMax( $product );
 
-      // check if this puid already exists and when delete it
-      foreach ((array) $sesArray['products'] as $key => $value)
-      { // one loop for every product
-          if (is_array($value))
-          {
-              // counter for condition. Every condition has to be true
-              $int_counter = 0;
-
-              // loop every condition
-              foreach($arr_variant as $key_variant => $value_variant)
-              {
-                  // condition fits
-                  if ($value[$key_variant] == $value_variant)
-                  {
-                      $int_counter++;
-                  }
-              }
-              // loop every condition
-
-              // all conditions fit
-              if($int_counter == count($arr_variant))
-              {
-                  // remove product
-                  $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
-                  unset($sesArray['products'][$key]);
-              }
-          }
-      }
-
-      $product = $this->quantityCheckMinMax( $product );
-
-      if (isset($product['price']))
-      {
-          $product['price'] = str_replace(',', '.', $product['price']); // comma to point
-      }
+    if( isset( $product['price'] ) )
+    {
+      $product['price'] = str_replace( ',', '.', $product['price'] ); // comma to point
+    }
 
       // remove puid from variant array
-      unset( $arr_variant[0] );
+    unset( $arr_variant[0] );
 
-      // add variant key/value pairs to the current product
-      if (!empty($arr_variant))
+    // add variant key/value pairs to the current product
+    if( ! empty( $arr_variant ) )
+    {
+      foreach( $arr_variant as $key_variant => $value_variant )
       {
-          foreach ($arr_variant as $key_variant => $value_variant)
-          {
-              $product[$key_variant] = $value_variant;
-          }
+        $product[$key_variant] = $value_variant;
       }
-      // add variant key/value pairs to the current product
-
-      // add product to the session array
-      $sesArray['products'][] = $product;
-
-      // generate session with session array
-      $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
-      // save session
-      $GLOBALS['TSFE']->storeSessionData();
     }
+    // add variant key/value pairs to the current product
+
+    // add product to the session array
+    $sesArray['products'][ ] = $product;
+
+    // generate session with session array
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // save session
+    $GLOBALS['TSFE']->storeSessionData( );
+  }
 
  /**
   * Remove product from session with given uid
@@ -323,30 +331,27 @@ class tx_caddy_session
     $arr_variant['puid'] = $this->pObj->piVars['del'];
 
     // get products from session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
     // loop every product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
     {
-      //      if ($sesArray[$key]['puid'] == intval($uid)) { // uid fits
-      //        unset($sesArray[$key]); // delete old value
-      //      }
       // Counter for condition
       $int_counter = 0;
 
       // loop through conditions
-      foreach($arr_variant as $key_variant => $value_variant)
+      foreach( $arr_variant as $key_variant => $value_variant )
       {
         // condition fits
-        if ($sesArray['products'][$key][$key_variant] == $value_variant)
+        if ( $sesArray['products'][$key][$key_variant] == $value_variant )
         {
-            $int_counter++;
+          $int_counter++;
         }
       }
       // loop through conditions
 
       // all conditions fit
-      if($int_counter == count($arr_variant))
+      if( $int_counter == count($arr_variant ) )
       {
         // remove product from session
         unset($sesArray['products'][$key]);
@@ -355,12 +360,12 @@ class tx_caddy_session
     // loop every product
 
     // generate new session
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
-    $GLOBALS['TSFE']->storeSessionData();
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
-    /**
+/**
  * read product details (title, price from table)
  * the method productGetDetails of version 1.2.1 became productGetDetailsTs from version 1.2.2
  *
@@ -369,7 +374,7 @@ class tx_caddy_session
  * @version 1.2.2
  * @since 1.2.2
  */
-    public function productGetDetails($gpvar)
+    public function productGetDetails( $gpvar )
     {
         // build own sql query
         // handle query by db.sql
@@ -642,8 +647,8 @@ class tx_caddy_session
   * Quantity
   *
   * *********************************************/
-  *
-  *     /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  
+ /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
   *
   * @param	array
   * @return	array
@@ -653,15 +658,17 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
-    $product['error'] = array( );
-
     if( ! empty( $product['min'] ) )
     {
       if( $product['qty'] < $product['min'] )
       {
         $product['qty'] = $product['min'];
-        $product['error'][] = 'min';
+        $product['error']['min'] = true;
       }
+      else
+      {
+        unset( $product['error']['min'] );
+      }  
     }
 
     if( ! empty($product['max'] ) )
@@ -669,8 +676,12 @@ class tx_caddy_session
       if( $product['qty'] > $product['max'] )
       {
         $product['qty'] = $product['max'];
-        $product['error'][] = 'max';
+        $product['error']['max'] = true;
       }
+      else
+      {
+        unset( $product['error']['max'] );
+      }  
     }
 
     return $product;
