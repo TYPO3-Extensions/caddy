@@ -101,9 +101,31 @@ class tx_caddy_session
 
  /***********************************************
   *
-  * Get numbers
+  * Getting methods
   *
   **********************************************/
+
+/**
+ * getQuantityItems( )  : Get the amount of quantities
+ *
+ * @return	integer   $quantityItems : 
+ * @access private
+ * @version     2.0.0
+ * @since       2.0.0
+ */
+  private function getQuantityItems( )
+  {
+    $quantityItems = 0; 
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $products = $sesArray['products'];
+    
+    foreach( $products as $product )
+    {
+      $quantityItems  = $quantityItems
+                      + $product['qty'];
+    }
+    return ( int ) $quantityItems;
+  }
 
 /**
  * getNumberDeliveryorder( )  : Get the current order number
@@ -374,17 +396,18 @@ class tx_caddy_session
  * @version 1.2.2
  * @since 1.2.2
  */
-    public function productGetDetails( $gpvar )
+  public function productGetDetails( $gpvar )
+  {
+    // build own sql query
+    // handle query by db.sql
+    if( ! empty( $this->pObj->conf['db.']['sql'] ) ) 
     {
-        // build own sql query
-        // handle query by db.sql
-        if (!empty($this->pObj->conf['db.']['sql'])) {
-            return $this->productGetDetailsSql($gpvar);
-        }
-
-        // handle query by db.table and db.fields
-        return $this->productGetDetailsTs($gpvar);
+      return $this->productGetDetailsSql( $gpvar );
     }
+
+    // handle query by db.table and db.fields
+    return $this->productGetDetailsTs( $gpvar );
+  }
 
    /**
  * read product details by a manually configured sql query
@@ -397,46 +420,46 @@ class tx_caddy_session
  */
     private function productGetDetailsSql($gpvar)
     {
-        if ((!t3lib_div::_GET()) && (!t3lib_div::_POST()))
-        {
-            return false;
-        }
-
-        // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
-        $this->zz_sqlReplaceMarker( );
-                  // #42154, 101218, dwildt, 1-
-                //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
-                  // #42154, 101218, dwildt, 1+
-                $query = $this->pObj->cObj->cObjGetSingle($this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.']);
-        // execute the query
-        $res = $GLOBALS['TYPO3_DB']->sql_query($query);
-        $error = $GLOBALS['TYPO3_DB']->sql_error();
-
-        // exit in case of error
-        if (!empty($error))
-        {
-            $str = '<h1>caddy: SQL-Error</h1>';
-            $str .= '<p>'.$error.'</p>';
-            $str .= '<p>'.$query.'</p>';
-            $this->zz_msg($str, 0, 1, 1);
-        }
-
-        // ToDo: @dwildt: optimization highly needed
-        if ($res)
-        {
-            while($row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res))
-            {
-                if($row['title'] != null)
-                {
-                    break;
-                }
-            }
-            $row['puid']  = $gpvar['puid'];
-
-            return $row;
-        }
-
+      if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
+      {
         return false;
+      }
+
+      // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
+      $this->zz_sqlReplaceMarker( );
+        // #42154, 101218, dwildt, 1-
+      //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
+        // #42154, 101218, dwildt, 1+
+      $query  = $this->pObj->cObj->cObjGetSingle( $this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.'] );
+      // execute the query
+      $res    = $GLOBALS['TYPO3_DB']->sql_query( $query );
+      $error  = $GLOBALS['TYPO3_DB']->sql_error( );
+
+      // exit in case of error
+      if( ! empty( $error ) )
+      {
+        $str = '<h1>caddy: SQL-Error</h1>';
+        $str .= '<p>'.$error.'</p>';
+        $str .= '<p>'.$query.'</p>';
+        $this->zz_msg($str, 0, 1, 1);
+      }
+
+      // ToDo: @dwildt: optimization highly needed
+      if( $res )
+      {
+        while( $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res ) )
+        {
+          if($row['title'] != null)
+          {
+            break;
+          }
+        }
+        $row['puid']  = $gpvar['puid'];
+
+        return $row;
+      }
+
+      return false;
     }
 
    /**
@@ -448,92 +471,92 @@ class tx_caddy_session
  * @version 2.0.0
  * @since 1.4.6
  */
-    private function productGetDetailsTs($gpvar)
-    {
-        if (!empty($gpvar['title']) && !empty($gpvar['price']) && !empty($gpvar['tax']))
-        { // all values already filled via POST or GET param
-            return $gpvar;
-        }
-
-        $puid = intval($gpvar['puid']);
-        if ($puid === 0)
-        { // stop if no puid given
-            return false;
-        }
-
-        $table    = $this->pObj->conf['db.']['table'];
-        $select = $table . '.' . $this->pObj->conf['db.']['title'] . ', ' . $table . '.' . $this->pObj->conf['db.']['price'] . ', ' . $table . '.' . $this->pObj->conf['db.']['tax'];
-        if ($this->pObj->conf['db.']['sku'] != '' && $this->pObj->conf['db.']['sku'] != '{$plugin.caddy.db.sku}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['sku'];
-        }
-        if ($this->pObj->conf['db.']['min'] != '' && $this->pObj->conf['db.']['min'] != '{$plugin.caddy.db.min}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['min'];
-        }
-        if ($this->pObj->conf['db.']['max'] != '' && $this->pObj->conf['db.']['max'] != '{$plugin.caddy.db.max}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['max'];
-        }
-        if ($this->pObj->conf['db.']['service_attribute_1'] != '' && $this->pObj->conf['db.']['service_attribute_1'] != '{$plugin.caddy.db.service_attribute_1}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_1'];
-        }
-        if ($this->pObj->conf['db.']['service_attribute_2'] != '' && $this->pObj->conf['db.']['service_attribute_2'] != '{$plugin.caddy.db.service_attribute_2}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_2'];
-        }
-        if ($this->pObj->conf['db.']['service_attribute_3'] != '' && $this->pObj->conf['db.']['service_attribute_3'] != '{$plugin.caddy.db.service_attribute_3}')
-        {
-            $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_3'];
-        }
-        $where = ' ( ' . $table . '.uid = ' . $puid . ' OR l10n_parent = '.$puid . ' ) AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid;
-        $where .= tslib_cObj::enableFields($table);
-        $groupBy = '';
-        $orderBy = '';
-        $limit = 1;
-
-        $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy, $limit);
-
-        if ($res)
-        {
-            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-            $arr = array (
-                'title' => $row[$this->pObj->conf['db.']['title']],
-                'price' => $row[$this->pObj->conf['db.']['price']],
-                'tax'   => $row[$this->pObj->conf['db.']['tax']],
-                'puid'  => $gpvar['puid']
-            );
-            if ($row[$this->pObj->conf['db.']['sku']])
-            {
-                $arr['sku'] = $row[$this->pObj->conf['db.']['sku']];
-            }
-            if ($row[$this->pObj->conf['db.']['min']])
-            {
-                $arr['min'] = $row[$this->pObj->conf['db.']['min']];
-            }
-            if ($row[$this->pObj->conf['db.']['max']])
-            {
-                $arr['max'] = $row[$this->pObj->conf['db.']['max']];
-            }
-            if ($row[$this->pObj->conf['db.']['service_attribute_1']])
-            {
-                $arr['service_attribute_1'] = $row[$this->pObj->conf['db.']['service_attribute_1']];
-            }
-            if ($row[$this->pObj->conf['db.']['service_attribute_2']])
-            {
-                $arr['service_attribute_2'] = $row[$this->pObj->conf['db.']['service_attribute_2']];
-            }
-            if ($row[$this->pObj->conf['db.']['service_attribute_3']])
-            {
-                $arr['service_attribute_3'] = $row[$this->pObj->conf['db.']['service_attribute_3']];
-            }
-
-            return $arr;
-        } else {
-            // ToDo: include error handling -> only needed for admin, let's use devlog()
-        }
+  private function productGetDetailsTs( $gpvar )
+  {
+    if( ! empty( $gpvar['title'] ) && ! empty( $gpvar['price'] ) &&  ! empty( $gpvar['tax'] ) )
+    { // all values already filled via POST or GET param
+        return $gpvar;
     }
+
+    $puid = intval($gpvar['puid']);
+    if ($puid === 0)
+    { // stop if no puid given
+        return false;
+    }
+
+    $table    = $this->pObj->conf['db.']['table'];
+    $select = $table . '.' . $this->pObj->conf['db.']['title'] . ', ' . $table . '.' . $this->pObj->conf['db.']['price'] . ', ' . $table . '.' . $this->pObj->conf['db.']['tax'];
+    if ($this->pObj->conf['db.']['sku'] != '' && $this->pObj->conf['db.']['sku'] != '{$plugin.caddy.db.sku}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['sku'];
+    }
+    if ($this->pObj->conf['db.']['min'] != '' && $this->pObj->conf['db.']['min'] != '{$plugin.caddy.db.min}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['min'];
+    }
+    if ($this->pObj->conf['db.']['max'] != '' && $this->pObj->conf['db.']['max'] != '{$plugin.caddy.db.max}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['max'];
+    }
+    if ($this->pObj->conf['db.']['service_attribute_1'] != '' && $this->pObj->conf['db.']['service_attribute_1'] != '{$plugin.caddy.db.service_attribute_1}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_1'];
+    }
+    if ($this->pObj->conf['db.']['service_attribute_2'] != '' && $this->pObj->conf['db.']['service_attribute_2'] != '{$plugin.caddy.db.service_attribute_2}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_2'];
+    }
+    if ($this->pObj->conf['db.']['service_attribute_3'] != '' && $this->pObj->conf['db.']['service_attribute_3'] != '{$plugin.caddy.db.service_attribute_3}')
+    {
+        $select .= ', ' . $table . '.' . $this->pObj->conf['db.']['service_attribute_3'];
+    }
+    $where = ' ( ' . $table . '.uid = ' . $puid . ' OR l10n_parent = '.$puid . ' ) AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid;
+    $where .= tslib_cObj::enableFields($table);
+    $groupBy = '';
+    $orderBy = '';
+    $limit = 1;
+
+    $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery($select, $table, $where, $groupBy, $orderBy, $limit);
+
+    if ($res)
+    {
+        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
+        $arr = array (
+            'title' => $row[$this->pObj->conf['db.']['title']],
+            'price' => $row[$this->pObj->conf['db.']['price']],
+            'tax'   => $row[$this->pObj->conf['db.']['tax']],
+            'puid'  => $gpvar['puid']
+        );
+        if ($row[$this->pObj->conf['db.']['sku']])
+        {
+            $arr['sku'] = $row[$this->pObj->conf['db.']['sku']];
+        }
+        if ($row[$this->pObj->conf['db.']['min']])
+        {
+            $arr['min'] = $row[$this->pObj->conf['db.']['min']];
+        }
+        if ($row[$this->pObj->conf['db.']['max']])
+        {
+            $arr['max'] = $row[$this->pObj->conf['db.']['max']];
+        }
+        if ($row[$this->pObj->conf['db.']['service_attribute_1']])
+        {
+            $arr['service_attribute_1'] = $row[$this->pObj->conf['db.']['service_attribute_1']];
+        }
+        if ($row[$this->pObj->conf['db.']['service_attribute_2']])
+        {
+            $arr['service_attribute_2'] = $row[$this->pObj->conf['db.']['service_attribute_2']];
+        }
+        if ($row[$this->pObj->conf['db.']['service_attribute_3']])
+        {
+            $arr['service_attribute_3'] = $row[$this->pObj->conf['db.']['service_attribute_3']];
+        }
+
+        return $arr;
+    } else {
+        // ToDo: include error handling -> only needed for admin, let's use devlog()
+    }
+  }
 
    /**
  * productGetVariantGpvar(): Get variant values from piVars
@@ -677,7 +700,7 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMin( $product )
   { 
-    $product['error']['itemsMin']  = true;
+    //$product['error']['itemsMin']  = true;
     return $product;
 
     if( empty( $product['min'] ) )
@@ -710,6 +733,8 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
+    $itemsQuantity = $this->getQuantityItems( );
+var_dump( __METHOD__, __LINE__, $itemsQuantity );
     $product['error']['itemsMax']  = true;
     return $product;
 
