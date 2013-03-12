@@ -701,6 +701,7 @@ class tx_caddy_session
   private function quantityCheckMinMaxItemsMin( $product )
   { 
     //$product['error']['itemsMin']  = true;
+    unset( $product['error']['min'] );
     return $product;
 
     if( empty( $product['min'] ) )
