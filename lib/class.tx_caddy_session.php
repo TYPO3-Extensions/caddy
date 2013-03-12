@@ -31,42 +31,48 @@
  *
  *
  *
- *   83: class tx_caddy_session
+ *   89: class tx_caddy_session
  *
- *              SECTION: Order number
- *  130:     public function ordernumberGet()
+ *              SECTION: Get numbers
+ *  116:     public function getNumberDeliveryorder( )
+ *  131:     public function getNumberInvoice( )
+ *  146:     public function getNumberOrder( )
  *
  *              SECTION: Payment
- *  151:     public function paymentUpdate($value)
- *  166:     public function paymentGet()
+ *  167:     public function paymentUpdate($value)
+ *  182:     public function paymentGet()
  *
  *              SECTION: Product
- *  197:     public function productAdd( $product,  )
- *  303:     public function productDelete()
- *  359:     public function productGetDetails($gpvar, )
- *  381:     private function productGetDetailsSql($gpvar, )
- *  435:     private function productGetDetailsTs($gpvar, )
- *  534:     private function productGetVariantGpvar(  )
- *  568:     private function productGetVariantTs($product, )
- *  601:     public function productsGet()
- *  615:     public function productsGetGross( $pid )
- *  646:     private function quantityCheckMinMax( $product )
- *  680:     private function quantityGetVariant()
- *  755:     public function quantityUpdate()
+ *  212:     public function productAdd( $product )
+ *  317:     public function productDelete( )
+ *  372:     public function productGetDetails($gpvar)
+ *  393:     private function productGetDetailsSql($gpvar)
+ *  446:     private function productGetDetailsTs($gpvar)
+ *  543:     private function productGetVariantGpvar( )
+ *  576:     private function productGetVariantTs( $product )
+ *  609:     public function productsGet()
+ *  623:     public function productsGetGross( $pid )
+ *  654:     private function quantityCheckMinMax( $product )
+ *  689:     private function quantityGetVariant( )
+ *  763:     public function quantityUpdate( )
+ *
+ *              SECTION: Session
+ *  908:     public function sessionDelete( $content = '', $conf = array( ) )
+ *  943:     private function sessionDeleteIncreaseNumbers( $drs )
  *
  *              SECTION: Shipping
- *  896:     public function shippingUpdate($value)
- *  911:     public function shippingGet( )
+ * 1008:     public function shippingUpdate($value)
+ * 1023:     public function shippingGet( )
  *
  *              SECTION: Special
- *  932:     public function specialUpdate($special_arr)
- *  947:     public function specialGet()
+ * 1044:     public function specialUpdate($special_arr)
+ * 1059:     public function specialGet()
  *
  *              SECTION: ZZ
- *  975:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1037:     private function zz_sqlReplaceMarker(  )
+ * 1087:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ * 1148:     private function zz_sqlReplaceMarker( )
  *
- * TOTAL FUNCTIONS: 21
+ * TOTAL FUNCTIONS: 25
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -103,7 +109,7 @@ class tx_caddy_session
  * getNumberDeliveryorder( )  : Get the current order number
  *
  * @return	string
- * @access      public  
+ * @access public
  * @version     2.0.0
  * @since       2.0.0
  */
@@ -118,7 +124,7 @@ class tx_caddy_session
  * getNumberInvoice( )  : Get the current order number
  *
  * @return	string
- * @access      public  
+ * @access public
  * @version     2.0.0
  * @since       2.0.0
  */
@@ -133,7 +139,7 @@ class tx_caddy_session
  * getNumberOrder( )  : Get the current order number
  *
  * @return	string
- * @access      public  
+ * @access public
  * @version     2.0.0
  * @since       2.0.0
  */
@@ -636,8 +642,8 @@ class tx_caddy_session
   * Quantity
   *
   * *********************************************/
-  
-    /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+  *
+  *     /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
   *
   * @param	array
   * @return	array
@@ -657,7 +663,7 @@ class tx_caddy_session
         $product['error'][] = 'min';
       }
     }
-    
+
     if( ! empty($product['max'] ) )
     {
       if( $product['qty'] > $product['max'] )
@@ -893,6 +899,7 @@ class tx_caddy_session
   * sessionDelete( )
   *
   * @param	string		$content  : current content
+  * @param	[type]		$conf: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -915,7 +922,7 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
       // Increase numbers
     $this->sessionDeleteIncreaseNumbers( $drs );
 
@@ -927,6 +934,7 @@ class tx_caddy_session
  /**
   * sessionDeleteIncreaseNumbers( )
   *
+  * @param	[type]		$$drs: ...
   * @return	void
   * @access private
   * @version    2.0.0
@@ -935,7 +943,7 @@ class tx_caddy_session
   private function sessionDeleteIncreaseNumbers( $drs )
   {
     $products = $this->productsGet( );
-    
+
       // RETURN : any product, don't increase numbers!
     if( empty( $products ) )
     {
@@ -947,7 +955,7 @@ class tx_caddy_session
       return;
     }
       // RETURN : any product, don't increase numbers!
-    
+
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
     $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
 
@@ -968,7 +976,7 @@ class tx_caddy_session
     $registry->set('tx_caddy', $prefix . 'invoice',       $numberInvoice );
     $registry->set('tx_caddy', $prefix . 'order',         $numberOrder );
       // Set current numbers
-      
+
       // DRS
     if( $drs )
     {
@@ -980,7 +988,7 @@ class tx_caddy_session
       t3lib_div::devlog(' [INFO/SESSION] '. $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
 }
 
 
