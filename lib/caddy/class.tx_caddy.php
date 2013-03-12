@@ -146,13 +146,8 @@ class tx_caddy extends tslib_pibase
   {
     $arrReturn = null;
 
-    $this->pi_loadLL();
-
-      // DIE  : if pObj or row isn't initiated
-    $this->initDie( );
+    $this->init( );
     
-    $this->initInstances( );
-
       // get products from session
     $this->products = $this->session->productsGet( );
     switch( true )
@@ -612,10 +607,8 @@ class tx_caddy extends tslib_pibase
   */
   public function calc( )
   {
-    $this->initDie( );
+    $this->init( );
     
-    $this->initInstances( );
-
       // handle the current product
     $arrResult      = $this->calcProduct( );
     $contentItem    = $arrResult['contentItem'];
@@ -1252,6 +1245,24 @@ class tx_caddy extends tslib_pibase
   * Init
   *
   **********************************************/
+  
+ /**
+  * init( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function init( )
+  {
+    $this->pi_loadLL();
+
+      // DIE  : if pObj or row isn't initiated
+    $this->initDie( );
+    
+    $this->initInstances( );
+  }
   
  /**
   * initDie( )

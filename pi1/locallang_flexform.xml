@@ -43,6 +43,8 @@
       <label index="origin">Numbers</label>
       <label index="origin.deliveryorder">Increase delivery order number with</label>
       <label index="origin.invoice">Increase invoice number with</label>
+      <label index="origin.min">The minimum order quantity</label>
+      <label index="origin.max">The minimum order quantity</label>
       <label index="origin.order">Increase order number with</label>
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF draft: delivery order</label>
@@ -94,6 +96,8 @@
       <label index="origin">Nummern</label>
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
+      <label index="origin.min">Mindestmenge zu bestellender Artikel</label>
+      <label index="origin.max">Höchstmange bestellbarer Artikel</label>
       <label index="origin.order"><![CDATA[Erhöhe die Bestellnummer um]]></label>
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF-Vorlage: Lieferschein</label>

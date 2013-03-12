@@ -6,6 +6,30 @@
     </TCEforms>
     <type>array</type>
     <el>
+      <min>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.min</label>
+          <config>
+            <type>input</type>
+            <size>10</size>
+            <max>20</max>
+            <eval>int</eval>
+            <default>1</default>
+          </config>
+        </TCEforms>
+      </min>
+      <max>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.max</label>
+          <config>
+            <type>input</type>
+            <size>10</size>
+            <max>20</max>
+            <eval>int</eval>
+            <default>1000</default>
+          </config>
+        </TCEforms>
+      </max>
       <order>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.order</label>
