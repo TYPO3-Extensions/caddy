@@ -681,11 +681,11 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
-    $product = $this->quantityCheckMinMaxItemsMin( $product );
-    $product = $this->quantityCheckMinMaxItemsMax( $product );
-
     $product = $this->quantityCheckMinMaxMin( $product );
     $product = $this->quantityCheckMinMaxMax( $product );
+
+    $product = $this->quantityCheckMinMaxItemsMin( $product );
+    $product = $this->quantityCheckMinMaxItemsMax( $product );
 
     return $product;
   }
@@ -742,7 +742,7 @@ class tx_caddy_session
   
     $itemsQuantity    = $this->getQuantityItems( );
 //    $product['qty']   = 0;
-var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
+var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
     $product['error']['itemsMax']  = true;
     return $product;
@@ -900,138 +900,152 @@ var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
       return $arr_variant;
     }
 
-    /**
- * Change quantity of a product in session
+/**
+ * quantityUpdate( )  : Change quantity of a product in session
  *
  * @return	void
- * @version 1.2.2
+ * @access private
+ * @version 2.0.0
+ * @since 1.4.6
  */
-    public function quantityUpdate( )
+  public function quantityUpdate( )
+  {
+    // variants
+    // add variant key/value pairs from piVars
+    $arr_variant = $this->quantityGetVariant( );
+
+    // get products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+
+    $is_cart = intval($this->pObj->piVars['update_from_cart']);
+
+      // LOOP : each product
+    foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
     {
-        // variants
-        // add variant key/value pairs from piVars
-        $arr_variant = $this->quantityGetVariant( );
+      // current product id
+      $session_puid = $sesArray['products'][$key_session]['puid'];
 
-        // get products from session
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+      if( ! is_array( $arr_variant ) )
+      {
+        // no variant, nothing to loop
+        $int_qty = intval( $this->pObj->piVars['qty'][$session_puid] );
 
-        $is_cart = intval($this->pObj->piVars['update_from_cart']);
-
-        // loop every product
-        foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
+        if( $int_qty > 0 )
         {
-            // current product id
-            $session_puid = $sesArray['products'][$key_session]['puid'];
-
-            if(!is_array($arr_variant))
-            {
-                // no variant, nothing to loop
-                $int_qty = intval($this->pObj->piVars['qty'][$session_puid]);
-
-                if ($int_qty > 0)
-                {
-                    // update quantity
-                    if ($is_cart) {
-                        // update from cart then set new qty
-                        $sesArray['products'][$key_session]['qty'] = $int_qty;
-                    } else {
-                        // update not from cart then add qty
-                        $sesArray['products'][$key_session]['qty'] += $int_qty;
-                    }
-                    $sesArray['products'][$key_session] = $this->quantityCheckMinMax($sesArray['products'][$key_session]);
-                } else {
-                    // remove product from session
-                    $this->productDelete($sesArray['products'][$key_session]['puid']);
-                    // remove product from current session array
-                    unset($sesArray['products'][$key_session]);
-                }
-            } else {
-                // loop for every variant
-                $arr_variant_backup = $arr_variant;
-                foreach($arr_variant as $key_variant => $arr_condition)
-                {
-                    if (!isset($arr_variant[$key_variant]['puid']))
-                    {
-                        // without variant
-                        $curr_puid = key($this->pObj->piVars['qty']);
-                    }
-                    if (isset($arr_variant[$key_variant]['puid']))
-                    {
-                        $curr_puid = $arr_variant[$key_variant]['puid'];
-                    }
-                    if (!isset($arr_variant[$key_variant]['qty']))
-                    {
-                        // without variant
-                        $int_qty = intval($this->pObj->piVars['qty'][$curr_puid]);
-                    }
-                    if (isset($arr_variant[$key_variant]['qty']))
-                    {
-                        $int_qty = intval($arr_variant[$key_variant]['qty']);
-                    }
-
-                    // counter for condition
-                    $int_counter = 0;
-                    // puid: condition fits
-                    if ($session_puid == $curr_puid)
-                    {
-                        $int_counter++;
-                    }
-
-                    // loop through conditions
-                    foreach($arr_condition as $key_condition => $value_condition)
-                    {
-                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-                        if (in_array($key_condition, array('qty', 'puid')))
-                        {
-                            // workaround: puid and qty should fit in every case
-                            $int_counter++;
-                        }
-                        // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-                        if (!in_array($key_condition, array('qty', 'puid')))
-                        {
-                            // variants: condition fits
-                            if ($sesArray['products'][$key_session][$key_condition] == $value_condition)
-                            {
-                                //$prompt_315[] = 'div 315: true - session_key : ' . $key_session . ', ' . $key_condition . ' : ' . $value_condition;
-                                $int_counter++;
-                            }
-                        }
-                    }
-                    // loop through conditions
-
-                    // all conditions fit
-                    if($int_counter == (count($arr_condition) + 1))
-                    {
-                        if ($int_qty > 0)
-                        {
-                            if ($is_cart)
-                            {
-                                // update from cart then set new qty
-                                $sesArray['products'][$key_session]['qty'] = $int_qty;
-                            } else {
-                                // update not from cart then add qty
-                                $sesArray['products'][$key_session]['qty'] += $int_qty;
-                            }
-                        } else {
-                            // remove product from session
-                            $this->productDelete($sesArray['products'][$key_session]['puid']);
-                            // remove product from current session array
-                            unset($sesArray['products'][$key_session]);
-                        }
-                    }
-
-                }
-                $arr_variant = $arr_variant_backup;
-                // loop every variant
-            }
+          // update quantity
+          if( $is_cart ) 
+          {
+            // update from cart then set new qty
+            $sesArray['products'][$key_session]['qty']  = $int_qty;
+          }
+          else 
+          {
+            // update not from cart then add qty
+            $sesArray['products'][$key_session]['qty']  = $sesArray['products'][$key_session]['qty']
+                                                        + $int_qty;
+          }
+          $sesArray['products'][$key_session] = $this->quantityCheckMinMax( $sesArray['products'][$key_session] );
         }
-        // loop every product
+        else
+        {
+          // remove product from session
+          $this->productDelete($sesArray['products'][$key_session]['puid']);
+          // remove product from current session array
+          unset($sesArray['products'][$key_session]);
+        }
+      } 
+      else 
+      {
+        // loop for every variant
+        $arr_variant_backup = $arr_variant;
+        foreach( $arr_variant as $key_variant => $arr_condition )
+        {
+          if( ! isset( $arr_variant[$key_variant]['puid'] ) )
+          {
+            // without variant
+            $curr_puid = key( $this->pObj->piVars['qty'] );
+          }
+          if( isset( $arr_variant[$key_variant]['puid'] ) )
+          {
+            $curr_puid = $arr_variant[$key_variant]['puid'];
+          }
+          if( ! isset( $arr_variant[$key_variant]['qty'] ) )
+          {
+            // without variant
+            $int_qty = intval( $this->pObj->piVars['qty'][$curr_puid] );
+          }
+          if (isset($arr_variant[$key_variant]['qty']))
+          {
+            $int_qty = intval($arr_variant[$key_variant]['qty']);
+          }
 
-        // generate new session
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
-        // save session
-        $GLOBALS['TSFE']->storeSessionData();
+          // counter for condition
+          $int_counter = 0;
+          // puid: condition fits
+          if( $session_puid == $curr_puid )
+          {
+            $int_counter++;
+          }
+
+          // loop through conditions
+          foreach( $arr_condition as $key_condition => $value_condition )
+          {
+            // workaround (it would be better, if qty and puid won't be elements of $arr_condition
+            if( in_array( $key_condition, array( 'qty', 'puid' ) ) )
+            {
+              // workaround: puid and qty should fit in every case
+              $int_counter++;
+            }
+            // workaround (it would be better, if qty and puid won't be elements of $arr_condition
+            if( ! in_array( $key_condition, array( 'qty', 'puid' ) ) )
+            {
+              // variants: condition fits
+              if( $sesArray['products'][$key_session][$key_condition] == $value_condition )
+              {
+                //$prompt_315[] = 'div 315: true - session_key : ' . $key_session . ', ' . $key_condition . ' : ' . $value_condition;
+                $int_counter++;
+              }
+            }
+          }
+          // loop through conditions
+
+          // all conditions fit
+          if( $int_counter == ( count( $arr_condition ) + 1 ) )
+          {
+            if( $int_qty > 0 )
+            {
+              if( $is_cart )
+              {
+                // update from cart then set new qty
+                $sesArray['products'][$key_session]['qty'] = $int_qty;
+              }
+              else
+              {
+                // update not from cart then add qty
+                $sesArray['products'][$key_session]['qty']  = $sesArray['products'][$key_session]['qty']
+                                                            + $int_qty;
+              }
+            } 
+            else 
+            {
+              // remove product from session
+              $this->productDelete( $sesArray['products'][$key_session]['puid'] );
+              // remove product from current session array
+              unset( $sesArray['products'][$key_session] );
+            }
+          }
+        }
+        $arr_variant = $arr_variant_backup;
+        // loop every variant
+      }
     }
+      // LOOP : each product
+
+    // generate new session
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // save session
+    $GLOBALS['TSFE']->storeSessionData( );
+  }
 
 
 
