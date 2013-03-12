@@ -741,7 +741,7 @@ class tx_caddy_session
     }
   
     $itemsQuantity    = $this->getQuantityItems( );
-    $product['qty']   = 0;
+//    $product['qty']   = 0;
 var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
 
     $product['error']['itemsMax']  = true;
