@@ -743,7 +743,7 @@ class tx_caddy_session
   
     $itemsQuantity    = $this->getQuantityItems( );
 //    $product['qty']   = 0;
-var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
+var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQuantity, $itemsQuantityMax );
 
     $product['error']['itemsMax']  = true;
     return $product;
