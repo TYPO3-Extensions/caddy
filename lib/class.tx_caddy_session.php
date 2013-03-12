@@ -783,8 +783,11 @@ class tx_caddy_session
     }
       // RETURN : max quantity for all items is unlimited
   
+    $itemsQuantity  = $this->getQuantityItems( )
+                    + $this->pObj->gpvar['qty']
+                    ;
+
       // RETURN : max quantity for all items isn't overrun
-    $itemsQuantity = $this->getQuantityItems( );
     if( $itemsQuantity <= $itemsQuantityMax )
     {
       return $product;

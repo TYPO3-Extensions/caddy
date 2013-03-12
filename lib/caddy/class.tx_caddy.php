@@ -208,65 +208,7 @@ class tx_caddy extends tslib_pibase
     unset( $productsGross );
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
-    
-//      // handle the current product
-//    $arrResult      = $this->calcProduct( );
-//    $contentItem    = $arrResult['contentItem'];
-//    $sumNet         = $arrResult['net'];
-//    $sumGross       = $arrResult['gross'];
-//    $sumTaxReduced  = $arrResult['taxReduced'];
-//    $sumTaxNormal   = $arrResult['taxNormal'];
-//    unset( $arrResult );
-//      // handle the current product
-//
-//    $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
-//
-//    $this->productsGross = $sumGross;
-//    $productsNet        = $sumNet;
-//
-//      // option shipping : calculate tax, net and gross
-//    $arrResult      = $this->calcOptionsShipping( );
-//    $shippingId     = $arrResult['id'];
-//    $shippingNet    = $arrResult['net'];
-//    $shippingGross  = $arrResult['gross'];
-//    $sumNet         = $sumNet        + $shippingNet;
-//    $sumGross       = $sumGross      + $shippingGross;
-//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-//    unset( $arrResult );
-//      // option shipping : calculate tax, net and gross
-//
-//      // option payment : calculate tax, net and gross
-//    $arrResult      = $this->calcOptionsPayment( );
-//    $paymentId      = $arrResult['id'];
-//    $paymentNet     = $arrResult['net'];
-//    $paymentGross   = $arrResult['gross'];
-//    $sumNet         = $sumNet        + $paymentNet;
-//    $sumGross       = $sumGross      + $paymentGross;
-//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-//    unset( $arrResult );
-//      // option payment : calculate tax, net and gross
-//
-//      // option special : calculate tax, net and gross
-//    $arrResult      = $this->calcOptionsSpecial( );
-//    $specialIds     = $arrResult['ids'];
-//    $specialNet     = $arrResult['net'];
-//    $specialGross   = $arrResult['gross'];
-//    $sumNet         = $sumNet        + $specialNet;
-//    $sumGross       = $sumGross      + $specialGross;
-//    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-//    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-//    unset( $arrResult );
-//      // option special : calculate tax, net and gross
-//
-//      // sum of options
-//    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
-//    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
-//      // sum of options
-
-########################################################
-    
+       
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['payment_option']   = $payment_option;
