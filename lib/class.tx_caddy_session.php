@@ -863,6 +863,10 @@ var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+    if( $product['qty'] < 1 )
+    {
+      $product['qty'] = 1;
+    }
     if( $product['qty'] < 0 )
     {
       $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
