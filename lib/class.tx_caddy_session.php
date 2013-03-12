@@ -844,9 +844,7 @@ class tx_caddy_session
     }
       // RETURN : max quantity for all items is unlimited
   
-    $itemsQuantity  = $this->getQuantityItems( )
-                    + $this->pObj->gpvar['qty']
-                    ;
+    $itemsQuantity  = $this->getQuantityItems( );
 
 var_dump( __METHOD__, __LINE__, $this->getQuantityItems( ), $this->pObj->piVars['qty'] );
 
