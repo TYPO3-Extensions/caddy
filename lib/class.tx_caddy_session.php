@@ -733,19 +733,22 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
-    $itemsQuantity = $this->getQuantityItems( );
-var_dump( __METHOD__, __LINE__, $itemsQuantity );
-    $product['error']['itemsMax']  = true;
-    return $product;
-
-    if( empty( $product['max'] ) )
+    $itemsQuantityMax = $this->pObj->flexform->originMax;
+    
+    if( empty( $itemsQuantityMax ) )
     {
       return $product;
     }
+  
+    $itemsQuantity    = $this->getQuantityItems( );
+var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
+
+    $product['error']['itemsMax']  = true;
+    return $product;
 
     switch( true )
     {
-      case( $product['qty'] > $product['max'] ):
+      case( $itemsQuantityMax > $itemsQuantity ):
         $product['qty']           = $product['max'];
         $product['error']['max']  = true;
         break;    
