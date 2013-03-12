@@ -82,7 +82,7 @@ class tx_caddy extends tslib_pibase
 
   public $extKey = 'caddy';
   public $prefixId = 'tx_caddy_pi1';
-  public $scriptRelPath = 'lib/caddy/class.tx_caddy.php';
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
 
   private $caddyCount                 = 0;
