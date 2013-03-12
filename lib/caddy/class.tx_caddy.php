@@ -440,8 +440,6 @@ class tx_caddy extends tslib_pibase
   private function caddyWiProductsProductErrorMsg( $product )
   {
     $error_prompt = null;
-      // unset error msg
-    $this->markerArray['###ERROR_MSG###'] = '';
 
       // FOREACH  : error messages per product
     foreach( array_keys( $product['error'] ) as $error )
@@ -450,6 +448,7 @@ class tx_caddy extends tslib_pibase
       {
         continue;
       }
+
       $llKey    = 'caddy_ll_error_' . $error;
       $llAlt    = 'No value for caddy_ll_error_' . $error . ' in ' . __METHOD__ . ' (' . __LINE__ .')';
       $llPrompt = $this->pi_getLL( $llKey, $llAlt );

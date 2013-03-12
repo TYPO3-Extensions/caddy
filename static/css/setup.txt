@@ -58,7 +58,7 @@ plugin.tx_caddy_pi1 {
       color:#FFF; 
       font-weight:bold; 
       margin:0 .4em; 
-      padding:0 .6em;
+      padding:.2em .6em;
     }
     div.caddy_cart_mincart { 
       color:#e10004; 
