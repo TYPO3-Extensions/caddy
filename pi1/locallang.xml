@@ -15,8 +15,8 @@
       <label index="caddy_ll_empty">Currently there are no products in the cart.</label>
       <label index="caddy_ll_error_itemsMin">The minimum order quantity for all items is %s.</label>
       <label index="caddy_ll_error_itemsMax">The maximum order quantity for all items is %s.</label>
-      <label index="caddy_ll_error_min">The minimum order quantity is %s.</label>
-      <label index="caddy_ll_error_max">The maximum order quantity is %s.</label>
+      <label index="caddy_ll_error_min">The minimum order quantity is %s. The quanttity is reset.</label>
+      <label index="caddy_ll_error_max">The maximum order quantity is %s. The quanttity is reset.</label>
       <label index="caddy_ll_invoice">Invoice</label>
       <label index="caddy_ll_invoicenumber">Invoice number</label>
       <label index="caddy_ll_item">Item</label>

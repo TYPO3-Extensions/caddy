@@ -768,39 +768,45 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
-    unset( $product['error']['itemsMin'] );
-    return $product;
+    unset( $product['error']['itemsMax'] );
 
+      // RETURN : any item is added
     if( empty( $this->pObj->gpvar['puid'] ) )
     {
       return $product;
     }
+      // RETURN : any item is added
     
-    $itemsQuantityMax = $this->pObj->flexform->originMax;
-    
+      // RETURN : max quantity for all items is unlimited
+    $itemsQuantityMax = $this->pObj->flexform->originMax;   
     if( empty( $itemsQuantityMax ) )
     {
       return $product;
     }
+      // RETURN : max quantity for all items is unlimited
   
-    $itemsQuantity    = $this->getQuantityItems( );
-//    $product['qty']   = 0;
-var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQuantity, $itemsQuantityMax );
-
-    $product['error']['itemsMax']  = true;
-    return $product;
-
-    switch( true )
+      // RETURN : max quantity for all items isn't overrun
+    $itemsQuantity = $this->getQuantityItems( );
+    if( $itemsQuantity <= $itemsQuantityMax )
     {
-      case( $itemsQuantityMax > $itemsQuantity ):
-        $product['qty']           = $product['max'];
-        $product['error']['max']  = true;
-        break;    
-      case( $product['qty'] <= $product['max'] ):
-      default:
-        unset( $product['error']['max'] );
-        break;    
+      return $product;
     }
+      // RETURN : max quantity for all items isn't overrun
+
+    $itemsQuantityOverrun = $itemsQuantityMax
+                          - $itemsQuantity;
+    
+    $product['qty'] = $product['qty']
+                    - $itemsQuantityOverrun;
+
+    $llKey          = 'caddy_ll_error_itemsMax';
+    $llAlt          = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
+    $llPrompt       = sprintf( $llPrompt, $itemsQuantityMax );
+    $product['error']['min'] = $llPrompt;
+    $product['error']['min']  = true;
+
+    var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQuantity, $itemsQuantityMax );
 
     return $product;
   }
@@ -823,7 +829,12 @@ var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQ
     switch( true )
     {
       case( $product['qty'] < $product['min'] ):
-        $product['qty']           = $product['min'];
+        $product['qty'] = $product['min'];
+        $llKey          = 'caddy_ll_error_min';
+        $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
+        $llPrompt       = sprintf( $llPrompt, $product['min'] );
+        $product['error']['min'] = $llPrompt;
         $product['error']['min']  = true;
         break;    
       case( $product['qty'] >= $product['min'] ):
@@ -857,7 +868,6 @@ var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars, $itemsQ
         $llKey          = 'caddy_ll_error_max';
         $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
-var_dump( __METHOD__, __LINE__, $llPrompt );
         $llPrompt       = sprintf( $llPrompt, $product['max'] );
         $product['error']['max'] = $llPrompt;
         break;    
