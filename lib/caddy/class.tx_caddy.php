@@ -439,6 +439,7 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiProductsProductErrorMsg( $product )
   {
+    $error_prompt = null;
       // unset error msg
     $this->markerArray['###ERROR_MSG###'] = '';
 
@@ -454,11 +455,16 @@ class tx_caddy extends tslib_pibase
       $llPrompt = $this->pi_getLL( $llKey, $llAlt );
       $llPrompt = sprintf( $llPrompt, $product[$error] );
 
-      $this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $llPrompt;
-      $error_prompt = $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $llPrompt );
-      $this->markerArray['###ITEM_ERROR###'] = $error_prompt;
+      //$this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $llPrompt;
+      $error_prompt = $error_prompt 
+                    . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $llPrompt );
     }
       // FOREACH  : error messages per product
+    
+    if( $error_prompt )
+    {
+      $this->markerArray['###ITEM_ERROR###'] = $error_prompt;
+    }
   }
 
  /**
