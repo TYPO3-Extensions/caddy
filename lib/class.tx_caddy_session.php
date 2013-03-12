@@ -41,7 +41,7 @@
  *  166:     public function paymentGet()
  *
  *              SECTION: Product
- *  197:     public function productAdd( $parray,  )
+ *  197:     public function productAdd( $product,  )
  *  303:     public function productDelete()
  *  359:     public function productGetDetails($gpvar, )
  *  381:     private function productGetDetailsSql($gpvar, )
@@ -50,7 +50,7 @@
  *  568:     private function productGetVariantTs($product, )
  *  601:     public function productsGet()
  *  615:     public function productsGetGross( $pid )
- *  646:     private function quantityCheckMinMax( $parray )
+ *  646:     private function quantityCheckMinMax( $product )
  *  680:     private function quantityGetVariant()
  *  755:     public function quantityUpdate()
  *
@@ -188,7 +188,7 @@ class tx_caddy_session
   *
   **********************************************/
 
-    /**
+/**
  * Add product to session
  *
  *    array (
@@ -200,15 +200,15 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array		$parray: product array like
+ * @param	array		$product: product array like
  * @return	void
  */
-    public function productAdd( $parray )
+    public function productAdd( $product )
     {
       $arr_variant = null;
 
       // return without price or without title
-      if (empty($parray['price']) || empty($parray['title']))
+      if (empty($product['price']) || empty($product['title']))
       {
           return false;
       }
@@ -216,7 +216,7 @@ class tx_caddy_session
       // return without price or without title
 
       // variants
-      $arr_variant['puid'] = $parray['puid'];
+      $arr_variant['puid'] = $product['puid'];
       // add variant keys from ts settings.variants array,
       //  if there is a corresponding key in GET or POST
       if (is_array($this->pObj->conf['settings.']['variant.']))
@@ -266,17 +266,17 @@ class tx_caddy_session
               if($int_counter == count($arr_variant))
               {
                   // remove product
-                  $parray['qty'] = $sesArray['products'][$key]['qty'] + $parray['qty'];
+                  $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
                   unset($sesArray['products'][$key]);
               }
           }
       }
 
-      $parray = $this->quantityCheckMinMax( $parray );
+      $product = $this->quantityCheckMinMax( $product );
 
-      if (isset($parray['price']))
+      if (isset($product['price']))
       {
-          $parray['price'] = str_replace(',', '.', $parray['price']); // comma to point
+          $product['price'] = str_replace(',', '.', $product['price']); // comma to point
       }
 
       // remove puid from variant array
@@ -287,13 +287,13 @@ class tx_caddy_session
       {
           foreach ($arr_variant as $key_variant => $value_variant)
           {
-              $parray[$key_variant] = $value_variant;
+              $product[$key_variant] = $value_variant;
           }
       }
       // add variant key/value pairs to the current product
 
       // add product to the session array
-      $sesArray['products'][] = $parray;
+      $sesArray['products'][] = $product;
 
       // generate session with session array
       $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
@@ -529,7 +529,6 @@ class tx_caddy_session
  *                              variant values have to be content of
  *                              ts array variant and of piVars
  *
- * @param	array		$product: array with product uid, title, tax, etc...
  * @return	array		$arr_variants: array with variant key/value pairs
  * @access private
  * @version 2.0.0
@@ -565,10 +564,10 @@ class tx_caddy_session
  *
  * @param	array		$product: array with product uid, title, tax, etc...
  * @return	array		$arr_variants: array with variant key/value pairs
- * @version 1.2.2
- * @since 1.2.2
+ * @version 2.0.0
+ * @since 1.4.6
  */
-    private function productGetVariantTs($product)
+    private function productGetVariantTs( $product )
     {
         $arr_variants = null;
 
@@ -646,29 +645,29 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 1.4.2
   */
-  private function quantityCheckMinMax( $parray )
+  private function quantityCheckMinMax( $product )
   {
-    $parray['error'] = array( );
+    $product['error'] = array( );
 
-    if( ! empty( $parray['min'] ) )
+    if( ! empty( $product['min'] ) )
     {
-      if( $parray['qty'] < $parray['min'] )
+      if( $product['qty'] < $product['min'] )
       {
-        $parray['qty'] = $parray['min'];
-        $parray['error'][] = 'min';
+        $product['qty'] = $product['min'];
+        $product['error'][] = 'min';
       }
     }
     
-    if( ! empty($parray['max'] ) )
+    if( ! empty($product['max'] ) )
     {
-      if( $parray['qty'] > $parray['max'] )
+      if( $product['qty'] > $product['max'] )
       {
-        $parray['qty'] = $parray['max'];
-        $parray['error'][] = 'max';
+        $product['qty'] = $product['max'];
+        $product['error'][] = 'max';
       }
     }
 
-    return $parray;
+    return $product;
   }
 
 /**
@@ -676,7 +675,6 @@ class tx_caddy_session
  *                              variant values have to be content of
  *                              ts array variant and of qty field
  *
- * @param	array		$product: array with product uid, title, tax, etc...
  * @return	array		$arr_variants: array with variant key/value pairs
  * @access private
  * @version 2.0.0

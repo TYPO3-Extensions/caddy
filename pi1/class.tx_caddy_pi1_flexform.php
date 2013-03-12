@@ -90,6 +90,8 @@ class tx_caddy_pi1_flexform
     // [invoice]
 
     // [origin]
+  public $originMin             = null;
+  public $originMax             = null;
   public $originDeliveryorder   = null;
   public $originInvoice         = null;
   public $originOrder           = null;
@@ -311,6 +313,16 @@ class tx_caddy_pi1_flexform
     $field                      = 'invoice';
     $this->originInvoice        = ( int ) $this->zzFfValue( $sheet, $field );
       // originInvoice
+
+      // originMin
+    $field                      = 'min';
+    $this->originMin          = ( int ) $this->zzFfValue( $sheet, $field );
+      // originMin
+
+      // originMax
+    $field                      = 'max';
+    $this->originMax          = ( int ) $this->zzFfValue( $sheet, $field );
+      // originMax
 
       // originOrder
     $field                      = 'order';

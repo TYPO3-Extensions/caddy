@@ -97,7 +97,7 @@
       <label index="origin.deliveryorder"><![CDATA[Erhöhe die Lieferscheinnummer um]]></label>
       <label index="origin.invoice"><![CDATA[Erhöhe die Rechnungsnummer um]]></label>
       <label index="origin.min">Mindestmenge zu bestellender Artikel</label>
-      <label index="origin.max">Höchstmange bestellbarer Artikel</label>
+      <label index="origin.max">Höchstmenge bestellbarer Artikel</label>
       <label index="origin.order"><![CDATA[Erhöhe die Bestellnummer um]]></label>
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF-Vorlage: Lieferschein</label>
