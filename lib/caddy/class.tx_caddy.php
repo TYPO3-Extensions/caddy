@@ -146,6 +146,8 @@ class tx_caddy extends tslib_pibase
   {
     $arrReturn = null;
 
+    $this->pi_loadLL();
+
       // DIE  : if pObj or row isn't initiated
     $this->initDie( );
     
