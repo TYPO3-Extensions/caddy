@@ -681,6 +681,9 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
+    unset( $product['error']['itemsMin'] );
+    unset( $product['error']['itemsMax'] );
+
     $product = $this->quantityCheckMinMaxMin( $product );
     $product = $this->quantityCheckMinMaxMax( $product );
 
@@ -700,9 +703,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItems( $product )
   {
-    unset( $product['error']['itemsMin'] );
-    unset( $product['error']['itemsMax'] );
-
     switch( true )
     {
       case( $this->pObj->gpvar['puid'] ):
