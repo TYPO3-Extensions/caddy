@@ -684,8 +684,43 @@ class tx_caddy_session
     $product = $this->quantityCheckMinMaxMin( $product );
     $product = $this->quantityCheckMinMaxMax( $product );
 
-    $product = $this->quantityCheckMinMaxItemsMin( $product );
-    $product = $this->quantityCheckMinMaxItemsMax( $product );
+    $product = $this->quantityCheckMinMaxItems( $product );
+
+    return $product;
+  }
+  
+  
+ /* quantityCheckMinMaxItems( )  : 
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItems( $product )
+  {
+    unset( $product['error']['itemsMin'] );
+    unset( $product['error']['itemsMax'] );
+
+    switch( true )
+    {
+      case( $this->pObj->gpvar['puid'] ):
+        $product = $this->quantityCheckMinMaxItemsMin( $product );
+        $product = $this->quantityCheckMinMaxItemsMax( $product );
+        break;
+      case( $this->pObj->piVars['qty'] ):
+        break;
+      default:
+        $prompt = 'ERROR: no vavlue for switch' . PHP_EOL .
+                  'Sorry for the trouble.<br />' . PHP_EOL .
+                  'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+        die( $prompt );
+        break;
+        
+    }
+    
 
     return $product;
   }
@@ -734,6 +769,11 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
+    if( empty( $this->pObj->gpvar['puid'] ) )
+    {
+      return $product;
+    }
+    
     $itemsQuantityMax = $this->pObj->flexform->originMax;
     
     if( empty( $itemsQuantityMax ) )
