@@ -272,7 +272,7 @@ class tx_caddy_session
           }
       }
 
-      $parray = $this->quantityCheckMinMax($parray);
+      $parray = $this->quantityCheckMinMax( $parray );
 
       if (isset($parray['price']))
       {
@@ -648,7 +648,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $parray )
   {
-var_dump( __METHOD__, __LINE__, $parray );
     $parray['error'] = array( );
 
     if( ! empty( $parray['min'] ) )
@@ -668,7 +667,6 @@ var_dump( __METHOD__, __LINE__, $parray );
         $parray['error'][] = 'max';
       }
     }
-var_dump( __METHOD__, __LINE__, $parray );
 
     return $parray;
   }
