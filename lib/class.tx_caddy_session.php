@@ -648,7 +648,8 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $parray )
   {
-      $parray['error'] = array( );
+var_dump( __METHOD__, __LINE__ );
+    $parray['error'] = array( );
       if( ! empty( $parray['min'] ) )
       {
         if( $parray['qty'] < $parray['min'] )
