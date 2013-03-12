@@ -806,7 +806,7 @@ var_dump( __METHOD__, __LINE__, $product['qty'], $itemsQuantityOverrun );
     
     if( $product['qty'] < 0 )
     {
-      $prompt = 'ERROR: product quantity is below zero: ' $product['qty'] . PHP_EOL .
+      $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
                 'Sorry for the trouble.<br />' . PHP_EOL .
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
