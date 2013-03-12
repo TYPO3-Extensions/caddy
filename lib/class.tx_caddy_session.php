@@ -690,6 +690,8 @@ class tx_caddy_session
         unset( $product['error']['min'] );
         break;    
     }
+
+    return $product;
   }
   
  /* quantityCheckMinMaxMax( )  :
@@ -702,22 +704,24 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxMax( $product )
   { 
-    if( empty( $product['min'] ) )
+    if( empty( $product['max'] ) )
     {
       return $product;
     }
 
     switch( true )
     {
-      case( $product['qty'] < $product['min'] ):
+      case( $product['qty'] > $product['max'] ):
         $product['qty']           = $product['max'];
         $product['error']['max']  = true;
         break;    
-      case( $product['qty'] >= $product['min'] ):
+      case( $product['qty'] <= $product['min'] ):
       default:
         unset( $product['error']['max'] );
         break;    
     }
+
+    return $product;
   }
 
 /**
