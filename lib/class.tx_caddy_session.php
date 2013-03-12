@@ -735,7 +735,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMin( $product )
   { 
-    //$product['error']['itemsMin']  = true;
     unset( $product['error']['itemsMin'] );
     return $product;
 
@@ -769,6 +768,9 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
+    unset( $product['error']['itemsMin'] );
+    return $product;
+
     if( empty( $this->pObj->gpvar['puid'] ) )
     {
       return $product;
