@@ -455,6 +455,8 @@ class tx_caddy extends tslib_pibase
       $llPrompt = sprintf( $llPrompt, $product[$error] );
 
       $this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $llPrompt;
+      $error_prompt = $this->cObj->substituteMarkerArrayCached( $this->tmpl['item_error'], null, $llPrompt );
+      $this->markerArray['###ITEM_ERROR###'] = $error_prompt;
     }
       // FOREACH  : error messages per product
   }

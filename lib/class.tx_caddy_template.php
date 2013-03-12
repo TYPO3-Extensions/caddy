@@ -125,6 +125,8 @@ class tx_caddy_template
     $tmplSubparts['minprice'] = $cObj->getSubpart( $template, '###CADDY_MINPRICE###' );
     $tmplSubparts['item']     = $cObj->getSubpart( $tmplSubparts['all'], '###ITEM###' );
 
+    $tmplSubparts['item_error'] = $cObj->getSubpart( $template, '###CADDY_ITEM_ERROR###' );
+
     // new for Shipping radiolist and Payment radiolist and Special checkboxlist
     $tmplSubparts['shipping_all']   = $cObj->getSubpart( $template, '###CADDY_SHIPPING###' );
     $tmplSubparts['shipping_item']  = $cObj->getSubpart( $tmplSubparts['shipping_all'], '###ITEM###' );
