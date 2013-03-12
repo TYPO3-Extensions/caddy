@@ -97,13 +97,10 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
 class tx_caddy_pi1 extends tslib_pibase
 {
 
-  public $prefixId = 'tx_caddy_pi1';
-
-  // same as class name
+  public $extKey        = 'caddy';
+  public $prefixId      = 'tx_caddy_pi1';
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
-  // path to this script relative to the extension dir.
-  public $extKey = 'caddy';
 
   private $accessByIP = null;
 

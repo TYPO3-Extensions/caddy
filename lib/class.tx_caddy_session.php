@@ -794,7 +794,8 @@ class tx_caddy_session
       // RETURN : max quantity for all items isn't overrun
 
     $itemsQuantityOverrun = $itemsQuantity
-                          - $itemsQuantityMax;
+                          - $itemsQuantityMax
+                          - 1;
     
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
