@@ -448,10 +448,8 @@ class tx_caddy extends tslib_pibase
       // FOREACH  : error messages per product
     foreach( $product['error'] as $error )
     {
-      $errMsg = sprintf( $this->pi_getLL( 'caddy_ll_error_' . $error ), $error );
-var_dump( __METHOD__, __LINE__, 'caddy_ll_error_' . $error, $errMsg, $error );
-      $errMsg = sprintf( $this->pi_getLL( 'caddy_ll_error_222_' . $error ), $error );
-var_dump( __METHOD__, __LINE__, 'caddy_ll_error_222_' . $error, $errMsg, $error );
+      $errMsg = sprintf( $this->pi_getLL( 'caddy_ll_error_' . $error, $error ), $product[$error] );
+var_dump( __METHOD__, __LINE__, 'caddy_ll_error_' . $error, $errMsg, $product[$error] );
 
       $this->markerArray['###ERROR_MSG###'] = $this->markerArray['###ERROR_MSG###'] . $errMsg;
     }
