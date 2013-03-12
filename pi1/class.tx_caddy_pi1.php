@@ -115,7 +115,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
   private $outerMarkerArray = array( );
 
-  private $gpvar = array( );
+  public  $gpvar = array( );
 
   public $pid = null;
 
