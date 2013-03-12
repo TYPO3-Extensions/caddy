@@ -735,7 +735,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMin( $product )
   { 
-    unset( $product['error']['itemsMin'] );
     return $product;
 
     if( empty( $product['min'] ) )
@@ -768,7 +767,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax( $product )
   { 
-    unset( $product['error']['itemsMax'] );
 
       // RETURN : any item is added
     if( empty( $this->pObj->gpvar['puid'] ) )
@@ -795,6 +793,7 @@ class tx_caddy_session
 
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
+                          + $this->pObj->gpvar
                           + 1;
     
 var_dump( __METHOD__, __LINE__, $product['qty'], $itemsQuantityOverrun );
