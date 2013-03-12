@@ -798,7 +798,6 @@ var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
 
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
-                          - 1
                           ;
     
 var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
