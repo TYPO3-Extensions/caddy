@@ -710,9 +710,9 @@ class tx_caddy_session
         $product = $this->quantityCheckMinMaxItemsMax( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
+        $product = $this->quantityCheckMinMaxItemsMax2( $product );
         break;
       default:
-        $product = $this->quantityCheckMinMaxItemsMax2( $product );
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
                   'Sorry for the trouble.<br />' . PHP_EOL .
                   'TYPO3 Caddy<br />' . PHP_EOL .
