@@ -797,6 +797,7 @@ class tx_caddy_session
                           - $itemsQuantityMax
                           + 1;
     
+var_dump( __METHOD__, __LINE__, $product['qty'] );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
 
@@ -806,7 +807,7 @@ class tx_caddy_session
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
 
-    var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
+var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
     return $product;
   }
