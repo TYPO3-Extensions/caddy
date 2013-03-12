@@ -648,25 +648,29 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $parray )
   {
-var_dump( __METHOD__, __LINE__ );
+var_dump( __METHOD__, __LINE__, $parray );
     $parray['error'] = array( );
-      if( ! empty( $parray['min'] ) )
+
+    if( ! empty( $parray['min'] ) )
+    {
+      if( $parray['qty'] < $parray['min'] )
       {
-        if( $parray['qty'] < $parray['min'] )
-        {
-          $parray['qty'] = $parray['min'];
-          $parray['error'][] = 'min';
-        }
+        $parray['qty'] = $parray['min'];
+        $parray['error'][] = 'min';
       }
-      if( ! empty($parray['max'] ) )
+    }
+    
+    if( ! empty($parray['max'] ) )
+    {
+      if( $parray['qty'] > $parray['max'] )
       {
-        if( $parray['qty'] > $parray['max'] )
-        {
-          $parray['qty'] = $parray['max'];
-          $parray['error'][] = 'max';
-        }
+        $parray['qty'] = $parray['max'];
+        $parray['error'][] = 'max';
       }
-      return $parray;
+    }
+var_dump( __METHOD__, __LINE__, $parray );
+
+    return $parray;
   }
 
 /**
