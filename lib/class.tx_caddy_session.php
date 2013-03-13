@@ -721,7 +721,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Current item hasn\'t any maximum limit. Maximum limit won\'t checked.';
+        $prompt = 'Current item (' . $product['puid']. ') hasn\'t any maximum limit. Maximum limit won\'t checked.';
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -785,7 +785,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Current item hasn\'t any minimum limit. Minimum limit won\'t checked.';
+        $prompt = 'Current item (' . $product['puid']. ') hasn\'t any minimum limit. Minimum limit won\'t checked.';
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
