@@ -64,10 +64,10 @@
       <label index="caddy_ll_docauthor">Erstellt von TYPO3 Caddy. Siehe: http://typo3-caddy.de</label>
       <label index="caddy_ll_doctitle">Bestellung</label>
       <label index="caddy_ll_empty">Derzeit befinden sich keine Produkte im Warenkorb.</label>
-      <label index="caddy_ll_error_itemsMin">Die minimale Bestellmenge f<![CDATA[&uuml;]]>r alle Artikel betr<![CDATA[&auml;]]>gt %s. Ihre Bestellmenge wurde erh<![CDATA[&ouml;]]>ht.</label>
-      <label index="caddy_ll_error_itemsMax">Die maximale Bestellmenge f<![CDATA[&uuml;]]>r alle Artikel betr<![CDATA[&auml;]]>gt %s. Ihre Bestellmenge wurde reduziert.</label>
-      <label index="caddy_ll_error_min">Die minimale Bestellmenge betr<![CDATA[&auml;]]>gt %s. Ihre Bestellmenge wurde erh<![CDATA[&ouml;]]>ht.</label>
-      <label index="caddy_ll_error_max">Die maximale Bestellmenge betr<![CDATA[&auml;]]>gt %s. Ihre Bestellmenge wurde reduziert.</label>
+      <label index="caddy_ll_error_itemsMin">Die m<![CDATA[&uuml;]]>ssen mindesten %s Artikel bestellen. Ihre Einkaufsmenge wurde erh<![CDATA[&ouml;]]>ht.</label>
+      <label index="caddy_ll_error_itemsMax">Sie k<![CDATA[&ouml;]]>nnen h<![CDATA[&ouml;]]>chstens %s Artikel bestellen. Ihre Einkaufsmenge wurde reduziert.</label>
+      <label index="caddy_ll_error_min">Sie m<![CDATA[&uuml;]]>ssen von diesem Artikel mindestens %s St<![CDATA[&uuml;]]>ck bestellen. Ihre Einkaufsmenge wurde erh<![CDATA[&ouml;]]>ht.</label>
+      <label index="caddy_ll_error_max">Sie k<![CDATA[&ouml;]]>nnen von diesem Artikel h<![CDATA[&ouml;]]>chstens %s St<![CDATA[&uuml;]]>ck bestellen. Ihre Einkaufsmenge wurde reduziert.</label>
       <label index="caddy_ll_invoice">Rechnung</label>
       <label index="caddy_ll_invoicenumber">Rechnungsnummer</label>
       <label index="caddy_ll_item">Artikel</label>
