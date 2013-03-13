@@ -671,10 +671,19 @@ class tx_caddy_session
   *
   * *********************************************/
   
- /* quantityCheckMinMax( )  : check if min and max in quantity range and set error message
+ /* quantityCheckMinMax( )  : Checks 
+  *                           * min and max limits depending on an item (database)
+  *                           * min and max limits depending on the caddy (plugin/flexform)
+  *                           If a limit is passed over, quantities will updated and there will be 
+  *                           error prompts near the items.
+  *                           min and max limits of the caddy have precedence!
+  *                           Example:
+  *                           * An item have a maximum limit of 2
+  *                           * The caddy have a minimum limit of 4
+  *                           * quantityCheckMinMax( ) will update the quantity to 4 of the product 
   *
-  * @param	array
-  * @return	array
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -684,32 +693,126 @@ class tx_caddy_session
     unset( $product['error']['itemsMin'] );
     unset( $product['error']['itemsMax'] );
 
-    $product = $this->quantityCheckMinMaxMin( $product );
-    $product = $this->quantityCheckMinMaxMax( $product );
+      // Checks the min and max limit depending on an item (database)
+    $product = $this->quantityCheckMinMaxItemMin( $product );
+    $product = $this->quantityCheckMinMaxItemMax( $product );
 
+      // Checks the min and max limit depending on the caddy (plugin/flexform)
     $product = $this->quantityCheckMinMaxItems( $product );
+
+    return $product;
+  }  
+  
+ /* quantityCheckMinMaxItemMin( ) : Checks, if the minimum quantity is within the limit.
+  *                                 If not, quantity will increased to the limit,
+  *                                 and the item will get an error prompt    
+  *
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemMin( $product )
+  { 
+      // RETURN : current item hasn't any min quantity limit
+    if( empty( $product['min'] ) )
+    {
+      return $product;
+    }
+      // RETURN : current item hasn't any min quantity limit
+
+      // SWITCH : limit is overrun or limit isn't overrun
+    switch( true )
+    {
+      case( $product['qty'] < $product['min'] ):
+          // limit is overrun
+        $product['qty'] = $product['min'];
+        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+        $llKey          = 'caddy_ll_error_min';
+        $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
+        $llPrompt       = sprintf( $llPrompt, $product['min'] );
+        $product['error']['min'] = $llPrompt;
+        $product['error']['min']  = true;
+        break;    
+      case( $product['qty'] >= $product['min'] ):
+      default:
+          // limit isn't overrun
+        unset( $product['error']['min'] );
+        break;    
+    }
+      // SWITCH : limit is overrun or limit isn't overrun
 
     return $product;
   }
   
-  
- /* quantityCheckMinMaxItems( )  : 
+ /* quantityCheckMinMaxItemMax( ) : Checks, if the maximum quantity is within the limit.
+  *                                 If not, quantity will decreased to the limit,
+  *                                 and the item will get an error prompt    
   *
-  * @param	array
-  * @return	array
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemMax( $product )
+  { 
+      // RETURN : current item hasn't any max quantity limit
+    if( empty( $product['max'] ) )
+    {
+      return $product;
+    }
+      // RETURN : current item hasn't any max quantity limit
+
+      // SWITCH : limit is overrun or limit isn't overrun
+    switch( true )
+    {
+      case( $product['qty'] > $product['max'] ):
+          // limit is overrun
+        $product['qty'] = $product['max'];
+        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+        $llKey          = 'caddy_ll_error_max';
+        $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
+        $llPrompt       = sprintf( $llPrompt, $product['max'] );
+        $product['error']['max'] = $llPrompt;
+        break;    
+      case( $product['qty'] <= $product['max'] ):
+      default:
+          // limit isn't overrun
+        unset( $product['error']['max'] );
+        break;    
+    }
+      // SWITCH : limit is overrun or limit isn't overrun
+
+    return $product;
+  }
+  
+ /* quantityCheckMinMaxItems( ) : Checks min and max limits depending on the caddy (plugin/flexform)
+  *                               If a limit is passed over, quantities will updated and there will be 
+  *                               error prompts near the items.
+  *
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItems( $product )
   {
+      // SWITCH : add an item or update items quantity
     switch( true )
     {
       case( $this->pObj->gpvar['puid'] ):
+          // add an item
         $product = $this->quantityCheckMinMaxItemsAddMin( $product );
         $product = $this->quantityCheckMinMaxItemsAddMax( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
+          // update items quantity
+        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
         break;
       default:
@@ -718,57 +821,26 @@ class tx_caddy_session
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
         die( $prompt );
-        break;
-        
+        break;        
     }
+      // SWITCH : add an item or update items quantity
     
-
     return $product;
   }
   
- /* quantityCheckMinMaxItemsAddMin( )  :
+ /* quantityCheckMinMaxItemsAddMin( ) : Checks min limit depending on the caddy (plugin/flexform)
+  *                                     while adding an item into the caddy.
+  *                                     If the limit is passed over, quantity will increased and 
+  *                                     an error prompt will be near the item.
   *
-  * @param	array
-  * @return	array
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItemsAddMin( $product )
   { 
-    return $product;
-
-    if( empty( $product['min'] ) )
-    {
-      return $product;
-    }
-
-    switch( true )
-    {
-      case( $product['qty'] < $product['min'] ):
-        $product['qty']           = $product['min'];
-        $product['error']['min']  = true;
-        break;    
-      case( $product['qty'] >= $product['min'] ):
-      default:
-        unset( $product['error']['min'] );
-        break;    
-    }
-
-    return $product;
-  }
-  
- /* quantityCheckMinMaxItemsAddMax( )  :
-  *
-  * @param	array
-  * @return	array
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxItemsAddMax( $product )
-  { 
-
       // RETURN : any item is added
     if( empty( $this->pObj->gpvar['puid'] ) )
     {
@@ -776,35 +848,112 @@ class tx_caddy_session
     }
       // RETURN : any item is added
     
-      // RETURN : max quantity for all items is unlimited
+      // Get min limit for quantity of all items
+    $itemsQuantityMin = $this->pObj->flexform->originMin;   
+
+      // RETURN : min quantity for all items is unlimited
+    if( empty( $itemsQuantityMin ) )
+    {
+      return $product;
+    }
+      // RETURN : min quantity for all items is unlimited
+  
+      // Get current items quantity
+    $itemsQuantity  = $this->getQuantityItems( )
+                    + $this->pObj->gpvar['qty']
+                    ;
+
+//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
+
+      // RETURN : limit for min quantity for all items isn't passed
+    if( $itemsQuantity >= $itemsQuantityMin )
+    {
+      return $product;
+    }
+      // RETURN : limit for min quantity for all items isn't passed
+
+      // Limit for min quantity for all items is passed
+      
+      // Get the undercut quantity
+    $itemsQuantityUndercut  = $itemsQuantityMin
+                            - $itemsQuantity
+                            ;
+    
+//var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
+      // Increase quantity of the current product
+    $product['qty'] = $product['qty']
+                    + $itemsQuantityUndercut;
+    
+      // Set the error prompt
+    $llKey    = 'caddy_ll_error_itemsMin';
+    $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
+    $llPrompt = sprintf( $llPrompt, $itemsQuantityMin );
+    $product['error']['itemsMin'] = $llPrompt;
+      // Set the error prompt
+
+//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMin );
+
+    return $product;
+  }
+  
+ /* quantityCheckMinMaxItemsAddMax( ) : Checks max limit depending on the caddy (plugin/flexform)
+  *                                     while adding an item into the caddy.
+  *                                     If the limit is passed over, quantity will decreased and 
+  *                                     an error prompt will be near the item.
+  *
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxItemsAddMax( $product )
+  { 
+      // RETURN : any item is added
+    if( empty( $this->pObj->gpvar['puid'] ) )
+    {
+      return $product;
+    }
+      // RETURN : any item is added
+    
+      // Get max limit for quantity of all items
     $itemsQuantityMax = $this->pObj->flexform->originMax;   
+
+      // RETURN : max quantity for all items is unlimited
     if( empty( $itemsQuantityMax ) )
     {
       return $product;
     }
       // RETURN : max quantity for all items is unlimited
   
+      // Get current items quantity
     $itemsQuantity  = $this->getQuantityItems( )
                     + $this->pObj->gpvar['qty']
                     ;
 
 //var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
 
-      // RETURN : max quantity for all items isn't overrun
+      // RETURN : limit for max quantity for all items isn't passed
     if( $itemsQuantity <= $itemsQuantityMax )
     {
       return $product;
     }
-      // RETURN : max quantity for all items isn't overrun
+      // RETURN : limit for max quantity for all items isn't passed
 
+      // Limit for max quantity for all items is passed
+      
+      // Get the overrun quantity
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
                           ;
     
 //var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
+      // Decrease quantity of the current product
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+      // DIE  : Decreased quantity is below zero
     if( $product['qty'] < 0 )
     {
       $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
@@ -813,22 +962,30 @@ class tx_caddy_session
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
     }
+      // DIE  : Decreased quantity is below zero
 
+      // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMax';
     $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
     $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
+      // Set the error prompt
 
 //var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
     return $product;
   }
   
- /* quantityCheckMinMaxItemsUpdateMax( )  :
+ /* quantityCheckMinMaxItemsUpdateMax( )  : Checks max limit depending on the caddy (plugin/flexform)
+  *                                         while items are updating
+  *                                         If the limit is passed over, quantity will decreased and 
+  *                                         an error prompt will be near the item.
+  *                                         It's possible, that the quantity of more than one item
+  *                                         will decreased.
   *
-  * @param	array
-  * @return	array
+  * @param	array         $product  : the current product
+  * @return	array         $product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -845,124 +1002,54 @@ class tx_caddy_session
     }
       // RETURN : max quantity for all items is unlimited
   
+      // Get current quantity of all items
     foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
       $itemsQuantity  = $itemsQuantity 
                       + $value;
     }
-var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
+      // Get current quantity of all items
+//var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
 
-      // RETURN : max quantity for all items isn't overrun
+      // RETURN : limit for max quantity for all items isn't passed
     if( $itemsQuantity <= $itemsQuantityMax )
     {
       return $product;
     }
-      // RETURN : max quantity for all items isn't overrun
+      // RETURN : limit for max quantity for all items isn't passed
 
+      // Limit for max quantity for all items is passed
+      
+      // Get the overrun quantity
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
                           ;
     
+      // Decrease quantity of the current product
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+      // Decrease quantity of the current product (piVars)
     $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
     
+      // Update quantity to 1, if quantity is below 1
     if( $product['qty'] < 1 )
     {
       $product['qty'] = 1;
       $this->pObj->piVars['qty'][$product['puid']] = 1  ;
     }
-    if( $product['qty'] < 0 )
-    {
-      $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
+      // Update quantity to 1, if quantity is below 1
 
+      // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMax';
     $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
     $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
+      // Set the error prompt
 
 //var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
 
-    return $product;
-  }
-  
- /* quantityCheckMinMaxMin( )  :
-  *
-  * @param	array
-  * @return	array
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxMin( $product )
-  { 
-    if( empty( $product['min'] ) )
-    {
-      return $product;
-    }
-
-    switch( true )
-    {
-      case( $product['qty'] < $product['min'] ):
-        $product['qty'] = $product['min'];
-        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-        $llKey          = 'caddy_ll_error_min';
-        $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
-        $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
-        $llPrompt       = sprintf( $llPrompt, $product['min'] );
-        $product['error']['min'] = $llPrompt;
-        $product['error']['min']  = true;
-        break;    
-      case( $product['qty'] >= $product['min'] ):
-      default:
-        unset( $product['error']['min'] );
-        break;    
-    }
-var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $product );
-
-    return $product;
-  }
-  
- /* quantityCheckMinMaxMax( )  :
-  *
-  * @param	array
-  * @return	array
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxMax( $product )
-  { 
-    if( empty( $product['max'] ) )
-    {
-      return $product;
-    }
-
-    switch( true )
-    {
-      case( $product['qty'] > $product['max'] ):
-        $product['qty'] = $product['max'];
-        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-        $llKey          = 'caddy_ll_error_max';
-        $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
-        $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
-        $llPrompt       = sprintf( $llPrompt, $product['max'] );
-        $product['error']['max'] = $llPrompt;
-        break;    
-      case( $product['qty'] <= $product['max'] ):
-      default:
-        unset( $product['error']['max'] );
-        break;    
-    }
-
-var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $product );
     return $product;
   }
 
