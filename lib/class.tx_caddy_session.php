@@ -1486,6 +1486,9 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
       // SWITCH : add an item or update items quantity
     switch( true )
     {
+      case( $this->pObj->gpvar['puid'] ):
+        $quantity = $this->quantityGetAdd( );
+        break;
       case( $this->pObj->piVars['qty'] ):
         $quantity = $this->quantityGetUpdate( );
         break;
@@ -1503,6 +1506,21 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
 
     return $quantity;
   }
+  
+ /* quantityGetAdd( )  : 
+  *
+  * @return	integer   $quantity : the quantity of the current items
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityGetAdd( )
+  { 
+    $quantity = $this->pObj->gpvar['qty']; 
+
+    return $quantity;
+  }
+  
   
  /* quantityGetDelete( )  : 
   *
