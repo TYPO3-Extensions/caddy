@@ -1526,16 +1526,16 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     switch( true )
     {
       case( ! empty( $products ) ):
-        $quantity = ( int ) $this->pObj->gpvar['qty']; 
-        break;
-      case( empty( $products ) ):
-      default:
         foreach( ( array ) $products as $product )
         {
           $quantity = $quantity 
                     + $product['qty']
                     ;
         }
+        break;
+      case( empty( $products ) ):
+      default:
+        $quantity = ( int ) $this->pObj->gpvar['qty']; 
         break;
     }
       // SWITCH : products or any product
