@@ -1235,13 +1235,15 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // DRS
       
       // Decrease quantity of the current product (piVars)
-    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+    $this->pObj->piVars['qty'] = $product['qty'];
     
       // Update quantity to 1, if quantity is below 1
     if( $product['qty'] < 1 )
     {
       $product['qty'] = 1;
-      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
+//      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
+      $this->pObj->piVars['qty'] = 1  ;
     }
       // Update quantity to 1, if quantity is below 1
 
@@ -1336,7 +1338,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // DRS
       
       // Increase quantity of the current product (piVars)
-    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+    $this->pObj->piVars['qty'] = $product['qty'];
     
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMin';
