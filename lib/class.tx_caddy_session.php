@@ -31,61 +31,63 @@
  *
  *
  *
- *  104: class tx_caddy_session
+ *  106: class tx_caddy_session
  *
  *              SECTION: Getting methods
- *  131:     private function getQuantityItems( )
- *  153:     public function getNumberDeliveryorder( )
- *  168:     public function getNumberInvoice( )
- *  183:     public function getNumberOrder( )
+ *  133:     private function getQuantityItems( )
+ *  155:     public function getNumberDeliveryorder( )
+ *  170:     public function getNumberInvoice( )
+ *  185:     public function getNumberOrder( )
  *
  *              SECTION: Payment
- *  207:     public function paymentUpdate( $value )
- *  226:     public function paymentGet( )
+ *  209:     public function paymentUpdate( $value )
+ *  228:     public function paymentGet( )
  *
  *              SECTION: Product
- *  258:     public function productAdd( $product )
- *  362:     public function productDelete( )
- *  426:     public function productGetDetails( $gpvar )
- *  447:     private function productsGetFirstKey( )
- *  465:     private function productGetDetailsSql($gpvar)
- *  518:     private function productGetDetailsTs( $gpvar )
- *  615:     private function productGetVariantGpvar( )
- *  648:     private function productGetVariantTs( $product )
- *  686:     private function productSetQuantity( $quantity, $uid )
- *  739:     public function productsGet( )
- *  753:     public function productsGetGross( $pid )
- *  793:     private function quantityCheckMinMax( $product )
- *  823:     private function quantityCheckMinMaxDrs( )
- *  868:     private function quantityCheckMinMaxItemMax( $product )
- *  936:     private function quantityCheckMinMaxItemMin( $product )
- * 1010:     private function quantityCheckMinMaxItemsMax( $product )
- * 1103:     private function quantityCheckMinMaxItemsMin( $product )
- * 1186:     private function quantityGet( )
- * 1221:     private function quantityGetAdd( )
- * 1258:     private function quantityGetDelete( )
- * 1281:     private function quantityGetUpdate( )
- * 1305:     private function quantityGetVariant( )
- * 1381:     public function quantityUpdate( )
+ *  260:     public function productAdd( $product )
+ *  364:     public function productDelete( )
+ *  428:     public function productGetDetails( $gpvar )
+ *  449:     private function productsGetFirstKey( )
+ *  467:     private function productGetDetailsSql($gpvar)
+ *  520:     private function productGetDetailsTs( $gpvar )
+ *  617:     private function productGetVariantGpvar( )
+ *  650:     private function productGetVariantTs( $product )
+ *  688:     private function productSetQuantity( $quantity, $uid )
+ *  741:     public function productsGet( )
+ *  755:     public function productsGetGross( $pid )
+ *
+ *              SECTION: Quantity
+ *  795:     private function quantityCheckMinMax( $product )
+ *  826:     private function quantityCheckMinMaxDrs( )
+ *  872:     private function quantityCheckMinMaxItemMax( $product )
+ *  941:     private function quantityCheckMinMaxItemMin( $product )
+ * 1016:     private function quantityCheckMinMaxItemsMax( $product )
+ * 1110:     private function quantityCheckMinMaxItemsMin( $product )
+ * 1194:     private function quantityGet( )
+ * 1230:     private function quantityGetAdd( )
+ * 1268:     private function quantityGetDelete( )
+ * 1292:     private function quantityGetUpdate( )
+ * 1316:     private function quantityGetVariant( )
+ * 1392:     public function quantityUpdate( )
  *
  *              SECTION: Session
- * 1540:     public function sessionDelete( $content = '', $conf = array( ) )
- * 1575:     private function sessionDeleteIncreaseNumbers( $drs )
+ * 1551:     public function sessionDelete( $content = '', $conf = array( ) )
+ * 1586:     private function sessionDeleteIncreaseNumbers( $drs )
  *
  *              SECTION: Setting methods
- * 1643:     public function setParentObject( $pObj )
+ * 1654:     public function setParentObject( $pObj )
  *
  *              SECTION: Shipping
- * 1727:     public function shippingUpdate($value)
- * 1742:     public function shippingGet( )
+ * 1738:     public function shippingUpdate($value)
+ * 1753:     public function shippingGet( )
  *
  *              SECTION: Special
- * 1763:     public function specialUpdate($special_arr)
- * 1778:     public function specialGet()
+ * 1774:     public function specialUpdate($special_arr)
+ * 1789:     public function specialGet()
  *
  *              SECTION: ZZ
- * 1806:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1867:     private function zz_sqlReplaceMarker( )
+ * 1817:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ * 1878:     private function zz_sqlReplaceMarker( )
  *
  * TOTAL FUNCTIONS: 38
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -771,7 +773,7 @@ class tx_caddy_session
   * Quantity
   *
   * *********************************************/
-  
+
  /**
   * quantityCheckMinMax( )  : Checks
   *                           * min and max limits depending on an item (database)
@@ -861,8 +863,8 @@ class tx_caddy_session
   *                                 If not, quantity will decreased to the limit,
   *                                 and the item will get an error prompt
   *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
+  * @param	array		$product  : the current product
+  * @return	array		$product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -930,8 +932,8 @@ class tx_caddy_session
   *                                 If not, quantity will increased to the limit,
   *                                 and the item will get an error prompt
   *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
+  * @param	array		$product  : the current product
+  * @return	array		$product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1005,8 +1007,8 @@ class tx_caddy_session
   *                                         It's possible, that the quantity of more than one item
   *                                         will decreased.
   *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
+  * @param	array		$product  : the current product
+  * @return	array		$product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1099,8 +1101,8 @@ class tx_caddy_session
   *                                         It's possible, that the quantity of more than one item
   *                                         will increased.
   *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
+  * @param	array		$product  : the current product
+  * @return	array		$product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1184,7 +1186,7 @@ class tx_caddy_session
  /**
   * quantityGet( )  :
   *
-  * @return	integer   $quantity : the quantity of the current items
+  * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1220,7 +1222,7 @@ class tx_caddy_session
  /**
   * quantityGetAdd( )  :
   *
-  * @return	integer   $quantity : the quantity of the current items
+  * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1258,7 +1260,7 @@ class tx_caddy_session
  /**
   * quantityGetDelete( )  :
   *
-  * @return	integer   $quantity : the quantity of the current items
+  * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -1282,7 +1284,7 @@ class tx_caddy_session
  /**
   * quantityGetUpdate( )  :
   *
-  * @return	integer   $quantity : the quantity of the current items
+  * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
