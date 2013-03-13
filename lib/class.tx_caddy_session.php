@@ -388,13 +388,13 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $GLOBALS['TSFE']->storeSessionData( );
 
     
-//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-//    $productId = $this->productsGetFirstKey( );
-//var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
-//    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
-//    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-//    // save session
-//    $GLOBALS['TSFE']->storeSessionData( );    
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $productId = $this->productsGetFirstKey( );
+var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
+    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // save session
+    $GLOBALS['TSFE']->storeSessionData( );    
   }
 
 /**
@@ -721,8 +721,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     unset( $product['error']['itemsMax'] );
 
       // Checks the min and max limit depending on an item (database)
-    $product = $this->quantityCheckMinMaxItemMin( $product );
     $product = $this->quantityCheckMinMaxItemMax( $product );
+    $product = $this->quantityCheckMinMaxItemMin( $product );
 
       // Checks the min and max limit depending on the caddy (plugin/flexform)
     $product = $this->quantityCheckMinMaxItems( $product );
@@ -888,8 +888,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
         $product = $this->quantityCheckMinMaxItemsAddMax( $product );
+        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
           // update items quantity
@@ -900,8 +900,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
+        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         break;
       case( $this->pObj->piVars['del'] ):
           // update items quantity after delete
@@ -912,8 +912,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
+        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         break;
       default:
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
@@ -1182,12 +1182,7 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // RETURN : max quantity for all items is unlimited
   
       // Get current quantity of all items
-    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
-    {
-      $itemsQuantity  = $itemsQuantity 
-                      + $value;
-    }
-      // Get current quantity of all items
+    $itemsQuantity = $this->quantityGet( );
 //var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
 
       // RETURN : limit for max quantity for all items isn't passed
