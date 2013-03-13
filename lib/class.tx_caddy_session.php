@@ -381,6 +381,9 @@ class tx_caddy_session
     }
     // loop every product
 
+    $productId = $this->productGetFirstKey( );
+    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
+    
     // generate new session
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
@@ -413,10 +416,11 @@ class tx_caddy_session
  * productGetFirstKey( ) : 
  * 
  * @return	integer		$uid: uid of the first item in the caddy
- * @version 1.2.2
- * @since 1.2.2
+ * @access  private
+ * @version 2.0.0
+ * @since 2.0.0
  */
-  public function productGetFirstKey( )
+  private function productGetFirstKey( )
   {
     $products     = $this->productsGet( );
     $productsKey  = array_keys( $products );
