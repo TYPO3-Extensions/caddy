@@ -736,7 +736,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item is overrun. Item #' . $product['qty'] . ' > limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['puid']. ') is overrun. Item #' . $product['qty'] . ' > limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -755,7 +755,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item isn\'t overrun. Item #' . $product['qty'] . ' <= limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['puid']. ') isn\'t overrun. Item #' . $product['qty'] . ' <= limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -801,7 +801,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item is undercut. Item #' . $product['qty'] . ' < limit #' . $product['max'];
+          $prompt = 'Minimum limit of the current item (' . $product['puid']. ') is undercut. Item #' . $product['qty'] . ' < limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -819,7 +819,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item isn\'t undercut. Item #' . $product['qty'] . ' >= limit #' . $product['max'];
+          $prompt = 'Minimum limit of the current item (' . $product['puid']. ') isn\'t undercut. Item #' . $product['qty'] . ' >= limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
