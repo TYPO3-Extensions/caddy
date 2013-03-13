@@ -308,6 +308,7 @@ class tx_caddy_session
       }
     }
 
+var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $product = $this->quantityCheckMinMax( $product );
 
     if( isset( $product['price'] ) )
@@ -388,6 +389,7 @@ class tx_caddy_session
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $productId = $this->productsGetFirstKey( );
+var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
@@ -827,7 +829,8 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' 
+                  . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
           $prompt = 'Quantity will increased to #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
@@ -847,7 +850,8 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+                  . 'isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -1549,6 +1553,7 @@ class tx_caddy_session
           unset($sesArray['products'][$key_session]);
           $productId = $this->productsGetFirstKey( );
         }
+var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
         $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
       } 
       else 
