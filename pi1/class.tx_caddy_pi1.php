@@ -402,6 +402,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
     
+    $this->session->setParentObject( $this );
   }
 
 /**
@@ -754,7 +755,6 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
-    $this->session->pObj    = $this;
 
     require_once( $path2lib . 'class.tx_caddy_template.php' );
     $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );

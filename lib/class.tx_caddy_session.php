@@ -89,12 +89,12 @@
 class tx_caddy_session
 {
 
-  public $extKey        = 'caddy';
-  public $prefixId      = 'tx_caddy_pi1';
-  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+  public  $extKey        = 'caddy';
+  public  $prefixId      = 'tx_caddy_pi1';
+  public  $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
     // Object: the parent object
-  public $pObj = null;
+  private $pObj = null;
 
 
 
@@ -718,6 +718,13 @@ class tx_caddy_session
       // RETURN : current item hasn't any max quantity limit
     if( empty( $product['max'] ) )
     {
+        // DRS
+      if( $this->drs->drsSession || $drs )
+      {
+        $prompt = 'Session is cleared.';
+        t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : current item hasn't any max quantity limit
@@ -942,7 +949,7 @@ class tx_caddy_session
                     + $this->pObj->gpvar['qty']
                     ;
 
-var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
+//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
 
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
@@ -958,7 +965,7 @@ var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
                             - $itemsQuantity
                             ;
     
-var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
+//var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
       // Increase quantity of the current product
     $product['qty'] = $product['qty']
                     + $itemsQuantityUndercut;
@@ -1448,6 +1455,92 @@ var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
       // DRS
 
 }
+  
+
+
+  /***********************************************
+  *
+  * Setting methods
+  *
+  **********************************************/
+
+ /**
+  * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
+  *
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function setParentObject( $pObj )
+  {
+    if( ! is_object( $pObj ) )
+    {
+      $prompt = 'ERROR: no parent object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->pObj = $pObj;
+
+    if( ! is_object( $pObj->drs ) )
+    {
+      $prompt = 'ERROR: no DRS object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->drs = $pObj->drs;
+
+//    if( ! is_array( $pObj->conf ) || empty( $pObj->conf ) )
+//    {
+//      $prompt = 'ERROR: no configuration!<br />' . PHP_EOL .
+//                'Sorry for the trouble.<br />' . PHP_EOL .
+//                'TYPO3 Caddy<br />' . PHP_EOL .
+//              __METHOD__ . ' (' . __LINE__ . ')';
+//      die( $prompt );
+//      
+//    }
+//    $this->conf = $pObj->conf;
+//
+//    if( ! is_object( $pObj->cObj ) )
+//    {
+//      $prompt = 'ERROR: no cObject!<br />' . PHP_EOL .
+//                'Sorry for the trouble.<br />' . PHP_EOL .
+//                'TYPO3 Caddy<br />' . PHP_EOL .
+//              __METHOD__ . ' (' . __LINE__ . ')';
+//      die( $prompt );
+//      
+//    }
+//    $this->cObj       = $pObj->cObj;
+//
+//    if( ! is_object( $pObj->local_cObj ) )
+//    {
+//      $prompt = 'ERROR: no local_cObj!<br />' . PHP_EOL .
+//                'Sorry for the trouble.<br />' . PHP_EOL .
+//                'TYPO3 Caddy<br />' . PHP_EOL .
+//              __METHOD__ . ' (' . __LINE__ . ')';
+//      die( $prompt );
+//      
+//    }
+//    $this->local_cObj = $pObj->local_cObj;
+//
+//    if( ! is_array( $pObj->tmpl ) || empty( $pObj->tmpl ) )
+//    {
+//      $prompt = 'ERROR: no template!<br />' . PHP_EOL .
+//                'Sorry for the trouble.<br />' . PHP_EOL .
+//                'TYPO3 Caddy<br />' . PHP_EOL .
+//              __METHOD__ . ' (' . __LINE__ . ')';
+//      die( $prompt );
+//      
+//    }
+//
+//    $this->tmpl = $pObj->tmpl;
+  }
 
 
 
