@@ -1384,10 +1384,12 @@ class tx_caddy_session
   { 
     $quantity = 0; 
 
-    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
+    $products = $this->productsGet( );
+
+    foreach( ( array ) $products as $product )
     {
       $quantity = $quantity 
-                + $value
+                + $product['qty']
                 ;
     }
     
@@ -1405,12 +1407,10 @@ class tx_caddy_session
   { 
     $quantity = 0; 
 
-    $products = $this->productsGet( );
-
-    foreach( ( array ) $products as $product )
+    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
       $quantity = $quantity 
-                + $product['qty']
+                + $value
                 ;
     }
     
