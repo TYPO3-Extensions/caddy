@@ -719,10 +719,10 @@ class tx_caddy_session
     if( empty( $product['max'] ) )
     {
         // DRS
-      if( $this->drs->drsSession || $drs )
+      if( $this->drs->drsCalc )
       {
-        $prompt = 'Session is cleared.';
-        t3lib_div::devlog( '[INFO/SESSION] ' . $prompt, $this->extKey, 0 );
+        $prompt = 'Current item hasn\'t any maximum limit. Maximum limit won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
       return $product;
@@ -733,6 +733,13 @@ class tx_caddy_session
     switch( true )
     {
       case( $product['qty'] > $product['max'] ):
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Maximum limit of the current item is overrun. Item #' . $product['qty'] . ' > limit #' . $product['max'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
           // limit is overrun
         $product['qty'] = $product['max'];
         $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
@@ -745,6 +752,13 @@ class tx_caddy_session
       case( $product['qty'] <= $product['max'] ):
       default:
           // limit isn't overrun
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Maximum limit of the current item isn\'t overrun. Item #' . $product['qty'] . ' <= limit #' . $product['max'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         unset( $product['error']['max'] );
         break;    
     }
@@ -768,15 +782,29 @@ class tx_caddy_session
       // RETURN : current item hasn't any min quantity limit
     if( empty( $product['min'] ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Current item hasn\'t any minimum limit. Minimum limit won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : current item hasn't any min quantity limit
 
-      // SWITCH : limit is overrun or limit isn't overrun
+      // SWITCH : limit is undercut or limit isn't undercut
     switch( true )
     {
       case( $product['qty'] < $product['min'] ):
-          // limit is overrun
+          // limit is undercut
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Minimum limit of the current item is undercut. Item #' . $product['qty'] . ' < limit #' . $product['max'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         $product['qty'] = $product['min'];
         $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
         $llKey          = 'caddy_ll_error_min';
@@ -787,11 +815,18 @@ class tx_caddy_session
         break;    
       case( $product['qty'] >= $product['min'] ):
       default:
-          // limit isn't overrun
+          // limit isn't undercut
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Minimum limit of the current item isn\'t undercut. Item #' . $product['qty'] . ' >= limit #' . $product['max'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         unset( $product['error']['min'] );
         break;    
     }
-      // SWITCH : limit is overrun or limit isn't overrun
+      // SWITCH : limit is undercut or limit isn't undercut
 
     return $product;
   }
@@ -813,11 +848,25 @@ class tx_caddy_session
     {
       case( $this->pObj->gpvar['puid'] ):
           // add an item
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: add an item';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         $product = $this->quantityCheckMinMaxItemsAddMin( $product );
         $product = $this->quantityCheckMinMaxItemsAddMax( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
           // update items quantity
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: update quantity';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
         $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
         break;
@@ -850,6 +899,13 @@ class tx_caddy_session
       // RETURN : any item is added
     if( empty( $this->pObj->gpvar['puid'] ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Any gpvar[puid] is given. Maximum limit for all items isn\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : any item is added
@@ -860,6 +916,13 @@ class tx_caddy_session
       // RETURN : max quantity for all items is unlimited
     if( empty( $itemsQuantityMax ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'No maximum limit is given in the plugin/flexform. Maximum limit for all items won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : max quantity for all items is unlimited
@@ -874,11 +937,25 @@ class tx_caddy_session
       // RETURN : limit for max quantity for all items isn't passed
     if( $itemsQuantity <= $itemsQuantityMax )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Limit for all items isn\'t overrun. Items ' . $itemsQuantity . ' <= limit ' . $itemsQuantityMax;
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : limit for max quantity for all items isn't passed
 
       // Limit for max quantity for all items is passed
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Limit for all items is overrun. Items ' . $itemsQuantity . ' <= limit ' . $itemsQuantityMax;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
       
       // Get the overrun quantity
     $itemsQuantityOverrun = $itemsQuantity
@@ -930,6 +1007,13 @@ class tx_caddy_session
       // RETURN : any item is added
     if( empty( $this->pObj->gpvar['puid'] ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Any gpvar[puid] is given. Minimum limit for all items isn\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : any item is added
@@ -940,6 +1024,13 @@ class tx_caddy_session
       // RETURN : min quantity for all items is unlimited
     if( empty( $itemsQuantityMin ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'No minimum limit is given in the plugin/flexform. Minimum limit for all items won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : min quantity for all items is unlimited
@@ -954,11 +1045,25 @@ class tx_caddy_session
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Limit for all items isn\'t undercut. Items ' . $itemsQuantity . ' >= limit ' . $itemsQuantityMax;
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : limit for min quantity for all items isn't passed
 
       // Limit for min quantity for all items is passed
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Limit for all items is undercut. Items ' . $itemsQuantity . ' >= limit ' . $itemsQuantityMax;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
       
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
@@ -1004,6 +1109,13 @@ class tx_caddy_session
     $itemsQuantityMax = $this->pObj->flexform->originMax;   
     if( empty( $itemsQuantityMax ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'No maximum limit is given in the plugin/flexform. Maximum limit for all items won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : max quantity for all items is unlimited
@@ -1020,11 +1132,25 @@ class tx_caddy_session
       // RETURN : limit for max quantity for all items isn't passed
     if( $itemsQuantity <= $itemsQuantityMax )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Limit for all items isn\'t overrun. Items ' . $itemsQuantity . ' <= limit ' . $itemsQuantityMax;
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : limit for max quantity for all items isn't passed
 
       // Limit for max quantity for all items is passed
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Limit for all items is overrun. Items ' . $itemsQuantity . ' <= limit ' . $itemsQuantityMax;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
       
       // Get the overrun quantity
     $itemsQuantityOverrun = $itemsQuantity
@@ -1080,6 +1206,13 @@ class tx_caddy_session
     $itemsQuantityMin = $this->pObj->flexform->originMin;   
     if( empty( $itemsQuantityMin ) )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'No minimum limit is given in the plugin/flexform. Minimum limit for all items won\'t checked.';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : min quantity for all items is unlimited
@@ -1096,11 +1229,25 @@ class tx_caddy_session
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
     {
+        // DRS
+      if( $this->drs->drsCalc )
+      {
+        $prompt = 'Limit for all items isn\'t undercut. Items ' . $itemsQuantity . ' >= limit ' . $itemsQuantityMax;
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $product;
     }
       // RETURN : limit for min quantity for all items isn't passed
 
       // Limit for min quantity for all items is passed
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Limit for all items is undercut. Items ' . $itemsQuantity . ' >= limit ' . $itemsQuantityMax;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
       
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
