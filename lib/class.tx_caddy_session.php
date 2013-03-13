@@ -1523,6 +1523,8 @@ var_dump( __METHOD__, __LINE__, $quantity );
 
     $products = $this->productsGet( );
 
+    $quantity = 0; 
+
     foreach( ( array ) $products as $product )
     {
       $quantity = $quantity 
