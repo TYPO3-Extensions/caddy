@@ -1516,21 +1516,30 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
   */
   private function quantityGetAdd( )
   { 
+      // Default value
     $quantity = 0; 
 
-    $quantity = ( int ) $this->pObj->gpvar['qty']; 
-var_dump( __METHOD__, __LINE__, $quantity );
-
+      // Get products
     $products = $this->productsGet( );
-
-    $quantity = 0; 
-
-    foreach( ( array ) $products as $product )
+    
+      // SWITCH : products or any product
+    switch( true )
     {
-      $quantity = $quantity 
-                + $product['qty']
-                ;
+      case( ! empty( $products ) ):
+        $quantity = ( int ) $this->pObj->gpvar['qty']; 
+        break;
+      case( empty( $products ) ):
+      default:
+        foreach( ( array ) $products as $product )
+        {
+          $quantity = $quantity 
+                    + $product['qty']
+                    ;
+        }
+        break;
     }
+      // SWITCH : products or any product
+
 var_dump( __METHOD__, __LINE__, $quantity );
 
     return $quantity;
