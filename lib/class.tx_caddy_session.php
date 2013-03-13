@@ -868,9 +868,12 @@ var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+    
     if( $product['qty'] < 1 )
     {
       $product['qty'] = 1;
+      $this->pObj->piVars['qty'][$product['puid']] = 1;
     }
     if( $product['qty'] < 0 )
     {
