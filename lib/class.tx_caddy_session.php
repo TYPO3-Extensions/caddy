@@ -31,48 +31,63 @@
  *
  *
  *
- *   89: class tx_caddy_session
+ *  104: class tx_caddy_session
  *
- *              SECTION: Get numbers
- *  116:     public function getNumberDeliveryorder( )
- *  131:     public function getNumberInvoice( )
- *  146:     public function getNumberOrder( )
+ *              SECTION: Getting methods
+ *  131:     private function getQuantityItems( )
+ *  153:     public function getNumberDeliveryorder( )
+ *  168:     public function getNumberInvoice( )
+ *  183:     public function getNumberOrder( )
  *
  *              SECTION: Payment
- *  167:     public function paymentUpdate($value)
- *  182:     public function paymentGet()
+ *  207:     public function paymentUpdate( $value )
+ *  226:     public function paymentGet( )
  *
  *              SECTION: Product
- *  212:     public function productAdd( $product )
- *  317:     public function productDelete( )
- *  372:     public function productGetDetails($gpvar)
- *  393:     private function productGetDetailsSql($gpvar)
- *  446:     private function productGetDetailsTs($gpvar)
- *  543:     private function productGetVariantGpvar( )
- *  576:     private function productGetVariantTs( $product )
- *  609:     public function productsGet()
- *  623:     public function productsGetGross( $pid )
- *  654:     private function quantityCheckMinMax( $product )
- *  689:     private function quantityGetVariant( )
- *  763:     public function quantityUpdate( )
+ *  258:     public function productAdd( $product )
+ *  362:     public function productDelete( )
+ *  426:     public function productGetDetails( $gpvar )
+ *  447:     private function productsGetFirstKey( )
+ *  465:     private function productGetDetailsSql($gpvar)
+ *  518:     private function productGetDetailsTs( $gpvar )
+ *  615:     private function productGetVariantGpvar( )
+ *  648:     private function productGetVariantTs( $product )
+ *  686:     private function productSetQuantity( $quantity, $uid )
+ *  739:     public function productsGet( )
+ *  753:     public function productsGetGross( $pid )
+ *  793:     private function quantityCheckMinMax( $product )
+ *  823:     private function quantityCheckMinMaxDrs( )
+ *  868:     private function quantityCheckMinMaxItemMax( $product )
+ *  936:     private function quantityCheckMinMaxItemMin( $product )
+ * 1010:     private function quantityCheckMinMaxItemsMax( $product )
+ * 1103:     private function quantityCheckMinMaxItemsMin( $product )
+ * 1186:     private function quantityGet( )
+ * 1221:     private function quantityGetAdd( )
+ * 1258:     private function quantityGetDelete( )
+ * 1281:     private function quantityGetUpdate( )
+ * 1305:     private function quantityGetVariant( )
+ * 1381:     public function quantityUpdate( )
  *
  *              SECTION: Session
- *  908:     public function sessionDelete( $content = '', $conf = array( ) )
- *  943:     private function sessionDeleteIncreaseNumbers( $drs )
+ * 1540:     public function sessionDelete( $content = '', $conf = array( ) )
+ * 1575:     private function sessionDeleteIncreaseNumbers( $drs )
+ *
+ *              SECTION: Setting methods
+ * 1643:     public function setParentObject( $pObj )
  *
  *              SECTION: Shipping
- * 1008:     public function shippingUpdate($value)
- * 1023:     public function shippingGet( )
+ * 1727:     public function shippingUpdate($value)
+ * 1742:     public function shippingGet( )
  *
  *              SECTION: Special
- * 1044:     public function specialUpdate($special_arr)
- * 1059:     public function specialGet()
+ * 1763:     public function specialUpdate($special_arr)
+ * 1778:     public function specialGet()
  *
  *              SECTION: ZZ
- * 1087:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1148:     private function zz_sqlReplaceMarker( )
+ * 1806:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ * 1867:     private function zz_sqlReplaceMarker( )
  *
- * TOTAL FUNCTIONS: 25
+ * TOTAL FUNCTIONS: 38
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -108,17 +123,17 @@ class tx_caddy_session
 /**
  * getQuantityItems( )  : Get the amount of quantities
  *
- * @return	integer   $quantityItems : 
+ * @return	integer		$quantityItems :
  * @access private
  * @version     2.0.0
  * @since       2.0.0
  */
   private function getQuantityItems( )
   {
-    $quantityItems = 0; 
+    $quantityItems = 0;
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $products = $sesArray['products'];
-    
+
     foreach( $products as $product )
     {
       $quantityItems  = $quantityItems
@@ -192,9 +207,9 @@ class tx_caddy_session
   public function paymentUpdate( $value )
   {
       // get already exting products from session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); 
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
 
-    $sesArray['payment'] = intval( $value ); 
+    $sesArray['payment'] = intval( $value );
 
     $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
     $GLOBALS['TSFE']->storeSessionData();
@@ -235,7 +250,7 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array		$product: 
+ * @param	array		$product:
  * @return	void
  * @version     2.0.0
  * @since       1.4.6
@@ -386,7 +401,7 @@ class tx_caddy_session
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
 
-    
+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $productId = $this->productsGetFirstKey( );
     if( empty( $productId ) )
@@ -396,7 +411,7 @@ class tx_caddy_session
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
-    $GLOBALS['TSFE']->storeSessionData( );    
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
 /**
@@ -412,7 +427,7 @@ class tx_caddy_session
   {
     // build own sql query
     // handle query by db.sql
-    if( ! empty( $this->pObj->conf['db.']['sql'] ) ) 
+    if( ! empty( $this->pObj->conf['db.']['sql'] ) )
     {
       return $this->productGetDetailsSql( $gpvar );
     }
@@ -422,10 +437,10 @@ class tx_caddy_session
   }
 
 /**
- * productsGetFirstKey( ) : 
- * 
+ * productsGetFirstKey( ) :
+ *
  * @return	integer		$uid: uid of the first item in the caddy
- * @access  private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -434,7 +449,7 @@ class tx_caddy_session
     $products     = $this->productsGet( );
     $productsKey  = array_keys( $products );
     $uid          = $productsKey[0];
-    
+
     return $uid;
   }
 
@@ -664,7 +679,7 @@ class tx_caddy_session
  * @param	integer		$quantity : current quantity of the current product
  * @param	integer		$uid      : uid of the current product
  * @return	integer		$quantity : current quantity of the current product
- * @access      private
+ * @access private
  * @version     2.0.0
  * @since       2.0.0
  */
@@ -709,7 +724,7 @@ class tx_caddy_session
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
         die( $prompt );
-        break;        
+        break;
     }
 
     return $quantity;
@@ -757,20 +772,20 @@ class tx_caddy_session
   * Quantity
   *
   * *********************************************/
-  
- /* quantityCheckMinMax( )  : Checks 
+  *
+  *  /* quantityCheckMinMax( )  : Checks
   *                           * min and max limits depending on an item (database)
   *                           * min and max limits depending on the caddy (plugin/flexform)
-  *                           If a limit is passed over, quantities will updated and there will be 
+  *                           If a limit is passed over, quantities will updated and there will be
   *                           error prompts near the items.
   *                           min and max limits of the caddy have precedence!
   *                           Example:
   *                           * An item have a maximum limit of 2
   *                           * The caddy have a minimum limit of 4
-  *                           * quantityCheckMinMax( ) will update the quantity to 4 of the product 
+  *                           * quantityCheckMinMax( ) will update the quantity to 4 of the product
   *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
+  * @param	array		$product  : the current product
+  * @return	array		$product  : the current or the updated product
   * @access private
   * @version 2.0.0
   * @since 2.0.0
@@ -792,14 +807,14 @@ class tx_caddy_session
     $product = $this->quantityCheckMinMaxItemsMin( $product );
 
     return $product;
-  }  
-  
+  }
+
  /* quantityCheckMinMaxDrs( ) : Prompt to the DRS the current case.
   *                             Possible case is
   *                             * add
   *                             * delete
   *                             * update
-  * 
+  *
   * @return	void
   * @access private
   * @version 2.0.0
@@ -811,7 +826,7 @@ class tx_caddy_session
     {
       return;
     }
-    
+
       // SWITCH : add, update, delete
     switch( true )
     {
@@ -833,16 +848,16 @@ class tx_caddy_session
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
         die( $prompt );
-        break;        
+        break;
     }
       // SWITCH : add, update, delete
-    
+
     return;
-  }  
-  
+  }
+
  /* quantityCheckMinMaxItemMax( ) : Checks, if the maximum quantity is within the limit.
   *                                 If not, quantity will decreased to the limit,
-  *                                 and the item will get an error prompt    
+  *                                 and the item will get an error prompt
   *
   * @param	array         $product  : the current product
   * @return	array         $product  : the current or the updated product
@@ -851,7 +866,7 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItemMax( $product )
-  { 
+  {
       // RETURN : current item hasn't any max quantity limit
     if( empty( $product['max'] ) )
     {
@@ -889,7 +904,7 @@ class tx_caddy_session
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
         $llPrompt       = sprintf( $llPrompt, $product['max'] );
         $product['error']['max'] = $llPrompt;
-        break;    
+        break;
       case( $product['qty'] <= $product['max'] ):
       default:
           // limit isn't overrun
@@ -901,16 +916,16 @@ class tx_caddy_session
         }
           // DRS
         unset( $product['error']['max'] );
-        break;    
+        break;
     }
       // SWITCH : limit is overrun or limit isn't overrun
 
     return $product;
   }
-  
+
  /* quantityCheckMinMaxItemMin( ) : Checks, if the minimum quantity is within the limit.
   *                                 If not, quantity will increased to the limit,
-  *                                 and the item will get an error prompt    
+  *                                 and the item will get an error prompt
   *
   * @param	array         $product  : the current product
   * @return	array         $product  : the current or the updated product
@@ -919,7 +934,7 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItemMin( $product )
-  { 
+  {
       // RETURN : current item hasn't any min quantity limit
     if( empty( $product['min'] ) )
     {
@@ -942,14 +957,14 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' 
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': '
                   . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
           $prompt = 'Quantity will setup to #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        
+
         $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
 //        $product['qty'] = $product['min'];
 //        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
@@ -959,20 +974,20 @@ class tx_caddy_session
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
         $llPrompt       = sprintf( $llPrompt, $product['min'] );
         $product['error']['min'] = $llPrompt;
-        break;    
+        break;
       case( $product['qty'] >= $product['min'] ):
       default:
           // limit isn't undercut
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') '
                   . 'isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
         unset( $product['error']['min'] );
-        break;    
+        break;
     }
       // SWITCH : limit is undercut or limit isn't undercut
 
@@ -981,7 +996,7 @@ class tx_caddy_session
 
  /* quantityCheckMinMaxItemsMax( )  : Checks max limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
-  *                                         If the limit is passed over, quantity will decreased and 
+  *                                         If the limit is passed over, quantity will decreased and
   *                                         an error prompt will be near the item.
   *                                         It's possible, that the quantity of more than one item
   *                                         will decreased.
@@ -993,11 +1008,11 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItemsMax( $product )
-  { 
+  {
     $itemsQuantity = 0;
-    
+
       // RETURN : max quantity for all items is unlimited
-    $itemsQuantityMax = $this->pObj->flexform->originMax;   
+    $itemsQuantityMax = $this->pObj->flexform->originMax;
     if( empty( $itemsQuantityMax ) )
     {
         // DRS
@@ -1010,7 +1025,7 @@ class tx_caddy_session
       return $product;
     }
       // RETURN : max quantity for all items is unlimited
-  
+
       // Get current quantity of all items
     $itemsQuantity = $this->quantityGet( );
 
@@ -1036,12 +1051,12 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // Get the overrun quantity
     $itemsQuantityOverrun = $itemsQuantity
                           - $itemsQuantityMax
                           ;
-    
+
       // Decrease quantity of the current product
     $quantity = $product['qty']
               - $itemsQuantityOverrun
@@ -1051,16 +1066,16 @@ class tx_caddy_session
       $quantity = 1;
     }
     $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
-    
+
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') '
               . 'will setup to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMax';
     $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
@@ -1071,10 +1086,10 @@ class tx_caddy_session
 
     return $product;
   }
-  
+
  /* quantityCheckMinMaxItemsMin( )  : Checks min limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
-  *                                         If the limit is undercut, quantity will increased and 
+  *                                         If the limit is undercut, quantity will increased and
   *                                         an error prompt will be near the item.
   *                                         It's possible, that the quantity of more than one item
   *                                         will increased.
@@ -1086,11 +1101,11 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityCheckMinMaxItemsMin( $product )
-  { 
+  {
     $itemsQuantity = 0;
-    
+
       // RETURN : min quantity for all items is unlimited
-    $itemsQuantityMin = $this->pObj->flexform->originMin;   
+    $itemsQuantityMin = $this->pObj->flexform->originMin;
     if( empty( $itemsQuantityMin ) )
     {
         // DRS
@@ -1103,7 +1118,7 @@ class tx_caddy_session
       return $product;
     }
       // RETURN : min quantity for all items is unlimited
-  
+
       // Get current quantity of all items
     $itemsQuantity = $this->quantityGet( );
 
@@ -1129,27 +1144,27 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
                             - $itemsQuantity
                             ;
-    
+
       // INcrease quantity of the current product
     $quantity = $product['qty']
               + $itemsQuantityUndercut
               ;
     $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
-    
+
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') '
               . 'will setup to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMin';
     $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
@@ -1160,8 +1175,8 @@ class tx_caddy_session
 
     return $product;
   }
-  
- /* quantityGet( )  : 
+
+ /* quantityGet( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1169,9 +1184,9 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityGet( )
-  { 
+  {
     $quantity = 0;
-    
+
       // SWITCH : add an item or update items quantity
     switch( true )
     {
@@ -1190,13 +1205,13 @@ class tx_caddy_session
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
         die( $prompt );
-        break;        
+        break;
     }
 
     return $quantity;
   }
-  
- /* quantityGetAdd( )  : 
+
+ /* quantityGetAdd( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1204,36 +1219,36 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityGetAdd( )
-  { 
+  {
       // Default value
-    $quantity = 0; 
+    $quantity = 0;
 
       // Get products
     $products = $this->productsGet( );
-    
+
       // SWITCH : products or any product
     switch( true )
     {
       case( ! empty( $products ) ):
         foreach( ( array ) $products as $product )
         {
-          $quantity = $quantity 
+          $quantity = $quantity
                     + $product['qty']
                     ;
         }
         break;
       case( empty( $products ) ):
       default:
-        $quantity = ( int ) $this->pObj->gpvar['qty']; 
+        $quantity = ( int ) $this->pObj->gpvar['qty'];
         break;
     }
       // SWITCH : products or any product
 
     return $quantity;
   }
-  
-  
- /* quantityGetDelete( )  : 
+
+
+ /* quantityGetDelete( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1241,22 +1256,22 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityGetDelete( )
-  { 
-    $quantity = 0; 
+  {
+    $quantity = 0;
 
     $products = $this->productsGet( );
 
     foreach( ( array ) $products as $product )
     {
-      $quantity = $quantity 
+      $quantity = $quantity
                 + $product['qty']
                 ;
     }
-    
+
     return $quantity;
   }
-  
- /* quantityGetUpdate( )  : 
+
+ /* quantityGetUpdate( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1264,19 +1279,19 @@ class tx_caddy_session
   * @since 2.0.0
   */
   private function quantityGetUpdate( )
-  { 
-    $quantity = 0; 
+  {
+    $quantity = 0;
 
     foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
-      $quantity = $quantity 
+      $quantity = $quantity
                 + $value
                 ;
     }
-    
+
     return $quantity;
   }
-  
+
 /**
  * quantityGetVariant(): Get variant values out of the name of the qty field
  *                              variant values have to be content of
@@ -1388,12 +1403,12 @@ class tx_caddy_session
         if( $int_qty > 0 )
         {
           // update quantity
-          if( $is_cart ) 
+          if( $is_cart )
           {
             // update from cart then set new qty
             $sesArray['products'][$key_session]['qty']  = $int_qty;
           }
-          else 
+          else
           {
             // update not from cart then add qty
             $sesArray['products'][$key_session]['qty']  = $sesArray['products'][$key_session]['qty']
@@ -1410,8 +1425,8 @@ class tx_caddy_session
           $productId = $this->productsGetFirstKey( );
         }
         $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
-      } 
-      else 
+      }
+      else
       {
         // loop for every variant
         $arr_variant_backup = $arr_variant;
@@ -1482,8 +1497,8 @@ class tx_caddy_session
                 $sesArray['products'][$key_session]['qty']  = $sesArray['products'][$key_session]['qty']
                                                             + $int_qty;
               }
-            } 
-            else 
+            }
+            else
             {
               // remove product from session
               $this->productDelete( $sesArray['products'][$key_session]['puid'] );
@@ -1607,7 +1622,7 @@ class tx_caddy_session
       // DRS
 
 }
-  
+
 
 
   /***********************************************
@@ -1619,6 +1634,7 @@ class tx_caddy_session
  /**
   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
   *
+  * @param	[type]		$$pObj: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -1633,7 +1649,7 @@ class tx_caddy_session
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->pObj = $pObj;
 
@@ -1644,7 +1660,7 @@ class tx_caddy_session
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->drs = $pObj->drs;
 
@@ -1655,7 +1671,7 @@ class tx_caddy_session
 //                'TYPO3 Caddy<br />' . PHP_EOL .
 //              __METHOD__ . ' (' . __LINE__ . ')';
 //      die( $prompt );
-//      
+//
 //    }
 //    $this->conf = $pObj->conf;
 //
@@ -1666,7 +1682,7 @@ class tx_caddy_session
 //                'TYPO3 Caddy<br />' . PHP_EOL .
 //              __METHOD__ . ' (' . __LINE__ . ')';
 //      die( $prompt );
-//      
+//
 //    }
 //    $this->cObj       = $pObj->cObj;
 //
@@ -1677,7 +1693,7 @@ class tx_caddy_session
 //                'TYPO3 Caddy<br />' . PHP_EOL .
 //              __METHOD__ . ' (' . __LINE__ . ')';
 //      die( $prompt );
-//      
+//
 //    }
 //    $this->local_cObj = $pObj->local_cObj;
 //
@@ -1688,7 +1704,7 @@ class tx_caddy_session
 //                'TYPO3 Caddy<br />' . PHP_EOL .
 //              __METHOD__ . ' (' . __LINE__ . ')';
 //      die( $prompt );
-//      
+//
 //    }
 //
 //    $this->tmpl = $pObj->tmpl;
