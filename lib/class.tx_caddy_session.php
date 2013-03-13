@@ -940,7 +940,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Limit for all items isn\'t overrun. Items #' . $itemsQuantity . ' <= limit #' . $itemsQuantityMax;
+        $prompt = 'Limit for all items isn\'t overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -952,7 +952,7 @@ class tx_caddy_session
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Limit for all items is overrun. Items #' . $itemsQuantity . ' <= limit #' . $itemsQuantityMax;
+      $prompt = 'Limit for all items is overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -1048,7 +1048,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Limit for all items isn\'t undercut. Items #' . $itemsQuantity . ' >= limit #' . $itemsQuantityMin;
+        $prompt = 'Limit for all items isn\'t undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -1060,7 +1060,7 @@ class tx_caddy_session
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Limit for all items is undercut. Items #' . $itemsQuantity . ' >= limit #' . $itemsQuantityMin;
+      $prompt = 'Limit for all items is undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -1135,7 +1135,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Limit for all items isn\'t overrun. Items #' . $itemsQuantity . ' <= limit #' . $itemsQuantityMax;
+        $prompt = 'Limit for all items isn\'t overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -1147,7 +1147,7 @@ class tx_caddy_session
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Limit for all items is overrun. Items #' . $itemsQuantity . ' <= limit #' . $itemsQuantityMax;
+      $prompt = 'Limit for all items is overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -1232,7 +1232,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Limit for all items isn\'t undercut. Items #' . $itemsQuantity . ' >= limit #' . $itemsQuantityMin;
+        $prompt = 'Limit for all items isn\'t undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -1244,7 +1244,7 @@ class tx_caddy_session
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Limit for all items is undercut. Items #' . $itemsQuantity . ' >= limit #' . $itemsQuantityMin;
+      $prompt = 'Limit for all items is undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
