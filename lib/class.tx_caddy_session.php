@@ -381,13 +381,17 @@ class tx_caddy_session
     }
     // loop every product
 
-    $productId = $this->productGetFirstKey( );
-    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
-    
     // generate new session
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $productId = $this->productGetFirstKey( );
+    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // save session
+    $GLOBALS['TSFE']->storeSessionData( );    
   }
 
 /**
