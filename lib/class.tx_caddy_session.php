@@ -308,7 +308,6 @@ class tx_caddy_session
       }
     }
 
-var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $product = $this->quantityCheckMinMax( $product );
 
     if( isset( $product['price'] ) )
@@ -394,7 +393,6 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     {
       return;
     }
-var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
@@ -1540,8 +1538,6 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     }
       // SWITCH : products or any product
 
-var_dump( __METHOD__, __LINE__, $quantity );
-
     return $quantity;
   }
   
@@ -1722,7 +1718,6 @@ var_dump( __METHOD__, __LINE__, $quantity );
           unset($sesArray['products'][$key_session]);
           $productId = $this->productsGetFirstKey( );
         }
-var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
         $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
       } 
       else 
