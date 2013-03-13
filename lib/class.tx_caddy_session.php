@@ -734,7 +734,6 @@ class tx_caddy_session
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
         $llPrompt       = sprintf( $llPrompt, $product['min'] );
         $product['error']['min'] = $llPrompt;
-        $product['error']['min']  = true;
         break;    
       case( $product['qty'] >= $product['min'] ):
       default:
