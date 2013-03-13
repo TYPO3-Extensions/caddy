@@ -660,6 +660,64 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
         return $arr_variants;
     }
 
+/**
+ * productSetQuantity( )  : Returns the given quantity
+ *
+ * @param	integer		$quantity : current quantity of the current product
+ * @param	integer		$uid      : uid of the current product
+ * @return	integer		$quantity : current quantity of the current product
+ * @access      private
+ * @version     2.0.0
+ * @since       2.0.0
+ */
+  private function productSetQuantity( $quantity, $uid )
+  {
+    switch( true )
+    {
+      case( $this->pObj->gpvar['puid'] ):
+          // add an item
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: add an item';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+        $this->pObj->gpvar['qty'] = $quantity;
+        break;
+      case( $this->pObj->piVars['qty'] ):
+          // update items quantity
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: update quantity';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        $this->pObj->piVars['qty'][$uid] = $quantity;
+        break;
+      case( $this->pObj->piVars['del'] ):
+          // update items quantity after delete
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: update quantity after delete';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+      default:
+        $prompt = 'ERROR: no value for switch' . PHP_EOL .
+                  'Sorry for the trouble.<br />' . PHP_EOL .
+                  'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+        die( $prompt );
+        break;        
+    }
+
+    return $quantity;
+  }
+
+
     /**
  * Read products from session
  *
@@ -817,9 +875,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
         }
           // DRS
           // limit is overrun
-        $product['qty'] = $product['max'];
+        $product['qty'] = $this->productSetQuantity( $product['max'], $product['puid'] );
+//        $product['qty'] = $product['max'];
 //        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-        $this->pObj->piVars['qty'] = $product['qty'];
+//        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_max';
         $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -885,9 +944,11 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        $product['qty'] = $product['min'];
+        
+        $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
+//        $product['qty'] = $product['min'];
 //        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-        $this->pObj->piVars['qty'] = $product['qty'];
+//        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_min';
         $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -1022,9 +1083,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
       // RETURN : max quantity for all items is unlimited
   
       // Get current items quantity
-    $itemsQuantity  = $this->getQuantityItems( )
-                    + $this->pObj->gpvar['qty']
-                    ;
+//    $itemsQuantity  = $this->getQuantityItems( )
+//                    + $this->pObj->gpvar['qty']
+//                    ;
+    $itemsQuantity = $this->quantityGet( );
 
 //var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
 
@@ -1058,8 +1120,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     
 //var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
       // Decrease quantity of the current product
-    $product['qty'] = $product['qty']
-                    - $itemsQuantityOverrun;
+    $quantity = $product['qty']
+              - $itemsQuantityOverrun
+              ;
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
     
       // DRS
     if( $this->drs->drsCalc )
@@ -1139,9 +1203,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
       // RETURN : min quantity for all items is unlimited
   
       // Get current items quantity
-    $itemsQuantity  = $this->getQuantityItems( )
-                    + $this->pObj->gpvar['qty']
-                    ;
+//    $itemsQuantity  = $this->getQuantityItems( )
+//                    + $this->pObj->gpvar['qty']
+//                    ;
+    $itemsQuantity = $this->quantityGet( );
 
 //var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
 
@@ -1175,8 +1240,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     
 //var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
       // Increase quantity of the current product
-    $product['qty'] = $product['qty']
-                    + $itemsQuantityUndercut;
+    $quantity = $product['qty']
+              + $itemsQuantityUndercut
+              ;
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
     
       // DRS
     if( $this->drs->drsCalc )
@@ -1265,8 +1332,14 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
                           ;
     
       // Decrease quantity of the current product
-    $product['qty'] = $product['qty']
-                    - $itemsQuantityOverrun;
+    $quantity = $product['qty']
+              - $itemsQuantityOverrun
+              ;
+    if( $quantity < 1 )
+    {
+      $quantity = 1;
+    }
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
     
       // DRS
     if( $this->drs->drsCalc )
@@ -1277,18 +1350,18 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     }
       // DRS
       
-      // Decrease quantity of the current product (piVars)
-//    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-    $this->pObj->piVars['qty'] = $product['qty'];
-    
-      // Update quantity to 1, if quantity is below 1
-    if( $product['qty'] < 1 )
-    {
-      $product['qty'] = 1;
-//      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
-      $this->pObj->piVars['qty'] = 1  ;
-    }
-      // Update quantity to 1, if quantity is below 1
+//      // Decrease quantity of the current product (piVars)
+////    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//    $this->pObj->piVars['qty'] = $product['qty'];
+//    
+//      // Update quantity to 1, if quantity is below 1
+//    if( $product['qty'] < 1 )
+//    {
+//      $product['qty'] = 1;
+////      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
+//      $this->pObj->piVars['qty'] = 1  ;
+//    }
+//      // Update quantity to 1, if quantity is below 1
 
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMax';
@@ -1368,8 +1441,10 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
                             ;
     
       // INcrease quantity of the current product
-    $product['qty'] = $product['qty']
-                    + $itemsQuantityUndercut;
+    $quantity = $product['qty']
+              + $itemsQuantityUndercut
+              ;
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
     
       // DRS
     if( $this->drs->drsCalc )
@@ -1380,9 +1455,9 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     }
       // DRS
       
-      // Increase quantity of the current product (piVars)
-//    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-    $this->pObj->piVars['qty'] = $product['qty'];
+//      // Increase quantity of the current product (piVars)
+////    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//    $this->pObj->piVars['qty'] = $product['qty'];
     
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMin';
