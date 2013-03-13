@@ -942,7 +942,7 @@ class tx_caddy_session
                     + $this->pObj->gpvar['qty']
                     ;
 
-//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
+var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
 
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
@@ -958,7 +958,7 @@ class tx_caddy_session
                             - $itemsQuantity
                             ;
     
-//var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
+var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
       // Increase quantity of the current product
     $product['qty'] = $product['qty']
                     + $itemsQuantityUndercut;
