@@ -390,6 +390,10 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $productId = $this->productsGetFirstKey( );
+    if( empty( $productId ) )
+    {
+      return;
+    }
 var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
