@@ -387,7 +387,7 @@ class tx_caddy_session
     $GLOBALS['TSFE']->storeSessionData( );
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $productId = $this->productGetFirstKey( );
+    $productId = $this->productsGetFirstKey( );
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
@@ -417,14 +417,14 @@ class tx_caddy_session
   }
 
 /**
- * productGetFirstKey( ) : 
+ * productsGetFirstKey( ) : 
  * 
  * @return	integer		$uid: uid of the first item in the caddy
  * @access  private
  * @version 2.0.0
  * @since 2.0.0
  */
-  private function productGetFirstKey( )
+  private function productsGetFirstKey( )
   {
     $products     = $this->productsGet( );
     $productsKey  = array_keys( $products );
@@ -1282,6 +1282,7 @@ class tx_caddy_session
       // RETURN : min quantity for all items is unlimited
   
       // Get current quantity of all items
+    $itemsQuantity = $this->quantityGet( );
     foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
       $itemsQuantity  = $itemsQuantity 
@@ -1345,7 +1346,89 @@ class tx_caddy_session
 
     return $product;
   }
+  
+ /* quantityGet( )  : 
+  *
+  * @return	integer   $quantity : the quantity of the current items
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityGet( )
+  { 
+    $quantity = 0;
+    
+      // SWITCH : add an item or update items quantity
+    switch( true )
+    {
+      case( $this->pObj->piVars['qty'] ):
+        $quantity = $this->quantityGetUpdate( );
+        break;
+      case( $this->pObj->piVars['del'] ):
+        break;
+      default:
+        $quantity = $this->quantityGetDelete( );
+        $prompt = 'ERROR: no value for switch' . PHP_EOL .
+                  'Sorry for the trouble.<br />' . PHP_EOL .
+                  'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+        die( $prompt );
+        break;        
+    }
 
+    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
+    {
+      $quantity = $itemsQuantity 
+                + $value;
+    }
+    
+    return $quantity;
+  }
+  
+ /* quantityGetDelete( )  : 
+  *
+  * @return	integer   $quantity : the quantity of the current items
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityGetDelete( )
+  { 
+    $quantity = 0; 
+
+    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
+    {
+      $quantity = $quantity 
+                + $value
+                ;
+    }
+    
+    return $quantity;
+  }
+  
+ /* quantityGetUpdate( )  : 
+  *
+  * @return	integer   $quantity : the quantity of the current items
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityGetUpdate( )
+  { 
+    $quantity = 0; 
+
+    $products = $this->productsGet( );
+
+    foreach( ( array ) $products as $product )
+    {
+      $quantity = $quantity 
+                + $product['qty']
+                ;
+    }
+    
+    return $quantity;
+  }
+  
 /**
  * quantityGetVariant(): Get variant values out of the name of the qty field
  *                              variant values have to be content of
@@ -1476,7 +1559,7 @@ class tx_caddy_session
           $this->productDelete($sesArray['products'][$key_session]['puid']);
           // remove product from current session array
           unset($sesArray['products'][$key_session]);
-          $productId = $this->productGetFirstKey( );
+          $productId = $this->productsGetFirstKey( );
         }
         $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
       } 
