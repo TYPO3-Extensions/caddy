@@ -766,14 +766,13 @@ class tx_caddy_session
 
 
 
- /**
-  * ********************************************
+ /***********************************************
   *
   * Quantity
   *
-  * *********************************************/
-  *
-  *  /* quantityCheckMinMax( )  : Checks
+  **********************************************/
+  
+ /* quantityCheckMinMax( )  : Checks
   *                           * min and max limits depending on an item (database)
   *                           * min and max limits depending on the caddy (plugin/flexform)
   *                           If a limit is passed over, quantities will updated and there will be
