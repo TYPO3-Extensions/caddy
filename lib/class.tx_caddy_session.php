@@ -1283,12 +1283,6 @@ class tx_caddy_session
   
       // Get current quantity of all items
     $itemsQuantity = $this->quantityGet( );
-    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
-    {
-      $itemsQuantity  = $itemsQuantity 
-                      + $value;
-    }
-      // Get current quantity of all items
 //var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
 
       // RETURN : limit for min quantity for all items isn't passed
