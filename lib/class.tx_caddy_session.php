@@ -925,6 +925,7 @@ var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
         unset( $product['error']['min'] );
         break;    
     }
+var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $product );
 
     return $product;
   }
