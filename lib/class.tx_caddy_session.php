@@ -387,13 +387,14 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
 
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $productId = $this->productsGetFirstKey( );
-var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
-    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-    // save session
-    $GLOBALS['TSFE']->storeSessionData( );    
+    
+//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+//    $productId = $this->productsGetFirstKey( );
+//var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
+//    $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
+//    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+//    // save session
+//    $GLOBALS['TSFE']->storeSessionData( );    
   }
 
 /**
