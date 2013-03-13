@@ -373,7 +373,7 @@ class tx_caddy_session
       // loop through conditions
 
       // all conditions fit
-      if( $int_counter == count($arr_variant ) )
+      if( $int_counter == count( $arr_variant ) )
       {
         // remove product from session
         unset($sesArray['products'][$key]);
@@ -407,6 +407,22 @@ class tx_caddy_session
 
     // handle query by db.table and db.fields
     return $this->productGetDetailsTs( $gpvar );
+  }
+
+/**
+ * productGetFirstKey( ) : 
+ * 
+ * @return	integer		$uid: uid of the first item in the caddy
+ * @version 1.2.2
+ * @since 1.2.2
+ */
+  public function productGetFirstKey( )
+  {
+    $products     = $this->productsGet( );
+    $productsKey  = array_keys( $products );
+    $uid          = $productsKey[0];
+    
+    return $uid;
   }
 
    /**
@@ -634,7 +650,7 @@ class tx_caddy_session
  *
  * @return	array		$arr: array with all products from session
  */
-    public function productsGet()
+    public function productsGet( )
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
@@ -736,7 +752,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is overrun. Item #' . $product['qty'] . ' > limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
           $prompt = 'Quantity will decreased to #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
@@ -757,7 +773,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t overrun. Item #' . $product['qty'] . ' <= limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -868,6 +884,18 @@ class tx_caddy_session
         if( $this->drs->drsCalc )
         {
           $prompt = 'Case: update quantity';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
+        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
+        break;
+      case( $this->pObj->piVars['del'] ):
+          // update items quantity after delete
+          // DRS
+        if( $this->drs->drsCalc )
+        {
+          $prompt = 'Case: update quantity after delete';
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -1432,7 +1460,7 @@ class tx_caddy_session
             $sesArray['products'][$key_session]['qty']  = $sesArray['products'][$key_session]['qty']
                                                         + $int_qty;
           }
-          $sesArray['products'][$key_session] = $this->quantityCheckMinMax( $sesArray['products'][$key_session] );
+          $productId = $key_session;
         }
         else
         {
@@ -1440,7 +1468,9 @@ class tx_caddy_session
           $this->productDelete($sesArray['products'][$key_session]['puid']);
           // remove product from current session array
           unset($sesArray['products'][$key_session]);
+          $productId = $this->productGetFirstKey( );
         }
+        $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
       } 
       else 
       {
