@@ -738,6 +738,8 @@ class tx_caddy_session
         {
           $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is overrun. Item #' . $product['qty'] . ' > limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+          $prompt = 'Quantity will decreased to #' . $product['max'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
           // limit is overrun
@@ -802,6 +804,8 @@ class tx_caddy_session
         if( $this->drs->drsCalc )
         {
           $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+          $prompt = 'Quantity will increased to #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -967,6 +971,14 @@ class tx_caddy_session
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity will decreased to #' . $product['qty'];
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // DIE  : Decreased quantity is below zero
     if( $product['qty'] < 0 )
     {
@@ -1075,6 +1087,14 @@ class tx_caddy_session
     $product['qty'] = $product['qty']
                     + $itemsQuantityUndercut;
     
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity will increased to #' . $product['qty'];
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMin';
     $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
@@ -1161,6 +1181,14 @@ class tx_caddy_session
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity will decreased to #' . $product['qty'];
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // Decrease quantity of the current product (piVars)
     $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
     
@@ -1258,6 +1286,14 @@ class tx_caddy_session
     $product['qty'] = $product['qty']
                     + $itemsQuantityUndercut;
     
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity will increased to #' . $product['qty'];
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // Increase quantity of the current product (piVars)
     $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
     
