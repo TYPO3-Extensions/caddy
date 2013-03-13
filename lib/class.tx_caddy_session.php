@@ -847,7 +847,7 @@ class tx_caddy_session
   
     foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
-      $itemsQuantity  = $itemsQuantityMax 
+      $itemsQuantity  = $itemsQuantity 
                       + $value;
     }
 
