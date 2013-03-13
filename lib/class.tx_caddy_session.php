@@ -801,7 +801,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['max'];
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -819,7 +819,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['max'];
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
