@@ -1021,7 +1021,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity will decreased to #' . $product['qty'];
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+              . 'will decreased to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -1127,7 +1128,6 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
                             - $itemsQuantity
-                            - 1
                             ;
     
 //var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
@@ -1138,7 +1138,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity will increased to #' . $product['qty'];
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
+              . 'will increased to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
