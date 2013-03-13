@@ -1127,6 +1127,7 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
                             - $itemsQuantity
+                            - 1
                             ;
     
 //var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
@@ -1317,6 +1318,7 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
       // Get the undercut quantity
     $itemsQuantityUndercut  = $itemsQuantityMin
                             - $itemsQuantity
+                            - 1
                             ;
     
       // INcrease quantity of the current product
