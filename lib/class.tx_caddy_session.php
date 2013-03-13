@@ -766,14 +766,14 @@ class tx_caddy_session
 
 
 
- /**
-  * ********************************************
+ /**********************************************
   *
   * Quantity
   *
   * *********************************************/
-  *
-  *  /* quantityCheckMinMax( )  : Checks
+  
+ /**
+  * quantityCheckMinMax( )  : Checks
   *                           * min and max limits depending on an item (database)
   *                           * min and max limits depending on the caddy (plugin/flexform)
   *                           If a limit is passed over, quantities will updated and there will be
@@ -809,7 +809,8 @@ class tx_caddy_session
     return $product;
   }
 
- /* quantityCheckMinMaxDrs( ) : Prompt to the DRS the current case.
+ /**
+  * quantityCheckMinMaxDrs( ) : Prompt to the DRS the current case.
   *                             Possible case is
   *                             * add
   *                             * delete
@@ -855,7 +856,8 @@ class tx_caddy_session
     return;
   }
 
- /* quantityCheckMinMaxItemMax( ) : Checks, if the maximum quantity is within the limit.
+ /**
+  * quantityCheckMinMaxItemMax( ) : Checks, if the maximum quantity is within the limit.
   *                                 If not, quantity will decreased to the limit,
   *                                 and the item will get an error prompt
   *
@@ -923,7 +925,8 @@ class tx_caddy_session
     return $product;
   }
 
- /* quantityCheckMinMaxItemMin( ) : Checks, if the minimum quantity is within the limit.
+ /**
+  * quantityCheckMinMaxItemMin( ) : Checks, if the minimum quantity is within the limit.
   *                                 If not, quantity will increased to the limit,
   *                                 and the item will get an error prompt
   *
@@ -994,7 +997,8 @@ class tx_caddy_session
     return $product;
   }
 
- /* quantityCheckMinMaxItemsMax( )  : Checks max limit depending on the caddy (plugin/flexform)
+ /**
+  * quantityCheckMinMaxItemsMax( )  : Checks max limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
   *                                         If the limit is passed over, quantity will decreased and
   *                                         an error prompt will be near the item.
@@ -1087,7 +1091,8 @@ class tx_caddy_session
     return $product;
   }
 
- /* quantityCheckMinMaxItemsMin( )  : Checks min limit depending on the caddy (plugin/flexform)
+ /**
+  * quantityCheckMinMaxItemsMin( )  : Checks min limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
   *                                         If the limit is undercut, quantity will increased and
   *                                         an error prompt will be near the item.
@@ -1176,7 +1181,8 @@ class tx_caddy_session
     return $product;
   }
 
- /* quantityGet( )  :
+ /**
+  * quantityGet( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1211,7 +1217,8 @@ class tx_caddy_session
     return $quantity;
   }
 
- /* quantityGetAdd( )  :
+ /**
+  * quantityGetAdd( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1248,7 +1255,8 @@ class tx_caddy_session
   }
 
 
- /* quantityGetDelete( )  :
+ /**
+  * quantityGetDelete( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
@@ -1271,7 +1279,8 @@ class tx_caddy_session
     return $quantity;
   }
 
- /* quantityGetUpdate( )  :
+ /**
+  * quantityGetUpdate( )  :
   *
   * @return	integer   $quantity : the quantity of the current items
   * @access private
