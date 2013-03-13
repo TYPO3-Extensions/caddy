@@ -835,7 +835,8 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItemsMax2( $product )
   { 
-
+    $itemsQuantity = 0;
+    
       // RETURN : max quantity for all items is unlimited
     $itemsQuantityMax = $this->pObj->flexform->originMax;   
     if( empty( $itemsQuantityMax ) )
@@ -844,7 +845,11 @@ class tx_caddy_session
     }
       // RETURN : max quantity for all items is unlimited
   
-    $itemsQuantity  = $this->getQuantityItems( );
+    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
+    {
+      $itemsQuantity  = $itemsQuantityMax 
+                      + $value;
+    }
 
 var_dump( __METHOD__, __LINE__, $itemsQuantity );
 
