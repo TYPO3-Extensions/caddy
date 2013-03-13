@@ -777,6 +777,9 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
+      // Prompt case add, update or delete to DRS
+    $this->quantityCheckMinMaxDrs( );
+
     unset( $product['error']['itemsMin'] );
     unset( $product['error']['itemsMax'] );
 
@@ -788,6 +791,52 @@ class tx_caddy_session
     $product = $this->quantityCheckMinMaxItems( $product );
 
     return $product;
+  }  
+  
+ /* quantityCheckMinMaxDrs( ) : Prompt to the DRS the current case.
+  *                             Possible case is
+  *                             * add
+  *                             * delete
+  *                             * update
+  * 
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
+  private function quantityCheckMinMaxDrs( )
+  {
+    if( ! $this->drs->drsCalc )
+    {
+      return;
+    }
+    
+      // SWITCH : add, update, delete
+    switch( true )
+    {
+      case( $this->pObj->gpvar['puid'] ):
+        $prompt = 'Case: add an item';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        break;
+      case( $this->pObj->piVars['qty'] ):
+        $prompt = 'Case: update item quantity';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        break;
+      case( $this->pObj->piVars['del'] ):
+        $prompt = 'Case: delete an item';
+        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        break;
+      default:
+        $prompt = 'ERROR: no value for switch' . PHP_EOL .
+                  'Sorry for the trouble.<br />' . PHP_EOL .
+                  'TYPO3 Caddy<br />' . PHP_EOL .
+                __METHOD__ . ' (' . __LINE__ . ')';
+        die( $prompt );
+        break;        
+    }
+      // SWITCH : add, update, delete
+    
+    return;
   }  
   
  /* quantityCheckMinMaxItemMax( ) : Checks, if the maximum quantity is within the limit.
@@ -941,53 +990,53 @@ class tx_caddy_session
   */
   private function quantityCheckMinMaxItems( $product )
   {
-      // SWITCH : add an item or update items quantity
-    switch( true )
-    {
-      case( $this->pObj->gpvar['puid'] ):
-          // add an item
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: add an item';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        $product = $this->quantityCheckMinMaxItemsAddMax( $product );
-        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
-        break;
-      case( $this->pObj->piVars['qty'] ):
-          // update items quantity
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: update quantity';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-          // DRS
+//      // SWITCH : add an item or update items quantity
+//    switch( true )
+//    {
+//      case( $this->pObj->gpvar['puid'] ):
+//          // add an item
+//          // DRS
+//        if( $this->drs->drsCalc )
+//        {
+//          $prompt = 'Case: add an item';
+//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+//        }
+//          // DRS
+//        $product = $this->quantityCheckMinMaxItemsAddMax( $product );
+//        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
+//        break;
+//      case( $this->pObj->piVars['qty'] ):
+//          // update items quantity
+//          // DRS
+//        if( $this->drs->drsCalc )
+//        {
+//          $prompt = 'Case: update quantity';
+//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+//        }
+//          // DRS
         $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
         $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
-        break;
-      case( $this->pObj->piVars['del'] ):
-          // update items quantity after delete
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: update quantity after delete';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
-        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
-        break;
-      default:
-        $prompt = 'ERROR: no value for switch' . PHP_EOL .
-                  'Sorry for the trouble.<br />' . PHP_EOL .
-                  'TYPO3 Caddy<br />' . PHP_EOL .
-                __METHOD__ . ' (' . __LINE__ . ')';
-        die( $prompt );
-        break;        
-    }
+//        break;
+//      case( $this->pObj->piVars['del'] ):
+//          // update items quantity after delete
+//          // DRS
+//        if( $this->drs->drsCalc )
+//        {
+//          $prompt = 'Case: update quantity after delete';
+//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+//        }
+//          // DRS
+//        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
+//        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
+//        break;
+//      default:
+//        $prompt = 'ERROR: no value for switch' . PHP_EOL .
+//                  'Sorry for the trouble.<br />' . PHP_EOL .
+//                  'TYPO3 Caddy<br />' . PHP_EOL .
+//                __METHOD__ . ' (' . __LINE__ . ')';
+//        die( $prompt );
+//        break;        
+//    }
       // SWITCH : add an item or update items quantity
     
     return $product;
