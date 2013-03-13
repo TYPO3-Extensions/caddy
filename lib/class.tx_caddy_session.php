@@ -777,49 +777,6 @@ class tx_caddy_session
   */
   private function quantityCheckMinMax( $product )
   {
-    switch( true )
-    {
-      case( $this->pObj->gpvar['puid'] ):
-var_dump( __METHOD__, __LINE__, 'add', $this->pObj->gpvar );
-          // add an item
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: add an item';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-        break;
-      case( $this->pObj->piVars['qty'] ):
-var_dump( __METHOD__, __LINE__, 'qty', $this->pObj->piVars );
-          // update items quantity
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: update quantity';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
-      case( $this->pObj->piVars['del'] ):
-var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
-          // update items quantity after delete
-          // DRS
-        if( $this->drs->drsCalc )
-        {
-          $prompt = 'Case: update quantity after delete';
-          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
-      default:
-        $prompt = 'ERROR: no value for switch' . PHP_EOL .
-                  'Sorry for the trouble.<br />' . PHP_EOL .
-                  'TYPO3 Caddy<br />' . PHP_EOL .
-                __METHOD__ . ' (' . __LINE__ . ')';
-        die( $prompt );
-        break;        
-    }
-
     unset( $product['error']['itemsMin'] );
     unset( $product['error']['itemsMax'] );
 
