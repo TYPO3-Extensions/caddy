@@ -911,6 +911,7 @@ class tx_caddy_session
     {
       case( $product['qty'] < $product['min'] ):
         $product['qty'] = $product['min'];
+        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
         $llKey          = 'caddy_ll_error_min';
         $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
