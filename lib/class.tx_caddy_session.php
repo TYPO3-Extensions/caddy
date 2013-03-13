@@ -788,7 +788,8 @@ class tx_caddy_session
     $product = $this->quantityCheckMinMaxItemMin( $product );
 
       // Checks the min and max limit depending on the caddy (plugin/flexform)
-    $product = $this->quantityCheckMinMaxItems( $product );
+    $product = $this->quantityCheckMinMaxItemsMax( $product );
+    $product = $this->quantityCheckMinMaxItemsMin( $product );
 
     return $product;
   }  
@@ -977,301 +978,8 @@ class tx_caddy_session
 
     return $product;
   }
-  
- /* quantityCheckMinMaxItems( ) : Checks min and max limits depending on the caddy (plugin/flexform)
-  *                               If a limit is passed over, quantities will updated and there will be 
-  *                               error prompts near the items.
-  *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxItems( $product )
-  {
-//      // SWITCH : add an item or update items quantity
-//    switch( true )
-//    {
-//      case( $this->pObj->gpvar['puid'] ):
-//          // add an item
-//          // DRS
-//        if( $this->drs->drsCalc )
-//        {
-//          $prompt = 'Case: add an item';
-//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-//        }
-//          // DRS
-//        $product = $this->quantityCheckMinMaxItemsAddMax( $product );
-//        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
-//        break;
-//      case( $this->pObj->piVars['qty'] ):
-//          // update items quantity
-//          // DRS
-//        if( $this->drs->drsCalc )
-//        {
-//          $prompt = 'Case: update quantity';
-//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-//        }
-//          // DRS
-        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
-        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
-//        break;
-//      case( $this->pObj->piVars['del'] ):
-//          // update items quantity after delete
-//          // DRS
-//        if( $this->drs->drsCalc )
-//        {
-//          $prompt = 'Case: update quantity after delete';
-//          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-//        }
-//          // DRS
-//        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
-//        $product = $this->quantityCheckMinMaxItemsUpdateMin( $product );
-//        break;
-//      default:
-//        $prompt = 'ERROR: no value for switch' . PHP_EOL .
-//                  'Sorry for the trouble.<br />' . PHP_EOL .
-//                  'TYPO3 Caddy<br />' . PHP_EOL .
-//                __METHOD__ . ' (' . __LINE__ . ')';
-//        die( $prompt );
-//        break;        
-//    }
-      // SWITCH : add an item or update items quantity
-    
-    return $product;
-  }
-  
- /* quantityCheckMinMaxItemsAddMax( ) : Checks max limit depending on the caddy (plugin/flexform)
-  *                                     while adding an item into the caddy.
-  *                                     If the limit is passed over, quantity will decreased and 
-  *                                     an error prompt will be near the item.
-  *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxItemsAddMax( $product )
-  { 
-      // RETURN : any item is added
-    if( empty( $this->pObj->gpvar['puid'] ) )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'Any gpvar[puid] is given. Maximum limit for all items isn\'t checked.';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : any item is added
-    
-      // Get max limit for quantity of all items
-    $itemsQuantityMax = $this->pObj->flexform->originMax;   
 
-      // RETURN : max quantity for all items is unlimited
-    if( empty( $itemsQuantityMax ) )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'No maximum limit is given in the plugin/flexform. Maximum limit for all items won\'t checked.';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : max quantity for all items is unlimited
-  
-      // Get current items quantity
-//    $itemsQuantity  = $this->getQuantityItems( )
-//                    + $this->pObj->gpvar['qty']
-//                    ;
-    $itemsQuantity = $this->quantityGet( );
-
-//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMax );
-
-      // RETURN : limit for max quantity for all items isn't passed
-    if( $itemsQuantity <= $itemsQuantityMax )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'Limit for all items isn\'t overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : limit for max quantity for all items isn't passed
-
-      // Limit for max quantity for all items is passed
-      // DRS
-    if( $this->drs->drsCalc )
-    {
-      $prompt = 'Limit for all items is overrun: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMax;
-      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-      // Get the overrun quantity
-    $itemsQuantityOverrun = $itemsQuantity
-                          - $itemsQuantityMax
-                          ;
-    
-//var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
-      // Decrease quantity of the current product
-    $quantity = $product['qty']
-              - $itemsQuantityOverrun
-              ;
-    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
-    
-      // DRS
-    if( $this->drs->drsCalc )
-    {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
-              . 'will setup to #' . $product['qty'];
-      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-      // DIE  : Decreased quantity is below zero
-    if( $product['qty'] < 0 )
-    {
-      $prompt = 'ERROR: product quantity is below zero: ' . $product['qty'] . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-      // DIE  : Decreased quantity is below zero
-
-      // Set the error prompt
-    $llKey    = 'caddy_ll_error_itemsMax';
-    $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
-    $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
-    $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
-    $product['error']['itemsMax'] = $llPrompt;
-      // Set the error prompt
-
-//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
-
-    return $product;
-  }
-  
- /* quantityCheckMinMaxItemsAddMin( ) : Checks min limit depending on the caddy (plugin/flexform)
-  *                                     while adding an item into the caddy.
-  *                                     If the limit is passed over, quantity will increased and 
-  *                                     an error prompt will be near the item.
-  *
-  * @param	array         $product  : the current product
-  * @return	array         $product  : the current or the updated product
-  * @access private
-  * @version 2.0.0
-  * @since 2.0.0
-  */
-  private function quantityCheckMinMaxItemsAddMin( $product )
-  { 
-      // RETURN : any item is added
-    if( empty( $this->pObj->gpvar['puid'] ) )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'Any gpvar[puid] is given. Minimum limit for all items isn\'t checked.';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : any item is added
-    
-      // Get min limit for quantity of all items
-    $itemsQuantityMin = $this->pObj->flexform->originMin;   
-
-      // RETURN : min quantity for all items is unlimited
-    if( empty( $itemsQuantityMin ) )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'No minimum limit is given in the plugin/flexform. Minimum limit for all items won\'t checked.';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : min quantity for all items is unlimited
-  
-      // Get current items quantity
-//    $itemsQuantity  = $this->getQuantityItems( )
-//                    + $this->pObj->gpvar['qty']
-//                    ;
-    $itemsQuantity = $this->quantityGet( );
-
-//var_dump( __METHOD__, __LINE__, $itemsQuantity, $itemsQuantityMin );
-
-      // RETURN : limit for min quantity for all items isn't passed
-    if( $itemsQuantity >= $itemsQuantityMin )
-    {
-        // DRS
-      if( $this->drs->drsCalc )
-      {
-        $prompt = 'Limit for all items isn\'t undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      return $product;
-    }
-      // RETURN : limit for min quantity for all items isn't passed
-
-      // Limit for min quantity for all items is passed
-      // DRS
-    if( $this->drs->drsCalc )
-    {
-      $prompt = 'Limit for all items is undercut: Items #' . $itemsQuantity . ', limit #' . $itemsQuantityMin;
-      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-      // Get the undercut quantity
-    $itemsQuantityUndercut  = $itemsQuantityMin
-                            - $itemsQuantity
-                            ;
-    
-//var_dump( __METHOD__, __LINE__, $itemsQuantityUndercut );
-      // Increase quantity of the current product
-    $quantity = $product['qty']
-              + $itemsQuantityUndercut
-              ;
-    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
-    
-      // DRS
-    if( $this->drs->drsCalc )
-    {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') ' 
-              . 'will setup to #' . $product['qty'];
-      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-      
-      // Set the error prompt
-    $llKey    = 'caddy_ll_error_itemsMin';
-    $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
-    $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
-    $llPrompt = sprintf( $llPrompt, $itemsQuantityMin );
-    $product['error']['itemsMin'] = $llPrompt;
-      // Set the error prompt
-
-//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMin );
-
-    return $product;
-  }
-  
- /* quantityCheckMinMaxItemsUpdateMax( )  : Checks max limit depending on the caddy (plugin/flexform)
+ /* quantityCheckMinMaxItemsMax( )  : Checks max limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
   *                                         If the limit is passed over, quantity will decreased and 
   *                                         an error prompt will be near the item.
@@ -1284,7 +992,7 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityCheckMinMaxItemsUpdateMax( $product )
+  private function quantityCheckMinMaxItemsMax( $product )
   { 
     $itemsQuantity = 0;
     
@@ -1305,7 +1013,6 @@ class tx_caddy_session
   
       // Get current quantity of all items
     $itemsQuantity = $this->quantityGet( );
-//var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
 
       // RETURN : limit for max quantity for all items isn't passed
     if( $itemsQuantity <= $itemsQuantityMax )
@@ -1354,19 +1061,6 @@ class tx_caddy_session
     }
       // DRS
       
-//      // Decrease quantity of the current product (piVars)
-////    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-//    $this->pObj->piVars['qty'] = $product['qty'];
-//    
-//      // Update quantity to 1, if quantity is below 1
-//    if( $product['qty'] < 1 )
-//    {
-//      $product['qty'] = 1;
-////      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
-//      $this->pObj->piVars['qty'] = 1  ;
-//    }
-//      // Update quantity to 1, if quantity is below 1
-
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMax';
     $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
@@ -1375,12 +1069,10 @@ class tx_caddy_session
     $product['error']['itemsMax'] = $llPrompt;
       // Set the error prompt
 
-//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMax );
-
     return $product;
   }
   
- /* quantityCheckMinMaxItemsUpdateMin( )  : Checks min limit depending on the caddy (plugin/flexform)
+ /* quantityCheckMinMaxItemsMin( )  : Checks min limit depending on the caddy (plugin/flexform)
   *                                         while items are updating
   *                                         If the limit is undercut, quantity will increased and 
   *                                         an error prompt will be near the item.
@@ -1393,7 +1085,7 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityCheckMinMaxItemsUpdateMin( $product )
+  private function quantityCheckMinMaxItemsMin( $product )
   { 
     $itemsQuantity = 0;
     
@@ -1414,7 +1106,6 @@ class tx_caddy_session
   
       // Get current quantity of all items
     $itemsQuantity = $this->quantityGet( );
-//var_dump( __METHOD__, __LINE__, $this->pObj->piVars, $itemsQuantity, $product );
 
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
@@ -1459,10 +1150,6 @@ class tx_caddy_session
     }
       // DRS
       
-//      // Increase quantity of the current product (piVars)
-////    $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-//    $this->pObj->piVars['qty'] = $product['qty'];
-    
       // Set the error prompt
     $llKey    = 'caddy_ll_error_itemsMin';
     $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
@@ -1470,8 +1157,6 @@ class tx_caddy_session
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMin );
     $product['error']['itemsMin'] = $llPrompt;
       // Set the error prompt
-
-//var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $itemsQuantity, $itemsQuantityMin );
 
     return $product;
   }
