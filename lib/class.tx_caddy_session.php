@@ -1518,6 +1518,9 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
   { 
     $quantity = 0; 
 
+    $quantity = ( int ) $this->pObj->gpvar['qty']; 
+var_dump( __METHOD__, __LINE__, $quantity );
+
     $products = $this->productsGet( );
 
     foreach( ( array ) $products as $product )
@@ -1528,9 +1531,6 @@ var_dump( __METHOD__, __LINE__, 'del', $this->pObj->piVars );
     }
 var_dump( __METHOD__, __LINE__, $quantity );
 
-    $quantity = $this->pObj->gpvar['qty']; 
-var_dump( __METHOD__, __LINE__, $quantity );
-die( );
     return $quantity;
   }
   
