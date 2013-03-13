@@ -775,7 +775,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
           // DRS
           // limit is overrun
         $product['qty'] = $product['max'];
-        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_max';
         $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -842,7 +843,8 @@ var_dump( __METHOD__, __LINE__, 'quantityCheckMinMax( )' );
         }
           // DRS
         $product['qty'] = $product['min'];
-        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+//        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
+        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_min';
         $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
