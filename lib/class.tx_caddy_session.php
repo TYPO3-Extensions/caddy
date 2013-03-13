@@ -706,11 +706,11 @@ class tx_caddy_session
     switch( true )
     {
       case( $this->pObj->gpvar['puid'] ):
-        $product = $this->quantityCheckMinMaxItemsMin( $product );
-        $product = $this->quantityCheckMinMaxItemsMax( $product );
+        $product = $this->quantityCheckMinMaxItemsAddMin( $product );
+        $product = $this->quantityCheckMinMaxItemsAddMax( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
-        $product = $this->quantityCheckMinMaxItemsMax2( $product );
+        $product = $this->quantityCheckMinMaxItemsUpdateMax( $product );
         break;
       default:
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
@@ -726,7 +726,7 @@ class tx_caddy_session
     return $product;
   }
   
- /* quantityCheckMinMaxItemsMin( )  :
+ /* quantityCheckMinMaxItemsAddMin( )  :
   *
   * @param	array
   * @return	array
@@ -734,7 +734,7 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityCheckMinMaxItemsMin( $product )
+  private function quantityCheckMinMaxItemsAddMin( $product )
   { 
     return $product;
 
@@ -758,7 +758,7 @@ class tx_caddy_session
     return $product;
   }
   
- /* quantityCheckMinMaxItemsMax( )  :
+ /* quantityCheckMinMaxItemsAddMax( )  :
   *
   * @param	array
   * @return	array
@@ -766,7 +766,7 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityCheckMinMaxItemsMax( $product )
+  private function quantityCheckMinMaxItemsAddMax( $product )
   { 
 
       // RETURN : any item is added
@@ -825,7 +825,7 @@ class tx_caddy_session
     return $product;
   }
   
- /* quantityCheckMinMaxItemsMax2( )  :
+ /* quantityCheckMinMaxItemsUpdateMax( )  :
   *
   * @param	array
   * @return	array
@@ -833,7 +833,7 @@ class tx_caddy_session
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityCheckMinMaxItemsMax2( $product )
+  private function quantityCheckMinMaxItemsUpdateMax( $product )
   { 
     $itemsQuantity = 0;
     
@@ -851,8 +851,6 @@ class tx_caddy_session
                       + $value;
     }
 
-var_dump( __METHOD__, __LINE__, $this->pObj->piVars['qty'], $itemsQuantity );
-
       // RETURN : max quantity for all items isn't overrun
     if( $itemsQuantity <= $itemsQuantityMax )
     {
@@ -864,7 +862,6 @@ var_dump( __METHOD__, __LINE__, $this->pObj->piVars['qty'], $itemsQuantity );
                           - $itemsQuantityMax
                           ;
     
-var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     $product['qty'] = $product['qty']
                     - $itemsQuantityOverrun;
     
@@ -873,7 +870,7 @@ var_dump( __METHOD__, __LINE__, $itemsQuantityOverrun );
     if( $product['qty'] < 1 )
     {
       $product['qty'] = 1;
-      $this->pObj->piVars['qty'][$product['puid']] = 1;
+      $this->pObj->piVars['qty'][$product['puid']] = 1  ;
     }
     if( $product['qty'] < 0 )
     {
