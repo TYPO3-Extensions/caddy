@@ -1359,9 +1359,9 @@ class tx_caddy_session
         $quantity = $this->quantityGetUpdate( );
         break;
       case( $this->pObj->piVars['del'] ):
+        $quantity = $this->quantityGetDelete( );
         break;
       default:
-        $quantity = $this->quantityGetDelete( );
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
                   'Sorry for the trouble.<br />' . PHP_EOL .
                   'TYPO3 Caddy<br />' . PHP_EOL .
@@ -1370,12 +1370,6 @@ class tx_caddy_session
         break;        
     }
 
-    foreach( ( array ) $this->pObj->piVars['qty'] as $value )
-    {
-      $quantity = $itemsQuantity 
-                + $value;
-    }
-    
     return $quantity;
   }
   
