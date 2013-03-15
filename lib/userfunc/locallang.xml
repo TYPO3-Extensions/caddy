@@ -247,14 +247,14 @@
         Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
       ]]></label>
       <label index="pmSubjectReceiverMarkerWo"><![CDATA[
-        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER### to
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###
         in das Betreff-Feld des Empf&auml;ngers im Powermail-Formular!<br />
-        Der Betreff enth&auml;lt ohne den Marker kein Bestellnummer.
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
       ]]></label>
       <label index="pmSubjectSenderMarkerWo"><![CDATA[
-        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER### to
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###
         in das Betreff-Feld des Absenders im Powermail-Formular!<br />
-        Der Betreff enth&auml;lt ohne den Marker kein Bestellnummer.
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
       ]]></label>
       <label index="pmThanksMarkerWo"><![CDATA[
         Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker 
