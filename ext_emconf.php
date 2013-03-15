@@ -11,7 +11,7 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Caddy - the Shopping Cart',
+	'title' => 'Caddy - your Shopping Cart',
 	'description' => 'Caddy ...',
 	'category' => 'plugin',
 	'shy' => 0,

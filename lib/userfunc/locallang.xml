@@ -191,8 +191,8 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="dbTableEmpty"><![CDATA[
-        Die Typoscript-Eigenscgaft db.table ist leer.<br />
-        Bitte gebe die Tabelle an, die die Produkte f&uumlR Caddy enth&auml;t.<br />
+        Die Typoscript-Eigenschaft db.table ist leer.<br />
+        Bitte gebe die Tabelle an, die die Produkte f&uuml;r Caddy enth&auml;lt.<br />
         Siehe: Constant Editor > CADDY - DATABASE > table name
       ]]></label>
       <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
@@ -229,12 +229,17 @@
       ]]></label>
       <label index="pmSenderMarkerWo"><![CDATA[
         Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
-        Feld E-Mail-Text f&uuml;r den Absnder in das Powermail Formular ein!<br />
+        Feld E-Mail-Text f&uuml;r den Absender in das Powermail Formular ein!<br />
         E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
       ]]></label>
       <label index="pmSenderMarkerWiWtcart"><![CDATA[
         Der E-Mail-Text im Absender-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
         Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmThanksMarkerWo"><![CDATA[
+        Der Marker f&uuml;r das L&ouml;schen der Session fehlt! Bitte f&uuml;ge den Marker 
+        ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
+        Ohne den Marker wird die Session nicht gel&ouml;scht.
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
