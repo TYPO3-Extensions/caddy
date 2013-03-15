@@ -49,7 +49,7 @@
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF draft: delivery order</label>
       <label index="paths.invoice">PDF draft: invoice</label>
-      <label index="paths.terms"><![CDATA[PDF file: Terms & Conditions]]></label>
+      <label index="paths.terms"><![CDATA[PDF draft: Terms & Conditions]]></label>
       <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">List of allowed IP. Please add your current IP, if you like to see a result in the frontend.</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
@@ -102,7 +102,7 @@
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF-Vorlage: Lieferschein</label>
       <label index="paths.invoice">PDF-Vorlage: Rechnung</label>
-      <label index="paths.terms">PDF-Datei: AGB</label>
+      <label index="paths.terms">PDF-Vorlage: AGB</label>
       <label index="sdefCsvallowedip">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
       <label index="sdefReport">Check it!-Bericht</label>
