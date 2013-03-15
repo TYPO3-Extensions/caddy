@@ -748,6 +748,7 @@ class tx_caddy_powermail extends tslib_pibase
     $this->initMarkerSender( );
     $this->initMarkerSenderWtcart( );
     $this->initMarkerSubjectReceiver( );
+    $this->initMarkerSubjectSender( );
     $this->initMarkerThanks( );
   }
 
