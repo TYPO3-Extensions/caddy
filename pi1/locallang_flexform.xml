@@ -88,7 +88,7 @@
       <label index="invoice">Rechnungsadresse</label>
       <label index="invoice.company">Firma (Feld von Powermail)</label>
       <label index="invoice.firstName">Vorname (Feld von Powermail)</label>
-      <label index="invoice.lastName">Naxchname (Feld von Powermail)</label>
+      <label index="invoice.lastName">Nachname (Feld von Powermail)</label>
       <label index="invoice.address">Straße (Feld von Powermail)</label>
       <label index="invoice.zip">PLZ (Feld von Powermail)</label>
       <label index="invoice.city">Stadt (Feld von Powermail)</label>
