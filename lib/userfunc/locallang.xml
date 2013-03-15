@@ -69,7 +69,7 @@
       <label index="pmThanksMarkerWo"><![CDATA[
         No caddy clear session marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### to
         the response text field in the powermail form!<br />
-        The caddy session won't cleaned up without this marker.
+        The caddy session won't cleaned up without this marker and the order form can't send!
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         There isn't any powermail form at the current page.<br />
@@ -259,7 +259,7 @@
       <label index="pmThanksMarkerWo"><![CDATA[
         Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker 
         ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
-        Ohne den Marker wird die Session nicht gel&ouml;scht.
+        Ohne diesen Marker wird die Session nicht gel&ouml;scht und das Bestellformular kann nicht versendet werden.
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
