@@ -94,22 +94,27 @@ class tx_caddy_powermail extends tslib_pibase
 
   public  $drsUserfunc = false;
 
-  public  $fieldFfConfirm      = null;
-  public  $fieldFfMailreceiver = null;
-  public  $fieldFfMailsender   = null;
-  public  $fieldFfThanks       = null;
-  public  $fieldFormCss        = null;
-  public  $fieldUid            = null;
-  public  $fieldTitle          = null;
+  public  $fieldFfConfirm         = null;
+  public  $fieldFfMailreceiver    = null;
+  public  $fieldFfMailsender      = null;
+  public  $fieldFfSubjectReceiver = null;
+  public  $fieldFfSubjectSender   = null;
+  public  $fieldFfThanks          = null;
+  public  $fieldFormCss           = null;
+  public  $fieldUid               = null;
+  public  $fieldTitle             = null;
 
-  public  $markerReceiver       = null;
-  public  $markerReceiverWtcart = null;
-  public  $markerSender         = null;
-  public  $markerSenderWtcart   = null;
-  public  $markerThanks         = null;
-  private $markerTsCaddy        = '###POWERMAIL_TYPOSCRIPT_CADDY###';
-  private $markerTsThanks       = '###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION###';
-  private $markerTsWtcart       = '###POWERMAIL_TYPOSCRIPT_CART###';
+  public  $markerReceiver         = null;
+  public  $markerReceiverWtcart   = null;
+  public  $markerSender           = null;
+  public  $markerSenderWtcart     = null;
+  public  $markerSubjectReceiver  = null;
+  public  $markerSubjectSender    = null;
+  public  $markerThanks           = null;
+  private $markerTsCaddy          = '###POWERMAIL_TYPOSCRIPT_CADDY###';
+  private $markerTsOrdernumber    = '###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###';
+  private $markerTsThanks         = '###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION###';
+  private $markerTsWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
 
     // Current GET parameter
   private $paramGet  = null;
@@ -507,12 +512,14 @@ class tx_caddy_powermail extends tslib_pibase
       // DRS
 
     $arrResult = $this->initFields( $row );
-    $this->fieldFfConfirm       = $arrResult['ffConfirm'];
-    $this->fieldFfMailreceiver  = $arrResult['ffMailreceiver'];
-    $this->fieldFfMailsender    = $arrResult['ffMailsender'];
-    $this->fieldFfThanks        = $arrResult['ffThanks'];
-    $this->fieldTitle           = $arrResult['title'];
-    $this->fieldUid             = $arrResult['uid'];
+    $this->fieldFfConfirm         = $arrResult['ffConfirm'];
+    $this->fieldFfMailreceiver    = $arrResult['ffMailreceiver'];
+    $this->fieldFfMailsender      = $arrResult['ffMailsender'];
+    $this->fieldFfSubjectReceiver = $arrResult['ffSubjectReceiver'];
+    $this->fieldFfSubjectSender   = $arrResult['ffSubjectSender'];
+    $this->fieldFfThanks          = $arrResult['ffThanks'];
+    $this->fieldTitle             = $arrResult['title'];
+    $this->fieldUid               = $arrResult['uid'];
 
       // DRS
     if( $this->pObj->drs->drsPowermail )
@@ -657,27 +664,33 @@ class tx_caddy_powermail extends tslib_pibase
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
-        $pmFfConfirm      = $pmRecord['tx_powermail_confirm'];
-        $pmFfMailsender   = $pmRecord['tx_powermail_mailsender'];
-        $pmFfMailreceiver = $pmRecord['tx_powermail_mailreceiver'];
-        $pmFfThanks       = $pmRecord['tx_powermail_thanks'];         
+        $pmFfConfirm          = $pmRecord['tx_powermail_confirm'];
+        $pmFfMailreceiver     = $pmRecord['tx_powermail_mailreceiver'];
+        $pmFfMailsender       = $pmRecord['tx_powermail_mailsender'];
+        $pmFfSubjectReceiver  = $pmRecord['tx_powermail_subject_r'];
+        $pmFfSubjectSender    = $pmRecord['tx_powermail_subject_s'];
+        $pmFfThanks           = $pmRecord['tx_powermail_thanks'];         
         break;
       case( $this->versionInt < 3000000 ):
       default:
-        $pmFlexform       = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
-        $pmFfConfirm      = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
-        $pmFfMailsender   = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.body']['vDEF'];
-        $pmFfMailreceiver = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.body']['vDEF'];
-        $pmFfThanks       = $pmFlexform['data']['main']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
+        $pmFlexform           = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
+        $pmFfConfirm          = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
+        $pmFfMailreceiver     = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.body']['vDEF'];
+        $pmFfMailsender       = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.body']['vDEF'];
+        $pmFfSubjectReceiver  = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.subject']['vDEF'];
+        $pmFfSubjectSender    = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.subject']['vDEF'];
+        $pmFfThanks           = $pmFlexform['data']['main']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
         break;
     }
 
-    $arrReturn['uid']             = $pmUid;
-    $arrReturn['title']           = $pmTitle;
-    $arrReturn['ffConfirm']       = $pmFfConfirm;
-    $arrReturn['ffMailsender']    = $pmFfMailsender;
-    $arrReturn['ffMailreceiver']  = $pmFfMailreceiver;
-    $arrReturn['ffThanks']        = $pmFfThanks;
+    $arrReturn['uid']               = $pmUid;
+    $arrReturn['title']             = $pmTitle;
+    $arrReturn['ffConfirm']         = $pmFfConfirm;
+    $arrReturn['ffMailreceiver']    = $pmFfMailreceiver;
+    $arrReturn['ffMailsender']      = $pmFfMailsender;
+    $arrReturn['ffSubjectReceiver'] = $pmFfSubjectReceiver;
+    $arrReturn['ffSubjectSender']   = $pmFfSubjectSender;
+    $arrReturn['ffThanks']          = $pmFfThanks;
 
     return $arrReturn;
   }
@@ -734,6 +747,7 @@ class tx_caddy_powermail extends tslib_pibase
     $this->initMarkerReceiverWtcart( );
     $this->initMarkerSender( );
     $this->initMarkerSenderWtcart( );
+    $this->initMarkerSubjectReceiver( );
     $this->initMarkerThanks( );
   }
 
@@ -814,6 +828,46 @@ class tx_caddy_powermail extends tslib_pibase
     if( ! ( $pos === false ) )
     {
       $this->markerSenderWtcart = true;
+    }
+  }
+
+ /**
+  * initMarkerSubjectReceiver( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerSubjectReceiver( )
+  {
+    $this->markerSubjectReceiver = false;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfSubjectReceiver, $this->markerTsOrdernumber );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerSubjectReceiver = true;
+    }
+  }
+
+ /**
+  * initMarkerSubjectSender( ):
+  *
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initMarkerSubjectSender( )
+  {
+    $this->markerSubjectSender = false;
+
+      // Current IP is an element in the list
+    $pos = strpos( $this->fieldFfSubjectSender, $this->markerTsOrdernumber );
+    if( ! ( $pos === false ) )
+    {
+      $this->markerSubjectSender = true;
     }
   }
 

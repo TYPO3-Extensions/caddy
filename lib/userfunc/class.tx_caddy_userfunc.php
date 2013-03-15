@@ -363,6 +363,21 @@ class tx_caddy_userfunc
         return null;
     }
     
+    unset( $deliveryorderCompany );
+    unset( $deliveryorderFirstname );
+    unset( $deliveryorderLastname );
+    unset( $deliveryorderAddress );
+    unset( $deliveryorderZip );
+    unset( $deliveryorderCity );
+    unset( $deliveryorderCountry );
+    unset( $invoiceCompany );
+    unset( $invoiceFirstname );
+    unset( $invoiceLastname );
+    unset( $invoiceAddress );
+    unset( $invoiceZip );
+    unset( $invoiceCity );
+    unset( $invoiceCountry );
+
       // RETURN prompt : there isn't any flexform form
     $prompt = '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
@@ -753,6 +768,28 @@ class tx_caddy_userfunc
       <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
           ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( ! $this->powermail->markerSubjectReceiver )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectReceiverMarkerWo' ) . '
+        </div>
+      </div>
+      ';
+    }
+    
+    if( ! $this->powermail->markerSubjectSender )
+    {
+      $prompt = $prompt . '
+      <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectSenderMarkerWo' ) . '
         </div>
       </div>
       ';
