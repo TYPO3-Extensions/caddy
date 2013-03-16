@@ -1856,7 +1856,6 @@ plugin.tx_caddy_pi1 {
           data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_linktotheshop
         }
       }
-      noTrimWrap = || &raquo;|
     }
   }
 }
