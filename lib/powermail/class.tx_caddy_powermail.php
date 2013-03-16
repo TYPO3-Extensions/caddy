@@ -463,6 +463,238 @@ class tx_caddy_powermail extends tslib_pibase
 
   /***********************************************
   *
+  * Get fields
+  *
+  **********************************************/
+
+ /**
+  * getFieldById( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getFieldById( $uid )
+  {
+    switch( $this->fieldFfConfirm )
+    {
+      case( false ):
+        $value = $this->getFieldByIdFromPost( $uid );
+        break;
+      case( true ):
+      default:
+        $value = $this->getFieldByIdFromSession( $uid );
+        break;
+        
+    }
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromPost( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromPost( $uid )
+  {
+    $value = null;
+    
+    if( empty( $uid ) )
+    {
+      $prompt = 'FATAL ERROR: getFieldByIdFromPost( $uid ) is called with an empty uid<br />
+                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+                TYPO3 extension: ' . $this->extKey;
+      die( $prompt );
+    }
+    
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $value = $this->getFieldByIdFromPost1x( $uid );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $value = $this->getFieldByIdFromPost2x( $uid );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromPost1x( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromPost1x( $uid )
+  {
+    $value = null;
+    
+    $uidVersion1 = 'uid' . $uid;
+    $value = $this->paramPost[$uidVersion1];
+      // DRS
+    if( $this->pObj->drs->drsError )
+    {
+      if( ! isset( $this->paramPost[$uidVersion1] ) )
+      {
+        $prompt = 'POST[' . $uidVersion1 . '] isn\'t set!';
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+      }
+    }
+      // DRS
+
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromPost2x( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromPost2x( $uid )
+  {
+    $value = null;
+    unset( $uid );
+    
+    $prompt = 'TODO: powermail 2.x<br />
+      Please maintain the code!<br />
+      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );
+
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromSession( ) :  
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromSession( $uid )
+  {
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $value = $this->getFieldByIdFromSession1x( $uid );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $value = $this->getFieldByIdFromSession2x( $uid );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromSession1x( ) :  
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromSession1x( $uid )
+  {
+    $value = null;
+    
+    $sessionData = $this->sessionData( );
+
+    $uidVersion1 = 'uid' . $uid;
+    $value = $sessionData[$uidVersion1];
+
+      // DRS
+    if( $this->pObj->drs->drsError )
+    {
+      if( ! isset( $sessionData[$uidVersion1] ) )
+      {
+        $prompt = 'SESSION[' . $uidVersion1 . '] isn\'t set!';
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+      }
+    }
+      // DRS    
+    
+    return $value;
+  }
+
+ /**
+  * getFieldByIdFromSession2x( ) :  
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function getFieldByIdFromSession2x( $uid )
+  {
+    $value = null;
+    unset( $uid );
+    
+    $prompt = 'TODO: powermail 2.x<br />
+      Please maintain the code!<br />
+      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );
+
+    return $value;
+  }
+
+
+
+  /***********************************************
+  *
   * Init
   *
   **********************************************/
@@ -1213,76 +1445,11 @@ class tx_caddy_powermail extends tslib_pibase
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
-        $prompt = 'TODO: powermail 2.x<br />
+        $prompt = 'TODO: powermail 1.x<br />
           Please maintain the code!<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
-        break;
-      case( $this->versionInt < 3000000 ):
-        $prompt = 'TODO: powermail 2.x<br />
-          Please maintain the code!<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt >= 3000000 ):
-      default:
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-    }
-
-    return $value;
-  }
-
- /**
-  * paramPostById( ) :  Return the value of the given uid from the POST params.
-  *                     The uid is the uid only - without any prefix!
-  *
-  * @param      integer     $uid    : The uid of the value, which should returned
-  * @return	string      $value  : The value of the given uid
-  * @access     public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function paramPostById( $uid )
-  {
-    $value = null;
-    
-    if( empty( $uid ) )
-    {
-      $prompt = 'FATAL ERROR: paramPostById( $uid ) is called with an empty uid<br />
-                Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-                TYPO3 extension: ' . $this->extKey;
-      die( $prompt );
-    }
-    
-    switch( true )
-    {
-      case( $this->versionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt < 2000000 ):
-        $uidVersion1 = 'uid' . $uid;
-        $value = $this->paramPost[$uidVersion1];
-          // DRS
-        if( $this->pObj->drs->drsError )
-        {
-          if( ! isset( $this->paramPost[$uidVersion1] ) )
-          {
-            $prompt = 'POST[' . $uidVersion1 . '] isn\'t set!';
-            t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
-          }
-        }
-          // DRS
         break;
       case( $this->versionInt < 3000000 ):
         $prompt = 'TODO: powermail 2.x<br />
@@ -1688,14 +1855,14 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 /**
  * sessionData( ):
  *
- * @return    string        The content that should be displayed on the website
+ * @return    array        $sessionData : the session data
  * @access  public
  * @version 2.0.0
  * @since   2.0.0
  */
   public function sessionData(  )
   {
-    $content = null; 
+    $sessionData = null; 
 
     switch( true )
     {
@@ -1707,10 +1874,10 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
-        $content = $this->sessionDataVers1( );
+        $sessionData = $this->sessionDataVers1( );
         break;
       case( $this->versionInt < 3000000 ):
-        $content = $this->sessionDataVers2( );
+        $sessionData = $this->sessionDataVers2( );
         break;
       case( $this->versionInt >= 3000000 ):
       default:
@@ -1722,7 +1889,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         break;
     }
 
-    return $content;
+    return $sessionData;
   }
 
 /**

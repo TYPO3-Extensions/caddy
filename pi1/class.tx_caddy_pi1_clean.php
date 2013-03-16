@@ -313,7 +313,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderAddress( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderAddress;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -328,7 +328,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCity( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCity;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -343,7 +343,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCompany( )
   {                                  
     $pmUid  = $this->pObj->flexform->deliveryorderCompany;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -358,7 +358,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderCountry( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderCountry;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -373,7 +373,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderFirstname( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -388,7 +388,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderLastname( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderLastname;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -403,7 +403,7 @@ class tx_caddy_pi1_clean
   private function getPmFieldDeliveryorderZip( )
   {
     $pmUid  = $this->pObj->flexform->deliveryorderZip;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -418,8 +418,8 @@ class tx_caddy_pi1_clean
   private function getPmFieldEmailCustomerEmail( )
   {
     $pmUid  = $this->pObj->flexform->emailCustomerEmail;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
-var_dump( __METHOD__, __LINE__, $pmUid, $value );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+
     return $value;
   }
 
@@ -434,7 +434,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceAddress( )
   {
     $pmUid  = $this->pObj->flexform->invoiceAddress;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -449,7 +449,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceCity( )
   {
     $pmUid  = $this->pObj->flexform->invoiceCity;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -464,7 +464,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceCompany( )
   {                                  
     $pmUid  = $this->pObj->flexform->invoiceCompany;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -479,7 +479,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceCountry( )
   {
     $pmUid  = $this->pObj->flexform->invoiceCountry;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -494,7 +494,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceFirstname( )
   {
     $pmUid  = $this->pObj->flexform->invoiceFirstname;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -509,7 +509,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceLastname( )
   {
     $pmUid  = $this->pObj->flexform->invoiceLastname;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -524,7 +524,7 @@ var_dump( __METHOD__, __LINE__, $pmUid, $value );
   private function getPmFieldInvoiceZip( )
   {
     $pmUid  = $this->pObj->flexform->invoiceZip;
-    $value  = $this->pObj->powermail->paramPostById( $pmUid );
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
     
