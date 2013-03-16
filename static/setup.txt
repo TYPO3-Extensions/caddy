@@ -48,15 +48,15 @@ plugin.tx_caddy_pi1 {
     }
   }
   dynamicTyposcript {
-    linktotheshop = TEXT
-    linktotheshop {
+    caddy_ts_linktotheshop = TEXT
+    caddy_ts_linktotheshop {
       value = <h1>123 ABC</h1>
     }
   }
   caddy_ts_ {
     linktotheshop = TEXT
     linktotheshop {
-      value = <h1>123 ABC</h1>
+      value = <h1>456 DEF</h1>
     }
   }
     // template, currency properties, service attributes

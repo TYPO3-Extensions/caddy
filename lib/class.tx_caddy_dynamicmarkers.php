@@ -51,6 +51,10 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
           'CADDY_TS_', // prefix for HTML template part
           'caddy_ts_' // prefix for typoscript part
   );
+  public $typoscriptmarker_prefix = array(// prefix for automatic typoscriptmarker
+          'CADDY_TS_', // prefix for HTML template part
+          'dynamicTyposcript' // prefix for typoscript part
+  );
 
     // Function main() to replace typoscript- and locallang markers
   function main( $content, $pObj ) 
@@ -116,6 +120,9 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     // Function DynamicTyposcriptMarker() to get automaticly a marker from typoscript
   function DynamicTyposcriptMarker( $array ) 
   {
+var_dump(__METHOD__, __LINE__, $array );
+
+    $marker = strtolower( $this->typoscriptmarker_prefix[0] . $array[1] );
     if( $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )] )
     { // If there is a fitting entry in typoscript
       $string = $this->cObj->cObjGetSingle
