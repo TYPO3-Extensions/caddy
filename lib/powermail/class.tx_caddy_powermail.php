@@ -1273,15 +1273,16 @@ class tx_caddy_powermail extends tslib_pibase
       case( $this->versionInt < 2000000 ):
         $uidVersion1 = 'uid' . $uid;
         $value = $this->paramPost[$uidVersion1];
-  // DRS
-var_dump( __METHOD__, __LINE__, $this->paramPost );
-if( $this->pObj->drs->drsError )
-{
-  var_dump( __METHOD__, __LINE__, '################################################################################' );
-  $prompt = 'The powermail form isn\'t sent, nothing to clean up.';
-  t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-}
-  // DRS
+          // DRS
+        if( $this->pObj->drs->drsError )
+        {
+          if( ! isset( $this->paramPost[$uidVersion1] ) )
+          {
+            $prompt = 'POST[' . $uidVersion1 . '] isn\'t set!';
+            t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+          }
+        }
+          // DRS
         break;
       case( $this->versionInt < 3000000 ):
         $prompt = 'TODO: powermail 2.x<br />
