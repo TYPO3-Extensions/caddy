@@ -135,6 +135,7 @@ class tx_caddy_pi1_flexform
     $this->sheetDeliveryorder ( );
     $this->sheetInvoice( );
     $this->sheetOrigin( );
+    $this->sheetPaths( );
       // Sheets
 
   }
