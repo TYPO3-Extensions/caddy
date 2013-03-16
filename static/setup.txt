@@ -253,7 +253,7 @@ plugin.tx_caddy_pi1 {
 
       delete = IMAGE
       delete {
-        file = EXT:caddy/files/img/icon_delete.gif
+        file = EXT:caddy/files/img/delete_100_02.gif
         altText = delete product
         titleText.data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_delete
         params = class="caddy_delete"
