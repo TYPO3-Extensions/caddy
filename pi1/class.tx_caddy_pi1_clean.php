@@ -419,6 +419,7 @@ class tx_caddy_pi1_clean
   {
     $pmUid  = $this->pObj->flexform->emailCustomerEmail;
     $value  = $this->pObj->powermail->paramPostById( $pmUid );
+var_dump( __METHOD__, __LINE__, $pmUid, $value );
     return $value;
   }
 
