@@ -47,18 +47,6 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
-  _HTMLMARKER {
-    linktotheshop = TEXT
-    linktotheshop {
-      value = <h1>123 ABC</h1>
-    }
-  }
-  caddy_ts_ {
-    linktotheshop = TEXT
-    linktotheshop {
-      value = <h1>456 DEF</h1>
-    }
-  }
     // template, currency properties, service attributes
   main = 
   main {
@@ -1847,6 +1835,32 @@ plugin.tx_caddy_pi1 {
   }
 }
   // plugin.tx_caddy_pi1.pdf
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1._HTMLMARKER
+
+plugin.tx_powermail_pi1 {
+    // HTML marker
+  _HTMLMARKER =
+  _HTMLMARKER {
+      // Replace the marker _HTMLMARKER_LINTOTHESHOP
+    linktotheshop = TEXT
+    linktotheshop {
+      data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_linktotheshop
+      typolink {
+        parameter = {$plugin.quick_shop.pages.root}
+        title {
+          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_linktotheshop
+        }
+      }
+      noTrimWrap = || &raquo;|
+    }
+  }
+}
+  // plugin.tx_caddy_pi1._HTMLMARKER
 
 
 

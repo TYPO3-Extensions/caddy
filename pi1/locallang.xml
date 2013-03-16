@@ -20,6 +20,7 @@
       <label index="caddy_ll_invoice">Invoice</label>
       <label index="caddy_ll_invoicenumber">Invoice number</label>
       <label index="caddy_ll_item">Item</label>
+      <label index="caddy_ll_linktotheshop">Forward with shopping</label>
       <label index="caddy_ll_minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="caddy_ll_optionsnet">Service- and Shipping costs</label>
       <label index="caddy_ll_order">Order</label>
@@ -71,6 +72,7 @@
       <label index="caddy_ll_invoice">Rechnung</label>
       <label index="caddy_ll_invoicenumber">Rechnungsnummer</label>
       <label index="caddy_ll_item">Artikel</label>
+      <label index="caddy_ll_linktotheshop">Weiter einkaufen</label>
       <label index="caddy_ll_minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="caddy_ll_optionsnet">Service- und Versandkosten</label>
       <label index="caddy_ll_order">Bestellung</label>
