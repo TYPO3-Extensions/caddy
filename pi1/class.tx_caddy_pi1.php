@@ -878,7 +878,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray['sendCustomerDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
+        $sesArray['sendCustomerDeliveryorder'] = $this->flexform->pathsDeliveryorder;
         break;
       default:
         unset( $sesArray['sendCustomerDeliveryorder'] );
@@ -903,7 +903,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray['sendCustomerInvoice'] = $this->flexform->emailInvoicePath;
+        $sesArray['sendCustomerInvoice'] = $this->flexform->pathsInvoice;
         break;
       default:
         unset( $sesArray['sendCustomerInvoice'] );
@@ -928,7 +928,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'customer' ):
       case( 'all' ):
-        $sesArray['sendCustomerTerms'] = $this->flexform->emailTermsPath;
+        $sesArray['sendCustomerTerms'] = $this->flexform->pathsTerms;
         break;
       default:
         unset( $sesArray['sendCustomerTerms'] );
@@ -968,7 +968,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray['sendVendorDeliveryorder'] = $this->flexform->emailDeliveryorderPath;
+        $sesArray['sendVendorDeliveryorder'] = $this->flexform->pathsDeliveryorder;
         break;
       default:
         unset( $sesArray['sendVendorDeliveryorder'] );
@@ -993,7 +993,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray['sendVendorInvoice'] = $this->flexform->emailInvoicePath;
+        $sesArray['sendVendorInvoice'] = $this->flexform->pathsInvoice;
         break;
       default:
         unset( $sesArray['sendVendorInvoice'] );
@@ -1018,7 +1018,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       case( 'vendor' ):
       case( 'all' ):
-        $sesArray['sendVendorTerms'] = $this->flexform->emailTermsPath;
+        $sesArray['sendVendorTerms'] = $this->flexform->pathsTerms;
         break;
       default:
         unset( $sesArray['sendVendorTerms'] );

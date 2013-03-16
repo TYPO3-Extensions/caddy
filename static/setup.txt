@@ -1984,7 +1984,7 @@ plugin.tx_powermail_pi1 {
   email {
     recipient_mail {
       addAttachment {
-          // Caddy: Invoice
+          // Caddy: PDF attachments to the vendor
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendToVendor
@@ -1996,7 +1996,7 @@ plugin.tx_powermail_pi1 {
     }
     sender_mail {
       addAttachment {
-          // Caddy: Invoice
+          // Caddy: PDF attachments to the customer
         45967 = USER
         45967 {
           userFunc = tx_caddy_powermail->sendToCustomer

@@ -72,11 +72,8 @@ class tx_caddy_pi1_flexform
     // [email]
   public $emailCustomerEmail      = null;
   public $emailDeliveryorderMode  = null;
-  public $emailDeliveryorderPath  = null;
   public $emailInvoiceMode        = null;
-  public $emailInvoicePath        = null;
   public $emailTermsMode          = null;
-  public $emailTermsPath          = null;
     // [email]
 
     // [invoice]
@@ -96,6 +93,12 @@ class tx_caddy_pi1_flexform
   public $originInvoice         = null;
   public $originOrder           = null;
     // [origin]
+
+    // [paths]
+  public $pathsDeliveryorder  = null;
+  public $pathsInvoice        = null;
+  public $pathsTerms          = null;
+    // [paths]
 
     // [sdef]
     // [boolean] enable DRS
@@ -215,30 +218,30 @@ class tx_caddy_pi1_flexform
     $this->emailDeliveryorderMode = $this->zzFfValue( $sheet, $field );
       // emailDeliveryorderMode
 
-      // emailDeliveryorderPath
+      // pathsDeliveryorder
     $field                        = 'deliveryorderPath';
-    $this->emailDeliveryorderPath = $this->zzFfValue( $sheet, $field );
-      // emailDeliveryorderPath
+    $this->pathsDeliveryorder = $this->zzFfValue( $sheet, $field );
+      // pathsDeliveryorder
 
       // emailInvoiceMode
     $field                        = 'invoiceMode';
     $this->emailInvoiceMode       = $this->zzFfValue( $sheet, $field );
       // emailInvoiceMode
 
-      // emailInvoicePath
+      // pathsInvoice
     $field                        = 'invoicePath';
-    $this->emailInvoicePath       = $this->zzFfValue( $sheet, $field );
-      // emailInvoicePath
+    $this->pathsInvoice       = $this->zzFfValue( $sheet, $field );
+      // pathsInvoice
 
       // emailTermsMode
     $field                        = 'termsMode';
     $this->emailTermsMode         = $this->zzFfValue( $sheet, $field );
       // emailTermsMode
 
-      // emailTermsPath
+      // pathsTerms
     $field                        = 'termsPath';
-    $this->emailTermsPath         = $this->zzFfValue( $sheet, $field );
-      // emailTermsPath
+    $this->pathsTerms         = $this->zzFfValue( $sheet, $field );
+      // pathsTerms
 
     return;
   }
@@ -328,6 +331,35 @@ class tx_caddy_pi1_flexform
     $field                      = 'order';
     $this->originOrder          = ( int ) $this->zzFfValue( $sheet, $field );
       // originOrder
+
+    return;
+  }
+
+/**
+ * sheetPaths( )  :
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function sheetPaths( )
+  {
+    $sheet = 'paths';
+
+      // pathsDeliveryorder
+    $field                    = 'deliveryorder';
+    $this->pathsDeliveryorder = $this->zzFfValue( $sheet, $field );
+      // pathsDeliveryorder
+
+      // pathsInvoice
+    $field                    = 'invoice';
+    $this->pathsInvoice       = $this->zzFfValue( $sheet, $field );
+      // pathsInvoice
+
+      // pathsTerms
+    $field                    = 'terms';
+    $this->pathsTerms         = $this->zzFfValue( $sheet, $field );
+      // pathsTerms
 
     return;
   }

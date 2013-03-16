@@ -1328,9 +1328,21 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
-    $paths[] = $this->sendToCustomerDeliveryorder( );
-    $paths[] = $this->sendToCustomerInvoice( );
-    $paths[] = $this->sendToCustomerTerms( );
+    $path = $this->sendToCustomerDeliveryorder( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
+    $path = $this->sendToCustomerInvoice( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
+    $path = $this->sendToCustomerTerms( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
     
     if( empty( $paths ) ) 
     {
@@ -1499,9 +1511,21 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
-    $paths[] = $this->sendToVendorDeliveryorder( );
-    $paths[] = $this->sendToVendorInvoice( );
-    $paths[] = $this->sendToVendorTerms( );
+    $path = $this->sendToVendorDeliveryorder( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
+    $path = $this->sendToVendorInvoice( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
+    $path = $this->sendToVendorTerms( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
     
     if( empty( $paths ) ) 
     {
@@ -1534,6 +1558,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function sendToVendorDeliveryorder( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+var_dump( __METHOD__, __LINE__, $sesArray );
     $path     = $sesArray['sendVendorDeliveryorder'];
     
     if( empty ( $path ) )
