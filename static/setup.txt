@@ -47,6 +47,12 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
+  dynamicTyposcript {
+    linktotheshop = TEXT
+    linktotheshop {
+      value = <h1>123 ABC</h1>
+    }
+  }
     // template, currency properties, service attributes
   main = 
   main {
