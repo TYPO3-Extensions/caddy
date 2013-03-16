@@ -53,7 +53,7 @@ plugin.tx_caddy_pi1 {
       value = <h1>123 ABC</h1>
     }
   }
-  caddy_ts {
+  caddy_ts_ {
     linktotheshop = TEXT
     linktotheshop {
       value = <h1>123 ABC</h1>
