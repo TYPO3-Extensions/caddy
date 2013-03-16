@@ -73,6 +73,10 @@ plugin.tx_caddy_pi1 {
       margin: 0; 
       padding: 0; 
     }
+    div.caddy_linktotheshop {
+      padding: 0 2em 0 0;
+      text-align:right;
+    }
     /* table based cart */
     table.caddy_cart_table { 
       border:1px solid #336699; 
