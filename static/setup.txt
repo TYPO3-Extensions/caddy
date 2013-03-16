@@ -47,7 +47,7 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
-  HTML_TS_ {
+  _HTMLMARKER {
     linktotheshop = TEXT
     linktotheshop {
       value = <h1>123 ABC</h1>
