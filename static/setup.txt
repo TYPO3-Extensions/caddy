@@ -1842,7 +1842,7 @@ plugin.tx_caddy_pi1 {
   //
   // plugin.tx_caddy_pi1._HTMLMARKER
 
-plugin.tx_powermail_pi1 {
+plugin.tx_caddy_pi1 {
     // HTML marker
   _HTMLMARKER =
   _HTMLMARKER {
