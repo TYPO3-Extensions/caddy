@@ -1823,7 +1823,7 @@ plugin.tx_caddy_pi1 {
               content < styles.content.get
               content {
                 select {
-                  pidInList = 446
+                  pidInList = {$plugin.quick_shop.pages.terms}
                 }
               }
             }

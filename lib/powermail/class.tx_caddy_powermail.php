@@ -1735,7 +1735,6 @@ class tx_caddy_powermail extends tslib_pibase
   private function sendToVendorDeliveryorder( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-var_dump( __METHOD__, __LINE__, $sesArray );
     $path     = $sesArray['sendVendorDeliveryorder'];
     
     if( empty ( $path ) )
