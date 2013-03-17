@@ -7,64 +7,64 @@ plugin.tx_caddy_pi1 {
     #caddy_shipping {
       padding: 1em 0 0 4.3em;
     }
-    div.caddy_cart_header {
+    div.caddy_header {
       font-weight:bold; 
       margin-bottom:5px; 
       padding:0 5px 5px 5px; 
     }
-    div.caddy_cart_footer { 
+    div.caddy_footer { 
       padding:1em 0 0 5px; 
     }
-    div.caddy_cart_product { 
+    div.caddy_product { 
       padding:5px; 
     }
-    div.caddy_cart_col { 
+    div.caddy_col { 
       display:block; 
       float:left; 
     }
-    div.caddy_cart_col_strong {
+    div.caddy_col_strong {
       font-weight: bold;
     }
-    div.caddy_cart_col1 { 
+    div.caddy_col1 { 
       height: 1.8em;
       width:4em; 
     }
-    div.caddy_cart_footer .caddy_cart_col1 { 
+    div.caddy_footer .caddy_col1 { 
       text-align:center; 
     }
-    div.caddy_cart_col2 { 
+    div.caddy_col2 { 
       width:12em; 
     }
-    div.caddy_cart_col2_4 { 
+    div.caddy_col2_4 { 
       width:37em; 
     }
-    div.caddy_cart_col3 { 
+    div.caddy_col3 { 
       width:20em; 
     }
-    div.caddy_cart_col4 { 
+    div.caddy_col4 { 
       text-align:right;
       width:5em; 
     }
-    div.caddy_cart_col5 { 
+    div.caddy_col5 { 
       text-align:right;
       width:7em; 
     }
-    div.caddy_cart_col6 { 
+    div.caddy_col6 { 
       text-align:right;
       width:2em; 
     }
-    div.caddy_cart_error { 
+    div.caddy_error { 
       background:#F00;
       color:#FFF; 
       font-weight:bold; 
       padding:.2em .6em;
     }
-    div.caddy_cart_mincart { 
+    div.caddy_mincart { 
       color:#e10004; 
       font-weight:bold; 
       margin:5px 0; 
     }
-    div.caddy_cart_col input { 
+    div.caddy_col input { 
       text-align:right;
       width:2em; 
     }
@@ -78,12 +78,12 @@ plugin.tx_caddy_pi1 {
       text-align:right;
     }
     /* table based cart */
-    table.caddy_cart_table { 
+    table.caddy_table { 
       border:1px solid #336699; 
       margin:0 0 10px 0; 
       width:100%; 
     }
-    table.caddy_cart_table th { 
+    table.caddy_table th { 
       font-weight:normal; 
       background:#cedbde; 
       color:#000; 
@@ -91,20 +91,20 @@ plugin.tx_caddy_pi1 {
       line-height:30px; 
       padding:0 10px; 
     }
-    table.caddy_cart_table tbody td { 
+    table.caddy_table tbody td { 
       padding:5px 10px; 
       vertical-align:top; 
     }
-    table.caddy_cart_table tbody td input { 
+    table.caddy_table tbody td input { 
       width:20px; 
     }
-    table.caddy_cart_table tfoot td { 
+    table.caddy_table tfoot td { 
       background:#336699; 
       color:#fff; 
       padding:3px 10px 2px 10px; 
       text-align:right; 
     }
-    table.caddy_cart_table caddy_cart_right { 
+    table.caddy_table caddy_right { 
       text-align:right; 
     }
   )
