@@ -221,7 +221,7 @@ plugin.caddy {
   pdf.textColor.numberLine = #000
   # cat=caddy - pdf textcolor//107;          type=color;  label= Number order: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberOrder = #000
-  # cat=caddy - pdf textcolor//107;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//108;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.terms = #000
   # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.textColor.externalLinks = Click me!
