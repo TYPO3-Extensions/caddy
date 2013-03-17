@@ -109,8 +109,6 @@ plugin.caddy {
   pdf.caddy.width = 165
   # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
   pdf.caddy.fontsize = 10
-  # cat=caddy - pdf caddy//105;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.caddy.textColor = #000
   # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.caddy.externalLinks = Click me!
   # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -128,8 +126,6 @@ plugin.caddy {
   pdf.date.fontsize = 10
   # cat=caddy - pdf date//104; type=string; label= Date format: Format of the date. Examples: %Y-m-%d, %d. %M %Y
   pdf.date.strftime = %Y-%m-%d
-  # cat=caddy - pdf date//105;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.date.textColor = #000
   # cat=caddy - pdf date/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.date.externalLinks = Click me!
   # cat=caddy - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -148,11 +144,9 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//305; type=int+; label= Number position top: Position of the delivery number from the top margin in millimeters
   pdf.deliveryorder.number.y = 110
   # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
-  pdf.deliveryorder.number.fontsize = 24
+  pdf.deliveryorder.number.fontsize = 18
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
   pdf.deliveryorder.number.prefix = quick-shop-
-  # cat=caddy - pdf delivery order//307;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.deliveryorder.textColor = #000
   # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.deliveryorder.externalLinks = Click me!
   # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -171,11 +165,9 @@ plugin.caddy {
   # cat=caddy - pdf invoice//305; type=int+; label= Number position top: Position of the invoice number from the top margin in millimeters
   pdf.invoice.number.y = 110
   # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
-  pdf.invoice.number.fontsize = 24
+  pdf.invoice.number.fontsize = 18
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
   pdf.invoice.number.prefix = 
-  # cat=caddy - pdf invoice//307;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.invoice.textColor = #000
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.invoice.externalLinks = Click me!
   # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -183,8 +175,6 @@ plugin.caddy {
 
   # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number. Example : O-
   pdf.order.number.prefix = 
-  # cat=caddy - pdf order//307;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.order.textColor = #000
   # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.order.externalLinks = Click me!
   # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -200,29 +190,27 @@ plugin.caddy {
   pdf.terms.width = 165
   # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points
   pdf.terms.fontsize = 14
-  # cat=caddy - pdf terms//105;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.terms.textColor = #000
   # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.terms.externalLinks = Click me!
   # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.terms.sponsors = Click me!
 
   # cat=caddy - pdf textcolor//101;          type=color;  label= Address: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.address = #000
+  pdf.textColor.address = navy
   # cat=caddy - pdf textcolor//102;          type=color;  label= Caddy: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.caddy = #000
+  pdf.textColor.caddy = navy
   # cat=caddy - pdf textcolor//103;          type=color;  label= Date: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.date = #000
+  pdf.textColor.date = navy
   # cat=caddy - pdf textcolor//104;          type=color;  label= Number delivery order: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.numberDeliveryorder = #000
+  pdf.textColor.numberDeliveryorder = navy
   # cat=caddy - pdf textcolor//105;          type=color;  label= Number invoice: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.numberInvoice = #000
+  pdf.textColor.numberInvoice = navy
   # cat=caddy - pdf textcolor//106;          type=color;  label= Number line: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.numberLine = #000
+  pdf.textColor.numberLine = navy
   # cat=caddy - pdf textcolor//107;          type=color;  label= Number order: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.numberOrder = #000
+  pdf.textColor.numberOrder = navy
   # cat=caddy - pdf textcolor//108;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
-  pdf.textColor.terms = #000
+  pdf.textColor.terms = navy
   # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.textColor.externalLinks = Click me!
   # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
