@@ -702,6 +702,8 @@ class tx_caddy_session
         {
           $prompt = 'Case: add an item';
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+          $prompt = 'Quantity of current product is set to ' . $quantity;
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
         $this->pObj->gpvar['qty'] = $quantity;
         break;
@@ -711,6 +713,8 @@ class tx_caddy_session
         if( $this->drs->drsCalc )
         {
           $prompt = 'Case: update quantity';
+          t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+          $prompt = 'Quantity of current product is set to ' . $quantity;
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -906,13 +910,6 @@ class tx_caddy_session
           // DRS
           // limit is overrun
         $product['qty'] = $this->productSetQuantity( $product['max'], $product['puid'] );
-        if( isset( $this->pObj->gpvar['qty'] ) )
-        {
-          $this->pObj->gpvar['qty'] = $product['qty'];
-        }
-//        $product['qty'] = $product['max'];
-//        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-//        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_max';
         $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -981,13 +978,6 @@ class tx_caddy_session
           // DRS
 
         $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
-        if( isset( $this->pObj->gpvar['qty'] ) )
-        {
-          $this->pObj->gpvar['qty'] = $product['qty'];
-        }
-//        $product['qty'] = $product['min'];
-//        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
-//        $this->pObj->piVars['qty'] = $product['qty'];
         $llKey          = 'caddy_ll_error_min';
         $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -1244,7 +1234,17 @@ class tx_caddy_session
   private function quantityGetAdd( )
   {
       // Default value
-    $quantity = ( int ) $this->pObj->gpvar['qty'];
+    $quantityAdd = ( int ) $this->pObj->gpvar['qty'];
+    $quantityAll = 0
+    $quantitySum = 0;
+    
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity of current product is: ' . $quantity;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
       // Get products
     $products = $this->productsGet( );
@@ -1255,9 +1255,9 @@ class tx_caddy_session
       case( ! empty( $products ) ):
         foreach( ( array ) $products as $product )
         {
-          $quantity = $quantity
-                    + $product['qty']
-                    ;
+          $quantityAll  = $quantityAll
+                        + $product['qty']
+                        ;
         }
         break;
       case( empty( $products ) ):
@@ -1266,6 +1266,17 @@ class tx_caddy_session
         break;
     }
       // SWITCH : products or any product
+
+    $quantitySum  = $quantityAll
+                  + $quantityAdd
+                  ;
+      // DRS
+    if( $this->drs->drsCalc )
+    {
+      $prompt = 'Quantity: all #' . $quantityAll . ' + add #' . $quantityAdd . ' = sum #' . $quantitySum;
+      t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
     return $quantity;
   }
