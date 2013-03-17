@@ -265,24 +265,24 @@ class tx_caddy_pdf extends tslib_pibase
     }
       // FOREACH  : overall item
 
-    $subpartArray['###CADDY_LL_PRODUCTSNET###'] = $this->pi_getLL('caddy_ll_productsnet');
-    $subpartArray['###CADDY_LL_OPTIONSNET###']  = $this->pi_getLL('caddy_ll_optionsnet');
-    $subpartArray['###CADDY_LL_TAX###']         = $this->pi_getLL('caddy_ll_tax');
-    $subpartArray['###CADDY_LL_SUMGROSS###']    = $this->pi_getLL('caddy_ll_sumgross');
-
-      // Payment label
-    $subpartArray['###CADDY_LL_PAYMENTNET###']  = $this->pi_getLL('caddy_ll_paymentnet');
+//    $subpartArray['###CADDY_LL_PRODUCTSNET###'] = $this->pi_getLL('caddy_ll_productsnet');
+//    $subpartArray['###CADDY_LL_OPTIONSNET###']  = $this->pi_getLL('caddy_ll_optionsnet');
+//    $subpartArray['###CADDY_LL_TAX###']         = $this->pi_getLL('caddy_ll_tax');
+//    $subpartArray['###CADDY_LL_SUMGROSS###']    = $this->pi_getLL('caddy_ll_sumgross');
+//
+//      // Payment label
+//    $subpartArray['###CADDY_LL_PAYMENTNET###']  = $this->pi_getLL('caddy_ll_paymentnet');
       // Payment option label
     $subpartArray['###PAYMENTOPTIONLABEL###']   = $this->caddy->getPaymentOptionLabelBySessionId( );
       // Payment option label
 
-      // Shipping label
-    $subpartArray['###CADDY_LL_SHIPPINGNET###'] = $this->pi_getLL('caddy_ll_shippingnet');
+//      // Shipping label
+//    $subpartArray['###CADDY_LL_SHIPPINGNET###'] = $this->pi_getLL('caddy_ll_shippingnet');
       // Shipping option label
     $subpartArray['###SHIPPINGOPTIONLABEL###']  = $this->caddy->getShippingOptionLabelBySessionId( );
 
-      // Special label
-    $subpartArray['###CADDY_LL_SPECIALNET###']  = $this->pi_getLL('caddy_ll_specialnet');
+//      // Special label
+//    $subpartArray['###CADDY_LL_SPECIALNET###']  = $this->pi_getLL('caddy_ll_specialnet');
       // Special option label
     $subpartArray['###SPECIALOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
 
