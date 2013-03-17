@@ -325,8 +325,6 @@ class tx_caddy_session
       }
     }
 
-    $product = $this->quantityCheckMinMax( $product );
-
     if( isset( $product['price'] ) )
     {
       $product['price'] = str_replace( ',', '.', $product['price'] ); // comma to point
@@ -348,10 +346,13 @@ class tx_caddy_session
     // add product to the session array
     $sesArray['products'][ ] = $product;
 
+    $product = $this->quantityCheckMinMax( $product );
+
     // generate session with session array
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
+
   }
 
  /**
