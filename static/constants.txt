@@ -138,7 +138,7 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
   pdf.deliveryorder.address.y = 55
   # cat=caddy - pdf delivery order//204; type=int+; label= Address font-size: Font-size of the receiving address in points
-  pdf.deliveryorder.address.fontsize = 12
+  pdf.deliveryorder.address.fontsize = 10
   # cat=caddy - pdf delivery order//304; type=int+; label= Number position left: Position of the delivery number from the left margin in millimeters
   pdf.deliveryorder.number.x = 25
   # cat=caddy - pdf delivery order//305; type=int+; label= Number position top: Position of the delivery number from the top margin in millimeters
@@ -159,7 +159,7 @@ plugin.caddy {
   # cat=caddy - pdf invoice//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
   pdf.invoice.address.y = 55
   # cat=caddy - pdf invoice//204; type=int+; label= Address font-size: Font-size of the receiving address in points
-  pdf.invoice.address.fontsize = 12
+  pdf.invoice.address.fontsize = 10
   # cat=caddy - pdf invoice//304; type=int+; label= Number position left: Position of the invoice number from the left margin in millimeters
   pdf.invoice.number.x = 25
   # cat=caddy - pdf invoice//305; type=int+; label= Number position top: Position of the invoice number from the top margin in millimeters

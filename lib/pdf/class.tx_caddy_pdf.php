@@ -992,6 +992,8 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfInit( $srceFile )
   {
     $tcpdf = new FPDI( );
+    $width  = 0;
+    $tcpdf->SetLineWidth( $width );
     $tcpdf->AddPage( );
 
     $tcpdf->setSourceFile( $srceFile );
@@ -1000,9 +1002,13 @@ class tx_caddy_pdf extends tslib_pibase
 
     $author = $this->pi_getLL( 'caddy_ll_docauthor' );
     $title  = $this->pi_getLL( 'caddy_ll_doctitle' );
+    $perc   = 90;
+    $width  = 1;
 
     $tcpdf->SetAuthor( $author );
     $tcpdf->SetTitle( $title );
+    $tcpdf->setFontStretching( $perc );
+    $tcpdf->SetLineWidth( $width );
 //    $tcpdf->SetSubject('TYPO3 Caddy Order Subject');
 //    $tcpdf->SetKeywords('TYPO3, caddy');
 
