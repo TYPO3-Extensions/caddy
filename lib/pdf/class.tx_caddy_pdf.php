@@ -152,6 +152,9 @@ class tx_caddy_pdf extends tslib_pibase
                   );
       // render the marker
 
+    $htmlContent  = $this->dynamicMarkers->main( $htmlContent, $this);
+    $htmlContent  = preg_replace( '|###.*?###|i' , '&nbsp;', $htmlContent );
+
       // write the HTML content
     $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
     $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
@@ -717,6 +720,9 @@ class tx_caddy_pdf extends tslib_pibase
     $this->caddy        = t3lib_div::makeInstance( 'tx_caddy' );
     $this->caddy->conf  = $this->conf;
     $this->caddy->cObj  = $this->cObj;
+
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
+    $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
 
     require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
