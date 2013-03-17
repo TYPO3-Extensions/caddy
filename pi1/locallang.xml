@@ -54,6 +54,7 @@
       <label index="caddy_ll_special_free_from">free special option from</label>
       <label index="caddy_ll_special_free_until">free special option until</label>
       <label index="caddy_ll_sumgross">Price (w tax)</label>
+      <label index="caddy_ll_tableheaderdelete">Remove</label>
       <label index="caddy_ll_tax">TAX</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
     </languageKey>
@@ -106,6 +107,7 @@
       <label index="caddy_ll_special_free_from">kostenfrei ab</label>
       <label index="caddy_ll_special_free_until">kostenfrei bis</label>
       <label index="caddy_ll_sumgross">Gesamtsumme (brutto)</label>
+      <label index="caddy_ll_tableheaderdelete">Entfernen</label>
       <label index="caddy_ll_tax">Mehrwertsteuer</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
     </languageKey>
