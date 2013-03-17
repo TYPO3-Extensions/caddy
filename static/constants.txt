@@ -207,6 +207,25 @@ plugin.caddy {
   # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.terms.sponsors = Click me!
 
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.address = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.caddy = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.date = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.numberDeliveryorder = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.numberInvoice = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.numberLine = #000
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.numberOrder = #000
+  # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.textColor.externalLinks = Click me!
+  # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.textColor.sponsors = Click me!
+
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
   # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
