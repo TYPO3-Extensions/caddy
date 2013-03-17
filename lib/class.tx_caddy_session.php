@@ -354,7 +354,7 @@ class tx_caddy_session
     if( $product['qty'] != $quantityBeforeTest )
     {
 var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
-      $this->productAdd( $product );
+//      $this->productAdd( $product );
     }
   }
 
