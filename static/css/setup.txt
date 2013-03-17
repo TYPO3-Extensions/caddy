@@ -90,6 +90,11 @@ plugin.tx_caddy_pi1 {
   position:relative;
   top:.1em;
     }
+    div.caddy_linktotheshop a,
+    div.caddy_linktotheshop a:link,
+    div.caddy_linktotheshop a:visited {
+      color:white;
+    }
     /* table based cart */
     table.caddy_table { 
       border:1px solid #336699; 
