@@ -1462,7 +1462,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdf.textColor.orderNumber}
+                textColor = {$plugin.caddy.pdf.textColor.numberInvoice}
               }
                 // label, prefix, ordernumber
               content = COA
@@ -1817,7 +1817,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdf.terms.textColor}
+                textColor = {$plugin.caddy.pdf.textColor.terms}
               }
                 // label, prefix, ordernumber
               content < styles.content.get

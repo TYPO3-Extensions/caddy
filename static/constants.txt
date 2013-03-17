@@ -207,20 +207,22 @@ plugin.caddy {
   # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.terms.sponsors = Click me!
 
-  # cat=caddy - pdf textcolor//101;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//101;          type=color;  label= Address: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.address = #000
-  # cat=caddy - pdf textcolor//102;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//102;          type=color;  label= Caddy: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.caddy = #000
-  # cat=caddy - pdf textcolor//103;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//103;          type=color;  label= Date: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.date = #000
-  # cat=caddy - pdf textcolor//104;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//104;          type=color;  label= Number delivery order: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberDeliveryorder = #000
-  # cat=caddy - pdf textcolor//105;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//105;          type=color;  label= Number invoice: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberInvoice = #000
-  # cat=caddy - pdf textcolor//106;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//106;          type=color;  label= Number line: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberLine = #000
-  # cat=caddy - pdf textcolor//107;          type=color;  label= Text color: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//107;          type=color;  label= Number order: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberOrder = #000
+  # cat=caddy - pdf textcolor//107;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.terms = #000
   # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.textColor.externalLinks = Click me!
   # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
