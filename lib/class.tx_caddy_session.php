@@ -354,13 +354,8 @@ class tx_caddy_session
     if( $product['qty'] != $quantityBeforeTest )
     {
 var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
+      $this->productAdd( $product );
     }
-
-    // generate session with session array
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-    // save session
-    $GLOBALS['TSFE']->storeSessionData( );
-
   }
 
  /**
