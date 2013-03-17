@@ -138,13 +138,13 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
   pdf.deliveryorder.address.y = 55
   # cat=caddy - pdf delivery order//204; type=int+; label= Address font-size: Font-size of the receiving address in points
-  pdf.deliveryorder.address.fontsize = 14
+  pdf.deliveryorder.address.fontsize = 12
   # cat=caddy - pdf delivery order//304; type=int+; label= Number position left: Position of the delivery number from the left margin in millimeters
   pdf.deliveryorder.number.x = 25
   # cat=caddy - pdf delivery order//305; type=int+; label= Number position top: Position of the delivery number from the top margin in millimeters
   pdf.deliveryorder.number.y = 110
   # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
-  pdf.deliveryorder.number.fontsize = 18
+  pdf.deliveryorder.number.fontsize = 24
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
   pdf.deliveryorder.number.prefix = quick-shop-
   # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
@@ -159,13 +159,13 @@ plugin.caddy {
   # cat=caddy - pdf invoice//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
   pdf.invoice.address.y = 55
   # cat=caddy - pdf invoice//204; type=int+; label= Address font-size: Font-size of the receiving address in points
-  pdf.invoice.address.fontsize = 14
+  pdf.invoice.address.fontsize = 12
   # cat=caddy - pdf invoice//304; type=int+; label= Number position left: Position of the invoice number from the left margin in millimeters
   pdf.invoice.number.x = 25
   # cat=caddy - pdf invoice//305; type=int+; label= Number position top: Position of the invoice number from the top margin in millimeters
   pdf.invoice.number.y = 110
   # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
-  pdf.invoice.number.fontsize = 18
+  pdf.invoice.number.fontsize = 24
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
   pdf.invoice.number.prefix = 
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
