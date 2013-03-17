@@ -716,13 +716,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.deliveryorder.address.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -849,14 +851,16 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = {$plugin.caddy.pdf.caddy.y}
               }
-                // family, size, style
+                // family, size, stretching, style
               font =
               font {
                   // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size = {$plugin.caddy.pdf.caddy.fontsize}
-                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
@@ -888,13 +892,15 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = {$plugin.caddy.pdf.date.y}
               }
-                // family, size, style
+                // family, size, stretching, style
               font =
               font {
                   // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
@@ -936,13 +942,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.deliveryorder.number.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -998,13 +1006,15 @@ plugin.tx_caddy_pi1 {
                     prioriCalc  = intval
                   }
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points, taken from caddy.fontsize
                   size = {$plugin.caddy.pdf.caddy.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1166,13 +1176,15 @@ plugin.tx_caddy_pi1 {
                     prioriCalc  = 1
                   }
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1263,13 +1275,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.invoice.address.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1364,13 +1378,15 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = {$plugin.caddy.pdf.caddy.y}
               }
-                // family, size, style
+                // family, size, stretching, style
               font =
               font {
                   // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size = {$plugin.caddy.pdf.caddy.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =
               }
@@ -1403,13 +1419,15 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = {$plugin.caddy.pdf.date.y}
               }
-                // family, size, style
+                // family, size, stretching, style
               font =
               font {
                   // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
@@ -1451,13 +1469,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.invoice.number.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.invoice.number.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1513,13 +1533,15 @@ plugin.tx_caddy_pi1 {
                     prioriCalc  = intval
                   }
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points, taken from caddy.fontsize
                   size = {$plugin.caddy.pdf.caddy.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1657,13 +1679,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.invoice.address.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }
@@ -1758,13 +1782,15 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from top in millimeter 
                 y = {$plugin.caddy.pdf.date.y}
               }
-                // family, size, style
+                // family, size, stretching, style
               font =
               font {
                   // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                 family = {$plugin.caddy.pdfGeneral.fontfamily}
                   // [Integer] Font size in points
                 size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                   // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                 style =  
               }
@@ -1806,13 +1832,15 @@ plugin.tx_caddy_pi1 {
                     // [INTEGER] Position from top in millimeter 
                   y = {$plugin.caddy.pdf.terms.y}
                 }
-                  // family, size, style
+                  // family, size, stretching, style
                 font =
                 font {
                     // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
                   family = {$plugin.caddy.pdfGeneral.fontfamily}
                     // [Integer] Font size in points
                   size  = {$plugin.caddy.pdf.terms.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
                     // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
                   style =  
                 }

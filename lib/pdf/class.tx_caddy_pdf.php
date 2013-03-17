@@ -992,8 +992,6 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfInit( $srceFile )
   {
     $tcpdf = new FPDI( );
-    $width  = 0;
-    $tcpdf->SetLineWidth( $width );
     $tcpdf->AddPage( );
 
     $tcpdf->setSourceFile( $srceFile );
@@ -1002,13 +1000,9 @@ class tx_caddy_pdf extends tslib_pibase
 
     $author = $this->pi_getLL( 'caddy_ll_docauthor' );
     $title  = $this->pi_getLL( 'caddy_ll_doctitle' );
-    $perc   = 90;
-    $width  = 0;
 
     $tcpdf->SetAuthor( $author );
     $tcpdf->SetTitle( $title );
-    $tcpdf->setFontStretching( $perc );
-    $tcpdf->SetLineWidth( $width );
 //    $tcpdf->SetSubject('TYPO3 Caddy Order Subject');
 //    $tcpdf->SetKeywords('TYPO3, caddy');
 
@@ -1071,6 +1065,35 @@ class tx_caddy_pdf extends tslib_pibase
     if( $this->pObj->drsUserfunc )
     {
       $prompt = 'SetFont( "' . $family . '", "' . $style . '", ' . $size . ' )';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    $this->tcpdfSetFontStretching( $font );
+  }
+
+ /**
+  * tcpdfSetFontStretching( ) : Set the font properties family, size and style
+  *
+  * @param	[type]		$$font: ...
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function tcpdfSetFontStretching( $font )
+  {
+    $perc  = ( int ) $this->zz_cObjGetSingle( $font['stretching'],  $font['stretching.'] );
+    if( $perc <= 0 )
+    {
+      $perc = 100;
+    }
+    $this->tcpdf->setFontStretching( $perc );
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $prompt = 'SetFontStretching( "' . $perc . ' )';
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
