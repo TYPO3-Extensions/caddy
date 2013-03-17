@@ -1006,6 +1006,10 @@ class tx_caddy_pdf extends tslib_pibase
 //    $tcpdf->SetSubject('TYPO3 Caddy Order Subject');
 //    $tcpdf->SetKeywords('TYPO3, caddy');
 
+      // remove default header/footer
+    $tcpdf->setPrintHeader( false );
+    $tcpdf->setPrintFooter( false );    
+
     return $tcpdf;
   }
 
