@@ -374,8 +374,11 @@ class tx_caddy_session
 
     // loop every product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
-    {
-      // Counter for condition
+    { 
+        // Reset error messages
+      unset( $sesArray['products'][$key]['error'] );
+        
+        // Counter for condition
       $int_counter = 0;
 
       // loop through conditions
