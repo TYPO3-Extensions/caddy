@@ -21,10 +21,11 @@ plugin.tx_caddy_pi1 {
     div.caddy_product div.caddy_col { 
       padding:.3em 0 0 0; 
     }
-    div.caddy_product div.caddy_col1,
-    div.caddy_product div.caddy_col6,
-    { 
+    div.caddy_product div.caddy_col1 { 
       padding:0; 
+    }
+    div.caddy_product div.caddy_col6 { 
+      padding: 0 0 0 1em;
     }
     div.caddy_col { 
       display:block; 
@@ -84,15 +85,15 @@ plugin.tx_caddy_pi1 {
     }
     div.caddy_linktotheshop,
     img.caddy_delete { 
-  background: -moz-linear-gradient(center top , #E67100 0%, #FF9933 50%, #FF8800 51%, #FFB366 100%) repeat scroll 0 0 transparent;
-  border: 0 none;
-  border-radius: .4em;
-  box-shadow: 0 .2em .4em 0 #AAA;
-  color: white;
-  cursor:pointer;
-  padding: 5px 20px;
-  position:relative;
-  top:.1em;
+      background: -moz-linear-gradient(center top , #E67100 0%, #FF9933 50%, #FF8800 51%, #FFB366 100%) repeat scroll 0 0 transparent;
+      border: 0 none;
+      border-radius: .4em;
+      box-shadow: 0 .2em .4em 0 #AAA;
+      color: white;
+      cursor:pointer;
+      padding: 5px 20px;
+      position:relative;
+      top:.1em;
     }
     div.caddy_linktotheshop {
       display:inline;
