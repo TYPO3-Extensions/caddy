@@ -299,32 +299,33 @@ class tx_caddy_session
     // check if this puid already exists and when delete it
     foreach( ( array ) $sesArray['products'] as $key => $value )
     { // one loop for every product
-      if( ! is_array( $value ) )
+      if( is_array( $value ) )
       {
-        continue;
-      }
-      // counter for condition. Every condition has to be true
-      $int_counter = 0;
+        // counter for condition. Every condition has to be true
+        $int_counter = 0;
 
-      // loop every condition
-      foreach( $arr_variant as $key_variant => $value_variant )
-      {
-        // condition fits
-        if( $value[$key_variant] == $value_variant )
+        // loop every condition
+        foreach( $arr_variant as $key_variant => $value_variant )
         {
-          $int_counter++;
+          // condition fits
+          if( $value[$key_variant] == $value_variant )
+          {
+            $int_counter++;
+          }
+        }
+        // loop every condition
+
+        // all conditions fit
+        if( $int_counter == count( $arr_variant ) )
+        {
+          // remove product
+          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
+          unset( $sesArray['products'][$key] );
         }
       }
-      // loop every condition
-
-      // all conditions fit
-      if( $int_counter == count( $arr_variant ) )
-      {
-        // remove product
-        $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
-        unset( $sesArray['products'][$key] );
-      }
     }
+
+    $product = $this->quantityCheckMinMax( $product );
 
     if( isset( $product['price'] ) )
     {
@@ -346,16 +347,11 @@ class tx_caddy_session
 
     // add product to the session array
     $sesArray['products'][ ] = $product;
+
     // generate session with session array
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-
-    $quantityBeforeTest = $product['qty'];
-    $product = $this->quantityCheckMinMax( $product );
-    if( $product['qty'] != $quantityBeforeTest )
-    {
-var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
-//      $this->productAdd( $product );
-    }
+    // save session
+    $GLOBALS['TSFE']->storeSessionData( );
   }
 
  /**
@@ -1131,7 +1127,7 @@ var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
       // RETURN : min quantity for all items is unlimited
 
       // Get current quantity of all items
-    $itemsQuantity = $this->quantityGet( );
+    $itemsQuantity = $this->quantityGet( $product );
 
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
@@ -1190,12 +1186,13 @@ var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
  /**
   * quantityGet( )  :
   *
+  * @param	array		$product  : the current product
   * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityGet( )
+  private function quantityGet( $product )
   {
     $quantity = 0;
 
@@ -1203,7 +1200,7 @@ var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
     switch( true )
     {
       case( $this->pObj->gpvar['puid'] ):
-        $quantity = $this->quantityGetAdd( );
+        $quantity = $this->quantityGetAdd( $product );
         break;
       case( $this->pObj->piVars['qty'] ):
         $quantity = $this->quantityGetUpdate( );
@@ -1226,15 +1223,16 @@ var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
  /**
   * quantityGetAdd( )  :
   *
+  * @param	array		$currProduct  : the current product
   * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityGetAdd( )
+  private function quantityGetAdd( $currProduct )
   {
       // Default value
-    $quantity = 0;
+    $quantity = $currProduct['qty'];
 
       // Get products
     $products = $this->productsGet( );
