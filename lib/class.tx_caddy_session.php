@@ -1127,7 +1127,7 @@ class tx_caddy_session
       // RETURN : min quantity for all items is unlimited
 
       // Get current quantity of all items
-    $itemsQuantity = $this->quantityGet( $product );
+    $itemsQuantity = $this->quantityGet( );
 
       // RETURN : limit for min quantity for all items isn't passed
     if( $itemsQuantity >= $itemsQuantityMin )
@@ -1186,13 +1186,12 @@ class tx_caddy_session
  /**
   * quantityGet( )  :
   *
-  * @param	array		$product  : the current product
   * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityGet( $product )
+  private function quantityGet( )
   {
     $quantity = 0;
 
@@ -1200,7 +1199,7 @@ class tx_caddy_session
     switch( true )
     {
       case( $this->pObj->gpvar['puid'] ):
-        $quantity = $this->quantityGetAdd( $product );
+        $quantity = $this->quantityGetAdd( );
         break;
       case( $this->pObj->piVars['qty'] ):
         $quantity = $this->quantityGetUpdate( );
@@ -1223,16 +1222,15 @@ class tx_caddy_session
  /**
   * quantityGetAdd( )  :
   *
-  * @param	array		$currProduct  : the current product
   * @return	integer		$quantity : the quantity of the current items
   * @access private
   * @version 2.0.0
   * @since 2.0.0
   */
-  private function quantityGetAdd( $currProduct )
+  private function quantityGetAdd( )
   {
       // Default value
-    $quantity = $currProduct['qty'];
+    $quantity = ( int ) $this->pObj->gpvar['qty'];
 
       // Get products
     $products = $this->productsGet( );
@@ -1250,7 +1248,7 @@ class tx_caddy_session
         break;
       case( empty( $products ) ):
       default:
-        $quantity = ( int ) $this->pObj->gpvar['qty'];
+        //$quantity = ( int ) $this->pObj->gpvar['qty'];
         break;
     }
       // SWITCH : products or any product
