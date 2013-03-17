@@ -1278,7 +1278,7 @@ class tx_caddy_session
     }
       // DRS
 
-    return $quantity;
+    return $quantitySum;
   }
 
 
