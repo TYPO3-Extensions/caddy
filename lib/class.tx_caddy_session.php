@@ -301,7 +301,10 @@ class tx_caddy_session
     { // one loop for every product
       if( is_array( $value ) )
       {
-        // counter for condition. Every condition has to be true
+          // Reset error messages
+        unset( $sesArray['products'][$key]['error'] );
+
+          // counter for condition. Every condition has to be true
         $int_counter = 0;
 
         // loop every condition
