@@ -73,22 +73,25 @@ plugin.tx_caddy_pi1 {
       margin: 0; 
       padding: 0; 
     }
-    div.caddy_linktotheshop {
-      padding: 0 2em 0 0;
-      text-align:right;
+    div.caddy_linktotheshop,
+    img.caddy_delete { 
   background: -moz-linear-gradient(center top , #E67100 0%, #FF9933 50%, #FF8800 51%, #FFB366 100%) repeat scroll 0 0 transparent;
   border: 0 none;
   border-radius: .4em;
   box-shadow: 0 .2em .4em 0 #AAA;
   color: white;
   cursor:pointer;
-  display:inline;
-  float:right;
-  font-family: Trebuchet MS,Geneva,Arial,Helvetica,Verdana,sans serif;
-  font-weight:bold;
   padding: 5px 20px;
   position:relative;
   top:.1em;
+    }
+    div.caddy_linktotheshop {
+      display:inline;
+      float:right;
+      font-family: Trebuchet MS,Geneva,Arial,Helvetica,Verdana,sans serif;
+      font-weight:bold;
+      padding: 0 2em 0 0;
+      text-align:right;
     }
     div.caddy_linktotheshop a,
     div.caddy_linktotheshop a:link,
