@@ -1003,7 +1003,7 @@ class tx_caddy_pdf extends tslib_pibase
     $author = $this->pi_getLL( 'caddy_ll_docauthor' );
     $title  = $this->pi_getLL( 'caddy_ll_doctitle' );
     $perc   = 90;
-    $width  = 1;
+    $width  = 0;
 
     $tcpdf->SetAuthor( $author );
     $tcpdf->SetTitle( $title );
