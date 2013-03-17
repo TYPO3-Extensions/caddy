@@ -992,7 +992,6 @@ class tx_caddy_pdf extends tslib_pibase
   private function tcpdfInit( $srceFile )
   {
     $tcpdf = new FPDI( );
-    $tcpdf->AddPage( );
 
     $tcpdf->setSourceFile( $srceFile );
     $tmplId = $tcpdf->importPage( 1 );
@@ -1009,6 +1008,8 @@ class tx_caddy_pdf extends tslib_pibase
       // remove default header/footer
     $tcpdf->setPrintHeader( false );
     $tcpdf->setPrintFooter( false );    
+
+    $tcpdf->AddPage( );
 
     return $tcpdf;
   }
