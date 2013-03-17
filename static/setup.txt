@@ -727,7 +727,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.deliveryorder.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
               content = COA
@@ -860,7 +860,7 @@ plugin.tx_caddy_pi1 {
                 style =
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
-              textColor = {$plugin.caddy.pdfGeneral.textColor}
+              textColor = {$plugin.caddy.pdf.caddy.textColor}
             }
           }
         }
@@ -899,7 +899,7 @@ plugin.tx_caddy_pi1 {
                 style =  
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
-              textColor = {$plugin.caddy.pdfGeneral.textColor}
+              textColor = {$plugin.caddy.pdf.date.textColor}
             }
               // label, prefix, ordernumber
             content = TEXT
@@ -947,7 +947,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.deliveryorder.textColor}
               }
                 // label, prefix, ordernumber
               content = COA
@@ -1009,7 +1009,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.deliveryorder.textColor}
               }
                 // ordernumber devider invoicenumber
               content = COA
@@ -1177,7 +1177,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.invoice.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
               content = COA
@@ -1274,7 +1274,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.invoice.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
               content = COA
@@ -1375,7 +1375,7 @@ plugin.tx_caddy_pi1 {
                 style =
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
-              textColor = {$plugin.caddy.pdfGeneral.textColor}
+              textColor = {$plugin.caddy.pdf.caddy.textColor}
             }
           }
         }
@@ -1414,7 +1414,7 @@ plugin.tx_caddy_pi1 {
                 style =  
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
-              textColor = {$plugin.caddy.pdfGeneral.textColor}
+              textColor = {$plugin.caddy.pdf.date.textColor}
             }
               // label, prefix, ordernumber
             content = TEXT
@@ -1462,7 +1462,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.invoice.textColor}
               }
                 // label, prefix, ordernumber
               content = COA
@@ -1524,7 +1524,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.deliveryorder.textColor}
               }
                 // ordernumber devider deliveryordernumber
               content = COA
@@ -1668,7 +1668,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.invoice.textColor}
               }
                 // Address: company, first name and last name, street, zip and city, country
               content = COA
@@ -1769,7 +1769,7 @@ plugin.tx_caddy_pi1 {
                 style =  
               }
                 // [String] color in HTML notation like #CC00CC or #FFF
-              textColor = {$plugin.caddy.pdfGeneral.textColor}
+              textColor = {$plugin.caddy.pdf.date.textColor}
             }
               // label, prefix, ordernumber
             content = TEXT
@@ -1817,7 +1817,7 @@ plugin.tx_caddy_pi1 {
                   style =  
                 }
                   // [String] color in HTML notation like #CC00CC or #FFF
-                textColor = {$plugin.caddy.pdfGeneral.textColor}
+                textColor = {$plugin.caddy.pdf.terms.textColor}
               }
                 // label, prefix, ordernumber
               content < styles.content.get
