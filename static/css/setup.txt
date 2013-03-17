@@ -18,9 +18,21 @@ plugin.tx_caddy_pi1 {
     div.caddy_product { 
       padding:5px; 
     }
+    div.caddy_product div.caddy_col { 
+      padding:.3em 0 0 0; 
+    }
+    div.caddy_product div.caddy_col1,
+    div.caddy_product div.caddy_col6,
+    { 
+      padding:0; 
+    }
     div.caddy_col { 
       display:block; 
       float:left; 
+    }
+    div.caddy_col input { 
+      text-align:right;
+      width:2em; 
     }
     div.caddy_col_strong {
       font-weight: bold;
@@ -50,6 +62,7 @@ plugin.tx_caddy_pi1 {
       width:7em; 
     }
     div.caddy_col6 { 
+      padding: 0 0 0 1em;
       text-align:right;
       width:2em; 
     }
@@ -63,10 +76,6 @@ plugin.tx_caddy_pi1 {
       color:#e10004; 
       font-weight:bold; 
       margin:5px 0; 
-    }
-    div.caddy_col input { 
-      text-align:right;
-      width:2em; 
     }
     div.caddy_cleaner { 
       clear: both; 
@@ -90,7 +99,6 @@ plugin.tx_caddy_pi1 {
       float:right;
       font-family: Trebuchet MS,Geneva,Arial,Helvetica,Verdana,sans serif;
       font-weight:bold;
-      padding: 0 2em 0 0;
       text-align:right;
     }
     div.caddy_linktotheshop a,
