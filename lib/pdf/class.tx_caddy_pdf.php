@@ -993,10 +993,6 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $tcpdf = new FPDI( );
 
-    $tcpdf->setSourceFile( $srceFile );
-    $tmplId = $tcpdf->importPage( 1 );
-    $tcpdf->useTemplate( $tmplId, 0, 0, 210 );
-
     $author = $this->pi_getLL( 'caddy_ll_docauthor' );
     $title  = $this->pi_getLL( 'caddy_ll_doctitle' );
 
@@ -1010,6 +1006,9 @@ class tx_caddy_pdf extends tslib_pibase
     $tcpdf->setPrintFooter( false );    
 
     $tcpdf->AddPage( );
+    $tcpdf->setSourceFile( $srceFile );
+    $tmplId = $tcpdf->importPage( 1 );
+    $tcpdf->useTemplate( $tmplId, 0, 0, 210 );
 
     return $tcpdf;
   }
