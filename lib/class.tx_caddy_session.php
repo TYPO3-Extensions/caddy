@@ -299,29 +299,30 @@ class tx_caddy_session
     // check if this puid already exists and when delete it
     foreach( ( array ) $sesArray['products'] as $key => $value )
     { // one loop for every product
-      if( is_array( $value ) )
+      if( ! is_array( $value ) )
       {
-        // counter for condition. Every condition has to be true
-        $int_counter = 0;
+        continue;
+      }
+      // counter for condition. Every condition has to be true
+      $int_counter = 0;
 
-        // loop every condition
-        foreach( $arr_variant as $key_variant => $value_variant )
+      // loop every condition
+      foreach( $arr_variant as $key_variant => $value_variant )
+      {
+        // condition fits
+        if( $value[$key_variant] == $value_variant )
         {
-          // condition fits
-          if( $value[$key_variant] == $value_variant )
-          {
-            $int_counter++;
-          }
+          $int_counter++;
         }
-        // loop every condition
+      }
+      // loop every condition
 
-        // all conditions fit
-        if( $int_counter == count( $arr_variant ) )
-        {
-          // remove product
-          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
-          unset( $sesArray['products'][$key] );
-        }
+      // all conditions fit
+      if( $int_counter == count( $arr_variant ) )
+      {
+        // remove product
+        $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
+        unset( $sesArray['products'][$key] );
       }
     }
 
@@ -345,8 +346,15 @@ class tx_caddy_session
 
     // add product to the session array
     $sesArray['products'][ ] = $product;
+    // generate session with session array
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
 
+    $quantityBeforeTest = $product['qty'];
     $product = $this->quantityCheckMinMax( $product );
+    if( $product['qty'] != $quantityBeforeTest )
+    {
+var_dump( __METHOD__, __LINE__, $quantityBeforeTest, $product['qty'] );
+    }
 
     // generate session with session array
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
