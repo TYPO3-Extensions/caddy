@@ -906,6 +906,10 @@ class tx_caddy_session
           // DRS
           // limit is overrun
         $product['qty'] = $this->productSetQuantity( $product['max'], $product['puid'] );
+        if( isset( $this->pObj->gpvar['qty'] ) )
+        {
+          $this->pObj->gpvar['qty'] = $product['qty'];
+        }
 //        $product['qty'] = $product['max'];
 //        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
 //        $this->pObj->piVars['qty'] = $product['qty'];
@@ -977,6 +981,10 @@ class tx_caddy_session
           // DRS
 
         $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
+        if( isset( $this->pObj->gpvar['qty'] ) )
+        {
+          $this->pObj->gpvar['qty'] = $product['qty'];
+        }
 //        $product['qty'] = $product['min'];
 //        $this->pObj->piVars['qty'][$product['puid']] = $product['qty'];
 //        $this->pObj->piVars['qty'] = $product['qty'];
