@@ -1235,7 +1235,7 @@ class tx_caddy_session
   {
       // Default value
     $quantityAdd = ( int ) $this->pObj->gpvar['qty'];
-    $quantityAll = 0
+    $quantityAll = 0;
     $quantitySum = 0;
     
       // DRS
