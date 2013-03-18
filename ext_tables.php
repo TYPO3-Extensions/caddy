@@ -90,8 +90,8 @@ switch( true )
   case( $beLanguage == 'de' ):
       // German
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',              'Caddy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x',  'Caddy +Powermail 1.x');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x',  'Caddy +Powermail 2.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x',  'Caddy Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x',  'Caddy Powermail 2.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',          '+Caddy CSS');
 //    switch( true )
 //    {
@@ -106,8 +106,8 @@ switch( true )
   default:
       // English
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',              'Caddy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x',  'Caddy +Powermail 1.x');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x',  'Caddy +Powermail 2.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x',  'Caddy Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x',  'Caddy Powermail 2.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',          '+Caddy CSS');
 //    switch( true )
 //    {
