@@ -270,7 +270,7 @@ class tx_caddy extends tslib_pibase
     if( $sesArray['productsGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
     {
       $caddyMinStr                             = $this->zz_price_format($this->conf['cart.']['cartmin.']['value']);
-      $minPriceArray['###ERROR_MINPRICE###']  = sprintf($this->pi_getLL('caddy_ll_minprice'), $caddyMinStr);
+      $minPriceArray['###ERROR_MINPRICE###']  = sprintf($this->pi_getLL('minprice'), $caddyMinStr);
       $subpartArray['###MINPRICE###']         =
         $this->cObj->substituteMarkerArrayCached($this->tmpl['minprice'], $minPriceArray);
     }
@@ -1729,7 +1729,7 @@ class tx_caddy extends tslib_pibase
 
       if( isset( $value['free_from'] ) )
       {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_' . $type . '_free_from' ) .
+        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_free_from' ) .
                                             ' ' . $this->zz_price_format( $value['free_from'] );
         $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                             (
@@ -1738,7 +1738,7 @@ class tx_caddy extends tslib_pibase
       }
       if (isset($value['free_until']))
       {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_' . $type . '_free_until' ) . 
+        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_free_until' ) . 
                                             ' ' . $this->zz_price_format($value['free_until'] );
         $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                             (
@@ -1750,7 +1750,7 @@ class tx_caddy extends tslib_pibase
       {
         if( isset($value['available_from'] ) )
         {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_'.$type.'_available_from' ) .
+          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( $type.'_available_from' ) .
                                               ' ' . $this->zz_price_format( $value['available_from'] );
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                               (
@@ -1759,7 +1759,7 @@ class tx_caddy extends tslib_pibase
         }
         if( isset( $value['available_until'] ) )
         {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_' . $type . '_available_until' ) .
+          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_available_until' ) .
                                               ' ' . $this->zz_price_format( $value['available_until'] );
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                               (
@@ -1796,7 +1796,7 @@ class tx_caddy extends tslib_pibase
       {
         foreach( ( array ) $value['extra.'] as $extra )
         {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'caddy_ll_service_from' ) . 
+          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'service_from' ) . 
                                               ' ' . $extra['value'] . ' ' . $unit . ' : ' .
                                               $this->zz_price_format($extra['extra']);
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
@@ -1811,7 +1811,7 @@ class tx_caddy extends tslib_pibase
       {
         $show_price = sprintf
                       ( 
-                        $this->pi_getLL( 'caddy_ll_special_each' ), 
+                        $this->pi_getLL( 'special_each' ), 
                         $this->zz_price_format( $value['extra.']['1.']['extra'] ) 
                       );
       }

@@ -910,8 +910,8 @@ class tx_caddy_session
           // DRS
           // limit is overrun
         $product['qty'] = $this->productSetQuantity( $product['max'], $product['puid'] );
-        $llKey          = 'caddy_ll_error_max';
-        $llAlt          = 'No value for caddy_ll_error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llKey          = 'error_max';
+        $llAlt          = 'No value for error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
         $llPrompt       = sprintf( $llPrompt, $product['max'] );
         $product['error']['max'] = $llPrompt;
@@ -978,8 +978,8 @@ class tx_caddy_session
           // DRS
 
         $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
-        $llKey          = 'caddy_ll_error_min';
-        $llAlt          = 'No value for caddy_ll_error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
+        $llKey          = 'error_min';
+        $llAlt          = 'No value for error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
         $llPrompt       = sprintf( $llPrompt, $product['min'] );
         $product['error']['min'] = $llPrompt;
@@ -1087,8 +1087,8 @@ class tx_caddy_session
       // DRS
 
       // Set the error prompt
-    $llKey    = 'caddy_ll_error_itemsMax';
-    $llAlt    = 'No value for caddy_ll_error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llKey    = 'error_itemsMax';
+    $llAlt    = 'No value for error_itemsMax in ' . __METHOD__ . ' (' . __LINE__ .')';
     $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMax );
     $product['error']['itemsMax'] = $llPrompt;
@@ -1177,8 +1177,8 @@ class tx_caddy_session
       // DRS
 
       // Set the error prompt
-    $llKey    = 'caddy_ll_error_itemsMin';
-    $llAlt    = 'No value for caddy_ll_error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
+    $llKey    = 'error_itemsMin';
+    $llAlt    = 'No value for error_itemsMin in ' . __METHOD__ . ' (' . __LINE__ .')';
     $llPrompt = $this->pObj->pi_getLL( $llKey, $llAlt );
     $llPrompt = sprintf( $llPrompt, $itemsQuantityMin );
     $product['error']['itemsMin'] = $llPrompt;

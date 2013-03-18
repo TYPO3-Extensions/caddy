@@ -255,7 +255,7 @@ plugin.tx_caddy_pi1 {
       delete {
         file = EXT:caddy/files/img/delete_100_02.png
         altText = delete product
-        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_delete
+        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
         params = class="caddy_delete"
         imageLinkWrap = 1
         imageLinkWrap {
@@ -545,7 +545,7 @@ plugin.tx_caddy_pi1 {
           // title of shipping method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_shippingoption_01
+          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_01
         }
           // extra cost (gross price) of shipping method
         extra = 0.00
@@ -558,7 +558,7 @@ plugin.tx_caddy_pi1 {
           // title of shipping method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_shippingoption_02
+          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_02
         }
           // extra cost (gross price) of shipping method
         extra = 12.00
@@ -582,7 +582,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_paymentoption_01
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_01
         }
           // extra cost (gross price) of payment method
         extra = 0.00
@@ -595,7 +595,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_paymentoption_02
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_02
         }
           // extra cost (gross price) of payment method
         extra = 15.00
@@ -608,7 +608,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_paymentoption_03
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_03
         }
           // extra cost (gross price) of payment method
         extra = 3.00
@@ -656,7 +656,7 @@ plugin.tx_caddy_pi1 {
           // label: deliveryorder
         30 = TEXT
         30 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryorder
+          data = LLL:EXT:caddy/pi1/locallang.xml:deliveryorder
           wrap = |-
         }
           // deliver order number
@@ -963,7 +963,7 @@ plugin.tx_caddy_pi1 {
                   // label
                 10 = TEXT
                 10 {
-                  data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+                  data = LLL:EXT:caddy/pi1/locallang.xml:deliveryordernumber
                   noTrimWrap = || |
                 }
                   // prefix
@@ -1030,7 +1030,7 @@ plugin.tx_caddy_pi1 {
                     // label
                   10 = TEXT
                   10 {
-                    data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
+                    data = LLL:EXT:caddy/pi1/locallang.xml:ordernumber
                     noTrimWrap = || |
                   }
                     // prefix
@@ -1056,7 +1056,7 @@ plugin.tx_caddy_pi1 {
                     // label
                   10 = TEXT
                   10 {
-                    data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_invoicenumber
+                    data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
                     noTrimWrap = || |
                   }
                     // prefix
@@ -1113,7 +1113,7 @@ plugin.tx_caddy_pi1 {
           // label: invoice
         30 = TEXT
         30 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_invoice
+          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
           wrap = |-
         }
           // invoicenumber
@@ -1144,7 +1144,7 @@ plugin.tx_caddy_pi1 {
                 // label for delivery order address
               content = TEXT
               content {
-                data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryaddress
+                data = LLL:EXT:caddy/pi1/locallang.xml:deliveryaddress
                 wrap      = |<br>
               }
             }
@@ -1490,7 +1490,7 @@ plugin.tx_caddy_pi1 {
                   // label
                 10 = TEXT
                 10 {
-                  data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_invoicenumber
+                  data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
                   noTrimWrap = || |
                 }
                   // prefix
@@ -1557,7 +1557,7 @@ plugin.tx_caddy_pi1 {
                     // label
                   10 = TEXT
                   10 {
-                    data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_ordernumber
+                    data = LLL:EXT:caddy/pi1/locallang.xml:ordernumber
                     noTrimWrap = || |
                   }
                     // prefix
@@ -1583,7 +1583,7 @@ plugin.tx_caddy_pi1 {
                     // label
                   10 = TEXT
                   10 {
-                    data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_deliveryordernumber
+                    data = LLL:EXT:caddy/pi1/locallang.xml:deliveryordernumber
                     noTrimWrap = || |
                   }
                     // prefix
@@ -1877,11 +1877,11 @@ plugin.tx_caddy_pi1 {
       // Replace the marker _HTMLMARKER_LINTOTHESHOP
     linktotheshop = TEXT
     linktotheshop {
-      data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_linktotheshop
+      data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
       typolink {
         parameter = {$plugin.quick_shop.pages.root}
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:caddy_ll_linktotheshop
+          data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
         }
       }
     }

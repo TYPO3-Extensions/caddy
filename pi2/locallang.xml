@@ -6,7 +6,7 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="caddy_ll_form_submit">order</label>
+      <label index="form_submit">order</label>
       <label index="flexform.pid">Unique Product Id (PUID) *</label>
       <label index="flexform.title">Title *</label>
       <label index="flexform.sku">Stock Keeping Unit (SKU)</label>
@@ -17,7 +17,7 @@
       <label index="flexform.tax.reduced">Reduced</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="caddy_ll_form_submit">bestellen</label>
+      <label index="form_submit">bestellen</label>
       <label index="flexform.pid">Eindeutige Produkt Kennung (PUID) *</label>
       <label index="flexform.title">Titel *</label>
       <label index="flexform.sku">Artikelnummer (SKU)</label>

@@ -87,7 +87,7 @@ class tx_caddy_pi3 extends tslib_pibase {
 			}
 		
 			$typolink_conf = array();
-			$minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('caddy_ll_link'), $pid, "", $typolink_conf);
+			$minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $pid, "", $typolink_conf);
 			$minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($pid, "", $typolink_conf);
 		
 			$this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart'], $minicartMarkerArray); // Get html template

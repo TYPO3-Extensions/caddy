@@ -135,7 +135,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function caddy( $invoice = false )
   {
     $subpartArray = null;
-    $subpartArray = $this->caddyTablehead( $subpartArray );
+//    $subpartArray = $this->caddyTablehead( $subpartArray );
     $subpartArray = $this->caddyTablebody( $subpartArray );
 
     $outerMarkerArray = null;
@@ -311,37 +311,37 @@ class tx_caddy_pdf extends tslib_pibase
     return $subpartArray;
   }
 
- /**
-  * caddyTablehead( ) : HTML table head of the caddy
-  *
-  * @param	array		$subpartArray :
-  * @return	array		$subpartArray :
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyTablehead( $subpartArray )
-  {
-    return $subpartArray;
-    $fields = $this->confSettings['powermailCaddy.']['fields.'];
-
-      // LOOP : fields, the elements of a product
-    foreach( array_keys ( ( array ) $fields ) as $key )
-    {
-      if( ! stristr( $key, '.' ) )
-      {
-        $marker = '###CADDY_LL_' . strtoupper($key) . '###';
-        $value  = $this->pi_getLL( 'caddy_ll_' . $key );
-        $subpartArray[$marker] = $value;
-      }
-    }
-      // LOOP : fields, the elements of a product
-
-    $marker = '###CADDY_LL_ITEM###';
-    $value  = $this->pi_getLL( 'caddy_ll_item' );
-    $subpartArray[$marker] = $value;
-
-    return $subpartArray;
-  }
+// /**
+//  * caddyTablehead( ) : HTML table head of the caddy
+//  *
+//  * @param	array		$subpartArray :
+//  * @return	array		$subpartArray :
+//  * @version    2.0.0
+//  * @since      2.0.0
+//  */
+//  private function caddyTablehead( $subpartArray )
+//  {
+//    return $subpartArray;
+//    $fields = $this->confSettings['powermailCaddy.']['fields.'];
+//
+//      // LOOP : fields, the elements of a product
+//    foreach( array_keys ( ( array ) $fields ) as $key )
+//    {
+//      if( ! stristr( $key, '.' ) )
+//      {
+//        $marker = '###CADDY_LL_' . strtoupper($key) . '###';
+//        $value  = $this->pi_getLL( 'caddy_ll_' . $key );
+//        $subpartArray[$marker] = $value;
+//      }
+//    }
+//      // LOOP : fields, the elements of a product
+//
+//    $marker = '###CADDY_LL_ITEM###';
+//    $value  = $this->pi_getLL( 'caddy_ll_item' );
+//    $subpartArray[$marker] = $value;
+//
+//    return $subpartArray;
+//  }
 
 
 
@@ -989,8 +989,8 @@ class tx_caddy_pdf extends tslib_pibase
   {
     $tcpdf = new FPDI( );
 
-    $author = $this->pi_getLL( 'caddy_ll_docauthor' );
-    $title  = $this->pi_getLL( 'caddy_ll_doctitle' );
+    $author = $this->pi_getLL( 'docauthor' );
+    $title  = $this->pi_getLL( 'doctitle' );
 
     $tcpdf->SetAuthor( $author );
     $tcpdf->SetTitle( $title );

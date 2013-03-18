@@ -2,7 +2,7 @@ Caddy HTML Template for Frontend output
 
 VERSION 2.0.0
 
-  ###CADDY_LL_EMPTY###
+  ###_LOCAL_LANG_EMPTY###
 
 --- Markers inside -------------------------------------------------------------
 
@@ -10,11 +10,11 @@ VERSION 2.0.0
   ###TARGET###            Link to the same page
 
   ###UID###               Product UID
-  ###TITLE###             Producttitle            ###CADDY_LL_ITEM###
-  ###QTY###               Quantity                ###CADDY_LL_QTY###
+  ###TITLE###             Producttitle            ###_LOCAL_LANG_ITEM###
+  ###QTY###               Quantity                ###_LOCAL_LANG_QTY###
   ###QTY_NAME###          With key/field pairs in case of variants
-  ###PRICE###             Price (Gross)           ###CADDY_LL_PRICE###
-  ###PRICE_TOTAL###       Total Price (Gross)     ###CADDY_LL_PRICE_TOTAL###      Quantity * Price
+  ###PRICE###             Price (Gross)           ###_LOCAL_LANG_PRICE###
+  ###PRICE_TOTAL###       Total Price (Gross)     ###_LOCAL_LANG_PRICE_TOTAL###      Quantity * Price
 
   ###TAX_PRICE_TOTAL###   Tax (from Total Price)    
 
@@ -22,9 +22,9 @@ VERSION 2.0.0
 
 --- Markers outside ------------------------------------------------------------
 
-  ###SUMNET###                                  ###CADDY_LL_PRODUCTSNET###
-  ###SUMGROSS###                                ###CADDY_LL_SUMGROSS###
-  ###CART_SERVICE_COST###                         ###CADDY_LL_CART_SERVICE_COST###
+  ###SUMNET###                                  ###_LOCAL_LANG_PRODUCTSNET###
+  ###SUMGROSS###                                ###_LOCAL_LANG_SUMGROSS###
+  ###CART_SERVICE_COST###                         ###_LOCAL_LANG_CART_SERVICE_COST###
   ###PRODUCTSGROSS###
 
   ###SUMTAXNORMAL###
@@ -33,7 +33,7 @@ VERSION 2.0.0
   ###TAXRATE_NORMAL_STRING###
   ###TAXRATE_REDUCED_STRING###
 
-  ###CADDY_LL_TAX###
+  ###_LOCAL_LANG_TAX###
 
 --------------------------------------------------------------------------------
 
@@ -48,23 +48,23 @@ VERSION 2.0.0
     <table cellpadding="0" cellspacing="0" border="0" class="caddy_table">
         <thead>
             <tr>
-                <th class="caddy_thead_col1" colspan="2">###CADDY_LL_QTY###</th>
-                <th class="caddy_thead_col2">###CADDY_LL_ITEM###</th>
-                <th class="caddy_thead_col3 caddy_right">###CADDY_LL_PRICE###</th>
-                <th class="caddy_thead_col4 caddy_right">###CADDY_LL_PRICE_TOTAL###</th>
+                <th class="caddy_thead_col1" colspan="2">###_LOCAL_LANG_QTY###</th>
+                <th class="caddy_thead_col2">###_LOCAL_LANG_ITEM###</th>
+                <th class="caddy_thead_col3 caddy_right">###_LOCAL_LANG_PRICE###</th>
+                <th class="caddy_thead_col4 caddy_right">###_LOCAL_LANG_PRICE_TOTAL###</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
-                <td class="caddy_tfoot_col1" colspan="4">###CADDY_LL_PRODUCTSNET###</td>
+                <td class="caddy_tfoot_col1" colspan="4">###_LOCAL_LANG_PRODUCTSNET###</td>
                 <td class="caddy_tfoot_col2">###PRODUCTSNET###</td>
             </tr>
             <tr>
-                <td class="caddy_tfoot_col1" colspan="4">###CADDY_LL_OPTIONSNET###</td>
+                <td class="caddy_tfoot_col1" colspan="4">###_LOCAL_LANG_OPTIONSNET###</td>
                 <td class="caddy_tfoot_col2">###OPTIONSNET###</td>
             </tr>
             <tr>
-                <td class="caddy_tfoot_col1" colspan="4">###CADDY_LL_TAX###</td>
+                <td class="caddy_tfoot_col1" colspan="4">###_LOCAL_LANG_TAX###</td>
                 <td class="caddy_tfoot_col2"></td>
             </tr>
             <tr>
@@ -76,7 +76,7 @@ VERSION 2.0.0
                 <td class="caddy_tfoot_col">###SUMTAXREDUCED###</td>
             </tr>
             <tr>
-                <td class="caddy_tfoot_col1" colspan="4">###CADDY_LL_SUMGROSS###</td>
+                <td class="caddy_tfoot_col1" colspan="4">###_LOCAL_LANG_SUMGROSS###</td>
                 <td class="caddy_tfoot_col2">###SUMGROSS###</td>
             </tr>
         </tfoot>
@@ -105,7 +105,7 @@ VERSION 2.0.0
 <!-- ###CADDY_SHIPPING### begin -->
 <div id="caddy_shipping">
     <fieldset>
-        <legend>###CADDY_LL_SHIPPINGNET###</legend>
+        <legend>###_LOCAL_LANG_SHIPPINGNET###</legend>
         <!-- ###CONTENT### --><!-- ###ITEM### -->
         <div class="caddy_fieldwrap_radio">###SHIPPING_RADIO### ###SHIPPING_TITLE###</div>
         <!-- ###ITEM### --><!-- ###CONTENT### -->
@@ -126,7 +126,7 @@ VERSION 2.0.0
 <!-- ###CADDY_PAYMENT### begin -->
 <div id="caddy_payment">
     <fieldset>
-        <legend>###CADDY_LL_PAYMENTNET###</legend>
+        <legend>###_LOCAL_LANG_PAYMENTNET###</legend>
         <!-- ###CONTENT### --><!-- ###ITEM### -->
         <div class="caddy_fieldwrap_radio">###PAYMENT_RADIO### ###PAYMENT_TITLE###</div>
         <!-- ###ITEM### --><!-- ###CONTENT### -->
@@ -147,7 +147,7 @@ VERSION 2.0.0
 <!-- ###CADDY_SPECIAL### begin -->
 <div id="caddy_special">
     <fieldset>
-        <legend>###CADDY_LL_SPECIALNET###</legend>
+        <legend>###_LOCAL_LANG_SPECIALNET###</legend>
         <!-- ###CONTENT### --><!-- ###ITEM### -->
         <div class="caddy_fieldwrap_checkbox">###SPECIAL_CHECKBOX### ###SPECIAL_TITLE###</div>
         <!-- ###ITEM### --><!-- ###CONTENT### -->
@@ -166,7 +166,7 @@ VERSION 2.0.0
 
 
 <!-- ###CADDY_EMPTY### begin -->
-<div class="caddy_empty">###CADDY_LL_EMPTY###</div>
+<div class="caddy_empty">###_LOCAL_LANG_EMPTY###</div>
 <!-- ###CADDY_EMPTY### end -->
 
 
@@ -179,11 +179,11 @@ VERSION 2.0.0
 ###ORDERNUMBER###
 <table width="500" cellpadding="3" cellspacing="0" bgcolor="cccccc" border="1">
     <tr style="font-weight: bold;">
-        <td>###CADDY_LL_QTY###</td>
-	    <td>###CADDY_LL_SKU###</td>
-        <td>###CADDY_LL_ITEM###</td>
-        <td>###CADDY_LL_PRICE###</td>
-        <td>###CADDY_LL_PRICE_TOTAL###</td>
+        <td>###_LOCAL_LANG_QTY###</td>
+	    <td>###_LOCAL_LANG_SKU###</td>
+        <td>###_LOCAL_LANG_ITEM###</td>
+        <td>###_LOCAL_LANG_PRICE###</td>
+        <td>###_LOCAL_LANG_PRICE_TOTAL###</td>
     </tr>
     <!-- ###CONTENT### -->
     <!-- ###ITEM### -->
@@ -202,7 +202,7 @@ VERSION 2.0.0
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
                     <td colspan="2">
-                    	###CADDY_LL_PRODUCTSNET###
+                    	###_LOCAL_LANG_PRODUCTSNET###
 					</td>
                     <td>&nbsp;</td>
                     <td>###PRODUCTSNET###</td>
@@ -210,7 +210,7 @@ VERSION 2.0.0
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
                     <td colspan="2">
-                    	###CADDY_LL_OPTIONSNET###
+                    	###_LOCAL_LANG_OPTIONSNET###
 					</td>
                     <td>&nbsp;</td>
                     <td>###OPTIONSNET###</td>
@@ -218,7 +218,7 @@ VERSION 2.0.0
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
                     <td colspan="2">
-						###CADDY_LL_TAX###
+						###_LOCAL_LANG_TAX###
 					</td>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
@@ -242,7 +242,7 @@ VERSION 2.0.0
                 <tr style="font-weight: bold;">
                     <td>&nbsp;</td>
                     <td colspan="2">
-						###CADDY_LL_SUMGROSS###
+						###_LOCAL_LANG_SUMGROSS###
 					</td>
                     <td>&nbsp;</td>
                     <td>###SUMGROSS###</td>
@@ -252,7 +252,7 @@ VERSION 2.0.0
     </tr>
     <tr>
         <td colspan="2">
-            ###CADDY_LL_SHIPPINGNET###
+            ###_LOCAL_LANG_SHIPPINGNET###
         </td>
         <td colspan="3">
             ###SHIPPINGNET###
@@ -260,7 +260,7 @@ VERSION 2.0.0
     </tr>
     <tr>
         <td colspan="2">
-            ###CADDY_LL_PAYMENTNET###
+            ###_LOCAL_LANG_PAYMENTNET###
         </td>
         <td colspan="3">
             ###PAYMENTNET###
@@ -268,7 +268,7 @@ VERSION 2.0.0
     </tr>
     <tr>
         <td colspan="2">
-            ###CADDY_LL_SPECIALNET###
+            ###_LOCAL_LANG_SPECIALNET###
         </td>
         <td colspan="3">
             ###SPECIALNET###
@@ -285,7 +285,7 @@ VERSION 2.0.0
 	<form action="###CADDY_FORM_ACTION###">
 		<input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid">
 		<input type="text" value="1" name="qty">
-		<input type="submit" value="###CADDY_LL_FORM_SUBMIT###">
+		<input type="submit" value="###_LOCAL_LANG_FORM_SUBMIT###">
 	</form>
 </div>
 <!-- ###CADDY_FORM### end -->
@@ -293,7 +293,7 @@ VERSION 2.0.0
 
 <!-- ###CADDY_MINICART### begin --> 
 <div class="caddy_minicart">
-	<div>###MINICART_COUNT### ###CADDY_LL_COUNT_PRODUCTS_IN_CART###</div>
+	<div>###MINICART_COUNT### ###_LOCAL_LANG_COUNT_PRODUCTS_IN_CART###</div>
 	<div>###MINISUMGROSS###</div>
 	<div>###MINICART_LINK###</div>
 </div>
@@ -301,5 +301,5 @@ VERSION 2.0.0
 
 
 <!-- ###CADDY_MINICART_EMPTY### begin --> 
-<div class="caddy_minicart_empty">###CADDY_LL_MINICART_EMPTY###</div>
+<div class="caddy_minicart_empty">###_LOCAL_LANG_MINICART_EMPTY###</div>
 <!-- ###CADDY_MINICART_EMPTY### end -->
