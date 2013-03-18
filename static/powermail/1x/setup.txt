@@ -1,0 +1,85 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // INDEX
+  //
+  // plugin.tx_powermail_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_powermail_pi1
+
+plugin.tx_powermail_pi1 {
+  dynamicTyposcript {
+      // The caddy content
+    caddy = USER
+    caddy {
+      userFunc = tx_caddy_powermail->caddyForEmail
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Delivery order number
+    caddydeliveryordernumber = USER
+    caddydeliveryordernumber {
+      userFunc = tx_caddy_session->getNumberDeliveryorder
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Invoice number
+    caddyinvoicenumber = USER
+    caddyinvoicenumber {
+      userFunc = tx_caddy_session->getNumberInvoice
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Order number
+    caddyordernumber = USER
+    caddyordernumber {
+      userFunc = tx_caddy_session->getNumberOrder
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+      // Clear the caddy session
+    clearcaddysession = USER
+    clearcaddysession {
+      userFunc = tx_caddy_session->sessionDelete
+      userFunc {
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+    }
+  }
+  email {
+    recipient_mail {
+      addAttachment {
+          // Caddy: PDF attachments to the vendor
+        45967 = USER
+        45967 {
+          userFunc = tx_caddy_powermail->sendToVendor
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
+        }
+      }
+    }
+    sender_mail {
+      addAttachment {
+          // Caddy: PDF attachments to the customer
+        45967 = USER
+        45967 {
+          userFunc = tx_caddy_powermail->sendToCustomer
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
+          }
+        }
+      }
+    }
+  }
+}
+  // plugin.tx_powermail_pi1

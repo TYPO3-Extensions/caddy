@@ -91,6 +91,8 @@ switch( true )
       // German
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/', 'Caddy');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', '+Caddy CSS');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x', '+Caddy Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x', '+Caddy Powermail 2.x');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
@@ -105,6 +107,8 @@ switch( true )
       // English
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/', 'Caddy');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/', '+Caddy CSS');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x', '+Caddy Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x', '+Caddy Powermail 2.x');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
