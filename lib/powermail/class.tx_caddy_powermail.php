@@ -111,10 +111,10 @@ class tx_caddy_powermail extends tslib_pibase
   public  $markerSubjectReceiver  = null;
   public  $markerSubjectSender    = null;
   public  $markerThanks           = null;
-  private $markerTsCaddy          = '###POWERMAIL_TYPOSCRIPT_CADDY###';
-  private $markerTsOrdernumber    = '###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###';
-  private $markerTsThanks         = '###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION###';
-  private $markerTsWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
+  private $markerTsCaddy          = null;
+  private $markerTsOrdernumber    = null;
+  private $markerTsThanks         = null;
+  private $markerTsWtcart         = null;
 
     // Current GET parameter
   private $paramGet  = null;
@@ -975,6 +975,8 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function initMarker( )
   {
+    $this->initMarkerValues( );
+    
     $this->initMarkerReceiver( );
     $this->initMarkerReceiverWtcart( );
     $this->initMarkerSender( );
@@ -1122,6 +1124,74 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $this->markerThanks = true;
     }
+  }
+  
+/**
+ * initMarkerValues( ):
+ *
+ * @return    void
+ * @access  public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  public function initMarkerValues(  )
+  {
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $this->initMarkerValues1x( );
+        break;
+      case( $this->versionInt < 3000000 ):
+        $this->initMarkerValues2x( );
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+  }
+
+/**
+ * initMarkerValues1x( ):
+ *
+ * @return    void
+ * @access  public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  public function initMarkerValues1x(  )
+  {
+    $this->markerTsCaddy          = '###POWERMAIL_TYPOSCRIPT_CADDY###';
+    $this->markerTsOrdernumber    = '###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###';
+    $this->markerTsThanks         = '###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION###';
+    $this->markerTsWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
+  }
+
+/**
+ * initMarkerValues2x( ):
+ *
+ * @return    void
+ * @access  public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  public function initMarkerValues2x(  )
+  {
+    $this->markerTsCaddy          = '{f:cObject(typoscriptObjectPath:\'plugin.tx_caddy_pi1.powermail.caddy\')}';
+    $this->markerTsOrdernumber    = '{f:cObject(typoscriptObjectPath:\'plugin.tx_caddy_pi1.powermail.caddyordernumber\')}';
+    $this->markerTsThanks         = '{f:cObject(typoscriptObjectPath:\'plugin.tx_caddy_pi1.powermail.clearcaddysession\')}';
+    $this->markerTsWtcart         = '###POWERMAIL_TYPOSCRIPT_CART###';
   }
 
 
