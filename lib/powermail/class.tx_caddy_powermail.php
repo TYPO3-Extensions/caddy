@@ -664,13 +664,13 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $value = null;
     
-    $value = $this->paramPost[$uid2x];
+    $value = $this->paramPost['field'][$uid2x];
       // DRS
     if( $this->pObj->drs->drsError )
     {
       if( ! isset( $this->paramPost[$uid2x] ) )
       {
-        $prompt = 'POST[' . $uid2x . '] isn\'t set!';
+        $prompt = 'POST[field][' . $uid2x . '] isn\'t set!';
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
       }
     }
@@ -2079,10 +2079,10 @@ class tx_caddy_powermail extends tslib_pibase
         die( $prompt );
         break;
       case( $this->versionInt < 2000000 ):
-        $sessionData = $this->sessionDataVers1( );
+        $sessionData = $this->sessionData1x( );
         break;
       case( $this->versionInt < 3000000 ):
-        $sessionData = $this->sessionDataVers2( );
+        $sessionData = $this->sessionData2x( );
         break;
       case( $this->versionInt >= 3000000 ):
       default:
@@ -2098,14 +2098,14 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
 /**
- * sessionDataVers1( ):
+ * sessionData1x( ):
  *
  * @return    string        The content that should be displayed on the website
  * @access  private
  * @version 2.0.0
  * @since   2.0.0
  */
-  private function sessionDataVers1(  )
+  private function sessionData1x(  )
   {
       // DIE  : $fieldUid is empty
     if( empty( $this->fieldUid ) )
@@ -2120,8 +2120,8 @@ class tx_caddy_powermail extends tslib_pibase
 
       // Get the Powermail session data
     $uid  = $this->fieldUid;
-    $key  = 'powermail_';
-    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key . $uid );
+    $key  = 'powermail_' . $uid;
+    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key );
 
       // RETURN: no session data
     if( empty( $sessionData ) )
@@ -2139,20 +2139,22 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
 /**
- * sessionDataVers2( ):
+ * sessionData2x( ):
  *
  * @return    string        The content that should be displayed on the website
  * @access  private
  * @version 2.0.0
  * @since   2.0.0
  */
-  private function sessionDataVers2(  )
+  private function sessionData2x(  )
   {
       // Get the Powermail session data
-    $post = t3lib_div::_POST( 'tx_powermail_pi1' );
-    $uid  = $post['form'];
-    $key  = 'powermailFormstart';
-    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key . $uid );
+//    $post = t3lib_div::_POST( 'tx_powermail_pi1' );
+//    $uid  = $post['form'];
+//    $key  = 'powermailFormstart';
+    $uid  = $this->fieldUid;
+    $key  = 'powermail_' . $uid;
+    $sessionData = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $key );
 
       // RETURN: no session data
     if( empty( $sessionData ) )
@@ -2163,6 +2165,13 @@ class tx_caddy_powermail extends tslib_pibase
         t3lib_div::devlog(' [INFO/POWERMAIL] '. $prompt, $this->extKey, 0 );
       }
       return null;
+    }
+      // RETURN: no session data
+    
+    if( $this->pObj->drsPowermail || $this->pObj->drsWarn )
+    {
+      $prompt = 'powermail session uid: _LOCALIZED_UID will not respected!';
+      t3lib_div::devlog(' [WARN/POWERMAIL] '. $prompt, $this->extKey, 2 );
     }
       // RETURN: no session data
     
