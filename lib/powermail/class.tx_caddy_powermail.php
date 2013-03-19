@@ -1328,6 +1328,13 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function initPowermailVersionAppendix( )
   {
+    if( $this->versionInt === null )
+    {
+      $arrResult = $this->initVersion( );
+      $this->versionInt = $arrResult['int'];
+      $this->versionStr = $arrResult['str'];
+    }
+    
     switch( true )
     {
       case( $this->versionInt < 1000000 ):
