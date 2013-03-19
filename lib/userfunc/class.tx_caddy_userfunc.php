@@ -252,8 +252,7 @@ class tx_caddy_userfunc
   {
     $prompt = null;
     
-    $prompt = $this->flexformCheckNoteNote( )
-            . $this->flexformCheckEmailCustomeremail( )
+    $prompt = $this->flexformCheckEmailCustomeremail( )
             . $this->flexformCheckAddresses( )
             ;
 
@@ -418,7 +417,7 @@ class tx_caddy_userfunc
     
       // RETURN prompt : there isn't any flexform form
     $prompt = '
-      <div class="typo3-message message-info" style="max-width:' . $this->maxWidth . ';">
+      <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
           ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckNoteNote'). '
         </div>
@@ -546,13 +545,13 @@ class tx_caddy_userfunc
 
     $this->pi1FfSdefReportInit( );
 
-    $prompt = $this->typoscriptCheck( );
-
-    $prompt = $prompt . $this->databaseCheck( );
-
-    $prompt = $prompt . $this->powermailCheck( );
-
-    $prompt = $prompt . $this->flexformCheck( );
+    $prompt = null;
+    
+    $prompt = $this->flexformCheckNoteNote( )
+            . $this->typoscriptCheck( )
+            . $this->databaseCheck( )
+            . $this->powermailCheck( )
+            . $this->flexformCheck( );
 
     if( $prompt )
     {
