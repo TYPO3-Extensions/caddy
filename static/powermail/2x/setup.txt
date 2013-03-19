@@ -71,26 +71,22 @@ plugin.tx_powermail {
   settings {
     setup {
       receiver {
+          // Caddy: PDF attachments to the vendor
+        addAttachment = USER
         addAttachment {
-            // Caddy: PDF attachments to the vendor
-          45967 = USER
-          45967 {
-            userFunc = tx_caddy_powermail->sendToVendor
-            userFunc {
-              drs = {$plugin.caddy.debug.userfunc}
-            }
+          userFunc = tx_caddy_powermail->sendToVendor
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
           }
         }
       }
       sender {
+          // Caddy: PDF attachments to the customer
+        addAttachment = USER
         addAttachment {
-            // Caddy: PDF attachments to the customer
-          45967 = USER
-          45967 {
-            userFunc = tx_caddy_powermail->sendToCustomer
-            userFunc {
-              drs = {$plugin.caddy.debug.userfunc}
-            }
+          userFunc = tx_caddy_powermail->sendToCustomer
+          userFunc {
+            drs = {$plugin.caddy.debug.userfunc}
           }
         }
       }
