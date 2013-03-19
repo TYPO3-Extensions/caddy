@@ -5,8 +5,8 @@ if( ! defined( 'TYPO3_MODE' ) )
 }
 $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-$this->userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-var_dump( $this->userfunc->extMgmVersion( 'powermail' ) );
+$userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+var_dump( $userfunc->extMgmVersion( 'powermail' ) );
 die( );
 
 
