@@ -3,6 +3,11 @@ if( ! defined( 'TYPO3_MODE' ) )
 {
   die( 'Access denied.' );
 }
+$path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+$this->userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+var_dump( $this->userfunc->extMgmVersion( 'powermail' ) );
+die( );
 
 
 
@@ -253,4 +258,8 @@ t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_order ');
 t3lib_extMgm::addToInsertRecords( 'tx_caddy_item ');
 t3lib_extMgm::addToInsertRecords( 'tx_caddy_order ');
   // Allow tables on pages
+
+
+
+
 ?>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3DataStructure>
+  <ROOT>
+    <TCEforms>
+      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:email</sheetTitle>
+    </TCEforms>
+    <type>array</type>
+    <el>
+      <customerEmail>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.customerEmail</label>
+          <config>
+            <type>group</type>
+            <internal_type>db</internal_type>
+            <allowed>
+              tx_powermail_domain_model_fields
+            </allowed>
+            <minitems>0</minitems>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </customerEmail>
+      <termsMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode</label>
+          <config>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="1" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="2" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="3" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.termsMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>customer</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </termsMode>
+      <invoiceMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode</label>
+          <config>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="1" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="2" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="3" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.invoiceMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>all</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </invoiceMode>
+      <deliveryorderMode>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode</label>
+          <config>
+            <type>select</type>
+            <items type="array">
+              <numIndex index="0" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.disabled</numIndex>
+                <numIndex index="1">disabled</numIndex>
+              </numIndex>
+              <numIndex index="1" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.customer</numIndex>
+                <numIndex index="1">customer</numIndex>
+              </numIndex>
+              <numIndex index="2" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.vendor</numIndex>
+                <numIndex index="1">vendor</numIndex>
+              </numIndex>
+              <numIndex index="3" type="array">
+                <numIndex index="0">LLL:EXT:caddy/pi1/locallang_flexform.xml:email.deliveryorderMode.all</numIndex>
+                <numIndex index="1">all</numIndex>
+              </numIndex>
+            </items>
+            <default>vendor</default>
+            <maxitems>1</maxitems>
+            <size>1</size>
+          </config>
+        </TCEforms>
+      </deliveryorderMode>
+    </el>
+  </ROOT>
+</T3DataStructure>
