@@ -11,14 +11,17 @@
         Please configure the table, which delivers the products to caddy.<br />
         See: constant editor > CADDY - DATABASE > table name
       ]]></label>
-      <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
-        The customer e-mail is missing in the sheet [email].<br />
-        Any e-mail can't sent without this address. Please upate the sheet!
-      ]]></label>
-      <label index="flexformCheckPowermailOtherFields"><![CDATA[
+      <label index="flexformCheckAddresses"><![CDATA[
         Some fields in the sheets [delivery order address] and [billing address] aren't set.<br />
         Please update your configuration, if values are missing in the delivery order address
         or the billing address.
+      ]]></label>
+      <label index="flexformCheckEmailCustomeremail"><![CDATA[
+        The customer e-mail is missing in the sheet [email].<br />
+        Any e-mail can't sent without this address. Please upate the sheet!
+      ]]></label>
+      <label index="flexformCheckNoteNote"><![CDATA[
+        You have an internal annotation at the tab [Notes]. Please attend it!
       ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         This flexform is never saved. Please save it.<br />
@@ -238,14 +241,17 @@
         Bitte gebe die Tabelle an, die die Produkte f&uuml;r Caddy enth&auml;lt.<br />
         Siehe: Constant Editor > CADDY - DATABASE > table name
       ]]></label>
-      <label index="flexformCheckPowermailCustomerEmail"><![CDATA[
-        Du hast keine Kunden E-Mail im Blatt [E-Mail] angegeben.<br />
-        Ohne die Adresse kann keine E-Mail zugestellt werden. Bitte korrigiere die Einstellung!
-      ]]></label>
-      <label index="flexformCheckPowermailOtherFields"><![CDATA[
+      <label index="flexformCheckAddresses"><![CDATA[
         Einige Felder in den Bl&auml;ttern [Lieferadresse] und [Rechnungsadresse] sind leer.<br />
         Pr&uuml;fe Deine Einstellungen, wenn Angaben in der Lieferadresse oder der Rechnungsadresse 
         fehlen sollten.
+      ]]></label>
+      <label index="flexformCheckNoteNote"><![CDATA[
+        Der Reiter [Notizen] enthält Deine interne Bemerkung. Beachte den Hinweis!
+      ]]></label>
+      <label index="flexformCheckEmailCustomeremail"><![CDATA[
+        Du hast keine Kunden E-Mail im Blatt [E-Mail] angegeben.<br />
+        Ohne die Adresse kann keine E-Mail zugestellt werden. Bitte korrigiere die Einstellung!
       ]]></label>
       <label index="flexformIsEmpty"><![CDATA[
         Diese Flexform wurde nie gespeichert. Bitte speichere die Form einmal ab.<br />

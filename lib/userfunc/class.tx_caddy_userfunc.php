@@ -250,55 +250,22 @@ class tx_caddy_userfunc
    */
   private function flexformCheck( )
   {
-    $prompt = $this->flexformCheckPowermailCustomerEmail( );
-    $prompt = $prompt . $this->flexformCheckPowermailOtherFields( );
+    $prompt = $this->flexformCheckNoteNote( );
+    $prompt = $this->flexformCheckEmailCustomeremail( );
+    $prompt = $prompt . $this->flexformCheckAddresses( );
 
     return $prompt;
   }  
   
   /**
-   * flexformCheckPowermailCustomerEmail( ):
+   * flexformCheckAddresses( ):
    *
    * @return  string    $prompt : message wrapped in HTML
    * @access  private
    * @version 2.0.0
    * @since   2.0.0
    */
-  private function flexformCheckPowermailCustomerEmail( )
-  {
-    $sheet = 'email';
-    $field = 'customerEmail';
-    $customerEmail = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
-
-      // RETURN : there is a flexform form
-    if( $customerEmail )
-    {
-      return null;
-    }
-      // RETURN : there is a flexform form
-    
-      // RETURN prompt : there isn't any flexform form
-    $prompt = '
-      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
-        <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckPowermailCustomerEmail'). '
-        </div>
-      </div>
-      ';
-      // RETURN prompt : there isn't any flexform form
-    
-    return $prompt;
-  }
-  
-  /**
-   * flexformCheckPowermailOtherFields( ):
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
-  private function flexformCheckPowermailOtherFields( )
+  private function flexformCheckAddresses( )
   {
 //.message-notice
 //.message-information
@@ -382,7 +349,75 @@ class tx_caddy_userfunc
     $prompt = '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckPowermailOtherFields'). '
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckAddresses'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any flexform form
+    
+    return $prompt;
+  }
+  
+  /**
+   * flexformCheckEmailCustomeremail( ):
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function flexformCheckEmailCustomeremail( )
+  {
+    $sheet = 'email';
+    $field = 'customerEmail';
+    $emailCustomeremail = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+
+      // RETURN : there is a flexform form
+    if( $emailCustomeremail )
+    {
+      return null;
+    }
+      // RETURN : there is a flexform form
+    
+      // RETURN prompt : there isn't any flexform form
+    $prompt = '
+      <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckEmailCustomeremail'). '
+        </div>
+      </div>
+      ';
+      // RETURN prompt : there isn't any flexform form
+    
+    return $prompt;
+  }
+  
+  /**
+   * flexformCheckNoteNote( ):
+   *
+   * @return  string    $prompt : message wrapped in HTML
+   * @access  private
+   * @version 2.0.0
+   * @since   2.0.0
+   */
+  private function flexformCheckNoteNote( )
+  {
+    $sheet = 'note';
+    $field = 'note';
+    $noteNote = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
+
+      // RETURN : there is a flexform form
+    if( $noteNote )
+    {
+      return null;
+    }
+      // RETURN : there is a flexform form
+    
+      // RETURN prompt : there isn't any flexform form
+    $prompt = '
+      <div class="typo3-message message-info" style="max-width:' . $this->maxWidth . ';">
+        <div class="message-body">
+          ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:flexformCheckNoteNote'). '
         </div>
       </div>
       ';
