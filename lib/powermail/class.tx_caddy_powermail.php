@@ -907,11 +907,11 @@ class tx_caddy_powermail extends tslib_pibase
       default:
         $pmFlexform           = t3lib_div::xml2array( $pmRecord['pi_flexform'] );
         $pmFfConfirm          = $pmFlexform['data']['main']['lDEF']['settings.flexform.main.form']['vDEF'];
-        $pmFfMailreceiver     = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.body']['vDEF'];
-        $pmFfMailsender       = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.body']['vDEF'];
-        $pmFfSubjectReceiver  = $pmFlexform['data']['main']['lDEF']['settings.flexform.receiver.subject']['vDEF'];
-        $pmFfSubjectSender    = $pmFlexform['data']['main']['lDEF']['settings.flexform.sender.subject']['vDEF'];
-        $pmFfThanks           = $pmFlexform['data']['main']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
+        $pmFfMailreceiver     = $pmFlexform['data']['receiver']['lDEF']['settings.flexform.receiver.body']['vDEF'];
+        $pmFfSubjectReceiver  = $pmFlexform['data']['receiver']['lDEF']['settings.flexform.receiver.subject']['vDEF'];
+        $pmFfMailsender       = $pmFlexform['data']['sender']['lDEF']['settings.flexform.sender.body']['vDEF'];
+        $pmFfSubjectSender    = $pmFlexform['data']['sender']['lDEF']['settings.flexform.sender.subject']['vDEF'];
+        $pmFfThanks           = $pmFlexform['data']['thx']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
         break;
     }
 var_dump( __METHOD__, __LINE__, $pmFlexform, $pmFfMailreceiver );
