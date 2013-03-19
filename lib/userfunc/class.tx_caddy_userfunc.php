@@ -250,9 +250,12 @@ class tx_caddy_userfunc
    */
   private function flexformCheck( )
   {
-    $prompt = $this->flexformCheckNoteNote( );
-    $prompt = $this->flexformCheckEmailCustomeremail( );
-    $prompt = $prompt . $this->flexformCheckAddresses( );
+    $prompt = null;
+    
+    $prompt = $this->flexformCheckNoteNote( )
+            . $this->flexformCheckEmailCustomeremail( )
+            . $this->flexformCheckAddresses( )
+            ;
 
     return $prompt;
   }  
