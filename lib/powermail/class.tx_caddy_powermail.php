@@ -1602,6 +1602,10 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function initVersion( )
   {   
+    if( !is_object( $this->userfunc ) )
+    {
+      $this->initInstances( );
+    }
     return $this->userfunc->extMgmVersion( 'powermail' );
   }
 
