@@ -1523,57 +1523,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function initSend2x( )
   {
     $this->sent = false;
-    switch( true )
-    {
-      case( ! $this->fieldFfConfirm ):
-          // Confirmation page is disabled
-        $this->initSend2xWoConfirm( );
-        break;
-      case( $this->fieldFfConfirm ):
-      default:
-          // Confirmation page is enabled
-        $this->initSend2xWiConfirm( );
-        break;
-    }
-
-    return;
-  }
-
- /**
-  * initSend2xWiConfirm( )  : Set the global $send, if the powermail is sent
-  *                           * for powermail version 2.x
-  *                           * and an enabled confirmation mode
-  *
-  * @return	void
-  * @access private
-  * @version 2.0.0
-  * @since   2.0.0
-  */
-  private function initSend2xWiConfirm( )
-  {
-    $this->sent = false;
-    if( ! empty( $this->paramGet['sendNow'] ) )
-    {
-      $this->sent = true;
-    }
-
-    return;
-  }
-
- /**
-  * initSend2xWoConfirm( )  : Set the global $send, if the powermail is sent
-  *                           * for powermail version 2.x
-  *                           * and a disabled confirmation mode
-  *
-  * @return	void
-  * @access private
-  * @version 2.0.0
-  * @since   2.0.0
-  */
-  private function initSend2xWoConfirm( )
-  {
-    $this->sent = false;
-    if( ! empty( $this->paramGet['mailID'] ) )
+    if( $this->paramGet['action'] == 'create' )
     {
       $this->sent = true;
     }
