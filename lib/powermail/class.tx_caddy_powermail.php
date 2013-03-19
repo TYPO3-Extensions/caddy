@@ -1147,9 +1147,11 @@ class tx_caddy_powermail extends tslib_pibase
         break;
       case( $this->versionInt < 2000000 ):
         $this->initMarkerValues1x( );
+var_dump( __METHOD__, __LINE__, $this->versionInt, $this->markerTsCaddy );
         break;
       case( $this->versionInt < 3000000 ):
         $this->initMarkerValues2x( );
+var_dump( __METHOD__, __LINE__, $this->versionInt, $this->markerTsCaddy );
         break;
       case( $this->versionInt >= 3000000 ):
       default:
@@ -1160,6 +1162,7 @@ class tx_caddy_powermail extends tslib_pibase
         die( $prompt );
         break;
     }
+  
   }
 
 /**
