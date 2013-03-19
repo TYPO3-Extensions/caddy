@@ -405,12 +405,12 @@ class tx_caddy_userfunc
    */
   private function flexformCheckNoteNote( )
   {
-    $sheet = 'note';
-    $field = 'note';
+    $sheet    = 'note';
+    $field    = 'note';
     $noteNote = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
 
       // RETURN : there is a flexform form
-    if( $noteNote )
+    if( ! $noteNote )
     {
       return null;
     }
