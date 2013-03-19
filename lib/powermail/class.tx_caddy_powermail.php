@@ -602,23 +602,15 @@ class tx_caddy_powermail extends tslib_pibase
     
     switch( true )
     {
-      case( $this->versionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt < 2000000 ):
+      case( $this->pmVersAppendix == '1x' ):
         $value = $this->getFieldByIdFromPost1x( $uid );
         break;
-      case( $this->versionInt < 3000000 ):
+      case( $this->pmVersAppendix == '2x' ):
         $value = $this->getFieldByIdFromPost2x( $uid );
         break;
-      case( $this->versionInt >= 3000000 ):
       default:
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->versionInt . '<br />
+          powermail version is neither 1.x nor 2.x. Internal: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
@@ -642,14 +634,14 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $value = null;
     
-    $uidVersion1 = 'uid' . $uid;
-    $value = $this->paramPost[$uidVersion1];
+    $uid1x = 'uid' . $uid;
+    $value = $this->paramPost[$uid1x];
       // DRS
     if( $this->pObj->drs->drsError )
     {
-      if( ! isset( $this->paramPost[$uidVersion1] ) )
+      if( ! isset( $this->paramPost[$uid1x] ) )
       {
-        $prompt = 'POST[' . $uidVersion1 . '] isn\'t set!';
+        $prompt = 'POST[' . $uid1x . '] isn\'t set!';
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
       }
     }
@@ -668,16 +660,21 @@ class tx_caddy_powermail extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function getFieldByIdFromPost2x( $uid )
+  private function getFieldByIdFromPost2x( $uid2x )
   {
     $value = null;
-    unset( $uid );
     
-    $prompt = 'TODO: powermail 2.x<br />
-      Please maintain the code!<br />
-      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-      TYPO3 extension: ' . $this->extKey;
-    die( $prompt );
+    $value = $this->paramPost[$uid2x];
+      // DRS
+    if( $this->pObj->drs->drsError )
+    {
+      if( ! isset( $this->paramPost[$uid2x] ) )
+      {
+        $prompt = 'POST[' . $uid2x . '] isn\'t set!';
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+      }
+    }
+      // DRS
 
     return $value;
   }
@@ -736,15 +733,15 @@ class tx_caddy_powermail extends tslib_pibase
     
     $sessionData = $this->sessionData( );
 
-    $uidVersion1 = 'uid' . $uid;
-    $value = $sessionData[$uidVersion1];
+    $uid1x = 'uid' . $uid;
+    $value = $sessionData[$uid1x];
 
       // DRS
     if( $this->pObj->drs->drsError )
     {
-      if( ! isset( $sessionData[$uidVersion1] ) )
+      if( ! isset( $sessionData[$uid1x] ) )
       {
-        $prompt = 'SESSION[' . $uidVersion1 . '] isn\'t set!';
+        $prompt = 'SESSION[' . $uid1x . '] isn\'t set!';
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
       }
     }
@@ -1700,6 +1697,8 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
+    $this->initPowermailVersionAppendix( );
+    
     $this->initPdf( );
     $this->pdf->pObj  = $this;
 
@@ -1880,6 +1879,8 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
+    $this->initPowermailVersionAppendix( );
+
     $this->initPdf( );
     $this->pdf->pObj  = $this;
 
