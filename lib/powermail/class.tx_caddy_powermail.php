@@ -847,6 +847,7 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
 
+    $this->initPowermailVersionAppendix( );
     $this->initMarker( );
 
       // GET- and POST-parameters
