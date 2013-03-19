@@ -3,11 +3,6 @@ if( ! defined( 'TYPO3_MODE' ) )
 {
   die( 'Access denied.' );
 }
-$path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
-$userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-var_dump( $userfunc->extMgmVersion( 'powermail' ) );
-die( );
 
 
 
@@ -16,6 +11,7 @@ die( );
   // INDEX
 
   // Set TYPO3 version
+  // Set powermail version
   // Configuration by the extension manager
   //    Database read only
   //    Localization support
@@ -59,6 +55,46 @@ if( $typo3Version < 3000000 )
   die ( $prompt );
 }
   // Set TYPO3 version
+
+
+    
+
+  ////////////////////////////////////////////////////////////////////////////
+  //
+  // Set powermail version
+
+$path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
+$userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
+
+$arrResult = $userfunc->extMgmVersion( 'powermail' );
+$versionInt = $arrResult['int'];
+//$versionStr = $arrResult['str'];
+switch( true )
+{
+  case( $versionInt < 1000000 ):
+    $prompt = 'ERROR: unexpected result<br />
+      powermail version is below 1.0.0: ' . $versionInt . '<br />
+      ext_tables.php method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );
+    break;
+  case( $versionInt < 2000000 ):
+    $pmVers = '1x';
+    break;
+  case( $versionInt < 3000000 ):
+    $pmVers = '2x'; 
+    break;
+  case( $versionInt >= 3000000 ):
+  default:
+    $prompt = 'ERROR: unexpected result<br />
+      powermail version is 3.x: ' . $versionInt . '<br />
+      ext_tables.php method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );
+    break;
+}
+  // Set powermail version
 
 
     
@@ -177,7 +213,7 @@ t3lib_extMgm::addPlugin(array(
   $_EXTKEY . '_pi1',
   t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png'
 ),'list_type');
-t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform.xml' ); 
+t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform' . $pmVers . '.xml' ); 
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][ $_EXTKEY . '_pi2']  = 'layout,select_key,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][ $_EXTKEY . '_pi2']      = 'pi_flexform';
