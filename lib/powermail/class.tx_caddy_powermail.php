@@ -129,6 +129,7 @@ class tx_caddy_powermail extends tslib_pibase
   
     // [Object]
   private $pdf      = null;
+  
     // [Object]
   private $userfunc = null;
   
@@ -149,6 +150,8 @@ class tx_caddy_powermail extends tslib_pibase
   private $render                   = null;
   private $session                  = null;
   public  $tmpl                     = null;
+  
+  private $pmVersAppendix = null;
 
 
   
@@ -479,17 +482,99 @@ class tx_caddy_powermail extends tslib_pibase
   */
   public function getFieldById( $uid )
   {
+    switch( true )
+    {
+      case( $this->pmVersAppendix == '1x' ):
+        $value = $this->getFieldById1x( $uid );
+        break;
+      case( $this->pmVersAppendix == '2x' ):
+        $value = $this->getFieldById2x( $uid );
+        break;
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is neither 1.x nor 2.x. Internal: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+    return $value;
+  }
+
+ /**
+  * getFieldById1x( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getFieldById1x( $uid )
+  {
     switch( $this->fieldFfConfirm )
     {
       case( false ):
-        $value = $this->getFieldByIdFromPost( $uid );
+        $value = $this->getFieldById1xWiConfirm( $uid );
         break;
       case( true ):
       default:
-        $value = $this->getFieldByIdFromSession( $uid );
+        $value = $this->getFieldById1xWoConfirm( $uid );
         break;
         
     }
+    return $value;
+  }
+
+ /**
+  * getFieldById1xWiConfirm( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getFieldById1xWiConfirm( $uid )
+  {
+    $value = $this->getFieldByIdFromSession( $uid );
+
+    return $value;
+  }
+
+ /**
+  * getFieldById1xWoConfirm( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getFieldById1xWoConfirm( $uid )
+  {
+    $value = $this->getFieldByIdFromPost( $uid );
+
+    return $value;
+  }
+
+ /**
+  * getFieldById2x( ) :  Return the value of the given uid from the POST params.
+  *                     The uid is the uid only - without any prefix!
+  *
+  * @param      integer     $uid    : The uid of the value, which should returned
+  * @return	string      $value  : The value of the given uid
+  * @access     public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function getFieldById2x( $uid )
+  {
+    $value = $this->getFieldByIdFromPost( $uid );
+
     return $value;
   }
 
@@ -1130,31 +1215,23 @@ class tx_caddy_powermail extends tslib_pibase
  * initMarkerValues( ):
  *
  * @return    void
- * @access  public
+ * @access  private
  * @version 2.0.0
  * @since   2.0.0
  */
-  public function initMarkerValues(  )
+  private function initMarkerValues(  )
   {
     switch( true )
     {
-      case( $this->versionInt < 1000000 ):
-        $prompt = 'ERROR: unexpected result<br />
-          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
-          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-          TYPO3 extension: ' . $this->extKey;
-        die( $prompt );
-        break;
-      case( $this->versionInt < 2000000 ):
+      case( $this->pmVersAppendix == '1x' ):
         $this->initMarkerValues1x( );
         break;
-      case( $this->versionInt < 3000000 ):
+      case( $this->pmVersAppendix == '2x' ):
         $this->initMarkerValues2x( );
         break;
-      case( $this->versionInt >= 3000000 ):
       default:
         $prompt = 'ERROR: unexpected result<br />
-          powermail version is 3.x: ' . $this->versionInt . '<br />
+          powermail version is neither 1.x nor 2.x. Internal: ' . $this->versionInt . '<br />
           Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
           TYPO3 extension: ' . $this->extKey;
         die( $prompt );
@@ -1167,11 +1244,11 @@ class tx_caddy_powermail extends tslib_pibase
  * initMarkerValues1x( ):
  *
  * @return    void
- * @access  public
+ * @access  private
  * @version 2.0.0
  * @since   2.0.0
  */
-  public function initMarkerValues1x(  )
+  private function initMarkerValues1x(  )
   {
     $this->markerTsCaddy          = '###POWERMAIL_TYPOSCRIPT_CADDY###';
     $this->markerTsOrdernumber    = '###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###';
@@ -1183,11 +1260,11 @@ class tx_caddy_powermail extends tslib_pibase
  * initMarkerValues2x( ):
  *
  * @return    void
- * @access  public
+ * @access  private
  * @version 2.0.0
  * @since   2.0.0
  */
-  public function initMarkerValues2x(  )
+  private function initMarkerValues2x(  )
   {
     $this->markerTsCaddy          = '{f:cObject(typoscriptObjectPath:\'plugin.tx_caddy_pi1.powermail.caddy\')}';
     $this->markerTsOrdernumber    = '{f:cObject(typoscriptObjectPath:\'plugin.tx_caddy_pi1.powermail.caddyordernumber\')}';
@@ -1232,6 +1309,53 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
     
+  }
+
+
+
+  /***********************************************
+  *
+  * Init Powermail Version
+  *
+  **********************************************/
+
+
+ /**
+  * initPowermailVersionAppendix( ): 
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function initPowermailVersionAppendix( )
+  {
+    switch( true )
+    {
+      case( $this->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->versionInt < 2000000 ):
+        $this->pmVersAppendix = '1x';
+        break;
+      case( $this->versionInt < 3000000 ):
+        $this->pmVersAppendix = '2x';
+        break;
+      case( $this->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+
+    return;
   }
 
 
@@ -1576,6 +1700,9 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
+    $this->initPdf( );
+    $this->pdf->pObj  = $this;
+
     $path = $this->sendToCustomerDeliveryorder( );
     if( ! empty( $path ) )
     {
@@ -1637,8 +1764,6 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $this->initPdf( );
-    $this->pdf->pObj  = $this;
     $path = $this->pdf->deliveryorder( );
 
       // DRS
@@ -1678,8 +1803,6 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $this->initPdf( );
-    $this->pdf->pObj  = $this;
     $path = $this->pdf->invoice( );
 
       // DRS
@@ -1718,8 +1841,6 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $this->initPdf( );
-    $this->pdf->pObj  = $this;
     $path = $this->pdf->terms( );
 
       // DRS
@@ -1759,6 +1880,9 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
       
+    $this->initPdf( );
+    $this->pdf->pObj  = $this;
+
     $path = $this->sendToVendorDeliveryorder( );
     if( ! empty( $path ) )
     {
@@ -1820,8 +1944,6 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $this->initPdf( );
-    $this->pdf->pObj  = $this;
     $path = $this->pdf->deliveryorder( );
 
       // DRS
@@ -1861,8 +1983,6 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $this->initPdf( );
-    $this->pdf->pObj  = $this;
     $path = $this->pdf->invoice( );
 
 
@@ -1901,6 +2021,8 @@ class tx_caddy_powermail extends tslib_pibase
         // DRS
       return null;
     }
+
+    $path = $this->pdf->terms( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
