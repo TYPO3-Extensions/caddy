@@ -914,7 +914,7 @@ class tx_caddy_powermail extends tslib_pibase
         $pmFfThanks           = $pmFlexform['data']['main']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
         break;
     }
-var_dump( __METHOD__, __LINE__, $pmFfMailreceiver );
+var_dump( __METHOD__, __LINE__, $pmFlexform, $pmFfMailreceiver );
     $arrReturn['uid']               = $pmUid;
     $arrReturn['title']             = $pmTitle;
     $arrReturn['ffConfirm']         = $pmFfConfirm;
