@@ -729,12 +729,37 @@ class tx_caddy_userfunc
 //.message-error
     $prompt = null; 
 
+    switch( true )
+    {
+      case( $this->powermail->versionInt < 1000000 ):
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is below 1.0.0: ' . $this->powermail->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+      case( $this->powermail->versionInt < 2000000 ):
+        $pmVers = '1x';
+        break;
+      case( $this->powermail->versionInt < 3000000 ):
+        $pmVers = '2x';
+        break;
+      case( $this->powermail->versionInt >= 3000000 ):
+      default:
+        $prompt = 'ERROR: unexpected result<br />
+          powermail version is 3.x: ' . $this->powermail->versionInt . '<br />
+          Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+          TYPO3 extension: ' . $this->extKey;
+        die( $prompt );
+        break;
+    }
+    
     if( ! $this->powermail->markerReceiver )
     {
       $prompt = $prompt . '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWo' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -745,7 +770,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmReceiverMarkerWiWtcart' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -756,7 +781,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWo' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -767,7 +792,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-notice" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSenderMarkerWiWtcart' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -778,7 +803,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectReceiverMarkerWo' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectReceiverMarkerWo' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -789,7 +814,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-warning" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectSenderMarkerWo' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmSubjectSenderMarkerWo' . $pmVers ) . '
         </div>
       </div>
       ';
@@ -800,7 +825,7 @@ class tx_caddy_userfunc
       $prompt = $prompt . '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
         <div class="message-body">
-          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmThanksMarkerWo' ) . '
+          ' . $GLOBALS['LANG']->sL( 'LLL:EXT:caddy/lib/userfunc/locallang.xml:pmThanksMarkerWo' . $pmVers ) . '
         </div>
       </div>
       ';
