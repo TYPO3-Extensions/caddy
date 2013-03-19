@@ -5,6 +5,7 @@
   </meta>
   <sheets>
     <sDEF>EXT:caddy/pi1/flexform_sheet_sDEF.xml</sDEF>
+    <origin>EXT:caddy/pi1/flexform_sheet_note.xml</origin>
     <origin>EXT:caddy/pi1/flexform_sheet_origin.xml</origin>
     <email>EXT:caddy/pi1/flexform_sheet_email2x.xml</email>
     <invoice>EXT:caddy/pi1/flexform_sheet_invoice2x.xml</invoice>
