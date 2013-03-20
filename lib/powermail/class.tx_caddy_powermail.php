@@ -516,11 +516,11 @@ class tx_caddy_powermail extends tslib_pibase
     switch( $this->fieldFfConfirm )
     {
       case( false ):
-        $value = $this->getFieldById1xWiConfirm( $uid );
+        $value = $this->getFieldById1xWoConfirm( $uid );
         break;
       case( true ):
       default:
-        $value = $this->getFieldById1xWoConfirm( $uid );
+        $value = $this->getFieldById1xWiConfirm( $uid );
         break;
         
     }
