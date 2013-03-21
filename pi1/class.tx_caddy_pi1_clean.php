@@ -165,6 +165,7 @@ class tx_caddy_pi1_clean
       // Initiate files
     $fileDeliveryorder  = null;
     $fileInvoice        = null;
+    $fileRevocation     = null;
     $fileTerms          = null;
       // Initiate files
     
@@ -182,6 +183,8 @@ class tx_caddy_pi1_clean
     $pdfDeliveryorderToVendor   = false;
     $pdfInvoiceToCustomer       = false;
     $pdfInvoiceToVendor         = false;
+    $pdfRevocationToCustomer    = false;
+    $pdfRevocationToVendor      = false;
     $pdfTermsToCustomer         = false;
     $pdfTermsToVendor           = false;
 
@@ -200,6 +203,14 @@ class tx_caddy_pi1_clean
     if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
     {
       $pdfInvoiceToVendor = true;
+    }
+    if( ! empty ( $sesArray['sendCustomerRevocation'] ) ) 
+    {
+      $pdfRevocationToCustomer = true;
+    }
+    if( ! empty ( $sesArray['sendVendorRevocation'] ) ) 
+    {
+      $pdfRevocationToVendor = true;
     }
     if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
     {
@@ -236,6 +247,17 @@ class tx_caddy_pi1_clean
     }
     switch( true )
     {
+      case( $pdfRevocationToCustomer ):
+      case( $pdfRevocationToVendor ):
+        $fileRevocation  = $this->local_cObj->cObjGetSingle
+                      (
+                        $this->pObj->conf['pdf.']['revocation.']['filename'],
+                        $this->pObj->conf['pdf.']['revocation.']['filename.']
+                      );
+        break;
+    }
+    switch( true )
+    {
       case( $pdfTermsToCustomer ):
       case( $pdfTermsToVendor ):
         $fileTerms  = $this->local_cObj->cObjGetSingle
@@ -262,6 +284,7 @@ class tx_caddy_pi1_clean
       'customerEmail'               => $customerEmail,
       'fileDeliveryorder'           => $fileDeliveryorder,
       'fileInvoice'                 => $fileInvoice,
+      'fileRevocation'              => $fileRevocation,
       'fileTerms'                   => $fileTerms,
       'items'                       => '',
       'numberDeliveryorder'         => $numberDeliveryorder,
@@ -271,6 +294,8 @@ class tx_caddy_pi1_clean
       'pdfDeliveryorderToVendor'    => $pdfDeliveryorderToVendor,
       'pdfInvoiceToCustomer'        => $pdfInvoiceToCustomer,
       'pdfInvoiceToVendor'          => $pdfInvoiceToVendor,
+      'pdfRevocationToCustomer'     => $pdfRevocationToCustomer,
+      'pdfRevocationToVendor'       => $pdfRevocationToVendor,
       'pdfTermsToCustomer'          => $pdfTermsToCustomer,
       'pdfTermsToVendor'            => $pdfTermsToVendor,
       'quantity'                    => $quantity,

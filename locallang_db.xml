@@ -18,6 +18,7 @@
       <label index="tx_caddy_order.div.sum">Sum</label>                        
       <label index="tx_caddy_order.fileDeliveryorder">Delivery order</label>                        
       <label index="tx_caddy_order.fileInvoice">Invoice</label>                        
+      <label index="tx_caddy_order.fileRevocation">Power of Revocation</label>                        
       <label index="tx_caddy_order.fileTerms"><![CDATA[Terms & Conditions]]></label>                        
       <label index="tx_caddy_order.item">Items</label>                        
       <label index="tx_caddy_order.numberDeliveryorder">Delivery order</label>                        
@@ -33,6 +34,8 @@
       <label index="tx_caddy_order.pdfDeliveryorderToVendor">Delivery order</label>                        
       <label index="tx_caddy_order.pdfInvoiceToCustomer">Invoice</label>                        
       <label index="tx_caddy_order.pdfInvoiceToVendor">Invoice</label>                        
+      <label index="tx_caddy_order.pdfRevocationToCustomer">Power of Revocation</label>                        
+      <label index="tx_caddy_order.pdfRevocationToVendor">Power of Revocation</label>                        
       <label index="tx_caddy_order.pdfTermsToCustomer"><![CDATA[Terms & Conditions]]></label>                        
       <label index="tx_caddy_order.pdfTermsToVendor"><![CDATA[Terms & Conditions]]></label>                        
       <label index="tx_caddy_order.quantity">Number of items</label>                        
@@ -55,6 +58,7 @@
       <label index="tx_caddy_order.div.sum">Summe</label>                        
       <label index="tx_caddy_order.fileDeliveryorder">Lieferschein</label>                        
       <label index="tx_caddy_order.fileInvoice">Rechnung</label>                        
+      <label index="tx_caddy_order.fileRevocation">Widerrufsbelehrung</label>                        
       <label index="tx_caddy_order.fileTerms">AGB</label>                        
       <label index="tx_caddy_order.item">Artikel</label>                        
       <label index="tx_caddy_order.numberDeliveryorder">Lieferschein</label>                        
@@ -70,6 +74,8 @@
       <label index="tx_caddy_order.pdfDeliveryorderToVendor">Lieferschein</label>                        
       <label index="tx_caddy_order.pdfInvoiceToCustomer">Rechnung</label>                        
       <label index="tx_caddy_order.pdfInvoiceToVendor">Rechnung</label>                        
+      <label index="tx_caddy_order.pdfRevocationToCustomer">Widerrufsbelehrung</label>                        
+      <label index="tx_caddy_order.pdfRevocationToVendor">Widerrufsbelehrung</label>                        
       <label index="tx_caddy_order.pdfTermsToCustomer">AGB</label>                        
       <label index="tx_caddy_order.pdfTermsToVendor">AGB</label>                        
       <label index="tx_caddy_order.quantity">Anzahl der Artikel</label>                        

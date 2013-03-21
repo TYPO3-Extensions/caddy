@@ -52,11 +52,11 @@ $TCA['tx_caddy_order'] = array (
   'ctrl' => $TCA['tx_caddy_order']['ctrl'],
   'interface' => array (
     'showRecordFieldList' =>  'customerEmail,' . 
-                              'fileDeliveryorder,fileInvoice,fileTerms,' . 
+                              'fileDeliveryorder,fileInvoice,fileRevocation,fileTerms,' . 
                               'items,' . 
                               'numberDeliveryorder,numberInvoice,numberOrder,' . 
                               'pdfDeliveryorderToCustomer,pdfDeliveryorderToVendor,pdfInvoiceToCustomer,' .
-                              'pdfInvoiceToVendor,pdfTermsToCustomer,pdfTermsToVendor,' .
+                              'pdfInvoiceToVendor,pdfRevocationToCustomer,pdfRevocationToVendor,pdfTermsToCustomer,pdfTermsToVendor,' .
                               'quantity,' . 
                               'sumGross,sumNet,sumTaxReduced,sumTaxNormal,' . 
                               'tstamp',
@@ -90,6 +90,21 @@ $TCA['tx_caddy_order'] = array (
     'fileInvoice' => array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileInvoice',
+      'config' => array (
+        'type' => 'group',
+        'internal_type' => 'file',
+        'allowed' => 'pdf',  
+        'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],  
+        'uploadfolder' => 'uploads/tx_caddy',
+        'show_thumbs' => 1,  
+        'size' => 1,  
+        'minitems' => 0,
+        'maxitems' => 1,
+      )
+    ),
+    'fileRevocation' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileRevocation',
       'config' => array (
         'type' => 'group',
         'internal_type' => 'file',
@@ -171,6 +186,22 @@ $TCA['tx_caddy_order'] = array (
     'pdfInvoiceToVendor' => array (
       'exclude' => 0,
       'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfRevocationToCustomer' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfRevocationToCustomer',
+      'config' => array (
+        'type' => 'check',
+        'default' => 1,
+      )
+    ),
+    'pdfRevocationToVendor' => array (
+      'exclude' => 0,
+      'label' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfRevocationToVendor',
       'config' => array (
         'type' => 'check',
         'default' => 1,
@@ -326,6 +357,7 @@ $TCA['tx_caddy_order'] = array (
         'fileDeliveryorder;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileDeliveryorder,' .
         'fileInvoice;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileInvoice,' .
         '--linebreak--,' . 
+        'fileRevocation;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileRevocation,' .
         'fileTerms;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.fileTerms,' .
         '',
       'canNotCollapse' => 1,
@@ -334,6 +366,7 @@ $TCA['tx_caddy_order'] = array (
       'showitem' => 
         'pdfDeliveryorderToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToCustomer,' .
         'pdfInvoiceToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToCustomer,' .
+        'pdfRevocationToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfRevocationToCustomer,' .
         'pdfTermsToCustomer;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToCustomer,' .
         '',
       'canNotCollapse' => 1,
@@ -342,6 +375,7 @@ $TCA['tx_caddy_order'] = array (
       'showitem' => 
         'pdfDeliveryorderToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfDeliveryorderToVendor,' .
         'pdfInvoiceToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfInvoiceToVendor,' .
+        'pdfRevocationToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfRevocationToVendor,' .
         'pdfTermsToVendor;LLL:EXT:caddy/locallang_db.xml:tx_caddy_order.pdfTermsToVendor,' .
         '',
       'canNotCollapse' => 1,

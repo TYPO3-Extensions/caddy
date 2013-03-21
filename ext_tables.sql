@@ -40,6 +40,7 @@ CREATE TABLE tx_caddy_order (
 
   fileDeliveryorder text,
   fileInvoice text,
+  fileRevocation text,
   fileTerms text,
 
   items tinytext,
@@ -52,6 +53,8 @@ CREATE TABLE tx_caddy_order (
   pdfDeliveryorderToVendor tinyint(4) DEFAULT '0' NOT NULL,
   pdfInvoiceToCustomer tinyint(4) DEFAULT '0' NOT NULL,
   pdfInvoiceToVendor tinyint(4) DEFAULT '0' NOT NULL,
+  pdfRevocationToCustomer tinyint(4) DEFAULT '0' NOT NULL,
+  pdfRevocationToVendor tinyint(4) DEFAULT '0' NOT NULL,
   pdfTermsToCustomer tinyint(4) DEFAULT '0' NOT NULL,
   pdfTermsToVendor tinyint(4) DEFAULT '0' NOT NULL,
 

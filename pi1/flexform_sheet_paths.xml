@@ -18,6 +18,18 @@
           </config>
         </TCEforms>
       </terms>
+      <revocation>
+        <TCEforms>
+          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.revocation</label>
+          <config>
+            <type>input</type>
+            <size>40</size>
+            <max>255</max>
+            <eval>trim</eval>
+            <default>typo3conf/ext/quick_shop/res/pdf/typo3-quick-shop-invoice.pdf</default>
+          </config>
+        </TCEforms>
+      </revocation>
       <invoice>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.invoice</label>

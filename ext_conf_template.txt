@@ -5,11 +5,11 @@ evaluatorExternalLinks = 1
   # cat=evaluator/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
 evaluatorSponsors = 1
 
-  # cat=database/enable/100;           type=boolean; label= Read only: Caddy records can't edited and can't removed (recommended).
+  # cat=archive audit proof/enable/100;           type=boolean; label= Enabled: Caddy records can't edited and can't removed (recommended). Audit proof in German: revisionssicher.
 databaseReadonly      = 1
-  # cat=database/others/198;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
+  # cat=archive audit proof/others/198;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links
 databaseExternalLinks = 1
-  # cat=database/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=archive audit proof/others/199;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
 databaseSponsors = 1
 
   # cat=debugging/enable/100;           type=options[Disabled,Enabled (for debugging only!)]; label= DRS - Development Reporting System: Messages will be written to DevLog (you need the extension devlog).

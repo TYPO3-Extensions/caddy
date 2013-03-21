@@ -182,6 +182,21 @@ plugin.caddy {
   # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.order.sponsors = Click me!
 
+  # cat=caddy - pdf revocation//101; type=options[,L,C,R];  label= Revocation alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
+  pdf.revocation.align = 
+  # cat=caddy - pdf revocation//101; type=int+; label= Revocation position left: Position of the revocation from the left margin in millimeters
+  pdf.revocation.x = 25
+  # cat=caddy - pdf revocation//102; type=int+; label= Revocation position top: Position of the revocation from the top margin in millimeters
+  pdf.revocation.y = 100
+  # cat=caddy - pdf revocation//103; type=int+; label= Revocation width: Width of the revocation in millimeters
+  pdf.revocation.width = 165
+  # cat=caddy - pdf revocation//104; type=int+; label= Revocation font-size: Font-size of the revocation in points
+  pdf.revocation.fontsize = 14
+  # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdf.revocation.externalLinks = Click me!
+  # cat=caddy - pdf revocation/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdf.revocation.sponsors = Click me!
+
   # cat=caddy - pdf terms//101; type=options[,L,C,R];  label= Terms alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
   pdf.terms.align = 
   # cat=caddy - pdf terms//101; type=int+; label= Terms position left: Position of the terms from the left margin in millimeters

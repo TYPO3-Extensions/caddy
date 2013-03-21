@@ -982,6 +982,8 @@ class tx_caddy_pdf extends tslib_pibase
   * @return	object		$tcpdf    : TCPDF object
   * @access private
   * @internal   http://www.tcpdf.org/doc/code/classTCPDF.html
+  *             http://www.setasign.de/support/manuals/fpdi/
+  *             http://www.setasign.de/products/pdf-php-solutions/fpdi/demos/
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1002,9 +1004,20 @@ class tx_caddy_pdf extends tslib_pibase
     $tcpdf->setPrintFooter( false );    
 
     $tcpdf->AddPage( );
-    $tcpdf->setSourceFile( $srceFile );
+    $numbersOfPages = $tcpdf->setSourceFile( $srceFile );
+    unset( $numbersOfPages ); 
     $tmplId = $tcpdf->importPage( 1 );
-    $tcpdf->useTemplate( $tmplId, 0, 0, 210 );
+      // Abscissa of the upper-left corner.
+    $x = 0;
+      // Ordinate of the upper-left corner.
+    $y = 0;
+      // Width of the template in the page. If not specified or equal to zero, it is automatically calculated.
+    $w = 210;
+      // Height of the template in the page. If not specified or equal to zero, it is automatically calculated.
+    $h = 297;
+      // If this parameter is set to true the page size will be adjusted to the size of the imported page.
+    $adjustPageSize = true;
+    $tcpdf->useTemplate( $tmplId, $x, $y, $w, $h, $adjustPageSize );
 
     return $tcpdf;
   }
@@ -1198,6 +1211,209 @@ class tx_caddy_pdf extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+  }
+
+
+
+  /***********************************************
+  *
+  * Revocation
+  *
+  **********************************************/
+
+ /**
+  * revocation( ) : Generates the PDF revocation and returns the path to the PDF file
+  *
+  * @return	string		$path : path to the rendered pdf file
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function revocation( )
+  {
+    $destFile = null;
+    $destPath = null;
+
+      // Init caddy pdf
+    $this->init( );
+
+      // RETURN : any pdf is requested
+    if( ! $this->revocationInit( ) )
+    {
+      return;
+    }
+      // RETURN : any pdf is requested
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // Add session data to the local cObj
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+
+      // DRS
+    if( $this->pObj->drsUserfunc )
+    {
+      $data   = var_export( $this->local_cObj->data, true );
+      $prompt = 'cObj->data: ' . $data;
+      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+      // Get the path of the destination file
+    $destFile = $this->local_cObj->cObjGetSingle
+                (
+                  $this->confPdf['revocation.']['filename'],
+                  $this->confPdf['revocation.']['filename.']
+                );
+    $destPath = 'uploads/tx_caddy/' . $destFile;
+      // Get the path of the destination file
+
+      // RETURN : destination file already exists
+    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
+      }
+        // DRS
+      return $destPath;
+    }
+      // RETURN : destination file already exists
+
+      // PDF source file
+    $srceFile = $sesArray['sendVendorRevocation'];
+    if( empty ( $srceFile ) )
+    {
+      $srceFile = $sesArray['sendCustomerRevocation'];
+    }
+    if( empty ( $srceFile ) )
+    {
+      $prompt = 'Can\'t get source file from session data ' .
+                'sendCustomerRevocation/sendVendorRevocation<br />' . PHP .
+                __METHOD__ . '(line ' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // PDF source file
+
+      // Init tcpdf
+    $this->tcpdf = $this->tcpdfInit( $srceFile );
+
+      // Write the delivery order address
+    $this->revocationAddress( );
+
+      // Write the delivery order date
+    $this->revocationDate( );
+
+      // Write additional textblocks
+    $this->revocationAdditionalTextblocks( );
+
+      // Write the caddy
+//    $this->caddy( );
+
+      // Create the PDF
+    $this->tcpdfOutput( $destPath );
+
+      // RETURN :
+    return $destPath;
+  }
+
+ /**
+  * revocationAdditionalTextblocks( ) : Write addional text blocks
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function revocationAdditionalTextblocks( )
+  {
+    $additionalTextblocks = $this->confPdf['revocation.']['content.']['additionaltextblocks.'];
+
+      // LOOP : additional textblocks
+    foreach( array_keys ( ( array ) $additionalTextblocks ) as $key )
+    {
+      if( ! stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+      $this->writeTextblock( $additionalTextblocks[$key], 'revocation.additionaltextblocks.' . $key );
+    }
+      // LOOP : additional textblocks
+
+  }
+
+ /**
+  * revocationAddress( ) :  Write the invoice address
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function revocationAddress( )
+  {
+    $invoiceaddress = $this->confPdf['revocation.']['content.']['address.']['invoice.'];
+    $this->writeTextblock( $invoiceaddress, 'invoiceAddress' );
+  }
+
+ /**
+  * revocationDate( ) : Write the current date
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function revocationDate( )
+  {
+    $date = $this->confPdf['revocation.']['content.']['date.'];
+    $this->writeTextblock( $date, 'revocationDate' );
+  }
+
+ /**
+  * revocationInit( ) : Return false, if revocation should not sent to the customer or the vendor
+  *
+  * @return	boolean		$revocationInit  : false, if invoice should not sent
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function revocationInit( )
+  {
+    $revocationInit = null;
+
+      // Get the caddy session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // RETURN : any pdf is requested
+    switch( true )
+    {
+      case( ! empty( $sesArray['sendCustomerRevocation'] ) ):
+      case( ! empty( $sesArray['sendVendorRevocation'] ) ):
+        $revocationInit = true;
+        break;
+      default:
+        $revocationInit = false;
+        break;
+    }
+    unset( $sesArray );
+
+    if( ! $revocationInit )
+    {
+        // DRS
+      if( $this->pObj->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+      // RETURN : any pdf is requested
+
+    return $revocationInit;
   }
 
 

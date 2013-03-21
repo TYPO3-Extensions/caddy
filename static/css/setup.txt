@@ -1,6 +1,8 @@
 plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
-    /* div based cart */
+    
+    /* div based caddy */
+    
     #caddy_payment {
       padding: 0.4em 0 0 4.3em;
     }
@@ -107,7 +109,9 @@ plugin.tx_caddy_pi1 {
     div.caddy_linktotheshop a:visited {
       color:white;
     }
-    /* table based cart */
+
+    /* table based caddy */
+
     table.caddy_table { 
       border:1px solid #336699; 
       margin:0 0 10px 0; 

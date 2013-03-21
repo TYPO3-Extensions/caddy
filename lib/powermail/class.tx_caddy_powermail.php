@@ -1778,6 +1778,44 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
+  * sendToCustomerRevocation( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToCustomerRevocation( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendCustomerRevocation'];
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $this->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
+
+    $path = $this->pdf->terms( );
+
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
+  }
+
+ /**
   * sendToCustomerTerms( ):
   *
   * @return	string		$path : path to the attachment, which should send
@@ -1948,6 +1986,44 @@ class tx_caddy_powermail extends tslib_pibase
 
     $path = $this->pdf->invoice( );
 
+
+      // DRS
+    if( $this->drs->drsSession || $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $path;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+    
+    return $path;
+  }
+
+ /**
+  * sendToVendorRevocation( ):
+  *
+  * @return	string		$path : path to the attachment, which should send
+  * @access private
+  * @version 2.0.0
+  * @since   2.0.0
+  */
+  private function sendToVendorRevocation( )
+  {      
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $path     = $sesArray['sendVendorRevocation'];
+    
+    if( empty ( $path ) )
+    {
+        // DRS
+      if( $this->drs->drsSession || $this->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return null;
+    }
+
+    $path = $this->pdf->terms( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )

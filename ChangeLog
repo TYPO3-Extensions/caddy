@@ -1,5 +1,28 @@
+2.0.1
+  2013-03-21
+  Feature
+  * #i0002: Power of Revocation
+            Effected files:
+            * ext_tables.sql
+            * locallang_db.xml
+            * tca.php
+            * lib/powermail
+              * class.tx_caddy_powermail.php    ( new )
+            * pi1
+              * class.tx_caddy_pi1.php
+              * class.tx_caddy_pi1_clean.php
+              * flexform_sheet_email1x.xml
+              * flexform_sheet_email2x.xml
+              * flexform_sheet_paths.xml
+              * locallang_flexform.xml
+            * static
+              * constants.txt
+              * setup.txt
+  Bugfix
+  * #i0001: unproper locallang.xml value in userfunc
+
 2.0.0
-  2013-02-23
+  2013-03-19
   Features
   * #45954: Database
             Effected files
@@ -11,7 +34,7 @@
   * #45915: Powermail Controller
             Effected files
             * lib/powermail
-              *class.tx_caddy_powermail.php     ( new )
+              * class.tx_caddy_powermail.php    ( new )
             * pi1
               * class.tx_caddy_pi1.php
   * #45863: Icons

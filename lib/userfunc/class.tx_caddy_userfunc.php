@@ -894,7 +894,7 @@ class tx_caddy_userfunc
       $prompt = $prompt.'
 <div class="typo3-message message-information">
   <div class="message-body">
-    ' . $GLOBALS['LANG']->sL('LLL:EXT:powermail4dev/lib/locallang.xml:promptCurrIPBody') . ': ' . t3lib_div :: getIndpEnv('REMOTE_ADDR') . '
+    ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptCurrIPBody') . ': ' . t3lib_div :: getIndpEnv('REMOTE_ADDR') . '
   </div>
 </div>';
 

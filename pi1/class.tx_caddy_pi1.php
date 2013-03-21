@@ -860,6 +860,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->sendCustomerDeliveryorder( );
     $this->sendCustomerInvoice( );
+    $this->sendCustomerRevocation( );
     $this->sendCustomerTerms( );
   }
 
@@ -914,6 +915,31 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
+  * sendCustomerRevocation( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendCustomerRevocation( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    switch( $this->flexform->emailRevocationMode )
+    {
+      case( 'customer' ):
+      case( 'all' ):
+        $sesArray['sendCustomerRevocation'] = $this->flexform->pathsRevocation;
+        break;
+      default:
+        unset( $sesArray['sendCustomerRevocation'] );
+        break;
+    }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
+  }
+
+ /**
   * sendCustomerTerms( )
   *
   * @return	void
@@ -950,6 +976,7 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $this->sendVendorDeliveryorder( );
     $this->sendVendorInvoice( );
+    $this->sendVendorRevocation( );
     $this->sendVendorTerms( );
   }
 
@@ -997,6 +1024,31 @@ class tx_caddy_pi1 extends tslib_pibase
         break;
       default:
         unset( $sesArray['sendVendorInvoice'] );
+        break;
+    }
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
+  }
+
+ /**
+  * sendVendorRevocation( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function sendVendorRevocation( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    switch( $this->flexform->emailRevocationMode )
+    {
+      case( 'vendor' ):
+      case( 'all' ):
+        $sesArray['sendVendorRevocation'] = $this->flexform->pathsRevocation;
+        break;
+      default:
+        unset( $sesArray['sendVendorRevocation'] );
         break;
     }
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
