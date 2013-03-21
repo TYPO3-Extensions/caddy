@@ -26,7 +26,7 @@
       <label index="email.invoiceMode.customer">Send it to the customer</label>
       <label index="email.invoiceMode.vendor">Send it to the vendor</label>
       <label index="email.invoiceMode.all">Send it to the customer and the vendor (recommended)</label>
-      <label index="email.revocationMode">Power of Revocation</label>
+      <label index="email.revocationMode">PDF: Power of Revocation</label>
       <label index="email.revocationMode.disabled">Don't send</label>
       <label index="email.revocationMode.customer">Send it to the customer (recommended)</label>
       <label index="email.revocationMode.vendor">Send it to the vendor</label>
@@ -87,7 +87,7 @@
       <label index="email.invoiceMode.customer">An den Kunden senden</label>
       <label index="email.invoiceMode.vendor">An den Anbieter senden</label>
       <label index="email.invoiceMode.all">An den Kunden und den Anbieter senden (empfohlen)</label>
-      <label index="email.revocationMode">Widerrufsbelehrung</label>
+      <label index="email.revocationMode">PDF-Widerrufsbelehrung</label>
       <label index="email.revocationMode.disabled">Nicht versenden</label>
       <label index="email.revocationMode.customer">An den Kunden senden (empfohlen)</label>
       <label index="email.revocationMode.vendor">An den Anbieter senden</label>
