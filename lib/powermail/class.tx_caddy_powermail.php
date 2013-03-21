@@ -1674,6 +1674,11 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $paths[] = $path;
     }
+    $path = $this->sendToCustomerRevocation( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
     $path = $this->sendToCustomerTerms( );
     if( ! empty( $path ) )
     {
@@ -1890,6 +1895,11 @@ class tx_caddy_powermail extends tslib_pibase
       $paths[] = $path;
     }
     $path = $this->sendToVendorInvoice( );
+    if( ! empty( $path ) )
+    {
+      $paths[] = $path;
+    }
+    $path = $this->sendToVendorRevocation( );
     if( ! empty( $path ) )
     {
       $paths[] = $path;
