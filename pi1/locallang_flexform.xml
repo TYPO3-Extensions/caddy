@@ -51,7 +51,7 @@
       <label index="origin.deliveryorder">Increase delivery order number with</label>
       <label index="origin.invoice">Increase invoice number with</label>
       <label index="origin.min">The minimum order quantity</label>
-      <label index="origin.max">The minimum order quantity</label>
+      <label index="origin.max">The maximum order quantity</label>
       <label index="origin.order">Increase order number with</label>
       <label index="paths">PDF</label>
       <label index="paths.deliveryorder">PDF draft: Delivery order</label>
