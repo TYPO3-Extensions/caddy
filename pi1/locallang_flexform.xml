@@ -54,8 +54,8 @@
       <label index="origin.max">The minimum order quantity</label>
       <label index="origin.order">Increase order number with</label>
       <label index="paths">PDF</label>
-      <label index="paths.deliveryorder">PDF draft: delivery order</label>
-      <label index="paths.invoice">PDF draft: invoice</label>
+      <label index="paths.deliveryorder">PDF draft: Delivery order</label>
+      <label index="paths.invoice">PDF draft: Invoice</label>
       <label index="paths.revocation">PDF draft: Power of Revocation</label>
       <label index="paths.terms"><![CDATA[PDF draft: Terms & Conditions]]></label>
       <label index="sdef">Check it!</label>

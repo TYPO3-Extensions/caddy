@@ -73,6 +73,7 @@ class tx_caddy_pi1_flexform
   public $emailCustomerEmail      = null;
   public $emailDeliveryorderMode  = null;
   public $emailInvoiceMode        = null;
+  public $emailRevocationMode     = null;
   public $emailTermsMode          = null;
     // [email]
 
@@ -97,6 +98,7 @@ class tx_caddy_pi1_flexform
     // [paths]
   public $pathsDeliveryorder  = null;
   public $pathsInvoice        = null;
+  public $pathsRevocation     = null;
   public $pathsTerms          = null;
     // [paths]
 
@@ -231,8 +233,18 @@ class tx_caddy_pi1_flexform
 
       // pathsInvoice
     $field                        = 'invoicePath';
-    $this->pathsInvoice       = $this->zzFfValue( $sheet, $field );
+    $this->pathsInvoice           = $this->zzFfValue( $sheet, $field );
       // pathsInvoice
+
+      // emailRevocationMode
+    $field                        = 'revocationMode';
+    $this->emailRevocationMode    = $this->zzFfValue( $sheet, $field );
+      // emailRevocationMode
+
+      // pathsRevocation
+    $field                        = 'revocationPath';
+    $this->pathsRevocation        = $this->zzFfValue( $sheet, $field );
+      // pathsRevocation
 
       // emailTermsMode
     $field                        = 'termsMode';
@@ -241,7 +253,7 @@ class tx_caddy_pi1_flexform
 
       // pathsTerms
     $field                        = 'termsPath';
-    $this->pathsTerms         = $this->zzFfValue( $sheet, $field );
+    $this->pathsTerms             = $this->zzFfValue( $sheet, $field );
       // pathsTerms
 
     return;
@@ -356,6 +368,11 @@ class tx_caddy_pi1_flexform
     $field                    = 'invoice';
     $this->pathsInvoice       = $this->zzFfValue( $sheet, $field );
       // pathsInvoice
+
+      // pathsRevocation
+    $field                    = 'revocation';
+    $this->pathsRevocation    = $this->zzFfValue( $sheet, $field );
+      // pathsRevocation
 
       // pathsTerms
     $field                    = 'terms';
