@@ -1807,7 +1807,7 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $path = $this->pdf->terms( );
+    $path = $this->pdf->revocation( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
@@ -2033,7 +2033,7 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
 
-    $path = $this->pdf->terms( );
+    $path = $this->pdf->revocation( );
 
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
