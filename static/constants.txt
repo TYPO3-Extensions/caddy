@@ -191,7 +191,7 @@ plugin.caddy {
   # cat=caddy - pdf revocation//103; type=int+; label= Revocation width: Width of the revocation in millimeters
   pdf.revocation.width = 165
   # cat=caddy - pdf revocation//104; type=int+; label= Revocation font-size: Font-size of the revocation in points
-  pdf.revocation.fontsize = 14
+  pdf.revocation.fontsize = 10
   # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.revocation.externalLinks = Click me!
   # cat=caddy - pdf revocation/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -206,7 +206,7 @@ plugin.caddy {
   # cat=caddy - pdf terms//103; type=int+; label= Terms width: Width of the terms in millimeters
   pdf.terms.width = 165
   # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points
-  pdf.terms.fontsize = 14
+  pdf.terms.fontsize = 10
   # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.terms.externalLinks = Click me!
   # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -226,7 +226,9 @@ plugin.caddy {
   pdf.textColor.numberLine = navy
   # cat=caddy - pdf textcolor//107;          type=color;  label= Number order: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.numberOrder = navy
-  # cat=caddy - pdf textcolor//108;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//108;          type=color;  label= Revocation: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.revocation = navy
+  # cat=caddy - pdf textcolor//109;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.terms = navy
   # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   pdf.textColor.externalLinks = Click me!
