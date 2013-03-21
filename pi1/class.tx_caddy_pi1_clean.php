@@ -308,7 +308,18 @@ class tx_caddy_pi1_clean
 
       // Insert record
     $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
+    $error  = $GLOBALS['TYPO3_DB']->sql_error( );
 
+      // exit in case of error
+    if( ! empty( $error ) )
+    {
+      $prompt = '<h1>caddy: SQL-Error</h1>'
+              . '<p>'.$error.'</p>'
+              . '<p>'.$query.'</p>';
+      die( $prompt );
+    }
+      // exit in case of error
+      
       // DRS
     if( $this->pObj->drs->drsClean )
     {
