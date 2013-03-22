@@ -728,6 +728,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
+    $this->caddy->setParentObject( $this );
+    $this->caddy->setContentRow( $this->cObj->data );
 
       // Class with methods for get clean values
     require_once( 'class.tx_caddy_pi1_clean.php' );

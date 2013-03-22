@@ -58,10 +58,10 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *              SECTION: ZZ
  *  912:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
  *  950:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- *  980:     private function zz_checkOptionIsNotAvailable($type, $option_id)
- * 1014:     private function zz_getPriceForOption($type, $option_id)
+ *  980:     private function zz_checkOptionIsNotAvailable($optionType, $optionId)
+ * 1014:     private function calcOptionCosts($optionType, $optionId)
  * 1064:     private function zz_price_format($value)
- * 1086:     private function zz_renderOptionList($type, $option_id)
+ * 1086:     private function zz_renderOptionList($optionType, $optionId)
  *
  * TOTAL FUNCTIONS: 20
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -74,25 +74,25 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	2.0.2
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
 {
 
-  public $extKey = 'caddy';
-  public $prefixId = 'tx_caddy_pi1';
+  public $extKey        = 'caddy';
+  public $prefixId      = 'tx_caddy_pi1';
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
 
 
-  private $caddyCount                 = 0;
-  private $productsGross              = 0;
+  private $numberOfItems              = 0;
   private $caddyServiceAttribute1Max  = 0;
   private $caddyServiceAttribute1Sum  = 0;
   private $caddyServiceAttribute2Max  = 0;
   private $caddyServiceAttribute2Sum  = 0;
   private $caddyServiceAttribute3Max  = 0;
   private $caddyServiceAttribute3Sum  = 0;
+  private $productsGross              = 0;
 
     // [array] current typoscript configuration
   public $conf = null;
@@ -548,8 +548,9 @@ class tx_caddy extends tslib_pibase
     unset( $arrResult );
       // handle the current product
 
-    $this->productsGross = $sumGross;
-    $productsNet        = $sumNet;
+    $this->productsGross  = $sumGross;
+    $productsGross        = $sumGross;
+    $productsNet          = $sumNet;
 
       // option shipping : calculate tax, net and gross
     $arrResult        = $this->calcOptionsShipping( );
@@ -602,7 +603,7 @@ class tx_caddy extends tslib_pibase
                     'contentItem'       => $contentItem,
                     'paymentId'         => $paymentId,
                     'payment_option'    => $payment_option,
-                    'productsGross'     => $this->productsGross,
+                    'productsGross'     => $productsGross,
                     'productsNet'       => $productsNet,
                     'optionsNet'        => $optionsNet,
                     'optionsGross'      => $optionsGross,
@@ -620,114 +621,292 @@ class tx_caddy extends tslib_pibase
 
     return $arrReturn;
   }
-	
+
  /**
-  * calcOptionById( )
+  * calcOptionCosts( )  : Gets the gross costs for the given option
   *
-  * @return   array   $array : gross, net
-  * @access     private
-  * @version    2.0.0
-  * @since      1.4.6
+  * @param    string        $optionType   : payment, shipping, special
+  * @param    integer       $optionId     : current option id
+  * @return   array         $optionCosts  : gross and net
+  * @access   private
+  * @version    2.0.2
+  * @since      2.0.2
   */
-  private function calcOptionById( $conf, $type, $option_id, &$obj ) 
+  private function calcOptionCosts( $optionType, $optionId ) 
   {
-    $arrReturn = null; 
-    
-    $optionIds = $conf[$type . '.']['options.'][$option_id . '.'];
-
-    $filterArr = array(
-      'by_price'                    => $obj->cartGrossNoService,
-      'by_quantity'                 => $obj->cartCount,
-      'by_service_attribute_1_sum'  => $obj->cartServiceAttribute1Sum,
-      'by_service_attribute_1_max'  => $obj->cartServiceAttribute1Max,
-      'by_service_attribute_2_sum'  => $obj->cartServiceAttribute2Sum,
-      'by_service_attribute_2_max'  => $obj->cartServiceAttribute2Max,
-      'by_service_attribute_3_sum'  => $obj->cartServiceAttribute3Sum,
-      'by_service_attribute_3_max'  => $obj->cartServiceAttribute3Max
+    $optionCosts = array
+    (
+      'gross' => 0.00,
+      'net'   => 0.00
     );
-
-    if( array_key_exists( $optionIds['extra'], $filterArr ) ) 
+    
+      // DRS
+    if( $this->drs->drsFormula )
     {
-      foreach( $optionIds['extra.'] as $extra ) 
-      {
-        if( floatval( $extra['value'] ) <= $filterArr[$optionIds['extra']] ) 
-        {
-          $arrReturn = $this->calcOption($conf, $type, $option_id, floatval( $extra['extra'] ), $obj );
-        }
-        else
-        {
-          break;
-        }
-      }
-      return $arrReturn;
-    } 
-
-    switch( $optionIds['extra'] )
+      $prompt = $optionType . '.options.' . $optionId;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    switch( $this->calcOptionCostsIsFree( $optionType, $optionId ) )
     {
+      case( true ):
+          // Return $optionsCosts with 0.00 / 0.00
+        break;
+      case( false ):
+      default:
+          // Get option gross costs
+        $optionCosts = $this->calcOptionCostsGross( $optionType, $optionId );
+        break;
+    }
+    
+      // DRS
+    if( $this->drs->drsFormula )
+    {
+      $gross  = $optionCosts['gross'];
+      $net    = $optionCosts['net'];
+      $prompt = 'Returns gross ' . $gross . ' and net ' . $net;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $optionCosts;
+  }
+
+ /**
+  * calcOptionCostsGross( )  : Gets the gross costs for the given option
+  *
+  * @param    string        $optionType : payment, shipping, special
+  * @param    integer       $optionId   : current option id
+  * @return   double        $gross      : the gross costs
+  * @access   private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcOptionCostsGross( $optionType, $optionId ) 
+  {
+    $gross  = 0.00;
+    $net    = 0.00;
+    
+      // configuration of current options array
+    $confOptions  = $this->conf[$optionType . '.']['options.'][$optionId . '.'];
+    $extra        = $confOptions['extra'];
+    $extras       = $confOptions['extra.'];
+    $taxType      = $confOptions['tax'];
+
+
+      // DRS
+    if( $this->drs->drsFormula )
+    {
+      $prompt = 'extraType: ' . $extra;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      $prompt = 'taxType: ' . $taxType;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+      // SWITCH : extra costs
+    switch( $extra )
+    {
+      case 'by_price':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->productsGross );
+        break;
+      case 'by_quantity':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->numberOfItems );
+        break;
+      case 'by_service_attribute_1_sum':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute1Sum );
+        break;
+      case 'by_service_attribute_1_max':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute1Max );
+        break;
+      case 'by_service_attribute_2_sum':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute2Sum );
+        break;
+      case 'by_service_attribute_2_max':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute2Max );
+        break;
+      case 'by_service_attribute_3_sum':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute3Sum );
+        break;
+      case 'by_service_attribute_3_max':
+        $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute3Max );
+        break;
       case 'each':
-        $gross  = floatval($optionIds['extra.']['1.']['extra'])*$obj->cartCount;
-        $arrReturn =  $this->calcOption
-                      ( 
-                        $conf, $type, $option_id, $gross, $obj 
-                      );
+        $gross  = floatval( $extras['1.']['extra'] ) 
+                * $this->numberOfItems
+                ;
         break;
       default:
-        $arrReturn =  $this->calcOption
-                      ( 
-                        $conf, $type, $option_id, floatval( $optionIds['extra'] ), $obj 
-                      );
+        $gross = floatval( $extra );
+        break;
+    }
+      // SWITCH : extra costs
+    
+      // get net
+    $net = $this->zz_calcNet( $taxType, $gross );
+    
+      // result array
+    $optionCosts  = array
+    (
+      'gross' => $gross,
+      'net'   => $net
+    );
+    
+    return $optionCosts;
+  }
+
+ /**
+  * calcOptionCostsGrossByExtra( ) : Gets the gross costs for the given value.
+  *
+  * @param    string        $extras : the extra array of the current option id
+  * @param    integer       $value  : could be the number of products or the current price 
+  * @return   double        $gross  : the gross costs of the current option
+  * @access   private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcOptionCostsGrossByExtra( $extras, $value ) 
+  {
+    $limit  = null;
+    $gross  = null;
+    $valueIsGreaterOrEqual  = false;
+    $valueIsSmaller         = false;
+    
+    foreach( $extras as $extra )
+    {
+        // floatval, because value could be a double
+      $limit = floatval( $extra['value'] );
+      $value = floatval( $value );
+      $valueIsGreaterOrEqual  = ( $limit <= $value );
+      $valueIsSmaller         = ( $limit  > $value );
+      
+        // SWITCH : overrun limit
+      switch( true )
+      {
+        case( $valueIsGreaterOrEqual ):
+            // limit is overrun, take the gross costs of the current limit
+          $gross = $extra['extra'];
+            // DRS
+          if( $this->drs->drsFormula )
+          {
+            $prompt = 'value ' . $value . ' is greater than or equal to the limit ' . $limit;
+            t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+            $prompt = 'gross is set to ' . $gross;
+            t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+          }
+            // DRS
+          break;
+        case( $valueIsSmaller ):
+        default:
+            // limit is kept, return the latest gross costs from above
+            // DRS
+          if( $this->drs->drsFormula )
+          {
+            $prompt = 'value ' . $value . ' is smaller than the limit ' . $limit;
+            t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+            $prompt = 'gross is left by ' . $gross;
+            t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+          }
+            // DRS
+          continue 2;
+      }
+        // SWITCH : overrun limit
     }
 
-    return $arrReturn;
+    unset( $valueIsGreaterOrEqual );
+    unset( $valueIsSmaller );
+    
+    return $gross;
   }
 	
  /**
-  * calcOption( )
+  * calcOptionCostsIsFree( )  : Returns true, if option costs are for free.
+  *                               Costs are free if
+  *                               * free_from or free_to is configured
+  *                               * and if cartGrossNoService is within this limits
   *
-  * @return   array   $array : gross, net
+  * @param    string        $optionType   : payment, shipping, special
+  * @param    integer       $optionId    : current option id
+  * @return   boolean       $optionIsFree : True, if free. False, if not free.
   * @access   private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.0.2
+  * @since      2.0.2
   */
-  private function calcOption( $conf, $type, $option_id, $gross, $obj ) 
+  private function calcOptionCostsIsFree( $optionType, $optionId ) 
   {
-    $arrReturn = null; 
+    $optionIsFree = false; 
 
-    $free_from  = $conf[$type.'.']['options.'][$option_id . '.']['free_from'];
-    $free_to    = $conf[$type.'.']['options.'][$option_id . '.']['free_until'];
+    $confOptions = $this->conf[$optionType . '.']['options.'][$optionId . '.'];
+
+    $free_from  = $confOptions['free_from'];
+    $free_to    = $confOptions['free_until'];
+
+    $freeFromTo = $free_from . $free_to;
+    
+      // RETURN : there is neither a from nor a to
+    if( empty( $freeFromTo ) )
+    {
+        // DRS
+      if( $this->drs->drsFormula )
+      {
+        $prompt = 'free_from and free_until isn\'t set.';
+        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
+      return $optionIsFree;
+    }
+      // RETURN : there is neither a from nor a to
+
+    $limitFrom  = floatval( $free_from ); 
+    $limitTo    = floatval( $free_to ); 
+    
+      // DRS
+    if( $this->drs->drsFormula )
+    {
+      $prompt = 'Limit is from ' . $limitFrom . ' to ' . $limitTo;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      $prompt = 'Value is  ' . $this->productsGross;
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    $valueIsGreaterOrEqualThanFrom  = ( $limitFrom  <= $this->productsGross );
+    $valueIsSmallerOrEqualThanTo    = ( $limitTo    >= $this->productsGross );
     
     switch( true )
     {
-      case( isset( $free_from ) && ( floatval( $free_from ) <= $obj->cartGrossNoService ) ):
-      case( isset( $free_to )   && ( floatval( $free_to )   >= $obj->cartGrossNoService ) ):
-        $arrReturn['gross'] = 0.00;
-        $arrReturn['net']   = 0.00;
-        return $arrReturn;
+      case( $valueIsGreaterOrEqualThanFrom && $valueIsSmallerOrEqualThanTo ):
+        $optionIsFree = true; 
+          // DRS
+        if( $this->drs->drsFormula )
+        {
+          $prompt = 'value is keeping the limit.';
+          t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
         break;
       default;
+          // DRS
+        if( $this->drs->drsFormula )
+        {
+          $prompt = 'value is overrun the limit.';
+          t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        $optionIsFree = false; 
         break;
     }
     
-    unset( $free_from );
-    unset( $free_to );
-    unset( $obj );
+    unset( $valueIsGreaterOrEqualThanFrom );
+    unset( $valueIsSmallerOrEqualThanTo );
     
-      // calc net
-    if( $conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced' )
-    {
-      $net = $gross / ( 1.0 + $conf['tax.']['reducedCalc'] );
-    } 
-    else 
-    {
-      $net = $gross / ( 1.0 + $conf['tax.']['normalCalc'] );
-    }
-      // calc net
-
-    $arrReturn['gross'] = $gross;
-    $arrReturn['net']   = $net;
-    return $arrReturn;
+    return $optionIsFree;
   }
+	
 
+  
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
@@ -742,10 +921,10 @@ class tx_caddy extends tslib_pibase
 
     $paymentId = $this->session->paymentGet();
 
-    $gross        = 0.0;
-    $net          = 0.0;
-    $taxReduced   = 0.0;
-    $taxNormal    = 0.0;
+    $gross        = 0.00;
+    $net          = 0.00;
+    $taxReduced   = 0.00;
+    $taxNormal    = 0.00;
 
     if( ! $paymentId )
     {
@@ -760,7 +939,7 @@ class tx_caddy extends tslib_pibase
       $this->session->paymentUpdate( $newpaymentId );
     }
 
-    $arrResult  = $this->calcOptionById( $this->conf, 'payment', $paymentId, $this );
+    $arrResult  = $this->calcOptionCosts( 'payment', $paymentId );
     $net        = $arrResult['net'];  
     $gross      = $arrResult['gross'];  
 
@@ -798,10 +977,10 @@ class tx_caddy extends tslib_pibase
 
     $shippingId = $this->session->shippingGet();
 
-    $gross        = 0.0;
-    $net          = 0.0;
-    $taxReduced   = 0.0;
-    $taxNormal    = 0.0;
+    $gross        = 0.00;
+    $net          = 0.00;
+    $taxReduced   = 0.00;
+    $taxNormal    = 0.00;
 
     if( ! $shippingId )
     {
@@ -816,9 +995,9 @@ class tx_caddy extends tslib_pibase
       $this->session->shippingUpdate( $newshippingId );
     }
 
-    $arrResult = $this->calcOptionById( $this->conf, 'shipping', $shippingId, $this );
-    $net      = $arrResult['net'];  
-    $gross    = $arrResult['gross'];  
+    $arrResult  = $this->calcOptionCosts( 'shipping', $shippingId );
+    $net        = $arrResult['net'];  
+    $gross      = $arrResult['gross'];  
 
     if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
@@ -854,19 +1033,20 @@ class tx_caddy extends tslib_pibase
 
     $specialIds = $this->session->specialGet( );
 
-    $gross        = 0.0;
-    $net          = 0.0;
-    $sumGross     = 0.0;
-    $sumNet       = 0.0;
-    $taxReduced   = 0.0;
-    $taxNormal    = 0.0;
+    $gross        = 0.00;
+    $net          = 0.00;
+    $sumGross     = 0.00;
+    $sumNet       = 0.00;
+    $taxReduced   = 0.00;
+    $taxNormal    = 0.00;
     $options      = null;
     
     foreach( ( array ) $specialIds as $specialId )
     {
-      $arrResult = $this->calcOptionById( $this->conf, 'special', $specialId, $this );
-      $net      = $arrResult['net'];  
-      $gross    = $arrResult['gross'];  
+      $arrResult  = $this->calcOptionCosts( 'special', $specialId );
+      $net        = $arrResult['net'];  
+      $gross      = $arrResult['gross'];  
+      
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
       if( $this->conf['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
@@ -931,7 +1111,7 @@ class tx_caddy extends tslib_pibase
         // calculate price total
       $product['price_total'] = $product['price'] * $product['qty'];
 
-      // DRS
+        // DRS
       if( $this->drs->drsFormula )
       {
         $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
@@ -966,7 +1146,7 @@ class tx_caddy extends tslib_pibase
         // update product gross
       $productsGross        = $productsGross + $product['price_total'];
         // update number of products
-      $this->caddyCount  = $this->caddyCount + $product['qty'];
+      $this->numberOfItems  = $this->numberOfItems + $product['qty'];
 
         // update service attributes
       $this->caddyWiProductsProductServiceAttributes( $product );
@@ -1146,23 +1326,23 @@ class tx_caddy extends tslib_pibase
   private function getServiceAttributes( )
   {
     $arrResult =  array
-                  (
-                    '1' =>  array
-                            (
-                              'max' => $this->caddyServiceAttribute1Max,
-                              'sum' => $this->caddyServiceAttribute1Sum
-                            ),
-                    '2' =>  array
-                            (
-                              'max' => $this->caddyServiceAttribute2Max,
-                              'sum' => $this->caddyServiceAttribute2Sum
-                            ),
-                    '3' =>  array
-                            (
-                              'max' => $this->caddyServiceAttribute3Max,
-                              'sum' => $this->caddyServiceAttribute3Sum
-                            )
-                  );
+    (
+      '1' =>  array
+      (
+        'max' => $this->caddyServiceAttribute1Max,
+        'sum' => $this->caddyServiceAttribute1Sum
+      ),
+      '2' =>  array
+      (
+        'max' => $this->caddyServiceAttribute2Max,
+        'sum' => $this->caddyServiceAttribute2Sum
+      ),
+      '3' =>  array
+      (
+        'max' => $this->caddyServiceAttribute3Max,
+        'sum' => $this->caddyServiceAttribute3Sum
+      )
+    );
     
     return $arrResult;
   }
@@ -1261,7 +1441,7 @@ class tx_caddy extends tslib_pibase
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
 
-    if(is_object ( $this->pObj->powermail ) )
+    if( is_object ( $this->pObj->powermail ) )
     {
       $this->powermail = $this->pObj->powermail;
     }
@@ -1353,7 +1533,7 @@ class tx_caddy extends tslib_pibase
       die( $prompt );
       
     }
-    $this->cObj       = $pObj->cObj;
+    $this->cObj = $pObj->cObj;
 
     if( ! is_object( $pObj->local_cObj ) )
     {
@@ -1494,29 +1674,29 @@ class tx_caddy extends tslib_pibase
  *                                    If available, return is 0. If not available the given fallback 
  *                                    or preset will returns.
  *
- * @param	string		$type
- * @param	int		$option_id
+ * @param	string		$optionType
+ * @param	int		$optionId
  * @return	int
  */
-  private function zz_checkOptionIsNotAvailable( $type, $option_id )
+  private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
   {
     if
     ( 
       (
-        isset( $this->conf[$type.'.']['options.'][$option_id.'.']['available_from'] ) 
+        isset( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_from'] ) 
         &&  
         ( 
-          round( floatval( $this->conf[$type.'.']['options.'][$option_id.'.']['available_from'] ), 2 )
+          round( floatval( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_from'] ), 2 )
           > 
           round( $this->productsGross, 2 ) 
         ) 
       ) 
       ||
       (
-        isset( $this->conf[$type.'.']['options.'][$option_id.'.']['available_until'] ) 
+        isset( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_until'] ) 
         &&  
         ( 
-          round( floatval( $this->conf[$type.'.']['options.'][$option_id.'.']['available_until'] ), 2 ) 
+          round( floatval( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_until'] ), 2 ) 
           < 
           round( $this->productsGross, 2 ) 
         )
@@ -1524,26 +1704,67 @@ class tx_caddy extends tslib_pibase
      )
     {
       // check: fallback is given
-      if (isset($this->conf[$type.'.']['options.'][$option_id.'.']['fallback']))
+      if (isset($this->conf[$optionType.'.']['options.'][$optionId.'.']['fallback']))
       {
-        $fallback = $this->conf[$type.'.']['options.'][$option_id.'.']['fallback'];
+        $fallback = $this->conf[$optionType.'.']['options.'][$optionId.'.']['fallback'];
         // check: fallback is defined; the availability of fallback will not tested yet
-        if (isset($this->conf[$type.'.']['options.'][$fallback.'.']))
+        if (isset($this->conf[$optionType.'.']['options.'][$fallback.'.']))
         {
           $newoption_id = intval($fallback);
         } else {
 // 130227, dwildt, 1-
-//                                  $shippingId = intval($this->conf[$type.'.']['preset']);
+//                                  $shippingId = intval($this->conf[$optionType.'.']['preset']);
 // 130227, dwildt, 1+
-          $newoption_id = intval($this->conf[$type.'.']['preset']);
+          $newoption_id = intval($this->conf[$optionType.'.']['preset']);
         }
       } else {
-        $newoption_id = intval($this->conf[$type.'.']['preset']);
+        $newoption_id = intval($this->conf[$optionType.'.']['preset']);
       }
       return $newoption_id;
     }
 
     return 0;
+  }
+
+ /**
+  * zz_calcNet( ) : Get the net of the given gross
+  *
+  * @param	string		$taxType  : reduced, normal, (empty)
+  * @param	double		$gross    : current gross
+  * @return	double		$net      : calculated net
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function zz_calcNet( $taxType, $gross )
+  {
+    $net        = 0.00;
+    $taxDevider = 1.00;
+    
+    // if ($conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced') { // reduced tax
+    switch( $taxType )
+    {
+      case( 'reduced' ):
+        $taxDevider = $taxDevider
+                    + $this->conf['tax.']['reducedCalc']
+                    ;
+        break;
+      case( 'normal' ):
+        $taxDevider = $taxDevider
+                    + $this->conf['tax.']['normalCalc']
+                    ;
+        break;
+      default:
+          // gross == net
+        $taxDevider = $taxDevider
+                    + 0.00
+                    ;
+        break;
+    }
+    
+    $net = $gross / $taxDevider;
+
+    return $net;
   }
 
  /**
@@ -1572,72 +1793,6 @@ class tx_caddy extends tslib_pibase
 
     return $value;
   }
-
-  /**
- * Gets the price for a given type ('shipping', 'payment') method on the current cart
- *
- * @param	string		$type
- * @param	int		$option_id
- * @return	string
- */
-  private function zz_getPriceForOption($type, $option_id) 
-  {
-    $optionIds = $this->conf[$type.'.']['options.'][$option_id.'.'];
-
-    $free_from  = $optionIds['free_from'];
-    $free_until = $optionIds['free_until'];
-
-    switch( true )
-    {
-      case( isset(  $free_from ) && ( floatval( $free_from ) <= $this->productsGross ) ):
-      case( isset( $free_until ) && ( floatval( $free_until ) >= $this->productsGross ) ):
-        return '0.00';
-        break;
-      default:
-          // Follow the workflow
-        break;
-    }
-    
-    unset( $free_from );
-    unset( $free_until );
-
-    $filterArr = array(
-                        'by_price' => $this->productsGross,
-                        'by_quantity' => $this->caddyCount,
-                        'by_service_attribute_1_sum' => $this->caddyServiceAttribute1Sum,
-                        'by_service_attribute_1_max' => $this->caddyServiceAttribute1Max,
-                        'by_service_attribute_2_sum' => $this->caddyServiceAttribute2Sum,
-                        'by_service_attribute_2_max' => $this->caddyServiceAttribute2Max,
-                        'by_service_attribute_3_sum' => $this->caddyServiceAttribute3Sum,
-                        'by_service_attribute_3_max' => $this->caddyServiceAttribute3Max
-                      );
-
-    if( array_key_exists( $optionIds['extra'], $filterArr ) ) 
-    {
-      foreach( $optionIds['extra.'] as $extra )
-      {
-        if( floatval($extra['value'] ) <= $filterArr[$optionIds['extra']] )
-        {
-          $price = $extra['extra'];
-        } else {
-          return $price;
-          break;
-        }
-      }
-    } 
-    
-    switch( $optionIds['extra'] )
-    {
-      case 'each':
-        $price = floatval( $optionIds['extra.']['1.']['extra'] ) * $this->caddyCount;
-        break;
-      default:
-        $price = $optionIds['extra'];
-    }
-
-    return $price;
-  }
-
 
   /**
  * [Describe function...]
@@ -1674,16 +1829,16 @@ class tx_caddy extends tslib_pibase
   /**
  * [Describe function...]
  *
- * @param	[type]		$type: ...
- * @param	[type]		$option_id: ...
+ * @param	[type]		$optionType: ...
+ * @param	[type]		$optionId: ...
  * @return	[type]		...
  */
-  private function zz_renderOptionList( $type, $option_id ) 
+  private function zz_renderOptionList( $optionType, $optionId ) 
   {
     $radio_list = '';
     
       // LOOP each option
-    foreach( ( array ) $this->conf[$type.'.']['options.'] as $key => $value )
+    foreach( ( array ) $this->conf[$optionType.'.']['options.'] as $key => $value )
     {
       if( ! stristr( $key, '.' ) )
       { 
@@ -1711,7 +1866,7 @@ class tx_caddy extends tslib_pibase
         $show = false;
       }
 
-      if( ! ( $show || $this->conf[$type.'.']['show_all_disabled'] ) )
+      if( ! ( $show || $this->conf[$optionType.'.']['show_all_disabled'] ) )
       {
         continue;
       }
@@ -1729,20 +1884,20 @@ class tx_caddy extends tslib_pibase
 
       if( isset( $value['free_from'] ) )
       {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_free_from' ) .
+        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_free_from' ) .
                                             ' ' . $this->zz_price_format( $value['free_from'] );
         $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                             (
-                                              $this->tmpl[$type . '_condition_item'], $pmarkerArray
+                                              $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
                                             );
       }
       if (isset($value['free_until']))
       {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_free_until' ) . 
+        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_free_until' ) . 
                                             ' ' . $this->zz_price_format($value['free_until'] );
         $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                             (
-                                              $this->tmpl[$type . '_condition_item'], $pmarkerArray
+                                              $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
                                             );
       }
 
@@ -1750,20 +1905,20 @@ class tx_caddy extends tslib_pibase
       {
         if( isset($value['available_from'] ) )
         {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( $type.'_available_from' ) .
+          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( $optionType.'_available_from' ) .
                                               ' ' . $this->zz_price_format( $value['available_from'] );
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                               (
-                                                $this->tmpl[$type . '_condition_item'], $pmarkerArray
+                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
                                               );
         }
         if( isset( $value['available_until'] ) )
         {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $type . '_available_until' ) .
+          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_available_until' ) .
                                               ' ' . $this->zz_price_format( $value['available_until'] );
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                               (
-                                                $this->tmpl[$type . '_condition_item'], $pmarkerArray
+                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
                                               );
         }
       }
@@ -1801,11 +1956,12 @@ class tx_caddy extends tslib_pibase
                                               $this->zz_price_format($extra['extra']);
           $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
                                               (
-                                                $this->tmpl[$type . '_condition_item'], $pmarkerArray
+                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
                                               );
         }
 
-        $show_price = $this->zz_price_format( floatval( $this->zz_getPriceForOption( $type, intval( $key ) ) ) );
+        $optionGross  = floatval( $this->calcOptionCosts( $optionType, intval( $key ) ) );
+        $show_price   = $this->zz_price_format( $optionGross );
       } 
       else
       {
@@ -1816,22 +1972,22 @@ class tx_caddy extends tslib_pibase
                       );
       }
 
-      $upperType = strtoupper( $type );
+      $upperType = strtoupper( $optionType );
 
-      if( $type != 'special' ) 
+      if( $optionType != 'special' ) 
       {
-        $checkradio = intval( $key ) == $option_id ? 'checked="checked"' : '';
+        $checkradio = intval( $key ) == $optionId ? 'checked="checked"' : '';
         $this->smarkerArray['###' . $upperType . '_RADIO###'] = 
-          '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $type . ']" ' . 
-          'id="tx_caddy_pi1_' . $type . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
+          '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" ' . 
+          'id="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
           $checkradio . $disabled . '/>';
       } 
       else
       {
-        $checkbox = in_array( intval( $key ) , $option_id ) ? 'checked="checked"' : '';
+        $checkbox = in_array( intval( $key ) , $optionId ) ? 'checked="checked"' : '';
         $this->smarkerArray['###' . $upperType . '_CHECKBOX###'] = 
-          '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $type . '][]" '. 
-          'id="tx_caddy_pi1_' . $type . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
+          '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" '. 
+          'id="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
           $checkbox . $disabled . '/>';
       }
 
@@ -1839,17 +1995,17 @@ class tx_caddy extends tslib_pibase
 
       $title = $this->zz_cObjGetSingle( $value['title'], $value['title.'] );
       $this->smarkerArray['###'.$upperType.'_TITLE###'] = 
-        '<label for="tx_caddy_pi1_' . $type . '_' . intval( $key ) . '">' . 
+        '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '">' . 
         $title . ' (' . $show_price . ')</label>';
 
       if( isset( $condition_list['###CONTENT###'] ) )
       {
         $this->smarkerArray['###'.$upperType.'_CONDITION###'] = 
-          $this->cObj->substituteMarkerArrayCached( $this->tmpl[$type . '_condition_all'], null, $condition_list );
+          $this->cObj->substituteMarkerArrayCached( $this->tmpl[$optionType . '_condition_all'], null, $condition_list );
       } else {
         $this->smarkerArray['###'.$upperType.'_CONDITION###'] = '';
       }
-      $radio_list .= $this->cObj->substituteMarkerArrayCached( $this->tmpl[$type . '_item'], $this->smarkerArray );
+      $radio_list .= $this->cObj->substituteMarkerArrayCached( $this->tmpl[$optionType . '_item'], $this->smarkerArray );
     }
       // LOOP each option
 

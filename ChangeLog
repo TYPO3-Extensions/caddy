@@ -1,3 +1,11 @@
+2.0.2
+  2013-03-22
+  Improvement
+  # *i0003: Calculation of service costs
+            Effected files:
+            * lib/caddy/class.tx_caddy.php
+            * pi1/class.tx_caddy_pi1.php
+
 2.0.1
   2013-03-21
   Feature
