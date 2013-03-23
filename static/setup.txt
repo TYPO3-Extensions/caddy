@@ -2249,11 +2249,11 @@ plugin.tx_caddy_pi3 {
         20 = TEXT
         20 {
           if {
-            value = 1
-            isGreaterThan {
+            value = 2 
+            isLessThan {
               field = numberofitems
             }
-            negate      = 1
+            negate  = 1
           }
           data = LLL:EXT:caddy/pi3/locallang.xml:items
           wrap = <span class="label sumlabel">|</span>
