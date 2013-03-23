@@ -162,6 +162,7 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
   */
   private function initFlexform( )
   {
+    $this->pi_initPIflexForm();
     $this->flexform->main( );
   }
 

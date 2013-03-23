@@ -166,8 +166,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->pi_loadLL();
       // Init extension configuration array
     $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
-      // init flexform
-    $this->pi_initPIflexForm();
 
       // 130227, dwildt, 1-
     //$this->pi_USER_INT_obj = 1;
@@ -405,6 +403,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function init( )
   {
+      // init flexform
+    $this->pi_initPIflexForm();
+
     $this->initInstances( );
     $this->drs->init( );
     $this->initFlexform( );
