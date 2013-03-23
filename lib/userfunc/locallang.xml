@@ -112,6 +112,7 @@
         Sorry, but it isn't possible, to order products without a powermail form.<br /> 
         Please add the powermail form!
       ]]></label>
+      <label index="promptCurrIPBody">Your current IP</label>
       <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Please iclude the static template [+Flip it!: Basis for TYPO3 < 4.7 (obligate!)]]]></label>
       <label index="promptEvaluatorTYPO3version45smaller">Your are using a TYPO3 version smaller than 4.5. Flip it! isn't tested in this version. Try it!</label>
       <label index="promptEvaluatorTYPO3version46smaller">You are using TYPO3 4.5. This is perfect!</label>
@@ -338,6 +339,7 @@
         Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br /> 
         Bitte f&uuml;ge das Powermail Formular ein.
       ]]></label>
+      <label index="promptCurrIPBody">Deine aktuelle IP-Adresse</label>
       <label index="promptEvaluatorIncludeCss4-6"><![CDATA[Du musst das Static Template [+Flip it!: Basis fuer TYPO3 < 4.7 einbinden.]]]></label>
       <label index="promptEvaluatorTYPO3version45smaller">Du verwendest eine TYPO3-Version, die kleiner ist als 4.5. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptEvaluatorTYPO3version46smaller">Du verwendest TYPO3 4.5.x. Das ist perfekt.</label>

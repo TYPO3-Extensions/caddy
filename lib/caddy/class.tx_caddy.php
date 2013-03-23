@@ -1499,6 +1499,14 @@ class tx_caddy extends tslib_pibase
     $optionList   = null;
     $optionItems  = ( array ) $this->conf[$optionType.'.']['options.'];
     
+      // DRS
+    if( $this->drs->drsOptions )
+    {
+      $prompt = $optionType . '.options.' . $optionId;
+      t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // LOOP each option item
     foreach( $optionItems as $optionItemKey => $optionItemConf )
     {
