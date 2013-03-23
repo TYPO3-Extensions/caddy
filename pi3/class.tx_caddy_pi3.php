@@ -104,18 +104,6 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
     
-    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
-    {
-      if( stristr( $key, '.') )
-      { 
-        continue;
-      }
-      $marker = '###' . strtoupper( $key ) . '###';
-      $name   = $this->conf['settings.']['fields.'][$key];
-      $conf   = $this->conf['settings.']['fields.'][$key . '.'];
-      $markerArray[$marker] = $this->local_cObj->cObjGetSingle( $name, $conf );
-    }
-
     $pid                  = $this->pidCaddy;
 
     $label                = $this->pi_getLL('link');
@@ -129,7 +117,7 @@ class tx_caddy_pi3 extends tslib_pibase
 
 var_dump( __METHOD__, __LINE__, $markerArray );
     $tmpl     = $this->tmpl['minicart'];
-    $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+    $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );
     
     return $content;
