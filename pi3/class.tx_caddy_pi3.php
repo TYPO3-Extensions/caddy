@@ -154,9 +154,10 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   */	
   public function caddyWoProducts( ) 
   {
-    $tmpl = $this->tmpl['caddymini_empty'];
-    $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null );
-    $content = $this->dynamicMarkers->main( $content, $this );
+    $tmpl     = $this->tmpl['caddyminiempty'];
+    $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, null );
+    
+    $content  = $this->dynamicMarkers->main( $content, $this );
 
     return $content;
   }
@@ -311,8 +312,8 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
     $marker               = '###ITEMS###';
     $this->tmpl['items']  = $this->cObj->getSubpart( $this->tmpl['caddymini'], $marker );
 
-    $marker                         = '###CADDYMINI_EMPTY###';
-    $this->tmpl['caddymini_empty']  = $this->cObj->getSubpart( $fileRessource, $marker );
+    $marker                       = '###CADDYMINIEMPTY###';
+    $this->tmpl['caddyminiempty'] = $this->cObj->getSubpart( $fileRessource, $marker );
   }
 
  /**
