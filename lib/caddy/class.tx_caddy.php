@@ -101,7 +101,7 @@ class tx_caddy extends tslib_pibase
 
   // [object] parent DRS object
   private $calc     = null;
-  private $drs      = null;
+  public  $drs      = null;
   private $userfunc = null;
 
   // [object] parent object
@@ -1447,11 +1447,6 @@ class tx_caddy extends tslib_pibase
     $this->initInstances = true;
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-
-    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj        = $this;
-    $this->drs->row         = $this->cObj->data;
 
     if( is_object ( $this->pObj->powermail ) )
     {
