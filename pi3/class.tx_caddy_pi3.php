@@ -65,6 +65,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->pi_loadLL();
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2pi1 = t3lib_extMgm::extPath( 'caddy' ) . 'pi1/';
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
@@ -72,7 +73,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
       // Class with methods for get flexform values
-    require_once( 'class.tx_caddy_pi1_flexform.php' );
+    require_once( $path2pi1 . 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
