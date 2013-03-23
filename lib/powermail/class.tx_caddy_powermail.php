@@ -363,6 +363,11 @@ class tx_caddy_powermail extends tslib_pibase
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
 
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
+
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
     
