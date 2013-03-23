@@ -6,11 +6,11 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="sdef">Check it!</label>
+      <label index="sdef">Caddy</label>
       <label index="sdefPid">Page with the Caddy</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="sdef">Check it!</label>
+      <label index="sdef">Caddy</label>
       <label index="sdefPid">Seite mit dem Warenkorb</label>
     </languageKey>
   </data>
