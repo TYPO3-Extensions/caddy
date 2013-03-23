@@ -1554,7 +1554,7 @@ class tx_caddy extends tslib_pibase
       $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf ); 
 
         // Set the marker array
-      $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross );
+      $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf );
 
         // render the option item list
       $tmpl       = $this->tmpl[$optionType . '_item'];
@@ -1818,7 +1818,7 @@ class tx_caddy extends tslib_pibase
   * @param    double        $gross            : 
   * @return   void
   */
-  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross ) 
+  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf ) 
   {
     switch( true )
     {
@@ -1831,7 +1831,7 @@ class tx_caddy extends tslib_pibase
         break;
     }
 
-    $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross );
+    $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf );
 
     $this->optionListMarkerCondition( $optionType, $condition );
   }
@@ -1923,7 +1923,7 @@ class tx_caddy extends tslib_pibase
   * @param    integer       $optionId         : current option id
   * @return   void
   */
-  private function optionListMarkerLabel( $optionType, $optionItemKey, $gross )
+  private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
   {
     // TODO: In braces the actual Price for Payment should be displayed, not the first one.
 
