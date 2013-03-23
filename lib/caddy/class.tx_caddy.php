@@ -1846,7 +1846,7 @@ class tx_caddy extends tslib_pibase
 //    }
 
       // Enable checkbox, if id of current checkbox is part of the GP array
-    if( in_array( intval( $optionItemKey ), $optionIds ) )
+    if( in_array( intval( $optionItemKey ), ( array ) $optionIds ) )
     {
       $checked = ' checked="checked"';
     }
