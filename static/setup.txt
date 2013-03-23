@@ -2176,6 +2176,69 @@ plugin.tx_caddy_pi3 {
     template        = {$plugin.caddy.main.template}
     pid             = {$plugin.caddy.main.pid}
   }
+    // 
+  content = 
+  content {
+    item = COA
+    item {
+        // number of item
+      10 = TEXT
+      10 {
+        value = number of items
+        wrap = <span class="number itemnumber">|</div>
+      }
+        // label for item
+      20 = TEXT
+      20 {
+        value = label of item
+        wrap = <span class="label itemlabel">|</div>
+      }
+        // gross
+      30 = TEXT
+      30 {
+        value = gross
+        wrap = <span class="gross itemgross">|</div>
+      }
+      wrap = <div class="item minicaddyitem">|</div>
+    }
+    linktocaddy = TEXT
+    linktocaddy {
+      value = link to caddy
+      wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
+    }
+    sum = COA
+    sum {
+        // number of items
+      10 = TEXT
+      10 {
+        value = number of items
+        wrap = <span class="number sumnumber">|</div>
+      }
+        // label for items
+      20 = COA
+      20 {
+          // in case of one item
+        10 = TEXT
+        10 {
+          value = label in case of one item
+          wrap  = <span class="label sumlabel">|</div>
+        }
+          // in case of more than one item
+        20 = TEXT
+        20 {
+          value = label in case of more than one item
+          wrap = <span class="label sumlabel">|</div>
+        }
+      }
+        // gross
+      30 = TEXT
+      30 {
+        value = gross
+        wrap = <span class="gross sumgross">|</div>
+      }
+      wrap = <div class="sum minicaddysum">|</div>
+    }
+  }
   settings {
     fields {
       minicart_count = TEXT
