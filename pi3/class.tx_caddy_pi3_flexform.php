@@ -121,10 +121,10 @@ class tx_caddy_pi3_flexform
 //    $this->sdefDrs  = $this->zzFfValue( $sheet, $field, false );
       // sdefDrs
 
-      // sdefUpdatewizard
-    $field                  = 'sdefPidCaddy';
+      // sdefPidCaddy
+    $field              = 'sdefPidCaddy';
     $this->sdefPidCaddy = $this->zzFfValue( $sheet, $field );
-      // sdefUpdatewizard
+      // sdefPidCaddy
 
     return;
   }
@@ -150,6 +150,7 @@ class tx_caddy_pi3_flexform
   public function zzFfValue( $sheet, $field, $drs=true )
   {
     $pi_flexform = $this->row['pi_flexform'];
+var_dump( __METHOD__, __LINE__, $pi_flexform );
 
     $value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
 
