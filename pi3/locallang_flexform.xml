@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin "tx_browser_pi3"</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="help">Help!</label>
+      <label index="sdef">Check it!</label>
+      <label index="sdefPid">Uid of the page with the Caddy</label>
+      <label index="sponsors">Sponsors</label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="help">Hilfe!</label>      
+      <label index="sdef">Check it!</label>
+      <label index="sdefPid">Uid der Seite mit dem Warenkorb</label>
+      <label index="sponsors">Sponsoren</label>
+    </languageKey>
+  </data>
+</T3locallang>

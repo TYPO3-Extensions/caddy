@@ -119,12 +119,12 @@
       <label index="paths.invoice">PDF-Vorlage: Rechnung</label>
       <label index="paths.revocation">PDF-Vorlage: Widerrufsbelehrung</label>
       <label index="paths.terms">PDF-Vorlage: AGB</label>
+      <label index="sdef">Check it!</label>
       <label index="sdefCsvallowedip">Liste erlaubter IP. Bitte setze Deine aktuelle IP-Adresse ein, wenn Du ein Ergebnis im Frontend sehen willst.</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
       <label index="sdefReport">Check it!-Bericht</label>
       <label index="sdefReportEnable">Schalte den Check it!-Bericht ein</label>
       <label index="sdefUpdatewizard">Update Assistent: Du bekommst einen Bericht im Frontend, wenn Deine IP in der Liste der erlaubten IP eingetragen ist.</label>
-      <label index="sdef">Check it!</label>
       <label index="sponsors">Sponsoren</label>
     </languageKey>
   </data>

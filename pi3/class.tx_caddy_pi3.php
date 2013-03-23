@@ -58,32 +58,9 @@ class tx_caddy_pi3 extends tslib_pibase
     unset( $content );
     
       // config
-    global $TSFE;
-    $local_cObj = $TSFE->cObj;
     $this->conf = $conf;
-    $this->pi_setPiVarDefaults();
-    $this->pi_loadLL();
+    $this->init( );
     
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-    $path2pi1 = t3lib_extMgm::extPath( 'caddy' ) . 'pi1/';
-    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-    require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
-    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
-    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj        = $this;
-    $this->drs->row         = $this->cObj->data;
-      // Class with methods for get flexform values
-    require_once( $path2pi1 . 'class.tx_caddy_pi1_flexform.php' );
-    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
-    $this->flexform->pObj   = $this;
-    $this->flexform->row    = $this->cObj->data;
-
-    $this->drs->init( );
-    
-    $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
-    $this->session->setParentObject( $this );
-    
-    $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 
     $this->tmpl['minicart']       = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART###' ); // Load FORM HTML Template
     $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART_EMPTY###' ); // Load FORM HTML Template
@@ -113,12 +90,12 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
         'count'           => $count,
         'minicart_gross'  => $this->session->productsGetGross( $pid )
       );
-      $local_cObj->start($outerArr, $this->conf['db.']['table']);
+      $this->local_cObj->start($outerArr, $this->conf['db.']['table']);
       foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
       {
         if (!stristr($key, '.'))
         { // no .
-          $minicartMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
+          $minicartMarkerArray['###' . strtoupper($key) . '###'] = $this->local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
         }
       }
 
@@ -137,4 +114,161 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
     }
     return $this->pi_wrapInBaseClass($this->content);
   }
+
+
+
+  /***********************************************
+  *
+  * Init
+  *
+  **********************************************/
+
+ /**
+  * init( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function init( )
+  {
+    $this->initVars( );
+    
+    $this->initInstances( );
+    $this->initFlexform( );
+    $this->initPid( );
+    $this->initTemplate( );
+    
+    $this->session->setParentObject( $this );
+  }
+ /**
+  * initFlexform( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initFlexform( )
+  {
+    $this->flexform->main( );
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initInstances( )
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2pi1 = t3lib_extMgm::extPath( 'caddy' ) . 'pi1/';
+    
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
+    $this->drs->init( );
+
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php');
+    $this->dynamicMarkers = t3lib_div::makeInstance(' tx_caddy_dynamicmarkers' );
+
+    require_once( $path2pi1 . 'class.tx_caddy_pi1_flexform.php' );
+    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
+    $this->flexform->pObj   = $this;
+    $this->flexform->row    = $this->cObj->data;
+
+    require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
+    $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
+    $this->session->setParentObject( $this );
+    
+    require_once( $path2lib . 'class.tx_caddy_template.php' );
+    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
+    $this->template->pObj   = $this;
+
+  }
+
+/**
+ * initPid( ) :
+ *
+ * @return	void
+ * @version 2.0.0
+ * @since   2.0.0
+ */
+  private function initPid( )
+  {
+    $pid = ( int ) $this->conf['main']['pid'];
+
+    switch( true )
+    {
+      case( ! empty( $pid ) ):
+        $this->pid = $pid;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'pid is taken from main.pid and is set to ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+      case( empty( $pid ) ):
+      default:
+        $this->pid = $GLOBALS['TSFE']->id;
+          // DRS
+        if( $this->drs->drsInit )
+        {
+          $prompt = 'main.pid is empty. pid is set to the id of the current page: ' . $this->pid;
+          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
+        }
+          // DRS
+        break;
+    }
+  }
+
+ /**
+  * initPowermail( )
+  *
+  * @return	void
+  * @access private
+  * @internal   #45915
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initPowermail( )
+  {
+    $this->powermail->init( $this->cObj->data );
+  }
+
+ /**
+  * initTemplate( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initTemplate( )
+  {
+    $this->tmpl = $this->template->main( );
+  }
+
+ /**
+  * initVars( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initVars( )
+  {
+    $this->local_cObj = $GLOBALS['TSFE']->cObj;
+    $this->pi_setPiVarDefaults();
+    $this->pi_loadLL();
+  }
+
 }

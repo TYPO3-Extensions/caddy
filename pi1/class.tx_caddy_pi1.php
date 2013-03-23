@@ -389,7 +389,6 @@ class tx_caddy_pi1 extends tslib_pibase
 
 
 
-
   /***********************************************
   *
   * Init

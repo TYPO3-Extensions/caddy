@@ -1,34 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3DataStructure>
   <meta>
     <langDisable>1</langDisable>
   </meta>
   <sheets>
-    <sDEF>
-      <ROOT>
-        <TCEforms>
-          <sheetTitle>LLL:EXT:caddy/locallang_db.php:tt_content.list_type_pi3</sheetTitle>
-        </TCEforms>
-        <type>array</type>
-          <el>
-            <pid>
-              <TCEforms>
-                <label>LLL:EXT:caddy/pi3/locallang.xml:flexform.pid</label>
-                  <config>
-                    <type>input</type>
-                    <size>10</size>
-                    <max>9999999999</max>
-                    <eval>int</eval>
-                    <checkbox>1</checkbox>
-                    <range>
-                      <upper>9999999999</upper>
-                      <lower>1</lower>
-                    </range>
-                    <default>1</default>
-                  </config>
-              </TCEforms>
-            </pid>
-          </el>
-      </ROOT>
-    </sDEF>
+    <sDEF>EXT:caddy/pi3/flexform_sheet_sDEF.xml</sDEF>
+    <sponsors>EXT:caddy/pi1/flexform_sheet_sponsors.xml</sponsors>
+    <help>EXT:caddy/pi1/flexform_sheet_help.xml</help>
   </sheets>
 </T3DataStructure>
