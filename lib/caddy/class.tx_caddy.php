@@ -1799,7 +1799,7 @@ class tx_caddy extends tslib_pibase
         $keepingTheLimit = false;
         break;
       default:
-        $keepingTheLimit = false;
+        $keepingTheLimit = true;
         break;
     }
       // SWITCH : keeping the limit
