@@ -42,71 +42,112 @@ class tx_caddy_pi3 extends tslib_pibase
   public $extKey = 'caddy';
 
  /**
-  * the main method of the PlugIn
+  * main( ) : the main method of the PlugIn
   *
-  * @param string    $content: The PlugIn content
-  * @param array   $conf: The PlugIn configuration
-  * @return  The content that is displayed on the website
+  * @param      string      $content  : The PlugIn content. Not needed.
+  * @param      array       $conf     : The PlugIn configuration. Will overriden by conf of pi1
+  * @return     string      $content  : The content that is displayed on the website
   * @version  2.0.2
   * @since    2.0.2
   */	
   public function main( $content, $conf ) 
   {
-    unset( $content );
+    unset( $conf );
     
-      // config
-    //$this->conf = $conf;
     $this->init( );
     
-
-    $this->tmpl['minicart']       = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART###' ); // Load FORM HTML Template
-    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART_EMPTY###' ); // Load FORM HTML Template
-
-    //Read Flexform
-
-    $this->products = $this->session->productsGet( $this->pidCaddy );
-    $count = count( $this->products );
-//    switch( true )
-//    {
-//      case( count( $this->products ) > 0 ):
-//        $caddy = $this->caddyWiProducts( );
-//        break;
-//      case( ! ( count( $this->products ) > 0 ) ):
-//      default:
-//        $this->caddyWoProducts( );
-//        $caddy = null;
-//        break;
-//    }
-var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
-    if( $count ) 
+    $this->products   = $this->session->productsGet( $this->pidCaddy );
+    $numberOfProducts = count( $this->products );
+    
+    switch( true )
     {
-      $outerArr = array(
-        'count'           => $count,
-        'minicart_gross'  => $this->session->productsGetGross( $this->pidCaddy )
-      );
-      $this->local_cObj->start($outerArr, $this->conf['db.']['table']);
-      foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
-      {
-        if (!stristr($key, '.'))
-        { // no .
-          $minicartMarkerArray['###' . strtoupper($key) . '###'] = $this->local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
-        }
-      }
-
-      $typolink_conf = array();
-      $minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $this->pidCaddy, "", $typolink_conf);
-      $minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($this->pidCaddy, "", $typolink_conf);
-
-      $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart'], $minicartMarkerArray); // Get html template
-      $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
-      //$this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
-    } 
-    else 
-    {
-      $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart_empty'], null, $minicartMarkerArray); // Get html template
-      $this->content = $this->dynamicMarkers->main($this->content, $this);
+      case( $numberOfProducts > 0 ):
+        $caddy = $this->caddyWiProducts( );
+        break;
+      case( $numberOfProducts = 0 ):
+      default:
+        $this->caddyWoProducts( );
+        $caddy = null;
+        break;
     }
-    return $this->pi_wrapInBaseClass($this->content);
+    
+    unset( $numberOfProducts );
+    
+    $content = $caddy;
+    return $this->pi_wrapInBaseClass( $content );
+  }
+
+
+
+  /***********************************************
+  *
+  * Caddy
+  *
+  **********************************************/
+
+ /**
+  * caddyWiProducts( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function caddyWiProducts( ) 
+  {
+    $numberOfProducts = count( $this->products );
+    
+    $outerArr = array
+    (
+      'count'           => $numberOfProducts,
+      'minicart_gross'  => $this->session->productsGetGross( $this->pidCaddy )
+    );
+    
+    $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+    
+    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    {
+      if( stristr( $key, '.') )
+      { 
+        continue;
+      }
+      $marker = '###' . strtoupper( $key ) . '###';
+      $name   = $this->conf['settings.']['fields.'][$key];
+      $conf   = $this->conf['settings.']['fields.'][$key . '.'];
+      $markerArray[$marker] = $this->local_cObj->cObjGetSingle( $name, $conf );
+    }
+
+    $pid                  = $this->pidCaddy;
+
+    $label                = $this->pi_getLL('link');
+    $typolinkConf         = array( );
+    $value                = $this->pi_linkToPage( $label, $pid, null, $typolinkConf );
+    $marker               = '###MINICART_LINK###';
+    $markerArray[$marker] = $value;
+
+    $marker               = '###MINICART_LINK_URL###';
+    $markerArray[$marker] = $this->pi_getPageLink( $pid, null, $typolinkConf);
+
+    $tmpl     = $this->tmpl['minicart'];
+    $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+    $content  = $this->dynamicMarkers->main( $content, $this );
+    
+    return $content;
+  }
+
+ /**
+  * caddyWoProducts( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of no products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function caddyWoProducts( ) 
+  {
+    $tmpl = $this->tmpl['minicart_empty'];
+    $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null );
+    $content = $this->dynamicMarkers->main( $content, $this );
+
+    return $content;
   }
 
 
@@ -250,6 +291,12 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
   private function initTemplate( )
   {
     $this->tmpl = $this->template->main( );
+
+    $fileRessource  = $this->cObj->fileResource($this->conf['main.']['template'] );
+    $marker         = '###CADDY_MINICART###';
+    $this->tmpl['minicart']       = $this->cObj->getSubpart( $fileRessource, $marker );
+    $marker         = '###CADDY_MINICART_EMPTY###';
+    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $fileRessource, $marker );
   }
 
  /**
