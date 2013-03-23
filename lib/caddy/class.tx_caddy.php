@@ -1452,11 +1452,10 @@ class tx_caddy extends tslib_pibase
     
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
-    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj        = $this;
-    $this->drs->row         = $this->cObj->data;
-    $this->drs->init( );
+//    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+//    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+//    $this->drs->pObj        = $this;
+//    $this->drs->row         = $this->cObj->data;
 
     if( is_object ( $this->pObj->powermail ) )
     {
@@ -2027,6 +2026,17 @@ class tx_caddy extends tslib_pibase
       
     }
     $this->cObj = $pObj->cObj;
+
+    if( ! is_object( $pObj->drs ) )
+    {
+      $prompt = 'ERROR: no DRS!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+      
+    }
+    $this->drs = $pObj->drs;
 
     if( ! is_object( $pObj->local_cObj ) )
     {
