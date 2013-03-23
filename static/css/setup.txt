@@ -3,12 +3,14 @@ plugin.tx_caddy_pi1 {
     
     /* div based caddy */
     
-    #caddy_payment {
+    div.caddy_options {
       padding: 0.4em 0 0 4.3em;
     }
+    #caddy_payment,
     #caddy_shipping,
     #caddy_special {
-      padding: 1em 0 0 4.3em;
+      float:left;
+      padding: 1em 2em 0 0;
     }
     div.caddy_header {
       font-weight:bold; 
