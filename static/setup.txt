@@ -2290,7 +2290,10 @@ plugin.tx_caddy_pi3 {
           // Label
         10 = TEXT
         10 {
-          data        = LLL:EXT:caddy/pi3/locallang.xml:linktocaddylabel
+          data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+          typolink {
+            parameter = {$plugin.caddy.pages.caddy}
+          }
           noTrimWrap  = || |
         }
           // Icon
