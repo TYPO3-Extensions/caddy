@@ -1689,16 +1689,16 @@ class tx_caddy_session
     }
     $this->pObj = $pObj;
 
-$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
-          'TYPO3 Caddy<br />' . PHP_EOL .
-        __METHOD__ . ' (' . __LINE__ . ')';
-echo $prompt;
+//$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
+//          'TYPO3 Caddy<br />' . PHP_EOL .
+//        __METHOD__ . ' (' . __LINE__ . ')';
+//echo $prompt;
 
     if( ! is_object( $pObj->drs ) )
     {
       $prompt = 'ERROR: no DRS object!<br />' . PHP_EOL .
                 'Sorry for the trouble.<br />' . PHP_EOL .
-                'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
+//                'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
