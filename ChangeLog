@@ -3,7 +3,12 @@
   Improvement
   # *i0004: Rendering of option lists
             Effected files:
+            * files/templates
+              * caddy.html
+              * caddy_table.html
+              * pdf_table.html
             * lib/caddy/class.tx_caddy.php
+            * pi1/locallang.xml
             * static/setup
   # *i0003: Calculation of options costs
             Effected files:
