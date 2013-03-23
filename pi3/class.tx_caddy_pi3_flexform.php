@@ -59,49 +59,6 @@ class tx_caddy_pi3_flexform
     // Current row
   public $row = null;
 
-    // [deliveryorder]
-  public $deliveryorderCompany    = null;
-  public $deliveryorderFirstname  = null;
-  public $deliveryorderLastname   = null;
-  public $deliveryorderAddress    = null;
-  public $deliveryorderZip        = null;
-  public $deliveryorderCity       = null;
-  public $deliveryorderCountry    = null;
-    // [deliveryorder]
-
-    // [email]
-  public $emailCustomerEmail      = null;
-  public $emailDeliveryorderMode  = null;
-  public $emailInvoiceMode        = null;
-  public $emailRevocationMode     = null;
-  public $emailTermsMode          = null;
-    // [email]
-
-    // [invoice]
-  public $invoiceCompany    = null;
-  public $invoiceFirstname  = null;
-  public $invoiceLastname   = null;
-  public $invoiceAddress    = null;
-  public $invoiceZip        = null;
-  public $invoiceCity       = null;
-  public $invoiceCountry    = null;
-    // [invoice]
-
-    // [origin]
-  public $originMin             = null;
-  public $originMax             = null;
-  public $originDeliveryorder   = null;
-  public $originInvoice         = null;
-  public $originOrder           = null;
-    // [origin]
-
-    // [paths]
-  public $pathsDeliveryorder  = null;
-  public $pathsInvoice        = null;
-  public $pathsRevocation     = null;
-  public $pathsTerms          = null;
-    // [paths]
-
     // [sdef]
     // [boolean] enable DRS
   public $sdefDrs = null;
