@@ -1832,7 +1832,7 @@ class tx_caddy extends tslib_pibase
   private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
     $checked = null;
-var_dump( __METHOD__, __LINE__, $_POST['tx_caddy_pi1'][$optionType] );    
+var_dump( __METHOD__, __LINE__, $_POST['tx_caddy_pi1'][$optionType], t3lib_div::_GP['tx_caddy_pi1'][$optionType] );    
 $enabledCheckboxes = $_POST['tx_caddy_pi1'][$optionType];
 //    if( in_array( intval( $optionItemKey ), $optionIds ) )
     if( in_array( intval( $optionItemKey ), $enabledCheckboxes ) )
