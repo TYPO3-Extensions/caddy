@@ -44,15 +44,15 @@ class tx_caddy_pi3 extends tslib_pibase
  /**
   * main( ) : the main method of the PlugIn
   *
-  * @param      string      $content  : The PlugIn content. Not needed.
-  * @param      array       $conf     : The PlugIn configuration. Will overriden by conf of pi1
+  * @param      string      $content  : plugin content. Usually empty.
+  * @param      array       $conf     : plugin configuration.
   * @return     string      $content  : The content that is displayed on the website
   * @version  2.0.2
   * @since    2.0.2
   */	
   public function main( $content, $conf ) 
   {
-    unset( $conf );
+    $this->conf = $conf;
     
     $this->init( );
     
@@ -96,6 +96,21 @@ class tx_caddy_pi3 extends tslib_pibase
   {
     $numberOfProducts = count( $this->products );
     
+    $outerArr = array
+    (
+      'count'           => $count,
+      'minicart_gross'  => $this->div->getGrossPrice($pid)
+    );
+
+    $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+    foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
+    {
+      if (!stristr($key, '.'))
+      {
+        $markerArray['###' . strtoupper($key) . '###'] = $this->local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
+      }
+    }
+
     $pid                  = $this->pidCaddy;
 
     $value                = $numberOfProducts;
@@ -299,7 +314,6 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   private function initVars( )
   {
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
-    $this->conf       = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
 
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
