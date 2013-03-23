@@ -189,7 +189,7 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi3_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
-var_dump( __METHOD__, __LINE__, $this->cObj->data );
+//var_dump( __METHOD__, __LINE__, $this->cObj->data );
     require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
     $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
     $this->session->setParentObject( $this );
