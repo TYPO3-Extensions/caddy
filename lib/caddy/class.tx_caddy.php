@@ -150,7 +150,6 @@ class tx_caddy extends tslib_pibase
     
       // get products from session
     $this->products = $this->session->productsGet( );
-//var_dump( __METHOD__, __LINE__, $this->products );
     switch( true )
     {
       case( count( $this->products ) > 0 ):
@@ -263,7 +262,6 @@ class tx_caddy extends tslib_pibase
       }
         // DRS
     }
-//var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );    
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
     
@@ -617,7 +615,6 @@ class tx_caddy extends tslib_pibase
                     'sumTaxNormal'      => $sumTaxNormal,
                     'sumTaxReduced'     => $sumTaxReduced
                   );
-//var_dump( __METHOD__, __LINE__, $arrReturn );
 
     return $arrReturn;
   }
@@ -1181,7 +1178,6 @@ class tx_caddy extends tslib_pibase
     $arrReturn['gross']       = $productsGross;
     $arrReturn['taxReduced']  = $productsTaxReduced;
     $arrReturn['taxNormal']   = $productsTaxNormal;
-//var_dump( __METHOD__, __LINE__, $contentItem, $this->tmpl['item'] );
 
     return $arrReturn;
   }
@@ -1597,7 +1593,7 @@ class tx_caddy extends tslib_pibase
     if( $conf['extra'] != 'each' )
     {
       $condition  = $condition
-                  . $this->optionListConditionNotEach( $optionItemKey, $optionType, $conf ); 
+                  . $this->optionListConditionNotEach( $optionType, $conf ); 
     }
     return $condition;
   }
@@ -1702,8 +1698,10 @@ class tx_caddy extends tslib_pibase
   */
   private function optionListConditionGrossOther( $optionItemKey, $optionType ) 
   {
-    $gross  = floatval( $this->calcOptionCosts( $optionType, intval( $optionItemKey ) ) );
-    $gross  = $this->zz_price_format( $gross );
+    $arrResult  = $this->calcOptionCosts( $optionType, intval( $optionItemKey ) );
+    $gross      = $arrResult['gross'];
+    
+    $gross      = $this->zz_price_format( $gross );
     
       // DRS
     if( $this->drs->drsOptions )
@@ -1723,7 +1721,7 @@ class tx_caddy extends tslib_pibase
   * @param    array         $conf       : configuration of current option item
   * @return   array         $arrReturn  : content, gross
   */
-  private function optionListConditionNotEach( $optionItemKey, $optionType, $conf ) 
+  private function optionListConditionNotEach( $optionType, $conf ) 
   {
     $content  = null;
     $gross    = null;
@@ -1742,15 +1740,7 @@ class tx_caddy extends tslib_pibase
                 . $this->cObj->substituteMarkerArrayCached( $tmpl, $marker );
     }
 
-    $gross  = floatval( $this->calcOptionCosts( $optionType, intval( $optionItemKey ) ) );
-    $gross  = $this->zz_price_format( $gross );
-    
-    $arrReturn = array(
-      'content' => $content,
-      'gross'   => $gross
-    );
-    
-    return $arrReturn;
+    return $content;
   }
   
  /**
@@ -2097,14 +2087,21 @@ class tx_caddy extends tslib_pibase
 
     if( ! is_object( $pObj->drs ) )
     {
-      $prompt = 'ERROR: no DRS!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-      
+      $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+      require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+      $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+      $this->drs->pObj        = $this;
+      $this->drs->row         = $this->cObj->data;
+//      $prompt = 'ERROR: no DRS!<br />' . PHP_EOL .
+//                'Sorry for the trouble.<br />' . PHP_EOL .
+//                'TYPO3 Caddy<br />' . PHP_EOL .
+//              __METHOD__ . ' (' . __LINE__ . ')';
+//      die( $prompt );      
     }
-    $this->drs = $pObj->drs;
+    else
+    {
+      $this->drs = $pObj->drs;
+    }
 
     if( ! is_object( $pObj->local_cObj ) )
     {
@@ -2373,7 +2370,10 @@ class tx_caddy extends tslib_pibase
  */
   private function zz_price_format( $value )
   {
-    $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.']; // get ts
+    if( empty ( $this->conf ) )
+    {
+      $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+    }
 
     $currencySymbol = $this->conf['main.']['currencySymbol'];
     $price          = number_format
@@ -2383,7 +2383,6 @@ class tx_caddy extends tslib_pibase
                         $this->conf['main.']['dec_point'], 
                         $this->conf['main.']['thousands_sep']
                       );
-
     // print currency symbol before or after price
     if( $this->conf['main.']['currencySymbolBeforePrice'] ) 
     {
