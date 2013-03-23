@@ -93,25 +93,24 @@ class tx_caddy_pi3 extends tslib_pibase
   */	
   public function caddyWiProducts( ) 
   {
-    $numberOfProducts = count( $this->products );
     $numberOfItems  = $this->zz_numberOfItems( );
     
-    $outerArr = array
+    $cObjData = array
     (
-      'caddymini_count' => $numberOfProducts,
+      'numberofitems' => $numberOfItems,
       'minisumgross'  => $this->session->productsGetGross( $this->pidCaddy )
     );
 
-    $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+    $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
 var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
-    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['content.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
         continue;
       }
-      $name                 = $this->conf['settings.']['fields.'][$key];
-      $conf                 = $this->conf['settings.']['fields.'][$key . '.'];
+      $name                 = $this->conf['content.'][$key];
+      $conf                 = $this->conf['content.'][$key . '.'];
       $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
       $marker               = '###' . strtoupper( $key ) . '###';
       $markerArray[$marker] = $value;
@@ -357,8 +356,7 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
                       + $product['qty']
                       ;
     }
- var_dump( __METHOD__, __LINE__, $this->products, $numberOfItems );
-   
+
     return $numberOfItems;
   }
 }

@@ -2237,8 +2237,8 @@ plugin.tx_caddy_pi3 {
   }
   settings {
     fields {
-      caddymini_count = TEXT
-      caddymini_count.field = caddymini_count
+      numberofitems = TEXT
+      numberofitems.field = numberofitems
 
       minisumgross = COA
       minisumgross {
