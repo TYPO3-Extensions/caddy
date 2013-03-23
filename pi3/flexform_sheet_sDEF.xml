@@ -28,11 +28,11 @@
             <type>select</type>
             <items type="array">
               <numIndex index="0" type="array">
-                <numIndex index="0">LLL:EXT:caddy/pi3/locallang_flexform.xml:sdef.sdefCaddyMode.wiItems</numIndex>
+                <numIndex index="0">LLL:EXT:caddy/pi3/locallang_flexform.xml:sdefCaddyModeWiItems</numIndex>
                 <numIndex index="1">wiItems</numIndex>
               </numIndex>
               <numIndex index="1" type="array">
-                <numIndex index="0">LLL:EXT:caddy/pi3/locallang_flexform.xml:sdef.sdefCaddyMode.woItems</numIndex>
+                <numIndex index="0">LLL:EXT:caddy/pi3/locallang_flexform.xml:sdefCaddyModeWoItems</numIndex>
                 <numIndex index="1">woItems</numIndex>
               </numIndex>
             </items>
