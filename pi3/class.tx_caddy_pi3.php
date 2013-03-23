@@ -55,7 +55,7 @@ class tx_caddy_pi3 extends tslib_pibase
     unset( $content );
     
       // config
-    $this->conf = $conf;
+    //$this->conf = $conf;
     $this->init( );
     
 
@@ -263,11 +263,11 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
   private function initVars( )
   {
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
+    $this->conf       = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
-var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );
     $this->pi_initPIflexForm( );
-var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );
   }
 
 }

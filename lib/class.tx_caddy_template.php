@@ -112,6 +112,9 @@ class tx_caddy_template
             Please enable the DRS - the Development Reporting System. It tries to offer a fix.
           </p>
           <p>
+            ' . __METHOD__ . ' (' . __LINE__ . ')
+          </p>
+          <p>
             Caddy - the Shopping Cart
           </p>
         </div>
