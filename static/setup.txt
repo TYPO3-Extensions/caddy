@@ -2202,11 +2202,6 @@ plugin.tx_caddy_pi3 {
       }
       wrap = <div class="item minicaddyitem">|</div>
     }
-    linktocaddy = TEXT
-    linktocaddy {
-      value = link to caddy
-      wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
-    }
     sum = COA
     sum {
         // number of items
@@ -2280,16 +2275,50 @@ plugin.tx_caddy_pi3 {
     // HTML marker
   _HTMLMARKER =
   _HTMLMARKER {
-      // Replace the marker _HTMLMARKER_LINTOTHESHOP
-    linktocaddy = TEXT
+      // Replace the marker _HTMLMARKER_LINTOCADDY
+    linktocaddy = COA
     linktocaddy {
-      data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
-      typolink {
-        parameter = {$plugin.caddy.pages.caddy}
-        title {
-          data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+        // Button begin
+      10 = TEXT
+      10 {
+        data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddylabel
+        wrap = <button class="submit" name="submit" type="submit" value="|">
+      }
+        // Button content: label and icon
+      20 = COA
+      20 {
+          // Label
+        10 = TEXT
+        10 {
+          data        = LLL:EXT:caddy/pi3/locallang.xml:linktocaddylabel
+          noTrimWrap  = || |
+        }
+          // Icon
+        20 = IMAGE
+        20 {
+          file = EXT:caddy/files/img/caddy_100_02.png
+          altText {
+            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+          }
+          titleText {
+            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+          }
+          params = class="linktocaddy"
+          imageLinkWrap = 1
+          imageLinkWrap {
+            enable = 1
+            typolink {
+              parameter = {$plugin.caddy.pages.caddy}
+            }
+          }
         }
       }
+        // Button end
+      30 = TEXT
+      30 {
+        value = </button>
+      }
+      wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
     }
   }
 }
