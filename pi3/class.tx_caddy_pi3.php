@@ -156,6 +156,7 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   {
     $tmpl     = $this->tmpl['caddyminiempty'];
     //$content  = $this->cObj->substituteMarkerArrayCached( $tmpl, null );
+    $content  = $tmpl;
     
     $content  = $this->dynamicMarkers->main( $content, $this );
 
