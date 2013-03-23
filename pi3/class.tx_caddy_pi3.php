@@ -117,26 +117,6 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
     }
 var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
 
-    $pid                  = $this->pidCaddy;
-
-//    $value                = $numberOfProducts;
-//    $marker               = '###MINICART_COUNT###';
-//    $markerArray[$marker] = $value;
-//
-//    $value                = $this->session->productsGetGross( $this->pidCaddy );
-//    $marker               = '###MINISUMGROSS###';
-//    $markerArray[$marker] = $value;
-
-    $label                = $this->pi_getLL('link');
-    $typolinkConf         = array( );
-    $value                = $this->pi_linkToPage( $label, $pid, null, $typolinkConf );
-    $marker               = '###MINICART_LINK###';
-    $markerArray[$marker] = $value;
-
-    $marker               = '###MINICART_LINK_URL###';
-    $markerArray[$marker] = $this->pi_getPageLink( $pid, null, $typolinkConf);
-
-var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
     $tmpl     = $this->tmpl['caddymini'];
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );

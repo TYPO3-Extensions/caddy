@@ -2227,7 +2227,7 @@ plugin.tx_caddy_pi3 {
         // number of items
       10 = TEXT
       10 {
-        value = number of items
+        field = numberofitems
         wrap = <span class="number sumnumber">|</span>
       }
         // label for items
