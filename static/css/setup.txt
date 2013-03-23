@@ -9,12 +9,8 @@ plugin.tx_caddy_pi1 {
     #caddy_payment {
     #caddy_shipping,
     #caddy_special {
-      float:left;
+      float:left
       padding: 1em 2em 0 0;
-    }
-    #caddy_shipping,
-    #caddy_special {
-      padding: 1em 0 0 4.3em;
     }
     div.caddy_header {
       font-weight:bold; 
