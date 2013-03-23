@@ -1467,11 +1467,11 @@ class tx_caddy extends tslib_pibase
     
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session->setParentObject( $this );
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
     
-    $this->session->setParentObject( $this );
   }
   
 

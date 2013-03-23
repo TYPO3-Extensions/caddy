@@ -368,6 +368,7 @@ class tx_caddy_powermail extends tslib_pibase
     
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session->setParentObject( $this );
     
   } 
 
