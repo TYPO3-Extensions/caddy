@@ -61,7 +61,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  980:     private function zz_checkOptionIsNotAvailable($optionType, $optionId)
  * 1014:     private function calcOptionCosts($optionType, $optionId)
  * 1064:     private function zz_price_format($value)
- * 1086:     private function zz_renderOptionList($optionType, $optionId)
+ * 1086:     private function optionList($optionType, $optionId)
  *
  * TOTAL FUNCTIONS: 20
  * (This index is automatically created/updated by the extension "extdeveval")
@@ -266,52 +266,52 @@ class tx_caddy extends tslib_pibase
 //var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );    
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
-      // Set min price error
-    if( $sesArray['productsGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
+    
+    $minimumRate           = floatval( $this->conf['cart.']['cartmin.']['value'] );
+    $minimumRateIsUndercut = ( $sesArray['productsGross'] < $minimumRate );
+
+      // SWITCH : product gross is undercut minimum rate
+    switch( $minimumRateIsUndercut )
     {
-      $caddyMinStr                             = $this->zz_price_format($this->conf['cart.']['cartmin.']['value']);
-      $minPriceArray['###ERROR_MINPRICE###']  = sprintf($this->pi_getLL('minprice'), $caddyMinStr);
-      $subpartArray['###MINPRICE###']         =
-        $this->cObj->substituteMarkerArrayCached($this->tmpl['minprice'], $minPriceArray);
+      case( true ):
+          // Set min price error
+        $caddyMinStr                            = $this->zz_price_format( $minimumRate );
+        $minPriceArray['###ERROR_MINPRICE###']  = sprintf( $this->pi_getLL( 'minprice' ), $caddyMinStr );
+        $subpartArray['###MINPRICE###']         = $this->cObj->substituteMarkerArrayCached
+                                                  ( 
+                                                    $this->tmpl['minprice'], 
+                                                    $minPriceArray 
+                                                  );
+        break;
+      case( false ):
+      default:
+          // Set shipping radio, payment radio and special checkbox
+        $shippingArray['###CONTENT###'] = $this->optionList( 'shipping', $shippingId );
+        $subpartArray['###SHIPPING_RADIO###'] = '';
+        if( $shippingArray['###CONTENT###'] )
+        {
+          $subpartArray['###SHIPPING_RADIO###'] =
+            $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
+        }
+
+        $paymentArray['###CONTENT###'] = $this->optionList('payment', $paymentId);
+        $subpartArray['###PAYMENT_RADIO###'] = '';
+        if( $paymentArray['###CONTENT###'] )
+        {
+          $subpartArray['###PAYMENT_RADIO###'] =
+            $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
+        }
+
+        $subpartArray['###SPECIAL_CHECKBOX###'] = '';
+        $specialArray['###CONTENT###'] = $this->optionList('special', $specialIds);
+        if( $specialArray['###CONTENT###'] )
+        {
+          $subpartArray['###SPECIAL_CHECKBOX###'] =
+            $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
+        }
+        break;
     }
-      // Set min price error
-
-      // Set shipping radio, payment radio and special checkbox
-    if
-    (
-      ! ( $sesArray['productsGross'] < floatval( $this->conf['cart.']['cartmin.']['value'] ) )
-      ||
-      (
-        ( $sesArray['productsGross'] < floatval($this->conf['cart.']['cartmin.']['value'] ) )
-        &&
-        ( ! $this->conf['cart.']['cartmin.']['hideifnotreached.']['service'] )
-      )
-    )
-    {
-      $shippingArray['###CONTENT###'] = $this->zz_renderOptionList( 'shipping', $shippingId );
-      $subpartArray['###SHIPPING_RADIO###'] = '';
-      if( $shippingArray['###CONTENT###'] )
-      {
-        $subpartArray['###SHIPPING_RADIO###'] =
-          $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
-      }
-
-      $paymentArray['###CONTENT###'] = $this->zz_renderOptionList('payment', $paymentId);
-      $subpartArray['###PAYMENT_RADIO###'] = '';
-      if( $paymentArray['###CONTENT###'] )
-      {
-        $subpartArray['###PAYMENT_RADIO###'] =
-          $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
-      }
-
-      $subpartArray['###SPECIAL_CHECKBOX###'] = '';
-      $specialArray['###CONTENT###'] = $this->zz_renderOptionList('special', $specialIds);
-      if( $specialArray['###CONTENT###'] )
-      {
-        $subpartArray['###SPECIAL_CHECKBOX###'] =
-          $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
-      }
-    }
+      // SWITCH : product gross is undercut minimum rate
 
       // RESET cObj->data
     return $subpartArray;
@@ -621,6 +621,14 @@ class tx_caddy extends tslib_pibase
 
     return $arrReturn;
   }
+  
+
+
+  /***********************************************
+  *
+  * Calc Options
+  *
+  **********************************************/
 
  /**
   * calcOptionCosts( )  : Gets the gross costs for the given option
@@ -1072,6 +1080,14 @@ class tx_caddy extends tslib_pibase
 
     return $arrReturn;
   }
+  
+
+
+  /***********************************************
+  *
+  * Calc Products
+  *
+  **********************************************/
 
  /**
   * calcProduct( )
@@ -1466,6 +1482,474 @@ class tx_caddy extends tslib_pibase
 
   /***********************************************
   *
+  * Options
+  *
+  **********************************************/
+
+ /**
+  * optionList( )
+  * 
+  * @param    string        $optionType   : payment, shipping, special
+  * @param    integer       $optionId     : current option id
+  * @return	[type]		...
+  */
+  private function optionList( $optionType, $optionId ) 
+  {
+    $condition    = null;
+    $optionList   = null;
+    $optionItems  = ( array ) $this->conf[$optionType.'.']['options.'];
+    
+      // LOOP each option item
+    foreach( $optionItems as $optionItemKey => $optionItemConf )
+    {
+      if( ! stristr( $optionItemKey, '.' ) )
+      { 
+        continue;
+      }
+
+        // productsGross keeps the limit for available
+      $keepingTheLimit = true;
+      $keepingTheLimit = $this->optionListGrossIsKeepingTheLimit( $optionItemConf );
+        // productsGross keeps the limit for available
+
+        // SWITCH : display option list item
+      switch( true )
+      {
+        case( ! $keepingTheLimit ):
+        case( ! $this->conf[$optionType.'.']['show_all_disabled'] ):
+          continue 2;
+          break;
+        default:
+            // follow the work flow
+          break;
+      }
+        // SWITCH : display option list item
+
+        // Get the content for met conditions
+      $condition  = $this->optionListCondition( $keepingTheLimit, $optionType, $optionItemConf, $optionItemKey );
+      
+        // Get the gross costs
+      $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf ); 
+
+        // Set the marker array
+      $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross );
+
+        // render the option item list
+      $tmpl       = $this->tmpl[$optionType . '_item'];
+      $optionList = $optionList
+                  . $this->cObj->substituteMarkerArrayCached( $tmpl, $this->smarkerArray );
+        // render the option item list
+    }
+      // LOOP each option item
+
+    return $optionList;
+  }
+
+ /**
+  * optionListCondition( )
+  * 
+  * @param    string        $keepingTheLimit  : 
+  * @param    string        $optionType : payment, shipping, special
+  * @param    array         $conf       : configuration of current option item
+  * @param    string        $optionItemKey
+  * @return   string        $content
+  */
+  private function optionListCondition( $keepingTheLimit, $optionType, $conf, $optionItemKey ) 
+  {
+    $condition = null;
+    
+    $condition  = $condition
+                . $this->optionListConditionByType( 'free_from', $optionType, $conf );
+
+    $condition  = $condition
+                . $this->optionListConditionByType( 'free_until', $optionType, $conf );
+
+    if ( ! $keepingTheLimit )
+    {
+      $condition  = $condition
+                  . $this->optionListConditionByType( 'available_from', $optionType, $conf );
+      $condition  = $condition
+                  . $this->optionListConditionByType( 'available_until', $optionType, $conf );
+    }
+    
+    if( $conf['extra'] != 'each' )
+    {
+      $condition  = $condition
+                  . $this->optionListConditionNotEach( $optionItemKey, $optionType, $conf ); 
+    }
+    return $condition;
+  }
+
+ /**
+  * optionListConditionByType( )
+  * 
+  * @param    string        $condition  : free_from, free_until, available_from, available_until
+  * @param    string        $optionType : payment, shipping, special
+  * @param    array         $conf       : configuration of current option item
+  * @return   string        $content
+  */
+  private function optionListConditionByType( $condition, $optionType, $conf ) 
+  {
+    $content = null;
+    
+      // RETURN : no value
+    if( ! isset( $conf[$condition] ) )
+    {
+      return $content;
+    }
+      // RETURN : no value
+    
+      // marker
+    $gross    = $this->zz_price_format( $conf[$condition] );
+    $llLabel  = $optionType . '_' . $condition;
+    $llLabel  = $this->pi_getLL( $llLabel );
+    $marker['###CONDITION###'] =  $llLabel . ' ' . $gross;
+      // marker
+
+      // content
+    $content  = $this->tmpl[$optionType . '_condition_item'];
+    $content  = $this->cObj->substituteMarkerArrayCached( $content, $marker );
+      // content
+    
+    return $content;
+  }
+
+/**
+  * optionListConditionGross( )
+  * 
+  * @param    string        $optionItemKey : 
+  * @param    string        $optionType     : payment, shipping, special
+  * @param    array         $conf           : configuration of current option item
+  * @return   double        $gross
+  */
+  private function optionListConditionGross( $optionItemKey, $optionType, $conf ) 
+  {
+    $gross = null; 
+    
+    switch( true )
+    {
+      case( $conf['extra'] != 'each' ):
+        $gross = $this->optionListConditionGrossOther( $optionItemKey, $optionType ); 
+        break;
+      case( $conf['extra'] == 'each' ):
+      default:
+        $gross = $this->optionListConditionGrossEach( $conf );
+        break;
+    }
+    
+    return $gross;
+  }
+  
+/**
+  * optionListConditionGrossEach( )
+  * 
+  * @param    array         $conf   : configuration of current option item
+  * @return   double        $gross
+  */
+  private function optionListConditionGrossEach( $conf ) 
+  {
+    $gross    = $this->zz_price_format( $conf['extra.']['1.']['extra'] );
+    $llLabel  = $this->pi_getLL( 'special_each' );
+
+    $gross  = sprintf( $llLabel, $gross );
+    
+    return $gross;
+  }
+
+ /**
+  * optionListConditionGrossOther( )
+  * 
+  * @param    string        $optionItemKey        : 
+  * @param    string        $optionType : payment, shipping, special
+  * @return   double        $gross
+  */
+  private function optionListConditionGrossOther( $optionItemKey, $optionType ) 
+  {
+    $gross  = floatval( $this->calcOptionCosts( $optionType, intval( $optionItemKey ) ) );
+    $gross  = $this->zz_price_format( $gross );
+    
+    return $gross;
+  }
+
+ /**
+  * optionListConditionNotEach( )
+  * 
+  * @param    string        $optionItemKey        : 
+  * @param    string        $optionType : payment, shipping, special
+  * @param    array         $conf       : configuration of current option item
+  * @return   array         $arrReturn  : content, gross
+  */
+  private function optionListConditionNotEach( $optionItemKey, $optionType, $conf ) 
+  {
+    $content  = null;
+    $gross    = null;
+
+    $unit   = $this->optionListSymbolByExtra( $conf['extra'] );
+    $extras = ( array ) $conf['extra.'];
+
+    foreach( $extras as $extra )
+    {
+      $gross    = $this->zz_price_format( $extra['extra'] );
+      $llLabel  = $this->pi_getLL( 'service_from' );
+      $tmpl     = $this->tmpl[$optionType . '_condition_item'];
+
+      $marker['###CONDITION###'] =  $llLabel . ' ' . $extra['value'] . ' ' . $unit . ' : ' . $gross;
+      $content  = $content
+                . $this->cObj->substituteMarkerArrayCached( $tmpl, $marker );
+    }
+
+    $gross  = floatval( $this->calcOptionCosts( $optionType, intval( $optionItemKey ) ) );
+    $gross  = $this->zz_price_format( $gross );
+    
+    $arrReturn = array(
+      'content' => $content,
+      'gross'   => $gross
+    );
+    
+    return $arrReturn;
+  }
+  
+ /**
+  * optionListGrossIsKeepingTheLimit( ) : Checks, if price gross is keeping the limit for an option
+  * 
+  * @param    array         $confOption       : configuration of the current option
+  * @return   boolean       $keepingTheLimit  : True, if price gross is keeping the limit, false, if not
+  */
+  private function optionListGrossIsKeepingTheLimit( $confOption ) 
+  {
+      // By default: option should displayed
+    $keepingTheLimit  = true;
+    $gross          = round( $this->productsGross, 2 );
+    
+      // By default: gross is keeping the limit
+    $grossIsSmallerThanFrom = false;
+    $grossIsGreaterThanTo   = false;
+    
+      // IF : available from
+    if( isset( $confOption['available_from'] ) )
+    {
+      $limitFrom = round( floatval( $confOption['available_from'] ),   2 );
+      if( $limitFrom > $gross )
+      {
+        $grossIsSmallerThanFrom = true;
+      }
+    }
+      // IF : available from
+
+      // IF : available to
+    if( isset( $confOption['available_until'] ) )
+    {
+      $limitTo = round( floatval( $confOption['available_until'] ),   2 );
+      if( $limitTo < $gross )
+      {
+        $grossIsGreaterThanTo = true;
+      }
+    }
+      // IF : available to
+
+      // SWITCH : keeping the limit
+    switch( true )
+    {
+      case( $grossIsSmallerThanFrom ):
+      case( $grossIsGreaterThanTo ):
+        $keepingTheLimit = false;
+        break;
+      default:
+        $keepingTheLimit = false;
+        break;
+    }
+      // SWITCH : keeping the limit
+  
+    return $keepingTheLimit;
+  }  
+
+ /**
+  * optionListMarker( )
+  * 
+  * @param    string        $keepingTheLimit  : 
+  * @param    string        $optionType       : payment, shipping, special
+  * @param    string        $optionItemKey    :
+  * @param    integer       $optionId         : current option id
+  * @param    string        $condition        :
+  * @param    double        $gross            : 
+  * @return   void
+  */
+  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross ) 
+  {
+    switch( true )
+    {
+      case( $optionType != 'special' ):
+        $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+        break;
+      case( $optionType == 'special' ):
+      default:
+        $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+        break;
+    }
+
+    $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross );
+
+    $this->optionListMarkerCondition( $optionType, $condition );
+  }
+
+ /**
+  * optionListMarkerCheckbox( )
+  * 
+  * @param    string        $keepingTheLimit  : 
+  * @param    string        $optionType       : payment, shipping, special
+  * @param    string        $optionItemKey    :
+  * @param    integer       $optionId         : current option id
+  * @return   void
+  */
+  private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+  {
+    $checked = null;
+    if( intval( $optionItemKey ) == $optionId )
+    {
+      $checked = ' checked="checked"';
+    }
+
+    $disabled = null;
+    if( ! $keepingTheLimit )
+    {
+      $disabled = ' disabled="disabled"';
+    }
+    
+    $hashMarker = strtoupper( $optionType );
+ 
+    $content  = '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" ' 
+              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '" ' 
+              . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
+
+    $this->smarkerArray['###' . $hashMarker . '_CHECKBOX###'] = $content; 
+  }
+
+ /**
+  * optionListMarkerLabel( )
+  * 
+  * @param    string        $optionType       : payment, shipping, special
+  * @param    string        $condition        :
+  * @return   void
+  */
+  private function optionListMarkerCondition( $optionType, $condition )
+  {
+    $hashMarker = strtoupper( $optionType );
+    
+      // RETURN : no condition content
+    if( ! $condition )
+    {
+      $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = '';
+      return;
+    }
+      // RETURN : no condition content
+
+      // Get template and marker
+    $tmpl                     = $this->tmpl[$optionType . '_condition_all'];
+    $marker['###CONTENT###']  = $condition;
+
+      // render the content
+    $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null, $marker );
+    
+      // set the marker
+    $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = $content; 
+  }
+
+ /**
+  * optionListMarkerLabel( )
+  * 
+  * @param    string        $keepingTheLimit  : 
+  * @param    string        $optionType       : payment, shipping, special
+  * @param    string        $optionItemKey    :
+  * @param    integer       $optionId         : current option id
+  * @return   void
+  */
+  private function optionListMarkerLabel( $optionType, $optionItemKey, $gross )
+  {
+    // TODO: In braces the actual Price for Payment should be displayed, not the first one.
+
+    $title = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
+
+    $hashMarker = strtoupper( $optionType );
+ 
+    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">' 
+              . $title . ' (' . $gross . ')</label>';
+
+    $this->smarkerArray['###' . $hashMarker . '_TITLE###'] = $content; 
+  }
+
+ /**
+  * optionListMarkerRadio( )
+  * 
+  * @param    string        $keepingTheLimit  : 
+  * @param    string        $optionType       : payment, shipping, special
+  * @param    string        $optionItemKey    :
+  * @param    integer       $optionId         : current option id
+  * @return   void
+  */
+  private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+  {
+    $checked = null;
+    if( intval( $optionItemKey ) == $optionId )
+    {
+      $checked = ' checked="checked"';
+    }
+
+    $disabled = null;
+    if( ! $keepingTheLimit )
+    {
+      $disabled = ' disabled="disabled"';
+    }
+    
+    $hashMarker = strtoupper( $optionType );
+ 
+    $content  = '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" ' 
+              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  ' 
+              . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
+
+    $this->smarkerArray['###' . $hashMarker . '_RADIO###'] = $content; 
+  }
+
+ /**
+  * optionListSymbolByExtra( )  : Returns the symbol depending on the extra type
+  * 
+  * @param    string        $extraType  : te extra type
+  * @return   string        $symbol     : symbold depending on extra type
+  */
+  private function optionListSymbolByExtra( $extraType ) 
+  {
+    $symbol = null;
+
+    switch( $extraType )
+    {
+      case 'by_price':
+        $symbol = $this->conf['main.']['currencySymbol'];
+        break;
+      case 'by_quantity':
+        $symbol = $this->conf['main.']['quantitySymbol'];
+        break;
+      case 'by_service_attribute_1_sum':
+      case 'by_service_attribute_1_max':
+        $symbol = $this->conf['main.']['service_attribute_1_symbol'];
+        break;
+      case 'by_service_attribute_2_sum':
+      case 'by_service_attribute_2_max':
+        $symbol = $this->conf['main.']['service_attribute_2_symbol'];
+        break;
+      case 'by_service_attribute_3_sum':
+      case 'by_service_attribute_3_max':
+        $symbol = $this->conf['main.']['service_attribute_3_symbol'];
+        break;
+      default:
+        $symbol = '';
+    }
+    
+    return $symbol;
+  }
+
+  
+
+  /***********************************************
+  *
   * Setting methods
   *
   **********************************************/
@@ -1825,193 +2309,7 @@ class tx_caddy extends tslib_pibase
 
     return $price;
   }
-
-  /**
- * [Describe function...]
- *
- * @param	[type]		$optionType: ...
- * @param	[type]		$optionId: ...
- * @return	[type]		...
- */
-  private function zz_renderOptionList( $optionType, $optionId ) 
-  {
-    $radio_list = '';
-    
-      // LOOP each option
-    foreach( ( array ) $this->conf[$optionType.'.']['options.'] as $key => $value )
-    {
-      if( ! stristr( $key, '.' ) )
-      { 
-        continue;
-      }
-
-        // hide option if not available by cartGrossNoService
-      $show = true;
-      if
-      ( 
-        ( 
-          isset( $value['available_from'] ) 
-          && 
-          (
-            round( floatval( $value['available_from'] ), 2 ) > round( $this->productsGross, 2 ) 
-          ) 
-        )
-        ||
-        (
-          isset( $value['available_until'] ) 
-          && ( round( floatval( $value['available_until'] ), 2 ) < round( $this->productsGross, 2 ) )
-        )
-      )
-      {
-        $show = false;
-      }
-
-      if( ! ( $show || $this->conf[$optionType.'.']['show_all_disabled'] ) )
-      {
-        continue;
-      }
-
-      if( $show )
-      {
-        $disabled = null;
-      }
-      else
-      {
-        $disabled = 'disabled="disabled"';
-      }
-
-      $condition_list = array( );
-
-      if( isset( $value['free_from'] ) )
-      {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_free_from' ) .
-                                            ' ' . $this->zz_price_format( $value['free_from'] );
-        $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
-                                            (
-                                              $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
-                                            );
-      }
-      if (isset($value['free_until']))
-      {
-        $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_free_until' ) . 
-                                            ' ' . $this->zz_price_format($value['free_until'] );
-        $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
-                                            (
-                                              $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
-                                            );
-      }
-
-      if ( ! $show )
-      {
-        if( isset($value['available_from'] ) )
-        {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( $optionType.'_available_from' ) .
-                                              ' ' . $this->zz_price_format( $value['available_from'] );
-          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
-                                              (
-                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
-                                              );
-        }
-        if( isset( $value['available_until'] ) )
-        {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL(  $optionType . '_available_until' ) .
-                                              ' ' . $this->zz_price_format( $value['available_until'] );
-          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
-                                              (
-                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
-                                              );
-        }
-      }
-
-      switch( $value['extra'] )
-      {
-        case 'by_price':
-          $unit = $this->conf['main.']['currencySymbol'];
-          break;
-        case 'by_quantity':
-          $unit = $this->conf['main.']['quantitySymbol'];
-          break;
-        case 'by_service_attribute_1_sum':
-        case 'by_service_attribute_1_max':
-          $unit = $this->conf['main.']['service_attribute_1_symbol'];
-          break;
-        case 'by_service_attribute_2_sum':
-        case 'by_service_attribute_2_max':
-          $unit = $this->conf['main.']['service_attribute_2_symbol'];
-          break;
-        case 'by_service_attribute_3_sum':
-        case 'by_service_attribute_3_max':
-          $unit = $this->conf['main.']['service_attribute_3_symbol'];
-          break;
-        default:
-          $unit = '';
-      }
-
-      if( $value['extra'] != 'each' )
-      {
-        foreach( ( array ) $value['extra.'] as $extra )
-        {
-          $pmarkerArray['###CONDITION###'] =  $this->pi_getLL( 'service_from' ) . 
-                                              ' ' . $extra['value'] . ' ' . $unit . ' : ' .
-                                              $this->zz_price_format($extra['extra']);
-          $condition_list['###CONTENT###'] .= $this->cObj->substituteMarkerArrayCached
-                                              (
-                                                $this->tmpl[$optionType . '_condition_item'], $pmarkerArray
-                                              );
-        }
-
-        $optionGross  = floatval( $this->calcOptionCosts( $optionType, intval( $key ) ) );
-        $show_price   = $this->zz_price_format( $optionGross );
-      } 
-      else
-      {
-        $show_price = sprintf
-                      ( 
-                        $this->pi_getLL( 'special_each' ), 
-                        $this->zz_price_format( $value['extra.']['1.']['extra'] ) 
-                      );
-      }
-
-      $upperType = strtoupper( $optionType );
-
-      if( $optionType != 'special' ) 
-      {
-        $checkradio = intval( $key ) == $optionId ? 'checked="checked"' : '';
-        $this->smarkerArray['###' . $upperType . '_RADIO###'] = 
-          '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" ' . 
-          'id="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
-          $checkradio . $disabled . '/>';
-      } 
-      else
-      {
-        $checkbox = in_array( intval( $key ) , $optionId ) ? 'checked="checked"' : '';
-        $this->smarkerArray['###' . $upperType . '_CHECKBOX###'] = 
-          '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" '. 
-          'id="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '"  value="' . intval( $key ) . '"  ' . 
-          $checkbox . $disabled . '/>';
-      }
-
-      // TODO: In braces the actual Price for Payment should be displayed, not the first one.
-
-      $title = $this->zz_cObjGetSingle( $value['title'], $value['title.'] );
-      $this->smarkerArray['###'.$upperType.'_TITLE###'] = 
-        '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $key ) . '">' . 
-        $title . ' (' . $show_price . ')</label>';
-
-      if( isset( $condition_list['###CONTENT###'] ) )
-      {
-        $this->smarkerArray['###'.$upperType.'_CONDITION###'] = 
-          $this->cObj->substituteMarkerArrayCached( $this->tmpl[$optionType . '_condition_all'], null, $condition_list );
-      } else {
-        $this->smarkerArray['###'.$upperType.'_CONDITION###'] = '';
-      }
-      $radio_list .= $this->cObj->substituteMarkerArrayCached( $this->tmpl[$optionType . '_item'], $this->smarkerArray );
-    }
-      // LOOP each option
-
-    return $radio_list;
-  }
-
+ 
 
 
 

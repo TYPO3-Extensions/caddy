@@ -39,12 +39,6 @@ plugin.tx_caddy_pi1 {
     cartmin {
       # set a value for minimal price, this value will be compared with the gross price excluding service cost
       value =
-	  # hide service form and powermail form if price is lower than minimal price
-	  # right now default setting, do not change it, error handling not styled and localized yet
-      hideifnotreached {
-        service = 1
-        powermail = 1
-      }
     }
   }
     // template, currency properties, service attributes

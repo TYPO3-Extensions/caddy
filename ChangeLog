@@ -1,7 +1,11 @@
 2.0.2
   2013-03-22
   Improvement
-  # *i0003: Calculation of service costs
+  # *i0004: Rendering of option lists
+            Effected files:
+            * lib/caddy/class.tx_caddy.php
+            * static/setup
+  # *i0003: Calculation of options costs
             Effected files:
             * lib/caddy/class.tx_caddy.php
             * pi1/class.tx_caddy_pi1.php
