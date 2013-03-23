@@ -28,7 +28,7 @@
  *
  *
  *
- *   55: class tx_caddy_pi1_flexform
+ *   55: class tx_caddy_pi3_flexform
  *   87:     function main()
  *
  *              SECTION: Sheets
@@ -43,7 +43,7 @@
  */
 
 /**
- * The class tx_caddy_pi1_flexform bundles all methods for the flexform but any wizard.
+ * The class tx_caddy_pi3_flexform bundles all methods for the flexform but any wizard.
  * See Wizards in the wizard class.
  *
  * @author    Dirk Wildt http://wildt.at.die-netzmacher.de
@@ -52,7 +52,7 @@
  * @version 2.0.0
  * @since   2.0.0
  */
-class tx_caddy_pi1_flexform
+class tx_caddy_pi3_flexform
 {
     // Parent object
   public $pObj = null;
@@ -460,7 +460,7 @@ class tx_caddy_pi1_flexform
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_flexform.php']) {
-  include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi1_flexform.php']);
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi3_flexform.php']) {
+  include_once ($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy_pi3_flexform.php']);
 }
 ?>
