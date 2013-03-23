@@ -1693,6 +1693,7 @@ class tx_caddy_session
     {
       $prompt = 'ERROR: no DRS object!<br />' . PHP_EOL .
                 'Sorry for the trouble.<br />' . PHP_EOL .
+                'debug trail: ' . $debugTrail_str = t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
