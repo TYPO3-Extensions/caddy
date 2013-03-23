@@ -1802,7 +1802,7 @@ class tx_caddy_session
  * @param	array		$arr: array to change
  * @return	void
  */
-    public function specialUpdate($special_arr)
+    public function specialUpdate( $special_arr )
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
