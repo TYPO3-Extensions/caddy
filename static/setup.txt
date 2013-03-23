@@ -2181,13 +2181,13 @@ plugin.tx_caddy_pi3 {
       minicart_count = TEXT
       minicart_count.field = minicart_count
 
-      minisumGross = COA
-      minisumGross {
+      minisumgross = COA
+      minisumgross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = minisumGross
+          number.field = minisumgross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
