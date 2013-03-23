@@ -214,10 +214,12 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
       // DIE  : $row is empty
     if( empty( $this->pidCaddy ) )
     {
-      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-              __METHOD__ . ' (' . __LINE__ . ')';
+      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL 
+              . 'Please take care of a proper configuration of the plaugin/flexform.<br />' . PHP_EOL 
+              . 'Sorry for the trouble.<br />' . PHP_EOL 
+              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . __METHOD__ . ' (' . __LINE__ . ')'
+              ;
       die( $prompt );
     }
       // DIE  : $row is empty
