@@ -2126,7 +2126,7 @@ plugin.tx_caddy_pi1 {
     linktotheshop {
       data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
       typolink {
-        parameter = {$plugin.caddy.pages.root}
+        parameter = {$plugin.caddy.pages.shop}
         title {
           data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
         }
@@ -2278,48 +2278,33 @@ plugin.tx_caddy_pi3 {
       // Replace the marker _HTMLMARKER_LINTOCADDY
     linktocaddy = COA
     linktocaddy {
-        // Button begin
+        // Label
       10 = TEXT
       10 {
-        data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddylabel
-        wrap = <button class="submit" name="submit" type="submit" value="|">
+        data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+        typolink {
+          parameter = {$plugin.caddy.pages.caddy}
+        }
+        noTrimWrap  = || |
       }
-        // Button content: label and icon
-      20 = COA
+        // Icon
+      20 = IMAGE
       20 {
-          // Label
-        10 = TEXT
-        10 {
-          data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+        file = EXT:caddy/files/img/caddy_100_02.png
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        params = class="linktocaddy"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
           typolink {
             parameter = {$plugin.caddy.pages.caddy}
           }
-          noTrimWrap  = || |
         }
-          // Icon
-        20 = IMAGE
-        20 {
-          file = EXT:caddy/files/img/caddy_100_02.png
-          altText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
-          }
-          titleText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
-          }
-          params = class="linktocaddy"
-          imageLinkWrap = 1
-          imageLinkWrap {
-            enable = 1
-            typolink {
-              parameter = {$plugin.caddy.pages.caddy}
-            }
-          }
-        }
-      }
-        // Button end
-      30 = TEXT
-      30 {
-        value = </button>
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
     }
