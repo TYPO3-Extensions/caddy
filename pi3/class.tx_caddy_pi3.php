@@ -85,8 +85,8 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 
-    $this->tmpl['minicart']       = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template
-    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART_EMPTY###'); // Load FORM HTML Template
+    $this->tmpl['minicart']       = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART###' ); // Load FORM HTML Template
+    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART_EMPTY###' ); // Load FORM HTML Template
 
     //Read Flexform
     $row          = $this->pi_getRecord('tt_content', $this->cObj->data['uid']); 
@@ -106,12 +106,12 @@ class tx_caddy_pi3 extends tslib_pibase
 //        $caddy = null;
 //        break;
 //    }
-var_dump( __METHOD__, __LINE__, $pid, $this->products );
+var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
     if( $count ) 
     {
       $outerArr = array(
         'count'           => $count,
-        'minicart_gross'  => $this->session->productsGetGross($pid)
+        'minicart_gross'  => $this->session->productsGetGross( $pid )
       );
       $local_cObj->start($outerArr, $this->conf['db.']['table']);
       foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
