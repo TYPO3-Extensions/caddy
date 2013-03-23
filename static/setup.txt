@@ -2179,7 +2179,7 @@ plugin.tx_caddy_pi3 {
   settings {
     fields {
       minicart_count = TEXT
-      minicart_count.field = count
+      minicart_count.field = minicart_count
 
       minisumGross = COA
       minisumGross {

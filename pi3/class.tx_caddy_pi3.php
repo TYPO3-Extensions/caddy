@@ -98,7 +98,7 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $outerArr = array
     (
-      'minicartcount' => $numberOfProducts,
+      'minicart_count' => $numberOfProducts,
       'minisumgross'  => $this->session->productsGetGross( $this->pidCaddy )
     );
 
