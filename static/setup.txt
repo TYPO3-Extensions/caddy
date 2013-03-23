@@ -535,7 +535,7 @@ plugin.tx_caddy_pi1 {
           // title of shipping method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_01
+          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_maildefault
         }
           // extra cost (gross price) of shipping method
         extra = 0.00
@@ -548,7 +548,7 @@ plugin.tx_caddy_pi1 {
           // title of shipping method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_02
+          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_mailexpress
         }
           // extra cost (gross price) of shipping method
         extra = 12.00
@@ -572,7 +572,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_01
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
         }
           // extra cost (gross price) of payment method
         extra = 0.00
@@ -585,7 +585,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_02
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
         }
           // extra cost (gross price) of payment method
         extra = 15.00
@@ -598,7 +598,7 @@ plugin.tx_caddy_pi1 {
           // title of payment method
         title = TEXT
         title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_03
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
         }
           // extra cost (gross price) of payment method
         extra = 3.00
