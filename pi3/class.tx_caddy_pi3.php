@@ -66,8 +66,7 @@ class tx_caddy_pi3 extends tslib_pibase
         break;
       case( $numberOfProducts = 0 ):
       default:
-        $this->caddyWoProducts( );
-        $caddy = null;
+        $caddy = $this->caddyWoProducts( );
         break;
     }
     
@@ -155,10 +154,11 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   public function caddyWoProducts( ) 
   {
     $tmpl         = $this->tmpl['caddyminiempty'];
-    $markerArray  = array( );
-    $content      = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray );
-    
+//    $markerArray  = array( );
+//    $content      = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray );
+    $content      = $tmpl;
     $content  = $this->dynamicMarkers->main( $content, $this );
+    
 var_dump( __METHOD__, __LINE__, $this->tmpl['caddyminiempty'], $content );
 
     return $content;
