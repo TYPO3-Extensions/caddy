@@ -8,7 +8,7 @@
     <languageKey index="default" type="array">
       <label index="sdef">Caddy</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
-      <label index="sdefCaddyMode">Minicaddy mode</label>
+      <label index="sdefCaddyMode">Minicaddy mode 2</label>
       <label index="sdefCaddyModeWiItems">Items and sum (recommended)</label>
       <label index="sdefCaddyModeWoItems">Sum only</label>
       <label index="sdefPidCaddy">Page with the Caddy</label>
