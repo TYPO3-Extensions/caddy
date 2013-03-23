@@ -106,7 +106,7 @@ class tx_caddy_pi3 extends tslib_pibase
 //        $caddy = null;
 //        break;
 //    }
-
+var_dump( __METHOD__, __LINE__, $this->products );
     if( $count ) 
     {
       $outerArr = array(

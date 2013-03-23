@@ -743,17 +743,21 @@ class tx_caddy_session
   }
 
 
-    /**
+/**
  * Read products from session
  *
  * @return	array		$arr: array with all products from session
  */
-    public function productsGet( )
+  public function productsGet( $pid = null )
+  {
+    if( $pid === null )
     {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
-        return $sesArray['products'];
+      $pid = $GLOBALS["TSFE"]->id;
     }
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+    return $sesArray['products'];
+  }
 
    /**
  * Count gross price of all products in a cart
