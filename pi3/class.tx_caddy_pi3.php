@@ -6,9 +6,6 @@
  *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
- *  Caddy is a fork of wt_cart (version 1.4.6)
- *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
- * 
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -26,7 +23,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_tslib . 'class.tslib_pibase.php');
+require_once( PATH_tslib . 'class.tslib_pibase.php' );
 
 /**
 * plugin 'Minicart' for the 'caddy' extension.
@@ -35,7 +32,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @package	TYPO3
  * @subpackage	tx_caddy
  * @version	2.0.2
- * @since       1.4.6
+ * @since       2.0.2
  */
 class tx_caddy_pi3 extends tslib_pibase
 {
@@ -51,7 +48,7 @@ class tx_caddy_pi3 extends tslib_pibase
   * @param array   $conf: The PlugIn configuration
   * @return  The content that is displayed on the website
   * @version  2.0.2
-  * @since    1.4.6
+  * @since    2.0.2
   */	
   public function main( $content, $conf ) 
   {
