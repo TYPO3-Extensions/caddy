@@ -94,6 +94,7 @@ class tx_caddy_pi3 extends tslib_pibase
   public function caddyWiProducts( ) 
   {
     $numberOfProducts = count( $this->products );
+    $numberOfItems  = $this->zz_numberOfItems( );
     
     $outerArr = array
     (
@@ -331,4 +332,33 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
     $this->pi_initPIflexForm( );
   }
 
+
+
+  /***********************************************
+  *
+  * Caddy
+  *
+  **********************************************/
+
+ /**
+  * zz_numberOfItems( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function zz_numberOfItems( ) 
+  {
+    $numberOfItems = 0;
+    
+    foreach( ( array ) $this->products as $product )
+    {
+      $numberOfItems  = $numberOfItems
+                      + $product['qty']
+                      ;
+    }
+ var_dump( __METHOD__, __LINE__, $this->products, $numberOfItems );
+   
+    return $numberOfItems;
+  }
 }
