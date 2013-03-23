@@ -2186,19 +2186,19 @@ plugin.tx_caddy_pi3 {
       10 = TEXT
       10 {
         value = number of items
-        wrap = <span class="number itemnumber">|</div>
+        wrap = <span class="number itemnumber">|</span>
       }
         // label for item
       20 = TEXT
       20 {
         value = label of item
-        wrap = <span class="label itemlabel">|</div>
+        wrap = <span class="label itemlabel">|</span>
       }
         // gross
       30 = TEXT
       30 {
         value = gross
-        wrap = <span class="gross itemgross">|</div>
+        wrap = <span class="gross itemgross">|</span>
       }
       wrap = <div class="item minicaddyitem">|</div>
     }
@@ -2208,7 +2208,7 @@ plugin.tx_caddy_pi3 {
       10 = TEXT
       10 {
         value = number of items
-        wrap = <span class="number sumnumber">|</div>
+        wrap = <span class="number sumnumber">|</span>
       }
         // label for items
       20 = COA
@@ -2217,20 +2217,20 @@ plugin.tx_caddy_pi3 {
         10 = TEXT
         10 {
           value = label in case of one item
-          wrap  = <span class="label sumlabel">|</div>
+          wrap  = <span class="label sumlabel">|</span>
         }
           // in case of more than one item
         20 = TEXT
         20 {
           value = label in case of more than one item
-          wrap = <span class="label sumlabel">|</div>
+          wrap = <span class="label sumlabel">|</span>
         }
       }
         // gross
       30 = TEXT
       30 {
         value = gross
-        wrap = <span class="gross sumgross">|</div>
+        wrap = <span class="gross sumgross">|</span>
       }
       wrap = <div class="sum minicaddysum">|</div>
     }
