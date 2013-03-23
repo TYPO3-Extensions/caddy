@@ -1456,6 +1456,7 @@ class tx_caddy extends tslib_pibase
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
+    $this->drs->init( );
 
     if( is_object ( $this->pObj->powermail ) )
     {
