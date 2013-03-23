@@ -234,7 +234,7 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
-    $this->dynamicMarkers->scriptRelPath = 'pi1/class.tx_caddy_pi3.php';
+    $this->dynamicMarkers->scriptRelPath = 'pi3/class.tx_caddy_pi3.php';
 
     require_once( 'class.tx_caddy_pi3_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi3_flexform' );
