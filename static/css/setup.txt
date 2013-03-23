@@ -12,6 +12,11 @@ plugin.tx_caddy_pi1 {
       float:left;
       padding: 1em 2em 0 0;
     }
+    #caddy_payment fieldset legend,
+    #caddy_shipping fieldset legend,
+    #caddy_special fieldset legend {
+      padding: 0 0 1em 0;
+    }
     div.caddy_header {
       font-weight:bold; 
       margin-bottom:.5em; 
