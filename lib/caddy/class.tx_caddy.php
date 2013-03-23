@@ -1831,16 +1831,22 @@ class tx_caddy extends tslib_pibase
   {
     $checked = null;
 
-      // Get current GET and POST parameters - priority by POST
-    $_GP = array (
-      'tx_caddy_pi1' => t3lib_div::_GP( 'tx_caddy_pi1' )
-    );
-    
-      // Get the array with the ids of the enabled checkboxes
-    $gpEnabledCheckboxes = $_GP['tx_caddy_pi1'][$optionType];
+//      // Get current GET and POST parameters - priority by POST
+//    $_GP = array (
+//      'tx_caddy_pi1' => t3lib_div::_GP( 'tx_caddy_pi1' )
+//    );
+//    
+//      // Get the array with the ids of the enabled checkboxes
+//    $gpEnabledCheckboxes = $_GP['tx_caddy_pi1'][$optionType];
+//
+//      // Enable checkbox, if id of current checkbox is part of the GP array
+//    if( in_array( intval( $optionItemKey ), $gpEnabledCheckboxes ) )
+//    {
+//      $checked = ' checked="checked"';
+//    }
 
       // Enable checkbox, if id of current checkbox is part of the GP array
-    if( in_array( intval( $optionItemKey ), $gpEnabledCheckboxes ) )
+    if( in_array( intval( $optionItemKey ), $optionIds ) )
     {
       $checked = ' checked="checked"';
     }

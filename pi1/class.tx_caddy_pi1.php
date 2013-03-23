@@ -310,7 +310,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $special = $this->piVars['special'];
     }
-    $this->session->specialUpdate( $this->piVars['special'] ); // change payment
+    $this->session->specialUpdate( $this->piVars['special'] );
   }
 
 
