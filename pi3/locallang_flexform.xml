@@ -8,11 +8,17 @@
     <languageKey index="default" type="array">
       <label index="sdef">Caddy</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
+      <label index="sdefCaddyMode">Minicaddy mode</label>
+      <label index="sdefCaddyMode.wiItems">Items and sum (recommended)</label>
+      <label index="sdefCaddyMode.woItems">Sum only</label>
       <label index="sdefPidCaddy">Page with the Caddy</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="sdef">Caddy</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
+      <label index="sdefCaddyMode">Minicaddy Format</label>
+      <label index="sdefCaddyMode.wiItems">Artikel und Summe (empfohlen)</label>
+      <label index="sdefCaddyMode.woItems">Nur die Summe</label>
       <label index="sdefPidCaddy">Seite mit dem Warenkorb</label>
     </languageKey>
   </data>

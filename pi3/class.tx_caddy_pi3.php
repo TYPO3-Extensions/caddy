@@ -98,7 +98,7 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $outerArr = array
     (
-      'minicart_count' => $numberOfProducts,
+      'caddymini_count' => $numberOfProducts,
       'minisumgross'  => $this->session->productsGetGross( $this->pidCaddy )
     );
 
@@ -138,7 +138,7 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
     $markerArray[$marker] = $this->pi_getPageLink( $pid, null, $typolinkConf);
 
 var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
-    $tmpl     = $this->tmpl['minicart'];
+    $tmpl     = $this->tmpl['caddymini'];
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );
     
@@ -154,7 +154,7 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   */	
   public function caddyWoProducts( ) 
   {
-    $tmpl = $this->tmpl['minicart_empty'];
+    $tmpl = $this->tmpl['caddymini_empty'];
     $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null );
     $content = $this->dynamicMarkers->main( $content, $this );
 
@@ -304,10 +304,15 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
     $this->tmpl = $this->template->main( );
 
     $fileRessource  = $this->cObj->fileResource($this->conf['main.']['template'] );
-    $marker         = '###CADDY_MINICART###';
-    $this->tmpl['minicart']       = $this->cObj->getSubpart( $fileRessource, $marker );
-    $marker         = '###CADDY_MINICART_EMPTY###';
-    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $fileRessource, $marker );
+    
+    $marker                   = '###CADDYMINI###';
+    $this->tmpl['caddymini']  = $this->cObj->getSubpart( $fileRessource, $marker );
+    
+    $marker               = '###ITEMS###';
+    $this->tmpl['items']  = $this->cObj->getSubpart( $this->tmpl['caddymini'], $marker );
+
+    $marker                         = '###CADDYMINI_EMPTY###';
+    $this->tmpl['caddymini_empty']  = $this->cObj->getSubpart( $fileRessource, $marker );
   }
 
  /**

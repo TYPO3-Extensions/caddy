@@ -64,6 +64,8 @@ class tx_caddy_pi3_flexform
   public $sdefDrs = null;
     // [integer] pid of the caddy
   public $sdefPidCaddy;
+    // [string] caddy mode
+  public $sdefCaddyMode;
     // [sdef]
 
 
@@ -115,6 +117,15 @@ class tx_caddy_pi3_flexform
 //    $field          = 'sdefDrs';
 //    $this->sdefDrs  = $this->zzFfValue( $sheet, $field, false );
       // sdefDrs
+
+      // sdefCaddyMode
+    $field              = 'sdefCaddyMode';
+    $this->sdefCaddyMode = $this->zzFfValue( $sheet, $field );
+    if( empty( $this->sdefCaddyMode ) )
+    {
+      $this->sdefCaddyMode = 'wiItems';
+    }
+      // sdefCaddyMode
 
       // sdefPidCaddy
     $field              = 'sdefPidCaddy';
