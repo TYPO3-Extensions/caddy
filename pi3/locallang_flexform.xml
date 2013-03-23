@@ -8,13 +8,13 @@
     <languageKey index="default" type="array">
       <label index="help">Help!</label>
       <label index="sdef">Check it!</label>
-      <label index="sdefPid">Uid of the page with the Caddy</label>
+      <label index="sdefPid">Page with the Caddy</label>
       <label index="sponsors">Sponsors</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="help">Hilfe!</label>      
       <label index="sdef">Check it!</label>
-      <label index="sdefPid">Uid der Seite mit dem Warenkorb</label>
+      <label index="sdefPid">Seite mit dem Warenkorb</label>
       <label index="sponsors">Sponsoren</label>
     </languageKey>
   </data>
