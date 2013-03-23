@@ -2308,6 +2308,39 @@ plugin.tx_caddy_pi3 {
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
     }
+      // Replace the marker _HTMLMARKER_LINTOSHOP
+    linktoshop = COA
+    linktoshop {
+        // Label
+      10 = TEXT
+      10 {
+        data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
+        typolink {
+          parameter = {$plugin.caddy.pages.shop}
+        }
+        noTrimWrap  = || |
+      }
+        // Icon
+      20 = IMAGE
+      20 {
+        file = EXT:caddy/files/img/caddy_100_02.png
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        params = class="linktoshop"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.shop}
+          }
+        }
+      }
+      wrap = <div class="linktoshop minicaddylinktoshop">|</div>
+    }
   }
 }
   // plugin.tx_caddy_pi3._HTMLMARKER
