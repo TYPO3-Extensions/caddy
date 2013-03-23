@@ -127,6 +127,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $marker               = '###MINICART_LINK_URL###';
     $markerArray[$marker] = $this->pi_getPageLink( $pid, null, $typolinkConf);
 
+var_dump( __METHOD__, __LINE__, $markerArray );
     $tmpl     = $this->tmpl['minicart'];
     $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );
