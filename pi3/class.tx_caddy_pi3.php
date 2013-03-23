@@ -71,9 +71,17 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
+      // Class with methods for get flexform values
+    require_once( 'class.tx_caddy_pi1_flexform.php' );
+    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
+    $this->flexform->pObj   = $this;
+    $this->flexform->row    = $this->cObj->data;
+
     $this->drs->init( );
+    
     $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
     $this->session->setParentObject( $this );
+    
     $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
 
     $this->tmpl['minicart']       = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template
