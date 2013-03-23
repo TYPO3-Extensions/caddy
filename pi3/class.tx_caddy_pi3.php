@@ -104,13 +104,19 @@ class tx_caddy_pi3 extends tslib_pibase
 
     $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
 var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
-    foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
+    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
-      if (!stristr($key, '.'))
+      if( stristr( $key, '.' ) )
       {
-        $markerArray['###' . strtoupper($key) . '###'] = $this->local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
+        continue;
       }
+      $name                 = $this->conf['settings.']['fields.'][$key];
+      $conf                 = $this->conf['settings.']['fields.'][$key . '.'];
+      $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $marker               = '###' . strtoupper( $key ) . '###';
+      $markerArray[$marker] = $value;
     }
+var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
 
     $pid                  = $this->pidCaddy;
 
