@@ -1539,7 +1539,7 @@ class tx_caddy extends tslib_pibase
         // SWITCH : display option list item
 
         // Get the content for met conditions
-      $condition  = $this->optionListCondition( $keepingTheLimit, $optionType, $optionItemConf, $optionItemKey );
+      $condition  = $this->optionListCondition( $keepingTheLimit, $optionType, $optionItemConf );
       
         // Get the gross costs
       $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf ); 
@@ -1564,10 +1564,9 @@ class tx_caddy extends tslib_pibase
   * @param    string        $keepingTheLimit  : 
   * @param    string        $optionType : payment, shipping, special
   * @param    array         $conf       : configuration of current option item
-  * @param    string        $optionItemKey
   * @return   string        $content
   */
-  private function optionListCondition( $keepingTheLimit, $optionType, $conf, $optionItemKey ) 
+  private function optionListCondition( $keepingTheLimit, $optionType, $conf ) 
   {
     $condition = null;
     
@@ -1827,16 +1826,18 @@ class tx_caddy extends tslib_pibase
   * @param    string        $keepingTheLimit  : 
   * @param    string        $optionType       : payment, shipping, special
   * @param    string        $optionItemKey    :
-  * @param    integer       $optionId         : current option id
+  * @param    integer       $optionIds        : current option ids
   * @return   void
   */
-  private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+  private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
     $checked = null;
-var_dump( __METHOD__, __LINE__, $_POST['tx_caddy_pi1'] );    
-    if( in_array( intval( $optionItemKey ), $optionId ) )
+var_dump( __METHOD__, __LINE__, $_POST['tx_caddy_pi1'][$optionType] );    
+$enabledCheckboxes = $_POST['tx_caddy_pi1'][$optionType];
+//    if( in_array( intval( $optionItemKey ), $optionIds ) )
+    if( in_array( intval( $optionItemKey ), $enabledCheckboxes ) )
     {
-var_dump( __METHOD__, __LINE__, $optionItemKey, $optionId );    
+var_dump( __METHOD__, __LINE__, $optionItemKey, $optionIds );    
       $checked = ' checked="checked"';
     }
 
