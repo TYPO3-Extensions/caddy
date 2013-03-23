@@ -147,6 +147,7 @@ class tx_caddy_pi3_flexform
     $pi_flexform = $this->row['pi_flexform'];
 
     $value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
+var_dump( __METHOD__, __LINE__, $pi_flexform, $sheet, $field, $value );
 
       // RETURN : Don't prompt to DRS
     if( ! $drs )
