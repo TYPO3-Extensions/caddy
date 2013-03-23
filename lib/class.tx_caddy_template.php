@@ -74,7 +74,6 @@ class tx_caddy_template
 
     $tmplSubparts = null;
     $template     = $cObj->fileResource( $conf['main.']['template'] );
-var_dump( __METHOD__, __LINE__, $conf );
 
       // Die if there isn't any HTML template
     if( empty ( $template ) )
