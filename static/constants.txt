@@ -94,6 +94,21 @@ plugin.caddy {
   # cat=caddy - gpvar/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   gpvar.sponsors = Click me!
 
+  # cat=caddy - pages/enable/301; type=integer; label= Caddy:Uid of the page with the caddy - your shopping cart
+  pages.caddy = 
+  # cat=caddy - pages/enable/302; type=integer; label= Shop:Uid of the page which contains the items. Usually the root page.
+  pages.shop = 
+  # cat=caddy - pages/enable/303; type=integer; label= Power of Revocation:Uid of the page with the revocation info (German: Widerrufsbelehrung)
+  pages.revocation = 
+  # cat=caddy - pages/enable/304; type=integer; label= Shipping:Uid of the page with the shipping terms
+  pages.shipping = 
+  # cat=caddy - pages/enable/305; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
+  pages.terms = 
+  # cat=caddy - pages/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  pdfGeneral.externalLinks = Click me!
+  # cat=caddy - pages/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  pdfGeneral.sponsors = Click me!
+
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
   # cat=caddy - pdf//102;          type=integer;  label= Font Stretching: In percent. 100: no effect. 90: smaller. 110: expanded

@@ -12,6 +12,7 @@
   // plugin.tx_caddy_pi1.pdf.terms
   // plugin.tx_caddy_pi2
   // plugin.tx_caddy_pi3
+  // plugin.tx_caddy_pi3._HTMLMARKER
 
 
 
@@ -1841,7 +1842,7 @@ plugin.tx_caddy_pi1 {
               content < styles.content.get
               content {
                 select {
-                  pidInList = {$plugin.quick_shop.pages.revocation}
+                  pidInList = {$plugin.caddy.pages.revocation}
                 }
               }
             }
@@ -2097,7 +2098,7 @@ plugin.tx_caddy_pi1 {
               content < styles.content.get
               content {
                 select {
-                  pidInList = {$plugin.quick_shop.pages.terms}
+                  pidInList = {$plugin.caddy.pages.terms}
                 }
               }
             }
@@ -2125,7 +2126,7 @@ plugin.tx_caddy_pi1 {
     linktotheshop {
       data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
       typolink {
-        parameter = {$plugin.quick_shop.pages.root}
+        parameter = {$plugin.caddy.pages.root}
         title {
           data = LLL:EXT:caddy/pi1/locallang.xml:linktotheshop
         }
@@ -2268,3 +2269,28 @@ plugin.tx_caddy_pi3 {
   }
 }
   // plugin.tx_caddy_pi3
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi3._HTMLMARKER
+
+plugin.tx_caddy_pi3 {
+    // HTML marker
+  _HTMLMARKER =
+  _HTMLMARKER {
+      // Replace the marker _HTMLMARKER_LINTOTHESHOP
+    linktocaddy = TEXT
+    linktocaddy {
+      data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+      typolink {
+        parameter = {$plugin.caddy.pages.caddy}
+        title {
+          data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+        }
+      }
+    }
+  }
+}
+  // plugin.tx_caddy_pi3._HTMLMARKER

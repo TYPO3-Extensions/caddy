@@ -6,16 +6,18 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="flexform.pid">page ID of the cart</label>
-      <label index="count_products_in_cart">product(s) in cart</label>
-      <label index="link">go to cart</label>
       <label index="caddymini_empty">Currently there are no products in the cart.</label>
+      <label index="count_products_in_cart">product(s) in cart</label>
+      <label index="flexform.pid">page ID of the cart</label>
+      <label index="link">go to cart</label>
+      <label index="linktocaddy">Go to Caddy</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="flexform.pid">Page ID des Warekorbs</label>
-      <label index="count_products_in_cart">Produkt(e) im Warenkorb</label>
-      <label index="link">zum Warenkorb</label>
       <label index="caddymini_empty">Derzeit befinden sich keine Produkte im Warenkorb.</label>
+      <label index="count_products_in_cart">Produkt(e) im Warenkorb</label>
+      <label index="flexform.pid">Page ID des Warekorbs</label>
+      <label index="link">zum Warenkorb</label>
+      <label index="linktocaddy">Zum Warenkorb</label>
     </languageKey>
   </data>
 </T3locallang>
