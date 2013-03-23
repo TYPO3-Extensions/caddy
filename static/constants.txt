@@ -105,9 +105,9 @@ plugin.caddy {
   # cat=caddy - pages/enable/305; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
   pages.terms = 
   # cat=caddy - pages/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
-  pdfGeneral.externalLinks = Click me!
+  pages.externalLinks = Click me!
   # cat=caddy - pages/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  pdfGeneral.sponsors = Click me!
+  pages.sponsors = Click me!
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
