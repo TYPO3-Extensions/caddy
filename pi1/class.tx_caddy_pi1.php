@@ -292,17 +292,33 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->session->quantityUpdate( ); // change qty
     }
 
-      // change shipping
-    if( isset( $this->piVars['shipping'] ) )
-    {
-      $this->session->shippingUpdate($this->piVars['shipping']); // change shipping
-    }
+//      // change shipping
+//    if( isset( $this->piVars['shipping'] ) )
+//    {
+//      $this->session->shippingUpdate($this->piVars['shipping']);
+//    }
+//
+//      // change payment
+//    if( isset( $this->piVars['payment'] ) )
+//    {
+//      $this->session->paymentUpdate($this->piVars['payment']);
+//    }
 
-    // change payment
+      // change payment
+    $payment = null;
     if( isset( $this->piVars['payment'] ) )
     {
-      $this->session->paymentUpdate($this->piVars['payment']); // change payment
+      $payment = $this->piVars['payment'];
     }
+    $this->session->paymentUpdate( $this->piVars['payment'] );
+
+      // change shipping
+    $shipping = null;
+    if( isset( $this->piVars['shipping'] ) )
+    {
+      $shipping = $this->piVars['shipping'];
+    }
+    $this->session->shippingUpdate( $this->piVars['shipping'] );
 
       // change special
     $special = null;
