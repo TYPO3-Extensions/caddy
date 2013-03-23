@@ -6,7 +6,8 @@ plugin.tx_caddy_pi1 {
     #caddy_payment {
       padding: 0.4em 0 0 4.3em;
     }
-    #caddy_shipping {
+    #caddy_shipping,
+    #caddy_special {
       padding: 1em 0 0 4.3em;
     }
     div.caddy_header {
