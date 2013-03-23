@@ -754,7 +754,7 @@ class tx_caddy_session
     {
       $pid = $GLOBALS["TSFE"]->id;
     }
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
     return $sesArray['products'];
   }
