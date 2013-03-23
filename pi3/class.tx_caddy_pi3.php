@@ -66,11 +66,8 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->tmpl['minicart_empty'] = $this->cObj->getSubpart( $this->cObj->fileResource($this->conf['main.']['template'] ), '###CADDY_MINICART_EMPTY###' ); // Load FORM HTML Template
 
     //Read Flexform
-    $row          = $this->pi_getRecord('tt_content', $this->cObj->data['uid']); 
-    $flexformData = t3lib_div::xml2array($row['pi_flexform']);
-    $pid          = $this->pi_getFFvalue($flexformData, 'pid', 'sDEF');
 
-    $this->products = $this->session->productsGet( $pid );
+    $this->products = $this->session->productsGet( $this->pidCaddy );
     $count = count( $this->products );
 //    switch( true )
 //    {
@@ -83,12 +80,12 @@ class tx_caddy_pi3 extends tslib_pibase
 //        $caddy = null;
 //        break;
 //    }
-var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
+var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
     if( $count ) 
     {
       $outerArr = array(
         'count'           => $count,
-        'minicart_gross'  => $this->session->productsGetGross( $pid )
+        'minicart_gross'  => $this->session->productsGetGross( $this->pidCaddy )
       );
       $this->local_cObj->start($outerArr, $this->conf['db.']['table']);
       foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
@@ -100,8 +97,8 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
       }
 
       $typolink_conf = array();
-      $minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $pid, "", $typolink_conf);
-      $minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($pid, "", $typolink_conf);
+      $minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $this->pidCaddy, "", $typolink_conf);
+      $minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($this->pidCaddy, "", $typolink_conf);
 
       $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart'], $minicartMarkerArray); // Get html template
       $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
@@ -137,11 +134,27 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
     
     $this->initInstances( );
     $this->initFlexform( );
+    $this->initDrs( );
+
     $this->initPid( );
     $this->initTemplate( );
     
     $this->session->setParentObject( $this );
   }
+  
+ /**
+  * initDrs( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initDrs( )
+  {
+    $this->drs->init( );
+  }
+  
  /**
   * initFlexform( )
   *
@@ -166,18 +179,16 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
   private function initInstances( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-    $path2pi1 = t3lib_extMgm::extPath( 'caddy' ) . 'pi1/';
     
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
-    $this->drs->init( );
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php');
     $this->dynamicMarkers = t3lib_div::makeInstance(' tx_caddy_dynamicmarkers' );
 
-    require_once( $path2pi1 . 'class.tx_caddy_pi1_flexform.php' );
+    require_once( 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
@@ -201,32 +212,18 @@ var_dump( __METHOD__, __LINE__, $pid, $this->products, $this->tmpl );
  */
   private function initPid( )
   {
-    $pid = ( int ) $this->conf['main']['pid'];
+    $this->pidCaddy = $this->flexform->sdefPidCaddy;
 
-    switch( true )
+      // DIE  : $row is empty
+    if( empty( $this->pidCaddy ) )
     {
-      case( ! empty( $pid ) ):
-        $this->pid = $pid;
-          // DRS
-        if( $this->drs->drsInit )
-        {
-          $prompt = 'pid is taken from main.pid and is set to ' . $this->pid;
-          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
-      case( empty( $pid ) ):
-      default:
-        $this->pid = $GLOBALS['TSFE']->id;
-          // DRS
-        if( $this->drs->drsInit )
-        {
-          $prompt = 'main.pid is empty. pid is set to the id of the current page: ' . $this->pid;
-          t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
-        }
-          // DRS
-        break;
+      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
     }
+      // DIE  : $row is empty
   }
 
  /**

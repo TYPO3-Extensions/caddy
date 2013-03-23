@@ -8,12 +8,12 @@
     <languageKey index="default" type="array">
       <label index="sdef">Caddy</label>
       <label index="sdefDrs">DRS: You will get a report in the Developer Log</label>
-      <label index="sdefPid">Page with the Caddy</label>
+      <label index="sdefPidCaddy">Page with the Caddy</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="sdef">Caddy</label>
       <label index="sdefDrs">DRS: Du bekommst einen Bericht im Developer Log</label>
-      <label index="sdefPid">Seite mit dem Warenkorb</label>
+      <label index="sdefPidCaddy">Seite mit dem Warenkorb</label>
     </languageKey>
   </data>
 </T3locallang>

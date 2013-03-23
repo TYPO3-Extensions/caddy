@@ -62,10 +62,8 @@ class tx_caddy_pi3_flexform
     // [sdef]
     // [boolean] enable DRS
   public $sdefDrs = null;
-    // [boolean] enable update wizard
-  public $sdefUpdatewizard = null;
-    // [string] csv list of allowed IP
-  public $sdefCsvallowedip;
+    // [integer] pid of the caddy
+  public $sdefPidCaddy;
     // [sdef]
 
 
@@ -90,11 +88,6 @@ class tx_caddy_pi3_flexform
 
       // Sheets
     $this->sheetSdef( );
-    $this->sheetEmail( );
-    $this->sheetDeliveryorder ( );
-    $this->sheetInvoice( );
-    $this->sheetOrigin( );
-    $this->sheetPaths( );
       // Sheets
 
   }
@@ -106,239 +99,6 @@ class tx_caddy_pi3_flexform
    * Sheets
    *
    **********************************************/
-
-/**
- * sheetDeliveryorder( )  :
- *
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function sheetDeliveryorder( )
-  {
-    $sheet = 'deliveryorder';
-
-      // deliveryorderCompany
-    $field                        = 'company';
-    $this->deliveryorderCompany   = $this->zzFfValue( $sheet, $field );
-      // deliveryorderCompany
-
-      // deliveryorderFirstname
-    $field                        = 'firstName';
-    $this->deliveryorderFirstname = $this->zzFfValue( $sheet, $field );
-      // deliveryorderFirstname
-
-      // deliveryorderLastname
-    $field                        = 'lastName';
-    $this->deliveryorderLastname  = $this->zzFfValue( $sheet, $field );
-      // deliveryorderLastname
-
-      // deliveryorderAddress
-    $field                        = 'address';
-    $this->deliveryorderAddress   = $this->zzFfValue( $sheet, $field );
-      // deliveryorderAddress
-
-      // deliveryorderZip
-    $field                        = 'zip';
-    $this->deliveryorderZip       = $this->zzFfValue( $sheet, $field );
-      // deliveryorderZip
-
-      // deliveryorderCity
-    $field                        = 'city';
-    $this->deliveryorderCity      = $this->zzFfValue( $sheet, $field );
-      // deliveryorderCity
-
-      // deliveryorderCountry
-    $field                        = 'country';
-    $this->deliveryorderCountry   = $this->zzFfValue( $sheet, $field );
-      // deliveryorderCountry
-
-    return;
-  }
-
-/**
- * sheetEmail( )  :
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function sheetEmail( )
-  {
-    $sheet = 'email';
-
-      // emailCustomerEmail
-    $field                        = 'customerEmail';
-    $this->emailCustomerEmail     = $this->zzFfValue( $sheet, $field );
-      // emailCustomerEmail
-
-      // emailDeliveryorderMode
-    $field                        = 'deliveryorderMode';
-    $this->emailDeliveryorderMode = $this->zzFfValue( $sheet, $field );
-      // emailDeliveryorderMode
-
-      // pathsDeliveryorder
-    $field                        = 'deliveryorderPath';
-    $this->pathsDeliveryorder = $this->zzFfValue( $sheet, $field );
-      // pathsDeliveryorder
-
-      // emailInvoiceMode
-    $field                        = 'invoiceMode';
-    $this->emailInvoiceMode       = $this->zzFfValue( $sheet, $field );
-      // emailInvoiceMode
-
-      // pathsInvoice
-    $field                        = 'invoicePath';
-    $this->pathsInvoice           = $this->zzFfValue( $sheet, $field );
-      // pathsInvoice
-
-      // emailRevocationMode
-    $field                        = 'revocationMode';
-    $this->emailRevocationMode    = $this->zzFfValue( $sheet, $field );
-      // emailRevocationMode
-
-      // pathsRevocation
-    $field                        = 'revocationPath';
-    $this->pathsRevocation        = $this->zzFfValue( $sheet, $field );
-      // pathsRevocation
-
-      // emailTermsMode
-    $field                        = 'termsMode';
-    $this->emailTermsMode         = $this->zzFfValue( $sheet, $field );
-      // emailTermsMode
-
-      // pathsTerms
-    $field                        = 'termsPath';
-    $this->pathsTerms             = $this->zzFfValue( $sheet, $field );
-      // pathsTerms
-
-    return;
-  }
-
-/**
- * sheetInvoice( )  :
- *
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function sheetInvoice( )
-  {
-    $sheet = 'invoice';
-
-      // invoiceCompany
-    $field                  = 'company';
-    $this->invoiceCompany   = $this->zzFfValue( $sheet, $field );
-      // invoiceCompany
-
-      // invoiceFirstname
-    $field                  = 'firstName';
-    $this->invoiceFirstname = $this->zzFfValue( $sheet, $field );
-      // invoiceFirstname
-
-      // invoiceLastname
-    $field                  = 'lastName';
-    $this->invoiceLastname  = $this->zzFfValue( $sheet, $field );
-      // invoiceLastname
-
-      // invoiceAddress
-    $field                  = 'address';
-    $this->invoiceAddress   = $this->zzFfValue( $sheet, $field );
-      // invoiceAddress
-
-      // invoiceZip
-    $field                  = 'zip';
-    $this->invoiceZip       = $this->zzFfValue( $sheet, $field );
-      // invoiceZip
-
-      // invoiceCity
-    $field                  = 'city';
-    $this->invoiceCity      = $this->zzFfValue( $sheet, $field );
-      // invoiceCity
-
-      // invoiceCountry
-    $field                  = 'country';
-    $this->invoiceCountry   = $this->zzFfValue( $sheet, $field );
-      // invoiceCountry
-
-    return;
-  }
-
-/**
- * sheetOrigin( ) :
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function sheetOrigin( )
-  {
-    $sheet = 'origin';
-
-      // originDeliveryorder
-    $field                      = 'deliveryorder';
-    $this->originDeliveryorder  = ( int ) $this->zzFfValue( $sheet, $field );
-      // originDeliveryorder
-
-      // originInvoice
-    $field                      = 'invoice';
-    $this->originInvoice        = ( int ) $this->zzFfValue( $sheet, $field );
-      // originInvoice
-
-      // originMin
-    $field                      = 'min';
-    $this->originMin          = ( int ) $this->zzFfValue( $sheet, $field );
-      // originMin
-
-      // originMax
-    $field                      = 'max';
-    $this->originMax          = ( int ) $this->zzFfValue( $sheet, $field );
-      // originMax
-
-      // originOrder
-    $field                      = 'order';
-    $this->originOrder          = ( int ) $this->zzFfValue( $sheet, $field );
-      // originOrder
-
-    return;
-  }
-
-/**
- * sheetPaths( )  :
- *
- * @return	void
- * @version 2.0.0
- * @since   2.0.0
- */
-  private function sheetPaths( )
-  {
-    $sheet = 'paths';
-
-      // pathsDeliveryorder
-    $field                    = 'deliveryorder';
-    $this->pathsDeliveryorder = $this->zzFfValue( $sheet, $field );
-      // pathsDeliveryorder
-
-      // pathsInvoice
-    $field                    = 'invoice';
-    $this->pathsInvoice       = $this->zzFfValue( $sheet, $field );
-      // pathsInvoice
-
-      // pathsRevocation
-    $field                    = 'revocation';
-    $this->pathsRevocation    = $this->zzFfValue( $sheet, $field );
-      // pathsRevocation
-
-      // pathsTerms
-    $field                    = 'terms';
-    $this->pathsTerms         = $this->zzFfValue( $sheet, $field );
-      // pathsTerms
-
-    return;
-  }
-
 /**
  * sheetSdef( ) :
  *
@@ -362,8 +122,8 @@ class tx_caddy_pi3_flexform
       // sdefDrs
 
       // sdefUpdatewizard
-    $field                  = 'sdefUpdatewizard';
-    $this->sdefUpdatewizard = $this->zzFfValue( $sheet, $field );
+    $field                  = 'sdefPidCaddy';
+    $this->sdefPidCaddy = $this->zzFfValue( $sheet, $field );
       // sdefUpdatewizard
 
     return;

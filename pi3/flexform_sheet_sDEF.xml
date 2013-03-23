@@ -6,9 +6,9 @@
     </TCEforms>
     <type>array</type>
     <el>
-      <sdefPid>
+      <sdefPidCaddy>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi3/locallang_flexform.xml:sdefPid</label>
+          <label>LLL:EXT:caddy/pi3/locallang_flexform.xml:sdefPidCaddy</label>
           <config>
             <type>group</type>
             <internal_type>db</internal_type>
@@ -20,7 +20,7 @@
             <size>1</size>
           </config>
         </TCEforms>
-      </sdefPid>
+      </sdefPidCaddy>
       <sdefDrs>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>
