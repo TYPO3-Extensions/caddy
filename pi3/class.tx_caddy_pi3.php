@@ -98,8 +98,8 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $outerArr = array
     (
-      'count'           => $count,
-      'minicart_gross'  => $this->div->getGrossPrice($pid)
+      'minicartcount' => $numberOfProducts,
+      'minisumgross'  => $this->session->productsGetGross( $this->pidCaddy )
     );
 
     $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
@@ -113,13 +113,13 @@ class tx_caddy_pi3 extends tslib_pibase
 
     $pid                  = $this->pidCaddy;
 
-    $value                = $numberOfProducts;
-    $marker               = '###MINICART_COUNT###';
-    $markerArray[$marker] = $value;
-
-    $value                = $this->session->productsGetGross( $this->pidCaddy );
-    $marker               = '###MINISUMGROSS###';
-    $markerArray[$marker] = $value;
+//    $value                = $numberOfProducts;
+//    $marker               = '###MINICART_COUNT###';
+//    $markerArray[$marker] = $value;
+//
+//    $value                = $this->session->productsGetGross( $this->pidCaddy );
+//    $marker               = '###MINISUMGROSS###';
+//    $markerArray[$marker] = $value;
 
     $label                = $this->pi_getLL('link');
     $typolinkConf         = array( );
