@@ -9,6 +9,8 @@
       <label index="caddy">Caddy</label>
       <label index="caddyminiemptyyou">Your caddy is empty</label>
       <label index="caddyminiemptygermansie">Your caddy is empty</label>
+      <label index="item">item</label>
+      <label index="items">items</label>
       <label index="linktocaddy">Go to Caddy</label>
       <label index="linktocaddy">Go Shopping!</label>
     </languageKey>
@@ -16,6 +18,8 @@
       <label index="caddy">Warenkorb</label>
       <label index="caddyminiemptyyou">Dein Warenkorb ist leer</label>
       <label index="caddyminiemptygermansie">Ihr Warenkorb ist leer.</label>
+      <label index="item">Artikel</label>
+      <label index="items">Artikel</label>
       <label index="linktocaddy">Zum Warenkorb</label>
       <label index="linktoshop">Zum Shop</label>
     </languageKey>

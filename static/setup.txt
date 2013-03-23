@@ -2236,13 +2236,22 @@ plugin.tx_caddy_pi3 {
           // in case of one item
         10 = TEXT
         10 {
-          value = label in case of one item
+          if {
+            field         = numberofitems
+            isGreaterThan = 1
+          }
+          data = LLL:EXT:caddy/pi3/locallang.xml:item
           wrap  = <span class="label sumlabel">|</span>
         }
           // in case of more than one item
         20 = TEXT
         20 {
-          value = label in case of more than one item
+          if {
+            field         = numberofitems
+            isGreaterThan = 1
+            negate        = 1
+          }
+          data = LLL:EXT:caddy/pi3/locallang.xml:items
           wrap = <span class="label sumlabel">|</span>
         }
       }
