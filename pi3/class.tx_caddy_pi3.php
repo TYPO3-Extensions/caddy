@@ -103,6 +103,7 @@ class tx_caddy_pi3 extends tslib_pibase
     );
 
     $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
     foreach( ( array ) $this->conf['settings.']['fields.'] as $key => $value )
     {
       if (!stristr($key, '.'))
