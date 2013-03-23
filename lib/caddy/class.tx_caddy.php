@@ -1525,6 +1525,13 @@ class tx_caddy extends tslib_pibase
       {
         case( ! $keepingTheLimit ):
         case( ! $this->conf[$optionType.'.']['show_all_disabled'] ):
+            // DRS
+          if( $this->drs->drsOptions )
+          {
+            $prompt = 'Don\'t display current item: product gross isn\'t keeping the limit and show_all_disabled isn\'t enabled.';
+            t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+          }
+            // DRS
           continue 2;
           break;
         default:
@@ -1603,6 +1610,13 @@ class tx_caddy extends tslib_pibase
       // RETURN : no value
     if( ! isset( $conf[$condition] ) )
     {
+        // DRS
+      if( $this->drs->drsOptions )
+      {
+        $prompt = 'condition ' . $condition . ' isn\'t set.';
+        t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
       return $content;
     }
       // RETURN : no value
@@ -1661,6 +1675,14 @@ class tx_caddy extends tslib_pibase
 
     $gross  = sprintf( $llLabel, $gross );
     
+      // DRS
+    if( $this->drs->drsOptions )
+    {
+      $prompt = 'gross for each: ' . $gross;
+      t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
     return $gross;
   }
 
@@ -1676,6 +1698,13 @@ class tx_caddy extends tslib_pibase
     $gross  = floatval( $this->calcOptionCosts( $optionType, intval( $optionItemKey ) ) );
     $gross  = $this->zz_price_format( $gross );
     
+      // DRS
+    if( $this->drs->drsOptions )
+    {
+      $prompt = 'gross for others than each: ' . $gross;
+      t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
     return $gross;
   }
 
@@ -1830,6 +1859,14 @@ class tx_caddy extends tslib_pibase
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
     $this->smarkerArray['###' . $hashMarker . '_CHECKBOX###'] = $content; 
+
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = '###' . $hashMarker . '_CHECKBOX### is set to ' . $content;
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
@@ -1860,6 +1897,14 @@ class tx_caddy extends tslib_pibase
     
       // set the marker
     $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = $content; 
+
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = '###' . $hashMarker . '_CONDITION### is set to ' . $content;
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
@@ -1883,6 +1928,14 @@ class tx_caddy extends tslib_pibase
               . $title . ' (' . $gross . ')</label>';
 
     $this->smarkerArray['###' . $hashMarker . '_TITLE###'] = $content; 
+
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = '###' . $hashMarker . '_TITLE### is set to ' . $content;
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
@@ -1915,6 +1968,14 @@ class tx_caddy extends tslib_pibase
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
     $this->smarkerArray['###' . $hashMarker . '_RADIO###'] = $content; 
+
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = '###' . $hashMarker . '_RADIO### is set to ' . $content;
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
   }
 
  /**
