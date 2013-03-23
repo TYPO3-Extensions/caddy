@@ -93,7 +93,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $flexformData = t3lib_div::xml2array($row['pi_flexform']);
     $pid          = $this->pi_getFFvalue($flexformData, 'pid', 'sDEF');
 
-    $this->products = $this->session->productsGet( );
+    $this->products = $this->session->productsGet( $pid );
     $count = count( $this->products );
 //    switch( true )
 //    {
@@ -106,7 +106,7 @@ class tx_caddy_pi3 extends tslib_pibase
 //        $caddy = null;
 //        break;
 //    }
-var_dump( __METHOD__, __LINE__, $this->products );
+var_dump( __METHOD__, __LINE__, $pid, $this->products );
     if( $count ) 
     {
       $outerArr = array(
