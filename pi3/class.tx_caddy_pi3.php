@@ -27,8 +27,6 @@
  ***************************************************************/
 
 require_once(PATH_tslib . 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_session.php'); // file for div functions
-require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
 
 /**
 * plugin 'Minicart' for the 'caddy' extension.
@@ -66,6 +64,14 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
+    require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php'); // file for dynamicmarker functions
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
+    $this->drs->init( );
     $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
     $this->session->setParentObject( $this );
     $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
