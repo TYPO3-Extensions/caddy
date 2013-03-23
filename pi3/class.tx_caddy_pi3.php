@@ -96,14 +96,6 @@ class tx_caddy_pi3 extends tslib_pibase
   {
     $numberOfProducts = count( $this->products );
     
-    $outerArr = array
-    (
-      'count'           => $numberOfProducts,
-      'minicart_gross'  => $this->session->productsGetGross( $this->pidCaddy )
-    );
-    
-    $this->local_cObj->start( $outerArr, $this->conf['db.']['table'] );
-    
     $pid                  = $this->pidCaddy;
 
     $value                = $numberOfProducts;
@@ -123,7 +115,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $marker               = '###MINICART_LINK_URL###';
     $markerArray[$marker] = $this->pi_getPageLink( $pid, null, $typolinkConf);
 
-var_dump( __METHOD__, __LINE__, $markerArray );
+var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
     $tmpl     = $this->tmpl['minicart'];
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );
