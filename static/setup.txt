@@ -2238,7 +2238,7 @@ plugin.tx_caddy_pi3 {
         10 {
           if {
             field         = numberofitems
-            isGreaterThan = 1
+            isGreaterThan = 2
           }
           data = LLL:EXT:caddy/pi3/locallang.xml:item
           wrap  = <span class="label sumlabel">|</span>
@@ -2248,7 +2248,7 @@ plugin.tx_caddy_pi3 {
         20 {
           if {
             field         = numberofitems
-            isGreaterThan = 1
+            isGreaterThan = 2
             negate        = 1
           }
           data = LLL:EXT:caddy/pi3/locallang.xml:items
