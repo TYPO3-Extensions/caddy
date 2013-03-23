@@ -264,6 +264,7 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
   {
     $this->local_cObj = $GLOBALS['TSFE']->cObj;
     $this->conf       = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
+var_dump( __METHOD__, __LINE__, $this->conf );
 
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
