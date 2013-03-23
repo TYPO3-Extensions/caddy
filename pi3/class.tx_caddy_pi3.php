@@ -106,6 +106,14 @@ class tx_caddy_pi3 extends tslib_pibase
     
     $pid                  = $this->pidCaddy;
 
+    $value                = $numberOfProducts;
+    $marker               = '###MINICART_COUNT###';
+    $markerArray[$marker] = $value;
+
+    $value                = $this->session->productsGetGross( $this->pidCaddy );
+    $marker               = '###MINISUMGROSS###';
+    $markerArray[$marker] = $value;
+
     $label                = $this->pi_getLL('link');
     $typolinkConf         = array( );
     $value                = $this->pi_linkToPage( $label, $pid, null, $typolinkConf );
