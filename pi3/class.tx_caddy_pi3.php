@@ -36,67 +36,78 @@ require_once(t3lib_extMgm::extPath('caddy') . 'lib/class.tx_caddy_dynamicmarkers
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	2.0.2
  * @since       1.4.6
  */
-class tx_caddy_pi3 extends tslib_pibase {
-	public $prefixId = 'tx_caddy_pi3';
-	public $scriptRelPath = 'pi3/class.tx_caddy_pi3.php';
-	public $extKey = 'caddy';
+class tx_caddy_pi3 extends tslib_pibase
+{
 
-	/**
-	* the main method of the PlugIn
-	*
-	* @param string    $content: The PlugIn content
-	* @param array   $conf: The PlugIn configuration
-	* @return  The content that is displayed on the website
-	*/	
-	public function main($content, $conf) {
-		// config
-		global $TSFE;
-		$local_cObj = $TSFE->cObj; // cObject
-		$this->conf = $conf;
-		$this->pi_setPiVarDefaults();
-		$this->pi_loadLL();
-		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
-                $this->session->pObj    = $this;
-		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
+  public $prefixId = 'tx_caddy_pi3';
+  public $scriptRelPath = 'pi3/class.tx_caddy_pi3.php';
+  public $extKey = 'caddy';
 
-		$this->tmpl['minicart'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template
-		$this->tmpl['minicart_empty'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART_EMPTY###'); // Load FORM HTML Template
-		
-		//Read Flexform
-		$row=$this->pi_getRecord('tt_content', $this->cObj->data['uid']); 
-		$flexformData = t3lib_div::xml2array($row['pi_flexform']);
-		$pid = $this->pi_getFFvalue($flexformData, 'pid', 'sDEF');
-		
-		$count = $this->session->countProductsInCart($pid);
-		
-		if ($count) {
-			$outerArr = array(
-				'count' => $count,
-				'minicart_gross' => $this->session->productsGetGross($pid)
-			);
-			$local_cObj->start($outerArr, $this->conf['db.']['table']);
-			foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
-			{
-				if (!stristr($key, '.'))
-				{ // no .
-					$minicartMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
-				}
-			}
-		
-			$typolink_conf = array();
-			$minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $pid, "", $typolink_conf);
-			$minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($pid, "", $typolink_conf);
-		
-			$this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart'], $minicartMarkerArray); // Get html template
-			$this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
-			//$this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
-		} else {
-			$this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart_empty'], null, $minicartMarkerArray); // Get html template
-			$this->content = $this->dynamicMarkers->main($this->content, $this);
-		}
-		return $this->pi_wrapInBaseClass($this->content);
-	}
+ /**
+  * the main method of the PlugIn
+  *
+  * @param string    $content: The PlugIn content
+  * @param array   $conf: The PlugIn configuration
+  * @return  The content that is displayed on the website
+  * @version  2.0.2
+  * @since    1.4.6
+  */	
+  public function main( $content, $conf ) 
+  {
+    unset( $content );
+    
+      // config
+    global $TSFE;
+    $local_cObj = $TSFE->cObj;
+    $this->conf = $conf;
+    $this->pi_setPiVarDefaults();
+    $this->pi_loadLL();
+    
+    $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
+    $this->session->setParentObject( $this );
+    $this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
+
+    $this->tmpl['minicart']       = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART###'); // Load FORM HTML Template
+    $this->tmpl['minicart_empty'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_MINICART_EMPTY###'); // Load FORM HTML Template
+
+    //Read Flexform
+    $row          = $this->pi_getRecord('tt_content', $this->cObj->data['uid']); 
+    $flexformData = t3lib_div::xml2array($row['pi_flexform']);
+    $pid          = $this->pi_getFFvalue($flexformData, 'pid', 'sDEF');
+
+    $count = $this->session->countProductsInCart($pid);
+
+    if( $count ) 
+    {
+      $outerArr = array(
+        'count'           => $count,
+        'minicart_gross'  => $this->session->productsGetGross($pid)
+      );
+      $local_cObj->start($outerArr, $this->conf['db.']['table']);
+      foreach ((array) $this->conf['settings.']['fields.'] as $key => $value)
+      {
+        if (!stristr($key, '.'))
+        { // no .
+          $minicartMarkerArray['###' . strtoupper($key) . '###'] = $local_cObj->cObjGetSingle($this->conf['settings.']['fields.'][$key], $this->conf['settings.']['fields.'][$key . '.']);
+        }
+      }
+
+      $typolink_conf = array();
+      $minicartMarkerArray['###MINICART_LINK###']= $this->pi_linkToPage($this->pi_getLL('link'), $pid, "", $typolink_conf);
+      $minicartMarkerArray['###MINICART_LINK_URL###']= $this->pi_getPageLink($pid, "", $typolink_conf);
+
+      $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart'], $minicartMarkerArray); // Get html template
+      $this->content = $this->dynamicMarkers->main($this->content, $this); // Fill dynamic locallang or typoscript markers
+      //$this->content = preg_replace('|###.*?###|i', '', $this->content); // Finally clear not filled markers
+    } 
+    else 
+    {
+      $this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['minicart_empty'], null, $minicartMarkerArray); // Get html template
+      $this->content = $this->dynamicMarkers->main($this->content, $this);
+    }
+    return $this->pi_wrapInBaseClass($this->content);
+  }
 }
