@@ -93,34 +93,120 @@ class tx_caddy_pi3 extends tslib_pibase
   */	
   public function caddyWiProducts( ) 
   {
-    $numberOfItems  = $this->zz_numberOfItems( );
+    $tmpl = $this->caddyWiProductsItems( );
+
+    $quantity  = $this->zz_quantity( );
     
     $cObjData = array
     (
-      'numberofitems' => $numberOfItems,
-      'minisumgross'  => $this->session->productsGetGross( $this->pidCaddy )
+      'quantity'  => $quantity,
+      'gross'     => $this->session->productsGetGross( $this->pidCaddy )
     );
 
     $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
-var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
-    foreach( array_keys( ( array ) $this->conf['content.'] ) as $key )
+
+    $key                  = 'sum';
+    $name                 = $this->conf['content.'][$key];
+    $conf                 = $this->conf['content.'][$key . '.'];
+    $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
+    $marker               = '###' . strtoupper( $key ) . '###';
+    $markerArray[$marker] = $value;
+var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
+
+    $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+    $content  = $this->dynamicMarkers->main( $content, $this );
+    
+    return $content;
+  }
+
+ /**
+  * caddyWiProductsItems( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function caddyWiProductsItems( ) 
+  {
+    $tmpl = null;
+    $sdefCaddyMode = $this->flexform->sdefCaddyMode;
+
+    switch( true )
     {
-      if( stristr( $key, '.' ) )
-      {
-        continue;
-      }
+      case( $sdefCaddyMode == 'woItems' ):
+        $tmpl = $this->caddyWiProductsItemsWoItems( );
+        break;
+      case( $sdefCaddyMode == 'wiItems' ):
+      default:
+        $tmpl = $this->caddyWiProductsItemsWiItems( );
+        break;
+    }
+    
+    unset( $sdefCaddyMode );
+    
+    return $tmpl;
+  }
+
+ /**
+  * caddyWiProductsItemsWiItems( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function caddyWiProductsItemsWiItems( ) 
+  {
+    $items = null; 
+
+    foreach( ( array ) $this->products as $product )
+    {
+      $cObjData = array
+      (
+        'gross'     => $product['price'],
+        'quantity'  => $product['qty'],
+        'label'     => $product['title'],
+      );
+
+      $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
+
+      $key                  = 'item';
       $name                 = $this->conf['content.'][$key];
       $conf                 = $this->conf['content.'][$key . '.'];
       $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
       $marker               = '###' . strtoupper( $key ) . '###';
       $markerArray[$marker] = $value;
-    }
-var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
 
-    $tmpl     = $this->tmpl['caddymini'];
-    $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
-    $content  = $this->dynamicMarkers->main( $content, $this );
-    
+      $tmpl = $this->tmpl['items'];
+      $item = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+      $item = $this->dynamicMarkers->main( $item, $this );
+      
+      $items  = $items 
+              . $item
+              ;
+    }
+
+    $content  = $this->tmpl['caddymini'];
+    $marker   = '###ITEMS###';
+    $value    = $items;
+    $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
+   
+    return $content;
+  }
+
+ /**
+  * caddyWiProductsItemsWoItems( ) : 
+  *
+  * @return     string      $content  : mini caddy in case of products
+  * @version  2.0.2
+  * @since    2.0.2
+  */	
+  public function caddyWiProductsItemsWoItems( ) 
+  {
+    $content  = $this->tmpl['caddymini'];
+    $marker   = '###ITEMS###';
+    $value    = null;
+    $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
+   
     return $content;
   }
 
@@ -320,23 +406,23 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
   **********************************************/
 
  /**
-  * zz_numberOfItems( ) : 
+  * zz_quantity( ) : 
   *
   * @return     string      $content  : mini caddy in case of products
   * @version  2.0.2
   * @since    2.0.2
   */	
-  public function zz_numberOfItems( ) 
+  public function zz_quantity( ) 
   {
-    $numberOfItems = 0;
+    $quantity = 0;
     
     foreach( ( array ) $this->products as $product )
     {
-      $numberOfItems  = $numberOfItems
-                      + $product['qty']
-                      ;
+      $quantity = $quantity
+                + $product['qty']
+                ;
     }
 
-    return $numberOfItems;
+    return $quantity;
   }
 }
