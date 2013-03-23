@@ -185,8 +185,8 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy, $this->products, $this->tmpl );
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
 
-    require_once( 'class.tx_caddy_pi1_flexform.php' );
-    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
+    require_once( 'class.tx_caddy_pi3_flexform.php' );
+    $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi3_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
 
