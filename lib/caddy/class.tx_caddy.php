@@ -1515,6 +1515,14 @@ class tx_caddy extends tslib_pibase
         continue;
       }
 
+        // DRS
+      if( $this->drs->drsOptions )
+      {
+        $prompt = $optionType . '.options.' . $optionId . '.' . $optionItemKey;
+        t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
         // productsGross keeps the limit for available
       $keepingTheLimit = true;
       $keepingTheLimit = $this->optionListGrossIsKeepingTheLimit( $optionItemConf );
@@ -1523,8 +1531,10 @@ class tx_caddy extends tslib_pibase
         // SWITCH : display option list item
       switch( true )
       {
-        case( ! $keepingTheLimit ):
-        case( ! $this->conf[$optionType.'.']['show_all_disabled'] ):
+        case( $keepingTheLimit ):
+        case( $this->conf[$optionType.'.']['show_all_disabled'] ):
+          break;
+        default:
             // DRS
           if( $this->drs->drsOptions )
           {
@@ -1533,9 +1543,6 @@ class tx_caddy extends tslib_pibase
           }
             // DRS
           continue 2;
-          break;
-        default:
-            // follow the work flow
           break;
       }
         // SWITCH : display option list item
