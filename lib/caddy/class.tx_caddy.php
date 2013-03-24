@@ -35,7 +35,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *              SECTION: Caddy
  *  187:     public function caddy( )
  *  221:     private function caddyWiProducts( )
- *  343:     private function caddyWiProductsItem( $contentItem )
+ *  343:     private function caddyWiProductsInCaseOfPaymentDEPRECATED( $contentItem )
  *  381:     private function caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
  *  400:     private function caddyWiProductsOptionsPayment( $subpartArray, $paymentId )
  *  425:     private function caddyWiProductsOptionsShipping( $subpartArray, $shippingId )
@@ -211,7 +211,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProducts( )  : Workflow for a caddy, whoch contains products
+  * caddyWiProducts( )  : Workflow for a caddy, which contains products
   *
   * @return	array		: $subpartArray
   * @access private
@@ -226,31 +226,19 @@ class tx_caddy extends tslib_pibase
 
     $subpartArray   = null;
 
-    $arrResult = $this->calc( );
-var_dump( __METHOD__, __LINE__, $arrResult );
+      // calculated caddy: content, items, options, serviceattributes, sum. 
+    $calcedCaddy = $this->calc( );
+
+      // content. here: items
+    $content                        = $calcedCaddy['content'];
+    $subpartArray['###CONTENT###']  = $this->caddyWiProductsContent( $content );
+    unset( $calcedCaddy['content'] );
+
+      // session  : new or update 
+    $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
+var_dump( __METHOD__, __LINE__, $sesArray );
 die( );
-    $contentItem      = $arrResult['contentItem'];
-    $paymentLabel     = $arrResult['paymentLabel'];
-    $paymentId        = $arrResult['paymentId'];
-    $productsGross    = $arrResult['productsGross'];
-    $productsNet      = $arrResult['productsNet'];
-    $optionsNet       = $arrResult['optionsNet'];
-    $optionsGross     = $arrResult['optionsGross'];
-    $shippingLabel    = $arrResult['shippingLabel'];
-    $shippingId       = $arrResult['shippingId'];
-    $specialLabels    = $arrResult['specialLabels'];
-    $specialIds       = $arrResult['specialIds'];
-    $sumGross         = $arrResult['sumGross'];
-    $sumNet           = $arrResult['sumNet'];
-    $sumTaxNormal     = $arrResult['sumTaxNormal'];
-    $sumTaxReduced    = $arrResult['sumTaxReduced'];
 
-    unset( $arrResult );
-    $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
-
-
-      // session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['paymentLabel']   = $paymentLabel;
     $sesArray['paymentId']        = $paymentId;
     $sesArray['productsGross']    = $productsGross;
@@ -265,7 +253,6 @@ die( );
     $sesArray['sumNet']           = $sumNet;
     $sesArray['sumTaxNormal']     = $sumTaxNormal;
     $sesArray['sumTaxReduced']    = $sumTaxReduced;
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // session
 
     $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
@@ -331,40 +318,95 @@ die( );
       // RESET cObj->data
     return $subpartArray;
   }
-
+    
  /**
-  * caddyWiProductsItem( )  : Render the item (product)
+  * caddyWiProductsContent( )  : 
   *
-  * @param	string		$contentItem : current item
-  * @return	string		$contentItem : rendered item
+  * @param	string		$content : current content
+  * @return	string		$content : handeld content
   * @access private
-  * @version    2.0.0
+  * @version    2.0.2
   * @since      2.0.0
   */
-  private function caddyWiProductsItem( $contentItem )
+  private function caddyWiProductsContent( $content )
   {
+    $content  = $content
+              . $this->caddyWiProductsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiProductsFieldHidden( )
+              ;
+    
+    return $content;
+  }
+
+ /**
+  * caddyWiProductsFieldHidden( )  : 
+  *
+  * @return	string		$content : rendered hidden field
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.0
+  */
+  private function caddyWiProductsFieldHidden( )
+  {
+    $content = '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
+    
+    return $content;
+  }
+
+  /**
+  * caddyWiProductsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
+  *
+  * @return	string		$content : rendered item
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.0
+  */
+  private function caddyWiProductsInCaseOfPaymentDEPRECATED( )
+  {
+    
+     /**
+      * DEPRECATED!caddyWiProductsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
+      *
+      * Seems to be deorecated:
+      *   * $this->tmpl['special_item'] is ###CADDY_SPECIAL### ###ITEM###
+      *   * Subpart ###ITEM### doesnt't contain any marke from below.
+      *   
+      * dwildt, 130324 
+      */
+
+    $content = null;
+    
       // item for payment
     $paymentId = $this->session->paymentGet( );
-    if( $paymentId )
+    if( ! $paymentId )
     {
-      $this->markerArray['###QTY###']         = 1;
-      $name   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title'];
-      $conf   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title.'];
-      $title  = $this->zz_cObjGetSingle( $name, $conf );
-      $this->markerArray['###TITLE###']       = $title;
-      $this->markerArray['###PRICE###']       = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
-      $this->markerArray['###PRICE_TOTAL###'] = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
-         // add inner html to variable
-      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
-                                    (
-                                      $this->tmpl['special_item'],
-                                      $this->markerArray
-                                    );
+      return $content;
     }
 
-    $contentItem  = $contentItem . '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
+      // quantity
+//    $this->markerArray['###QTY###'] = 1;
+    $markerArray['###QTY###'] = 1;
+    
+      // title
+    $name   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title'];
+    $conf   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title.'];
+    $title  = $this->zz_cObjGetSingle( $name, $conf );
+//    $this->markerArray['###TITLE###'] = $title;
+    $markerArray['###TITLE###'] = $title;
+    
+      // price and prce_total
+    $price  = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
+//    $this->markerArray['###PRICE###']       = $price;
+//    $this->markerArray['###PRICE_TOTAL###'] = $price;
+    $markerArray['###PRICE###']       = $price;
+    $markerArray['###PRICE_TOTAL###'] = $price;
 
-    return $contentItem;
+    // add inner html to variable
+    $tmpl = $this->tmpl['special_item'];
+//    $this->markerArray = $markerArray + $this->markerArray;
+    $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray );
+
+    return $content;
   }
 
  /**
@@ -612,6 +654,38 @@ die( );
   }
 
  /**
+  * caddyWiProductsSession( )  : 
+  *
+  * @param      array       $calcedCaddy : 
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWiProductsSession( $calcedCaddy )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $calcedCaddy
+              + $sesArray
+              ;
+//    $sesArray['paymentLabel']   = $paymentLabel;
+//    $sesArray['paymentId']        = $paymentId;
+//    $sesArray['productsGross']    = $productsGross;
+//    $sesArray['productsNet']      = $productsNet;
+//    $sesArray['optionsNet']       = $optionsNet;
+//    $sesArray['optionsGross']     = $optionsGross;
+//    $sesArray['shippingLabel']  = $shippingLabel;
+//    $sesArray['shippingId']       = $shippingId;
+//    $sesArray['specialLabels']  = $specialLabels;
+//    $sesArray['specialIds']       = $specialIds;
+//    $sesArray['sumGross']         = $sumGross;
+//    $sesArray['sumNet']           = $sumNet;
+//    $sesArray['sumTaxNormal']     = $sumTaxNormal;
+//    $sesArray['sumTaxReduced']    = $sumTaxReduced;
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+  }
+  
+ /**
   * caddyWoProducts( )  : Render a caddy, which doesn't contain any product
   *
   * @return	void
@@ -655,8 +729,8 @@ die( );
     $options  = null;
 
       // handle the current product
-    $items        = $this->calcItems( );
-    $contentItem  = $items['contentItem'];
+    $items    = $this->calcItems( );
+    $content  = $items['content'];
       // handle the current product
 
     $this->productsGross  = $items['sum']['gross'];
@@ -672,7 +746,7 @@ die( );
 
     $calc = array
     (
-      'contentItem'       => $contentItem,
+      'content'           => $content,
       'options'           => $options,
       'serviceattributes' => $serviceattributes,
       'sum'               => $sum,
@@ -711,7 +785,7 @@ die( );
       // DIE  : $row is empty
 
     $arrReturn    = null;
-    $contentItem  = '';
+    $content  = '';
 
     $productsNet        = 0;
     $productsGross      = 0;
@@ -754,7 +828,7 @@ die( );
       $this->caddyWiProductsProductErrorMsg( $product );
 
          // add inner html to variable
-      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
+      $content = $content . $this->cObj->substituteMarkerArrayCached
                                     (
                                       $this->tmpl['item'], $this->markerArray
                                     );
@@ -776,7 +850,7 @@ die( );
     }
       // FOREACH  : products
 
-    $arrReturn['contentItem']           = $contentItem;
+    $arrReturn['content']               = $content;
     $arrReturn['sum']['net']            = $productsNet;
     $arrReturn['sum']['gross']          = $productsGross;
     $arrReturn['sum']['tax']['normal']  = $productsTaxNormal;
