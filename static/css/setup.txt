@@ -85,6 +85,7 @@ plugin.tx_caddy_pi1 {
     }
     div.caddymini {
       background: #FFF;
+      margin: 0 0 1em 0;
       padding: 1em 1em 3.5em 0;
     }
     div.caddymini .item,
