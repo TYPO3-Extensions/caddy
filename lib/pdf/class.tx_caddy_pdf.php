@@ -270,13 +270,19 @@ class tx_caddy_pdf extends tslib_pibase
 
       // Payment option label
     $subpartArray['###PAYMENTOPTIONLABEL###']   = $this->caddy->getPaymentOptionLabelBySessionId( );
+    $subpartArray['###PAYMENTOPTIONTAX###']     = 'payTax';
+    $subpartArray['###PAYMENTOPTIONGROSS###']   = '1.11 EUR';
       // Payment option label
 
       // Shipping option label
     $subpartArray['###SHIPPINGOPTIONLABEL###']  = $this->caddy->getShippingOptionLabelBySessionId( );
+    $subpartArray['###SHIPPINGOPTIONTAX###']    = 'shipTax';
+    $subpartArray['###SHIPPINGOPTIONGROSS###']  = '2.22 EUR';
 
       // Special option label
     $subpartArray['###SPECIALOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
+    $subpartArray['###SPECIALOPTIONTAX###']     = 'specTax';
+    $subpartArray['###SPECIALOPTIONGROSS###']   = '3.33 EUR';
 
     return $subpartArray;
   }

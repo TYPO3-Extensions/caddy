@@ -304,7 +304,6 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddyUpdateOptions( )
   {
-var_dump( __METHOD__, __LINE__, $_POST,  $this->piVars );
       // RETURN : Don't update options, if form isnt by itself 
     if( ! intval( $this->piVars['updateByCaddy'] ) )
     {
