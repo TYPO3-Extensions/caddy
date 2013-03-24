@@ -418,7 +418,7 @@ die( );
   {
     $markerArray = null;
 
-    foreach( array_keys( ( array ) $this->conf['settings.']['overall.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['sum.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
