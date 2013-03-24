@@ -236,7 +236,10 @@ class tx_caddy extends tslib_pibase
 
       // session  : new or update 
     $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
-var_dump( __METHOD__, __LINE__, $sesArray );
+    
+    //$data = $this->zz_sessionArrayOneDimension( $sesArray );
+    $data  = t3lib_BEfunc::implodeTSParams( $sesArray );
+var_dump( __METHOD__, __LINE__, $data, $sesArray );
 die( );
 
     $sesArray['paymentLabel']   = $paymentLabel;
