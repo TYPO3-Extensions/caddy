@@ -639,7 +639,7 @@ plugin.tx_caddy_pi1 {
     // format of sum fields. If a sum field isn't configured, it won't rendered for output.
   output =
   output {
-      // labels, values
+      // labels, rates, values
     sum =
     sum {
         // payment, shipping, specials
