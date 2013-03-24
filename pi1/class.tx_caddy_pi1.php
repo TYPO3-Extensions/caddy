@@ -190,9 +190,9 @@ class tx_caddy_pi1 extends tslib_pibase
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
     $arrResult  = $this->caddyRendered( );
-    $tmpl       = $arrResult['tmpl'];
     $marker     = $arrResult['marker'];
     $subparts   = $arrResult['subparts'];
+    $tmpl       = $arrResult['tmpl'];
 var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
     unset( $arrResult );
 

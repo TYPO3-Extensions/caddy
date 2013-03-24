@@ -257,6 +257,7 @@ class tx_caddy extends tslib_pibase
 
       // calculated caddy: content, items, options, serviceattributes, sum. 
     $calcedCaddy = $this->calc( );
+var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;      
 
 
 //    $sesArray['paymentLabel']   = $paymentLabel;
