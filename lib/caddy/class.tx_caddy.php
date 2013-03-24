@@ -6,9 +6,6 @@
  *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
- *  Caddy is a fork of wt_cart (version 1.4.6)
- *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
- *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -1260,18 +1257,37 @@ die( );
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcSum( $arrItems, $arrOptions )
+  private function calcSum( $items, $options )
   {
-    $items    = $this->calcSumItems( $arrItems );
-    $options  = $this->calcSumOptions( $arrOptions );
-
-    $sum = array( 
-      'items'   => $items,
-      'options' => $options,
-      'sum'     => $this->calcSumSum( $items, $options ),
-    );
+    $this->calcSumInitInstance( );
+    $sum = $this->tx_caddy_calcsum->sum( $items, $options);
     
     return $sum;
+//    $items    = $this->calcSumItems( $items );
+//    $options  = $this->calcSumOptions( $options );
+//
+//    $sum = array( 
+//      'items'   => $items,
+//      'options' => $options,
+//      'sum'     => $this->calcSumSum( $items, $options ),
+//    );
+//    
+//    return $sum;
+  }
+
+ /**
+  * calcSumInitInstance( )  : 
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumInitInstance( )
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    require_once( $path2lib . 'caddy/class.tx_caddy_calcsum.php' );
+    $this->tx_caddy_calcsum = t3lib_div::makeInstance( 'tx_caddy_calcsum' );
   }
 
  /**
@@ -2668,8 +2684,8 @@ die( );
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php'])
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/caddy/class.tx_caddy.php'])
 {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/pi1/class.tx_caddy.php']);
+  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/caddy/class.tx_caddy.php']);
 }
 ?>
