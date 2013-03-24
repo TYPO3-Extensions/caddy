@@ -71,10 +71,10 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
 /**
  * plugin 'Cart to powermail' for the 'caddy' extension.
  *
- * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
- * @package	TYPO3
- * @subpackage	tx_caddy
- * @version	2.0.2
+ * @author    Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ * @package    TYPO3
+ * @subpackage    tx_caddy
+ * @version    2.0.2
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -137,7 +137,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddy( )  : Returns a caddy with HTML form and HTML options among others
   *
-  * @return	array		$arrReturn  : array with elements caddy, tmpl, outerMarkerArray
+  * @return    array        $arrReturn  : array with elements caddy, tmpl, outerMarkerArray
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -171,7 +171,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProducts( )  : Workflow for a caddy, whoch contains products
   *
-  * @return	array   : $subpartArray
+  * @return    array   : $subpartArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -318,8 +318,8 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProductsItem( )  : Render the item (product)
   *
-  * @param	string		$contentItem : current item
-  * @return	string		$contentItem : rendered item
+  * @param    string        $contentItem : current item
+  * @return    string        $contentItem : rendered item
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -353,8 +353,8 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProductsProductErrorMsg( ) : 
   *
-  * @param	array		$product : the current item / product
-  * @return	void
+  * @param    array        $product : the current item / product
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -385,8 +385,8 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProductsProductServiceAttributes( )
   *
-  * @param	array		$product :
-  * @return	void
+  * @param    array        $product :
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -452,8 +452,8 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProductsProductSettings( )
   *
-  * @param	array		$product :
-  * @return	void
+  * @param    array        $product :
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -500,7 +500,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWoProducts( )  : Render a caddy, which doesn't contain any product
   *
-  * @return	void
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -527,7 +527,7 @@ class tx_caddy extends tslib_pibase
  /**
   * calc( )  : 
   *
-  * @return	array   : 
+  * @return    array   : 
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -824,7 +824,7 @@ class tx_caddy extends tslib_pibase
     
     return $gross;
   }
-	
+    
  /**
   * calcOptionCostsIsFree( )  : Returns true, if option costs are for free.
   *                               Costs are free if
@@ -909,13 +909,13 @@ class tx_caddy extends tslib_pibase
     
     return $optionIsFree;
   }
-	
+    
 
   
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
-  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @return    array        $array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -971,7 +971,7 @@ class tx_caddy extends tslib_pibase
  /**
   * calcOptionsShipping( ) : calculate tax, net and gross for the option shipping
   *
-  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @return    array        $array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1027,7 +1027,7 @@ class tx_caddy extends tslib_pibase
  /**
   * calcOptionsSpecial( ) : calculate tax, net and gross for the option special
   *
-  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @return    array        $array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1087,7 +1087,7 @@ class tx_caddy extends tslib_pibase
  /**
   * calcProduct( )
   *
-  * @return	void
+  * @return    void
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
@@ -1183,8 +1183,8 @@ class tx_caddy extends tslib_pibase
  /**
   * calcProductTax( )
   *
-  * @param	array		$product  :
-  * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
+  * @param    array        $product  :
+  * @return    array        $tax      : cartNet, cartTaxReduced, cartTaxNormal
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1245,7 +1245,7 @@ class tx_caddy extends tslib_pibase
  /**
   * getPaymentOptionLabelBySessionId( )
   *
-  * @return	array
+  * @return    array
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
@@ -1271,7 +1271,7 @@ class tx_caddy extends tslib_pibase
  /**
   * getShippingOptionLabelBySessionId( )
   *
-  * @return	array
+  * @return    array
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
@@ -1297,7 +1297,7 @@ class tx_caddy extends tslib_pibase
  /**
   * getSpecialOptionLabelsBySessionId( )
   *
-  * @return	array
+  * @return    array
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
@@ -1328,7 +1328,7 @@ class tx_caddy extends tslib_pibase
  /**
   * getServiceAttributes( )
   *
-  * @return	array
+  * @return    array
   * @access     private
   * @version    2.0.0
   * @since      2.0.0
@@ -1368,7 +1368,7 @@ class tx_caddy extends tslib_pibase
  /**
   * init( )
   *
-  * @return	void
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1386,7 +1386,7 @@ class tx_caddy extends tslib_pibase
  /**
   * initDie( )
   *
-  * @return	void
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1430,7 +1430,7 @@ class tx_caddy extends tslib_pibase
  /**
   * initInstances( )
   *
-  * @return	void
+  * @return    void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -1480,7 +1480,7 @@ class tx_caddy extends tslib_pibase
   * 
   * @param    string        $optionType   : payment, shipping, special
   * @param    integer       $optionId     : current option id
-  * @return	[type]		...
+  * @return    [type]        ...
   */
   private function optionList( $optionType, $optionId ) 
   {
@@ -2017,7 +2017,7 @@ class tx_caddy extends tslib_pibase
  /**
   * setContentRow( )  : Set $row with cObj->data
   *
-  * @return	void
+  * @return    void
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -2039,7 +2039,7 @@ class tx_caddy extends tslib_pibase
  /**
   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
   *
-  * @return	void
+  * @return    void
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -2124,7 +2124,7 @@ class tx_caddy extends tslib_pibase
  /**
   * setProducts( )  :
   *
-  * @return	void
+  * @return    void
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -2159,10 +2159,10 @@ class tx_caddy extends tslib_pibase
   *                                 name="tx_caddy_pi1[puid][20][]"
   *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
   *
-  * @param	array		$products: array with products with elements uid, title, tax, etc...
-  * @param	array		$markerArray: current marker array
-  * @param	array		$pobj: Parent Object
-  * @return	array		$markerArray: with added element ###VARIANTS### in case of variants
+  * @param    array        $products: array with products with elements uid, title, tax, etc...
+  * @param    array        $markerArray: current marker array
+  * @param    array        $pobj: Parent Object
+  * @return    array        $markerArray: with added element ###VARIANTS### in case of variants
   * @access private
   * @version 2.0.0
   * @since 1.4.6
@@ -2196,11 +2196,11 @@ class tx_caddy extends tslib_pibase
   * zz_addVariantGpvarToImagelinkwrap():  Adds all table.field of the variant to
   *                                          imageLinkWrap.typolink.additionalParams.wrap
   *
-  * @param	array		$product: array with product uid, title, tax, etc...
-  * @param	string		$ts_key: key of the current TypoScript configuration array
-  * @param	array		$ts_conf: the current TypoScript configuration array
-  * @param	array		$pobj: Parent Object
-  * @return	array		$ts_conf: configuration array added with the varaition gpvars
+  * @param    array        $product: array with product uid, title, tax, etc...
+  * @param    string        $ts_key: key of the current TypoScript configuration array
+  * @param    array        $ts_conf: the current TypoScript configuration array
+  * @param    array        $pobj: Parent Object
+  * @return    array        $ts_conf: configuration array added with the varaition gpvars
   * @access private
   * @version 2.0.0
   * @since 1.4.6
@@ -2236,9 +2236,9 @@ class tx_caddy extends tslib_pibase
  *                                    If available, return is 0. If not available the given fallback 
  *                                    or preset will returns.
  *
- * @param	string		$optionType
- * @param	int		$optionId
- * @return	int
+ * @param    string        $optionType
+ * @param    int        $optionId
+ * @return    int
  */
   private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
   {
@@ -2291,9 +2291,9 @@ class tx_caddy extends tslib_pibase
  /**
   * zz_calcNet( ) : Get the net of the given gross
   *
-  * @param	string		$taxType  : reduced, normal, (empty)
-  * @param	double		$gross    : current gross
-  * @return	double		$net      : calculated net
+  * @param    string        $taxType  : reduced, normal, (empty)
+  * @param    double        $gross    : current gross
+  * @return    double        $net      : calculated net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -2333,9 +2333,9 @@ class tx_caddy extends tslib_pibase
   * zz_cObjGetSingle( ) : Renders a typoscript property with cObjGetSingle, if it is an array.
   *                       Otherwise returns the property unchanged.
   *
-  * @param	string		$cObj_name  : value or the name of the property like TEXT, COA, IMAGE, ...
-  * @param	array		$cObj_conf  : null or the configuration of the property
-  * @return	string		$value      : unchanged value or rendered typoscript property
+  * @param    string        $cObj_name  : value or the name of the property like TEXT, COA, IMAGE, ...
+  * @param    array        $cObj_conf  : null or the configuration of the property
+  * @return    string        $value      : unchanged value or rendered typoscript property
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -2359,8 +2359,8 @@ class tx_caddy extends tslib_pibase
   /**
  * [Describe function...]
  *
- * @param	[type]		$value: ...
- * @return	[type]		...
+ * @param    [type]        $value: ...
+ * @return    [type]        ...
  */
   private function zz_price_format( $value )
   {

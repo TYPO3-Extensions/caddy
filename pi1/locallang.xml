@@ -8,6 +8,8 @@
     <languageKey index="default" type="array">
       <label index="caddyempty">Caddy is empty</label>
       <label index="caddyemptyyou">Your caddy is empty</label>
+      <label index="caddyempty">Caddy is empty</label>
+      <label index="caddyemptyyou">Your caddy is empty</label>
       <label index="delete">Remove this item from cart.</label>
       <label index="deliveryaddress">Delivery Address</label>
       <label index="deliveryorder">Delivery order</label>
