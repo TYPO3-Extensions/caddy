@@ -94,6 +94,8 @@ plugin.tx_caddy_pi1 {
       padding: 0; 
     }
     div.caddy_linktotheshop,
+    div.linktocaddy,
+    div.linktoshop,
     img.caddy_delete { 
       background: -moz-linear-gradient(center top , #E67100 0%, #FF9933 50%, #FF8800 51%, #FFB366 100%) repeat scroll 0 0 transparent;
       border: 0 none;
@@ -105,7 +107,9 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:.1em;
     }
-    div.caddy_linktotheshop {
+    div.caddy_linktotheshop,
+    div.linktocaddy,
+    div.linktoshop {
       display:inline;
       float:right;
       font-family: Trebuchet MS,Geneva,Arial,Helvetica,Verdana,sans serif;
@@ -114,7 +118,13 @@ plugin.tx_caddy_pi1 {
     }
     div.caddy_linktotheshop a,
     div.caddy_linktotheshop a:link,
-    div.caddy_linktotheshop a:visited {
+    div.caddy_linktotheshop a:visited,
+    div.linktoshop a,
+    div.linktoshop a:link,
+    div.linktoshop a:visited,
+    div.linktocaddy a,
+    div.linktocaddy a:link,
+    div.linktocaddy a:visited {
       color:white;
     }
 
