@@ -2282,10 +2282,10 @@ plugin.tx_caddy_pi3 {
       wrap = <div class="sum minicaddysum">|</div>
     }
   }
-    // HTML marker
+    // linktocaddy, linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
-      // Replace the marker _HTMLMARKER_LINTOCADDY
+      // label, icon. Replaces _HTMLMARKER_LINTOCADDY
     linktocaddy = COA
     linktocaddy {
         // Label
@@ -2321,7 +2321,7 @@ plugin.tx_caddy_pi3 {
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
     }
-      // Replace the marker _HTMLMARKER_LINTOSHOP
+      // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
     linktoshop {
         // Label
