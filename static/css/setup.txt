@@ -84,9 +84,9 @@ plugin.tx_caddy_pi1 {
       padding:.2em .6em;
     }
     div.caddymini { 
-      overflow:hidden;
+      display:block; 
+      float:left; 
       padding: 0 1em 1em 0;
-      width: 17em;
     }
     div.caddymini .sum {
       font-weight:bold; 
@@ -103,7 +103,6 @@ plugin.tx_caddy_pi1 {
       width:2em; 
     }
     div.caddymini .label {
-      width:8em; 
     }
     div.caddymini .gross {
       text-align:right;
