@@ -656,8 +656,8 @@ die( );
  /**
   * caddyWiProductsSession( )  : 
   *
-  * @param      array       $calcedCaddy : 
-  * @return	void
+  * @param      array       $calcedCaddy  : 
+  * @return	array       $sesArray     : the new or updated session array
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -683,6 +683,8 @@ die( );
 //    $sesArray['sumTaxNormal']     = $sumTaxNormal;
 //    $sesArray['sumTaxReduced']    = $sumTaxReduced;
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    
+    return $sesArray;
   }
   
  /**
