@@ -1037,7 +1037,7 @@ die( );
   *
   * @param	string		$optionType   : payment, shipping, special
   * @param	integer		$optionId     : current option id
-  * @return	array		$optionCosts  : gross and net
+  * @return	array		$optionCosts  : gross, net, rate
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -1086,9 +1086,9 @@ die( );
  /**
   * calcOptionCostsGross( )  : Gets the gross costs for the given option
   *
-  * @param	string		$optionType : payment, shipping, special
-  * @param	integer		$optionId   : current option id
-  * @return	double		$gross      : the gross costs
+  * @param	string		$optionType   : payment, shipping, special
+  * @param	integer		$optionId     : current option id
+  * @return	array		$optionCosts  : gross, net, rate
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -1096,7 +1096,6 @@ die( );
   private function calcOptionCostsGross( $optionType, $optionId )
   {
     $gross  = 0.00;
-    $net    = 0.00;
 
       // configuration of current options array
     $confOptions  = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
@@ -1154,14 +1153,7 @@ die( );
       // SWITCH : extra costs
 
       // get net
-    $net = $this->zz_calcNet( $taxType, $gross );
-
-      // result array
-    $optionCosts  = array
-    (
-      'gross' => $gross,
-      'net'   => $net
-    );
+    $optionCosts = $this->zz_calcNet( $taxType, $gross );
 
     return $optionCosts;
   }
@@ -1370,8 +1362,9 @@ die( );
     }
 
     $arrResult  = $this->calcOptionCosts( 'payment', $paymentId );
-    $net        = $arrResult['net'];
     $gross      = $arrResult['gross'];
+    $net        = $arrResult['net'];
+    $rate       = $arrResult['rate'];
 
     if( $this->conf['options.']['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
     {
@@ -1388,8 +1381,9 @@ die( );
     $arrReturn['label']                 = $label;
     $arrReturn['sum']['gross']          = $gross;
     $arrReturn['sum']['net']            = $net;
-    $arrReturn['sum']['tax']['reduced'] = $taxReduced;
+    $arrReturn['sum']['rate']           = $rate;
     $arrReturn['sum']['tax']['normal']  = $taxNormal;
+    $arrReturn['sum']['tax']['reduced'] = $taxReduced;
     return $arrReturn;
   }
 
@@ -1426,8 +1420,9 @@ die( );
     }
 
     $arrResult  = $this->calcOptionCosts( 'shipping', $shippingId );
-    $net        = $arrResult['net'];
     $gross      = $arrResult['gross'];
+    $net        = $arrResult['net'];
+    $rate       = $arrResult['rate'];
 
     if( $this->conf['options.']['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
@@ -1444,6 +1439,7 @@ die( );
     $arrReturn['label']                 = $label;
     $arrReturn['sum']['gross']          = $gross;
     $arrReturn['sum']['net']            = $net;
+    $arrReturn['sum']['rate']           = $rate;
     $arrReturn['sum']['tax']['reduced'] = $taxReduced;
     $arrReturn['sum']['tax']['normal']  = $taxNormal;
     return $arrReturn;
@@ -1474,8 +1470,9 @@ die( );
     foreach( ( array ) $specialIds as $specialId )
     {
       $arrResult  = $this->calcOptionCosts( 'special', $specialId );
-      $net        = $arrResult['net'];
       $gross      = $arrResult['gross'];
+      $net        = $arrResult['net'];
+      $rate       = $arrResult['rate'];
 
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
@@ -1495,6 +1492,7 @@ die( );
     $arrReturn['labels']                = $labels;
     $arrReturn['sum']['gross']          = $gross;
     $arrReturn['sum']['net']            = $net;
+    $arrReturn['sum']['rate']           = $rate;
     $arrReturn['sum']['tax']['reduced'] = $taxReduced;
     $arrReturn['sum']['tax']['normal']  = $taxNormal;
 
@@ -2605,7 +2603,7 @@ die( );
   *
   * @param	string		$taxType  : reduced, normal, (empty)
   * @param	double		$gross    : current gross
-  * @return	double		$net      : calculated net
+  * @return	array		$result   : calculated net, gross, rate
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -2613,32 +2611,36 @@ die( );
   private function zz_calcNet( $taxType, $gross )
   {
     $net        = 0.00;
+    $rate       = 0.00;
     $taxDevider = 1.00;
 
     // if ($conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced') { // reduced tax
     switch( $taxType )
     {
       case( 'reduced' ):
-        $taxDevider = $taxDevider
-                    + $this->conf['tax.']['reducedCalc']
-                    ;
+        $rate = $this->conf['tax.']['reducedCalc'];
         break;
       case( 'normal' ):
-        $taxDevider = $taxDevider
-                    + $this->conf['tax.']['normalCalc']
-                    ;
+        $rate = $this->conf['tax.']['normalCalc'];
         break;
       default:
-          // gross == net
-        $taxDevider = $taxDevider
-                    + 0.00
-                    ;
+        $rate = 0.00;
         break;
     }
 
+    $taxDevider = $taxDevider
+                + $rate
+                ;
     $net = $gross / $taxDevider;
 
-    return $net;
+    $result = array
+    (
+      'gross' => $gross,
+      'net'   => $net,
+      'rate'  => $rate
+    );
+
+    return $result;
   }
 
  /**
