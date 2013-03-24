@@ -186,15 +186,15 @@ class tx_caddy extends tslib_pibase
 
     $arrResult = $this->calc( );
     $contentItem      = $arrResult['contentItem'];
-    $paymentLabel   = $arrResult['payment_options'];
+    $paymentLabel     = $arrResult['paymentLabel'];
     $paymentId        = $arrResult['paymentId'];
     $productsGross    = $arrResult['productsGross'];
     $productsNet      = $arrResult['productsNet'];
     $optionsNet       = $arrResult['optionsNet'];
     $optionsGross     = $arrResult['optionsGross'];
-    $shippingLabel  = $arrResult['shipping_options'];
+    $shippingLabel    = $arrResult['shippingLabel'];
     $shippingId       = $arrResult['shippingId'];
-    $specialLabels  = $arrResult['specialLabels'];
+    $specialLabels    = $arrResult['specialLabels'];
     $specialIds       = $arrResult['specialIds'];
     $sumGross         = $arrResult['sumGross'];
     $sumNet           = $arrResult['sumNet'];

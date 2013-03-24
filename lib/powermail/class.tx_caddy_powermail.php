@@ -264,7 +264,7 @@ var_dump( __METHOD__, __LINE__, $arrResult );
                   'optionsGross'    => $optionsGross,
                   'shippingLabel'   => $shippingLabel,
                   'shippingId'      => $shippingId,
-                  'special_option'  => $specialLabels,
+                  'specialLabels'   => $specialLabels,
                   'specialId'       => $specialIds,
                   'sumGross'        => $sumGross,
                   'sumNet'          => $sumNet,

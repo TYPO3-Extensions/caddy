@@ -505,18 +505,18 @@ plugin.tx_caddy_pi1 {
     powermailCaddy {
         // titel, puid, qty, service attributes, min, max, sku, price, price_total, delete, tax
       fields < plugin.tx_caddy_pi1.settings.fields
-        // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, payment_option 
+        // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
       overall < plugin.tx_caddy_pi1.settings.overall
 
       overall {
-        shipping_option = TEXT
-        shipping_option.field = shipping_option
+        shippingLabel = TEXT
+        shippingLabel.field = shippingLabel
 
-        payment_option = TEXT
-        payment_option.field = payment_option
+        paymentLabel = TEXT
+        paymentLabel.field = paymentLabel
 
-        special_option = TEXT
-        special_option.field = special_option
+        specialLabels = TEXT
+        specialLabels.field = specialLabels
       }
     }
   }
