@@ -8,7 +8,7 @@
     <languageKey index="default" type="array">
       <label index="tt_content.list_type_pi1">Caddy : cart</label>
       <label index="tt_content.list_type_pi2">Caddy : add to cart</label>
-      <label index="tt_content.list_type_pi3">Caddy : minicart</label>
+      <label index="tt_content.list_type_pi3">Caddy : mini</label>
       <label index="tx_caddy_item">Item</label>                        
       <label index="tx_caddy_item.title">Title</label>                        
       <label index="tx_caddy_order">Order</label>                        
@@ -48,7 +48,7 @@
     <languageKey index="de" type="array">
       <label index="tt_content.list_type_pi1">Caddy : Warenkorb</label>
       <label index="tt_content.list_type_pi2">Caddy : Produkt in den Warenkorb</label>
-      <label index="tt_content.list_type_pi3">Caddy : Miniwarenkorb</label>
+      <label index="tt_content.list_type_pi3">Caddy : Mini</label>
       <label index="tx_caddy_item">Artikel</label>                        
       <label index="tx_caddy_item.title">Titel</label>                        
       <label index="tx_caddy_order">Bestellung</label>                        
