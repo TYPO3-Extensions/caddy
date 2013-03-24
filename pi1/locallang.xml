@@ -20,7 +20,7 @@
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
-      <label index="linktotheshop">Forward with shopping <![CDATA[&raquo;]]></label>
+      <label index="linktoshop">Forward with Shopping</label>
       <label index="minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="optionsnet">Service- and Shipping costs</label>
       <label index="order">Order</label>
@@ -73,7 +73,7 @@
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>
-      <label index="linktotheshop">Weiter Einkaufen <![CDATA[&raquo;]]></label>
+      <label index="linktoshop">Weiter Shoppen</label>
       <label index="minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="optionsnet">Service- und Versandkosten</label>
       <label index="order">Bestellung</label>
