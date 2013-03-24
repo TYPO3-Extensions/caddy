@@ -98,12 +98,14 @@ plugin.tx_caddy_pi1 {
       float:left; 
     }
     div.caddymini .quantity {
+      text-align:right;
       width:2em; 
     }
     div.caddymini .label {
       width:6em; 
     }
     div.caddymini .gross {
+      text-align:right;
       width:4em; 
     }
 
