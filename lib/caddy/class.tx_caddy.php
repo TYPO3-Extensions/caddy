@@ -292,13 +292,15 @@ class tx_caddy extends tslib_pibase
         unset( $calcedCaddy['content'] );
 
           // session  : new or update 
-        $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
+        $this->caddyWiProductsSession( $calcedCaddy );
 
           // set data
           // set cObjData
         $this->zz_setDataBySession( );
           // set marker
-        $marker   = $this->caddyWiProductsSumMarker( );
+        $marker   = ( array ) $this->caddyWiProductsSumMarkerLabels( )
+                  + ( array ) $this->caddyWiProductsSumMarkerValues( )
+                  ;
         $subparts = $this->caddyWiProductsOptions( $paymentId, $shippingId, $specialIds );
         break;
     }
@@ -407,14 +409,53 @@ die( );
   }
 
  /**
-  * caddyWiProductsSumMarker( )  :
+  * caddyWiProductsSumMarkerLabels( )  :
   *
   * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsSumMarker( )
+  private function caddyWiProductsSumMarkerLabels( )
+  {
+    $markerArray = null;
+    
+    $sumConf = ( array ) $this->conf['output.']['sum.']['labels.'];
+
+    foreach( array_keys( $sumConf ) as $key )
+    {
+      if( stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+      $marker = '###' . strtoupper( $key ) . '###';
+      $name   = $sumConf[$key];
+      $conf   = $sumConf[$key . '.'];
+      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $markerArray[$marker] = $value;
+
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        $prompt = $marker . ': "' . $value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+    
+    return $markerArray;
+  }
+
+ /**
+  * caddyWiProductsSumMarkerValues( )  :
+  *
+  * @return	array		: $markerArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsSumMarkerValues( )
   {
     $markerArray = null;
     
@@ -2122,7 +2163,7 @@ die( );
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = '###' . $hashMarker . '_CHECKBOX### is set to ' . $content;
+      $prompt = '###' . $hashMarker . '_CHECKBOX###: ' . $content;
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -2160,7 +2201,7 @@ die( );
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = '###' . $hashMarker . '_CONDITION### is set to ' . $content;
+      $prompt = '###' . $hashMarker . '_CONDITION###: ' . $content;
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -2191,7 +2232,7 @@ die( );
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = '###' . $hashMarker . '_TITLE### is set to ' . $content;
+      $prompt = '###' . $hashMarker . '_TITLE###: ' . $content;
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
@@ -2231,7 +2272,7 @@ die( );
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = '###' . $hashMarker . '_RADIO### is set to ' . $content;
+      $prompt = '###' . $hashMarker . '_RADIO###: ' . $content;
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
