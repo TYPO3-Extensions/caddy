@@ -653,23 +653,14 @@ class tx_caddy extends tslib_pibase
     $options = null;
 
       // handle the current product
-    $arrResult      = $this->calcItems( );
-    $contentItem    = $arrResult['contentItem'];
-    $items['sum']['net']             = $arrResult['net'];
-    $items['sum']['gross']           = $arrResult['gross'];
-    $items['sum']['tax']['reduced']  = $arrResult['taxReduced'];
-    $items['sum']['tax']['normal']   = $arrResult['taxNormal'];
-    unset( $arrResult );
+    $items        = $this->calcItems( );
+    $contentItem  = $items['contentItem'];
       // handle the current product
 
-    $this->productsGross  = $sumGross;
+    $this->productsGross  = $items['sum']['gross'];
 
-      // option payment : calculate tax, net and gross
-    $options['payment']  = $this->calcOptionsPayment( );
-      // option shipping : calculate tax, net and gross
-    $options['shipping'] = $this->calcOptionsShipping( );
-      // option specials : calculate tax, net and gross
-    $options['specials'] = $this->calcOptionsSpecial( );
+      // option payment, shipping, specials
+    $options = $this->calcOptions( );
 
       // Get the values auf the service attributes
     $serviceattributes = $this->getServiceAttributes( );
@@ -702,7 +693,7 @@ die( );
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    2.0.2
   * @since      2.0.0
   */
   private function calcItems( )
@@ -784,11 +775,11 @@ die( );
     }
       // FOREACH  : products
 
-    $arrReturn['contentItem'] = $contentItem;
-    $arrReturn['net']         = $productsNet;
-    $arrReturn['gross']       = $productsGross;
-    $arrReturn['taxReduced']  = $productsTaxReduced;
-    $arrReturn['taxNormal']   = $productsTaxNormal;
+    $arrReturn['contentItem']           = $contentItem;
+    $arrReturn['sum']['net']            = $productsNet;
+    $arrReturn['sum']['gross']          = $productsGross;
+    $arrReturn['sum']['tax']['normal']  = $productsTaxNormal;
+    $arrReturn['sum']['tax']['reduced'] = $productsTaxReduced;
 
     return $arrReturn;
   }
@@ -1139,6 +1130,26 @@ die( );
   }
 
 
+
+ /**
+  * calcOptions( ) : calculate tax, net and gross for the option payment
+  *
+  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcOptions( )
+  {
+    $options = array
+    (
+      'payment'  => $this->calcOptionsPayment( ),
+      'shipping' => $this->calcOptionsShipping( ),
+      'specials' => $this->calcOptionsSpecial( )
+    );
+    
+    return $options;
+  }
 
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
