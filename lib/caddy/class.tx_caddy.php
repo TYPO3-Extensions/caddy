@@ -2678,6 +2678,7 @@ die( );
     $this->local_cObj->start( $data, $this->conf['db.']['table'] );
       // cObject becomes current record
 
+var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
       // RETURN : no DRS
     if( ! $this->drs->drsCobj )
     {
