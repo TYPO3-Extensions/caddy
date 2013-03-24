@@ -456,7 +456,7 @@ die( );
   */
   private function caddyWiProductsOptions( $paymentId, $shippingId, $specialIds )
   {
-    $markerArray = null;
+    $markerArray = array( );
     
     $markerArray  = $markerArray
                   + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
