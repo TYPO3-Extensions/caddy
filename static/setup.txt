@@ -2342,10 +2342,10 @@ plugin.tx_caddy_pi3 {
       20 {
         file = EXT:caddy/files/img/caddy_100_02.png
         altText {
-          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
         }
         titleText {
-          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
         }
         params = class="linktoshop"
         imageLinkWrap = 1

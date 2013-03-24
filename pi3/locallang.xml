@@ -12,7 +12,8 @@
       <label index="item">item</label>
       <label index="items">items</label>
       <label index="linktocaddy">Go to Caddy</label>
-      <label index="linktocaddy">Go Shopping!</label>
+      <label index="linktoshop">Go Shopping!</label>
+      <label index="shop">Shop</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddy">Warenkorb</label>
@@ -22,6 +23,7 @@
       <label index="items">Artikel</label>
       <label index="linktocaddy">Zum Warenkorb</label>
       <label index="linktoshop">Zum Shop</label>
+      <label index="shop">Shop</label>
     </languageKey>
   </data>
 </T3locallang>
