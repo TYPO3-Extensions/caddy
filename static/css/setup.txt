@@ -88,10 +88,12 @@ plugin.tx_caddy_pi1 {
       margin: 0 0 1em 0;
       padding: 1em 1em 3.5em 0;
     }
+    div.caddymini .empty,
     div.caddymini .item,
     div.caddymini .sum {
       font-size:.9em; 
     }
+    div.caddymini .empty,
     div.caddymini .sum {
       font-weight:bold; 
       padding: 0 0 1em 0;
