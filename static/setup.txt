@@ -657,18 +657,6 @@ plugin.tx_caddy_pi1 {
         optionsspecialslabel {
           field = optionsspecialslabel
         }
-        paymentlabel = TEXT
-        paymentlabel {
-          field = paymentlabel
-        }
-        shippinglabel = TEXT
-        shippinglabel {
-          field = shippinglabel
-        }
-        specialslabels = TEXT
-        specialslabels {
-          field = specialslabels
-        }
       }
         // payment, shipping, specials
       rates =
