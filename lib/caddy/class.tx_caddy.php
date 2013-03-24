@@ -186,7 +186,11 @@ class tx_caddy extends tslib_pibase
   */
   public function caddy( )
   {
-    $arrReturn = null;
+    $caddy = array(
+      'marker'    => null,
+      'subparts'  => null,
+      'tmpl'      => $this->tmpl
+    );
 
     $this->init( );
 
@@ -200,27 +204,52 @@ class tx_caddy extends tslib_pibase
       case( ! ( count( $this->products ) > 0 ) ):
       default:
         $this->caddyWoProducts( );
-        $caddy = null;
+        //$caddy = null;
         break;
     }
 
-    $arrReturn['caddy']             = $caddy;
-    $arrReturn['tmpl']              = $this->tmpl;
-    $arrReturn['outerMarkerArray']  = $this->outerMarkerArray;
-    return $arrReturn;
+    return $caddy;
   }
 
  /**
+  * caddyWiMinPriceUndercut( )  : 
+  *
+  * @return	string		: $content
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWiMinPriceUndercut( )
+  {
+    $minimumRate  = floatval( $this->conf['cart.']['cartmin.']['value'] );
+    $caddyMinStr  = $this->zz_price_format( $minimumRate );
+    
+    $tmpl           = $this->tmpl['minprice'];
+    $llCaddyMinStr  = sprintf( $this->pi_getLL( 'minprice' ), $caddyMinStr );
+    $minPriceArray['###ERROR_MINPRICE###']  = $llCaddyMinStr;
+
+    $content = $this->cObj->substituteMarkerArrayCached( $tmpl, $minPriceArray );
+    return $content;
+  }
+  
+ /**
   * caddyWiProducts( )  : Workflow for a caddy, which contains products
   *
-  * @return	array		: $subpartArray
+  * @return	array		: $markerArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function caddyWiProducts( )
   {
-    $subpartArray = null;
+    $marker   = null;
+    $subparts = null;
+    $caddy    = array
+    (
+      'marker'    => $marker,
+      'subparts'  => $subparts,
+      'tmpl'      => $this->tmpl
+    );
 
       // #45915, 130228
       // Set the hidden field to false of the powermail form
@@ -248,50 +277,45 @@ die( );
 //    $sesArray['sumTaxReduced']    = $sumTaxReduced;
       // session
 
-    $minimumRateIsUndercut  = false;
-    $minimumRate           = floatval( $this->conf['cart.']['cartmin.']['value'] );
-    if ( $minimumRate >= $sesArray['sum']['items']['gross'] )
-    {
-      $minimumRateIsUndercut = true;
-    }
+    $minRateUndercut = $this->calcMinRateUndercut( $calcedCaddy );
 
       // SWITCH : product gross is undercut minimum rate
-    switch( $minimumRateIsUndercut )
+    switch( $minRateUndercut )
     {
       case( true ):
           // Set min price error
-        $caddyMinStr                            = $this->zz_price_format( $minimumRate );
-        $minPriceArray['###ERROR_MINPRICE###']  = sprintf( $this->pi_getLL( 'minprice' ), $caddyMinStr );
-        $subpartArray['###MINPRICE###']         = $this->cObj->substituteMarkerArrayCached
-                                                  (
-                                                    $this->tmpl['minprice'],
-                                                    $minPriceArray
-                                                  );
+        $subparts['###MINPRICE###'] = $this->caddyWiMinPriceUndercut( );
         break;
       case( false ):
       default:
           // content. here: items
-        $content                        = $calcedCaddy['content'];
-        $subpartArray['###CONTENT###']  = $this->caddyWiProductsContent( $content );
+        $content                    = $calcedCaddy['content'];
+        $subparts['###CONTENT###']  = $this->caddyWiProductsContent( $content );
         unset( $calcedCaddy['content'] );
 
           // session  : new or update 
         $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
 
           // set data
-    var_dump( __METHOD__, __LINE__, $data, $sesArray );
-    die( );
           // set cObjData
         $this->zz_setDataBySession( );
           // set marker
-        $this->outerMarkerArray = $this->caddyWiProductsSumMarker( );
-        $subpartArray = $this->caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds );
+        $marker   = $this->caddyWiProductsSumMarker( );
+        $subparts = $this->caddyWiProductsOptions( $paymentId, $shippingId, $specialIds );
         break;
     }
       // SWITCH : product gross is undercut minimum rate
 
       // RESET cObj->data
-    return $subpartArray;
+    $caddy    = array
+    (
+      'marker'    => $marker,
+      'subparts'  => $subparts,
+      'tmpl'      => $this->tmpl
+    );
+var_dump( __METHOD__, __LINE__, $caddy );
+die( );
+    return $caddy;
   }
     
  /**
@@ -424,98 +448,103 @@ die( );
  /**
   * caddyWiProductsOptions( )  :
   *
-  * @param	[type]		$$subpartArray: ...
-  * @param	[type]		$paymentId: ...
-  * @param	[type]		$shippingId: ...
-  * @param	[type]		$specialIds: ...
-  * @return	array		: $subpartArray
+  * @param	integer		$paymentId    :
+  * @param	integer		$shippingId   :
+  * @param	integer		$specialIds   :
+  * @return	array		$markerArray :
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
+  private function caddyWiProductsOptions( $paymentId, $shippingId, $specialIds )
   {
-    $subpartArray = $this->caddyWiProductsOptionsPayment(   $subpartArray, $paymentId   );
-    $subpartArray = $this->caddyWiProductsOptionsShipping(  $subpartArray, $shippingId  );
-    $subpartArray = $this->caddyWiProductsOptionsSpecials(  $subpartArray, $specialIds  );
+    $markerArray = null;
+    
+    $markerArray  = $markerArray
+                  + $this->caddyWiProductsOptionsPayment(   $paymentId  )
+                  + $this->caddyWiProductsOptionsShipping(  $shippingId )
+                  + $this->caddyWiProductsOptionsSpecials(  $specialIds )
+                  ;
 
-    return $subpartArray;
+    return $markerArray;
   }
 
  /**
   * caddyWiProductsOptionsPayment( )  :
   *
-  * @param	[type]		$$subpartArray: ...
   * @param	[type]		$paymentId: ...
-  * @return	array		: $subpartArray
+  * @return	array		$markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsPayment( $subpartArray, $paymentId )
+  private function caddyWiProductsOptionsPayment( $paymentId )
   {
-    $paymentArray   = null;
+    $markerArray = null;
+    $paymentArray = null;
 
     $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
-    $subpartArray['###PAYMENT_RADIO###'] = '';
+    $markerArray['###PAYMENT_RADIO###'] = '';
     if( $paymentArray['###CONTENT###'] )
     {
-      $subpartArray['###PAYMENT_RADIO###'] =
+      $markerArray['###PAYMENT_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
     }
 
-    return $subpartArray;
+    return $markerArray;
   }
 
  /**
   * caddyWiProductsOptionsShipping( )  :
   *
-  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$$markerArray: ...
   * @param	[type]		$shippingId: ...
-  * @return	array		: $subpartArray
+  * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsShipping( $subpartArray, $shippingId )
+  private function caddyWiProductsOptionsShipping( $shippingId )
   {
+    $markerArray   = null;
     $shippingArray  = null;
 
       // Set shipping radio, payment radio and special checkbox
     $shippingArray['###CONTENT###'] = $this->optionList( 'shipping', $shippingId );
-    $subpartArray['###SHIPPING_RADIO###'] = '';
+    $markerArray['###SHIPPING_RADIO###'] = '';
     if( $shippingArray['###CONTENT###'] )
     {
-      $subpartArray['###SHIPPING_RADIO###'] =
+      $markerArray['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
 
-    return $subpartArray;
+    return $markerArray;
   }
 
  /**
   * caddyWiProductsOptionsSpecials( )  :
   *
-  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$$markerArray: ...
   * @param	[type]		$specialIds: ...
-  * @return	array		: $subpartArray
+  * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsSpecials( $subpartArray, $specialIds )
+  private function caddyWiProductsOptionsSpecials( $specialIds )
   {
-    $specialArray   = null;
+    $markerArray = null;
+    $specialArray = null;
 
-    $subpartArray['###SPECIAL_CHECKBOX###'] = '';
+    $markerArray['###SPECIAL_CHECKBOX###'] = '';
     $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
-      $subpartArray['###SPECIAL_CHECKBOX###'] =
+      $markerArray['###SPECIAL_CHECKBOX###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
     }
 
-    return $subpartArray;
+    return $markerArray;
   }
 
  /**
@@ -926,7 +955,36 @@ die( );
 
     return $arrReturn;
   }
+ 
 
+
+  /***********************************************
+  *
+  * Calculating Minimum Rate
+  *
+  **********************************************/
+
+ /**
+  * calcMinRateUndercut( )  :
+  *
+  * @param	aray		$calcedCaddy            :
+  * @return	boolean		$minimumRateIsUndercut  :
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcMinRateUndercut( $calcedCaddy )
+  {
+    $minimumRate            = floatval( $this->conf['cart.']['cartmin.']['value'] );
+    $minimumRateIsUndercut  = false;
+    if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
+    {
+      $minimumRateIsUndercut = true;
+    }
+    
+    return $minimumRateIsUndercut;
+  }
+ 
 
 
   /***********************************************

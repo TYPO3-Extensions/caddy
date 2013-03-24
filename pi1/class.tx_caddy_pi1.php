@@ -189,10 +189,10 @@ class tx_caddy_pi1 extends tslib_pibase
       // Get the caddy
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
-    $arrResult              = $this->caddyRendered( );
-    $caddy                  = $arrResult['caddy'];
-    $this->tmpl             = $arrResult['tmpl'];
-    $this->outerMarkerArray = $arrResult['outerMarkerArray'];
+    $arrResult  = $this->caddyRendered( );
+    $tmpl       = $arrResult['tmpl'];
+    $marker     = $arrResult['marker'];
+    $subparts   = $arrResult['subparts'];
     unset( $arrResult );
 
     $content = $this->powermail->formCss( $content );
@@ -203,9 +203,9 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $content . $this->cObj->substituteMarkerArrayCached
                           (
-                            $this->tmpl['all'],
-                            $this->outerMarkerArray,
-                            $caddy
+                            $tmpl['all'],
+                            $marker,
+                            $subparts
                           );
 //var_dump( __METHOD__, __LINE__ , $this->tmpl['all'] ) ;      
 
