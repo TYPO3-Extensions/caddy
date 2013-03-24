@@ -597,85 +597,42 @@ class tx_caddy extends tslib_pibase
   {
     $this->init( );
     
+    $items   = null;
+    $options = null;
+    
       // handle the current product
     $arrResult      = $this->calcProduct( );
     $contentItem    = $arrResult['contentItem'];
-    $sumNet         = $arrResult['net'];
-    $sumGross       = $arrResult['gross'];
-    $sumTaxReduced  = $arrResult['taxReduced'];
-    $sumTaxNormal   = $arrResult['taxNormal'];
+    $items['sum']['net']             = $arrResult['net'];
+    $items['sum']['gross']           = $arrResult['gross'];
+    $items['sum']['tax']['reduced']  = $arrResult['taxReduced'];
+    $items['sum']['tax']['normal']   = $arrResult['taxNormal'];
     unset( $arrResult );
       // handle the current product
 
     $this->productsGross  = $sumGross;
-    $productsGross        = $sumGross;
-    $productsNet          = $sumNet;
-
-      // option shipping : calculate tax, net and gross
-    $arrResult        = $this->calcOptionsShipping( );
-    $shippingId       = $arrResult['id'];
-    $shippingNet      = $arrResult['net'];
-    $shippingGross    = $arrResult['gross'];
-    $shippingLabel    = $arrResult['label'];
-    $sumNet           = $sumNet        + $shippingNet;
-    $sumGross         = $sumGross      + $shippingGross;
-    $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal     = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option shipping : calculate tax, net and gross
 
       // option payment : calculate tax, net and gross
-    $arrResult      = $this->calcOptionsPayment( );
-    $paymentId      = $arrResult['id'];
-    $paymentNet     = $arrResult['net'];
-    $paymentGross   = $arrResult['gross'];
-    $paymentLabel   = $arrResult['label'];
-    $sumNet         = $sumNet        + $paymentNet;
-    $sumGross       = $sumGross      + $paymentGross;
-    $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal   = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option payment : calculate tax, net and gross
+    $options['payment']  = $this->calcOptionsPayment( );
+      // option shipping : calculate tax, net and gross
+    $options['shipping'] = $this->calcOptionsShipping( );
+      // option specials : calculate tax, net and gross
+    $options['specials'] = $this->calcOptionsSpecial( );
 
-      // option special : calculate tax, net and gross
-    $arrResult        = $this->calcOptionsSpecial( );
-    $specialIds       = $arrResult['ids'];
-    $specialNet       = $arrResult['net'];
-    $specialGross     = $arrResult['gross'];
-    $specialLabels    = $arrResult['labels'];
-    $sumNet           = $sumNet        + $specialNet;
-    $sumGross         = $sumGross      + $specialGross;
-    $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
-    $sumTaxNormal     = $sumTaxNormal  + $arrResult['taxNormal'];
-    unset( $arrResult );
-      // option special : calculate tax, net and gross
-
-      // sum of options
-    $optionsNet   = $shippingNet    + $paymentNet   + $specialNet;
-    $optionsGross = $shippingGross  + $paymentGross + $specialGross;
-      // sum of options
-
+      // Get the values auf the service attributes
     $serviceattributes = $this->getServiceAttributes( );
 
-    $arrReturn =  array
-                  ( 
-                    'contentItem'       => $contentItem,
-                    'paymentId'         => $paymentId,
-                    'paymentLabel'      => $paymentLabel,
-                    'productsGross'     => $productsGross,
-                    'productsNet'       => $productsNet,
-                    'optionsNet'        => $optionsNet,
-                    'optionsGross'      => $optionsGross,
-                    'serviceattributes' => $serviceattributes,
-                    'shippingId'        => $shippingId,
-                    'shippingLabel'     => $shippingLabel,
-                    'specialIds'        => $specialIds,
-                    'specialLabels'     => $specialLabels,
-                    'sumGross'          => $sumGross,
-                    'sumNet'            => $sumNet,
-                    'sumTaxNormal'      => $sumTaxNormal,
-                    'sumTaxReduced'     => $sumTaxReduced
-                  );
+      // Get all sums (gross, net, tax.normal, tax.reduced for items, options and both (sum)
+    $sum = $this->calcSum( $items, $options );
+var_dump( __METHOD__, __LINE__, $items, $options, $sum );
+die( );
+    $arrReturn = array
+    ( 
+      'contentItem'       => $contentItem,
+      'options'           => $options,
+      'serviceattributes' => $serviceattributes,
+      'sum'               => $sum,
+    );
 
     return $arrReturn;
   }
@@ -1020,12 +977,12 @@ class tx_caddy extends tslib_pibase
 
     $label = $this->getPaymentOptionLabelBySessionId( );
 
-    $arrReturn['id']          = $paymentId;
-    $arrReturn['gross']       = $gross;
-    $arrReturn['label']      = $label;
-    $arrReturn['net']         = $net;
-    $arrReturn['taxReduced']  = $taxReduced;
-    $arrReturn['taxNormal']   = $taxNormal;
+    $arrReturn['id']                    = $paymentId;
+    $arrReturn['label']                 = $label;
+    $arrReturn['sum']['gross']          = $gross;
+    $arrReturn['sum']['net']            = $net;
+    $arrReturn['sum']['tax']['reduced'] = $taxReduced;
+    $arrReturn['sum']['tax']['normal']  = $taxNormal;
     return $arrReturn;
   }
 
@@ -1076,12 +1033,12 @@ class tx_caddy extends tslib_pibase
 
     $label = $this->getShippingOptionLabelBySessionId( );
 
-    $arrReturn['id']          = $shippingId;
-    $arrReturn['net']         = $net;
-    $arrReturn['gross']       = $gross;
-    $arrReturn['label']      = $label;
-    $arrReturn['taxReduced']  = $taxReduced;
-    $arrReturn['taxNormal']   = $taxNormal;
+    $arrReturn['id']                    = $shippingId;
+    $arrReturn['label']                 = $label;
+    $arrReturn['sum']['gross']          = $gross;
+    $arrReturn['sum']['net']            = $net;
+    $arrReturn['sum']['tax']['reduced'] = $taxReduced;
+    $arrReturn['sum']['tax']['normal']  = $taxNormal;
     return $arrReturn;
   }
 
@@ -1127,12 +1084,12 @@ class tx_caddy extends tslib_pibase
 
     $labels = $this->getSpecialOptionLabelsBySessionId( );
 
-    $arrReturn['ids']         = $specialIds;
-    $arrReturn['net']         = $sumNet;
-    $arrReturn['gross']       = $sumGross;
-    $arrReturn['options']     = $labels;
-    $arrReturn['taxReduced']  = $taxReduced;
-    $arrReturn['taxNormal']   = $taxNormal;
+    $arrReturn['ids']                   = $specialIds;
+    $arrReturn['labels']                = $labels;
+    $arrReturn['sum']['gross']          = $gross;
+    $arrReturn['sum']['net']            = $net;
+    $arrReturn['sum']['tax']['reduced'] = $taxReduced;
+    $arrReturn['sum']['tax']['normal']  = $taxNormal;
 
     return $arrReturn;
   }
@@ -1293,6 +1250,261 @@ class tx_caddy extends tslib_pibase
     $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
 
     return $arrReturn;
+  }
+
+ /**
+  * calcSum( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSum( $arrItems, $arrOptions )
+  {
+    $items    = $this->calcSumItems( $arrItems );
+    $options  = $this->calcSumOptions( $arrOptions );
+
+    $sum = array( 
+      'items'   => $items,
+      'options' => $options,
+      'sum'     => $this->calcSumSum( $items, $options ),
+    );
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumItems( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumItems( $arrItems )
+  {
+    $sum = $arrItems;
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumOptions( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptions( $arrOptions )
+  {
+    $sum = array
+    ( 
+      'gross' =>  $this->calcSumOptionsGross( $arrOptions ),
+      'net'   =>  $this->calcSumOptionsNet(   $arrOptions ),
+      'tax'   =>  $this->calcSumOptionsTax(   $arrOptions ),
+    );
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumOptionsGross( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsGross( $arrOptions )
+  {
+    $sum  = $arrOptions['payment']['sum']['gross']
+          + $arrOptions['shipping']['sum']['gross']
+          + $arrOptions['specials']['sum']['gross']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * calcSumOptionsNet( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsNet( $arrOptions )
+  {
+    $sum  = $arrOptions['payment']['sum']['net']
+          + $arrOptions['shipping']['sum']['net']
+          + $arrOptions['specials']['sum']['net']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * calcSumOptionsTax( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsTax( $arrOptions )
+  {
+    $sum = array
+    ( 
+      'normal'  => $this->calcSumOptionsTaxReduced( $arrOptions ),
+      'reduced' => $this->calcSumOptionsTaxNormal(  $arrOptions ),
+    );
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumOptionsTaxNormal( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsNormal( $arrOptions )
+  {
+    $sum  = $arrOptions['payment']['sum']['tax']['normal']
+          + $arrOptions['shipping']['sum']['tax']['normal']
+          + $arrOptions['specials']['sum']['tax']['normal']
+          ;
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumOptionsTaxReduced( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsReduced( $arrOptions )
+  {
+    $sum  = $arrOptions['payment']['sum']['tax']['reduced']
+          + $arrOptions['shipping']['sum']['tax']['reduced']
+          + $arrOptions['specials']['sum']['tax']['reduced']
+          ;
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumSum( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumSum( $items, $options )
+  {
+    $sum = array
+    ( 
+      'gross' =>  $this->calcSumSumGross( $items, $options ),
+      'net'   =>  $this->calcSumSumNet(   $items, $options ),
+      'tax'   =>  $this->calcSumSumTax(   $items, $options ),
+    );
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumSumGross( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumSumGross( $items, $options )
+  {
+    $sum  = $items['gross']
+          + $options['gross']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * calcSumSumNet( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumSumNet( $items, $options )
+  {
+    $sum  = $items['net']
+          + $options['net']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * calcSumSumTax( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumSumTax( $items, $options )
+  {
+    $sum = array
+    ( 
+      'normal'  => $this->calcSumSumTaxReduced( $items, $options ),
+      'reduced' => $this->calcSumSumTaxNormal(  $items, $options ),
+    );
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumSumTaxNormal( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumSumNormal( $items, $options )
+  {
+    $sum  = $items['tax']['normal']
+          + $options['tax']['normal']
+          ;
+    
+    return $sum;
+  }
+
+ /**
+  * calcSumSumTaxReduced( )  : 
+  *
+  * @return	array   : 
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function calcSumOptionsReduced( $items, $options )
+  {
+    $sum  = $items['tax']['normal']
+          + $options['tax']['normal']
+          ;
+    
+    return $sum;
   }
 
 

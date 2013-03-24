@@ -500,7 +500,7 @@ plugin.tx_caddy_pi1 {
       }
     }
 
-      // fields, overall
+      // caddy within the powermail email: fields, overall
     powermailCaddy =
     powermailCaddy {
         // titel, puid, qty, service attributes, min, max, sku, price, price_total, delete, tax
