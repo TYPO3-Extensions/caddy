@@ -2301,6 +2301,9 @@ plugin.tx_caddy_pi3 {
         data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
         typolink {
           parameter = {$plugin.caddy.pages.caddy}
+          title {
+            data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+          }
         }
         noTrimWrap  = || |
       }
@@ -2320,6 +2323,9 @@ plugin.tx_caddy_pi3 {
           enable = 1
           typolink {
             parameter = {$plugin.caddy.pages.caddy}
+            title {
+              data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+            }
           }
         }
       }
@@ -2334,6 +2340,9 @@ plugin.tx_caddy_pi3 {
         data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
         typolink {
           parameter = {$plugin.caddy.pages.shop}
+          title {
+            data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
+          }
         }
         noTrimWrap  = || |
       }
@@ -2353,6 +2362,9 @@ plugin.tx_caddy_pi3 {
           enable = 1
           typolink {
             parameter = {$plugin.caddy.pages.shop}
+            title {
+              data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
+            }
           }
         }
       }
