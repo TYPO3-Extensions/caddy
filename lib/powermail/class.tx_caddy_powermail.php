@@ -224,71 +224,59 @@ class tx_caddy_powermail extends tslib_pibase
       // Calculate the caddy
     $arrResult          = $this->caddy->calc( );
     
-      // Handle the result
-    $contentItem        = $arrResult['contentItem']; 
-    $paymentLabel       = $arrResult['paymentLabel'];
-    $paymentId          = $arrResult['paymentId'];
-    $productsGross      = $arrResult['productsGross'];
-    $productsNet        = $arrResult['productsNet'];
-    $optionsNet         = $arrResult['optionsNet'];
-    $optionsGross       = $arrResult['optionsGross'];
+      // Set service attributes
     $serviceattributes  = $arrResult['serviceattributes'];
-    $shippingLabel      = $arrResult['shippingLabel'];
-    $shippingId         = $arrResult['shippingId'];
-    $specialLabels      = $arrResult['specialLabels'];
-    $specialIds         = $arrResult['specialIds'];
-    $sumGross           = $arrResult['sumGross'];
-    $sumNet             = $arrResult['sumNet'];
-    $sumTaxNormal       = $arrResult['sumTaxNormal'];
-    $sumTaxReduced      = $arrResult['sumTaxReduced'];
-var_dump( __METHOD__, __LINE__, $arrResult );
-    unset( $productsGross );
-    unset( $arrResult );
-
     $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
     $this->cartServiceAttribute1Sum = $serviceattributes['1']['sum'];
     $this->cartServiceAttribute2Max = $serviceattributes['2']['max'];
     $this->cartServiceAttribute2Sum = $serviceattributes['2']['sum'];
     $this->cartServiceAttribute3Max = $serviceattributes['3']['max'];
     $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
+    unset( $arrResult['serviceattributes'] );
 
-    $subpartArray['###CONTENT###'] = $contentItem; // work on subpart 3
+      // Set items (rendered HTML code)
+    $contentItem                    = $arrResult['contentItem']; 
+    $subpartArray['###CONTENT###']  = $contentItem; // work on subpart 3
+    unset( $arrResult['contentItem'] );
 
-    $outerArr = array
-                (
-                  'paymentLabel'    => $paymentLabel,
-                  'paymentId'       => $paymentId,
-                  'productsGross'   => $this->productsGross,
-                  'productsNet'     => $productsNet,
-                  'optionsNet'      => $optionsNet,
-                  'optionsGross'    => $optionsGross,
-                  'shippingLabel'   => $shippingLabel,
-                  'shippingId'      => $shippingId,
-                  'specialLabels'   => $specialLabels,
-                  'specialId'       => $specialIds,
-                  'sumGross'        => $sumGross,
-                  'sumNet'          => $sumNet,
-                  'sumTaxNormal'    => $sumTaxNormal,
-                  'sumTaxReduced'   => $sumTaxReduced
-                );
+//    $outerArr = array
+//                (
+//                  'paymentLabel'    => $paymentLabel,
+//                  'paymentId'       => $paymentId,
+//                  'productsGross'   => $this->productsGross,
+//                  'productsNet'     => $productsNet,
+//                  'optionsNet'      => $optionsNet,
+//                  'optionsGross'    => $optionsGross,
+//                  'shippingLabel'   => $shippingLabel,
+//                  'shippingId'      => $shippingId,
+//                  'specialLabels'   => $specialLabels,
+//                  'specialId'       => $specialIds,
+//                  'sumGross'        => $sumGross,
+//                  'sumNet'          => $sumNet,
+//                  'sumTaxNormal'    => $sumTaxNormal,
+//                  'sumTaxReduced'   => $sumTaxReduced
+//                );
 //var_dump( __METHOD__, __LINE__, $outerArr );
+//    $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
     
-    $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
+      // Set cObj->data
+    $data = $arrResult;
+    $local_cObj->start( $data, $this->conf['db.']['table'] );
 
-    foreach( array_keys( ( array ) $this->conf['settings.']['powermailCaddy.']['overall.'] ) as $key )
+    $powermailCaddyOverall = ( array ) $this->conf['settings.']['powermailCaddy.']['overall.'];
+    foreach( array_keys( $powermailCaddyOverall ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
         continue;        
       }
       $marker = '###' . strtoupper($key) . '###';
-      $value  = $local_cObj->cObjGetSingle
-                (
-                  $this->conf['settings.']['powermailCaddy.']['overall.'][$key], 
-                  $this->conf['settings.']['powermailCaddy.']['overall.'][$key . '.']
-                );  
+      $name   = $powermailCaddyOverall[$key];
+      $conf   = $powermailCaddyOverall[$key . '.'];
+      $value  = $local_cObj->cObjGetSingle( $name, $conf );  
       $this->outerMarkerArray[$marker] = $value;
     }
+    
 var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );
 
     $this->content  = $this->cObj->substituteMarkerArrayCached
