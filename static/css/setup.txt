@@ -98,6 +98,9 @@ plugin.tx_caddy_pi1 {
       font-weight:bold; 
       padding: 0 0 1em 0;
     }
+    div.caddymini .empty {
+      padding-left: 1em;
+    }
     div.caddymini .quantity,
     div.caddymini .label,
     div.caddymini .gross {
