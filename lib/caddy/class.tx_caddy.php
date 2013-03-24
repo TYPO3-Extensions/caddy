@@ -1498,7 +1498,7 @@ die( );
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcSumOptionsReduced( $items, $options )
+  private function calcSumSumReduced( $items, $options )
   {
     $sum  = $items['tax']['normal']
           + $options['tax']['normal']
