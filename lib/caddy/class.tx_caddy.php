@@ -220,83 +220,40 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiProducts( )
   {
+    $subpartArray = null;
+
       // #45915, 130228
       // Set the hidden field to false of the powermail form
     $this->powermail->formShow( );
 
-    $subpartArray   = null;
-
       // calculated caddy: content, items, options, serviceattributes, sum. 
     $calcedCaddy = $this->calc( );
-
-      // content. here: items
-    $content                        = $calcedCaddy['content'];
-    $subpartArray['###CONTENT###']  = $this->caddyWiProductsContent( $content );
-    unset( $calcedCaddy['content'] );
-
-      // session  : new or update 
-    $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
-    
-    //$data = $this->zz_sessionArrayOneDimension( $sesArray );
-    $data  = t3lib_BEfunc::implodeTSParams( $sesArray );
-var_dump( __METHOD__, __LINE__, $data, $sesArray );
+var_dump( __METHOD__, __LINE__, $calcedCaddy );
 die( );
 
-    $sesArray['paymentLabel']   = $paymentLabel;
-    $sesArray['paymentId']        = $paymentId;
-    $sesArray['productsGross']    = $productsGross;
-    $sesArray['productsNet']      = $productsNet;
-    $sesArray['optionsNet']       = $optionsNet;
-    $sesArray['optionsGross']     = $optionsGross;
-    $sesArray['shippingLabel']  = $shippingLabel;
-    $sesArray['shippingId']       = $shippingId;
-    $sesArray['specialLabels']  = $specialLabels;
-    $sesArray['specialIds']       = $specialIds;
-    $sesArray['sumGross']         = $sumGross;
-    $sesArray['sumNet']           = $sumNet;
-    $sesArray['sumTaxNormal']     = $sumTaxNormal;
-    $sesArray['sumTaxReduced']    = $sumTaxReduced;
+
+//    $sesArray['paymentLabel']   = $paymentLabel;
+//    $sesArray['paymentId']        = $paymentId;
+//    $sesArray['productsGross']    = $productsGross;
+//    $sesArray['productsNet']      = $productsNet;
+//    $sesArray['optionsNet']       = $optionsNet;
+//    $sesArray['optionsGross']     = $optionsGross;
+//    $sesArray['shippingLabel']  = $shippingLabel;
+//    $sesArray['shippingId']       = $shippingId;
+//    $sesArray['specialLabels']  = $specialLabels;
+//    $sesArray['specialIds']       = $specialIds;
+//    $sesArray['sumGross']         = $sumGross;
+//    $sesArray['sumNet']           = $sumNet;
+//    $sesArray['sumTaxNormal']     = $sumTaxNormal;
+//    $sesArray['sumTaxReduced']    = $sumTaxReduced;
       // session
 
-    $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
-      // cObject becomes current record
-
-      // DRS
-    if( $this->drs->drsCobj )
-    {
-      $data   = var_export( $this->local_cObj->data, true );
-      $prompt = 'cObj->data: ' . $data;
-      t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-
-      // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
-    foreach( array_keys( ( array ) $this->conf['settings.']['overall.'] ) as $key )
-    {
-      if( stristr( $key, '.' ) )
-      {
-        continue;
-      }
-
-      $marker = $this->local_cObj->cObjGetSingle
-                (
-                  $this->conf['settings.']['overall.'][$key],
-                  $this->conf['settings.']['overall.'][$key . '.']
-                );
-      $this->outerMarkerArray['###' . strtoupper( $key ) . '###'] = $marker;
-        // DRS
-      if( $this->drs->drsMarker )
-      {
-        $prompt = 'Overall - ###' . strtoupper( $key ) . '### : "' . $marker . '"';
-        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-    }
-      // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
-
-
+    $minimumRateIsUndercut  = false;
     $minimumRate           = floatval( $this->conf['cart.']['cartmin.']['value'] );
-    $minimumRateIsUndercut = ( $sesArray['productsGross'] < $minimumRate );
+    if ( $minimumRate >= $sesArray['sum']['items']['gross'] )
+    {
+      $minimumRateIsUndercut = true;
+    }
 
       // SWITCH : product gross is undercut minimum rate
     switch( $minimumRateIsUndercut )
@@ -313,6 +270,21 @@ die( );
         break;
       case( false ):
       default:
+          // content. here: items
+        $content                        = $calcedCaddy['content'];
+        $subpartArray['###CONTENT###']  = $this->caddyWiProductsContent( $content );
+        unset( $calcedCaddy['content'] );
+
+          // session  : new or update 
+        $sesArray = $this->caddyWiProductsSession( $calcedCaddy );
+
+          // set data
+    var_dump( __METHOD__, __LINE__, $data, $sesArray );
+    die( );
+          // set cObjData
+        $this->zz_setDataBySession( );
+          // set marker
+        $this->outerMarkerArray = $this->caddyWiProductsSumMarker( );
         $subpartArray = $this->caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds );
         break;
     }
@@ -412,6 +384,43 @@ die( );
     return $content;
   }
 
+ /**
+  * caddyWiProductsSumMarker( )  :
+  *
+  * @return	array		: $markerArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsSumMarker( )
+  {
+    $markerArray = null;
+
+    foreach( array_keys( ( array ) $this->conf['settings.']['overall.'] ) as $key )
+    {
+      if( stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+      $marker = '###' . strtoupper( $key ) . '###';
+      $name   = $this->conf['settings.']['overall.'][$key];
+      $conf   = $this->conf['settings.']['overall.'][$key . '.'];
+      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $markerArray[$marker] = $value;
+
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        $prompt = $marker . ': "' . $value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+    
+    return $markerArray;
+  }
+  
  /**
   * caddyWiProductsOptions( )  :
   *
@@ -2562,7 +2571,7 @@ die( );
     return $value;
   }
 
-  /**
+/**
  * [Describe function...]
  *
  * @param	[type]		$value: ...
@@ -2594,6 +2603,39 @@ die( );
     }
 
     return $price;
+  }
+
+/**
+ * zz_setDataBySession( ) : 
+ *
+ * @return	void
+ * @access    private
+ * @version 2.0.2
+ * @since 2.0.2
+ */
+  private function zz_setDataBySession( )
+  {
+      // Get the current session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    
+      // Implode the array to a one dimensional array
+    $data  = t3lib_BEfunc::implodeTSParams( $sesArray );
+
+    $this->local_cObj->start( $data, $this->conf['db.']['table'] );
+      // cObject becomes current record
+
+      // RETURN : no DRS
+    if( ! $this->drs->drsCobj )
+    {
+      return;
+    }
+      // RETURN : no DRS
+
+      // DRS
+    $cObjData = var_export( $this->local_cObj->data, true );
+    $prompt   = 'cObj->data: ' . $cObjData;
+    t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      // DRS
   }
 
 
