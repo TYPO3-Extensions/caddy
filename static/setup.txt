@@ -642,14 +642,18 @@ plugin.tx_caddy_pi1 {
     optionspaymentsumgross = COA
     optionspaymentsumgross {
       10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionspaymentsumgross
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
+      10 {
+        userFunc = tx_caddy_userfunc->numberformat
+        userFunc {
+          number = TEXT
+          number {
+            field = optionspaymentsumgross
+          }
+          decimal       = {$plugin.caddy.main.decimal}
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+          drs           = {$plugin.caddy.debug.userfunc}
+        }
       }
       20 = TEXT
       20 {
@@ -657,132 +661,57 @@ plugin.tx_caddy_pi1 {
         noTrimWrap = | ||
       }
     }
-    optionspaymentsumnet = COA
-    optionspaymentsumnet {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionspaymentsumnet
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionspaymentsumtaxnormal = COA
-    optionspaymentsumtaxnormal {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionspaymentsumtaxnormal
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionspaymentsumtaxreduced = COA
-    optionspaymentsumtaxreduced {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionspaymentsumtaxreduced
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionsshippingsumgross = COA
-    optionsshippingsumgross {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionsshippingsumgross
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionsshippingsumnet = COA
-    optionsshippingsumnet {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionsshippingsumnet
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionsshippingsumtaxnormal = COA
-    optionsshippingsumtaxnormal {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionsshippingsumtaxnormal
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
-    optionsshippingsumtaxreduced = COA
-    optionsshippingsumtaxreduced {
-      10 = USER
-      10.userFunc = tx_caddy_userfunc->numberformat
-      10.userFunc {
-        number = TEXT
-        number.field = optionsshippingsumtaxreduced
-        decimal = 2
-        dec_point = {$plugin.caddy.main.dec_point}
-        thousands_sep = {$plugin.caddy.main.thousands_sep}
-        drs = {$plugin.caddy.debug.userfunc}
-      }
-      20 = TEXT
-      20 {
-        value = {$plugin.caddy.main.currencySymbol}
-        noTrimWrap = | ||
-      }
-    }
+    optionspaymentsumnet          < .optionspaymentsumgross
+    optionspaymentsumnet.10.userFunc.number.field         = optionspaymentsumnet
+    optionspaymentsumtaxnormal    < .optionspaymentsumgross
+    optionspaymentsumtaxnormal.10.userFunc.number.field   = optionspaymentsumtaxnormal
+    optionspaymentsumtaxreduced   < .optionspaymentsumgross
+    optionspaymentsumtaxreduced.10.userFunc.number.field  = optionspaymentsumtaxreduced
+
+    optionsshippingsumgross       < .optionspaymentsumgross
+    optionsshippingsumgross.10.userFunc.number.field      = optionsshippingsumnet
+    optionsshippingsumnet         < .optionspaymentsumgross
+    optionsshippingsumnet.10.userFunc.number.field        = optionsshippingsumnet
+    optionsshippingsumtaxnormal   < .optionspaymentsumgross
+    optionsshippingsumtaxnormal.10.userFunc.number.field  = optionsshippingsumtaxnormal
+    optionsshippingsumtaxreduced  < .optionspaymentsumgross
+    optionsshippingsumtaxreduced.10.userFunc.number.field = optionsshippingsumtaxreduced
+
+    optionsspecialssumgross       < .optionspaymentsumgross
+    optionsspecialssumgross.10.userFunc.number.field      = optionsspecialssumnet
+    optionsspecialssumnet         < .optionspaymentsumgross
+    optionsspecialssumnet.10.userFunc.number.field        = optionsspecialssumnet
+    optionsspecialssumtaxnormal   < .optionspaymentsumgross
+    optionsspecialssumtaxnormal.10.userFunc.number.field  = optionsspecialssumtaxnormal
+    optionsspecialssumtaxreduced  < .optionspaymentsumgross
+    optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
+
+    sumitemsgross       < .optionspaymentsumgross
+    sumitemsgross.10.userFunc.number.field      = sumitemsnet
+    sumitemsnet         < .optionspaymentsumgross
+    sumitemsnet.10.userFunc.number.field        = sumitemsnet
+    sumitemstaxnormal   < .optionspaymentsumgross
+    sumitemstaxnormal.10.userFunc.number.field  = sumitemstaxnormal
+    sumitemstaxreduced  < .optionspaymentsumgross
+    sumitemstaxreduced.10.userFunc.number.field = sumitemssumtaxreduced
+
+    sumoptionsgross       < .optionspaymentsumgross
+    sumoptionsgross.10.userFunc.number.field      = sumoptionsnet
+    sumoptionsnet         < .optionspaymentsumgross
+    sumoptionsnet.10.userFunc.number.field        = sumoptionsnet
+    sumoptionstaxnormal   < .optionspaymentsumgross
+    sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
+    sumoptionstaxreduced  < .optionspaymentsumgross
+    sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
+
+    sumsumgross       < .optionspaymentsumgross
+    sumsumgross.10.userFunc.number.field      = sumsumnet
+    sumsumnet         < .optionspaymentsumgross
+    sumsumnet.10.userFunc.number.field        = sumsumnet
+    sumsumtaxnormal   < .optionspaymentsumgross
+    sumsumtaxnormal.10.userFunc.number.field  = sumsumtaxnormal
+    sumsumtaxreduced  < .optionspaymentsumgross
+    sumsumtaxreduced.10.userFunc.number.field = sumsumtaxreduced
   }
 
     // reduced, normal
