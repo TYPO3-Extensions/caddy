@@ -37,15 +37,15 @@
  *  106:     public function sum( $items, $options )
  *
  *              SECTION: Calculation Items
- *  144:     private function sumItems( $arrItems )
+ *  144:     private function sumItems( $items )
  *
  *              SECTION: Calculation Options
- *  176:     private function sumOptions( $arrOptions )
- *  197:     private function sumOptionsGross( $arrOptions )
- *  216:     private function sumOptionsNet( $arrOptions )
- *  235:     private function sumOptionsTax( $arrOptions )
- *  255:     private function sumOptionsTaxNormal( $arrOptions )
- *  274:     private function sumOptionsTaxReduced( $arrOptions )
+ *  176:     private function sumOptions( $options )
+ *  197:     private function sumOptionsGross( $options )
+ *  216:     private function sumOptionsNet( $options )
+ *  235:     private function sumOptionsTax( $options )
+ *  255:     private function sumOptionsTaxNormal( $options )
+ *  274:     private function sumOptionsTaxReduced( $options )
  *
  *              SECTION: Calculation Sum
  *  310:     private function sumSum( $items, $options )
@@ -105,8 +105,8 @@ class tx_caddy_calcsum
   */
   public function sum( $items, $options )
   {
-    $items    = $this->sumItems( $arrItems );
-    $options  = $this->sumOptions( $arrOptions );
+    $items    = $this->sumItems( $items );
+    $options  = $this->sumOptions( $options );
 
     $sum = array(
       'items'   => $items,
@@ -141,9 +141,9 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumItems( $arrItems )
+  private function sumItems( $items )
   {
-    $sum = $arrItems;
+    $sum = $items;
 
     return $sum;
   }
@@ -173,13 +173,13 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptions( $arrOptions )
+  private function sumOptions( $options )
   {
     $sum = array
     (
-      'gross' =>  $this->sumOptionsGross( $arrOptions ),
-      'net'   =>  $this->sumOptionsNet(   $arrOptions ),
-      'tax'   =>  $this->sumOptionsTax(   $arrOptions ),
+      'gross' =>  $this->sumOptionsGross( $options ),
+      'net'   =>  $this->sumOptionsNet(   $options ),
+      'tax'   =>  $this->sumOptionsTax(   $options ),
     );
 
     return $sum;
@@ -194,11 +194,11 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptionsGross( $arrOptions )
+  private function sumOptionsGross( $options )
   {
-    $sum  = $arrOptions['payment']['sum']['gross']
-          + $arrOptions['shipping']['sum']['gross']
-          + $arrOptions['specials']['sum']['gross']
+    $sum  = $options['payment']['sum']['gross']
+          + $options['shipping']['sum']['gross']
+          + $options['specials']['sum']['gross']
           ;
 
     return $sum;
@@ -213,11 +213,11 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptionsNet( $arrOptions )
+  private function sumOptionsNet( $options )
   {
-    $sum  = $arrOptions['payment']['sum']['net']
-          + $arrOptions['shipping']['sum']['net']
-          + $arrOptions['specials']['sum']['net']
+    $sum  = $options['payment']['sum']['net']
+          + $options['shipping']['sum']['net']
+          + $options['specials']['sum']['net']
           ;
 
     return $sum;
@@ -226,18 +226,18 @@ class tx_caddy_calcsum
  /**
   * sumOptionsTax( )  :
   *
-  * @param	[type]		$$arrOptions: ...
+  * @param	[type]		$$options: ...
   * @return	array		:
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptionsTax( $arrOptions )
+  private function sumOptionsTax( $options )
   {
     $sum = array
     (
-      'normal'  => $this->sumOptionsTaxReduced( $arrOptions ),
-      'reduced' => $this->sumOptionsTaxNormal(  $arrOptions ),
+      'normal'  => $this->sumOptionsTaxReduced( $options ),
+      'reduced' => $this->sumOptionsTaxNormal(  $options ),
     );
 
     return $sum;
@@ -246,17 +246,17 @@ class tx_caddy_calcsum
  /**
   * sumOptionsTaxNormal( )  :
   *
-  * @param	[type]		$$arrOptions: ...
+  * @param	[type]		$$options: ...
   * @return	array		:
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptionsTaxNormal( $arrOptions )
+  private function sumOptionsTaxNormal( $options )
   {
-    $sum  = $arrOptions['payment']['sum']['tax']['normal']
-          + $arrOptions['shipping']['sum']['tax']['normal']
-          + $arrOptions['specials']['sum']['tax']['normal']
+    $sum  = $options['payment']['sum']['tax']['normal']
+          + $options['shipping']['sum']['tax']['normal']
+          + $options['specials']['sum']['tax']['normal']
           ;
 
     return $sum;
@@ -265,17 +265,17 @@ class tx_caddy_calcsum
  /**
   * sumOptionsTaxReduced( )  :
   *
-  * @param	[type]		$$arrOptions: ...
+  * @param	[type]		$$options: ...
   * @return	array		:
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumOptionsTaxReduced( $arrOptions )
+  private function sumOptionsTaxReduced( $options )
   {
-    $sum  = $arrOptions['payment']['sum']['tax']['reduced']
-          + $arrOptions['shipping']['sum']['tax']['reduced']
-          + $arrOptions['specials']['sum']['tax']['reduced']
+    $sum  = $options['payment']['sum']['tax']['reduced']
+          + $options['shipping']['sum']['tax']['reduced']
+          + $options['specials']['sum']['tax']['reduced']
           ;
 
     return $sum;
