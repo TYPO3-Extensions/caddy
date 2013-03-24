@@ -125,7 +125,6 @@ plugin.tx_caddy_pi1 {
       margin: 0; 
       padding: 0; 
     }
-    div.caddy_linktotheshop,
     div.linktocaddy,
     div.linktoshop,
     img.caddy_delete { 
@@ -145,7 +144,6 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:.1em;
     }
-    div.caddy_linktotheshop,
     div.linktocaddy,
     div.linktoshop {
       display:inline;
@@ -154,9 +152,6 @@ plugin.tx_caddy_pi1 {
       font-weight:bold;
       text-align:right;
     }
-    div.caddy_linktotheshop a,
-    div.caddy_linktotheshop a:link,
-    div.caddy_linktotheshop a:visited,
     div.linktoshop a,
     div.linktoshop a:link,
     div.linktoshop a:visited,
