@@ -694,7 +694,7 @@ class tx_caddy extends tslib_pibase
     $net    = 0.00;
     
       // configuration of current options array
-    $confOptions  = $this->conf[$optionType . '.']['options.'][$optionId . '.'];
+    $confOptions  = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
     $extra        = $confOptions['extra'];
     $extras       = $confOptions['extra.'];
     $taxType      = $confOptions['tax'];
@@ -842,7 +842,7 @@ class tx_caddy extends tslib_pibase
   {
     $optionIsFree = false; 
 
-    $confOptions = $this->conf[$optionType . '.']['options.'][$optionId . '.'];
+    $confOptions = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
 
     $free_from  = $confOptions['free_from'];
     $free_to    = $confOptions['free_until'];
