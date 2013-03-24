@@ -7,8 +7,8 @@
   <data type="array">
     <languageKey index="default" type="array">
       <label index="caddy">Caddy</label>
+      <label index="caddyminiempty">Caddy is empty</label>
       <label index="caddyminiemptyyou">Your caddy is empty</label>
-      <label index="caddyminiemptygermansie">Your caddy is empty</label>
       <label index="item">item</label>
       <label index="items">items</label>
       <label index="linktocaddy">Go to Caddy</label>
@@ -17,8 +17,8 @@
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddy">Warenkorb</label>
+      <label index="caddyminiempty">Der Warenkorb ist leer</label>
       <label index="caddyminiemptyyou">Dein Warenkorb ist leer</label>
-      <label index="caddyminiemptygermansie">Ihr Warenkorb ist leer.</label>
       <label index="item">Artikel</label>
       <label index="items">Artikel</label>
       <label index="linktocaddy">Zum Warenkorb</label>

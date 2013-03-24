@@ -331,12 +331,12 @@ class tx_caddy extends tslib_pibase
     if( $paymentId )
     {
       $this->markerArray['###QTY###']         = 1;
-      $name   = $this->conf['payment.']['options.'][$paymentId . '.']['title'];
-      $conf   = $this->conf['payment.']['options.'][$paymentId . '.']['title.'];
+      $name   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title'];
+      $conf   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title.'];
       $title  = $this->zz_cObjGetSingle( $name, $conf );
       $this->markerArray['###TITLE###']       = $title;
-      $this->markerArray['###PRICE###']       = $this->conf['payment.']['options.'][$paymentId . '.']['extra'];
-      $this->markerArray['###PRICE_TOTAL###'] = $this->conf['payment.']['options.'][$paymentId . '.']['extra'];
+      $this->markerArray['###PRICE###']       = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
+      $this->markerArray['###PRICE_TOTAL###'] = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
          // add inner html to variable
       $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
                                     (
@@ -933,7 +933,7 @@ class tx_caddy extends tslib_pibase
 
     if( ! $paymentId )
     {
-      $paymentId = intval( $this->conf['payment.']['preset'] );
+      $paymentId = intval( $this->conf['options.']['payment.']['preset'] );
       $this->session->paymentUpdate( $paymentId );
     }
       // check if selected payment option is available
@@ -948,7 +948,7 @@ class tx_caddy extends tslib_pibase
     $net        = $arrResult['net'];  
     $gross      = $arrResult['gross'];  
 
-    if( $this->conf['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
+    if( $this->conf['options.']['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
     {
       $taxReduced = $gross - $net;
     }
@@ -989,7 +989,7 @@ class tx_caddy extends tslib_pibase
 
     if( ! $shippingId )
     {
-      $shippingId = intval( $this->conf['shipping.']['preset'] );
+      $shippingId = intval( $this->conf['options.']['shipping.']['preset'] );
       $this->session->shippingUpdate( $shippingId );
     }
       // check if selected shipping option is available
@@ -1004,7 +1004,7 @@ class tx_caddy extends tslib_pibase
     $net        = $arrResult['net'];  
     $gross      = $arrResult['gross'];  
 
-    if( $this->conf['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
+    if( $this->conf['options.']['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
       $taxReduced = $gross - $net;
     }
@@ -1054,7 +1054,7 @@ class tx_caddy extends tslib_pibase
       
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
-      if( $this->conf['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
+      if( $this->conf['options.']['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
       {
         $taxReduced = $taxReduced + $gross - $net;
       }
@@ -1256,7 +1256,7 @@ class tx_caddy extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $optionsConf = $this->conf['payment.']['options.'];
+    $optionsConf = $this->conf['options.']['payment.']['options.'];
     
       // Get key for the option 
     $key    = $sesArray['paymentId'] . '.';
@@ -1282,7 +1282,7 @@ class tx_caddy extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $optionsConf = $this->conf['shipping.']['options.'];
+    $optionsConf = $this->conf['options.']['shipping.']['options.'];
     
       // Get key for option 
     $key    = $sesArray['shippingId'] . '.';
@@ -1308,7 +1308,7 @@ class tx_caddy extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $optionsConf = $this->conf['special.']['options.'];
+    $optionsConf = $this->conf['options.']['special.']['options.'];
     
       // Get key for the option 
 

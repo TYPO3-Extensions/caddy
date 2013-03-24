@@ -521,92 +521,129 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // preset, options
-  shipping =
-  shipping {
-    #set default shipping method
-    preset = 1
-      // 1, 2
-    options =
-    options {
-        // title, extra, tax
-      1 =
-      1 {
-          // title of shipping method
-        title = TEXT
-        title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_maildefault
+    // payment, shipping, special
+  options =
+  options {
+      // preset, options
+    payment =
+    payment {
+        // default method
+      preset = 1
+        // cash in advance, invoice, cash on delivery
+      options =
+      options {
+          // cash in advance: title, extra, tax
+        1 =
+        1 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
+          }
+            // extra cost (gross price) of payment method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
         }
-          // extra cost (gross price) of shipping method
-        extra = 0.00
-          // tax rate which will be applied (reduced or normal)
-        tax = normal
+          // invoice: title, extra, tax
+        2 =
+        2 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+          }
+            // extra cost (gross price) of payment method
+          extra = 3.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+          // cash on delivery: title, extra, tax
+        3 =
+        3 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
+          }
+            // extra cost (gross price) of payment method
+          extra = 15.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
       }
-        // title, extra, tax
-      2 =
-      2 {
-          // title of shipping method
-        title = TEXT
-        title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_mailexpress
+    }
+      // preset, options
+    shipping =
+    shipping {
+        // default method
+      preset = 1
+        // maildefault, mailexpress
+      options =
+      options {
+          // maildefault: title, extra, tax
+        1 =
+        1 {
+            // title of shipping method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_maildefault
+          }
+            // extra cost (gross price) of shipping method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
         }
-          // extra cost (gross price) of shipping method
-        extra = 12.00
-          // tax rate which will be applied (reduced or normal)
-        tax = normal
+          // title, extra, tax
+        2 =
+        2 {
+            // mailexpress: title of shipping method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_
+          }
+            // extra cost (gross price) of shipping method
+          extra = 12.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+      }
+    }
+      // preset, options
+    special =
+    special {
+        // neutralpackage, addfeeforislands
+      options {
+          // neutralpackage: title of payment method
+        1 =
+        1 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_neutralpackage
+          }
+            // extra cost (gross price) of payment method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+          // addfeeforislands: title of payment method
+        2 =
+        2 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_addfeeforislands
+          }
+            // extra cost (gross price) of payment method
+          extra = 13.00
+            // tax rate which will be applied (reduced or normal)
+          tax = reduced
+        }
       }
     }
   }
 
-    // preset, options
-  payment =
-  payment {
-    #set default payment method
-    preset = 1
-      // 1, 2
-    options =
-    options {
-        // title, extra, tax
-      1 =
-      1 {
-          // title of payment method
-        title = TEXT
-        title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
-        }
-          // extra cost (gross price) of payment method
-        extra = 0.00
-          // tax rate which will be applied (reduced or normal)
-        tax = normal
-      }
-        // title, extra, tax
-      2 =
-      2 {
-          // title of payment method
-        title = TEXT
-        title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
-        }
-          // extra cost (gross price) of payment method
-        extra = 15.00
-          // tax rate which will be applied (reduced or normal)
-        tax = normal
-      }
-        // title, extra, tax
-      3 =
-      3 {
-          // title of payment method
-        title = TEXT
-        title {
-          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-        }
-          // extra cost (gross price) of payment method
-        extra = 3.00
-          // tax rate which will be applied (reduced or normal)
-        tax = normal
-      }
-    }
-  }
     // Never remove this property!
   pluginCheck = dummy
 }
