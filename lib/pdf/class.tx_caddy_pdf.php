@@ -278,23 +278,62 @@ class tx_caddy_pdf extends tslib_pibase
   *
   * @param	array		$subpartArray :
   * @return	array		$subpartArray :
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.0.2
+  * @since      2.0.2
   */
   private function caddySumOptions( $subpartArray )
   {
-      // Payment option label
+    $subpartArray = $this->caddySumOptionsPayment(  $subpartArray );
+    $subpartArray = $this->caddySumOptionsShipping( $subpartArray );
+    $subpartArray = $this->caddySumOptionsSpecials( $subpartArray );
+
+    return $subpartArray;
+  }
+
+ /**
+  * caddySumOptionsPayment( ) : 
+  *
+  * @param	array		$subpartArray :
+  * @return	array		$subpartArray :
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddySumOptionsPayment( $subpartArray )
+  {
     $subpartArray['###PAYMENTOPTIONLABEL###']   = $this->caddy->getPaymentOptionLabelBySessionId( );
     $subpartArray['###PAYMENTOPTIONTAX###']     = 'payTax';
     $subpartArray['###PAYMENTOPTIONGROSS###']   = '1.11 EUR';
-      // Payment option label
 
-      // Shipping option label
+    return $subpartArray;
+  }
+
+ /**
+  * caddySumOptionsShipping( ) : 
+  *
+  * @param	array		$subpartArray :
+  * @return	array		$subpartArray :
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddySumOptionsShipping( $subpartArray )
+  {
     $subpartArray['###SHIPPINGOPTIONLABEL###']  = $this->caddy->getShippingOptionLabelBySessionId( );
     $subpartArray['###SHIPPINGOPTIONTAX###']    = 'shipTax';
     $subpartArray['###SHIPPINGOPTIONGROSS###']  = '2.22 EUR';
 
-      // Special option label
+    return $subpartArray;
+  }
+
+ /**
+  * caddySumOptionsSpecials( ) : 
+  *
+  * @param	array		$subpartArray :
+  * @return	array		$subpartArray :
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddySumOptionsSpecials( $subpartArray )
+  {
     $subpartArray['###SPECIALOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
     $subpartArray['###SPECIALOPTIONTAX###']     = 'specTax';
     $subpartArray['###SPECIALOPTIONGROSS###']   = '3.33 EUR';
