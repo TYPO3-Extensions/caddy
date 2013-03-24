@@ -449,98 +449,98 @@ die( );
   * @param	integer		$paymentId    :
   * @param	integer		$shippingId   :
   * @param	integer		$specialIds   :
-  * @return	array		$markerArray :
+  * @return	array		$marker :
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
   private function caddyWiProductsOptions( $paymentId, $shippingId, $specialIds )
   {
-    $markerArray = array( );
+    $marker = array( );
     
-    $markerArray  = $markerArray
-                  + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
-                  + ( array ) $this->caddyWiProductsOptionsShipping(  $shippingId )
-                  + ( array ) $this->caddyWiProductsOptionsSpecials(  $specialIds )
-                  ;
+    $marker = $marker
+            + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
+            + ( array ) $this->caddyWiProductsOptionsShipping(  $shippingId )
+            + ( array ) $this->caddyWiProductsOptionsSpecials(  $specialIds )
+            ;
 
-    return $markerArray;
+    return $marker;
   }
 
  /**
   * caddyWiProductsOptionsPayment( )  :
   *
   * @param	integer		$paymentId: ...
-  * @return	array		$markerArray
+  * @return	array		$marker
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
   private function caddyWiProductsOptionsPayment( $paymentId )
   {
-    $markerArray = null;
+    $marker = null;
     $paymentArray = null;
 
     $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
-    $markerArray['###PAYMENT_RADIO###'] = '';
+    $marker['###PAYMENT_RADIO###'] = '';
     if( $paymentArray['###CONTENT###'] )
     {
-      $markerArray['###PAYMENT_RADIO###'] =
+      $marker['###PAYMENT_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
     }
 
-    return $markerArray;
+    return $marker;
   }
 
  /**
   * caddyWiProductsOptionsShipping( )  :
   *
   * @param	integer		$shippingId: ...
-  * @return	array		$markerArray
+  * @return	array		$marker
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
   private function caddyWiProductsOptionsShipping( $shippingId )
   {
-    $markerArray   = null;
+    $marker   = null;
     $shippingArray  = null;
 
       // Set shipping radio, payment radio and special checkbox
     $shippingArray['###CONTENT###'] = $this->optionList( 'shipping', $shippingId );
-    $markerArray['###SHIPPING_RADIO###'] = '';
+    $marker['###SHIPPING_RADIO###'] = '';
     if( $shippingArray['###CONTENT###'] )
     {
-      $markerArray['###SHIPPING_RADIO###'] =
+      $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
 
-    return $markerArray;
+    return $marker;
   }
 
  /**
   * caddyWiProductsOptionsSpecials( )  :
   *
   * @param	integer		$specialIds: ...
-  * @return	array		$markerArray
+  * @return	array		$marker
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
   private function caddyWiProductsOptionsSpecials( $specialIds )
   {
-    $markerArray = null;
+    $marker = null;
     $specialArray = null;
 
-    $markerArray['###SPECIAL_CHECKBOX###'] = '';
+    $marker['###SPECIAL_CHECKBOX###'] = '';
     $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
-      $markerArray['###SPECIAL_CHECKBOX###'] =
+      $marker['###SPECIAL_CHECKBOX###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
     }
 
-    return $markerArray;
+    return $marker;
   }
 
  /**

@@ -56,238 +56,6 @@ plugin.tx_caddy_pi1 {
     service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
     pid              = {$plugin.caddy.main.pid}
   }
-    // qry, service attributes, puid, sku
-  gpvar =
-  gpvar {
-    qty   = {$plugin.caddy.gpvar.qty}
-    service_attribute_1   = {$plugin.caddy.gpvar.service_attribute_1}
-    service_attribute_2   = {$plugin.caddy.gpvar.service_attribute_2}
-    service_attribute_3   = {$plugin.caddy.gpvar.service_attribute_3}
-    puid  = {$plugin.caddy.gpvar.puid}
-    sku   = {$plugin.caddy.gpvar.sku}
-  }
-    // reduced, normal
-  tax =
-  tax {
-    reduced     = {$plugin.caddy.tax.reduced}
-    reducedCalc = {$plugin.caddy.tax.reducedCalc}
-    normal      = {$plugin.caddy.tax.normal}
-    normalCalc  = {$plugin.caddy.tax.normalCalc}
-  }
-    // table, title, price, tax, sku, min, max, service attributes
-  db =
-  db {
-    table = {$plugin.caddy.db.table}
-    title = {$plugin.caddy.db.title}
-    price = {$plugin.caddy.db.price}
-    tax   = {$plugin.caddy.db.tax}
-    sku   = {$plugin.caddy.db.sku}
-    min   = {$plugin.caddy.db.min}
-    max   = {$plugin.caddy.db.max}
-    service_attribute_1   = {$plugin.caddy.db.service_attribute_1}
-    service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
-    service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
-  }
-
-  debug  = {$plugin.caddy.debug.paramsAndTs}
-
-    // titel, price, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
-  settings =
-  settings {
-
-    # GET or POST param for title (if not empty: Overwrite values from db request with puid)
-    title = TEXT
-    title {
-      data = GP:{$plugin.caddy.gpvar.title}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for price (if not empty: Overwrite values from db request with puid)
-    price = TEXT
-    price {
-      data = GP:{$plugin.caddy.gpvar.price}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for qty
-    qty = TEXT
-    qty {
-      data = GP:{$plugin.caddy.gpvar.qty}
-      intval = 1
-    }
-
-    # GET or POST param for sku
-    sku = TEXT
-    sku {
-      data = GP:{$plugin.caddy.gpvar.sku}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for min
-    min = TEXT
-    min {
-      data = GP:{$plugin.caddy.gpvar.min}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for max
-    max = TEXT
-    max {
-      data = GP:{$plugin.caddy.gpvar.max}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for weight
-    weight = TEXT
-    weight {
-      data = GP:{$plugin.caddy.gpvar.weight}
-      floatval = 1
-    }
-
-    # GET or POST param for volume
-    volume = TEXT
-    volume {
-      data = GP:{$plugin.caddy.gpvar.volume}
-      floatval = 1
-    }
-
-    # Param for tax (will be overwritten from db request)
-    tax = TEXT
-    tax.value = {$plugin.caddy.tax.normalCalc}
-
-    # GET or POST param for product uid
-    puid = TEXT
-    puid {
-      data = GP:{$plugin.caddy.gpvar.puid}
-      intval = 1
-    }
-
-    # GET or POST param for content id
-    cid = TEXT
-    cid {
-      data = GP:{$plugin.caddy.gpvar.cid}
-      intval = 1
-    }
-
-      // titel, puid, qty, service attributes, min, max, sku, price, delete, tax
-    fields =
-    fields {
-      title = TEXT
-      title.field = title
-
-      puid = TEXT
-      puid.field = puid
-
-      qty = TEXT
-      qty.field = qty
-
-      service_attribute_1 = TEXT
-      service_attribute_1.field = service_attribute_1
-
-      service_attribute_2 = TEXT
-      service_attribute_2.field = service_attribute_2
-
-      service_attribute_3 = TEXT
-      service_attribute_3.field = service_attribute_3
-
-      min = TEXT
-      min.field = min
-
-      max = TEXT
-      max.field = max
-
-      sku = TEXT
-      sku.field = sku
-
-      price = COA
-      price {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = price
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      price_total = COA
-      price_total {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = price_total
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      delete = IMAGE
-      delete {
-        file = EXT:caddy/files/img/delete_100_02.png
-        altText = delete product
-        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
-        params = class="caddy_delete"
-        imageLinkWrap = 1
-        imageLinkWrap {
-          enable = 1
-          typolink.parameter.data = page:alias//TSFE:id
-          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = puid
-        }
-      }
-
-      tax = CASE
-      tax {
-        key.field = tax
-
-        default = TEXT
-        default {
-          current = 1
-          setCurrent.field = price_total
-          setCurrent.wrap = (| / (1 + ###TAX###)) * (###TAX###)
-          prioriCalc = 1
-        }
-
-        # reduced tax
-        1 = TEXT
-        1 {
-          current = 1
-          setCurrent.field = price_total
-          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.reducedCalc})) * ({$plugin.caddy.tax.reducedCalc})
-          prioriCalc = 1
-        }
-
-        # normal tax
-        2 = TEXT
-        2 {
-          current = 1
-          setCurrent.field = price_total
-          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.normalCalc})) * ({$plugin.caddy.tax.normalCalc})
-          prioriCalc = 1
-        }
-      }
-    }
-
       // sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax
     overall =
     overall {
@@ -499,26 +267,32 @@ plugin.tx_caddy_pi1 {
         noTrimWrap = || {$plugin.caddy.tax.normal}% |
       }
     }
+    // table, title, price, tax, sku, min, max, service attributes
+  db =
+  db {
+    table = {$plugin.caddy.db.table}
+    title = {$plugin.caddy.db.title}
+    price = {$plugin.caddy.db.price}
+    tax   = {$plugin.caddy.db.tax}
+    sku   = {$plugin.caddy.db.sku}
+    min   = {$plugin.caddy.db.min}
+    max   = {$plugin.caddy.db.max}
+    service_attribute_1   = {$plugin.caddy.db.service_attribute_1}
+    service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
+    service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
+  }
 
-      // caddy within the powermail email: fields, overall
-    powermailCaddy =
-    powermailCaddy {
-        // titel, puid, qty, service attributes, min, max, sku, price, price_total, delete, tax
-      fields < plugin.tx_caddy_pi1.settings.fields
-        // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
-      overall < plugin.tx_caddy_pi1.settings.overall
+  debug  = {$plugin.caddy.debug.paramsAndTs}
 
-      overall {
-        shippingLabel = TEXT
-        shippingLabel.field = shippingLabel
-
-        paymentLabel = TEXT
-        paymentLabel.field = paymentLabel
-
-        specialLabels = TEXT
-        specialLabels.field = specialLabels
-      }
-    }
+    // qry, service attributes, puid, sku
+  gpvar =
+  gpvar {
+    qty   = {$plugin.caddy.gpvar.qty}
+    service_attribute_1   = {$plugin.caddy.gpvar.service_attribute_1}
+    service_attribute_2   = {$plugin.caddy.gpvar.service_attribute_2}
+    service_attribute_3   = {$plugin.caddy.gpvar.service_attribute_3}
+    puid  = {$plugin.caddy.gpvar.puid}
+    sku   = {$plugin.caddy.gpvar.sku}
   }
 
     // payment, shipping, special
@@ -642,6 +416,382 @@ plugin.tx_caddy_pi1 {
         }
       }
     }
+  }
+
+    // titel, price, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
+  settings =
+  settings {
+
+    # GET or POST param for title (if not empty: Overwrite values from db request with puid)
+    title = TEXT
+    title {
+      data = GP:{$plugin.caddy.gpvar.title}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for price (if not empty: Overwrite values from db request with puid)
+    price = TEXT
+    price {
+      data = GP:{$plugin.caddy.gpvar.price}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for qty
+    qty = TEXT
+    qty {
+      data = GP:{$plugin.caddy.gpvar.qty}
+      intval = 1
+    }
+
+    # GET or POST param for sku
+    sku = TEXT
+    sku {
+      data = GP:{$plugin.caddy.gpvar.sku}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for min
+    min = TEXT
+    min {
+      data = GP:{$plugin.caddy.gpvar.min}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for max
+    max = TEXT
+    max {
+      data = GP:{$plugin.caddy.gpvar.max}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for weight
+    weight = TEXT
+    weight {
+      data = GP:{$plugin.caddy.gpvar.weight}
+      floatval = 1
+    }
+
+    # GET or POST param for volume
+    volume = TEXT
+    volume {
+      data = GP:{$plugin.caddy.gpvar.volume}
+      floatval = 1
+    }
+
+    # Param for tax (will be overwritten from db request)
+    tax = TEXT
+    tax.value = {$plugin.caddy.tax.normalCalc}
+
+    # GET or POST param for product uid
+    puid = TEXT
+    puid {
+      data = GP:{$plugin.caddy.gpvar.puid}
+      intval = 1
+    }
+
+    # GET or POST param for content id
+    cid = TEXT
+    cid {
+      data = GP:{$plugin.caddy.gpvar.cid}
+      intval = 1
+    }
+
+      // titel, puid, qty, service attributes, min, max, sku, price, delete, tax
+    fields =
+    fields {
+      title = TEXT
+      title.field = title
+
+      puid = TEXT
+      puid.field = puid
+
+      qty = TEXT
+      qty.field = qty
+
+      service_attribute_1 = TEXT
+      service_attribute_1.field = service_attribute_1
+
+      service_attribute_2 = TEXT
+      service_attribute_2.field = service_attribute_2
+
+      service_attribute_3 = TEXT
+      service_attribute_3.field = service_attribute_3
+
+      min = TEXT
+      min.field = min
+
+      max = TEXT
+      max.field = max
+
+      sku = TEXT
+      sku.field = sku
+
+      price = COA
+      price {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = price
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      price_total = COA
+      price_total {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = price_total
+
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+
+      delete = IMAGE
+      delete {
+        file = EXT:caddy/files/img/delete_100_02.png
+        altText = delete product
+        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
+        params = class="caddy_delete"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink.parameter.data = page:alias//TSFE:id
+          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
+          typolink.additionalParams.field = puid
+        }
+      }
+
+      tax = CASE
+      tax {
+        key.field = tax
+
+        default = TEXT
+        default {
+          current = 1
+          setCurrent.field = price_total
+          setCurrent.wrap = (| / (1 + ###TAX###)) * (###TAX###)
+          prioriCalc = 1
+        }
+
+        # reduced tax
+        1 = TEXT
+        1 {
+          current = 1
+          setCurrent.field = price_total
+          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.reducedCalc})) * ({$plugin.caddy.tax.reducedCalc})
+          prioriCalc = 1
+        }
+
+        # normal tax
+        2 = TEXT
+        2 {
+          current = 1
+          setCurrent.field = price_total
+          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.normalCalc})) * ({$plugin.caddy.tax.normalCalc})
+          prioriCalc = 1
+        }
+      }
+    }
+
+      // caddy within the powermail email: fields, overall
+    powermailCaddy =
+    powermailCaddy {
+        // titel, puid, qty, service attributes, min, max, sku, price, price_total, delete, tax
+      fields < plugin.tx_caddy_pi1.settings.fields
+        // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
+      overall < plugin.tx_caddy_pi1.settings.overall
+
+      overall {
+        shippingLabel = TEXT
+        shippingLabel.field = shippingLabel
+
+        paymentLabel = TEXT
+        paymentLabel.field = paymentLabel
+
+        specialLabels = TEXT
+        specialLabels.field = specialLabels
+      }
+    }
+  }
+
+    // optionspaymentsumnet
+  sum =
+  sum {
+    optionspaymentsumgross = COA
+    optionspaymentsumgross {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionspaymentsumgross
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionspaymentsumnet = COA
+    optionspaymentsumnet {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionspaymentsumnet
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionspaymentsumtaxnormal = COA
+    optionspaymentsumtaxnormal {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionspaymentsumtaxnormal
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionspaymentsumtaxreduced = COA
+    optionspaymentsumtaxreduced {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionspaymentsumtaxreduced
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionsshippingsumgross = COA
+    optionsshippingsumgross {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionsshippingsumgross
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionsshippingsumnet = COA
+    optionsshippingsumnet {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionsshippingsumnet
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionsshippingsumtaxnormal = COA
+    optionsshippingsumtaxnormal {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionsshippingsumtaxnormal
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+    optionsshippingsumtaxreduced = COA
+    optionsshippingsumtaxreduced {
+      10 = USER
+      10.userFunc = tx_caddy_userfunc->numberformat
+      10.userFunc {
+        number = TEXT
+        number.field = optionsshippingsumtaxreduced
+        decimal = 2
+        dec_point = {$plugin.caddy.main.dec_point}
+        thousands_sep = {$plugin.caddy.main.thousands_sep}
+        drs = {$plugin.caddy.debug.userfunc}
+      }
+      20 = TEXT
+      20 {
+        value = {$plugin.caddy.main.currencySymbol}
+        noTrimWrap = | ||
+      }
+    }
+  }
+
+    // reduced, normal
+  tax =
+  tax {
+    reduced     = {$plugin.caddy.tax.reduced}
+    reducedCalc = {$plugin.caddy.tax.reducedCalc}
+    normal      = {$plugin.caddy.tax.normal}
+    normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
 
     // Never remove this property!
