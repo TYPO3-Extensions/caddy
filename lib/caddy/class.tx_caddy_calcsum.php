@@ -143,7 +143,7 @@ class tx_caddy_calcsum
   */
   private function sumItems( $items )
   {
-    $sum = $items;
+    $sum = $items['sum'];
 
     return $sum;
   }
