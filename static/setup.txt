@@ -2173,13 +2173,16 @@ plugin.tx_caddy_pi2 {
 
 
 plugin.tx_caddy_pi3 {
+    // template, pid
+  main =
   main {
     template        = {$plugin.caddy.main.template}
     pid             = {$plugin.caddy.main.pid}
   }
-    // 
+    // item, marker
   content = 
   content {
+      // quantity, label, gross
     item = COA
     item {
         // quantity
@@ -2218,6 +2221,7 @@ plugin.tx_caddy_pi3 {
       }
       wrap = <div class="item minicaddyitem">|</div><div class="caddy_cleaner"></div>
     }
+      // quantity, label, gross
     sum = COA
     sum {
         // quantity

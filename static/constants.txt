@@ -96,14 +96,10 @@ plugin.caddy {
 
   # cat=caddy - pages/enable/301; type=integer; label= Caddy:Uid of the page with the caddy - your shopping cart
   pages.caddy = 
-  # cat=caddy - pages/enable/302; type=integer; label= Caddymini:Uid of the page with the caddy mini - the cart for marginals
-  pages.caddymini = 
   # cat=caddy - pages/enable/303; type=integer; label= Shop:Uid of the page which contains the items. Usually the root page.
   pages.shop = 
   # cat=caddy - pages/enable/304; type=integer; label= Power of Revocation:Uid of the page with the revocation info (German: Widerrufsbelehrung)
   pages.revocation = 
-  # cat=caddy - pages/enable/305; type=integer; label= Shipping:Uid of the page with the shipping terms
-  pages.shipping = 
   # cat=caddy - pages/enable/306; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
   pages.terms = 
   # cat=caddy - pages/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de

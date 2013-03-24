@@ -327,7 +327,16 @@ class tx_caddy_pi3 extends tslib_pibase
  */
   private function initPid( )
   {
-    $this->pidCaddy = $this->flexform->sdefPidCaddy;
+      // Take pid from TypoScript
+    $this->pidCaddy = $this->conf['main.']['pid'];
+
+      // IF : pid is empty
+    if( empty( $this->pidCaddy ) )
+    {
+        // Take pid from the flexform
+      $this->pidCaddy = $this->flexform->sdefPidCaddy;
+    }
+      // IF : pid is empty
 
       // DIE  : $row is empty
     if( empty( $this->pidCaddy ) )
