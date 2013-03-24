@@ -1372,7 +1372,7 @@ die( );
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcSumOptionsNormal( $arrOptions )
+  private function calcSumOptionsTaxNormal( $arrOptions )
   {
     $sum  = $arrOptions['payment']['sum']['tax']['normal']
           + $arrOptions['shipping']['sum']['tax']['normal']
@@ -1390,7 +1390,7 @@ die( );
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcSumOptionsReduced( $arrOptions )
+  private function calcSumOptionsTaxReduced( $arrOptions )
   {
     $sum  = $arrOptions['payment']['sum']['tax']['reduced']
           + $arrOptions['shipping']['sum']['tax']['reduced']
