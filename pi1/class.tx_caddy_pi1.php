@@ -193,6 +193,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $tmpl       = $arrResult['tmpl'];
     $marker     = $arrResult['marker'];
     $subparts   = $arrResult['subparts'];
+var_dump( __METHOD__, __LINE__ , $this->tmpl['all'] ) ;      
     unset( $arrResult );
 
     $content = $this->powermail->formCss( $content );
@@ -207,7 +208,6 @@ class tx_caddy_pi1 extends tslib_pibase
                             $marker,
                             $subparts
                           );
-//var_dump( __METHOD__, __LINE__ , $this->tmpl['all'] ) ;      
 
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
