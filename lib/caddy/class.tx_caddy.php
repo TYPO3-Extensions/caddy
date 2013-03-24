@@ -470,7 +470,7 @@ die( );
  /**
   * caddyWiProductsOptionsPayment( )  :
   *
-  * @param	[type]		$paymentId: ...
+  * @param	integer		$paymentId: ...
   * @return	array		$markerArray
   * @access private
   * @version    2.0.2
@@ -495,9 +495,8 @@ die( );
  /**
   * caddyWiProductsOptionsShipping( )  :
   *
-  * @param	[type]		$$markerArray: ...
-  * @param	[type]		$shippingId: ...
-  * @return	array		: $markerArray
+  * @param	integer		$shippingId: ...
+  * @return	array		$markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -522,9 +521,8 @@ die( );
  /**
   * caddyWiProductsOptionsSpecials( )  :
   *
-  * @param	[type]		$$markerArray: ...
-  * @param	[type]		$specialIds: ...
-  * @return	array		: $markerArray
+  * @param	integer		$specialIds: ...
+  * @return	array		$markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
