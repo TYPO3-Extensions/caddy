@@ -37,11 +37,11 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  191:     public function caddyByUserfunc( $content = '', $conf = array( ) )
  *  223:     private function caddyWiProducts( )
  *  401:     private function caddyWiProductsItem( $contentItem )
- *  432:     private function calcProduct( )
+ *  432:     private function calcItems( )
  *  507:     private function caddyWiProductsProductErrorMsg( $product )
  *  531:     private function caddyWiProductsProductServiceAttributes( $product )
  *  593:     private function caddyWiProductsProductSettings( $product )
- *  643:     private function calcProductTax( $product )
+ *  643:     private function calcItemsTax( $product )
  *  696:     private function caddyWoProducts( )
  *
  *              SECTION: Caddy
@@ -598,7 +598,7 @@ class tx_caddy extends tslib_pibase
     $options = null;
     
       // handle the current product
-    $arrResult      = $this->calcProduct( );
+    $arrResult      = $this->calcItems( );
     $contentItem    = $arrResult['contentItem'];
     $items['sum']['net']             = $arrResult['net'];
     $items['sum']['gross']           = $arrResult['gross'];
@@ -638,7 +638,165 @@ die( );
 
   /***********************************************
   *
-  * Calc Options
+  * Calculating Items
+  *
+  **********************************************/
+
+ /**
+  * calcItems( )
+  *
+  * @return	void
+  * @access     private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcItems( )
+  {   
+      // DIE  : $row is empty
+    if( empty( $this->products ) )
+    {
+      $prompt = 'ERROR: there isn\'t any product!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+      // DIE  : $row is empty
+
+    $arrReturn    = null;
+    $contentItem  = '';
+    
+    $productsNet        = 0;
+    $productsGross      = 0;
+    $productsTaxReduced = 0;
+    $productsTaxNormal  = 0;
+
+      // FOREACH  : products
+    foreach( ( array ) $this->products as $product )
+    {
+        // clear marker array to avoid problems with error msg etc.
+      unset( $this->markerArray );
+
+        // calculate price total
+      $product['price_total'] = $product['price'] * $product['qty'];
+
+        // DRS
+      if( $this->drs->drsFormula )
+      {
+        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
+        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
+        // cObject become current record
+      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
+
+        // DRS
+      if( $this->drs->drsCobj )
+      {
+        $data   = var_export( $this->local_cObj->data, true );
+        $prompt = 'cObj->data: ' . $data;
+        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+        
+        // update product settings
+      $this->caddyWiProductsProductSettings( $product );
+
+        // update error prompts
+      $this->caddyWiProductsProductErrorMsg( $product );
+
+         // add inner html to variable
+      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
+                                    (
+                                      $this->tmpl['item'], $this->markerArray
+                                    );
+
+        // update product gross
+      $productsGross        = $productsGross + $product['price_total'];
+        // update number of products
+      $this->numberOfItems  = $this->numberOfItems + $product['qty'];
+
+        // update service attributes
+      $this->caddyWiProductsProductServiceAttributes( $product );
+
+        // calculate tax
+      $arrResult          = $this->calcItemsTax( $product );
+      $productsNet        = $productsNet        + $arrResult['cartNet'];
+      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
+      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
+
+    }
+      // FOREACH  : products
+
+    $arrReturn['contentItem'] = $contentItem;
+    $arrReturn['net']         = $productsNet;
+    $arrReturn['gross']       = $productsGross;
+    $arrReturn['taxReduced']  = $productsTaxReduced;
+    $arrReturn['taxNormal']   = $productsTaxNormal;
+
+    return $arrReturn;
+  }
+
+ /**
+  * calcItemsTax( )
+  *
+  * @param	array		$product  :
+  * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function calcItemsTax( $product )
+  {
+    $arrReturn = null;
+
+      // Handle HTML snippet
+      // get the formular with the markers ###TAX## for calculating tax
+    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
+      // save the formular with marker, we need it later
+    $str_wrap_former = $str_wrap;
+      // replace the ###TAX### with current tax rate like 0.07 or 0.19
+    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
+      // assign the formular with tax rates to TypoScript
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
+      // Handle HTML snippet
+
+      // tax within price grosso
+    $currTax = $this->local_cObj->cObjGetSingle
+           (
+              $this->conf['settings.']['fields.']['tax'],
+              $this->conf['settings.']['fields.']['tax.']
+           );
+      // price netto
+    $arrReturn['cartNet'] = $product['price_total'] - $currTax;
+
+    switch( $product['tax'] )
+    {
+      case( 0 ):
+        break;
+      case( 1 ):
+      case( $this->conf['tax.']['reducedCalc'] ):
+        $arrReturn['taxReduced'] = $currTax;
+        break;
+      case( 2 ):
+      case( $this->conf['tax.']['normalCalc'] ):
+        $arrReturn['taxNormal'] = $currTax;
+        break;
+      default:
+        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+        exit;
+    }
+    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
+
+    return $arrReturn;
+  }
+  
+
+
+  /***********************************************
+  *
+  * Calculating Options
   *
   **********************************************/
 
@@ -1090,164 +1248,14 @@ die( );
 
     return $arrReturn;
   }
-  
+
 
 
   /***********************************************
   *
-  * Calc Products
+  * Calculation sum
   *
   **********************************************/
-
- /**
-  * calcProduct( )
-  *
-  * @return	void
-  * @access     private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function calcProduct( )
-  {   
-      // DIE  : $row is empty
-    if( empty( $this->products ) )
-    {
-      $prompt = 'ERROR: there isn\'t any product!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
-              __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );
-    }
-      // DIE  : $row is empty
-
-    $arrReturn    = null;
-    $contentItem  = '';
-    
-    $productsNet        = 0;
-    $productsGross      = 0;
-    $productsTaxReduced = 0;
-    $productsTaxNormal  = 0;
-
-      // FOREACH  : products
-    foreach( ( array ) $this->products as $product )
-    {
-        // clear marker array to avoid problems with error msg etc.
-      unset( $this->markerArray );
-
-        // calculate price total
-      $product['price_total'] = $product['price'] * $product['qty'];
-
-        // DRS
-      if( $this->drs->drsFormula )
-      {
-        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
-        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-
-        // cObject become current record
-      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
-
-        // DRS
-      if( $this->drs->drsCobj )
-      {
-        $data   = var_export( $this->local_cObj->data, true );
-        $prompt = 'cObj->data: ' . $data;
-        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-        
-        // update product settings
-      $this->caddyWiProductsProductSettings( $product );
-
-        // update error prompts
-      $this->caddyWiProductsProductErrorMsg( $product );
-
-         // add inner html to variable
-      $contentItem = $contentItem . $this->cObj->substituteMarkerArrayCached
-                                    (
-                                      $this->tmpl['item'], $this->markerArray
-                                    );
-
-        // update product gross
-      $productsGross        = $productsGross + $product['price_total'];
-        // update number of products
-      $this->numberOfItems  = $this->numberOfItems + $product['qty'];
-
-        // update service attributes
-      $this->caddyWiProductsProductServiceAttributes( $product );
-
-        // calculate tax
-      $arrResult          = $this->calcProductTax( $product );
-      $productsNet        = $productsNet        + $arrResult['cartNet'];
-      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
-      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
-
-    }
-      // FOREACH  : products
-
-    $arrReturn['contentItem'] = $contentItem;
-    $arrReturn['net']         = $productsNet;
-    $arrReturn['gross']       = $productsGross;
-    $arrReturn['taxReduced']  = $productsTaxReduced;
-    $arrReturn['taxNormal']   = $productsTaxNormal;
-
-    return $arrReturn;
-  }
-
- /**
-  * calcProductTax( )
-  *
-  * @param	array		$product  :
-  * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function calcProductTax( $product )
-  {
-    $arrReturn = null;
-
-      // Handle HTML snippet
-      // get the formular with the markers ###TAX## for calculating tax
-    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
-      // save the formular with marker, we need it later
-    $str_wrap_former = $str_wrap;
-      // replace the ###TAX### with current tax rate like 0.07 or 0.19
-    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
-      // assign the formular with tax rates to TypoScript
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
-      // Handle HTML snippet
-
-      // tax within price grosso
-    $currTax = $this->local_cObj->cObjGetSingle
-           (
-              $this->conf['settings.']['fields.']['tax'],
-              $this->conf['settings.']['fields.']['tax.']
-           );
-      // price netto
-    $arrReturn['cartNet'] = $product['price_total'] - $currTax;
-
-    switch( $product['tax'] )
-    {
-      case( 0 ):
-        break;
-      case( 1 ):
-      case( $this->conf['tax.']['reducedCalc'] ):
-        $arrReturn['taxReduced'] = $currTax;
-        break;
-      case( 2 ):
-      case( $this->conf['tax.']['normalCalc'] ):
-        $arrReturn['taxNormal'] = $currTax;
-        break;
-      default:
-        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
-        exit;
-    }
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
-
-    return $arrReturn;
-  }
 
  /**
   * calcSum( )  : 
@@ -1263,16 +1271,6 @@ die( );
     $sum = $this->tx_caddy_calcsum->sum( $items, $options);
     
     return $sum;
-//    $items    = $this->calcSumItems( $items );
-//    $options  = $this->calcSumOptions( $options );
-//
-//    $sum = array( 
-//      'items'   => $items,
-//      'options' => $options,
-//      'sum'     => $this->calcSumSum( $items, $options ),
-//    );
-//    
-//    return $sum;
   }
 
  /**
@@ -1288,239 +1286,6 @@ die( );
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
     require_once( $path2lib . 'caddy/class.tx_caddy_calcsum.php' );
     $this->tx_caddy_calcsum = t3lib_div::makeInstance( 'tx_caddy_calcsum' );
-  }
-
- /**
-  * calcSumItems( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumItems( $arrItems )
-  {
-    $sum = $arrItems;
-    
-    return $sum;
-  }
-
- /**
-  * calcSumOptions( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptions( $arrOptions )
-  {
-    $sum = array
-    ( 
-      'gross' =>  $this->calcSumOptionsGross( $arrOptions ),
-      'net'   =>  $this->calcSumOptionsNet(   $arrOptions ),
-      'tax'   =>  $this->calcSumOptionsTax(   $arrOptions ),
-    );
-    
-    return $sum;
-  }
-
- /**
-  * calcSumOptionsGross( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptionsGross( $arrOptions )
-  {
-    $sum  = $arrOptions['payment']['sum']['gross']
-          + $arrOptions['shipping']['sum']['gross']
-          + $arrOptions['specials']['sum']['gross']
-          ;
-
-    return $sum;
-  }
-
- /**
-  * calcSumOptionsNet( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptionsNet( $arrOptions )
-  {
-    $sum  = $arrOptions['payment']['sum']['net']
-          + $arrOptions['shipping']['sum']['net']
-          + $arrOptions['specials']['sum']['net']
-          ;
-
-    return $sum;
-  }
-
- /**
-  * calcSumOptionsTax( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptionsTax( $arrOptions )
-  {
-    $sum = array
-    ( 
-      'normal'  => $this->calcSumOptionsTaxReduced( $arrOptions ),
-      'reduced' => $this->calcSumOptionsTaxNormal(  $arrOptions ),
-    );
-    
-    return $sum;
-  }
-
- /**
-  * calcSumOptionsTaxNormal( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptionsTaxNormal( $arrOptions )
-  {
-    $sum  = $arrOptions['payment']['sum']['tax']['normal']
-          + $arrOptions['shipping']['sum']['tax']['normal']
-          + $arrOptions['specials']['sum']['tax']['normal']
-          ;
-    
-    return $sum;
-  }
-
- /**
-  * calcSumOptionsTaxReduced( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumOptionsTaxReduced( $arrOptions )
-  {
-    $sum  = $arrOptions['payment']['sum']['tax']['reduced']
-          + $arrOptions['shipping']['sum']['tax']['reduced']
-          + $arrOptions['specials']['sum']['tax']['reduced']
-          ;
-    
-    return $sum;
-  }
-
- /**
-  * calcSumSum( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSum( $items, $options )
-  {
-    $sum = array
-    ( 
-      'gross' =>  $this->calcSumSumGross( $items, $options ),
-      'net'   =>  $this->calcSumSumNet(   $items, $options ),
-      'tax'   =>  $this->calcSumSumTax(   $items, $options ),
-    );
-    
-    return $sum;
-  }
-
- /**
-  * calcSumSumGross( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSumGross( $items, $options )
-  {
-    $sum  = $items['gross']
-          + $options['gross']
-          ;
-
-    return $sum;
-  }
-
- /**
-  * calcSumSumNet( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSumNet( $items, $options )
-  {
-    $sum  = $items['net']
-          + $options['net']
-          ;
-
-    return $sum;
-  }
-
- /**
-  * calcSumSumTax( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSumTax( $items, $options )
-  {
-    $sum = array
-    ( 
-      'normal'  => $this->calcSumSumTaxReduced( $items, $options ),
-      'reduced' => $this->calcSumSumTaxNormal(  $items, $options ),
-    );
-    
-    return $sum;
-  }
-
- /**
-  * calcSumSumTaxNormal( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSumTaxNormal( $items, $options )
-  {
-    $sum  = $items['tax']['normal']
-          + $options['tax']['normal']
-          ;
-    
-    return $sum;
-  }
-
- /**
-  * calcSumSumTaxReduced( )  : 
-  *
-  * @return	array   : 
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.2
-  */
-  private function calcSumSumTaxReduced( $items, $options )
-  {
-    $sum  = $items['tax']['normal']
-          + $options['tax']['normal']
-          ;
-    
-    return $sum;
   }
 
 
