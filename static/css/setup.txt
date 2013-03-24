@@ -107,6 +107,12 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:.1em;
     }
+    img.linktocaddy,
+    img.linktoshop { 
+      cursor:pointer;
+      position:relative;
+      top:.1em;
+    }
     div.caddy_linktotheshop,
     div.linktocaddy,
     div.linktoshop {
