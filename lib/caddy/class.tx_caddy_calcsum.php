@@ -117,7 +117,7 @@ class tx_caddy_calcsum
 
   /***********************************************
   *
-  * Calculation
+  * Calculation Items
   *
   **********************************************/
 
@@ -143,6 +143,15 @@ class tx_caddy_calcsum
 
     return $sum;
   }
+
+
+
+  /***********************************************
+  *
+  * Calculation Options
+  *
+  **********************************************/
+
 
  /**
   * sumOptions( ) : Returns sum for
@@ -267,6 +276,15 @@ class tx_caddy_calcsum
 
     return $sum;
   }
+
+
+
+  /***********************************************
+  *
+  * Calculation Sum
+  *
+  **********************************************/
+
 
  /**
   * sumSum( ) : Returns sum for
