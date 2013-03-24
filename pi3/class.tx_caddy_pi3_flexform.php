@@ -123,7 +123,7 @@ class tx_caddy_pi3_flexform
     $this->sdefCaddyMode = $this->zzFfValue( $sheet, $field );
     if( empty( $this->sdefCaddyMode ) )
     {
-      $this->sdefCaddyMode = 'wiItems';
+      $this->sdefCaddyMode = 'woItems';
     }
       // sdefCaddyMode
 

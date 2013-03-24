@@ -36,7 +36,7 @@
                 <numIndex index="1">woItems</numIndex>
               </numIndex>
             </items>
-            <default>wiItems</default>
+            <default>woItems</default>
             <maxitems>1</maxitems>
             <size>1</size>
           </config>
