@@ -227,6 +227,8 @@ class tx_caddy extends tslib_pibase
     $subpartArray   = null;
 
     $arrResult = $this->calc( );
+var_dump( __METHOD__, __LINE__, $arrResult );
+die( );
     $contentItem      = $arrResult['contentItem'];
     $paymentLabel     = $arrResult['paymentLabel'];
     $paymentId        = $arrResult['paymentId'];
@@ -244,7 +246,6 @@ class tx_caddy extends tslib_pibase
     $sumTaxReduced    = $arrResult['sumTaxReduced'];
 
     unset( $arrResult );
-    unset( $productsGross );
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
 
@@ -252,7 +253,7 @@ class tx_caddy extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['paymentLabel']   = $paymentLabel;
     $sesArray['paymentId']        = $paymentId;
-    $sesArray['productsGross']    = $this->productsGross;
+    $sesArray['productsGross']    = $productsGross;
     $sesArray['productsNet']      = $productsNet;
     $sesArray['optionsNet']       = $optionsNet;
     $sesArray['optionsGross']     = $optionsGross;
@@ -640,7 +641,7 @@ class tx_caddy extends tslib_pibase
  /**
   * calc( )  :
   *
-  * @return	array		:
+  * @return	array		$calc : 
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -649,8 +650,9 @@ class tx_caddy extends tslib_pibase
   {
     $this->init( );
 
-    $items   = null;
-    $options = null;
+    $calc     = null;
+    $items    = null;
+    $options  = null;
 
       // handle the current product
     $items        = $this->calcItems( );
@@ -667,9 +669,8 @@ class tx_caddy extends tslib_pibase
 
       // Get all sums (gross, net, tax.normal, tax.reduced for items, options and both (sum)
     $sum = $this->calcSum( $items, $options );
-var_dump( __METHOD__, __LINE__, $items, $options, $sum );
-die( );
-    $arrReturn = array
+
+    $calc = array
     (
       'contentItem'       => $contentItem,
       'options'           => $options,
@@ -677,7 +678,7 @@ die( );
       'sum'               => $sum,
     );
 
-    return $arrReturn;
+    return $calc;
   }
 
 
