@@ -241,6 +241,7 @@ class tx_caddy_powermail extends tslib_pibase
     $sumNet             = $arrResult['sumNet'];
     $sumTaxNormal       = $arrResult['sumTaxNormal'];
     $sumTaxReduced      = $arrResult['sumTaxReduced'];
+var_dump( __METHOD__, __LINE__, $arrResult );
     unset( $productsGross );
     unset( $arrResult );
 
@@ -288,6 +289,7 @@ class tx_caddy_powermail extends tslib_pibase
                 );  
       $this->outerMarkerArray[$marker] = $value;
     }
+var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );
 
     $this->content  = $this->cObj->substituteMarkerArrayCached
                       (
@@ -306,8 +308,8 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // DRS
 
-//var_dump( __METHOD__, __LINE__, $this->content );
-//die( );
+var_dump( __METHOD__, __LINE__, $this->content );
+die( );
     return $this->content;
   }
   
