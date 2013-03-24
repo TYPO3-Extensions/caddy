@@ -105,6 +105,7 @@ plugin.tx_caddy_pi1 {
     div.caddymini .label {
     }
     div.caddymini .gross {
+      float:right;
       text-align:right;
       width:6em; 
     }
