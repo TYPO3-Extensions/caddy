@@ -30,37 +30,82 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   80: class tx_caddy extends tslib_pibase
+ *  122: class tx_caddy extends tslib_pibase
  *
  *              SECTION: Caddy
- *  145:     public function caddy( )
- *  191:     public function caddyByUserfunc( $content = '', $conf = array( ) )
- *  223:     private function caddyWiProducts( )
- *  401:     private function caddyWiProductsItem( $contentItem )
- *  432:     private function calcItems( )
- *  507:     private function caddyWiProductsProductErrorMsg( $product )
- *  531:     private function caddyWiProductsProductServiceAttributes( $product )
- *  593:     private function caddyWiProductsProductSettings( $product )
- *  643:     private function calcItemsTax( $product )
- *  696:     private function caddyWoProducts( )
+ *  187:     public function caddy( )
+ *  221:     private function caddyWiProducts( )
+ *  343:     private function caddyWiProductsItem( $contentItem )
+ *  381:     private function caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
+ *  400:     private function caddyWiProductsOptionsPayment( $subpartArray, $paymentId )
+ *  425:     private function caddyWiProductsOptionsShipping( $subpartArray, $shippingId )
+ *  451:     private function caddyWiProductsOptionsSpecials( $subpartArray, $specialIds )
+ *  475:     private function caddyWiProductsProductErrorMsg( $product )
+ *  507:     private function caddyWiProductsProductServiceAttributes( $product )
+ *  574:     private function caddyWiProductsProductSettings( $product )
+ *  621:     private function caddyWoProducts( )
  *
- *              SECTION: Caddy
- *  723:     private function calcOptionsPayment( )
- *  767:     private function calcOptionsShipping( )
- *  811:     private function calcOptionsSpecial( )
+ *              SECTION: Calc
+ *  648:     public function calc( )
+ *
+ *              SECTION: Calculating Items
+ *  708:     private function calcItems( )
+ *  805:     private function calcItemsTax( $product )
+ *
+ *              SECTION: Calculating Options
+ *  868:     private function calcOptionCosts( $optionType, $optionId )
+ *  919:     private function calcOptionCostsGross( $optionType, $optionId )
+ * 1002:     private function calcOptionCostsGrossByExtra( $extras, $value )
+ * 1069:     private function calcOptionCostsIsFree( $optionType, $optionId )
+ * 1151:     private function calcOptionsPayment( )
+ * 1207:     private function calcOptionsShipping( )
+ * 1263:     private function calcOptionsSpecial( )
+ *
+ *              SECTION: Calculation sum
+ * 1325:     private function calcSum( $items, $options )
+ * 1341:     private function calcSumInitInstance( )
+ *
+ *              SECTION: Getting methods
+ * 1364:     public function getPaymentOptionLabelBySessionId( )
+ * 1390:     public function getShippingOptionLabelBySessionId( )
+ * 1416:     public function getSpecialOptionLabelsBySessionId( )
+ * 1447:     private function getServiceAttributes( )
  *
  *              SECTION: Init
- *  864:     private function initInstances( )
+ * 1487:     private function init( )
+ * 1505:     private function initDie( )
+ * 1549:     private function initInstances( )
+ *
+ *              SECTION: Options
+ * 1596:     private function optionList( $optionType, $optionId )
+ * 1678:     private function optionListCondition( $keepingTheLimit, $optionType, $conf )
+ * 1712:     private function optionListConditionByType( $condition, $optionType, $conf )
+ * 1753:     private function optionListConditionGross( $optionItemKey, $optionType, $conf )
+ * 1777:     private function optionListConditionGrossEach( $conf )
+ * 1802:     private function optionListConditionGrossOther( $optionItemKey, $optionType )
+ * 1827:     private function optionListConditionNotEach( $optionType, $conf )
+ * 1855:     private function optionListGrossIsKeepingTheLimit( $confOption )
+ * 1915:     private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
+ * 1942:     private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
+ * 1982:     private function optionListMarkerCondition( $optionType, $condition )
+ * 2022:     private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+ * 2053:     private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+ * 2090:     private function optionListSymbolByExtra( $extraType )
+ *
+ *              SECTION: Setting methods
+ * 2138:     public function setContentRow( $row )
+ * 2161:     public function setParentObject( $pObj )
+ * 2247:     public function setProducts( $products )
  *
  *              SECTION: ZZ
- *  912:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
- *  950:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- *  980:     private function zz_checkOptionIsNotAvailable($optionType, $optionId)
- * 1014:     private function calcOptionCosts($optionType, $optionId)
- * 1064:     private function zz_price_format($value)
- * 1086:     private function optionList($optionType, $optionId)
+ * 2285:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
+ * 2323:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ * 2358:     private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
+ * 2416:     private function zz_calcNet( $taxType, $gross )
+ * 2458:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 2480:     private function zz_price_format( $value )
  *
- * TOTAL FUNCTIONS: 20
+ * TOTAL FUNCTIONS: 53
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -144,7 +189,7 @@ class tx_caddy extends tslib_pibase
     $arrReturn = null;
 
     $this->init( );
-    
+
       // get products from session
     $this->products = $this->session->productsGet( );
     switch( true )
@@ -168,7 +213,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiProducts( )  : Workflow for a caddy, whoch contains products
   *
-  * @return	array   : $subpartArray
+  * @return	array		: $subpartArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -202,7 +247,7 @@ class tx_caddy extends tslib_pibase
     unset( $productsGross );
     $subpartArray['###CONTENT###'] = $this->caddyWiProductsItem( $contentItem );
 
-       
+
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray['paymentLabel']   = $paymentLabel;
@@ -224,7 +269,7 @@ class tx_caddy extends tslib_pibase
 
     $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
       // cObject becomes current record
-    
+
       // DRS
     if( $this->drs->drsCobj )
     {
@@ -258,7 +303,7 @@ class tx_caddy extends tslib_pibase
     }
       // FOREACH  : setting (sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax)
 
-    
+
     $minimumRate           = floatval( $this->conf['cart.']['cartmin.']['value'] );
     $minimumRateIsUndercut = ( $sesArray['productsGross'] < $minimumRate );
 
@@ -270,9 +315,9 @@ class tx_caddy extends tslib_pibase
         $caddyMinStr                            = $this->zz_price_format( $minimumRate );
         $minPriceArray['###ERROR_MINPRICE###']  = sprintf( $this->pi_getLL( 'minprice' ), $caddyMinStr );
         $subpartArray['###MINPRICE###']         = $this->cObj->substituteMarkerArrayCached
-                                                  ( 
-                                                    $this->tmpl['minprice'], 
-                                                    $minPriceArray 
+                                                  (
+                                                    $this->tmpl['minprice'],
+                                                    $minPriceArray
                                                   );
         break;
       case( false ):
@@ -322,9 +367,13 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsOptions( )  : 
+  * caddyWiProductsOptions( )  :
   *
-  * @return	array   : $subpartArray
+  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$paymentId: ...
+  * @param	[type]		$shippingId: ...
+  * @param	[type]		$specialIds: ...
+  * @return	array		: $subpartArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -339,9 +388,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsOptionsPayment( )  : 
+  * caddyWiProductsOptionsPayment( )  :
   *
-  * @return	array   : $subpartArray
+  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$paymentId: ...
+  * @return	array		: $subpartArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -362,9 +413,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsOptionsShipping( )  : 
+  * caddyWiProductsOptionsShipping( )  :
   *
-  * @return	array   : $subpartArray
+  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$shippingId: ...
+  * @return	array		: $subpartArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -386,9 +439,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsOptionsSpecials( )  : 
+  * caddyWiProductsOptionsSpecials( )  :
   *
-  * @return	array   : $subpartArray
+  * @param	[type]		$$subpartArray: ...
+  * @param	[type]		$specialIds: ...
+  * @return	array		: $subpartArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -409,7 +464,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsProductErrorMsg( ) : 
+  * caddyWiProductsProductErrorMsg( ) :
   *
   * @param	array		$product : the current item / product
   * @return	void
@@ -429,11 +484,11 @@ class tx_caddy extends tslib_pibase
         continue;
       }
 
-      $prompt = $prompt 
+      $prompt = $prompt
               . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $productError );
     }
       // FOREACH  : error messages per product
-    
+
     if( $prompt )
     {
       $this->markerArray['###ITEM_ERROR###'] = $prompt;
@@ -461,9 +516,9 @@ class tx_caddy extends tslib_pibase
     }
       // DRS
 
-    $this->caddyServiceAttribute1Sum  = $this->caddyServiceAttribute1Sum 
+    $this->caddyServiceAttribute1Sum  = $this->caddyServiceAttribute1Sum
                                       + (
-                                            $product['service_attribute_1'] 
+                                            $product['service_attribute_1']
                                           * $product['qty']
                                         )
                                       ;
@@ -476,9 +531,9 @@ class tx_caddy extends tslib_pibase
       $this->caddyServiceAttribute1Max = $product['service_attribute_1'];
     }
 
-    $this->caddyServiceAttribute2Sum  = $this->caddyServiceAttribute2Sum 
+    $this->caddyServiceAttribute2Sum  = $this->caddyServiceAttribute2Sum
                                       + (
-                                            $product['service_attribute_2'] 
+                                            $product['service_attribute_2']
                                           * $product['qty']
                                         )
                                       ;
@@ -491,9 +546,9 @@ class tx_caddy extends tslib_pibase
       $this->caddyServiceAttribute2Max = $product['service_attribute_2'];
     }
 
-    $this->caddyServiceAttribute3Sum  = $this->caddyServiceAttribute3Sum 
+    $this->caddyServiceAttribute3Sum  = $this->caddyServiceAttribute3Sum
                                       + (
-                                            $product['service_attribute_3'] 
+                                            $product['service_attribute_3']
                                           * $product['qty']
                                         )
                                       ;
@@ -583,9 +638,9 @@ class tx_caddy extends tslib_pibase
   **********************************************/
 
  /**
-  * calc( )  : 
+  * calc( )  :
   *
-  * @return	array   : 
+  * @return	array		:
   * @access public
   * @version    2.0.0
   * @since      2.0.0
@@ -593,10 +648,10 @@ class tx_caddy extends tslib_pibase
   public function calc( )
   {
     $this->init( );
-    
+
     $items   = null;
     $options = null;
-    
+
       // handle the current product
     $arrResult      = $this->calcItems( );
     $contentItem    = $arrResult['contentItem'];
@@ -624,7 +679,7 @@ class tx_caddy extends tslib_pibase
 var_dump( __METHOD__, __LINE__, $items, $options, $sum );
 die( );
     $arrReturn = array
-    ( 
+    (
       'contentItem'       => $contentItem,
       'options'           => $options,
       'serviceattributes' => $serviceattributes,
@@ -633,7 +688,7 @@ die( );
 
     return $arrReturn;
   }
-  
+
 
 
   /***********************************************
@@ -646,12 +701,12 @@ die( );
   * calcItems( )
   *
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function calcItems( )
-  {   
+  {
       // DIE  : $row is empty
     if( empty( $this->products ) )
     {
@@ -665,7 +720,7 @@ die( );
 
     $arrReturn    = null;
     $contentItem  = '';
-    
+
     $productsNet        = 0;
     $productsGross      = 0;
     $productsTaxReduced = 0;
@@ -699,7 +754,7 @@ die( );
         t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
-        
+
         // update product settings
       $this->caddyWiProductsProductSettings( $product );
 
@@ -791,7 +846,7 @@ die( );
 
     return $arrReturn;
   }
-  
+
 
 
   /***********************************************
@@ -803,21 +858,21 @@ die( );
  /**
   * calcOptionCosts( )  : Gets the gross costs for the given option
   *
-  * @param    string        $optionType   : payment, shipping, special
-  * @param    integer       $optionId     : current option id
-  * @return   array         $optionCosts  : gross and net
-  * @access   private
+  * @param	string		$optionType   : payment, shipping, special
+  * @param	integer		$optionId     : current option id
+  * @return	array		$optionCosts  : gross and net
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcOptionCosts( $optionType, $optionId ) 
+  private function calcOptionCosts( $optionType, $optionId )
   {
     $optionCosts = array
     (
       'gross' => 0.00,
       'net'   => 0.00
     );
-    
+
       // DRS
     if( $this->drs->drsFormula )
     {
@@ -825,7 +880,7 @@ die( );
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
     switch( $this->calcOptionCostsIsFree( $optionType, $optionId ) )
     {
       case( true ):
@@ -837,7 +892,7 @@ die( );
         $optionCosts = $this->calcOptionCostsGross( $optionType, $optionId );
         break;
     }
-    
+
       // DRS
     if( $this->drs->drsFormula )
     {
@@ -854,18 +909,18 @@ die( );
  /**
   * calcOptionCostsGross( )  : Gets the gross costs for the given option
   *
-  * @param    string        $optionType : payment, shipping, special
-  * @param    integer       $optionId   : current option id
-  * @return   double        $gross      : the gross costs
-  * @access   private
+  * @param	string		$optionType : payment, shipping, special
+  * @param	integer		$optionId   : current option id
+  * @return	double		$gross      : the gross costs
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcOptionCostsGross( $optionType, $optionId ) 
+  private function calcOptionCostsGross( $optionType, $optionId )
   {
     $gross  = 0.00;
     $net    = 0.00;
-    
+
       // configuration of current options array
     $confOptions  = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
     $extra        = $confOptions['extra'];
@@ -882,7 +937,7 @@ die( );
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // SWITCH : extra costs
     switch( $extra )
     {
@@ -911,7 +966,7 @@ die( );
         $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute3Max );
         break;
       case 'each':
-        $gross  = floatval( $extras['1.']['extra'] ) 
+        $gross  = floatval( $extras['1.']['extra'] )
                 * $this->numberOfItems
                 ;
         break;
@@ -920,37 +975,37 @@ die( );
         break;
     }
       // SWITCH : extra costs
-    
+
       // get net
     $net = $this->zz_calcNet( $taxType, $gross );
-    
+
       // result array
     $optionCosts  = array
     (
       'gross' => $gross,
       'net'   => $net
     );
-    
+
     return $optionCosts;
   }
 
  /**
   * calcOptionCostsGrossByExtra( ) : Gets the gross costs for the given value.
   *
-  * @param    string        $extras : the extra array of the current option id
-  * @param    integer       $value  : could be the number of products or the current price 
-  * @return   double        $gross  : the gross costs of the current option
-  * @access   private
+  * @param	string		$extras : the extra array of the current option id
+  * @param	integer		$value  : could be the number of products or the current price
+  * @return	double		$gross  : the gross costs of the current option
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcOptionCostsGrossByExtra( $extras, $value ) 
+  private function calcOptionCostsGrossByExtra( $extras, $value )
   {
     $limit  = null;
     $gross  = null;
     $valueIsGreaterOrEqual  = false;
     $valueIsSmaller         = false;
-    
+
     foreach( $extras as $extra )
     {
         // floatval, because value could be a double
@@ -958,7 +1013,7 @@ die( );
       $value = floatval( $value );
       $valueIsGreaterOrEqual  = ( $limit <= $value );
       $valueIsSmaller         = ( $limit  > $value );
-      
+
         // SWITCH : overrun limit
       switch( true )
       {
@@ -994,26 +1049,26 @@ die( );
 
     unset( $valueIsGreaterOrEqual );
     unset( $valueIsSmaller );
-    
+
     return $gross;
   }
-	
+
  /**
   * calcOptionCostsIsFree( )  : Returns true, if option costs are for free.
   *                               Costs are free if
   *                               * free_from or free_to is configured
   *                               * and if cartGrossNoService is within this limits
   *
-  * @param    string        $optionType   : payment, shipping, special
-  * @param    integer       $optionId    : current option id
-  * @return   boolean       $optionIsFree : True, if free. False, if not free.
-  * @access   private
+  * @param	string		$optionType   : payment, shipping, special
+  * @param	integer		$optionId    : current option id
+  * @return	boolean		$optionIsFree : True, if free. False, if not free.
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function calcOptionCostsIsFree( $optionType, $optionId ) 
+  private function calcOptionCostsIsFree( $optionType, $optionId )
   {
-    $optionIsFree = false; 
+    $optionIsFree = false;
 
     $confOptions = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
 
@@ -1021,7 +1076,7 @@ die( );
     $free_to    = $confOptions['free_until'];
 
     $freeFromTo = $free_from . $free_to;
-    
+
       // RETURN : there is neither a from nor a to
     if( empty( $freeFromTo ) )
     {
@@ -1037,9 +1092,9 @@ die( );
     }
       // RETURN : there is neither a from nor a to
 
-    $limitFrom  = floatval( $free_from ); 
-    $limitTo    = floatval( $free_to ); 
-    
+    $limitFrom  = floatval( $free_from );
+    $limitTo    = floatval( $free_to );
+
       // DRS
     if( $this->drs->drsFormula )
     {
@@ -1052,11 +1107,11 @@ die( );
 
     $valueIsGreaterOrEqualThanFrom  = ( $limitFrom  <= $this->productsGross );
     $valueIsSmallerOrEqualThanTo    = ( $limitTo    >= $this->productsGross );
-    
+
     switch( true )
     {
       case( $valueIsGreaterOrEqualThanFrom && $valueIsSmallerOrEqualThanTo ):
-        $optionIsFree = true; 
+        $optionIsFree = true;
           // DRS
         if( $this->drs->drsFormula )
         {
@@ -1073,18 +1128,18 @@ die( );
           t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
-        $optionIsFree = false; 
+        $optionIsFree = false;
         break;
     }
-    
+
     unset( $valueIsGreaterOrEqualThanFrom );
     unset( $valueIsSmallerOrEqualThanTo );
-    
+
     return $optionIsFree;
   }
-	
 
-  
+
+
  /**
   * calcOptionsPayment( ) : calculate tax, net and gross for the option payment
   *
@@ -1118,8 +1173,8 @@ die( );
     }
 
     $arrResult  = $this->calcOptionCosts( 'payment', $paymentId );
-    $net        = $arrResult['net'];  
-    $gross      = $arrResult['gross'];  
+    $net        = $arrResult['net'];
+    $gross      = $arrResult['gross'];
 
     if( $this->conf['options.']['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
     {
@@ -1174,8 +1229,8 @@ die( );
     }
 
     $arrResult  = $this->calcOptionCosts( 'shipping', $shippingId );
-    $net        = $arrResult['net'];  
-    $gross      = $arrResult['gross'];  
+    $net        = $arrResult['net'];
+    $gross      = $arrResult['gross'];
 
     if( $this->conf['options.']['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
@@ -1218,13 +1273,13 @@ die( );
     $taxReduced   = 0.00;
     $taxNormal    = 0.00;
     $labels      = null;
-    
+
     foreach( ( array ) $specialIds as $specialId )
     {
       $arrResult  = $this->calcOptionCosts( 'special', $specialId );
-      $net        = $arrResult['net'];  
-      $gross      = $arrResult['gross'];  
-      
+      $net        = $arrResult['net'];
+      $gross      = $arrResult['gross'];
+
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
       if( $this->conf['options.']['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
@@ -1258,9 +1313,11 @@ die( );
   **********************************************/
 
  /**
-  * calcSum( )  : 
+  * calcSum( )  :
   *
-  * @return	array   : 
+  * @param	[type]		$$items: ...
+  * @param	[type]		$options: ...
+  * @return	array		:
   * @access private
   * @version    2.0.2
   * @since      2.0.2
@@ -1269,12 +1326,12 @@ die( );
   {
     $this->calcSumInitInstance( );
     $sum = $this->tx_caddy_calcsum->sum( $items, $options);
-    
+
     return $sum;
   }
 
  /**
-  * calcSumInitInstance( )  : 
+  * calcSumInitInstance( )  :
   *
   * @return	void
   * @access private
@@ -1300,7 +1357,7 @@ die( );
   * getPaymentOptionLabelBySessionId( )
   *
   * @return	array
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1311,8 +1368,8 @@ die( );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['payment.']['options.'];
-    
-      // Get key for the option 
+
+      // Get key for the option
     $key    = $sesArray['paymentId'] . '.';
 
       // Render the option label
@@ -1326,7 +1383,7 @@ die( );
   * getShippingOptionLabelBySessionId( )
   *
   * @return	array
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1337,8 +1394,8 @@ die( );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['shipping.']['options.'];
-    
-      // Get key for option 
+
+      // Get key for option
     $key    = $sesArray['shippingId'] . '.';
 
       // Render the option label
@@ -1352,7 +1409,7 @@ die( );
   * getSpecialOptionLabelsBySessionId( )
   *
   * @return	array
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1363,8 +1420,8 @@ die( );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['special.']['options.'];
-    
-      // Get key for the option 
+
+      // Get key for the option
 
       // Render the option label
     $value = null;
@@ -1383,7 +1440,7 @@ die( );
   * getServiceAttributes( )
   *
   * @return	array
-  * @access     private
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -1407,7 +1464,7 @@ die( );
         'sum' => $this->caddyServiceAttribute3Sum
       )
     );
-    
+
     return $arrResult;
   }
 
@@ -1418,7 +1475,7 @@ die( );
   * Init
   *
   **********************************************/
-  
+
  /**
   * init( )
   *
@@ -1433,10 +1490,10 @@ die( );
 
       // DIE  : if pObj or row isn't initiated
     $this->initDie( );
-    
+
     $this->initInstances( );
   }
-  
+
  /**
   * initDie( )
   *
@@ -1476,7 +1533,7 @@ die( );
                 'Sorry for the trouble.<br />' . PHP_EOL .
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
-      die( $prompt );     
+      die( $prompt );
     }
       // DIE  : $local_cObj isn't initiated
   }
@@ -1495,9 +1552,9 @@ die( );
     {
       return;
     }
-    
+
     $this->initInstances = true;
-    
+
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     if( is_object ( $this->pObj->powermail ) )
@@ -1511,16 +1568,16 @@ die( );
       $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
       $this->powermail->pObj  = $this;
     }
-    
+
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->setParentObject( $this );
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-    
+
   }
-  
+
 
 
   /***********************************************
@@ -1531,17 +1588,17 @@ die( );
 
  /**
   * optionList( )
-  * 
-  * @param    string        $optionType   : payment, shipping, special
-  * @param    integer       $optionId     : current option id
+  *
+  * @param	string		$optionType   : payment, shipping, special
+  * @param	integer		$optionId     : current option id
   * @return	[type]		...
   */
-  private function optionList( $optionType, $optionId ) 
+  private function optionList( $optionType, $optionId )
   {
     $condition    = null;
     $optionList   = null;
     $optionItems  = ( array ) $this->conf['options.'][$optionType . '.']['options.'];
-    
+
       // DRS
     if( $this->drs->drsOptions )
     {
@@ -1549,12 +1606,12 @@ die( );
       t3lib_div::devlog( '[INFO/OPTIONS] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // LOOP each option item
     foreach( $optionItems as $optionItemKey => $optionItemConf )
     {
       if( ! stristr( $optionItemKey, '.' ) )
-      { 
+      {
         continue;
       }
 
@@ -1592,9 +1649,9 @@ die( );
 
         // Get the content for met conditions
       $condition  = $this->optionListCondition( $keepingTheLimit, $optionType, $optionItemConf );
-      
+
         // Get the gross costs
-      $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf ); 
+      $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf );
 
         // Set the marker array
       $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf );
@@ -1612,16 +1669,16 @@ die( );
 
  /**
   * optionListCondition( )
-  * 
-  * @param    string        $keepingTheLimit  : 
-  * @param    string        $optionType : payment, shipping, special
-  * @param    array         $conf       : configuration of current option item
-  * @return   string        $content
+  *
+  * @param	string		$keepingTheLimit  :
+  * @param	string		$optionType : payment, shipping, special
+  * @param	array		$conf       : configuration of current option item
+  * @return	string		$content
   */
-  private function optionListCondition( $keepingTheLimit, $optionType, $conf ) 
+  private function optionListCondition( $keepingTheLimit, $optionType, $conf )
   {
     $condition = null;
-    
+
     $condition  = $condition
                 . $this->optionListConditionByType( 'free_from', $optionType, $conf );
 
@@ -1635,27 +1692,27 @@ die( );
       $condition  = $condition
                   . $this->optionListConditionByType( 'available_until', $optionType, $conf );
     }
-    
+
     if( $conf['extra'] != 'each' )
     {
       $condition  = $condition
-                  . $this->optionListConditionNotEach( $optionType, $conf ); 
+                  . $this->optionListConditionNotEach( $optionType, $conf );
     }
     return $condition;
   }
 
  /**
   * optionListConditionByType( )
-  * 
-  * @param    string        $condition  : free_from, free_until, available_from, available_until
-  * @param    string        $optionType : payment, shipping, special
-  * @param    array         $conf       : configuration of current option item
-  * @return   string        $content
+  *
+  * @param	string		$condition  : free_from, free_until, available_from, available_until
+  * @param	string		$optionType : payment, shipping, special
+  * @param	array		$conf       : configuration of current option item
+  * @return	string		$content
   */
-  private function optionListConditionByType( $condition, $optionType, $conf ) 
+  private function optionListConditionByType( $condition, $optionType, $conf )
   {
     $content = null;
-    
+
       // RETURN : no value
     if( ! isset( $conf[$condition] ) )
     {
@@ -1669,7 +1726,7 @@ die( );
       return $content;
     }
       // RETURN : no value
-    
+
       // marker
     $gross    = $this->zz_price_format( $conf[$condition] );
     $llLabel  = $optionType . '_' . $condition;
@@ -1681,49 +1738,49 @@ die( );
     $content  = $this->tmpl[$optionType . '_condition_item'];
     $content  = $this->cObj->substituteMarkerArrayCached( $content, $marker );
       // content
-    
+
     return $content;
   }
 
 /**
-  * optionListConditionGross( )
-  * 
-  * @param    string        $optionItemKey : 
-  * @param    string        $optionType     : payment, shipping, special
-  * @param    array         $conf           : configuration of current option item
-  * @return   double        $gross
-  */
-  private function optionListConditionGross( $optionItemKey, $optionType, $conf ) 
+ * optionListConditionGross( )
+ *
+ * @param	string		$optionItemKey :
+ * @param	string		$optionType     : payment, shipping, special
+ * @param	array		$conf           : configuration of current option item
+ * @return	double		$gross
+ */
+  private function optionListConditionGross( $optionItemKey, $optionType, $conf )
   {
-    $gross = null; 
-    
+    $gross = null;
+
     switch( true )
     {
       case( $conf['extra'] != 'each' ):
-        $gross = $this->optionListConditionGrossOther( $optionItemKey, $optionType ); 
+        $gross = $this->optionListConditionGrossOther( $optionItemKey, $optionType );
         break;
       case( $conf['extra'] == 'each' ):
       default:
         $gross = $this->optionListConditionGrossEach( $conf );
         break;
     }
-    
+
     return $gross;
   }
-  
+
 /**
-  * optionListConditionGrossEach( )
-  * 
-  * @param    array         $conf   : configuration of current option item
-  * @return   double        $gross
-  */
-  private function optionListConditionGrossEach( $conf ) 
+ * optionListConditionGrossEach( )
+ *
+ * @param	array		$conf   : configuration of current option item
+ * @return	double		$gross
+ */
+  private function optionListConditionGrossEach( $conf )
   {
     $gross    = $this->zz_price_format( $conf['extra.']['1.']['extra'] );
     $llLabel  = $this->pi_getLL( 'special_each' );
 
     $gross  = sprintf( $llLabel, $gross );
-    
+
       // DRS
     if( $this->drs->drsOptions )
     {
@@ -1737,18 +1794,18 @@ die( );
 
  /**
   * optionListConditionGrossOther( )
-  * 
-  * @param    string        $optionItemKey        : 
-  * @param    string        $optionType : payment, shipping, special
-  * @return   double        $gross
+  *
+  * @param	string		$optionItemKey        :
+  * @param	string		$optionType : payment, shipping, special
+  * @return	double		$gross
   */
-  private function optionListConditionGrossOther( $optionItemKey, $optionType ) 
+  private function optionListConditionGrossOther( $optionItemKey, $optionType )
   {
     $arrResult  = $this->calcOptionCosts( $optionType, intval( $optionItemKey ) );
     $gross      = $arrResult['gross'];
-    
+
     $gross      = $this->zz_price_format( $gross );
-    
+
       // DRS
     if( $this->drs->drsOptions )
     {
@@ -1761,13 +1818,13 @@ die( );
 
  /**
   * optionListConditionNotEach( )
-  * 
-  * @param    string        $optionItemKey        : 
-  * @param    string        $optionType : payment, shipping, special
-  * @param    array         $conf       : configuration of current option item
-  * @return   array         $arrReturn  : content, gross
+  *
+  * @param	string		$optionItemKey        :
+  * @param	string		$optionType : payment, shipping, special
+  * @param	array		$conf       : configuration of current option item
+  * @return	array		$arrReturn  : content, gross
   */
-  private function optionListConditionNotEach( $optionType, $conf ) 
+  private function optionListConditionNotEach( $optionType, $conf )
   {
     $content  = null;
     $gross    = null;
@@ -1788,23 +1845,23 @@ die( );
 
     return $content;
   }
-  
+
  /**
   * optionListGrossIsKeepingTheLimit( ) : Checks, if price gross is keeping the limit for an option
-  * 
-  * @param    array         $confOption       : configuration of the current option
-  * @return   boolean       $keepingTheLimit  : True, if price gross is keeping the limit, false, if not
+  *
+  * @param	array		$confOption       : configuration of the current option
+  * @return	boolean		$keepingTheLimit  : True, if price gross is keeping the limit, false, if not
   */
-  private function optionListGrossIsKeepingTheLimit( $confOption ) 
+  private function optionListGrossIsKeepingTheLimit( $confOption )
   {
       // By default: option should displayed
     $keepingTheLimit  = true;
     $gross          = round( $this->productsGross, 2 );
-    
+
       // By default: gross is keeping the limit
     $grossIsSmallerThanFrom = false;
     $grossIsGreaterThanTo   = false;
-    
+
       // IF : available from
     if( isset( $confOption['available_from'] ) )
     {
@@ -1839,22 +1896,23 @@ die( );
         break;
     }
       // SWITCH : keeping the limit
-  
+
     return $keepingTheLimit;
-  }  
+  }
 
  /**
   * optionListMarker( )
-  * 
-  * @param    string        $keepingTheLimit  : 
-  * @param    string        $optionType       : payment, shipping, special
-  * @param    string        $optionItemKey    :
-  * @param    integer       $optionId         : current option id
-  * @param    string        $condition        :
-  * @param    double        $gross            : 
-  * @return   void
+  *
+  * @param	string		$keepingTheLimit  :
+  * @param	string		$optionType       : payment, shipping, special
+  * @param	string		$optionItemKey    :
+  * @param	integer		$optionId         : current option id
+  * @param	string		$condition        :
+  * @param	double		$gross            :
+  * @param	[type]		$optionItemConf: ...
+  * @return	void
   */
-  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf ) 
+  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
   {
     switch( true )
     {
@@ -1874,12 +1932,12 @@ die( );
 
  /**
   * optionListMarkerCheckbox( )
-  * 
-  * @param    string        $keepingTheLimit  : 
-  * @param    string        $optionType       : payment, shipping, special
-  * @param    string        $optionItemKey    :
-  * @param    integer       $optionIds        : current option ids
-  * @return   void
+  *
+  * @param	string		$keepingTheLimit  :
+  * @param	string		$optionType       : payment, shipping, special
+  * @param	string		$optionItemKey    :
+  * @param	integer		$optionIds        : current option ids
+  * @return	void
   */
   private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
@@ -1896,14 +1954,14 @@ die( );
     {
       $disabled = ' disabled="disabled"';
     }
-    
+
     $hashMarker = strtoupper( $optionType );
- 
-    $content  = '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" ' 
-              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '" ' 
+
+    $content  = '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" '
+              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '" '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
-    $this->smarkerArray['###' . $hashMarker . '_CHECKBOX###'] = $content; 
+    $this->smarkerArray['###' . $hashMarker . '_CHECKBOX###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -1916,15 +1974,15 @@ die( );
 
  /**
   * optionListMarkerLabel( )
-  * 
-  * @param    string        $optionType       : payment, shipping, special
-  * @param    string        $condition        :
-  * @return   void
+  *
+  * @param	string		$optionType       : payment, shipping, special
+  * @param	string		$condition        :
+  * @return	void
   */
   private function optionListMarkerCondition( $optionType, $condition )
   {
     $hashMarker = strtoupper( $optionType );
-    
+
       // RETURN : no condition content
     if( ! $condition )
     {
@@ -1939,9 +1997,9 @@ die( );
 
       // render the content
     $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null, $marker );
-    
+
       // set the marker
-    $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = $content; 
+    $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -1954,12 +2012,12 @@ die( );
 
  /**
   * optionListMarkerLabel( )
-  * 
-  * @param    string        $keepingTheLimit  : 
-  * @param    string        $optionType       : payment, shipping, special
-  * @param    string        $optionItemKey    :
-  * @param    integer       $optionId         : current option id
-  * @return   void
+  *
+  * @param	string		$keepingTheLimit  :
+  * @param	string		$optionType       : payment, shipping, special
+  * @param	string		$optionItemKey    :
+  * @param	integer		$optionId         : current option id
+  * @return	void
   */
   private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
   {
@@ -1968,11 +2026,11 @@ die( );
     $title = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
 
     $hashMarker = strtoupper( $optionType );
- 
-    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">' 
+
+    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">'
               . $title . ' (' . $gross . ')</label>';
 
-    $this->smarkerArray['###' . $hashMarker . '_TITLE###'] = $content; 
+    $this->smarkerArray['###' . $hashMarker . '_TITLE###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -1985,12 +2043,12 @@ die( );
 
  /**
   * optionListMarkerRadio( )
-  * 
-  * @param    string        $keepingTheLimit  : 
-  * @param    string        $optionType       : payment, shipping, special
-  * @param    string        $optionItemKey    :
-  * @param    integer       $optionId         : current option id
-  * @return   void
+  *
+  * @param	string		$keepingTheLimit  :
+  * @param	string		$optionType       : payment, shipping, special
+  * @param	string		$optionItemKey    :
+  * @param	integer		$optionId         : current option id
+  * @return	void
   */
   private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
   {
@@ -2005,14 +2063,14 @@ die( );
     {
       $disabled = ' disabled="disabled"';
     }
-    
+
     $hashMarker = strtoupper( $optionType );
- 
-    $content  = '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" ' 
-              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  ' 
+
+    $content  = '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" '
+              . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
-    $this->smarkerArray['###' . $hashMarker . '_RADIO###'] = $content; 
+    $this->smarkerArray['###' . $hashMarker . '_RADIO###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -2025,11 +2083,11 @@ die( );
 
  /**
   * optionListSymbolByExtra( )  : Returns the symbol depending on the extra type
-  * 
-  * @param    string        $extraType  : te extra type
-  * @return   string        $symbol     : symbold depending on extra type
+  *
+  * @param	string		$extraType  : te extra type
+  * @return	string		$symbol     : symbold depending on extra type
   */
-  private function optionListSymbolByExtra( $extraType ) 
+  private function optionListSymbolByExtra( $extraType )
   {
     $symbol = null;
 
@@ -2056,11 +2114,11 @@ die( );
       default:
         $symbol = '';
     }
-    
+
     return $symbol;
   }
 
-  
+
 
   /***********************************************
   *
@@ -2071,6 +2129,7 @@ die( );
  /**
   * setContentRow( )  : Set $row with cObj->data
   *
+  * @param	[type]		$$row: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -2085,7 +2144,7 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->row = $row;
   }
@@ -2093,6 +2152,7 @@ die( );
  /**
   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
   *
+  * @param	[type]		$$pObj: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -2107,7 +2167,7 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->pObj = $pObj;
 
@@ -2118,7 +2178,7 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->conf = $pObj->conf;
 
@@ -2129,7 +2189,7 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->cObj = $pObj->cObj;
 
@@ -2144,7 +2204,7 @@ die( );
 //                'Sorry for the trouble.<br />' . PHP_EOL .
 //                'TYPO3 Caddy<br />' . PHP_EOL .
 //              __METHOD__ . ' (' . __LINE__ . ')';
-//      die( $prompt );      
+//      die( $prompt );
     }
     else
     {
@@ -2158,7 +2218,7 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->local_cObj = $pObj->local_cObj;
 
@@ -2169,15 +2229,16 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
 
     $this->tmpl = $pObj->tmpl;
   }
-  
+
  /**
   * setProducts( )  :
   *
+  * @param	[type]		$$products: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -2192,11 +2253,11 @@ die( );
                 'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-      
+
     }
     $this->products = $products;
   }
-  
+
 
 
   /***********************************************
@@ -2262,7 +2323,7 @@ die( );
   private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
   {
     unset( $ts_key );
-    
+
       // RETURN : there isn't any variant
     if( ! is_array($pObj->conf['settings.']['variant.'] ) )
     {
@@ -2285,9 +2346,9 @@ die( );
   }
 
 /**
- * zz_checkOptionIsNotAvailable( )  : Gets the option_id for a given type ('shipping', 'payment') 
- *                                    method on the current cart and checks the availability. 
- *                                    If available, return is 0. If not available the given fallback 
+ * zz_checkOptionIsNotAvailable( )  : Gets the option_id for a given type ('shipping', 'payment')
+ *                                    method on the current cart and checks the availability.
+ *                                    If available, return is 0. If not available the given fallback
  *                                    or preset will returns.
  *
  * @param	string		$optionType
@@ -2297,24 +2358,24 @@ die( );
   private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
   {
     if
-    ( 
+    (
       (
-        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ) 
-        &&  
-        ( 
+        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] )
+        &&
+        (
           round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ), 2 )
-          > 
-          round( $this->productsGross, 2 ) 
-        ) 
-      ) 
+          >
+          round( $this->productsGross, 2 )
+        )
+      )
       ||
       (
-        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ) 
-        &&  
-        ( 
-          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ), 2 ) 
-          < 
-          round( $this->productsGross, 2 ) 
+        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] )
+        &&
+        (
+          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ), 2 )
+          <
+          round( $this->productsGross, 2 )
         )
        )
      )
@@ -2356,7 +2417,7 @@ die( );
   {
     $net        = 0.00;
     $taxDevider = 1.00;
-    
+
     // if ($conf[$type.'.']['options.'][$option_id . '.']['tax'] == 'reduced') { // reduced tax
     switch( $taxType )
     {
@@ -2377,7 +2438,7 @@ die( );
                     ;
         break;
     }
-    
+
     $net = $gross / $taxDevider;
 
     return $net;
@@ -2426,24 +2487,24 @@ die( );
     $currencySymbol = $this->conf['main.']['currencySymbol'];
     $price          = number_format
                       (
-                        $value, 
-                        $this->conf['main.']['decimal'], 
-                        $this->conf['main.']['dec_point'], 
+                        $value,
+                        $this->conf['main.']['decimal'],
+                        $this->conf['main.']['dec_point'],
                         $this->conf['main.']['thousands_sep']
                       );
     // print currency symbol before or after price
-    if( $this->conf['main.']['currencySymbolBeforePrice'] ) 
+    if( $this->conf['main.']['currencySymbolBeforePrice'] )
     {
       $price = $currencySymbol . ' ' . $price;
-    } 
-    else 
+    }
+    else
     {
       $price = $price . ' ' . $currencySymbol;
     }
 
     return $price;
   }
- 
+
 
 
 
