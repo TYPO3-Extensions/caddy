@@ -191,7 +191,7 @@ class tx_caddy_powermail extends tslib_pibase
       
       // Get the typoscript configuration of the caddy plugin 1
     $this->conf = $this->caddyForEmailInitConf( );
-      // Get the HTML template for CADDY_POWERMAIL
+      // Get the HTML template for CADDY_EMAIL
     $this->tmpl = $this->caddyForEmailInitTemplate( );
     
     $this->cObj = $GLOBALS['TSFE']->cObj;
@@ -327,7 +327,7 @@ class tx_caddy_powermail extends tslib_pibase
   }
   
  /**
-  * caddyForEmailInitTemplate( )  : Get teh template CADDY_POWERMAIL
+  * caddyForEmailInitTemplate( )  : Get teh template CADDY_EMAIL
   *
   * @access private
   * @version 2.0.0
@@ -337,7 +337,7 @@ class tx_caddy_powermail extends tslib_pibase
   {   
     $tmpl     = null;
     $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
-    $marker   = '###CADDY_POWERMAIL###';
+    $marker   = '###CADDY_EMAIL###';
 
     $tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
     $tmpl['item'] = $this->cObj->getSubpart( $tmpl['all'], '###ITEM###'); // work on subpart 2
