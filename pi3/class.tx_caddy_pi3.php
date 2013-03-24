@@ -162,7 +162,9 @@ var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $mark
     {
       $cObjData = array
       (
-        'gross'     => $product['price'],
+        'gross'     => $product['price']
+                    *  $product['qty']
+                    ,
         'quantity'  => $product['qty'],
         'label'     => $product['title'],
       );
