@@ -289,18 +289,27 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $this->session->quantityUpdate( ); // change qty
     }
+    
+    $this->caddyUpdateOptions( );
 
-//      // change shipping
-//    if( isset( $this->piVars['shipping'] ) )
-//    {
-//      $this->session->shippingUpdate($this->piVars['shipping']);
-//    }
-//
-//      // change payment
-//    if( isset( $this->piVars['payment'] ) )
-//    {
-//      $this->session->paymentUpdate($this->piVars['payment']);
-//    }
+  }
+
+ /**
+  * caddyUpdateOptions( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyUpdateOptions( )
+  {
+      // RETURN : Don't update options, if form isnt by itself 
+    if( ! intval( $this->pObj->piVars['updateByCaddy'] ) )
+    {
+      return;
+    }
+      // RETURN : Don't update options, if form isnt by itself 
 
       // change payment
     $payment = null;

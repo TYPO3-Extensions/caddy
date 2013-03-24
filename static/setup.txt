@@ -600,7 +600,7 @@ plugin.tx_caddy_pi1 {
             // mailexpress: title of shipping method
           title = TEXT
           title {
-            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_
+            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_mailexpress
           }
             // extra cost (gross price) of shipping method
           extra = 12.00

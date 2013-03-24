@@ -292,7 +292,7 @@ class tx_caddy extends tslib_pibase
             $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
         }
 
-        $paymentArray['###CONTENT###'] = $this->optionList('payment', $paymentId);
+        $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
         $subpartArray['###PAYMENT_RADIO###'] = '';
         if( $paymentArray['###CONTENT###'] )
         {
@@ -301,7 +301,7 @@ class tx_caddy extends tslib_pibase
         }
 
         $subpartArray['###SPECIAL_CHECKBOX###'] = '';
-        $specialArray['###CONTENT###'] = $this->optionList('special', $specialIds);
+        $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
         if( $specialArray['###CONTENT###'] )
         {
           $subpartArray['###SPECIAL_CHECKBOX###'] =
@@ -345,7 +345,7 @@ class tx_caddy extends tslib_pibase
                                     );
     }
 
-    $contentItem  = $contentItem . '<input type="hidden" name="tx_caddy_pi1[update_from_cart]" value="1">';
+    $contentItem  = $contentItem . '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
 
     return $contentItem;
   }
@@ -1486,7 +1486,7 @@ class tx_caddy extends tslib_pibase
   {
     $condition    = null;
     $optionList   = null;
-    $optionItems  = ( array ) $this->conf[$optionType.'.']['options.'];
+    $optionItems  = ( array ) $this->conf['options.'][$optionType . '.']['options.'];
     
       // DRS
     if( $this->drs->drsOptions )
@@ -1521,7 +1521,7 @@ class tx_caddy extends tslib_pibase
       switch( true )
       {
         case( $keepingTheLimit ):
-        case( $this->conf[$optionType.'.']['show_all_disabled'] ):
+        case( $this->conf['options.'][$optionType . '.']['show_all_disabled'] ):
           break;
         default:
             // DRS
@@ -1830,20 +1830,6 @@ class tx_caddy extends tslib_pibase
   private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
     $checked = null;
-
-//      // Get current GET and POST parameters - priority by POST
-//    $_GP = array (
-//      'tx_caddy_pi1' => t3lib_div::_GP( 'tx_caddy_pi1' )
-//    );
-//    
-//      // Get the array with the ids of the enabled checkboxes
-//    $gpEnabledCheckboxes = $_GP['tx_caddy_pi1'][$optionType];
-//
-//      // Enable checkbox, if id of current checkbox is part of the GP array
-//    if( in_array( intval( $optionItemKey ), $gpEnabledCheckboxes ) )
-//    {
-//      $checked = ' checked="checked"';
-//    }
 
       // Enable checkbox, if id of current checkbox is part of the GP array
     if( in_array( intval( $optionItemKey ), ( array ) $optionIds ) )
@@ -2259,20 +2245,20 @@ class tx_caddy extends tslib_pibase
     if
     ( 
       (
-        isset( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_from'] ) 
+        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ) 
         &&  
         ( 
-          round( floatval( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_from'] ), 2 )
+          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ), 2 )
           > 
           round( $this->productsGross, 2 ) 
         ) 
       ) 
       ||
       (
-        isset( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_until'] ) 
+        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ) 
         &&  
         ( 
-          round( floatval( $this->conf[$optionType.'.']['options.'][$optionId.'.']['available_until'] ), 2 ) 
+          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ), 2 ) 
           < 
           round( $this->productsGross, 2 ) 
         )
@@ -2280,21 +2266,21 @@ class tx_caddy extends tslib_pibase
      )
     {
       // check: fallback is given
-      if (isset($this->conf[$optionType.'.']['options.'][$optionId.'.']['fallback']))
+      if (isset($this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback']))
       {
-        $fallback = $this->conf[$optionType.'.']['options.'][$optionId.'.']['fallback'];
+        $fallback = $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback'];
         // check: fallback is defined; the availability of fallback will not tested yet
-        if (isset($this->conf[$optionType.'.']['options.'][$fallback.'.']))
+        if (isset($this->conf['options.'][$optionType . '.']['options.'][$fallback.'.']))
         {
           $newoption_id = intval($fallback);
         } else {
 // 130227, dwildt, 1-
-//                                  $shippingId = intval($this->conf[$optionType.'.']['preset']);
+//                                  $shippingId = intval($this->conf['options.'][$optionType . '.']['preset']);
 // 130227, dwildt, 1+
-          $newoption_id = intval($this->conf[$optionType.'.']['preset']);
+          $newoption_id = intval($this->conf['options.'][$optionType . '.']['preset']);
         }
       } else {
-        $newoption_id = intval($this->conf[$optionType.'.']['preset']);
+        $newoption_id = intval($this->conf['options.'][$optionType . '.']['preset']);
       }
       return $newoption_id;
     }
