@@ -1427,7 +1427,7 @@ class tx_caddy_session
     // get products from session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
 
-    $is_cart = intval($this->pObj->piVars['updateByCaddy']);
+    $is_cart = intval( $this->pObj->piVars['updateByCaddy'] );
 
       // LOOP : each product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
