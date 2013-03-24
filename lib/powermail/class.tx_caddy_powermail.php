@@ -226,16 +226,16 @@ class tx_caddy_powermail extends tslib_pibase
     
       // Handle the result
     $contentItem        = $arrResult['contentItem']; 
-    $payment_option     = $arrResult['payment_option'];
+    $paymentLabel       = $arrResult['paymentLabel'];
     $paymentId          = $arrResult['paymentId'];
     $productsGross      = $arrResult['productsGross'];
     $productsNet        = $arrResult['productsNet'];
     $optionsNet         = $arrResult['optionsNet'];
     $optionsGross       = $arrResult['optionsGross'];
     $serviceattributes  = $arrResult['serviceattributes'];
-    $shipping_option    = $arrResult['shipping_option'];
+    $shippingLabel      = $arrResult['shippingLabel'];
     $shippingId         = $arrResult['shippingId'];
-    $special_options    = $arrResult['special_options'];
+    $specialLabels      = $arrResult['specialLabels'];
     $specialIds         = $arrResult['specialIds'];
     $sumGross           = $arrResult['sumGross'];
     $sumNet             = $arrResult['sumNet'];
@@ -255,15 +255,15 @@ class tx_caddy_powermail extends tslib_pibase
 
     $outerArr = array
                 (
-                  'payment_option'  => $payment_option,
+                  'paymentLabel'    => $paymentLabel,
                   'paymentId'       => $paymentId,
                   'productsGross'   => $this->productsGross,
                   'productsNet'     => $productsNet,
                   'optionsNet'      => $optionsNet,
                   'optionsGross'    => $optionsGross,
-                  'shipping_option' => $shipping_option,
+                  'shippingLabel'   => $shippingLabel,
                   'shippingId'      => $shippingId,
-                  'special_option'  => $special_options,
+                  'special_option'  => $specialLabels,
                   'specialId'       => $specialIds,
                   'sumGross'        => $sumGross,
                   'sumNet'          => $sumNet,

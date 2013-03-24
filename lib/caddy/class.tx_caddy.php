@@ -183,21 +183,18 @@ class tx_caddy extends tslib_pibase
     $this->powermail->formShow( );
 
     $subpartArray   = null;
-    $shippingArray  = null;
-    $paymentArray   = null;
-    $specialArray   = null;
 
     $arrResult = $this->calc( );
     $contentItem      = $arrResult['contentItem'];
-    $payment_option   = $arrResult['payment_options'];
+    $paymentLabel   = $arrResult['payment_options'];
     $paymentId        = $arrResult['paymentId'];
     $productsGross    = $arrResult['productsGross'];
     $productsNet      = $arrResult['productsNet'];
     $optionsNet       = $arrResult['optionsNet'];
     $optionsGross     = $arrResult['optionsGross'];
-    $shipping_option  = $arrResult['shipping_options'];
+    $shippingLabel  = $arrResult['shipping_options'];
     $shippingId       = $arrResult['shippingId'];
-    $special_options  = $arrResult['special_options'];
+    $specialLabels  = $arrResult['specialLabels'];
     $specialIds       = $arrResult['specialIds'];
     $sumGross         = $arrResult['sumGross'];
     $sumNet           = $arrResult['sumNet'];
@@ -211,15 +208,15 @@ class tx_caddy extends tslib_pibase
        
       // session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $sesArray['payment_option']   = $payment_option;
+    $sesArray['paymentLabel']   = $paymentLabel;
     $sesArray['paymentId']        = $paymentId;
     $sesArray['productsGross']    = $this->productsGross;
     $sesArray['productsNet']      = $productsNet;
     $sesArray['optionsNet']       = $optionsNet;
     $sesArray['optionsGross']     = $optionsGross;
-    $sesArray['shipping_option']  = $shipping_option;
+    $sesArray['shippingLabel']  = $shippingLabel;
     $sesArray['shippingId']       = $shippingId;
-    $sesArray['special_options']  = $special_options;
+    $sesArray['specialLabels']  = $specialLabels;
     $sesArray['specialIds']       = $specialIds;
     $sesArray['sumGross']         = $sumGross;
     $sesArray['sumNet']           = $sumNet;
@@ -619,7 +616,7 @@ class tx_caddy extends tslib_pibase
     $shippingId       = $arrResult['id'];
     $shippingNet      = $arrResult['net'];
     $shippingGross    = $arrResult['gross'];
-    $shipping_option  = $arrResult['option'];
+    $shippingLabel    = $arrResult['label'];
     $sumNet           = $sumNet        + $shippingNet;
     $sumGross         = $sumGross      + $shippingGross;
     $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
@@ -632,7 +629,7 @@ class tx_caddy extends tslib_pibase
     $paymentId      = $arrResult['id'];
     $paymentNet     = $arrResult['net'];
     $paymentGross   = $arrResult['gross'];
-    $payment_option = $arrResult['option'];
+    $paymentLabel   = $arrResult['label'];
     $sumNet         = $sumNet        + $paymentNet;
     $sumGross       = $sumGross      + $paymentGross;
     $sumTaxReduced  = $sumTaxReduced + $arrResult['taxReduced'];
@@ -645,7 +642,7 @@ class tx_caddy extends tslib_pibase
     $specialIds       = $arrResult['ids'];
     $specialNet       = $arrResult['net'];
     $specialGross     = $arrResult['gross'];
-    $special_options  = $arrResult['options'];
+    $specialLabels    = $arrResult['labels'];
     $sumNet           = $sumNet        + $specialNet;
     $sumGross         = $sumGross      + $specialGross;
     $sumTaxReduced    = $sumTaxReduced + $arrResult['taxReduced'];
@@ -664,16 +661,16 @@ class tx_caddy extends tslib_pibase
                   ( 
                     'contentItem'       => $contentItem,
                     'paymentId'         => $paymentId,
-                    'payment_option'    => $payment_option,
+                    'paymentLabel'      => $paymentLabel,
                     'productsGross'     => $productsGross,
                     'productsNet'       => $productsNet,
                     'optionsNet'        => $optionsNet,
                     'optionsGross'      => $optionsGross,
                     'serviceattributes' => $serviceattributes,
                     'shippingId'        => $shippingId,
-                    'shipping_option'   => $shipping_option,
+                    'shippingLabel'     => $shippingLabel,
                     'specialIds'        => $specialIds,
-                    'special_options'   => $special_options,
+                    'specialLabels'     => $specialLabels,
                     'sumGross'          => $sumGross,
                     'sumNet'            => $sumNet,
                     'sumTaxNormal'      => $sumTaxNormal,
@@ -1021,11 +1018,11 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $option = $this->getPaymentOptionLabelBySessionId( );
+    $label = $this->getPaymentOptionLabelBySessionId( );
 
     $arrReturn['id']          = $paymentId;
     $arrReturn['gross']       = $gross;
-    $arrReturn['option']      = $option;
+    $arrReturn['label']      = $label;
     $arrReturn['net']         = $net;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
@@ -1077,12 +1074,12 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $option = $this->getShippingOptionLabelBySessionId( );
+    $label = $this->getShippingOptionLabelBySessionId( );
 
     $arrReturn['id']          = $shippingId;
     $arrReturn['net']         = $net;
     $arrReturn['gross']       = $gross;
-    $arrReturn['option']      = $option;
+    $arrReturn['label']      = $label;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
     return $arrReturn;
@@ -1108,7 +1105,7 @@ class tx_caddy extends tslib_pibase
     $sumNet       = 0.00;
     $taxReduced   = 0.00;
     $taxNormal    = 0.00;
-    $options      = null;
+    $labels      = null;
     
     foreach( ( array ) $specialIds as $specialId )
     {
@@ -1128,12 +1125,12 @@ class tx_caddy extends tslib_pibase
       }
     }
 
-    $options = $this->getSpecialOptionLabelsBySessionId( );
+    $labels = $this->getSpecialOptionLabelsBySessionId( );
 
     $arrReturn['ids']         = $specialIds;
     $arrReturn['net']         = $sumNet;
     $arrReturn['gross']       = $sumGross;
-    $arrReturn['options']     = $options;
+    $arrReturn['options']     = $labels;
     $arrReturn['taxReduced']  = $taxReduced;
     $arrReturn['taxNormal']   = $taxNormal;
 
