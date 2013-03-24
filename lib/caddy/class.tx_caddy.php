@@ -459,9 +459,9 @@ die( );
     $markerArray = null;
     
     $markerArray  = $markerArray
-                  + $this->caddyWiProductsOptionsPayment(   $paymentId  )
-                  + $this->caddyWiProductsOptionsShipping(  $shippingId )
-                  + $this->caddyWiProductsOptionsSpecials(  $specialIds )
+                  + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
+                  + ( array ) $this->caddyWiProductsOptionsShipping(  $shippingId )
+                  + ( array ) $this->caddyWiProductsOptionsSpecials(  $specialIds )
                   ;
 
     return $markerArray;
