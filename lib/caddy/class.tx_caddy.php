@@ -283,7 +283,7 @@ class tx_caddy extends tslib_pibase
         break;
       case( false ):
       default:
-        $subpartArray = $this->caddyWiProductsOptions( );
+        $subpartArray = $this->caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds );
         break;
     }
       // SWITCH : product gross is undercut minimum rate
