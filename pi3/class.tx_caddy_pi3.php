@@ -111,7 +111,6 @@ class tx_caddy_pi3 extends tslib_pibase
     $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
     $marker               = '###' . strtoupper( $key ) . '###';
     $markerArray[$marker] = $value;
-var_dump( __METHOD__, __LINE__, $this->products, count( $this->products ), $markerArray );
 
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $content  = $this->dynamicMarkers->main( $content, $this );
