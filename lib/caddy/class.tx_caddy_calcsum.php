@@ -36,10 +36,10 @@
  *              SECTION: Main
  *  106:     public function sum( $items, $options )
  *
- *              SECTION: Calculation Items
+ *              SECTION: Calculating Items
  *  144:     private function sumItems( $items )
  *
- *              SECTION: Calculation Options
+ *              SECTION: Calculating Options
  *  176:     private function sumOptions( $options )
  *  197:     private function sumOptionsGross( $options )
  *  216:     private function sumOptionsNet( $options )
@@ -47,7 +47,7 @@
  *  255:     private function sumOptionsTaxNormal( $options )
  *  274:     private function sumOptionsTaxReduced( $options )
  *
- *              SECTION: Calculation Sum
+ *              SECTION: Calculating Sum
  *  310:     private function sumSum( $items, $options )
  *  332:     private function sumSumGross( $items, $options )
  *  351:     private function sumSumNet( $items, $options )
@@ -121,7 +121,7 @@ class tx_caddy_calcsum
 
   /***********************************************
   *
-  * Calculation Items
+  * Calculating Items
   *
   **********************************************/
 
@@ -152,7 +152,7 @@ class tx_caddy_calcsum
 
   /***********************************************
   *
-  * Calculation Options
+  * Calculating Options
   *
   **********************************************/
 
@@ -285,7 +285,7 @@ class tx_caddy_calcsum
 
   /***********************************************
   *
-  * Calculation Sum
+  * Calculating Sum
   *
   **********************************************/
 
