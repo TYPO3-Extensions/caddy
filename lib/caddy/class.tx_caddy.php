@@ -61,7 +61,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * 1207:     private function calcOptionsShipping( )
  * 1263:     private function calcOptionsSpecial( )
  *
- *              SECTION: Calculation sum
+ *              SECTION: Calculation Sum
  * 1325:     private function calcSum( $items, $options )
  * 1341:     private function calcSumInitInstance( )
  *

@@ -31,25 +31,29 @@
  *
  *
  *
- *   68: class tx_caddy_calcsum
+ *   72: class tx_caddy_calcsum
  *
  *              SECTION: Main
- *  102:     public function sum( $items, $options )
+ *  106:     public function sum( $items, $options )
  *
- *              SECTION: Calculation
- *  140:     private function sumItems( $arrItems )
- *  163:     private function sumOptions( $arrOptions )
- *  184:     private function sumOptionsGross( $arrOptions )
- *  203:     private function sumOptionsNet( $arrOptions )
- *  222:     private function sumOptionsTax( $arrOptions )
- *  242:     private function sumOptionsTaxNormal( $arrOptions )
- *  261:     private function sumOptionsTaxReduced( $arrOptions )
- *  288:     private function sumSum( $items, $options )
- *  310:     private function sumSumGross( $items, $options )
- *  329:     private function sumSumNet( $items, $options )
- *  348:     private function sumSumTax( $items, $options )
- *  369:     private function sumSumTaxNormal( $items, $options )
- *  388:     private function sumSumTaxReduced( $items, $options )
+ *              SECTION: Calculation Items
+ *  144:     private function sumItems( $arrItems )
+ *
+ *              SECTION: Calculation Options
+ *  176:     private function sumOptions( $arrOptions )
+ *  197:     private function sumOptionsGross( $arrOptions )
+ *  216:     private function sumOptionsNet( $arrOptions )
+ *  235:     private function sumOptionsTax( $arrOptions )
+ *  255:     private function sumOptionsTaxNormal( $arrOptions )
+ *  274:     private function sumOptionsTaxReduced( $arrOptions )
+ *
+ *              SECTION: Calculation Sum
+ *  310:     private function sumSum( $items, $options )
+ *  332:     private function sumSumGross( $items, $options )
+ *  351:     private function sumSumNet( $items, $options )
+ *  370:     private function sumSumTax( $items, $options )
+ *  391:     private function sumSumTaxNormal( $items, $options )
+ *  410:     private function sumSumTaxReduced( $items, $options )
  *
  * TOTAL FUNCTIONS: 14
  * (This index is automatically created/updated by the extension "extdeveval")
