@@ -12,7 +12,6 @@
   // plugin.tx_caddy_pi1.pdf.terms
   // plugin.tx_caddy_pi2
   // plugin.tx_caddy_pi3
-  // plugin.tx_caddy_pi3._HTMLMARKER
 
 
 
@@ -2283,16 +2282,6 @@ plugin.tx_caddy_pi3 {
       wrap = <div class="sum minicaddysum">|</div>
     }
   }
-}
-  // plugin.tx_caddy_pi3
-
-
-
-  ///////////////////////////////////////////////////////////////
-  //
-  // plugin.tx_caddy_pi3._HTMLMARKER
-
-plugin.tx_caddy_pi3 {
     // HTML marker
   _HTMLMARKER =
   _HTMLMARKER {
@@ -2370,4 +2359,4 @@ plugin.tx_caddy_pi3 {
     }
   }
 }
-  // plugin.tx_caddy_pi3._HTMLMARKER
+  // plugin.tx_caddy_pi3
