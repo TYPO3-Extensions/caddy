@@ -83,11 +83,30 @@ plugin.tx_caddy_pi1 {
       font-weight:bold; 
       padding:.2em .6em;
     }
-    div.caddy_mincart { 
-      color:#e10004; 
-      font-weight:bold; 
-      margin:5px 0; 
+    div.caddymini { 
+      overflow:hidden;
+      padding: 0 1em 1em 1em;
+      width: 14em;
     }
+    div.caddymini .sum {
+      font-weight:bold; 
+    }
+    div.caddymini .quantity,
+    div.caddymini .label,
+    div.caddymini .gross {
+      display:block; 
+      float:left; 
+    }
+    div.caddymini .quantity {
+      width:2em; 
+    }
+    div.caddymini .label {
+      width:6em; 
+    }
+    div.caddymini .gross {
+      width:4em; 
+    }
+
     div.caddy_cleaner { 
       clear: both; 
       margin: 0; 

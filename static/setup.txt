@@ -2186,13 +2186,13 @@ plugin.tx_caddy_pi3 {
       10 = TEXT
       10 {
         field = quantity
-        wrap = <span class="quantity itemquantity">|</span>
+        wrap = <div class="quantity itemquantity">|</div>
       }
         // label
       20 = TEXT
       20 {
         field = label
-        wrap  = <span class="label itemlabel">|</span>
+        wrap  = <div class="label itemlabel">|</div>
       }
         // gross
       30 = COA
@@ -2214,9 +2214,9 @@ plugin.tx_caddy_pi3 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="gross itemgross">|</span>
+        wrap = <div class="gross itemgross">|</div>
       }
-      wrap = <div class="item minicaddyitem">|</div>
+      wrap = <div class="item minicaddyitem">|</div><div class="caddy_cleaner"></div>
     }
     sum = COA
     sum {
@@ -2224,7 +2224,7 @@ plugin.tx_caddy_pi3 {
       10 = TEXT
       10 {
         field = quantity
-        wrap = <span class="quantity sumquantity">|</span>
+        wrap = <div class="quantity sumquantity">|</div>
       }
         // label
       20 = COA
@@ -2252,7 +2252,7 @@ plugin.tx_caddy_pi3 {
           }
           data = LLL:EXT:caddy/pi3/locallang.xml:items
         }
-        wrap = <span class="label sumlabel">|</span>
+        wrap = <div class="label sumlabel">|</div>
       }
         // gross
       30 = COA
@@ -2274,7 +2274,7 @@ plugin.tx_caddy_pi3 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="gross sumgross">|</span>
+        wrap = <div class="gross sumgross">|</div><div class="caddy_cleaner"></div>
       }
       wrap = <div class="sum minicaddysum">|</div>
     }
@@ -2323,9 +2323,6 @@ plugin.tx_caddy_pi3 {
           enable = 1
           typolink {
             parameter = {$plugin.caddy.pages.caddy}
-            title {
-              data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
-            }
           }
         }
       }
@@ -2362,9 +2359,6 @@ plugin.tx_caddy_pi3 {
           enable = 1
           typolink {
             parameter = {$plugin.caddy.pages.shop}
-            title {
-              data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
-            }
           }
         }
       }
