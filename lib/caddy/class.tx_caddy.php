@@ -303,7 +303,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
                   + ( array ) $this->caddyWiProductsSumMarkerTaxRates( )
                   + ( array ) $this->caddyWiProductsSumMarkerValues( )
                   ;
-        $subparts = $this->caddyWiProductsOptions( $paymentId, $shippingId, $specialIds );
+        $subparts = $this->caddyWiProductsOptions( $calcedCaddy );
         break;
     }
       // SWITCH : product gross is undercut minimum rate
@@ -536,9 +536,13 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptions( $paymentId, $shippingId, $specialIds )
+  private function caddyWiProductsOptions( $calcedCaddy )
   {
     $marker = array( );
+    
+    $paymentId  = $calcedCaddy['options']['payment']['id'];
+    $shippingId = $calcedCaddy['options']['shipping']['id'];
+    $specialIds = $calcedCaddy['options']['specials']['id'];
     
     $marker = $marker
             + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
