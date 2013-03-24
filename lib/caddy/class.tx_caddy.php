@@ -418,7 +418,7 @@ die( );
   {
     $markerArray = null;
     
-    $sumConf = ( array ) $this->conf['sum.'];
+    $sumConf = ( array ) $this->conf['output.']['sum.']['values.'];
 
     foreach( array_keys( $sumConf ) as $key )
     {
