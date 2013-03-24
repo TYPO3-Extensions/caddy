@@ -8,6 +8,10 @@ INDEX
 * CADDY_DELIVERYORDER
 * CADDY_INVOICE
 
+* CADDY_PAYMENT
+* CADDY_SHIPPING
+* CADDY_SPECIAL
+
 
 <!-- ###CADDY_DELIVERYORDER### begin -->
 <table border="0" cellpadding="1" cellspacing="0">
@@ -145,6 +149,9 @@ INDEX
       &nbsp;
     </td>
   </tr>
+  ###SHIPPING_RADIO###
+  ###PAYMENT_RADIO###
+  ###SPECIAL_CHECKBOX###
   <tr>
     <td align="center">
       +
@@ -191,3 +198,57 @@ INDEX
   </tr>
 </table>
 <!-- ###CADDY_INVOICE### end --> 
+
+
+
+<!-- ###CADDY_PAYMENT### begin -->
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+      ###_LOCAL_LANG_PAYMENTLABEL###
+    </td>
+    <td>
+      ###PAYMENT_TITLE###
+    </td>
+    <td colspan="2">
+      &nbsp;
+    </td>
+  </tr>
+<!-- ###CADDY_PAYMENT### end -->
+
+<!-- ###CADDY_SHIPPING### begin -->
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+      ###_LOCAL_LANG_SHIPPINGLABEL###
+    </td>
+    <td>
+      ###SHIPPING_TITLE###
+    </td>
+    <td colspan="2">
+      &nbsp;
+    </td>
+  </tr>
+<!-- ###CADDY_SHIPPING### end -->
+
+<!-- ###CADDY_SPECIAL### begin -->
+  <tr>
+    <td>
+      &nbsp;
+    </td>
+    <td>
+      ###_LOCAL_LANG_SPECIALLABEL###
+    </td>
+    <td>
+      ###SPECIAL_TITLE###
+    </td>
+    <td colspan="2">
+      &nbsp;
+    </td>
+  </tr>
+<!-- ###CADDY_SPECIAL### end -->
+

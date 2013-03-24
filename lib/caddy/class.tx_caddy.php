@@ -283,30 +283,7 @@ class tx_caddy extends tslib_pibase
         break;
       case( false ):
       default:
-          // Set shipping radio, payment radio and special checkbox
-        $shippingArray['###CONTENT###'] = $this->optionList( 'shipping', $shippingId );
-        $subpartArray['###SHIPPING_RADIO###'] = '';
-        if( $shippingArray['###CONTENT###'] )
-        {
-          $subpartArray['###SHIPPING_RADIO###'] =
-            $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
-        }
-
-        $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
-        $subpartArray['###PAYMENT_RADIO###'] = '';
-        if( $paymentArray['###CONTENT###'] )
-        {
-          $subpartArray['###PAYMENT_RADIO###'] =
-            $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
-        }
-
-        $subpartArray['###SPECIAL_CHECKBOX###'] = '';
-        $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
-        if( $specialArray['###CONTENT###'] )
-        {
-          $subpartArray['###SPECIAL_CHECKBOX###'] =
-            $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
-        }
+        $subpartArray = $this->caddyWiProductsOptions( );
         break;
     }
       // SWITCH : product gross is undercut minimum rate
@@ -348,6 +325,93 @@ class tx_caddy extends tslib_pibase
     $contentItem  = $contentItem . '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
 
     return $contentItem;
+  }
+
+ /**
+  * caddyWiProductsOptions( )  : 
+  *
+  * @return	array   : $subpartArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
+  {
+    $subpartArray = $this->caddyWiProductsOptionsPayment(   $subpartArray, $paymentId   );
+    $subpartArray = $this->caddyWiProductsOptionsShipping(  $subpartArray, $shippingId  );
+    $subpartArray = $this->caddyWiProductsOptionsSpecials(  $subpartArray, $specialIds  );
+
+    return $subpartArray;
+  }
+
+ /**
+  * caddyWiProductsOptionsPayment( )  : 
+  *
+  * @return	array   : $subpartArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsOptionsPayment( $subpartArray, $paymentId )
+  {
+    $paymentArray   = null;
+
+    $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
+    $subpartArray['###PAYMENT_RADIO###'] = '';
+    if( $paymentArray['###CONTENT###'] )
+    {
+      $subpartArray['###PAYMENT_RADIO###'] =
+        $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
+    }
+
+    return $subpartArray;
+  }
+
+ /**
+  * caddyWiProductsOptionsShipping( )  : 
+  *
+  * @return	array   : $subpartArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsOptionsShipping( $subpartArray, $shippingId )
+  {
+    $shippingArray  = null;
+
+      // Set shipping radio, payment radio and special checkbox
+    $shippingArray['###CONTENT###'] = $this->optionList( 'shipping', $shippingId );
+    $subpartArray['###SHIPPING_RADIO###'] = '';
+    if( $shippingArray['###CONTENT###'] )
+    {
+      $subpartArray['###SHIPPING_RADIO###'] =
+        $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
+    }
+
+    return $subpartArray;
+  }
+
+ /**
+  * caddyWiProductsOptionsSpecials( )  : 
+  *
+  * @return	array   : $subpartArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsOptionsSpecials( $subpartArray, $specialIds )
+  {
+    $specialArray   = null;
+
+    $subpartArray['###SPECIAL_CHECKBOX###'] = '';
+    $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
+    if( $specialArray['###CONTENT###'] )
+    {
+      $subpartArray['###SPECIAL_CHECKBOX###'] =
+        $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
+    }
+
+    return $subpartArray;
   }
 
  /**

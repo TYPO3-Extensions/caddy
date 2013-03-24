@@ -267,7 +267,22 @@ class tx_caddy_pdf extends tslib_pibase
       $subpartArray[$marker] = $value;
     }
       // FOREACH  : overall item
+    
+    $subpartArray = $this->caddySumOptions( $subpartArray );
 
+    return $subpartArray;
+  }
+
+ /**
+  * caddySumOptions( ) : 
+  *
+  * @param	array		$subpartArray :
+  * @return	array		$subpartArray :
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddySumOptions( $subpartArray )
+  {
       // Payment option label
     $subpartArray['###PAYMENTOPTIONLABEL###']   = $this->caddy->getPaymentOptionLabelBySessionId( );
     $subpartArray['###PAYMENTOPTIONTAX###']     = 'payTax';
