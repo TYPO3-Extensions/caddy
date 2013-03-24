@@ -289,7 +289,6 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
       default:
           // content. here: items
         $content                    = $calcedCaddy['content'];
-        $subparts['###CONTENT###']  = $this->caddyWiProductsContent( $content );
         unset( $calcedCaddy['content'] );
 
           // session  : new or update 
@@ -303,7 +302,10 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
                   + ( array ) $this->caddyWiProductsSumMarkerTaxRates( )
                   + ( array ) $this->caddyWiProductsSumMarkerValues( )
                   ;
-        $subparts = $this->caddyWiProductsOptions( $calcedCaddy );
+        $subparts['###CONTENT###']  = $this->caddyWiProductsContent( $content );
+        $subparts = $subparts
+                  + ( array ) $this->caddyWiProductsOptions( $calcedCaddy )
+                  ;
         break;
     }
       // SWITCH : product gross is undercut minimum rate
