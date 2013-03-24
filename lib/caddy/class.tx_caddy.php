@@ -417,8 +417,10 @@ die( );
   private function caddyWiProductsSumMarker( )
   {
     $markerArray = null;
+    
+    $sumConf = ( array ) $this->conf['sum.'];
 
-    foreach( array_keys( ( array ) $this->conf['sum.'] ) as $key )
+    foreach( array_keys( $sumConf ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
@@ -426,8 +428,8 @@ die( );
       }
 
       $marker = '###' . strtoupper( $key ) . '###';
-      $name   = $this->conf['settings.']['overall.'][$key];
-      $conf   = $this->conf['settings.']['overall.'][$key . '.'];
+      $name   = $sumConf[$key];
+      $conf   = $sumConf[$key . '.'];
       $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
       $markerArray[$marker] = $value;
 
