@@ -5,7 +5,7 @@
     <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
   </meta>
   <data type="array">
-    <languageKey index="default" type="array"
+    <languageKey index="default" type="array">
       <label index="caddyempty">Caddy is empty</label>
       <label index="caddyemptyyou">Your caddy is empty</label>
       <label index="delete">Remove this item from cart.</label>
@@ -62,8 +62,8 @@
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="caddyempty">Der Warenkorb ist leer.</label>
-      <label index="caddyemptyyou">Dein Warenkorb ist leer.</label>
+      <label index="caddyempty">Der Warenkorb ist leer</label>
+      <label index="caddyemptyyou">Dein Warenkorb ist leer</label>
       <label index="delete">Diesen Artikel aus dem Warenkorb entfernen.</label>
       <label index="deliveryaddress">Lieferadresse</label>
       <label index="deliveryorder">Lieferschein</label>
