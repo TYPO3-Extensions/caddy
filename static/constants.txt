@@ -19,6 +19,8 @@ plugin.caddy {
   main.currencySymbol = &euro;
   # cat=caddy - main numberformat//206; type=boolean; label= currency before price: Show currency symbol before price.
   main.currencySymbolBeforePrice = 0
+  # cat=caddy - main numberformat//207; type=string; label= Percent symbol
+  main.percentSymbol = %
   # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   numberformat.externalLinks = Click me!
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

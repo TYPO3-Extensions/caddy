@@ -299,6 +299,7 @@ class tx_caddy extends tslib_pibase
         $this->zz_setDataBySession( );
           // set marker
         $marker   = ( array ) $this->caddyWiProductsSumMarkerLabels( )
+                  + ( array ) $this->caddyWiProductsSumMarkerTaxRates( )
                   + ( array ) $this->caddyWiProductsSumMarkerValues( )
                   ;
         $subparts = $this->caddyWiProductsOptions( $paymentId, $shippingId, $specialIds );
@@ -421,6 +422,45 @@ die( );
     $markerArray = null;
     
     $sumConf = ( array ) $this->conf['output.']['sum.']['labels.'];
+
+    foreach( array_keys( $sumConf ) as $key )
+    {
+      if( stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+      $marker = '###' . strtoupper( $key ) . '###';
+      $name   = $sumConf[$key];
+      $conf   = $sumConf[$key . '.'];
+      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $markerArray[$marker] = $value;
+
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        $prompt = $marker . ': "' . $value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+    }
+    
+    return $markerArray;
+  }
+
+ /**
+  * caddyWiProductsSumMarkerTaxRates( )  :
+  *
+  * @return	array		: $markerArray
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function caddyWiProductsSumMarkerTaxRates( )
+  {
+    $markerArray = null;
+    
+    $sumConf = ( array ) $this->conf['output.']['sum.']['rates.'];
 
     foreach( array_keys( $sumConf ) as $key )
     {
