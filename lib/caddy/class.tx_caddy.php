@@ -189,7 +189,7 @@ class tx_caddy extends tslib_pibase
     $caddy = array(
       'marker'    => null,
       'subparts'  => null,
-      'tmpl'      => $this->tmpl
+      'tmpl'      => null
     );
 
     $this->init( );
@@ -203,7 +203,7 @@ class tx_caddy extends tslib_pibase
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
-        $this->caddyWoItems( );
+        $caddy = $this->caddyWoItems( );
         //$caddy = null;
         break;
     }
@@ -248,7 +248,7 @@ class tx_caddy extends tslib_pibase
     (
       'marker'    => $marker,
       'subparts'  => $subparts,
-      'tmpl'      => $this->tmpl
+      'tmpl'      => $this->tmpl['all']
     );
 
       // #45915, 130228
@@ -819,7 +819,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWoItems( )  : Render a caddy, which doesn't contain any product
   *
-  * @return	void
+  * @return	arry
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -830,9 +830,14 @@ class tx_caddy extends tslib_pibase
       // Set the hidden field to true of the powermail form
     $this->powermail->formHide( );
 
-      // overwrite default template with empty template
-    $this->tmpl['all'] = $this->tmpl['empty'];
-
+    $caddy    = array
+    (
+      'marker'    => null,
+      'subparts'  => null,
+      'tmpl'      => $this->tmpl['empty']
+    );
+    
+    return $caddy;
   }
 
 

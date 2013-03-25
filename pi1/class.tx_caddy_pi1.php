@@ -204,7 +204,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $content . $this->cObj->substituteMarkerArrayCached
                           (
-                            $tmpl['all'],
+                            $tmpl,
                             $marker,
                             $subparts
                           );
