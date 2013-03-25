@@ -552,6 +552,10 @@ plugin.tx_caddy_pi1 {
       sumnet < .gross
       sumnet.10.userFunc.number.field = sumnet
 
+      taxrate < .gross
+      taxrate.10.userFunc.number.field = taxrate
+      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
+      
       delete = IMAGE
       delete {
         file = EXT:caddy/files/img/delete_100_02.png

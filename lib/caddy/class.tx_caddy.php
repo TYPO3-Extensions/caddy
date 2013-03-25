@@ -1022,12 +1022,12 @@ class tx_caddy extends tslib_pibase
 
       // calculate net total
     
-    $taxRate  = $product['sumgross']
-              / $product['sumnet']
-              ;
-    $product['net'] = $product['gross']
-                      / $taxRate
-                      ;
+    $product['taxrate'] = $product['sumgross']
+                        / $product['sumnet']
+                        ;
+    $product['net']     = $product['gross']
+                        / $product['taxrate']
+                        ;
                           ;
     switch( $product['tax'] )
     {
