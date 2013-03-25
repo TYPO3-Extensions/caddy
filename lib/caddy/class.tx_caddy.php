@@ -1021,10 +1021,10 @@ class tx_caddy extends tslib_pibase
         exit;
     }
 
-    $product['sum'] = $product['sumnet'] / $product['qty'];
+    $product['net'] = $product['sumnet'] / $product['qty'];
 
     // price netto
-var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;      
+//var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;      
 
     return $product;
   }
