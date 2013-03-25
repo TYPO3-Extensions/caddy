@@ -257,7 +257,6 @@ class tx_caddy extends tslib_pibase
 
       // calculated caddy: content, items, options, serviceattributes, sum. 
     $calcedCaddy = $this->calc( );
-var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;      
 
 
 //    $sesArray['paymentLabel']   = $paymentLabel;
@@ -422,7 +421,6 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   private function caddyWiItemsMarkerItem( $product )
   {
     
-var_dump( __METHOD__, __LINE__, $product );    
     $markerArray = null;
     
       // FOREACH  : settings property
@@ -920,13 +918,13 @@ var_dump( __METHOD__, __LINE__, $product );
     $arrReturn          = null;
     $content            = '';
 
-    $markerArray        = null;
     $productsNet        = 0.00;
     $productsGross      = 0.00;
     $productsTaxReduced = 0.00;
     $productsTaxNormal  = 0.00;
 
       // FOREACH  : products
+var_dump( __METHOD__, __LINE__, $this->product );
     foreach( ( array ) $this->products as $product )
     {
         // calculate price total
@@ -944,7 +942,7 @@ var_dump( __METHOD__, __LINE__, $product );
       $this->zz_setData( $product, $this->conf['db.']['table'] );
 
         // update product settings
-      $markerArray  = ( array ) $markerArray
+      $markerArray  = ( array ) null
                     + ( array ) $this->caddyWiItemsMarkerItem( $product )
                     + ( array ) $this->caddyWiItemsItemErrorMsg( $product )
                     ;
