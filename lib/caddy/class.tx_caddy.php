@@ -930,14 +930,6 @@ class tx_caddy extends tslib_pibase
         // calculate tax
       $product = $this->calcItemsTax( $product );
 
-        // DRS
-      if( $this->drs->drsFormula )
-      {
-        $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
-        t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-
         // cObject become current record
       $this->zz_setData( $product, $this->conf['db.']['table'] );
 
@@ -995,57 +987,44 @@ class tx_caddy extends tslib_pibase
 
       // calculate gross total
     $product['sumgross']  = $product['gross'] 
-                            * $product['qty']
-                            ;
-
-      // Handle HTML snippet
-      // get the formular with the markers ###TAX## for calculating tax
-    $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
-      // save the formular with marker, we need it later
-    $str_wrap_former = $str_wrap;
-      // replace the ###TAX### with current tax rate like 0.07 or 0.19
-    $str_wrap = str_replace( '###TAX###', $product['tax'], $str_wrap );
-      // assign the formular with tax rates to TypoScript
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap;
-      // Handle HTML snippet
-
-      // tax within price grosso
-    $currTax = $this->local_cObj->cObjGetSingle
-           (
-              $this->conf['settings.']['fields.']['tax'],
-              $this->conf['settings.']['fields.']['tax.']
-           );
-      // price netto
-    $product['sumnet']  = $product['sumgross'] 
-                          - $currTax
+                          * $product['qty']
                           ;
 
-      // calculate net total
-    
-    $product['taxrate'] = $product['sumgross']
-                        / $product['sumnet']
-                        ;
-    $product['net']     = $product['gross']
-                        / $product['taxrate']
-                        ;
-                          ;
+      // DRS
+    if( $this->drs->drsFormula )
+    {
+      $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
     switch( $product['tax'] )
     {
       case( 0 ):
+        $product['taxrate'] = 0.00;
+        $product['sumnet']  = 0.00;
         break;
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
-        $product['taxReduced'] = $currTax;
+        $product['taxrate']    = $this->conf['tax.']['reducedCalc'];
+        $product['sumnet']     = $product['sumgross'] / ( 1 + $product['taxrate'] );
+        $product['taxReduced'] = $product['sumnet'] * $product['taxrate'];
         break;
       case( 2 ):
       case( $this->conf['tax.']['normalCalc'] ):
-        $product['taxNormal'] = $currTax;
+        $product['taxrate']   = $this->conf['tax.']['normalCalc'];
+        $product['sumnet']    = $product['sumgross'] / ( 1 + $product['taxrate'] );
+        $product['taxNormal'] = $product['sumnet'] * $product['taxrate'];
         break;
       default:
         echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
         exit;
     }
-    $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
+
+    $product['sum'] = $product['sumnet'] / $product['qty'];
+
+    // price netto
+var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;      
 
     return $product;
   }
