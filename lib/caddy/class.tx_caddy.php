@@ -248,7 +248,7 @@ class tx_caddy extends tslib_pibase
     (
       'marker'    => $marker,
       'subparts'  => $subparts,
-      'tmpl'      => $this->tmpl['all']
+      'tmpl'      => null
     );
 
       // #45915, 130228
@@ -309,12 +309,11 @@ class tx_caddy extends tslib_pibase
     }
       // SWITCH : product gross is undercut minimum rate
 
-      // RESET cObj->data
-    $caddy    = array
+    $caddy = array
     (
       'marker'    => $marker,
       'subparts'  => $subparts,
-      'tmpl'      => $this->tmpl
+      'tmpl'      => $this->tmpl['all']
     );
     return $caddy;
   }
