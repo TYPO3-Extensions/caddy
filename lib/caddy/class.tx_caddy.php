@@ -927,8 +927,28 @@ class tx_caddy extends tslib_pibase
 var_dump( __METHOD__, __LINE__, $this->product );
     foreach( ( array ) $this->products as $product )
     {
-        // calculate price total
-      $product['sumgross'] = $product['gross'] * $product['qty'];
+        // calculate tax
+      $arrResult          = $this->calcItemsTax( $product );
+      $productsNet        = $productsNet        
+                          + $arrResult['sumnet']
+                          ;
+      $productsTaxReduced = $productsTaxReduced 
+                          + $arrResult['taxReduced']
+                          ;
+      $productsTaxNormal  = $productsTaxNormal  
+                          + $arrResult['taxNormal']
+                          ;
+      
+
+        // calculate gross total
+      $product['sumgross']  = $product['gross'] 
+                            * $product['qty']
+                            ;
+        // calculate net total
+      $product['net']       = $arrResult['sumnet'];
+      $product['sumnet']    = $product['net']
+                            * $product['qty']
+                            ;
 
         // DRS
       if( $this->drs->drsFormula )
@@ -962,12 +982,6 @@ var_dump( __METHOD__, __LINE__, $this->product );
 
         // update service attributes
       $this->caddyWiItemsItemServiceAttributes( $product );
-
-        // calculate tax
-      $arrResult          = $this->calcItemsTax( $product );
-      $productsNet        = $productsNet        + $arrResult['cartNet'];
-      $productsTaxReduced = $productsTaxReduced + $arrResult['taxReduced'];
-      $productsTaxNormal  = $productsTaxNormal  + $arrResult['taxNormal'];
 
     }
       // FOREACH  : products
@@ -1012,7 +1026,9 @@ var_dump( __METHOD__, __LINE__, $this->product );
               $this->conf['settings.']['fields.']['tax.']
            );
       // price netto
-    $arrReturn['cartNet'] = $product['sumgross'] - $currTax;
+    $arrReturn['sumnet'] = $product['sumgross'] 
+                          - $currTax
+                          ;
 
     switch( $product['tax'] )
     {
