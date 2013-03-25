@@ -548,7 +548,7 @@ plugin.tx_caddy_pi1 {
       net < .gross
       net.10.userFunc.number.field = net
       sumgross < .gross
-      net.10.userFunc.number.field = sumgross
+      sumgross.10.userFunc.number.field = sumgross
       sumnet < .gross
       sumnet.10.userFunc.number.field = sumnet
 
@@ -571,36 +571,6 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      tax = CASE
-      tax {
-        key.field = tax
-
-        default = TEXT
-        default {
-          current = 1
-          setCurrent.field = sumgross
-          setCurrent.wrap = (| / (1 + ###TAX###)) * (###TAX###)
-          prioriCalc = 1
-        }
-
-        # reduced tax
-        1 = TEXT
-        1 {
-          current = 1
-          setCurrent.field = sumgross
-          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.reducedCalc})) * ({$plugin.caddy.tax.reducedCalc})
-          prioriCalc = 1
-        }
-
-        # normal tax
-        2 = TEXT
-        2 {
-          current = 1
-          setCurrent.field = sumgross
-          setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.normalCalc})) * ({$plugin.caddy.tax.normalCalc})
-          prioriCalc = 1
-        }
-      }
     }
 
       // caddy within the powermail email: fields, overall
