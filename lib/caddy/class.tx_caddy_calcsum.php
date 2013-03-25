@@ -409,8 +409,8 @@ class tx_caddy_calcsum
   */
   private function sumSumTaxReduced( $items, $options )
   {
-    $sum  = $items['tax']['normal']
-          + $options['tax']['normal']
+    $sum  = $items['tax']['reduced']
+          + $options['tax']['reduced']
           ;
 
     return $sum;
