@@ -649,7 +649,7 @@ var_dump( __METHOD__, __LINE__ , $arrResult ) ;
 
       // read variables
     $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['settings.']['title'], $conf['settings.']['title.'] );
-    $this->gpvar['price'] = $this->zz_cObjGetSingle( $conf['settings.']['price'], $conf['settings.']['price.'] );
+    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['settings.']['gross'], $conf['settings.']['price.'] );
     $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['settings.']['qty'], $conf['settings.']['qty.'] ) );
     $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['settings.']['tax'], $conf['settings.']['tax.'] );
     $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['settings.']['puid'], $conf['settings.']['puid.'] ) );
@@ -712,7 +712,7 @@ var_dump( __METHOD__, __LINE__ , $arrResult ) ;
     $this->gpvar['puid']  = $this->pi_getFFvalue( $flexformData, 'puid', 'sDEF' );
     $this->gpvar['title'] = $this->pi_getFFvalue( $flexformData, 'title', 'sDEF' );
     $this->gpvar['sku']   = $this->pi_getFFvalue( $flexformData, 'sku', 'sDEF' );
-    $this->gpvar['price'] = $this->pi_getFFvalue( $flexformData, 'price', 'sDEF' );
+    $this->gpvar['gross'] = $this->pi_getFFvalue( $flexformData, 'gross', 'sDEF' );
     $this->gpvar['tax']   = $this->pi_getFFvalue( $flexformData, 'tax', 'sDEF' );
 
     $attributes = split( "\n", $this->pi_getFFvalue( $flexformData, 'attributes', 'sDEF' ) );

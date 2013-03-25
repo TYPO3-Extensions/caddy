@@ -10,7 +10,7 @@
       <label index="flexform.pid">Unique Product Id (PUID) *</label>
       <label index="flexform.title">Title *</label>
       <label index="flexform.sku">Stock Keeping Unit (SKU)</label>
-      <label index="flexform.price">Price *</label>
+      <label index="flexform.gross">Gross *</label>
       <label index="flexform.tax">Tax Class *</label>
       <label index="flexform.attributes">Additional Attributes</label>
       <label index="flexform.tax.normal">Normal</label>
@@ -21,7 +21,7 @@
       <label index="flexform.pid">Eindeutige Produkt Kennung (PUID) *</label>
       <label index="flexform.title">Titel *</label>
       <label index="flexform.sku">Artikelnummer (SKU)</label>
-      <label index="flexform.price">Preis *</label>
+      <label index="flexform.gross">Brutto *</label>
       <label index="flexform.tax">Steuerklasse *</label>
       <label index="flexform.attributes">Zusätzliche Attribute</label>
       <label index="flexform.tax.normal">Normal</label>

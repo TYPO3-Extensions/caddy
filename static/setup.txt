@@ -56,7 +56,7 @@ plugin.tx_caddy_pi1 {
     service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
     pid              = {$plugin.caddy.main.pid}
   }
-      // sumNet, sumGross, price_total, service_costs, odernumber, target, taxrates, tax
+      // sumNet, sumGross, sumgross, service_costs, odernumber, target, taxrates, tax
     overall =
     overall {
 
@@ -267,12 +267,12 @@ plugin.tx_caddy_pi1 {
         noTrimWrap = || {$plugin.caddy.tax.normal}% |
       }
     }
-    // table, title, price, tax, sku, min, max, service attributes
+    // table, title, gross, tax, sku, min, max, service attributes
   db =
   db {
     table = {$plugin.caddy.db.table}
     title = {$plugin.caddy.db.title}
-    price = {$plugin.caddy.db.price}
+    gross = {$plugin.caddy.db.price}
     tax   = {$plugin.caddy.db.tax}
     sku   = {$plugin.caddy.db.sku}
     min   = {$plugin.caddy.db.min}
@@ -418,7 +418,7 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // titel, price, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
+    // titel, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
   settings =
   settings {
 
@@ -429,9 +429,9 @@ plugin.tx_caddy_pi1 {
       htmlSpecialChars = 1
     }
 
-    # GET or POST param for price (if not empty: Overwrite values from db request with puid)
-    price = TEXT
-    price {
+    # GET or POST param for gross (if not empty: Overwrite values from db request with puid)
+    gross = TEXT
+    gross {
       data = GP:{$plugin.caddy.gpvar.price}
       htmlSpecialChars = 1
     }
@@ -496,7 +496,7 @@ plugin.tx_caddy_pi1 {
       intval = 1
     }
 
-      // titel, puid, qty, service attributes, min, max, sku, price, delete, tax
+      // titel, puid, qty, service attributes, min, max, sku, gross, delete, tax
     fields =
     fields {
       title = TEXT
@@ -526,13 +526,13 @@ plugin.tx_caddy_pi1 {
       sku = TEXT
       sku.field = sku
 
-      price = COA
-      price {
+      gross = COA
+      gross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = price
+          number.field = gross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -547,13 +547,13 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-      price_total = COA
-      price_total {
+      sumgross = COA
+      sumgross {
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = price_total
+          number.field = sumgross
 
           decimal = 2
           dec_point = {$plugin.caddy.main.dec_point}
@@ -590,7 +590,7 @@ plugin.tx_caddy_pi1 {
         default = TEXT
         default {
           current = 1
-          setCurrent.field = price_total
+          setCurrent.field = sumgross
           setCurrent.wrap = (| / (1 + ###TAX###)) * (###TAX###)
           prioriCalc = 1
         }
@@ -599,7 +599,7 @@ plugin.tx_caddy_pi1 {
         1 = TEXT
         1 {
           current = 1
-          setCurrent.field = price_total
+          setCurrent.field = sumgross
           setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.reducedCalc})) * ({$plugin.caddy.tax.reducedCalc})
           prioriCalc = 1
         }
@@ -608,7 +608,7 @@ plugin.tx_caddy_pi1 {
         2 = TEXT
         2 {
           current = 1
-          setCurrent.field = price_total
+          setCurrent.field = sumgross
           setCurrent.wrap = (| / (1 + {$plugin.caddy.tax.normalCalc})) * ({$plugin.caddy.tax.normalCalc})
           prioriCalc = 1
         }
@@ -618,7 +618,7 @@ plugin.tx_caddy_pi1 {
       // caddy within the powermail email: fields, overall
     powermailCaddy =
     powermailCaddy {
-        // titel, puid, qty, service attributes, min, max, sku, price, price_total, delete, tax
+        // titel, puid, qty, service attributes, min, max, sku, gross, sumgross, delete, tax
       fields < plugin.tx_caddy_pi1.settings.fields
         // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
       overall < plugin.tx_caddy_pi1.settings.overall
@@ -2347,7 +2347,7 @@ plugin.tx_caddy_pi2 {
   flexfields {
     puid = puid
     title = title
-    price = price
+    gross = gross
     tax = tax
     sku = sku
     attributes {

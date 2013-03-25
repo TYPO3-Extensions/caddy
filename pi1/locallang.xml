@@ -119,19 +119,5 @@
       <label index="tax">Mehrwertsteuer</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
     </languageKey>
-    <languageKey index="fr" type="array">
-      <label index="delete">Supprimer cet article du panier.</label>
-      <label index="empty">Votre panier de commande est actuellement vide.</label>
-      <label index="item">Article</label>
-      <label index="optionsnet">Frais de services et de livraison</label>
-      <label index="paymentlabel">Paiement</label>
-      <label index="price">Prix unitaire</label>
-      <label index="price_total">Total</label>
-      <label index="productsnet">Total (net)</label>
-      <label index="qty">Quantité</label>
-      <label index="shippinglabel">Livraison</label>
-      <label index="sumgross">Total (brut)</label>
-      <label index="tax">TVA</label>
-    </languageKey>
   </data>
 </T3locallang>

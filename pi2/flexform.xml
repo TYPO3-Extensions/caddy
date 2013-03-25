@@ -40,15 +40,15 @@
               </config>
             </TCEforms>
           </sku>
-          <price>
+          <gross>
             <TCEforms>
-              <label>LLL:EXT:caddy/pi2/locallang.xml:flexform.price</label>
+              <label>LLL:EXT:caddy/pi2/locallang.xml:flexform.gross</label>
               <config>
                 <type>input</type>
-                <eval>tx_caddy_evalprice</eval>
+                <eval>double2</eval>
               </config>
             </TCEforms>
-          </price>      
+          </gross>      
           <tax>
             <TCEforms>
               <label>LLL:EXT:caddy/pi2/locallang.xml:flexform.tax</label>

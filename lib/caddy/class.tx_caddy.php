@@ -398,9 +398,9 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
       // price and prce_total
     $price  = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
 //    $this->markerArray['###PRICE###']       = $price;
-//    $this->markerArray['###PRICE_TOTAL###'] = $price;
+//    $this->markerArray['###SUMGROSS###'] = $price;
     $markerArray['###PRICE###']       = $price;
-    $markerArray['###PRICE_TOTAL###'] = $price;
+    $markerArray['###SUMGROSS###'] = $price;
 
     // add inner html to variable
     $tmpl = $this->tmpl['special_item'];
@@ -634,15 +634,16 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
  /**
   * caddyWiProductsProductErrorMsg( ) :
   *
-  * @param	array		$product : the current item / product
-  * @return	void
+  * @param	array		$product      : the current item / product
+  * @return	array           $markerArray  :
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function caddyWiProductsProductErrorMsg( $product )
   {
-    $prompt = null;
+    $prompt       = null;
+    $markerArray  = null;
 
       // FOREACH  : error messages per product
     foreach( ( array ) $product['error'] as $productError )
@@ -659,8 +660,10 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
 
     if( $prompt )
     {
-      $this->markerArray['###ITEM_ERROR###'] = $prompt;
+      $markerArray['###ITEM_ERROR###'] = $prompt;
     }
+    
+    return $markerArray;
   }
 
  /**
@@ -734,13 +737,15 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * caddyWiProductsProductSettings( )
   *
   * @param	array		$product :
-  * @return	void
+  * @return	array           $markerArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function caddyWiProductsProductSettings( $product )
   {
+    $markerArray = null;
+    
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
@@ -749,33 +754,32 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
         continue;
       }
 
-        // name of the current field in the TypoScript
-      $ts_key   = $this->conf['settings.']['fields.'][$key];
-        // configuration array of the current field in the TypoScript
-      $ts_conf  = $this->conf['settings.']['fields.'][$key . '.'];
-      switch( $key )
+      $name = $this->conf['settings.']['fields.'][$key];
+      $conf = $this->conf['settings.']['fields.'][$key . '.'];
+
+      if( $key == 'delete' )
       {
-        case('delete'):
-          $ts_conf = $this->zz_addVariantGpvarToImagelinkwrap( $product, $ts_key, $ts_conf, $this );
-          break;
-        default:
-          // nothing to do, there is no default now
+        $conf = $this->zz_addVariantGpvarToImagelinkwrap( $product, $name, $conf, $this );
       }
-      $ts_rendered_value  = $this->local_cObj->cObjGetSingle( $ts_key, $ts_conf );
-      $this->markerArray['###' . strtoupper( $key ) . '###'] = $ts_rendered_value; // write to marker
+      
+      $marker = '###' . strtoupper( $key ) . '###';
+      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $markerArray[$marker] = $value;
 
         // DRS
       if( $this->drs->drsMarker )
       {
-        $prompt = 'Product - ###' . strtoupper( $key ) . '### : "' . $ts_rendered_value . '"';
+        $prompt = 'Product - ' . $marker . ': "' . $value . '"';
         t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
 
-      // adds the ###QTY_NAME### marker in case of variants
-      $this->markerArray = $this->zz_addQtynameMarker($product, $this->markerArray, $this);
+        // adds the ###QTY_NAME### marker in case of variants
+      $markerArray = $this->zz_addQtynameMarker( $product, $markerArray, $this );
     }
       // FOREACH  : settings property
+    
+    return $markerArray;
   }
 
  /**
@@ -911,57 +915,48 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
     }
       // DIE  : $row is empty
 
-    $arrReturn    = null;
-    $content  = '';
+    $arrReturn          = null;
+    $content            = '';
 
-    $productsNet        = 0;
-    $productsGross      = 0;
-    $productsTaxReduced = 0;
-    $productsTaxNormal  = 0;
+    $markerArray        = null;
+    $productsNet        = 0.00;
+    $productsGross      = 0.00;
+    $productsTaxReduced = 0.00;
+    $productsTaxNormal  = 0.00;
 
       // FOREACH  : products
     foreach( ( array ) $this->products as $product )
     {
-        // clear marker array to avoid problems with error msg etc.
-      unset( $this->markerArray );
-
         // calculate price total
-      $product['price_total'] = $product['price'] * $product['qty'];
+      $product['sumgross'] = $product['gross'] * $product['qty'];
 
         // DRS
       if( $this->drs->drsFormula )
       {
-        $prompt = $product['title'] . ': ' . $product['price'] . ' x ' . $product['qty'] . ' = ' . $product['price_total'];
+        $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
         t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
 
         // cObject become current record
-      $this->local_cObj->start( $product, $this->conf['db.']['table'] );
-
-        // DRS
-      if( $this->drs->drsCobj )
-      {
-        $data   = var_export( $this->local_cObj->data, true );
-        $prompt = 'cObj->data: ' . $data;
-        t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
+      $this->zz_setData( $product, $this->conf['db.']['table'] );
 
         // update product settings
-      $this->caddyWiProductsProductSettings( $product );
-
-        // update error prompts
-      $this->caddyWiProductsProductErrorMsg( $product );
+      $markerArray  = ( array ) $markerArray
+                    + ( array ) $this->caddyWiProductsProductSettings( $product )
+                    + ( array ) $this->caddyWiProductsProductErrorMsg( $product )
+                    ;
 
          // add inner html to variable
-      $content = $content . $this->cObj->substituteMarkerArrayCached
-                                    (
-                                      $this->tmpl['item'], $this->markerArray
-                                    );
+      $content  = $content 
+                . $this->cObj->substituteMarkerArrayCached
+                  (
+                    $this->tmpl['item'], $markerArray
+                  )
+                ;
 
         // update product gross
-      $productsGross        = $productsGross + $product['price_total'];
+      $productsGross        = $productsGross + $product['sumgross'];
         // update number of products
       $this->numberOfItems  = $this->numberOfItems + $product['qty'];
 
@@ -1017,7 +1012,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
               $this->conf['settings.']['fields.']['tax.']
            );
       // price netto
-    $arrReturn['cartNet'] = $product['price_total'] - $currTax;
+    $arrReturn['cartNet'] = $product['sumgross'] - $currTax;
 
     switch( $product['tax'] )
     {
@@ -2750,22 +2745,17 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
 /**
- * zz_setDataBySession( ) : 
+ * zz_setData( ) : 
  *
  * @return	void
  * @access    private
  * @version 2.0.2
  * @since 2.0.2
  */
-  private function zz_setDataBySession( )
+  private function zz_setData( $data, $table )
   {
-      // Get the current session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     
-      // Implode the array to a one dimensional array
-    $data  = t3lib_BEfunc::implodeTSParams( $sesArray );
-
-    $this->local_cObj->start( $data, $this->conf['db.']['table'] );
+    $this->local_cObj->start( $data, $table );
       // cObject becomes current record
 
       // RETURN : no DRS
@@ -2780,6 +2770,26 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
     $prompt   = 'cObj->data: ' . $cObjData;
     t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
       // DRS
+  }
+
+/**
+ * zz_setDataBySession( ) : 
+ *
+ * @return	void
+ * @access    private
+ * @version 2.0.2
+ * @since 2.0.2
+ */
+  private function zz_setDataBySession( )
+  {
+      // Get the current session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    
+      // data: implode the array to a one dimensional array
+    $data = t3lib_BEfunc::implodeTSParams( $sesArray );
+
+      // set cObj->data
+    $this->zz_setData( $data, $this->conf['db.']['table'] );
   }
 
 

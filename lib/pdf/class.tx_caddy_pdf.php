@@ -170,7 +170,7 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function caddyProduct( $product )
   {
-    $product['price_total'] = $product['price'] * $product['qty'];
+    $product['sumgross'] = $product['gross'] * $product['qty'];
 
     $this->local_cObj->start( $product, $this->conf['db.']['table'] );
 

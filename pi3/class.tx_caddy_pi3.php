@@ -161,7 +161,7 @@ class tx_caddy_pi3 extends tslib_pibase
     {
       $cObjData = array
       (
-        'gross'     => $product['price']
+        'gross'     => $product['gross']
                     *  $product['qty']
                     ,
         'quantity'  => $product['qty'],
