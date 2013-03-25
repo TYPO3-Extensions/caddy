@@ -924,31 +924,11 @@ class tx_caddy extends tslib_pibase
     $productsTaxNormal  = 0.00;
 
       // FOREACH  : products
-var_dump( __METHOD__, __LINE__, $this->product );
+//var_dump( __METHOD__, __LINE__, $this->product );
     foreach( ( array ) $this->products as $product )
     {
         // calculate tax
-      $arrResult          = $this->calcItemsTax( $product );
-      $productsNet        = $productsNet        
-                          + $arrResult['sumnet']
-                          ;
-      $productsTaxReduced = $productsTaxReduced 
-                          + $arrResult['taxReduced']
-                          ;
-      $productsTaxNormal  = $productsTaxNormal  
-                          + $arrResult['taxNormal']
-                          ;
-      
-
-        // calculate gross total
-      $product['sumgross']  = $product['gross'] 
-                            * $product['qty']
-                            ;
-        // calculate net total
-      $product['net']       = $arrResult['sumnet'];
-      $product['sumnet']    = $product['net']
-                            * $product['qty']
-                            ;
+      $product = $this->calcItemsTax( $product );
 
         // DRS
       if( $this->drs->drsFormula )
@@ -976,7 +956,12 @@ var_dump( __METHOD__, __LINE__, $this->product );
                 ;
 
         // update product gross
-      $productsGross        = $productsGross + $product['sumgross'];
+      $productsGross  = $productsGross 
+                      + $product['sumgross']
+                      ;
+      $productsNet    = $productsNet 
+                      + $product['sumnet']
+                      ;
         // update number of products
       $this->numberOfItems  = $this->numberOfItems + $product['qty'];
 
@@ -987,8 +972,8 @@ var_dump( __METHOD__, __LINE__, $this->product );
       // FOREACH  : products
 
     $arrReturn['content']               = $content;
-    $arrReturn['sum']['net']            = $productsNet;
     $arrReturn['sum']['gross']          = $productsGross;
+    $arrReturn['sum']['net']            = $productsNet;
     $arrReturn['sum']['tax']['normal']  = $productsTaxNormal;
     $arrReturn['sum']['tax']['reduced'] = $productsTaxReduced;
 
@@ -1008,6 +993,11 @@ var_dump( __METHOD__, __LINE__, $this->product );
   {
     $arrReturn = null;
 
+      // calculate gross total
+    $product['sumgross']  = $product['gross'] 
+                            * $product['qty']
+                            ;
+
       // Handle HTML snippet
       // get the formular with the markers ###TAX## for calculating tax
     $str_wrap = $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'];
@@ -1026,21 +1016,30 @@ var_dump( __METHOD__, __LINE__, $this->product );
               $this->conf['settings.']['fields.']['tax.']
            );
       // price netto
-    $arrReturn['sumnet'] = $product['sumgross'] 
+    $product['sumnet']  = $product['sumgross'] 
                           - $currTax
                           ;
 
+      // calculate net total
+    
+    $taxRate  = $product['sumgross']
+              / $product['sumnet']
+              ;
+    $product['net'] = $product['gross']
+                      / $taxRate
+                      ;
+                          ;
     switch( $product['tax'] )
     {
       case( 0 ):
         break;
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
-        $arrReturn['taxReduced'] = $currTax;
+        $product['taxReduced'] = $currTax;
         break;
       case( 2 ):
       case( $this->conf['tax.']['normalCalc'] ):
-        $arrReturn['taxNormal'] = $currTax;
+        $product['taxNormal'] = $currTax;
         break;
       default:
         echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
@@ -1048,7 +1047,7 @@ var_dump( __METHOD__, __LINE__, $this->product );
     }
     $this->conf['settings.']['fields.']['tax.']['default.']['setCurrent.']['wrap'] = $str_wrap_former;
 
-    return $arrReturn;
+    return $product;
   }
  
 
