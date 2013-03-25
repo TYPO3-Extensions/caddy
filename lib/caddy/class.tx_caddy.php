@@ -34,16 +34,16 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *              SECTION: Caddy
  *  187:     public function caddy( )
- *  221:     private function caddyWiProducts( )
- *  343:     private function caddyWiProductsInCaseOfPaymentDEPRECATED( $contentItem )
- *  381:     private function caddyWiProductsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
- *  400:     private function caddyWiProductsOptionsPayment( $subpartArray, $paymentId )
- *  425:     private function caddyWiProductsOptionsShipping( $subpartArray, $shippingId )
- *  451:     private function caddyWiProductsOptionsSpecials( $subpartArray, $specialIds )
- *  475:     private function caddyWiProductsProductErrorMsg( $product )
- *  507:     private function caddyWiProductsProductServiceAttributes( $product )
- *  574:     private function caddyWiProductsProductSettings( $product )
- *  621:     private function caddyWoProducts( )
+ *  221:     private function caddyWiItems( )
+ *  343:     private function caddyWiItemsInCaseOfPaymentDEPRECATED( $contentItem )
+ *  381:     private function caddyWiItemsOptions( $subpartArray, $paymentId, $shippingId, $specialIds )
+ *  400:     private function caddyWiItemsOptionsPayment( $subpartArray, $paymentId )
+ *  425:     private function caddyWiItemsOptionsShipping( $subpartArray, $shippingId )
+ *  451:     private function caddyWiItemsOptionsSpecials( $subpartArray, $specialIds )
+ *  475:     private function caddyWiItemsItemErrorMsg( $product )
+ *  507:     private function caddyWiItemsItemServiceAttributes( $product )
+ *  574:     private function caddyWiItemsMarkerItem( $product )
+ *  621:     private function caddyWoItems( )
  *
  *              SECTION: Calc
  *  648:     public function calc( )
@@ -199,11 +199,11 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( count( $this->products ) > 0 ):
-        $caddy = $this->caddyWiProducts( );
+        $caddy = $this->caddyWiItems( );
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
-        $this->caddyWoProducts( );
+        $this->caddyWoItems( );
         //$caddy = null;
         break;
     }
@@ -233,14 +233,14 @@ class tx_caddy extends tslib_pibase
   }
   
  /**
-  * caddyWiProducts( )  : Workflow for a caddy, which contains products
+  * caddyWiItems( )  : Workflow for a caddy, which contains products
   *
   * @return	array		: $markerArray
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProducts( )
+  private function caddyWiItems( )
   {
     $marker   = null;
     $subparts = null;
@@ -292,19 +292,19 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
         unset( $calcedCaddy['content'] );
 
           // session  : new or update 
-        $this->caddyWiProductsSession( $calcedCaddy );
+        $this->caddyWiItemsSession( $calcedCaddy );
 
           // set data
           // set cObjData
         $this->zz_setDataBySession( );
           // set marker
-        $marker   = ( array ) $this->caddyWiProductsSumMarkerLabels( )
-                  + ( array ) $this->caddyWiProductsSumMarkerTaxRates( )
-                  + ( array ) $this->caddyWiProductsSumMarkerValues( )
+        $marker   = ( array ) $this->caddyWiItemsMarkerSumLabels( )
+                  + ( array ) $this->caddyWiItemsMarkerSumTaxRates( )
+                  + ( array ) $this->caddyWiItemsMarkerSumValues( )
                   ;
-        $subparts['###CONTENT###']  = $this->caddyWiProductsContent( $content );
+        $subparts['###CONTENT###']  = $this->caddyWiItemsContent( $content );
         $subparts = $subparts
-                  + ( array ) $this->caddyWiProductsOptions( $calcedCaddy )
+                  + ( array ) $this->caddyWiItemsOptions( $calcedCaddy )
                   ;
         break;
     }
@@ -321,7 +321,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
     
  /**
-  * caddyWiProductsContent( )  : 
+  * caddyWiItemsContent( )  : 
   *
   * @param	string		$content : current content
   * @return	string		$content : handeld content
@@ -329,25 +329,25 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.0
   */
-  private function caddyWiProductsContent( $content )
+  private function caddyWiItemsContent( $content )
   {
     $content  = $content
-              . $this->caddyWiProductsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiProductsFieldHidden( )
+              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiItemsFieldHidden( )
               ;
     
     return $content;
   }
 
  /**
-  * caddyWiProductsFieldHidden( )  : 
+  * caddyWiItemsFieldHidden( )  : 
   *
   * @return	string		$content : rendered hidden field
   * @access private
   * @version    2.0.2
   * @since      2.0.0
   */
-  private function caddyWiProductsFieldHidden( )
+  private function caddyWiItemsFieldHidden( )
   {
     $content = '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
     
@@ -355,18 +355,18 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
   /**
-  * caddyWiProductsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
+  * caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
   *
   * @return	string		$content : rendered item
   * @access private
   * @version    2.0.2
   * @since      2.0.0
   */
-  private function caddyWiProductsInCaseOfPaymentDEPRECATED( )
+  private function caddyWiItemsInCaseOfPaymentDEPRECATED( )
   {
     
      /**
-      * DEPRECATED!caddyWiProductsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
+      * DEPRECATED!caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
       *
       * Seems to be deorecated:
       *   * $this->tmpl['special_item'] is ###CADDY_SPECIAL### ###ITEM###
@@ -411,14 +411,65 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsSumMarkerLabels( )  :
+  * caddyWiItemsMarkerItem( )
+  *
+  * @param	array		$product :
+  * @return	array           $markerArray
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWiItemsMarkerItem( $product )
+  {
+    
+var_dump( __METHOD__, __LINE__, $product );    
+    $markerArray = null;
+    
+      // FOREACH  : settings property
+    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    {
+      if( stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+      $name = $this->conf['settings.']['fields.'][$key];
+      $conf = $this->conf['settings.']['fields.'][$key . '.'];
+
+      if( $key == 'delete' )
+      {
+        $conf = $this->zz_addVariantGpvarToImagelinkwrap( $product, $name, $conf, $this );
+      }
+      
+      $marker = '###' . strtoupper( $key ) . '###';
+      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
+      $markerArray[$marker] = $value;
+
+        // DRS
+      if( $this->drs->drsMarker )
+      {
+        $prompt = 'Product - ' . $marker . ': "' . $value . '"';
+        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
+        // adds the ###QTY_NAME### marker in case of variants
+      $markerArray = $this->zz_addQtynameMarker( $product, $markerArray, $this );
+    }
+      // FOREACH  : settings property
+    
+    return $markerArray;
+  }
+
+ /**
+  * caddyWiItemsMarkerSumLabels( )  :
   *
   * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsSumMarkerLabels( )
+  private function caddyWiItemsMarkerSumLabels( )
   {
     $markerArray = null;
     
@@ -450,14 +501,14 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsSumMarkerTaxRates( )  :
+  * caddyWiItemsMarkerSumTaxRates( )  :
   *
   * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsSumMarkerTaxRates( )
+  private function caddyWiItemsMarkerSumTaxRates( )
   {
     $markerArray = null;
     
@@ -489,14 +540,14 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsSumMarkerValues( )  :
+  * caddyWiItemsMarkerSumValues( )  :
   *
   * @return	array		: $markerArray
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsSumMarkerValues( )
+  private function caddyWiItemsMarkerSumValues( )
   {
     $markerArray = null;
     
@@ -528,7 +579,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
   
  /**
-  * caddyWiProductsOptions( )  :
+  * caddyWiItemsOptions( )  :
   *
   * @param	integer		$paymentId    :
   * @param	integer		$shippingId   :
@@ -538,7 +589,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptions( $calcedCaddy )
+  private function caddyWiItemsOptions( $calcedCaddy )
   {
     $marker = array( );
     
@@ -547,16 +598,16 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
     $specialIds = $calcedCaddy['options']['specials']['id'];
     
     $marker = $marker
-            + ( array ) $this->caddyWiProductsOptionsPayment(   $paymentId  )
-            + ( array ) $this->caddyWiProductsOptionsShipping(  $shippingId )
-            + ( array ) $this->caddyWiProductsOptionsSpecials(  $specialIds )
+            + ( array ) $this->caddyWiItemsOptionsPayment(   $paymentId  )
+            + ( array ) $this->caddyWiItemsOptionsShipping(  $shippingId )
+            + ( array ) $this->caddyWiItemsOptionsSpecials(  $specialIds )
             ;
 
     return $marker;
   }
 
  /**
-  * caddyWiProductsOptionsPayment( )  :
+  * caddyWiItemsOptionsPayment( )  :
   *
   * @param	integer		$paymentId: ...
   * @return	array		$marker
@@ -564,7 +615,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsPayment( $paymentId )
+  private function caddyWiItemsOptionsPayment( $paymentId )
   {
     $marker = null;
     $paymentArray = null;
@@ -581,7 +632,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsOptionsShipping( )  :
+  * caddyWiItemsOptionsShipping( )  :
   *
   * @param	integer		$shippingId: ...
   * @return	array		$marker
@@ -589,7 +640,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsShipping( $shippingId )
+  private function caddyWiItemsOptionsShipping( $shippingId )
   {
     $marker   = null;
     $shippingArray  = null;
@@ -607,7 +658,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsOptionsSpecials( )  :
+  * caddyWiItemsOptionsSpecials( )  :
   *
   * @param	integer		$specialIds: ...
   * @return	array		$marker
@@ -615,7 +666,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiProductsOptionsSpecials( $specialIds )
+  private function caddyWiItemsOptionsSpecials( $specialIds )
   {
     $marker = null;
     $specialArray = null;
@@ -632,7 +683,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsProductErrorMsg( ) :
+  * caddyWiItemsItemErrorMsg( ) :
   *
   * @param	array		$product      : the current item / product
   * @return	array           $markerArray  :
@@ -640,7 +691,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProductsProductErrorMsg( $product )
+  private function caddyWiItemsItemErrorMsg( $product )
   {
     $prompt       = null;
     $markerArray  = null;
@@ -667,7 +718,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsProductServiceAttributes( )
+  * caddyWiItemsItemServiceAttributes( )
   *
   * @param	array		$product :
   * @return	void
@@ -675,7 +726,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProductsProductServiceAttributes( $product )
+  private function caddyWiItemsItemServiceAttributes( $product )
   {
       // DRS
     if( $this->drs->drsTodo )
@@ -734,56 +785,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
 
  /**
-  * caddyWiProductsProductSettings( )
-  *
-  * @param	array		$product :
-  * @return	array           $markerArray
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWiProductsProductSettings( $product )
-  {
-    $markerArray = null;
-    
-      // FOREACH  : settings property
-    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
-    {
-      if( stristr( $key, '.' ) )
-      {
-        continue;
-      }
-
-      $name = $this->conf['settings.']['fields.'][$key];
-      $conf = $this->conf['settings.']['fields.'][$key . '.'];
-
-      if( $key == 'delete' )
-      {
-        $conf = $this->zz_addVariantGpvarToImagelinkwrap( $product, $name, $conf, $this );
-      }
-      
-      $marker = '###' . strtoupper( $key ) . '###';
-      $value  = $this->local_cObj->cObjGetSingle( $name, $conf );
-      $markerArray[$marker] = $value;
-
-        // DRS
-      if( $this->drs->drsMarker )
-      {
-        $prompt = 'Product - ' . $marker . ': "' . $value . '"';
-        t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-
-        // adds the ###QTY_NAME### marker in case of variants
-      $markerArray = $this->zz_addQtynameMarker( $product, $markerArray, $this );
-    }
-      // FOREACH  : settings property
-    
-    return $markerArray;
-  }
-
- /**
-  * caddyWiProductsSession( )  : 
+  * caddyWiItemsSession( )  : 
   *
   * @param      array       $calcedCaddy  : 
   * @return	array       $sesArray     : the new or updated session array
@@ -791,7 +793,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiProductsSession( $calcedCaddy )
+  private function caddyWiItemsSession( $calcedCaddy )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray = $calcedCaddy
@@ -817,14 +819,14 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
   }
   
  /**
-  * caddyWoProducts( )  : Render a caddy, which doesn't contain any product
+  * caddyWoItems( )  : Render a caddy, which doesn't contain any product
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWoProducts( )
+  private function caddyWoItems( )
   {
       // #45915, 130228
       // Set the hidden field to true of the powermail form
@@ -943,8 +945,8 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
 
         // update product settings
       $markerArray  = ( array ) $markerArray
-                    + ( array ) $this->caddyWiProductsProductSettings( $product )
-                    + ( array ) $this->caddyWiProductsProductErrorMsg( $product )
+                    + ( array ) $this->caddyWiItemsMarkerItem( $product )
+                    + ( array ) $this->caddyWiItemsItemErrorMsg( $product )
                     ;
 
          // add inner html to variable
@@ -961,7 +963,7 @@ var_dump( __METHOD__, __LINE__ , $calcedCaddy ) ;
       $this->numberOfItems  = $this->numberOfItems + $product['qty'];
 
         // update service attributes
-      $this->caddyWiProductsProductServiceAttributes( $product );
+      $this->caddyWiItemsItemServiceAttributes( $product );
 
         // calculate tax
       $arrResult          = $this->calcItemsTax( $product );
