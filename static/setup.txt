@@ -237,35 +237,6 @@ plugin.tx_caddy_pi1 {
         typolink.returnLast = url
       }
 
-      taxrate_reduced_string = TEXT
-      taxrate_reduced_string {
-        value = including
-        lang { 
-          de = inklusive 
-          en = including
-        }
-        if {
-          isTrue {
-            field = sumTaxReduced
-          }
-        }
-        noTrimWrap = || {$plugin.caddy.tax.reduced}% |
-      }
-
-      taxrate_normal_string = TEXT
-      taxrate_normal_string {
-        value = including
-        lang { 
-          de = inklusive 
-          en = including
-        }
-        if {
-          isTrue {
-            field = sumTaxNormal
-          }
-        }
-        noTrimWrap = || {$plugin.caddy.tax.normal}% |
-      }
     }
     // table, title, gross, tax, sku, min, max, service attributes
   db =
@@ -614,6 +585,34 @@ plugin.tx_caddy_pi1 {
         optionsspecialslabel = TEXT
         optionsspecialslabel {
           field = optionsspecialslabel
+        }
+        taxrate_reduced_string = TEXT
+        taxrate_reduced_string {
+          value = including
+          lang { 
+            de = inklusive 
+            en = including
+          }
+          if {
+            isTrue {
+              field = sumTaxReduced
+            }
+          }
+          noTrimWrap = || {$plugin.caddy.tax.reduced}% |
+        }
+        taxrate_normal_string = TEXT
+        taxrate_normal_string {
+          value = including
+          lang { 
+            de = inklusive 
+            en = including
+          }
+          if {
+            isTrue {
+              field = sumTaxNormal
+            }
+          }
+          noTrimWrap = || {$plugin.caddy.tax.normal}% |
         }
       }
         // payment, shipping, specials
