@@ -954,6 +954,12 @@ class tx_caddy extends tslib_pibase
       $productsNet    = $productsNet 
                       + $product['sumnet']
                       ;
+      $productsTaxNormal    = $productsTaxNormal
+                            + $product['taxNormal']
+                            ;
+      $productsTaxReduced   = $productsTaxReduced
+                            + $product['taxReduced']
+                            ;
         // update number of products
       $this->numberOfItems  = $this->numberOfItems + $product['qty'];
 
