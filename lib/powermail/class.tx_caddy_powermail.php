@@ -230,19 +230,19 @@ $content                    = $calcedCaddy['content'];
 unset( $calcedCaddy['content'] );
 
   // session  : new or update 
-$this->caddyWiItemsSession( $calcedCaddy );
+$this->caddy->caddyWiItemsSession( $calcedCaddy );
 
   // set data
   // set cObjData
-$this->zz_setDataBySession( );
+$this->caddy->zz_setDataBySession( );
   // set marker
-$marker   = ( array ) $this->caddyWiItemsMarkerSumLabels( )
-          + ( array ) $this->caddyWiItemsMarkerSumTaxRates( )
-          + ( array ) $this->caddyWiItemsMarkerSumValues( )
+$marker   = ( array ) $this->caddy->caddyWiItemsMarkerSumLabels( )
+          + ( array ) $this->caddy->caddyWiItemsMarkerSumTaxRates( )
+          + ( array ) $this->caddy->caddyWiItemsMarkerSumValues( )
           ;
-$subparts['###CONTENT###']  = $this->caddyWiItemsContent( $content );
+$subparts['###CONTENT###']  = $this->caddy->caddyWiItemsContent( $content );
 $subparts = $subparts
-          + ( array ) $this->caddyWiItemsOptions( $calcedCaddy )
+          + ( array ) $this->caddy->caddyWiItemsOptions( $calcedCaddy )
           ;
 
 var_dump( __METHOD__, __LINE__, $marker, $subparts );

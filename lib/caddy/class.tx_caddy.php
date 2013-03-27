@@ -327,7 +327,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.2
   * @since      2.0.0
   */
-  private function caddyWiItemsContent( $content )
+//  private function caddyWiItemsContent( $content )
+  public function caddyWiItemsContent( $content )
   {
     $content  = $content
               . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
@@ -466,7 +467,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiItemsMarkerSumLabels( )
+//  private function caddyWiItemsMarkerSumLabels( )
+  public function caddyWiItemsMarkerSumLabels( )
   {
     $markerArray = null;
     
@@ -505,7 +507,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiItemsMarkerSumTaxRates( )
+//  private function caddyWiItemsMarkerSumTaxRates( ) 
+  public function caddyWiItemsMarkerSumTaxRates( ) 
   {
     $markerArray = null;
     
@@ -544,7 +547,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiItemsMarkerSumValues( )
+//  private function caddyWiItemsMarkerSumValues( )
+  public function caddyWiItemsMarkerSumValues( )
   {
     $markerArray = null;
     
@@ -586,7 +590,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function caddyWiItemsOptions( $calcedCaddy )
+//  private function caddyWiItemsOptions( $calcedCaddy )
+  public function caddyWiItemsOptions( $calcedCaddy )
   {
     $marker = array( );
     
@@ -790,7 +795,8 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiItemsSession( $calcedCaddy )
+//  private function caddyWiItemsSession( $calcedCaddy )
+  public function caddyWiItemsSession( $calcedCaddy )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray = $calcedCaddy
@@ -2782,7 +2788,8 @@ class tx_caddy extends tslib_pibase
  * @version 2.0.2
  * @since 2.0.2
  */
-  private function zz_setDataBySession( )
+//  private function zz_setDataBySession( )
+  public function zz_setDataBySession( )
   {
       // Get the current session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
