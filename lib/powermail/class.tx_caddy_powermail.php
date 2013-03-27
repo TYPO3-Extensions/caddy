@@ -222,8 +222,30 @@ class tx_caddy_powermail extends tslib_pibase
     $this->caddy->setProducts( $this->products );
     
       // Calculate the caddy
-    $arrResult          = $this->caddy->calc( );
-var_dump( __METHOD__, __LINE__, $arrResult );
+//    $arrResult          = $this->caddy->calc( );
+
+$calcedCaddy          = $this->caddy->calc( );
+
+$content                    = $calcedCaddy['content'];
+unset( $calcedCaddy['content'] );
+
+  // session  : new or update 
+$this->caddyWiItemsSession( $calcedCaddy );
+
+  // set data
+  // set cObjData
+$this->zz_setDataBySession( );
+  // set marker
+$marker   = ( array ) $this->caddyWiItemsMarkerSumLabels( )
+          + ( array ) $this->caddyWiItemsMarkerSumTaxRates( )
+          + ( array ) $this->caddyWiItemsMarkerSumValues( )
+          ;
+$subparts['###CONTENT###']  = $this->caddyWiItemsContent( $content );
+$subparts = $subparts
+          + ( array ) $this->caddyWiItemsOptions( $calcedCaddy )
+          ;
+
+var_dump( __METHOD__, __LINE__, $marker, $subparts );
 die( );
     
       // Set service attributes
