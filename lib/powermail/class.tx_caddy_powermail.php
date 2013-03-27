@@ -224,31 +224,31 @@ class tx_caddy_powermail extends tslib_pibase
       // Calculate the caddy
 //    $arrResult          = $this->caddy->calc( );
 
+$arrResult = $this->caddy->caddy( );
+$marker     = $arrResult['marker'];
+$subparts   = $arrResult['subparts'];
+$tmpl       = $arrResult['tmpl'];
+//var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
+unset( $arrResult );
+
+$content = $this->powermail->formCss( $content );
+
+$this->send( );
+
+$this->clean( );
+
+$content = $content . $this->cObj->substituteMarkerArrayCached
+                      (
+                        $tmpl,
+                        $marker,
+                        $subparts
+                      );
+
+$content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
+$content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
 var_dump( __METHOD__, __LINE__, $this->caddy->caddy( ) );
 die( );
-$calcedCaddy          = $this->caddy->calc( );
-
-$content                    = $calcedCaddy['content'];
-unset( $calcedCaddy['content'] );
-
-  // session  : new or update 
-$this->caddy->caddyWiItemsSession( $calcedCaddy );
-
-  // set data
-  // set cObjData
-$this->caddy->zz_setDataBySession( );
-  // set marker
-$marker   = ( array ) $this->caddy->caddyWiItemsMarkerSumLabels( )
-          + ( array ) $this->caddy->caddyWiItemsMarkerSumTaxRates( )
-          + ( array ) $this->caddy->caddyWiItemsMarkerSumValues( )
-          ;
-$subparts['###CONTENT###']  = $this->caddy->caddyWiItemsContent( $content );
-$subparts = $subparts
-          + ( array ) $this->caddy->caddyWiItemsOptions( $calcedCaddy )
-          ;
-
-var_dump( __METHOD__, __LINE__, $marker, $subparts );
-die( );
+return $content;
     
 //      // Set service attributes
 //    $serviceattributes  = $arrResult['serviceattributes'];
