@@ -224,6 +224,8 @@ class tx_caddy_powermail extends tslib_pibase
       // Calculate the caddy
 //    $arrResult          = $this->caddy->calc( );
 
+var_dump( __METHOD__, __LINE__, $this->caddy->caddy( ) );
+die( );
 $calcedCaddy          = $this->caddy->calc( );
 
 $content                    = $calcedCaddy['content'];
@@ -248,20 +250,20 @@ $subparts = $subparts
 var_dump( __METHOD__, __LINE__, $marker, $subparts );
 die( );
     
-      // Set service attributes
-    $serviceattributes  = $arrResult['serviceattributes'];
-    $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
-    $this->cartServiceAttribute1Sum = $serviceattributes['1']['sum'];
-    $this->cartServiceAttribute2Max = $serviceattributes['2']['max'];
-    $this->cartServiceAttribute2Sum = $serviceattributes['2']['sum'];
-    $this->cartServiceAttribute3Max = $serviceattributes['3']['max'];
-    $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
-    unset( $arrResult['serviceattributes'] );
-
-      // Set items (rendered HTML code)
-    $contentItem                    = $arrResult['contentItem']; 
-    $subpartArray['###CONTENT###']  = $contentItem; // work on subpart 3
-    unset( $arrResult['contentItem'] );
+//      // Set service attributes
+//    $serviceattributes  = $arrResult['serviceattributes'];
+//    $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
+//    $this->cartServiceAttribute1Sum = $serviceattributes['1']['sum'];
+//    $this->cartServiceAttribute2Max = $serviceattributes['2']['max'];
+//    $this->cartServiceAttribute2Sum = $serviceattributes['2']['sum'];
+//    $this->cartServiceAttribute3Max = $serviceattributes['3']['max'];
+//    $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
+//    unset( $arrResult['serviceattributes'] );
+//
+//      // Set items (rendered HTML code)
+//    $contentItem                    = $arrResult['contentItem']; 
+//    $subpartArray['###CONTENT###']  = $contentItem; // work on subpart 3
+//    unset( $arrResult['contentItem'] );
 
 //    $outerArr = array
 //                (
@@ -283,42 +285,42 @@ die( );
 //var_dump( __METHOD__, __LINE__, $outerArr );
 //    $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
     
-      // Set cObj->data
-    $data = $arrResult;
-    $local_cObj->start( $data, $this->conf['db.']['table'] );
-
-    $powermailCaddyOverall = ( array ) $this->conf['settings.']['powermailCaddy.']['overall.'];
-    foreach( array_keys( $powermailCaddyOverall ) as $key )
-    {
-      if( stristr( $key, '.' ) )
-      {
-        continue;        
-      }
-      $marker = '###' . strtoupper($key) . '###';
-      $name   = $powermailCaddyOverall[$key];
-      $conf   = $powermailCaddyOverall[$key . '.'];
-      $value  = $local_cObj->cObjGetSingle( $name, $conf );  
-      $this->outerMarkerArray[$marker] = $value;
-    }
-    
-var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );
-
-    $this->content  = $this->cObj->substituteMarkerArrayCached
-                      (
-                        $this->tmpl['all'], 
-                        $this->outerMarkerArray, 
-                        $subpartArray
-                      );
-    $this->content  = $this->dynamicMarkers->main( $this->content, $this);
-    $this->content  = preg_replace( '|###.*?###|i' , '&nbsp;', $this->content );
-
-      // DRS
-    if( $this->drs->drsSession || $drs )
-    {
-      $prompt = __METHOD__ . ' returns the caddy with products and calculation.';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
+//      // Set cObj->data
+//    $data = $arrResult;
+//    $local_cObj->start( $data, $this->conf['db.']['table'] );
+//
+//    $powermailCaddyOverall = ( array ) $this->conf['settings.']['powermailCaddy.']['overall.'];
+//    foreach( array_keys( $powermailCaddyOverall ) as $key )
+//    {
+//      if( stristr( $key, '.' ) )
+//      {
+//        continue;        
+//      }
+//      $marker = '###' . strtoupper($key) . '###';
+//      $name   = $powermailCaddyOverall[$key];
+//      $conf   = $powermailCaddyOverall[$key . '.'];
+//      $value  = $local_cObj->cObjGetSingle( $name, $conf );  
+//      $this->outerMarkerArray[$marker] = $value;
+//    }
+//    
+//var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );
+//
+//    $this->content  = $this->cObj->substituteMarkerArrayCached
+//                      (
+//                        $this->tmpl['all'], 
+//                        $this->outerMarkerArray, 
+//                        $subpartArray
+//                      );
+//    $this->content  = $this->dynamicMarkers->main( $this->content, $this);
+//    $this->content  = preg_replace( '|###.*?###|i' , '&nbsp;', $this->content );
+//
+//      // DRS
+//    if( $this->drs->drsSession || $drs )
+//    {
+//      $prompt = __METHOD__ . ' returns the caddy with products and calculation.';
+//      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+//    }
+//      // DRS
 
 var_dump( __METHOD__, __LINE__, $this->content );
 die( );
