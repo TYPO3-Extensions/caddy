@@ -231,12 +231,6 @@ $tmpl       = $arrResult['tmpl'];
 //var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
 unset( $arrResult );
 
-$content = $this->powermail->formCss( $content );
-
-$this->send( );
-
-$this->clean( );
-
 $content = $content . $this->cObj->substituteMarkerArrayCached
                       (
                         $tmpl,
