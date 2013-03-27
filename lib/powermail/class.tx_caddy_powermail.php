@@ -223,6 +223,8 @@ class tx_caddy_powermail extends tslib_pibase
     
       // Calculate the caddy
     $arrResult          = $this->caddy->calc( );
+var_dump( __METHOD__, __LINE__, $arrResult );
+die( );
     
       // Set service attributes
     $serviceattributes  = $arrResult['serviceattributes'];

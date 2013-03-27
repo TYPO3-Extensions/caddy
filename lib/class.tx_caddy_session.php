@@ -493,10 +493,16 @@ class tx_caddy_session
     // exit in case of error
     if( $error )
     {
-      $str  = '<h1>caddy: SQL-Error</h1>'
-            . '<p>'.$error.'</p>'
-            . '<p>'.$query.'</p>'
-            ;
+      $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
+              . '<p>' . $error . '</p>' . PHP_EOL
+              . '<p>' . $query . '</p>' . PHP_EOL
+              . '<p>' . PHP_EOL
+              . 'Please take care for a proper configuratio at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
+              . 'Sorry for the trouble.<br />' . PHP_EOL
+              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . __METHOD__ . ' (' . __LINE__ . ')';
+              ;
+      die( $prompt );
       $this->zz_msg( $str, 0, 1, 1 );
     }
 
@@ -612,10 +618,14 @@ class tx_caddy_session
     
     if( $error )
     {
-      $prompt = '<h1>caddy: SQL-Error</h1>'
-              . '<p>' . $error . '</p>'
-              . '<p>' . $query . '</p>'
-              . '<p>' . __METHOD__ . ' (' . __LINE__ . ')</p>'
+      $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
+              . '<p>' . $error . '</p>' . PHP_EOL
+              . '<p>' . $query . '</p>' . PHP_EOL
+              . '<p>' . PHP_EOL
+              . 'Please take care for a proper configuratio at plugin.tx_caddy_pi1.db<br />' . PHP_EOL
+              . 'Sorry for the trouble.<br />' . PHP_EOL
+              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . __METHOD__ . ' (' . __LINE__ . ')';
               ;
       die( $prompt );
     }
