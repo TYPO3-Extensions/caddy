@@ -34,7 +34,7 @@
  *  135:     private function caddy( $invoice = false )
  *  168:     private function caddyProduct( $product )
  *  219:     private function  caddySum( $subpartArray )
- *  321:     private function caddyTablebody( $subpartArray )
+ *  321:     private function caddyTableItems( $subpartArray )
  *  351:     private function caddyTablehead( $subpartArray )
  *
  *              SECTION: Delivery Order
@@ -134,30 +134,52 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function caddy( $invoice = false )
   {
-    $subpartArray = null;
-//    $subpartArray = $this->caddyTablehead( $subpartArray );
-    $subpartArray = $this->caddyTablebody( $subpartArray );
+//    $subpartArray = null;
+////    $subpartArray = $this->caddyTablehead( $subpartArray );
+//    $subpartArray = $this->caddyTableItems( $subpartArray );
+//
+//    $outerMarkerArray = null;
+//    if( $invoice )
+//    {
+//      $outerMarkerArray = $this->caddySum( $subpartArray );
+//    }
+//      // render the marker
+//    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
+//                  (
+//                    $this->tmpl['all'],
+//                    $outerMarkerArray,
+//                    $subpartArray
+//                  );
+//      // render the marker
+//
+//    $htmlContent  = $this->dynamicMarkers->main( $htmlContent, $this);
+//    $htmlContent  = preg_replace( '|###.*?###|i' , '&nbsp;', $htmlContent );
+//
+//      // write the HTML content
+//    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
+//    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
 
-    $outerMarkerArray = null;
-    if( $invoice )
-    {
-      $outerMarkerArray = $this->caddySum( $subpartArray );
-    }
-      // render the marker
-    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-                  (
-                    $this->tmpl['all'],
-                    $outerMarkerArray,
-                    $subpartArray
-                  );
-      // render the marker
+$arrResult = $this->caddy->caddy( );
+$marker     = $arrResult['marker'];
+$subparts   = $arrResult['subparts'];
+$tmpl       = $arrResult['tmpl'];
+//var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
+unset( $arrResult );
 
-    $htmlContent  = $this->dynamicMarkers->main( $htmlContent, $this);
-    $htmlContent  = preg_replace( '|###.*?###|i' , '&nbsp;', $htmlContent );
+$content = $content . $this->cObj->substituteMarkerArrayCached
+                      (
+                        $tmpl,
+                        $marker,
+                        $subparts
+                      );
 
-      // write the HTML content
-    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
-    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
+$content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
+$content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
+var_dump( __METHOD__, __LINE__, $content );
+die( );
+// write the HTML content
+$body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
+$this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
   }
 
  /**
@@ -342,14 +364,14 @@ class tx_caddy_pdf extends tslib_pibase
   }
 
  /**
-  * caddyTablebody( ) : HTML table body of the caddy
+  * caddyTableItems( ) : HTML table body of the caddy
   *
   * @param	array		$subpartArray :
   * @return	array		$subpartArray :
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyTablebody( $subpartArray )
+  private function caddyTableItems( $subpartArray )
   {
     $content = null;
 
