@@ -58,7 +58,8 @@
       <label index="special_free_from">free special option from</label>
       <label index="special_free_until">free special option until</label>
       <label index="sum">Sum</label>
-      <label index="sumgross">Price (w tax)</label>
+      <label index="sumnet">Sum (wo tax)</label>
+      <label index="sumgross">Sum (w tax)</label>
       <label index="tableheaderdelete">Remove</label>
       <label index="tax">TAX</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
@@ -114,6 +115,7 @@
       <label index="special_free_from">kostenfrei ab</label>
       <label index="special_free_until">kostenfrei bis</label>
       <label index="sum">Betrag</label>
+      <label index="sumnet">Gesamtsumme (netto)</label>
       <label index="sumgross">Gesamtsumme (brutto)</label>
       <label index="tableheaderdelete">Entfernen</label>
       <label index="tax">Mehrwertsteuer</label>
