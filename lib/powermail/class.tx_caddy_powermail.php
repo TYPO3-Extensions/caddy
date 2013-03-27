@@ -240,8 +240,7 @@ $content = $content . $this->cObj->substituteMarkerArrayCached
 
 $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
 $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
-var_dump( __METHOD__, __LINE__, $content );
-die( );
+//var_dump( __METHOD__, __LINE__, $content );
 return $content;
     
 //      // Set service attributes
@@ -316,9 +315,9 @@ return $content;
 //    }
 //      // DRS
 
-var_dump( __METHOD__, __LINE__, $this->content );
-die( );
-    return $this->content;
+//var_dump( __METHOD__, __LINE__, $this->content );
+//die( );
+//    return $this->content;
   }
   
  /**
