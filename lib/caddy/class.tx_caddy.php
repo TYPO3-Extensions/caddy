@@ -859,16 +859,16 @@ class tx_caddy extends tslib_pibase
   {
     $this->init( );
 
-    $calc     = null;
-    $items    = null;
-    $options  = null;
+    $calc         = null;
+    $calcedItems  = null;
+    $options      = null;
 
       // handle the current product
-    $items    = $this->calcItems( );
-    $content  = $items['content'];
+    $calcedItems  = $this->calcItems( );
+    $content      = $calcedItems['content'];
       // handle the current product
 
-    $this->productsGross  = $items['sum']['gross'];
+    $this->productsGross  = $calcedItems['sum']['gross'];
 
       // option payment, shipping, specials
     $options = $this->calcOptions( );
@@ -877,11 +877,12 @@ class tx_caddy extends tslib_pibase
     $serviceattributes = $this->getServiceAttributes( );
 
       // Get all sums (gross, net, tax.normal, tax.reduced for items, options and both (sum)
-    $sum = $this->calcSum( $items, $options );
+    $sum = $this->calcSum( $calcedItems, $options );
 
     $calc = array
     (
       'content'           => $content,
+      'calcedItems'       => $calcedItems,
       'options'           => $options,
       'serviceattributes' => $serviceattributes,
       'sum'               => $sum,
@@ -919,8 +920,9 @@ class tx_caddy extends tslib_pibase
     }
       // DIE  : $row is empty
 
-    $arrReturn          = null;
+    $calcedItems          = null;
     $content            = '';
+    $items              = null;
 
     $productsNet        = 0.00;
     $productsGross      = 0.00;
@@ -969,18 +971,19 @@ class tx_caddy extends tslib_pibase
 
         // update service attributes
       $this->caddyWiItemsItemServiceAttributes( $product );
-var_dump( __METHOD__, __LINE__ , $product ) ;      
+      $items[] = $product;
 
     }
       // FOREACH  : products
 
-    $arrReturn['content']               = $content;
-    $arrReturn['sum']['gross']          = $productsGross;
-    $arrReturn['sum']['net']            = $productsNet;
-    $arrReturn['sum']['tax']['normal']  = $productsTaxNormal;
-    $arrReturn['sum']['tax']['reduced'] = $productsTaxReduced;
+    $calcedItems['content']               = $content;
+    $calcedItems['items']                 = $items;
+    $calcedItems['sum']['gross']          = $productsGross;
+    $calcedItems['sum']['net']            = $productsNet;
+    $calcedItems['sum']['tax']['normal']  = $productsTaxNormal;
+    $calcedItems['sum']['tax']['reduced'] = $productsTaxReduced;
 
-    return $arrReturn;
+    return $calcedItems;
   }
 
  /**
