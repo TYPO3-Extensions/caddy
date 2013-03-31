@@ -426,7 +426,7 @@ class tx_caddy extends tslib_pibase
     if( $this->drs->drsMarker )
     {
       $prompt = 'Configuration by settings.fields. ...';
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
       
@@ -484,7 +484,7 @@ class tx_caddy extends tslib_pibase
     if( $this->drs->drsMarker )
     {
       $prompt = 'Configuration by output.sum.labels. ...';
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
 
@@ -531,7 +531,7 @@ class tx_caddy extends tslib_pibase
     if( $this->drs->drsMarker )
     {
       $prompt = 'Configuration by output.sum.rates. ...';
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
       
@@ -578,7 +578,7 @@ class tx_caddy extends tslib_pibase
     if( $this->drs->drsMarker )
     {
       $prompt = 'Configuration by output.sum.values. ...';
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
 
