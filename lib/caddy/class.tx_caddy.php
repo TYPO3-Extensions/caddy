@@ -936,7 +936,7 @@ class tx_caddy extends tslib_pibase
     $calc = array
     (
       'content'           => $content,
-      'calcedItems'       => $calcedItems,
+      'items'             => $calcedItems['items'],
       'options'           => $options,
       'serviceattributes' => $serviceattributes,
       'sum'               => $sum,
