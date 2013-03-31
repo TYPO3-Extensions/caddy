@@ -401,21 +401,21 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = 'Configuration by settings.fields. ...';
+      $prompt = 'Configuration by output.item. ...';
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
-      
+
       // FOREACH  : settings property
-    foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['output.']['item.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
         continue;
       }
 
-      $name = $this->conf['settings.']['fields.'][$key];
-      $conf = $this->conf['settings.']['fields.'][$key . '.'];
+      $name = $this->conf['output.']['item.'][$key];
+      $conf = $this->conf['output.']['item.'][$key . '.'];
 
       if( $key == 'delete' )
       {
@@ -454,16 +454,6 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsMarkerItems( $calcedCaddy )
   {
-    $itemConf = ( array ) $this->conf['output.']['item.'];
-    
-      // DRS
-    if( $this->drs->drsMarker )
-    {
-      $prompt = 'Configuration by output.items. ...';
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
-    }
-      // DRS
-
       // FOREACH  : item
     foreach( ( array ) $calcedCaddy['items'] as $item )
     {
