@@ -565,9 +565,106 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // format of sum fields. If a sum field isn't configured, it won't rendered for output.
+    // item, sum
   output =
   output {
+      // titel, puid, qty, service attributes, min, max, sku, gross, delete, tax
+    item =
+    item {
+        // delete icon: for removing the current item from the caddy
+      delete = IMAGE
+      delete {
+        file = EXT:caddy/files/img/delete_100_02.png
+        altText = delete product
+        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
+        params = class="caddy_delete"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink.parameter.data = page:alias//TSFE:id
+          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
+          typolink.additionalParams.field = puid
+        }
+      }
+        // gross costs of the item
+      gross = COA
+      gross {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = gross
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+        // minimum quantity for ordering 
+      min = TEXT
+      min {
+        field = min
+      }
+        // maximum quantity for ordering 
+      max = TEXT
+      max {
+        field = max
+      }
+        // net costs of the item
+      net < .gross
+      net.10.userFunc.number.field = net
+        // uid of the item
+      puid = TEXT
+      puid {
+        field = puid
+      }
+        // quantity of the item
+      qty = TEXT
+      qty {
+        field = qty
+      }
+        // service attribute 1
+      service_attribute_1 = TEXT
+      service_attribute_1 {
+        field = service_attribute_1
+      }
+        // service attribute 2
+      service_attribute_2 = TEXT
+      service_attribute_2 {
+        field = service_attribute_2
+      }
+        // service attribute 3
+      service_attribute_3 = TEXT
+      service_attribute_3 {
+        field = service_attribute_3
+      }
+        // stock keeping unit
+      sku = TEXT
+      sku {
+        field = sku
+      }
+        // gross costs sum ( gross costs * quantity )
+      sumgross < .gross
+      sumgross.10.userFunc.number.field = sumgross
+        // net costs sum ( net costs * quantity )
+      sumnet < .gross
+      sumnet.10.userFunc.number.field = sumnet
+        // taxrate of the item
+      taxrate < .gross
+      taxrate.10.userFunc.number.field = taxrate
+      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
+        // label of the item
+      title = TEXT
+      title {
+        field = title
+      }
+    }
       // labels, rates, values
     sum =
     sum {
