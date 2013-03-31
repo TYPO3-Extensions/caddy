@@ -468,7 +468,8 @@ class tx_caddy extends tslib_pibase
     foreach( ( array ) $calcedCaddy['items'] as $item )
     {
         // cObject become current record
-      $this->zz_setData( $itemConf, $this->conf['db.']['table'] );
+      //$this->zz_setData( $itemConf, $this->conf['db.']['table'] );
+      $this->zz_setData( $item, $this->conf['db.']['table'] );
 
         // update product settings
       $markerArray  = ( array ) null
