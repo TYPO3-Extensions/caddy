@@ -313,6 +313,7 @@ class tx_caddy_pi1_clean
       // exit in case of error
     if( ! empty( $error ) )
     {
+      $query = $GLOBALS['TYPO3_DB']->INSERTquery( 'tx_caddy_order', $insertFields );
       $prompt = '<h1>caddy: SQL-Error</h1>'
               . '<p>'.$error.'</p>'
               . '<p>'.$query.'</p>';

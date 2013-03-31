@@ -969,6 +969,7 @@ class tx_caddy extends tslib_pibase
 
         // update service attributes
       $this->caddyWiItemsItemServiceAttributes( $product );
+var_dump( __METHOD__, __LINE__ , $product ) ;      
 
     }
       // FOREACH  : products
