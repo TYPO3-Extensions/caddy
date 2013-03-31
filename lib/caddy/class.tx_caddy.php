@@ -312,25 +312,6 @@ class tx_caddy extends tslib_pibase
     );
     return $caddy;
   }
-    
- /**
-  * caddyWiItemsContent( )  : 
-  *
-  * @param	string		$content : current content
-  * @return	string		$content : handeld content
-  * @access private
-  * @version    2.0.2
-  * @since      2.0.0
-  */
-  private function caddyWiItemsContent( $content )
-  {
-    $content  = $content
-              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiItemsFieldHidden( )
-              ;
-    
-    return $content;
-  }
 
  /**
   * caddyWiItemsFieldHidden( )  : 
@@ -473,6 +454,51 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsMarkerItems( $calcedCaddy )
   {
+    $itemsConf = ( array ) $this->conf['output.']['items.'];
+    
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = 'Configuration by output.items. ...';
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
+    }
+      // DRS
+
+      // FOREACH  : item
+    foreach( ( array ) $calcedCaddy['items'] as $item )
+    {
+        // cObject become current record
+      $this->zz_setData( $itemsConf, $this->conf['db.']['table'] );
+
+        // update product settings
+      $markerArray  = ( array ) null
+                    + ( array ) $this->caddyWiItemsMarkerItem( $item )
+                    + ( array ) $this->caddyWiItemsItemErrorMsg( $item )
+                    ;
+
+         // add inner html to variable
+      $content  = $content 
+                . $this->cObj->substituteMarkerArrayCached
+                  (
+                    $this->tmpl['item'], $markerArray
+                  )
+                ;
+
+
+    }
+      // FOREACH  : item
+
+    $content  = $content
+              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiItemsFieldHidden( )
+              ;
+    $marker = array
+    ( 
+      '###CONTENT###' => $content,
+    );
+    
+    return $marker;
+
       // content. here: items
     $content = $calcedCaddy['content'];
     $content  = $content
@@ -974,7 +1000,7 @@ class tx_caddy extends tslib_pibase
     }
       // DIE  : $row is empty
 
-    $calcedItems          = null;
+    $calcedItems        = null;
     $content            = '';
     $items              = null;
 
