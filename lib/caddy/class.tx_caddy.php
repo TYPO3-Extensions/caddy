@@ -454,7 +454,7 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsMarkerItems( $calcedCaddy )
   {
-    $itemsConf = ( array ) $this->conf['output.']['items.'];
+    $itemConf = ( array ) $this->conf['output.']['item.'];
     
       // DRS
     if( $this->drs->drsMarker )
@@ -468,7 +468,7 @@ class tx_caddy extends tslib_pibase
     foreach( ( array ) $calcedCaddy['items'] as $item )
     {
         // cObject become current record
-      $this->zz_setData( $itemsConf, $this->conf['db.']['table'] );
+      $this->zz_setData( $itemConf, $this->conf['db.']['table'] );
 
         // update product settings
       $markerArray  = ( array ) null
