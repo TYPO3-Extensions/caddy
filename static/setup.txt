@@ -389,7 +389,7 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // titel, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
+    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
   settings =
   settings {
 
@@ -467,7 +467,7 @@ plugin.tx_caddy_pi1 {
       intval = 1
     }
 
-      // titel, puid, qty, service attributes, min, max, sku, gross, delete, tax
+      // title, puid, qty, service attributes, min, max, sku, gross, delete, tax
     fields =
     fields {
       title = TEXT
@@ -547,7 +547,7 @@ plugin.tx_caddy_pi1 {
       // caddy within the powermail email: fields, overall
     powermailCaddy =
     powermailCaddy {
-        // titel, puid, qty, service attributes, min, max, sku, gross, sumgross, delete, tax
+        // title, puid, qty, service attributes, min, max, sku, gross, sumgross, delete, tax
       fields < plugin.tx_caddy_pi1.settings.fields
         // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
       overall < plugin.tx_caddy_pi1.settings.overall
@@ -568,7 +568,7 @@ plugin.tx_caddy_pi1 {
     // item, sum
   output =
   output {
-      // titel, puid, qty, service attributes, min, max, sku, gross, delete, tax
+      // delete, gross, min, max, puid, qty, service attributes (1-3), sku, title, tax
     item =
     item {
         // delete icon: for removing the current item from the caddy
@@ -655,6 +655,14 @@ plugin.tx_caddy_pi1 {
         // net costs sum ( net costs * quantity )
       sumnet < .gross
       sumnet.10.userFunc.number.field = sumnet
+        // tax costs sum ( tax costs * quantity )
+      sumtax < .gross
+      sumtax.10.userFunc.number.field = sumtax
+        // tax value of the item (0 , 1, 2)
+      tax = TEXT
+      tax {
+        field = tax
+      }
         // taxrate of the item
       taxrate < .gross
       taxrate.10.userFunc.number.field = taxrate

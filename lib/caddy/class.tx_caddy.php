@@ -1069,18 +1069,21 @@ class tx_caddy extends tslib_pibase
       case( 0 ):
         $product['taxrate'] = 0.00;
         $product['sumnet']  = 0.00;
+        $product['sumtax']  = 0.00;
         break;
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
-        $product['taxrate']    = $this->conf['tax.']['reducedCalc'];
-        $product['sumnet']     = $product['sumgross'] / ( 1 + $product['taxrate'] );
-        $product['taxReduced'] = $product['sumnet'] * $product['taxrate'];
+        $product['taxrate']     = $this->conf['tax.']['reducedCalc'];
+        $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
+        $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
+        $product['taxReduced']  = $product['sumtax'];
         break;
       case( 2 ):
       case( $this->conf['tax.']['normalCalc'] ):
         $product['taxrate']   = $this->conf['tax.']['normalCalc'];
         $product['sumnet']    = $product['sumgross'] / ( 1 + $product['taxrate'] );
-        $product['taxNormal'] = $product['sumnet'] * $product['taxrate'];
+        $product['sumtax']    = $product['sumnet'] * $product['taxrate'];
+        $product['taxNormal'] = $product['sumtax'];
         break;
       default:
         echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
