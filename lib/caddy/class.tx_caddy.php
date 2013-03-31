@@ -422,6 +422,14 @@ class tx_caddy extends tslib_pibase
     
     $markerArray = null;
     
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = 'Configuration by settings.fields. ...';
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['settings.']['fields.'] ) as $key )
     {
@@ -471,6 +479,14 @@ class tx_caddy extends tslib_pibase
     $markerArray = null;
     
     $sumConf = ( array ) $this->conf['output.']['sum.']['labels.'];
+    
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = 'Configuration by output.sum.labels. ...';
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
     foreach( array_keys( $sumConf ) as $key )
     {
@@ -511,6 +527,14 @@ class tx_caddy extends tslib_pibase
     
     $sumConf = ( array ) $this->conf['output.']['sum.']['rates.'];
 
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = 'Configuration by output.sum.rates. ...';
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
     foreach( array_keys( $sumConf ) as $key )
     {
       if( stristr( $key, '.' ) )
@@ -547,8 +571,16 @@ class tx_caddy extends tslib_pibase
   private function caddyWiItemsMarkerSumValues( )
   {
     $markerArray = null;
-    
+
     $sumConf = ( array ) $this->conf['output.']['sum.']['values.'];
+    
+      // DRS
+    if( $this->drs->drsMarker )
+    {
+      $prompt = 'Configuration by output.sum.values. ...';
+      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
 
     foreach( array_keys( $sumConf ) as $key )
     {
