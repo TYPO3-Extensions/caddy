@@ -286,10 +286,6 @@ class tx_caddy extends tslib_pibase
         break;
       case( false ):
       default:
-          // content. here: items
-        $content                    = $calcedCaddy['content'];
-        unset( $calcedCaddy['content'] );
-
           // session  : new or update 
         $this->caddyWiItemsSession( $calcedCaddy );
 
@@ -301,8 +297,7 @@ class tx_caddy extends tslib_pibase
                   + ( array ) $this->caddyWiItemsMarkerSumTaxRates( )
                   + ( array ) $this->caddyWiItemsMarkerSumValues( )
                   ;
-        $subparts['###CONTENT###']  = $this->caddyWiItemsContent( $content );
-        $subparts = $subparts
+        $subparts = ( array ) $this->caddyWiItemsMarkerItems( $calcedCaddy )
                   + ( array ) $this->caddyWiItemsOptions( $calcedCaddy )
                   ;
         break;
@@ -464,6 +459,33 @@ class tx_caddy extends tslib_pibase
       // FOREACH  : settings property
     
     return $markerArray;
+  }
+
+ /**
+  * caddyWiItemsMarkerItems( )
+  *
+  * @param	array		$calcedCaddy  :
+  * @param	array		$markerArray  :
+  * @return	array           $markerArray  :
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWiItemsMarkerItems( $calcedCaddy )
+  {
+      // content. here: items
+    $content = $calcedCaddy['content'];
+    $content  = $content
+              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiItemsFieldHidden( )
+              ;
+    $marker = array
+    ( 
+      '###CONTENT###' => $content,
+    );
+    
+    return $marker;
+    
   }
 
  /**
