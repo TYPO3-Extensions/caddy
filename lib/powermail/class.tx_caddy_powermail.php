@@ -225,6 +225,7 @@ var_dump( __METHOD__, __LINE__ );
 //    $arrResult          = $this->caddy->calc( );
 var_dump( __METHOD__, __LINE__ );
 $arrResult = $this->caddy->caddy( );
+var_dump( __METHOD__, __LINE__ );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
 $tmpl       = $arrResult['tmpl'];
