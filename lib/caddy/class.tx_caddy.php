@@ -1960,6 +1960,7 @@ class tx_caddy extends tslib_pibase
     $condition    = null;
     $optionList   = null;
     $optionItems  = ( array ) $this->conf['options.'][$optionType . '.']['options.'];
+    $marker       = null;
 
       // DRS
     if( $this->drs->drsOptions )
@@ -2016,12 +2017,12 @@ class tx_caddy extends tslib_pibase
       $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf );
 
         // Set the marker array
-      $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf );
+      $marker = $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf );
 
         // render the option item list
       $tmpl       = $this->tmpl[$optionType . '_item'];
       $optionList = $optionList
-                  . $this->cObj->substituteMarkerArrayCached( $tmpl, $this->smarkerArray );
+                  . $this->cObj->substituteMarkerArrayCached( $tmpl, $marker );
         // render the option item list
     }
       // LOOP each option item
@@ -2287,25 +2288,37 @@ class tx_caddy extends tslib_pibase
   * @param	integer		$optionId         : current option id
   * @param	string		$condition        :
   * @param	double		$gross            :
-  * @param	[type]		$optionItemConf: ...
-  * @return	void
+  * @param	[type]		$optionItemConf   : ...
+  * @return	array           $marker           :
   */
   private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
   {
+    $marker = null;
+    
     switch( true )
     {
       case( $optionType != 'special' ):
-        $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+        $marker = $marker 
+                + $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+                ;
         break;
       case( $optionType == 'special' ):
       default:
-        $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+        $marker = $marker
+                + $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+                ;
         break;
     }
 
-    $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf );
+    $marker = $marker
+            + $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+            ;
 
-    $this->optionListMarkerCondition( $optionType, $condition );
+    $marker = $marker
+            + $this->optionListMarkerCondition( $optionType, $condition )
+            ;
+    
+    return $marker;
   }
 
  /**
@@ -2315,7 +2328,7 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionIds        : current option ids
-  * @return	void
+  * @return	array           $marker           :
   */
   private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
@@ -2339,7 +2352,9 @@ class tx_caddy extends tslib_pibase
               . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '" '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
-    $this->smarkerArray['###' . $hashMarker . '_CHECKBOX###'] = $content;
+    $marker = array(
+      '###' . $hashMarker . '_CHECKBOX###' => $content    
+    );
 
       // DRS
     if( $this->drs->drsMarker )
@@ -2348,6 +2363,8 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+    return $marker;
   }
 
  /**
@@ -2355,16 +2372,17 @@ class tx_caddy extends tslib_pibase
   *
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$condition        :
-  * @return	void
+  * @return	array           $marker           :
   */
   private function optionListMarkerCondition( $optionType, $condition )
   {
+    $marker     = null;
     $hashMarker = strtoupper( $optionType );
 
       // RETURN : no condition content
     if( ! $condition )
     {
-      $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = '';
+      $marker['###' . $hashMarker . '_CONDITION###'] = '';
       return;
     }
       // RETURN : no condition content
@@ -2377,7 +2395,7 @@ class tx_caddy extends tslib_pibase
     $content = $this->cObj->substituteMarkerArrayCached( $tmpl, null, $marker );
 
       // set the marker
-    $this->smarkerArray['###' . $hashMarker . '_CONDITION###'] = $content;
+    $marker['###' . $hashMarker . '_CONDITION###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -2386,6 +2404,8 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+    return $marker;
   }
 
  /**
@@ -2395,11 +2415,11 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionId         : current option id
-  * @return	void
+  * @return	array           $marker           :
   */
   private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
   {
-    // TODO: In braces the actual Price for Payment should be displayed, not the first one.
+    $marker = null; 
 
     $title = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
 
@@ -2408,7 +2428,7 @@ class tx_caddy extends tslib_pibase
     $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">'
               . $title . ' (' . $gross . ')</label>';
 
-    $this->smarkerArray['###' . $hashMarker . '_TITLE###'] = $content;
+    $marker['###' . $hashMarker . '_TITLE###'] = $content;
 
       // DRS
     if( $this->drs->drsMarker )
@@ -2417,6 +2437,8 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+    return $marker;
   }
 
  /**
@@ -2426,7 +2448,7 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionId         : current option id
-  * @return	void
+  * @return	array           $marker           :
   */
   private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
   {
@@ -2448,7 +2470,10 @@ class tx_caddy extends tslib_pibase
               . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
-    $this->smarkerArray['###' . $hashMarker . '_RADIO###'] = $content;
+    $marker = array
+    (
+      '###' . $hashMarker . '_RADIO###' => $content
+    );
 
       // DRS
     if( $this->drs->drsMarker )
@@ -2457,6 +2482,8 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+    return $marker;
   }
 
  /**
