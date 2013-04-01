@@ -732,6 +732,11 @@ $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
     $this->initCheckProducts( );
     
     $this->initInstances( );
+    $this->initTemplate( );
+
+    $this->caddy->setParentObject( $this );
+    $this->caddy->setContentRow( $this->cObj->data );
+    
 
   }
 
@@ -794,15 +799,30 @@ $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy        = t3lib_div::makeInstance( 'tx_caddy' );
-    $this->caddy->setParentObject( $this );
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
+
+    require_once( $path2lib . 'class.tx_caddy_template.php' );
+    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
+    $this->template->pObj   = $this;
 
     require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
   }
 
+ /**
+  * initTemplate( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initTemplate( )
+  {
+    $this->tmpl = $this->template->main( );
+  }
 
 
   /***********************************************
