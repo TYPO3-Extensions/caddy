@@ -110,7 +110,7 @@ class tx_caddy_pdf extends tslib_pibase
   private $confSettings = null;
   private $confPdf      = null;
 
-  private $local_cObj   = null;
+  public  $local_cObj   = null;
     // [Object]
   private $pObj         = null;
     // [Object]
