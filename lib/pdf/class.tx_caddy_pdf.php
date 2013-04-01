@@ -115,7 +115,7 @@ class tx_caddy_pdf extends tslib_pibase
   private $pObj         = null;
     // [Object]
   private $tcpdf        = null;
-  private $tmpl         = null;
+  public  $tmpl         = null;
 
 
 
