@@ -738,7 +738,6 @@ class tx_caddy extends tslib_pibase
     $paymentId  = $calcedCaddy['options']['payment']['id'];
     $shippingId = $calcedCaddy['options']['shipping']['id'];
     $specialIds = $calcedCaddy['options']['specials']['ids'];
-var_dump( __METHOD__, __LINE__, $calcedCaddy['options'] );
 
     $marker = $marker
             + ( array ) $this->caddyWiItemsOptionsPayment(   $paymentId  )
@@ -811,7 +810,6 @@ var_dump( __METHOD__, __LINE__, $calcedCaddy['options'] );
   */
   private function caddyWiItemsOptionsSpecials( $specialIds )
   {
-var_dump( __METHOD__, __LINE__, $specialIds );
     $marker = null;
     $specialArray = null;
 
@@ -2324,7 +2322,6 @@ var_dump( __METHOD__, __LINE__, $specialIds );
     $checked = null;
 
       // Enable checkbox, if id of current checkbox is part of the GP array
-var_dump( __METHOD__, __LINE__, intval( $optionItemKey ), $optionIds );
     if( in_array( intval( $optionItemKey ), ( array ) $optionIds ) )
     {
       $checked = ' checked="checked"';
