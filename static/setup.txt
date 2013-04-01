@@ -503,14 +503,14 @@ plugin.tx_caddy_pi1 {
         optionsspecialssumtaxreduced  < .optionspaymentsumgross
         optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
 
-        sumitemsgross       < .optionspaymentsumgross
-        sumitemsgross.10.userFunc.number.field      = sumitemsgross
-        sumitemsnet         < .optionspaymentsumgross
-        sumitemsnet.10.userFunc.number.field        = sumitemsnet
-        sumitemstaxnormal   < .optionspaymentsumgross
-        sumitemstaxnormal.10.userFunc.number.field  = sumitemstaxnormal
-        sumitemstaxreduced  < .optionspaymentsumgross
-        sumitemstaxreduced.10.userFunc.number.field = sumitemssumtaxreduced
+        sumitemsgross         < .optionspaymentsumgross
+        sumitemsgross.10.userFunc.number.field        = sumitemsgross
+        sumitemsnet           < .optionspaymentsumgross
+        sumitemsnet.10.userFunc.number.field          = sumitemsnet
+        sumitemstaxnormal     < .optionspaymentsumgross
+        sumitemstaxnormal.10.userFunc.number.field    = sumitemstaxnormal
+        sumitemstaxreduced    < .optionspaymentsumgross
+        sumitemstaxreduced.10.userFunc.number.field   = sumitemssumtaxreduced
 
         sumoptionsgross       < .optionspaymentsumgross
         sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
@@ -521,16 +521,16 @@ plugin.tx_caddy_pi1 {
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
 
-        sumsumgross       < .optionspaymentsumgross
-        sumsumgross.10.userFunc.number.field      = sumsumgross
-        sumsumnet         < .optionspaymentsumgross
-        sumsumnet.10.userFunc.number.field        = sumsumnet
-        sumsumtax         < .optionspaymentsumgross
-        sumsumtax.10.userFunc.number.field        = sumsumtax
-        sumsumtaxnormal   < .optionspaymentsumgross
-        sumsumtaxnormal.10.userFunc.number.field  = sumsumtaxnormal
-        sumsumtaxreduced  < .optionspaymentsumgross
-        sumsumtaxreduced.10.userFunc.number.field = sumsumtaxreduced
+        sumsumgross           < .optionspaymentsumgross
+        sumsumgross.10.userFunc.number.field          = sumsumgross
+        sumsumnet             < .optionspaymentsumgross
+        sumsumnet.10.userFunc.number.field            = sumsumnet
+        sumsumtax             < .optionspaymentsumgross
+        sumsumtax.10.userFunc.number.field            = sumsumtax
+        sumsumtaxnormal       < .optionspaymentsumgross
+        sumsumtaxnormal.10.userFunc.number.field      = sumsumtaxnormal
+        sumsumtaxreduced      < .optionspaymentsumgross
+        sumsumtaxreduced.10.userFunc.number.field     = sumsumtaxreduced
       }
     }
   }

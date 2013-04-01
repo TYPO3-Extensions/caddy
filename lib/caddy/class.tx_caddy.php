@@ -53,7 +53,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  785:     private function caddyWiItemsOptionsShipping( $shippingId )
  *  811:     private function caddyWiItemsOptionsSpecials( $specialIds )
  *  836:     private function caddyWiItemsItemServiceAttributes( $product )
- *  903:     private function caddyWiItemsSession( $calcedCaddy )
+ *  903:     private function caddyWiItemsSetSession( $calcedCaddy )
  *
  *              SECTION: Caddy without items (empty)
  *  945:     private function caddyWoItems( )
@@ -310,7 +310,7 @@ class tx_caddy extends tslib_pibase
       case( false ):
       default:
           // session  : new or update
-        $this->caddyWiItemsSession( $calcedCaddy );
+        $this->caddyWiItemsSetSession( $calcedCaddy );
 
           // set data
           // set cObjData
@@ -495,7 +495,7 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = 'Configuration by output.item. ...';
+      $prompt = 'Configuration by marker.item. ...';
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
@@ -588,7 +588,7 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = 'Configuration by output.sum.labels. ...';
+      $prompt = 'Configuration by marker.sum.labels. ...';
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
@@ -635,7 +635,7 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = 'Configuration by output.sum.rates. ...';
+      $prompt = 'Configuration by marker.sum.rates. ...';
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
@@ -682,7 +682,7 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsMarker )
     {
-      $prompt = 'Configuration by output.sum.values. ...';
+      $prompt = 'Configuration by marker.sum.values. ...';
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
@@ -892,7 +892,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiItemsSession( )  :
+  * caddyWiItemsSetSession( )  :
   *
   * @param	array		$calcedCaddy  :
   * @return	array		$sesArray     : the new or updated session array
@@ -900,7 +900,7 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiItemsSession( $calcedCaddy )
+  private function caddyWiItemsSetSession( $calcedCaddy )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $sesArray = $calcedCaddy
@@ -1040,7 +1040,6 @@ class tx_caddy extends tslib_pibase
       // DIE  : $row is empty
 
     $calcedItems        = null;
-    $content            = '';
     $items              = null;
 
     $productsNet        = 0.00;
