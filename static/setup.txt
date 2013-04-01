@@ -525,12 +525,12 @@ plugin.tx_caddy_pi1 {
         sumsumgross.10.userFunc.number.field          = sumsumgross
         sumsumnet             < .optionspaymentsumgross
         sumsumnet.10.userFunc.number.field            = sumsumnet
-        sumsumtax             < .optionspaymentsumgross
-        sumsumtax.10.userFunc.number.field            = sumsumtax
         sumsumtaxnormal       < .optionspaymentsumgross
         sumsumtaxnormal.10.userFunc.number.field      = sumsumtaxnormal
         sumsumtaxreduced      < .optionspaymentsumgross
         sumsumtaxreduced.10.userFunc.number.field     = sumsumtaxreduced
+        sumsumtaxsum          < .optionspaymentsumgross
+        sumsumtaxsum.10.userFunc.number.field         = sumsumtaxsum
       }
     }
   }
