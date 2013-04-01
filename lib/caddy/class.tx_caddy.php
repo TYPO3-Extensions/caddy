@@ -737,7 +737,7 @@ class tx_caddy extends tslib_pibase
 
     $paymentId  = $calcedCaddy['options']['payment']['id'];
     $shippingId = $calcedCaddy['options']['shipping']['id'];
-    $specialIds = $calcedCaddy['options']['specials']['id'];
+    $specialIds = $calcedCaddy['options']['specials']['ids'];
 var_dump( __METHOD__, __LINE__, $calcedCaddy['options'] );
 
     $marker = $marker
