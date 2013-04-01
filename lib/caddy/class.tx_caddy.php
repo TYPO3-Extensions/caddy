@@ -397,6 +397,14 @@ class tx_caddy extends tslib_pibase
     return $content;
   }
 
+
+
+  /***********************************************
+  *
+  * Caddy Marker
+  *
+  **********************************************/
+
  /**
   * caddyWiItemsMarkerItems( )
   *
@@ -694,6 +702,14 @@ class tx_caddy extends tslib_pibase
     return $markerArray;
   }
 
+
+
+  /***********************************************
+  *
+  * Caddy Options
+  *
+  **********************************************/
+
  /**
   * caddyWiItemsOptions( )  :
   *
@@ -927,7 +943,7 @@ class tx_caddy extends tslib_pibase
 
   /***********************************************
   *
-  * Calc
+  * Calculating
   *
   **********************************************/
 
@@ -1995,6 +2011,14 @@ class tx_caddy extends tslib_pibase
     return $optionList;
   }
 
+
+
+  /***********************************************
+  *
+  * Options Conditions
+  *
+  **********************************************/
+
  /**
   * optionListCondition( )
   *
@@ -2227,6 +2251,14 @@ class tx_caddy extends tslib_pibase
 
     return $keepingTheLimit;
   }
+
+
+
+  /***********************************************
+  *
+  * Options Marker
+  *
+  **********************************************/
 
  /**
   * optionListMarker( )
