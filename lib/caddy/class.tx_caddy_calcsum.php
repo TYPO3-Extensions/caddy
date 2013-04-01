@@ -374,8 +374,11 @@ class tx_caddy_calcsum
   {
     $sum = array
     (
-      'normal'  => $this->sumSumTaxReduced( $items, $options ),
-      'reduced' => $this->sumSumTaxNormal(  $items, $options ),
+      'normal'  => $this->sumSumTaxNormal(  $items, $options ),
+      'reduced' => $this->sumSumTaxReduced( $items, $options ),
+      'sum'     => $this->sumSumTaxNormal(  $items, $options ),
+                +  $this->sumSumTaxReduced(  $items, $options )
+                ,
     );
 
     return $sum;
