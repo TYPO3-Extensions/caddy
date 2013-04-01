@@ -463,19 +463,19 @@ class tx_caddy extends tslib_pibase
 
     return $marker;
 
-      // content. here: items
-    $content = $calcedCaddy['content'];
-    $content  = $content
-              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiItemsFieldHidden( )
-              ;
-    $marker = array
-    (
-      '###CONTENT###' => $content,
-    );
-
-    return $marker;
-
+//      // content. here: items
+//    $content = $calcedCaddy['content'];
+//    $content  = $content
+//              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+//              . $this->caddyWiItemsFieldHidden( )
+//              ;
+//    $marker = array
+//    (
+//      '###CONTENT###' => $content,
+//    );
+//
+//    return $marker;
+//
   }
 
  /**
@@ -984,7 +984,7 @@ class tx_caddy extends tslib_pibase
 
       // handle the current product
     $calcedItems  = $this->calcItems( );
-    $content      = $calcedItems['content'];
+//    $content      = $calcedItems['content'];
       // handle the current product
 
     $this->productsGross  = $calcedItems['sum']['gross'];
@@ -1000,7 +1000,7 @@ class tx_caddy extends tslib_pibase
 
     $calc = array
     (
-      'content'           => $content,
+//      'content'           => $content,
       'items'             => $calcedItems['items'],
       'options'           => $options,
       'serviceattributes' => $serviceattributes,
@@ -1055,22 +1055,22 @@ class tx_caddy extends tslib_pibase
         // calculate tax
       $product = $this->calcItemsTax( $product );
 
-        // cObject become current record
-      $this->zz_setData( $product, $this->conf['db.']['table'] );
-
-        // update product settings
-      $markerArray  = ( array ) null
-                    + ( array ) $this->caddyWiItemsMarkerItemsItem( $product )
-                    + ( array ) $this->caddyWiItemsMarkerItemsItemErrorMsg( $product )
-                    ;
-
-         // add inner html to variable
-      $content  = $content
-                . $this->cObj->substituteMarkerArrayCached
-                  (
-                    $this->tmpl['item'], $markerArray
-                  )
-                ;
+//        // cObject become current record
+//      $this->zz_setData( $product, $this->conf['db.']['table'] );
+//
+//        // update product settings
+//      $markerArray  = ( array ) null
+//                    + ( array ) $this->caddyWiItemsMarkerItemsItem( $product )
+//                    + ( array ) $this->caddyWiItemsMarkerItemsItemErrorMsg( $product )
+//                    ;
+//
+//         // add inner html to variable
+//      $content  = $content
+//                . $this->cObj->substituteMarkerArrayCached
+//                  (
+//                    $this->tmpl['item'], $markerArray
+//                  )
+//                ;
 
         // update product gross
       $productsGross  = $productsGross
@@ -1095,7 +1095,7 @@ class tx_caddy extends tslib_pibase
     }
       // FOREACH  : products
 
-    $calcedItems['content']               = $content;
+//    $calcedItems['content']               = $content;
     $calcedItems['items']                 = $items;
     $calcedItems['sum']['gross']          = $productsGross;
     $calcedItems['sum']['net']            = $productsNet;
