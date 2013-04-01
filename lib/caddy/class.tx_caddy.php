@@ -923,6 +923,15 @@ class tx_caddy extends tslib_pibase
     return $sesArray;
   }
 
+
+
+  /***********************************************
+  *
+  * Caddy without items (empty)
+  *
+  **********************************************/
+
+
  /**
   * caddyWoItems( )  : Render a caddy, which doesn't contain any product
   *
