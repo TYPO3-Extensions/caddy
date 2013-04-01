@@ -30,101 +30,103 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  143: class tx_caddy extends tslib_pibase
+ *  145: class tx_caddy extends tslib_pibase
  *
  *              SECTION: Caddy
- *  208:     public function caddy( )
- *  243:     private function caddyWiMinPriceUndercut( )
- *  264:     private function caddyWiItems( )
- *  345:     private function caddyWiItemsFieldHidden( )
- *  360:     private function caddyWiItemsInCaseOfPaymentDEPRECATED( )
+ *  210:     public function caddy( )
+ *  245:     private function caddyWiMinPriceUndercut( )
+ *  266:     private function caddyWiItems( )
+ *  347:     private function caddyWiItemsFieldHidden( )
+ *  362:     private function caddyWiItemsInCaseOfPaymentDEPRECATED( )
  *
  *              SECTION: Caddy Marker
- *  426:     private function caddyWiItemsMarkerItems( $calcedCaddy )
- *  488:     private function caddyWiItemsMarkerItemsItem( $product )
- *  546:     private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
- *  580:     private function caddyWiItemsMarkerSumLabels( )
- *  627:     private function caddyWiItemsMarkerSumTaxRates( )
- *  674:     private function caddyWiItemsMarkerSumValues( )
+ *  428:     private function caddyWiItemsMarkerItems( $calcedCaddy )
+ *  490:     private function caddyWiItemsMarkerItemsItem( $product )
+ *  548:     private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
+ *  582:     private function caddyWiItemsMarkerSumLabels( )
+ *  629:     private function caddyWiItemsMarkerSumTaxRates( )
+ *  676:     private function caddyWiItemsMarkerSumValues( )
  *
  *              SECTION: Caddy Options
- *  732:     private function caddyWiItemsOptions( $calcedCaddy )
- *  758:     private function caddyWiItemsOptionsPayment( $paymentId )
- *  783:     private function caddyWiItemsOptionsShipping( $shippingId )
- *  809:     private function caddyWiItemsOptionsSpecials( $specialIds )
- *  834:     private function caddyWiItemsItemServiceAttributes( $product )
- *  901:     private function caddyWiItemsSession( $calcedCaddy )
- *  934:     private function caddyWoItems( )
+ *  734:     private function caddyWiItemsOptions( $calcedCaddy )
+ *  760:     private function caddyWiItemsOptionsPayment( $paymentId )
+ *  785:     private function caddyWiItemsOptionsShipping( $shippingId )
+ *  811:     private function caddyWiItemsOptionsSpecials( $specialIds )
+ *  836:     private function caddyWiItemsItemServiceAttributes( $product )
+ *  903:     private function caddyWiItemsSession( $calcedCaddy )
+ *
+ *              SECTION: Caddy without items (empty)
+ *  945:     private function caddyWoItems( )
  *
  *              SECTION: Calculating
- *  966:     public function calc( )
+ *  977:     public function calc( )
  *
  *              SECTION: Calculating Items
- * 1018:     private function calcItems( )
- * 1106:     private function calcItemsTax( $product )
+ * 1029:     private function calcItems( )
+ * 1117:     private function calcItemsTax( $product )
  *
  *              SECTION: Calculating Minimum Rate
- * 1172:     private function calcMinRateUndercut( $calcedCaddy )
+ * 1183:     private function calcMinRateUndercut( $calcedCaddy )
  *
  *              SECTION: Calculating Options
- * 1202:     private function calcOptionCosts( $optionType, $optionId )
- * 1253:     private function calcOptionCostsGross( $optionType, $optionId )
- * 1328:     private function calcOptionCostsGrossByExtra( $extras, $value )
- * 1395:     private function calcOptionCostsIsFree( $optionType, $optionId )
- * 1477:     private function calcOptions( )
- * 1497:     private function calcOptionsPayment( )
- * 1555:     private function calcOptionsShipping( )
- * 1613:     private function calcOptionsSpecial( )
+ * 1213:     private function calcOptionCosts( $optionType, $optionId )
+ * 1264:     private function calcOptionCostsGross( $optionType, $optionId )
+ * 1339:     private function calcOptionCostsGrossByExtra( $extras, $value )
+ * 1406:     private function calcOptionCostsIsFree( $optionType, $optionId )
+ * 1488:     private function calcOptions( )
+ * 1508:     private function calcOptionsPayment( )
+ * 1566:     private function calcOptionsShipping( )
+ * 1624:     private function calcOptionsSpecial( )
  *
  *              SECTION: Calculation Sum
- * 1677:     private function calcSum( $items, $options )
- * 1693:     private function calcSumInitInstance( )
+ * 1688:     private function calcSum( $items, $options )
+ * 1704:     private function calcSumInitInstance( )
  *
  *              SECTION: Getting methods
- * 1716:     public function getPaymentOptionLabelBySessionId( )
- * 1742:     public function getShippingOptionLabelBySessionId( )
- * 1768:     public function getSpecialOptionLabelsBySessionId( )
- * 1799:     private function getServiceAttributes( )
+ * 1727:     public function getPaymentOptionLabelBySessionId( )
+ * 1753:     public function getShippingOptionLabelBySessionId( )
+ * 1779:     public function getSpecialOptionLabelsBySessionId( )
+ * 1810:     private function getServiceAttributes( )
  *
  *              SECTION: Init
- * 1839:     private function init( )
- * 1857:     private function initDie( )
- * 1901:     private function initInstances( )
+ * 1850:     private function init( )
+ * 1868:     private function initDie( )
+ * 1912:     private function initInstances( )
  *
  *              SECTION: Options
- * 1948:     private function optionList( $optionType, $optionId )
+ * 1959:     private function optionList( $optionType, $optionId )
  *
  *              SECTION: Options Conditions
- * 2038:     private function optionListCondition( $keepingTheLimit, $optionType, $conf )
- * 2072:     private function optionListConditionByType( $condition, $optionType, $conf )
- * 2113:     private function optionListConditionGross( $optionItemKey, $optionType, $conf )
- * 2137:     private function optionListConditionGrossEach( $conf )
- * 2162:     private function optionListConditionGrossOther( $optionItemKey, $optionType )
- * 2187:     private function optionListConditionNotEach( $optionType, $conf )
- * 2215:     private function optionListGrossIsKeepingTheLimit( $confOption )
+ * 2049:     private function optionListCondition( $keepingTheLimit, $optionType, $conf )
+ * 2083:     private function optionListConditionByType( $condition, $optionType, $conf )
+ * 2124:     private function optionListConditionGross( $optionItemKey, $optionType, $conf )
+ * 2148:     private function optionListConditionGrossEach( $conf )
+ * 2173:     private function optionListConditionGrossOther( $optionItemKey, $optionType )
+ * 2198:     private function optionListConditionNotEach( $optionType, $conf )
+ * 2226:     private function optionListGrossIsKeepingTheLimit( $confOption )
  *
  *              SECTION: Options Marker
- * 2283:     private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
- * 2310:     private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
- * 2350:     private function optionListMarkerCondition( $optionType, $condition )
- * 2390:     private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
- * 2421:     private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
- * 2458:     private function optionListSymbolByExtra( $extraType )
+ * 2294:     private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
+ * 2321:     private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
+ * 2361:     private function optionListMarkerCondition( $optionType, $condition )
+ * 2401:     private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+ * 2432:     private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+ * 2469:     private function optionListSymbolByExtra( $extraType )
  *
  *              SECTION: Setting methods
- * 2506:     public function setContentRow( $row )
- * 2529:     public function setParentObject( $pObj )
- * 2615:     public function setProducts( $products )
+ * 2517:     public function setContentRow( $row )
+ * 2540:     public function setParentObject( $pObj )
+ * 2626:     public function setProducts( $products )
  *
  *              SECTION: ZZ
- * 2653:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
- * 2691:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- * 2726:     private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
- * 2784:     private function zz_calcNet( $taxType, $gross )
- * 2830:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
- * 2852:     private function zz_price_format( $value )
- * 2890:     private function zz_setData( $data, $table )
- * 2918:     private function zz_setDataBySession( )
+ * 2664:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
+ * 2702:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ * 2737:     private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
+ * 2795:     private function zz_calcNet( $taxType, $gross )
+ * 2841:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 2863:     private function zz_price_format( $value )
+ * 2901:     private function zz_setData( $data, $table )
+ * 2929:     private function zz_setDataBySession( )
  *
  * TOTAL FUNCTIONS: 64
  * (This index is automatically created/updated by the extension "extdeveval")
