@@ -1732,7 +1732,7 @@ class tx_caddy extends tslib_pibase
     $optionsConf = $this->conf['options.']['payment.']['options.'];
 
       // Get key for the option
-    $key    = $sesArray['paymentId'] . '.';
+    $key    = $sesArray['options']['payment']['id'] . '.';
 
       // Render the option label
     $name  = $optionsConf[ $key ]['title'];
@@ -1758,7 +1758,7 @@ class tx_caddy extends tslib_pibase
     $optionsConf = $this->conf['options.']['shipping.']['options.'];
 
       // Get key for option
-    $key    = $sesArray['shippingId'] . '.';
+    $key    = $sesArray['options']['shipping']['id'] . '.';
 
       // Render the option label
     $name   = $optionsConf[ $key ]['title'];
@@ -1787,7 +1787,7 @@ class tx_caddy extends tslib_pibase
 
       // Render the option label
     $value = null;
-    foreach( ( array ) $sesArray['specialIds'] as $key )
+    foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
     {
       $name   = $optionsConf[ $key ]['title'];
       $conf   = $optionsConf[ $key ]['title.'];
@@ -2271,6 +2271,19 @@ class tx_caddy extends tslib_pibase
     return $keepingTheLimit;
   }
 
+ /**
+  * optionListLabel( )
+  *
+  * @param	array		$optionItemConf : 
+  * @return	string          $label          :
+  */
+  private function optionListLabel( $optionItemConf )
+  {
+    $label = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
+    
+    return $label;
+  }
+
 
 
   /***********************************************
@@ -2414,7 +2427,7 @@ class tx_caddy extends tslib_pibase
   {
     $marker = null; 
 
-    $title = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
+    $title = $this->optionListLabel( $optionItemConf );
 
     $hashMarker = strtoupper( $optionType );
 
