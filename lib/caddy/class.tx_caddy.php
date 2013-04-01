@@ -810,6 +810,7 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsOptionsSpecials( $specialIds )
   {
+var_dump( __METHOD__, __LINE__, $specialIds );
     $marker = null;
     $specialArray = null;
 
@@ -2322,7 +2323,7 @@ class tx_caddy extends tslib_pibase
     $checked = null;
 
       // Enable checkbox, if id of current checkbox is part of the GP array
-var_dump( __METHOD__, __LINE__, $optionItemKey, $optionIds );
+var_dump( __METHOD__, __LINE__, intval( $optionItemKey ), $optionIds );
     if( in_array( intval( $optionItemKey ), ( array ) $optionIds ) )
     {
       $checked = ' checked="checked"';
