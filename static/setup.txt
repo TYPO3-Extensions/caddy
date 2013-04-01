@@ -566,8 +566,8 @@ plugin.tx_caddy_pi1 {
   }
 
     // item, sum
-  output =
-  output {
+  marker =
+  marker {
       // delete, gross, min, max, puid, qty, service attributes (1-3), sku, title, tax
     item =
     item {

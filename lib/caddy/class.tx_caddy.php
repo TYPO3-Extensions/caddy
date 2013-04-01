@@ -501,15 +501,15 @@ class tx_caddy extends tslib_pibase
       // DRS
 
       // FOREACH  : settings property
-    foreach( array_keys( ( array ) $this->conf['output.']['item.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['marker.']['item.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
         continue;
       }
 
-      $name = $this->conf['output.']['item.'][$key];
-      $conf = $this->conf['output.']['item.'][$key . '.'];
+      $name = $this->conf['marker.']['item.'][$key];
+      $conf = $this->conf['marker.']['item.'][$key . '.'];
 
       if( $key == 'delete' )
       {
@@ -583,7 +583,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['output.']['sum.']['labels.'];
+    $sumConf = ( array ) $this->conf['marker.']['sum.']['labels.'];
 
       // DRS
     if( $this->drs->drsMarker )
@@ -630,7 +630,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['output.']['sum.']['rates.'];
+    $sumConf = ( array ) $this->conf['marker.']['sum.']['rates.'];
 
       // DRS
     if( $this->drs->drsMarker )
@@ -677,7 +677,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['output.']['sum.']['values.'];
+    $sumConf = ( array ) $this->conf['marker.']['sum.']['values.'];
 
       // DRS
     if( $this->drs->drsMarker )
