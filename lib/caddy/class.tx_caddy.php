@@ -40,9 +40,9 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  400:     private function caddyWiItemsOptionsPayment( $subpartArray, $paymentId )
  *  425:     private function caddyWiItemsOptionsShipping( $subpartArray, $shippingId )
  *  451:     private function caddyWiItemsOptionsSpecials( $subpartArray, $specialIds )
- *  475:     private function caddyWiItemsItemErrorMsg( $product )
+ *  475:     private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
  *  507:     private function caddyWiItemsItemServiceAttributes( $product )
- *  574:     private function caddyWiItemsMarkerItem( $product )
+ *  574:     private function caddyWiItemsMarkerItemsItem( $product )
  *  621:     private function caddyWoItems( )
  *
  *              SECTION: Calc
@@ -385,7 +385,70 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiItemsMarkerItem( )
+  * caddyWiItemsMarkerItems( )
+  *
+  * @param	array		$calcedCaddy  :
+  * @param	array		$markerArray  :
+  * @return	array           $markerArray  :
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function caddyWiItemsMarkerItems( $calcedCaddy )
+  {
+      // FOREACH  : item
+    foreach( ( array ) $calcedCaddy['items'] as $item )
+    {
+        // cObject become current record
+      //$this->zz_setData( $itemConf, $this->conf['db.']['table'] );
+      $this->zz_setData( $item, $this->conf['db.']['table'] );
+
+        // update product settings
+      $markerArray  = ( array ) null
+                    + ( array ) $this->caddyWiItemsMarkerItemsItem( $item )
+                    + ( array ) $this->caddyWiItemsMarkerItemsItemErrorMsg( $item )
+                    ;
+
+         // add inner html to variable
+      $content  = $content 
+                . $this->cObj->substituteMarkerArrayCached
+                  (
+                    $this->tmpl['item'], $markerArray
+                  )
+                ;
+
+
+    }
+      // FOREACH  : item
+
+    $content  = $content
+              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiItemsFieldHidden( )
+              ;
+    $marker = array
+    ( 
+      '###CONTENT###' => $content,
+    );
+    
+    return $marker;
+
+      // content. here: items
+    $content = $calcedCaddy['content'];
+    $content  = $content
+              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+              . $this->caddyWiItemsFieldHidden( )
+              ;
+    $marker = array
+    ( 
+      '###CONTENT###' => $content,
+    );
+    
+    return $marker;
+    
+  }
+
+ /**
+  * caddyWiItemsMarkerItemsItem( )
   *
   * @param	array		$product :
   * @return	array           $markerArray
@@ -393,7 +456,7 @@ class tx_caddy extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiItemsMarkerItem( $product )
+  private function caddyWiItemsMarkerItemsItem( $product )
   {
     
     $markerArray = null;
@@ -443,66 +506,38 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiItemsMarkerItems( )
+  * caddyWiItemsMarkerItemsItemErrorMsg( ) :
   *
-  * @param	array		$calcedCaddy  :
-  * @param	array		$markerArray  :
+  * @param	array		$product      : the current item / product
   * @return	array           $markerArray  :
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyWiItemsMarkerItems( $calcedCaddy )
+  private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
   {
-      // FOREACH  : item
-    foreach( ( array ) $calcedCaddy['items'] as $item )
+    $prompt       = null;
+    $markerArray  = null;
+
+      // FOREACH  : error messages per product
+    foreach( ( array ) $product['error'] as $productError )
     {
-        // cObject become current record
-      //$this->zz_setData( $itemConf, $this->conf['db.']['table'] );
-      $this->zz_setData( $item, $this->conf['db.']['table'] );
+      if( ! $productError )
+      {
+        continue;
+      }
 
-        // update product settings
-      $markerArray  = ( array ) null
-                    + ( array ) $this->caddyWiItemsMarkerItem( $item )
-                    + ( array ) $this->caddyWiItemsItemErrorMsg( $item )
-                    ;
-
-         // add inner html to variable
-      $content  = $content 
-                . $this->cObj->substituteMarkerArrayCached
-                  (
-                    $this->tmpl['item'], $markerArray
-                  )
-                ;
-
-
+      $prompt = $prompt
+              . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $productError );
     }
-      // FOREACH  : item
+      // FOREACH  : error messages per product
 
-    $content  = $content
-              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiItemsFieldHidden( )
-              ;
-    $marker = array
-    ( 
-      '###CONTENT###' => $content,
-    );
+    if( $prompt )
+    {
+      $markerArray['###ITEM_ERROR###'] = $prompt;
+    }
     
-    return $marker;
-
-      // content. here: items
-    $content = $calcedCaddy['content'];
-    $content  = $content
-              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiItemsFieldHidden( )
-              ;
-    $marker = array
-    ( 
-      '###CONTENT###' => $content,
-    );
-    
-    return $marker;
-    
+    return $markerArray;
   }
 
  /**
@@ -751,41 +786,6 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * caddyWiItemsItemErrorMsg( ) :
-  *
-  * @param	array		$product      : the current item / product
-  * @return	array           $markerArray  :
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function caddyWiItemsItemErrorMsg( $product )
-  {
-    $prompt       = null;
-    $markerArray  = null;
-
-      // FOREACH  : error messages per product
-    foreach( ( array ) $product['error'] as $productError )
-    {
-      if( ! $productError )
-      {
-        continue;
-      }
-
-      $prompt = $prompt
-              . $this->cObj->substituteMarker( $this->tmpl['item_error'], '###ERROR_PROMPT###', $productError );
-    }
-      // FOREACH  : error messages per product
-
-    if( $prompt )
-    {
-      $markerArray['###ITEM_ERROR###'] = $prompt;
-    }
-    
-    return $markerArray;
-  }
-
- /**
   * caddyWiItemsItemServiceAttributes( )
   *
   * @param	array		$product :
@@ -1012,8 +1012,8 @@ class tx_caddy extends tslib_pibase
 
         // update product settings
       $markerArray  = ( array ) null
-                    + ( array ) $this->caddyWiItemsMarkerItem( $product )
-                    + ( array ) $this->caddyWiItemsItemErrorMsg( $product )
+                    + ( array ) $this->caddyWiItemsMarkerItemsItem( $product )
+                    + ( array ) $this->caddyWiItemsMarkerItemsItemErrorMsg( $product )
                     ;
 
          // add inner html to variable
