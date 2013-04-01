@@ -2298,24 +2298,17 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( $optionType != 'special' ):
-        $marker = $marker 
-                + $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
-                ;
+        $marker = $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
       case( $optionType == 'special' ):
       default:
-        $marker = $marker
-                + $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
-                ;
+        $marker = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
     }
 
-    $marker = $marker
-            + $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
-            ;
-
-    $marker = $marker
-            + $this->optionListMarkerCondition( $optionType, $condition )
+    $marker = ( array ) $marker
+            + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+            + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
             ;
     
     return $marker;
