@@ -195,7 +195,6 @@ class tx_caddy_powermail extends tslib_pibase
     $this->tmpl = $this->caddyForEmailInitTemplate( );
     
     $this->cObj = $GLOBALS['TSFE']->cObj;
-    $local_cObj = $GLOBALS['TSFE']->cObj;
 
       // Init instances
     $this->caddyForEmailInstances( );
@@ -219,11 +218,12 @@ class tx_caddy_powermail extends tslib_pibase
       // RETURN : empty content, no product in session
 
       // Set products
+var_dump( __METHOD__, __LINE__ );
     $this->caddy->setProducts( $this->products );
     
       // Calculate the caddy
 //    $arrResult          = $this->caddy->calc( );
-
+var_dump( __METHOD__, __LINE__ );
 $arrResult = $this->caddy->caddy( );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
