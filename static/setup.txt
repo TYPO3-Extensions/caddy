@@ -266,6 +266,273 @@ plugin.tx_caddy_pi1 {
     sku   = {$plugin.caddy.gpvar.sku}
   }
 
+    // item, sum
+  marker =
+  marker {
+      // delete, gross, min, max, puid, qty, service attributes (1-3), sku, title, tax
+    item =
+    item {
+        // delete icon: for removing the current item from the caddy
+      delete = IMAGE
+      delete {
+        file = EXT:caddy/files/img/delete_100_02.png
+        altText = delete product
+        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
+        params = class="caddy_delete"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink.parameter.data = page:alias//TSFE:id
+          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
+          typolink.additionalParams.field = puid
+        }
+      }
+        // gross costs of the item
+      gross = COA
+      gross {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = gross
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+        // minimum quantity for ordering 
+      min = TEXT
+      min {
+        field = min
+      }
+        // maximum quantity for ordering 
+      max = TEXT
+      max {
+        field = max
+      }
+        // net costs of the item
+      net < .gross
+      net.10.userFunc.number.field = net
+        // uid of the item
+      puid = TEXT
+      puid {
+        field = puid
+      }
+        // quantity of the item
+      qty = TEXT
+      qty {
+        field = qty
+      }
+        // service attribute 1
+      service_attribute_1 = TEXT
+      service_attribute_1 {
+        field = service_attribute_1
+      }
+        // service attribute 2
+      service_attribute_2 = TEXT
+      service_attribute_2 {
+        field = service_attribute_2
+      }
+        // service attribute 3
+      service_attribute_3 = TEXT
+      service_attribute_3 {
+        field = service_attribute_3
+      }
+        // stock keeping unit
+      sku = TEXT
+      sku {
+        field = sku
+      }
+        // gross costs sum ( gross costs * quantity )
+      sumgross < .gross
+      sumgross.10.userFunc.number.field = sumgross
+        // net costs sum ( net costs * quantity )
+      sumnet < .gross
+      sumnet.10.userFunc.number.field = sumnet
+        // tax costs sum ( tax costs * quantity )
+      sumtax < .gross
+      sumtax.10.userFunc.number.field = sumtax
+        // tax value of the item (0 , 1, 2)
+      tax = TEXT
+      tax {
+        field = tax
+      }
+        // taxrate of the item
+      taxrate < .gross
+      taxrate.10.userFunc.number.field = taxrate
+      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
+        // label of the item
+      title = TEXT
+      title {
+        field = title
+      }
+    }
+      // labels, rates, values
+    sum =
+    sum {
+        // payment, shipping, specials
+      labels =
+      labels {
+        optionspaymentlabel = TEXT
+        optionspaymentlabel {
+          field = optionspaymentlabel
+        }
+        optionsshippinglabel = TEXT
+        optionsshippinglabel {
+          field = optionsshippinglabel
+        }
+        optionsspecialslabel = TEXT
+        optionsspecialslabel {
+          field = optionsspecialslabel
+        }
+        taxrate_reduced_string = TEXT
+        taxrate_reduced_string {
+          value = including
+          lang { 
+            de = inklusive 
+            en = including
+          }
+          if {
+            isTrue {
+              field = sumsumtaxreduced
+            }
+          }
+          noTrimWrap = || {$plugin.caddy.tax.reduced}% |
+        }
+        taxrate_normal_string = TEXT
+        taxrate_normal_string {
+          value = including
+          lang { 
+            de = inklusive 
+            en = including
+          }
+          if {
+            isTrue {
+              field = sumsumtaxnormal
+            }
+          }
+          noTrimWrap = || {$plugin.caddy.tax.normal}% |
+        }
+      }
+        // payment, shipping, specials
+      rates =
+      rates {
+        optionspaymentsumrate = COA
+        optionspaymentsumrate {
+          10 = USER
+          10 {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              number = TEXT
+              number {
+                field = optionspaymentsumrate
+              }
+              decimal       = {$plugin.caddy.main.decimal}
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+              drs           = {$plugin.caddy.debug.userfunc}
+            }
+          }
+          20 = TEXT
+          20 {
+            value = {$plugin.caddy.main.percentSymbol}
+            noTrimWrap = | ||
+          }
+        }
+
+        optionsshippingsumrate                           < .optionspaymentsumrate
+        optionsshippingsumrate.10.userFunc.number.field  = optionsshippingsumrate
+
+        optionsspecialssumrate                           < .optionspaymentsumrate
+        optionsspecialssumrate.10.userFunc.number.field  = optionsspecialssumrate
+      }
+        // payment, shipping, specials, items, sum
+      values =
+      values {
+        optionspaymentsumgross = COA
+        optionspaymentsumgross {
+          10 = USER
+          10 {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              number = TEXT
+              number {
+                field = optionspaymentsumgross
+              }
+              decimal       = {$plugin.caddy.main.decimal}
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+              drs           = {$plugin.caddy.debug.userfunc}
+            }
+          }
+          20 = TEXT
+          20 {
+            value = {$plugin.caddy.main.currencySymbol}
+            noTrimWrap = | ||
+          }
+        }
+        optionspaymentsumnet          < .optionspaymentsumgross
+        optionspaymentsumnet.10.userFunc.number.field         = optionspaymentsumnet
+        optionspaymentsumtaxnormal    < .optionspaymentsumgross
+        optionspaymentsumtaxnormal.10.userFunc.number.field   = optionspaymentsumtaxnormal
+        optionspaymentsumtaxreduced   < .optionspaymentsumgross
+        optionspaymentsumtaxreduced.10.userFunc.number.field  = optionspaymentsumtaxreduced
+
+        optionsshippingsumgross       < .optionspaymentsumgross
+        optionsshippingsumgross.10.userFunc.number.field      = optionsshippingsumgross
+        optionsshippingsumnet         < .optionspaymentsumgross
+        optionsshippingsumnet.10.userFunc.number.field        = optionsshippingsumnet
+        optionsshippingsumtaxnormal   < .optionspaymentsumgross
+        optionsshippingsumtaxnormal.10.userFunc.number.field  = optionsshippingsumtaxnormal
+        optionsshippingsumtaxreduced  < .optionspaymentsumgross
+        optionsshippingsumtaxreduced.10.userFunc.number.field = optionsshippingsumtaxreduced
+
+        optionsspecialssumgross       < .optionspaymentsumgross
+        optionsspecialssumgross.10.userFunc.number.field      = optionsspecialssumgross
+        optionsspecialssumnet         < .optionspaymentsumgross
+        optionsspecialssumnet.10.userFunc.number.field        = optionsspecialssumnet
+        optionsspecialssumtaxnormal   < .optionspaymentsumgross
+        optionsspecialssumtaxnormal.10.userFunc.number.field  = optionsspecialssumtaxnormal
+        optionsspecialssumtaxreduced  < .optionspaymentsumgross
+        optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
+
+        sumitemsgross       < .optionspaymentsumgross
+        sumitemsgross.10.userFunc.number.field      = sumitemsgross
+        sumitemsnet         < .optionspaymentsumgross
+        sumitemsnet.10.userFunc.number.field        = sumitemsnet
+        sumitemstaxnormal   < .optionspaymentsumgross
+        sumitemstaxnormal.10.userFunc.number.field  = sumitemstaxnormal
+        sumitemstaxreduced  < .optionspaymentsumgross
+        sumitemstaxreduced.10.userFunc.number.field = sumitemssumtaxreduced
+
+        sumoptionsgross       < .optionspaymentsumgross
+        sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
+        sumoptionsnet         < .optionspaymentsumgross
+        sumoptionsnet.10.userFunc.number.field        = sumoptionsnet
+        sumoptionstaxnormal   < .optionspaymentsumgross
+        sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
+        sumoptionstaxreduced  < .optionspaymentsumgross
+        sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
+
+        sumsumgross       < .optionspaymentsumgross
+        sumsumgross.10.userFunc.number.field      = sumsumgross
+        sumsumnet         < .optionspaymentsumgross
+        sumsumnet.10.userFunc.number.field        = sumsumnet
+        sumsumtaxnormal   < .optionspaymentsumgross
+        sumsumtaxnormal.10.userFunc.number.field  = sumsumtaxnormal
+        sumsumtaxreduced  < .optionspaymentsumgross
+        sumsumtaxreduced.10.userFunc.number.field = sumsumtaxreduced
+      }
+    }
+  }
+
     // payment, shipping, special
   options =
   options {
@@ -561,273 +828,6 @@ plugin.tx_caddy_pi1 {
 
         specialLabels = TEXT
         specialLabels.field = specialLabels
-      }
-    }
-  }
-
-    // item, sum
-  marker =
-  marker {
-      // delete, gross, min, max, puid, qty, service attributes (1-3), sku, title, tax
-    item =
-    item {
-        // delete icon: for removing the current item from the caddy
-      delete = IMAGE
-      delete {
-        file = EXT:caddy/files/img/delete_100_02.png
-        altText = delete product
-        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
-        params = class="caddy_delete"
-        imageLinkWrap = 1
-        imageLinkWrap {
-          enable = 1
-          typolink.parameter.data = page:alias//TSFE:id
-          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = puid
-        }
-      }
-        // gross costs of the item
-      gross = COA
-      gross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = gross
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-        // minimum quantity for ordering 
-      min = TEXT
-      min {
-        field = min
-      }
-        // maximum quantity for ordering 
-      max = TEXT
-      max {
-        field = max
-      }
-        // net costs of the item
-      net < .gross
-      net.10.userFunc.number.field = net
-        // uid of the item
-      puid = TEXT
-      puid {
-        field = puid
-      }
-        // quantity of the item
-      qty = TEXT
-      qty {
-        field = qty
-      }
-        // service attribute 1
-      service_attribute_1 = TEXT
-      service_attribute_1 {
-        field = service_attribute_1
-      }
-        // service attribute 2
-      service_attribute_2 = TEXT
-      service_attribute_2 {
-        field = service_attribute_2
-      }
-        // service attribute 3
-      service_attribute_3 = TEXT
-      service_attribute_3 {
-        field = service_attribute_3
-      }
-        // stock keeping unit
-      sku = TEXT
-      sku {
-        field = sku
-      }
-        // gross costs sum ( gross costs * quantity )
-      sumgross < .gross
-      sumgross.10.userFunc.number.field = sumgross
-        // net costs sum ( net costs * quantity )
-      sumnet < .gross
-      sumnet.10.userFunc.number.field = sumnet
-        // tax costs sum ( tax costs * quantity )
-      sumtax < .gross
-      sumtax.10.userFunc.number.field = sumtax
-        // tax value of the item (0 , 1, 2)
-      tax = TEXT
-      tax {
-        field = tax
-      }
-        // taxrate of the item
-      taxrate < .gross
-      taxrate.10.userFunc.number.field = taxrate
-      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
-        // label of the item
-      title = TEXT
-      title {
-        field = title
-      }
-    }
-      // labels, rates, values
-    sum =
-    sum {
-        // payment, shipping, specials
-      labels =
-      labels {
-        optionspaymentlabel = TEXT
-        optionspaymentlabel {
-          field = optionspaymentlabel
-        }
-        optionsshippinglabel = TEXT
-        optionsshippinglabel {
-          field = optionsshippinglabel
-        }
-        optionsspecialslabel = TEXT
-        optionsspecialslabel {
-          field = optionsspecialslabel
-        }
-        taxrate_reduced_string = TEXT
-        taxrate_reduced_string {
-          value = including
-          lang { 
-            de = inklusive 
-            en = including
-          }
-          if {
-            isTrue {
-              field = sumTaxReduced
-            }
-          }
-          noTrimWrap = || {$plugin.caddy.tax.reduced}% |
-        }
-        taxrate_normal_string = TEXT
-        taxrate_normal_string {
-          value = including
-          lang { 
-            de = inklusive 
-            en = including
-          }
-          if {
-            isTrue {
-              field = sumTaxNormal
-            }
-          }
-          noTrimWrap = || {$plugin.caddy.tax.normal}% |
-        }
-      }
-        // payment, shipping, specials
-      rates =
-      rates {
-        optionspaymentsumrate = COA
-        optionspaymentsumrate {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_userfunc->numberformat
-            userFunc {
-              number = TEXT
-              number {
-                field = optionspaymentsumrate
-              }
-              decimal       = {$plugin.caddy.main.decimal}
-              dec_point     = {$plugin.caddy.main.dec_point}
-              thousands_sep = {$plugin.caddy.main.thousands_sep}
-              drs           = {$plugin.caddy.debug.userfunc}
-            }
-          }
-          20 = TEXT
-          20 {
-            value = {$plugin.caddy.main.percentSymbol}
-            noTrimWrap = | ||
-          }
-        }
-
-        optionsshippingsumrate                           < .optionspaymentsumrate
-        optionsshippingsumrate.10.userFunc.number.field  = optionsshippingsumrate
-
-        optionsspecialssumrate                           < .optionspaymentsumrate
-        optionsspecialssumrate.10.userFunc.number.field  = optionsspecialssumrate
-      }
-        // payment, shipping, specials, items, sum
-      values =
-      values {
-        optionspaymentsumgross = COA
-        optionspaymentsumgross {
-          10 = USER
-          10 {
-            userFunc = tx_caddy_userfunc->numberformat
-            userFunc {
-              number = TEXT
-              number {
-                field = optionspaymentsumgross
-              }
-              decimal       = {$plugin.caddy.main.decimal}
-              dec_point     = {$plugin.caddy.main.dec_point}
-              thousands_sep = {$plugin.caddy.main.thousands_sep}
-              drs           = {$plugin.caddy.debug.userfunc}
-            }
-          }
-          20 = TEXT
-          20 {
-            value = {$plugin.caddy.main.currencySymbol}
-            noTrimWrap = | ||
-          }
-        }
-        optionspaymentsumnet          < .optionspaymentsumgross
-        optionspaymentsumnet.10.userFunc.number.field         = optionspaymentsumnet
-        optionspaymentsumtaxnormal    < .optionspaymentsumgross
-        optionspaymentsumtaxnormal.10.userFunc.number.field   = optionspaymentsumtaxnormal
-        optionspaymentsumtaxreduced   < .optionspaymentsumgross
-        optionspaymentsumtaxreduced.10.userFunc.number.field  = optionspaymentsumtaxreduced
-
-        optionsshippingsumgross       < .optionspaymentsumgross
-        optionsshippingsumgross.10.userFunc.number.field      = optionsshippingsumgross
-        optionsshippingsumnet         < .optionspaymentsumgross
-        optionsshippingsumnet.10.userFunc.number.field        = optionsshippingsumnet
-        optionsshippingsumtaxnormal   < .optionspaymentsumgross
-        optionsshippingsumtaxnormal.10.userFunc.number.field  = optionsshippingsumtaxnormal
-        optionsshippingsumtaxreduced  < .optionspaymentsumgross
-        optionsshippingsumtaxreduced.10.userFunc.number.field = optionsshippingsumtaxreduced
-
-        optionsspecialssumgross       < .optionspaymentsumgross
-        optionsspecialssumgross.10.userFunc.number.field      = optionsspecialssumgross
-        optionsspecialssumnet         < .optionspaymentsumgross
-        optionsspecialssumnet.10.userFunc.number.field        = optionsspecialssumnet
-        optionsspecialssumtaxnormal   < .optionspaymentsumgross
-        optionsspecialssumtaxnormal.10.userFunc.number.field  = optionsspecialssumtaxnormal
-        optionsspecialssumtaxreduced  < .optionspaymentsumgross
-        optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
-
-        sumitemsgross       < .optionspaymentsumgross
-        sumitemsgross.10.userFunc.number.field      = sumitemsgross
-        sumitemsnet         < .optionspaymentsumgross
-        sumitemsnet.10.userFunc.number.field        = sumitemsnet
-        sumitemstaxnormal   < .optionspaymentsumgross
-        sumitemstaxnormal.10.userFunc.number.field  = sumitemstaxnormal
-        sumitemstaxreduced  < .optionspaymentsumgross
-        sumitemstaxreduced.10.userFunc.number.field = sumitemssumtaxreduced
-
-        sumoptionsgross       < .optionspaymentsumgross
-        sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
-        sumoptionsnet         < .optionspaymentsumgross
-        sumoptionsnet.10.userFunc.number.field        = sumoptionsnet
-        sumoptionstaxnormal   < .optionspaymentsumgross
-        sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
-        sumoptionstaxreduced  < .optionspaymentsumgross
-        sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
-
-        sumsumgross       < .optionspaymentsumgross
-        sumsumgross.10.userFunc.number.field      = sumsumgross
-        sumsumnet         < .optionspaymentsumgross
-        sumsumnet.10.userFunc.number.field        = sumsumnet
-        sumsumtaxnormal   < .optionspaymentsumgross
-        sumsumtaxnormal.10.userFunc.number.field  = sumsumtaxnormal
-        sumsumtaxreduced  < .optionspaymentsumgross
-        sumsumtaxreduced.10.userFunc.number.field = sumsumtaxreduced
       }
     }
   }
