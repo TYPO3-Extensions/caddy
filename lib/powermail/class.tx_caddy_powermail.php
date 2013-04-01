@@ -218,14 +218,11 @@ class tx_caddy_powermail extends tslib_pibase
       // RETURN : empty content, no product in session
 
       // Set products
-//var_dump( __METHOD__, __LINE__ );
     $this->caddy->setProducts( $this->products );
     
       // Calculate the caddy
 //    $arrResult          = $this->caddy->calc( );
-//var_dump( __METHOD__, __LINE__ );
 $arrResult = $this->caddy->caddy( );
-//var_dump( __METHOD__, __LINE__ );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
 $tmpl       = $arrResult['tmpl'];

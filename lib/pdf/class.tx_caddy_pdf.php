@@ -159,7 +159,9 @@ class tx_caddy_pdf extends tslib_pibase
 //    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
 //    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
 
+var_dump( __METHOD__, __LINE__ );
 $arrResult = $this->caddy->caddy( );
+var_dump( __METHOD__, __LINE__ );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
 $tmpl       = $arrResult['tmpl'];
