@@ -218,14 +218,14 @@ class tx_caddy_powermail extends tslib_pibase
       // RETURN : empty content, no product in session
 
       // Set products
-var_dump( __METHOD__, __LINE__ );
+//var_dump( __METHOD__, __LINE__ );
     $this->caddy->setProducts( $this->products );
     
       // Calculate the caddy
 //    $arrResult          = $this->caddy->calc( );
-var_dump( __METHOD__, __LINE__ );
+//var_dump( __METHOD__, __LINE__ );
 $arrResult = $this->caddy->caddy( );
-var_dump( __METHOD__, __LINE__ );
+//var_dump( __METHOD__, __LINE__ );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
 $tmpl       = $arrResult['tmpl'];
@@ -241,7 +241,7 @@ $content = $content . $this->cObj->substituteMarkerArrayCached
 
 $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
 $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
-//var_dump( __METHOD__, __LINE__, $content );
+var_dump( __METHOD__, __LINE__, $content );
 return $content;
     
 //      // Set service attributes
