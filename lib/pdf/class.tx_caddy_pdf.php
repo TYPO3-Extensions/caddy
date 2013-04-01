@@ -110,10 +110,12 @@ class tx_caddy_pdf extends tslib_pibase
   private $confSettings = null;
   private $confPdf      = null;
 
-  private $local_cObj = null;
+  private $local_cObj   = null;
     // [Object]
-  private $tcpdf      = null;
-  private $tmpl       = null;
+  private $pObj         = null;
+    // [Object]
+  private $tcpdf        = null;
+  private $tmpl         = null;
 
 
 
@@ -792,8 +794,7 @@ $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy        = t3lib_div::makeInstance( 'tx_caddy' );
-    $this->caddy->conf  = $this->conf;
-    $this->caddy->cObj  = $this->cObj;
+    $this->caddy->setParentObject( $this );
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
@@ -1051,7 +1052,38 @@ $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
 
   }
 
+  
 
+  /***********************************************
+  *
+  * Set
+  *
+  **********************************************/
+
+ /**
+  * setParentObject( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access public
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  public function setParentObject( $pObj )
+  {
+    if( ! is_object( $pObj ) )
+    {
+      $prompt = 'ERROR: no object!<br />' . PHP_EOL .
+                'Sorry for the trouble.<br />' . PHP_EOL .
+                'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+
+    }
+    $this->pObj = $pObj;
+  }
+
+  
 
   /***********************************************
   *

@@ -1669,7 +1669,7 @@ return $content;
     $this->initPowermailVersionAppendix( );
     
     $this->initPdf( );
-    $this->pdf->pObj  = $this;
+    $this->pdf->setParentObject( $this );
 
     $path = $this->sendToCustomerDeliveryorder( );
     if( ! empty( $path ) )
@@ -1894,7 +1894,7 @@ return $content;
     $this->initPowermailVersionAppendix( );
 
     $this->initPdf( );
-    $this->pdf->pObj  = $this;
+    $this->pdf->setParentObject( $this );
 
     $path = $this->sendToVendorDeliveryorder( );
     if( ! empty( $path ) )
