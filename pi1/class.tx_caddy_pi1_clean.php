@@ -160,23 +160,63 @@ class tx_caddy_pi1_clean
     }
       // DRS
 
-    $customerEmail = $this->getPmFieldEmailCustomerEmail( );
+      // Set record
+    $record = array(
+      'pid'           => $this->pObj->pid,
+      'tstamp'        => $time,
+      'crdate'        => $time,
+      'customerEmail' => $this->getPmFieldEmailCustomerEmail( ),
+      'items'         => '',
+      'quantity'      => count( $sesArray['products'] ),
+    );
+    $record = $record
+            + $this->databaseFieldsFiles(   $sesArray )
+            + $this->databaseFieldsNumbers( $sesArray )
+            + $this->databaseFieldsSum(     $sesArray )
+            ;
 
+      // Insert record
+    $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $record );
+    $error  = $GLOBALS['TYPO3_DB']->sql_error( );
+
+      // exit in case of error
+    if( ! empty( $error ) )
+    {
+      $query = $GLOBALS['TYPO3_DB']->INSERTquery( 'tx_caddy_order', $record );
+      $prompt = '<h1>caddy: SQL-Error</h1>'
+              . '<p>'.$error.'</p>'
+              . '<p>'.$query.'</p>';
+      die( $prompt );
+    }
+      // exit in case of error
+      
+      // DRS
+    if( $this->pObj->drs->drsClean )
+    {
+      $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+    }
+      // DRS
+    
+  }
+
+ /**
+  * databaseFieldsFiles( )
+  *
+  * @param      array       $sesArray :
+  * @return	void
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function databaseFieldsFiles( $sesArray )
+  {
       // Initiate files
     $fileDeliveryorder  = null;
     $fileInvoice        = null;
     $fileRevocation     = null;
     $fileTerms          = null;
       // Initiate files
-    
-      // Get numbers
-    $numberDeliveryorder  = $sesArray['numberDeliveryorderCurrent'];
-    $numberInvoice        = $sesArray['numberInvoiceCurrent'];
-    $numberOrder          = $sesArray['numberOrderCurrent'];
-      // Get numbers
-
-      // Get quantity
-    $quantity = count( $sesArray['products'] );
     
       // Get pdf is sent to ...
     $pdfDeliveryorderToCustomer = false;
@@ -267,30 +307,13 @@ class tx_caddy_pi1_clean
                       );
         break;
     }
-      // Set files
-
-      // Get total sum
-var_dump( __METHOD__, __LINE__, $sesArray );    
-    $sumGross       = $sesArray['sum']['sum']['gross'];
-    $sumNet         = $sesArray['sum']['sum']['net'];
-    $sumTaxNormal   = $sesArray['sum']['sum']['tax']['normal'];
-    $sumTaxReduced  = $sesArray['sum']['sum']['tax']['reduced'];
-      // Get total sum
-
-      // Set record
-    $insertFields = array(
-      'pid'                         => $this->pObj->pid,
-      'tstamp'                      => $time,
-      'crdate'                      => $time,
-      'customerEmail'               => $customerEmail,
+    
+    $record = array
+    (
       'fileDeliveryorder'           => $fileDeliveryorder,
       'fileInvoice'                 => $fileInvoice,
       'fileRevocation'              => $fileRevocation,
       'fileTerms'                   => $fileTerms,
-      'items'                       => '',
-      'numberDeliveryorder'         => $numberDeliveryorder,
-      'numberInvoice'               => $numberInvoice,
-      'numberOrder'                 => $numberOrder,
       'pdfDeliveryorderToCustomer'  => $pdfDeliveryorderToCustomer,
       'pdfDeliveryorderToVendor'    => $pdfDeliveryorderToVendor,
       'pdfInvoiceToCustomer'        => $pdfInvoiceToCustomer,
@@ -299,37 +322,55 @@ var_dump( __METHOD__, __LINE__, $sesArray );
       'pdfRevocationToVendor'       => $pdfRevocationToVendor,
       'pdfTermsToCustomer'          => $pdfTermsToCustomer,
       'pdfTermsToVendor'            => $pdfTermsToVendor,
-      'quantity'                    => $quantity,
-      'sumGross'                    => $sumGross,
-      'sumNet'                      => $sumNet,
-      'sumTaxNormal'                => $sumTaxNormal,
-      'sumTaxReduced'               => $sumTaxReduced,
     );
       // Set record
-
-      // Insert record
-    $GLOBALS['TYPO3_DB']->exec_INSERTquery( 'tx_caddy_order', $insertFields );
-    $error  = $GLOBALS['TYPO3_DB']->sql_error( );
-
-      // exit in case of error
-    if( ! empty( $error ) )
-    {
-      $query = $GLOBALS['TYPO3_DB']->INSERTquery( 'tx_caddy_order', $insertFields );
-      $prompt = '<h1>caddy: SQL-Error</h1>'
-              . '<p>'.$error.'</p>'
-              . '<p>'.$query.'</p>';
-      die( $prompt );
-    }
-      // exit in case of error
-      
-      // DRS
-    if( $this->pObj->drs->drsClean )
-    {
-      $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
-    }
-      // DRS
     
+    return $record;
+  }
+
+ /**
+  * databaseFieldsNumbers( )
+  *
+  * @param      array       $sesArray :
+  * @return	void
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function databaseFieldsNumbers( $sesArray )
+  {
+    $record = array
+    (
+      'numberDeliveryorder' => $sesArray['numberDeliveryorderCurrent'],
+      'numberInvoice'       => $sesArray['numberInvoiceCurrent'],
+      'numberOrder'         => $sesArray['numberOrderCurrent'],
+    );
+      // Set record
+    
+    return $record;
+  }
+
+ /**
+  * databaseFieldsSum( )
+  *
+  * @param      array       $sesArray :
+  * @return	void
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function databaseFieldsSum( $sesArray )
+  {
+    $record = array
+    (
+      'sumGross'      => $sesArray['sum']['sum']['gross'],
+      'sumNet'        => $sesArray['sum']['sum']['net'],
+      'sumTaxNormal'  => $sesArray['sum']['sum']['tax']['normal'],
+      'sumTaxReduced' => $sesArray['sum']['sum']['tax']['reduced'],
+    );
+      // Set record
+    
+    return $record;
   }
 
 
