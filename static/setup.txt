@@ -2068,25 +2068,6 @@ plugin.tx_caddy_pi1 {
 
     }
 
-      // caddy within the powermail email: fields, overall
-    powermailCaddy =
-    powermailCaddy {
-        // title, puid, qty, service attributes, min, max, sku, gross, sumgross, delete, tax
-      fields < plugin.tx_caddy_pi1.settings.fields
-        // optionsNet, optionsGross, productsNet, productsGross, sumNet, sumGross, sumTaxNormal, sumTaxReduced, target, taxrate_reduced_string, taxrate_normal_string, payment_note, shipping_note, paymentLabel 
-      overall < plugin.tx_caddy_pi1.settings.overall
-
-      overall {
-        shippingLabel = TEXT
-        shippingLabel.field = shippingLabel
-
-        paymentLabel = TEXT
-        paymentLabel.field = paymentLabel
-
-        specialLabels = TEXT
-        specialLabels.field = specialLabels
-      }
-    }
   }
     // decimal, dec_point, thousands_sep, currencySymbol, currencySymbolBeforePrice, quantitySymbol, service_attributes_X_symbol
   symbols = 
@@ -2182,7 +2163,6 @@ plugin.tx_caddy_pi1 {
           border      = 0
           cellpadding = 3
           cellspacing = 0 
-          width       = 200px
         }
       }
         // file, marker, table
@@ -2201,7 +2181,6 @@ plugin.tx_caddy_pi1 {
           border      = 0
           cellpadding = 3
           cellspacing = 0 
-          width       = 100%
         }
       }
     }
