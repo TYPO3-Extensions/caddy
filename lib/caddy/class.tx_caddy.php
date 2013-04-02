@@ -1636,7 +1636,7 @@ class tx_caddy extends tslib_pibase
 
     foreach( ( array ) $specialIds as $specialId )
     {
-      $arrResult  = $this->calcOptionCosts( 'special', $specialId );
+      $arrResult  = $this->calcOptionCosts( 'specials', $specialId );
       $gross      = $arrResult['gross'];
       $net        = $arrResult['net'];
       $rate       = $arrResult['rate'];
@@ -2310,10 +2310,10 @@ var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $option
     
     switch( true )
     {
-      case( $optionType != 'special' ):
+      case( $optionType != 'specials' ):
         $marker = $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
-      case( $optionType == 'special' ):
+      case( $optionType == 'specials' ):
       default:
         $marker = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;

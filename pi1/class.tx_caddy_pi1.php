@@ -329,11 +329,11 @@ class tx_caddy_pi1 extends tslib_pibase
 
       // change special
     $special = null;
-    if( isset( $this->piVars['special'] ) )
+    if( isset( $this->piVars['specials'] ) )
     {
-      $special = $this->piVars['special'];
+      $special = $this->piVars['specials'];
     }
-    $this->session->specialUpdate( $this->piVars['special'] );
+    $this->session->specialUpdate( $this->piVars['specials'] );
   }
 
 

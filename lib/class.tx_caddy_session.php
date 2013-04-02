@@ -1865,7 +1865,7 @@ class tx_caddy_session
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
-        $sesArray['special'] = $special_arr; // overwrite with new qty
+        $sesArray['specials'] = $special_arr; // overwrite with new qty
 
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
         $GLOBALS['TSFE']->storeSessionData(); // Save session
@@ -1880,7 +1880,7 @@ class tx_caddy_session
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
-        return $sesArray['special'];
+        return $sesArray['specials'];
     }
 
 
