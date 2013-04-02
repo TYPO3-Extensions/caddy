@@ -136,7 +136,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function caddy( )
   {
     $caddy = $this->caddy->caddy( );
-var_dump( __METHOD__, __LINE__, $caddy );
+//var_dump( __METHOD__, __LINE__, $caddy );
     $marker     = $caddy['marker'];
     $subparts   = $caddy['subparts'];
     $tmpl       = $caddy['tmpl'];
@@ -151,7 +151,7 @@ var_dump( __METHOD__, __LINE__, $caddy );
 
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
-var_dump( __METHOD__, __LINE__, $content );
+//var_dump( __METHOD__, __LINE__, $content );
 //die( );
     // write the HTML content
     $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
