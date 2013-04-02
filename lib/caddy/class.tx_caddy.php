@@ -1789,12 +1789,12 @@ class tx_caddy extends tslib_pibase
     $value = null;
     foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
     {
-      $name   = $optionsConf[ $key ]['title'];
-      $conf   = $optionsConf[ $key ]['title.'];
+      $name   = $optionsConf[ $key . '.' ]['title'];
+      $conf   = $optionsConf[ $key . '.' ]['title.'];
       $value  = $value
               . $this->zz_cObjGetSingle( $name, $conf );
     }
-var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $optionsConf, $value );
+var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $optionsConf[ $key . '.' ], $value );
     return $value;
   }
 
