@@ -308,12 +308,10 @@ class tx_caddy_powermail extends tslib_pibase
     $markerAll  = $this->conf['templates.']['e-mail.']['marker.']['all'];
     $markerItem = $this->conf['templates.']['e-mail.']['marker.']['item'];
 
-    $tmplFile   = $GLOBALS['TSFE']->cObj->fileResource( $file );
-    $tmpl = array
-    ( 
-      'all'  => $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll ),
-      'item' => $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem )
-    );
+    $tmplFile     = $GLOBALS['TSFE']->cObj->fileResource( $file );
+    $tmpl         = array( );
+    $tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll );
+    $tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem );
 
     return $tmpl;
   }

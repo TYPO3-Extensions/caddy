@@ -568,11 +568,49 @@ class tx_caddy_pdf extends tslib_pibase
         break;
     }
 
-    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $file );
-    $this->tmpl = array( );
+    $tmplFile           = $GLOBALS['TSFE']->cObj->fileResource( $file );
+    $this->tmpl         = array( );
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll );
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem );
-var_dump( __METHOD__, __LINE__, $case, $this->tmpl );    
+    
+    $this->initTemplate( $case );
+  }
+
+ /**
+  * initTemplate( )
+  *
+  * @param      $string       $case : deliveryorder || invoice || revocation || terms
+  * @return	void
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function initTemplateTable( $case )
+  {
+    switch( $case )
+    {
+      case( 'deliveryorder' ):
+      case( 'invoice' ):
+        $table = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['table.'];
+        break;
+      case( 'revocation' ):
+      case( 'terms' ):
+          // Template for caddy isn't needed
+        return;
+        break;
+      default:
+        $prompt = 'Unproper value in switch. Case is "' . $case . '"'
+                . PHP
+                . __METHOD__ . '(line ' . __LINE__ . ')';
+        die( $prompt );
+        break;
+    }
+
+    foreach( $table as $property )
+    {
+      $marker = '###' . strtoupper( $property ) . '###';
+      $this->tmpl['all'] = str_replace( $marker, $property, $this->tmpl['all'] );      
+    }
   }
 
 

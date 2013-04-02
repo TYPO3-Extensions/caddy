@@ -6,10 +6,6 @@
   //
   // includeLibs
   // plugin.tx_caddy_pi1
-  // plugin.tx_caddy_pi1.pdf.deliveryorder
-  // plugin.tx_caddy_pi1.pdf.invoice
-  // plugin.tx_caddy_pi1.pdf.revocation
-  // plugin.tx_caddy_pi1.pdf.terms
   // plugin.tx_caddy_pi2
   // plugin.tx_caddy_pi3
 
@@ -2119,6 +2115,13 @@ plugin.tx_caddy_pi1 {
         all   = ###CADDY_EMAIL###
         item  = ###ITEM###
       }
+        // border, cellpadding, cellspacing
+      table = 
+      table {
+        border      = 1
+        cellpadding = 3
+        cellspacing = 0 
+      }
     }
       // caddy, caddymini
     html =
@@ -2133,6 +2136,13 @@ plugin.tx_caddy_pi1 {
           all   = ###CADDY###
           item  = ###ITEM###
         }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
+        }
       }
         // file, marker
       caddymini =
@@ -2143,6 +2153,13 @@ plugin.tx_caddy_pi1 {
         marker {
           all   = ###CADDYMINI###
           item  = ###ITEMS###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
         }
       }
     }
@@ -2159,6 +2176,13 @@ plugin.tx_caddy_pi1 {
           all   = ###CADDY_EMAILDELIVERY###
           item  = ###ITEM###
         }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
+        }
       }
         // file, marker
       invoice =
@@ -2169,6 +2193,13 @@ plugin.tx_caddy_pi1 {
         marker {
           all   = ###CADDY_EMAIL###
           item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
         }
       }
     }
