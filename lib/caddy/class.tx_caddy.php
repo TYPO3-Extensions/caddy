@@ -1781,7 +1781,7 @@ class tx_caddy extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
       // Get configuration
-    $optionsConf = $this->conf['options.']['special.']['options.'];
+    $optionsConf = $this->conf['options.']['specials.']['options.'];
 
       // Get key for the option
 
