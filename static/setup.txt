@@ -58,32 +58,32 @@ plugin.tx_caddy_pi1 {
   getpost {
     gross = TEXT
     gross {
-      data = GP:{$plugin.caddy.gpvar.price}
+      data = GP:{$plugin.caddy.getpost.price}
       htmlSpecialChars = 1
     }
     max = TEXT
     max {
-      data = GP:{$plugin.caddy.gpvar.max}
+      data = GP:{$plugin.caddy.getpost.max}
       htmlSpecialChars = 1
     }
     min = TEXT
     min {
-      data = GP:{$plugin.caddy.gpvar.min}
+      data = GP:{$plugin.caddy.getpost.min}
       htmlSpecialChars = 1
     }
     uid = TEXT
     uid {
-      data = GP:{$plugin.caddy.gpvar.uid}
+      data = GP:{$plugin.caddy.getpost.uid}
       intval = 1
     }
     qty = TEXT
     qty {
-      data = GP:{$plugin.caddy.gpvar.qty}
+      data = GP:{$plugin.caddy.getpost.qty}
       intval = 1
     }
     sku = TEXT
     sku {
-      data = GP:{$plugin.caddy.gpvar.sku}
+      data = GP:{$plugin.caddy.getpost.sku}
       htmlSpecialChars = 1
     }
     tax = TEXT
@@ -92,17 +92,17 @@ plugin.tx_caddy_pi1 {
     }
     title = TEXT
     title {
-      data = GP:{$plugin.caddy.gpvar.title}
+      data = GP:{$plugin.caddy.getpost.title}
       htmlSpecialChars = 1
     }
     volume = TEXT
     volume {
-      data = GP:{$plugin.caddy.gpvar.volume}
+      data = GP:{$plugin.caddy.getpost.volume}
       floatval = 1
     }
     weight = TEXT
     weight {
-      data = GP:{$plugin.caddy.gpvar.weight}
+      data = GP:{$plugin.caddy.getpost.weight}
       floatval = 1
     }
   }
