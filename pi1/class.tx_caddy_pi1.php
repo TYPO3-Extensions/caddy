@@ -648,7 +648,7 @@ class tx_caddy_pi1 extends tslib_pibase
     
     foreach( $this->conf['getpost.'] as $getpostKey => $getpostConf )
     {
-      if( ! stristr( $getpostKey, '.' ) )
+      if( stristr( $getpostKey, '.' ) )
       {
         continue;
       }
