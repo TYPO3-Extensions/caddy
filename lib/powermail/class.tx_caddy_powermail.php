@@ -328,7 +328,7 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function caddyForEmailInitTemplateTable( $tmpl )
   {
-    $table = $this->conf['templates.']['e-mail.']['marker.']['table.'];
+    $table = $this->conf['templates.']['e-mail.']['table.'];
 
     foreach( $table as $property )
     {

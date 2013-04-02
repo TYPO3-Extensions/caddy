@@ -404,7 +404,7 @@ class tx_caddy_pi3 extends tslib_pibase
   */
   private function initTemplateTable( )
   {
-    $table = $this->conf['templates.']['html.']['caddymini.']['marker.'];
+    $table = $this->conf['templates.']['html.']['caddymini.']['table.'];
 
     foreach( $table as $property )
     {

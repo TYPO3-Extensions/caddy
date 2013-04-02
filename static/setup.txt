@@ -2105,7 +2105,7 @@ plugin.tx_caddy_pi1 {
     // e-mail, html, pdf
   templates =
   templates {
-      // file, marker
+      // file, marker, table
     e-mail =
     e-mail {
       file = {$plugin.caddy.templates.e-mail}
@@ -2126,7 +2126,7 @@ plugin.tx_caddy_pi1 {
       // caddy, caddymini
     html =
     html {
-        // file, marker
+        // file, marker, table
       caddy =
       caddy {
         file = {$plugin.caddy.templates.html.caddy}
@@ -2144,7 +2144,7 @@ plugin.tx_caddy_pi1 {
           cellspacing = 0 
         }
       }
-        // file, marker
+        // file, marker, table
       caddymini =
       caddymini {
         file = {$plugin.caddy.templates.html.caddymini}
@@ -2166,7 +2166,7 @@ plugin.tx_caddy_pi1 {
       // delivery order, invoice
     pdf =
     pdf {
-        // file, marker
+        // file, marker, table
       deliveryorder =
       deliveryorder {
         file = {$plugin.caddy.templates.pdf.deliveryorder}
@@ -2184,7 +2184,7 @@ plugin.tx_caddy_pi1 {
           cellspacing = 0 
         }
       }
-        // file, marker
+        // file, marker, table
       invoice =
       invoice {
         file = {$plugin.caddy.templates.pdf.invoice}

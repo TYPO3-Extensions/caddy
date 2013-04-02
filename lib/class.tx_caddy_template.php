@@ -166,7 +166,7 @@ class tx_caddy_template
   */
   private function templateTable( $tmplSubparts )
   {
-    $table = $this->conf['templates.']['html.']['caddy.']['marker.']['table.'];
+    $table = $this->conf['templates.']['html.']['caddy.']['table.'];
 
     foreach( $table as $property )
     {
