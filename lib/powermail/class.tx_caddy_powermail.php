@@ -304,13 +304,17 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function caddyForEmailInitTemplate( )
   {   
-    $tmpl     = null;
-    $template = $this->cObj->fileResource( $this->conf['main.']['template'] );
-    $marker   = '###CADDY_EMAIL###';
+    $file       = $this->conf['templates.']['e-mail.']['file'];
+    $markerAll  = $this->conf['templates.']['e-mail.']['marker.']['all'];
+    $markerItem = $this->conf['templates.']['e-mail.']['marker.']['item'];
 
-    $tmpl['all']  = $this->cObj->getSubpart( $template, $marker );
-    $tmpl['item'] = $this->cObj->getSubpart( $tmpl['all'], '###ITEM###'); // work on subpart 2
-    
+    $tmplFile   = $GLOBALS['TSFE']->cObj->fileResource( $file );
+    $tmpl = array
+    ( 
+      'all'  => $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll ),
+      'item' => $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem )
+    );
+
     return $tmpl;
   }
 

@@ -73,7 +73,7 @@ class tx_caddy_template
     $conf = $this->pObj->conf;
 
     $tmplSubparts = null;
-    $template     = $cObj->fileResource( $conf['main.']['template'] );
+    $template     = $cObj->fileResource( $conf['templates.']['html.']['caddy.']['file'] );
 
       // Die if there isn't any HTML template
     if( empty ( $template ) )
@@ -81,14 +81,14 @@ class tx_caddy_template
         // DRS
       if( $this->pObj->drs->drsError )
       {
-        if( empty ( $conf['main.']['template'] ) )
+        if( empty ( $conf['templates.']['html.']['file'] ) )
         {
           $prompt = 'The path to the HTML template is empty!';
           t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
           $prompt = 'Please check, if you have included the static template.';
           t3lib_div::devlog( '[HELP/INIT] ' . $prompt, $this->extKey, 1 );
         }
-        if( ! empty ( $conf['main.']['template'] ) )
+        if( ! empty ( $conf['templates.']['html.']['file'] ) )
         {
           $prompt = 'The path to your HTML template seem\'s to be unproper!';
           t3lib_div::devlog( '[ERROR/INIT] ' . $prompt, $this->extKey, 3 );
@@ -123,10 +123,13 @@ class tx_caddy_template
     }
       // Die if there isn't any HTML template
 
-    $tmplSubparts['all']      = $cObj->getSubpart( $template, '###CADDY###' );
+    $markerAll  = $conf['templates.']['html.']['caddy.']['marker.']['all'];
+    $markerItem = $conf['templates.']['html.']['caddy.']['marker.']['item'];
+
+    $tmplSubparts['all']      = $cObj->getSubpart( $template, $markerAll );
     $tmplSubparts['empty']    = $cObj->getSubpart( $template, '###CADDY_EMPTY###' );
     $tmplSubparts['minprice'] = $cObj->getSubpart( $template, '###CADDY_MINPRICE###' );
-    $tmplSubparts['item']     = $cObj->getSubpart( $tmplSubparts['all'], '###ITEM###' );
+    $tmplSubparts['item']     = $cObj->getSubpart( $tmplSubparts['all'], $markerItem );
 
     $tmplSubparts['item_error'] = $cObj->getSubpart( $template, '###CADDY_ITEM_ERROR###' );
 

@@ -67,7 +67,8 @@ class tx_caddy_pi2 extends tslib_pibase
 		$this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
                 $this->session->pObj    = $this;
 		$this->dynamicMarkers = t3lib_div::makeInstance('tx_caddy_dynamicmarkers', $this->scriptRelPath); // Create new instance for dynamicmarker function
-		$this->tmpl['form'] = $this->cObj->getSubpart($this->cObj->fileResource($this->conf['main.']['template']), '###CADDY_FORM###'); // Load FORM HTML Template
+                $template = $cObj->fileResource( $this->conf['templates.']['html.']['caddy.']['file'] );
+		$this->tmpl['form'] = $this->cObj->getSubpart( $template, '###CADDY_FORM###'); // Load FORM HTML Template
 
 		// build product from FlexForm
 		$product = array();

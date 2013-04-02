@@ -41,203 +41,6 @@ plugin.tx_caddy_pi1 {
       value =
     }
   }
-    // template, currency properties, service attributes
-  main = 
-  main {
-    template        = {$plugin.caddy.main.template}
-    decimal         = {$plugin.caddy.main.decimal}
-    dec_point       = {$plugin.caddy.main.dec_point}
-    thousands_sep   = {$plugin.caddy.main.thousands_sep}
-    currencySymbol  = {$plugin.caddy.main.currencySymbol}
-    currencySymbolBeforePrice = {$plugin.caddy.main.currencySymbolBeforePrice}
-    quantitySymbol  = {$plugin.caddy.main.quantitySymbol}
-    service_attribute_1_symbol = {$plugin.caddy.main.service_attribute_1_symbol}
-    service_attribute_2_symbol = {$plugin.caddy.main.service_attribute_2_symbol}
-    service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
-    pid              = {$plugin.caddy.main.pid}
-  }
-      // sumNet, sumGross, sumgross, service_costs, odernumber, target, taxrates, tax
-    XXXX_overall =
-    XXXX_overall {
-
-      optionsNet = COA
-      optionsNet {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = optionsNet
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      optionsGross = COA
-      optionsGross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = optionsGross
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      productsGross = COA
-      productsGross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = productsGross
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      productsNet = COA
-      productsNet {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = productsNet
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      sumNet = COA
-      sumNet {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumNet
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      sumGross = COA
-      sumGross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumGross
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      sumTaxNormal = COA
-      sumTaxNormal {
-        if.isTrue.field = sumTaxNormal
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumTaxNormal
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      sumTaxReduced = COA
-      sumTaxReduced {
-        if.isTrue.field = sumTaxReduced
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = sumTaxReduced
-
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-
-      target = TEXT
-      target {
-        value = x
-        typolink.parameter.data = page:alias//TSFE:id
-        typolink.returnLast = url
-      }
-
-    }
     // table, title, gross, tax, sku, min, max, service attributes
   db =
   db {
@@ -665,14 +468,12 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // deliveryorder, invoice
+    // deliveryorder, invoice, revocation, terms
   pdf =
   pdf {
       // delivery order PDF
     deliveryorder =
     deliveryorder {
-
-      template = {$plugin.caddy.pdf.deliveryorder.template}
 
         // order number - page id - label - delivery order number . pdf
       filename = COA
@@ -1116,8 +917,6 @@ plugin.tx_caddy_pi1 {
       // invoice PDF
     invoice =
     invoice {
-
-      template = {$plugin.caddy.pdf.invoice.template}
 
         // order number - page id - label - invoicenumber . pdf
       filename = COA
@@ -2114,6 +1913,11 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
+    // page id of the caddy
+  pid = {$plugin.caddy.main.pid}
+
+    // Never remove this property!
+  pluginCheck = dummy
 
     // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
   settings =
@@ -2290,6 +2094,87 @@ plugin.tx_caddy_pi1 {
       }
     }
   }
+    // decimal, dec_point, thousands_sep, currencySymbol, currencySymbolBeforePrice, quantitySymbol, service_attributes_X_symbol
+  symbols = 
+  symbols {
+    decimal         = {$plugin.caddy.main.decimal}
+    dec_point       = {$plugin.caddy.main.dec_point}
+    thousands_sep   = {$plugin.caddy.main.thousands_sep}
+    currencySymbol  = {$plugin.caddy.main.currencySymbol}
+    currencySymbolBeforePrice = {$plugin.caddy.main.currencySymbolBeforePrice}
+    quantitySymbol  = {$plugin.caddy.main.quantitySymbol}
+    service_attribute_1_symbol = {$plugin.caddy.main.service_attribute_1_symbol}
+    service_attribute_2_symbol = {$plugin.caddy.main.service_attribute_2_symbol}
+    service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
+  }
+
+    // e-mail, html, pdf
+  templates =
+  templates {
+      // file, marker
+    e-mail =
+    e-mail {
+      file = {$plugin.caddy.templates.e-mail}
+        // all, item
+      marker =
+      marker {
+        all   = ###CADDY_EMAIL###
+        item  = ###ITEM###
+      }
+    }
+      // caddy, caddymini
+    html =
+    html {
+        // file, marker
+      caddy =
+      caddy {
+        file = {$plugin.caddy.templates.html.caddy}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY###
+          item  = ###ITEM###
+        }
+      }
+        // file, marker
+      caddymini =
+      caddymini {
+        file = {$plugin.caddy.templates.html.caddymini}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDYMINI###
+          item  = ###ITEM###
+        }
+      }
+    }
+      // delivery order, invoice
+    pdf =
+    pdf {
+        // file, marker
+      deliveryorder =
+      deliveryorder {
+        file = {$plugin.caddy.templates.pdf.deliveryorder}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_EMAILDELIVERY###
+          item  = ###ITEM###
+        }
+      }
+        // file, marker
+      invoice =
+      invoice {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_EMAIL###
+          item  = ###ITEM###
+        }
+      }
+    }
+  }
 
     // reduced, normal
   tax =
@@ -2300,8 +2185,6 @@ plugin.tx_caddy_pi1 {
     normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
 
-    // Never remove this property!
-  pluginCheck = dummy
 }
   // plugin.tx_caddy_pi1
 

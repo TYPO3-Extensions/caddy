@@ -553,15 +553,10 @@ class tx_caddy_pdf extends tslib_pibase
     switch( $case )
     {
       case( 'deliveryorder' ):
-          // HTML template
-        $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] );
-        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_EMAILDELIVERY###' );
-        $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
-        break;
       case( 'invoice' ):
-        $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['invoice.']['template'] );
-        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_EMAIL###' );
-        $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
+        $file       = $this->conf['templates.']['pdf.'][$case . '.']['file'];
+        $markerAll  = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['all'];
+        $markerItem = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['item'];
         break;
       default:
         $prompt = 'Unproper value in switch. Case is "' . $case . '"'
@@ -570,7 +565,14 @@ class tx_caddy_pdf extends tslib_pibase
         die( $prompt );
         break;
     }
-}
+
+    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $file );
+    $this->tmpl= array
+    ( 
+      'all'  => $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll ),
+      'item' => $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem )
+    );
+  }
 
 
   /***********************************************

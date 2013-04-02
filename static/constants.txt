@@ -1,7 +1,5 @@
 plugin.caddy {
 
-  # cat=caddy - main//101; type=string; label= HTML template: Path gto the HTML template file (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
-  main.template = EXT:caddy/files/templates/caddy.html
   # cat=caddy - main//111; type=text; label= Uid of storage folder: Uid of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
   main.pid =
   # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
@@ -150,8 +148,6 @@ plugin.caddy {
   # cat=caddy - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.date.sponsors = Click me!
 
-  # cat=caddy - pdf delivery order//101; type=string; label= HTML for the caddy (items):Path to the HTML template
-  pdf.deliveryorder.template = EXT:caddy/files/templates/caddy.html
   # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
   pdf.deliveryorder.address.x = 25
   # cat=caddy - pdf delivery order//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
@@ -171,8 +167,6 @@ plugin.caddy {
   # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.deliveryorder.sponsors = Click me!
 
-  # cat=caddy - pdf invoice//101; type=string; label= HTML for the caddy (items):Path to the HTML template
-  pdf.invoice.template = EXT:caddy/files/templates/caddy.html
   # cat=caddy - pdf invoice//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
   pdf.invoice.address.x = 25
   # cat=caddy - pdf invoice//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
@@ -271,5 +265,16 @@ plugin.caddy {
   tax.externalLinks = Click me!
   # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   tax.sponsors = Click me!
+
+  # cat=caddy - templates//101; type=string; label= E-mails: Path to the HTML template file, which is used in e-mails (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
+  templates.e-mail            = EXT:caddy/files/templates/caddy.html
+  # cat=caddy - templates//201; type=string; label= HTML caddy: Path to the HTML template file, which is used in HTML pages for the caddy - the website (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
+  templates.html.caddy        = EXT:caddy/files/templates/caddy.html
+  # cat=caddy - templates//202; type=string; label= HTML caddy mini: Path to the HTML template file, which is used in HTML pages for the mini caddy - the website (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
+  templates.html.caddymini    = EXT:caddy/files/templates/caddy.html
+  # cat=caddy - templates//301; type=string; label= PDF delivery order: Path to the HTML template file, which is used in the delivery order - a PDF attachment  (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
+  templates.pdf.deliveryorder = EXT:caddy/files/templates/caddy.html
+  # cat=caddy - templates//301; type=string; label= PDF invoice: Path to the HTML template file, which is used in the invoice - a PDF attachment (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_table.html)
+  templates.pdf.invoice       = EXT:caddy/files/templates/caddy.html
 }
 
