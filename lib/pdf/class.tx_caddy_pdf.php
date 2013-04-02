@@ -137,8 +137,7 @@ class tx_caddy_pdf extends tslib_pibase
   private function caddy( $invoice = false )
   {
     $caddy = $this->caddy->caddy( );
-    var_dump( __METHOD__, __LINE__, $caddy );
-    die( );
+var_dump( __METHOD__, __LINE__, $caddy );
     $marker     = $caddy['marker'];
     $subparts   = $caddy['subparts'];
     $tmpl       = $caddy['tmpl'];
