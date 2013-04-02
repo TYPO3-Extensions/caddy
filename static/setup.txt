@@ -6,7 +6,6 @@
   //
   // includeLibs
   // plugin.tx_caddy_pi1
-  // plugin.tx_caddy_pi2
   // plugin.tx_caddy_pi3
 
 
@@ -54,7 +53,7 @@ plugin.tx_caddy_pi1 {
 
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
-    // gross, min, max, qty, puid, sku, tax, title, volume, weight
+    // gross, min, max, qty, uid, sku, tax, title, volume, weight
   getpost =
   getpost {
     gross = TEXT
@@ -72,9 +71,9 @@ plugin.tx_caddy_pi1 {
       data = GP:{$plugin.caddy.gpvar.min}
       htmlSpecialChars = 1
     }
-    puid = TEXT
-    puid {
-      data = GP:{$plugin.caddy.gpvar.puid}
+    uid = TEXT
+    uid {
+      data = GP:{$plugin.caddy.gpvar.uid}
       intval = 1
     }
     qty = TEXT
@@ -111,7 +110,7 @@ plugin.tx_caddy_pi1 {
     // item, sum
   marker =
   marker {
-      // delete, gross, min, max, puid, qty, service attributes (1-3), sku, title, tax
+      // delete, gross, min, max, uid, qty, service attributes (1-3), sku, title, tax
     item =
     item {
         // delete icon: for removing the current item from the caddy
@@ -126,7 +125,7 @@ plugin.tx_caddy_pi1 {
           enable = 1
           typolink.parameter.data = page:alias//TSFE:id
           typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = puid
+          typolink.additionalParams.field = uid
         }
       }
         // gross costs of the item
@@ -163,9 +162,9 @@ plugin.tx_caddy_pi1 {
       net < .gross
       net.10.userFunc.number.field = net
         // uid of the item
-      puid = TEXT
-      puid {
-        field = puid
+      uid = TEXT
+      uid {
+        field = uid
       }
         // quantity of the item
       qty = TEXT
@@ -2134,36 +2133,6 @@ plugin.tx_caddy_pi1 {
   }
 }
   // plugin.tx_caddy_pi1._HTMLMARKER
-
-
-
-  ///////////////////////////////////////////////////////////////
-  //
-  // plugin.tx_caddy_pi2
-
-plugin.tx_caddy_pi2 {
-    // map fields of FlexForm with TypoScript / HTML template
-  flexfields {
-    puid = puid
-    title = title
-    gross = gross
-    tax = tax
-    sku = sku
-    attributes {
-      min = min
-      max = max
-      service_attribute_1 = service_attribute_1
-      service_attribute_2 = service_attribute_2
-      service_attribute_3 = service_attribute_3
-    }
-  }
-    // page id of the caddy
-  pid = {$plugin.caddy.main.pid}
-    // e-mail, html, pdf
-  templates =
-  templates < plugin.tx_caddy_pi1.templates
-}
-  // plugin.tx_caddy_pi2
 
 
 

@@ -2715,7 +2715,7 @@ class tx_caddy extends tslib_pibase
   *                          in case of variant
   *                          It returns in aray with hidden fields like
   *                          <input type="hidden"
-  *                                 name="tx_caddy_pi1[puid][20][]"
+  *                                 name="tx_caddy_pi1[uid][20][]"
   *                                 value="tx_caddy_pi1[tx_org_calentrance.uid]=4|tx_caddy_pi1[qty]=91" />
   *
   * @param	array		$products: array with products with elements uid, title, tax, etc...
@@ -2729,7 +2729,7 @@ class tx_caddy extends tslib_pibase
   private function zz_addQtynameMarker($product, $markerArray, $pObj)
   {
       // default name for QTY. It is compatible with version 1.2.1
-      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty][' . $product['puid'] . ']';
+      $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty][' . $product['uid'] . ']';
 
       // return there isn't any variant
       if (!is_array($pObj->conf['settings.']['variant.']))
@@ -2740,7 +2740,7 @@ class tx_caddy extends tslib_pibase
       $str_marker = null;
       // get all variant key/value pairs from the current product
       $array_add_gpvar = $this->productsGetVariantTs($product, $pObj);
-      $array_add_gpvar['puid']  = $product['puid'];
+      $array_add_gpvar['uid']  = $product['uid'];
       // generate the marker array
       foreach ((array) $array_add_gpvar as $key => $value)
       {

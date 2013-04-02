@@ -671,7 +671,7 @@ class tx_caddy_pi1 extends tslib_pibase
 //    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
 //    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
 //    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['getpost.']['tax'], $conf['getpost.']['tax.'] );
-//    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['puid'], $conf['getpost.']['puid.'] ) );
+//    $this->gpvar['uid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['uid'], $conf['getpost.']['uid.'] ) );
 //    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['getpost.']['cid'], $conf['getpost.']['cid.'] ) );
 //
 //    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['getpost.']['sku'], $conf['getpost.']['sku.'] );

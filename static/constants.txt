@@ -71,8 +71,8 @@ plugin.caddy {
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
 
-  # cat=caddy - getpost//100; type=text; label= PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
-  gpvar.puid =
+  # cat=caddy - getpost//100; type=text; label= Uid: Enter the correct parameter name for a unique id (integer) of your item. caddy uses this id for SQL requests. I.e. tx_browser_pi1|showUid
+  gpvar.uid =
   # cat=caddy - getpost//110; type=text; label= Quantity: Enter the correct parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
   gpvar.qty = qty
   # cat=caddy - getpost//115; type=text; label= Title: Enter the correct parameter name for the title field in your order form (e.g. title).

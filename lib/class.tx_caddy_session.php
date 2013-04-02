@@ -248,7 +248,7 @@ class tx_caddy_session
  *      'amount' => 2,
  *      'gross' => '1,49',
  *      'tax' => 1,
- *      'puid' => 234,
+ *      'uid' => 234,
  *      'sku' => 'P234whatever'
  *    )
  *
@@ -269,7 +269,7 @@ class tx_caddy_session
       // RETURN : without price or without title
 
     // variants
-    $arr_variant['puid'] = $product['puid'];
+    $arr_variant['uid'] = $product['uid'];
     // add variant keys from ts settings.variants array,
     //  if there is a corresponding key in GET or POST
     if( is_array( $this->pObj->conf['settings.']['variant.'] ) )
@@ -296,7 +296,7 @@ class tx_caddy_session
     // get already exting products from session
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
-      // check if this puid already exists and when delete it
+      // check if this uid already exists and when delete it
     foreach( ( array ) $sesArray['products'] as $key => $value )
     { // one loop for every product
       if( is_array( $value ) )
@@ -335,7 +335,7 @@ class tx_caddy_session
       $product['gross'] = str_replace( ',', '.', $product['gross'] ); // comma to point
     }
 
-      // remove puid from variant array
+      // remove uid from variant array
     unset( $arr_variant[0] );
 
     // add variant key/value pairs to the current product
@@ -370,7 +370,7 @@ class tx_caddy_session
     // add variant key/value pairs from piVars
     $arr_variant = $this->productGetVariantGpvar( );
     // add product id to variant array
-    $arr_variant['puid'] = $this->pObj->piVars['del'];
+    $arr_variant['uid'] = $this->pObj->piVars['del'];
 
     // get products from session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -516,7 +516,7 @@ class tx_caddy_session
           break;
         }
       }
-      $row['puid']  = $gpvar['puid'];
+      $row['uid']  = $gpvar['uid'];
 
       return $row;
     }
@@ -546,8 +546,8 @@ class tx_caddy_session
         return $gpvar;
     }
 
-    $puid = intval( $gpvar['puid'] );
-    if( $puid === 0 )
+    $uid = intval( $gpvar['uid'] );
+    if( $uid === 0 )
     {
       return false;
     }
@@ -605,7 +605,7 @@ class tx_caddy_session
     }
     
     
-    $where    = ' ( ' . $table . '.uid = ' . $puid . ' OR l10n_parent = ' . $puid . ' ) ' 
+    $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR l10n_parent = ' . $uid . ' ) ' 
               . 'AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
               . tslib_cObj::enableFields( $table )
               ;
@@ -635,7 +635,7 @@ class tx_caddy_session
         'title' => $row[$this->pObj->conf['db.']['title']],
         'gross' => $row[$this->pObj->conf['db.']['gross']],
         'tax'   => $row[$this->pObj->conf['db.']['tax']],
-        'puid'  => $gpvar['puid']
+        'uid'  => $gpvar['uid']
     );
     if ($row[$sku])
     {
@@ -750,7 +750,7 @@ class tx_caddy_session
   {
     switch( true )
     {
-      case( $this->pObj->gpvar['puid'] ):
+      case( $this->pObj->gpvar['uid'] ):
           // add an item
           // DRS
         if( $this->drs->drsCalc )
@@ -902,7 +902,7 @@ class tx_caddy_session
       // SWITCH : add, update, delete
     switch( true )
     {
-      case( $this->pObj->gpvar['puid'] ):
+      case( $this->pObj->gpvar['uid'] ):
         $prompt = 'Case: add an item';
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         break;
@@ -946,7 +946,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Current item (' . $product['title'] . ': ' . $product['puid'] . ') hasn\'t any maximum limit. Maximum limit won\'t checked.';
+        $prompt = 'Current item (' . $product['title'] . ': ' . $product['uid'] . ') hasn\'t any maximum limit. Maximum limit won\'t checked.';
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -961,14 +961,14 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') is overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['uid'] . ') is overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
           $prompt = 'Quantity will setup to #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
           // limit is overrun
-        $product['qty'] = $this->productSetQuantity( $product['max'], $product['puid'] );
+        $product['qty'] = $this->productSetQuantity( $product['max'], $product['uid'] );
         $llKey          = 'error_max';
         $llAlt          = 'No value for error_max in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -981,7 +981,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') isn\'t overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
+          $prompt = 'Maximum limit of the current item (' . $product['title'] . ': ' . $product['uid'] . ') isn\'t overrun. Item #' . $product['qty'] . ', limit #' . $product['max'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
@@ -1012,7 +1012,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsCalc )
       {
-        $prompt = 'Current item (' . $product['title'] . ': ' . $product['puid'] . ') hasn\'t any minimum limit. Minimum limit won\'t checked.';
+        $prompt = 'Current item (' . $product['title'] . ': ' . $product['uid'] . ') hasn\'t any minimum limit. Minimum limit won\'t checked.';
         t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
@@ -1029,14 +1029,14 @@ class tx_caddy_session
         if( $this->drs->drsCalc )
         {
           $prompt = 'Minimum limit of the current item (' . $product['title'] . ': '
-                  . $product['puid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
+                  . $product['uid'] . ') is undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
           $prompt = 'Quantity will setup to #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
           // DRS
 
-        $product['qty'] = $this->productSetQuantity( $product['min'], $product['puid'] );
+        $product['qty'] = $this->productSetQuantity( $product['min'], $product['uid'] );
         $llKey          = 'error_min';
         $llAlt          = 'No value for error_min in ' . __METHOD__ . ' (' . __LINE__ .')';
         $llPrompt       = $this->pObj->pi_getLL( $llKey, $llAlt );
@@ -1049,7 +1049,7 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsCalc )
         {
-          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['puid'] . ') '
+          $prompt = 'Minimum limit of the current item (' . $product['title'] . ': ' . $product['uid'] . ') '
                   . 'isn\'t undercut. Item #' . $product['qty'] . ', limit #' . $product['min'];
           t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         }
@@ -1134,12 +1134,12 @@ class tx_caddy_session
     {
       $quantity = 1;
     }
-    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['uid'] );
 
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') '
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['uid'] . ') '
               . 'will setup to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
@@ -1224,12 +1224,12 @@ class tx_caddy_session
     $quantity = $product['qty']
               + $itemsQuantityUndercut
               ;
-    $product['qty'] = $this->productSetQuantity( $quantity, $product['puid'] );
+    $product['qty'] = $this->productSetQuantity( $quantity, $product['uid'] );
 
       // DRS
     if( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['puid'] . ') '
+      $prompt = 'Quantity for item  (' . $product['title'] . ': ' . $product['uid'] . ') '
               . 'will setup to #' . $product['qty'];
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
@@ -1261,7 +1261,7 @@ class tx_caddy_session
       // SWITCH : add an item or update items quantity
     switch( true )
     {
-      case( $this->pObj->gpvar['puid'] ):
+      case( $this->pObj->gpvar['uid'] ):
         $quantity = $this->quantityGetAdd( );
         break;
       case( $this->pObj->piVars['qty'] ):
@@ -1429,18 +1429,18 @@ class tx_caddy_session
         {
           // i.e for a key: tx_org_calentrance.uid=4
           list($key_variant, $value_variant) = explode('=', $key_iterator);
-          if ($key_variant == 'puid')
+          if ($key_variant == 'uid')
           {
-            $arr_variant[$key]['puid'] = $value_variant;
+            $arr_variant[$key]['uid'] = $value_variant;
           }
           // i.e arr_var[tx_org_calentrance.uid] = 4
           $arr_from_qty[$key][$key_variant] = $value_variant;
           if (is_array($value_iterator))
           {
             list($key_variant, $value_variant) = explode('=', key($value_iterator));
-            if ($key_variant == 'puid')
+            if ($key_variant == 'uid')
             {
-              $arr_variant[$key]['puid'] = $value_variant;
+              $arr_variant[$key]['uid'] = $value_variant;
             }
             $arr_from_qty[$key][$key_variant] = $value_variant;
           }
@@ -1488,12 +1488,12 @@ class tx_caddy_session
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key_session )
     {
       // current product id
-      $session_puid = $sesArray['products'][$key_session]['puid'];
+      $session_uid = $sesArray['products'][$key_session]['uid'];
 
       if( ! is_array( $arr_variant ) )
       {
         // no variant, nothing to loop
-        $int_qty = intval( $this->pObj->piVars['qty'][$session_puid] );
+        $int_qty = intval( $this->pObj->piVars['qty'][$session_uid] );
 
         if( $int_qty > 0 )
         {
@@ -1514,7 +1514,7 @@ class tx_caddy_session
         else
         {
           // remove product from session
-          $this->productDelete($sesArray['products'][$key_session]['puid']);
+          $this->productDelete($sesArray['products'][$key_session]['uid']);
           // remove product from current session array
           unset($sesArray['products'][$key_session]);
           $productId = $this->productsGetFirstKey( );
@@ -1527,19 +1527,19 @@ class tx_caddy_session
         $arr_variant_backup = $arr_variant;
         foreach( $arr_variant as $key_variant => $arr_condition )
         {
-          if( ! isset( $arr_variant[$key_variant]['puid'] ) )
+          if( ! isset( $arr_variant[$key_variant]['uid'] ) )
           {
             // without variant
-            $curr_puid = key( $this->pObj->piVars['qty'] );
+            $curr_uid = key( $this->pObj->piVars['qty'] );
           }
-          if( isset( $arr_variant[$key_variant]['puid'] ) )
+          if( isset( $arr_variant[$key_variant]['uid'] ) )
           {
-            $curr_puid = $arr_variant[$key_variant]['puid'];
+            $curr_uid = $arr_variant[$key_variant]['uid'];
           }
           if( ! isset( $arr_variant[$key_variant]['qty'] ) )
           {
             // without variant
-            $int_qty = intval( $this->pObj->piVars['qty'][$curr_puid] );
+            $int_qty = intval( $this->pObj->piVars['qty'][$curr_uid] );
           }
           if (isset($arr_variant[$key_variant]['qty']))
           {
@@ -1548,8 +1548,8 @@ class tx_caddy_session
 
           // counter for condition
           $int_counter = 0;
-          // puid: condition fits
-          if( $session_puid == $curr_puid )
+          // uid: condition fits
+          if( $session_uid == $curr_uid )
           {
             $int_counter++;
           }
@@ -1557,14 +1557,14 @@ class tx_caddy_session
           // loop through conditions
           foreach( $arr_condition as $key_condition => $value_condition )
           {
-            // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-            if( in_array( $key_condition, array( 'qty', 'puid' ) ) )
+            // workaround (it would be better, if qty and uid won't be elements of $arr_condition
+            if( in_array( $key_condition, array( 'qty', 'uid' ) ) )
             {
-              // workaround: puid and qty should fit in every case
+              // workaround: uid and qty should fit in every case
               $int_counter++;
             }
-            // workaround (it would be better, if qty and puid won't be elements of $arr_condition
-            if( ! in_array( $key_condition, array( 'qty', 'puid' ) ) )
+            // workaround (it would be better, if qty and uid won't be elements of $arr_condition
+            if( ! in_array( $key_condition, array( 'qty', 'uid' ) ) )
             {
               // variants: condition fits
               if( $sesArray['products'][$key_session][$key_condition] == $value_condition )
@@ -1596,7 +1596,7 @@ class tx_caddy_session
             else
             {
               // remove product from session
-              $this->productDelete( $sesArray['products'][$key_session]['puid'] );
+              $this->productDelete( $sesArray['products'][$key_session]['uid'] );
               // remove product from current session array
               unset( $sesArray['products'][$key_session] );
             }
