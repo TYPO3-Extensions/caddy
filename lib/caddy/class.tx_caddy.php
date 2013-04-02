@@ -76,7 +76,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * 1488:     private function calcOptions( )
  * 1508:     private function calcOptionsPayment( )
  * 1566:     private function calcOptionsShipping( )
- * 1624:     private function calcOptionsSpecial( )
+ * 1624:     private function calcOptionsSpecials( )
  *
  *              SECTION: Calculation Sum
  * 1688:     private function calcSum( $items, $options )
@@ -1490,7 +1490,7 @@ class tx_caddy extends tslib_pibase
     (
       'payment'  => $this->calcOptionsPayment( ),
       'shipping' => $this->calcOptionsShipping( ),
-      'specials' => $this->calcOptionsSpecial( )
+      'specials' => $this->calcOptionsSpecials( )
     );
 
     return $options;
@@ -1613,14 +1613,14 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * calcOptionsSpecial( ) : calculate tax, net and gross for the option special
+  * calcOptionsSpecials( ) : calculate tax, net and gross for the option special
   *
   * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function calcOptionsSpecial( )
+  private function calcOptionsSpecials( )
   {
     $arrReturn = null;
 
@@ -1643,7 +1643,7 @@ class tx_caddy extends tslib_pibase
 
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
-      if( $this->conf['options.']['special.']['options.'][$specialId . '.']['tax'] == 'reduced' )
+      if( $this->conf['options.']['specials.']['options.'][$specialId . '.']['tax'] == 'reduced' )
       {
         $taxReduced = $taxReduced + $gross - $net;
       }
