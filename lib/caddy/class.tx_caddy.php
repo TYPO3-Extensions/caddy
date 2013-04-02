@@ -425,7 +425,6 @@ class tx_caddy extends tslib_pibase
                     ;
 
          // add inner html to variable
-var_dump( __METHOD__, __LINE__, $this->tmpl['item'] );    
       $content  = $content
                 . $this->cObj->substituteMarkerArrayCached
                   (
