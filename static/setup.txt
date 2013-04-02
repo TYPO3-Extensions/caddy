@@ -54,6 +54,85 @@ plugin.tx_caddy_pi1 {
 
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
+    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
+  getpost =
+  getpost {
+
+    # GET or POST param for title (if not empty: Overwrite values from db request with puid)
+    title = TEXT
+    title {
+      data = GP:{$plugin.caddy.gpvar.title}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for gross (if not empty: Overwrite values from db request with puid)
+    gross = TEXT
+    gross {
+      data = GP:{$plugin.caddy.gpvar.price}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for qty
+    qty = TEXT
+    qty {
+      data = GP:{$plugin.caddy.gpvar.qty}
+      intval = 1
+    }
+
+    # GET or POST param for sku
+    sku = TEXT
+    sku {
+      data = GP:{$plugin.caddy.gpvar.sku}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for min
+    min = TEXT
+    min {
+      data = GP:{$plugin.caddy.gpvar.min}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for max
+    max = TEXT
+    max {
+      data = GP:{$plugin.caddy.gpvar.max}
+      htmlSpecialChars = 1
+    }
+
+    # GET or POST param for weight
+    weight = TEXT
+    weight {
+      data = GP:{$plugin.caddy.gpvar.weight}
+      floatval = 1
+    }
+
+    # GET or POST param for volume
+    volume = TEXT
+    volume {
+      data = GP:{$plugin.caddy.gpvar.volume}
+      floatval = 1
+    }
+
+    # Param for tax (will be overwritten from db request)
+    tax = TEXT
+    tax.value = {$plugin.caddy.tax.normalCalc}
+
+    # GET or POST param for product uid
+    puid = TEXT
+    puid {
+      data = GP:{$plugin.caddy.gpvar.puid}
+      intval = 1
+    }
+
+    # GET or POST param for content id
+    cid = TEXT
+    cid {
+      data = GP:{$plugin.caddy.gpvar.cid}
+      intval = 1
+    }
+  }
+
     // item, sum
   marker =
   marker {
@@ -1902,162 +1981,6 @@ plugin.tx_caddy_pi1 {
     // Never remove this property!
   pluginCheck = dummy
 
-    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
-  settings =
-  settings {
-
-    # GET or POST param for title (if not empty: Overwrite values from db request with puid)
-    title = TEXT
-    title {
-      data = GP:{$plugin.caddy.gpvar.title}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for gross (if not empty: Overwrite values from db request with puid)
-    gross = TEXT
-    gross {
-      data = GP:{$plugin.caddy.gpvar.price}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for qty
-    qty = TEXT
-    qty {
-      data = GP:{$plugin.caddy.gpvar.qty}
-      intval = 1
-    }
-
-    # GET or POST param for sku
-    sku = TEXT
-    sku {
-      data = GP:{$plugin.caddy.gpvar.sku}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for min
-    min = TEXT
-    min {
-      data = GP:{$plugin.caddy.gpvar.min}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for max
-    max = TEXT
-    max {
-      data = GP:{$plugin.caddy.gpvar.max}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for weight
-    weight = TEXT
-    weight {
-      data = GP:{$plugin.caddy.gpvar.weight}
-      floatval = 1
-    }
-
-    # GET or POST param for volume
-    volume = TEXT
-    volume {
-      data = GP:{$plugin.caddy.gpvar.volume}
-      floatval = 1
-    }
-
-    # Param for tax (will be overwritten from db request)
-    tax = TEXT
-    tax.value = {$plugin.caddy.tax.normalCalc}
-
-    # GET or POST param for product uid
-    puid = TEXT
-    puid {
-      data = GP:{$plugin.caddy.gpvar.puid}
-      intval = 1
-    }
-
-    # GET or POST param for content id
-    cid = TEXT
-    cid {
-      data = GP:{$plugin.caddy.gpvar.cid}
-      intval = 1
-    }
-
-      // title, puid, qty, service attributes, min, max, sku, gross, delete, tax
-    fields =
-    fields {
-      title = TEXT
-      title.field = title
-
-      puid = TEXT
-      puid.field = puid
-
-      qty = TEXT
-      qty.field = qty
-
-      service_attribute_1 = TEXT
-      service_attribute_1.field = service_attribute_1
-
-      service_attribute_2 = TEXT
-      service_attribute_2.field = service_attribute_2
-
-      service_attribute_3 = TEXT
-      service_attribute_3.field = service_attribute_3
-
-      min = TEXT
-      min.field = min
-
-      max = TEXT
-      max.field = max
-
-      sku = TEXT
-      sku.field = sku
-
-      gross = COA
-      gross {
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          number = TEXT
-          number.field = gross
-          decimal = 2
-          dec_point = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
-
-          drs = {$plugin.caddy.debug.userfunc}
-        }
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
-        }
-      }
-      net < .gross
-      net.10.userFunc.number.field = net
-      sumgross < .gross
-      sumgross.10.userFunc.number.field = sumgross
-      sumnet < .gross
-      sumnet.10.userFunc.number.field = sumnet
-
-      taxrate < .gross
-      taxrate.10.userFunc.number.field = taxrate
-      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
-      
-      delete = IMAGE
-      delete {
-        file = EXT:caddy/files/img/delete_100_02.png
-        altText = delete product
-        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
-        params = class="caddy_delete"
-        imageLinkWrap = 1
-        imageLinkWrap {
-          enable = 1
-          typolink.parameter.data = page:alias//TSFE:id
-          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = puid
-        }
-      }
-
-    }
-
-  }
     // decimal, dec_point, thousands_sep, currencySymbol, currencySymbolBeforePrice, quantitySymbol, service_attributes_X_symbol
   symbols = 
   symbols {

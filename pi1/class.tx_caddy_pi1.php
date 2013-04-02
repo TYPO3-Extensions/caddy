@@ -56,8 +56,8 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *  448:     private function initDatabase( )
  *  461:     private function initDatabaseTable( )
  *  512:     private function initFlexform( )
- *  525:     private function initGpVar( )
- *  581:     private function initGpVarCid( )
+ *  525:     private function initGetPost( )
+ *  581:     private function initGetPostCid( )
  *  631:     private function initInstances( )
  *  681:     private function initPid( )
  *  720:     private function initPowermail( )
@@ -421,7 +421,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initPid( );
     $this->initAccessByIp( );
     $this->initTemplate( );
-    $this->initGpVar( );
+    $this->initGetPost( );
     $this->initPowermail( );
     $this->initDatabase( );
     $this->initNumbers( );
@@ -636,54 +636,54 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
-  * initGpVar( )
+  * initGetPost( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initGpVar( )
+  private function initGetPost( )
   {
     $conf = $this->conf;
 
       // read variables
-    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['settings.']['title'], $conf['settings.']['title.'] );
-    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['settings.']['gross'], $conf['settings.']['price.'] );
-    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['settings.']['qty'], $conf['settings.']['qty.'] ) );
-    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['settings.']['tax'], $conf['settings.']['tax.'] );
-    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['settings.']['puid'], $conf['settings.']['puid.'] ) );
-    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['settings.']['cid'], $conf['settings.']['cid.'] ) );
+    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['getpost.']['title'], $conf['getpost.']['title.'] );
+    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
+    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
+    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['getpost.']['tax'], $conf['getpost.']['tax.'] );
+    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['puid'], $conf['getpost.']['puid.'] ) );
+    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['getpost.']['cid'], $conf['getpost.']['cid.'] ) );
 
-    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['settings.']['sku'], $conf['settings.']['sku.'] );
-    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['settings.']['min'], $conf['settings.']['min.'] );
-    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['settings.']['max'], $conf['settings.']['max.'] );
+    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['getpost.']['sku'], $conf['getpost.']['sku.'] );
+    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['getpost.']['min'], $conf['getpost.']['min.'] );
+    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['getpost.']['max'], $conf['getpost.']['max.'] );
 
     $this->gpvar['service_attribute_1'] = floatval
                                           (
                                             $this->zz_cObjGetSingle
                                             (
-                                              $conf['settings.']['service_attribute_1'],
-                                              $conf['settings.']['service_attribute_1.']
+                                              $conf['getpost.']['service_attribute_1'],
+                                              $conf['getpost.']['service_attribute_1.']
                                             )
                                           );
     $this->gpvar['service_attribute_2'] = floatval
                                           (
                                             $this->zz_cObjGetSingle
                                             (
-                                              $conf['settings.']['service_attribute_2'],
-                                              $conf['settings.']['service_attribute_2.']
+                                              $conf['getpost.']['service_attribute_2'],
+                                              $conf['getpost.']['service_attribute_2.']
                                             )
                                           );
     $this->gpvar['service_attribute_3'] = floatval
                                           (
                                             $this->zz_cObjGetSingle
                                             (
-                                              $conf['settings.']['service_attribute_3'],
-                                              $conf['settings.']['service_attribute_3.']
+                                              $conf['getpost.']['service_attribute_3'],
+                                              $conf['getpost.']['service_attribute_3.']
                                             )
                                           );
-    $this->initGpVarCid( );
+    $this->initGetPostCid( );
 
     if ($this->gpvar['qty'] === 0)
     {
@@ -692,14 +692,14 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
-  * initGpVarCid( )
+  * initGetPostCid( )
   *
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initGpVarCid( )
+  private function initGetPostCid( )
   {
     if( ! $this->gpvar['cid'] )
     {
