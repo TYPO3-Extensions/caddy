@@ -181,7 +181,7 @@ class tx_caddy_pdf extends tslib_pibase
     $destPath = null;
 
       // Init caddy pdf
-    $this->init( );
+    $this->init( 'deliveryorder' );
 
       // RETURN : any pdf is requested
     if( ! $this->deliveryorderInit( ) )
@@ -433,12 +433,13 @@ class tx_caddy_pdf extends tslib_pibase
   *           * of an unproper dir
   *           * of no products
   *
+  * @param      $string       $case : deliveryorder || invoice || revocation || terms
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function init( )
+  private function init( $case )
   {
     $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $this->confSettings = $this->conf['settings.'];
@@ -457,7 +458,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->initCheckProducts( );
     
     $this->initInstances( );
-    $this->initTemplate( );
+    $this->initTemplate( $case );
 
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
@@ -539,7 +540,7 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * initTemplate( )
   *
-  * @param      $string       $case : deliveryorder || invoice
+  * @param      $string       $case : deliveryorder || invoice || revocation || terms
   * @return	void
   * @access private
   * @version    2.0.0
@@ -557,6 +558,11 @@ class tx_caddy_pdf extends tslib_pibase
         $file       = $this->conf['templates.']['pdf.'][$case . '.']['file'];
         $markerAll  = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['all'];
         $markerItem = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['item'];
+        break;
+      case( 'revocation' ):
+      case( 'terms' ):
+          // Template for caddy isn't needed
+        return;
         break;
       default:
         $prompt = 'Unproper value in switch. Case is "' . $case . '"'
@@ -595,7 +601,7 @@ class tx_caddy_pdf extends tslib_pibase
     $destPath = null;
 
       // Init caddy pdf
-    $this->init( );
+    $this->init( 'invoice' );
 
       // RETURN : any pdf is requested
     if( ! $this->invoiceInit( ) )
@@ -1116,7 +1122,7 @@ class tx_caddy_pdf extends tslib_pibase
     $destPath = null;
 
       // Init caddy pdf
-    $this->init( );
+    $this->init( 'revocation' );
 
       // RETURN : any pdf is requested
     if( ! $this->revocationInit( ) )
@@ -1319,7 +1325,7 @@ class tx_caddy_pdf extends tslib_pibase
     $destPath = null;
 
       // Init caddy pdf
-    $this->init( );
+    $this->init( 'terms' );
 
       // RETURN : any pdf is requested
     if( ! $this->termsInit( ) )
