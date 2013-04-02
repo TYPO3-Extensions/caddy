@@ -202,12 +202,7 @@ plugin.tx_caddy_pi1 {
             de = inklusive 
             en = including
           }
-          if {
-            isTrue {
-              field = sumsumtaxreduced
-            }
-          }
-          noTrimWrap = || {$plugin.caddy.tax.reduced}% |
+          noTrimWrap = || {$plugin.caddy.tax.reduced}{$plugin.caddy.main.percentSymbol} |
         }
         taxrate_normal_string = TEXT
         taxrate_normal_string {
@@ -216,12 +211,7 @@ plugin.tx_caddy_pi1 {
             de = inklusive 
             en = including
           }
-          if {
-            isTrue {
-              field = sumsumtaxnormal
-            }
-          }
-          noTrimWrap = || {$plugin.caddy.tax.normal}% |
+          noTrimWrap = || {$plugin.caddy.tax.normal}{$plugin.caddy.main.percentSymbol} |
         }
       }
         // payment, shipping, specials
