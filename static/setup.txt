@@ -2245,11 +2245,7 @@ plugin.tx_caddy_pi1 {
   // plugin.tx_caddy_pi2
 
 plugin.tx_caddy_pi2 {
-  main {
-    template        = {$plugin.caddy.main.template}
-    pid             = {$plugin.caddy.main.pid}
-  }
-  # map fields of FlexForm with TypoScript / HTML template
+    // map fields of FlexForm with TypoScript / HTML template
   flexfields {
     puid = puid
     title = title
@@ -2264,6 +2260,11 @@ plugin.tx_caddy_pi2 {
       service_attribute_3 = service_attribute_3
     }
   }
+    // page id of the caddy
+  pid = {$plugin.caddy.main.pid}
+    // e-mail, html, pdf
+  templates =
+  templates < plugin.tx_caddy_pi1.templates
 }
   // plugin.tx_caddy_pi2
 
@@ -2275,12 +2276,6 @@ plugin.tx_caddy_pi2 {
 
 
 plugin.tx_caddy_pi3 {
-    // template, pid
-  main =
-  main {
-    template        = {$plugin.caddy.main.template}
-    pid             = {$plugin.caddy.main.pid}
-  }
     // item, marker
   content = 
   content {
@@ -2385,6 +2380,13 @@ plugin.tx_caddy_pi3 {
       wrap = <div class="sum minicaddysum">|</div>
     }
   }
+    // page id of the caddy
+  pid = {$plugin.caddy.main.pid}
+
+    // e-mail, html, pdf
+  templates =
+  templates < plugin.tx_caddy_pi1.templates
+
     // linktocaddy, linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
