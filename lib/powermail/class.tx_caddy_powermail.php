@@ -758,7 +758,7 @@ class tx_caddy_powermail extends tslib_pibase
   *                   * fieldTitle
   *                   * fieldFfConfirm
   *
-  * @param	[type]		$$row: ...
+  * @param	array		$row: ...
   * @return	void
   * @access public
   * @internal   #45915

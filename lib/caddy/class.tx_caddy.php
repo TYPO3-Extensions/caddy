@@ -2537,9 +2537,9 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
+  * setParentObject( )  : 
   *
-  * @param	[type]		$$pObj: ...
+  * @param	object		$pObj: ...
   * @return	void
   * @access public
   * @version    2.0.0
@@ -2557,7 +2557,26 @@ class tx_caddy extends tslib_pibase
 
     }
     $this->pObj = $pObj;
+    
+    $this->setParentObjectCObj(       $pObj );
+    $this->setParentObjectConf(       $pObj );
+    $this->setParentObjectDrs(        $pObj );
+    $this->setParentObjectLocalCObj(  $pObj );
+    $this->setParentObjectTemplate(   $pObj );
 
+  }
+
+ /**
+  * setParentObjectConf( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access     private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function setParentObjectConf( $pObj )
+  {
     if( ! is_array( $pObj->conf ) || empty( $pObj->conf ) )
     {
       $prompt = 'ERROR: no configuration!<br />' . PHP_EOL .
@@ -2568,7 +2587,19 @@ class tx_caddy extends tslib_pibase
 
     }
     $this->conf = $pObj->conf;
+  }
 
+ /**
+  * setParentObjectCObj( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access     private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function setParentObjectCObj( $pObj )
+  {
     if( ! is_object( $pObj->cObj ) )
     {
       $prompt = 'ERROR: no cObject!<br />' . PHP_EOL .
@@ -2579,7 +2610,19 @@ class tx_caddy extends tslib_pibase
 
     }
     $this->cObj = $pObj->cObj;
+  }
 
+ /**
+  * setParentObjectDrs( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access     private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function setParentObjectDrs( $pObj )
+  {
     if( ! is_object( $pObj->drs ) )
     {
       $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
@@ -2587,17 +2630,24 @@ class tx_caddy extends tslib_pibase
       $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
       $this->drs->pObj        = $this;
       $this->drs->row         = $this->cObj->data;
-//      $prompt = 'ERROR: no DRS!<br />' . PHP_EOL .
-//                'Sorry for the trouble.<br />' . PHP_EOL .
-//                'TYPO3 Caddy<br />' . PHP_EOL .
-//              __METHOD__ . ' (' . __LINE__ . ')';
-//      die( $prompt );
     }
     else
     {
       $this->drs = $pObj->drs;
     }
+  }
 
+ /**
+  * setParentObjectLocalCObj( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access     private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function setParentObjectLocalCObj( $pObj )
+  {
     if( ! is_object( $pObj->local_cObj ) )
     {
       $prompt = 'ERROR: no local_cObj!<br />' . PHP_EOL .
@@ -2608,7 +2658,19 @@ class tx_caddy extends tslib_pibase
 
     }
     $this->local_cObj = $pObj->local_cObj;
+  }
 
+ /**
+  * setParentObjectTemplate( )  : 
+  *
+  * @param	object		$pObj: ...
+  * @return	void
+  * @access     private
+  * @version    2.0.2
+  * @since      2.0.2
+  */
+  private function setParentObjectTemplate( $pObj )
+  {
     if( ! is_array( $pObj->tmpl ) || empty( $pObj->tmpl ) )
     {
       $prompt = 'ERROR: no template!<br />' . PHP_EOL .

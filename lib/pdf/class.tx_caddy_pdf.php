@@ -229,11 +229,6 @@ die( );
     }
       // RETURN : destination file already exists
 
-      // HTML template
-    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] );
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDER###' );
-    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
-
       // PDF source file
     $srceFile = $sesArray['sendVendorDeliveryorder'];
     if( empty ( $srceFile ) )
@@ -534,9 +529,9 @@ die( );
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
 
-    require_once( $path2lib . 'class.tx_caddy_template.php' );
-    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
-    $this->template->pObj   = $this;
+//    require_once( $path2lib . 'class.tx_caddy_template.php' );
+//    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
+//    $this->template->pObj   = $this;
 
     require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
@@ -545,15 +540,38 @@ die( );
  /**
   * initTemplate( )
   *
+  * @param      $string       $case : deliveryorder || invoice
   * @return	void
   * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function initTemplate( )
+  private function initTemplate( $case='invoice')
   {
-    $this->tmpl = $this->template->main( );
-  }
+//    $this->tmpl = $this->template->main( );
+        // HTML template
+
+    switch( $case )
+    {
+      case( 'deliveryorder' ):
+          // HTML template
+        $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['deliveryorder.']['template'] );
+        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_DELIVERYORDER###' );
+        $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
+        break;
+      case( 'invoice' ):
+        $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['invoice.']['template'] );
+        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_INVOICE###' );
+        $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
+        break;
+      default:
+        $prompt = 'Unproper value in switch. Case is "' . $case . '"'
+                . PHP
+                . __METHOD__ . '(line ' . __LINE__ . ')';
+        die( $prompt );
+        break;
+    }
+}
 
 
   /***********************************************
@@ -622,11 +640,6 @@ die( );
       return $destPath;
     }
       // RETURN : destination file already exists
-
-      // HTML template
-    $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['invoice.']['template'] );
-    $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_INVOICE###' );
-    $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
 
       // PDF source file
     $srceFile = $sesArray['sendVendorInvoice'];
