@@ -150,6 +150,30 @@ class tx_caddy_template
     $tmplSubparts['specials_condition_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIALS_CONDITIONS###' );
     $tmplSubparts['specials_condition_item'] = $cObj->getSubpart( $tmplSubparts['specials_condition_all'], '###ITEM###' );
 
+    $tmplSubparts = $this->templateTable( $tmplSubparts ); 
+    
+    return $tmplSubparts;
+  }
+
+ /**
+  * templateTable( )
+  *
+  * @param      string        $tmplSubparts : 
+  * @return	string        $tmplSubparts : 
+  * @access private
+  * @version    2.0.0
+  * @since      2.0.0
+  */
+  private function templateTable( $tmplSubparts )
+  {
+    $table = $this->conf['templates.']['html.']['caddy.']['marker.']['table.'];
+
+    foreach( $table as $property )
+    {
+      $marker               = '###' . strtoupper( $property ) . '###';
+      $tmplSubparts['all']  = str_replace( $marker, $property, $tmplSubparts['all'] );     
+    }
+    
     return $tmplSubparts;
   }
 
