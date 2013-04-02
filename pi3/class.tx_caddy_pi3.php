@@ -383,7 +383,7 @@ class tx_caddy_pi3 extends tslib_pibase
   {
 //    $this->tmpl = $this->template->main( );
 
-    $fileRessource  = $this->cObj->fileResource( $conf['templates.']['html.']['caddymini.']['file'] );
+    $fileRessource  = $this->cObj->fileResource( $this->conf['templates.']['html.']['caddymini.']['file'] );
     $markerAll      = $this->conf['templates.']['html.']['caddymini.']['marker.']['all'];
     $markerItem     = $this->conf['templates.']['html.']['caddymini.']['marker.']['item'];
     
