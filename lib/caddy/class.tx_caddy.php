@@ -1778,23 +1778,22 @@ var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
   */
   public function getSpecialOptionLabelsBySessionId( )
   {
+    $value  = null;
+    $values = null;
+
       // Get session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 
-      // Get configuration
+      // Get the devider
+    $name     = $this->conf['options.']['specials.']['devider'];
+    $conf     = $this->conf['options.']['specials.']['devider.'];
+    $devider  = $this->zz_cObjGetSingle( $name, $conf );
+      // Get the devider
+
+      // Get options configuration
     $optionsConf = $this->conf['options.']['specials.']['options.'];
 
-      // Devider
-    $name     = $optionsConf['devider'];
-    $conf     = $optionsConf['devider.'];
-    $devider  = $this->zz_cObjGetSingle( $name, $conf );
-      // Devider
-
-      // Get key for the option
-
       // Render the option label
-    $value  = null;
-    $values = null;
     foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
     {
       $name     = $optionsConf[ $key . '.' ]['title'];
