@@ -71,7 +71,6 @@ class tx_caddy_template
   {
     $cObj = $this->pObj->cObj;
     $conf = $this->pObj->conf;
-var_dump( __METHOD__, __LINE__, $conf );
     $template     = $cObj->fileResource( $conf['templates.']['html.']['caddy.']['file'] );
 
       // Die if there isn't any HTML template
