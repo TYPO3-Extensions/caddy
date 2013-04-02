@@ -54,17 +54,6 @@ plugin.tx_caddy_pi1 {
 
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
-    // qry, service attributes, puid, sku
-  gpvar =
-  gpvar {
-    qty   = {$plugin.caddy.gpvar.qty}
-    service_attribute_1   = {$plugin.caddy.gpvar.service_attribute_1}
-    service_attribute_2   = {$plugin.caddy.gpvar.service_attribute_2}
-    service_attribute_3   = {$plugin.caddy.gpvar.service_attribute_3}
-    puid  = {$plugin.caddy.gpvar.puid}
-    sku   = {$plugin.caddy.gpvar.sku}
-  }
-
     // item, sum
   marker =
   marker {
