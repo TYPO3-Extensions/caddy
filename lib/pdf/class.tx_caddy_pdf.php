@@ -107,7 +107,6 @@ class tx_caddy_pdf extends tslib_pibase
 
 
   public  $conf         = null;
-  private $confSettings = null;
   private $confPdf      = null;
 
   public  $local_cObj   = null;
@@ -441,7 +440,6 @@ class tx_caddy_pdf extends tslib_pibase
   private function init( $case )
   {
     $this->conf         = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
-    $this->confSettings = $this->conf['settings.'];
     $this->confPdf      = $this->conf['pdf.'];
 
     $this->cObj         = $GLOBALS['TSFE']->cObj;
