@@ -344,40 +344,10 @@ plugin.tx_caddy_pi1 {
         1 =
         1 {
             // label, gross
-          title = COA
+          title = TEXT
           title {
-              // label
-            10 = TEXT
-            10 {
-              data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
-              noTrimWrap = || |
-            }
-              // gross: number, currency
-            20 = COA
-            20 {
-                // number
-              10 = USER
-              10 {
-                userFunc = tx_caddy_userfunc->numberformat
-                userFunc {
-                  number = TEXT
-                  number {
-                    field = optionspaymentsumgross
-                  }
-                  decimal       = {$plugin.caddy.main.decimal}
-                  dec_point     = {$plugin.caddy.main.dec_point}
-                  thousands_sep = {$plugin.caddy.main.thousands_sep}
-                  drs           = {$plugin.caddy.debug.userfunc}
-                }
-              }
-                // currency
-              20 = TEXT
-              20 {
-                value = {$plugin.caddy.main.currencySymbol}
-                noTrimWrap = | ||
-              }
-              wrap = (|)
-            }
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
+            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 0.00
@@ -391,21 +361,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-          }
-            // extra cost (gross price) of payment method
-          extra = 3.00
-            // tax rate which will be applied (reduced or normal)
-          tax = normal
-        }
-        2 >
-        2 < .1
-          // invoice: title, extra, tax
-        2 =
-        2 {
-          title {
-            10 {
-              data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-            }
+            noTrimWrap = || (3 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 3.00
@@ -419,6 +375,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
+            noTrimWrap = || (15 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 15.00
@@ -442,6 +399,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_maildefault
+            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of shipping method
           extra = 0.00
@@ -455,6 +413,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_mailexpress
+            noTrimWrap = || (12 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of shipping method
           extra = 12.00
@@ -482,6 +441,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_neutralpackage
+            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 0.00
@@ -495,6 +455,7 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_addfeeforislands
+            noTrimWrap = || (13 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 13.00
