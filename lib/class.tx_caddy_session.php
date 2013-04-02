@@ -82,7 +82,7 @@
  * 1753:     public function shippingGet( )
  *
  *              SECTION: Special
- * 1774:     public function specialUpdate($special_arr)
+ * 1774:     public function specialUpdate($specials_arr)
  * 1789:     public function specialGet()
  *
  *              SECTION: ZZ
@@ -1861,11 +1861,11 @@ class tx_caddy_session
  * @param	array		$arr: array to change
  * @return	void
  */
-    public function specialUpdate( $special_arr )
+    public function specialUpdate( $specials_arr )
     {
         $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
 
-        $sesArray['specials'] = $special_arr; // overwrite with new qty
+        $sesArray['specials'] = $specials_arr; // overwrite with new qty
 
         $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
         $GLOBALS['TSFE']->storeSessionData(); // Save session

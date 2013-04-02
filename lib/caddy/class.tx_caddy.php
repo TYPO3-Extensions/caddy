@@ -366,7 +366,7 @@ class tx_caddy extends tslib_pibase
       * DEPRECATED!caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
       *
       * Seems to be deorecated:
-      *   * $this->tmpl['special_item'] is ###CADDY_SPECIALS### ###ITEM###
+      *   * $this->tmpl['specials_item'] is ###CADDY_SPECIALS### ###ITEM###
       *   * Subpart ###ITEM### doesnt't contain any marke from below.
       *
       * dwildt, 130324
@@ -400,7 +400,7 @@ class tx_caddy extends tslib_pibase
     $markerArray['###SUMGROSS###'] = $price;
 
     // add inner html to variable
-    $tmpl = $this->tmpl['special_item'];
+    $tmpl = $this->tmpl['specials_item'];
 //    $this->markerArray = $markerArray + $this->markerArray;
     $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray );
 
@@ -795,7 +795,6 @@ class tx_caddy extends tslib_pibase
       $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
-var_dump( __METHOD__, __LINE__, $shippingArray, $shippingId );
 
     return $marker;
   }
@@ -820,7 +819,7 @@ var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
       $marker['###SPECIALS_CHECKBOX###'] =
-        $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
+        $this->cObj->substituteMarkerArrayCached( $this->tmpl['specials_all'], null, $specialArray );
     }
 
     return $marker;
@@ -2150,7 +2149,7 @@ var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $option
   private function optionListConditionGrossEach( $conf )
   {
     $gross    = $this->zz_price_format( $conf['extra.']['1.']['extra'] );
-    $llLabel  = $this->pi_getLL( 'special_each' );
+    $llLabel  = $this->pi_getLL( 'specials_each' );
 
     $gross  = sprintf( $llLabel, $gross );
 
