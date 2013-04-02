@@ -143,10 +143,10 @@ class tx_caddy_template
     $tmplSubparts['payment_condition_all']  = $cObj->getSubpart( $template, '###CADDY_PAYMENT_CONDITIONS###' );
     $tmplSubparts['payment_condition_item'] = $cObj->getSubpart( $tmplSubparts['payment_condition_all'], '###ITEM###' );
 
-    $tmplSubparts['special_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIAL###' );
+    $tmplSubparts['special_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIALS###' );
     $tmplSubparts['special_item'] = $cObj->getSubpart( $tmplSubparts['special_all'], '###ITEM###' );
 
-    $tmplSubparts['special_condition_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIAL_CONDITIONS###' );
+    $tmplSubparts['special_condition_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIALS_CONDITIONS###' );
     $tmplSubparts['special_condition_item'] = $cObj->getSubpart( $tmplSubparts['special_condition_all'], '###ITEM###' );
 
     return $tmplSubparts;

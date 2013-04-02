@@ -366,7 +366,7 @@ class tx_caddy extends tslib_pibase
       * DEPRECATED!caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
       *
       * Seems to be deorecated:
-      *   * $this->tmpl['special_item'] is ###CADDY_SPECIAL### ###ITEM###
+      *   * $this->tmpl['special_item'] is ###CADDY_SPECIALS### ###ITEM###
       *   * Subpart ###ITEM### doesnt't contain any marke from below.
       *
       * dwildt, 130324
