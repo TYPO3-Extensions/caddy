@@ -226,7 +226,7 @@ $arrResult = $this->caddy->caddy( );
 $marker     = $arrResult['marker'];
 $subparts   = $arrResult['subparts'];
 $tmpl       = $arrResult['tmpl'];
-//var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
+var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
 unset( $arrResult );
 
 $content = $content . $this->cObj->substituteMarkerArrayCached
@@ -238,7 +238,7 @@ $content = $content . $this->cObj->substituteMarkerArrayCached
 
 $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
 $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
-//var_dump( __METHOD__, __LINE__, $content );
+var_dump( __METHOD__, __LINE__, $content );
 die( __METHOD__ . '#' . __LINE__ );
 return $content;
     

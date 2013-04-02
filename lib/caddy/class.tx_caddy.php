@@ -815,7 +815,6 @@ class tx_caddy extends tslib_pibase
 
     $marker['###SPECIALS_CHECKBOX###'] = '';
     $specialArray['###CONTENT###'] = $this->optionList( 'specials', $specialIds );
-var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
       $marker['###SPECIALS_CHECKBOX###'] =
@@ -1802,7 +1801,6 @@ var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
     }
     
     $value = implode( $devider, ( array ) $values );
-var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $optionsConf[ $key . '.' ], $value );
     return $value;
   }
 
@@ -2377,7 +2375,6 @@ var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $option
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-var_dump( __METHOD__, __LINE__, $marker );
     
     return $marker;
   }
