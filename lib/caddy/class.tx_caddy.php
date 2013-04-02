@@ -2318,7 +2318,6 @@ var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $option
       case( $optionType == 'specials' ):
       default:
         $marker = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
-var_dump( __METHOD__, __LINE__, $optionType );
         break;
     }
 
@@ -2372,6 +2371,7 @@ var_dump( __METHOD__, __LINE__, $optionType );
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+var_dump( __METHOD__, __LINE__, $marker );
     
     return $marker;
   }
