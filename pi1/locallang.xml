@@ -49,7 +49,7 @@
       <label index="shipping_free_from">free shipping from</label>
       <label index="shipping_free_until">free shipping until</label>
       <label index="sku">Stock Keeping Unit</label>
-      <label index="specialslabel">Other Options</label>
+      <label index="specialslabels">Other Options</label>
       <label index="specialoption_addfeeforislands">Additional fee for islands</label>
       <label index="specialoption_neutralpackage">Neutral package</label>
       <label index="specials_available_from">special option available from</label>
@@ -106,7 +106,7 @@
       <label index="shipping_free_from">versandkostenfrei ab</label>
       <label index="shipping_free_until">versandkostenfrei bis</label>
       <label index="sku">Artikelnummer</label>
-      <label index="specialslabel">Weitere Optionen</label>
+      <label index="specialslabels">Weitere Optionen</label>
       <label index="specialoption_addfeeforislands">Inselzuschlag</label>
       <label index="specialoption_neutralpackage">Neutrale Verpackung</label>
       <label index="specials_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
