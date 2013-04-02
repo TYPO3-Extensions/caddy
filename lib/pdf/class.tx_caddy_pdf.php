@@ -136,54 +136,29 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function caddy( $invoice = false )
   {
-//    $subpartArray = null;
-////    $subpartArray = $this->caddyTablehead( $subpartArray );
-//    $subpartArray = $this->caddyTableItems( $subpartArray );
-//
-//    $outerMarkerArray = null;
-//    if( $invoice )
-//    {
-//      $outerMarkerArray = $this->caddySum( $subpartArray );
-//    }
-//      // render the marker
-//    $htmlContent = $GLOBALS['TSFE']->cObj->substituteMarkerArrayCached
-//                  (
-//                    $this->tmpl['all'],
-//                    $outerMarkerArray,
-//                    $subpartArray
-//                  );
-//      // render the marker
-//
-//    $htmlContent  = $this->dynamicMarkers->main( $htmlContent, $this);
-//    $htmlContent  = preg_replace( '|###.*?###|i' , '&nbsp;', $htmlContent );
-//
-//      // write the HTML content
-//    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
-//    $this->tcpdfWriteHtmlCell( $body['properties.'], $htmlContent, 'caddy' );
+    $caddy = $this->caddy->caddy( );
+    var_dump( __METHOD__, __LINE__, $caddy );
+    die( );
+    $marker     = $caddy['marker'];
+    $subparts   = $caddy['subparts'];
+    $tmpl       = $caddy['tmpl'];
+    //var_dump( __METHOD__, __LINE__ , $caddy ) ;      
+    unset( $caddy );
 
-$arrResult = $this->caddy->caddy( );
-var_dump( __METHOD__, __LINE__, $arrResult );
-die( );
-$marker     = $arrResult['marker'];
-$subparts   = $arrResult['subparts'];
-$tmpl       = $arrResult['tmpl'];
-//var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
-unset( $arrResult );
+    $content = $content . $this->cObj->substituteMarkerArrayCached
+                          (
+                            $tmpl,
+                            $marker,
+                            $subparts
+                          );
 
-$content = $content . $this->cObj->substituteMarkerArrayCached
-                      (
-                        $tmpl,
-                        $marker,
-                        $subparts
-                      );
-
-$content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
-$content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
+    $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
+    $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
 var_dump( __METHOD__, __LINE__, $content );
 die( );
-// write the HTML content
-$body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
-$this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
+    // write the HTML content
+    $body = $this->confPdf['deliveryorder.']['content.']['caddy.']['body.'];
+    $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
   }
 
  /**

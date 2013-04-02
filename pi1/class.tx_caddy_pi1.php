@@ -189,12 +189,12 @@ class tx_caddy_pi1 extends tslib_pibase
       // Get the caddy
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
 //var_dump( __METHOD__, __LINE__, $sesArray );
-    $arrResult  = $this->caddyRendered( );
-    $marker     = $arrResult['marker'];
-    $subparts   = $arrResult['subparts'];
-    $tmpl       = $arrResult['tmpl'];
-//var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
-    unset( $arrResult );
+    $caddy    = $this->caddyRendered( );
+    $marker   = $caddy['marker'];
+    $subparts = $caddy['subparts'];
+    $tmpl     = $caddy['tmpl'];
+//var_dump( __METHOD__, __LINE__ , $caddy ) ;      
+    unset( $caddy );
 
     $content = $this->powermail->formCss( $content );
 

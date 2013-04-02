@@ -281,23 +281,7 @@ class tx_caddy extends tslib_pibase
       // calculated caddy: content, items, options, serviceattributes, sum.
     $calcedCaddy = $this->calc( );
 
-
-//    $sesArray['paymentLabel']   = $paymentLabel;
-//    $sesArray['paymentId']        = $paymentId;
-//    $sesArray['productsGross']    = $productsGross;
-//    $sesArray['productsNet']      = $productsNet;
-//    $sesArray['optionsNet']       = $optionsNet;
-//    $sesArray['optionsGross']     = $optionsGross;
-//    $sesArray['shippingLabel']  = $shippingLabel;
-//    $sesArray['shippingId']       = $shippingId;
-//    $sesArray['specialLabels']  = $specialLabels;
-//    $sesArray['specialIds']       = $specialIds;
-//    $sesArray['sumGross']         = $sumGross;
-//    $sesArray['sumNet']           = $sumNet;
-//    $sesArray['sumTaxNormal']     = $sumTaxNormal;
-//    $sesArray['sumTaxReduced']    = $sumTaxReduced;
-      // session
-
+      // Is min rate for gross undercut?
     $minRateUndercut = $this->calcMinRateUndercut( $calcedCaddy );
 
       // SWITCH : product gross is undercut minimum rate
@@ -462,20 +446,6 @@ class tx_caddy extends tslib_pibase
     );
 
     return $marker;
-
-//      // content. here: items
-//    $content = $calcedCaddy['content'];
-//    $content  = $content
-//              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-//              . $this->caddyWiItemsFieldHidden( )
-//              ;
-//    $marker = array
-//    (
-//      '###CONTENT###' => $content,
-//    );
-//
-//    return $marker;
-//
   }
 
  /**

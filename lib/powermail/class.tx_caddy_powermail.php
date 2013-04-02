@@ -164,159 +164,89 @@ class tx_caddy_powermail extends tslib_pibase
 
 
 
-
  /**
   * caddyForEmail( )  : Returns a caddy rendered for an e-mail
   *
-  * @return  string    cart content
+  * @return  string    caddy content
+  * @access public
+  * @version 2.0.2
+  * @since  2.0.2
+  */
+  public function caddyForEmail( $content = '', $conf = array( ) )
+  {   
+    unset( $conf );
+    unset( $content );
+    
+      // Get the typoscript configuration of the caddy plugin 1
+    $this->conf = $this->caddyForEmailInitConf( );
+    
+      // RETURN null, if init is unproper
+    if( ! $this->caddyForEmailInit( ) )
+    {
+      return null;
+    }
+      // RETURN null, if init is unproper
+    
+
+      // Get the caddy
+    $caddy    = $this->caddy->caddy( );
+    $marker   = $caddy['marker'];
+    $subparts = $caddy['subparts'];
+    $tmpl     = $caddy['tmpl'];
+    unset( $caddy );
+
+    $content = $content . $this->cObj->substituteMarkerArrayCached
+                          (
+                            $tmpl,
+                            $marker,
+                            $subparts
+                          );
+
+    $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
+    $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
+//    var_dump( __METHOD__, __LINE__, $content );
+//    die( __METHOD__ . '#' . __LINE__ );
+    return $content;
+  }
+
+ /**
+  * caddyForEmailInit( )  : 
+  *
+  * @return  boolean      : true in case of products
   * @access public
   * @version 2.0.0
   * @since  1.4.6
   */
-  public function caddyForEmail( $content = '', $conf = array( ) )
+  public function caddyForEmailInit( )
   {   
-    unset( $content );
-    
     $this->pi_loadLL();
 
       // DRS
-    if( $conf['userFunc.']['drs'] )
+    if( $this->conf['userFunc.']['drs'] )
     {
       $this->drsUserfunc = true;
-      $drs               = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
       
-      // Get the typoscript configuration of the caddy plugin 1
-    $this->conf = $this->caddyForEmailInitConf( );
       // Get the HTML template for CADDY_EMAIL
     $this->tmpl = $this->caddyForEmailInitTemplate( );
     
     $this->cObj = $GLOBALS['TSFE']->cObj;
 
       // Init instances
-    $this->caddyForEmailInstances( );
-    
-      // Get products from session
-    $this->products = $this->session->productsGet( );
+    $this->caddyForEmailInstances( );    
 
-      // RETURN : empty content, no product in session
-    if( count( $this->products ) < 1 )
+      // RETURN false : no products
+    if( ! $this->caddyForEmailInitProducts( ) )
     {
-        // DRS
-      if( $this->drs->drsSession || $drs )
-      {
-        $prompt = __METHOD__ . ' returns null[userFunc.][drs].';
-        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-      }
-        // DRS
-      $this->content = ''; // clear content
-      return $this->content;
+      return false;
     }
-      // RETURN : empty content, no product in session
-
-      // Set products
-//    $this->caddy->setProducts( $this->products );
+      // RETURN false : no products
     
-      // Calculate the caddy
-//    $arrResult          = $this->caddy->calc( );
-$arrResult = $this->caddy->caddy( );
-$marker     = $arrResult['marker'];
-$subparts   = $arrResult['subparts'];
-$tmpl       = $arrResult['tmpl'];
-var_dump( __METHOD__, __LINE__ , $arrResult ) ;      
-unset( $arrResult );
-
-$content = $content . $this->cObj->substituteMarkerArrayCached
-                      (
-                        $tmpl,
-                        $marker,
-                        $subparts
-                      );
-
-$content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
-$content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
-var_dump( __METHOD__, __LINE__, $content );
-die( __METHOD__ . '#' . __LINE__ );
-return $content;
-    
-//      // Set service attributes
-//    $serviceattributes  = $arrResult['serviceattributes'];
-//    $this->cartServiceAttribute1Max = $serviceattributes['1']['max'];
-//    $this->cartServiceAttribute1Sum = $serviceattributes['1']['sum'];
-//    $this->cartServiceAttribute2Max = $serviceattributes['2']['max'];
-//    $this->cartServiceAttribute2Sum = $serviceattributes['2']['sum'];
-//    $this->cartServiceAttribute3Max = $serviceattributes['3']['max'];
-//    $this->cartServiceAttribute3Sum = $serviceattributes['3']['sum'];
-//    unset( $arrResult['serviceattributes'] );
-//
-//      // Set items (rendered HTML code)
-//    $contentItem                    = $arrResult['contentItem']; 
-//    $subpartArray['###CONTENT###']  = $contentItem; // work on subpart 3
-//    unset( $arrResult['contentItem'] );
-
-//    $outerArr = array
-//                (
-//                  'paymentLabel'    => $paymentLabel,
-//                  'paymentId'       => $paymentId,
-//                  'productsGross'   => $this->productsGross,
-//                  'productsNet'     => $productsNet,
-//                  'optionsNet'      => $optionsNet,
-//                  'optionsGross'    => $optionsGross,
-//                  'shippingLabel'   => $shippingLabel,
-//                  'shippingId'      => $shippingId,
-//                  'specialLabels'   => $specialLabels,
-//                  'specialId'       => $specialIds,
-//                  'sumGross'        => $sumGross,
-//                  'sumNet'          => $sumNet,
-//                  'sumTaxNormal'    => $sumTaxNormal,
-//                  'sumTaxReduced'   => $sumTaxReduced
-//                );
-//var_dump( __METHOD__, __LINE__, $outerArr );
-//    $local_cObj->start( $outerArr, $this->conf['db.']['table'] );
-    
-//      // Set cObj->data
-//    $data = $arrResult;
-//    $local_cObj->start( $data, $this->conf['db.']['table'] );
-//
-//    $powermailCaddyOverall = ( array ) $this->conf['settings.']['powermailCaddy.']['overall.'];
-//    foreach( array_keys( $powermailCaddyOverall ) as $key )
-//    {
-//      if( stristr( $key, '.' ) )
-//      {
-//        continue;        
-//      }
-//      $marker = '###' . strtoupper($key) . '###';
-//      $name   = $powermailCaddyOverall[$key];
-//      $conf   = $powermailCaddyOverall[$key . '.'];
-//      $value  = $local_cObj->cObjGetSingle( $name, $conf );  
-//      $this->outerMarkerArray[$marker] = $value;
-//    }
-//    
-//var_dump( __METHOD__, __LINE__, $this->outerMarkerArray );
-//
-//    $this->content  = $this->cObj->substituteMarkerArrayCached
-//                      (
-//                        $this->tmpl['all'], 
-//                        $this->outerMarkerArray, 
-//                        $subpartArray
-//                      );
-//    $this->content  = $this->dynamicMarkers->main( $this->content, $this);
-//    $this->content  = preg_replace( '|###.*?###|i' , '&nbsp;', $this->content );
-//
-//      // DRS
-//    if( $this->drs->drsSession || $drs )
-//    {
-//      $prompt = __METHOD__ . ' returns the caddy with products and calculation.';
-//      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
-//    }
-//      // DRS
-
-//var_dump( __METHOD__, __LINE__, $this->content );
-//die( );
-//    return $this->content;
+      // RETURN true : there are products
+    return true;
   }
   
  /**
@@ -332,6 +262,37 @@ return $content;
     $conf = array_merge( ( array ) $this->conf, ( array ) $conf );
     
     return $conf;
+  }
+
+ /**
+  * caddyForEmailInitProducts( )  : 
+  *
+  * @return  boolean          : true in case of products
+  * @access public
+  * @version 2.0.0
+  * @since  1.4.6
+  */
+  public function caddyForEmailInitProducts( )
+  {   
+      // Get products from session
+    $this->products = $this->session->productsGet( );
+
+      // RETURN : empty content, no product in session
+    if( count( $this->products ) < 1 )
+    {
+        // DRS
+      if( $this->drsUserfunc )
+      {
+        $prompt = __METHOD__ . ' returns null.';
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      
+      return false;
+    }
+      // RETURN : empty content, no product in session
+    
+    return true;
   }
   
  /**
