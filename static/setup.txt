@@ -54,82 +54,57 @@ plugin.tx_caddy_pi1 {
 
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
-    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid
+    // gross, min, max, qty, puid, sku, tax, title, volume, weight
   getpost =
   getpost {
-
-    # GET or POST param for title (if not empty: Overwrite values from db request with puid)
-    title = TEXT
-    title {
-      data = GP:{$plugin.caddy.gpvar.title}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for gross (if not empty: Overwrite values from db request with puid)
     gross = TEXT
     gross {
       data = GP:{$plugin.caddy.gpvar.price}
       htmlSpecialChars = 1
     }
-
-    # GET or POST param for qty
-    qty = TEXT
-    qty {
-      data = GP:{$plugin.caddy.gpvar.qty}
-      intval = 1
-    }
-
-    # GET or POST param for sku
-    sku = TEXT
-    sku {
-      data = GP:{$plugin.caddy.gpvar.sku}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for min
-    min = TEXT
-    min {
-      data = GP:{$plugin.caddy.gpvar.min}
-      htmlSpecialChars = 1
-    }
-
-    # GET or POST param for max
     max = TEXT
     max {
       data = GP:{$plugin.caddy.gpvar.max}
       htmlSpecialChars = 1
     }
-
-    # GET or POST param for weight
-    weight = TEXT
-    weight {
-      data = GP:{$plugin.caddy.gpvar.weight}
-      floatval = 1
+    min = TEXT
+    min {
+      data = GP:{$plugin.caddy.gpvar.min}
+      htmlSpecialChars = 1
     }
-
-    # GET or POST param for volume
-    volume = TEXT
-    volume {
-      data = GP:{$plugin.caddy.gpvar.volume}
-      floatval = 1
-    }
-
-    # Param for tax (will be overwritten from db request)
-    tax = TEXT
-    tax.value = {$plugin.caddy.tax.normalCalc}
-
-    # GET or POST param for product uid
     puid = TEXT
     puid {
       data = GP:{$plugin.caddy.gpvar.puid}
       intval = 1
     }
-
-    # GET or POST param for content id
-    cid = TEXT
-    cid {
-      data = GP:{$plugin.caddy.gpvar.cid}
+    qty = TEXT
+    qty {
+      data = GP:{$plugin.caddy.gpvar.qty}
       intval = 1
+    }
+    sku = TEXT
+    sku {
+      data = GP:{$plugin.caddy.gpvar.sku}
+      htmlSpecialChars = 1
+    }
+    tax = TEXT
+    tax {
+      value = {$plugin.caddy.tax.normalCalc}
+    }
+    title = TEXT
+    title {
+      data = GP:{$plugin.caddy.gpvar.title}
+      htmlSpecialChars = 1
+    }
+    volume = TEXT
+    volume {
+      data = GP:{$plugin.caddy.gpvar.volume}
+      floatval = 1
+    }
+    weight = TEXT
+    weight {
+      data = GP:{$plugin.caddy.gpvar.weight}
+      floatval = 1
     }
   }
 
