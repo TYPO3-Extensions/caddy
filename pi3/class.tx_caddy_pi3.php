@@ -333,7 +333,7 @@ class tx_caddy_pi3 extends tslib_pibase
   private function initPid( )
   {
       // Take pid from TypoScript
-    $this->pidCaddy = $this->conf['main.']['pid'];
+    $this->pidCaddy = $this->conf['pid'];
 
       // IF : pid is empty
     if( empty( $this->pidCaddy ) )

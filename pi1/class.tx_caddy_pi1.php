@@ -801,7 +801,7 @@ class tx_caddy_pi1 extends tslib_pibase
  */
   private function initPid( )
   {
-    $pid = ( int ) $this->conf['main']['pid'];
+    $pid = ( int ) $this->conf['pid'];
 
     switch( true )
     {

@@ -116,8 +116,8 @@ class tx_caddy_pi2 extends tslib_pibase
 			}
 		}
 
-		$formMarkerArray['###CADDY_FORM_ACTION_PID###'] = $this->conf['main.']['pid'];
-		$formMarkerArray['###CADDY_FORM_ACTION###'] = $this->pi_getPageLink($this->conf['main.']['pid']);
+		$formMarkerArray['###CADDY_FORM_ACTION_PID###'] = $this->conf['pid'];
+		$formMarkerArray['###CADDY_FORM_ACTION###'] = $this->pi_getPageLink( $this->conf['pid'] );
 		$formMarkerArray['###CADDY_FORM_CONTENTUID###'] = $this->cObj->data['uid'];
 
 		$this->content = $this->cObj->substituteMarkerArrayCached($this->tmpl['form'], null, $formMarkerArray); // Get html template
