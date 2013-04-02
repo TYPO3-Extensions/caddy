@@ -795,6 +795,7 @@ class tx_caddy extends tslib_pibase
       $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
+var_dump( __METHOD__, __LINE__, $shippingArray, $shippingId );
 
     return $marker;
   }

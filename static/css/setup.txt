@@ -8,13 +8,13 @@ plugin.tx_caddy_pi1 {
     }
     #caddy_payment,
     #caddy_shipping,
-    #caddy_special {
+    #caddy_specials {
       float:left;
       padding: 1em 3em 0 0;
     }
     #caddy_payment fieldset legend,
     #caddy_shipping fieldset legend,
-    #caddy_special fieldset legend {
+    #caddy_specials fieldset legend {
       padding: 0 0 .6em 0;
     }
     div.caddy_header {
