@@ -646,7 +646,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initGetPost( )
   {
     
-    foreach( $this->conf['getpost.'] as $getpostKey => $getpostConf )
+    foreach( array_keys( ( array ) $this->conf['getpost.'] ) as $getpostKey )
     {
       if( stristr( $getpostKey, '.' ) )
       {
@@ -658,55 +658,71 @@ class tx_caddy_pi1 extends tslib_pibase
 
       $this->gpvar[ $getpostKey ] = $this->zz_cObjGetSingle( $name, $conf );
 
-      if( $this->gpvar['qty'] === 0 )
-      {
-        $this->gpvar['qty'] = 1;
-      }
     }
-var_dump( __METHOD__, __LINE__, $this->gpvar );
-      // read variables
-    $conf = $this->conf;
+    
+    $this->initGetPostQty( );
+//var_dump( __METHOD__, __LINE__, $this->gpvar );
+    return;
+    
+//      // read variables
+//    $conf = $this->conf;
+//
+//    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['getpost.']['title'], $conf['getpost.']['title.'] );
+//    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
+//    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
+//    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['getpost.']['tax'], $conf['getpost.']['tax.'] );
+//    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['puid'], $conf['getpost.']['puid.'] ) );
+//    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['getpost.']['cid'], $conf['getpost.']['cid.'] ) );
+//
+//    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['getpost.']['sku'], $conf['getpost.']['sku.'] );
+//    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['getpost.']['min'], $conf['getpost.']['min.'] );
+//    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['getpost.']['max'], $conf['getpost.']['max.'] );
+//
+//    $this->gpvar['service_attribute_1'] = floatval
+//                                          (
+//                                            $this->zz_cObjGetSingle
+//                                            (
+//                                              $conf['getpost.']['service_attribute_1'],
+//                                              $conf['getpost.']['service_attribute_1.']
+//                                            )
+//                                          );
+//    $this->gpvar['service_attribute_2'] = floatval
+//                                          (
+//                                            $this->zz_cObjGetSingle
+//                                            (
+//                                              $conf['getpost.']['service_attribute_2'],
+//                                              $conf['getpost.']['service_attribute_2.']
+//                                            )
+//                                          );
+//    $this->gpvar['service_attribute_3'] = floatval
+//                                          (
+//                                            $this->zz_cObjGetSingle
+//                                            (
+//                                              $conf['getpost.']['service_attribute_3'],
+//                                              $conf['getpost.']['service_attribute_3.']
+//                                            )
+//                                          );
+//    if( $this->gpvar['qty'] === 0 )
+//    {
+//      $this->gpvar['qty'] = 1;
+//    }
+//var_dump( __METHOD__, __LINE__, $this->gpvar );
+  }
 
-    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['getpost.']['title'], $conf['getpost.']['title.'] );
-    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
-    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
-    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['getpost.']['tax'], $conf['getpost.']['tax.'] );
-    $this->gpvar['puid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['puid'], $conf['getpost.']['puid.'] ) );
-    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['getpost.']['cid'], $conf['getpost.']['cid.'] ) );
-
-    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['getpost.']['sku'], $conf['getpost.']['sku.'] );
-    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['getpost.']['min'], $conf['getpost.']['min.'] );
-    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['getpost.']['max'], $conf['getpost.']['max.'] );
-
-    $this->gpvar['service_attribute_1'] = floatval
-                                          (
-                                            $this->zz_cObjGetSingle
-                                            (
-                                              $conf['getpost.']['service_attribute_1'],
-                                              $conf['getpost.']['service_attribute_1.']
-                                            )
-                                          );
-    $this->gpvar['service_attribute_2'] = floatval
-                                          (
-                                            $this->zz_cObjGetSingle
-                                            (
-                                              $conf['getpost.']['service_attribute_2'],
-                                              $conf['getpost.']['service_attribute_2.']
-                                            )
-                                          );
-    $this->gpvar['service_attribute_3'] = floatval
-                                          (
-                                            $this->zz_cObjGetSingle
-                                            (
-                                              $conf['getpost.']['service_attribute_3'],
-                                              $conf['getpost.']['service_attribute_3.']
-                                            )
-                                          );
+ /**
+  * initGetPostQty( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.2
+  * @since      2.0.0
+  */
+  private function initGetPostQty( )
+  {
     if( $this->gpvar['qty'] === 0 )
     {
       $this->gpvar['qty'] = 1;
     }
-var_dump( __METHOD__, __LINE__, $this->gpvar );
   }
 
  /**
