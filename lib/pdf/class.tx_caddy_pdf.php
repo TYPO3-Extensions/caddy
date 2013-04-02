@@ -561,7 +561,7 @@ die( );
         break;
       case( 'invoice' ):
         $tmplFile = $GLOBALS['TSFE']->cObj->fileResource( $this->confPdf['invoice.']['template'] );
-        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_INVOICE###' );
+        $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile, '###CADDY_EMAIL###' );
         $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], '###ITEM###' );
         break;
       default:

@@ -172,7 +172,7 @@ plugin.caddy {
   pdf.deliveryorder.sponsors = Click me!
 
   # cat=caddy - pdf invoice//101; type=string; label= HTML for the caddy (items):Path to the HTML template
-  pdf.invoice.template = EXT:caddy/files/templates/pdf_table.html
+  pdf.invoice.template = EXT:caddy/files/templates/caddy.html
   # cat=caddy - pdf invoice//202; type=int+; label= Address position left: Position of the receiving address from the left margin in millimeters
   pdf.invoice.address.x = 25
   # cat=caddy - pdf invoice//203; type=int+; label= Address position top: Position of the receiving address from the top margin in millimeters
