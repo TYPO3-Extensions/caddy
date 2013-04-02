@@ -343,11 +343,6 @@ plugin.tx_caddy_pi1 {
           // cash in advance: title, extra, tax
         1 =
         1 {
-            // title of payment method
-          title = TEXT
-          title {
-            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
-          }
             // label, gross
           title = COA
           title {
@@ -396,6 +391,19 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+          }
+            // extra cost (gross price) of payment method
+          extra = 3.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+        2 >
+        2 < . 1
+        2 {
+          title {
+            10 {
+              data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+            }
           }
             // extra cost (gross price) of payment method
           extra = 3.00
