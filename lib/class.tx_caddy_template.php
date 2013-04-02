@@ -168,10 +168,10 @@ class tx_caddy_template
   {
     $table = $this->conf['templates.']['html.']['caddy.']['table.'];
 
-    foreach( $table as $property )
+    foreach( $table as $property => $value )
     {
       $marker               = '###' . strtoupper( $property ) . '###';
-      $tmplSubparts['all']  = str_replace( $marker, $property, $tmplSubparts['all'] );     
+      $tmplSubparts['all']  = str_replace( $marker, $value, $tmplSubparts['all'] );     
     }
     
     return $tmplSubparts;

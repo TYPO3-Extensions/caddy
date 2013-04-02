@@ -334,9 +334,8 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $marker       = '###' . strtoupper( $property ) . '###';
       $tmpl['all']  = str_replace( $marker, $value, $tmpl['all'] );     
-var_dump( __METHOD__, __LINE__, $marker, $property, $value );    
     }
-var_dump( __METHOD__, __LINE__, $table, $tmpl['all'] );    
+
     return $tmpl;
   }
 
