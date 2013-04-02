@@ -129,12 +129,11 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * caddy( ) : Generates the HTML caddy and write it to tcpdf
   *
-  * @param	boolean		$invoice  : true: render caddy for the invoice. false: render caddy for the delivery order
   * @return	void
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddy( $invoice = false )
+  private function caddy( )
   {
     $caddy = $this->caddy->caddy( );
 //var_dump( __METHOD__, __LINE__, $caddy );
@@ -674,7 +673,7 @@ class tx_caddy_pdf extends tslib_pibase
 
       // Write the caddy
     $invoice = true;
-    $this->caddy( $invoice );
+    $this->caddy( );
 
       // Create the PDF
     $this->tcpdfOutput( $destPath );
