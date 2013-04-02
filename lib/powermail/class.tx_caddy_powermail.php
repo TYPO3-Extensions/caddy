@@ -310,8 +310,8 @@ class tx_caddy_powermail extends tslib_pibase
 
     $tmplFile     = $GLOBALS['TSFE']->cObj->fileResource( $file );
     $tmpl         = array( );
-    $tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll );
-    $tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem );
+    $tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,    $markerAll );
+    $tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $tmpl['all'], $markerItem );
 
     $tmpl = $this->caddyForEmailInitTemplateTable( $tmpl );
     return $tmpl;
