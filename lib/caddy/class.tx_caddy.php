@@ -1989,11 +1989,8 @@ class tx_caddy extends tslib_pibase
         // Get the content for met conditions
       $condition  = $this->optionListCondition( $keepingTheLimit, $optionType, $optionItemConf );
 
-        // Get the gross costs
-      $gross = $this->optionListConditionGross( $optionItemKey, $optionType, $optionItemConf );
-
         // Set the marker array
-      $marker = $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf );
+      $marker = $this->optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $optionItemConf );
 
         // render the option item list
       $tmpl       = $this->tmpl[$optionType . '_item'];
@@ -2276,11 +2273,10 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionItemKey    :
   * @param	integer		$optionId         : current option id
   * @param	string		$condition        :
-  * @param	double		$gross            :
-  * @param	[type]		$optionItemConf   : ...
+  * @param	array		$optionItemConf   : ...
   * @return	array           $marker           :
   */
-  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
+  private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $optionItemConf )
   {
     $marker = null;
     
@@ -2296,7 +2292,7 @@ class tx_caddy extends tslib_pibase
     }
 
     $marker = ( array ) $marker
-            + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+            + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
             + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
             ;
     
@@ -2393,13 +2389,12 @@ class tx_caddy extends tslib_pibase
  /**
   * optionListMarkerLabel( )
   *
-  * @param	string		$keepingTheLimit  :
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
-  * @param	integer		$optionId         : current option id
+  * @param	integer		$optionItemConf   : 
   * @return	array           $marker           :
   */
-  private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
+  private function optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
   {
     $marker = null; 
 
@@ -2408,7 +2403,7 @@ class tx_caddy extends tslib_pibase
     $hashMarker = strtoupper( $optionType );
 
     $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">'
-              . $title . ' (' . $gross . ')</label>';
+              . $title . '</label>';
 
     $marker['###' . $hashMarker . '_TITLE###'] = $content;
 
