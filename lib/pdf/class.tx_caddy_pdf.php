@@ -573,7 +573,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll );
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem );
     
-    $this->initTemplate( $case );
+    $this->initTemplateTable( $case );
   }
 
  /**
@@ -609,7 +609,7 @@ class tx_caddy_pdf extends tslib_pibase
     foreach( $table as $property )
     {
       $marker = '###' . strtoupper( $property ) . '###';
-      $this->tmpl['all'] = str_replace( $marker, $property, $this->tmpl['all'] );      
+      $this->tmpl['all'] = str_replace( $marker, $property, $this->tmpl['all'] );     
     }
   }
 
