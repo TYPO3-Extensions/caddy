@@ -1784,17 +1784,25 @@ var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
       // Get configuration
     $optionsConf = $this->conf['options.']['specials.']['options.'];
 
+      // Devider
+    $name     = $optionsConf['devider'];
+    $conf     = $optionsConf['devider.'];
+    $devider  = $this->zz_cObjGetSingle( $name, $conf );
+      // Devider
+
       // Get key for the option
 
       // Render the option label
-    $value = null;
+    $value  = null;
+    $values = null;
     foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
     {
-      $name   = $optionsConf[ $key . '.' ]['title'];
-      $conf   = $optionsConf[ $key . '.' ]['title.'];
-      $value  = $value
-              . $this->zz_cObjGetSingle( $name, $conf );
+      $name     = $optionsConf[ $key . '.' ]['title'];
+      $conf     = $optionsConf[ $key . '.' ]['title.'];
+      $values[] = $this->zz_cObjGetSingle( $name, $conf );
     }
+    
+    $value = implode( $devider, ( array ) $values );
 var_dump( __METHOD__, __LINE__, $sesArray['options']['specials']['ids'], $optionsConf[ $key . '.' ], $value );
     return $value;
   }
