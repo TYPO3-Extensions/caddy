@@ -2182,7 +2182,7 @@ plugin.tx_caddy_pi1 {
           border      = 0
           cellpadding = 3
           cellspacing = 0 
-          style       = width:400px; 
+          width       = 200px; 
         }
       }
         // file, marker, table
@@ -2201,7 +2201,7 @@ plugin.tx_caddy_pi1 {
           border      = 0
           cellpadding = 3
           cellspacing = 0 
-          style       = width:100%; 
+          width       = 100%; 
         }
       }
     }
