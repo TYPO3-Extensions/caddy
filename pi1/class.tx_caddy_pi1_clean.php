@@ -270,6 +270,7 @@ class tx_caddy_pi1_clean
       // Set files
 
       // Get total sum
+var_dump( __METHOD__, __LINE__, $sesArray );    
     $sumGross       = $sesArray['sumGross'];
     $sumNet         = $sesArray['sumNet'];
     $sumTaxNormal   = $sesArray['sumTaxNormal'];
