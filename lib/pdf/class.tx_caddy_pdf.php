@@ -360,9 +360,9 @@ $this->tcpdfWriteHtmlCell( $body['properties.'], $content, 'caddy' );
   */
   private function caddySumOptionsSpecials( $subpartArray )
   {
-    $subpartArray['###SPECIALOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
-    $subpartArray['###SPECIALOPTIONTAX###']     = 'specTax';
-    $subpartArray['###SPECIALOPTIONGROSS###']   = '3.33 EUR';
+    $subpartArray['###SPECIALSOPTIONLABELS###']  = $this->caddy->getSpecialOptionLabelsBySessionId( );
+    $subpartArray['###SPECIALSOPTIONTAX###']     = 'specTax';
+    $subpartArray['###SPECIALSOPTIONGROSS###']   = '3.33 EUR';
 
     return $subpartArray;
   }

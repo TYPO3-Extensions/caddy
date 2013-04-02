@@ -814,12 +814,12 @@ var_dump( __METHOD__, __LINE__, $shippingArray, $shippingId );
     $marker = null;
     $specialArray = null;
 
-    $marker['###SPECIAL_CHECKBOX###'] = '';
+    $marker['###SPECIALS_CHECKBOX###'] = '';
     $specialArray['###CONTENT###'] = $this->optionList( 'specials', $specialIds );
 var_dump( __METHOD__, __LINE__, $specialArray, $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
-      $marker['###SPECIAL_CHECKBOX###'] =
+      $marker['###SPECIALS_CHECKBOX###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['special_all'], null, $specialArray );
     }
 
