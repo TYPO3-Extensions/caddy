@@ -626,6 +626,7 @@ plugin.tx_caddy_pi1 {
       // preset, options
     specials =
     specials {
+        // devider for list of options in e-mails und PDF attachments
       devider = TEXT
       devider {
         value       = ,
