@@ -574,6 +574,7 @@ class tx_caddy_pdf extends tslib_pibase
       'all'  => $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll ),
       'item' => $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem )
     );
+var_dump( __METHOD__, __LINE__, $case, $this->tmpl );    
   }
 
 
