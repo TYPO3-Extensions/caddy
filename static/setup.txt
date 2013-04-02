@@ -624,8 +624,8 @@ plugin.tx_caddy_pi1 {
       }
     }
       // preset, options
-    special =
-    special {
+    specials =
+    specials {
         // neutralpackage, addfeeforislands
       options {
           // neutralpackage: title of payment method
