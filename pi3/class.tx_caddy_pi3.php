@@ -378,14 +378,12 @@ class tx_caddy_pi3 extends tslib_pibase
   {
     $this->tmpl = $this->template->main( );
 
-    $fileRessource  = $this->cObj->fileResource($this->conf['main.']['template'] );
+    $fileRessource  = $this->cObj->fileResource( $conf['templates.']['html.']['caddy.']['file'] );
+    $markerAll      = $this->conf['templates.']['html.']['caddy.']['marker.']['all'];
+    $markerItem     = $this->conf['templates.']['html.']['caddy.']['marker.']['item'];
     
-    $marker                   = '###CADDYMINI###';
-    $this->tmpl['caddymini']  = $this->cObj->getSubpart( $fileRessource, $marker );
-    
-    $marker               = '###ITEMS###';
-    $this->tmpl['items']  = $this->cObj->getSubpart( $this->tmpl['caddymini'], $marker );
-
+    $this->tmpl['caddymini']      = $this->cObj->getSubpart( $fileRessource, $markerAll );
+    $this->tmpl['items']          = $this->cObj->getSubpart( $this->tmpl['caddymini'], $markerItem );
     $marker                       = '###CADDYMINIEMPTY###';
     $this->tmpl['caddyminiempty'] = $this->cObj->getSubpart( $fileRessource, $marker );
   }
