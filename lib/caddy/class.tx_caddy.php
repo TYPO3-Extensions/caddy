@@ -1794,7 +1794,7 @@ class tx_caddy extends tslib_pibase
       $value  = $value
               . $this->zz_cObjGetSingle( $name, $conf );
     }
-
+var_dump( __METHOD__, __LINE__, $value, $sesArray['options']['specials']['ids'] );
     return $value;
   }
 
