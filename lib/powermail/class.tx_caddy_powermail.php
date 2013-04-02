@@ -330,11 +330,11 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $table = $this->conf['templates.']['e-mail.']['table.'];
 
-    foreach( $table as $property )
+    foreach( $table as $property => $value )
     {
       $marker       = '###' . strtoupper( $property ) . '###';
-      $tmpl['all']  = str_replace( $marker, $property, $tmpl['all'] );     
-var_dump( __METHOD__, __LINE__, $marker, $property );    
+      $tmpl['all']  = str_replace( $marker, $value, $tmpl['all'] );     
+var_dump( __METHOD__, __LINE__, $marker, $property, $value );    
     }
 var_dump( __METHOD__, __LINE__, $table, $tmpl['all'] );    
     return $tmpl;
