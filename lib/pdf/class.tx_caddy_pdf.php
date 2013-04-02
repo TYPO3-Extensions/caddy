@@ -547,9 +547,6 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function initTemplate( $case='invoice')
   {
-//    $this->tmpl = $this->template->main( );
-        // HTML template
-
     switch( $case )
     {
       case( 'deliveryorder' ):

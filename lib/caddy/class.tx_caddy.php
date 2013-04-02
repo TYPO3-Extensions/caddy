@@ -411,7 +411,6 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsMarkerItems( $calcedCaddy )
   {
-var_dump( __METHOD__, __LINE__, $calcedCaddy );    
       // FOREACH  : item
     foreach( ( array ) $calcedCaddy['items'] as $item )
     {
@@ -426,6 +425,7 @@ var_dump( __METHOD__, __LINE__, $calcedCaddy );
                     ;
 
          // add inner html to variable
+var_dump( __METHOD__, __LINE__, $this->tmpl['item'] );    
       $content  = $content
                 . $this->cObj->substituteMarkerArrayCached
                   (
