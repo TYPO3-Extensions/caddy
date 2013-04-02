@@ -54,7 +54,7 @@ plugin.tx_caddy_pi1 {
 
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
-    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid, fields, overall, powermailCaddy
+    // title, gross, qty, sku, min, max, weight, volume, tax, puid, cid
   getpost =
   getpost {
 

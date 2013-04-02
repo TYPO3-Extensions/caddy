@@ -640,14 +640,33 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    2.0.2
   * @since      2.0.0
   */
   private function initGetPost( )
   {
+    
+    foreach( $this->conf['getpost.'] as $getpostKey => $getpostConf )
+    {
+      if( ! stristr( $getpostKey, '.' ) )
+      {
+        continue;
+      }
+      
+      $name = $getpostConf[ $getpostKey ];
+      $conf = $getpostConf[ $getpostKey . '.' ];
+
+      $this->gpvar[ $getpostKey ] = $this->zz_cObjGetSingle( $name, $conf );
+
+      if( $this->gpvar['qty'] === 0 )
+      {
+        $this->gpvar['qty'] = 1;
+      }
+    }
+var_dump( __METHOD__, __LINE__, $this->gpvar );
+      // read variables
     $conf = $this->conf;
 
-      // read variables
     $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['getpost.']['title'], $conf['getpost.']['title.'] );
     $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
     $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
@@ -683,62 +702,11 @@ class tx_caddy_pi1 extends tslib_pibase
                                               $conf['getpost.']['service_attribute_3.']
                                             )
                                           );
-    $this->initGetPostCid( );
-
-    if ($this->gpvar['qty'] === 0)
+    if( $this->gpvar['qty'] === 0 )
     {
       $this->gpvar['qty'] = 1;
     }
-  }
-
- /**
-  * initGetPostCid( )
-  *
-  * @return	void
-  * @access private
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  private function initGetPostCid( )
-  {
-    if( ! $this->gpvar['cid'] )
-    {
-      return;
-    }
-
-    $row=$this->pi_getRecord('tt_content', $this->gpvar['cid'] );
-    $flexformData = t3lib_div::xml2array($row['pi_flexform'] );
-
-    $this->gpvar['puid']  = $this->pi_getFFvalue( $flexformData, 'puid', 'sDEF' );
-    $this->gpvar['title'] = $this->pi_getFFvalue( $flexformData, 'title', 'sDEF' );
-    $this->gpvar['sku']   = $this->pi_getFFvalue( $flexformData, 'sku', 'sDEF' );
-    $this->gpvar['gross'] = $this->pi_getFFvalue( $flexformData, 'gross', 'sDEF' );
-    $this->gpvar['tax']   = $this->pi_getFFvalue( $flexformData, 'tax', 'sDEF' );
-
-    $attributes = split( "\n", $this->pi_getFFvalue( $flexformData, 'attributes', 'sDEF' ) );
-
-    foreach ( $attributes as $line )
-    {
-      list($key, $value) = explode("==", $line, 2);
-      switch ( $key )
-      {
-        case 'service_attribute_1':
-          $this->gpvar['service_attribute_1'] = floatval($value);
-          break;
-        case 'service_attribute_2':
-          $this->gpvar['service_attribute_2'] = floatval($value);
-          break;
-        case 'service_attribute_3':
-          $this->gpvar['service_attribute_3'] = floatval($value);
-          break;
-        case 'min':
-          $this->gpvar['min'] = intval($value);
-          break;
-        case 'max':
-          $this->gpvar['max'] = intval($value);
-          break;
-      }
-    }
+var_dump( __METHOD__, __LINE__, $this->gpvar );
   }
 
  /**
