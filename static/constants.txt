@@ -71,27 +71,25 @@ plugin.caddy {
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
 
-  # cat=caddy - gpvar//100; type=text; label= Param PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
+  # cat=caddy - getpost//100; type=text; label= PUID: Enter the correct parameter name for a unique product number (integer) of your order form. caddy uses this number for internal purposes. It can't be a string. The PUID will never be displayed (e.g. tx_browser_pi1|showUid).
   gpvar.puid =
-  # cat=caddy - gpvar//105; type=text; label= Param CID: Enter the correct parameter name for the uid of the current tt_content element. This value is only needed if you want to add tt_content elements to your cart. The provided parameter must be equal to the name in your HTML template. Default: cid.
-  gpvar.cid = cid
-  # cat=caddy - gpvar//110; type=text; label= Param Quantity: Enter the correct parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
+  # cat=caddy - getpost//110; type=text; label= Quantity: Enter the correct parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
   gpvar.qty = qty
-  # cat=caddy - gpvar//115; type=text; label= Param Title: Enter the correct parameter name for the title field in your order form (e.g. title).
+  # cat=caddy - getpost//115; type=text; label= Title: Enter the correct parameter name for the title field in your order form (e.g. title).
   gpvar.title = title
-  # cat=caddy - gpvar//120; type=text; label= Param Price: Enter the correct parameter name for the price field in your order form (e.g. price).
+  # cat=caddy - getpost//120; type=text; label= Price: Enter the correct parameter name for the price field in your order form (e.g. price).
   gpvar.price = price
-  # cat=caddy - gpvar//121; type=text; label= Param Service Attribute 1: Enter the correct parameter name for the service attribute field 1 of your order form (e.g. weight).
+  # cat=caddy - getpost//121; type=text; label= Service Attribute 1: Enter the correct parameter name for the service attribute field 1 of your order form (e.g. weight).
   gpvar.service_attribute_1 =
-  # cat=caddy - gpvar//122; type=text; label= Param Service Attribute 2: Enter the correct parameter name for the service attribute field 2 of your order form (e.g. volume).
+  # cat=caddy - getpost//122; type=text; label= Service Attribute 2: Enter the correct parameter name for the service attribute field 2 of your order form (e.g. volume).
   gpvar.service_attribute_2 =
-  # cat=caddy - gpvar//123; type=text; label= Param Service Attribute 3: Enter the correct parameter name for the service attribute field 3 of your order form (e.g. length).
+  # cat=caddy - getpost//123; type=text; label= Service Attribute 3: Enter the correct parameter name for the service attribute field 3 of your order form (e.g. length).
   gpvar.service_attribute_3 =
-  # cat=caddy - gpvar//140; type=text; label= Param SKU: Enter the correct parameter name for your SKU (stock keeping unit).
+  # cat=caddy - getpost//140; type=text; label= SKU: Enter the correct parameter name for your SKU (stock keeping unit).
   gpvar.sku =
-  # cat=caddy - gpvar/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - getpost/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   gpvar.externalLinks = Click me!
-  # cat=caddy - gpvar/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - getpost/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   gpvar.sponsors = Click me!
 
   # cat=caddy - pages/enable/301; type=integer; label= Caddy:Uid of the page with the caddy - your shopping cart
