@@ -653,8 +653,8 @@ class tx_caddy_pi1 extends tslib_pibase
         continue;
       }
       
-      $name = $getpostConf[ $getpostKey ];
-      $conf = $getpostConf[ $getpostKey . '.' ];
+      $name = $this->conf['getpost.'][ $getpostKey ];
+      $conf = $this->conf['getpost.'][ $getpostKey . '.' ];
 
       $this->gpvar[ $getpostKey ] = $this->zz_cObjGetSingle( $name, $conf );
 
