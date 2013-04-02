@@ -814,7 +814,7 @@ class tx_caddy extends tslib_pibase
     $specialArray = null;
 
     $marker['###SPECIAL_CHECKBOX###'] = '';
-    $specialArray['###CONTENT###'] = $this->optionList( 'special', $specialIds );
+    $specialArray['###CONTENT###'] = $this->optionList( 'specials', $specialIds );
     if( $specialArray['###CONTENT###'] )
     {
       $marker['###SPECIAL_CHECKBOX###'] =
