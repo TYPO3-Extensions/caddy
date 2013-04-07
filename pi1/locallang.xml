@@ -20,6 +20,7 @@
       <label index="error_itemsMax">The maximum order quantity for all items is %s. The quanttity is updated.</label>
       <label index="error_min">The minimum order quantity for this item is %s. The quanttity is updated.</label>
       <label index="error_max">The maximum order quantity for this item is %s. The quanttity is updated.</label>
+      <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
@@ -62,7 +63,6 @@
       <label index="sumgross">Sum (w tax)</label>
       <label index="tableheaderdelete">Remove</label>
       <label index="tax">TAX</label>
-      <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddyempty">Der Warenkorb ist leer</label>
@@ -77,6 +77,7 @@
       <label index="error_itemsMax">Sie k<![CDATA[&ouml;]]>nnen h<![CDATA[&ouml;]]>chstens %s Artikel bestellen. Ihre Einkaufsmenge wurde reduziert.</label>
       <label index="error_min">Sie m<![CDATA[&uuml;]]>ssen von diesem Artikel mindestens %s St<![CDATA[&uuml;]]>ck bestellen. Ihre Einkaufsmenge wurde erh<![CDATA[&ouml;]]>ht.</label>
       <label index="error_max">Sie k<![CDATA[&ouml;]]>nnen von diesem Artikel h<![CDATA[&ouml;]]>chstens %s St<![CDATA[&uuml;]]>ck bestellen. Ihre Einkaufsmenge wurde reduziert.</label>
+      <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>
@@ -119,7 +120,6 @@
       <label index="sumgross">Gesamtsumme (brutto)</label>
       <label index="tableheaderdelete">Entfernen</label>
       <label index="tax">Mehrwertsteuer</label>
-      <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
     </languageKey>
   </data>
 </T3locallang>
