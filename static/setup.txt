@@ -780,7 +780,7 @@ plugin.tx_caddy_pi1 {
                 // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdf.textColor.date}
             }
-              // label, prefix, ordernumber
+              // data, strftime
             content = TEXT
             content {
               data      = date : U
@@ -830,7 +830,7 @@ plugin.tx_caddy_pi1 {
                   // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdf.textColor.numberDeliveryorder}
               }
-                // label, prefix, ordernumber
+                // label, prefix, deliveryordernumber
               content = COA
               content {
                   // label
@@ -844,7 +844,7 @@ plugin.tx_caddy_pi1 {
                 20 {
                   value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
                 }
-                  // ordernumber
+                  // deliveryordernumber
                 30 = TEXT
                 30 {
                   field = numberDeliveryorderCurrent
@@ -1293,7 +1293,7 @@ plugin.tx_caddy_pi1 {
                 // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdf.textColor.date}
             }
-              // label, prefix, ordernumber
+              // data, strftime
             content = TEXT
             content {
               data      = date : U
@@ -1343,7 +1343,7 @@ plugin.tx_caddy_pi1 {
                   // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdf.textColor.numberInvoice}
               }
-                // label, prefix, ordernumber
+                // label, prefix, invoicenumber
               content = COA
               content {
                   // label
@@ -1357,7 +1357,7 @@ plugin.tx_caddy_pi1 {
                 20 {
                   value = {$plugin.caddy.pdf.invoice.number.prefix}
                 }
-                  // ordernumber
+                  // invoicenumber
                 30 = TEXT
                 30 {
                   field = numberInvoiceCurrent
@@ -1410,7 +1410,7 @@ plugin.tx_caddy_pi1 {
                 // ordernumber devider deliveryordernumber
               content = COA
               content {
-                  // label, prefix, ordernumber
+                  // label, prefix, deliveryordernumber
                 10 = COA
                 10 {
                     // label
@@ -1643,7 +1643,7 @@ plugin.tx_caddy_pi1 {
                 // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdf.textColor.date}
             }
-              // label, prefix, ordernumber
+              // data, strftime
             content = TEXT
             content {
               data      = date : U
@@ -1693,7 +1693,7 @@ plugin.tx_caddy_pi1 {
                   // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdf.textColor.revocation}
               }
-                // label, prefix, ordernumber
+                // content
               content < styles.content.get
               content {
                 select {
@@ -1886,7 +1886,7 @@ plugin.tx_caddy_pi1 {
                 // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdf.textColor.date}
             }
-              // label, prefix, ordernumber
+              // data, strftime
             content = TEXT
             content {
               data      = date : U
@@ -1936,7 +1936,7 @@ plugin.tx_caddy_pi1 {
                   // [String] color in HTML notation like #CC00CC or #FFF
                 textColor = {$plugin.caddy.pdf.textColor.terms}
               }
-                // label, prefix, ordernumber
+                // content
               content < styles.content.get
               content {
                 select {
