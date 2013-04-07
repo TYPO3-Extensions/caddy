@@ -1366,8 +1366,8 @@ plugin.tx_caddy_pi1 {
             }
           }
             // body
-          orderAndInvoice = 
-          orderAndInvoice {
+          orderAndDeliveryorder = 
+          orderAndDeliveryorder {
               // properties, content
             body =
             body {
@@ -1410,7 +1410,7 @@ plugin.tx_caddy_pi1 {
                 // ordernumber devider deliveryordernumber
               content = COA
               content {
-                  // label, prefix, deliveryordernumber
+                  // label, prefix, ordernumber
                 10 = COA
                 10 {
                     // label
