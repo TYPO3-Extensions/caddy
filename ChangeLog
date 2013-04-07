@@ -1,3 +1,10 @@
+2.0.4
+  13-04-07
+  Feature
+  * #47017: Ready TypoScript SEO configuration
+            Effected files:
+            * static/setup.txt
+
 2.0.3
   2013-04-03
   Improvements
