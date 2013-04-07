@@ -1,0 +1,3 @@
+3.0.0
+  Feature
+  * #47014: Extend caddy for a localised powermail configuration

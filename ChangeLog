@@ -1,12 +1,12 @@
 2.0.3
   2013-04-03
   Improvements
-  # *i0005: TypoScript is cleaned up
+  * #i0005: TypoScript is cleaned up
 
 2.0.2
   2013-03-22
   Improvement
-  # *i0004: Rendering of option lists
+  * #i0004: Rendering of option lists
             Effected files:
             * files/templates
               * caddy.html
@@ -15,7 +15,7 @@
             * lib/caddy/class.tx_caddy.php
             * pi1/locallang.xml
             * static/setup
-  # *i0003: Calculation of options costs
+  * #i0003: Calculation of options costs
             Effected files:
             * lib/caddy/class.tx_caddy.php
             * pi1/class.tx_caddy_pi1.php
