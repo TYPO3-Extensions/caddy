@@ -545,7 +545,7 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // addess, caddy, date, numbers, additionaltextblocks
+        // address, caddy, date, numbers, additionaltextblocks
       content = 
       content {
           // deliveryorder, invoice
@@ -988,7 +988,7 @@ plugin.tx_caddy_pi1 {
         }
       }
 
-        // addess, caddy, date, numbers, additionaltextblocks
+        // address, caddy, date, numbers, additionaltextblocks
       content = 
       content {
           // deliveryorder, invoice
@@ -1496,7 +1496,7 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-        // addess, date, additionaltextblocks
+        // address, date, additionaltextblocks
       content = 
       content {
           // invoice
@@ -1739,7 +1739,7 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-        // addess, date, additionaltextblocks
+        // address, date, additionaltextblocks
       content = 
       content {
           // invoice
