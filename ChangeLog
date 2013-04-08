@@ -1,3 +1,13 @@
+2.0.4
+  13-04-09
+  Bugfix
+  * #i0012: * foreach( )  :  Invalid argument in line 607
+              Effected file:
+              * lib/pdf/class.tx_caddy_pdf.php
+            * foreach( )  :  Invalid argument in line 171
+              Effected file:
+              * lib/class.tx_caddy_template.php
+
 2.0.3
   2013-04-03
   Improvements
