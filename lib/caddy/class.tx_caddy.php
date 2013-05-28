@@ -2179,7 +2179,7 @@ class tx_caddy extends tslib_pibase
     foreach( $extras as $extra )
     {
       $gross    = $this->zz_price_format( $extra['extra'] );
-var_dump( __METHOD__, __LINE__, $extra['extra'], $gross );      
+var_dump( __METHOD__, __LINE__, $extra['extra'], $gross );
       $llLabel  = $this->pi_getLL( 'service_from' );
       $tmpl     = $this->tmpl[$optionType . '_condition_item'];
 
@@ -2477,22 +2477,22 @@ var_dump( __METHOD__, __LINE__, $extra['extra'], $gross );
     switch( $extraType )
     {
       case 'by_price':
-        $symbol = $this->conf['main.']['currencySymbol'];
+        $symbol = $this->conf['symbols.']['currencySymbol'];
         break;
       case 'by_quantity':
-        $symbol = $this->conf['main.']['quantitySymbol'];
+        $symbol = $this->conf['symbols.']['quantitySymbol'];
         break;
       case 'by_service_attribute_1_sum':
       case 'by_service_attribute_1_max':
-        $symbol = $this->conf['main.']['service_attribute_1_symbol'];
+        $symbol = $this->conf['symbols.']['service_attribute_1_symbol'];
         break;
       case 'by_service_attribute_2_sum':
       case 'by_service_attribute_2_max':
-        $symbol = $this->conf['main.']['service_attribute_2_symbol'];
+        $symbol = $this->conf['symbols.']['service_attribute_2_symbol'];
         break;
       case 'by_service_attribute_3_sum':
       case 'by_service_attribute_3_max':
-        $symbol = $this->conf['main.']['service_attribute_3_symbol'];
+        $symbol = $this->conf['symbols.']['service_attribute_3_symbol'];
         break;
       default:
         $symbol = '';
@@ -2933,16 +2933,16 @@ var_dump( __METHOD__, __LINE__, $extra['extra'], $gross );
       $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     }
 
-    $currencySymbol = $this->conf['main.']['currencySymbol'];
+    $currencySymbol = $this->conf['symbols.']['currencySymbol'];
     $price          = number_format
                       (
                         $value,
-                        $this->conf['main.']['decimal'],
-                        $this->conf['main.']['dec_point'],
-                        $this->conf['main.']['thousands_sep']
+                        $this->conf['symbols.']['decimal'],
+                        $this->conf['symbols.']['dec_point'],
+                        $this->conf['symbols.']['thousands_sep']
                       );
     // print currency symbol before or after price
-    if( $this->conf['main.']['currencySymbolBeforePrice'] )
+    if( $this->conf['symbols.']['currencySymbolBeforePrice'] )
     {
       $price = $currencySymbol . ' ' . $price;
     }
