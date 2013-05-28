@@ -2179,7 +2179,7 @@ class tx_caddy extends tslib_pibase
     foreach( $extras as $extra )
     {
       $gross    = $this->zz_price_format( $extra['extra'] );
-var_dump( __METHOD__, __LINE__, $gross );      
+var_dump( __METHOD__, __LINE__, $extra['extra'], $gross );      
       $llLabel  = $this->pi_getLL( 'service_from' );
       $tmpl     = $this->tmpl[$optionType . '_condition_item'];
 
