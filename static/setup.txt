@@ -2069,10 +2069,42 @@ plugin.tx_caddy_pi1 {
           cellspacing = 0 
         }
       }
-        // #i0013, 130604, dwildt, 1+ / file, marker, table
-      revocation  < .invoice
-        // #i0013, 130604, dwildt, 1+ / file, marker, table
-      terms       < .invoice
+        // #i0013, 130604, dwildt, + // file, marker, table
+      revocation =
+      revocation {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_REVOCATION###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
+        }
+      }
+        // #i0013, 130604, dwildt, + // file, marker, table
+      terms =
+      terms {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_TERMS###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          border      = 0
+          cellpadding = 3
+          cellspacing = 0 
+        }
+      }
     }
   }
 
