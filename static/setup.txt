@@ -2069,6 +2069,9 @@ plugin.tx_caddy_pi1 {
           cellspacing = 0 
         }
       }
+        // #i0013, 130604, dwildt, 2+
+      revocation  < .invoice
+      terms       < .invoice
     }
   }
 

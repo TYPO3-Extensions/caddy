@@ -555,8 +555,13 @@ class tx_caddy_pdf extends tslib_pibase
         break;
       case( 'revocation' ):
       case( 'terms' ):
-          // Template for caddy isn't needed
-        return;
+          // #i0013, 130604, dwildt, 2-
+          //// Template for caddy isn't needed
+        //return;
+          // #i0013, 130604, dwildt, 3+
+        $file       = $this->conf['templates.']['pdf.'][$case . '.']['file'];
+        $markerAll  = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['all'];
+        $markerItem = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['item'];
         break;
       default:
         $prompt = 'Unproper value in switch. Case is "' . $case . '"'
@@ -589,12 +594,18 @@ class tx_caddy_pdf extends tslib_pibase
     {
       case( 'deliveryorder' ):
       case( 'invoice' ):
-        $table = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['table.'];
+          // #i0014, 130604, dwildt, 1-
+        //$table = $this->conf['templates.']['pdf.'][$case . '.']['marker.']['table.'];
+          // #i0014, 130604, dwildt, 1+
+        $table = $this->conf['templates.']['pdf.'][$case . '.']['table.'];
         break;
       case( 'revocation' ):
       case( 'terms' ):
-          // Template for caddy isn't needed
-        return;
+          // #i0013, 130604, dwildt, 2-
+//          // Template for caddy isn't needed
+//        return;
+          // #i0013, #i0014, 130604, dwildt, 1+
+        $table = $this->conf['templates.']['pdf.'][$case . '.']['table.'];
         break;
       default:
         $prompt = 'Unproper value in switch. Case is "' . $case . '"'

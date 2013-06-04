@@ -1,3 +1,17 @@
+2.0.5
+  13-06-04
+  Bugfix
+  * #i0014: * Unproper TypoScript path to HTML table properties for PDF files
+              Effected file:
+              * lib/pdf/class.tx_caddy_pdf.php  
+  * #i0013: * If customer doesn't get any invoice and any deliveryorder, HTML template for caddy isn't loaded.
+              This causes a bug, while sending the confirmation e-mail.
+              Workflow:
+              * Respect HTML template in case of all PDF files.
+              Effected file:
+              * lib/pdf/class.tx_caddy_pdf.php  
+              * static/setup.txt
+
 2.0.4
   13-04-09
   Bugfix
