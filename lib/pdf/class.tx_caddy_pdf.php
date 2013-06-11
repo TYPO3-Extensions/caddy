@@ -218,11 +218,15 @@ class tx_caddy_pdf extends tslib_pibase
         // DRS
       if( $this->pObj->drsUserfunc )
       {
-        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1-
+        //$prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1+
+        $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' exists and will overridden!';
         t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
       }
         // DRS
-      return $destPath;
+      // #i0015, 130611, dwildt, 1-
+      //return $destPath;
     }
       // RETURN : destination file already exists
 
@@ -682,11 +686,15 @@ class tx_caddy_pdf extends tslib_pibase
         // DRS
       if( $this->pObj->drsUserfunc )
       {
-        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1-
+        //$prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1+
+        $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' exists and will overridden!';
         t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
       }
         // DRS
-      return $destPath;
+      // #i0015, 130611, dwildt, 1-
+      //return $destPath;
     }
       // RETURN : destination file already exists
 
@@ -1202,11 +1210,15 @@ class tx_caddy_pdf extends tslib_pibase
         // DRS
       if( $this->pObj->drsUserfunc )
       {
-        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1-
+        //$prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1+
+        $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' exists and will overridden!';
         t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
       }
         // DRS
-      return $destPath;
+      // #i0015, 130611, dwildt, 1-
+      //return $destPath;
     }
       // RETURN : destination file already exists
 
@@ -1405,11 +1417,15 @@ class tx_caddy_pdf extends tslib_pibase
         // DRS
       if( $this->pObj->drsUserfunc )
       {
-        $prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1-
+        //$prompt = 'RETURN : uploads/tx_caddy' . '/' . $destFile . ' exists!';
+        // #i0015, 130611, dwildt, 1+
+        $prompt = 'uploads/tx_caddy' . '/' . $destFile . ' exists and will overridden!';
         t3lib_div::devlog( '[WARN/USERFUNC] ' . $prompt, $this->extKey, 2 );
       }
         // DRS
-      return $destPath;
+      // #i0015, 130611, dwildt, 1-
+      //return $destPath;
     }
       // RETURN : destination file already exists
 
