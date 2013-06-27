@@ -255,19 +255,19 @@ plugin.tx_caddy_pi1 {
         }
         taxrate_reduced_string = TEXT
         taxrate_reduced_string {
-          value = including
+          value = plus
           lang { 
-            de = inklusive 
-            en = including
+            de = zuz&uuml;glich 
+            en = plus
           }
           noTrimWrap = || {$plugin.caddy.tax.reduced}{$plugin.caddy.main.percentSymbol} |
         }
         taxrate_normal_string = TEXT
         taxrate_normal_string {
-          value = including
+          value = plus
           lang { 
-            de = inklusive 
-            en = including
+            de = zuz&uuml;glich 
+            en = plus
           }
           noTrimWrap = || {$plugin.caddy.tax.normal}{$plugin.caddy.main.percentSymbol} |
         }
