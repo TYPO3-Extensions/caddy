@@ -192,9 +192,6 @@ INDEX
 
 <!-- ###CADDY_EMAIL### begin -->
 <style type="text/css">
-  table {
-    font-size:.5em;
-  }
     /* border */
   th {
     border-bottom:1px solid orange;
@@ -220,6 +217,7 @@ INDEX
   tbody td.qty,
   tbody td.tax,
   tbody td.net,
+  tfoot td.qty,
   tfoot td.net { 
     text-align:right;
   }
@@ -229,6 +227,7 @@ INDEX
   }
     /* width */
   tbody td.qty,
+  tfoot td.qty,
   thead th.qty { 
     width:10%; 
   }
@@ -307,7 +306,7 @@ INDEX
   <!-- ###CONTENT### -->
   <tfoot>
     <tr class="itemssumnet">
-      <td style="text-align:center">
+      <td class="qty">
         #
       </td>
       <td colspan="4">
@@ -318,7 +317,7 @@ INDEX
       </td>
     </tr>
     <tr>
-      <td style="text-align:center">
+      <td class="qty">
         +
       </td>
       <td colspan="4">
@@ -371,7 +370,7 @@ INDEX
       </td>
     </tr>
     <tr>
-      <td style="text-align:center">
+      <td class="qty">
         +
       </td>
       <td colspan="4">
@@ -382,7 +381,7 @@ INDEX
       </td>
     </tr>
     <tr>
-      <td style="text-align:center">
+      <td class="qty">
         &nbsp;
       </td>
       <td colspan="3">
@@ -396,7 +395,7 @@ INDEX
       </td>
     </tr>
     <tr>
-      <td style="text-align:center">
+      <td class="qty">
         &nbsp;
       </td>
       <td colspan="3">
@@ -410,7 +409,7 @@ INDEX
       </td>
     </tr>
     <tr class="sumgross">
-      <td style="text-align:center">
+      <td class="qty">
         #
       </td>
       <td colspan="4">
