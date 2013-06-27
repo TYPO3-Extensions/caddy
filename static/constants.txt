@@ -96,6 +96,22 @@ plugin.caddy {
 
   # cat=caddy - html//100;              type=color;  label= Border Color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
   html.bordercolor = navy
+  # cat=caddy - html//200;              type=text;  label= Width columns Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.qty.width = 10%
+  # cat=caddy - html//201;              type=text;  label= Width columns SKU: The width of the caddy column stock keep unit in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.sku.width = 15%
+  # cat=caddy - html//202;              type=text;  label= Width columns item: The width of the caddy column item in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.item.width = 35%
+  # cat=caddy - html//203;              type=text;  label= Width columns tax: The width of the caddy column tax in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.tax.width = 10%
+  # cat=caddy - html//204;              type=text;  label= Width columns net: The width of the caddy column net in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.net.width = 15%
+  # cat=caddy - html//205;              type=text;  label= Width columns sum: The width of the caddy column sum in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.sum.width = 15%
+  # cat=caddy - html//301;              type=text;  label= Width 3 columns: The width of the caddy columns sku, item and tax in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.skuitemtax.width = 60%
+  # cat=caddy - html//301;              type=text;  label= Width 4 columns: The width of the caddy column sku, item, tax and net in HTML tables for CSS. Units can be px, em or % among others.
+  html.caddy.table.td.skuitemtaxnet.width = 75%
   # cat=caddy - html/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
   html.externalLinks = Click me!
   # cat=caddy - html/others/999;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
