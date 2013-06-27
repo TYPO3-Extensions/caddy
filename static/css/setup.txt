@@ -34,8 +34,10 @@ plugin.tx_caddy_pi1 {
     div.caddy_product div.caddy_col1 { 
       padding:0; 
     }
-    div.caddy_product div.caddy_col4 { 
+    div.caddy_product div.caddy_col4 {
+      padding-right:1em;
       text-align: right;
+      width:3em;
     }
     div.caddy_product div.caddy_col6 { 
       padding-right: 1em;
