@@ -193,9 +193,6 @@ INDEX
 <!-- ###CADDY_EMAIL### begin -->
 <style type="text/css">
     /* border */
-  th {
-    border-bottom:1px solid orange;
-  }
   tfoot tr.sumgross td,
   tfoot tr.itemssumnet td {
     border-bottom:1px solid orange;
@@ -256,28 +253,26 @@ INDEX
 </style>
 <!--<table border="###BORDER###" cellpadding="###CELLPADDING###" cellspacing="###CELLSPACING###">-->
 <table border="0" cellpadding="0" cellspacing="0">
-  <thead>
-    <tr style="font-weight: bold;">
-      <th class="qty">
-        ###_LOCAL_LANG_QTY###
-      </th>
-      <th class="sku">
-        ###_LOCAL_LANG_SKU_SHORT###
-      </th>
-      <th class="item">
-        ###_LOCAL_LANG_ITEM###
-      </th>
-      <th class="tax">
-        ###_LOCAL_LANG_TAX_ABBR###
-      </th>
-      <th class="net">
-        ###_LOCAL_LANG_PRICE_NET_UNIT###
-      </th>
-      <th class="sum">
-        ###_LOCAL_LANG_PRICE_NET_UNIT_WI_QTY###
-      </th>
-    </tr>
-  </thead>
+  <tr style="font-weight:bold;">
+    <th class="qty" style="border-bottom:1px solid orange;width:10%">
+      ###_LOCAL_LANG_QTY###
+    </th>
+    <th class="sku" style="border-bottom:1px solid orange;width:15%">
+      ###_LOCAL_LANG_SKU_SHORT###
+    </th>
+    <th class="item" style="border-bottom:1px solid orange;width:35%">
+      ###_LOCAL_LANG_ITEM###
+    </th>
+    <th class="tax" style="border-bottom:1px solid orange;width:10%">
+      ###_LOCAL_LANG_TAX_ABBR###
+    </th>
+    <th class="net" style="border-bottom:1px solid orange;width:15%">
+      ###_LOCAL_LANG_PRICE_NET_UNIT###
+    </th>
+    <th class="sum" style="border-bottom:1px solid orange;width:15%">
+      ###_LOCAL_LANG_PRICE_NET_UNIT_WI_QTY###
+    </th>
+  </tr>
   <!-- ###CONTENT### -->
   <!-- ###ITEM### -->
   <tbody>
