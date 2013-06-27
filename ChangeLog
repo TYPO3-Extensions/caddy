@@ -4,8 +4,13 @@
   * #i0016: * Improved caddy table structur
               Effected file:
               * files/templates/caddy.html
+              * lib/powermail/class.tx_caddy_powermail.php
               * pi1/locallang.xml
-              * static/css/setup.txt
+              * pi3/class.tx_caddy_pi3.php
+              * static
+                * css/setup.txt
+                * constants.txt
+                * setup.txt
 
 2.0.6
   13-06-11
