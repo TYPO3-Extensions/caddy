@@ -39,11 +39,12 @@ INDEX
     ###VARIANTS###
     <div class="caddy_header">
       <div class="caddy_col caddy_col1">###_LOCAL_LANG_QTY###</div>
-      <div class="caddy_col caddy_col2">###_LOCAL_LANG_SKU###</div>
+      <div class="caddy_col caddy_col2">###_LOCAL_LANG_SKU_SHORT###</div>
       <div class="caddy_col caddy_col3">###_LOCAL_LANG_ITEM###</div>
-      <div class="caddy_col caddy_col4">###_LOCAL_LANG_NET###</div>
-      <div class="caddy_col caddy_col5">###_LOCAL_LANG_SUM###</div>
-      <div class="caddy_col caddy_col6">###_LOCAL_LANG_TABLEHEADERDELETE###</div>
+      <div class="caddy_col caddy_col4">###_LOCAL_LANG_TAX_TURNOVER_ABBR_PERCENT###</div>
+      <div class="caddy_col caddy_col5">###_LOCAL_LANG_PRICE_NET_UNIT###</div>
+      <div class="caddy_col caddy_col6">###_LOCAL_LANG_PRICE_NET_UNIT_WI_QTY###</div>
+      <div class="caddy_col caddy_col7">###_LOCAL_LANG_TABLEHEADERDELETE###</div>
       <div class="caddy_cleaner"></div>
     </div>
     <!-- ###CONTENT### -->
@@ -55,8 +56,9 @@ INDEX
       <div class="caddy_col caddy_col2">###SKU###</div>
       <div class="caddy_col caddy_col3">###TITLE###</div>
       <div class="caddy_col caddy_col4">###NET###</div>
-      <div class="caddy_col caddy_col5">###SUMNET###</div>
-      <div class="caddy_col caddy_col6">###DELETE###</div>
+      <div class="caddy_col caddy_col5">###NET###</div>
+      <div class="caddy_col caddy_col6">###SUMNET###</div>
+      <div class="caddy_col caddy_col7">###DELETE###</div>
       <div class="caddy_cleaner"></div>
       ###ITEM_ERROR###
     </div>
@@ -64,30 +66,30 @@ INDEX
     <!-- ###CONTENT### -->
     <div class="caddy_footer">                        
       <div class="caddy_col caddy_col1 caddy_col_strong">#</div>
-      <div class="caddy_col caddy_col2_4 caddy_col_strong">###_LOCAL_LANG_ITEMSSUMNET###</div>
-      <div class="caddy_col caddy_col5 caddy_col_strong">###SUMITEMSNET###</div>
+      <div class="caddy_col caddy_col2_5 caddy_col_strong">###_LOCAL_LANG_ITEMSSUMNET###</div>
+      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMITEMSNET###</div>
       <div class="caddy_cleaner"></div>
       <div class="caddy_col caddy_col1">+</div>
-      <div class="caddy_col caddy_col2_4">###_LOCAL_LANG_OPTIONSNET###</div>
-      <div class="caddy_col caddy_col5">###SUMOPTIONSNET###</div>
+      <div class="caddy_col caddy_col2_5">###_LOCAL_LANG_OPTIONSNET###</div>
+      <div class="caddy_col caddy_col6">###SUMOPTIONSNET###</div>
       <div class="caddy_cleaner"></div>
       <div class="caddy_col caddy_col1">+</div>
-      <div class="caddy_col caddy_col2_4">###_LOCAL_LANG_TAX###</div>
-      <div class="caddy_col caddy_col5 caddy_col_strong">###SUMSUMTAXSUM###</div>
+      <div class="caddy_col caddy_col2_5">###_LOCAL_LANG_TAX###</div>
+      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMSUMTAXSUM###</div>
       <div class="caddy_cleaner"></div>
       <div class="caddy_col caddy_col1">&nbsp;</div>
-      <div class="caddy_col caddy_col2_3">###TAXRATE_NORMAL_STRING###</div>
-      <div class="caddy_col caddy_col4">###SUMSUMTAXNORMAL###</div>
-      <div class="caddy_col caddy_col5">&nbsp;</div>
+      <div class="caddy_col caddy_col2_4">###TAXRATE_NORMAL_STRING###</div>
+      <div class="caddy_col caddy_col5">###SUMSUMTAXNORMAL###</div>
+      <div class="caddy_col caddy_col6">&nbsp;</div>
       <div class="caddy_cleaner"></div>
       <div class="caddy_col caddy_col1">&nbsp;</div>
-      <div class="caddy_col caddy_col2_3">###TAXRATE_REDUCED_STRING###</div>
-      <div class="caddy_col caddy_col4">###SUMSUMTAXREDUCED###</div>
-      <div class="caddy_col caddy_col5">&nbsp;</div>
+      <div class="caddy_col caddy_col2_4">###TAXRATE_REDUCED_STRING###</div>
+      <div class="caddy_col caddy_col5">###SUMSUMTAXREDUCED###</div>
+      <div class="caddy_col caddy_col6">&nbsp;</div>
       <div class="caddy_cleaner"></div>
       <div class="caddy_col caddy_col1 caddy_col_strong">#</div>
-      <div class="caddy_col caddy_col2_4 caddy_col_strong">###_LOCAL_LANG_SUMGROSS###</div>
-      <div class="caddy_col caddy_col5 caddy_col_strong">###SUMSUMGROSS###</div>
+      <div class="caddy_col caddy_col2_5 caddy_col_strong">###_LOCAL_LANG_SUMGROSS###</div>
+      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMSUMGROSS###</div>
       <div class="caddy_cleaner"></div>
     </div>
     <div class="caddy_options">
@@ -195,16 +197,19 @@ INDEX
       ###_LOCAL_LANG_QTY###
     </td>
     <td>
-      ###_LOCAL_LANG_SKU###
+      ###_LOCAL_LANG_SKU_SHORT###
     </td>
     <td>
       ###_LOCAL_LANG_ITEM###
     </td>
     <td style="text-align:right">
-      ###_LOCAL_LANG_NET###
+      ###_LOCAL_LANG_TAX_TURNOVER_ABBR_PERCENT###
     </td>
     <td style="text-align:right">
-      ###_LOCAL_LANG_SUM###
+      ###_LOCAL_LANG_PRICE_NET_UNIT###
+    </td>
+    <td style="text-align:right">
+      ###_LOCAL_LANG_PRICE_NET_UNIT_WI_QTY###
     </td>
   </tr>
   <!-- ###CONTENT### -->
@@ -223,6 +228,9 @@ INDEX
       ###NET###
     </td>
     <td style="text-align:right">
+      ###NET###
+    </td>
+    <td style="text-align:right">
       ###SUMNET###
     </td>
   </tr>
@@ -232,7 +240,7 @@ INDEX
     <td style="text-align:center">
       #
     </td>
-    <td colspan="3">
+    <td colspan="4">
       ###_LOCAL_LANG_ITEMSSUMNET###
     </td>
     <td style="text-align:right">
@@ -243,7 +251,7 @@ INDEX
     <td style="text-align:center">
       +
     </td>
-    <td colspan="3">
+    <td colspan="4">
       ###_LOCAL_LANG_OPTIONSNET###
     </td>
     <td style="text-align:right">
@@ -254,7 +262,7 @@ INDEX
     <td>
       &nbsp;
     </td>
-    <td colspan="2">
+    <td colspan="3">
       ###_LOCAL_LANG_SHIPPINGLABEL###: ###OPTIONSSHIPPINGLABEL###
     </td>
     <td style="text-align:right">
@@ -268,7 +276,7 @@ INDEX
     <td>
       &nbsp;
     </td>
-    <td colspan="2">
+    <td colspan="3">
       ###_LOCAL_LANG_PAYMENTLABEL###: ###OPTIONSPAYMENTLABEL###
     </td>
     <td style="text-align:right">
@@ -282,7 +290,7 @@ INDEX
     <td>
       &nbsp;
     </td>
-    <td colspan="2">
+    <td colspan="3">
       ###_LOCAL_LANG_SPECIALSLABELS###: ###OPTIONSSPECIALSLABELS###
     </td>
     <td style="text-align:right">
@@ -296,7 +304,7 @@ INDEX
     <td style="text-align:center">
       +
     </td>
-    <td colspan="3">
+    <td colspan="4">
       ###_LOCAL_LANG_TAX###
     </td>
     <td style="text-align:right">
@@ -307,7 +315,7 @@ INDEX
     <td style="text-align:center">
       &nbsp;
     </td>
-    <td colspan="2">
+    <td colspan="3">
       ###TAXRATE_NORMAL_STRING###
     </td>
     <td style="text-align:right">
@@ -321,7 +329,7 @@ INDEX
     <td style="text-align:center">
       &nbsp;
     </td>
-    <td colspan="2">
+    <td colspan="4">
       ###TAXRATE_REDUCED_STRING###
     </td>
     <td style="text-align:right">
@@ -335,7 +343,7 @@ INDEX
     <td style="text-align:center">
       #
     </td>
-    <td colspan="3">
+    <td colspan="4">
       ###_LOCAL_LANG_SUMGROSS###
     </td>
     <td style="text-align:right">
@@ -353,7 +361,7 @@ INDEX
       ###_LOCAL_LANG_QTY###
     </td>
     <td>
-      ###_LOCAL_LANG_SKU###
+      ###_LOCAL_LANG_SKU_SHORT###
     </td>
     <td>
       ###_LOCAL_LANG_ITEM###

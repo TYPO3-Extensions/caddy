@@ -39,6 +39,8 @@
       <label index="payment_free_until">free service option until</label>
       <label index="payment_available_from">service option available from</label>
       <label index="payment_available_until">service option available until</label>
+      <label index="price_net_unit">Unit Price</label>
+      <label index="price_net_unit_wi_qty">Price</label>
       <label index="qty">Amount</label>
       <label index="service_each">each</label>
       <label index="service_from">from</label>
@@ -50,6 +52,7 @@
       <label index="shipping_free_from">free shipping from</label>
       <label index="shipping_free_until">free shipping until</label>
       <label index="sku">Stock Keeping Unit</label>
+      <label index="sku_short">SKU</label>
       <label index="specialslabels">Other Options</label>
       <label index="specialoption_addfeeforislands">Additional fee for islands</label>
       <label index="specialoption_neutralpackage">Neutral package</label>
@@ -63,6 +66,9 @@
       <label index="sumgross">Sum (w tax)</label>
       <label index="tableheaderdelete">Remove</label>
       <label index="tax">TAX</label>
+      <label index="tax_turnover">turnover tax</label>
+      <label index="tax_turnover_abbr">VAT</label>
+      <label index="tax_turnover_abbr_percent">VAT %</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="caddyempty">Der Warenkorb ist leer</label>
@@ -96,7 +102,9 @@
       <label index="payment_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
       <label index="payment_free_from">servicekostenfrei ab</label>
       <label index="payment_free_until">servicekostenfrei bis</label>
-      <label index="qty">Anzahl</label>
+      <label index="price_net_unit">Einzelpreis</label>
+      <label index="price_net_unit_wi_qty">Gesamtpreis</label>
+      <label index="qty">Menge</label>
       <label index="service_each">je</label>
       <label index="service_from">ab</label>
       <label index="shippinglabel">Versand</label>
@@ -107,6 +115,7 @@
       <label index="shipping_free_from">versandkostenfrei ab</label>
       <label index="shipping_free_until">versandkostenfrei bis</label>
       <label index="sku">Artikelnummer</label>
+      <label index="sku_short">Art.-Nr.</label>
       <label index="specialslabels">Weitere Optionen</label>
       <label index="specialoption_addfeeforislands">Inselzuschlag</label>
       <label index="specialoption_neutralpackage">Neutrale Verpackung</label>
@@ -120,6 +129,9 @@
       <label index="sumgross">Gesamtsumme (brutto)</label>
       <label index="tableheaderdelete">Entfernen</label>
       <label index="tax">Mehrwertsteuer</label>
+      <label index="tax_turnover">Umsatzsteuer</label>
+      <label index="tax_turnover_abbr">USt.</label>
+      <label index="tax_turnover_abbr_percent">USt. %</label>
     </languageKey>
   </data>
 </T3locallang>
