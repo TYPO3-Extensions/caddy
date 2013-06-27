@@ -37,7 +37,7 @@ plugin.tx_caddy_pi1 {
       padding:0; 
     }
     div.caddy_product div.caddy_col6 { 
-      padding: 0 0 0 1em;
+      padding-right: 1em;
     }
     div.caddy_col { 
       display:block; 
