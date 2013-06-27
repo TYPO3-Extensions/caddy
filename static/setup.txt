@@ -206,9 +206,29 @@ plugin.tx_caddy_pi1 {
         field = tax
       }
         // taxrate of the item
-      taxrate < .gross
-      taxrate.10.userFunc.number.field = taxrate
-      taxrate.20.value = {$plugin.caddy.main.percentSymbol}
+      taxrate = COA
+      taxrate {
+        10 = USER
+        10 {
+          userFunc = tx_caddy_userfunc->calcMultiply
+          userFunc {
+            number = TEXT
+            number {
+              field         = taxrate
+            }
+            multiplier    = 100
+            decimal       = 2
+            dec_point     = {$plugin.caddy.main.dec_point}
+            thousands_sep = {$plugin.caddy.main.thousands_sep}
+            drs           = {$plugin.caddy.debug.userfunc}
+          }
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.percentSymbol}
+          noTrimWrap = | ||
+        }
+      }
         // label of the item
       title = TEXT
       title {
