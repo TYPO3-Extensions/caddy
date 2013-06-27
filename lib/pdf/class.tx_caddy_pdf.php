@@ -622,7 +622,8 @@ class tx_caddy_pdf extends tslib_pibase
     foreach( ( array ) $table as $property => $value )
     {
       $marker = '###' . strtoupper( $property ) . '###';
-      $this->tmpl['all'] = str_replace( $marker, $value, $this->tmpl['all'] );     
+      $this->tmpl['all']  = str_replace( $marker, $value, $this->tmpl['all'] );     
+      $this->tmpl['item'] = str_replace( $marker, $value, $this->tmpl['item'] );     
     }
   }
 

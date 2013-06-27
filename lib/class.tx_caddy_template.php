@@ -172,6 +172,7 @@ class tx_caddy_template
     {
       $marker               = '###' . strtoupper( $property ) . '###';
       $tmplSubparts['all']  = str_replace( $marker, $value, $tmplSubparts['all'] );     
+      $tmplSubparts['item'] = str_replace( $marker, $value, $tmplSubparts['item'] );     
     }
     
     return $tmplSubparts;
