@@ -40,6 +40,9 @@ plugin.tx_caddy_pi1 {
     div.caddy_product div.caddy_col6 { 
       padding-right: 1em;
     }
+    div.caddy_product div.caddy_col7 { 
+      padding:0;
+    }
     div.caddy_col { 
       display:block; 
       float:left; 
