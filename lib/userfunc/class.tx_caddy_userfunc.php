@@ -122,14 +122,57 @@ class tx_caddy_userfunc
  * @param	[type]		$conf: ...
  * @return	string		formatted number
  */
+  public function calcDueDate( $content = '', $conf = array( ) )
+  {
+    unset( $content );
+    $conf       = $conf['userFunc.'];
+    
+    $strtotime  = $conf['strtotime'];
+    if( empty ( $strtotime ) )
+    {
+      $strtotime = '+4 week';
+    }
+    $timestamp  = strtotime( $strtotime );
+    $strftime   = $conf['strftime'];
+    if( empty ( $strftime ) )
+    {
+      $strftime = 'Y-m-d';
+    }
+
+    $dueDate    = date( $strftime, $timestamp );
+
+      // DRS
+    $drs = false;
+    if( $conf['drs'] )
+    {
+      $drs = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+    if( $this->drs->drsSession || $drs )
+    {
+      $prompt = __METHOD__ . ' returns: ' . $numberFormat;
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $dueDate;
+  }
+  /**
+ * 
+ *
+ * @param	[type]		$$content: ...
+ * @param	[type]		$conf: ...
+ * @return	string		formatted number
+ */
   public function calcMultiply( $content = '', $conf = array( ) )
   {
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
+    $conf       = $conf['userFunc.'];
 
     if( ! $content )
     {
-      $conf     = $conf['userFunc.']; // TS configuration
       $content  = ( double ) $local_cObj->cObjGetSingle( $conf['number'], $conf['number.'] ); // get number
     }
     
@@ -140,7 +183,7 @@ class tx_caddy_userfunc
       // DRS
     unset( $content );
     $drs = false;
-    if( $conf['userFunc.']['drs'] )
+    if( $conf['drs'] )
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
@@ -497,9 +540,10 @@ class tx_caddy_userfunc
     global $TSFE;
     $local_cObj = $TSFE->cObj; // cObject
 
+    $conf = $conf['userFunc.'];
+
     if( ! $content )
     {
-      $conf     = $conf['userFunc.']; // TS configuration
       $content  = ( double ) $local_cObj->cObjGetSingle( $conf['number'], $conf['number.'] ); // get number
     }
 
@@ -508,7 +552,7 @@ class tx_caddy_userfunc
       // DRS
     unset( $content );
     $drs = false;
-    if( $conf['userFunc.']['drs'] )
+    if( $conf['drs'] )
     {
       $drs = true;
       $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';

@@ -1,6 +1,11 @@
 2.0.7
   13-06-27
   Improvement
+  * #i0018: * New user functions 
+              * calcDueDate
+              * calcMultiply
+              Effected file:
+              * lib/userfunc/class.tx_caddy_userfunc.php
   * #i0017: * Shipping tax
               * Moved from normal to reduced
               Effected file:
