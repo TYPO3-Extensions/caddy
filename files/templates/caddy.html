@@ -345,31 +345,35 @@ INDEX
 <!-- ###CADDY_EMAIL### end -->
 
 <!-- ###CADDY_EMAILDELIVERY### begin -->
-<table border="###BORDER###" cellpadding="###CELLPADDING###" cellspacing="###CELLSPACING###">
-  <tr style="font-weight: bold;">
-    <td>
-      ###_LOCAL_LANG_QTY###
-    </td>
-    <td>
-      ###_LOCAL_LANG_SKU_SHORT###
-    </td>
-    <td>
-      ###_LOCAL_LANG_ITEM###
-    </td>
-  </tr>
+<table border="0" cellpadding="0" cellspacing="0">
+  <thead style="text-align:left;">
+    <tr style="font-weight:bold;">
+      <th style="border-bottom:1px solid orange;padding:.2em 1em .2em 0;width:10%;">
+        ###_LOCAL_LANG_QTY###
+      </th>
+      <th style="border-bottom:1px solid orange;padding:.2em 1em .2em 0;width:20%;">
+        ###_LOCAL_LANG_SKU_SHORT###
+      </th>
+      <th style="border-bottom:1px solid orange;padding:.2em 0em .2em 0;width:70%;">
+        ###_LOCAL_LANG_ITEM###
+      </th>
+    </tr>
+  </thead>
   <!-- ###CONTENT### -->
   <!-- ###ITEM### -->
-  <tr>
-    <td>
-      ###QTY###
-    </td>
-    <td>
-      ###SKU###
-    </td>
-    <td>
-      ###TITLE###
-    </td>
-  </tr>
+  <tbody>
+    <tr>
+      <td style="padding:.2em 1em .2em 0;width:10%;">
+        ###QTY###
+      </td>
+      <td style="padding:.2em 1em .2em 0;width:20%;">
+        ###SKU###
+      </td>
+      <td style="padding:.2em 0em .2em 0;width:70%;">
+        ###TITLE###
+      </td>
+    </tr>
+  </tbody>
   <!-- ###ITEM### -->
   <!-- ###CONTENT### -->
 </table>
