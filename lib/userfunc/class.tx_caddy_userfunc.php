@@ -136,10 +136,10 @@ class tx_caddy_userfunc
     $strftime   = $conf['strftime'];
     if( empty ( $strftime ) )
     {
-      $strftime = 'Y-m-d';
+      $strftime = '%Y-%m-%d';
     }
 
-    $dueDate    = date( $strftime, $timestamp );
+    $dueDate    = strftime( $strftime, $timestamp );
 
       // DRS
     $drs = false;
