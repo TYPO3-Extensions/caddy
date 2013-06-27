@@ -82,8 +82,7 @@ plugin.tx_caddy_pi1 {
       width:7em; 
     }
     div.caddy_col7 { 
-      padding-right: 1em;
-      text-align:right;
+      padding-left: 1em;
       width:2em; 
     }
     div.caddy_error { 
