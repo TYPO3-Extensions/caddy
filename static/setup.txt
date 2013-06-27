@@ -481,7 +481,7 @@ plugin.tx_caddy_pi1 {
             // extra cost (gross price) of shipping method
           extra = 0.00
             // tax rate which will be applied (reduced or normal)
-          tax = normal
+          tax = reduced
         }
           // title, extra, tax
         2 =
@@ -495,7 +495,7 @@ plugin.tx_caddy_pi1 {
             // extra cost (gross price) of shipping method
           extra = 12.00
             // tax rate which will be applied (reduced or normal)
-          tax = normal
+          tax = reduced
         }
       }
     }

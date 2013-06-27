@@ -1,8 +1,13 @@
 2.0.7
   13-06-27
   Improvement
-  * #i0016: * Improved caddy table structur
+  * #i0017: * Shipping tax
+              * Moved from normal to reduced
               Effected file:
+              * static
+                * setup.txt
+  * #i0016: * Improved caddy table structur
+              Effected files:
               * files/templates/caddy.html
               * lib/powermail/class.tx_caddy_powermail.php
               * pi1/locallang.xml
