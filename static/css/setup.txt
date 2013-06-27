@@ -3,8 +3,6 @@ plugin.tx_caddy_pi1 {
     
     /* div based caddy */
     
-    /* div based caddy */
-    
     div.caddy_options {
       padding: 0.4em 0 0 4.3em;
     }
@@ -35,6 +33,10 @@ plugin.tx_caddy_pi1 {
     }
     div.caddy_product div.caddy_col1 { 
       padding:0; 
+    }
+    div.caddy_product div.caddy_col4 { 
+      padding:0; 
+      text-align: right;
     }
     div.caddy_product div.caddy_col6 { 
       padding-right: 1em;
@@ -67,11 +69,10 @@ plugin.tx_caddy_pi1 {
       width:37em; 
     }
     div.caddy_col3 { 
-      width:19em; 
+      width:16em; 
     }
     div.caddy_col4 { 
-      text-align:right;
-      width:1em; 
+      width:4em; 
     }
     div.caddy_col5 { 
       text-align:right;
