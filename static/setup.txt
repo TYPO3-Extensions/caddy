@@ -253,23 +253,43 @@ plugin.tx_caddy_pi1 {
         optionsspecialslabels {
           field = optionsspecialslabels
         }
-        taxrate_reduced_string = TEXT
+          // plus value, VAT
+        taxrate_reduced_string = COA
         taxrate_reduced_string {
-          value = plus
-          lang { 
-            de = zuz&uuml;glich 
-            en = plus
+            // plus value
+          10 = TEXT
+          10 {
+            value = plus
+            lang { 
+              de = zuz&uuml;glich 
+              en = plus
+            }
+            noTrimWrap = || {$plugin.caddy.tax.reduced}{$plugin.caddy.main.percentSymbol} |
           }
-          noTrimWrap = || {$plugin.caddy.tax.reduced}{$plugin.caddy.main.percentSymbol} |
+            // VAT
+          20 = TEXT
+          20 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:tax_abbr
+          }
         }
-        taxrate_normal_string = TEXT
+          // plus value, VAT
+        taxrate_normal_string = COA
         taxrate_normal_string {
-          value = plus
-          lang { 
-            de = zuz&uuml;glich 
-            en = plus
+            // plus value
+          10 = TEXT
+          10 {
+            value = plus
+            lang { 
+              de = zuz&uuml;glich 
+              en = plus
+            }
+            noTrimWrap = || {$plugin.caddy.tax.normal}{$plugin.caddy.main.percentSymbol} |
           }
-          noTrimWrap = || {$plugin.caddy.tax.normal}{$plugin.caddy.main.percentSymbol} |
+            // VAT
+          20 = TEXT
+          20 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:tax_abbr
+          }
         }
       }
         // payment, shipping, specials
