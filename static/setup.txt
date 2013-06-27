@@ -2024,9 +2024,10 @@ plugin.tx_caddy_pi1 {
         // border, cellpadding, cellspacing
       table = 
       table {
+        bordercolor = red
         border      = 1
         cellpadding = 3
-        cellspacing = 0 
+        cellspacing = 0
       }
     }
       // caddy, caddymini
@@ -2045,6 +2046,7 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
+          bordercolor = red
           border      = 0
           cellpadding = 3
           cellspacing = 0 
@@ -2059,13 +2061,6 @@ plugin.tx_caddy_pi1 {
         marker {
           all   = ###CADDYMINI###
           item  = ###ITEMS###
-        }
-          // border, cellpadding, cellspacing
-        table = 
-        table {
-          border      = 0
-          cellpadding = 3
-          cellspacing = 0 
         }
       }
     }
@@ -2085,6 +2080,7 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
+          bordercolor = blue
           border      = 0
           cellpadding = 3
           cellspacing = 0 
@@ -2103,6 +2099,7 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
+          bordercolor = blue
           border      = 0
           cellpadding = 3
           cellspacing = 0 
@@ -2121,6 +2118,7 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
+          bordercolor = blue
           border      = 0
           cellpadding = 3
           cellspacing = 0 
@@ -2139,6 +2137,7 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
+          bordercolor = blue
           border      = 0
           cellpadding = 3
           cellspacing = 0 
