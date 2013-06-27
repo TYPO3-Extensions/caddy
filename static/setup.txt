@@ -226,7 +226,6 @@ plugin.tx_caddy_pi1 {
         20 = TEXT
         20 {
           value = {$plugin.caddy.main.percentSymbol}
-          noTrimWrap = | ||
         }
       }
         // label of the item
