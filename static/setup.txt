@@ -1546,10 +1546,10 @@ plugin.tx_caddy_pi1 {
                   // Pay until
                 10 = TEXT
                 10 {
-                  value = 
+                  value = Please pay until 
                   lang {
                     de = Zahlen Sie bitte bis sp&auml;testens
-                    en = 
+                    en = Please pay until
                   }
                   noTrimWrap = || |
                 }
@@ -1561,6 +1561,11 @@ plugin.tx_caddy_pi1 {
                     strtotime = {$plugin.caddy.main.dueDate}
                     strftime  = {$plugin.caddy.pdf.date.strftime} 
                   }
+                }
+                  // space
+                21 = TEXT
+                21 {
+                  value = 
                   noTrimWrap = || |
                 }
                   // amount
@@ -1595,10 +1600,10 @@ plugin.tx_caddy_pi1 {
                     // text
                   10 = TEXT
                   10 {
-                    value = 
+                    value = with the annotation
                     lang {
                       de = mit dem Vermerk
-                      en =
+                      en = with the annotation
                     }
                     noTrimWrap  = | | |
                   }
@@ -1627,22 +1632,22 @@ plugin.tx_caddy_pi1 {
                   // to account
                 50 = TEXT
                 50 {
-                  value = 
+                  value = to the account below.
                   lang {
                     de = auf das unten angegebene Konto.
-                    en = 
+                    en = to the account below.
                   }
                   noTrimWrap = | ||
                 }
                 wrap  = |<br />
               }
-                // Line 2: empfehlen Sie uns
+                // Line 2: recommend
               20 = TEXT
               20 {
-                value = 
+                value = We will be happy, if you recommend us. 
                 lang {
                   de = Wir w&uuml;rden uns freuen uns, wenn Sie uns weiterempfehlen.
-                  en =
+                  en = We will be happy, if you recommend us.
                 }
               }
             }
