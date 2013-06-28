@@ -555,7 +555,7 @@ plugin.tx_caddy_pi1 {
           // label: invoice
         10 = TEXT
         10 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
+          data = LLL:EXT:caddy/pi1/locallang.xml:deliveryorder
           wrap = |-
         }
           // deliver order number
