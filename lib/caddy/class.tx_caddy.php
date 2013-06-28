@@ -978,7 +978,7 @@ class tx_caddy extends tslib_pibase
     );
 
       // 130628, dwildt, 2+
-    $sumOneDimTmp = t3lib_BEfunc::implodeTSParams( $sum, 'sum' );
+    $sumOneDim = t3lib_BEfunc::implodeTSParams( $sum, 'sum' );
     
     $calc = array_merge( $calc, $sumOneDim );
 var_dump( __METHOD__, __LINE__, $sumOneDim, $calc );
