@@ -258,6 +258,9 @@ class tx_caddy_pdf extends tslib_pibase
       // Write the delivery order number
     $this->deliveryorderNumbers( );
 
+      // Write the delivery order term of credit
+    $this->deliveryorderTermOfCredit( );
+
       // Write additional textblocks
     $this->deliveryorderAdditionalTextblocks( );
 
@@ -419,6 +422,20 @@ class tx_caddy_pdf extends tslib_pibase
       $this->writeTextblock( $numbers[$key], 'deliveryorder.numbers.' . $key );
     }
 
+  }
+
+ /**
+  * deliveryorderTermOfCredit( ) : Write the current date
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.8
+  * @since      2.0.8
+  */
+  private function deliveryorderTermOfCredit( )
+  {
+    $termOfCredit = $this->confPdf['deliveryorder.']['content.']['termOfCredit.'];
+    $this->writeTextblock( $termOfCredit, 'deliveryorderTermOfCredit' );
   }
 
 
@@ -717,15 +734,18 @@ class tx_caddy_pdf extends tslib_pibase
       // Init tcpdf
     $this->tcpdf = $this->tcpdfInit( $srceFile );
 
-      // Write the delivery order address
+      // Write the invoice order address
     $fallBackToInvoiceAddress = false;
     $this->invoiceAddress( $fallBackToInvoiceAddress );
 
-      // Write the delivery order date
+      // Write the invoice order date
     $this->invoiceDate( );
 
-      // Write the delivery order number
+      // Write the invoice order number
     $this->invoiceNumbers( );
+
+      // Write the invoice order number
+    $this->invoiceTermOfCredit( );
 
       // Write additional textblocks
     $this->invoiceAdditionalTextblocks( );
@@ -871,6 +891,20 @@ class tx_caddy_pdf extends tslib_pibase
       $this->writeTextblock( $numbers[$key], 'invoice.numbers.' . $key );
     }
 
+  }
+
+ /**
+  * invoiceTermOfCredit( ) : Write the current date
+  *
+  * @return	void
+  * @access private
+  * @version    2.0.8
+  * @since      2.0.8
+  */
+  private function invoiceTermOfCredit( )
+  {
+    $termOfCredit = $this->confPdf['invoice.']['content.']['termOfCredit.'];
+    $this->writeTextblock( $termOfCredit, 'invoiceTermOfCredit' );
   }
 
   

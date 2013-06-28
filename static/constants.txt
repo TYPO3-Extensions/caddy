@@ -172,6 +172,12 @@ plugin.caddy {
   pdf.deliveryorder.number.fontsize = 24
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
   pdf.deliveryorder.number.prefix = quick-shop-
+  # cat=caddy - pdf delivery order//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
+  pdf.deliveryorder.termOfCredit.x = 25
+  # cat=caddy - pdf delivery order//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
+  pdf.deliveryorder.termOfCredit.y = 122
+  # cat=caddy - pdf delivery order//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
+  pdf.deliveryorder.termOfCredit.fontsize = 10
   # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.deliveryorder.externalLinks = Click me!
   # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -191,6 +197,12 @@ plugin.caddy {
   pdf.invoice.number.fontsize = 24
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
   pdf.invoice.number.prefix = 
+  # cat=caddy - pdf invoice//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
+  pdf.invoice.termOfCredit.x = 25
+  # cat=caddy - pdf invoice//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
+  pdf.invoice.termOfCredit.y = 122
+  # cat=caddy - pdf invoice//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
+  pdf.invoice.termOfCredit.fontsize = 10
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.invoice.externalLinks = Click me!
   # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
@@ -249,7 +261,9 @@ plugin.caddy {
   pdf.textColor.numberOrder = navy
   # cat=caddy - pdf textcolor//108;          type=color;  label= Revocation: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.revocation = navy
-  # cat=caddy - pdf textcolor//109;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
+  # cat=caddy - pdf textcolor//109;          type=color;  label= Term of credit: font color as CSS name or HTML notation like #FFF or #123456
+  pdf.textColor.termOfCredit = navy
+  # cat=caddy - pdf textcolor//110;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.terms = navy
   # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.textColor.externalLinks = Click me!

@@ -1499,6 +1499,158 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
+          // body, 
+        termOfCredit =
+        termOfCredit {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = left
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.invoice.termOfCredit.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.invoice.termOfCredit.x}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.invoice.termOfCredit.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.termOfCredit}
+            }
+              // Zahlungsweise, zahlbar bis, Rechnungsnummer angeben, empfehlen Sie uns
+            content = COA
+            content {
+                // Zahlungsweise
+              10 = COA
+              10 {
+                10 = TEXT
+                10 {
+                  value = 
+                  lang {
+                    de = Zahlen Sie den Rechnungsbetrag in H&ouml;he von
+                    en = 
+                  }
+                  noTrimWrap = || |
+                }
+                20 = COA
+                20 {
+                  10 = USER
+                  10 {
+                    userFunc = tx_caddy_userfunc->numberformat
+                    userFunc {
+                      number = TEXT
+                      number {
+                        field = sumgross
+                      }
+                      decimal       = {$plugin.caddy.main.decimal}
+                      dec_point     = {$plugin.caddy.main.dec_point}
+                      thousands_sep = {$plugin.caddy.main.thousands_sep}
+                      drs           = {$plugin.caddy.debug.userfunc}
+                    }
+                  }
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.main.currencySymbol}
+                    noTrimWrap = | ||
+                  }
+                }
+                30 = TEXT
+                30 {
+                  value = 
+                  lang {
+                    de = bitte sp&auml;testens bis
+                    en = 
+                  }
+                  noTrimWrap = | | |
+                }
+                  // due date
+                40 = USER
+                40 {
+                  userFunc = tx_caddy_userfunc->calcDueDate
+                  userFunc {
+                    strtotime = {$plugin.caddy.main.dueDate}
+                    strftime  = {$plugin.caddy.pdf.date.strftime} 
+                  }
+                }
+                50 = TEXT
+                50 {
+                  value = 
+                  lang {
+                    de = auf das unten angegebene Konto.
+                    en = 
+                  }
+                  noTrimWrap = | | |
+                }
+                wrap  = |<br />
+              }
+                // Rechnungsnummer angeben
+              20 = COA
+              20 {
+                  // prefix
+                10 = TEXT
+                10 {
+                  value = 
+                  lang {
+                    de = Geben Sie bei der Zahlung bitte immer an:
+                    en =
+                  }
+                  noTrimWrap  = || |
+                }
+                  // invoicenumber
+                20 = COA
+                20 {
+                    // label
+                  10 = TEXT
+                  10 {
+                    data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                    noTrimWrap = || |
+                  }
+                    // prefix
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.pdf.invoice.number.prefix}
+                  }
+                    // number
+                  30 = TEXT
+                  30 {
+                    field = numberInvoiceCurrent
+                  }
+                }
+                wrap  = |<br />
+              }
+                // empfehlen Sie uns
+              90 = TEXT
+              90 {
+                  value = 
+                  lang {
+                    de = Und wir freuen uns, wenn Sie uns weiterempfehlen.
+                    en =
+                  }
+                wrap  = <br />|
+              }
+            }
+          }
+        }
       }
     }
       // revocation PDF

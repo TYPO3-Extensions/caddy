@@ -1,5 +1,7 @@
 2.0.8
   13-06-28
+  Features
+  * #i0021: * 
   Improvement
   * #i0020: * Constant Editor Labelling
               Effected file:
@@ -26,17 +28,12 @@
 
 2.0.7
   13-06-27
-  Improvement
+  Features
   * #i0018: * New user functions 
               * calcDueDate
               * calcMultiply
               Effected file:
               * lib/userfunc/class.tx_caddy_userfunc.php
-  * #i0017: * Shipping tax
-              * Moved from normal to reduced
-              Effected file:
-              * static
-                * setup.txt
   * #i0016: * Improved caddy table structur
               Effected files:
               * files/templates/caddy.html
@@ -46,6 +43,12 @@
               * static
                 * css/setup.txt
                 * constants.txt
+                * setup.txt
+  Improvement
+  * #i0017: * Shipping tax
+              * Moved from normal to reduced
+              Effected file:
+              * static
                 * setup.txt
 
 2.0.6
