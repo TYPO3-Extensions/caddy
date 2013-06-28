@@ -26,42 +26,29 @@ plugin.caddy {
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   numberformat.sponsors = Click me!
 
-  # cat=caddy - main symbols//707; type=text; label= Quantity symbol: for example: pc. (English), St. (German)
-  main.quantitySymbol = St.
-  # cat=caddy - main symbols//708; type=text; label= Service Attribute 1 symbol: e.g. Weight: g, kg, lbs
-  main.service_attribute_1_symbol =
-  # cat=caddy - main symbols//709; type=text; label= Service Attribute 2 symbol: e.g. Volume: l, gal
-  main.service_attribute_2_symbol =
-  # cat=caddy - main symbols//710; type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
-  main.service_attribute_3_symbol =
-  # cat=caddy - main symbols/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
-  symbols.externalLinks = Click me!
-  # cat=caddy - main symbols/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  symbols.sponsors = Click me!
-
-  # cat=caddy - database//200; type=text; label= Table name: Enter the correct table name where the products are stored (e.g. tx_database).
+  # cat=caddy - database*//200; type=text; label= Table name*: Obligate! Enter the correct table name where the products are stored (e.g. tx_database).
   db.table =
-  # cat=caddy - database//210; type=text; label= Title column: Enter the correct column name of the table where the product titles are stored (e.g. title).
+  # cat=caddy - database*//210; type=text; label= Title field*: Obligate! Enter the label of the field where the product title is stored (e.g. title).
   db.title = title
-  # cat=caddy - database//220; type=text; label= Price column: Enter the correct column name of the table where the prices are stored (e.g. price).
+  # cat=caddy - database*//220; type=text; label= Price field*: Obligate! Enter the label of the field where the price is stored (e.g. price).
   db.price = price
-  # cat=caddy - database//230; type=text; label= Tax column: Enter the correct column name of the table where the tax categories are stored (e.g. tax).
+  # cat=caddy - database*//230; type=text; label= Tax field*: Obligate! Enter the label of the field where the tax category is stored (e.g. tax).
   db.tax = tax
-  # cat=caddy - database//240; type=text; label= SKU column: Enter the correct column name of the table where the SKUs are stored (e.g. sku).
+  # cat=caddy - database*//240; type=text; label= SKU field: Enter the label of the field where the SKU is stored (e.g. sku).
   db.sku =
-  # cat=caddy - database//241; type=text; label= MIN column: Enter the correct column name of the table where the MIN order quantities are stored (e.g. min).
+  # cat=caddy - database*//241; type=text; label= MIN field: Enter the label of the field where the MIN order quantity is stored (e.g. min).
   db.min =
-  # cat=caddy - database//242; type=text; label= MAX column: Enter the correct column name of the table where the MAX order quantities are stored (e.g. max).
+  # cat=caddy - database*//242; type=text; label= MAX field: Enter the label of the field where the MAX order quantity is stored (e.g. max).
   db.max =
-  # cat=caddy - database//250; type=text; label= Service Attribute 1 column: Enter the correct column name of the table where the service attribute 1 are stored (e.g. for weight).
+  # cat=caddy - database*//250; type=text; label= Service Attribute 1 field: Enter the label of the field where the service attribute 1 is stored (e.g. for weight).
   db.service_attribute_1 =
-  # cat=caddy - database//251; type=text; label= Service Attribute 2 column: Enter the correct column name of the table where the service attribute 2 are stored (e.g. for volume).
+  # cat=caddy - database*//251; type=text; label= Service Attribute 2 field: Enter the label of the field where the service attribute 2 is stored (e.g. for volume).
   db.service_attribute_2 =
-  # cat=caddy - database//252; type=text; label= Service Attribute 3 column: Enter the correct column name of the table where the service attribute 3 are stored (e.g. for length).
+  # cat=caddy - database*//252; type=text; label= Service Attribute 3 field: Enter the label of the field where the service attribute 3 is stored (e.g. for length).
   db.service_attribute_3 =
-  # cat=caddy - database/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - database*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   db.externalLinks = Click me!
-  # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - database*/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   db.sponsors = Click me!
 
   # cat=caddy - debug//100;           type=boolean; label= Debug params/typoscript (frontend): Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
@@ -275,6 +262,19 @@ plugin.caddy {
   powermailContent.externalLinks = Click me!
   # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   powermail.sponsors = Click me!
+
+  # cat=caddy - symbols & service attributes//707; type=text; label= Quantity symbol: for example: pc. (English), St. (German)
+  main.quantitySymbol = St.
+  # cat=caddy - symbols & service attributes//708; type=text; label= Service Attribute 1 symbol: e.g. Weight: g, kg, lbs
+  main.service_attribute_1_symbol =
+  # cat=caddy - symbols & service attributes//709; type=text; label= Service Attribute 2 symbol: e.g. Volume: l, gal
+  main.service_attribute_2_symbol =
+  # cat=caddy - symbols & service attributes//710; type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
+  main.service_attribute_3_symbol =
+  # cat=caddy - symbols & service attributes/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  symbols.externalLinks = Click me!
+  # cat=caddy - symbols & service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  symbols.sponsors = Click me!
 
   # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
