@@ -1561,6 +1561,7 @@ plugin.tx_caddy_pi1 {
                     strtotime = {$plugin.caddy.main.dueDate}
                     strftime  = {$plugin.caddy.pdf.date.strftime} 
                   }
+                  noTrimWrap = || |
                 }
                   // amount
                 30 = COA
