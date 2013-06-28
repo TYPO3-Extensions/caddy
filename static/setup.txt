@@ -1025,7 +1025,7 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-        // order number - page id - label - invoicenumber . pdf
+        // label - invoicenumber - date . pdf
       filename >
       filename = COA
       filename {
@@ -1044,7 +1044,8 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           data      = date : U
-          strftime  = %Y%m%d%H%M 
+          strftime  = %Y%m%d%H%M
+          wrap      = -|
         }
           // extension pdf
         50 = TEXT
