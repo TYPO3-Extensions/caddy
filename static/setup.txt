@@ -1568,6 +1568,11 @@ plugin.tx_caddy_pi1 {
                       drs           = {$plugin.caddy.debug.userfunc}
                     }
                   }
+                  11 = TEXT
+                  11 {
+                    field = numberInvoiceCurrent
+                    noTrimWrap = | | |
+                  }
                   12 = TEXT
                   12 {
                     field = sumsumgross

@@ -967,7 +967,7 @@ class tx_caddy extends tslib_pibase
 
       // Get all sums (gross, net, tax.normal, tax.reduced for items, options and both (sum)
     $sum = $this->calcSum( $calcedItems, $options );
-
+    
     $calc = array
     (
 //      'content'           => $content,
@@ -976,6 +976,10 @@ class tx_caddy extends tslib_pibase
       'serviceattributes' => $serviceattributes,
       'sum'               => $sum,
     );
+
+      // 130628, dwildt, 2+
+    $sumOneDim = t3lib_BEfunc::implodeTSParams( $sum );
+    $calc = array_merge( $calc, $sumOneDim );
 
     return $calc;
   }
