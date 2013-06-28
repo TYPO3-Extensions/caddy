@@ -206,6 +206,7 @@ class tx_caddy_powermail extends tslib_pibase
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
 
       // #i0019, 130628, dwildt, 2+
+    $content = utf8_decode( $content );
     $content = html_entity_decode( $content );
     $content = utf8_encode( $content );
 
