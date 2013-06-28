@@ -1586,7 +1586,7 @@ plugin.tx_caddy_pi1 {
                   userFunc = tx_caddy_userfunc->calcDueDate
                   userFunc {
                     strtotime = {$plugin.caddy.main.dueDate}
-                    strftime  = {$plugin.caddy.pdf.date.strftime} 
+                    strftime  = {$plugin.caddy.main.dueDateFormat} 
                   }
                 }
                   // space
@@ -1673,7 +1673,7 @@ plugin.tx_caddy_pi1 {
               20 {
                 value = We will be happy, if you recommend us. 
                 lang {
-                  de = Wir w&uuml;rden uns freuen uns, wenn Sie uns weiterempfehlen.
+                  de = Wir w&uuml;rden uns freuen, wenn Sie uns weiterempfehlen.
                   en = We will be happy, if you recommend us.
                 }
               }

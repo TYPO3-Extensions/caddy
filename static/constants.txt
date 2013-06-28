@@ -4,6 +4,8 @@ plugin.caddy {
   main.pid =
   # cat=caddy - main//201;          type=options[now,+1day, +2 days, +3 days, +4 days, +5 days, +6 days, +1 week, +2 weeks, +3 weeks, +1 month];  label= Due date: Due date for payment. 
   main.dueDate = +2 weeks
+  # cat=caddy - main//202;          type=string; label= Date format: Format of the due date. Examples: %Y-%m-%d, %d. %b. %Y
+  main.dueDateFormat = %Y-%m-%d
   # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   main.externalLinks = Click me!
   # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
