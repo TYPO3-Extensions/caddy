@@ -205,6 +205,7 @@ class tx_caddy_powermail extends tslib_pibase
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
 
+      // #i0019, 130628, dwildt, 2+
     $content = html_entity_decode( $content );
     $content = utf8_encode( $content );
 
