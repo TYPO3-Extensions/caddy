@@ -1,12 +1,13 @@
 2.0.8
   13-06-28
   Bugfixing
-  * #49431: misspelling nachnahme
-  * #49427: misspelling constants
-  * #49428: Localisation dependency
-
-
-
+  * #49431: * misspelling nachnahme
+  * #49427: * misspelling constants
+              Effected file:
+              static/constants.txt
+  * #49428: * Localisation dependency
+              Effected file:
+              * lib/class.tx_caddy_session.php
 
 2.0.8
   13-06-28
