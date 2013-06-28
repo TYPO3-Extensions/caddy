@@ -265,9 +265,9 @@ plugin.caddy {
   # cat=caddy - symbols & service attributes//710;          type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
   #symbols.service_attribute_3_symbol =
   # cat=caddy - symbols & service attributes/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
-  symbols.externalLinks = Click me!
+  #symbols.externalLinks = Click me!
   # cat=caddy - symbols & service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  symbols.sponsors = Click me!
+  #symbols.sponsors = Click me!
 
   # cat=caddy - tax//150; type=text; label= Tax rate: Enter the tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
