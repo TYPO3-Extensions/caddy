@@ -1568,6 +1568,11 @@ plugin.tx_caddy_pi1 {
                       drs           = {$plugin.caddy.debug.userfunc}
                     }
                   }
+                  12 = TEXT
+                  12 {
+                    field = sumsumgross
+                    noTrimWrap = | | |
+                  }
                   20 = TEXT
                   20 {
                     value = {$plugin.caddy.main.currencySymbol}
