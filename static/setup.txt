@@ -549,32 +549,26 @@ plugin.tx_caddy_pi1 {
       // delivery order PDF
     deliveryorder =
     deliveryorder {
-
-        // order number - page id - label - delivery order number . pdf
+        // label - delivery order number - date . pdf
       filename = COA
       filename {
-          // numberOrderCurrent
+          // label: invoice
         10 = TEXT
         10 {
-          field = numberOrderCurrent
-          wrap  = |-
-        }
-          // page id
-        20 = TEXT
-        20 {
-          data = TSFE:id
-          wrap  = |-
-        }
-          // label: deliveryorder
-        30 = TEXT
-        30 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:deliveryorder
+          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
           wrap = |-
         }
           // deliver order number
-        40 = TEXT
-        40 {
+        20 = TEXT
+        20 {
           field = numberDeliveryorderCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M
+          wrap      = -|
         }
           // extension pdf
         50 = TEXT
@@ -583,8 +577,7 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-
-        // address, caddy, date, numbers, additionaltextblocks
+        // address, caddy, date, numbers, termOfCredit, additionaltextblocks
       content = 
       content {
           // deliveryorder, invoice
@@ -992,41 +985,7 @@ plugin.tx_caddy_pi1 {
       // invoice PDF
     invoice =
     invoice {
-        // order number - page id - label - invoicenumber . pdf
-      filename = COA
-      filename {
-          // numberOrderCurrent
-        10 = TEXT
-        10 {
-          field = numberOrderCurrent
-          wrap  = |-
-        }
-          // page id
-        20 = TEXT
-        20 {
-          data = TSFE:id
-          wrap  = |-
-        }
-          // label: invoice
-        30 = TEXT
-        30 {
-          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
-          wrap = |-
-        }
-          // invoicenumber
-        40 = TEXT
-        40 {
-          field = numberInvoiceCurrent
-        }
-          // extension pdf
-        50 = TEXT
-        50 {
-          value = pdf
-          wrap  = .|
-        }
-      }
         // label - invoicenumber - date . pdf
-      filename >
       filename = COA
       filename {
           // label: invoice
@@ -1054,7 +1013,7 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-        // address, caddy, date, numbers, additionaltextblocks
+        // address, caddy, date, numbers, termOfCredit, additionaltextblocks
       content = 
       content {
           // deliveryorder, invoice
@@ -1564,10 +1523,10 @@ plugin.tx_caddy_pi1 {
                 // [String] color in HTML notation like #CC00CC or #FFF
               textColor = {$plugin.caddy.pdf.textColor.termOfCredit}
             }
-              // Zahlungsweise, zahlbar bis, Rechnungsnummer angeben, empfehlen Sie uns
+              // Line 1: Term of credit, Line 2: Recommend us
             content = COA
             content {
-                // Line 1: Zahlungsweise
+                // Line 1: Term of credit
               10 = COA
               10 {
                   // Pay until
@@ -1668,7 +1627,7 @@ plugin.tx_caddy_pi1 {
                 }
                 wrap  = |<br />
               }
-                // Line 2: recommend
+                // Line 2: Recommend us
               20 = TEXT
               20 {
                 value = We will be happy, if you recommend us. 
@@ -1685,29 +1644,30 @@ plugin.tx_caddy_pi1 {
       // revocation PDF
     revocation =
     revocation {
-        // order number - page id - label . pdf
+        // label - invoicenumber - date . pdf
       filename = COA
       filename {
-          // numberOrderCurrent
+          // label: revocation
         10 = TEXT
         10 {
-          field = numberOrderCurrent
-          wrap  = |-
-        }
-          // page id
-        20 = TEXT
-        20 {
-          data = TSFE:id
-          wrap  = |-
-        }
-          // label: revocation
-        30 = TEXT
-        30 {
           value = revocation
           lang {
             de = Widerrufsrecht
             en = revocation
           }
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M
+          wrap      = -|
         }
           // extension pdf
         50 = TEXT
@@ -1928,29 +1888,30 @@ plugin.tx_caddy_pi1 {
       // terms PDF
     terms =
     terms {
-        // order number - page id - label . pdf
+        // label - invoicenumber - date . pdf
       filename = COA
       filename {
-          // numberOrderCurrent
+          // label: terms
         10 = TEXT
         10 {
-          field = numberOrderCurrent
-          wrap  = |-
-        }
-          // page id
-        20 = TEXT
-        20 {
-          data = TSFE:id
-          wrap  = |-
-        }
-          // label: terms
-        30 = TEXT
-        30 {
           value = terms
           lang {
             de = AGB
             en = terms
           }
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M
+          wrap      = -|
         }
           // extension pdf
         50 = TEXT
