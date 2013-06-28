@@ -1,6 +1,7 @@
 2.0.8
   13-06-28
   Features
+  * #i0022: * Unique file names
   * #i0021: * Term of Credit
               Effected files:
               * lib/pdf/class.tx_caddy_pdf.php

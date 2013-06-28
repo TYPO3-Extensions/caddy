@@ -992,7 +992,6 @@ plugin.tx_caddy_pi1 {
       // invoice PDF
     invoice =
     invoice {
-
         // order number - page id - label - invoicenumber . pdf
       filename = COA
       filename {
@@ -1026,7 +1025,34 @@ plugin.tx_caddy_pi1 {
           wrap  = .|
         }
       }
-
+        // order number - page id - label - invoicenumber . pdf
+      filename >
+      filename = COA
+      filename {
+          // label: invoice
+        10 = TEXT
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M 
+        }
+          // extension pdf
+        50 = TEXT
+        50 {
+          value = pdf
+          wrap  = .|
+        }
+      }
         // address, caddy, date, numbers, additionaltextblocks
       content = 
       content {
