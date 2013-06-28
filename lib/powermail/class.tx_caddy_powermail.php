@@ -209,8 +209,8 @@ class tx_caddy_powermail extends tslib_pibase
     $content = html_entity_decode( $content );
     $content = utf8_encode( $content );
 
-//var_dump( __METHOD__, __LINE__, $content );
-//die( __METHOD__ . '#' . __LINE__ );
+var_dump( __METHOD__, __LINE__, $content );
+die( __METHOD__ . '#' . __LINE__ );
     return $content;
   }
 
