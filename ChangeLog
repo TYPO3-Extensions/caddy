@@ -21,6 +21,10 @@
                 * css/setup.txt
                 * constants.txt
                 * setup.txt
+  Bugfixing
+  * #i0019: * UTF8-Bug in Powermail 2
+              Effected files:
+              * lib/powermail/class.tx_caddy_powermail.php
 
 2.0.6
   13-06-11
