@@ -210,6 +210,7 @@ class tx_caddy_powermail extends tslib_pibase
 //$content = str_replace( '&nbsp;', ' ', $content );
 //$content = str_replace( '&uuml;', 'ü', $content );
 var_dump( __METHOD__, __LINE__, $content );
+var_dump( __METHOD__, __LINE__, utf8_encode( $content ) );
 die( __METHOD__ . '#' . __LINE__ );
     return $content;
   }
