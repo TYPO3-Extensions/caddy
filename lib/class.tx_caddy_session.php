@@ -604,11 +604,59 @@ class tx_caddy_session
               ;
     }
     
+      // #49428, 130628, dwildt, +
+      // Load the TCA
+    if( ! is_array( $GLOBALS[ 'TCA' ][ $table ][ 'columns' ] ) )
+    {
+      t3lib_div::loadTCA( $table );    
+    }
+      // Load the TCA
     
-    $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR l10n_parent = ' . $uid . ' ) ' 
-              . 'AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
-              . tslib_cObj::enableFields( $table )
-              ;
+      // Load language fields
+    $languageField          = null;
+    $transOrigPointerField  = null;
+    $boolIsTranslated       = true;
+    if( isset ( $GLOBALS[ 'TCA' ][ $table ][ 'ctrl' ][ 'languageField' ] ) )
+    {
+      $languageField = $GLOBALS[ 'TCA' ][ $table ][ 'ctrl' ][ 'languageField' ];
+    }
+    else
+    {
+      $boolIsTranslated = false;
+    }
+    if( isset ( $GLOBALS[ 'TCA' ][ $table ][ 'ctrl' ][ 'transOrigPointerField' ] ) )
+    {
+      $transOrigPointerField = $GLOBALS[ 'TCA' ][ $table ][ 'ctrl' ][ 'transOrigPointerField' ];
+    }
+    else
+    {
+      $boolIsTranslated = false;
+    }
+      // Load language fields
+
+      // andWhere in dependence of localisation status
+    switch( $boolIsTranslated )
+    {
+      case( true ):
+        $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR ' . $transOrigPointerField . '  = ' . $uid . ' ) ' 
+                  . 'AND ' . $languageField . ' = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
+                  . tslib_cObj::enableFields( $table )
+                  ;
+        break;
+      case( false ):
+      default:
+        $where    = $table . '.uid = ' . $uid . ' '
+                  . tslib_cObj::enableFields( $table )
+                  ;
+        break;
+    }
+      // andWhere in dependence of localisation status
+//    $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR l10n_parent = ' . $uid . ' ) ' 
+//              . 'AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
+//              . tslib_cObj::enableFields( $table )
+//              ;
+      // #49428, 130628, dwildt, +
+
     $groupBy  = null;
     $orderBy  = null;
     $limit    = 1;

@@ -119,7 +119,7 @@ plugin.caddy {
 
   # cat=caddy - pages/enable/301; type=integer; label= Caddy:Uid of the page with the caddy - your shopping cart
   pages.caddy = 
-  # cat=caddy - pages/enable/302; type=integer; label= Caddy mini:Uid of the page with the caddy mini - the cart for mairginal column
+  # cat=caddy - pages/enable/302; type=integer; label= Caddy mini:Uid of the page with the caddy mini - the cart for marginal column
   pages.caddymini = 
   # cat=caddy - pages/enable/303; type=integer; label= Shop:Uid of the page which contains the items. Usually the root page.
   pages.shop = 

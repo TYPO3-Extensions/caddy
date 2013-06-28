@@ -1,6 +1,16 @@
 2.0.8
   13-06-28
   Bugfixing
+  * #49431: misspelling nachnahme
+  * #49427: misspelling constants
+  * #49428: Localisation dependency
+
+
+
+
+2.0.8
+  13-06-28
+  Bugfixing
   * #i0019: * UTF8-Bug in Powermail 2
               Effected files:
               * lib/powermail/class.tx_caddy_powermail.php
