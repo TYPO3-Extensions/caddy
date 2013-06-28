@@ -256,13 +256,6 @@ plugin.caddy {
   # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.textColor.sponsors = Click me!
 
-  # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
-  powermailContent.uid =
-  # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
-  powermailContent.externalLinks = Click me!
-  # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  powermail.sponsors = Click me!
-
   # cat=caddy - symbols & service attributes//707; type=text; label= Quantity symbol: for example: pc. (English), St. (German)
   main.quantitySymbol = St.
   # cat=caddy - symbols & service attributes//708; type=text; label= Service Attribute 1 symbol: e.g. Weight: g, kg, lbs
