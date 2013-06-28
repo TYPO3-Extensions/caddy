@@ -1540,20 +1540,32 @@ plugin.tx_caddy_pi1 {
               // Zahlungsweise, zahlbar bis, Rechnungsnummer angeben, empfehlen Sie uns
             content = COA
             content {
-                // Zahlungsweise
+                // Line 1: Zahlungsweise
               10 = COA
               10 {
+                  // Pay until
                 10 = TEXT
                 10 {
                   value = 
                   lang {
-                    de = Zahlen Sie den Rechnungsbetrag in H&ouml;he von
+                    de = Zahlen Sie bitte bis sp&auml;testens
                     en = 
                   }
                   noTrimWrap = || |
                 }
-                20 = COA
+                  // due date
+                20 = USER
                 20 {
+                  userFunc = tx_caddy_userfunc->calcDueDate
+                  userFunc {
+                    strtotime = {$plugin.caddy.main.dueDate}
+                    strftime  = {$plugin.caddy.pdf.date.strftime} 
+                  }
+                }
+                  // amount
+                30 = COA
+                30 {
+                    // sum gross
                   10 = USER
                   10 {
                     userFunc = tx_caddy_userfunc->numberformat
@@ -1568,40 +1580,50 @@ plugin.tx_caddy_pi1 {
                       drs           = {$plugin.caddy.debug.userfunc}
                     }
                   }
-                  11 = TEXT
-                  11 {
-                    field = numberInvoiceCurrent
-                    noTrimWrap = | | |
-                  }
-                  12 = TEXT
-                  12 {
-                    field = sumsumgross
-                    noTrimWrap = | | |
-                  }
+                    // currency symbol
                   20 = TEXT
                   20 {
                     value = {$plugin.caddy.main.currencySymbol}
                     noTrimWrap = | ||
                   }
+                  wrap = <b>|</b>
                 }
-                30 = TEXT
-                30 {
-                  value = 
-                  lang {
-                    de = bitte sp&auml;testens bis
-                    en = 
-                  }
-                  noTrimWrap = | | |
-                }
-                  // due date
-                40 = USER
+                  // invoice number
+                40 = COA
                 40 {
-                  userFunc = tx_caddy_userfunc->calcDueDate
-                  userFunc {
-                    strtotime = {$plugin.caddy.main.dueDate}
-                    strftime  = {$plugin.caddy.pdf.date.strftime} 
+                    // text
+                  10 = TEXT
+                  10 {
+                    value = 
+                    lang {
+                      de = mit dem Vermerk
+                      en =
+                    }
+                    noTrimWrap  = | | |
+                  }
+                    // invoice number
+                  20 = COA
+                  20 {
+                      // label
+                    10 = TEXT
+                    10 {
+                      data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                      noTrimWrap = || |
+                    }
+                      // prefix
+                    20 = TEXT
+                    20 {
+                      value = {$plugin.caddy.pdf.invoice.number.prefix}
+                    }
+                      // number
+                    30 = TEXT
+                    30 {
+                      field = numberInvoiceCurrent
+                    }
+                    wrap = "<b>|</b>"
                   }
                 }
+                  // to account
                 50 = TEXT
                 50 {
                   value = 
@@ -1609,54 +1631,18 @@ plugin.tx_caddy_pi1 {
                     de = auf das unten angegebene Konto.
                     en = 
                   }
-                  noTrimWrap = | | |
+                  noTrimWrap = | ||
                 }
                 wrap  = |<br />
               }
-                // Rechnungsnummer angeben
-              20 = COA
+                // Line 2: empfehlen Sie uns
+              20 = TEXT
               20 {
-                  // prefix
-                10 = TEXT
-                10 {
-                  value = 
-                  lang {
-                    de = Geben Sie bei der Zahlung bitte immer an:
-                    en =
-                  }
-                  noTrimWrap  = || |
+                value = 
+                lang {
+                  de = Wir w&uuml;rden uns freuen uns, wenn Sie uns weiterempfehlen.
+                  en =
                 }
-                  // invoicenumber
-                20 = COA
-                20 {
-                    // label
-                  10 = TEXT
-                  10 {
-                    data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
-                    noTrimWrap = || |
-                  }
-                    // prefix
-                  20 = TEXT
-                  20 {
-                    value = {$plugin.caddy.pdf.invoice.number.prefix}
-                  }
-                    // number
-                  30 = TEXT
-                  30 {
-                    field = numberInvoiceCurrent
-                  }
-                }
-                wrap  = |<br />
-              }
-                // empfehlen Sie uns
-              90 = TEXT
-              90 {
-                  value = 
-                  lang {
-                    de = Und wir freuen uns, wenn Sie uns weiterempfehlen.
-                    en =
-                  }
-                wrap  = <br />|
               }
             }
           }
