@@ -1,11 +1,6 @@
 2.0.8
   13-06-28
   Improvement
-  * #i0021: * Powermail 2.x Constants
-              * Don't embed jQuery
-              Effected file:
-              * static/powermail/2x
-                * constants.txt           ( new )
   * #i0020: * Constant Editor Labelling
               Effected file:
               * static
