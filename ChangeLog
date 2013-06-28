@@ -5,9 +5,12 @@
   * #49427: * misspelling constants
               Effected file:
               static/constants.txt
-  * #49428: * Localisation dependency
+  * #49428: * Localisation dependency (isn't tested in not localised context)
               Effected file:
               * lib/class.tx_caddy_session.php
+  * #49430: * Check TypoScript Case
+              Effected file:
+              * lib/caddy/class.tx_caddy.php
 
 2.0.8
   13-06-28

@@ -1097,6 +1097,27 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+      // #49430, 130628, dwildt, +
+    if( $product[ 'tax' ] == 'reduced' )
+    {
+      $product[ 'tax' ] = 1;
+      if( $this->drs->drsError )
+      {
+        $prompt = 'tax == reduced. This is an error! tax ist set to 1.';
+        t3lib_div::devlog( '[ERROR/DEVELOPMENT] ' . $prompt, $this->extKey, 3 );
+      }
+    }
+    if( $product[ 'tax' ] == 'normal' )
+    {
+      $product[ 'tax' ] = 2;
+      if( $this->drs->drsError )
+      {
+        $prompt = 'tax == normal. This is an error! tax ist set to 2.';
+        t3lib_div::devlog( '[ERROR/DEVELOPMENT] ' . $prompt, $this->extKey, 3 );
+      }
+    }
+      // #49430, 130628, dwildt, +
 
     switch( $product['tax'] )
     {
