@@ -22,9 +22,9 @@ plugin.caddy {
   # cat=caddy - main numberformat//207; type=string; label= Percent symbol
   main.percentSymbol = %
   # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
-  numberformat.externalLinks = Click me!
+  main.numberformat.externalLinks = Click me!
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  numberformat.sponsors = Click me!
+  main.numberformat.sponsors = Click me!
 
   # cat=caddy - database*//200; type=text; label= Table name*: *Obligate! Enter the correct table name where the products are stored (e.g. tx_database).
   db.table =
@@ -257,13 +257,13 @@ plugin.caddy {
   pdf.textColor.sponsors = Click me!
 
   # cat=caddy - symbols & service attributes//707; type=text; label= Quantity symbol: for example: pc. (English), St. (German)
-  main.quantitySymbol = St.
+  symbols.quantitySymbol = St.
   # cat=caddy - symbols & service attributes//708; type=text; label= Service Attribute 1 symbol: e.g. Weight: g, kg, lbs
-  main.service_attribute_1_symbol =
+  symbols.service_attribute_1_symbol =
   # cat=caddy - symbols & service attributes//709; type=text; label= Service Attribute 2 symbol: e.g. Volume: l, gal
-  main.service_attribute_2_symbol =
+  symbols.service_attribute_2_symbol =
   # cat=caddy - symbols & service attributes//710; type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
-  main.service_attribute_3_symbol =
+  symbols.service_attribute_3_symbol =
   # cat=caddy - symbols & service attributes/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   symbols.externalLinks = Click me!
   # cat=caddy - symbols & service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

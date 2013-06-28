@@ -2002,10 +2002,10 @@ plugin.tx_caddy_pi1 {
     thousands_sep   = {$plugin.caddy.main.thousands_sep}
     currencySymbol  = {$plugin.caddy.main.currencySymbol}
     currencySymbolBeforePrice = {$plugin.caddy.main.currencySymbolBeforePrice}
-    quantitySymbol  = {$plugin.caddy.main.quantitySymbol}
-    service_attribute_1_symbol = {$plugin.caddy.main.service_attribute_1_symbol}
-    service_attribute_2_symbol = {$plugin.caddy.main.service_attribute_2_symbol}
-    service_attribute_3_symbol = {$plugin.caddy.main.service_attribute_3_symbol}
+    quantitySymbol  = {$plugin.caddy.symbols.quantitySymbol}
+    service_attribute_1_symbol = {$plugin.caddy.symbols.service_attribute_1_symbol}
+    service_attribute_2_symbol = {$plugin.caddy.symbols.service_attribute_2_symbol}
+    service_attribute_3_symbol = {$plugin.caddy.symbols.service_attribute_3_symbol}
   }
 
     // e-mail, html, pdf
