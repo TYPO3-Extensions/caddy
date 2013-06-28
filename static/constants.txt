@@ -4,7 +4,7 @@ plugin.caddy {
   main.pid =
   # cat=caddy - main//201;          type=options[now,+1day, +2 days, +3 days, +4 days, +5 days, +6 days, +1 week, +2 weeks, +3 weeks, +1 month];  label= Due date: Due date for payment. 
   main.dueDate = +2 weeks
-  # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   main.externalLinks = Click me!
   # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   main.sponsors = Click me!
@@ -21,7 +21,7 @@ plugin.caddy {
   main.currencySymbolBeforePrice = 0
   # cat=caddy - main numberformat//207; type=string; label= Percent symbol
   main.percentSymbol = %
-  # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   numberformat.externalLinks = Click me!
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   numberformat.sponsors = Click me!
@@ -34,7 +34,7 @@ plugin.caddy {
   main.service_attribute_2_symbol =
   # cat=caddy - main symbols//710; type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
   main.service_attribute_3_symbol =
-  # cat=caddy - main symbols/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - main symbols/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   symbols.externalLinks = Click me!
   # cat=caddy - main symbols/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   symbols.sponsors = Click me!
@@ -59,7 +59,7 @@ plugin.caddy {
   db.service_attribute_2 =
   # cat=caddy - database//252; type=text; label= Service Attribute 3 column: Enter the correct column name of the table where the service attribute 3 are stored (e.g. for length).
   db.service_attribute_3 =
-  # cat=caddy - database/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - database/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   db.externalLinks = Click me!
   # cat=caddy - database/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   db.sponsors = Click me!
@@ -68,7 +68,7 @@ plugin.caddy {
   debug.paramsAndTs = 0
   # cat=caddy - debug//101;           type=boolean; label= Debug user functions (backend): Enable the DRS for user functions
   debug.userfunc = 0
-  # cat=caddy - debug/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - debug/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   debug.externalLinks = Click me!
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
@@ -89,7 +89,7 @@ plugin.caddy {
   getpost.service_attribute_3 =
   # cat=caddy - getpost//140; type=text; label= SKU: Enter the correct parameter name for your SKU (stock keeping unit).
   getpost.sku =
-  # cat=caddy - getpost/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - getpost/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   getpost.externalLinks = Click me!
   # cat=caddy - getpost/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
@@ -112,7 +112,7 @@ plugin.caddy {
   html.caddy.table.td.skuitemtax.width = 60%
   # cat=caddy - html//302;              type=text;  label= Width 4 columns: The width of the caddy column sku, item, tax and net in HTML tables for CSS. Units can be px, em or % among others.
   html.caddy.table.td.skuitemtaxnet.width = 75%
-  # cat=caddy - html/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - html/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   html.externalLinks = Click me!
   # cat=caddy - html/others/999;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.sponsors = Click me!
@@ -127,7 +127,7 @@ plugin.caddy {
   pages.revocation = 
   # cat=caddy - pages/enable/306; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
   pages.terms = 
-  # cat=caddy - pages/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pages/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pages.externalLinks = Click me!
   # cat=caddy - pages/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pages.sponsors = Click me!
@@ -136,7 +136,7 @@ plugin.caddy {
   pdfGeneral.fontfamily = Helvetica
   # cat=caddy - pdf//102;          type=integer;  label= Font Stretching: In percent. 100: no effect. 90: smaller. 110: expanded
   pdfGeneral.fontStretching = 90
-  # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdfGeneral.externalLinks = Click me!
   # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdfGeneral.sponsors = Click me!
@@ -149,7 +149,7 @@ plugin.caddy {
   pdf.caddy.width = 165
   # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
   pdf.caddy.fontsize = 10
-  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.caddy.externalLinks = Click me!
   # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.caddy.sponsors = Click me!
@@ -166,7 +166,7 @@ plugin.caddy {
   pdf.date.fontsize = 10
   # cat=caddy - pdf date//104; type=string; label= Date format: Format of the date. Examples: %Y-m-%d, %d. %M %Y
   pdf.date.strftime = %Y-%m-%d
-  # cat=caddy - pdf date/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf date/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.date.externalLinks = Click me!
   # cat=caddy - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.date.sponsors = Click me!
@@ -185,7 +185,7 @@ plugin.caddy {
   pdf.deliveryorder.number.fontsize = 24
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
   pdf.deliveryorder.number.prefix = quick-shop-
-  # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.deliveryorder.externalLinks = Click me!
   # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.deliveryorder.sponsors = Click me!
@@ -204,14 +204,14 @@ plugin.caddy {
   pdf.invoice.number.fontsize = 24
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
   pdf.invoice.number.prefix = 
-  # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.invoice.externalLinks = Click me!
   # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.invoice.sponsors = Click me!
 
   # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number. Example : O-
   pdf.order.number.prefix = 
-  # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.order.externalLinks = Click me!
   # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.order.sponsors = Click me!
@@ -226,7 +226,7 @@ plugin.caddy {
   pdf.revocation.width = 165
   # cat=caddy - pdf revocation//104; type=int+; label= Revocation font-size: Font-size of the revocation in points
   pdf.revocation.fontsize = 10
-  # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.revocation.externalLinks = Click me!
   # cat=caddy - pdf revocation/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.revocation.sponsors = Click me!
@@ -241,7 +241,7 @@ plugin.caddy {
   pdf.terms.width = 165
   # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points
   pdf.terms.fontsize = 10
-  # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.terms.externalLinks = Click me!
   # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.terms.sponsors = Click me!
@@ -264,14 +264,14 @@ plugin.caddy {
   pdf.textColor.revocation = navy
   # cat=caddy - pdf textcolor//109;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.terms = navy
-  # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.textColor.externalLinks = Click me!
   # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.textColor.sponsors = Click me!
 
   # cat=caddy - powermail//100; type=int+; label= Powermail content uid: Enter the uid of the powermail content element to hide this element if the cart is empty AND to clear cart if this form was submitted.
   powermailContent.uid =
-  # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - powermail/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   powermailContent.externalLinks = Click me!
   # cat=caddy - powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   powermail.sponsors = Click me!
@@ -284,7 +284,7 @@ plugin.caddy {
   tax.normal = 19
   # cat=caddy - tax//165; type=text; label= Tax rate: Enter the tax rate for normal items (e.g. 0.19). Used for calculation.
   tax.normalCalc = 0.19
-  # cat=caddy - tax/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-flipit.de
+  # cat=caddy - tax/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   tax.externalLinks = Click me!
   # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   tax.sponsors = Click me!

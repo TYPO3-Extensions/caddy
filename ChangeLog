@@ -1,5 +1,10 @@
 2.0.8
   13-06-28
+  Improvement
+  * #i0020: * Constant Editor Labelling
+              Effected file:
+              * static
+                * constants.txt
   Bugfixing
   * #49431: * misspelling nachnahme
   * #49427: * misspelling constants
