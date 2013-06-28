@@ -175,7 +175,7 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
   pdf.deliveryorder.termOfCredit.x = 25
   # cat=caddy - pdf delivery order//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
-  pdf.deliveryorder.termOfCredit.y = 122
+  pdf.deliveryorder.termOfCredit.y = 250
   # cat=caddy - pdf delivery order//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
   pdf.deliveryorder.termOfCredit.fontsize = 10
   # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
@@ -200,7 +200,7 @@ plugin.caddy {
   # cat=caddy - pdf invoice//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
   pdf.invoice.termOfCredit.x = 25
   # cat=caddy - pdf invoice//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
-  pdf.invoice.termOfCredit.y = 122
+  pdf.invoice.termOfCredit.y = 250
   # cat=caddy - pdf invoice//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
   pdf.invoice.termOfCredit.fontsize = 10
   # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de

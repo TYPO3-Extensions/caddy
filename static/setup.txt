@@ -1499,7 +1499,7 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
-          // body, 
+          // body
         termOfCredit =
         termOfCredit {
             // properties, content
@@ -1520,7 +1520,7 @@ plugin.tx_caddy_pi1 {
                   // [INTEGER] Position from left in millimeter 
                 x = {$plugin.caddy.pdf.invoice.termOfCredit.x}
                   // [INTEGER] Position from top in millimeter 
-                y = {$plugin.caddy.pdf.invoice.termOfCredit.x}
+                y = {$plugin.caddy.pdf.invoice.termOfCredit.y}
               }
                 // family, size, stretching, style
               font =
@@ -1560,7 +1560,7 @@ plugin.tx_caddy_pi1 {
                     userFunc {
                       number = TEXT
                       number {
-                        field = sumgross
+                        field = sumsumgross
                       }
                       decimal       = {$plugin.caddy.main.decimal}
                       dec_point     = {$plugin.caddy.main.dec_point}
