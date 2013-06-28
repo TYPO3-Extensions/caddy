@@ -1,7 +1,12 @@
 2.0.8
   13-06-28
   Features
-  * #i0021: * 
+  * #i0021: * Term of Credit
+              Effected files:
+              * lib/pdf/class.tx_caddy_pdf.php
+              * static
+                * constants.txt
+                * setup.txt              
   Improvement
   * #i0020: * Constant Editor Labelling
               Effected file:

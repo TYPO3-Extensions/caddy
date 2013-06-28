@@ -431,6 +431,8 @@ class tx_caddy_pdf extends tslib_pibase
   * @access private
   * @version    2.0.8
   * @since      2.0.8
+  * 
+  * @internal: #i0021
   */
   private function deliveryorderTermOfCredit( )
   {
@@ -900,6 +902,8 @@ class tx_caddy_pdf extends tslib_pibase
   * @access private
   * @version    2.0.8
   * @since      2.0.8
+  * 
+  * @internal: #i0021
   */
   private function invoiceTermOfCredit( )
   {
