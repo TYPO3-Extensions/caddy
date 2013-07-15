@@ -1,3 +1,17 @@
+2.0.9
+  13-07-15
+  Bugfixing
+  * #50045: * rounding error
+              Effected files:
+              * lib/pdf/class.tx_caddy_pdf.php
+
+2.0.9
+  13-06-28
+  Bugfixing
+  * #i0019: * UTF8-Bug in Powermail 2
+              Effected files:
+              * lib/powermail/class.tx_caddy_powermail.php
+
 2.0.8
   13-06-28
   Features
@@ -24,13 +38,6 @@
   * #49430: * Check TypoScript Case
               Effected file:
               * lib/caddy/class.tx_caddy.php
-
-2.0.8
-  13-06-28
-  Bugfixing
-  * #i0019: * UTF8-Bug in Powermail 2
-              Effected files:
-              * lib/powermail/class.tx_caddy_powermail.php
 
 2.0.7
   13-06-27

@@ -1087,24 +1087,25 @@ class tx_caddy extends tslib_pibase
   * @param	array		$product  :
   * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
   * @access private
-  * @version    2.0.0
+  * @version    2.0.10
   * @since      2.0.0
   */
   private function calcItemsTax( $product )
   {
+      // #50045, dwildt, 11-
       // calculate gross total
-    $product['sumgross']  = $product['gross']
-                          * $product['qty']
-                          ;
-
-      // DRS
-    if( $this->drs->drsFormula )
-    {
-      $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
-      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
-    }
-      // DRS
-    
+//    $product['sumgross']  = $product['gross']
+//                          * $product['qty']
+//                          ;
+//      // DRS
+//    if( $this->drs->drsFormula )
+//    {
+//      $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
+//      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+//    }
+//      // DRS
+      // #50045, dwildt, 11-
+      
       // #49430, 130628, dwildt, +
     if( $product[ 'tax' ] == 'reduced' )
     {
@@ -1130,29 +1131,40 @@ class tx_caddy extends tslib_pibase
     {
       case( 0 ):
         $product['taxrate'] = 0.00;
-        $product['sumnet']  = 0.00;
-        $product['sumtax']  = 0.00;
+        // #50045, dwildt, 2-
+//        $product['sumnet']  = 0.00;
+//        $product['sumtax']  = 0.00;
         break;
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
         $product['taxrate']     = $this->conf['tax.']['reducedCalc'];
-        $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
-        $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
-        $product['taxReduced']  = $product['sumtax'];
+          // #50045, dwildt, 3-
+//        $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
+//        $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
+//        $product['taxReduced']  = $product['sumtax'];
         break;
       case( 2 ):
       case( $this->conf['tax.']['normalCalc'] ):
         $product['taxrate']   = $this->conf['tax.']['normalCalc'];
-        $product['sumnet']    = $product['sumgross'] / ( 1 + $product['taxrate'] );
-        $product['sumtax']    = $product['sumnet'] * $product['taxrate'];
-        $product['taxNormal'] = $product['sumtax'];
+          // #50045, dwildt, 3-
+//        $product['sumnet']    = $product['sumgross'] / ( 1 + $product['taxrate'] );
+//        $product['sumtax']    = $product['sumnet'] * $product['taxrate'];
+//        $product['taxNormal'] = $product['sumtax'];
         break;
       default:
         echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
         exit;
     }
 
-    $product['net'] = $product['sumnet'] / $product['qty'];
+        // #50045, dwildt, 1-
+//    $product['net'] = $product['sumnet'] / $product['qty'];
+        
+        // #50045, dwildt, 6+
+      $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
+      $product['net']       = round( $net, 2 );
+      $product['sumnet']    = $product['net'] * $product['qty'];
+      $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
+      $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
 
     // price netto
 //var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
