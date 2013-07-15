@@ -5,6 +5,7 @@
               Effected files:
               * files/templates/caddy.html
               * lib/caddy/class.tx_caddy.php
+              * pi1/locallang.xml
 
 2.0.9
   13-06-28

@@ -24,6 +24,7 @@
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
+      <label index="itemssumgross">Sum of items (gross)</label>
       <label index="itemssumnet">Sum of items (net)</label>
       <label index="linktoshop">Forward with Shopping</label>
       <label index="minprice">The minimum order value of %s has not been reached yet.</label>
@@ -88,6 +89,7 @@
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>
+      <label index="itemssumgross">Summe Artikel (brutto)</label>
       <label index="itemssumnet">Summe Artikel (netto)</label>
       <label index="linktoshop">Weiter Shoppen</label>
       <label index="minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
