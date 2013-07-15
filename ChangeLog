@@ -3,6 +3,7 @@
   Bugfixing
   * #50045: * rounding error
               Effected files:
+              * files/templates/caddy.html
               * lib/caddy/class.tx_caddy.php
 
 2.0.9
