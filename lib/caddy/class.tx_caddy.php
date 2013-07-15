@@ -1160,8 +1160,8 @@ class tx_caddy extends tslib_pibase
 //    $product['sumnet']    = $product['net'] * $product['qty'];
 //    $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
 //    $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
-    $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
-    $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
+    $product['sumnet']      = round( ( $product['sumgross'] / ( 1 + $product['taxrate'] ) ), 2 );
+    $product['sumtax']      = $product['sumgross'] - $product['sumnet'];
       // #50045, dwildt, 7+
 
       // #50045, dwildt, +
@@ -1184,7 +1184,7 @@ class tx_caddy extends tslib_pibase
     }
       // #50045, dwildt, +
 
-    $product['net'] = $product['sumnet'] / $product['qty'];
+    $product['net'] = round( ( $product['sumnet'] / $product['qty'] ), 2 );
         
     // price netto
 //var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
