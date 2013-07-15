@@ -1156,15 +1156,36 @@ class tx_caddy extends tslib_pibase
         exit;
     }
 
-        // #50045, dwildt, 1-
+      // #50045, dwildt, 1-
 //    $product['net'] = $product['sumnet'] / $product['qty'];
         
-        // #50045, dwildt, 6+
-      $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
-      $product['net']       = round( $net, 2 );
-      $product['sumnet']    = $product['net'] * $product['qty'];
-      $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
-      $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
+      // #50045, dwildt, 5+
+    $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
+    $product['net']       = round( $net, 2 );
+    $product['sumnet']    = $product['net'] * $product['qty'];
+    $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
+    $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
+      // #50045, dwildt, 5+
+
+      // #50045, dwildt, +
+    switch( $product['tax'] )
+    {
+      case( 0 ):
+          // Do nothing
+        break;
+      case( 1 ):
+      case( $this->conf['tax.']['reducedCalc'] ):
+        $product['taxReduced']  = $product['sumtax'];
+        break;
+      case( 2 ):
+      case( $this->conf['tax.']['normalCalc'] ):
+        $product['taxNormal'] = $product['sumtax'];
+        break;
+      default:
+        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+        exit;
+    }
+      // #50045, dwildt, +
 
     // price netto
 //var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
