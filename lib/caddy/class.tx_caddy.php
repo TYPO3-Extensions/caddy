@@ -1092,19 +1092,17 @@ class tx_caddy extends tslib_pibase
   */
   private function calcItemsTax( $product )
   {
-      // #50045, dwildt, 11-
       // calculate gross total
-//    $product['sumgross']  = $product['gross']
-//                          * $product['qty']
-//                          ;
-//      // DRS
-//    if( $this->drs->drsFormula )
-//    {
-//      $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
-//      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
-//    }
-//      // DRS
-      // #50045, dwildt, 11-
+    $product['sumgross']  = $product['gross']
+                          * $product['qty']
+                          ;
+      // DRS
+    if( $this->drs->drsFormula )
+    {
+      $prompt = $product['title'] . ': ' . $product['gross'] . ' x ' . $product['qty'] . ' = ' . $product['sumgross'];
+      t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
       
       // #49430, 130628, dwildt, +
     if( $product[ 'tax' ] == 'reduced' )
@@ -1156,16 +1154,15 @@ class tx_caddy extends tslib_pibase
         exit;
     }
 
-      // #50045, dwildt, 1-
-//    $product['net'] = $product['sumnet'] / $product['qty'];
-        
-      // #50045, dwildt, 5+
-    $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
-    $product['net']       = round( $net, 2 );
-    $product['sumnet']    = $product['net'] * $product['qty'];
-    $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
-    $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
-      // #50045, dwildt, 5+
+      // #50045, dwildt, 7+
+//    $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
+//    $product['net']       = round( $net, 2 );
+//    $product['sumnet']    = $product['net'] * $product['qty'];
+//    $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
+//    $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
+    $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
+    $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
+      // #50045, dwildt, 7+
 
       // #50045, dwildt, +
     switch( $product['tax'] )
@@ -1187,6 +1184,8 @@ class tx_caddy extends tslib_pibase
     }
       // #50045, dwildt, +
 
+    $product['net'] = $product['sumnet'] / $product['qty'];
+        
     // price netto
 //var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
 
