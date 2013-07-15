@@ -40,6 +40,8 @@
       <label index="payment_free_until">free service option until</label>
       <label index="payment_available_from">service option available from</label>
       <label index="payment_available_until">service option available until</label>
+      <label index="price_gross_unit">Unit Price</label>
+      <label index="price_gross_unit_wi_qty">Price</label>
       <label index="price_net_unit">Unit Price</label>
       <label index="price_net_unit_wi_qty">Price</label>
       <label index="qty">Amount</label>
@@ -105,6 +107,8 @@
       <label index="payment_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
       <label index="payment_free_from">servicekostenfrei ab</label>
       <label index="payment_free_until">servicekostenfrei bis</label>
+      <label index="price_gross_unit">Einzelpreis</label>
+      <label index="price_gross_unit_wi_qty">Gesamtpreis</label>
       <label index="price_net_unit">Einzelpreis</label>
       <label index="price_net_unit_wi_qty">Gesamtpreis</label>
       <label index="qty">Menge</label>
