@@ -119,6 +119,8 @@ class tx_caddy_drs
   */
   private function initByExtmngr( )
   {
+var_dump( __METHOD__, __LINE__, $this->pObj->arr_extConf['debuggingDrs'] );
+    
     switch( $this->pObj->arr_extConf['debuggingDrs'] )
     {
       case( 'Disabled' ):
