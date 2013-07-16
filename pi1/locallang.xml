@@ -29,7 +29,8 @@
       <label index="linktoshop">Forward with Shopping</label>
       <label index="minprice">The minimum order value of %s has not been reached yet.</label>
       <label index="net">Net</label>
-      <label index="optionsnet">Service- and Shipping costs</label>
+      <label index="optionsgross">Service- and Shipping costs</label>
+      <label index="optionsnet">Service- and Shipping costs (net)</label>
       <label index="order">Order</label>
       <label index="ordernumber">Order number</label>
       <label index="paymentlabel">Type of billing</label>
@@ -96,7 +97,8 @@
       <label index="linktoshop">Weiter Shoppen</label>
       <label index="minprice">Der Mindestbestellwert von %s wurde noch nicht erreicht.</label>
       <label index="net">Netto</label>
-      <label index="optionsnet">Service- und Versandkosten</label>
+      <label index="optionsgross">Service- und Versandkosten</label>
+      <label index="optionsnet">Service- und Versandkosten (netto)</label>
       <label index="order">Bestellung</label>
       <label index="ordernumber">Bestellnummer</label>
       <label index="paymentlabel">Zahlung per</label>
