@@ -381,7 +381,7 @@ plugin.tx_caddy_pi1 {
         sumitemstaxnormal     < .optionspaymentsumgross
         sumitemstaxnormal.10.userFunc.number.field    = sumitemstaxnormal
         sumitemstaxreduced    < .optionspaymentsumgross
-        sumitemstaxreduced.10.userFunc.number.field   = sumitemssumtaxreduced
+        sumitemstaxreduced.10.userFunc.number.field   = sumitemstaxreduced
 
         sumoptionsgross       < .optionspaymentsumgross
         sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
