@@ -254,7 +254,7 @@ class tx_caddy_session
  *
  * @param	array		$product:
  * @return	void
- * @version     2.0.11
+ * @version     2.0.0
  * @since       1.4.6
  */
   public function productAdd( $product )
@@ -300,15 +300,15 @@ class tx_caddy_session
 //    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
       // 130720, dwildt, +
       // Get products
-    $products = $this->productsGet( );
+    $sesArray = $this->productsGet( );
 
       // check if this uid already exists and when delete it
-    foreach( ( array ) $products['products'] as $key => $value )
+    foreach( ( array ) $sesArray['products'] as $key => $value )
     { // one loop for every product
       if( is_array( $value ) )
       {
           // Reset error messages
-        unset( $products['products'][$key]['error'] );
+        unset( $sesArray['products'][$key]['error'] );
 
           // counter for condition. Every condition has to be true
         $int_counter = 0;
@@ -328,8 +328,8 @@ class tx_caddy_session
         if( $int_counter == count( $arr_variant ) )
         {
           // remove product
-          $product['qty'] = $products['products'][$key]['qty'] + $product['qty'];
-          unset( $products['products'][$key] );
+          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
+          unset( $sesArray['products'][$key] );
         }
       }
     }
@@ -355,11 +355,11 @@ class tx_caddy_session
     // add variant key/value pairs to the current product
 
       // add product to the session array
-    $products['products'][ ] = $product;
-var_dump( __METHOD__, __LINE__, $products );
+    $sesArray['products'][ ] = $product;
+var_dump( __METHOD__, __LINE__, $sesArray );
 
       // generate session with session array
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $products );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // save session
     $GLOBALS['TSFE']->storeSessionData( );
   }
