@@ -225,6 +225,7 @@ class tx_caddy extends tslib_pibase
       case( count( $this->products ) > 0 ):
 //var_dump( __METHOD__, __LINE__, $this->products );
         $caddy = $this->caddyWiItems( );
+var_dump( __METHOD__, __LINE__ , $caddy ) ;
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
@@ -1094,7 +1095,6 @@ class tx_caddy extends tslib_pibase
   */
   private function calcItemsTax( $product )
   {
-var_dump( __METHOD__, __LINE__ , $product ) ;
       // calculate gross total
     $product['sumgross']  = $product['gross']
                           * $product['qty']
@@ -1227,7 +1227,6 @@ var_dump( __METHOD__, __LINE__ , $product ) ;
     $product['net'] = round( ( $product['sumnet'] / $product['qty'] ), 2 );
         
     // price netto
-var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
 
     return $product;
   }
@@ -1256,7 +1255,7 @@ var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $prod
       // 130721, dwildt, 1-
     //if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
       // 130721, dwildt, 1+
-    if ( $minimumRate > $calcedCaddy['sum']['items']['gross'] )
+    if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
     {
       $minimumRateIsUndercut = true;
     }
