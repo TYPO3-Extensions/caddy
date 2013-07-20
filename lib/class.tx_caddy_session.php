@@ -787,7 +787,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         // piVars contain variant key
         if (!empty($this->pObj->piVars[$tableField]))
         {
-          $arr_variant[$tableField] = zz_mysqlEscapeString($this->pObj->piVars[$tableField]);
+          $arr_variant[$tableField] = $this->zz_mysqlEscapeString($this->pObj->piVars[$tableField]);
         }
       }
 
@@ -1572,7 +1572,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           // piVars contain variant key
           if( ! empty($arr_from_qty[$key][$tableField] ) )
           {
-            $arr_variant[$key][$tableField] = zz_mysqlEscapeString( $arr_from_qty[$key][$tableField] );
+            $arr_variant[$key][$tableField] = $this->zz_mysqlEscapeString( $arr_from_qty[$key][$tableField] );
           }
         }
       }
@@ -2069,7 +2069,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         continue;
       }
       
-      $variant = zz_mysqlEscapeString( $GP[$table][$field] );
+      $variant = $this->zz_mysqlEscapeString( $GP[$table][$field] );
       
         // DRS
       if( $this->drs->drsVariants )
@@ -2310,12 +2310,12 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           foreach($arr_fields as $field => $value)
           {
             $tableField = strtoupper($table . '.' . $field);
-//            $marker['###GP:' . strtoupper($tableField) . '###'] = zz_mysqlEscapeString($value);
+//            $marker['###GP:' . strtoupper($tableField) . '###'] = $this->zz_mysqlEscapeString($value);
           }
         }
         if (!is_array($arr_fields))
         {
-          $marker['###GP:' . strtoupper($table) . '###'] = zz_mysqlEscapeString($arr_fields);
+          $marker['###GP:' . strtoupper($table) . '###'] = $this->zz_mysqlEscapeString($arr_fields);
         }
       }
 
@@ -2327,12 +2327,12 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           foreach ($arr_fields as $field => $value)
           {
             $tableField = strtoupper($table . '.' . $field);
-            $marker['###GP:' . strtoupper($tableField) . '###'] = zz_mysqlEscapeString($value);
+            $marker['###GP:' . strtoupper($tableField) . '###'] = $this->zz_mysqlEscapeString($value);
           }
         }
         if (!is_array($arr_fields))
         {
-          $marker['###GP:' . strtoupper($table) . '###'] = zz_mysqlEscapeString($arr_fields);
+          $marker['###GP:' . strtoupper($table) . '###'] = $this->zz_mysqlEscapeString($arr_fields);
         }
       }
 
