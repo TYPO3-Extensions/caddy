@@ -1253,7 +1253,10 @@ var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $prod
   {
     $minimumRate            = floatval( $this->conf['cart.']['cartmin.']['value'] );
     $minimumRateIsUndercut  = false;
-    if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
+      // 130721, dwildt, 1-
+    //if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
+      // 130721, dwildt, 1+
+    if ( $minimumRate > $calcedCaddy['sum']['items']['gross'] )
     {
       $minimumRateIsUndercut = true;
     }
