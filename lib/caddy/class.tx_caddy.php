@@ -1134,6 +1134,7 @@ class tx_caddy extends tslib_pibase
 //        $product['sumtax']  = 0.00;
         break;
       case( '7.00' ):
+      case( 7.00 ):
       case( 7 ):
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
