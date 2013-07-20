@@ -461,8 +461,8 @@ class tx_caddy_session
     return $uid;
   }
 
-   /**
- * read product details by a manually configured sql query
+/**
+ * productGetDetailsSql( )  :   read product details by a manually configured sql query
  *
  * @param	array		$gpvar: array with product uid, title, tax, etc...
  * @return	array		$arr: array with title and price
@@ -470,12 +470,15 @@ class tx_caddy_session
  * @version 2.0.0
  * @since 1.4.6
  */
-  private function productGetDetailsSql($gpvar)
+  private function productGetDetailsSql( $gpvar )
   {
+var_dump( __METHOD__, __LINE__ );
+      // RETURN : there isn't any GET or POST parameter
     if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
     {
       return false;
     }
+      // RETURN : there isn't any GET or POST parameter
 
     // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
     $this->zz_sqlReplaceMarker( );
@@ -503,7 +506,7 @@ class tx_caddy_session
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
       die( $prompt );
-      $this->zz_msg( $str, 0, 1, 1 );
+      $this->zz_msg( $prompt, 0, 1, 1 );
     }
 
     // ToDo: @dwildt: optimization highly needed
@@ -2055,7 +2058,7 @@ class tx_caddy_session
         // #42154, 101218, dwildt, 1-
       //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
         // #42154, 101218, dwildt, 1+
-      $query = $this->pObj->cObj->cObjGetSingle($this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.']);
+      $query = $this->pObj->cObj->cObjGetSingle( $this->pObj->conf['db.']['sql'], $this->pObj->conf['db.']['sql.'] );
 
       // get all gp:marker out of the query
       $arr_gpMarker = array();
