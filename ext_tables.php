@@ -76,7 +76,7 @@ switch( true )
     $prompt = 'ERROR: unexpected result<br />
       powermail version is below 1.0.0: ' . $versionInt . '<br />
       ext_tables.php method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-      TYPO3 extension: ' . $this->extKey;
+      TYPO3 extension: ' . $_EXTKEY;
     die( $prompt );
     break;
   case( $versionInt < 2000000 ):
@@ -90,7 +90,7 @@ switch( true )
     $prompt = 'ERROR: unexpected result<br />
       powermail version is 3.x: ' . $versionInt . '<br />
       ext_tables.php method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-      TYPO3 extension: ' . $this->extKey;
+      TYPO3 extension: ' . $_EXTKEY;
     die( $prompt );
     break;
 }
