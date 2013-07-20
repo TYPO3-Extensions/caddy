@@ -541,7 +541,7 @@ class tx_caddy_session
         // DRS
       if( $this->drs->drsSql )
       {
-        $prompt = var_export( $row, false );
+        $prompt = var_export( $row, true );
         t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
