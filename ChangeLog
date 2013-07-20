@@ -3,7 +3,9 @@
   Improvement
   * #i0024: db.sql
             Effected files:
-            * lib/class.tx_caddy_session.php
+            * lib
+              * class.tx_caddy_session.php
+              * drs/class.tx_caddy_drs.php
 
   Bugfixing
   * #i0023: $this->extKey -> $_EXTKEY
