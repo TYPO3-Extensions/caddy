@@ -252,111 +252,60 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array		$product:
+ * @param	array		$newProduct :
  * @return	void
- * @version     2.0.0
- * @since       1.4.6
+ * 
+ * @access      public
+ * @version     2.0.11
+ * @since       2.0.11
  */
-  public function productAdd( $product )
+  public function productAdd( $newProduct )
   {
-    $arr_variant = null;
+    $variants = null;
 
       // RETURN : requirements aren't matched
-    if( ! $this->productAddRequirements( $product ) )
+    if( ! $this->productAddRequirements( $newProduct ) )
     {
       return false;
     }
       // RETURN : requirements aren't matched
 
-
-      // variants
-    $arr_variant['uid'] = $product['uid'];
-
-      // add variant keys from ts settings.variants array,
-      //  if there is a corresponding key in GET or POST
-    if( is_array( $this->pObj->conf['settings.']['variant.'] ) )
-    {
-      $arr_get  = t3lib_div::_GET( );
-      $arr_post = t3lib_div::_POST( );
-      foreach( $this->pObj->conf['settings.']['variant.'] as $key => $tableField )
-      {
-        list( $table, $field ) = explode( '.', $tableField );
-        if( isset( $arr_get[$table][$field] ) )
-        {
-          $arr_variant[$tableField] = mysql_escape_string( $arr_get[$table][$field] );
-        }
-        if( isset( $arr_post[$table][$field] ) )
-        {
-          $arr_variant[$tableField] = mysql_escape_string( $arr_post[$table][$field] );
-        }
-      }
-      // add variant keys from ts settings.variants array,
-    }
-    // variants
-
-      // 130720, dwildt, -
-//    $sesArray = array( );
-//    // get already exting products from session
-//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-      // 130720, dwildt, +
-      // Get products
+      // Get current products
     $currProducts = $this->productsGet( );
+      // Reset error messages
+    $currProducts = $this->productResetErrorPrompt( $currProducts );
 var_dump( __METHOD__, __LINE__, $currProducts );
 
-      // check if this uid already exists and when delete it
-    foreach( ( array ) $currProducts as $key => $value )
-    { // one loop for every product
-      if( is_array( $value ) )
+      // Init variants
+    $variants = $this->variantsInit( $newProduct['uid'] );
+
+      // remove product from current products, sum quantity
+      // FOREACH  : current product
+    foreach( ( array ) $currProducts as $key => $currProduct )
+    { 
+      $matchedVariants = $this->variantsMatched( $variants, $currProduct ); 
+
+      // all conditions fit
+      if( $matchedVariants == count( $variants ) )
       {
-          // Reset error messages
-        unset( $currProducts[$key]['error'] );
-
-          // counter for condition. Every condition has to be true
-        $int_counter = 0;
-
-        // loop every condition
-        foreach( $arr_variant as $key_variant => $value_variant )
-        {
-          // condition fits
-          if( $value[$key_variant] == $value_variant )
-          {
-            $int_counter++;
-          }
-        }
-        // loop every condition
-
-        // all conditions fit
-        if( $int_counter == count( $arr_variant ) )
-        {
-          // remove product
-          $product['qty'] = $currProducts[$key]['qty'] + $product['qty'];
-          unset( $currProducts[$key] );
-        }
+        $newProduct['qty'] = $currProducts[$key]['qty'] + $newProduct['qty'];
+          // remove product from current products
+        unset( $currProducts[ $key ] );
       }
     }
+      // FOREACH  : current product
+      // remove product from current products, sum quantity
 
-    $product = $this->quantityCheckMinMax( $product );
+      // limit quantity
+    $newProduct = $this->quantityCheckMinMax( $newProduct );
 
-    if( isset( $product['gross'] ) )
-    {
-      $product['gross'] = str_replace( ',', '.', $product['gross'] ); // comma to point
-    }
+      // move comma to dot
+    $newProduct['gross'] = $this->zz_commaToDot( $newProduct['gross'] );
 
-      // remove uid from variant array
-    unset( $arr_variant[0] );
-
-    // add variant key/value pairs to the current product
-    if( ! empty( $arr_variant ) )
-    {
-      foreach( $arr_variant as $key_variant => $value_variant )
-      {
-        $product[$key_variant] = $value_variant;
-      }
-    }
-    // add variant key/value pairs to the current product
+    $newProduct = $this->variantsSet( $variants, $newProduct ); 
 
       // add product to the session array
-    $currProducts[ ] = $product;
+    $currProducts[ ] = $newProduct;
     $sesArray['products'] = $currProducts;
 var_dump( __METHOD__, __LINE__, $currProducts );
 
@@ -370,13 +319,14 @@ var_dump( __METHOD__, __LINE__, $currProducts );
  * productAddRequirements( ) : 
  *
  * @param	array		$product:
- * 
- * @internal    #i0024
  * @return	boolean         true, if requirements are matched
+ * 
+ * @access      private
+ * @internal    #i0024
  * @version     2.0.11
  * @since       2.0.11
  */
-  public function productAddRequirements( $product )
+  private function productAddRequirements( $product )
   {
       // RETURN : without price or without title
     switch( true )
@@ -880,6 +830,26 @@ var_dump( __METHOD__, __LINE__, $currProducts );
 
         return $arr_variants;
     }
+
+/**
+ * productResetErrorPrompt( )  :
+ *
+ * @param	array		$products:
+ * @return	array           $products:
+ * @version     2.0.11
+ * @since       1.4.6
+ */
+  public function productResetErrorPrompt( $products )
+  {
+      // FOREACH  : current product
+    foreach( array_keys( ( array ) $products ) as $product )
+    { 
+        // Reset error messages
+      unset( $products[ $product ][ 'error' ] );
+    }
+    
+    return $products;
+  }
 
 /**
  * productSetQuantity( )  : Returns the given quantity
@@ -2032,11 +2002,199 @@ var_dump( __METHOD__, __LINE__, $currProducts );
 
  /***********************************************
   *
+  * Variants
+  *
+  **********************************************/
+
+/**
+ * variantsInit( )  :
+ *
+ * @param	array		$newProduct :
+ * @return	array           $variants :
+ * 
+ * @access      private
+ * @version     2.0.11
+ * @since       2.0.11
+ */
+  private function variantsInit( $newProductUid )
+  {
+    $variants =  array
+                    (
+                      'uid' => $newProductUid
+                    );
+
+      // RETURN : variants aren't configured
+    if( ! is_array( $this->pObj->conf['settings.']['variant.'] ) )
+    {
+        // DRS
+      if( $this->drs->drsVariants )
+      {
+        $prompt = 'settings.variant is empty: Variants aren\'t handled.';
+        t3lib_div::devlog( '[INFO/VARIANTS] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+      return $variants;
+    }
+      // RETURN : variants aren't configured
+    
+      // POST has precedence!
+    $GP = t3lib_div::_POST( ) + t3lib_div::_GET( );
+
+      // FOREACH variant
+    foreach( $this->pObj->conf['settings.']['variant.'] as $key => $tableField )
+    {
+      if( stristr( $key, '.' ) )
+      {
+        continue;
+      }
+
+        // DRS
+      if( $this->drs->drsVariants )
+      {
+        $prompt = 'settings.variant. ' . $key . ' = ' . $tableField;
+        t3lib_div::devlog( '[INFO/VARIANTS] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+
+      list( $table, $field ) = explode( '.', $tableField );
+      if( ! isset( $GP[$table][$field] ) )
+      {
+          // DRS
+        if( $this->drs->drsVariants )
+        {
+          $prompt = 'GET/POST[' . $table . '][' . $field . '] is not set.';
+          t3lib_div::devlog( '[WARN/VARIANTS] ' . $prompt, $this->extKey, 2 );
+        }
+          // DRS
+        continue;
+      }
+      
+      $mysqlEscapeString = mysql_escape_string( $arr_get[$table][$field] );
+      if( ! $mysqlEscapeString )
+      {
+        $prompt = 'mysql_escape_string( ) returns false! Unproper connection to database.<br /> ' . PHP_EOL
+                . __METHOD__ . ' #' . __LINE__ ;
+        die( $prompt );
+      }
+      
+        // DRS
+      if( $this->drs->drsVariants )
+      {
+        $prompt = 'Variant: GET/POST[' . $table . '][' . $field . '] is set.';
+        t3lib_div::devlog( '[OK/VARIANTS] ' . $prompt, $this->extKey, -1 );
+      }
+        // DRS
+
+      $variants[$tableField] = $mysqlEscapeString;
+    }
+      // FOREACH variant
+    
+    return $variants;
+  }
+
+/**
+ * variantsMatched( ) 
+ *
+ * @param	array		$variants :
+ * @param	array		$product  :
+ * @return	integer         $matchedVariants
+ * 
+ * @access      private
+ * @version     2.0.11
+ * @since       2.0.11
+ */
+  private function variantsMatched( $variants, $product )
+  {
+    $matchedVariants = 0;
+
+      // FOREACH variant
+    foreach( ( array ) $variants as $tableField => $variant )
+    {
+        // varaiant fits
+      if( $product[$tableField] == $variant )
+      {
+        $matchedVariants++;
+      }
+    }
+      // FOREACH variant
+    
+      // DRS
+    if( $this->drs->drsVariants )
+    {
+      switch( $matchedVariants )
+      {
+        case( 0 ):
+          $prompt = 'Any variant doesn\'t match!';
+          break;
+        case( 0 ):
+          $prompt = '#1 variant matchs!';
+          break;
+        default:
+          $prompt = '#' . $matchedVariants . ' variants matchs!';
+          break;
+      }
+      t3lib_div::devlog( '[INFO/VARIANTS] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $matchedVariants;
+  }
+
+/**
+ * variantsMatched( ) 
+ *
+ * @param	array		$variants :
+ * @param	array		$product  :
+ * @return	integer         $matchedVariants
+ * 
+ * @access      private
+ * @version     2.0.11
+ * @since       2.0.11
+ */
+  private function variantsSet( $variants, $product )
+  {
+    if( empty( $variants ) )
+    {
+      return $product;
+    }
+     
+      // remove uid from variant array
+    unset( $variants[ 'uid' ] );
+
+      // add variant 
+    foreach( $variants as $tableField => $variant )
+    {
+      $product[ $tableField ] = $variant;
+    }
+    
+    return $product;
+  }
+  
+  
+ /***********************************************
+  *
   * ZZ
   *
   **********************************************/
 
-   /**
+/**
+ * zz_commaToDot( ) :
+ *
+ * @param	string		$strWiComma :
+ * @return      string          $strWiDot   :
+ * 
+ * @access private
+ * @version 2.0.0
+ * @since 1.4.6
+ */
+  private function zz_commaToDot( $strWiComma )
+  {
+    $strWiDot = str_replace( ',', '.', $strWiComma );
+    
+    return $strWiDot;
+  }
+  
+/**
  * returns message with optical flair
  *
  * @param	string		$str: Message to show

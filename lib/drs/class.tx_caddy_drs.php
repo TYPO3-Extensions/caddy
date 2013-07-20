@@ -80,6 +80,7 @@ class tx_caddy_drs
   public $drsSession    = false;
   public $drsSql        = false;
   public $drsTodo       = false;
+  public $drsVariants   = false;
 
 
 
@@ -210,6 +211,7 @@ class tx_caddy_drs
     $this->drsSession   = true;
     $this->drsSql       = true;
     $this->drsTodo      = true;
+    $this->drsVariants  = true;
   }
   
 }
