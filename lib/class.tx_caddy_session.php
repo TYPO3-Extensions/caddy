@@ -300,16 +300,16 @@ class tx_caddy_session
 //    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
       // 130720, dwildt, +
       // Get products
-    $sesArray = $this->productsGet( );
-var_dump( __METHOD__, __LINE__, $sesArray );
+    $currProducts = $this->productsGet( );
+var_dump( __METHOD__, __LINE__, $currProducts );
 
       // check if this uid already exists and when delete it
-    foreach( ( array ) $sesArray['products'] as $key => $value )
+    foreach( ( array ) $currProducts as $key => $value )
     { // one loop for every product
       if( is_array( $value ) )
       {
           // Reset error messages
-        unset( $sesArray['products'][$key]['error'] );
+        unset( $currProducts[$key]['error'] );
 
           // counter for condition. Every condition has to be true
         $int_counter = 0;
@@ -329,8 +329,8 @@ var_dump( __METHOD__, __LINE__, $sesArray );
         if( $int_counter == count( $arr_variant ) )
         {
           // remove product
-          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
-          unset( $sesArray['products'][$key] );
+          $product['qty'] = $currProducts[$key]['qty'] + $product['qty'];
+          unset( $currProducts[$key] );
         }
       }
     }
@@ -357,7 +357,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
 
       // add product to the session array
     $sesArray['products'][ ] = $product;
-var_dump( __METHOD__, __LINE__, $sesArray );
+var_dump( __METHOD__, __LINE__, $currProducts );
 
       // generate session with session array
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
