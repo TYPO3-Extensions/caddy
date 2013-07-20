@@ -223,9 +223,8 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( count( $this->products ) > 0 ):
-var_dump( __METHOD__, __LINE__, $this->products );
+//var_dump( __METHOD__, __LINE__, $this->products );
         $caddy = $this->caddyWiItems( );
-var_dump( __METHOD__, __LINE__, $caddy );
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
@@ -1227,7 +1226,7 @@ var_dump( __METHOD__, __LINE__, $caddy );
     $product['net'] = round( ( $product['sumnet'] / $product['qty'] ), 2 );
         
     // price netto
-//var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
+var_dump( __METHOD__, __LINE__ , $product['sumgross'], $product['sumnet'], $product['taxrate'] ) ;
 
     return $product;
   }
