@@ -307,7 +307,7 @@ class tx_caddy_session
       // add product to the session array
     $currProducts[ ] = $newProduct;
     $sesArray['products'] = $currProducts;
-var_dump( __METHOD__, __LINE__, $currProducts );
+//var_dump( __METHOD__, __LINE__, $currProducts );
 
       // generate session with session array
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
