@@ -794,16 +794,18 @@ class tx_caddy_session
       return $arr_variant;
     }
 
-    /**
+/**
  * productGetVariantTs():  Get an array with the variant values
  *                                out of the current product
  *
  * @param	array		$product: array with product uid, title, tax, etc...
  * @return	array		$arr_variants: array with variant key/value pairs
- * @version 2.0.0
+ * 
+ * @access    public
+ * @version 2.0.11
  * @since 1.4.6
  */
-    private function productGetVariantTs( $product )
+    public function productGetVariantTs( $product )
     {
         $arr_variants = null;
 
