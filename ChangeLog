@@ -3,6 +3,7 @@
   Bugfixing
   * #i0023: $this->extKey -> $_EXTKEY
             Effected files:
+            * ext_tables.php
 
 2.0.10
   13-07-15
