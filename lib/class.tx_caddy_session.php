@@ -2120,7 +2120,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         case( 0 ):
           $prompt = 'Any variant doesn\'t match!';
           break;
-        case( 0 ):
+        case( 1 ):
           $prompt = '#1 variant matchs!';
           break;
         default:

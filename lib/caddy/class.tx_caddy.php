@@ -1150,7 +1150,24 @@ class tx_caddy extends tslib_pibase
 //        $product['taxNormal'] = $product['sumtax'];
         break;
       default:
-        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+        echo '<div style="border:2em solid red;padding:2em;color:red;">
+                <h1 style="color:red;">
+                  caddy Error
+                </h1>
+                <p>
+                  tax is "' . $product['tax'] . '".<br />
+                    This is an undefined value in class.tx_caddy.php. ABORT!<br />
+                    <br />
+                    Are you sure, that you included the caddy static template?
+                </p>
+                <p>
+                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . ' 
+                </p>
+                <p>
+                  Sorry for the trouble.<br />
+                  TYPO3 Caddy
+                </p>
+              </div>';
         exit;
     }
 
