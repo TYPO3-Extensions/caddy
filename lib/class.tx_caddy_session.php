@@ -487,7 +487,7 @@ class tx_caddy_session
     $name   = $this->pObj->conf['db.']['sql'];
     $conf   = $this->pObj->conf['db.']['sql.'];
     $query  = $this->pObj->cObj->cObjGetSingle( $name, $conf );
-var_dump( __METHOD__, __LINE__, $query );
+    
 
       // execute the query
     $res    = $GLOBALS['TYPO3_DB']->sql_query( $query );
@@ -496,6 +496,15 @@ var_dump( __METHOD__, __LINE__, $query );
     // exit in case of error
     if( $error )
     {
+        // DRS
+      if( $this->drs->drsError )
+      {
+        $prompt = $query;
+        t3lib_div::devlog( '[ERROR/SQL] ' . $prompt, $this->extKey, 3 );
+        $prompt = $error;
+        t3lib_div::devlog( '[ERROR/SQL] ' . $prompt, $this->extKey, 2 );
+      }
+        // DRS
       $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
               . '<p>' . $error . '</p>' . PHP_EOL
               . '<p>' . $query . '</p>' . PHP_EOL
@@ -509,12 +518,19 @@ var_dump( __METHOD__, __LINE__, $query );
       $this->zz_msg( $prompt, 0, 1, 1 );
     }
 
+      // DRS
+    if( $this->drs->drsSql )
+    {
+      $prompt = $query;
+      t3lib_div::devlog( '[OK/SQL] ' . $prompt, $this->extKey, -1 );
+    }
+      // DRS
+
     // ToDo: @dwildt: optimization highly needed
     if( $res )
     {
       while( $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res ) )
       {
-var_dump( __METHOD__, __LINE__, $row );
         if( $row['title'] != null )
         {
           break;
@@ -522,6 +538,14 @@ var_dump( __METHOD__, __LINE__, $row );
       }
       $row['uid']  = $gpvar['uid'];
 
+        // DRS
+      if( $this->drs->drsSql )
+      {
+        $prompt = var_export( $row, false );
+        t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
+      }
+        // DRS
+var_dump( __METHOD__, __LINE__, $row );
       return $row;
     }
 
