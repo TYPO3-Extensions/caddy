@@ -219,6 +219,7 @@ class tx_caddy extends tslib_pibase
 
       // get products from session
     $this->products = $this->session->productsGet( );
+var_dump( __METHOD__, __LINE__, $this->products );
     switch( true )
     {
       case( count( $this->products ) > 0 ):
@@ -1133,7 +1134,7 @@ class tx_caddy extends tslib_pibase
 //        $product['sumnet']  = 0.00;
 //        $product['sumtax']  = 0.00;
         break;
-      case( 7.00 ):
+      case( 7.00 ):  // :TODO: 7.00
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
         $product['taxrate']     = $this->conf['tax.']['reducedCalc'];
@@ -1188,7 +1189,7 @@ class tx_caddy extends tslib_pibase
       case( 0 ):
           // Do nothing
         break;
-      case( 7.00 ):
+      case( 7.00 ):  // :TODO: 7.00
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
         $product['taxReduced']  = $product['sumtax'];

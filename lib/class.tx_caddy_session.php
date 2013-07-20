@@ -274,7 +274,7 @@ class tx_caddy_session
     $currProducts = $this->productsGet( );
       // Reset error messages
     $currProducts = $this->productResetErrorPrompt( $currProducts );
-var_dump( __METHOD__, __LINE__, $currProducts );
+//var_dump( __METHOD__, __LINE__, $currProducts );
 
       // Init variants
     $variants = $this->variantsInit( $newProduct['uid'] );
