@@ -262,9 +262,27 @@ class tx_caddy_session
     $arr_variant = null;
 
       // RETURN : without price or without title
-    if( empty( $product['gross'] ) || empty( $product['title'] ) )
+      // #i0024, 130720, dwildt
+    switch( true )
     {
-      return false;
+      case( empty( $product['gross'] ) ):
+          // DRS
+        if( $this->drs->drsWarn )
+        {
+          $prompt = 'Aborted: Item record is without the element "gross"!';
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+        }
+        return false;
+        break;
+      case( empty( $product['title'] ) ):
+          // DRS
+        if( $this->drs->drsWarn )
+        {
+          $prompt = 'Aborted: Item record is without the element "gross"!';
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+        }
+        return false;
+        break;
     }
       // RETURN : without price or without title
 
