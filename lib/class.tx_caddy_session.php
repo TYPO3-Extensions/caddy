@@ -301,6 +301,7 @@ class tx_caddy_session
       // 130720, dwildt, +
       // Get products
     $sesArray = $this->productsGet( );
+var_dump( __METHOD__, __LINE__, $sesArray );
 
       // check if this uid already exists and when delete it
     foreach( ( array ) $sesArray['products'] as $key => $value )
