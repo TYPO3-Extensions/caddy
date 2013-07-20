@@ -1094,6 +1094,7 @@ class tx_caddy extends tslib_pibase
   */
   private function calcItemsTax( $product )
   {
+var_dump( __METHOD__, __LINE__ , $product ) ;
       // calculate gross total
     $product['sumgross']  = $product['gross']
                           * $product['qty']
