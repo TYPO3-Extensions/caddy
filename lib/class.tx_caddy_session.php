@@ -787,7 +787,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         // piVars contain variant key
         if (!empty($this->pObj->piVars[$tableField]))
         {
-          $arr_variant[$tableField] = mysql_escape_string($this->pObj->piVars[$tableField]);
+          $arr_variant[$tableField] = zz_mysqlEscapeString($this->pObj->piVars[$tableField]);
         }
       }
 
@@ -1572,7 +1572,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           // piVars contain variant key
           if( ! empty($arr_from_qty[$key][$tableField] ) )
           {
-            $arr_variant[$key][$tableField] = mysql_escape_string( $arr_from_qty[$key][$tableField] );
+            $arr_variant[$key][$tableField] = zz_mysqlEscapeString( $arr_from_qty[$key][$tableField] );
           }
         }
       }
@@ -2069,13 +2069,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         continue;
       }
       
-      $mysqlEscapeString = mysql_escape_string( $arr_get[$table][$field] );
-      if( ! $mysqlEscapeString )
-      {
-        $prompt = 'mysql_escape_string( ) returns false! Unproper connection to database.<br /> ' . PHP_EOL
-                . __METHOD__ . ' #' . __LINE__ ;
-        die( $prompt );
-      }
+      $variant = zz_mysqlEscapeString( $GP[$table][$field] );
       
         // DRS
       if( $this->drs->drsVariants )
@@ -2085,7 +2079,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
       }
         // DRS
 
-      $variants[$tableField] = $mysqlEscapeString;
+      $variants[$tableField] = $variant;
     }
       // FOREACH variant
     
@@ -2254,7 +2248,43 @@ var_dump( __METHOD__, __LINE__, $currProducts );
         }
     }
 
-    /**
+/**
+ * variantsInit( )  :
+ *
+ * @param	string		$string :
+ * @return	string           $string :
+ * 
+ * @access      private
+ * @version     2.0.11
+ * @since       2.0.11
+ */
+  private function zz_mysqlEscapeString( $string )
+  {
+    $mysqlEscapeString = mysql_escape_string( $string );
+    
+    if( $mysqlEscapeString )
+    {
+      return $mysqlEscapeString;
+    }
+
+      // DRS
+    if( $this->drs->drsWarn )
+    {
+      $prompt = 'mysql_escape_string( ) returns false! Unproper connection to database!';
+      t3lib_div::devlog( '[WARN/PHP] ' . $prompt, $this->extKey, 2 );
+      $prompt = '", \' and \\ will replaced manually. Maybe this is a security risk!';
+      t3lib_div::devlog( '[WARN/PHP] ' . $prompt, $this->extKey, 2 );
+    }
+      // DRS
+
+    $string = str_replace( '"',   null, $string );
+    $string = str_replace( "'",   null, $string );
+    $string = str_replace( '\\',  null, $string );
+
+    return $string;
+  }
+
+/**
  * zz_sqlReplaceMarker(): Replace marker in the SQL query
  *                             MARKERS are
  *                             - GET/POST markers
@@ -2280,12 +2310,12 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           foreach($arr_fields as $field => $value)
           {
             $tableField = strtoupper($table . '.' . $field);
-            $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
+//            $marker['###GP:' . strtoupper($tableField) . '###'] = zz_mysqlEscapeString($value);
           }
         }
         if (!is_array($arr_fields))
         {
-          $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
+          $marker['###GP:' . strtoupper($table) . '###'] = zz_mysqlEscapeString($arr_fields);
         }
       }
 
@@ -2297,12 +2327,12 @@ var_dump( __METHOD__, __LINE__, $currProducts );
           foreach ($arr_fields as $field => $value)
           {
             $tableField = strtoupper($table . '.' . $field);
-            $marker['###GP:' . strtoupper($tableField) . '###'] = mysql_escape_string($value);
+            $marker['###GP:' . strtoupper($tableField) . '###'] = zz_mysqlEscapeString($value);
           }
         }
         if (!is_array($arr_fields))
         {
-          $marker['###GP:' . strtoupper($table) . '###'] = mysql_escape_string($arr_fields);
+          $marker['###GP:' . strtoupper($table) . '###'] = zz_mysqlEscapeString($arr_fields);
         }
       }
 
