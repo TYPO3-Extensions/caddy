@@ -293,6 +293,8 @@ var_dump( __METHOD__, __LINE__ , $caddy ) ;
       case( true ):
           // Set min price error
         $subparts['###MINPRICE###'] = $this->caddyWiMinPriceUndercut( );
+          // 130721, dwildt, 1+
+        $this->tmpl['all'] = '###MINPRICE###';
         break;
       case( false ):
       default:
