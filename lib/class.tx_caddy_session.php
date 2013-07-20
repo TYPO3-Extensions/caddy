@@ -356,7 +356,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
     // add variant key/value pairs to the current product
 
       // add product to the session array
-    $sesArray['products'][ ] = $product;
+    $currProducts[ ] = $product;
 var_dump( __METHOD__, __LINE__, $currProducts );
 
       // generate session with session array
