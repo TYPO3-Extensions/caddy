@@ -472,7 +472,6 @@ class tx_caddy_session
  */
   private function productGetDetailsSql( $gpvar )
   {
-var_dump( __METHOD__, __LINE__ );
       // RETURN : there isn't any GET or POST parameter
     if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
     {
@@ -488,6 +487,7 @@ var_dump( __METHOD__, __LINE__ );
     $name   = $this->pObj->conf['db.']['sql'];
     $conf   = $this->pObj->conf['db.']['sql.'];
     $query  = $this->pObj->cObj->cObjGetSingle( $name, $conf );
+var_dump( __METHOD__, __LINE__, $query );
 
       // execute the query
     $res    = $GLOBALS['TYPO3_DB']->sql_query( $query );
@@ -514,6 +514,7 @@ var_dump( __METHOD__, __LINE__ );
     {
       while( $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res ) )
       {
+var_dump( __METHOD__, __LINE__, $row );
         if( $row['title'] != null )
         {
           break;
