@@ -79,6 +79,8 @@ switch( true )
       TYPO3 extension: ' . $_EXTKEY;
       // 130720, dwildt, 1-: die( ) blocks the whole TYPO3 system
     //die( $prompt );
+      // 130720, dwildt, 1+
+    $pmVers = '0x';
     break;
   case( $versionInt < 2000000 ):
     $pmVers = '1x';
@@ -94,6 +96,8 @@ switch( true )
       TYPO3 extension: ' . $_EXTKEY;
       // 130720, dwildt, 1-: die( ) blocks the whole TYPO3 system
     //die( $prompt );
+      // 130720, dwildt, 1+
+    $pmVers = '3x';
     break;
 }
   // Set powermail version
