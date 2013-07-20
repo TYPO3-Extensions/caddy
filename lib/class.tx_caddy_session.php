@@ -357,6 +357,7 @@ var_dump( __METHOD__, __LINE__, $currProducts );
 
       // add product to the session array
     $currProducts[ ] = $product;
+    $sesArray['products'] = $currProducts;
 var_dump( __METHOD__, __LINE__, $currProducts );
 
       // generate session with session array
