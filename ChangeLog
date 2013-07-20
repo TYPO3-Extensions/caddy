@@ -1,45 +1,51 @@
+2.0.11
+  13-07-15
+  Bugfixing
+  * #i0023: $this->extKey -> $_EXTKEY
+            Effected files:
+
 2.0.10
   13-07-15
   Bugfixing
-  * #50045: * rounding error
-              Effected files:
-              * files/templates/caddy.html
-              * lib/caddy/class.tx_caddy.php
-              * pi1/locallang.xml
+  * #50045: rounding error
+            Effected files:
+            * files/templates/caddy.html
+            * lib/caddy/class.tx_caddy.php
+            * pi1/locallang.xml
 
 2.0.9
   13-06-28
   Bugfixing
-  * #i0019: * UTF8-Bug in Powermail 2
-              Effected files:
-              * lib/powermail/class.tx_caddy_powermail.php
+  * #i0019: UTF8-Bug in Powermail 2
+            Effected files:
+            * lib/powermail/class.tx_caddy_powermail.php
 
 2.0.8
   13-06-28
   Features
-  * #i0022: * Unique file names
-  * #i0021: * Term of Credit
-              Effected files:
-              * lib/pdf/class.tx_caddy_pdf.php
-              * static
-                * constants.txt
-                * setup.txt              
+  * #i0022: Unique file names
+  * #i0021: Term of Credit
+            Effected files:
+            * lib/pdf/class.tx_caddy_pdf.php
+            * static
+              * constants.txt
+              * setup.txt              
   Improvement
-  * #i0020: * Constant Editor Labelling
-              Effected file:
-              * static
-                * constants.txt
+  * #i0020: Constant Editor Labelling
+            Effected file:
+            * static
+              * constants.txt
   Bugfixing
-  * #49431: * misspelling nachnahme
-  * #49427: * misspelling constants
-              Effected file:
-              static/constants.txt
-  * #49428: * Localisation dependency (isn't tested in not localised context)
-              Effected file:
-              * lib/class.tx_caddy_session.php
-  * #49430: * Check TypoScript Case
-              Effected file:
-              * lib/caddy/class.tx_caddy.php
+  * #49431: misspelling nachnahme
+  * #49427: misspelling constants
+            Effected file:
+            static/constants.txt
+  * #49428: Localisation dependency (isn't tested in not localised context)
+            Effected file:
+            * lib/class.tx_caddy_session.php
+  * #49430: Check TypoScript Case
+            Effected file:
+            * lib/caddy/class.tx_caddy.php
 
 2.0.7
   13-06-27
