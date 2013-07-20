@@ -1133,9 +1133,7 @@ class tx_caddy extends tslib_pibase
 //        $product['sumnet']  = 0.00;
 //        $product['sumtax']  = 0.00;
         break;
-      case( '7.00' ):
       case( 7.00 ):
-      case( 7 ):
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
         $product['taxrate']     = $this->conf['tax.']['reducedCalc'];
@@ -1190,6 +1188,7 @@ class tx_caddy extends tslib_pibase
       case( 0 ):
           // Do nothing
         break;
+      case( 7.00 ):
       case( 1 ):
       case( $this->conf['tax.']['reducedCalc'] ):
         $product['taxReduced']  = $product['sumtax'];
@@ -1199,7 +1198,25 @@ class tx_caddy extends tslib_pibase
         $product['taxNormal'] = $product['sumtax'];
         break;
       default:
-        echo '<div style="border:2em solid red;padding:2em;color:red;"><h1 style="color:red;">caddy Error</h1><p>tax is "' . $product['tax'] . '".<br />This is an undefined value in class.tx_caddy.php. ABORT!<br /><br />Are you sure, that you included the caddy static template?</p></div>';
+      default:
+        echo '<div style="border:2em solid red;padding:2em;color:red;">
+                <h1 style="color:red;">
+                  caddy Error
+                </h1>
+                <p>
+                  tax is "' . $product['tax'] . '".<br />
+                    This is an undefined value in class.tx_caddy.php. ABORT!<br />
+                    <br />
+                    Are you sure, that you included the caddy static template?
+                </p>
+                <p>
+                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . ' 
+                </p>
+                <p>
+                  Sorry for the trouble.<br />
+                  TYPO3 Caddy
+                </p>
+              </div>';
         exit;
     }
       // #50045, dwildt, +
