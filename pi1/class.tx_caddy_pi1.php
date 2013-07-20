@@ -233,14 +233,12 @@ class tx_caddy_pi1 extends tslib_pibase
   {
       // add further product to session
     $this->newProduct = $this->session->productGetDetails( $this->gpvar );
-var_dump( __METHOD__, __LINE__, $this->newProduct );
     if( $this->newProduct !== false )
     {
       $this->newProduct['qty']                  = $this->gpvar['qty'];
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-var_dump( __METHOD__, __LINE__, $this->newProduct );
       $this->session->productAdd( $this->newProduct );
     }
   }

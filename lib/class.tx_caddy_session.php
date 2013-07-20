@@ -254,42 +254,26 @@ class tx_caddy_session
  *
  * @param	array		$product:
  * @return	void
- * @version     2.0.0
+ * @version     2.0.11
  * @since       1.4.6
  */
   public function productAdd( $product )
   {
     $arr_variant = null;
 
-      // RETURN : without price or without title
-      // #i0024, 130720, dwildt
-    switch( true )
+      // RETURN : requirements aren't matched
+    if( ! $this->productAddRequirements( $product ) )
     {
-      case( empty( $product['gross'] ) ):
-          // DRS
-        if( $this->drs->drsWarn )
-        {
-          $prompt = 'Aborted: Item record is without the element "gross"!';
-          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
-        }
-        return false;
-        break;
-      case( empty( $product['title'] ) ):
-          // DRS
-        if( $this->drs->drsWarn )
-        {
-          $prompt = 'Aborted: Item record is without the element "gross"!';
-          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
-        }
-        return false;
-        break;
+      return false;
     }
-      // RETURN : without price or without title
+      // RETURN : requirements aren't matched
 
-    // variants
+
+      // variants
     $arr_variant['uid'] = $product['uid'];
-    // add variant keys from ts settings.variants array,
-    //  if there is a corresponding key in GET or POST
+
+      // add variant keys from ts settings.variants array,
+      //  if there is a corresponding key in GET or POST
     if( is_array( $this->pObj->conf['settings.']['variant.'] ) )
     {
       $arr_get  = t3lib_div::_GET( );
@@ -310,17 +294,21 @@ class tx_caddy_session
     }
     // variants
 
-    $sesArray = array( );
-    // get already exting products from session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+      // 130720, dwildt, -
+//    $sesArray = array( );
+//    // get already exting products from session
+//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+      // 130720, dwildt, +
+      // Get products
+    $products = $this->productsGet( );
 
       // check if this uid already exists and when delete it
-    foreach( ( array ) $sesArray['products'] as $key => $value )
+    foreach( ( array ) $products['products'] as $key => $value )
     { // one loop for every product
       if( is_array( $value ) )
       {
           // Reset error messages
-        unset( $sesArray['products'][$key]['error'] );
+        unset( $products['products'][$key]['error'] );
 
           // counter for condition. Every condition has to be true
         $int_counter = 0;
@@ -340,8 +328,8 @@ class tx_caddy_session
         if( $int_counter == count( $arr_variant ) )
         {
           // remove product
-          $product['qty'] = $sesArray['products'][$key]['qty'] + $product['qty'];
-          unset( $sesArray['products'][$key] );
+          $product['qty'] = $products['products'][$key]['qty'] + $product['qty'];
+          unset( $products['products'][$key] );
         }
       }
     }
@@ -366,13 +354,56 @@ class tx_caddy_session
     }
     // add variant key/value pairs to the current product
 
-    // add product to the session array
-    $sesArray['products'][ ] = $product;
+      // add product to the session array
+    $products['products'][ ] = $product;
+var_dump( __METHOD__, __LINE__, $products );
 
-    // generate session with session array
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-    // save session
+      // generate session with session array
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $products );
+      // save session
     $GLOBALS['TSFE']->storeSessionData( );
+  }
+
+/**
+ * productAddRequirements( ) : 
+ *
+ * @param	array		$product:
+ * 
+ * @internal    #i0024
+ * @return	boolean         true, if requirements are matched
+ * @version     2.0.11
+ * @since       2.0.11
+ */
+  public function productAddRequirements( $product )
+  {
+      // RETURN : without price or without title
+    switch( true )
+    {
+      case( empty( $product['gross'] ) ):
+          // DRS
+        if( $this->drs->drsWarn )
+        {
+          $prompt = 'Aborted: Item record is without the element "gross"!';
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+        }
+        return false;
+        break;
+      case( empty( $product['title'] ) ):
+          // DRS
+        if( $this->drs->drsWarn )
+        {
+          $prompt = 'Aborted: Item record is without the element "gross"!';
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+        }
+        return false;
+        break;
+    }
+      // RETURN : without price or without title
+    
+    unset( $product );
+    
+    return true;
+
   }
 
  /**
