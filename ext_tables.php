@@ -77,7 +77,8 @@ switch( true )
       powermail version is below 1.0.0: ' . $versionInt . '<br />
       ext_tables.php method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
       TYPO3 extension: ' . $_EXTKEY;
-    die( $prompt );
+    //die( $prompt );
+    echo $prompt;
     break;
   case( $versionInt < 2000000 ):
     $pmVers = '1x';
