@@ -2841,7 +2841,7 @@ var_dump( __METHOD__, __LINE__ , $caddy ) ;
 
       $str_marker = null;
       // get all variant key/value pairs from the current product
-      $array_add_gpvar = $this->productsGetVariantTs($product, $pObj);
+      $array_add_gpvar = $this->session->productsGetVariantTs($product, $pObj);
       $array_add_gpvar['uid']  = $product['uid'];
       // generate the marker array
       foreach ((array) $array_add_gpvar as $key => $value)
@@ -2878,7 +2878,7 @@ var_dump( __METHOD__, __LINE__ , $caddy ) ;
       // RETURN : there isn't any variant
 
       // get all variant key/value pairs from the current product
-    $array_add_gpvar = $this->productsGetVariantTs( $product, $pObj );
+    $array_add_gpvar = $this->session->productsGetVariantTs( $product, $pObj );
 
       // add variant key/value pairs to imageLinkWrap
     foreach( ( array ) $array_add_gpvar as $key => $value )
