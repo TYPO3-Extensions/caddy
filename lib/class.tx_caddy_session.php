@@ -433,14 +433,14 @@ class tx_caddy_session
  */
   public function productGetDetails( $gpvar )
   {
-    // build own sql query
-    // handle query by db.sql
+      // build own sql query
+      // handle query by db.sql
     if( ! empty( $this->pObj->conf['db.']['sql'] ) )
     {
       return $this->productGetDetailsSql( $gpvar );
     }
 
-    // handle query by db.table and db.fields
+      // handle query by db.table and db.fields
     return $this->productGetDetailsTs( $gpvar );
   }
 
@@ -515,7 +515,6 @@ class tx_caddy_session
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
       die( $prompt );
-      $this->zz_msg( $prompt, 0, 1, 1 );
     }
 
       // DRS
@@ -526,30 +525,49 @@ class tx_caddy_session
     }
       // DRS
 
-    // ToDo: @dwildt: optimization highly needed
-    if( $res )
+      // RETURN false : no SQL ressource
+    if( ! $res )
     {
-      while( $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res ) )
-      {
-        if( $row['title'] != null )
-        {
-          break;
-        }
-      }
-      $row['uid']  = $gpvar['uid'];
+      return false;
+    }
+      // RETURN false : no SQL ressource
 
-        // DRS
-      if( $this->drs->drsSql )
+      // WHILE  : get a row with a title field
+    while( $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc( $res ) )
+    {
+      if( $row['title'] != null )
       {
-        $prompt = var_export( $row, true );
-        t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
+        break;
       }
-        // DRS
-var_dump( __METHOD__, __LINE__, $row );
-      return $row;
+    }
+      // WHILE  : get a row with a title field
+    
+    if( empty( $row ) )
+    {
+      $prompt = '<h1>caddy: error</h1>' . PHP_EOL
+              . '<p>SQL query has an unexpected result: no row with a title field!</p>' . PHP_EOL
+              . '<p>' . $query . '</p>' . PHP_EOL
+              . '<p>' . PHP_EOL
+              . 'Please take care for a proper configuratio at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
+              . 'Sorry for the trouble.<br />' . PHP_EOL
+              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . __METHOD__ . ' (' . __LINE__ . ')';
+              ;
+      die( $prompt );
     }
 
-    return false;
+      // Add or overwrite uid field
+    $row['uid'] = $gpvar['uid'];
+
+      // DRS
+    if( $this->drs->drsSql )
+    {
+      $prompt = var_export( $row, true );
+      t3lib_div::devlog( '[INFO/SQL] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+
+    return $row;
   }
 
    /**

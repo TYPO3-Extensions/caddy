@@ -1,5 +1,10 @@
 2.0.11
   13-07-15
+  Improvement
+  * #i0024: db.sql
+            Effected files:
+            * lib/class.tx_caddy_session.php
+
   Bugfixing
   * #i0023: $this->extKey -> $_EXTKEY
             Effected files:
