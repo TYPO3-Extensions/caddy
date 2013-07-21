@@ -173,7 +173,7 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
   pdf.deliveryorder.number.fontsize = 24
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
-  pdf.deliveryorder.number.prefix = quick-shop-
+  pdf.deliveryorder.number.prefix = 
   # cat=caddy - pdf delivery order//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
   pdf.deliveryorder.termOfCredit.x = 25
   # cat=caddy - pdf delivery order//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
