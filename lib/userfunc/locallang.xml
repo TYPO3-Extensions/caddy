@@ -125,21 +125,21 @@
         </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
-            alt="Caddy is powered by die-netzmacher.de"
-            title="Caddy is powered by die-netzmacher.de"
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
               width="80" 
               height="80" 
-              alt="Caddy is powered by die-netzmacher.de" /></a>
-          <a href="http://die-netzmacher.de/" 
-            alt="Caddy is powered by die-netzmacher.de"
-            title="Caddy is powered by die-netzmacher.de"
+              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+          <a href="http://wildt.at.die-netzmacher.de/" 
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
               width="80" 
               height="80" 
-              alt="Caddy is powered by die-netzmacher.de" /></a>
+              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
@@ -164,14 +164,14 @@
               target="_blank">TYPO3-Caddy website &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/en"
+            <a href="http://typo3-caddy.de/en/support"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
               target="_blank">TYPO3-Caddy support &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/en"
+            <a href="http://typo3-caddy.de/en/sponsoring"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
@@ -185,7 +185,7 @@
               target="_blank">TYPO3-Caddy forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://die-netzmacher.de/" 
+            <a href="http://wildt.at.die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
               title="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
@@ -384,21 +384,21 @@
         </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
-            alt="Caddy is powered by die-netzmacher.de"
-            title="Caddy is powered by die-netzmacher.de"
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
               width="80" 
               height="80" 
-              alt="Caddy is powered by die-netzmacher.de" /></a>
-          <a href="http://die-netzmacher.de/" 
-            alt="Caddy is powered by die-netzmacher.de"
-            title="Caddy is powered by die-netzmacher.de"
+              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+          <a href="http://wildt.at.die-netzmacher.de/" 
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
               width="80" 
               height="80" 
-              alt="Caddy is powered by die-netzmacher.de" /></a>
+              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
@@ -430,7 +430,21 @@
               target="_blank">TYPO3-Caddy Forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://die-netzmacher.de/" 
+            <a href="http://typo3-caddy.de/support/" 
+              style="text-decoration:underline;"
+              alt="TYPO3-Caddy - Support"
+              title="TYPO3-Caddy - Support"
+              target="_blank">TYPO3-Caddy Support &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/sponsoring/" 
+              style="text-decoration:underline;"
+              alt="TYPO3-Caddy - Sponsoring"
+              title="TYPO3-Caddy - Sponsoring"
+              target="_blank">TYPO3-Caddy Sponsoring &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://wildt.at.die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
               title="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
