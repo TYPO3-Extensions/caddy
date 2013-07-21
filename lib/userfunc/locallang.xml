@@ -164,6 +164,20 @@
               target="_blank">TYPO3-Caddy website</a>
           </li>
           <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en"
+              style="text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">TYPO3-Caddy support</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en"
+              style="text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">TYPO3-Caddy sponsoring</a>
+          </li>
+          <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
@@ -182,8 +196,21 @@
       ]]></label>
       <label index="promptSponsors"><![CDATA[
         <h1 style="text-align:left;">
-          Thanks!
+          Donating and Sponsoring
         </h1>
+        <p>
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
+            width="30"
+            height="30"
+            alt="Please support my job!" />        
+          Please donate to Caddy or sponsor it! I need the money for maintaining and developing Caddy.
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="text-decoration:underline;"
+            alt="Donating and Sponsoring"
+            title="Donating and Sponsoring"
+            target="_blank">
+            Donating and Sponsoring &raquo;</a>.
+        </p>
         <p style="font-weight:bold;padding:1em 0;">
           The TYPO3-Caddy project is sponsored by:
         </p>
