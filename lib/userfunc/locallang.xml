@@ -147,49 +147,49 @@
               style="text-decoration:underline;"
               alt="Caddy - online manual"
               title="Caddy - online manual"
-              target="_blank">TYPO3-Caddy online manual</a>
+              target="_blank">TYPO3-Caddy online manual &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
               alt="Caddy - PDF manual"
               title="Caddy - PDF manual"
-              target="_blank">TYPO3-Caddy PDF manual</a>
+              target="_blank">TYPO3-Caddy PDF manual &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy website</a>
+              target="_blank">TYPO3-Caddy website &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy support</a>
+              target="_blank">TYPO3-Caddy support &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy sponsoring</a>
+              target="_blank">TYPO3-Caddy sponsoring &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">TYPO3-Caddy forum</a>
+              target="_blank">TYPO3-Caddy forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Die Netzmacher - the developers of TYPO3 without PHP."
               title="Die Netzmacher - the developers of TYPO3 without PHP."
-              target="_blank">Die Netzmacher - the developers of TYPO3-Caddy</a>
+              target="_blank">Die Netzmacher - the developers of TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
         </div>
@@ -214,7 +214,7 @@
             alt="Donating and Sponsoring"
             title="Donating and Sponsoring"
             target="_blank">
-            Donating and Sponsoring &raquo;</a>.
+            Donating and Sponsoring &raquo; &raquo;</a>.
         </p>
         <p style="font-weight:bold;padding:1em 0;">
           The TYPO3-Caddy project is sponsored by:
@@ -234,7 +234,7 @@
             alt="Your logo with your URL. 120 x 90 pixel."
             title="Your logo with your URL. 120 x 90 pixel."
             target="_blank">
-            Further information</a>.
+            Further information &raquo;</a>.
         </p>
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
@@ -406,35 +406,35 @@
               style="text-decoration:underline;"
               alt="Caddy - Online-Handbuch"
               title="Caddy - Online-Handbuch"
-              target="_blank">TYPO3-Caddy Online-Handbuch</a>
+              target="_blank">TYPO3-Caddy Online-Handbuch &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
               alt="Caddy - PDF-Handbuch"
               title="Caddy - PDF-Handbuch"
-              target="_blank">TYPO3-Caddy PDF-Handbuch</a>
+              target="_blank">TYPO3-Caddy PDF-Handbuch &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy Website</a>
+              target="_blank">TYPO3-Caddy Website &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">TYPO3-Caddy Forum</a>
+              target="_blank">TYPO3-Caddy Forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
               title="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
-              target="_blank">Die Netzmacher - die Entwickler von TYPO3-Caddy</a>
+              target="_blank">Die Netzmacher - die Entwickler von TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
         </div>
@@ -461,7 +461,7 @@
             alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
             title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
             target="_blank">
-            Mehr Infos</a>.
+            Mehr Infos &raquo;</a>.
         </p>
         <a href="http://typo3-caddy.de/de/sponsoring/"
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
