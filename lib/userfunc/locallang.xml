@@ -198,14 +198,16 @@
         <h1 style="text-align:left;">
           Donating and Sponsoring
         </h1>
-        <div styles="float:left;padding-right:1em;">
+        <div style="float:left;padding-right:1em;">
           <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
             width="30"
             height="30"
             alt="Please support my job!" />        
         </div>
         <p>
-          Please donate to Caddy or sponsor it! I need the money for maintaining and developing Caddy.<br />
+          Please donate to Caddy or sponsor it!<br />
+          I need the money for maintaining and developing Caddy.<br />7
+          <br />
           Dirk Wildt<br />
           <a href="http://typo3-caddy.de/en/sponsoring/"
             style="text-decoration:underline;"
