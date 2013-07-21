@@ -187,9 +187,9 @@
           <li style="margin-bottom:.6em;">
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
-              alt="Die Netzmacher - the developers of TYPO3 without PHP."
-              title="Die Netzmacher - the developers of TYPO3 without PHP."
-              target="_blank">Die Netzmacher - the developers of TYPO3-Caddy &raquo;</a>
+              alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
+              title="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
+              target="_blank">Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
         </div>
@@ -206,7 +206,7 @@
         </div>
         <p>
           Please donate to Caddy or sponsor it!<br />
-          I need the money for maintaining and developing Caddy.<br />
+          I need the money for improving and developing Caddy.<br />
           <br />
           Dirk Wildt<br />
           <a href="http://typo3-caddy.de/en/sponsoring/"
@@ -432,14 +432,35 @@
           <li style="margin-bottom:.6em;">
             <a href="http://die-netzmacher.de/" 
               style="text-decoration:underline;"
-              alt="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
-              title="Die Netzmacher - die Entwickler von TYPO3 ohne PHP."
-              target="_blank">Die Netzmacher - die Entwickler von TYPO3-Caddy &raquo;</a>
+              alt="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
+              title="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
+              target="_blank">Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
         </div>
       ]]></label>
       <label index="promptSponsors"><![CDATA[
+        <h1 style="text-align:left;">
+          Spenden und Sponsern
+        </h1>
+        <div style="float:left;padding-right:1em;">
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
+            width="30"
+            height="30"
+            alt="Bitte unterst&uuml;tze meine Arbeit!" />        
+        </div>
+        <p>
+          Bitte spende f&uuml:r Caddy oder sponser die Extension!<br />
+          Ich brauche das Geld f&uuml;r die Verbesserung und Weiterentwicklung von Caddy.<br />
+          <br />
+          Dirk Wildt<br />
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="text-decoration:underline;"
+            alt="Spenden und Sponsern"
+            title="Spenden und Sponsern"
+            target="_blank">
+            Spenden und Sponsern &raquo; &raquo;</a>.
+        </p>
         <h1 style="text-align:left;">
           Herzlichen Dank!
         </h1>
