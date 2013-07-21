@@ -60,6 +60,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->conf = $pObj->conf;
     $this->cObj = $pObj->cObj;
     $this->content = $content;
+var_dump( __METHOD__, __LINE__ , $this->scriptRelPath);
     $this->pi_loadLL();
 
       // 1. replace locallang markers

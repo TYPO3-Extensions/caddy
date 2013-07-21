@@ -114,6 +114,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $markerArray[$marker] = $value;
 
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+    $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $content  = $this->dynamicMarkers->main( $content, $this );
     
     return $content;
@@ -182,6 +183,7 @@ class tx_caddy_pi3 extends tslib_pibase
 
       $tmpl = $this->tmpl['items'];
       $item = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
+      $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
       $item = $this->dynamicMarkers->main( $item, $this );
       
       $items  = $items 
@@ -226,6 +228,7 @@ class tx_caddy_pi3 extends tslib_pibase
   private function caddyWoProducts( ) 
   {
     $content  = $this->tmpl['caddyminiempty'];
+    $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $content  = $this->dynamicMarkers->main( $content, $this );
     
     return $content;
@@ -306,7 +309,7 @@ class tx_caddy_pi3 extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
-    $this->dynamicMarkers->scriptRelPath = 'pi3/class.tx_caddy_pi3.php';
+    $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
 
     require_once( 'class.tx_caddy_pi3_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi3_flexform' );
