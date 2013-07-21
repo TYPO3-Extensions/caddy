@@ -131,7 +131,7 @@
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
               width="80" 
               height="80" 
-              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
           <a href="http://wildt.at.die-netzmacher.de/" 
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
@@ -139,7 +139,7 @@
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
               width="80" 
               height="80" 
-              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
@@ -202,7 +202,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
             width="30"
             height="30"
-            alt="Please support my job!" />        
+            title="Please support my job!" />        
         </div>
         <p>
           Please donate to Caddy or sponsor it!<br />
@@ -243,7 +243,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-blue.gif" 
             width="120" 
             height="90" 
-            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
@@ -252,7 +252,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
             width="120" 
             height="90" 
-            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
@@ -261,7 +261,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
             width="120" 
             height="90" 
-            alt="Your logo with your URL. 120 x 90 pixel." /></a>
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
       ]]></label>
       <label index="typoscriptMissing"><![CDATA[
         There isn't any typoscript template for caddy.<br />
@@ -390,7 +390,7 @@
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
               width="80" 
               height="80" 
-              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
           <a href="http://wildt.at.die-netzmacher.de/" 
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
@@ -398,7 +398,7 @@
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
               width="80" 
               height="80" 
-              alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
@@ -461,7 +461,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
             width="30"
             height="30"
-            alt="Bitte unterst&uuml;tze meine Arbeit!" />        
+            title="Bitte unterst&uuml;tze meine Arbeit!" />        
         </div>
         <p>
           Bitte spende f&uuml:r Caddy oder sponser die Extension!<br />
@@ -488,7 +488,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/made-in-nature.de_120x90.gif"
             width="120"
             height="90"
-            alt="made in nature, Deutschland, Sponsor des des TYPO3-Caddy-Projekts" /></a>
+            title="made in nature, Deutschland, Sponsor des des TYPO3-Caddy-Projekts" /></a>
         <p style="padding:0 0 1em 0;">
           M&ouml;chtest Du das TYPO3-Caddy-Projekt unterst&uuml;tzen?
           <a href="http://typo3-caddy.de/de/sponsoring/"
@@ -505,7 +505,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-blue.gif" 
             width="120" 
             height="90" 
-            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/de/sponsoring/"
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
@@ -514,7 +514,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
             width="120" 
             height="90" 
-            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/de/sponsoring/"
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
@@ -523,7 +523,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
             width="120" 
             height="90" 
-            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
       ]]></label>
       <label index="typoscriptMissing"><![CDATA[
         Es gibt keine Typoscript f&uuml;r Caddy.<br />
