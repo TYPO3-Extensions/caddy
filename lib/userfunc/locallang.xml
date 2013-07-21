@@ -175,7 +175,7 @@
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy sponsoring &raquo;</a>
+                target="_blank">TYPO3-Caddy sponsoring &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
@@ -214,7 +214,7 @@
             alt="Donating and Sponsoring"
             title="Donating and Sponsoring"
             target="_blank">
-            Donating and Sponsoring &raquo; &raquo;</a>.
+            Donating and Sponsoring &raquo;</a>.
         </p>
         <p style="font-weight:bold;padding:1em 0;">
           The TYPO3-Caddy project is sponsored by:
@@ -473,7 +473,7 @@
             alt="Spenden und Sponsern"
             title="Spenden und Sponsern"
             target="_blank">
-            Spenden und Sponsern &raquo; &raquo;</a>.
+            Spenden und Sponsern &raquo;</a>.
         </p>
         <h1 style="text-align:left;">
           Herzlichen Dank!
