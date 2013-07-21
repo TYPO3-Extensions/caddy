@@ -47,7 +47,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
 //          'CADDY_LL_', // prefix for HTML template part
 //          'caddy_ll_' // prefix for typoscript part
           '_LOCAL_LANG_', // prefix for HTML template part
-          null // prefix for typoscript part
+          '_LOCAL_LANG' // prefix for typoscript part
   );
   public $typoscriptmarker_prefix = array(// prefix for automatic typoscriptmarker
           '_HTMLMARKER_', // prefix for HTML template part
