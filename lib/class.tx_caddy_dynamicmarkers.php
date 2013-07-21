@@ -44,9 +44,10 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
   // Path to pi1 to get locallang.xml from pi1 folder
   public $locallangmarker_prefix = array(// prefix for automatic locallangmarker
+//          'CADDY_LL_', // prefix for HTML template part
+//          'caddy_ll_' // prefix for typoscript part
           '_LOCAL_LANG_', // prefix for HTML template part
           null // prefix for typoscript part
-//          '_LOCAL_LANG' // prefix for typoscript part
   );
   public $typoscriptmarker_prefix = array(// prefix for automatic typoscriptmarker
           '_HTMLMARKER_', // prefix for HTML template part
@@ -60,7 +61,6 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->conf = $pObj->conf;
     $this->cObj = $pObj->cObj;
     $this->content = $content;
-//var_dump( __METHOD__, __LINE__ , $this->scriptRelPath);
     $this->pi_loadLL();
 
       // 1. replace locallang markers
