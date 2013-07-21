@@ -225,7 +225,7 @@ class tx_caddy extends tslib_pibase
       case( count( $this->products ) > 0 ):
 //var_dump( __METHOD__, __LINE__, $this->products );
         $caddy = $this->caddyWiItems( );
-var_dump( __METHOD__, __LINE__ , $caddy ) ;
+//var_dump( __METHOD__, __LINE__ , $caddy ) ;
         break;
       case( ! ( count( $this->products ) > 0 ) ):
       default:
