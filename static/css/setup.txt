@@ -181,6 +181,7 @@ plugin.tx_caddy_pi1 {
       box-shadow: 0 .2em .4em 0 #AAA;
       color: {$plugin.caddy.html.color.button.text};
       cursor:pointer;
+      font-weight:bold;
       padding: 5px 20px;
       position:relative;
       top:.1em;
