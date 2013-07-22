@@ -1,6 +1,16 @@
 plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
     
+    /* order form */
+
+    form.caddy {
+      text-align: right;
+    }
+    form.caddy button.submit img {
+      position:relative;
+      top:.1em;
+    }
+
     /* div based caddy */
     
     div.caddy form {
@@ -156,6 +166,7 @@ plugin.tx_caddy_pi1 {
     }
     div.linktocaddy,
     div.linktoshop,
+    form.caddy button.submit,
     img.caddy_delete { 
       background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
       background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
