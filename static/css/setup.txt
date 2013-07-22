@@ -44,7 +44,7 @@ plugin.tx_caddy_pi1 {
     div.caddy_header {
       font-weight:bold; 
       margin-bottom:.5em; 
-      padding:5px; 
+      padding:.5em .5em 0 .5em; 
     }
     div.caddy_footer { 
       padding:1em 0 0 5px; 
