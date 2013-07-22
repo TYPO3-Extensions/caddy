@@ -116,7 +116,7 @@ plugin.tx_caddy_pi1 {
         // delete icon: for removing the current item from the caddy
       delete = IMAGE
       delete {
-        file = {plugin.caddy.html.color.icon.delete}
+        file = {$plugin.caddy.html.color.icon.delete}
         altText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
         titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
         params = class="caddy_delete"
@@ -2358,7 +2358,7 @@ plugin.tx_caddy_pi1 {
         // Icon
       20 = IMAGE
       20 {
-        file = {plugin.caddy.html.color.icon.caddy}
+        file = {$plugin.caddy.html.color.icon.caddy}
         altText {
           data = LLL:EXT:caddy/pi1/locallang.xml:shop
         }
