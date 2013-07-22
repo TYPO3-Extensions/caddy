@@ -2166,15 +2166,15 @@ plugin.tx_caddy_pi1 {
         // border, cellpadding, cellspacing
       table = 
       table {
-        bordercolor             = {$plugin.caddy.html.bordercolor}
-        width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-        width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-        width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-        width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-        width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-        width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-        width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-        width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+        bordercolor             = {$plugin.caddy.html.color.border}
+        width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+        width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+        width_td_item           = {$plugin.caddy.html.width.table.td.item}
+        width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+        width_td_net            = {$plugin.caddy.html.width.table.td.net}
+        width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+        width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+        width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
       }
     }
       // caddy, caddymini
@@ -2193,15 +2193,15 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
-          bordercolor             = {$plugin.caddy.html.bordercolor}
-          width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-          width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-          width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-          width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-          width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-          width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-          width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-          width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
         }
       }
         // file, marker, table
@@ -2232,15 +2232,15 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
-          bordercolor             = {$plugin.caddy.html.bordercolor}
-          width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-          width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-          width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-          width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-          width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-          width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-          width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-          width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
         }
       }
         // file, marker, table
@@ -2256,15 +2256,15 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
-          bordercolor             = {$plugin.caddy.html.bordercolor}
-          width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-          width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-          width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-          width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-          width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-          width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-          width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-          width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
         }
       }
         // #i0013, 130604, dwildt, + // file, marker, table
@@ -2280,15 +2280,15 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
-          bordercolor             = {$plugin.caddy.html.bordercolor}
-          width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-          width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-          width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-          width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-          width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-          width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-          width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-          width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
         }
       }
         // #i0013, 130604, dwildt, + // file, marker, table
@@ -2304,15 +2304,15 @@ plugin.tx_caddy_pi1 {
           // border, cellpadding, cellspacing
         table = 
         table {
-          bordercolor             = {$plugin.caddy.html.bordercolor}
-          width_td_qty            = {$plugin.caddy.html.caddy.table.td.qty.width}
-          width_td_sku            = {$plugin.caddy.html.caddy.table.td.sku.width}
-          width_td_item           = {$plugin.caddy.html.caddy.table.td.item.width}
-          width_td_tax            = {$plugin.caddy.html.caddy.table.td.tax.width}
-          width_td_net            = {$plugin.caddy.html.caddy.table.td.net.width}
-          width_td_sum            = {$plugin.caddy.html.caddy.table.td.sum.width}
-          width_td_skuitemtax     = {$plugin.caddy.html.caddy.table.td.skuitemtax.width}
-          width_td_skuitemtaxnet  = {$plugin.caddy.html.caddy.table.td.skuitemtaxnet.width}
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
         }
       }
     }
