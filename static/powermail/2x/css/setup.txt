@@ -1,4 +1,4 @@
-plugin.tx_caddy_pi1 {
+plugin.tx_caddy_pi1_powermail {
   _CSS_DEFAULT_STYLE (
       /* powermail */
     form.powermail_form input.powermail_confirmation_form,
