@@ -94,9 +94,9 @@ plugin.caddy {
   # cat=caddy - html - colors/others/203;        type=color;  label= Button gradient color 4
   html.color.gradient4 = #7DB9E8
   # cat=caddy - html - colors/others/300;        type=string;  label= Icon caddy
-  html.color.icon.caddy = EXT:caddy/files/img/caddy_000_13.png
+  html.color.icon.caddy = EXT:caddy/files/img/caddy_080_08.png
   # cat=caddy - html - colors/others/301;        type=string;  label= Icon delete
-  html.color.icon.delete = EXT:caddy/files/img/delete_000_13.png
+  html.color.icon.delete = EXT:caddy/files/img/delete_080_08.png
   # cat=caddy - html - colors/others/400;        type=color;  label= Table header background
   html.color.table.head.background = #207CCA
   # cat=caddy - html - colors/others/401;        type=color;  label= Table header text
