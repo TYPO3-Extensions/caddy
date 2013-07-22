@@ -83,16 +83,18 @@ plugin.caddy {
   # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
 
-  # cat=caddy - html - colors//100;              type=color;  label= Border Color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
+  # cat=caddy - html - colors//100;              type=color;  label= Border color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
   html.color.border = #207CCA
-  # cat=caddy - html - colors/others/200;        type=color;  label= Button gradient color 1
-  html.color.gradient1 = #1E5799
-  # cat=caddy - html - colors/others/201;        type=color;  label= Button gradient color 2
-  html.color.gradient2 = #2989D8
-  # cat=caddy - html - colors/others/202;        type=color;  label= Button gradient color 3
-  html.color.gradient3 = #207CCA
-  # cat=caddy - html - colors/others/203;        type=color;  label= Button gradient color 4
-  html.color.gradient4 = #7DB9E8
+  # cat=caddy - html - colors//200;              type=color;  label= Button text color
+  html.color.button.text = #FFF
+  # cat=caddy - html - colors/others/201;        type=color;  label= Button gradient color 1
+  html.color.button.gradient1 = #1E5799
+  # cat=caddy - html - colors/others/202;        type=color;  label= Button gradient color 2
+  html.color.button.gradient2 = #2989D8
+  # cat=caddy - html - colors/others/203;        type=color;  label= Button gradient color 3
+  html.color.button.gradient3 = #207CCA
+  # cat=caddy - html - colors/others/204;        type=color;  label= Button gradient color 4
+  html.color.button.gradient4 = #7DB9E8
   # cat=caddy - html - colors/others/300;        type=string;  label= Icon caddy
   html.color.icon.caddy = EXT:caddy/files/img/caddy_080_08.png
   # cat=caddy - html - colors/others/301;        type=string;  label= Icon delete
