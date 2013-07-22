@@ -3,6 +3,20 @@ plugin.tx_caddy_pi1 {
     
     /* div based caddy */
     
+    div.caddy form {
+      border-bottom: 1px solid {$plugin.caddy.html.bordercolor};
+    }
+    div.caddy_footer {
+      border-bottom: 1px solid {$plugin.caddy.html.bordercolor};
+    }
+    div.caddy_header {
+      background-color: {$plugin.caddy.html.bordercolor};
+      color: #fff;
+    }
+    div.caddy_product {
+      border-bottom: 1px solid {$plugin.caddy.html.bordercolor};
+      padding:.6em .5em .3em .5em;
+    }
     div.caddy_options {
       padding: 0.4em 0 0 4.3em;
     }
