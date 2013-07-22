@@ -555,7 +555,8 @@ class tx_caddy_session
               . 'TYPO3 Caddy<br />' . PHP_EOL 
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
-      die( $prompt );
+      echo $prompt;
+      //die( $prompt );
     }
 
       // Add or overwrite uid field
