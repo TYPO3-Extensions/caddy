@@ -10,8 +10,8 @@ plugin.tx_caddy_pi1 {
       border-bottom: 1px solid {$plugin.caddy.html.color.border};
     }
     div.caddy_header {
-      background-color: {$plugin.caddy.html.color.border};
-      color: #fff;
+      background-color: {$plugin.caddy.html.color.table.head.background};
+      color: {$plugin.caddy.html.color.table.head.text};
     }
     div.caddy_product {
       border-bottom: 1px solid {$plugin.caddy.html.color.border};
