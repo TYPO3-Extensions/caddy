@@ -83,46 +83,46 @@ plugin.caddy {
   # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
 
-  # cat=caddy - html - colors//100;              type=color;  label= Border color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
+  # cat=caddy - html colors//100;              type=color;  label= Border color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
   html.color.border = #207CCA
-  # cat=caddy - html - colors//200;              type=color;  label= Button text color
+  # cat=caddy - html colors//200;              type=color;  label= Button text color
   html.color.button.text = #FFF
-  # cat=caddy - html - colors/others/201;        type=color;  label= Button gradient color 1
+  # cat=caddy - html colors/others/201;        type=color;  label= Button gradient color 1
   html.color.button.gradient1 = #1E5799
-  # cat=caddy - html - colors/others/202;        type=color;  label= Button gradient color 2
+  # cat=caddy - html colors/others/202;        type=color;  label= Button gradient color 2
   html.color.button.gradient2 = #2989D8
-  # cat=caddy - html - colors/others/203;        type=color;  label= Button gradient color 3
+  # cat=caddy - html colors/others/203;        type=color;  label= Button gradient color 3
   html.color.button.gradient3 = #207CCA
-  # cat=caddy - html - colors/others/204;        type=color;  label= Button gradient color 4
+  # cat=caddy - html colors/others/204;        type=color;  label= Button gradient color 4
   html.color.button.gradient4 = #7DB9E8
-  # cat=caddy - html - colors/others/300;        type=string;  label= Icon caddy
+  # cat=caddy - html colors/others/300;        type=string;  label= Icon caddy
   html.color.icon.caddy = EXT:caddy/files/img/caddy_080_08.png
-  # cat=caddy - html - colors/others/301;        type=string;  label= Icon delete
+  # cat=caddy - html colors/others/301;        type=string;  label= Icon delete
   html.color.icon.delete = EXT:caddy/files/img/delete_080_08.png
-  # cat=caddy - html - colors/others/400;        type=color;  label= Table header background
+  # cat=caddy - html colors/others/400;        type=color;  label= Table header background
   html.color.table.head.background = #207CCA
-  # cat=caddy - html - colors/others/401;        type=color;  label= Table header text
+  # cat=caddy - html colors/others/401;        type=color;  label= Table header text
   html.color.table.head.text = #FFF
-  # cat=caddy - html - colors/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - html colors/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   html.width.externalLinks = Click me!
 
-  # cat=caddy - html - width//200;              type=text;  label= Width columns Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//200;              type=text;  label= Width columns Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.qty = 10%
-  # cat=caddy - html - width//201;              type=text;  label= Width columns SKU: The width of the caddy column stock keep unit in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//201;              type=text;  label= Width columns SKU: The width of the caddy column stock keep unit in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.sku = 15%
-  # cat=caddy - html - width//202;              type=text;  label= Width columns item: The width of the caddy column item in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//202;              type=text;  label= Width columns item: The width of the caddy column item in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.item = 35%
-  # cat=caddy - html - width//203;              type=text;  label= Width columns tax: The width of the caddy column tax in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//203;              type=text;  label= Width columns tax: The width of the caddy column tax in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.tax = 10%
-  # cat=caddy - html - width//204;              type=text;  label= Width columns net: The width of the caddy column net in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//204;              type=text;  label= Width columns net: The width of the caddy column net in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.net = 15%
-  # cat=caddy - html - width//205;              type=text;  label= Width columns sum: The width of the caddy column sum in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//205;              type=text;  label= Width columns sum: The width of the caddy column sum in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.sum = 15%
-  # cat=caddy - html - width//301;              type=text;  label= Width 3 columns: The total width of the caddy columns sku, item and tax in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//301;              type=text;  label= Width 3 columns: The total width of the caddy columns sku, item and tax in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.skuitemtax = 60%
-  # cat=caddy - html - width//302;              type=text;  label= Width 4 columns: The total width of the caddy columns sku, item, tax and net in HTML tables for CSS. Units can be px, em or % among others.
+  # cat=caddy - html width//302;              type=text;  label= Width 4 columns: The total width of the caddy columns sku, item, tax and net in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.skuitemtaxnet = 75%
-  # cat=caddy - html - width/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - html width/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   html.width.externalLinks = Click me!
 
   # cat=caddy - pages*/enable/301; type=integer; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart
