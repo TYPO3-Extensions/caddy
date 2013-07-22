@@ -94,7 +94,7 @@ plugin.caddy {
   # cat=caddy - html - colors/others/203;        type=color;  label= Button gradient color 4
   html.color.gradient4 = #7DB9E8
   # cat=caddy - html - colors/others/300;        type=color;  label= Table header background
-  html.color.table.head.backgorund = #207CCA
+  html.color.table.head.background = #207CCA
   # cat=caddy - html - colors/others/301;        type=color;  label= Table header text
   html.color.table.head.text = #FFF
   # cat=caddy - html - colors/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
