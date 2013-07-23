@@ -480,12 +480,16 @@ class tx_caddy_session
     }
       // RETURN : there isn't any GET or POST parameter
 
-      // RETURN : cas eis update of quantity only
+      // RETURN : case is update of quantity only
     if( intval( $this->pObj->piVars['updateByCaddy'] ) )
     {
       return;
     }
-      // RETURN : cas eis update of quantity only
+    if( intval( $this->pObj->piVars['del'] ) )
+    {
+      return;
+    }
+      // RETURN : case is update of quantity only
     
       // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
     $this->zz_sqlReplaceMarker( );
@@ -563,8 +567,8 @@ class tx_caddy_session
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
 var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
-      echo $prompt;
-      //die( $prompt );
+      //echo $prompt;
+      die( $prompt );
       return false;
     }
 
