@@ -481,7 +481,7 @@ class tx_caddy_session
       // RETURN : there isn't any GET or POST parameter
 
       // RETURN : cas eis update of quantity only
-    if( intval( $this->piVars['updateByCaddy'] ) )
+    if( intval( $this->pObj->piVars['updateByCaddy'] ) )
     {
       return;
     }
