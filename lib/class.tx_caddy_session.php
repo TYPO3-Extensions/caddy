@@ -481,13 +481,15 @@ class tx_caddy_session
       // RETURN : there isn't any GET or POST parameter
 
       // RETURN : case is update of quantity only
-    if( intval( $this->pObj->piVars['updateByCaddy'] ) )
+    switch( true )
     {
-      return;
-    }
-    if( intval( $this->pObj->piVars['del'] ) )
-    {
-      return;
+      case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
+      case( intval( $this->pObj->piVars['del'] ) ):
+        return;
+        break;
+      default:
+          // Follow the workflow
+        break;
     }
       // RETURN : case is update of quantity only
     
@@ -566,9 +568,9 @@ class tx_caddy_session
               . 'TYPO3 Caddy<br />' . PHP_EOL 
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
-var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
-      //echo $prompt;
-      die( $prompt );
+//var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
+      echo $prompt;
+      //die( $prompt );
       return false;
     }
 
