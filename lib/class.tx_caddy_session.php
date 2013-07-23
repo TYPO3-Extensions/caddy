@@ -557,6 +557,7 @@ class tx_caddy_session
               ;
       echo $prompt;
       //die( $prompt );
+      return false;
     }
 
       // Add or overwrite uid field
