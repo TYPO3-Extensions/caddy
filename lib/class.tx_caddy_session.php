@@ -486,6 +486,7 @@ var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
     {
       case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
       case( intval( $this->pObj->piVars['del'] ) ):
+      case( $this->pObj->piVars['action'] == 'confirmation' ):
         return;
         break;
       default:
