@@ -562,10 +562,7 @@ class tx_caddy_session
               . 'TYPO3 Caddy<br />' . PHP_EOL 
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
-var_dump( __METHOD__, __LINE__, t3lib_div::_POST( ) );
-      echo $prompt;
-      //die( $prompt );
-      return false;
+      die( $prompt );
     }
 
       // Add or overwrite uid field
