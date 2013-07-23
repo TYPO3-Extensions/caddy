@@ -474,19 +474,24 @@ class tx_caddy_session
   private function productGetDetailsSql( $gpvar )
   {
       // RETURN : there isn't any GET or POST parameter
-var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ), $this->pObj->piVars );
+var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
     if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
     {
       return false;
     }
       // RETURN : there isn't any GET or POST parameter
 
+    $GP = t3lib_div::_GET( )
+        + t3lib_div::_POST( )
+        ;
+var_dump( $GP, $this->pObj->piVars );
+    
       // RETURN : case is update of quantity only
     switch( true )
     {
       case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
       case( intval( $this->pObj->piVars['del'] ) ):
-      case( $this->pObj->piVars['action'] == 'confirmation' ):
+      case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
         return;
         break;
       default:
