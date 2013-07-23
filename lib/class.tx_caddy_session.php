@@ -474,6 +474,7 @@ class tx_caddy_session
   private function productGetDetailsSql( $gpvar )
   {
       // RETURN : there isn't any GET or POST parameter
+var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
     if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
     {
       return false;
