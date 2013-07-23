@@ -468,37 +468,17 @@ class tx_caddy_session
  * @param	array		$gpvar: array with product uid, title, tax, etc...
  * @return	array		$arr: array with title and price
  * @access private
- * @version 2.0.0
+ * @version 2.0.11
  * @since 1.4.6
  */
   private function productGetDetailsSql( $gpvar )
   {
-      // RETURN : there isn't any GET or POST parameter
-var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
-    if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
+      // RETURN : any sql result isn't needed
+    if( productGetDetailsSqlIsNotNeeded( ) )
     {
       return false;
     }
-      // RETURN : there isn't any GET or POST parameter
-
-    $GP = t3lib_div::_GET( )
-        + t3lib_div::_POST( )
-        ;
-var_dump( $GP, $this->pObj->piVars );
-    
-      // RETURN : case is update of quantity only
-    switch( true )
-    {
-      case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
-      case( intval( $this->pObj->piVars['del'] ) ):
-      case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
-        return;
-        break;
-      default:
-          // Follow the workflow
-        break;
-    }
-      // RETURN : case is update of quantity only
+      // RETURN : any sql result isn't needed
     
       // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
     $this->zz_sqlReplaceMarker( );
@@ -593,6 +573,51 @@ var_dump( $GP, $this->pObj->piVars );
       // DRS
 
     return $row;
+  }
+
+/**
+ * productGetDetailsSqlIsNotNeeded( )  : 
+ *
+ * @return  boolean         true, if SQL result is not needed
+ * @access  private
+ * @version 2.0.11
+ * @since   2.0.11
+ */
+  private function productGetDetailsSqlIsNotNeeded( )
+  {
+      // RETURN : there isn't any GET or POST parameter
+//var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
+    if( ( ! t3lib_div::_GET( ) ) && ( ! t3lib_div::_POST( ) ) )
+    {
+      return true;
+    }
+      // RETURN : there isn't any GET or POST parameter
+
+    $GP = t3lib_div::_GET( )
+        + t3lib_div::_POST( )
+        ;
+//var_dump( $GP, $this->pObj->piVars );
+    
+      // RETURN : no sql result needed
+    switch( true )
+    {
+        // case is update of quantity only
+      case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
+        // case is removing the current item
+      case( intval( $this->pObj->piVars['del'] ) ):
+        // case is confirmation of ordering
+      case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
+        return true;
+        break;
+      default:
+          // Follow the workflow
+        break;
+    }
+      // RETURN : no sql result needed
+    
+    unset( $GP );
+    
+    return false;
   }
 
    /**
