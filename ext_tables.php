@@ -139,6 +139,8 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              '+Caddy CSS');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       '+Caddy CSS +Orange');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        '+Caddy CSS +Gruen');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          '+Caddy CSS +Rot');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    '+Caddy Einstellungen Deutsch');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     '+Caddy Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     '+Caddy Powermail 2.x Main');
@@ -158,6 +160,8 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              '+Caddy CSS');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       '+Caddy CSS +orange');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        '+Caddy CSS +green');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          '+Caddy CSS +red');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    '+Caddy properties German');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     '+Caddy Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     '+Caddy Powermail 2.x Main');

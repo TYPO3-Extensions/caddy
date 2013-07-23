@@ -99,7 +99,7 @@ plugin.caddy {
   html.color.icon.caddy = EXT:caddy/files/img/caddy_080_08.png
   # cat=caddy - html colors/others/301;        type=string;  label= Icon delete
   html.color.icon.delete = EXT:caddy/files/img/delete_080_08.png
-  # cat=caddy - html colors/others/400;        type=color;  label= Table header text
+  # cat=caddy - html colors/others/400;        type=color;  label= Powermail text
   html.color.powermail.text = #207CCA
   # cat=caddy - html colors/others/500;        type=color;  label= Table header background
   html.color.table.head.background = #207CCA
