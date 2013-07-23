@@ -474,7 +474,7 @@ class tx_caddy_session
   private function productGetDetailsSql( $gpvar )
   {
       // RETURN : any sql result isn't needed
-    if( productGetDetailsSqlIsNotNeeded( ) )
+    if( $this->productGetDetailsSqlIsNotNeeded( ) )
     {
       return false;
     }
