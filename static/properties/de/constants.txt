@@ -1,9 +1,7 @@
 plugin.caddy {
   main {
-    main {
-      dec_point     = ,
-      thousands_sep = .
-    }
+    dec_point     = ,
+    thousands_sep = .
     dueDateFormat = %d. %b. %Y
   }
 }
