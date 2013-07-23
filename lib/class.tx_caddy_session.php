@@ -480,7 +480,14 @@ class tx_caddy_session
     }
       // RETURN : there isn't any GET or POST parameter
 
-    // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
+      // RETURN : cas eis update of quantity only
+    if( intval( $this->piVars['updateByCaddy'] ) )
+    {
+      return;
+    }
+      // RETURN : cas eis update of quantity only
+    
+      // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
     $this->zz_sqlReplaceMarker( );
       // #42154, 101218, dwildt, 1-
     //$query = $pObj->cObj->stdWrap($pObj->conf['db.']['sql'], $pObj->conf['db.']['sql.']);
