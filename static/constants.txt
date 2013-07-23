@@ -14,9 +14,9 @@ plugin.caddy {
   # cat=caddy - main numberformat//202; type=text; label= Decimal: e.g. 2. This setting will be used for formatting prices.
   main.decimal = 2
   # cat=caddy - main numberformat//203; type=text; label= Decimal symbol: e.g. , or . This setting will be used for formatting prices.
-  main.dec_point = ,
+  main.dec_point = .
   # cat=caddy - main numberformat//204; type=text; label= Thousands separator:  e.g. , or . This setting will be used for formatting prices.
-  main.thousands_sep = .
+  main.thousands_sep = ,
   # cat=caddy - main numberformat//205; type=text; label= Currency symbol: e.g. &euro or $
   main.currencySymbol = &euro;
   # cat=caddy - main numberformat//206; type=boolean; label= currency before price: Show currency symbol before price.

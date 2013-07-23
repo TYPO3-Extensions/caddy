@@ -336,7 +336,7 @@ class tx_caddy_session
         if( $this->drs->drsWarn )
         {
           $prompt = 'Aborted: Item record is without the element "gross"!';
-          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 3 );
         }
         return false;
         break;
@@ -344,8 +344,8 @@ class tx_caddy_session
           // DRS
         if( $this->drs->drsWarn )
         {
-          $prompt = 'Aborted: Item record is without the element "gross"!';
-          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+          $prompt = 'Aborted: Item record is without the element "title"!';
+          t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 3 );
         }
         return false;
         break;
