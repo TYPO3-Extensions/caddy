@@ -194,12 +194,12 @@ switch( true )
     $TCA['pages']['columns']['module']['config']['items'][] =
        array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_100_02.png' );
     $TCA['pages']['columns']['module']['config']['items'][] =
-       array( 'Caddy Mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_100_02.png' );
+       array( 'Caddy Mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_050_03.png' );
     break;
   default:
       // English
     $TCA['pages']['columns']['module']['config']['items'][] =
-       array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_050_03.png' );
+       array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_100_02.png' );
     $TCA['pages']['columns']['module']['config']['items'][] =
        array( 'Caddy mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ).'files/img/caddy_050_03.png' );
 }
