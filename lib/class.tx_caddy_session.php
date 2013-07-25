@@ -596,11 +596,13 @@ class tx_caddy_session
     $GP = t3lib_div::_GET( )
         + t3lib_div::_POST( )
         ;
-var_dump( $GP, $this->pObj->piVars );
+//var_dump( $GP, $this->pObj->piVars );
     
       // RETURN : no sql result needed
     switch( true )
     {
+        // caddy is called without the page id only
+      case( count( $GP ) == 1 && empty( $this->pObj->piVars ) ):
         // case is update of quantity only
       case( intval( $this->pObj->piVars['updateByCaddy'] ) ):
         // case is removing the current item
