@@ -262,6 +262,7 @@ class tx_caddy_session
   public function productAdd( $newProduct )
   {
     $variants = null;
+    $sesArray = array( );
 
       // RETURN : requirements aren't matched
     if( ! $this->productAddRequirements( $newProduct ) )
@@ -1428,6 +1429,7 @@ class tx_caddy_session
   {
     $quantity = 0;
 
+var_dump( __METHOD__, __LINE__, $this->pObj->gpvar );
       // SWITCH : add an item or update items quantity
     switch( true )
     {
@@ -1441,7 +1443,7 @@ class tx_caddy_session
         $quantity = $this->quantityGetDelete( );
         break;
       default:
-        $prompt = 'ERROR: no value for switch' . PHP_EOL .
+        $prompt = 'ERROR: no value for switch.<br />' . PHP_EOL .
                   'Sorry for the trouble.<br />' . PHP_EOL .
                   'TYPO3 Caddy<br />' . PHP_EOL .
                 __METHOD__ . ' (' . __LINE__ . ')';
