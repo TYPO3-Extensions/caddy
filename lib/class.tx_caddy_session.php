@@ -596,7 +596,7 @@ class tx_caddy_session
     $GP = t3lib_div::_GET( )
         + t3lib_div::_POST( )
         ;
-//var_dump( $GP, $this->pObj->piVars );
+var_dump( $GP, $this->pObj->piVars );
     
       // RETURN : no sql result needed
     switch( true )
