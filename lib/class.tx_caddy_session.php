@@ -1429,7 +1429,6 @@ class tx_caddy_session
   {
     $quantity = 0;
 
-var_dump( __METHOD__, __LINE__, $this->pObj->gpvar, $this->pObj->piVars );
       // SWITCH : add an item or update items quantity
     switch( true )
     {
