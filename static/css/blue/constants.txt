@@ -1,0 +1,31 @@
+plugin.caddy {
+  html {
+    color {
+      border                = #207CCA
+      button.gradient1      = #1E5799
+      button.gradient2      = #2989D8
+      button.gradient3      = #207CCA
+      button.gradient4      = #7DB9E8
+      button.text           = #FFF
+      icon.caddy            = EXT:caddy/files/img/caddy_080_08.png
+      icon.delete           = EXT:caddy/files/img/delete_080_08.png
+      powermail.text        = #207CCA
+      table.head.background = #207CCA
+      table.head.text       = #FFF
+    }
+  }
+  pdf {
+    textColor {
+      address             = #333333
+      caddy               = #207CCA
+      date                = #207CCA
+      numberDeliveryorder = #207CCA
+      numberInvoice       = #207CCA
+      numberLine          = #333333
+      numberOrder         = #207CCA
+      revocation          = #207CCA
+      termOfCredit        = #333333
+      terms               = #207CCA
+    }
+  }
+}
