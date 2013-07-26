@@ -52,6 +52,7 @@ class tx_caddy_pi3 extends tslib_pibase
   */	
   public function main( $content, $conf ) 
   {
+var_dump( __METHOD__, __LINE__ );
     $this->conf = $conf;
     
     $this->init( );
@@ -73,6 +74,7 @@ class tx_caddy_pi3 extends tslib_pibase
     unset( $numberOfProducts );
     
     $content = $caddy;
+var_dump( __METHOD__, __LINE__ );
     return $this->pi_wrapInBaseClass( $content );
   }
 
