@@ -289,6 +289,7 @@ var_dump( __METHOD__, __LINE__ );
   */
   private function initFlexform( )
   {
+    $this->pi_initPIflexForm( ); 
     $this->flexform->main( );
   }
 
