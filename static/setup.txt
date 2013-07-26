@@ -2520,7 +2520,7 @@ plugin.tx_caddy_pi3 {
         // Icon
       20 = IMAGE
       20 {
-        file = EXT:caddy/files/img/caddy_100_02.png
+        file = {$plugin.caddy.html.color.icon.caddy}
         altText {
           data = LLL:EXT:caddy/pi3/locallang.xml:caddy
         }
@@ -2556,7 +2556,7 @@ plugin.tx_caddy_pi3 {
         // Icon
       20 = IMAGE
       20 {
-        file = EXT:caddy/files/img/caddy_100_02.png
+        file = {$plugin.caddy.html.color.icon.caddy}
         altText {
           data = LLL:EXT:caddy/pi3/locallang.xml:shop
         }
