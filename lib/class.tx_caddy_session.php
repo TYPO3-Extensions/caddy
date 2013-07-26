@@ -1553,7 +1553,7 @@ class tx_caddy_session
     foreach( ( array ) $this->pObj->piVars['qty'] as $value )
     {
       $quantity = $quantity
-                + $value
+                + ( int ) $value
                 ;
     }
 
