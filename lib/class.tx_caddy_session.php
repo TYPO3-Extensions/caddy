@@ -612,6 +612,8 @@ class tx_caddy_session
       case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
         // case is ordering is sent
       case( $GP['tx_powermail_pi1']['action'] == 'create' ):
+        // ordering is canceled 
+      case( $GP['tx_powermail_pi1']['action'] == 'form' ):
         return true;
         break;
       default:
