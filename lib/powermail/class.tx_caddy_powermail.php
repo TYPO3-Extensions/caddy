@@ -672,7 +672,7 @@ class tx_caddy_powermail extends tslib_pibase
       // DRS
     if( $this->pObj->drs->drsError )
     {
-      if( ! isset( $this->paramPost[$uid2x] ) )
+      if( ! isset( $this->paramPost['field'][$uid2x] ) )
       {
         $prompt = 'POST[field][' . $uid2x . '] isn\'t set!';
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
@@ -1026,6 +1026,19 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $this->paramGet  = t3lib_div::_GET( 'tx_powermail_pi1' );
     $this->paramPost = t3lib_div::_POST( 'tx_powermail_pi1' );
+
+      // RETURN : no DRS
+    if( ! ( $this->drs->drsPowermail || $this->drs->drsSession || $this->drsUserfunc ) )
+    {
+      return;
+    }
+      // RETURN : no DRS
+      
+      // DRS
+    $prompt = 'GET[tx_powermail_pi1]: ' . var_export( $this->paramGet, true );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    $prompt = 'POST[tx_powermail_pi1]: ' . var_export( $this->paramPost, true );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
   }
 
  /**
