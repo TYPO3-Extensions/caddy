@@ -289,7 +289,6 @@ var_dump( __METHOD__, __LINE__ );
   */
   private function initFlexform( )
   {
-    $this->pi_initPIflexForm( ); 
     $this->flexform->main( );
   }
 
@@ -414,7 +413,9 @@ var_dump( __METHOD__, __LINE__ );
 
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
+var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );    
     $this->pi_initPIflexForm( );
+var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );    
   }
 
 
