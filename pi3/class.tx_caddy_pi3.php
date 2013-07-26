@@ -52,12 +52,12 @@ class tx_caddy_pi3 extends tslib_pibase
   */	
   public function main( $content, $conf ) 
   {
-var_dump( __METHOD__, __LINE__ );
     $this->conf = $conf;
     
     $this->init( );
     
     $this->products   = $this->session->productsGet( $this->pidCaddy );
+var_dump( __METHOD__, __LINE__,  $this->pidCaddy, $this->products );
     $numberOfProducts = count( $this->products );
     
     switch( true )
