@@ -57,7 +57,6 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->init( );
     
     $this->products   = $this->session->productsGet( $this->pidCaddy );
-var_dump( __METHOD__, __LINE__,  $this->pidCaddy, $this->products );
     $numberOfProducts = count( $this->products );
     
     switch( true )
@@ -74,7 +73,7 @@ var_dump( __METHOD__, __LINE__,  $this->pidCaddy, $this->products );
     unset( $numberOfProducts );
     
     $content = $caddy;
-var_dump( __METHOD__, __LINE__ );
+
     return $this->pi_wrapInBaseClass( $content );
   }
 
@@ -413,9 +412,7 @@ var_dump( __METHOD__, __LINE__ );
 
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
-var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );    
     $this->pi_initPIflexForm( );
-var_dump( __METHOD__, __LINE__, $this->cObj->data['pi_flexform'] );    
   }
 
 
