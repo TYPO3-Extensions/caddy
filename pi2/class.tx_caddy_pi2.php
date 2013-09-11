@@ -128,11 +128,14 @@ class tx_caddy_pi2 extends tslib_pibase
   */	
   private function caddyWoProducts( ) 
   {
-    $content  = $this->tmpl['caddysumempty'];
-    $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
-    $content  = $this->dynamicMarkers->main( $content, $this );
-    
+    $content = null;
     return $content;
+    
+//    $content  = $this->tmpl['caddysumempty'];
+//    $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
+//    $content  = $this->dynamicMarkers->main( $content, $this );
+//    
+//    return $content;
   }
 
 
