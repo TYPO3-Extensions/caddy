@@ -321,10 +321,12 @@ plugin.caddy {
 
   # cat=caddy - templates//101; type=string; label= E-mails: Path to the HTML template file, which is used in e-mails (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
   templates.e-mail            = EXT:caddy/files/templates/caddy.html
-  # cat=caddy - templates//201; type=string; label= HTML caddy: Path to the HTML template file, which is used in HTML pages for the caddy - the website (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
+  # cat=caddy - templates//201; type=string; label= HTML caddy: Path to the HTML template file, which is used in HTML pages for the caddy (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
   templates.html.caddy        = EXT:caddy/files/templates/caddy.html
-  # cat=caddy - templates//202; type=string; label= HTML caddy mini: Path to the HTML template file, which is used in HTML pages for the mini caddy - the website (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
+  # cat=caddy - templates//202; type=string; label= HTML caddy mini: Path to the HTML template file, which is used in HTML pages for the mini caddy (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
   templates.html.caddymini    = EXT:caddy/files/templates/caddy.html
+  # cat=caddy - templates//203; type=string; label= HTML caddy sum: Path to the HTML template file, which is used in HTML pages for the caddy sum (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddysum.html)
+  templates.html.caddysum    = EXT:caddy/files/templates/caddy.html
   # cat=caddy - templates//301; type=string; label= PDF delivery order: Path to the HTML template file, which is used in the delivery order - a PDF attachment  (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)
   templates.pdf.deliveryorder = EXT:caddy/files/templates/caddy.html
   # cat=caddy - templates//301; type=string; label= PDF invoice: Path to the HTML template file, which is used in the invoice - a PDF attachment (i.e. EXT:caddy/files/templates/caddy.html or EXT:caddy/files/templates/caddy_wo_options.html)

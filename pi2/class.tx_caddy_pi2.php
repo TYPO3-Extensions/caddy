@@ -95,13 +95,10 @@ class tx_caddy_pi2 extends tslib_pibase
   */	
   private function caddyWiProducts( ) 
   {
-    $tmpl = $this->caddyWiProductsItems( );
-
-    $quantity  = $this->zz_quantity( );
+    $tmpl     = $this->tmpl['caddysum'];
     
     $cObjData = array
     (
-      'quantity'  => $quantity,
       'gross'     => $this->session->productsGetGross( $this->pidCaddy )
     );
 
@@ -122,90 +119,6 @@ class tx_caddy_pi2 extends tslib_pibase
   }
 
  /**
-  * caddyWiProductsItems( ) : 
-  *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
-  * @version  2.1.0
-  * @since    2.1.0
-  */	
-  private function caddyWiProductsItems( ) 
-  {
-    $tmpl = null;
-    $tmpl = $this->caddyWiProductsItemsWoItems( );
-    
-    return $tmpl;
-  }
-
- /**
-  * caddyWiProductsItemsWiItems( ) : 
-  *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
-  * @version  2.1.0
-  * @since    2.1.0
-  */	
-  private function caddyWiProductsItemsWiItems( ) 
-  {
-    $items = null; 
-
-    foreach( ( array ) $this->products as $product )
-    {
-      $cObjData = array
-      (
-        'gross'     => $product['gross']
-                    *  $product['qty']
-                    ,
-        'quantity'  => $product['qty'],
-        'label'     => $product['title'],
-      );
-
-      $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
-
-      $key                  = 'item';
-      $name                 = $this->conf['content.'][$key];
-      $conf                 = $this->conf['content.'][$key . '.'];
-      $value                = $this->local_cObj->cObjGetSingle( $name, $conf );
-      $marker               = '###' . strtoupper( $key ) . '###';
-      $markerArray[$marker] = $value;
-
-      $tmpl = $this->tmpl['items'];
-      $item = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
-      $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
-      $item = $this->dynamicMarkers->main( $item, $this );
-      
-      $items  = $items 
-              . $item
-              ;
-    }
-
-    $content  = $this->tmpl['caddymini'];
-    $marker   = '###ITEMS###';
-    $value    = $items;
-    $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
-   
-    return $content;
-  }
-
- /**
-  * caddyWiProductsItemsWoItems( ) : 
-  *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
-  * @version  2.1.0
-  * @since    2.1.0
-  */	
-  private function caddyWiProductsItemsWoItems( ) 
-  {
-    $content  = $this->tmpl['caddymini'];
-    $marker   = '###ITEMS###';
-    $value    = null;
-    $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
-   
-    return $content;
-  }
-
- /**
   * caddyWoProducts( ) : 
   *
   * @return     string      $content  : mini caddy in case of no products
@@ -215,7 +128,7 @@ class tx_caddy_pi2 extends tslib_pibase
   */	
   private function caddyWoProducts( ) 
   {
-    $content  = $this->tmpl['caddyminiempty'];
+    $content  = $this->tmpl['caddysumempty'];
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $content  = $this->dynamicMarkers->main( $content, $this );
     
@@ -400,35 +313,5 @@ class tx_caddy_pi2 extends tslib_pibase
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     $this->pi_initPIflexForm( );
-  }
-
-
-
-  /***********************************************
-  *
-  * Caddy
-  *
-  **********************************************/
-
- /**
-  * zz_quantity( ) : 
-  *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
-  * @version  2.1.0
-  * @since    2.1.0
-  */	
-  private function zz_quantity( ) 
-  {
-    $quantity = 0;
-    
-    foreach( ( array ) $this->products as $product )
-    {
-      $quantity = $quantity
-                + $product['qty']
-                ;
-    }
-
-    return $quantity;
   }
 }
