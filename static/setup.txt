@@ -2431,9 +2431,8 @@ plugin.tx_caddy_pi2 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        noTrimWrap = |<span class="gross sumgross">|</div><div class="caddy_cleaner"></span>|
+        wrap = <span class="gross sumgross">|</span>
       }
-      wrap = <div class="sum caddysum">|</div>
     }
   }
     // page id of the caddy

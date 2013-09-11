@@ -159,6 +159,15 @@ plugin.tx_caddy_pi1 {
       width:6em; 
     }
 
+    div.caddysum {
+      background: #FFF;
+      margin: 0 0 1em 0;
+    }
+    div.caddysum .sum {
+      font-size:2em; 
+      font-weight:bold; 
+    }
+
     div.caddy_cleaner { 
       clear: both; 
       margin: 0; 
