@@ -254,14 +254,16 @@ class tx_caddy_pi2 extends tslib_pibase
     if( empty( $this->pidCaddy ) )
     {
       $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL 
+              . '<br />' . PHP_EOL 
               . 'Please take care of a proper configuration.<br />' . PHP_EOL 
               . 'Please maintain<br />' . PHP_EOL 
-              . '* constant editor > category [CADDY - MAIN] > pid.<br />' . PHP_EOL 
+              . '* constant editor > category [CADDY - MAIN] > pid<br />' . PHP_EOL 
               . 'or<br />' . PHP_EOL 
               . '* plugin / flexform > [Plugin] > [Caddy] > Page with the caddy<br />' . PHP_EOL 
               . '<br />' . PHP_EOL 
               . 'Sorry for the trouble.<br />' . PHP_EOL 
               . 'TYPO3 Caddy > sum (plugin 2)<br />' . PHP_EOL 
+              . '<br />' . PHP_EOL 
               . __METHOD__ . ' (' . __LINE__ . ')'
               ;
       die( $prompt );
