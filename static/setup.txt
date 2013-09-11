@@ -2220,11 +2220,10 @@ plugin.tx_caddy_pi1 {
       caddysum =
       caddysum {
         file = {$plugin.caddy.templates.html.caddysum}
-          // all, item
+          // all
         marker =
         marker {
           all   = ###CADDYSUM###
-          item  = ###ITEMS###
         }
       }
     }

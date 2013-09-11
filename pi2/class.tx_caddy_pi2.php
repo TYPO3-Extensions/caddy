@@ -95,11 +95,11 @@ class tx_caddy_pi2 extends tslib_pibase
   */	
   private function caddyWiProducts( ) 
   {
-    $tmpl     = $this->tmpl['caddysum'];
+    $tmpl = $this->tmpl['caddysum'];
     
     $cObjData = array
     (
-      'gross'     => $this->session->productsGetGross( $this->pidCaddy )
+      'gross' => $this->session->productsGetGross( $this->pidCaddy )
     );
 
     $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
@@ -285,17 +285,14 @@ class tx_caddy_pi2 extends tslib_pibase
   */
   private function initTemplate( )
   {
-//    $this->tmpl = $this->template->main( );
-
-    $fileRessource  = $this->conf['templates.']['html.']['caddymini.']['file'];
+    $fileRessource  = $this->conf['templates.']['html.']['caddysum.']['file'];
     $template       = $this->cObj->fileResource( $fileRessource );
-    $markerAll      = $this->conf['templates.']['html.']['caddymini.']['marker.']['all'];
-    $markerItem     = $this->conf['templates.']['html.']['caddymini.']['marker.']['item'];
+    $markerAll      = $this->conf['templates.']['html.']['caddysum.']['marker.']['all'];
     
-    $this->tmpl['caddymini']      = $this->cObj->getSubpart( $template, $markerAll );
-    $this->tmpl['items']          = $this->cObj->getSubpart( $this->tmpl['caddymini'], $markerItem );
-    $marker                       = '###CADDYMINIEMPTY###';
-    $this->tmpl['caddyminiempty'] = $this->cObj->getSubpart( $template, $marker );
+    $this->tmpl['caddysum']      = $this->cObj->getSubpart( $template, $markerAll );
+    $this->tmpl['items']         = $this->cObj->getSubpart( $this->tmpl['caddysum'], $markerItem );
+    $marker                      = '###CADDYSUMEMPTY###';
+    $this->tmpl['caddysumempty'] = $this->cObj->getSubpart( $template, $marker );
   }
 
  /**
