@@ -21,27 +21,6 @@
           </config>
         </TCEforms>
       </sdefPidCaddy>
-      <sdefCaddyMode>
-        <TCEforms>
-          <label>LLL:EXT:caddy/pi2/locallang_flexform.xml:sdefCaddyMode</label>
-          <config>
-            <type>select</type>
-            <items type="array">
-              <numIndex index="0" type="array">
-                <numIndex index="0">LLL:EXT:caddy/pi2/locallang_flexform.xml:sdefCaddyModeWiItems</numIndex>
-                <numIndex index="1">wiItems</numIndex>
-              </numIndex>
-              <numIndex index="1" type="array">
-                <numIndex index="0">LLL:EXT:caddy/pi2/locallang_flexform.xml:sdefCaddyModeWoItems</numIndex>
-                <numIndex index="1">woItems</numIndex>
-              </numIndex>
-            </items>
-            <default>woItems</default>
-            <maxitems>1</maxitems>
-            <size>1</size>
-          </config>
-        </TCEforms>
-      </sdefCaddyMode>
       <sdefDrs>
         <TCEforms>
           <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>

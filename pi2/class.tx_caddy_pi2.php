@@ -31,8 +31,8 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.2
- * @since       2.0.2
+ * @version	2.1.0
+ * @since       2.1.0
  */
 class tx_caddy_pi2 extends tslib_pibase
 {
@@ -47,8 +47,8 @@ class tx_caddy_pi2 extends tslib_pibase
   * @param      string      $content  : plugin content. Usually empty.
   * @param      array       $conf     : plugin configuration.
   * @return     string      $content  : The content that is displayed on the website
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   public function main( $content, $conf ) 
   {
@@ -90,8 +90,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function caddyWiProducts( ) 
   {
@@ -126,26 +126,13 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function caddyWiProductsItems( ) 
   {
     $tmpl = null;
-    $sdefCaddyMode = $this->flexform->sdefCaddyMode;
-
-    switch( true )
-    {
-      case( $sdefCaddyMode == 'woItems' ):
-        $tmpl = $this->caddyWiProductsItemsWoItems( );
-        break;
-      case( $sdefCaddyMode == 'wiItems' ):
-      default:
-        $tmpl = $this->caddyWiProductsItemsWiItems( );
-        break;
-    }
-    
-    unset( $sdefCaddyMode );
+    $tmpl = $this->caddyWiProductsItemsWoItems( );
     
     return $tmpl;
   }
@@ -155,8 +142,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function caddyWiProductsItemsWiItems( ) 
   {
@@ -205,8 +192,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function caddyWiProductsItemsWoItems( ) 
   {
@@ -223,8 +210,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of no products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function caddyWoProducts( ) 
   {
@@ -428,8 +415,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return     string      $content  : mini caddy in case of products
   * @access   private
-  * @version  2.0.2
-  * @since    2.0.2
+  * @version  2.1.0
+  * @since    2.1.0
   */	
   private function zz_quantity( ) 
   {
