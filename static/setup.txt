@@ -2132,7 +2132,7 @@ plugin.tx_caddy_pi1 {
     }
   }
     // page id of the caddy
-  pid = {$plugin.caddy.main.pid}
+  pid = {$plugin.caddy.pages.pid}
 
     // Never remove this property!
   pluginCheck = dummy
@@ -2436,7 +2436,7 @@ plugin.tx_caddy_pi2 {
     }
   }
     // page id of the caddy
-  pid = {$plugin.caddy.main.pid}
+  pid = {$plugin.caddy.pages.pid}
 
     // e-mail, html, pdf
   templates =
@@ -2557,7 +2557,7 @@ plugin.tx_caddy_pi3 {
     }
   }
     // page id of the caddy
-  pid = {$plugin.caddy.main.pid}
+  pid = {$plugin.caddy.pages.pid}
 
     // e-mail, html, pdf
   templates =
