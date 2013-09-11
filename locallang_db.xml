@@ -6,7 +6,7 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="tt_content.list_type_pi1">Caddy : cart</label>
+      <label index="tt_content.list_type_pi1">Caddy</label>
       <label index="tt_content.list_type_pi2">Caddy : sum gross</label>
       <label index="tt_content.list_type_pi3">Caddy : mini</label>
       <label index="tx_caddy_item">Item</label>                        
@@ -46,7 +46,7 @@
       <label index="tx_caddy_order.tstamp">at</label>                        
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="tt_content.list_type_pi1">Caddy : Warenkorb</label>
+      <label index="tt_content.list_type_pi1">Caddy</label>
       <label index="tt_content.list_type_pi2">Caddy : Brutto-Betrag</label>
       <label index="tt_content.list_type_pi3">Caddy : Mini</label>
       <label index="tx_caddy_item">Artikel</label>                        
