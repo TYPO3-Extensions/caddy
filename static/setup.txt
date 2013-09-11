@@ -2406,32 +2406,10 @@ plugin.tx_caddy_pi2 {
     sum = COA
     sum {
         // label
-      20 = COA
+      20 = TEXT
       20 {
-          // in case of one item
-        10 = TEXT
-        10 {
-          if {
-            value = 2 
-            isLessThan {
-              field = quantity
-            }
-          }
-          data = LLL:EXT:caddy/pi2/locallang.xml:item
-        }
-          // in case of more than one item
-        20 = TEXT
-        20 {
-          if {
-            value = 2 
-            isLessThan {
-              field = quantity
-            }
-            negate  = 1
-          }
-          data = LLL:EXT:caddy/pi2/locallang.xml:items
-        }
-        wrap = <div class="label sumlabel">|</div>
+        data        = LLL:EXT:caddy/pi2/locallang.xml:phrasesum
+        noTrimWrap  = |<span class="label sumlabel">|</span> |
       }
         // gross
       30 = COA
@@ -2453,7 +2431,7 @@ plugin.tx_caddy_pi2 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="gross sumgross">|</div><div class="caddy_cleaner"></div>
+        noTrimWrap = |<span class="gross sumgross">|</div><div class="caddy_cleaner"></span>|
       }
       wrap = <div class="sum caddysum">|</div>
     }

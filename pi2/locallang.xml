@@ -6,24 +6,14 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
-      <label index="caddy">Caddy</label>
       <label index="caddysumempty">Caddy is empty</label>
       <label index="caddysumemptyyou">Your caddy is empty</label>
-      <label index="item">item</label>
-      <label index="items">items</label>
-      <label index="linktocaddy">Go to the Caddy</label>
-      <label index="linktoshop">Go Shopping!</label>
-      <label index="shop">Shop</label>
+      <label index="phrasesum">Sum</label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="caddy">Warenkorb</label>
       <label index="caddysumempty">Der Warenkorb ist leer</label>
       <label index="caddysumemptyyou">Dein Warenkorb ist leer</label>
-      <label index="item">Artikel</label>
-      <label index="items">Artikel</label>
-      <label index="linktocaddy">Zum Warenkorb</label>
-      <label index="linktoshop">Zum Shop</label>
-      <label index="shop">Shop</label>
+      <label index="phrasesum">Bestellsumme</label>
     </languageKey>
   </data>
 </T3locallang>
