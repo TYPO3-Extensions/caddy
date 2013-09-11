@@ -253,9 +253,10 @@ class tx_caddy_pi2 extends tslib_pibase
       // DIE  : $row is empty
     if( empty( $this->pidCaddy ) )
     {
-      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL 
+      $prompt = 'ERROR: uid of the page with the caddy is empty!<br />' . PHP_EOL 
               . '<br />' . PHP_EOL 
               . 'Please take care of a proper configuration.<br />' . PHP_EOL 
+              . '<br />' . PHP_EOL 
               . 'Please maintain<br />' . PHP_EOL 
               . '* constant editor > category [CADDY - MAIN] > pid<br />' . PHP_EOL 
               . 'or<br />' . PHP_EOL 
