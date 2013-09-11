@@ -163,8 +163,11 @@ plugin.tx_caddy_pi1 {
       background: #FFF;
       margin: 0 0 1em 0;
     }
-    div.caddysum .sum {
+    div.caddysum .label,
+    div.caddysum .gross {
       font-size:2em; 
+    }
+    div.caddysum .gross {
       font-weight:bold; 
     }
 
