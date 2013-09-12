@@ -2402,7 +2402,7 @@ plugin.tx_caddy_pi2 {
     // item, marker
   content = 
   content {
-      // label, gross
+      // label, sumsumgross
     sum = COA
     sum {
         // label
@@ -2411,9 +2411,10 @@ plugin.tx_caddy_pi2 {
         data        = LLL:EXT:caddy/pi2/locallang.xml:phrasesum
         noTrimWrap  = |<span class="label sumlabel">|</span> |
       }
-        // gross
+        // sumsumgross
       30 = COA
       30 {
+          // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
@@ -2426,6 +2427,7 @@ plugin.tx_caddy_pi2 {
 
           drs = {$plugin.caddy.debug.userfunc}
         }
+          // currency
         20 = TEXT
         20 {
           value = {$plugin.caddy.main.currencySymbol}
@@ -2473,6 +2475,7 @@ plugin.tx_caddy_pi3 {
         // gross
       30 = COA
       30 {
+          // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
@@ -2485,6 +2488,7 @@ plugin.tx_caddy_pi3 {
 
           drs = {$plugin.caddy.debug.userfunc}
         }
+          // currency
         20 = TEXT
         20 {
           value = {$plugin.caddy.main.currencySymbol}
