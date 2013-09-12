@@ -340,7 +340,7 @@ var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
   private function zz_setData( $data, $table )
   {
 
-    $this->local_cObj->start( $data, $table );
+    $this->local_cObj->start( $data );
       // cObject becomes current record
 
       // RETURN : no DRS
