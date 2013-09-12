@@ -40,6 +40,11 @@ class tx_caddy_pi2 extends tslib_pibase
   public $prefixId      = 'tx_caddy_pi2';
   public $scriptRelPath = 'pi2/class.tx_caddy_pi2.php';
   public $extKey        = 'caddy';
+  
+  public  $local_cObj       = null;
+  public  $conf             = null;
+  public  $arr_extConf      = null;
+  
 
  /**
   * main( ) : the main method of the PlugIn
@@ -144,11 +149,13 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function init( )
   {
+    $this->initExtManager( );
+    
     $this->initVars( );
     
     $this->initInstances( );
@@ -201,8 +208,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initDrs( )
   {
@@ -210,12 +217,26 @@ class tx_caddy_pi2 extends tslib_pibase
   }
   
  /**
+  * init( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.1.0
+  * @since      2.1.0
+  */
+  private function initExtManager( )
+  {
+    $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
+  }  
+
+
+ /**
   * initFlexform( )
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initFlexform( )
   {
@@ -227,8 +248,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initInstances( )
   {
@@ -247,23 +268,19 @@ class tx_caddy_pi2 extends tslib_pibase
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi2_flexform' );
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
-//var_dump( __METHOD__, __LINE__, $this->cObj->data );
+
     require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
     $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
     $this->session->setParentObject( $this );
     
-//    require_once( $path2lib . 'class.tx_caddy_template.php' );
-//    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
-//    $this->template->pObj   = $this;
-
   }
 
 /**
  * initPid( ) :
  *
  * @return	void
- * @version 2.0.0
- * @since   2.0.0
+ * @version 2.1.0
+ * @since   2.1.0
  */
   private function initPid( )
   {
@@ -306,8 +323,8 @@ class tx_caddy_pi2 extends tslib_pibase
   * @return	void
   * @access private
   * @internal   #45915
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initPowermail( )
   {
@@ -319,8 +336,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initTemplate( )
   {
@@ -339,8 +356,8 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
-  * @since      2.0.0
+  * @version    2.1.0
+  * @since      2.1.0
   */
   private function initVars( )
   {
