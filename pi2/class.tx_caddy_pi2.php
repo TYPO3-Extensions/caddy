@@ -56,8 +56,6 @@ class tx_caddy_pi2 extends tslib_pibase
     
     $this->init( );
     
-$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
     $this->products   = $this->session->productsGet( $this->pidCaddy );
     $numberOfProducts = count( $this->products );
     
@@ -99,15 +97,6 @@ var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
   {
     $tmpl = $this->tmpl['caddysum'];
           
-//    $cObjData = array
-//    (
-//      'gross' => $this->session->productsGetGross( $this->pidCaddy )
-//    );
-//    $this->local_cObj->start( $cObjData, $this->conf['db.']['table'] );
-    
-    $this->zz_setDataBySession( $this->pidCaddy );
-
-
     $key                  = 'sum';
     $name                 = $this->conf['content.'][$key];
     $conf                 = $this->conf['content.'][$key . '.'];
@@ -169,7 +158,42 @@ var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
     $this->initPid( );
     $this->initTemplate( );
     
-    $this->session->setParentObject( $this );
+    $this->initCobj( );
+    
+    //$this->session->setParentObject( $this );
+  }
+  
+/**
+ * initCobj( ) :
+ *
+ * @return	void
+ * @access private
+ * @version 2.1.0
+ * @since 2.1.0
+ */
+  private function initCobj( )
+  {
+      // Get the current session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+
+      // data: implode the array to a one dimensional array
+    $data = t3lib_BEfunc::implodeTSParams( $sesArray );
+
+      // cObject becomes current record
+    $this->local_cObj->start( $data );
+
+      // RETURN : no DRS
+    if( ! $this->drs->drsCobj )
+    {
+      return;
+    }
+      // RETURN : no DRS
+
+      // DRS
+    $cObjData = var_export( $this->local_cObj->data, true );
+    $prompt   = 'cObj->data: ' . $cObjData;
+    t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      // DRS
   }
   
  /**
@@ -327,53 +351,4 @@ var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
     $this->pi_initPIflexForm( );
   }
 
-/**
- * zz_setData( ) :
- *
- * @param	[type]		$$data: ...
- * @param	[type]		$table: ...
- * @return	void
- * @access private
- * @version 2.0.2
- * @since 2.0.2
- */
-  private function zz_setData( $data, $table )
-  {
-
-    $this->local_cObj->start( $data );
-      // cObject becomes current record
-
-      // RETURN : no DRS
-    if( ! $this->drs->drsCobj )
-    {
-      return;
-    }
-      // RETURN : no DRS
-
-      // DRS
-    $cObjData = var_export( $this->local_cObj->data, true );
-    $prompt   = 'cObj->data: ' . $cObjData;
-    t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
-      // DRS
-  }
-  
-/**
- * zz_setDataBySession( ) :
- *
- * @return	void
- * @access private
- * @version 2.1.0
- * @since 2.1.0
- */
-  private function zz_setDataBySession( $pid )
-  {
-      // Get the current session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
-
-      // data: implode the array to a one dimensional array
-    $data = t3lib_BEfunc::implodeTSParams( $sesArray );
-
-      // set cObj->data
-    $this->zz_setData( $data, $this->conf['db.']['table'] );
-  }
 }
