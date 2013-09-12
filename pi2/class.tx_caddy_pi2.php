@@ -229,7 +229,6 @@ class tx_caddy_pi2 extends tslib_pibase
     $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
   }  
 
-
  /**
   * initFlexform( )
   *

@@ -41,6 +41,11 @@ class tx_caddy_pi3 extends tslib_pibase
   public $scriptRelPath = 'pi3/class.tx_caddy_pi3.php';
   public $extKey = 'caddy';
 
+  public  $local_cObj       = null;
+  public  $conf             = null;
+  public  $arr_extConf      = null;
+  
+
  /**
   * main( ) : the main method of the PlugIn
   *
@@ -253,6 +258,8 @@ class tx_caddy_pi3 extends tslib_pibase
   */
   private function init( )
   {
+    $this->initExtManager( );
+
     $this->initVars( );
     
     $this->initInstances( );
@@ -261,8 +268,6 @@ class tx_caddy_pi3 extends tslib_pibase
 
     $this->initPid( );
     $this->initTemplate( );
-    
-    $this->session->setParentObject( $this );
   }
   
  /**
@@ -278,6 +283,19 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->drs->init( );
   }
   
+ /**
+  * init( )
+  *
+  * @return	void
+  * @access private
+  * @version    2.1.0
+  * @since      2.1.0
+  */
+  private function initExtManager( )
+  {
+    $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
+  }  
+
  /**
   * initFlexform( )
   *
