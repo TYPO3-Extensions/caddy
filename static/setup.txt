@@ -2418,7 +2418,7 @@ plugin.tx_caddy_pi2 {
         10.userFunc = tx_caddy_userfunc->numberformat
         10.userFunc {
           number = TEXT
-          number.field = gross
+          number.field = sumsumgross
 
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}
