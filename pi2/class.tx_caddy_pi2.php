@@ -56,8 +56,8 @@ class tx_caddy_pi2 extends tslib_pibase
     
     $this->init( );
     
-$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
-var_dump( $sesArray );
+$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+var_dump( $this->extKey . '_' . $this->pidCaddy, $sesArray );
     $this->products   = $this->session->productsGet( $this->pidCaddy );
     $numberOfProducts = count( $this->products );
     
