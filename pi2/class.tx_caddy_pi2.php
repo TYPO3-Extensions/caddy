@@ -37,9 +37,9 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
 class tx_caddy_pi2 extends tslib_pibase
 {
 
-  public $prefixId = 'tx_caddy_pi2';
+  public $prefixId      = 'tx_caddy_pi2';
   public $scriptRelPath = 'pi2/class.tx_caddy_pi2.php';
-  public $extKey = 'caddy';
+  public $extKey        = 'caddy';
 
  /**
   * main( ) : the main method of the PlugIn
@@ -56,6 +56,8 @@ class tx_caddy_pi2 extends tslib_pibase
     
     $this->init( );
     
+$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+var_dump( $sesArray );
     $this->products   = $this->session->productsGet( $this->pidCaddy );
     $numberOfProducts = count( $this->products );
     
