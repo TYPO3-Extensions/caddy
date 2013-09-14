@@ -616,6 +616,10 @@ class tx_caddy_session
       case( $GP['tx_powermail_pi1']['action'] == 'form' ):
         return true;
         break;
+        // 130913, dwildt, 3+
+      case( isset( $GP['tx_powermail_pi1']['mailID'] ) ):
+        return true;
+        break;
       default:
           // Follow the workflow
         break;

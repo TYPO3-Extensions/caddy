@@ -2,12 +2,6 @@ VERSION
 =======
 2.1.1: 13-09-13
 
-This is a copy of
-* caddy.html
-
-Options are removed.
-
-
 INDEX
 =====
 
@@ -37,6 +31,8 @@ INDEX
 * CADDYMINI 
 * CADDYMINIEMPTY 
 
+* CADDYSUM
+
 
 <!-- ###CADDY### begin --> 
 <div class="caddy">
@@ -47,9 +43,6 @@ INDEX
       <div class="caddy_col caddy_col1">###_LOCAL_LANG_QTY###</div>
       <div class="caddy_col caddy_col2">###_LOCAL_LANG_SKU_SHORT###</div>
       <div class="caddy_col caddy_col3">###_LOCAL_LANG_ITEM###</div>
-      <div class="caddy_col caddy_col4">###_LOCAL_LANG_TAX_ABBR###</div>
-      <div class="caddy_col caddy_col5">###_LOCAL_LANG_PRICE_GROSS_UNIT###</div>
-      <div class="caddy_col caddy_col6">###_LOCAL_LANG_PRICE_GROSS_UNIT_WI_QTY###</div>
       <div class="caddy_col caddy_col7">###_LOCAL_LANG_TABLEHEADERDELETE###</div>
       <div class="caddy_cleaner"></div>
     </div>
@@ -61,39 +54,12 @@ INDEX
       </div>
       <div class="caddy_col caddy_col2">###SKU###</div>
       <div class="caddy_col caddy_col3">###TITLE###</div>
-      <div class="caddy_col caddy_col4">###TAXRATE###</div>
-      <div class="caddy_col caddy_col5">###GROSS###</div>
-      <div class="caddy_col caddy_col6">###SUMGROSS###</div>
       <div class="caddy_col caddy_col7">###DELETE###</div>
       <div class="caddy_cleaner"></div>
       ###ITEM_ERROR###
     </div>
     <!-- ###ITEM### -->
     <!-- ###CONTENT### -->
-    <div class="caddy_footer">                        
-      <div class="caddy_col caddy_col1 caddy_col_strong">#</div>
-      <div class="caddy_col caddy_col2_5 caddy_col_strong">###_LOCAL_LANG_ITEMSSUMNET###</div>
-      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMITEMSNET###</div>
-      <div class="caddy_cleaner"></div>
-      <div class="caddy_col caddy_col1">+</div>
-      <div class="caddy_col caddy_col2_5">###_LOCAL_LANG_TAX###</div>
-      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMSUMTAXSUM###</div>
-      <div class="caddy_cleaner"></div>
-      <div class="caddy_col caddy_col1">&nbsp;</div>
-      <div class="caddy_col caddy_col2_4">###TAXRATE_NORMAL_STRING###</div>
-      <div class="caddy_col caddy_col5">###SUMSUMTAXNORMAL###</div>
-      <div class="caddy_col caddy_col6">&nbsp;</div>
-      <div class="caddy_cleaner"></div>
-      <div class="caddy_col caddy_col1">&nbsp;</div>
-      <div class="caddy_col caddy_col2_4">###TAXRATE_REDUCED_STRING###</div>
-      <div class="caddy_col caddy_col5">###SUMSUMTAXREDUCED###</div>
-      <div class="caddy_col caddy_col6">&nbsp;</div>
-      <div class="caddy_cleaner"></div>
-      <div class="caddy_col caddy_col1 caddy_col_strong">#</div>
-      <div class="caddy_col caddy_col2_5 caddy_col_strong">###_LOCAL_LANG_SUMGROSS###</div>
-      <div class="caddy_col caddy_col6 caddy_col_strong">###SUMSUMGROSS###</div>
-      <div class="caddy_cleaner"></div>
-    </div>
   </form>
   ###_HTMLMARKER_LINKTOSHOP###
   <div class="caddy_cleaner"></div>
@@ -199,15 +165,6 @@ INDEX
       <th style="border-bottom:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_ITEM###;">
         ###_LOCAL_LANG_ITEM###
       </th>
-      <th style="border-bottom:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_TAX###;">
-        ###_LOCAL_LANG_TAX_ABBR###
-      </th>
-      <th style="border-bottom:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_NET###;">
-        ###_LOCAL_LANG_PRICE_GROSS_UNIT###
-      </th>
-      <th style="border-bottom:1px solid ###BORDERCOLOR###;padding:.2em 0em .2em 0;;width:###WIDTH_TD_SUM###;">
-        ###_LOCAL_LANG_PRICE_GROSS_UNIT_WI_QTY###
-      </th>
     </tr>
   </thead>
   <!-- ###CONTENT### -->
@@ -223,65 +180,10 @@ INDEX
       <td style="padding:.2em 1em .2em 0;width:###WIDTH_TD_ITEM###;">
         ###TITLE###
       </td>
-      <td style="padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_TAX###;">
-        ###TAXRATE###
-      </td>
-      <td style="padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_NET###;">
-        ###GROSS###
-      </td>
-      <td style="padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
-        ###SUMGROSS###
-      </td>
     </tr>
   </tbody>
   <!-- ###ITEM### -->
   <!-- ###CONTENT### -->
-  <tfoot>
-    <tr>
-      <td style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
-        #
-      </td>
-      <td colspan="4" style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_SKUITEMTAXNET###;">
-        ###_LOCAL_LANG_ITEMSSUMNET###
-      </td>
-      <td style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
-        ###SUMITEMSNET###
-      </td>
-    </tr>
-    <tr>
-      <td style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
-        +
-      </td>
-      <td colspan="4" style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_SKUITEMTAXNET###;">
-        ###TAXRATE_NORMAL_STRING###
-      </td>
-      <td style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
-        ###SUMSUMTAXNORMAL###
-      </td>
-    </tr>
-    <tr>
-      <td style="padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
-        +
-      </td>
-      <td colspan="4" style="padding:.2em 1em .2em 0;width:###WIDTH_TD_SKUITEMTAXNET###;">
-        ###TAXRATE_REDUCED_STRING###
-      </td>
-      <td style="padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
-        ###SUMSUMTAXREDUCED###
-      </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
-        #
-      </td>
-      <td colspan="4" style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_SKUITEMTAXNET###;">
-        ###_LOCAL_LANG_SUMGROSS###
-      </td>
-      <td style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
-        ###SUMSUMGROSS###
-      </td>
-    </tr>
-  </tfoot>
 </table>
 <br />
 <!-- ###CADDY_EMAIL### end -->
@@ -372,3 +274,16 @@ INDEX
   ###_HTMLMARKER_LINKTOSHOP###
 </div>
 <!-- ###CADDYMINIEMPTY### end -->
+
+
+<!-- ###CADDYSUM### begin --> 
+<div class="caddysum">
+  ###SUM###
+</div>
+<!-- ###CADDYSUM### end -->
+
+<!-- ###CADDYSUMEMPTY### begin --> 
+<div class="caddysum caddysumempty">
+  ###_LOCAL_LANG_CADDYSUMEMPTY###
+</div>
+<!-- ###CADDYSUMEMPTY### end -->

@@ -98,6 +98,7 @@ class tx_caddy_template
       }
         // DRS
 
+        // #i0025, 130913, dwildt
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
           <h1>
@@ -106,9 +107,14 @@ class tx_caddy_template
           <p>
             There isn\'t any HTML template.
           </p>
-          <p>
-            Please enable the DRS - the Development Reporting System. It tries to offer a fix.
-          </p>
+          <ul>
+            <li>
+              Please check the current configuration with the Caddy plugin -> tab [Check it!]
+            </li>
+            <li>
+              Please enable the DRS - the Development Reporting System. It tries to offer a fix.
+            </li>
+          </ul>
           <p>
             ' . __METHOD__ . ' (' . __LINE__ . ')
           </p>
