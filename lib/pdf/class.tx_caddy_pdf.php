@@ -553,7 +553,8 @@ class tx_caddy_pdf extends tslib_pibase
 //    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
 //    $this->template->pObj   = $this;
 
-    require_once( $path2lib . 'pdf/tcpdf/tcpdf.php' );
+      // #52165, 130921, dwildt
+    require_once( $path2lib . 'pdf/tcpdf_6.0.031/tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
   }
 
