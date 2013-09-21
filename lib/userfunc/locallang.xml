@@ -141,7 +141,7 @@
               height="80" 
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
-        <h2 style="text-align:left;">
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
           Caddy
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
@@ -150,52 +150,45 @@
               style="text-decoration:underline;"
               alt="Caddy - online manual"
               title="Caddy - online manual"
-              target="_blank">TYPO3-Caddy online manual &raquo;</a>
+              target="_blank">Manual (HTML) &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
               alt="Caddy - PDF manual"
               title="Caddy - PDF manual"
-              target="_blank">TYPO3-Caddy PDF manual &raquo;</a>
+              target="_blank">Manual (PDF) &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy website &raquo;</a>
-          </li>
-          <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/en/support"
-              style="text-decoration:underline;"
-              alt="Caddy - the Shopping Cart"
-              title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy support &raquo;</a>
-          </li>
-          <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/en/sponsoring"
-              style="text-decoration:underline;"
-              alt="Caddy - the Shopping Cart"
-              title="Caddy - the Shopping Cart"
-                target="_blank">TYPO3-Caddy sponsoring &raquo;</a>
+              target="_blank">Homepage &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">TYPO3-Caddy forum &raquo;</a>
+              target="_blank">Forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3.org/extension-manuals/caddy/"
+            <a href="http://typo3-caddy.de/en/support"
               style="text-decoration:underline;"
-              alt="Caddy - online manual"
-              title="Caddy - online manual"
-              target="_blank">TYPO3-Caddy online manual &raquo;</a>
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">Support &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en/sponsoring"
+              style="text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+                target="_blank">Sponsoring &raquo;</a>
           </li>
         </ul>
-        <h2 style="text-align:left;">
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
           One-Click-Installer
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
@@ -204,17 +197,17 @@
               style="text-decoration:underline;"
               alt="TYPO3 Organiser Installer"
               title="TYPO3 Organiser Installer"
-              target="_blank">TYPO3 Organiser Installer &raquo;</a>
+              target="_blank">Organiser &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-quick-shop.de/en/one-click/" 
               style="text-decoration:underline;"
               alt="TYPO3 Quick Shop Installer"
               title="TYPO3 Quick Shop Installer"
-              target="_blank">TYPO3 Quick Shop Installer &raquo;</a>
+              target="_blank">Quick Shop &raquo;</a>
           </li>
         </ul>
-        <h2 style="text-align:left;">
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
           Developer
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
@@ -223,7 +216,7 @@
               style="text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
               title="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
-              target="_blank">Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy &raquo;</a>
+              target="_blank">Dirk Wildt (Die Netzmacher) &raquo;</a>
           </li>
         </ul>
       ]]></label>
