@@ -1156,6 +1156,8 @@ class tx_caddy_pdf extends tslib_pibase
   {
       // 130921
     $htmlContent = str_replace( 'src="http', 'src="*http', $htmlContent );
+    var_dump( __METHOD__ , __LINE__ , $htmlContent );
+    die( __LINE__ );
     
       // Set textColor
     $this->tcpdfSetTextColor( $properties );
