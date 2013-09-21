@@ -141,6 +141,9 @@
               height="80" 
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
+        <h2 style="text-align:left;">
+          Caddy
+        </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
             <a href="http://typo3.org/extension-manuals/caddy/"
@@ -185,6 +188,37 @@
               target="_blank">TYPO3-Caddy forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
+            <a href="http://typo3.org/extension-manuals/caddy/"
+              style="text-decoration:underline;"
+              alt="Caddy - online manual"
+              title="Caddy - online manual"
+              target="_blank">TYPO3-Caddy online manual &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="text-align:left;">
+          One-Click-Installer
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-organiser.de/en/one-click/" 
+              style="text-decoration:underline;"
+              alt="TYPO3 Organiser Installer"
+              title="TYPO3 Organiser Installer"
+              target="_blank">TYPO3 Organiser Installer &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-quick-shop.de/en/one-click/" 
+              style="text-decoration:underline;"
+              alt="TYPO3 Quick Shop Installer"
+              title="TYPO3 Quick Shop Installer"
+              target="_blank">TYPO3 Quick Shop Installer &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="text-align:left;">
+          Developer
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
             <a href="http://wildt.at.die-netzmacher.de/" 
               style="text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
@@ -192,7 +226,6 @@
               target="_blank">Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
-        </div>
       ]]></label>
       <label index="promptSponsors"><![CDATA[
         <h1 style="text-align:left;">
