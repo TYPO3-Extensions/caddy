@@ -93,7 +93,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version     2.0.0
+ * @version     2.1.2
  * @since       2.0.0
  */
 class tx_caddy_pdf extends tslib_pibase
@@ -536,7 +536,7 @@ class tx_caddy_pdf extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    2.1.2
   * @since      2.0.0
   */
   private function initInstances( )
@@ -1155,11 +1155,6 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
   {
-      // 130921
-    //$htmlContent = str_replace( 'src="http://typo3-organiser.de/', 'src="/home/www/htdocs/www.typo3-browser-forum.de/typo3/', $htmlContent );
-    //var_dump( __METHOD__ , __LINE__ , $htmlContent );
-    //die( __LINE__ );
-    
       // Set textColor
     $this->tcpdfSetTextColor( $properties );
 
