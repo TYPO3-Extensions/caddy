@@ -555,15 +555,24 @@ class tx_caddy_session
     
     if( empty( $row ) )
     {
-      $prompt = '<h1>caddy: error</h1>' . PHP_EOL
+      $GP = t3lib_div::_GET( )
+          + t3lib_div::_POST( )
+          ;
+
+        // DRS
+      $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
               . '<p>SQL query has an unexpected result: no row with a title field!</p>' . PHP_EOL
               . '<p>Maybe the SQL result is empty.</p>' . PHP_EOL
               . '<p>' . $query . '</p>' . PHP_EOL
               . '<p>' . PHP_EOL
+              . '<pre>' . PHP_EOL
+              . var_export( $GP, true ) . PHP_EOL
+              . '</pre>' . PHP_EOL
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
               . 'TYPO3 Caddy<br />' . PHP_EOL 
-              . __METHOD__ . ' (' . __LINE__ . ')';
+              . __METHOD__ . ' (' . __LINE__ . ')'
+              . '</p>' . PHP_EOL
               ;
 //var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
       echo $prompt;
