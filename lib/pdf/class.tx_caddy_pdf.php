@@ -1154,6 +1154,9 @@ class tx_caddy_pdf extends tslib_pibase
   */
   private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
   {
+      // 130921
+    $htmlContent = str_replace( 'src="http', 'src="*http', $htmlContent );
+    
       // Set textColor
     $this->tcpdfSetTextColor( $properties );
 
