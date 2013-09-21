@@ -1156,7 +1156,7 @@ class tx_caddy_pdf extends tslib_pibase
   {
       // 130921
     $htmlContent = str_replace( 'src="http://typo3-organiser.de/', 'src="/home/www/htdocs/www.typo3-browser-forum.de/typo3/', $htmlContent );
-    var_dump( __METHOD__ , __LINE__ , $htmlContent );
+    //var_dump( __METHOD__ , __LINE__ , $htmlContent );
     //die( __LINE__ );
     
       // Set textColor
