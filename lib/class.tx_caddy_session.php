@@ -506,15 +506,24 @@ class tx_caddy_session
         $prompt = $error;
         t3lib_div::devlog( '[ERROR/SQL] ' . $prompt, $this->extKey, 2 );
       }
+      
+      $GP = t3lib_div::_GET( )
+          + t3lib_div::_POST( )
+          ;
+
         // DRS
       $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
               . '<p>' . $error . '</p>' . PHP_EOL
               . '<p>' . $query . '</p>' . PHP_EOL
               . '<p>' . PHP_EOL
+              . '<pre>' . PHP_EOL
+              . var_export( $GP, true ) . PHP_EOL
+              . '</pre>' . PHP_EOL
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
               . 'TYPO3 Caddy<br />' . PHP_EOL 
-              . __METHOD__ . ' (' . __LINE__ . ')';
+              . __METHOD__ . ' (' . __LINE__ . ')'
+              . '</p>' . PHP_EOL
               ;
       die( $prompt );
     }
