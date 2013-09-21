@@ -1,6 +1,7 @@
 2.1.2
   13-09-21
   Improvement
+  * #i0027: pdf filename %H%M -> %H%M%S
   * #52165: Update tcpdf: 5.9.149 -> 6.0.031
             * tcpdf_6.0.031
               * examples ( removed )

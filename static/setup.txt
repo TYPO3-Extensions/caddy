@@ -568,7 +568,7 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           data      = date : U
-          strftime  = %Y%m%d%H%M
+          strftime  = %Y%m%d%H%M%S
           wrap      = -|
         }
           // extension pdf
@@ -1004,7 +1004,7 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           data      = date : U
-          strftime  = %Y%m%d%H%M
+          strftime  = %Y%m%d%H%M%S
           wrap      = -|
         }
           // extension pdf
@@ -1667,7 +1667,7 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           data      = date : U
-          strftime  = %Y%m%d%H%M
+          strftime  = %Y%m%d%H%M%S
           wrap      = -|
         }
           // extension pdf
@@ -1911,7 +1911,7 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           data      = date : U
-          strftime  = %Y%m%d%H%M
+          strftime  = %Y%m%d%H%M%S
           wrap      = -|
         }
           // extension pdf
