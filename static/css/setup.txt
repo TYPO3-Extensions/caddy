@@ -203,6 +203,9 @@ plugin.tx_caddy_pi1 {
     .caddy select  { 
       padding: .7em 0 .4em .5em
     }
+    .filter .caddy select  { 
+      margin: 0 1em 0 0;
+    }
     .caddy select option
     {
       color: black;
