@@ -180,7 +180,6 @@ plugin.tx_caddy_pi1 {
     div.linktocaddy,
     div.linktoshop,
     .caddy select,
-    .caddy select option,
     form.caddy button.submit,
     img.caddy_delete { 
       background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
@@ -201,7 +200,7 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:.1em;
     }
-    .Xcaddy select option
+    .caddy select option
     {
       color: black;
       padding: 0 0 0 .4em;
