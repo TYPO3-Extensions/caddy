@@ -1,7 +1,10 @@
 plugin.caddy {
   main {
-    dec_point     = ,
-    thousands_sep = .
-    dueDateFormat = %d. %b. %Y
+    dec_point                 = ,
+    thousands_sep             = .
+    dueDateFormat             = %d. %b. %Y
+    currencySymbol            = &euro;
+    currencySymbolBeforePrice = 0
+    percentSymbol             = %
   }
 }
