@@ -179,7 +179,7 @@ plugin.tx_caddy_pi1 {
     }
     div.linktocaddy,
     div.linktoshop,
-    form.caddy select,
+    .caddy select,
     form.caddy button.submit,
     img.caddy_delete { 
       background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
