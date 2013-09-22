@@ -28,25 +28,25 @@ plugin.caddy {
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   main.numberformat.sponsors = Click me!
 
-  # cat=caddy - database*//200; type=text; label= Table name*: *Obligate! Enter the name of the table with the items (products). Examples: tx_myextension_products, tx_quickshop_main
+  # cat=caddy - database*//200; type=text; label= Table*: *Obligate! Name of the table with the items (products). Examples: tx_myextension_products, tx_quickshop_products, tx_cars_model
   db.table =
-  # cat=caddy - database*//210; type=text; label= Title field*: *Obligate! Enter the label of the field with the title of the item (product).
+  # cat=caddy - database*//210; type=text; label= Title*: *Obligate! Label of the field with the title of the item (product).
   db.title = title
-  # cat=caddy - database*//220; type=text; label= Price field*: *Obligate! Enter the label of the field with the gross price of the item (product).
+  # cat=caddy - database*//220; type=text; label= Price*: *Obligate! Label of the field with the gross price of the item (product).
   db.price = price
-  # cat=caddy - database*//230; type=text; label= Tax field*: *Obligate! Enter the label of the field with the tax category of the item (product).
+  # cat=caddy - database*//230; type=text; label= Tax*: *Obligate! Label of the field with the tax category of the item (product).
   db.tax = tax
-  # cat=caddy - database*//240; type=text; label= SKU field: Enter the label of the field with the sku (unique id) of the item (product).
+  # cat=caddy - database*//240; type=text; label= SKU: Label of the field with the sku (unique id) of the item (product).
   db.sku =
-  # cat=caddy - database*//241; type=text; label= MIN field: Enter the label of the field with the minimum order quantity of the item (product).
+  # cat=caddy - database*//241; type=text; label= MIN: Label of the field with the minimum order quantity of the item (product).
   db.min =
-  # cat=caddy - database*//242; type=text; label= MAX field: Enter the label of the field with the minimum order quantity of the item (product).
+  # cat=caddy - database*//242; type=text; label= MAX: Label of the field with the minimum order quantity of the item (product).
   db.max =
-  # cat=caddy - database*//250; type=text; label= Service Attribute 1 field: Enter the label of the field with the service attribute 1 of the item (product).
+  # cat=caddy - database*//250; type=text; label= Service Attribute 1: Label of the field with the service attribute 1 of the item (product).
   db.service_attribute_1 =
-  # cat=caddy - database*//251; type=text; label= Service Attribute 2 field: Enter the label of the field with the service attribute 2 of the item (product).
+  # cat=caddy - database*//251; type=text; label= Service Attribute 2: Label of the field with the service attribute 2 of the item (product).
   db.service_attribute_2 =
-  # cat=caddy - database*//252; type=text; label= Service Attribute 3 field: Enter the label of the field with the service attribute 3 of the item (product).
+  # cat=caddy - database*//252; type=text; label= Service Attribute 3: Label of the field with the service attribute 3 of the item (product).
   db.service_attribute_3 =
   # cat=caddy - database*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   db.externalLinks = Click me!
