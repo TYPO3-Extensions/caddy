@@ -18,7 +18,7 @@ plugin.caddy {
   # cat=caddy - main numberformat//204; type=text; label= Thousands separator:  e.g. , or . This setting will be used for formatting prices.
   main.thousands_sep = ,
   # cat=caddy - main numberformat//205; type=text; label= Currency symbol: e.g. &euro or $
-  main.currencySymbol = $;
+  main.currencySymbol = $
   # cat=caddy - main numberformat//206; type=boolean; label= currency before price: Show currency symbol before price.
   main.currencySymbolBeforePrice = 1
   # cat=caddy - main numberformat//207; type=string; label= Percent symbol
