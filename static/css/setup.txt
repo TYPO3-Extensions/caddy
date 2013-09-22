@@ -196,12 +196,12 @@ plugin.tx_caddy_pi1 {
       color: {$plugin.caddy.html.color.button.text};
       cursor:pointer;
       font-weight:bold;
-      padding: 5px 20px;
+      padding: .4em .5em;
       position:relative;
       top:.1em;
     }
     .caddy select  { 
-      padding: 10px 5px 5px;
+      padding: .7em 0 .4em .5em
     }
     .caddy select option
     {
