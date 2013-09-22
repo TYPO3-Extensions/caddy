@@ -158,16 +158,16 @@ switch( true )
     break;
   default:
       // English
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              '+Caddy CSS');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         '+Caddy CSS +blue');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       '+Caddy CSS +orange');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        '+Caddy CSS +green');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          '+Caddy CSS +red');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    '+Caddy properties German');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     '+Caddy Powermail 1.x');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     '+Caddy Powermail 2.x Main');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', '+Caddy Powermail 2.x +CSS fancy');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1) - ');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (2+) - CSS');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         'Caddy (2+) - CSS +blue');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (2+) - CSS +orange');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy (2+) - CSS +green');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy (2+) - CSS +red');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (3+) - properties German');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (4+) - Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (4+) - Powermail 2.x Main');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (5+) - Powermail 2.x +CSS fancy');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
