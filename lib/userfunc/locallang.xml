@@ -120,9 +120,6 @@
       <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version48orGreater">You are using TYPO3 greater than 4.7. Flip it! isn't tested in this version. Try it!</label>
       <label index="promptExternalLinksBody"><![CDATA[
-        <h1 style="text-align:left;">
-          Helpful Links
-        </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
@@ -141,6 +138,9 @@
               height="80" 
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
+        <h1 style="text-align:left;">
+          Helpful Links
+        </h1>
         <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
           Caddy
         </h2>
@@ -405,9 +405,6 @@
       <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version48orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 4.7. Flip it! ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptExternalLinksBody"><![CDATA[
-        <h1 style="text-align:left;">
-          Hilfreiche Links
-        </h1>
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
@@ -426,49 +423,79 @@
               height="80" 
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
+        <h1 style="text-align:left;">
+          Hilfreiche Links
+        </h1>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Caddy
+        </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
             <a href="http://typo3.org/extension-manuals/caddy/"
               style="text-decoration:underline;"
               alt="Caddy - Online-Handbuch"
               title="Caddy - Online-Handbuch"
-              target="_blank">TYPO3-Caddy Online-Handbuch &raquo;</a>
+              target="_blank">Handbuch (HTML) &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
               style="text-decoration:underline;"
               alt="Caddy - PDF-Handbuch"
               title="Caddy - PDF-Handbuch"
-              target="_blank">TYPO3-Caddy PDF-Handbuch &raquo;</a>
+              target="_blank">Handbuch (PDF) &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/en"
               style="text-decoration:underline;"
               alt="Caddy - the Shopping Cart"
               title="Caddy - the Shopping Cart"
-              target="_blank">TYPO3-Caddy Website &raquo;</a>
+              target="_blank">Homepage &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/forum/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
-              target="_blank">TYPO3-Caddy Forum &raquo;</a>
+              target="_blank">Forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/support/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Support"
               title="TYPO3-Caddy - Support"
-              target="_blank">TYPO3-Caddy Support &raquo;</a>
+              target="_blank">Support &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
             <a href="http://typo3-caddy.de/sponsoring/" 
               style="text-decoration:underline;"
               alt="TYPO3-Caddy - Sponsoring"
               title="TYPO3-Caddy - Sponsoring"
-              target="_blank">TYPO3-Caddy Sponsoring &raquo;</a>
+              target="_blank">Sponsoring &raquo;</a>
           </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Ein-Klick-Installer
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-organiser.de/en/one-click/" 
+              style="text-decoration:underline;"
+              alt="TYPO3 Organiser Installer"
+              title="TYPO3 Organiser Installer"
+              target="_blank">Organiser &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-quick-shop.de/en/one-click/" 
+              style="text-decoration:underline;"
+              alt="TYPO3 Quick Shop Installer"
+              title="TYPO3 Quick Shop Installer"
+              target="_blank">Quick Shop &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Der Entwickler
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
             <a href="http://wildt.at.die-netzmacher.de/" 
               style="text-decoration:underline;"
@@ -477,7 +504,6 @@
               target="_blank">Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy &raquo;</a>
           </li>
         </ul>
-        </div>
       ]]></label>
       <label index="promptSponsors"><![CDATA[
         <h1 style="text-align:left;">
