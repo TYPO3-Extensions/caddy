@@ -201,7 +201,7 @@ plugin.tx_caddy_pi1 {
       top:.1em;
     }
     .caddy select  { 
-      padding: 8px 5px 7px;
+      padding: 10px 5px 5px;
     }
     .caddy select option
     {
