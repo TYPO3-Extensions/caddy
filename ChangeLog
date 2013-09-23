@@ -1,6 +1,7 @@
 2.1.2
   13-09-21
   Improvement
+  * #i0029: Setup: minimum groos sum for items
   * #i0028: CSS
   * #i0027: pdf filename %H%M -> %H%M%S
   * #52165: Update tcpdf: 5.9.149 -> 6.0.031

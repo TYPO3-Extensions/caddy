@@ -29,12 +29,22 @@ includeLibs {
   // plugin.tx_caddy_pi1
 
 plugin.tx_caddy_pi1 {
-    // Minimum price
-  cart =
-  cart {
-    cartmin {
-      # set a value for minimal price, this value will be compared with the gross price excluding service cost
-      value =
+    // limits
+  conditions =
+  conditions {
+      // items
+    limits =
+    limits {
+        // gross
+      items =
+      items {
+          // min
+        gross =
+        gross {
+            // [double] minimal price. This value will compared with the gross sum of of the items (without service costs)
+          min =
+        }
+      }
     }
   }
     // table, title, gross, tax, sku, min, max, service attributes

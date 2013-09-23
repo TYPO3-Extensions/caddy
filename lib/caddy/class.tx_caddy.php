@@ -247,7 +247,7 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiMinPriceUndercut( )
   {
-    $minimumRate  = floatval( $this->conf['cart.']['cartmin.']['value'] );
+    $minimumRate  = floatval( $this->conf['conditions.']['limits.']['items.']['gross.']['min'] );
     $caddyMinStr  = $this->zz_price_format( $minimumRate );
 
     $tmpl           = $this->tmpl['minprice'];
@@ -1250,7 +1250,7 @@ class tx_caddy extends tslib_pibase
   */
   private function calcMinRateUndercut( $calcedCaddy )
   {
-    $minimumRate            = floatval( $this->conf['cart.']['cartmin.']['value'] );
+    $minimumRate            = floatval( $this->conf['conditions.']['limits.']['items.']['gross.']['min'] );
     $minimumRateIsUndercut  = false;
       // 130721, dwildt, 1-
     //if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
