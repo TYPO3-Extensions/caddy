@@ -61,7 +61,7 @@ plugin.tx_caddy_pi1 {
     service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
     service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
   }
-
+    // [Boolean] Prompts a debug report with informations about TypoScript to the frontend
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
     // gross, min, max, qty, uid, sku, tax, title, volume, weight
