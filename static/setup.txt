@@ -64,7 +64,7 @@ plugin.tx_caddy_pi1 {
     // [Boolean] Prompts a debug report with informations about TypoScript to the frontend
   debug  = {$plugin.caddy.debug.paramsAndTs}
 
-    // gross, min, max, qty, uid, sku, tax, title, volume, weight
+    // gross, min, max, qty, sku, tax, title, uid, volume, weight
   getpost =
   getpost {
     gross = TEXT
@@ -81,11 +81,6 @@ plugin.tx_caddy_pi1 {
     min {
       data = GP:{$plugin.caddy.getpost.min}
       htmlSpecialChars = 1
-    }
-    uid = TEXT
-    uid {
-      data = GP:{$plugin.caddy.getpost.uid}
-      intval = 1
     }
     qty = TEXT
     qty {
@@ -105,6 +100,11 @@ plugin.tx_caddy_pi1 {
     title {
       data = GP:{$plugin.caddy.getpost.title}
       htmlSpecialChars = 1
+    }
+    uid = TEXT
+    uid {
+      data = GP:{$plugin.caddy.getpost.uid}
+      intval = 1
     }
     volume = TEXT
     volume {
