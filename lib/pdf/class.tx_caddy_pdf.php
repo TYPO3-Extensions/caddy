@@ -555,11 +555,13 @@ class tx_caddy_pdf extends tslib_pibase
 
       // #52313, 130926, dwildt, 3-
       // #52165, 130921, dwildt
-    require_once( $path2lib . 'pdf/tcpdf_6.0.031/tcpdf.php' );
-    require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
+//    require_once( $path2lib . 'pdf/tcpdf_6.0.031/tcpdf.php' );
+//    require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
     
       // #52313, 130926, dwildt, 1+
 //    require_once( t3lib_extMgm::extPath('t3_tcpdf') . 'class.tx_t3_tcpdf.php' );
+    require_once( t3lib_extMgm::extPath('caddypdf') . 'tcpdf/tcpdf.php' );
+    require_once( t3lib_extMgm::extPath('caddypdf') . 'fpdi/fpdi.php' );
   }
 
  /**
