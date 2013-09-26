@@ -549,20 +549,14 @@ class tx_caddy_pdf extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
 
-//    require_once( $path2lib . 'class.tx_caddy_template.php' );
-//    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
-//    $this->template->pObj   = $this;
-
       // #52313, 130926, dwildt, 3-
       // #52165, 130921, dwildt
 //    require_once( $path2lib . 'pdf/tcpdf_6.0.031/tcpdf.php' );
 //    require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
     
-      // #52313, 130926, dwildt, 1+
+      // #52313, 130926, dwildt, 2+
     require_once( t3lib_extMgm::extPath('t3_tcpdf') . 'class.tx_t3_tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
-//    require_once( t3lib_extMgm::extPath('caddypdf') . 'tcpdf/tcpdf.php' );
-//    require_once( t3lib_extMgm::extPath('caddypdf') . 'fpdi/fpdi.php' );
   }
 
  /**
@@ -974,7 +968,6 @@ class tx_caddy_pdf extends tslib_pibase
   {    
       // #52313
     $tcpdf = new FPDI( );
-//    $tcpdf = t3lib_div::makeInstance( 'tx_t3_tcpdf','P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false );
     
     $author = $this->pi_getLL( 'docauthor' );
     $title  = $this->pi_getLL( 'doctitle' );
