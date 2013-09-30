@@ -280,6 +280,9 @@ $TCA['tx_caddy_order'] = array (
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
     'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
+    'searchFields'      =>  'customerEmail,' . 
+                            'numberDeliveryorder,numberInvoice,numberOrder,' . 
+                            'sumGross,sumNet,sumTaxReduced,sumTaxNormal,'
   ),
 );
   // Orders
@@ -300,6 +303,7 @@ $TCA['tx_caddy_item'] = array (
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
     'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
+    'searchFields'      => 'title'
   ),
 );
   // Items
