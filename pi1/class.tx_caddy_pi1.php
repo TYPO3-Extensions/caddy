@@ -421,6 +421,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initAccessByIp( );
     $this->initTemplate( );
     $this->initGetPost( );
+    $this->initJavascript( );
     $this->initPowermail( );
     $this->initDatabase( );
     $this->initNumbers( );
