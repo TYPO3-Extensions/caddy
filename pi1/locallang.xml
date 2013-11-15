@@ -103,7 +103,7 @@
       <label index="ordernumber">Bestellnummer</label>
       <label index="paymentlabel">Zahlung per</label>
       <label index="paymentoption_cashinadvance">Vorkasse</label>
-      <label index="paymentoption_cashondelivery">Nachname</label>      
+      <label index="paymentoption_cashondelivery">Nachnahme</label>      
       <label index="paymentoption_invoice">Rechnung</label>
       <label index="payment_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
       <label index="payment_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
