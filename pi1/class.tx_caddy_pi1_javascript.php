@@ -118,7 +118,7 @@ class tx_caddy_pi1_javascript
     $name         = 'jquery_plugins_caddy_library';
     $path         = $tsPathToCaddy['library'];
     $inline       = $tsPathToCaddy['library.']['inline'];
-    $path_tsConf  = 'javascript.jquery.plugins.t3caddy.library';
+    $path_tsConf  = 'javascript.jquery.plugins.caddy.library';
     $marker       = $tsPathToCaddy['library.']['marker.'];
     $footer       = $tsPathToCaddy['library.']['footer'];
     $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker );
@@ -150,7 +150,7 @@ class tx_caddy_pi1_javascript
     $path         = $tsPathToCaddy['localisation'];
     $path         = str_replace('###LANG###', $GLOBALS['TSFE']->lang, $path);
     $inline       = $tsPathToCaddy['localisation.']['inline'];
-    $path_tsConf  = 'javascript.jquery.plugins.t3caddy.localisation';
+    $path_tsConf  = 'javascript.jquery.plugins.caddy.localisation';
     $marker       = $tsPathToCaddy['localisation.']['marker.'];
     $footer       = $tsPathToCaddy['localisation.']['footer'];
     $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker );
@@ -176,7 +176,7 @@ class tx_caddy_pi1_javascript
     $name         = 'jquery_plugins_caddy_plugin';
     $path         = $tsPathToCaddy['plugin'];
     $inline       = $tsPathToCaddy['plugin.']['inline'];
-    $path_tsConf  = 'javascript.jquery.plugins.t3caddy.plugin';
+    $path_tsConf  = 'javascript.jquery.plugins.caddy.plugin';
     $marker       = $tsPathToCaddy['plugin.']['marker.'];
     $footer       = $tsPathToCaddy['plugin.']['footer'];
     $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker );
