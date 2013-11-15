@@ -560,7 +560,7 @@ class tx_caddy_pi1_javascript
       switch( true )
       {
         case( is_array( $value ) ):
-          $marker[$hashKey] = var_export( $value, false );
+          $marker[$hashKey] = var_export( $value, true );
           break;
         case( ! is_array( $value ) ):
         default:
