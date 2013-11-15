@@ -125,7 +125,7 @@ plugin.tx_caddy_pi1 {
     ajax =
     ajax {
         // default
-      caddyPluginOnly =
+      caddyPluginOnly = PAGE
       caddyPluginOnly {
           // typeNum, config, 10
         default = PAGE
