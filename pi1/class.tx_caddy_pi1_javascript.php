@@ -200,7 +200,7 @@ class tx_caddy_pi1_javascript
     if( empty( $this->pObj->objFlexform->str_caddy_libraries ) )
     {
         // DRS
-      if ( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
+      if( $this->pObj->drs->drsJavascript )
       {
         $prompt = 'Flexform Javascript|caddy_libraries is empty.';
         t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
@@ -213,7 +213,7 @@ class tx_caddy_pi1_javascript
       // RETURN, there isn't any file for embedding
 
       // DRS
-    if ( $this->pObj->b_drs_error )
+    if( $this->pObj->drs->drsError )
     {
       $prompt = 'Script can not be included: ' . $path;
       t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->pObj->extKey, 3 );
@@ -305,7 +305,7 @@ class tx_caddy_pi1_javascript
     $GLOBALS[ 'TSFE' ]->additionalHeaderData[ $key ] = $script;
 
       // DRS
-    if( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
+    if( $this->pObj->drs->drsJavascript )
     {
       $prompt = 'file is placed in the header section: ' . $path;
       t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
@@ -347,7 +347,7 @@ class tx_caddy_pi1_javascript
     $GLOBALS[ 'TSFE' ]->additionalFooterData[ $key ] = $script;
 
       // DRS
-    if( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
+    if( $this->pObj->drs->drsJavascript )
     {
       $prompt = 'file is placed in the footer section: ' . $path;
       t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
@@ -378,7 +378,7 @@ class tx_caddy_pi1_javascript
     if( empty( $path ) )
     {
         // DRS
-      if( $this->pObj->b_drs_warn )
+      if( $this->pObj->drs->drsWarn )
       {
         $prompt = 'file can not be included. Path is empty. Maybe it is ok.';
         t3lib_div::devlog( '[WARN/JSS] ' . $prompt, $this->pObj->extKey, 2 );
@@ -422,7 +422,7 @@ class tx_caddy_pi1_javascript
     if( ! $bool_file_exists )
     {
         // DRS
-      if ( $this->pObj->b_drs_error )
+      if ( $this->pObj->drs->drsError )
       {
         $prompt = 'Script can not be included. File doesn\'t exist: ' . $path;
         t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->pObj->extKey, 3 );
