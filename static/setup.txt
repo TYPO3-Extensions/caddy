@@ -141,6 +141,54 @@ plugin.tx_caddy_pi1 {
         }
       }
     }
+      // plugins
+    jquery =
+    jquery {
+        // t3caddy
+      plugins =
+      plugins {
+          // library, localisation, plugin
+        caddy =
+        caddy {
+          library = EXT:caddy/res/javascript/caddy/library/tx_caddy_pi1-4.0.0.js
+          library {
+              // [Boolean] 1 (default): place JSS scripts in the footer section
+            footer = 1
+              // [Boolean] 0: link to the script file, 1 (default): include the script inline
+            inline = 1
+              // t3caddyalert, typenum
+            marker =
+            marker {
+                // Enable/Disable JSS alerts
+              t3caddyalert = TEXT
+              t3caddyalert {
+                value = 1
+              }
+              typenum = TEXT
+              typenum {
+                value = {$plugin.caddy.typeNum.caddyPluginOnly}
+              }
+            }
+          }
+            // [STRING] Path to the jss file of the t3caddy localisation. ###LANG### will be replacedwhile runtime
+          localisation = EXT:caddy/res/javascript/caddy/plugin/localisation_4.0.0.###LANG###.js
+          localisation {
+              // [Boolean] 1 (default): place JSS scripts in the footer section
+            footer = 1
+              // [Boolean] 0 (default): link to the script file, 1: include the script inline
+            inline = 0
+          }
+            // [String] Path to the jss file of the t3caddy plugin
+          plugin = EXT:caddy/res/javascript/caddy/plugin/jquery.t3caddy-4.0.0.js
+          plugin {
+              // [Boolean] 1 (default): place JSS scripts in the footer section
+            footer = 1
+              // [Boolean] 0 (default): link to the script file, 1: include the script inline
+            inline = 0
+          }
+        }
+      }
+    }
   }
 
     // item, sum

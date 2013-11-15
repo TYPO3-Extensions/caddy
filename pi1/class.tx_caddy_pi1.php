@@ -762,6 +762,12 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->flexform->pObj   = $this;
     $this->flexform->row    = $this->cObj->data;
 
+      // #53679, 131115, dwildt, 4+
+    require_once( 'class.tx_caddy_pi1_javascript.php' );
+    $this->javascript       = t3lib_div::makeInstance( 'tx_caddy_pi1_javascript' );
+    $this->javascript->pObj = $this;
+    $this->javascript->row  = $this->cObj->data;
+
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail        = t3lib_div::makeInstance( 'tx_caddy_powermail' );
     $this->powermail->pObj  = $this;
@@ -774,6 +780,21 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->template->pObj   = $this;
 
   }
+
+ /**
+  * initJavascript( )
+  *
+  * @return	void
+  * @access private
+  * @internal   #53679
+  * @version    4.0.0
+  * @since      4.0.0
+  */
+  private function initJavascript( )
+  {
+    $this->javascript->addJssFilesJqueryPluginsCaddy( );
+  }
+
 
 /**
  * initPid( ) :
