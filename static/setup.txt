@@ -171,7 +171,7 @@ plugin.tx_caddy_pi1 {
             }
           }
             // [STRING] Path to the jss file of the t3caddy localisation. ###LANG### will be replacedwhile runtime
-          localisation = EXT:caddy/res/javascript/caddy/plugin/localisation_4.0.0.###LANG###.js
+          localisation = EXT:caddy/res/javascript/caddy/plugin/localisation-4.0.0.###LANG###.js
           localisation {
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer = 1
