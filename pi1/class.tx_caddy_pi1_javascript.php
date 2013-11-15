@@ -552,8 +552,22 @@ class tx_caddy_pi1_javascript
       $marker[$hashKey] = $this->pObj->cObj->cObjGetSingle( $coa, $conf );
     }
     
-var_dump( __METHOD__, __LINE__, $this->local_cObj );
-var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
+    foreach( $this->pObj->cObj->data as $key => $value )
+    {
+      $hashKey          = '###' . strtoupper( $key ) . '###';
+      switch( true )
+      {
+        case( is_array( $value ) ):
+          $marker[$hashKey] = var_export( $value, false );
+          break;
+        case( ! is_array( $value ) ):
+        default:
+          $marker[$hashKey] = $value;
+          break;
+      }
+    }
+//var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
+var_dump( __METHOD__, __LINE__, $marker );
 //    $marker = $this->pObj->objMarker->extend_marker_wi_cObjData( $marker );
 //    $marker = $this->pObj->objMarker->extend_marker_wi_pivars( $marker );
     
