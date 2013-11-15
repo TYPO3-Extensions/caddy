@@ -550,6 +550,8 @@ class tx_caddy_pi1_javascript
       $coa              = $marker[ $keyWoDot ];
       $conf             = $marker[ $key ];
       $marker[$hashKey] = $this->pObj->cObj->cObjGetSingle( $coa, $conf );
+      unset( $marker[ $keyWoDot ] );
+      unset( $marker[ $key ] );
     }
     
     foreach( $this->pObj->cObj->data as $key => $value )
@@ -567,7 +569,7 @@ class tx_caddy_pi1_javascript
       }
     }
 //var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
-var_dump( __METHOD__, __LINE__, $marker );
+//var_dump( __METHOD__, __LINE__, $marker );
 //    $marker = $this->pObj->objMarker->extend_marker_wi_cObjData( $marker );
 //    $marker = $this->pObj->objMarker->extend_marker_wi_pivars( $marker );
     
