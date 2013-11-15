@@ -4,6 +4,7 @@
   * #53679: Workflow in AJAX
             Effected files:
             * t3jquery.txt
+            * files/img/loader.gif
             * pi1
               * class.tx_caddy_pi1_javascript.php
               * class.tx_caddy_pi1.php
