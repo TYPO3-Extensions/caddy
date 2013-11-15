@@ -125,7 +125,7 @@ plugin.tx_caddy_pi1 {
     ajax =
     ajax {
         // default
-      caddyPluginOnly = PAGE
+      caddyPluginOnly = 
       caddyPluginOnly {
           // typeNum, config, 10
         default = PAGE
@@ -2694,7 +2694,7 @@ plugin.tx_caddy_pi3 {
 
 caddyPluginOnly < plugin.tx_caddy_pi1.javascript.ajax.caddyPluginOnly
 
-[globalVar = GP:type = {$plugin.caddy.typeNum.caddyPluginOnly}]
+[globalVar = GP:type = {$plugin.caddy.typeNum.caddyPluginOnly.default}]
     // Don't handle header of the content element (plugin)
   lib.stdheader >
 [global]
