@@ -118,7 +118,7 @@ plugin.tx_caddy_pi1 {
     }
   }
 
-    // AJAX
+    // ajax, jquery
   javascript =
   javascript {
       // caddyPluginOnly
