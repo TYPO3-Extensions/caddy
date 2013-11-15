@@ -118,6 +118,31 @@ plugin.tx_caddy_pi1 {
     }
   }
 
+    // AJAX
+  javascript =
+  javascript {
+      // caddyPluginOnly
+    ajax =
+    ajax {
+        // default
+      caddyPluginOnly =
+      caddyPluginOnly {
+          // typeNum, config, 10
+        default = PAGE
+        default {
+          typeNum = {$plugin.caddy.typeNum.caddyPluginOnly}
+          config {
+            disableAllHeaderCode  = 1
+            xhtml_cleaning        = 0
+            admPanel              = 0
+            metaCharset           = UTF-8
+          }
+          10 < styles.content.get
+        }
+      }
+    }
+  }
+
     // item, sum
   marker =
   marker {
@@ -2348,6 +2373,11 @@ plugin.tx_caddy_pi1 {
     normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
 
+    // caddyPluginOnly
+  typeNum = 
+  typeNum {
+    caddyPluginOnly = {$plugin.caddy.typeNum.caddyPluginOnly}
+  }
 }
   // plugin.tx_caddy_pi1
 
@@ -2655,3 +2685,17 @@ plugin.tx_caddy_pi3 {
   }
 }
   // plugin.tx_caddy_pi3
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // caddyPluginOnly: PAGE object for AJAX
+
+caddyPluginOnly < plugin.tx_caddy_pi1.javascript.ajax.caddyPluginOnly
+
+[globalVar = GP:type = {$plugin.caddy.typeNum.caddyPluginOnly}]
+    // Don't handle header of the content element (plugin)
+  lib.stdheader >
+[global]
+  // caddyPluginOnly: PAGE object for AJAX
