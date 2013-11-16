@@ -267,5 +267,21 @@ plugin.tx_caddy_pi1 {
     table.caddy_table caddy_right { 
       text-align:right; 
     }
-  )
+
+    .opacity08 {
+      opacity:.8;
+    }
+    #tx-caddy-pi1-loader {
+      background: #fff url(/typo3conf/ext/caddy/files/img/loader.gif) no-repeat  center ;
+      background-color: #fff;
+      opacity:.8;
+      position: relative;
+      top:0;
+      left:0;
+      width:100%;             /* Overriden while runtime */
+      height:300px;           /* Overriden while runtime */
+      margin-bottom:-300px;   /* Overriden while runtime */
+      z-index:2;
+    }
+)
 }
