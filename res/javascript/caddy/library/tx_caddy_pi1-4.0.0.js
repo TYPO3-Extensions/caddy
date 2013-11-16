@@ -36,8 +36,8 @@ $( document ).ready( function( )
         
         // Update the content with the id #c###UID###-###VIEW###view
       var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
-      var html_element              = "#c###UID###";
-      //var html_element              = "#content";
+      //var html_element              = "#c###UID###";
+      var html_element              = "#content";
       var html_element_wi_selector  = html_element + " > *";
       $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
         // Update the content with the id #c###UID###-###VIEW###view
