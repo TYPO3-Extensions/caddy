@@ -427,11 +427,11 @@
                       // Cover the current html element with the loader *.gif
                     function cover_wi_loader( html_element ) {
                         // Add an opacity to the html element
-                      $( html_element ).addClass( "opacity08" );
+//                      $( html_element ).addClass( "opacity08" );
                       $( html_element ).addClass( "tx-caddy-pi1-loader" );
 
-                        // Cover the html element with a loading gif
-                      $( html_element ).prepend( "\t<div id='tx-caddy-pi1-loader'></div>\n" );
+//                        // Cover the html element with a loading gif
+//                      $( html_element ).prepend( "\t<div id='tx-caddy-pi1-loader'></div>\n" );
 //                        // Get the size of the html element
 //                      var heightWiPx      = $( html_element ).css( "height" );
 //                      var widthWiPx       = $( html_element ).css( "width" );
@@ -458,7 +458,7 @@
 //                      });
                         // Remove the opacity of the html element
                       $( html_element ).removeClass( "tx-caddy-pi1-loader" );
-                      $( html_element ).removeClass( "opacity08" );
+//                      $( html_element ).removeClass( "opacity08" );
                         // Initiate the ui button layout again
                       $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
                     };
