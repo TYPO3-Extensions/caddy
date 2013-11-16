@@ -268,7 +268,7 @@ plugin.tx_caddy_pi1 {
       text-align:right; 
     }
 
-    .XXX_opacity08 {
+    .opacity08 {
       opacity:.8;
     }
     #XXX_tx-caddy-pi1-loader {
@@ -292,7 +292,6 @@ plugin.tx_caddy_pi1 {
     }
     .tx-caddy-pi1-loader {
       background: #fff url(/typo3conf/ext/caddy/files/img/loader.gif) no-repeat  center ;
-      background-color: #fff;
       opacity:.8;
     }
 )
