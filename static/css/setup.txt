@@ -283,6 +283,13 @@ plugin.tx_caddy_pi1 {
       margin-bottom:-300px;   /* Overriden while runtime */
       z-index:2;
     }
+    #tx-caddy-pi1-loader {
+      background: #fff url(/typo3conf/ext/caddy/files/img/loader.gif) no-repeat  center ;
+      cursor:wait;
+      display:none;
+      position: absolute;
+      z-index:10000;
+    }
     .tx-caddy-pi1-loader {
       background: #fff url(/typo3conf/ext/caddy/files/img/loader.gif) no-repeat  center ;
       background-color: #fff;
