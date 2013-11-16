@@ -184,20 +184,20 @@
                       $( html_element ).addClass( "opacity08" );
 
                         // Cover the html element with a loading gif
-                      $( html_element ).prepend( "\t<div id='tx-browser-pi1-loader'></div>\n" );
+                      $( html_element ).prepend( "\t<div id='tx-caddy-pi1-loader'></div>\n" );
                         // Get the size of the html element
                       var heightWiPx      = $( html_element ).css( "height" );
                       var widthWiPx       = $( html_element ).css( "width" );
                       var marginBottomPx  = "-" + $( html_element ).css( "height" );
                         // Set the loader to the size of the html element
-                      $( "#tx-browser-pi1-loader" ).css( "height",        heightWiPx      );
-                      $( "#tx-browser-pi1-loader" ).css( "width",         widthWiPx       );
-                      $( "#tx-browser-pi1-loader" ).css( "margin-bottom", marginBottomPx  );
+                      $( "#tx-caddy-pi1-loader" ).css( "height",        heightWiPx      );
+                      $( "#tx-caddy-pi1-loader" ).css( "width",         widthWiPx       );
+                      $( "#tx-caddy-pi1-loader" ).css( "margin-bottom", marginBottomPx  );
                         // Fade in the loader
                         // #33841, 121209, dwildt, 1-
-                      //$( "#tx-browser-pi1-loader" ).fadeIn( 150 );
+                      //$( "#tx-caddy-pi1-loader" ).fadeIn( 150 );
                         // #33841, 121209, dwildt, 1+
-                      $( "#tx-browser-pi1-loader" ).fadeTo( 150, 1 );
+                      $( "#tx-caddy-pi1-loader" ).fadeTo( 150, 1 );
                         // Cover the html element with a loading gif
                     };
                       // Cover the current html element with the loader *.gif
@@ -205,14 +205,14 @@
                       // Fade out the loading *.gif, initiate buttons again
                     function clean_up( html_element ) {
                         // Fade out the loading *.gif
-                      $( "#tx-browser-pi1-loader" ).fadeOut( 500, function( )
+                      $( "#tx-caddy-pi1-loader" ).fadeOut( 500, function( )
                       {
                         $( this ).remove( );
                       });
                         // Remove the opacity of the html element
                       $( html_element ).removeClass( "opacity08" );
                         // Initiate the ui button layout again
-                      $( "input:submit, input:button, a.backbutton", ".tx-browser-pi1" ).button( );
+                      $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
                     };
                       // Fade out the loading *.gif, initiate buttons again
 
@@ -430,20 +430,20 @@
                       $( html_element ).addClass( "opacity08" );
 
                         // Cover the html element with a loading gif
-                      $( html_element ).prepend( "\t<div id='tx-browser-pi1-loader'></div>\n" );
+                      $( html_element ).prepend( "\t<div id='tx-caddy-pi1-loader'></div>\n" );
                         // Get the size of the html element
-                      var heightWiPx      = $( html_element ).css( "height" );
-                      var widthWiPx       = $( html_element ).css( "width" );
-                      var marginBottomPx  = "-" + $( html_element ).css( "width" );
-                        // Set the loader to the size of the html element
-                      $( "#tx-browser-pi1-loader" ).css( "height",        heightWiPx      );
-                      $( "#tx-browser-pi1-loader" ).css( "width",         widthWiPx       );
-                      $( "#tx-browser-pi1-loader" ).css( "margin-bottom", marginBottomPx  );
-                        // Fade in the loader
-                        // #33841, 121209, dwildt, 11
-                      //$( "#tx-browser-pi1-loader" ).fadeIn( 150 );
-                        // #33841, 121209, dwildt, 1+
-                      $( "#tx-browser-pi1-loader" ).fadeTo( 150, 1 );
+//                      var heightWiPx      = $( html_element ).css( "height" );
+//                      var widthWiPx       = $( html_element ).css( "width" );
+//                      var marginBottomPx  = "-" + $( html_element ).css( "width" );
+//                        // Set the loader to the size of the html element
+//                      $( "#tx-caddy-pi1-loader" ).css( "height",        heightWiPx      );
+//                      $( "#tx-caddy-pi1-loader" ).css( "width",         widthWiPx       );
+//                      $( "#tx-caddy-pi1-loader" ).css( "margin-bottom", marginBottomPx  );
+//                        // Fade in the loader
+//                        // #33841, 121209, dwildt, 11
+//                      //$( "#tx-caddy-pi1-loader" ).fadeIn( 150 );
+//                        // #33841, 121209, dwildt, 1+
+//                      $( "#tx-caddy-pi1-loader" ).fadeTo( 150, 1 );
                         // Cover the html element with a loading gif
                     };
                       // Cover the current html element with the loader *.gif
@@ -451,14 +451,14 @@
                       // Fade out the loading *.gif, initiate buttons again
                     function clean_up( html_element ) {
                         // Fade out the loading *.gif
-                      $( "#tx-browser-pi1-loader" ).fadeOut( 500, function( )
-                      {
-                        $( this ).remove( );
-                      });
+//                      $( "#tx-caddy-pi1-loader" ).fadeOut( 500, function( )
+//                      {
+//                        $( this ).remove( );
+//                      });
                         // Remove the opacity of the html element
                       $( html_element ).removeClass( "opacity08" );
                         // Initiate the ui button layout again
-                      $( "input:submit, input:button, a.backbutton", ".tx-browser-pi1" ).button( );
+                      $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
                     };
                       // Fade out the loading *.gif, initiate buttons again
 
