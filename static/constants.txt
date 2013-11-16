@@ -340,13 +340,13 @@ plugin.caddy {
   # cat=caddy - templates/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   templates.sponsors = Click me!
 
-  # cat=caddy - typeNum//100;             type=int+; label= Caddy address data: typeNum of a PAGE with the content of the caddy address data only. Is needed for AJAX.
+  # cat=caddy - typeNum//100;             type=int+; label= Caddy address data:   typeNum of a PAGE with the caddy address data only. Is needed for AJAX.
   typeNum.caddyAddressData    = 53679
-  # cat=caddy - typeNum//101;             type=int+; label= Caddy address data: typeNum of a PAGE with the content of the caddy address data only. Is needed for AJAX.
+  # cat=caddy - typeNum//101;             type=int+; label= Caddy options:        typeNum of a PAGE with the caddy options only. Is needed for AJAX.
   typeNum.caddyOptions        = 53693
-  # cat=caddy - typeNum//102;             type=int+; label= Caddy address data: typeNum of a PAGE with the content of the caddy address data only. Is needed for AJAX.
+  # cat=caddy - typeNum//102;             type=int+; label= Caddy payment method: typeNum of a PAGE with the caddy payment method only. Is needed for AJAX.
   typeNum.caddyPaymentMethod  = 53694
-  # cat=caddy - typeNum//103;             type=int+; label= Caddy address data: typeNum of a PAGE with the content of the caddy address data only. Is needed for AJAX.
+  # cat=caddy - typeNum//103;             type=int+; label= Caddy check-out:      typeNum of a PAGE with the caddy check out only. Is needed for AJAX.
   typeNum.caddyCheckOut       = 53695
   # cat=caddy - typeNum/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   typeNum.externalLinks       = Click me!

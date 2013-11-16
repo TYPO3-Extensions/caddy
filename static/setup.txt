@@ -2784,6 +2784,20 @@ caddyAddressData < plugin.tx_caddy_pi1.javascript.ajax.caddyAddressData
 
   ///////////////////////////////////////////////////////////////
   //
+  // caddyCheckOut: PAGE object with the caddy check-out
+
+caddyCheckOut < plugin.tx_caddy_pi1.javascript.ajax.caddyCheckOut
+
+[globalVar = GP:type = {$plugin.caddy.typeNum.caddyCheckOut}]
+    // Don't handle header of the content element (plugin)
+  lib.stdheader >
+[global]
+  // caddyCheckOut: PAGE object with the caddy check-out
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
   // caddyOptions: PAGE object with the caddy options
 
 caddyOptions < plugin.tx_caddy_pi1.javascript.ajax.caddyOptions
@@ -2807,17 +2821,3 @@ caddyPaymentMethod < plugin.tx_caddy_pi1.javascript.ajax.caddyPaymentMethod
   lib.stdheader >
 [global]
   // caddyPaymentMethod: PAGE object with the caddy payment methods
-
-
-
-  ///////////////////////////////////////////////////////////////
-  //
-  // caddyCheckOut: PAGE object with the caddy check-out
-
-caddyCheckOut < plugin.tx_caddy_pi1.javascript.ajax.caddyCheckOut
-
-[globalVar = GP:type = {$plugin.caddy.typeNum.caddyCheckOut}]
-    // Don't handle header of the content element (plugin)
-  lib.stdheader >
-[global]
-  // caddyCheckOut: PAGE object with the caddy check-out
