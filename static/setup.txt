@@ -162,7 +162,7 @@ plugin.tx_caddy_pi1 {
               }
               typenum = TEXT
               typenum {
-                value = {$plugin.caddy.typeNum.caddyAddressData}
+                value = {$plugin.caddy.typeNum.caddyCheckOut}
               }
             }
           }
@@ -2417,10 +2417,10 @@ plugin.tx_caddy_pi1 {
     normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
 
-    // caddyAddressData
+    // caddyCheckOut
   typeNum = 
   typeNum {
-    caddyAddressData = {$plugin.caddy.typeNum.caddyAddressData}
+    caddyCheckOut = {$plugin.caddy.typeNum.caddyCheckOut}
   }
 }
   // plugin.tx_caddy_pi1
