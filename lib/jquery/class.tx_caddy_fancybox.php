@@ -594,7 +594,7 @@ class tx_caddy_fancybox
     switch( true )
     {
       case( is_array( $cObj_conf ) ):
-        $value = $this->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
+        $value = $this->pObj->cObj->cObjGetSingle( $cObj_name, $cObj_conf );
         break;
       case( ! ( is_array( $cObj_conf ) ) ):
       default:
