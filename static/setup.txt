@@ -310,8 +310,12 @@ plugin.tx_caddy_pi1 {
 
               <script type="text/javascript">
                 $(document).ready(function() {
-                  $("#c%uid%_flipit_link").fancybox({
-                    %params%                         
+                  $("#c%uid%_step").fancybox({
+                    %params%     
+                    ajax : {
+                      type : 'POST',
+                      data : 'mydata=test'
+                    }                    
                   });
                 });
               </script>
