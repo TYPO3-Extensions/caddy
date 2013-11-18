@@ -2346,7 +2346,7 @@ plugin.tx_caddy_pi1 {
     service_attribute_3_symbol = {$plugin.caddy.symbol.service_attribute_3_symbol}
   }
 
-    // e-mail, html, pdf
+    // e-mail, fancybox, html, pdf
   templates =
   templates {
       // file, marker, table
@@ -2371,6 +2371,50 @@ plugin.tx_caddy_pi1 {
         width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
         width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
         width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+      }
+    }
+      // if, javascript, A tag, DIV begin
+    fancybox = COA
+    fancybox {
+        // IF constant_editor.configuration.enableFancybox = enabled || null
+      if = 
+      if {
+        value   = enabled
+          // [String] yes || no
+        equals  = {$plugin.caddy.fancybox.enabled}
+      }
+        // Javascript
+      10 = USER
+      10 {
+          // params, variables, javascript
+        userFunc = tx_flipit_typoscript->javascriptFancyboxScript
+        userFunc {
+            // Parameter from constant editor for the javascript
+          params < plugin.tx_caddy_pi1.javascript.jquery.plugins.fancybox.configuration
+            // HTML space left for fancybox parameters - for a nice HTML code only
+          paramsSpaceLeft = 22
+            // Variables for the javascript
+          variables = 
+          variables {
+              // field:uid
+            uid = TEXT
+            uid {
+              value       = {field:uid}
+              insertData  = 1
+            }
+          } 
+            // Script
+          javascript (
+
+            <script type="text/javascript">
+              $(document).ready(function() {
+                $("#c%uid%_flipit_link").fancybox({
+                  %params%                         
+                });
+              });
+            </script>
+)
+        }
       }
     }
       // caddy, caddymini
