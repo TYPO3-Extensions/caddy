@@ -193,18 +193,20 @@ plugin.tx_caddy_pi1 {
           includes {
               // Fancybox: Include the jQuery fancybox library (1.3.4) and CSS provided by Caddy. If you are using another fancybox library and CSS, please set this option to "disabled"
             fancybox = {$plugin.caddy.jquery.fancybox}
+              // Fancybox CSS
+            fancyboxCSS = <link rel="stylesheet" type="text/css" href="{$plugin.caddy.jquery.fancyboxCSS}" media="screen" />
+              // Fancybox library
+            fancyboxLibrary = <script src="{$plugin.caddy.jquery.fancyboxLibrary}" type="text/javascript"></script>
               // Fancybox position : Place the jQuery fancybox library at the top of the page (HTML head) or at the bottom
             fancyboxPosition = {$plugin.caddy.jquery.fancyboxPosition}
-              // Fancybox library
-            fancyboxLibrary = {$plugin.caddy.jquery.fancyboxLibrary}
-              // Fancybox CSS
-            fancyboxCSS = {$plugin.caddy.jquery.fancyboxCSS}
               // jQuery : jQuery: Use the jQuery library (1.4.3) provided by the fancybox. If you are using another jquery library, please set this option to "disabled"
             source = {$plugin.caddy.jquery.source}
+              // Fancybox library
+            sourceLibrary = <script src="{$plugin.caddy.jquery.sourceLibrary}" type="text/javascript"></script>
               // jQuery position : Place the jQuery library at the top of the page (HTML head) or at the bottom
             sourcePosition = {$plugin.caddy.jquery.sourcePosition}
           }
-            // paramsSpaceLeft, script, variables
+            // params, paramsSpaceLeft, script, variables
           javascript = 
           javascript {
               // autoScale, ..., width
