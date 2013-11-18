@@ -62,7 +62,7 @@ plugin.caddy {
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
 
-  # cat=caddy - configuration/enable/100;    type=options[disabled,enabled];   label= Fancybox:Disable it, if you don't want to use Caddy content in a fancybox by default.
+  # cat=caddy - fancybox/enable/100;    type=options[disabled,enabled];   label= Fancybox:Disable it, if you don't want to use Caddy content in a fancybox by default.
   fancybox.enabled = enabled
   # cat=caddy - fancybox/dims/201;       type=int+;                  label= padding:Space between FancyBox wrapper and content
   fancybox.padding = 10
