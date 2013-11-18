@@ -146,7 +146,7 @@ plugin.tx_caddy_pi1 {
           // library, localisation, plugin
         caddy =
         caddy {
-          library = EXT:caddy/res/javascript/caddy/library/tx_caddy_pi1-4.0.0.js
+          library = EXT:caddy/res/javascript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js
           library {
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer = 1
@@ -167,7 +167,7 @@ plugin.tx_caddy_pi1 {
             }
           }
             // [STRING] Path to the jss file of the t3caddy localisation. ###LANG### will be replacedwhile runtime
-          localisation = EXT:caddy/res/javascript/caddy/plugin/localisation-4.0.0.###LANG###.js
+          localisation = EXT:caddy/res/javascript/jquery.caddy-4.0.0/plugin/localisation-4.0.0.###LANG###.js
           localisation {
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer = 1
@@ -175,7 +175,7 @@ plugin.tx_caddy_pi1 {
             inline = 0
           }
             // [String] Path to the jss file of the t3caddy plugin
-          plugin = EXT:caddy/res/javascript/caddy/plugin/jquery.t3caddy-4.0.0.js
+          plugin = EXT:caddy/res/javascript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
           plugin {
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer = 1
