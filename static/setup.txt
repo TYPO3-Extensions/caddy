@@ -204,7 +204,7 @@ plugin.tx_caddy_pi1 {
               // jQuery position : Place the jQuery library at the top of the page (HTML head) or at the bottom
             sourcePosition = {$plugin.caddy.jquery.sourcePosition}
           }
-            // params, variables, javascript
+            // paramsSpaceLeft, script, variables
           javascript = 
           javascript {
               // HTML space left for fancybox parameters - for a nice HTML code only
