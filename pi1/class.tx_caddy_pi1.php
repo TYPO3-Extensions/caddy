@@ -175,6 +175,14 @@ class tx_caddy_pi1 extends tslib_pibase
       // Prompt of the update wizard
     $content = $this->updateWizard( $content );
 
+      // #53742, 131119, dwildt, 5+
+    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
+    if( $fancybox == 'yes' )
+    {
+      $content  = $content
+                . $this->fancybox->main( );
+    }
+
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
 
@@ -636,24 +644,6 @@ class tx_caddy_pi1 extends tslib_pibase
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
     }
       // DRS
-  }
-
- /**
-  * initFancybox( )
-  *
-  * @return	void
-  * @access private
-  * @internal   #53742
-  * @version    4.0.1
-  * @since      4.0.1
-  */
-  private function initFancybox( )
-  {
-    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
-    if( $fancybox == 'yes' )
-    {
-      $this->fancybox->main( );
-    }
   }
 
  /**
