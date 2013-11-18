@@ -423,6 +423,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initGetPost( );
       // #53679, 131115, dwildt, 1+
     $this->initJavascript( );
+      // #53742, 131119, dwildt, 1+
+    $this->initJavascript( );
     $this->initPowermail( );
     $this->initDatabase( );
     $this->initNumbers( );
@@ -637,6 +639,24 @@ class tx_caddy_pi1 extends tslib_pibase
   }
 
  /**
+  * initFanybox( )
+  *
+  * @return	void
+  * @access private
+  * @internal   #53742
+  * @version    4.0.1
+  * @since      4.0.1
+  */
+  private function initFanybox( )
+  {
+    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
+    if( $fancybox == 'enabled' )
+    {
+      $this->fancybox->main( );
+    }
+  }
+
+ /**
   * initGetPost( )
   *
   * @return	void
@@ -757,6 +777,16 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
+
+      // Class with methods for get flexform values
+    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
+    if( $fancybox == 'enabled' )
+    {
+      require_once( $path2lib . 'jquery/class.tx_caddy_fancybox.php' );
+      $this->fancybox       = t3lib_div::makeInstance( 'tx_caddy_fancybox' );
+      $this->fancybox->pObj = $this;
+      $this->fancybox->row  = $this->cObj->data;
+    }
 
       // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );

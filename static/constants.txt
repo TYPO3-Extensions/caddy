@@ -195,7 +195,7 @@ plugin.caddy {
   # cat=caddy - jquery/enable/101;    type=options[enabled,disabled];      label= Fancybox: Include the jQuery fancybox library (1.3.4) and CSS provided by caddy. If you are using another fancybox library and CSS, please set this option to "disabled"
   jquery.fancybox = enabled
   # cat=caddy - jquery/enable/102;    type=options[top,bottom];            label= Fancybox position: Place the jQuery fancybox library at the top of the page (HTML head) or at the bottom
-  jquery.fancyboxPosition = top
+  jquery.fancyboxPosition = bottom
   # cat=caddy - jquery/enable/103;    type=string;                         label= Fancybox library
   jquery.fancyboxLibrary  = typo3conf/ext/caddy/res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js
   # cat=caddy - jquery/enable/104;    type=string;                         label= Fancybox CSS
@@ -203,12 +203,12 @@ plugin.caddy {
   # cat=caddy - jquery/enable/201;    type=options[enabled,disabled];      label= jQuery: Use the jQuery library (1.4.3) provided by Caddy. If you are using another jQuery library, please set this option to "disabled"
   jquery.source = enabled
   # cat=caddy - jquery/enable/202;    type=options[top,bottom];            label= jQuery position: Place the jQuery library at the top of the page (HTML head) or at the bottom
-  jquery.sourcePosition = top
+  jquery.sourcePosition = bottom
   # cat=caddy - jquery/enable/203;    type=string;                         label= jQuery library
   jquery.sourceLibrary = typo3conf/ext/caddy/res/javascript/jquery.fancybox-1.3.4/jquery-1.4.3.min.js
-  # cat=caddy - jquery/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - jquery/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   jquery.externalLinks = Click me!
-  # cat=caddy - jquery/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - jquery/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   jquery.sponsors = Click me!
 
   # cat=caddy - pages*/enable/301; type=integer; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart

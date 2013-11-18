@@ -3,6 +3,9 @@
   Major Feature 
   * #53742: Fancybox
             Effected files:
+            * t3jquery.txt
+            * lib/jquery/class.tx_caddy_fancybox.php
+            * pi1/class.tx_caddy_pi1.php
             * res/javascript/jquery.fancybox-1.3.4
             * static
               * constants.txt
@@ -18,7 +21,7 @@
             * pi1
               * class.tx_caddy_pi1_javascript.php
               * class.tx_caddy_pi1.php
-            * res/javascript/jquery.t3caddy_4.0.0
+            * res/javascript/jquery.caddy-4.0.0
             * static
               * constants.txt
               * setup.txt
