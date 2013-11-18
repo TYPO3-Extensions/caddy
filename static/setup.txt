@@ -311,11 +311,11 @@ plugin.tx_caddy_pi1 {
               <script type="text/javascript">
                 $(document).ready(function() {
                   $("#c%uid%_step").fancybox({
-                    %params%     
+                    %params%,
                     ajax : {
                       type : 'POST',
                       data : 'mydata=test'
-                    }                    
+                    }
                   });
                 });
               </script>
