@@ -431,8 +431,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initGetPost( );
       // #53679, 131115, dwildt, 1+
     $this->initJavascript( );
-      // #53742, 131119, dwildt, 1+
-    $this->initFancybox( );
     $this->initPowermail( );
     $this->initDatabase( );
     $this->initNumbers( );
