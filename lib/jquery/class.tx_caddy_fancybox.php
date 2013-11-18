@@ -110,19 +110,17 @@ class tx_caddy_fancybox
  /**
   * main( ):
   *
-  * @param    string        Content input. Not used, ignore.
-  * @param    array        TypoScript configuration
   * @return    mixed        HTML output.
   * @access public
   * @version 4.0.1
   * @since 4.0.1
   */
-  public function main( $content, $conf )
+  public function main( )
   {
     unset( $content );
     
       // Init
-    if( ! $this->init( $conf ) )
+    if( ! $this->init( ) )
     {
       return;
     }
@@ -138,16 +136,14 @@ class tx_caddy_fancybox
  /**
   * init( ):
   *
-  * @param      array     $conf : current TypoScript configuration
   * @return    boolean        
   * @access private
   * @version 4.0.1
   * @since 4.0.1
   */
-  private function  init( $conf )
+  private function  init( )
   {
       // Current TypoScript configuration
-    $this->conf         = $conf;
     $this->confFancybox = $conf['javascript.']['jquery.']['plugins.']['fancybox.'];
 
     $success = $this->initRequirements( );
