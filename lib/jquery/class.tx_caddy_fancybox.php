@@ -144,6 +144,7 @@ class tx_caddy_fancybox
   private function  init( )
   {
       // Current TypoScript configuration
+    $this->conf = $this->pObj->conf;
     $this->confFancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.'];
 
     $success = $this->initRequirements( );
