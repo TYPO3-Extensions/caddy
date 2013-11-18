@@ -138,12 +138,13 @@ class tx_caddy_fancybox
  /**
   * init( ):
   *
+  * @param      array     $conf : current TypoScript configuration
   * @return    boolean        
   * @access private
   * @version 4.0.1
   * @since 4.0.1
   */
-  private function  init( )
+  private function  init( $conf )
   {
       // Current TypoScript configuration
     $this->conf         = $conf;
