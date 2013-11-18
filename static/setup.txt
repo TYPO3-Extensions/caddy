@@ -2373,16 +2373,9 @@ plugin.tx_caddy_pi1 {
         width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
       }
     }
-      // if, javascript, A tag, DIV begin
+      // 10, if
     fancybox = COA
     fancybox {
-        // IF constant_editor.configuration.enableFancybox = enabled || null
-      if = 
-      if {
-        value   = enabled
-          // [String] yes || no
-        equals  = {$plugin.caddy.fancybox.enabled}
-      }
         // Javascript
       10 = USER
       10 {
@@ -2415,6 +2408,13 @@ plugin.tx_caddy_pi1 {
             </script>
 )
         }
+      }
+        // IF fancybox.enabled = yes
+      if = 
+      if {
+        value   = enabled
+          // [String] yes || no
+        equals  = {$plugin.caddy.fancybox.enabled}
       }
     }
       // caddy, caddymini
