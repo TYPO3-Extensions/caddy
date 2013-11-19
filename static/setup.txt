@@ -320,7 +320,7 @@ plugin.tx_caddy_pi1 {
                 });
               </script>
 )
-            script (
+            XX_script (
 
               <script type="text/javascript">
                   $(".c%uid%_step").live('click', function() {
