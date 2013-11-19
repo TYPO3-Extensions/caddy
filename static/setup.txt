@@ -336,6 +336,25 @@ plugin.tx_caddy_pi1 {
                   });
               </script>
 )
+            script (
+
+              <script type="text/javascript">
+                $(document).on('click', '.c%uid%_step', function() {
+                  // remove the class to ensure this will only run once
+                  $(this).removeClass('c%uid%_step');
+                  // now attach fancybox and click to open it
+                  $(this).fancybox({
+                    %params%,
+                    ajax : {
+                      type : 'POST',
+                      data : 'type=53679'
+                    }
+                  }).click();
+                  // prevent default action
+                  return false;
+                });
+              </script>
+)
               // Variables for the javascript
             variables = 
             variables {
