@@ -77,9 +77,9 @@ plugin.caddy {
   # cat=caddy - fancybox/dims/206;      type=options[auto,yes,no];  label= scrolling:Set the overflow CSS property to create or hide scrollbars. Can be set to 'auto', 'yes', or 'no'
   fancybox.scrolling = auto     
   # cat=caddy - fancybox/dims/207;      type=string;                label= width:Width for content types 'iframe' and 'swf'. Also set for inline content if 'autoDimensions' is set to 'false'
-  fancybox.width = 560px
+  fancybox.width = 
   # cat=caddy - fancybox/dims/208;      type=string;                label= height:Height for content types 'iframe' and 'swf'. Also set for inline content if 'autoDimensions' is set to 'false'
-  fancybox.height = 340px 
+  fancybox.height = 
   # cat=caddy - fancybox/dims/209;      type=options[true,false];   label= autoScale:If true, FancyBox is scaled to fit in viewport 
   fancybox.autoScale = true
   # cat=caddy - fancybox/dims/210;      type=options[true,false];   label= autoDimensions:For inline and ajax views, resizes the view to the element recieves. Make sure it has dimensions otherwise this will give unexpected results
@@ -97,7 +97,7 @@ plugin.caddy {
   # cat=caddy - fancybox/dims/216;      type=color;                 label= overlayColor:Color of the overlay
   fancybox.overlayColor = #666
   # cat=caddy - fancybox/dims/217;      type=string;                label= title:Forces title. Take a field of the current record.
-  fancybox.title = header
+  fancybox.title = 
   # cat=caddy - fancybox/dims/218;      type=options[true,false];   label= titleShow:Toggle title
   fancybox.titleShow = true
   # cat=caddy - fancybox/dims/219;      type=options[,outside,inside,over];   label= titlePosition:The position of title. Can be set to 'outside', 'inside' or 'over'
