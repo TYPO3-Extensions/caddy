@@ -412,7 +412,7 @@ class tx_caddy_fancybox
         case( $param == 'centerOnScroll'      && $value == 'false' ):
         case( $param == 'cyclic'              && $value == 'false' ):
         case( $param == 'enableEscapeButton'  && $value == 'true' ):
-        case( $param == 'height'              && $value == '340px' ):
+        case( $param == 'height'              && $value == null ):
         case( $param == 'hideOnContentClick'  && $value == 'false' ):
         case( $param == 'hideOnOverlayClick'  && $value == 'true' ):
         case( $param == 'margin'              && $value == 20 ):
@@ -427,10 +427,11 @@ class tx_caddy_fancybox
         case( $param == 'showNavArrows'       && $value == 'true' ):
         case( $param == 'speedIn'             && $value == 300 ):
         case( $param == 'speedOut'            && $value == 300 ):
+        case( $param == 'title'               && $value == null ):
         case( $param == 'titleShow'           && $value == 'true' ):
         case( $param == 'transitionIn'        && $value == "'fade'" ):
         case( $param == 'transitionOut'       && $value == "'fade'" ):
-        case( $param == 'width'               && $value == '560px' ):
+        case( $param == 'width'               && $value == null ):
           if( $this->pObj->drs->drsJavascript )
           {
             $prompt = 'Fancybox parameter ' . $param . ' = ' . $value . '. This is the default. Parameter won\'t processed.';
@@ -455,6 +456,10 @@ class tx_caddy_fancybox
       $params[] = "'" . $param . "' : " . $value;
     }
     $strParams = implode( ',' . PHP_EOL . str_repeat( ' ', $spaceLeft ), ( array ) $params );
+    if( $strParams )
+    {
+      $strParams = $strParams . ',';
+    }
       // params
        
     return $strParams;    
