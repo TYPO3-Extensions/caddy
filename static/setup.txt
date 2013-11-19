@@ -313,9 +313,27 @@ plugin.tx_caddy_pi1 {
                   $(".c%uid%_step").fancybox({
                     %params%,
                     ajax : {
-                      type : 'POST',
-                      data : 'mydata=test&type=53679'
+                      type : 'GET',
+                      data : 'type=53679'
                     }
+                  });
+                });
+              </script>
+)
+            script (
+
+              <script type="text/javascript">
+                $(document).ready(function() {
+                  $(".c%uid%_step").live('click', function() {
+                    $this = $(this);
+                    $.fancybox({
+                      %params%,
+                      ajax : {
+                        type : 'GET',
+                        data : 'type=53679'
+                      }
+                    });
+                    return false;
                   });
                 });
               </script>
