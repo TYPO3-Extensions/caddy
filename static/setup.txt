@@ -317,6 +317,18 @@ plugin.tx_caddy_pi1 {
                       data : 'type=53679'
                     }
                   });
+                  alert( 1 );
+                    // RETURN there isn't any HTML element with the defined class
+                  if( ! $( fieldset_delivery_address ).length )
+                  {
+                    return;
+                  }
+
+                  alert( 2 );
+                    // Hide all fields (divs) of the fieldset delivery address
+                  $( fieldset_delivery_address ).children( 'div' )
+                    .slideUp( 'fast' );
+                  var bool_visible = false;
                 });
               </script>
 )
