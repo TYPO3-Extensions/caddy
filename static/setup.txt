@@ -329,7 +329,7 @@ plugin.tx_caddy_pi1 {
                     $.fancybox({
                       %params%,
                       ajax : {
-                        type : 'GET',
+                        type : 'POST',
                         data : 'type=53679'
                       }
                     });
