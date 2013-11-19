@@ -343,7 +343,7 @@ plugin.tx_caddy_pi1 {
                       ajax : {
                         type : 'POST',
                         data : 'type=53679'
-                      }
+                      },
                       onComplete : function() {
                           // HTML unique class of the fieldset delivery address
                         var fieldset_delivery_address  = ".powermail_fieldset_22";
@@ -374,7 +374,7 @@ plugin.tx_caddy_pi1 {
                     ajax : {
                       type : 'POST',
                       data : 'type=53679'
-                    }
+                    },
                     onComplete : function() {
                         // HTML unique class of the fieldset delivery address
                       var fieldset_delivery_address  = ".powermail_fieldset_22";
