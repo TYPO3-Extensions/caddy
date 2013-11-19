@@ -323,7 +323,6 @@ plugin.tx_caddy_pi1 {
             script (
 
               <script type="text/javascript">
-                $(document).ready(function() {
                   $(".c%uid%_step").live('click', function() {
                     $this = $(this);
                     $.fancybox({
@@ -335,7 +334,6 @@ plugin.tx_caddy_pi1 {
                     });
                     return false;
                   });
-                });
               </script>
 )
               // Variables for the javascript
