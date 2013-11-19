@@ -201,7 +201,7 @@ plugin.caddy {
   # cat=caddy - jquery/enable/104;    type=string;                         label= Fancybox CSS
   jquery.fancyboxCSS      = typo3conf/ext/caddy/res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css
   # cat=caddy - jquery/enable/201;    type=options[enabled,disabled];      label= jQuery: Use the jQuery library (1.4.3) provided by Caddy. If you are using another jQuery library, please set this option to "disabled"
-  jquery.source = enabled
+  jquery.source = disabled
   # cat=caddy - jquery/enable/202;    type=options[top,bottom];            label= jQuery position: Place the jQuery library at the top of the page (HTML head) or at the bottom
   jquery.sourcePosition = bottom
   # cat=caddy - jquery/enable/203;    type=string;                         label= jQuery library
