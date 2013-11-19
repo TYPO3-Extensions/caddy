@@ -318,12 +318,13 @@ plugin.tx_caddy_pi1 {
                     }
                   });
                   alert( 1 );
+                    // HTML unique class of the fieldset delivery address
+                  var fieldset_delivery_address  = ".powermail_fieldset_22";
                     // RETURN there isn't any HTML element with the defined class
                   if( ! $( fieldset_delivery_address ).length )
                   {
                     return;
                   }
-
                   alert( 2 );
                     // Hide all fields (divs) of the fieldset delivery address
                   $( fieldset_delivery_address ).children( 'div' )
