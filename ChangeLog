@@ -10,6 +10,10 @@
             * static
               * constants.txt
               * setup.txt
+  Improvement
+  * #i0032: plugin.tx_powermail.settings.misc.showOnlyFilledValues = true
+            Effected files:
+            * static/powermail/2x/constants.txt   ( new )
 
 4.0.0
   2013-11-15
