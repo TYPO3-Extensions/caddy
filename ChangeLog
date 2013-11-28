@@ -1,10 +1,21 @@
 3.0.1
   2013-11-28
+  Major Feature 
   * #53678: e-payment
-            Integration of paymill
+            Integration of paymill step 1
             Effected files:
             * res/e-payment-provider/paymill  ( new )
+  Improvement
+  * #i0034: Disable jquery.caddy-3.0.0
+            Effected files:
+            * pi1/class.tx_caddy_pi1.php
   * #i0033: Move version from 4.0.1 to 3.0.1
+            Effected files:
+            * t3jquery.txt
+            * res/javascript
+              * jquery.caddy-4.0.0 > jquery.caddy-3.0.0
+            * static
+              * setup.txt
 
 4.0.1
   2013-11-21

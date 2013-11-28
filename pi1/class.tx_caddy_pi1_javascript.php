@@ -94,6 +94,9 @@ class tx_caddy_pi1_javascript
  */
   public function addJssFilesJqueryPluginsCaddy( )
   {
+      // #i0034, 131128, dwildt, 1+
+    return;
+    
     $this->local_cObj = $this->pObj->local_cObj;
 
     $this->addJssFilesJqueryPluginsCaddyPlugin( );
