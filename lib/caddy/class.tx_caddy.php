@@ -1797,15 +1797,21 @@ class tx_caddy extends tslib_pibase
  /**
   * getPaymentOptionLabelBySessionId( )
   *
+  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
   * @return	array
   * @access public
-  * @version    2.0.0
+  * @version    3.0.1
   * @since      2.0.0
   */
-  public function getPaymentOptionLabelBySessionId( )
+  public function getPaymentOptionLabelBySessionId( $pid=null )
   {
+    $pid = $this->getPid( $pid );
+
       // Get session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['payment.']['options.'];
@@ -1820,69 +1826,25 @@ class tx_caddy extends tslib_pibase
     return $value;
   }
 
- /**
-  * getShippingOptionLabelBySessionId( )
-  *
-  * @return	array
-  * @access public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function getShippingOptionLabelBySessionId( )
+/**
+ * getPid( )  : Returns the globlas tsfe id, if the given pid is null
+ *
+ * @param       integer         $pid  : given pid (may be null)
+ * @return	integer		$pid  : id of the page with the caddy plugin
+ * @internal    #i0035
+ * @version     3.0.1
+ * @since       3.0.1
+ */
+  private function getPid( $pid )
   {
-      // Get session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
-      // Get configuration
-    $optionsConf = $this->conf['options.']['shipping.']['options.'];
-
-      // Get key for option
-    $key    = $sesArray['options']['shipping']['id'] . '.';
-
-      // Render the option label
-    $name   = $optionsConf[ $key ]['title'];
-    $conf   = $optionsConf[ $key ]['title.'];
-    $value  = $this->zz_cObjGetSingle( $name, $conf );
-    return $value;
-  }
-
- /**
-  * getSpecialOptionLabelsBySessionId( )
-  *
-  * @return	array
-  * @access public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
-  public function getSpecialOptionLabelsBySessionId( )
-  {
-    $value  = null;
-    $values = null;
-
-      // Get session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-
-      // Get the devider
-    $name     = $this->conf['options.']['specials.']['devider'];
-    $conf     = $this->conf['options.']['specials.']['devider.'];
-    $devider  = $this->zz_cObjGetSingle( $name, $conf );
-      // Get the devider
-
-      // Get options configuration
-    $optionsConf = $this->conf['options.']['specials.']['options.'];
-
-      // Render the option label
-    foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
+    if( $pid === null )
     {
-      $name     = $optionsConf[ $key . '.' ]['title'];
-      $conf     = $optionsConf[ $key . '.' ]['title.'];
-      $values[] = $this->zz_cObjGetSingle( $name, $conf );
+      $pid = $GLOBALS["TSFE"]->id;
     }
-    
-    $value = implode( $devider, ( array ) $values );
-    return $value;
-  }
 
+    return $pid;
+  }
+  
  /**
   * getServiceAttributes( )
   *
@@ -1913,6 +1875,81 @@ class tx_caddy extends tslib_pibase
     );
 
     return $arrResult;
+  }
+
+ /**
+  * getShippingOptionLabelBySessionId( )
+  *
+  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
+  * @return	array
+  * @access public
+  * @version    3.0.1
+  * @since      2.0.0
+  */
+  public function getShippingOptionLabelBySessionId( $pid=null )
+  {
+    $pid = $this->getPid( $pid );
+
+      // Get session array
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+
+      // Get configuration
+    $optionsConf = $this->conf['options.']['shipping.']['options.'];
+
+      // Get key for option
+    $key    = $sesArray['options']['shipping']['id'] . '.';
+
+      // Render the option label
+    $name   = $optionsConf[ $key ]['title'];
+    $conf   = $optionsConf[ $key ]['title.'];
+    $value  = $this->zz_cObjGetSingle( $name, $conf );
+    return $value;
+  }
+
+ /**
+  * getSpecialOptionLabelsBySessionId( )
+  *
+  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
+  * @return	array
+  * @access public
+  * @version    3.0.1
+  * @since      2.0.0
+  */
+  public function getSpecialOptionLabelsBySessionId( $pid=null )
+  {
+    $value  = null;
+    $values = null;
+
+    $pid = $this->getPid( $pid );
+
+      // Get session array
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+
+      // Get the devider
+    $name     = $this->conf['options.']['specials.']['devider'];
+    $conf     = $this->conf['options.']['specials.']['devider.'];
+    $devider  = $this->zz_cObjGetSingle( $name, $conf );
+      // Get the devider
+
+      // Get options configuration
+    $optionsConf = $this->conf['options.']['specials.']['options.'];
+
+      // Render the option label
+    foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
+    {
+      $name     = $optionsConf[ $key . '.' ]['title'];
+      $conf     = $optionsConf[ $key . '.' ]['title.'];
+      $values[] = $this->zz_cObjGetSingle( $name, $conf );
+    }
+    
+    $value = implode( $devider, ( array ) $values );
+    return $value;
   }
 
 

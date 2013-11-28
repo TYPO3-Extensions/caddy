@@ -272,7 +272,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	array		$caddy : ...
   * @access private
-  * @version    2.0.0
+  * @version    3.0.1
   * @since      2.0.0
   */
   private function caddyRendered( )
@@ -289,7 +289,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    3.0.1
   * @since      2.0.0
   */
   private function caddyUpdate( )
@@ -297,10 +297,16 @@ class tx_caddy_pi1 extends tslib_pibase
       // change qty
     if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
     {
-      $this->session->quantityUpdate( ); // change qty
+      // #i0035, 131128, dwildt, 1-
+      //$this->session->quantityUpdate( );
+      // #i0035, 131128, dwildt, 1+
+      $this->session->quantityUpdate( $this->pid );
     }
     
-    $this->caddyUpdateOptions( );
+    // #i0035, 131128, dwildt, 1-
+    //$this->caddyUpdateOptions( );
+    // #i0035, 131128, dwildt, 1+
+    $this->caddyUpdateOptions( $this->pid );
 
   }
 

@@ -123,17 +123,86 @@ class tx_caddy_session
   **********************************************/
 
 /**
- * getQuantityItems( )  : Get the amount of quantities
+ * getNumberDeliveryorder( )  : Get the current order number
  *
- * @return	integer		$quantityItems :
- * @access private
- * @version     2.0.0
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @return	string
+ * @access public
+ * @version     3.0.1
  * @since       2.0.0
  */
-  private function getQuantityItems( )
+  public function getNumberDeliveryorder( $pid=null )
   {
-    $quantityItems = 0;
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $pid = $this->getPid( $pid );
+
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $currentNumber  = $sesArray['numberDeliveryorderCurrent'];
+    return $currentNumber;
+  }
+
+/**
+ * getNumberInvoice( )  : Get the current order number
+ *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @return	string
+ * @access public
+ * @version     3.0.1
+ * @since       2.0.0
+ */
+  public function getNumberInvoice( $pid=null )
+  {
+    $pid = $this->getPid( $pid );
+
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $currentNumber  = $sesArray['numberInvoiceCurrent'];
+    return $currentNumber;
+  }
+
+/**
+ * getNumberOrder( )  : Get the current order number
+ *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @return	string
+ * @access public
+ * @version     3.0.1
+ * @since       2.0.0
+ */
+  public function getNumberOrder( $pid=null )
+  {
+    $pid = $this->getPid( $pid );
+
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $currentNumber  = $sesArray['numberOrderCurrent'];
+    return $currentNumber;
+  }
+  
+/**
+ * getQuantityItems( )  : Get the amount of quantities
+ *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @return	integer		$quantityItems :
+ * @access private
+ * @version     3.0.1
+ * @since       2.0.0
+ */
+  private function getQuantityItems( $pid=null )
+  {
+    $quantityItems  = 0;
+    $pid            = $this->getPid( $pid );
+
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
     $products = $sesArray['products'];
 
     foreach( $products as $product )
@@ -145,48 +214,22 @@ class tx_caddy_session
   }
 
 /**
- * getNumberDeliveryorder( )  : Get the current order number
+ * getPid( )  : Returns the globlas tsfe id, if the given pid is null
  *
- * @return	string
- * @access public
- * @version     2.0.0
- * @since       2.0.0
+ * @param       integer         $pid  : given pid (may be null)
+ * @return	integer		$pid  : id of the page with the caddy plugin
+ * @internal    #i0035
+ * @version     3.0.1
+ * @since       3.0.1
  */
-  public function getNumberDeliveryorder( )
+  private function getPid( $pid )
   {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $currentNumber  = $sesArray['numberDeliveryorderCurrent'];
-    return $currentNumber;
-  }
+    if( $pid === null )
+    {
+      $pid = $GLOBALS["TSFE"]->id;
+    }
 
-/**
- * getNumberInvoice( )  : Get the current order number
- *
- * @return	string
- * @access public
- * @version     2.0.0
- * @since       2.0.0
- */
-  public function getNumberInvoice( )
-  {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $currentNumber  = $sesArray['numberInvoiceCurrent'];
-    return $currentNumber;
-  }
-
-/**
- * getNumberOrder( )  : Get the current order number
- *
- * @return	string
- * @access public
- * @version     2.0.0
- * @since       2.0.0
- */
-  public function getNumberOrder( )
-  {
-    $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $currentNumber  = $sesArray['numberOrderCurrent'];
-    return $currentNumber;
+    return $pid;
   }
 
 
@@ -200,34 +243,48 @@ class tx_caddy_session
 /**
  * paymentUpdate( ) : Change the payment method in session
  *
- * @param	integer		$value
+ * @param	integer	: $value
+ * @param       integer : $pid   : uid of the page, which contains the caddy plugin
  * @return	void
  * @access public
- * @version     2.0.0
+ * @version     3.0.1
  * @since       1.4.6
  */
-  public function paymentUpdate( $value )
+  public function paymentUpdate( $value, $pid=null )
   {
+    $pid = $this->getPid( $pid );
+
       // get already exting products from session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray             = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $sesArray['payment']  = intval( $value );
 
-    $sesArray['payment'] = intval( $value );
-
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData();
   }
 
 /**
  * paymentGet( )  : get the payment method from session
  *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
  * @access public
- * @version     2.0.0
+ * @version     3.0.1
  * @since       1.4.6
  */
-  public function paymentGet( )
+  public function paymentGet( $pid=null )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+    $pid = $this->getPid( $pid );
+
+      // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+      // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
     return $sesArray['payment'];
   }
@@ -252,14 +309,15 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array		$newProduct :
+ * @param	array	: $newProduct :
+ * @param       integer : $pid        : uid of the page, which contains the caddy plugin
  * @return	void
  * 
  * @access      public
- * @version     2.0.11
+ * @version     3.0.1
  * @since       2.0.11
  */
-  public function productAdd( $newProduct )
+  public function productAdd( $newProduct, $pid=null )
   {
     $variants = null;
     $sesArray = array( );
@@ -272,7 +330,7 @@ class tx_caddy_session
       // RETURN : requirements aren't matched
 
       // Get current products
-    $currProducts = $this->productsGet( );
+    $currProducts = $this->productsGet( $pid );
       // Reset error messages
     $currProducts = $this->productResetErrorPrompt( $currProducts );
 //var_dump( __METHOD__, __LINE__, $currProducts );
@@ -311,7 +369,11 @@ class tx_caddy_session
 //var_dump( __METHOD__, __LINE__, $currProducts );
 
       // generate session with session array
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+      // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+      // #i0035, 131128, dwildt, 2+
+    $pid = $this->getPid( $pid );
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
       // save session
     $GLOBALS['TSFE']->storeSessionData( );
   }
@@ -360,22 +422,28 @@ class tx_caddy_session
   }
 
  /**
-  * Remove product from session with given uid
+  * productDelete( )  : Remove product from session with given uid
   *
+  * @param       integer : $pid   : uid of the page, which contains the caddy plugin
   * @return	void
-  * @version  2.0.0
+  * @version  3.0.1
   * @since    1.4.6
   */
-  public function productDelete( )
+  public function productDelete( $pid=null )
   {
+    $pid = $this->getPid( $pid );
+
     // variants
     // add variant key/value pairs from piVars
     $arr_variant = $this->productGetVariantGpvar( );
     // add product id to variant array
     $arr_variant['uid'] = $this->pObj->piVars['del'];
 
-    // get products from session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+      // get already exting products from session
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
     // loop every product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
@@ -407,19 +475,28 @@ class tx_caddy_session
     // loop every product
 
     // generate new session
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
 
 
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
     $productId = $this->productsGetFirstKey( );
     if( empty( $productId ) )
     {
       return;
     }
     $sesArray['products'][$productId] = $this->quantityCheckMinMax( $sesArray['products'][$productId] );
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
   }
@@ -994,41 +1071,45 @@ class tx_caddy_session
 
 
 /**
- * Read products from session
+ * productsGet( ) : Read products from session
  *
- * @return	array		$arr: array with all products from session
+ * @param      integer : $pidCaddy : uid of the page, which contains the caddy plugin
+ * @return	array   : $arr      : array with all products from session
+ * @version    3.0.1
+ * @since      2.0.0
  */
   public function productsGet( $pid = null )
   {
-    if( $pid === null )
-    {
-      $pid = $GLOBALS["TSFE"]->id;
-    }
+    $pid      = $this->getPid( $pid );
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
     return $sesArray['products'];
   }
 
-   /**
- * Count gross price of all products in a cart
- * Is used by pi3 only
+/**
+ * productsGetGross( )  : Count gross price of all products in a cart
+ *                        Is used by pi3 only
  *
- * @param	[type]		$pid: ...
+ * @param       integer : $pidCaddy : uid of the page, which contains the caddy plugin
  * @return	integer
+ * @version    3.0.1
+ * @since      2.0.0
  */
-    public function productsGetGross( $pid )
+  public function productsGetGross( $pid=null )
+  {
+    // #i0035, 131128, dwildt, 1+
+    $pid = $this->getPid( $pid );
+      // get already exting products from session
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+
+    $gross = 0;
+    foreach( ( array ) $sesArray['products'] as  $val )
     {
-        // get already exting products from session
-      $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
-
-      $gross = 0;
-      foreach( ( array ) $sesArray['products'] as  $val )
-      {
-          $gross += $val['gross'] * $val['qty'];
-      }
-
-      return $gross;
+        $gross += $val['gross'] * $val['qty'];
     }
+
+    return $gross;
+  }
 
 
 
@@ -1663,19 +1744,27 @@ class tx_caddy_session
 /**
  * quantityUpdate( )  : Change quantity of a product in session
  *
+ * @param       integer : $pid   : uid of the page, which contains the caddy plugin
  * @return	void
  * @access private
- * @version 2.0.0
+ * @version 3.0.1
  * @since 1.4.6
  */
-  public function quantityUpdate( )
+  // #i0035, 131128, dwildt, 1-
+  //public function quantityUpdate( )
+  // #i0035, 131128, dwildt, 1+
+  public function quantityUpdate( $pid = null )
   {
+    $pid = $this->getPid( $pid );    
     // variants
     // add variant key/value pairs from piVars
     $arr_variant = $this->quantityGetVariant( );
 
     // get products from session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
     $is_cart = intval( $this->pObj->piVars['updateByCaddy'] );
 
@@ -1709,7 +1798,10 @@ class tx_caddy_session
         else
         {
           // remove product from session
-          $this->productDelete($sesArray['products'][$key_session]['uid']);
+          // #i0035, 131128, dwildt, 1-
+          //$this->productDelete($sesArray['products'][$key_session]['uid']);
+          // #i0035, 131128, dwildt, 1+
+          $this->productDelete( $pid );
           // remove product from current session array
           unset($sesArray['products'][$key_session]);
           $productId = $this->productsGetFirstKey( );
@@ -1791,7 +1883,10 @@ class tx_caddy_session
             else
             {
               // remove product from session
-              $this->productDelete( $sesArray['products'][$key_session]['uid'] );
+              // #i0035, 131128, dwildt, 1-
+              //$this->productDelete( $sesArray['products'][$key_session]['uid'] );
+              // #i0035, 131128, dwildt, 1+
+              $this->productDelete( $pid );
               // remove product from current session array
               unset( $sesArray['products'][$key_session] );
             }
@@ -1804,7 +1899,10 @@ class tx_caddy_session
       // LOOP : each product
 
     // generate new session
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );
   }
@@ -1820,15 +1918,18 @@ class tx_caddy_session
  /**
   * sessionDelete( )
   *
-  * @param	string		$content  : current content
-  * @param	[type]		$conf: ...
+  * @param	string	: $content  : current content (will be empty)
+  * @param	array   : $conf     : current TypoScript configuration
+  * @param      integer : $pid      : uid of the page, which contains the caddy plugin
   * @return	void
   * @access public
-  * @version    2.0.0
+  * @version    3.0.1
   * @since      2.0.0
   */
-  public function sessionDelete( $content = '', $conf = array( ) )
+  public function sessionDelete( $content = '', $conf = array( ), $pid=null )
   {
+    $pid = $this->getPid( $pid );
+
       // DRS
     unset( $content );
     $drs = false;
@@ -1849,7 +1950,10 @@ class tx_caddy_session
     $this->sessionDeleteIncreaseNumbers( $drs );
 
       // Delete the session
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, array( ) );
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, array( ) );
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, array( ) );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -2008,39 +2112,61 @@ class tx_caddy_session
 
 
 
+
  /***********************************************
   *
   * Shipping
   *
   **********************************************/
 
-    /**
- * Change the shipping method in session
+/**
+ * shippingUpdate( )  : Change the shipping method in session
  *
- * @param	array		$arr: array to change
+ * @param	integer : 
+ * @param       integer : $pid      : uid of the page, which contains the caddy plugin
  * @return	void
+ * @version     3.0.1
+ * @since       1.4.0
  */
-    public function shippingUpdate($value)
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function shippingUpdate( $value, $pid=null )
+  {
+    $pid = $this->getPid( $pid );    
 
-        $sesArray['shipping'] = intval($value); // overwrite with new qty
+    // get products from session
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
+    $sesArray['shipping'] = intval($value); // overwrite with new qty
 
-    /**
- * get the shipping method from session
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData(); // Save session
+  }
+
+/**
+ * shippingGet( ) : Get the shipping method from session
  *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
- */
-    public function shippingGet( )
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+ * @version     3.0.1
+ * @since       1.4.0
+*/
+  public function shippingGet( $pid=null )
+  {
+    $pid = $this->getPid( $pid );    
 
-        return $sesArray['shipping'];
-    }
+    // get products from session
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+
+    return $sesArray['shipping'];
+  }
 
 
 
@@ -2050,33 +2176,54 @@ class tx_caddy_session
   *
   **********************************************/
 
-    /**
- * Change the special method in session
+/**
+ * specialUpdate( ) : Change the special method in session
  *
- * @param	array		$arr: array to change
+ * @param	array	: $arr  : array to change
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	void
+ * @version     3.0.1
+ * @since       1.4.0
  */
-    public function specialUpdate( $specials_arr )
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function specialUpdate( $specials_arr, $pid=null )
+  {
+    $pid = $this->getPid( $pid );    
 
-        $sesArray['specials'] = $specials_arr; // overwrite with new qty
+    // get products from session
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
-        $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
-        $GLOBALS['TSFE']->storeSessionData(); // Save session
-    }
+    $sesArray['specials'] = $specials_arr; // overwrite with new qty
 
-    /**
- * get the special method from session
+    // #i0035, 131128, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #i0035, 131128, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData(); // Save session
+  }
+
+/**
+ * specialGet( )  : get the special method from session
  *
+ * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
+ * @version     3.0.1
+ * @since       1.4.0
  */
-    public function specialGet()
-    {
-        $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id); // get already exting products from session
+  public function specialGet( $pid=null )
+  {
+    $pid = $this->getPid( $pid );    
 
-        return $sesArray['specials'];
-    }
+    // get products from session
+    // #i0035, 131128, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #i0035, 131128, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+
+    return $sesArray['specials'];
+  }
 
 
 
