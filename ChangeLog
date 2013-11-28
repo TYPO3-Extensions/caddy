@@ -12,6 +12,10 @@
             * static
               * constants.txt
   Improvement
+  * #i0035: Enable controlling of the caddy (pi1) by pid
+            Effected files:
+            * lib/caddy/class.tx_caddy.php
+            * pi1/class.tx_caddy_pi1.php
   * #i0034: Disable jquery.caddy-3.0.0 / fancybox
             Effected files:
             * lib/jquery/class.tx_caddy_fancybox.php

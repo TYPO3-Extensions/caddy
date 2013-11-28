@@ -139,7 +139,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.2
+ * @version	3.0.1
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -201,13 +201,17 @@ class tx_caddy extends tslib_pibase
 
  /**
   * caddy( )  : Returns a caddy with HTML form and HTML options among others
-  *
-  * @return	array		$arrReturn  : array with elements caddy, tmpl, outerMarkerArray
+  * 
+  * @param      integer : $pidCaddy   : uid of the page, which contains the caddy plugin
+  * @return	array	: $arrReturn  : array with elements caddy, tmpl, outerMarkerArray
   * @access public
-  * @version    2.0.0
+  * @version    3.0.1
   * @since      2.0.0
   */
-  public function caddy( )
+  // #i0035, 131128, dwildt, 1-
+  //public function caddy( )
+  // #i0035, 131128, dwildt, 1+
+  public function caddy( $pidCaddy=null )
   {
     $caddy = array(
       'marker'    => null,
@@ -218,7 +222,10 @@ class tx_caddy extends tslib_pibase
     $this->init( );
 
       // get products from session
-    $this->products = $this->session->productsGet( );
+    // #i0035, 131128, dwildt, 1-
+    //$this->products = $this->session->productsGet( );
+    // #i0035, 131128, dwildt, 1+
+    $this->products = $this->session->productsGet( $pidCaddy );
 
     switch( true )
     {

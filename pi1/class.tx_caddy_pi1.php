@@ -277,7 +277,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddyRendered( )
   {
-    $arrReturn = $this->caddy->caddy( );
+    // #i0035, 131128, dwildt, 1-
+    //$arrReturn = $this->caddy->caddy( );
+    // #i0035, 131128, dwildt, 1+
+    $arrReturn = $this->caddy->caddy( $this->pid );
     return $arrReturn;
   }
 
