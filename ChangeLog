@@ -1,5 +1,13 @@
-4.0.1
+3.0.1
   2013-11-28
+  * #53678: e-payment
+            Integration of paymill
+            Effected files:
+            * res/e-payment-provider/paymill  ( new )
+  * #i0033: Move version from 4.0.1 to 3.0.1
+
+4.0.1
+  2013-11-21
   Major Feature 
   * #53742: Fancybox
             Effected files:
