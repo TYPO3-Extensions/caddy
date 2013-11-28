@@ -117,6 +117,9 @@ class tx_caddy_fancybox
   */
   public function main( )
   {
+      // #i0034, 131128, dwildt, 1+
+    return;
+
     unset( $content );
     
       // Init
