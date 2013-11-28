@@ -3,11 +3,18 @@
   Major Feature 
   * #53678: e-payment
             Integration of paymill step 1
+            * Move HTML templates from files/templates to files/templates/2.0.0
             Effected files:
+            * files/templates
+              * 2.0.0
+              * 3.0.0                         ( new )
             * res/e-payment-provider/paymill  ( new )
+            * static
+              * constants.txt
   Improvement
-  * #i0034: Disable jquery.caddy-3.0.0
+  * #i0034: Disable jquery.caddy-3.0.0 / fancybox
             Effected files:
+            * lib/jquery/class.tx_caddy_fancybox.php
             * pi1/class.tx_caddy_pi1.php
   * #i0033: Move version from 4.0.1 to 3.0.1
             Effected files:
