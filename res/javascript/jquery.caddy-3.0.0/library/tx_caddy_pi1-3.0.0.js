@@ -45,7 +45,7 @@ var fnAccordion = function() {
           return true;
         }
         // Are all values proper of the powermail form?
-        var success = $("#myform").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
+        var success = $("#c###UID###-accordion-powermail form").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
         if( success )
         {
           // RETURN : all values are proper
@@ -133,7 +133,7 @@ var movePowermailFormToCaddy = function() {
 $(function() {
   // Configure the tabs of the powermail form
   $("ul.css-tabs").tabs(
-  "#myform > fieldset.powermail_fieldset",
+  "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
   {
     initialIndex  : 0, // first tab
     onBeforeClick : function( event, indexTabDest ) {
@@ -172,12 +172,12 @@ $.tools.validator.localize("de", {
   '[min]'	: 'Mindestens $1 ist n&ouml;tig',
   '[required]'	: 'Gib einen Wert an'
 }); // $.tools.validator.localize ...
-$("#myform").validator( 
+$("#c###UID###-accordion-powermail form").validator( 
 {
   inputEvent  : 'blur',
   lang        : 'de'
   //singleError : true // No effect!
-}); // $("#myform").validator ...
+}); // $("#c###UID###-accordion-powermail form").validator ...
 /* Validator end */
 
 
