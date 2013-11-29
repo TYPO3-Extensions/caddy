@@ -57,6 +57,8 @@ plugin.caddy {
   debug.paramsAndTs = 0
   # cat=caddy - debug//101;           type=boolean; label= Debug user functions (backend): Enable the DRS for user functions
   debug.userfunc = 0
+  # cat=caddy - debug//102;           type=boolean; label= Don't replace empty marker: Enable it, if empty HTML markers should not removed.
+  debug.dontReplaceEmptyMarker = 0
   # cat=caddy - debug/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   debug.externalLinks = Click me!
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

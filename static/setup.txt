@@ -61,8 +61,16 @@ plugin.tx_caddy_pi1 {
     service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
     service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
   }
-    // [Boolean] Prompts a debug report with informations about TypoScript to the frontend
-  debug  = {$plugin.caddy.debug.paramsAndTs}
+    // dontReplaceEmptyMarker, paramsAndTs, userfunc
+  debug  = 
+  debug {
+      // [Boolean] Debug params/typoscript (frontend): Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
+    dontReplaceEmptyMarker  = {$plugin.caddy.debug.dontReplaceEmptyMarker}
+      // [Boolean] Debug user functions (backend): Enable the DRS for user functions
+    paramsAndTs             = {$plugin.caddy.debug.paramsAndTs}
+      // [Boolean] Don't replace empty marker: Enable it, if empty HTML markers should not removed.
+    userfunc                = {$plugin.caddy.debug.userfunc}
+  }
 
     // gross, min, max, qty, sku, tax, title, uid, volume, weight
   getpost =

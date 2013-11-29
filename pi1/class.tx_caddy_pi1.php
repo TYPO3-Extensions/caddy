@@ -393,7 +393,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function debugOutputBeforeRunning( )
   {
       // RETURN : Don't output debug prompt
-    if( ! $this->conf['debug'] )
+    if( ! $this->conf['debug.']['paramsAndTs'] )
     {
       return;
     }

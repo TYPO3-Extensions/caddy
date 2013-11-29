@@ -59,6 +59,13 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   {
       // config
     $this->conf = $pObj->conf;
+    
+      // #i0036, dwildt, 4+
+    if( $this->conf['debug.']['dontReplaceEmptyMarker'] )
+    {
+      return $content;
+    }
+    
     $this->cObj = $pObj->cObj;
     $this->content = $content;
     $this->pi_loadLL();
