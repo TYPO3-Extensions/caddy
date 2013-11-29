@@ -30,6 +30,9 @@
   width:35px;
 }
 
+div.caddy form {
+  border-bottom:0;
+}
 /* error message for validator */
 .error {
   height:15px;
