@@ -107,7 +107,7 @@ $(document).on("click", ".c###UID###-step", function(e) {
     //alert( 3 ); 
     c###UID###Accordion();
     //alert( 4 ); 
-  }, 2000 );
+  }, 1000 );
   console.log( 'ZZZ' );
   // Update the content with the id #c###UID###-###VIEW###view
 }) // User has clicked a tag with the cUID-step class
