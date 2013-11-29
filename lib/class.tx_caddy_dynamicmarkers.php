@@ -74,12 +74,6 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
       // #i0037, dwildt, 1+
     $this->content  = $this->cObjData( );
     
-      // #i0036, dwildt, 4+
-    if( $this->conf['debug.']['dontReplaceEmptyMarker'] )
-    {
-      return $this->content;
-    }
-    
     $this->pi_loadLL();
 
       // 1. replace locallang markers
@@ -108,10 +102,13 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
                         $this->content // current content
                       );
 
-    if( ! empty( $this->content ) )
+      // #i0036, dwildt, 5+
+    if( $this->conf['debug.']['dontReplaceEmptyMarker'] )
     {
       return $this->content;
     }
+    $this->content = preg_replace( '|###.*?###|i', '', $this->content );
+    
   }
 
  /**
@@ -185,7 +182,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
         continue;
       }
       $hashMarker     = '###'.strtoupper($key).'###';
-      $this->content  = str_replace($hashMarker, $value, $this->content );
+      $this->content  = str_replace( $hashMarker, $value, $this->content );
     }
     return $this->content;
   }
