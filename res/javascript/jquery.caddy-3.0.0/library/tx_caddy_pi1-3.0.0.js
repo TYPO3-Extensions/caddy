@@ -133,14 +133,7 @@ var movePowermailFormToCaddy = function() {
   $('#c###UID###-accordion div.caddy-powermail form h3').remove();
   // Add IDs to each fieldset
   $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
-    if (i % 2 == 1)
-    {
-      $(this).addClass("odd");
-    }
-    else
-    {
-      $(this).addClass("even");
-    }
+    $(this).attr("id", "tab-" + i );
   });
 };
 
