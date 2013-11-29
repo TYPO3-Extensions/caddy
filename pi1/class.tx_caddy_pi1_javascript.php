@@ -123,7 +123,7 @@ class tx_caddy_pi1_javascript
     $path         = $tsPathToCaddy['css.']['path'];
     $path_tsConf  = 'javascript.jquery.plugins.caddy.css';
     $marker       = $tsPathToCaddy['css.']['marker.'];
-    $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $marker );
+    $bool_success = $this->addCssFile( $path, $name, $path_tsConf, $marker );
     unset( $bool_success );
   }
 
