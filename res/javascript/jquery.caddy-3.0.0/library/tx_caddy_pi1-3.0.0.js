@@ -135,7 +135,10 @@ var movePowermailFormToCaddy = function() {
   $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
     $(this).attr("id", "tab-" + i );
   });
-  initPowermailTabs();
+  //initPowermailTabs();
+  setTimeout(function() {
+    initPowermailTabs(); /* Initiate Accordion */
+  }, 2000 );
 };
 
 /* Powermail tabs begin */
