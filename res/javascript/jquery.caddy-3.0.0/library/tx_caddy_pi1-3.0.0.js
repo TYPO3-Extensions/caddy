@@ -72,95 +72,89 @@ $(function() {
 }); /* Accordion end */
 
 /* AJAX begin */
-//$( function( )
-//{
-//    // User has clicked a tag with the cUID-step class
-//  $( ".c###UID###-step" ).live(
-//    'click',
-//    function( e ) {
-//      e.preventDefault( ); // Don't execute the click
-//
-//        // RETURN : current id isn't part of the DOM
-//      //if( ! $( "#c###UID###" ).length )
-//      if( ! $( "#content" ).length )
-//      {
-//        if( t3caddyAlert )
-//        {
-//          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
-//          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
-//        }
-//        return;
-//      } // RETURN : current id isn't part of the DOM
-//        
-//        // Update the content with the id #c###UID###-###VIEW###view
-//      var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
-//      //var html_element              = "#c###UID###";
-//      var html_element              = "#content";
-//      var html_element_wi_selector  = html_element + " > *";
-//      $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
-//        // Update the content with the id #c###UID###-###VIEW###view
-//    }
-//  ); // User has clicked a tag with the cUID-step class
-//});
- /* AJAX end */
+$(document).on("click", ".c###UID###-step", function(e) {
+  // User has clicked a tag with the cUID-step class
+  e.preventDefault( ); // Don't execute the click
+
+  // RETURN : current id isn't part of the DOM
+  //if( ! $( "#c###UID###" ).length )
+  if( ! $( "#content" ).length )
+  {
+    if( t3caddyAlert )
+    {
+      //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
+      alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
+    }
+    return;
+  } // RETURN : current id isn't part of the DOM
+        
+  // Update the content with the id #c###UID###-###VIEW###view
+  var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
+  //var html_element              = "#c###UID###";
+  var html_element              = "#content";
+  var html_element_wi_selector  = html_element + " > *";
+  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
+  // Update the content with the id #c###UID###-###VIEW###view
+}); // User has clicked a tag with the cUID-step class
+/* AJAX end */
 
 /* Overlay begin */
 $(function() {
-  // Workaround: Use buttons to initial overlays
-  $("button[rel]").overlay({
-    mask    : '#000', 
-    effect  : 'apple'
-  }); 
+// Workaround: Use buttons to initial overlays
+$("button[rel]").overlay({
+  mask    : '#000', 
+  effect  : 'apple'
+}); 
 }); /* Overlay end */
 
 /* Powermail tabs begin */
 $(function() {
-  // Configure the tabs of the powermail form
-  $("ul.css-tabs").tabs(
-  "#myform > fieldset.powermail_fieldset",
-  {
-    initialIndex  : 0, // first tab
-    onBeforeClick : function( event, indexTabDest ) {
-      // Get index of the current tab
-      var indexTabSrce = this.getIndex();
-      // If index is undefined, tab is the initial tab
-      if( indexTabSrce == undefined )
-      {
-        // follow the workflow
-        return true;
-      }
-      // Get HTML id of the current tab
-      var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
-      // Validate HTML input fields of the current tab
-      var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
-      // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
-      if( success )
-      {
-        return true;
-      }
-      // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
-      return false;
+// Configure the tabs of the powermail form
+$("ul.css-tabs").tabs(
+"#myform > fieldset.powermail_fieldset",
+{
+  initialIndex  : 0, // first tab
+  onBeforeClick : function( event, indexTabDest ) {
+    // Get index of the current tab
+    var indexTabSrce = this.getIndex();
+    // If index is undefined, tab is the initial tab
+    if( indexTabSrce == undefined )
+    {
+      // follow the workflow
+      return true;
     }
-  });
+    // Get HTML id of the current tab
+    var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
+    // Validate HTML input fields of the current tab
+    var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+    // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
+    if( success )
+    {
+      return true;
+    }
+    // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
+    return false;
+  }
+});
 });  // $(function() ...
 /* Powermail tabs begin */
 
 /* Validator begin */
 $.tools.validator.localize("de", {
-  // Isn't localised
-  //'*'		: 'Der Wert wird nicht akzeptiert',
-  ':email'  	: 'Gib eine korrekte E-Mail-Adresse ab',
-  ':number' 	: 'Gib eine Nummer an',
-  ':url' 	: 'Gib eine URL an',
-  '[max]'	: 'Maximal $1 ist erlaubt',
-  '[min]'	: 'Mindestens $1 ist n&ouml;tig',
-  '[required]'	: 'Gib einen Wert an'
+// Isn't localised
+//'*'		: 'Der Wert wird nicht akzeptiert',
+':email'  	: 'Gib eine korrekte E-Mail-Adresse ab',
+':number' 	: 'Gib eine Nummer an',
+':url' 	: 'Gib eine URL an',
+'[max]'	: 'Maximal $1 ist erlaubt',
+'[min]'	: 'Mindestens $1 ist n&ouml;tig',
+'[required]'	: 'Gib einen Wert an'
 }); // $.tools.validator.localize ...
 $("#myform").validator( 
 {
-  inputEvent  : 'blur',
-  lang        : 'de'
-  //singleError : true // No effect!
+inputEvent  : 'blur',
+lang        : 'de'
+//singleError : true // No effect!
 }); // $("#myform").validator ...
 /* Validator end */
 
