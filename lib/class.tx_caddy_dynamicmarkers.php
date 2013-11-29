@@ -107,7 +107,9 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     {
       return $this->content;
     }
+
     $this->content = preg_replace( '|###.*?###|i', '', $this->content );
+    return $this->content;
     
   }
 
