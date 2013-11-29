@@ -161,7 +161,7 @@ var initPowermailTabs = function() {
         return true;
       }
       // Get HTML id of the current tab
-      var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
+      var idTabSrce = '#tab-' + indexTabSrce + ' :input';
       alert( idTabSrce );
       alert( $(idTabSrce).length );
       alert( $(idTabSrce).validator({ lang : 'de' }).length );
