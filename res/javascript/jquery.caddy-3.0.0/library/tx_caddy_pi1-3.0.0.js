@@ -22,8 +22,8 @@ var fnAccordion = function() {
     // The accordian panes of the caddy
     $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
     {
-      tabs          : 'h2', 
-      effect        : 'slide', 
+      tabs          : 'h2',
+      effect        : 'slide',
       initialIndex  : 0,
       onBeforeClick : function( event, indexAccordionDest ) {
         // Get index of the current accordion tab
@@ -71,11 +71,11 @@ var fnAccordion = function() {
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
   });
-  //  alert( 1 ); 
+  //  alert( 1 );
 }; /* Accordion end */
 
 var fnInit = function() {
-  fnAccordion();  
+  fnAccordion();
   movePowermailFormToCaddy();
 };
 
@@ -100,7 +100,7 @@ $(document).on("click", ".c###UID###-step", function(e) {
     }
     return;
   } // RETURN : current id isn't part of the DOM
-        
+
   // Update the content with the id #c###UID###-###VIEW###view
   var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
   //var html_element              = "#c###UID###";
@@ -119,9 +119,9 @@ $(document).on("click", ".c###UID###-step", function(e) {
 $(function() {
   // Workaround: Use buttons to initial overlays
   $("button[rel]").overlay({
-    mask    : '#000', 
+    mask    : '#000',
     effect  : 'apple'
-  }); 
+  });
 }); /* Overlay end */
 
 var movePowermailFormToCaddy = function() {
@@ -140,6 +140,12 @@ var movePowermailFormToCaddy = function() {
 
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
+  $("#c###UID###-accordion-powermail form").validator(
+  {
+    inputEvent  : 'blur',
+    lang        : 'de'
+    //singleError : true // No effect!
+  }); // $("#c###UID###-accordion-powermail form").validator ...
   // Configure the tabs of the powermail form
   $("ul.css-tabs").tabs(
   "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
@@ -182,12 +188,6 @@ $.tools.validator.localize("de", {
   '[min]'	: 'Mindestens $1 ist n&ouml;tig',
   '[required]'	: 'Gib einen Wert an'
 }); // $.tools.validator.localize ...
-$("#c###UID###-accordion-powermail form").validator( 
-{
-  inputEvent  : 'blur',
-  lang        : 'de'
-  //singleError : true // No effect!
-}); // $("#c###UID###-accordion-powermail form").validator ...
 /* Validator end */
 
 
