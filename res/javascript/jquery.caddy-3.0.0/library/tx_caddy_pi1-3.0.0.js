@@ -19,7 +19,7 @@ var t3caddyAlert              = ###T3CADDYALERT###;
 /* Accordion begin */
 $(function() {
   // The accordian panes of the caddy
-  $("#accordion").tabs( "#accordion div.pane",
+  $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
   {
     tabs          : 'h2', 
     effect        : 'slide', 
@@ -68,7 +68,7 @@ $(function() {
       $("#promptPowermailInvalid").click();
       return false;
     } // onBeforeClick ...
-  }); // $("#accordion").panes ...
+  }); // $("#c###UID###-accordion").panes ...
 }); /* Accordion end */
 
 /* AJAX begin */
