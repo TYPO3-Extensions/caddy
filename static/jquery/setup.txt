@@ -284,7 +284,7 @@ plugin.tx_caddy_pi1 {
                   });
               </script>
 )
-            script (
+            XX_script (
 
               <script type="text/javascript">
                 $(document).on('click', '.c%uid%_step', function() {
