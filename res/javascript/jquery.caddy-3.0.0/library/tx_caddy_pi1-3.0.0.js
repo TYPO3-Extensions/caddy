@@ -140,13 +140,10 @@ var movePowermailFormToCaddy = function() {
 
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
-  $("#c###UID###-accordion-powermail form").validator(
-  {
-    inputEvent  : 'blur',
-    lang        : 'de'
-    //singleError : true // No effect!
-  }); // $("#c###UID###-accordion-powermail form").validator ...
   // Configure the tabs of the powermail form
+  $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
+    alert( $(this).("legend") );
+  });
   $("ul.css-tabs").tabs(
   "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
   {
@@ -162,10 +159,6 @@ var initPowermailTabs = function() {
       }
       // Get HTML id of the current tab
       var idTabSrce = '#tab-' + indexTabSrce + ' :input';
-      alert( idTabSrce );
-      alert( $(idTabSrce).length );
-      alert( $(idTabSrce).validator({ lang : 'de' }).length );
-      alert( $(idTabSrce).validator({ lang : 'de' }).data('validator').length );
       // Validate HTML input fields of the current tab
       var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
@@ -193,4 +186,9 @@ $.tools.validator.localize("de", {
 }); // $.tools.validator.localize ...
 /* Validator end */
 
-
+$("#c###UID###-accordion-powermail form").validator(
+{
+  inputEvent  : 'blur',
+  lang        : 'de'
+  //singleError : true // No effect!
+}); // $("#c###UID###-accordion-powermail form").validator ...
