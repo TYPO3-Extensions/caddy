@@ -18,7 +18,7 @@ var t3caddyAlert              = ###T3CADDYALERT###;
 
 /* Accordion begin */
 //$(function() {
-$(document).on("click", "#c###UID###-accordion", function(e) {
+$(document).on("click", "#c###UID###-accordion > h2", function(e) {
   // The accordian panes of the caddy
   $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
   {
