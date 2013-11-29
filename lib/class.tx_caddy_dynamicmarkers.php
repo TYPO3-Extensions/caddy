@@ -34,7 +34,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage    tx_caddy
- * @version     2.0.0
+ * @version     3.0.1
  * @since       1.4.6
  */
 
@@ -54,20 +54,32 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
           '_HTMLMARKER' // prefix for typoscript part
   );
 
-    // Function main() to replace typoscript- and locallang markers
+ /**
+  * main( ) : replace typoscript- and locallang markers
+  *
+  * @param      string    $content  : current content with HTML marker
+  * @param      object    $pObj     : parent object
+  * @return	string    $content  : current content with replaced HTML marker
+  * @access public
+  * @version    3.0.1
+  * @since      1.4.0
+  */
   function main( $content, $pObj ) 
   {
       // config
-    $this->conf = $pObj->conf;
+    $this->conf     = $pObj->conf;
+    $this->cObj     = $pObj->cObj;
+    $this->content  = $content;
+    
+      // #i0037, dwildt, 1+
+    $this->content  = $this->cObjData( );
     
       // #i0036, dwildt, 4+
     if( $this->conf['debug.']['dontReplaceEmptyMarker'] )
     {
-      return $content;
+      return $this->content;
     }
     
-    $this->cObj = $pObj->cObj;
-    $this->content = $content;
     $this->pi_loadLL();
 
       // 1. replace locallang markers
@@ -102,8 +114,16 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     }
   }
 
-	// Function DynamicLocalLangMarker() to get automaticly a marker from locallang.xml (###LOCALLANG_BLABLA### from locallang.xml: locallangmarker_blabla)
-  function DynamicLocalLangMarker( $array ) 
+ /**
+  * DynamicLocalLangMarker( ) : get automaticly a marker from locallang.xml (###LOCALLANG_BLABLA###)
+  *
+  * @param      array     $array
+  * @return	string    $content  : current content with replaced HTML marker
+  * @access public
+  * @version    3.0.1
+  * @since      1.4.0
+  */
+  private function DynamicLocalLangMarker( $array ) 
   {
     if( ! empty( $array[1] ) )
     {
@@ -120,8 +140,16 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     }
   }
 
-    // Function DynamicTyposcriptMarker() to get automaticly a marker from typoscript
-  function DynamicTyposcriptMarker( $array ) 
+ /**
+  * DynamicTyposcriptMarker( )  : Get automaticly a marker from typoscript
+  *
+  * @param      array     $array
+  * @return	string    $content  : current content with replaced HTML marker
+  * @access public
+  * @version    3.0.1
+  * @since      1.4.0
+  */
+  private function DynamicTyposcriptMarker( $array ) 
   {
     if( $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )] )
     { // If there is a fitting entry in typoscript
@@ -136,6 +164,30 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     {
       return $string;
     }
+  }
+
+ /**
+  * cObjData( ) : Replace all marker, which correspond with cObjData like ###UID###, ###PID###
+  *
+  * @param      string    $content  : current content with HTML marker
+  * @return	string    $content  : current content with replaced HTML marker
+  * @access     private
+  * @internal   #i0037
+  * @version    3.0.1
+  * @since      1.4.0
+  */
+  private function cObjData( ) 
+  {
+    foreach( $this->cObj->data as $key => $value )
+    {
+      if( empty( $value ) )
+      {
+        continue;
+      }
+      $hashMarker     = '###'.strtoupper($key).'###';
+      $this->content  = str_replace($hashMarker, $value, $content );
+    }
+    return $this->content;
   }
 
 }

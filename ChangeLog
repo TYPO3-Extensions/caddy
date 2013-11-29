@@ -14,7 +14,10 @@
                 * constants.txt               ( new )
               * constants.txt
               * setup.txt
-  Improvement
+  Features
+  * #i0037: Replace marker by cObjData
+            Effected files:
+            * lib/class.tx_caddy_dynamicmarkers.php
   * #i0036: Debugging: Don't replace empty marker
             Effected files:
             * lib/class.tx_caddy_dynamicmarkers.php
@@ -29,6 +32,7 @@
               * caddy
                 * class.tx_caddy.php
             * pi1/class.tx_caddy_pi1.php
+  Improvement
   * #i0034: Disable jquery.caddy-3.0.0 / fancybox
             Effected files:
             * lib/jquery/class.tx_caddy_fancybox.php

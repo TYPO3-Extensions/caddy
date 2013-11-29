@@ -111,13 +111,33 @@ INDEX
     <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
       <div class="caddy_options">
         ###SHIPPING_RADIO###
-        ###PAYMENT_RADIO###
         ###SPECIALS_CHECKBOX###
         <div class="caddy_cleaner"></div>
       </div>
     </form> <!-- /caddy -->
-  </div> <!-- /caddy caddy-product-table pane -->
+  </div> <!-- /caddy caddy-options pane -->
   <!-- ###OPTIONS### end -->
+  <!-- ###POWERMAIL### begin -->
+  ###_HTMLMARKER_POWERMAIL_HEADER###
+  <div class="caddy caddy-powermail pane">
+  </div> <!-- /caddy caddy-powermail pane -->
+  <!-- ###POWERMAIL### end -->
+  <!-- ###PAYMENT_METHOD### begin -->
+  ###_HTMLMARKER_PAYMENT_METHOD_HEADER###
+  <div class="caddy caddy-payment-method pane">
+    <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
+      <div class="caddy_options">
+        ###PAYMENT_RADIO###
+        <div class="caddy_cleaner"></div>
+      </div>
+    </form> <!-- /caddy -->
+  </div> <!-- /caddy caddy-payment-method pane -->
+  <!-- ###PAYMENT_METHOD### end -->
+  <!-- ###ORDER### begin -->
+  ###_HTMLMARKER_ORDER_HEADER###
+  <div class="caddy caddy-order pane">
+  </div> <!-- /caddy caddy-order pane -->
+  <!-- ###ORDER### end -->
   ###_HTMLMARKER_LINKTOSHOP###
   <div class="caddy_cleaner"></div>
 </div> <!-- /c###uid###-accordion -->
