@@ -135,10 +135,7 @@ var movePowermailFormToCaddy = function() {
   $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
     $(this).attr("id", "tab-" + i );
   });
-  //initPowermailTabs();
-  setTimeout(function() {
-    initPowermailTabs(); /* Initiate Accordion */
-  }, 2000 );
+  initPowermailTabs();
 };
 
 /* Powermail tabs begin */
@@ -166,6 +163,9 @@ var initPowermailTabs = function() {
       // Get HTML id of the current tab
       var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
       alert( idTabSrce );
+      alert( $(idTabSrce).length );
+      alert( $(idTabSrce).validator({ lang : 'de' }).length );
+      alert( $(idTabSrce).validator({ lang : 'de' }).data('validator').length );
       // Validate HTML input fields of the current tab
       var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
