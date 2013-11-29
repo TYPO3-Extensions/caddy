@@ -246,9 +246,9 @@ class tx_caddy_pi1_javascript
       return false;
     }
 
-    $css = '  <style type="text/css">
+    $css = '<style type="text/css">
 ' . implode ('', file( $absPath )) . '
-  </style>';
+</style>';
     
     $marker = $this->getHashMarker( $marker );
 //var_dump( __METHOD__, __LINE__, $marker );

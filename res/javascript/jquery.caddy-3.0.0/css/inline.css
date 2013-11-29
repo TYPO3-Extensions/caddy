@@ -1,3 +1,5 @@
+/* CSS by TYPO3 Caddy */
+
 /*Overlay*/
 /* the overlayed element */
 .apple_overlay {
@@ -31,12 +33,12 @@
 }
 
 /* root element for accordion. decorated with rounded borders and gradient background image */
-#accordion {
+#c###UID###-accordion {
   margin: 0 auto;
 }
 
 /* accordion header */
-#accordion h2 {
+#c###UID###-accordion h2 {
   background-color:#FFC584;
   border:1px solid #fff;
   color:#fff;
@@ -48,14 +50,14 @@
   font-weight:normal;
 }
 /* currently active header */
-#accordion h2.current {
+#c###UID###-accordion h2.current {
   background:#FF8800;
   border:1px solid #fff;
   color:#fff;
   cursor:default;
 }
 /* accordion pane */
-#accordion .pane {
+#c###UID###-accordion .pane {
   /*        background:#eee;
           border-top: 1px solid #FF8800;
           border-right: 1px solid #eee;
@@ -65,7 +67,7 @@
   font-size:12px;
   padding:0.4em 15px 1em 15px;
 } 
-#accordion .pane p {
+#c###UID###-accordion .pane p {
   margin:0;
   padding:0;
 } 
