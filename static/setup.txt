@@ -2658,6 +2658,14 @@ plugin.tx_caddy_pi1 {
     // linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
+    caddy_header_items = TEXT
+    caddy_header_items {
+      value = <h2 class="current"><span class="label">Warenkorb</span><span class="content">10 Artikel</span><span class="value">312,48 &euro;</span></h2>
+    }
+    caddy_header_options = TEXT
+    caddy_header_options {
+      value = <h2 class="current"><span class="label">Bestelloptionen</span><span class="content">1 Option</span><span class="value">18,90 &euro;</span></h2>
+    }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
     linktoshop {

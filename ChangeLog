@@ -13,6 +13,7 @@
               * 2.0.0
                 * constants.txt               ( new )
               * constants.txt
+              * setup.txt
   Improvement
   * #i0035: Enable controlling of the caddy (pi1) by pid
             Effected files:
