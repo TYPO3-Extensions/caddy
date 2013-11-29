@@ -97,7 +97,9 @@ $(document).on("click", ".c###UID###-step", function(e) {
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
-  c###UID###Accordion();
+  $(function() {
+    c###UID###Accordion();
+  });
   // Update the content with the id #c###UID###-###VIEW###view
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
