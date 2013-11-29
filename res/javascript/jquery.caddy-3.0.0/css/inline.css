@@ -102,6 +102,14 @@
   /*        background-color:#678;*/
 }      
 
+c###UID###-powermail-alert {
+  background:red;
+  color:white;
+  font-weight:bold;
+  padding:1em;
+  text-align:center;
+}
+
 /* root element for tabs  */
 ul.css-tabs {
   margin:0 !important;
