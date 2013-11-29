@@ -71,6 +71,14 @@
   margin:0;
   padding:0;
 } 
+#c2997-accordion .pane p#c###UID###-powermail-alert {
+  background:red;
+  color:white;
+  font-weight:bold;
+  padding:1em;
+  text-align:center;
+}
+
 /* error message for validator */
 .error {
   height:15px;
@@ -101,14 +109,6 @@
 #exposeMask {
   /*        background-color:#678;*/
 }      
-
-#c###UID###-powermail-alert {
-  background:red;
-  color:white;
-  font-weight:bold;
-  padding:1em;
-  text-align:center;
-}
 
 /* root element for tabs  */
 ul.css-tabs {
