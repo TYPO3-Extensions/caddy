@@ -35,10 +35,10 @@ INDEX
 
 
 <!-- ###CADDY### begin --> 
-<div id="c###UID###-accordion" class="expose">
+<div id="c###UID###-accordion">
   <!-- ###CADDY-PRODUCT-TABLE### begin --> 
   ###_HTMLMARKER_CADDY_HEADER_ITEMS###
-  <div class="caddy caddy-product-table pane">
+  <div id="c###UID###-accordion-items" class="caddy caddy-product-table pane">
     ###MINPRICE###
     <form name="caddy" id="caddy" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
@@ -107,7 +107,7 @@ INDEX
   <!-- ###CADDY-PRODUCT-TABLE### end --> 
   <!-- ###OPTIONS### begin -->
   ###_HTMLMARKER_CADDY_HEADER_OPTIONS###
-  <div class="caddy caddy-options pane">
+  <div id="c###UID###-accordion-options" class="caddy caddy-options pane">
     ###MINPRICE###
     <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
@@ -121,7 +121,7 @@ INDEX
   <!-- ###OPTIONS### end -->
   <!-- ###POWERMAIL### begin -->
   ###_HTMLMARKER_CADDY_HEADER_POWERMAIL###
-  <div class="caddy caddy-powermail pane">
+  <div id="c###UID###-accordion-powermail" class="caddy caddy-powermail pane">
     <p id="c###UID###-powermail-alert">
       <em>
         ERROR: This part isn't replaced by the powermail form from below. Something with the Caddy jQuery went wrong. Sorry.
@@ -131,7 +131,7 @@ INDEX
   <!-- ###POWERMAIL### end -->
   <!-- ###PAYMENT_METHOD### begin -->
   ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD###
-  <div class="caddy caddy-payment-method pane">
+  <div id="c###UID###-accordion-paymentmethod" class="caddy caddy-payment-method pane">
     <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
       <div class="caddy_options">
@@ -143,7 +143,7 @@ INDEX
   <!-- ###PAYMENT_METHOD### end -->
   <!-- ###ORDER### begin -->
   ###_HTMLMARKER_CADDY_HEADER_ORDER###
-  <div class="caddy caddy-order pane">
+  <div id="c###UID###-accordion-order" class="caddy caddy-order pane">
     <em>Warenkorb</em>
   </div> <!-- /caddy caddy-order pane -->
   <!-- ###ORDER### end -->

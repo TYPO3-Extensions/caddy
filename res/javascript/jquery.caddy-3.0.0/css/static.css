@@ -30,45 +30,6 @@
   width:35px;
 }
 
-/* root element for accordion. decorated with rounded borders and gradient background image */
-#c2997-accordion {
-  margin: 0 auto;
-}
-
-/* accordion header */
-#c2997-accordion h2 {
-  background-color:#FFC584;
-  border:1px solid #fff;
-  color:#fff;
-  cursor:pointer;
-  line-height: 14px;
-  margin:0;
-  padding:5px 15px;
-  font-size:14px;
-  font-weight:normal;
-}
-/* currently active header */
-#c2997-accordion h2.current {
-  background:#FF8800;
-  border:1px solid #fff;
-  color:#fff;
-  cursor:default;
-}
-/* accordion pane */
-#c2997-accordion .pane {
-  /*        background:#eee;
-          border-top: 1px solid #FF8800;
-          border-right: 1px solid #eee;
-          border-bottom: 1px solid #eee;
-          border-left: 1px solid #eee;*/
-  display:none;
-  font-size:12px;
-  padding:0.4em 15px 1em 15px;
-} 
-#c2997-accordion .pane p {
-  margin:0;
-  padding:0;
-} 
 /* error message for validator */
 .error {
   height:15px;
@@ -96,9 +57,6 @@
 .error p {
   margin:0;
 }
-#exposeMask {
-  /*        background-color:#678;*/
-}      
 
 /* root element for tabs  */
 ul.css-tabs {
