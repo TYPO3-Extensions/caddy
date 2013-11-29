@@ -70,7 +70,7 @@ var c###UID###Accordion = function() {
     } // onBeforeClick ...
   }); // $("#c###UID###-accordion").panes ...
 }; /* Accordion end */
-$.(function() {
+$(function() {
   c###UID###Accordion();
 });
 
