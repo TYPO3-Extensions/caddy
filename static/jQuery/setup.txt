@@ -1,6 +1,6 @@
 plugin.tx_caddy_pi1 {
   test = 1
-  CSS_DEFAULT_STYLE := appendString('/* ACCORDION BEGIN */#c2997-accordion {margin: 0 auto;}')
+  _CSS_DEFAULT_STYLE := appendString('/* ACCORDION BEGIN */#c2997-accordion {margin: 0 auto;}')
   XXX_CSS_DEFAULT_STYLE (
     /* ACCORDION BEGIN */
     #c2997-accordion {
