@@ -2676,7 +2676,7 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
-      value = <h2>Adreese, Kontakt, Wiederrufsbelehrung</h2>
+      value = <h2>Adresse, Kontakt, Wiederrufsbelehrung</h2>
     }
     caddy_header_order = TEXT
     caddy_header_order {
