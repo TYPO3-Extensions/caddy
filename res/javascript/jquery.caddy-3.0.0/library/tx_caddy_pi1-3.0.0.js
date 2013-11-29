@@ -125,7 +125,8 @@ $(function() {
 }); /* Overlay end */
 
 var movePowermailFormToCaddy = function() {
-  $('#c2995>div').detach().appendTo('#c2997-accordion div.caddy-powermail');
+  $('#c2995>div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
+  $('#c###UID###-powermail-alert').remove();
 };
 
 /* Powermail tabs begin */
