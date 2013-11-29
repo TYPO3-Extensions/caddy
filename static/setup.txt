@@ -2682,8 +2682,8 @@ plugin.tx_caddy_pi1 {
     caddy_header_order {
       value = <h2><span class="label">Bestelloptionen</span><span class="content"></span><span class="value">340,80 &euro;</span></h2>
     }
-    caddy_header_paymentmethods = TEXT
-    caddy_header_paymentmethods {
+    caddy_header_paymentmethod = TEXT
+    caddy_header_paymentmethod {
       value = <h2><span class="label">Zahlungsart</span><span class="content">Lastschrift</span><span class="value">0,00 &euro;</span></h2>
     }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
