@@ -155,6 +155,7 @@ $(function() {
       }
       // Get HTML id of the current tab
       var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
+      alert( idTabSrce );
       // Validate HTML input fields of the current tab
       var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
