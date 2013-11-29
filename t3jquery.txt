@@ -1,6 +1,6 @@
-  // res/javascript/jquery.caddy-3.0.0/library/tx_caddy_pi1_4.0.0.js
+  // res/javascript/jquery.caddy-3.0.0/library/tx_caddy_pi1_3.0.0.js
   // res/javascript/jquery.caddy-3.0.0/plugin/jquery.caddy-3.0.0.js
   // res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js
   // res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js
   // res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js
-script=res/javascript/jquery.caddy-3.0.0/library/tx_caddy_pi1_4.0.0.js,res/javascript/jquery.caddy-3.0.0/plugin/jquery.caddy-3.0.0.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js
+script=res/javascript/jquery.caddy-3.0.0/library/tx_caddy_pi1_3.0.0.js,res/javascript/jquery.caddy-3.0.0/plugin/jquery.caddy-3.0.0.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.easing-1.3.pack.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js,res/javascript/jquery.fancybox-1.3.4/fancybox/jquery.mousewheel-3.0.4.pack.js
