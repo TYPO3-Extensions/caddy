@@ -70,6 +70,9 @@ var c###UID###Accordion = function() {
     } // onBeforeClick ...
   }); // $("#c###UID###-accordion").panes ...
 }; /* Accordion end */
+$.(function() {
+  c###UID###Accordion();
+});
 
 /* AJAX begin */
 $(document).on("click", ".c###UID###-step", function(e) {
