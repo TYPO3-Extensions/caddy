@@ -101,8 +101,8 @@ $(document).on("click", ".c###UID###-step", function(e) {
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
-  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector ).queue( function () {
-    alert( 3 ); 
+  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector ).delay(100).queue( function () {
+    //alert( 3 ); 
     c###UID###Accordion();
   });
   //  $(function() {
