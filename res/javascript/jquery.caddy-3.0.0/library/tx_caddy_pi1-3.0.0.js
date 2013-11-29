@@ -125,9 +125,23 @@ $(function() {
 }); /* Overlay end */
 
 var movePowermailFormToCaddy = function() {
+  // Move the powermail form TYPO3 content element to the powermail accordian div
   $('#c2995>div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
+  // Remove the default powermail-can't-move-error
   $('#c###UID###-powermail-alert').remove();
+  // Remove the powermail default h3-header
   $('#c###UID###-accordion div.caddy-powermail form h3').remove();
+  // Add IDs to each fieldset
+  $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
+    if (i % 2 == 1)
+    {
+      $(this).addClass("odd");
+    }
+    else
+    {
+      $(this).addClass("even");
+    }
+  });
 };
 
 /* Powermail tabs begin */
