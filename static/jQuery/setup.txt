@@ -2,11 +2,11 @@ plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
     
     /* ACCORDION BEGIN */
-    #accordion {
+    #c2997-accordion {
       margin: 0 auto;
     }
     /* header */
-    #accordion h2 {
+    #c2997-accordion h2 {
       background-color:#FFC584;
       border:1px solid #fff;
       color:#fff;
@@ -18,14 +18,14 @@ plugin.tx_caddy_pi1 {
       font-weight:normal;
     }
       /* currently active header */
-      #accordion h2.current {
+      #c2997-accordion h2.current {
         background:#FF8800;
         border:1px solid #fff;
         color:#fff;
         cursor:default;
       }
     /* pane */
-    #accordion .pane {
+    #c2997-accordion .pane {
       /*        background:#eee;
               border-top: 1px solid #FF8800;
               border-right: 1px solid #eee;
@@ -35,7 +35,7 @@ plugin.tx_caddy_pi1 {
       font-size:12px;
       padding:0.4em 15px 1em 15px;
     } 
-      #accordion .pane p {
+      #c2997-accordion .pane p {
         margin:0;
         padding:0;
       } 
