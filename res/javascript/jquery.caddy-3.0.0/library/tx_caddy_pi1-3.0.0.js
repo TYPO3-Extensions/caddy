@@ -18,60 +18,63 @@ var t3caddyAlert              = ###T3CADDYALERT###;
 
 /* Accordion begin */
 var c###UID###Accordion = function() {
-  // The accordian panes of the caddy
-  $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
-  {
-    tabs          : 'h2', 
-    effect        : 'slide', 
-    initialIndex  : 0,
-    onBeforeClick : function( event, indexAccordionDest ) {
-      // Get index of the current accordion tab
-      var indexAccordionSrce = this.getIndex();
-      // If index is undefined, accordion tab is the initial tab
-      if( indexAccordionSrce == undefined )
-      {
-        // RETURN : follow the users workflow
-        return true;
-      }
-      // Hide possible error prompts of accordion tab 2, if destination accordion tab isn't the 2. tab - the powermail form
-      if ( indexAccordionDest != 2 )
-      {
+  $(function() {
+    // The accordian panes of the caddy
+    $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
+    {
+      tabs          : 'h2', 
+      effect        : 'slide', 
+      initialIndex  : 0,
+      onBeforeClick : function( event, indexAccordionDest ) {
+        // Get index of the current accordion tab
+        var indexAccordionSrce = this.getIndex();
+        // If index is undefined, accordion tab is the initial tab
+        if( indexAccordionSrce == undefined )
+        {
+          // RETURN : follow the users workflow
+          return true;
+        }
+        // Hide possible error prompts of accordion tab 2, if destination accordion tab isn't the 2. tab - the powermail form
+        if ( indexAccordionDest != 2 )
+        {
+          $( "div.error" ).hide();
+        }
+        // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
+        if ( indexAccordionDest <= 2 )
+        {
+          return true;
+        }
+        // Are all values proper of the powermail form?
+        var success = $("#myform").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
+        if( success )
+        {
+          // RETURN : all values are proper
+          return true;
+        }
+        // Hide possible error prompts
         $( "div.error" ).hide();
-      }
-      // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
-      if ( indexAccordionDest <= 2 )
-      {
-        return true;
-      }
-      // Are all values proper of the powermail form?
-      var success = $("#myform").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
-      if( success )
-      {
-        // RETURN : all values are proper
-        return true;
-      }
-      // Hide possible error prompts
-      $( "div.error" ).hide();
-      // RETURN : current tab is the tab of the powermail form
-      if ( indexAccordionDest == 2 )
-      {
+        // RETURN : current tab is the tab of the powermail form
+        if ( indexAccordionDest == 2 )
+        {
+          return false;
+        }
+        // Select the second tab - the powermail form
+        this.click( 2 );
+        // Get the current tab (fieldset) of the powermail form
+        var indexTabSrce  = $("ul.css-tabs").data("tabs").getIndex();
+        var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
+        // Validate HTML input fields of the current tab (fieldset)
+        $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+        // Prompt a message in a lightbox (overflow)
+        $("#promptPowermailInvalid").click();
         return false;
-      }
-      // Select the second tab - the powermail form
-      this.click( 2 );
-      // Get the current tab (fieldset) of the powermail form
-      var indexTabSrce  = $("ul.css-tabs").data("tabs").getIndex();
-      var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
-      // Validate HTML input fields of the current tab (fieldset)
-      $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
-      // Prompt a message in a lightbox (overflow)
-      $("#promptPowermailInvalid").click();
-      return false;
-    } // onBeforeClick ...
-  }); // $("#c###UID###-accordion").panes ...
+      } // onBeforeClick ...
+    }); // $("#c###UID###-accordion").panes ...
+  });
   alert( 1 ); 
 }; /* Accordion end */
 $(function() {
+  alert( 0 ); 
   c###UID###Accordion();
   alert( 2 ); 
 });
@@ -100,8 +103,9 @@ $(document).on("click", ".c###UID###-step", function(e) {
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
   $(function() {
-    c###UID###Accordion();
     alert( 3 ); 
+    c###UID###Accordion();
+    alert( 4 ); 
   });
   // Update the content with the id #c###UID###-###VIEW###view
 }); // User has clicked a tag with the cUID-step class
