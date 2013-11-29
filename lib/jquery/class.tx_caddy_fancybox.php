@@ -29,8 +29,8 @@
 * @package    TYPO3
 * @subpackage    caddy
 * @internal   #53742 
-* @version  4.0.1
-* @since    4.0.1
+* @version  3.0.1
+* @since    3.0.1
 */
 
 
@@ -112,16 +112,14 @@ class tx_caddy_fancybox
   *
   * @return    mixed        HTML output.
   * @access public
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   public function main( )
   {
-      // #i0034, 131128, dwildt, 1+
-    return;
+//      // #i0034, 131128, dwildt, 1+
+//    return;
 
-    unset( $content );
-    
       // Init
     if( ! $this->init( ) )
     {
@@ -141,8 +139,8 @@ class tx_caddy_fancybox
   *
   * @return    boolean        
   * @access private
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   private function  init( )
   {
@@ -161,8 +159,8 @@ class tx_caddy_fancybox
   *
   * @return    boolean        
   * @access private
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   private function  initRequirements( )
   {
@@ -208,8 +206,8 @@ class tx_caddy_fancybox
   *
   * @return    string     $content  : HTML content
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function jquery( )
   {
@@ -227,8 +225,8 @@ class tx_caddy_fancybox
   *
   * @return    void
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function jqueryFancybox( )
   {
@@ -278,8 +276,8 @@ class tx_caddy_fancybox
   *
   * @return    void
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function jqueryFancyboxCSS( )
   {
@@ -303,8 +301,8 @@ class tx_caddy_fancybox
   *
   * @return    void
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function jqueryFancyboxLibrary( )
   {
@@ -358,8 +356,8 @@ class tx_caddy_fancybox
   *
   * @return    mixed        HTML output.
   * @access private
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   private function jqueryFancyboxScript( )
   {
@@ -382,8 +380,8 @@ class tx_caddy_fancybox
   *
   * @return    string        list of parameter
   * @access private
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   private function jqueryFancyboxScriptParams( )
   {
@@ -475,8 +473,8 @@ class tx_caddy_fancybox
   *
   * @return    array        $variables
   * @access private
-  * @version 4.0.1
-  * @since 4.0.1
+  * @version 3.0.1
+  * @since 3.0.1
   */
   private function jqueryFancyboxScriptVars( )
   {
@@ -508,8 +506,8 @@ class tx_caddy_fancybox
   *
   * @return    void
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function jquerySource( )
   {
@@ -594,8 +592,8 @@ class tx_caddy_fancybox
   *
   * @return    string        $value  : ....
   * @access   private
-  * @version  4.0.1
-  * @since    4.0.1
+  * @version  3.0.1
+  * @since    3.0.1
   */
   private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
   {

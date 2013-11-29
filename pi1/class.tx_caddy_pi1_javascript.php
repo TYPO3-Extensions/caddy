@@ -94,16 +94,39 @@ class tx_caddy_pi1_javascript
  */
   public function addJssFilesJqueryPluginsCaddy( )
   {
-      // #i0034, 131128, dwildt, 1+
-    return;
+//      // #i0034, 131128, dwildt, 1+
+//    return;
     
     $this->local_cObj = $this->pObj->local_cObj;
 
+    $this->addJssFilesJqueryPluginsCaddyCSS( );
     $this->addJssFilesJqueryPluginsCaddyPlugin( );
     $this->addJssFilesJqueryPluginsCaddyLocalisation( );
     $this->addJssFilesJqueryPluginsCaddyLibrary( );
   }
   
+/**
+ * addJssFilesJqueryPluginsCaddyCSS( )
+ *
+ * @return	void
+ * @access      private
+ * @version     4.0.0
+ * @since       4.0.0
+ */
+  private function addJssFilesJqueryPluginsCaddyCSS( )
+  {
+      // Short variable
+    $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
+    
+      // Include the inline css
+    $name         = 'jquery_plugins_caddy_css';
+    $path         = $tsPathToCaddy['css.']['path'];
+    $path_tsConf  = 'javascript.jquery.plugins.caddy.css';
+    $marker       = $tsPathToCaddy['css.']['marker.'];
+    $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $marker );
+    unset( $bool_success );
+  }
+
 /**
  * addJssFilesJqueryPluginsCaddyLibrary( )
  *
@@ -119,7 +142,7 @@ class tx_caddy_pi1_javascript
     
       // Include the library code
     $name         = 'jquery_plugins_caddy_library';
-    $path         = $tsPathToCaddy['library'];
+    $path         = $tsPathToCaddy['library.']['path'];
     $inline       = $tsPathToCaddy['library.']['inline'];
     $path_tsConf  = 'javascript.jquery.plugins.caddy.library';
     $marker       = $tsPathToCaddy['library.']['marker.'];
@@ -150,7 +173,7 @@ class tx_caddy_pi1_javascript
     
       // Include localised file, if current language isn't English
     $name         = 'jquery_plugins_caddy_localisation';
-    $path         = $tsPathToCaddy['localisation'];
+    $path         = $tsPathToCaddy['localisation.']['path'];
     $path         = str_replace('###LANG###', $GLOBALS['TSFE']->lang, $path);
     $inline       = $tsPathToCaddy['localisation.']['inline'];
     $path_tsConf  = 'javascript.jquery.plugins.caddy.localisation';
@@ -177,7 +200,7 @@ class tx_caddy_pi1_javascript
     
       // Include the plugin code
     $name         = 'jquery_plugins_caddy_plugin';
-    $path         = $tsPathToCaddy['plugin'];
+    $path         = $tsPathToCaddy['plugin.']['path'];
     $inline       = $tsPathToCaddy['plugin.']['inline'];
     $path_tsConf  = 'javascript.jquery.plugins.caddy.plugin';
     $marker       = $tsPathToCaddy['plugin.']['marker.'];
@@ -186,14 +209,72 @@ class tx_caddy_pi1_javascript
     unset( $bool_success );
 
   }
+/**
+ * addCssFile(): 
+ *
+ * @param	string		$path       : Path to the Javascript or CSS
+ * @param	string		$name       : For the key of additionalHeaderData
+ * @param	string		$keyPathTs  : The TypoScript element path to $path for the DRS
+ * @param	array		$marker     : marker array
+ * @return	boolean		True        : success. False: error.
+ * @since   3.0.1
+ * @version 3.0.1
+ */
+  private function addCssFile( $path, $name, $keyPathTs, $marker )
+  {
+      // RETURN file is loaded
+    if( isset ( $GLOBALS['TSFE']->additionalHeaderData[ $this->extKey . '_' . $name ] ) )
+    {
+      if( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
+      {
+        $prompt = 'file isn\'t added again: ' . $path;
+        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
+      }
+      return true;
+    }
+      // RETURN file is loaded
+
+    $absPath = $this->getPathAbsolute( $path );
+    if( $absPath == false )
+    {
+      return false;
+    }
+
+    $path = $this->getPathRelative( $path );
+    if( $path == false )
+    {
+      return false;
+    }
+
+    $css = '  <style type="text/css">
+' . implode ('', file( $absPath )) . '
+  </style>';
+    
+    $marker = $this->getHashMarker( $marker );
+//var_dump( __METHOD__, __LINE__, $marker );
+    $css    = $this->pObj->cObj->substituteMarkerArray( $css, $marker );
+    $css = $this->pObj->dynamicMarkers->main( $css, $this->pObj );
+
+    $GLOBALS['TSFE']->additionalHeaderData[ $this->pObj->extKey.'_'.$name ] = $css;
+
+      // DRS
+    if ($this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript)
+    {
+      $prompt = 'file is included: ' . $path;
+      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
+      $prompt = 'Change it? Configure: \''.$keyPathTs.'\'';
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
+    }
+      // DRS
+
+    return true;
+  }
 
 /**
  * addJssFilePromptError(): Add a JavaScript file to the HTML head
  *
  * @param	string		$path: Path to the Javascript
- * @param	string		$name: For the key of additionalHeaderData
  * @param	string		$keyPathTs: The TypoScript element path to $path for the DRS
- * @param	boolean		$inline       : Add JSS script inline
  * @return	boolean		True: success. False: error.
  * @version   4.0.0
  * @since     4.0.0
@@ -364,6 +445,36 @@ class tx_caddy_pi1_javascript
     return true;
   }
 
+/**
+ * getHashMarker( ): 
+ *
+ * @param	array		$marker : marker array with key value pairs
+ * @return	array		$marker : marker array with hashkey value pairs
+ *
+ * @access    private 
+ * @since     3.0.1
+ * @version   3.0.1
+ */
+  private function getHashMarker( $marker )
+  {
+    foreach( array_keys( ( array ) $marker ) as $key )
+    {
+      if( substr( $key, -1, 1 ) != '.' )
+      {
+        continue;
+      }
+        // I.e. $key is 'title.', but we like the marker name without any dot
+      $keyWoDot         = substr( $key, 0, strlen( $key ) -1 );
+      $hashKey          = '###' . strtoupper( $keyWoDot ) . '###';
+      $coa              = $marker[ $keyWoDot ];
+      $conf             = $marker[ $key ];
+      $marker[$hashKey] = $this->pObj->cObj->cObjGetSingle( $coa, $conf );
+      unset( $marker[ $keyWoDot ] );
+      unset( $marker[ $key ] );
+    }
+    
+    return $marker;
+  }
 
 /**
  * getPathAbsolute( ): Returns the absolute path of the given path
@@ -541,42 +652,27 @@ class tx_caddy_pi1_javascript
       $marker = array( );
     }
     
-    foreach( array_keys( ( array ) $marker ) as $key )
-    {
-      if( substr( $key, -1, 1 ) != '.' )
-      {
-        continue;
-      }
-        // I.e. $key is 'title.', but we like the marker name without any dot
-      $keyWoDot         = substr( $key, 0, strlen( $key ) -1 );
-      $hashKey          = '###' . strtoupper( $keyWoDot ) . '###';
-      $coa              = $marker[ $keyWoDot ];
-      $conf             = $marker[ $key ];
-      $marker[$hashKey] = $this->pObj->cObj->cObjGetSingle( $coa, $conf );
-      unset( $marker[ $keyWoDot ] );
-      unset( $marker[ $key ] );
-    }
+    $marker = $this->getHashMarker( $marker );
     
-    foreach( $this->pObj->cObj->data as $key => $value )
-    {
-      $hashKey          = '###' . strtoupper( $key ) . '###';
-      switch( true )
-      {
-        case( is_array( $value ) ):
-          $marker[$hashKey] = var_export( $value, true );
-          break;
-        case( ! is_array( $value ) ):
-        default:
-          $marker[$hashKey] = $value;
-          break;
-      }
-    }
+//    foreach( $this->pObj->cObj->data as $key => $value )
+//    {
+//      $hashKey          = '###' . strtoupper( $key ) . '###';
+//      switch( true )
+//      {
+//        case( is_array( $value ) ):
+//          $marker[$hashKey] = var_export( $value, true );
+//          break;
+//        case( ! is_array( $value ) ):
+//        default:
+//          $marker[$hashKey] = $value;
+//          break;
+//      }
+//    }
 //var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
 //var_dump( __METHOD__, __LINE__, $marker );
-//    $marker = $this->pObj->objMarker->extend_marker_wi_cObjData( $marker );
-//    $marker = $this->pObj->objMarker->extend_marker_wi_pivars( $marker );
     
     $script = $this->pObj->cObj->substituteMarkerArray( $script, $marker );
+    $script = $this->pObj->dynamicMarkers->main( $script, $this->pObj );
 
     return $script;
   }
