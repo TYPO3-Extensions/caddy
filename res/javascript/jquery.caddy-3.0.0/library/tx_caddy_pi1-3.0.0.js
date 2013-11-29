@@ -69,9 +69,11 @@ var c###UID###Accordion = function() {
       return false;
     } // onBeforeClick ...
   }); // $("#c###UID###-accordion").panes ...
+  alert( 1 ); 
 }; /* Accordion end */
 $(function() {
   c###UID###Accordion();
+  alert( 2 ); 
 });
 
 /* AJAX begin */
@@ -99,6 +101,7 @@ $(document).on("click", ".c###UID###-step", function(e) {
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
   $(function() {
     c###UID###Accordion();
+    alert( 3 ); 
   });
   // Update the content with the id #c###UID###-###VIEW###view
 }); // User has clicked a tag with the cUID-step class
