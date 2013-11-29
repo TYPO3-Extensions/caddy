@@ -185,7 +185,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
         continue;
       }
       $hashMarker     = '###'.strtoupper($key).'###';
-      $this->content  = str_replace($hashMarker, $value, $content );
+      $this->content  = str_replace($hashMarker, $value, $this->content );
     }
     return $this->content;
   }
