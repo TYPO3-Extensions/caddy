@@ -2674,6 +2674,18 @@ plugin.tx_caddy_pi1 {
     caddy_header_options {
       value = <h2><span class="label">Bestelloptionen</span><span class="content">1 Option</span><span class="value">18,90 &euro;</span></h2>
     }
+    caddy_header_powermail = TEXT
+    caddy_header_powermail {
+      value = <h2>Adreese, Kontakt, Wiederrufsbelehrung</h2>
+    }
+    caddy_header_order = TEXT
+    caddy_header_order {
+      value = <h2><span class="label">Bestelloptionen</span><span class="content"></span><span class="value">340,80 &euro;</span></h2>
+    }
+    caddy_header_paymentmethods = TEXT
+    caddy_header_paymentmethods {
+      value = <h2><span class="label">Zahlungsart</span><span class="content">Lastschrift</span><span class="value">0,00 &euro;</span></h2>
+    }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
     linktoshop {
