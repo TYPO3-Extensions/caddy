@@ -17,7 +17,7 @@ var t3caddyAlert              = ###T3CADDYALERT###;
 
 
 /* Accordion begin */
-var c###UID###Accordion = function() {
+var fnAccordion = function() {
   $(function() {
     // The accordian panes of the caddy
     $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
@@ -73,11 +73,16 @@ var c###UID###Accordion = function() {
   });
   //  alert( 1 ); 
 }; /* Accordion end */
+
+var fnInit = function() {
+  fnAccordion();  
+  movePowermailFormToCaddy();
+};
+
+/* Initiate Accordion */
 $(function() {
-  //  alert( 0 ); 
-  c###UID###Accordion();
-  //  alert( 2 ); 
-});
+  fnInit();
+}); /* Initiate Accordion */
 
 /* AJAX begin */
 $(document).on("click", ".c###UID###-step", function(e) {
@@ -102,12 +107,11 @@ $(document).on("click", ".c###UID###-step", function(e) {
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
-  setTimeout(function() {
-    //alert( 3 ); 
-    c###UID###Accordion();
-    //alert( 4 ); 
-  }, 2000 );
   // Update the content with the id #c###UID###-###VIEW###view
+  // Reload functions after content is updated (after 2000 miliseconds)
+  setTimeout(function() {
+    fnInit(); /* Initiate Accordion */
+  }, 2000 );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
@@ -119,6 +123,10 @@ $(function() {
     effect  : 'apple'
   }); 
 }); /* Overlay end */
+
+var movePowermailFormToCaddy = function() {
+  $('#c2995>div').detach().appendTo('#c2997-accordion div.caddy-powermail');
+};
 
 /* Powermail tabs begin */
 $(function() {
