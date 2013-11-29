@@ -146,6 +146,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/2.0.0/',            'Caddy (7+) - Downgrade 2.x');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
@@ -168,6 +169,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/2.0.0/',            'Caddy (7+) - Downgrade 2.x');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
