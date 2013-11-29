@@ -72,36 +72,36 @@ $(function() {
 }); /* Accordion end */
 
 /* AJAX begin */
-$( function( )
-{
-    // User has clicked a tag with the cUID-step class
-  $( ".c###UID###-step" ).live(
-    'click',
-    function( e ) {
-      e.preventDefault( ); // Don't execute the click
-
-        // RETURN : current id isn't part of the DOM
-      //if( ! $( "#c###UID###" ).length )
-      if( ! $( "#content" ).length )
-      {
-        if( t3caddyAlert )
-        {
-          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
-          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
-        }
-        return;
-      } // RETURN : current id isn't part of the DOM
-        
-        // Update the content with the id #c###UID###-###VIEW###view
-      var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
-      //var html_element              = "#c###UID###";
-      var html_element              = "#content";
-      var html_element_wi_selector  = html_element + " > *";
-      $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
-        // Update the content with the id #c###UID###-###VIEW###view
-    }
-  ); // User has clicked a tag with the cUID-step class
-});
+//$( function( )
+//{
+//    // User has clicked a tag with the cUID-step class
+//  $( ".c###UID###-step" ).live(
+//    'click',
+//    function( e ) {
+//      e.preventDefault( ); // Don't execute the click
+//
+//        // RETURN : current id isn't part of the DOM
+//      //if( ! $( "#c###UID###" ).length )
+//      if( ! $( "#content" ).length )
+//      {
+//        if( t3caddyAlert )
+//        {
+//          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
+//          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
+//        }
+//        return;
+//      } // RETURN : current id isn't part of the DOM
+//        
+//        // Update the content with the id #c###UID###-###VIEW###view
+//      var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
+//      //var html_element              = "#c###UID###";
+//      var html_element              = "#content";
+//      var html_element_wi_selector  = html_element + " > *";
+//      $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector );
+//        // Update the content with the id #c###UID###-###VIEW###view
+//    }
+//  ); // User has clicked a tag with the cUID-step class
+//});
  /* AJAX end */
 
 /* Overlay begin */
@@ -113,7 +113,7 @@ $(function() {
   }); 
 }); /* Overlay end */
 
-/* Accordion begin */
+/* Powermail tabs begin */
 $(function() {
   // Configure the tabs of the powermail form
   $("ul.css-tabs").tabs(
@@ -143,7 +143,7 @@ $(function() {
     }
   });
 });  // $(function() ...
-/* Accordion begin */
+/* Powermail tabs begin */
 
 /* Validator begin */
 $.tools.validator.localize("de", {
