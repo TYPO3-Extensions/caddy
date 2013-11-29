@@ -102,11 +102,12 @@ $(document).on("click", ".c###UID###-step", function(e) {
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector ).queue( function () {
+    alert( 3 ); 
     c###UID###Accordion();
   });
   //  $(function() {
-//  alert( 3 ); 
-//  c###UID###Accordion();
+  //  alert( 3 ); 
+  //  c###UID###Accordion();
   //    alert( 4 ); 
   //  });
   // Update the content with the id #c###UID###-###VIEW###view
