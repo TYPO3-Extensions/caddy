@@ -40,7 +40,7 @@ plugin.tx_caddy_pi1 {
         padding:0;
       } 
     /* ACCORDION END */
-);
+)
   XXX_CSS_DEFAULT_STYLE (
     
     /* ACCORDION BEGIN */
