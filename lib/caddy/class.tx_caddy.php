@@ -359,9 +359,9 @@ class tx_caddy extends tslib_pibase
      /**
       * DEPRECATED!caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
       *
-      * Seems to be deorecated:
+      * Seems to be deprecated:
       *   * $this->tmpl['specials_item'] is ###CADDY_SPECIALS### ###ITEM###
-      *   * Subpart ###ITEM### doesnt't contain any marke from below.
+      *   * Subpart ###ITEM### doesnt't contain any marker from below.
       *
       * dwildt, 130324
       */
@@ -446,10 +446,11 @@ class tx_caddy extends tslib_pibase
     }
       // FOREACH  : item
 
-    $content  = $content
-              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-              . $this->caddyWiItemsFieldHidden( )
-              ;
+      // 131129, dwildt, 4-
+//    $content  = $content
+//              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
+//              . $this->caddyWiItemsFieldHidden( )
+//              ;
     $marker = array
     (
       '###CONTENT###' => $content,

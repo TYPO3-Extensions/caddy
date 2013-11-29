@@ -217,7 +217,6 @@ class tx_caddy_pi1 extends tslib_pibase
                           );
 
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
-    $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
     return $this->pi_wrapInBaseClass( $content );
   }
 
