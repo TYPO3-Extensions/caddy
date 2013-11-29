@@ -17,7 +17,8 @@ var t3caddyAlert              = ###T3CADDYALERT###;
 
 
 /* Accordion begin */
-$(function() {
+//$(function() {
+$(document).on("click", "#c###UID###-accordion", function(e) {
   // The accordian panes of the caddy
   $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
   {
@@ -100,61 +101,61 @@ $(document).on("click", ".c###UID###-step", function(e) {
 
 /* Overlay begin */
 $(function() {
-// Workaround: Use buttons to initial overlays
-$("button[rel]").overlay({
-  mask    : '#000', 
-  effect  : 'apple'
-}); 
+  // Workaround: Use buttons to initial overlays
+  $("button[rel]").overlay({
+    mask    : '#000', 
+    effect  : 'apple'
+  }); 
 }); /* Overlay end */
 
 /* Powermail tabs begin */
 $(function() {
-// Configure the tabs of the powermail form
-$("ul.css-tabs").tabs(
-"#myform > fieldset.powermail_fieldset",
-{
-  initialIndex  : 0, // first tab
-  onBeforeClick : function( event, indexTabDest ) {
-    // Get index of the current tab
-    var indexTabSrce = this.getIndex();
-    // If index is undefined, tab is the initial tab
-    if( indexTabSrce == undefined )
-    {
-      // follow the workflow
-      return true;
+  // Configure the tabs of the powermail form
+  $("ul.css-tabs").tabs(
+  "#myform > fieldset.powermail_fieldset",
+  {
+    initialIndex  : 0, // first tab
+    onBeforeClick : function( event, indexTabDest ) {
+      // Get index of the current tab
+      var indexTabSrce = this.getIndex();
+      // If index is undefined, tab is the initial tab
+      if( indexTabSrce == undefined )
+      {
+        // follow the workflow
+        return true;
+      }
+      // Get HTML id of the current tab
+      var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
+      // Validate HTML input fields of the current tab
+      var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+      // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
+      if( success )
+      {
+        return true;
+      }
+      // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
+      return false;
     }
-    // Get HTML id of the current tab
-    var idTabSrce = '#tabs-' + indexTabSrce + ' :input';
-    // Validate HTML input fields of the current tab
-    var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
-    // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
-    if( success )
-    {
-      return true;
-    }
-    // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
-    return false;
-  }
-});
+  });
 });  // $(function() ...
 /* Powermail tabs begin */
 
 /* Validator begin */
 $.tools.validator.localize("de", {
-// Isn't localised
-//'*'		: 'Der Wert wird nicht akzeptiert',
-':email'  	: 'Gib eine korrekte E-Mail-Adresse ab',
-':number' 	: 'Gib eine Nummer an',
-':url' 	: 'Gib eine URL an',
-'[max]'	: 'Maximal $1 ist erlaubt',
-'[min]'	: 'Mindestens $1 ist n&ouml;tig',
-'[required]'	: 'Gib einen Wert an'
+  // Isn't localised
+  //'*'		: 'Der Wert wird nicht akzeptiert',
+  ':email'  	: 'Gib eine korrekte E-Mail-Adresse ab',
+  ':number' 	: 'Gib eine Nummer an',
+  ':url' 	: 'Gib eine URL an',
+  '[max]'	: 'Maximal $1 ist erlaubt',
+  '[min]'	: 'Mindestens $1 ist n&ouml;tig',
+  '[required]'	: 'Gib einen Wert an'
 }); // $.tools.validator.localize ...
 $("#myform").validator( 
 {
-inputEvent  : 'blur',
-lang        : 'de'
-//singleError : true // No effect!
+  inputEvent  : 'blur',
+  lang        : 'de'
+  //singleError : true // No effect!
 }); // $("#myform").validator ...
 /* Validator end */
 
