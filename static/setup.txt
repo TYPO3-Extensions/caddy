@@ -2356,11 +2356,6 @@ plugin.tx_caddy_pi1 {
     normalCalc  = {$plugin.caddy.tax.normalCalc}
   }
 
-    // caddyCheckOut
-  typeNum = 
-  typeNum {
-    caddyCheckOut = {$plugin.caddy.typeNum.caddyCheckOut}
-  }
 }
   // plugin.tx_caddy_pi1
 
@@ -2709,17 +2704,3 @@ plugin.tx_caddy_pi3 {
   }
 }
   // plugin.tx_caddy_pi3
-
-
-
-  ///////////////////////////////////////////////////////////////
-  //
-  // caddyCheckOut: PAGE object with the caddy check-out
-
-caddyCheckOut < plugin.tx_caddy_pi1.javascript.ajax.caddyCheckOut
-
-[globalVar = GP:type = {$plugin.caddy.typeNum.caddyCheckOut}]
-    // Don't handle header of the content element (plugin)
-  lib.stdheader >
-[global]
-  // caddyCheckOut: PAGE object with the caddy check-out
