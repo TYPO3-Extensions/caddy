@@ -101,15 +101,16 @@ $(document).on("click", ".c###UID###-step", function(e) {
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
-  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector ).alert( 3 ).queue( function () {
+  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
+  $(function() {
+    console.log( 'XXX' );
     //alert( 3 ); 
+    delay( 1000 );
+    console.log( 'YYY' );
     c###UID###Accordion();
+    console.log( 'ZZZ' );
+    //alert( 4 ); 
   });
-  //  $(function() {
-  //  alert( 3 ); 
-  //  c###UID###Accordion();
-  //    alert( 4 ); 
-  //  });
   // Update the content with the id #c###UID###-###VIEW###view
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
