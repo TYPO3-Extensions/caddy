@@ -17,7 +17,7 @@ $EM_CONF[$_EXTKEY] = array(
                           'You can install Caddy with one mouse click.',
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '3.0.1',
+	'version' => '2.9.1',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
