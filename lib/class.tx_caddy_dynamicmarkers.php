@@ -162,10 +162,11 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   {
     if( $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )] )
     { // If there is a fitting entry in typoscript
-      $string = $this->cObj->cObjGetSingle
+      //$string = $this->cObj->cObjGetSingle
+      $string = $this->pObj->local_cObj->cObjGetSingle
                 (
                   $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )], 
-                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1]) . '.'] 
+                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] ) . '.'] 
                 ); // fill string with typoscript value
     }
 
