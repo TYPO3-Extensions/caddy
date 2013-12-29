@@ -71,26 +71,33 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:-.3em;
     }
-    div.caddy_col { 
+    div.caddy_col,
+    div.caddy-accordion_col { 
       display:block; 
       float:left; 
     }
-    div.caddy_col input { 
+    div.caddy_col input,
+    div.caddy-accordion_col input { 
       text-align:right;
       width:2em; 
     }
     div.caddy_col_strong {
       font-weight: bold;
     }
+    div.caddy-accordion_col1,
     div.caddy_col1 { 
       height: 1.8em;
       width:4em; 
     }
-    div.caddy_footer .caddy_col1 { 
+    div.caddy_footer .caddy_col1, 
+    div.caddy_footer .caddy-accordion_col1 { 
       text-align:center; 
     }
     div.caddy_col2 { 
       width:12em; 
+    }
+    div.caddy-accordion_col2_3 { 
+      width:17em; 
     }
     div.caddy_col2_4 { 
       width:32em; 
@@ -98,20 +105,24 @@ plugin.tx_caddy_pi1 {
     div.caddy_col2_5 { 
       width:37em; 
     }
+    div.caddy-accordion_col2,
     div.caddy_col3 { 
       width:16em; 
     }
     div.caddy_col4 { 
       width:4em; 
     }
+    div.caddy-accordion_col3,
     div.caddy_col5 { 
       text-align:right;
       width:5em; 
     }
+    div.caddy-accordion_col4,
     div.caddy_col6 { 
       text-align:right;
       width:7em; 
     }
+    div.caddy-accordion_col5,
     div.caddy_col7 { 
       padding-left: 1em;
       width:2em; 
