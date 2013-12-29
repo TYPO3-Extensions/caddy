@@ -99,7 +99,7 @@ plugin.tx_caddy_pi1 {
       width:4em; 
     }
     div.caddy_footer .caddy_col1, 
-    div.caddy_footer .caddy-accordion_col1 { 
+    div.caddy-accordion_footer .caddy-accordion_col1 { 
       text-align:center; 
     }
     div.caddy_col2 { 
@@ -135,10 +135,6 @@ plugin.tx_caddy_pi1 {
     div.caddy_col7 { 
       padding-left: 1em;
       width:2em; 
-    }
-    footer div.caddy-accordion_col5,
-    footer div.caddy_col7 { 
-      text-align:center;
     }
     div.caddy_error { 
       background:#F00;
