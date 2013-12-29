@@ -28,13 +28,11 @@ plugin.tx_caddy_pi1 {
       background-color: {$plugin.caddy.html.color.table.head.background};
       color: {$plugin.caddy.html.color.table.head.text};
     }
-    div.caddy-accordion_product,
     div.caddy_product {
       border-bottom: 1px solid {$plugin.caddy.html.color.border};
       padding:.6em .5em .3em .5em;
     }
     div.caddy-accordion_product {
-      border-bottom: 0;
     }
     div.caddy_options {
       padding: 0.4em 0 0 4.3em;
@@ -58,7 +56,8 @@ plugin.tx_caddy_pi1 {
     div.caddy_footer { 
       padding:1em 0 0 5px; 
     }
-    div.caddy-accordion_product,
+    div.caddy-accordion_product { 
+    }
     div.caddy_product { 
       padding:.6em .5em .3em .5em;
     }

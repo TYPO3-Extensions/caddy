@@ -33,7 +33,7 @@
           border-left: 1px solid #eee;*/
   display:none;
   font-size:12px;
-  padding:0.4em 15px 1em 15px;
+  padding:0 0 0 .5empx;
 } 
 #c###UID###-accordion .pane p {
   margin:0;
