@@ -219,6 +219,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->pObj->local_cObj->start( $data, $this->conf['db.']['table'] );
       // cObject becomes current record
 
+var_dump( __METHOD__, __LINE__, $this->content );
 var_dump( __METHOD__, __LINE__, $this->pObj->drs->drsCobj );
 var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
       // RETURN : no DRS
