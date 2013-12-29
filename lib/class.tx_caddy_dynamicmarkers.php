@@ -222,6 +222,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     {
       $this->pidCaddy = $GLOBALS["TSFE"]->id;
     }
+var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
   }
 
  /**
