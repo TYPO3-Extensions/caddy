@@ -1790,7 +1790,7 @@ class tx_caddy extends tslib_pibase
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
     require_once( $path2lib . 'caddy/class.tx_caddy_calcsum.php' );
     $this->tx_caddy_calcsum = t3lib_div::makeInstance( 'tx_caddy_calcsum' );
-    $this->tx_caddy_calcsum->initPidCaddy( ) = $this->pidCaddy;
+    $this->tx_caddy_calcsum->initPidCaddy( $this->pidCaddy );
   }
 
 
