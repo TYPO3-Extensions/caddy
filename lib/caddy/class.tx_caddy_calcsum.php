@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -66,7 +66,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.2
+ * @version	4.0.3
  * @since       2.0.0
  */
 class tx_caddy_calcsum
@@ -457,9 +457,6 @@ class tx_caddy_calcsum
               ;
     }
     
-var_dump( __METHOD__, __LINE__ , $this->products ) ;      
-var_dump( __METHOD__, __LINE__ , $qty ) ;      
-
     return $qty;
   }
 

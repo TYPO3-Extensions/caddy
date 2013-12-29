@@ -2384,11 +2384,11 @@ plugin.tx_caddy_pi1 {
           de = Warenkorb
           en = Caddy
         }
-        wrap  = <span class="h-accordion-label">|</span>
+        wrap  = <div class="h-accordion-label">|</div>
       }
       20 = COA
       20 {
-        wrap = <span class="h-accordion-content">|</span>
+        wrap = <div class="h-accordion-content">|</div>
           // quantity
         10 = TEXT
         10 {
@@ -2445,12 +2445,12 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="h-accordion-value">|</span>
+        wrap = <div class="h-accordion-value">|</div>
       }
     }
     caddy_header_options = TEXT
     caddy_header_options {
-      value = <h2><span class="h-accordion-label">Bestelloptionen</span><span class="h-accordion-content">1 Option</span><span class="h-accordion-value">18,90 &euro;</span></h2>
+      value = <h2><div class="h-accordion-label">Bestelloptionen</div><div class="h-accordion-content">1 Option</div><div class="h-accordion-value">18,90 &euro;</div></h2>
     }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
@@ -2458,11 +2458,11 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_order = TEXT
     caddy_header_order {
-      value = <h2><span class="h-accordion-label">Bestelloptionen</span><span class="h-accordion-content"></span><span class="h-accordion-value">340,80 &euro;</span></h2>
+      value = <h2><div class="h-accordion-label">Bestelloptionen</div><div class="h-accordion-content"></div><div class="h-accordion-value">340,80 &euro;</div></h2>
     }
     caddy_header_paymentmethod = TEXT
     caddy_header_paymentmethod {
-      value = <h2><span class="h-accordion-label">Zahlungsart</span><span class="h-accordion-content">Lastschrift</span><span class="h-accordion-value">0,00 &euro;</span></h2>
+      value = <h2><div class="h-accordion-label">Zahlungsart</div><div class="h-accordion-content">Lastschrift</div><div class="h-accordion-value">0,00 &euro;</div></h2>
     }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
