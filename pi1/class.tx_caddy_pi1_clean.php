@@ -65,6 +65,8 @@ class tx_caddy_pi1_clean
   public $pObj = null;
     // Current row
   public $row = null;
+
+  private $pidCaddy = null;
   
   private $local_cObj = null;
 
@@ -79,6 +81,9 @@ class tx_caddy_pi1_clean
   */
   public function main( )
   {
+      // #54628, 131229, dwildt, 1+
+    $this->initPidCaddy( $this->pidCaddy );
+
     $this->local_cObj = $this->pObj->local_cObj;
 
       // RETURN : powermail form isn't sent. Nothing to clean
@@ -129,7 +134,10 @@ class tx_caddy_pi1_clean
     $time     = time( );
 
       // Get the session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
       // RETURN : any product, don't increase numbers!
     if( empty( $sesArray['products'] ) )
     {
@@ -611,6 +619,33 @@ class tx_caddy_pi1_clean
 
   /***********************************************
   *
+  * Init
+  *
+  **********************************************/
+
+ /**
+  * initPidCaddy( )
+  *
+  * @return	void
+  * @access public
+  * @internal   #54628
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  public function initPidCaddy( $pidCaddy=null )
+  {
+    $this->pidCaddy = ( int ) $pidCaddy;
+    if( $pidCaddy === null )
+    {
+      $this->pidCaddy = ( int ) $GLOBALS["TSFE"]->id;
+    }
+//var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
+  }
+    
+
+
+  /***********************************************
+  *
   * Session
   *
   **********************************************/
@@ -640,7 +675,10 @@ class tx_caddy_pi1_clean
   private function sessionUpdateDeliveryorder( )
   {
       // Get the session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
     
     $sesArray['deliveryorderAddress']   = $this->getPmFieldDeliveryorderAddress( );
     $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
@@ -650,7 +688,10 @@ class tx_caddy_pi1_clean
     $sesArray['deliveryorderLastname']  = $this->getPmFieldDeliveryorderLastname( );
     $sesArray['deliveryorderZip']       = $this->getPmFieldDeliveryorderZip( );
     
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $this->pidCaddy, $sesArray); // Generate new session
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS
@@ -673,7 +714,10 @@ class tx_caddy_pi1_clean
   private function sessionUpdateInvoice( )
   {
       // Get the session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
     
     $sesArray['invoiceAddress']   = $this->getPmFieldInvoiceAddress( );
     $sesArray['invoiceCity']      = $this->getPmFieldInvoiceCity( );
@@ -683,7 +727,10 @@ class tx_caddy_pi1_clean
     $sesArray['invoiceLastname']  = $this->getPmFieldInvoiceLastname( );
     $sesArray['invoiceZip']       = $this->getPmFieldInvoiceZip( );
     
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $this->pidCaddy, $sesArray); // Generate new session
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS

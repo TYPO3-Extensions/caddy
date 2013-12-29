@@ -1947,7 +1947,7 @@ class tx_caddy_session
       // DRS
 
       // Increase numbers
-    $this->sessionDeleteIncreaseNumbers( $drs );
+    $this->sessionDeleteIncreaseNumbers( $drs, $pid );
 
       // Delete the session
     // #54634, 131128, dwildt, 1-
@@ -1966,9 +1966,9 @@ class tx_caddy_session
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function sessionDeleteIncreaseNumbers( $drs )
+  private function sessionDeleteIncreaseNumbers( $drs, $pid )
   {
-    $products = $this->productsGet( );
+    $products = $this->productsGet( $pid );
 
       // RETURN : any product, don't increase numbers!
     if( empty( $products ) )
@@ -1983,7 +1983,10 @@ class tx_caddy_session
       // RETURN : any product, don't increase numbers!
 
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
-    $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+    // #54634, 131128, dwildt, 1-
+    //$prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+    // #54634, 131128, dwildt, 1+
+    $prefix = 'page_' . $pid . '_';
 
       // Get current numbers
     $numberDeliveryorder  = ( int ) $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );

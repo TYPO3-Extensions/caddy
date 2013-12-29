@@ -888,7 +888,10 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiItemsSetSession( $calcedCaddy )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
     $sesArray = $calcedCaddy
               + $sesArray
               ;
@@ -906,7 +909,10 @@ class tx_caddy extends tslib_pibase
 //    $sesArray['sumNet']           = $sumNet;
 //    $sesArray['sumTaxNormal']     = $sumTaxNormal;
 //    $sesArray['sumTaxReduced']    = $sumTaxReduced;
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pidCaddy, $sesArray );
 
     return $sesArray;
   }
@@ -3147,7 +3153,10 @@ class tx_caddy extends tslib_pibase
   private function zz_setDataBySession( )
   {
       // Get the current session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // data: implode the array to a one dimensional array
     $data = t3lib_BEfunc::implodeTSParams( $sesArray );

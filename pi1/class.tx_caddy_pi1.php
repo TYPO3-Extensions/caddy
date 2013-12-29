@@ -429,7 +429,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->drs->init( );
     $this->initFlexform( );
     $this->initPid( );
-    $this->dynamicMarkers->initPidCaddy( $this->pid );
     $this->initAccessByIp( );
     $this->initTemplate( );
     $this->initGetPost( );
@@ -579,7 +578,10 @@ class tx_caddy_pi1 extends tslib_pibase
   private function initNumbers( )
   {
     $registry =  t3lib_div::makeInstance('t3lib_Registry');
-    $prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+    // #54634, 131229, dwildt, 1-
+    //$prefix = 'page_' . $GLOBALS["TSFE"]->id . '_';
+    // #54634, 131229, dwildt, 1+
+    $prefix = 'page_' . $this->pid . '_';
 
     $this->numberDeliveryorderRegistry  = ( int ) $registry->get( 'tx_caddy', $prefix . 'deliveryorder' );
     $this->numberInvoiceRegistry        = ( int ) $registry->get( 'tx_caddy', $prefix . 'invoice' );
@@ -628,14 +630,20 @@ class tx_caddy_pi1 extends tslib_pibase
   {
     $sesArray = array( );
       // get already exting session
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $this->pid);
   
     $sesArray['numberDeliveryorderCurrent']  = $this->numberDeliveryorderCurrent  ;
     $sesArray['numberInvoiceCurrent']        = $this->numberInvoiceCurrent  ;
     $sesArray['numberOrderCurrent']          = $this->numberOrderCurrent  ;
     
       // generate session with session array
-    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $this->pid, $sesArray);
       // save session
     $GLOBALS['TSFE']->storeSessionData();
 
@@ -819,7 +827,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->javascript->addJssFilesJqueryPluginsCaddy( );
   }
 
-
 /**
  * initPid( ) :
  *
@@ -855,6 +862,21 @@ class tx_caddy_pi1 extends tslib_pibase
           // DRS
         break;
     }
+
+    $this->initPidClasses( );
+  }
+
+/**
+ * initPidClasses( ) :
+ *
+ * @return	void
+ * @version 4.0.3
+ * @since   4.0.3
+ */
+  private function initPidClasses( )
+  {
+    $this->clean->initPidCaddy( $this->pid );
+    $this->dynamicMarkers->initPidCaddy( $this->pid );
   }
 
  /**
@@ -932,7 +954,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerDeliveryorder( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailDeliveryorderMode )
     {
       case( 'customer' ):
@@ -943,7 +968,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendCustomerDeliveryorder'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -957,7 +985,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerInvoice( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailInvoiceMode )
     {
       case( 'customer' ):
@@ -968,7 +999,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendCustomerInvoice'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -982,7 +1016,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerRevocation( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailRevocationMode )
     {
       case( 'customer' ):
@@ -993,7 +1030,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendCustomerRevocation'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -1007,7 +1047,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendCustomerTerms( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailTermsMode )
     {
       case( 'customer' ):
@@ -1018,7 +1061,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendCustomerTerms'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -1048,7 +1094,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorDeliveryorder( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailDeliveryorderMode )
     {
       case( 'vendor' ):
@@ -1059,7 +1108,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendVendorDeliveryorder'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -1073,7 +1125,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorInvoice( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailInvoiceMode )
     {
       case( 'vendor' ):
@@ -1084,7 +1139,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendVendorInvoice'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -1098,7 +1156,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorRevocation( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailRevocationMode )
     {
       case( 'vendor' ):
@@ -1109,7 +1170,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendVendorRevocation'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
@@ -1123,7 +1187,10 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function sendVendorTerms( )
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1-
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    // #54634, 131229, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     switch( $this->flexform->emailTermsMode )
     {
       case( 'vendor' ):
@@ -1134,7 +1201,10 @@ class tx_caddy_pi1 extends tslib_pibase
         unset( $sesArray['sendVendorTerms'] );
         break;
     }
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1-
+    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+    // #54634, 131229, dwildt, 1+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData( );
   }
 
