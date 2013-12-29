@@ -2384,11 +2384,11 @@ plugin.tx_caddy_pi1 {
           de = Warenkorb
           en = Caddy
         }
-        wrap  = <span class="label">|</span>
+        wrap  = <span class="h-accordion-label">|</span>
       }
       20 = COA
       20 {
-        wrap = <span class="content">|</span>
+        wrap = <span class="h-accordion-content">|</span>
           // quantity
         10 = TEXT
         10 {
@@ -2445,12 +2445,12 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="value">|</span>
+        wrap = <span class="h-accordion-value">|</span>
       }
     }
     caddy_header_options = TEXT
     caddy_header_options {
-      value = <h2><span class="label">Bestelloptionen</span><span class="content">1 Option</span><span class="value">18,90 &euro;</span></h2>
+      value = <h2><span class="h-accordion-label">Bestelloptionen</span><span class="h-accordion-content">1 Option</span><span class="h-accordion-value">18,90 &euro;</span></h2>
     }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
@@ -2458,11 +2458,11 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_order = TEXT
     caddy_header_order {
-      value = <h2><span class="label">Bestelloptionen</span><span class="content"></span><span class="value">340,80 &euro;</span></h2>
+      value = <h2><span class="h-accordion-label">Bestelloptionen</span><span class="h-accordion-content"></span><span class="h-accordion-value">340,80 &euro;</span></h2>
     }
     caddy_header_paymentmethod = TEXT
     caddy_header_paymentmethod {
-      value = <h2><span class="label">Zahlungsart</span><span class="content">Lastschrift</span><span class="value">0,00 &euro;</span></h2>
+      value = <h2><span class="h-accordion-label">Zahlungsart</span><span class="h-accordion-content">Lastschrift</span><span class="h-accordion-value">0,00 &euro;</span></h2>
     }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
@@ -2520,6 +2520,11 @@ plugin.tx_caddy_pi1 {
       opacity:.8;
       position: absolute;
       z-index:10000;
+    }
+    span.h-accordion-label,
+    span.h-accordion-content,
+    span.h-accordion-value {
+      padding: 0 1em 0 0;
     }
 )
 }
