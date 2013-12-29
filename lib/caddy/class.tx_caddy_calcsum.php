@@ -150,11 +150,14 @@ class tx_caddy_calcsum
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	array		$sum (see above)
   * @access public
-  * @version    2.0.2
+  * @version    4.0.3
   * @since      2.0.2
   */
   public function sum( $items, $options )
   {
+      // #54628, 131229, dwildt, 1+
+    $this->init( );
+    
     $items    = $this->sumItems( $items );
     $options  = $this->sumOptions( $options );
 
