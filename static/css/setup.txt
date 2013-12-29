@@ -58,12 +58,15 @@ plugin.tx_caddy_pi1 {
     div.caddy_footer { 
       padding:1em 0 0 5px; 
     }
+    div.caddy-accordion_product,
     div.caddy_product { 
       padding:.6em .5em .3em .5em;
     }
+    div.caddy-accordion_product div.caddy-accordion_col,
     div.caddy_product div.caddy_col { 
       padding:.3em 0 0 0; 
     }
+    div.caddy-accordion_product div.caddy-accordion_col1, 
     div.caddy_product div.caddy_col1 { 
       padding:0; 
     }
@@ -72,9 +75,11 @@ plugin.tx_caddy_pi1 {
       text-align: right;
       width:3em;
     }
+    div.caddy-accordion_product div.caddy-accordion_col4, 
     div.caddy_product div.caddy_col6 { 
       padding-right: 1em;
     }
+    div.caddy-accordion_product div.caddy-accordion_col5, 
     div.caddy_product div.caddy_col7 { 
       padding:0;
       position:relative;
