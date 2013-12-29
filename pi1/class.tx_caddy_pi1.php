@@ -244,7 +244,7 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
-      $this->session->productAdd( $this->newProduct );
+      $this->session->productAdd( $this->newProduct, $this->pid );
     }
   }
 
@@ -261,7 +261,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // remove product from session
     if( isset( $this->piVars['del'] ) )
     {
-      $this->session->productDelete( );
+      $this->session->productDelete( $this->pid );
     }
   }
  /**
@@ -396,7 +396,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // output debug prompt
     t3lib_div::debug
     (
-      $this->session->productsGet(), $this->extKey . ': ' . 'Values in session at the beginning'
+      $this->session->productsGet( $this->pid ), $this->extKey . ': ' . 'Values in session at the beginning'
     );
     t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
     t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
