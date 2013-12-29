@@ -1,5 +1,7 @@
 4.0.0
   2013-11-29
+  Features
+  * #54628: Calculated Caddy available for dynamicMarkers
   Improvement
   * #i0038: Caddy HTML
 

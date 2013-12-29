@@ -313,7 +313,9 @@ class tx_caddy_calcsum
   private function sumSum( $items, $options )
   {
     $sum = array
-    (
+    ( 
+        // #54628, 131229, dwildt, 1+
+      'qty'   =>  count( $items ),
       'gross' =>  $this->sumSumGross( $items, $options ),
       'net'   =>  $this->sumSumNet(   $items, $options ),
       'tax'   =>  $this->sumSumTax(   $items, $options ),
