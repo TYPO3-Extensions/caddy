@@ -374,7 +374,7 @@ class tx_caddy extends tslib_pibase
     $content = null;
 
       // item for payment
-    $paymentId = $this->session->paymentGet( );
+    $paymentId = $this->session->paymentGet( $this->pidCaddy );
     if( ! $paymentId )
     {
       return $content;
@@ -781,7 +781,7 @@ class tx_caddy extends tslib_pibase
       $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
-var_dump( __METHOD__, __LINE__, $marker );
+//var_dump( __METHOD__, __LINE__, $marker );
 
     return $marker;
   }
@@ -1600,7 +1600,7 @@ var_dump( __METHOD__, __LINE__, $marker );
   {
     $arrReturn = null;
 
-    $paymentId = $this->session->paymentGet();
+    $paymentId = $this->session->paymentGet( $this->pidCaddy );
 
     $gross        = 0.00;
     $net          = 0.00;
@@ -1610,14 +1610,14 @@ var_dump( __METHOD__, __LINE__, $marker );
     if( ! $paymentId )
     {
       $paymentId = intval( $this->conf['options.']['payment.']['preset'] );
-      $this->session->paymentUpdate( $paymentId );
+      $this->session->paymentUpdate( $paymentId, $this->pidCaddy );
     }
       // check if selected payment option is available
     $newpaymentId = $this->zz_checkOptionIsNotAvailable( 'payment', $paymentId );
     if( $newpaymentId )
     {
       $paymentId = $newpaymentId;
-      $this->session->paymentUpdate( $newpaymentId );
+      $this->session->paymentUpdate( $newpaymentId, $this->pidCaddy );
     }
 
     $arrResult  = $this->calcOptionCosts( 'payment', $paymentId );
@@ -1658,7 +1658,7 @@ var_dump( __METHOD__, __LINE__, $marker );
   {
     $arrReturn = null;
 
-    $shippingId = $this->session->shippingGet();
+    $shippingId = $this->session->shippingGet( $this->pidCaddy );
 
     $gross        = 0.00;
     $net          = 0.00;
@@ -1668,14 +1668,14 @@ var_dump( __METHOD__, __LINE__, $marker );
     if( ! $shippingId )
     {
       $shippingId = intval( $this->conf['options.']['shipping.']['preset'] );
-      $this->session->shippingUpdate( $shippingId );
+      $this->session->shippingUpdate( $shippingId, $this->pidCaddy );
     }
       // check if selected shipping option is available
     $newshippingId = $this->zz_checkOptionIsNotAvailable( 'shipping', $shippingId );
     if( $newshippingId )
     {
       $shippingId = $newshippingId;
-      $this->session->shippingUpdate( $newshippingId );
+      $this->session->shippingUpdate( $newshippingId, $this->pidCaddy );
     }
 
     $arrResult  = $this->calcOptionCosts( 'shipping', $shippingId );
@@ -1716,7 +1716,7 @@ var_dump( __METHOD__, __LINE__, $marker );
   {
     $arrReturn = null;
 
-    $specialIds = $this->session->specialGet( );
+    $specialIds = $this->session->specialGet( $this->pidCaddy );
 
     $gross        = 0.00;
     $net          = 0.00;

@@ -226,6 +226,11 @@ class tx_caddy_session
   {
     if( $pid === null )
     {
+      if( $this->drs->drsError )
+      {
+        $prompt = 'Given pid of the Caddy is empty!';
+        t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+      }
       $pid = $GLOBALS["TSFE"]->id;
     }
 
