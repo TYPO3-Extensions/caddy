@@ -96,8 +96,6 @@ class tx_caddy_calcsum
   */
   private function init( )
   {
-    $this->pi_loadLL();
-
     $this->initInstances( );
   }
 
