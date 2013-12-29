@@ -215,7 +215,7 @@ var_dump( __METHOD__, __LINE__, $sesArray );
                             $marker,
                             $subparts
                           );
-
+$this->caddy->zz_setDataBySession( );
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     return $this->pi_wrapInBaseClass( $content );
   }

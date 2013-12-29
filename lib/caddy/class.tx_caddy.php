@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -139,7 +139,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	3.0.1
+ * @version	4.0.0
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -3134,11 +3134,11 @@ class tx_caddy extends tslib_pibase
  * zz_setDataBySession( ) :
  *
  * @return	void
- * @access private
- * @version 2.0.2
+ * @access public
+ * @version 4.0.0
  * @since 2.0.2
  */
-  private function zz_setDataBySession( )
+  public function zz_setDataBySession( )
   {
       // Get the current session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
