@@ -2393,7 +2393,7 @@ plugin.tx_caddy_pi1 {
         10 = TEXT
         10 {
           field = sumsumqty
-          warp  = X|Y
+          wrap  = X|Y
         }
         20 = TEXT
         20 {
