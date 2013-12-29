@@ -216,11 +216,11 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $data = t3lib_BEfunc::implodeTSParams( $sesArray );
 
       // set cObj->data
-    $this->local_cObj->start( $data, $this->conf['db.']['table'] );
+    $this->pObj->local_cObj->start( $data, $this->conf['db.']['table'] );
       // cObject becomes current record
 
 var_dump( __METHOD__, __LINE__, $this->pObj->drs->drsCobj );
-var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
+var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
       // RETURN : no DRS
     if( ! $this->pObj->drs->drsCobj )
     {
@@ -229,7 +229,7 @@ var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
       // RETURN : no DRS
 
       // DRS
-    $cObjData = var_export( $this->local_cObj->data, true );
+    $cObjData = var_export( $this->pObj->local_cObj->data, true );
     $prompt   = 'cObj->data: ' . $cObjData;
     t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
       // DRS
