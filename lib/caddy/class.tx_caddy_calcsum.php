@@ -93,6 +93,7 @@ class tx_caddy_calcsum
   *
   * @return	void
   * @access private
+  * @internal   #54628
   * @version    4.0.3
   * @since      4.0.3
   */
@@ -106,6 +107,7 @@ class tx_caddy_calcsum
   *
   * @return	void
   * @access private
+  * @internal   #54628
   * @version    4.0.3
   * @since      4.0.3
   */
@@ -135,11 +137,12 @@ class tx_caddy_calcsum
   * initPidCaddy( )
   *
   * @return	void
-  * @access private
+  * @access public
+  * @internal   #54628
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function initPidCaddy( $pidCaddy )
+  public function initPidCaddy( $pidCaddy )
   {
     $this->pidCaddy = $pidCaddy;
   }
