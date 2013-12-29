@@ -273,7 +273,7 @@ plugin.tx_caddy_pi1 {
     }
     div.h-accordion-value {
       text-align:right;
-      width:3em;
+      width:10em;
     }
 
     /* table based caddy */

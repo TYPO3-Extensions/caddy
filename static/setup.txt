@@ -2464,6 +2464,33 @@ plugin.tx_caddy_pi1 {
     caddy_header_paymentmethod {
       value = <h2><div class="h-accordion-label">Zahlungsart</div><div class="h-accordion-content">Lastschrift</div><div class="h-accordion-value">0,00 &euro;</div></h2>
     }
+      // item || items
+    caddy_item_label = COA
+    caddy_item_label {
+        // in case of one item
+      10 = TEXT
+      10 {
+        if {
+          value = 2 
+          isLessThan {
+            field = sumsumqty
+          }
+        }
+        data = LLL:EXT:caddy/pi3/locallang.xml:item
+      }
+        // in case of more than one item
+      20 = TEXT
+      20 {
+        if {
+          value = 2 
+          isLessThan {
+            field = sumsumqty
+          }
+          negate  = 1
+        }
+        data = LLL:EXT:caddy/pi3/locallang.xml:items
+      }
+    }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
     linktoshop {
