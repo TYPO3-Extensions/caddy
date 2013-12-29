@@ -411,6 +411,10 @@ plugin.tx_caddy_pi1 {
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
 
+        sumsumqty = TEXT
+        sumsumqty {
+          field = sumsumqty
+        }
         sumsumgross           < .optionspaymentsumgross
         sumsumgross.10.userFunc.number.field          = sumsumgross
         sumsumnet             < .optionspaymentsumgross
