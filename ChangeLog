@@ -4,6 +4,7 @@
   * #54628: Calculated Caddy available for dynamicMarkers
             Effected files:
             * lib/class.tx_caddy_dynamicmarkers.php
+            * pi1/locallang.xml
             * static/setup.txt
   Improvement
   * #i0038: Caddy HTML
