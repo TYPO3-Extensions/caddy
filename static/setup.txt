@@ -2521,11 +2521,6 @@ plugin.tx_caddy_pi1 {
       position: absolute;
       z-index:10000;
     }
-    span.h-accordion-label,
-    span.h-accordion-content,
-    span.h-accordion-value {
-      padding: 0 1em 0 0;
-    }
 )
 }
   // plugin.tx_caddy_pi1: _CSS_DEFAULT_STYLE

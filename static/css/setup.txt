@@ -235,6 +235,11 @@ plugin.tx_caddy_pi1 {
     div.linktocaddy a:visited {
       color:white;
     }
+    span.h-accordion-label,
+    span.h-accordion-content,
+    span.h-accordion-value {
+      padding: 0 1em 0 0;
+    }
 
     /* table based caddy */
 

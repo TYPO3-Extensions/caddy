@@ -5,7 +5,10 @@
             Effected files:
             * lib/class.tx_caddy_dynamicmarkers.php
             * pi1/locallang.xml
-            * static/setup.txt
+            * static
+              * css
+                * setup.txt
+              * setup.txt
   Improvement
   * #i0038: Caddy HTML
 
