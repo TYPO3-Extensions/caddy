@@ -210,9 +210,9 @@ class tx_caddy extends tslib_pibase
   * @version    3.0.1
   * @since      2.0.0
   */
-  // #i0035, 131128, dwildt, 1-
+  // #54634, 131128, dwildt, 1-
   //public function caddy( )
-  // #i0035, 131128, dwildt, 1+
+  // #54634, 131128, dwildt, 1+
   public function caddy( $pidCaddy=null )
   {
     $caddy = array(
@@ -227,9 +227,9 @@ class tx_caddy extends tslib_pibase
     $this->init( );
 
       // get products from session
-    // #i0035, 131128, dwildt, 1-
+    // #54634, 131128, dwildt, 1-
     //$this->products = $this->session->productsGet( );
-    // #i0035, 131128, dwildt, 1+
+    // #54634, 131128, dwildt, 1+
     $this->products = $this->session->productsGet( $pidCaddy );
 
     switch( true )
@@ -1815,9 +1815,9 @@ class tx_caddy extends tslib_pibase
     $pid = $this->getPid( $pid );
 
       // Get session array
-    // #i0035, 131128, dwildt, 1-
+    // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #i0035, 131128, dwildt, 1+
+    // #54634, 131128, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
       // Get configuration
@@ -1838,7 +1838,7 @@ class tx_caddy extends tslib_pibase
  *
  * @param       integer         $pid  : given pid (may be null)
  * @return	integer		$pid  : id of the page with the caddy plugin
- * @internal    #i0035
+ * @internal    #54634
  * @version     3.0.1
  * @since       3.0.1
  */
@@ -1898,9 +1898,9 @@ class tx_caddy extends tslib_pibase
     $pid = $this->getPid( $pid );
 
       // Get session array
-    // #i0035, 131128, dwildt, 1-
+    // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #i0035, 131128, dwildt, 1+
+    // #54634, 131128, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
       // Get configuration
@@ -1933,9 +1933,9 @@ class tx_caddy extends tslib_pibase
     $pid = $this->getPid( $pid );
 
       // Get session array
-    // #i0035, 131128, dwildt, 1-
+    // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #i0035, 131128, dwildt, 1+
+    // #54634, 131128, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
       // Get the devider

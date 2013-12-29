@@ -274,9 +274,9 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddyRendered( )
   {
-    // #i0035, 131128, dwildt, 1-
+    // #54634, 131128, dwildt, 1-
     //$arrReturn = $this->caddy->caddy( );
-    // #i0035, 131128, dwildt, 1+
+    // #54634, 131128, dwildt, 1+
     $arrReturn = $this->caddy->caddy( $this->pid );
     return $arrReturn;
   }
@@ -294,16 +294,13 @@ class tx_caddy_pi1 extends tslib_pibase
       // change qty
     if( isset( $this->piVars['qty'] ) && is_array( $this->piVars['qty'] ) )
     {
-      // #i0035, 131128, dwildt, 1-
+      // #54634, 131128, dwildt, 1-
       //$this->session->quantityUpdate( );
-      // #i0035, 131128, dwildt, 1+
+      // #54634, 131128, dwildt, 1+
       $this->session->quantityUpdate( $this->pid );
     }
     
-    // #i0035, 131128, dwildt, 1-
-    //$this->caddyUpdateOptions( );
-    // #i0035, 131128, dwildt, 1+
-    $this->caddyUpdateOptions( $this->pid );
+    $this->caddyUpdateOptions( );
 
   }
 
@@ -330,7 +327,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $payment = $this->piVars['payment'];
     }
-    $this->session->paymentUpdate( $this->piVars['payment'] );
+    $this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
 
       // change shipping
     $shipping = null;
@@ -338,7 +335,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $shipping = $this->piVars['shipping'];
     }
-    $this->session->shippingUpdate( $this->piVars['shipping'] );
+    $this->session->shippingUpdate( $this->piVars['shipping'], $this->pid );
 
       // change special
     $special = null;
@@ -346,7 +343,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $special = $this->piVars['specials'];
     }
-    $this->session->specialUpdate( $this->piVars['specials'] );
+    $this->session->specialUpdate( $this->piVars['specials'], $this->pid );
   }
 
 
