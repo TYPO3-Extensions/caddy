@@ -173,6 +173,8 @@ class tx_caddy extends tslib_pibase
   private $pObj       = null;
   public  $cObj       = null;
   private $local_cObj = null;
+  
+  private $pidCaddy   = null;
 
   // [object] parent powermail object
   private $powermail = null;
@@ -219,6 +221,9 @@ class tx_caddy extends tslib_pibase
       'tmpl'      => null
     );
 
+      // #54628, 131229, dwildt, 1+
+    $this->pidCaddy = $pidCaddy;
+    
     $this->init( );
 
       // get products from session
@@ -1785,6 +1790,7 @@ class tx_caddy extends tslib_pibase
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
     require_once( $path2lib . 'caddy/class.tx_caddy_calcsum.php' );
     $this->tx_caddy_calcsum = t3lib_div::makeInstance( 'tx_caddy_calcsum' );
+    $this->tx_caddy_calcsum->initPidCaddy( ) = $this->pidCaddy;
   }
 
 

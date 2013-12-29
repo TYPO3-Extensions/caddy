@@ -78,6 +78,7 @@ class tx_caddy_calcsum
   
   public  $drs            = null;
   private $initInstances  = null;
+  private $pidCaddy       = null;
 
 
 
@@ -128,6 +129,19 @@ class tx_caddy_calcsum
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
     $this->session->setParentObject( $this );
 
+  }
+
+ /**
+  * initPidCaddy( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function initPidCaddy( $pidCaddy )
+  {
+    $this->pidCaddy = $pidCaddy;
   }
 
   
@@ -430,7 +444,7 @@ class tx_caddy_calcsum
   */
   private function sumSumQty( )
   {
-    $this->products = $this->session->productsGet( );
+    $this->products = $this->session->productsGet( $this->pidCaddy );
     $sum  = count( $this->products );
 var_dump( __METHOD__, __LINE__ , $this->products ) ;      
 var_dump( __METHOD__, __LINE__ , $sum ) ;      
