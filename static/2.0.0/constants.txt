@@ -1,6 +1,8 @@
 plugin.caddy {
   fancybox.enabled = no
 
+  html.marker.caddy = CADDY
+
   templates.e-mail            = EXT:caddy/files/templates/2.0.0/caddy.html
   templates.html.caddy        = EXT:caddy/files/templates/2.0.0/caddy.html
   templates.html.caddymini    = EXT:caddy/files/templates/2.0.0/caddy.html

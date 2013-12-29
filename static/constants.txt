@@ -112,6 +112,11 @@ plugin.caddy {
   # cat=caddy - html colors/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.color.sponsors = Click me!
 
+  # cat=caddy - marker//200;              type=options[CADDY,CADDYACCORDION];  label= Font family: The font family of your PDF attachments
+  html.marker.caddy = CADDY
+  # cat=caddy - marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  html.width.sponsors = Click me!
+
   # cat=caddy - html width//200;              type=text;  label= Width column Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.qty = 10%
   # cat=caddy - html width//201;              type=text;  label= Width column SKU: The width of the caddy column stock keep unit in HTML tables for CSS. Units can be px, em or % among others.

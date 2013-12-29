@@ -2209,7 +2209,7 @@ plugin.tx_caddy_pi1 {
           // all, item
         marker =
         marker {
-          all   = ###CADDYACCORDION###
+          all   = {$plugin.caddy.html.marker.caddy}
           item  = ###ITEM###
         }
           // border, cellpadding, cellspacing
