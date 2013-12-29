@@ -2386,21 +2386,40 @@ plugin.tx_caddy_pi1 {
         }
         wrap  = <span class="label">|</span>
       }
-        // content
       20 = COA
       20 {
         wrap = <span class="content">|</span>
+          // quantity
         10 = TEXT
         10 {
           field       = sumsumqty
           noTrimWrap  = || |
         }
-        20 = TEXT
+          // label
+        20 = COA
         20 {
-          value = Items
-          lang {
-            de = Artikel
-            en = Items
+            // in case of one item
+          10 = TEXT
+          10 {
+            if {
+              value = 2 
+              isLessThan {
+                field = sumsumqty
+              }
+            }
+            data = LLL:EXT:caddy/pi3/locallang.xml:item
+          }
+            // in case of more than one item
+          20 = TEXT
+          20 {
+            if {
+              value = 2 
+              isLessThan {
+                field = sumsumqty
+              }
+              negate  = 1
+            }
+            data = LLL:EXT:caddy/pi3/locallang.xml:items
           }
         }
       }

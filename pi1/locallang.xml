@@ -24,6 +24,7 @@
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
+      <label index="items">Items</label>
       <label index="itemssumgross">Sum of items (gross)</label>
       <label index="itemssumnet">Sum of items (net)</label>
       <label index="linktoshop">Forward with Shopping</label>
@@ -92,6 +93,7 @@
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>
+      <label index="items">Artikel</label>
       <label index="itemssumgross">Summe Artikel (brutto)</label>
       <label index="itemssumnet">Summe Artikel (netto)</label>
       <label index="linktoshop">Weiter Shoppen</label>
