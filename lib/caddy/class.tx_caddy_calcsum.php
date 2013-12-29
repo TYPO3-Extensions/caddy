@@ -447,12 +447,20 @@ class tx_caddy_calcsum
   */
   private function sumSumQty( )
   {
-    $this->products = $this->session->productsGet( $this->pidCaddy );
-    $sum  = count( $this->products );
+    $qty      = 0;
+    $products = $this->session->productsGet( $this->pidCaddy );
+    
+    foreach( ( array ) $products as  $product )
+    {
+        $qty  = $qty
+              + $product['qty']
+              ;
+    }
+    
 var_dump( __METHOD__, __LINE__ , $this->products ) ;      
-var_dump( __METHOD__, __LINE__ , $sum ) ;      
+var_dump( __METHOD__, __LINE__ , $qty ) ;      
 
-    return $sum;
+    return $qty;
   }
 
  /**
