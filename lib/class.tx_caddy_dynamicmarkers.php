@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -34,7 +34,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage    tx_caddy
- * @version     3.0.1
+ * @version     4.0.0
  * @since       1.4.6
  */
 
@@ -53,6 +53,12 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
           '_HTMLMARKER_', // prefix for HTML template part
           '_HTMLMARKER' // prefix for typoscript part
   );
+  
+  public  $conf;
+  private $cObj;
+  private $content;
+  private $pObj;
+  
 
  /**
   * main( ) : replace typoscript- and locallang markers
@@ -67,6 +73,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   function main( $content, $pObj ) 
   {
       // config
+    $this->pObj     = $pObj;
     $this->conf     = $pObj->conf;
     $this->cObj     = $pObj->cObj;
     $this->content  = $content;
@@ -75,6 +82,9 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->content  = $this->cObjData( );
     
     $this->pi_loadLL();
+    
+      // #54628, 131229, dwildt, 1+
+    $this->setSessionToLocal_cObj( );
 
       // 1. replace locallang markers
       // Automaticly fill locallangmarkers with fitting value of locallang.xml
@@ -187,6 +197,42 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
       $this->content  = str_replace( $hashMarker, $value, $this->content );
     }
     return $this->content;
+  }
+
+ /**
+  * setSessionToLocal_cObj( ) : 
+  *
+  * @access     private
+  * @internal   #54628
+  * @version    4.0.0
+  * @since      1.4.0
+  */
+  private function setSessionToLocal_cObj( ) 
+  {
+      // Get the current session array
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+
+      // data: implode the array to a one dimensional array
+    $data = t3lib_BEfunc::implodeTSParams( $sesArray );
+
+      // set cObj->data
+    $this->local_cObj->start( $data, $this->conf['db.']['table'] );
+      // cObject becomes current record
+
+var_dump( __METHOD__, __LINE__, $this->pObj->drs->drsCobj );
+var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
+      // RETURN : no DRS
+    if( ! $this->pObj->drs->drsCobj )
+    {
+      return;
+    }
+      // RETURN : no DRS
+
+      // DRS
+    $cObjData = var_export( $this->local_cObj->data, true );
+    $prompt   = 'cObj->data: ' . $cObjData;
+    t3lib_div::devlog( '[INFO/COBJ] ' . $prompt, $this->extKey, 0 );
+      // DRS
   }
 
 }

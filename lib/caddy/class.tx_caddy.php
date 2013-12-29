@@ -3134,12 +3134,11 @@ class tx_caddy extends tslib_pibase
  * zz_setDataBySession( ) :
  *
  * @return	void
- * @access    public
- * @internal  #54628
- * @version   4.0.0
+ * @access    private
+ * @version   2.0.2
  * @since     2.0.2
  */
-  public function zz_setDataBySession( )
+  private function zz_setDataBySession( )
   {
       // Get the current session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
