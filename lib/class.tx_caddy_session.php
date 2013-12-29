@@ -2134,6 +2134,7 @@ class tx_caddy_session
   public function shippingUpdate( $value, $pid=null )
   {
     $pid = $this->getPid( $pid );    
+var_dump( __METHOD__, __LINE__, $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
@@ -2141,7 +2142,7 @@ class tx_caddy_session
     // #54634, 131128, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 
-    $sesArray['shipping'] = intval($value); // overwrite with new qty
+    $sesArray['shipping'] = intval( $value ); // overwrite with new qty
 
     // #54634, 131128, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
