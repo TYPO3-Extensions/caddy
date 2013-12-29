@@ -429,6 +429,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->drs->init( );
     $this->initFlexform( );
     $this->initPid( );
+    $this->dynamicMarkers->initPidCaddy( $this->pid );
     $this->initAccessByIp( );
     $this->initTemplate( );
     $this->initGetPost( );
