@@ -72,10 +72,11 @@
 class tx_caddy_calcsum
 {
 
-  public $extKey        = 'caddy';
-  public $prefixId      = 'tx_caddy_pi1';
-  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+  public  $extKey         = 'caddy';
+  public  $prefixId       = 'tx_caddy_pi1';
+  public  $scriptRelPath  = 'pi1/class.tx_caddy_pi1.php';
   
+  public  $drs            = null;
   private $initInstances  = null;
 
 
@@ -117,6 +118,11 @@ class tx_caddy_calcsum
     $this->initInstances = true;
 
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
+    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
