@@ -217,12 +217,12 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   */
   public function initPidCaddy( $pidCaddy=null )
   {
-//    $this->pidCaddy = $pidCaddy;
-//    if( $pidCaddy === null )
-//    {
-//      $this->pidCaddy = $GLOBALS["TSFE"]->id;
-//    }
-//var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
+    $this->pidCaddy = $pidCaddy;
+    if( $pidCaddy === null )
+    {
+      $this->pidCaddy = $GLOBALS["TSFE"]->id;
+    }
+var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
   }
 
  /**
