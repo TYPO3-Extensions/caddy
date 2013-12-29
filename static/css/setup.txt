@@ -22,6 +22,7 @@ plugin.tx_caddy_pi1 {
       border-bottom: 1px solid {$plugin.caddy.html.color.border};
     }
     div.caddy-accordion_header {
+      font-weight:bold;
     }
     div.caddy_header {
       background-color: {$plugin.caddy.html.color.table.head.background};
@@ -134,6 +135,10 @@ plugin.tx_caddy_pi1 {
     div.caddy_col7 { 
       padding-left: 1em;
       width:2em; 
+    }
+    footer div.caddy-accordion_col5,
+    footer div.caddy_col7 { 
+      text-align:center;
     }
     div.caddy_error { 
       background:#F00;
