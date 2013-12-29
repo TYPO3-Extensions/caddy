@@ -58,6 +58,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   public  $cObj;
   private $content;
   private $pObj;
+  private $pidCaddy = null;
   
 
  /**
@@ -77,6 +78,9 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->conf     = $pObj->conf;
     $this->cObj     = $pObj->cObj;
     $this->content  = $content;
+    
+      // #54628, 131229, dwildt, 1+
+    $this->initPidCaddy( $this->pidCaddy );
     
     $this->pi_loadLL();
     
@@ -203,6 +207,24 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   }
 
  /**
+  * initPidCaddy( )
+  *
+  * @return	void
+  * @access public
+  * @internal   #54628
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  public function initPidCaddy( $pidCaddy=null )
+  {
+    $this->pidCaddy = $pidCaddy;
+    if( $pidCaddy === null )
+    {
+      $this->pidCaddy = $GLOBALS["TSFE"]->id;
+    }
+  }
+
+ /**
   * setSessionToLocal_cObj( ) : 
   *
   * @access     private
@@ -213,7 +235,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   private function setSessionToLocal_cObj( ) 
   {
       // Get the current session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' .  $this->pidCaddy );
 
       // data: implode the array to a one dimensional array
     $data = t3lib_BEfunc::implodeTSParams( $sesArray );
