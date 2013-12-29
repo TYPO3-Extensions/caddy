@@ -213,10 +213,8 @@ class tx_caddy_pi1 extends tslib_pibase
                             $marker,
                             $subparts
                           );
-var_dump( __METHOD__, __LINE__, $content );
 //var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
-var_dump( __METHOD__, __LINE__, $content );
     return $this->pi_wrapInBaseClass( $content );
   }
 

@@ -67,7 +67,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   * @param      object    $pObj     : parent object
   * @return	string    $content  : current content with replaced HTML marker
   * @access public
-  * @version    3.0.1
+  * @version    4.0.0
   * @since      1.4.0
   */
   function main( $content, $pObj ) 
@@ -78,10 +78,10 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     $this->cObj     = $pObj->cObj;
     $this->content  = $content;
     
+    $this->pi_loadLL();
+    
       // #i0037, dwildt, 1+
     $this->content  = $this->cObjData( );
-    
-    $this->pi_loadLL();
     
       // #54628, 131229, dwildt, 1+
     $this->setSessionToLocal_cObj( );
@@ -162,7 +162,9 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   {
     if( $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )] )
     { // If there is a fitting entry in typoscript
+      // #54628, 131229, dwildt, 1-
       //$string = $this->cObj->cObjGetSingle
+      // #54628, 131229, dwildt, 1+
       $string = $this->pObj->local_cObj->cObjGetSingle
                 (
                   $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )], 
