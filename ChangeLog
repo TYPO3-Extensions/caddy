@@ -1,4 +1,4 @@
-4.0.0
+4.0.2
   2013-11-29
   Features
   * #54628: Calculated Caddy available for dynamicMarkers
@@ -18,7 +18,12 @@
                 * setup.txt
               * setup.txt
 
-3.0.1
+4.0.1
+  2013-11-29
+  Bugfix
+  * #i0039: Caddy included TypoScript template for Caddy 4.x. Proper is tenplate for Caddy 2.x
+
+4.0.0
   2013-11-28
   Major Feature 
   * #53678: e-payment
