@@ -259,12 +259,21 @@ plugin.tx_caddy_pi1 {
     div.linktocaddy a:visited {
       color:white;
     }
-    div.h-accordion-label,
     div.h-accordion-content,
+    div.h-accordion-label,
     div.h-accordion-value {
       dislay:block;
       float: left;
-      padding: 0 1em 0 0;
+    }
+    div.h-accordion-content {
+      width:10em;
+    }
+    div.h-accordion-label {
+      width:10em;
+    }
+    div.h-accordion-value {
+      text-align:right;
+      width:3em;
     }
 
     /* table based caddy */
