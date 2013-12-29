@@ -410,7 +410,6 @@ plugin.tx_caddy_pi1 {
         sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
-
         sumsumqty = TEXT
         sumsumqty {
           field = sumsumqty
@@ -2393,7 +2392,7 @@ plugin.tx_caddy_pi1 {
         wrap = <span class="content">|</span>
         10 = TEXT
         10 {
-          field = quantity 
+          field = sumsumqty
         }
         20 = TEXT
         20 {

@@ -2,6 +2,9 @@
   2013-11-29
   Features
   * #54628: Calculated Caddy available for dynamicMarkers
+            Effected files:
+            * lib/caddy/class.tx_caddy_calcsum.php
+            * static/setup.txt
   Improvement
   * #i0038: Caddy HTML
 

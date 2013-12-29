@@ -3134,9 +3134,10 @@ class tx_caddy extends tslib_pibase
  * zz_setDataBySession( ) :
  *
  * @return	void
- * @access public
- * @version 4.0.0
- * @since 2.0.2
+ * @access    public
+ * @internal  #54628
+ * @version   4.0.0
+ * @since     2.0.2
  */
   public function zz_setDataBySession( )
   {
