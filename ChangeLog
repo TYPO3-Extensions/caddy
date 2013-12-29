@@ -12,10 +12,13 @@
   * #54634: Enable controlling of the caddy (pi1) by pid
             Effected files:
             * lib
+              * class.tx_caddy_dynamicmarkers.php
               * class.tx_caddy_session.php
               * caddy
                 * class.tx_caddy.php
-            * pi1/class.tx_caddy_pi1.php
+            * pi1
+              * class.tx_caddy_pi1.php
+              * class.tx_caddy_pi1_clean.php
   Improvement
   * #i0038: Caddy HTML
             Effected files:
