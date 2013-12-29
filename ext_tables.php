@@ -146,7 +146,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/2.0.0/',            'Caddy (7+) - Downgrade Caddy 2');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/3.0.0/',            'Caddy (7+) - Caddy 3 (nur Dev!');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - jQuery');
 //    switch( true )
 //    {
@@ -170,7 +170,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/2.0.0/',            'Caddy (7+) - Downgrade Caddy 2');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/3.0.0/',            'Caddy (7+) - Caddy 3 (dev only!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - jQuery');
 //    switch( true )
 //    {
