@@ -1,12 +1,12 @@
 plugin.caddy {
   fancybox.enabled = no
 
-  html.marker.caddy = CADDY
+  html.marker.caddy = CADDYACCORDION
 
-  templates.e-mail            = EXT:caddy/files/templates/3.0.0/caddy.html
-  templates.html.caddy        = EXT:caddy/files/templates/3.0.0/caddy.html
-  templates.html.caddymini    = EXT:caddy/files/templates/3.0.0/caddy.html
-  templates.html.caddysum     = EXT:caddy/files/templates/3.0.0/caddy.html
-  templates.pdf.deliveryorder = EXT:caddy/files/templates/3.0.0/caddy.html
-  templates.pdf.invoice       = EXT:caddy/files/templates/3.0.0/caddy.html
+  templates.e-mail            = EXT:caddy/files/templates/4.0.0/caddy.html
+  templates.html.caddy        = EXT:caddy/files/templates/4.0.0/caddy.html
+  templates.html.caddymini    = EXT:caddy/files/templates/4.0.0/caddy.html
+  templates.html.caddysum     = EXT:caddy/files/templates/4.0.0/caddy.html
+  templates.pdf.deliveryorder = EXT:caddy/files/templates/4.0.0/caddy.html
+  templates.pdf.invoice       = EXT:caddy/files/templates/4.0.0/caddy.html
 }
