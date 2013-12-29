@@ -236,7 +236,8 @@ var_dump( __METHOD__, __LINE__, $this->pidCaddy );
   private function setSessionToLocal_cObj( ) 
   {
       // Get the current session array
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' .  $this->pidCaddy );
+    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' .  $this->pidCaddy );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' .  $GLOBALS["TSFE"]->id );
 
       // data: implode the array to a one dimensional array
     $data = t3lib_BEfunc::implodeTSParams( $sesArray );
