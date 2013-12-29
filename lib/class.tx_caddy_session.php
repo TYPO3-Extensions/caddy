@@ -2134,7 +2134,6 @@ class tx_caddy_session
   public function shippingUpdate( $value, $pid=null )
   {
     $pid = $this->getPid( $pid );    
-var_dump( __METHOD__, __LINE__, $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
