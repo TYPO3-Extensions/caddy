@@ -163,6 +163,8 @@ class tx_caddy_pi2 extends tslib_pibase
     $this->initDrs( );
 
     $this->initPid( );
+    $this->dynamicMarkers->initPidCaddy( $this->pidCaddy );
+
     $this->initTemplate( );
     
     $this->initCobj( );
@@ -262,7 +264,6 @@ class tx_caddy_pi2 extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
-    $this->dynamicMarkers->initPidCaddy( $this->pidCaddy );
 
     require_once( 'class.tx_caddy_pi2_flexform.php' );
     $this->flexform         = t3lib_div::makeInstance( 'tx_caddy_pi2_flexform' );
