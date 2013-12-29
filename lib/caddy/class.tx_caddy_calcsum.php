@@ -372,7 +372,7 @@ class tx_caddy_calcsum
     $sum = array
     ( 
         // #54628, 131229, dwildt, 1+
-      'qty'   =>  $this->sumSumQty(   $items, $options ),
+      'qty'   =>  $this->sumSumQty( ),
       'gross' =>  $this->sumSumGross( $items, $options ),
       'net'   =>  $this->sumSumNet(   $items, $options ),
       'tax'   =>  $this->sumSumTax(   $items, $options ),
@@ -432,6 +432,8 @@ class tx_caddy_calcsum
   {
     $this->products = $this->session->productsGet( );
     $sum  = count( $this->products );
+var_dump( __METHOD__, __LINE__ , $this->products ) ;      
+var_dump( __METHOD__, __LINE__ , $sum ) ;      
 
     return $sum;
   }
