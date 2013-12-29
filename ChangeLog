@@ -11,6 +11,12 @@
               * setup.txt
   Improvement
   * #i0038: Caddy HTML
+            Effected files:
+            * files/templates/3.0.0/caddy.html
+            * static
+              * css
+                * setup.txt
+              * setup.txt
 
 3.0.1
   2013-11-28
