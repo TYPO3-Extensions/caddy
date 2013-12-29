@@ -75,9 +75,59 @@ class tx_caddy_calcsum
   public $extKey        = 'caddy';
   public $prefixId      = 'tx_caddy_pi1';
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+  
+  private $initInstances  = null;
 
 
 
+  /***********************************************
+  *
+  * Init
+  *
+  **********************************************/
+
+ /**
+  * init( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function init( )
+  {
+    $this->pi_loadLL();
+
+    $this->initInstances( );
+  }
+
+ /**
+  * initInstances( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function initInstances( )
+  {
+    if( ! ( $this->initInstances === null ) )
+    {
+      return;
+    }
+
+    $this->initInstances = true;
+
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'class.tx_caddy_session.php' );
+    $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );
+    $this->session->setParentObject( $this );
+
+  }
+
+  
+  
   /***********************************************
   *
   * Main
@@ -315,7 +365,7 @@ class tx_caddy_calcsum
     $sum = array
     ( 
         // #54628, 131229, dwildt, 1+
-      'qty'   =>  count( $items ),
+      'qty'   =>  $this->sumSumQty(   $items, $options ),
       'gross' =>  $this->sumSumGross( $items, $options ),
       'net'   =>  $this->sumSumNet(   $items, $options ),
       'tax'   =>  $this->sumSumTax(   $items, $options ),
@@ -358,6 +408,23 @@ class tx_caddy_calcsum
     $sum  = $items['net']
           + $options['net']
           ;
+
+    return $sum;
+  }
+
+ /**
+  * sumSumQty( )  :
+  *
+  * @return	integer
+  * @access private
+  * @internal   #54628
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumSumQty( )
+  {
+    $this->products = $this->session->productsGet( );
+    $sum  = count( $this->products );
 
     return $sum;
   }
