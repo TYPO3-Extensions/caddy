@@ -55,7 +55,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   );
   
   public  $conf;
-  private $cObj;
+  public  $cObj;
   private $content;
   private $pObj;
   
