@@ -286,7 +286,7 @@ plugin.tx_caddy_pi1 {
     }
     div.tx-powermail input {
       left:12em;
-      position:absolut;
+      position:absolute;
     }
 
     /* table based caddy */
