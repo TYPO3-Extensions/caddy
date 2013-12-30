@@ -12,8 +12,7 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var indexOfPowermailAccordion = ###T3CADDYALERT###;
-var t3caddyAlert              = ###T3CADDYALERT###;
+var t3caddyAlert = ###T3CADDYALERT###;
 
 
 /* Accordion begin */
@@ -40,7 +39,7 @@ var fnAccordion = function() {
           $( "div.error" ).hide();
         }
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
-        if ( indexAccordionDest <= 2 )
+        if ( indexAccordionDest <= 2 && indexAccordionSrce != 2 )
         {
           return true;
         }
@@ -125,7 +124,9 @@ $(function() {
   });
 }); /* Overlay end */
 
+  // Add the powermail tabs to the caddy tab powermail
 var addPowermailTabsToCaddy = function() {
+  // Get the URL
   urlWoSearch = $(location).attr("protocol") + "://" + $(location).attr("host") + $(location).attr("pathname");
   urlSearch   = $(location).attr("search");
   if( urlSearch )
@@ -133,20 +134,23 @@ var addPowermailTabsToCaddy = function() {
     urlSerach = "?" + urlSearch; 
   }
   tabs = "";
+  // LOOP all powermail fieldsets
   $("#c###UID_POWERMAIL_FORM### div form > fieldset > legend").each(function(i) {
     href  = urlWoSearch + "#tab-" + i + urlSearch;
     tabs  = tabs
           + '<li><a href="' + href + '">' + $(this).text() + '</a></li>'
           ;
-  });
+  }); // LOOP all powermail fieldsets
   tabs  = '<ul class="css-tabs">'
         + tabs
         + '</ul>'
         ;
   //alert( tabs );
+  // Add the powermail tabs to the caddy tab powermail
   $(tabs).appendTo('#c###UID###-accordion div.caddy-powermail');
-};
+}; // Add the powermail tabs to the caddy tab powermail
 
+  // Move the powermail form into the caddy to the tab powermail
 var movePowermailFormToCaddy = function() {
   // Move the powermail form TYPO3 content element to the powermail accordian div
   $('#c###UID_POWERMAIL_FORM### > div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
@@ -159,7 +163,7 @@ var movePowermailFormToCaddy = function() {
     $(this).attr("id", "tab-" + i );
   });
   initPowermailTabs();
-};
+};  // Move the powermail form into the caddy to the tab powermail
 
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
