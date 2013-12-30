@@ -2542,10 +2542,6 @@ plugin.tx_caddy_pi1 {
         wrap = <div class="h-accordion-value">|</div>
       }
     }
-    caddy_header_paymentmethod = TEXT
-    caddy_header_paymentmethod {
-      value = <h2><div class="h-accordion-label">Zahlungsart</div><div class="h-accordion-content">Lastschrift</div><div class="h-accordion-value">0,00 &euro;</div></h2>
-    }
     caddy_header_paymentmethod >
     caddy_header_paymentmethod = COA
     caddy_header_paymentmethod {
@@ -2563,11 +2559,7 @@ plugin.tx_caddy_pi1 {
         // content
       20 = TEXT
       20 {
-        value = &nbsp;
-        lang {
-          de = &nbsp;
-          en = &nbsp;
-        }
+        field = optionspaymentlabel
         wrap  = <div class="h-accordion-content">|</div>
       }
         // value
