@@ -1578,21 +1578,21 @@ class tx_caddy extends tslib_pibase
   */
   private function calcOptions( )
   {
-      // #i0039, 131230, dwildt, 3+
-    $shipping = $this->calcOptionsShipping( );
-    $specials = $this->calcOptionsSpecials( );
-    $service  = $shipping + $specials;
+//      // #i0039, 131230, dwildt, 3+
+//    $shipping = $this->calcOptionsShipping( );
+//    $specials = $this->calcOptionsSpecials( );
+//    $service  = $shipping + $specials;
     
     $options = array
     (
       'payment'   => $this->calcOptionsPayment( ),
         // #i0039, 131230, dwildt, 2-
-      //'shipping' => $this->calcOptionsShipping( ),
-      //'specials' => $this->calcOptionsSpecials( )
-        // #i0039, 131230, dwildt, 3+
-      'service'   => $service,
-      'shipping'  => $shipping,
-      'specials'  => $specials
+      'shipping' => $this->calcOptionsShipping( ),
+      'specials' => $this->calcOptionsSpecials( )
+//        // #i0039, 131230, dwildt, 3+
+//      'service'   => $service,
+//      'shipping'  => $shipping,
+//      'specials'  => $specials
     );
 
     return $options;

@@ -411,12 +411,10 @@ class tx_caddy_calcsum
   */
   private function sumServiceGross( $options )
   {
-var_dump( __METHOD__, __LINE__, $options );
     $sum  = $options['shipping']['sum']['gross']
           + $options['specials']['sum']['gross']
           ;
 
-var_dump( __METHOD__, __LINE__, $sum );
     return $sum;
   }
 
