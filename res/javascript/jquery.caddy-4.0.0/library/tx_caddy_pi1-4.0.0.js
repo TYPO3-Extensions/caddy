@@ -131,6 +131,7 @@ var addPowermailTabsToCaddy = function() {
     tabs  = tabs
           + '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>'
           ;
+    alert( tabs );
   });
   tabs  = '<ul class="css-tabs">'
         + tabs
