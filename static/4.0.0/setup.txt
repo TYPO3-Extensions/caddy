@@ -2515,7 +2515,12 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
-      value = <h2 class="powermail">Adresse, Kontakt, Wiederrufsbelehrung</h2>
+      wrap = <h2 class="powermail"><div class="h-accordion-label">|</div></h2>
+      value = Your data, power of revocation
+      lang {
+        de = Ihre Daten, Widerrufsbelehrung
+        en = Your data, power of revocation
+      }
     }
     caddy_header_order = COA
     caddy_header_order {

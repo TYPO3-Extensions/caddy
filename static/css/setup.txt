@@ -274,6 +274,9 @@ plugin.tx_caddy_pi1 {
     h2.optionswopayment div.h-accordion-label {
       width:20em;
     }
+    h2.powermail div.h-accordion-label {
+      width:30em;
+    }
     div.h-accordion-value {
       text-align:right;
       width:10em;
