@@ -282,6 +282,10 @@ plugin.tx_caddy_pi1 {
       width:10em;
     }
 
+    div.tx_powermail label {
+      witdh:12em;
+    }
+
     /* table based caddy */
 
     table.caddy_table { 
