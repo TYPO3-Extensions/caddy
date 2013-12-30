@@ -2497,28 +2497,27 @@ plugin.tx_caddy_pi1 {
     caddy_header_powermail {
       value = <h2>Adresse, Kontakt, Wiederrufsbelehrung</h2>
     }
-    caddy_header_order = TEXT
-    caddy_header_order {
-      value = <h2><div class="h-accordion-label">Bestelloptionen</div><div class="h-accordion-content"></div><div class="h-accordion-value">340,80 &euro;</div></h2>
-    }
-    caddy_header_order >
     caddy_header_order = COA
     caddy_header_order {
       wrap = <h2>|</h2>
         // label
       10 = TEXT
       10 {
-        value = Order
+        value = Your order
         lang {
-          de = Bestellung
-          en = Order
+          de = Ihre Bestellung
+          en = Your order
         }
         wrap  = <div class="h-accordion-label">|</div>
       }
         // content
       20 = TEXT
       20 {
-        value = &nbsp;
+        value = Amount
+        lang {
+          de = Summe
+          en = Amount
+        }
         wrap  = <div class="h-accordion-content">|</div>
       }
         // value
