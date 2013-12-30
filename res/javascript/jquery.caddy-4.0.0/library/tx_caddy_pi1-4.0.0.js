@@ -51,7 +51,7 @@ var fnAccordion = function() {
           return true;
         }
         // Hide possible error prompts
-        $( "div.error" ).hide();
+        //$( "div.error" ).hide();
         // RETURN : current tab is the tab of the powermail form
         if ( indexAccordionDest == 2 )
         {
