@@ -196,6 +196,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // Get the caddy
     $caddy    = $this->caddyRendered( );
     $marker   = $caddy['marker'];
+    $marker['###UID_POWERMAIL_FORM###'] = $this->powermail->fieldUid;
     $subparts = $caddy['subparts'];
     $tmpl     = $caddy['tmpl'];
 //var_dump( __METHOD__, __LINE__ , $caddy ) ;      
