@@ -126,7 +126,18 @@ $(function() {
 }); /* Overlay end */
 
 var addPowermailTabsToCaddy = function() {
-  $('<h1>TEST</h1>').appendTo('#c###UID###-accordion div.caddy-powermail');
+  tabs = null;
+  $("#c###UID###-accordion > div.caddy-powermail form > fieldset > legend").each(function(i) {
+    tabs  = tabs
+          + '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>'
+          ;
+  });
+  tabs  = '<ul class="css-tabs">'
+        + tabs
+        + '</ul>'
+        ;
+  alert( tabs );
+  $(tabs).appendTo('#c###UID###-accordion div.caddy-powermail');
 };
 
 var movePowermailFormToCaddy = function() {
@@ -146,10 +157,6 @@ var movePowermailFormToCaddy = function() {
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
   // Configure the tabs of the powermail form
-  $("#c###UID###-accordion > div.caddy-powermail form > fieldset > legend").each(function(i) {
-    prompt = '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>';
-    alert( prompt );
-  });
   $("ul.css-tabs").tabs(
   "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
   {
