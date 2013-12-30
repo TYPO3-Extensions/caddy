@@ -281,8 +281,7 @@ plugin.tx_caddy_pi1 {
       text-align:right;
       width:10em;
     }
-
-    div.tx_powermail label {
+    div.tx-powermail label {
       witdh:12em;
     }
 
