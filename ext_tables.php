@@ -137,6 +137,7 @@ switch( true )
   case( $beLanguage == 'de' ):
       // German
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (nur Dev!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - Deutsch');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         'Caddy (4+) - CSS blau');
@@ -146,8 +147,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (7+) - Caddy 4 (nur Dev!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - Caddy 4 jQuery (nur Dev!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - v4.x jQuery (nur Dev!)');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
@@ -161,6 +161,7 @@ switch( true )
   default:
       // English
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (dev only!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - German');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         'Caddy (4+) - CSS blue');
@@ -170,8 +171,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (5+) - Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (5+) - Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (6+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (7+) - Caddy 4 (dev only!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - Caddy 4 jQuery (dev only!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - v4.x jQuery (dev only!)');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
