@@ -179,17 +179,17 @@ class tx_caddy_calcsum
       // #54628, 131229, dwildt, 1+
     $this->init( );
     
-    $items    = $this->sumItems( $items );
-    $options  = $this->sumOptions( $options );
+    $sumItems    = $this->sumItems( $items );
+    $sumOptions  = $this->sumOptions( $options );
       // #i0039, 131230, dwildt, 1+
-    $service  = $this->sumService( $options );
+    $sumService  = $this->sumService( $options );
 
     $sum = array(
-      'items'   => $items,
-      'options' => $options,
+      'items'   => $sumItems,
+      'options' => $sumOptions,
         // #i0039, 131230, dwildt, 1+
-      'service' => $service,
-      'sum'     => $this->sumSum( $items, $options ),
+      'service' => $sumService,
+      'sum'     => $this->sumSum( $sumItems, $sumOptions ),
     );
 var_dump( __METHOD__, __LINE__, $sum );
 
