@@ -433,9 +433,10 @@ var_dump( __METHOD__, __LINE__, $this->powermail->fieldUid );
     $this->initAccessByIp( );
     $this->initTemplate( );
     $this->initGetPost( );
-      // #53679, 131115, dwildt, 1+
-    $this->initJavascript( );
     $this->initPowermail( );
+      // #53679, 131115, dwildt, 2+
+      // Must be after powermail, because powermail uid is needed
+    $this->initJavascript( );
     $this->initDatabase( );
     $this->initNumbers( );
     
