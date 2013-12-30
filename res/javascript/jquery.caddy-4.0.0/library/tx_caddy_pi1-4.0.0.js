@@ -76,6 +76,7 @@ var fnAccordion = function() {
 
 var fnInit = function() {
   fnAccordion();
+  addPowermailTabsToCaddy();
   movePowermailFormToCaddy();
 };
 
@@ -123,6 +124,10 @@ $(function() {
     effect  : 'apple'
   });
 }); /* Overlay end */
+
+var addPowermailTabsToCaddy = function() {
+  $('#c###UID###-accordion').append('<h1>TEST</h1>');
+};
 
 var movePowermailFormToCaddy = function() {
   // Move the powermail form TYPO3 content element to the powermail accordian div
