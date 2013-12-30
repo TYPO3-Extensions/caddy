@@ -196,7 +196,6 @@ class tx_caddy_pi1 extends tslib_pibase
       // Get the caddy
     $caddy    = $this->caddyRendered( );
     $marker   = $caddy['marker'];
-var_dump( __METHOD__, __LINE__, $this->powermail->fieldUid );
     $subparts = $caddy['subparts'];
     $tmpl     = $caddy['tmpl'];
 //var_dump( __METHOD__, __LINE__ , $caddy ) ;      
@@ -435,7 +434,7 @@ var_dump( __METHOD__, __LINE__, $this->powermail->fieldUid );
     $this->initGetPost( );
     $this->initPowermail( );
       // #53679, 131115, dwildt, 2+
-      // Must be after powermail, because powermail uid is needed
+      // #i0041, initJavaScript must be after powermail because of ###UID_POWERMAIL_FORM###
     $this->initJavascript( );
     $this->initDatabase( );
     $this->initNumbers( );

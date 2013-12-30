@@ -452,7 +452,7 @@ class tx_caddy_pi1_javascript
  * @return	array		$marker : marker array with hashkey value pairs
  *
  * @access    private 
- * @since     3.0.1
+ * @since     4.0.3
  * @version   3.0.1
  */
   private function getHashMarker( $marker )
@@ -473,7 +473,7 @@ class tx_caddy_pi1_javascript
       unset( $marker[ $key ] );
     }
     
-var_dump( __METHOD__, __LINE__, $this->pObj->powermail->fieldUid );
+      // #i0041, 131231, dwildt, 1+
     $marker['###UID_POWERMAIL_FORM###'] = $this->pObj->powermail->fieldUid;
     return $marker;
   }

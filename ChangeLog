@@ -4,6 +4,7 @@ TODO
 4.0.3
   2013-11-30
   Features
+  * #i0041: ###UID_POWERMAIL_FORM###
   * #i0040: jQuery for powermail
   * #i0039: Sum for shipping and specials (without payment)
   * #54628: Calculated Caddy available for dynamicMarkers
