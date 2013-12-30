@@ -134,7 +134,7 @@ var addPowermailTabsToCaddy = function() {
   }
   tabs = "";
   $("#c2995 div form > fieldset > legend").each(function(i) {
-    href  = urlWoSearch + "#tab-" + i + urSearch;
+    href  = urlWoSearch + "#tab-" + i + urlSearch;
     tabs  = tabs
           + '<li><a href="' + href + '">' + $(this).text() + '</a></li>'
           ;
