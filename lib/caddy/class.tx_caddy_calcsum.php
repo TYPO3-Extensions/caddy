@@ -179,16 +179,16 @@ class tx_caddy_calcsum
       // #54628, 131229, dwildt, 1+
     $this->init( );
     
-    $sumItems    = $this->sumItems( $items );
-    $sumOptions  = $this->sumOptions( $options );
+    $sumItems             = $this->sumItems( $items );
+    $sumOptions           = $this->sumOptions( $options );
       // #i0039, 131230, dwildt, 1+
-    $sumService  = $this->sumService( $options );
+    $sumOptionsWoPayment  = $this->sumOptionsWoPayment( $options );
 
     $sum = array(
       'items'   => $sumItems,
       'options' => $sumOptions,
         // #i0039, 131230, dwildt, 1+
-      'service' => $sumService,
+      'service' => $sumOptionsWoPayment,
       'sum'     => $this->sumSum( $sumItems, $sumOptions ),
     );
 //var_dump( __METHOD__, __LINE__, $sum );
@@ -367,13 +367,13 @@ class tx_caddy_calcsum
 
   /***********************************************
   *
-  * Calculating Service
+  * Calculating OptionsWoPayment
   *
   **********************************************/
 
 
  /**
-  * sumService( ) : Returns sum for
+  * sumOptionsWoPayment( ) : Returns sum for
   *                 * shipping and specials (without payment)
   *                 for
   *                 * gross
@@ -388,20 +388,20 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumService( $options )
+  private function sumOptionsWoPayment( $options )
   {
     $sum = array
     (
-      'gross' =>  $this->sumServiceGross( $options ),
-      'net'   =>  $this->sumServiceNet(   $options ),
-      'tax'   =>  $this->sumServiceTax(   $options ),
+      'gross' =>  $this->sumOptionsWoPaymentGross( $options ),
+      'net'   =>  $this->sumOptionsWoPaymentNet(   $options ),
+      'tax'   =>  $this->sumOptionsWoPaymentTax(   $options ),
     );
 
     return $sum;
   }
 
  /**
-  * sumServiceGross( )  : Returns sum gross for shipping and specials
+  * sumOptionsWoPaymentGross( )  : Returns sum gross for shipping and specials
   *
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	double		$sum      : sum gross for shipping and specials
@@ -409,7 +409,7 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumServiceGross( $options )
+  private function sumOptionsWoPaymentGross( $options )
   {
     $sum  = $options['shipping']['sum']['gross']
           + $options['specials']['sum']['gross']
@@ -419,7 +419,7 @@ class tx_caddy_calcsum
   }
 
  /**
-  * sumServiceNet( )  : Returns sum net for shipping and specials
+  * sumOptionsWoPaymentNet( )  : Returns sum net for shipping and specials
   *
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	double		$sum      : sum net for shipping and specials
@@ -427,7 +427,7 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumServiceNet( $options )
+  private function sumOptionsWoPaymentNet( $options )
   {
     $sum  = $options['shipping']['sum']['net']
           + $options['specials']['sum']['net']
@@ -437,7 +437,7 @@ class tx_caddy_calcsum
   }
 
  /**
-  * sumServiceTax( )  :
+  * sumOptionsWoPaymentTax( )  :
   *
   * @param	[type]		$$options: ...
   * @return	array		:
@@ -445,14 +445,14 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumServiceTax( $options )
+  private function sumOptionsWoPaymentTax( $options )
   {
     $sum = array
     (
-      'normal'  => $this->sumServiceTaxNormal(  $options ),
-      'reduced' => $this->sumServiceTaxReduced( $options ),
-      'sum'     => $this->sumServiceTaxNormal(  $options )
-                +  $this->sumServiceTaxReduced( $options )
+      'normal'  => $this->sumOptionsWoPaymentTaxNormal(  $options ),
+      'reduced' => $this->sumOptionsWoPaymentTaxReduced( $options ),
+      'sum'     => $this->sumOptionsWoPaymentTaxNormal(  $options )
+                +  $this->sumOptionsWoPaymentTaxReduced( $options )
                 ,
     );
 
@@ -460,7 +460,7 @@ class tx_caddy_calcsum
   }
 
  /**
-  * sumServiceTaxNormal( )  :
+  * sumOptionsWoPaymentTaxNormal( )  :
   *
   * @param	[type]		$$options: ...
   * @return	array		:
@@ -468,7 +468,7 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumServiceTaxNormal( $options )
+  private function sumOptionsWoPaymentTaxNormal( $options )
   {
     $sum  = $options['shipping']['sum']['tax']['normal']
           + $options['specials']['sum']['tax']['normal']
@@ -478,7 +478,7 @@ class tx_caddy_calcsum
   }
 
  /**
-  * sumServiceTaxReduced( )  :
+  * sumOptionsWoPaymentTaxReduced( )  :
   *
   * @param	[type]		$$options: ...
   * @return	array		:
@@ -486,7 +486,7 @@ class tx_caddy_calcsum
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function sumServiceTaxReduced( $options )
+  private function sumOptionsWoPaymentTaxReduced( $options )
   {
     $sum  = $options['shipping']['sum']['tax']['reduced']
           + $options['specials']['sum']['tax']['reduced']

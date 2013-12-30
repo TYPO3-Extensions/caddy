@@ -419,18 +419,18 @@ plugin.tx_caddy_pi1 {
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
 
-          // Sum gross of shipping and specials
-        sumservicegross       < .optionspaymentsumgross
-        sumservicegross.10.userFunc.number.field      = sumservicegross
-          // Sum net of shipping and specials
-        sumservicenet         < .optionspaymentsumgross
-        sumservicenet.10.userFunc.number.field        = sumservicenet
-          // Sum tax normal of shipping and specials
-        sumservicetaxnormal   < .optionspaymentsumgross
-        sumservicetaxnormal.10.userFunc.number.field  = sumservicetaxnormal
-          // Sum tax reduced of shipping and specials
-        sumservicetaxreduced  < .optionspaymentsumgross
-        sumservicetaxreduced.10.userFunc.number.field = sumservicetaxreduced
+          // Sum gross of options without payment
+        sumoptionswopaymentgross       < .optionspaymentsumgross
+        sumoptionswopaymentgross.10.userFunc.number.field      = sumoptionswopaymentgross
+          // Sum net of options without payment
+        sumoptionswopaymentnet         < .optionspaymentsumgross
+        sumoptionswopaymentnet.10.userFunc.number.field        = sumoptionswopaymentnet
+          // Sum tax normal of options without payment
+        sumoptionswopaymenttaxnormal   < .optionspaymentsumgross
+        sumoptionswopaymenttaxnormal.10.userFunc.number.field  = sumoptionswopaymenttaxnormal
+          // Sum tax reduced of options without payment
+        sumoptionswopaymenttaxreduced  < .optionspaymentsumgross
+        sumoptionswopaymenttaxreduced.10.userFunc.number.field = sumoptionswopaymenttaxreduced
 
           // Quantity over all items
         sumsumqty = TEXT
@@ -2475,8 +2475,8 @@ plugin.tx_caddy_pi1 {
         wrap = <div class="h-accordion-value">|</div>
       }
     }
-    caddy_header_options = COA
-    caddy_header_options {
+    caddy_header_optionswopayment = COA
+    caddy_header_optionswopayment {
       wrap = <h2>|</h2>
         // label
       10 = TEXT
@@ -2504,7 +2504,7 @@ plugin.tx_caddy_pi1 {
           drs           = {$plugin.caddy.debug.userfunc}
           number        = TEXT
           number {
-            field = sumservicegross
+            field = sumoptionswopaymentgross
           }
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}
