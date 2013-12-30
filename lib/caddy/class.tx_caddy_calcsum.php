@@ -185,11 +185,11 @@ class tx_caddy_calcsum
     $sumOptionsWoPayment  = $this->sumOptionsWoPayment( $options );
 
     $sum = array(
-      'items'   => $sumItems,
-      'options' => $sumOptions,
+      'items'             => $sumItems,
+      'options'           => $sumOptions,
         // #i0039, 131230, dwildt, 1+
-      'service' => $sumOptionsWoPayment,
-      'sum'     => $this->sumSum( $sumItems, $sumOptions ),
+      'optionswopayment'  => $sumOptionsWoPayment,
+      'sum'               => $this->sumSum( $sumItems, $sumOptions ),
     );
 //var_dump( __METHOD__, __LINE__, $sum );
 
