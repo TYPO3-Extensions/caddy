@@ -2401,7 +2401,7 @@ plugin.tx_caddy_pi1 {
       // label, content, value
     caddy_header_items = COA
     caddy_header_items {
-      wrap = <h2 class="current">|</h2>
+      wrap = <h2 class="items current">|</h2>
         // label
       10 = TEXT
       10 {
@@ -2477,22 +2477,16 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_optionswopayment = COA
     caddy_header_optionswopayment {
-      wrap = <h2>|</h2>
+      wrap = <h2 class="optionswopayment">|</h2>
         // label
       10 = TEXT
       10 {
-        value = Servicecosts
+        value = Costs for shipping and service
         lang {
-          de = Bestelloptionen
-          en = Servicecosts
+          de = Service- und Versandkosten
+          en = Costs for shipping and service
         }
         wrap  = <div class="h-accordion-label">|</div>
-      }
-        // content
-      20 = TEXT
-      20 {
-        value = &nbsp;
-        wrap  = <div class="h-accordion-content">|</div>
       }
         // value
       30 = COA
@@ -2521,11 +2515,11 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
-      value = <h2>Adresse, Kontakt, Wiederrufsbelehrung</h2>
+      value = <h2 class="powermail">Adresse, Kontakt, Wiederrufsbelehrung</h2>
     }
     caddy_header_order = COA
     caddy_header_order {
-      wrap = <h2>|</h2>
+      wrap = <h2 class="order">|</h2>
         // label
       10 = TEXT
       10 {
@@ -2571,10 +2565,9 @@ plugin.tx_caddy_pi1 {
         wrap = <div class="h-accordion-value">|</div>
       }
     }
-    caddy_header_paymentmethod >
     caddy_header_paymentmethod = COA
     caddy_header_paymentmethod {
-      wrap = <h2>|</h2>
+      wrap = <h2 class="paymentmethod">|</h2>
         // label
       10 = TEXT
       10 {
