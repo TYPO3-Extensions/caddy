@@ -126,10 +126,17 @@ $(function() {
 }); /* Overlay end */
 
 var addPowermailTabsToCaddy = function() {
+  urlWoSearch = $(location).attr("protocol") + "://" + $(location).attr("host") + $(location).attr("pathname");
+  urlSearch   = $(location).attr("search");
+  if( urlSearch )
+  {
+    urlSerach = "?" + urlSearch; 
+  }
   tabs = "";
   $("#c2995 div form > fieldset > legend").each(function(i) {
+    href  = urlWoSearch + "#tab-" + i + urSearch;
     tabs  = tabs
-          + '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>'
+          + '<li><a href="' + href + '">' + $(this).text() + '</a></li>'
           ;
   });
   tabs  = '<ul class="css-tabs">'
