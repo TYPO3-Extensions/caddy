@@ -126,18 +126,17 @@ $(function() {
 }); /* Overlay end */
 
 var addPowermailTabsToCaddy = function() {
-  tabs = null;
+  tabs = "";
   $("#c2995 div form > fieldset > legend").each(function(i) {
     tabs  = tabs
           + '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>'
           ;
-    alert( tabs );
   });
   tabs  = '<ul class="css-tabs">'
         + tabs
         + '</ul>'
         ;
-  alert( tabs );
+  //alert( tabs );
   $(tabs).appendTo('#c###UID###-accordion div.caddy-powermail');
 };
 
