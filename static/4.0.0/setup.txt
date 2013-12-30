@@ -402,6 +402,7 @@ plugin.tx_caddy_pi1 {
         sumitemstaxreduced    < .optionspaymentsumgross
         sumitemstaxreduced.10.userFunc.number.field   = sumitemstaxreduced
 
+          // Sum of payment, shipping and specials
         sumoptionsgross       < .optionspaymentsumgross
         sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
         sumoptionsnet         < .optionspaymentsumgross
@@ -410,10 +411,22 @@ plugin.tx_caddy_pi1 {
         sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
+
+          // Sum of shipping and specials
+        sumservicegross       < .optionspaymentsumgross
+        sumservicegross.10.userFunc.number.field      = sumservicegross
+        sumservicenet         < .optionspaymentsumgross
+        sumservicenet.10.userFunc.number.field        = sumservicenet
+        sumservicetaxnormal   < .optionspaymentsumgross
+        sumservicetaxnormal.10.userFunc.number.field  = sumservicetaxnormal
+        sumservicetaxreduced  < .optionspaymentsumgross
+        sumservicetaxreduced.10.userFunc.number.field = sumservicetaxreduced
+
         sumsumqty = TEXT
         sumsumqty {
           field = sumsumqty
         }
+
         sumsumgross           < .optionspaymentsumgross
         sumsumgross.10.userFunc.number.field          = sumsumgross
         sumsumnet             < .optionspaymentsumgross

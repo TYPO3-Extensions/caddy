@@ -181,10 +181,14 @@ class tx_caddy_calcsum
     
     $items    = $this->sumItems( $items );
     $options  = $this->sumOptions( $options );
+      // #i0039, 131230, dwildt, 1+
+    $service  = $this->sumService( $options );
 
     $sum = array(
       'items'   => $items,
       'options' => $options,
+        // #i0039, 131230, dwildt, 1+
+      'service' => $service,
       'sum'     => $this->sumSum( $items, $options ),
     );
 
@@ -352,6 +356,138 @@ class tx_caddy_calcsum
   {
     $sum  = $options['payment']['sum']['tax']['reduced']
           + $options['shipping']['sum']['tax']['reduced']
+          + $options['specials']['sum']['tax']['reduced']
+          ;
+
+    return $sum;
+  }
+
+
+
+  /***********************************************
+  *
+  * Calculating Service
+  *
+  **********************************************/
+
+
+ /**
+  * sumService( ) : Returns sum for
+  *                 * shipping and specials (without payment)
+  *                 for
+  *                 * gross
+  *                 * net
+  *                 * tax
+  *                 * normal
+  *                 * reduced
+  *
+  * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
+  * @return	array		$sum (see above)
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumService( $options )
+  {
+    $sum = array
+    (
+      'gross' =>  $this->sumServiceGross( $options ),
+      'net'   =>  $this->sumServiceNet(   $options ),
+      'tax'   =>  $this->sumServiceTax(   $options ),
+    );
+
+    return $sum;
+  }
+
+ /**
+  * sumServiceGross( )  : Returns sum gross for shipping and specials
+  *
+  * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
+  * @return	double		$sum      : sum gross for shipping and specials
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumServiceGross( $options )
+  {
+    $sum  = $options['shipping']['sum']['gross']
+          + $options['specials']['sum']['gross']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * sumServiceNet( )  : Returns sum net for shipping and specials
+  *
+  * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
+  * @return	double		$sum      : sum net for shipping and specials
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumServiceNet( $options )
+  {
+    $sum  = $options['shipping']['sum']['net']
+          + $options['specials']['sum']['net']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * sumServiceTax( )  :
+  *
+  * @param	[type]		$$options: ...
+  * @return	array		:
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumServiceTax( $options )
+  {
+    $sum = array
+    (
+      'normal'  => $this->sumServiceTaxNormal(  $options ),
+      'reduced' => $this->sumServiceTaxReduced( $options ),
+      'sum'     => $this->sumServiceTaxNormal(  $options )
+                +  $this->sumServiceTaxReduced( $options )
+                ,
+    );
+
+    return $sum;
+  }
+
+ /**
+  * sumServiceTaxNormal( )  :
+  *
+  * @param	[type]		$$options: ...
+  * @return	array		:
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumServiceTaxNormal( $options )
+  {
+    $sum  = $options['shipping']['sum']['tax']['normal']
+          + $options['specials']['sum']['tax']['normal']
+          ;
+
+    return $sum;
+  }
+
+ /**
+  * sumServiceTaxReduced( )  :
+  *
+  * @param	[type]		$$options: ...
+  * @return	array		:
+  * @access private
+  * @version    4.0.3
+  * @since      4.0.3
+  */
+  private function sumServiceTaxReduced( $options )
+  {
+    $sum  = $options['shipping']['sum']['tax']['reduced']
           + $options['specials']['sum']['tax']['reduced']
           ;
 

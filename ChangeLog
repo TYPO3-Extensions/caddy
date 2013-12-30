@@ -4,6 +4,7 @@ TODO
 4.0.3
   2013-11-29
   Features
+  * #i0039: Sum for shipping and specials (without payment)
   * #54628: Calculated Caddy available for dynamicMarkers
             Effected files:
             * lib/class.tx_caddy_dynamicmarkers.php
