@@ -127,7 +127,7 @@ $(function() {
 
 var addPowermailTabsToCaddy = function() {
   tabs = null;
-  $("#c2995 div.caddy-powermail form > fieldset > legend").each(function(i) {
+  $("#c2995 div form > fieldset > legend").each(function(i) {
     tabs  = tabs
           + '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>'
           ;
