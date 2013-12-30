@@ -281,9 +281,12 @@ plugin.tx_caddy_pi1 {
       text-align:right;
       width:10em;
     }
+    div.tx-powermail .powermail_fieldwrap {
+      height:2em;
+    }
     div.tx-powermail input {
       left:12em;
-      position:relative;
+      position:absolut;
     }
 
     /* table based caddy */
