@@ -112,7 +112,7 @@ plugin.caddy {
   # cat=caddy - html colors/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.color.sponsors = Click me!
 
-  # cat=caddy - marker//200;              type=options[CADDY,CADDYACCORDION];  label= Type of caddy: CADDY (v2.x): form without tabs. CADDYACCORDION (4.x): accordion with tabs.
+  # cat=caddy - marker//200;              type=options[CADDY,CADDYACCORDION];  label= Type of caddy: CADDY: form without tabs (2.x). CADDYACCORDION: accordion with tabs (4.x).
   html.marker.caddy = CADDYACCORDION
   # cat=caddy - marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.marker.sponsors = Click me!
