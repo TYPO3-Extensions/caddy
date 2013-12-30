@@ -191,6 +191,7 @@ class tx_caddy_calcsum
       'service' => $service,
       'sum'     => $this->sumSum( $items, $options ),
     );
+var_dump( __METHOD__, __LINE__, $sum );
 
     return $sum;
   }
