@@ -136,6 +136,7 @@ switch( true )
 {
   case( $beLanguage == 'de' ):
       // German
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (nur Dev!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - Deutsch');
@@ -160,6 +161,7 @@ switch( true )
     break;
   default:
       // English
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (dev only!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - German');
