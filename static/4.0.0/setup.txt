@@ -2547,7 +2547,7 @@ plugin.tx_caddy_pi1 {
       value = <h2><div class="h-accordion-label">Zahlungsart</div><div class="h-accordion-content">Lastschrift</div><div class="h-accordion-value">0,00 &euro;</div></h2>
     }
     caddy_header_paymentmethod >
-    caddy_header_paymentmethod = TEXT
+    caddy_header_paymentmethod = COA
     caddy_header_paymentmethod {
       wrap = <h2>|</h2>
         // label
