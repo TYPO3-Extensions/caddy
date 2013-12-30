@@ -140,8 +140,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (nur Dev!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - Deutsch');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         'Caddy (4+) - CSS blau');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS (blau)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (4+) - CSS orange');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy (4+) - CSS gruen');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy (4+) - CSS rot');
@@ -165,8 +164,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (dev only!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - German');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/blue/',         'Caddy (4+) - CSS blue');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS (blue)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (4+) - CSS orange');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy (4+) - CSS green');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy (4+) - CSS red');
