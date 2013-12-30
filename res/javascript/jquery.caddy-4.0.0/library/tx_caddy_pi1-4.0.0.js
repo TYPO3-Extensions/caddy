@@ -141,7 +141,7 @@ var movePowermailFormToCaddy = function() {
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
   // Configure the tabs of the powermail form
-  $("#c###UID###-accordion div.caddy-powermail form > fieldset.powermail_fieldset legend").each(function(i) {
+  $("#c###UID###-accordion div.caddy-powermail form > fieldset.powermail_fieldset > legend").each(function(i) {
     alert( $(this).text() );
   });
   $("ul.css-tabs").tabs(
