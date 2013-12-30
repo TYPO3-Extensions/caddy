@@ -473,6 +473,7 @@ class tx_caddy_pi1_javascript
       unset( $marker[ $key ] );
     }
     
+    $marker['###UID_POWERMAIL_FORM###'] = $this->pObj->powermail->fieldUid;
     return $marker;
   }
 
