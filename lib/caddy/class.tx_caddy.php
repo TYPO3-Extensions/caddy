@@ -139,7 +139,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.0
+ * @version	4.0.3
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -964,10 +964,10 @@ class tx_caddy extends tslib_pibase
   *
   * @return	array		$calc :
   * @access public
-  * @version    2.0.0
+  * @version    4.0.3
   * @since      2.0.0
   */
-  public function calc( )
+  private function calc( )
   {
     $this->init( );
 
@@ -1573,16 +1573,26 @@ class tx_caddy extends tslib_pibase
   *
   * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
   * @access private
-  * @version    2.0.0
+  * @version    4.0.3
   * @since      2.0.0
   */
   private function calcOptions( )
   {
+      // #i0039, 131230, dwildt, 3+
+    $shipping = $this->calcOptionsShipping( );
+    $specials = $this->calcOptionsSpecials( );
+    $service  = $shipping + $specials;
+    
     $options = array
     (
-      'payment'  => $this->calcOptionsPayment( ),
-      'shipping' => $this->calcOptionsShipping( ),
-      'specials' => $this->calcOptionsSpecials( )
+      'payment'   => $this->calcOptionsPayment( ),
+        // #i0039, 131230, dwildt, 2-
+      //'shipping' => $this->calcOptionsShipping( ),
+      //'specials' => $this->calcOptionsSpecials( )
+        // #i0039, 131230, dwildt, 3+
+      'service'   => $service,
+      'shipping'  => $shipping,
+      'specials'  => $specials
     );
 
     return $options;
