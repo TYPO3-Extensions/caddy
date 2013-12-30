@@ -2504,7 +2504,7 @@ plugin.tx_caddy_pi1 {
           drs           = {$plugin.caddy.debug.userfunc}
           number        = TEXT
           number {
-            field = sumoptionsgross
+            field = sumservicegross
           }
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}
