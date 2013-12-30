@@ -1634,7 +1634,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $label = $this->getPaymentOptionLabelBySessionId( );
+    $label = $this->getPaymentOptionLabelBySessionId( $this->pidCaddy );
 
     $arrReturn['id']                    = $paymentId;
     $arrReturn['label']                 = $label;
@@ -1811,21 +1811,18 @@ class tx_caddy extends tslib_pibase
  /**
   * getPaymentOptionLabelBySessionId( )
   *
-  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
   * @return	array
-  * @access public
-  * @version    3.0.1
+  * @access     private
+  * @version    4.0.3
   * @since      2.0.0
   */
-  public function getPaymentOptionLabelBySessionId( $pid=null )
+  private function getPaymentOptionLabelBySessionId( )
   {
-    $pid = $this->getPid( $pid );
-
       // Get session array
     // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['payment.']['options.'];
@@ -1896,19 +1893,18 @@ class tx_caddy extends tslib_pibase
   *
   * @param      integer : $pid  : uid of the page, which contains the caddy plugin
   * @return	array
-  * @access public
-  * @version    3.0.1
+  * @access     private
+  * @version    4.0.3
   * @since      2.0.0
   */
-  public function getShippingOptionLabelBySessionId( $pid=null )
+  private function getShippingOptionLabelBySessionId( )
   {
-    $pid = $this->getPid( $pid );
 
       // Get session array
     // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['shipping.']['options.'];
@@ -1926,24 +1922,21 @@ class tx_caddy extends tslib_pibase
  /**
   * getSpecialOptionLabelsBySessionId( )
   *
-  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
   * @return	array
-  * @access public
-  * @version    3.0.1
+  * @access     private
+  * @version    4.0.3
   * @since      2.0.0
   */
-  public function getSpecialOptionLabelsBySessionId( $pid=null )
+  private function getSpecialOptionLabelsBySessionId( )
   {
     $value  = null;
     $values = null;
-
-    $pid = $this->getPid( $pid );
 
       // Get session array
     // #54634, 131128, dwildt, 1-
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get the devider
     $name     = $this->conf['options.']['specials.']['devider'];
