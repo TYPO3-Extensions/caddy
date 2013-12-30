@@ -2641,16 +2641,6 @@ plugin.tx_caddy_pi1 {
         data = LLL:EXT:caddy/pi3/locallang.xml:items
       }
     }
-    caddy_tabs_powermail = TEXT
-    caddy_tabs_powermail {
-      wrap = <ul class="css-tabs">|</ul>
-      value (
-      <li><a href="http://typo3-quick-shop.de/warenkorb2#tab-0">Tab 0</a></li>
-      <li><a href="http://typo3-quick-shop.de/warenkorb2#tab-1">Tab 1</a></li>
-      <li><a href="http://typo3-quick-shop.de/warenkorb2#tab-2">Tab 2</a></li>
-      <li><a href="http://typo3-quick-shop.de/warenkorb2#tab-3">Tab 3</a></li>
-)
-    }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
     linktoshop = COA
     linktoshop {

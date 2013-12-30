@@ -142,7 +142,8 @@ var movePowermailFormToCaddy = function() {
 var initPowermailTabs = function() {
   // Configure the tabs of the powermail form
   $("#c###UID###-accordion > div.caddy-powermail form > fieldset > legend").each(function(i) {
-    alert( $(this).text() );
+    prompt = '<li><a href="http://typo3-quick-shop.de/warenkorb2#tab-' + i + '">' + $(this).text() + '</a></li>';
+    alert( prompt );
   });
   $("ul.css-tabs").tabs(
   "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
