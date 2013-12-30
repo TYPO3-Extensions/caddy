@@ -126,7 +126,7 @@ $(function() {
 }); /* Overlay end */
 
 var addPowermailTabsToCaddy = function() {
-  $('#c###UID###-accordion').after('<h1>TEST</h1>');
+  $('<h1>TEST</h1>').appendTo('#c###UID###-accordion div.caddy-powermail');
 };
 
 var movePowermailFormToCaddy = function() {
