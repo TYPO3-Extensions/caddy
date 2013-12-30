@@ -1,5 +1,5 @@
 /**
- * jquery.t3caddy-3.0.0.js
+ * jquery.t3caddy-4.0.0.js
  *
  * http://docs.jquery.com/Plugins/t3caddy
  *
@@ -186,14 +186,14 @@
                         // ERROR with source
                       if( typeof source == "undefined" )
                       {
-                        source =  'ERROR in jquery.t3caddy-3.0.0.js: source is undefined. It seems that there is ' +
+                        source =  'ERROR in jquery.t3caddy-4.0.0.js: source is undefined. It seems that there is ' +
                                   'a problem with a not defined variable. Function format( source, params ).';
                       }
                         // ERROR with params
                       if( typeof params == "undefined" )
                       {
                         params = new Array();
-                        params[0] = 'ERROR in jquery.t3caddy-3.0.0.js:';
+                        params[0] = 'ERROR in jquery.t3caddy-4.0.0.js:';
                         params[1] = 'params are undefined. It seems that there is a problem with a not defined variable. ' +
                                     'Function format( source, params ). Please check settings { ... }.';
                       }
@@ -263,7 +263,7 @@
     }
 
       // Error: No proper method, no arguments
-    $.error( "Method " +  method + " does not exist on jquery.t3caddy-3.0.0.js" );
+    $.error( "Method " +  method + " does not exist on jquery.t3caddy-4.0.0.js" );
       // Method calling logic
   };
 

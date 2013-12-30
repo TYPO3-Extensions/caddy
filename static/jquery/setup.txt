@@ -46,7 +46,7 @@ plugin.tx_caddy_pi1 {
           css = 
           css {
               // [STRING] Path to the jquery inline css
-            path = EXT:caddy/res/javascript/jquery.caddy-3.0.0/css/inline.css
+            path = EXT:caddy/res/javascript/jquery.caddy-4.0.0/css/inline.css
               // t3caddyalert, typenum
             marker  =
             marker {
@@ -65,7 +65,7 @@ plugin.tx_caddy_pi1 {
           library = 
           library {
               // [STRING] Path to the jquery library
-            path = EXT:caddy/res/javascript/jquery.caddy-3.0.0/library/tx_caddy_pi1-3.0.0.js
+            path = EXT:caddy/res/javascript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer = 1
               // [Boolean] 0: link to the script file, 1 (default): include the script inline
@@ -88,7 +88,7 @@ plugin.tx_caddy_pi1 {
           localisation = 
           localisation {
               // [STRING] Path to the jss file of the t3caddy localisation. ###LANG### will be replacedwhile runtime
-            path    = EXT:caddy/res/javascript/jquery.caddy-3.0.0/plugin/localisation-3.0.0.###LANG###.js
+            path    = EXT:caddy/res/javascript/jquery.caddy-4.0.0/plugin/localisation-4.0.0.###LANG###.js
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer  = 1
               // [Boolean] 0 (default): link to the script file, 1: include the script inline
@@ -98,7 +98,7 @@ plugin.tx_caddy_pi1 {
           plugin = 
           plugin {
               // [String] Path to the jss file of the t3caddy plugin
-            path    = EXT:caddy/res/javascript/jquery.caddy-3.0.0/plugin/jquery.t3caddy-3.0.0.js
+            path    = EXT:caddy/res/javascript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
               // [Boolean] 1 (default): place JSS scripts in the footer section
             footer  = 1
               // [Boolean] 0 (default): link to the script file, 1: include the script inline
@@ -347,7 +347,7 @@ plugin.tx_caddy_pi1 {
 
 page {
   includeCSS {
-    caddyJQuery = EXT:caddy/res/javascript/jquery.caddy-3.0.0/css/static.css
+    caddyJQuery = EXT:caddy/res/javascript/jquery.caddy-4.0.0/css/static.css
   }
 }
   // page.includeCss

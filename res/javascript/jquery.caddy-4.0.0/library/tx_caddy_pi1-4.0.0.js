@@ -1,9 +1,9 @@
 /**
  *
- * Copyright (c) 2011-2013 Dirk Wildt
+ * Copyright (c) 2013-2014 Dirk Wildt
  * http://wildt.at.die-netzmacher.de/
  *
- * Version 3.0.1
+ * Version 4.0.3
  *
  * jquery.t3caddy-x.x.x.js is needed
  *
@@ -141,7 +141,7 @@ var movePowermailFormToCaddy = function() {
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
   // Configure the tabs of the powermail form
-  $("#c###UID###-accordion div.caddy-powermail form > fieldset legend").each(function(i) {
+  $("#c###UID###-accordion div.caddy-powermail form > fieldset.powermail_fieldset legend").each(function(i) {
     alert( $(this).text() );
   });
   $("ul.css-tabs").tabs(
