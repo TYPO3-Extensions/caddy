@@ -173,17 +173,16 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
-  alert ( $.trim( $("input[name='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
-  alert ( $.trim( $("#powermail_field_contactdataemail").prev( ).text( ) ) );
-  alert( $.trim( $("#powermail_field_orderterms_1").next( ).text( ) ) );
-  alert( $.trim( $("#powermail_field_orderrevocation_1").next( ).text( ) ) );
+  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
+  alert( $.trim( $("input[name*='tx_powermail_pi1[field][628]']").next( ).text( ) ) );
+  alert( $.trim( $("input[name*='tx_powermail_pi1[field][629]']").next( ).text( ) ) );
   // Probleme mit Internet Explorer from d2w6 to 8.
-  //$("#powermail_field_contactdataemail").attr("type", "email");
-  marker = $("<span />").insertBefore( "#powermail_field_contactdataemail" );
-  $( "#powermail_field_contactdataemail" ).detach( ).attr( "type","email").insertAfter( marker );
+  //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
+  marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
+  $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
-  $( "#powermail_field_orderterms_1" ).attr( "required", "required" );
-  $( "#powermail_field_orderrevocation_1" ).attr( "required", "required" );
+  $( "input[name*='tx_powermail_pi1[field][628]']" ).attr( "required", "required" );
+  $( "input[name*='tx_powermail_pi1[field][629]']" ).attr( "required", "required" );
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
