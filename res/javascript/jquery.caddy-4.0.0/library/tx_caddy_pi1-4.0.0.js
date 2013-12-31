@@ -236,7 +236,8 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   // get the message wall
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
-  wall.find( "*" ).remove( );
+  //wall.find( "*" ).remove( );
+  wall.html( null );
   wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
@@ -261,10 +262,11 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 // the effect does nothing when all inputs are valid
 }, function( inputs ) 
 {
-  // get the message wall
-  var wall = $( this.getConf( ).container ).fadeIn( );
-  // remove all existing messages
-  wall.find( "*" ).remove( );
+//  // get the message wall
+//  var wall = $( this.getConf( ).container ).fadeIn( );
+//  // remove all existing messages
+//  wall.find( "*" ).remove( );
+  $( "#c###UID###-powermail-prompt" ).html( "" );
 });
 
 
@@ -296,7 +298,7 @@ var initValidator = function( selector, validate ) {
 //    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "type" ) );
 //    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "checked" ) );
     success = validatePowermailForm.data('validator').checkValidity( );
-    alert( success );
+    //alert( success );
   }
   return success;
 };  // $(function() ...
