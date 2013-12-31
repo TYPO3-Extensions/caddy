@@ -176,8 +176,8 @@ var movePowermailEvalFields = function() {
   marker = $("<span />").insertBefore( "#powermail_field_contactdataemail" );
   $( "#powermail_field_contactdataemail" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
-  $( "#powermail_field_orderterms_1" ).prop( "required", "required" );
-  $( "#powermail_field_orderrevocation_1" ).prop( "required", "required" );
+  $( "#powermail_field_orderterms_1" ).attr( "required", "required" );
+  $( "#powermail_field_orderrevocation_1" ).attr( "required", "required" );
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
