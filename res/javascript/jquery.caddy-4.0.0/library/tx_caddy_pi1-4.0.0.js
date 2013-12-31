@@ -83,6 +83,7 @@ var fnInit = function() {
   fnAccordion();
   addPowermailTabsToCaddy();
   movePowermailFormToCaddy();
+  properPowermailEvalFields( );  
 };
 
 /* Initiate Accordion */
@@ -173,13 +174,15 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var properPowermailEvalFields = function() {
-  // Probleme mit Internet Explorer from d2w6 to 8.
+  // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
   //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
   $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
+  // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
   $( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]" ).attr( "required", "required" );
   $( "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]" ).attr( "required", "required" );
+  // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
   $( "input[name*='tx_powermail_pi1[field][628]'][type=hidden]" ).remove( );
   $( "input[name*='tx_powermail_pi1[field][629]'][type=hidden]" ).remove( );
 }; // Add the powermail tabs to the caddy tab powermail
@@ -205,16 +208,12 @@ var initPowermailTabs = function() {
       // Validate HTML input fields of the current tab
       //alert( idTabSrce );
       var success = initValidator( idTabSrce, "validate" );
-      //var success = initValidator( "#c###UID###-accordion-powermail form", "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
-        //alert( "initPowermailTabs > onBeforeClick > success" );
         return true;
       }
       // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
-      //alert( "initPowermailTabs > onBeforeClick > false" );
-      //return true;
       return false;
     }
   });
@@ -245,8 +244,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   // add new ones
   $.each( errors, function( index, error ) {
     selector = "input[name='" + error.input.attr("name") + "']";
-//    alert ( selector );
-//    alert ( $.trim( $( selector ).prev( ).text( ) ) );
     switch( error.input.attr("name") )
     {
       case( "tx_powermail_pi1[field][628][0]"):
@@ -257,18 +254,12 @@ $.tools.validator.addEffect( "wall", function( errors, event )
         strAppend = "<p><strong>" + $( selector ).prev( ).text( ) + ":</strong> " + error.messages[0] + "</p>";
         break;
     }
-//  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
-//  alert( $.trim( $("input[name*='tx_powermail_pi1[field][628]']").next( ).text( ) ) );
-//  alert( $.trim( $("input[name*='tx_powermail_pi1[field][629]']").next( ).text( ) ) );
     wall.append( strAppend );
   });
 // the effect does nothing when all inputs are valid
 }, function( inputs ) 
 {
-//  // get the message wall
-//  var wall = $( this.getConf( ).container ).fadeIn( );
-//  // remove all existing messages
-//  wall.find( "*" ).remove( );
+  // remove all existing messages
   $( "#c###UID###-powermail-prompt" ).html( "" );
 });
 
@@ -316,6 +307,3 @@ initValidator( "#c###UID###-accordion-powermail form" );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
-
-// Must run before the validator method!
-properPowermailEvalFields( );  
