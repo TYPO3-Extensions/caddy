@@ -244,10 +244,10 @@ $.tools.validator.addEffect( "wall", function( errors, event )
     switch( error.input.attr("type") )
     {
       case( "checkbox"):
-        strAppend = "<p><strong>" + error.input.attr("name").next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( error.input.attr("name") ).next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
         break;
       default:
-        strAppend = "<p><strong>" + error.input.attr("name").prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( error.input.attr("name") ).prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
         break;
     }
 //  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
