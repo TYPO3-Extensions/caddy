@@ -276,6 +276,10 @@ var initValidator = function() {
 };  // $(function() ...
 
 var initValidator2 = function() {
+  settings : {
+    validate : false
+  }
+  alert( initValidator2.settings ); 
   test = $("#c###UID###-accordion-powermail form").validator(
   {
     inputEvent  : 'blur',
