@@ -173,7 +173,7 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
-  alert ( $.trim( $("input[name=tx_powermail_pi1[field][624]]").prev( ).text( ) ) );
+  alert ( $.trim( $("input[name='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
   alert ( $.trim( $("#powermail_field_contactdataemail").prev( ).text( ) ) );
   alert( $.trim( $("#powermail_field_orderterms_1").next( ).text( ) ) );
   alert( $.trim( $("#powermail_field_orderrevocation_1").next( ).text( ) ) );
