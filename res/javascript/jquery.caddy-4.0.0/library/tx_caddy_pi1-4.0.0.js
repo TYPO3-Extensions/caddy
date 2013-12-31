@@ -243,6 +243,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   $.each( errors, function( index, error ) {
     selector = "input[name='" + error.input.attr("name") + " ']";
     alert ( selector );
+    alert ( $.trim( $( selector ).prev( ).text( ) ) );
     switch( error.input.attr("type") )
     {
       case( "checkbox"):
