@@ -264,7 +264,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
-  properPowermailEvalFields( );  
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
@@ -296,6 +295,7 @@ var initValidator = function( selector, validate ) {
 };  // $(function() ...
 
 initValidator( "#c###UID###-accordion-powermail form" );
+properPowermailEvalFields( );  
 
 //$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
 //  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );
