@@ -276,13 +276,13 @@ var initValidator = function() {
 };  // $(function() ...
 
 var initValidator2 = function() {
-  $("#c###UID###-accordion-powermail form").validator(
+  test = $("#c###UID###-accordion-powermail form").validator(
   {
     inputEvent  : 'blur',
     lang        : 'de'
     //singleError : true // No effect!
   });
-  this.data('validator').checkValidity( ); // $("#c###UID###-accordion-powermail form").validator ...
+  test.data('validator').checkValidity( ); // $("#c###UID###-accordion-powermail form").validator ...
 };  // $(function() ...
 
 
