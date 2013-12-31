@@ -298,7 +298,7 @@ var initValidator = function( selector, validate ) {
 //    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "type" ) );
 //    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "checked" ) );
     success = validatePowermailForm.data('validator').checkValidity( );
-    //alert( success );
+    alert( success );
   }
   return success;
 };  // $(function() ...
