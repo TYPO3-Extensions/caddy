@@ -203,7 +203,6 @@ var initPowermailTabs = function() {
       // Validate HTML input fields of the current tab
       //var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
       var success = initValidator( idTabSrce, "validate" );
-      //var success = initValidator2( "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
@@ -290,6 +289,7 @@ var initValidator = function( selector, validate ) {
   }); // $("#c###UID###-accordion-powermail form").validator ...
   if( validate == "validate" )
   {
+    alert( $("input[name*='tx_powermail_pi1[field][628]']").attr( "checked" ) );
     success = validatePowermailForm.data('validator').checkValidity( );
   }
   return success;
