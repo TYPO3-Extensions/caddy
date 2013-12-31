@@ -232,41 +232,10 @@ $.tools.validator.localize("de", {
   // Must run before the validator method!
 properPowermailEvalFields( );  
 
-// adds an effect called "wall" to the validator
-$.tools.validator.addEffect( "wall", function( errors, event ) 
-{
-  // get the message wall
-  var wall = $( this.getConf( ).container ).fadeIn( );
-  // remove all existing messages
-  wall.find( "*" ).remove( );
-  // add new ones
-  $.each( errors, function( index, error ) {
-    wall.append(
-      "<h2>Warnung</h2>"
-      + "<p><strong>" +error.input.attr("name")+ "</strong> " +error.messages[0]+ "</p>"
-    );
-  });
-// the effect does nothing when all inputs are valid
-}, function( inputs ) 
-{
-});
-
 $("#c###UID###-accordion-powermail form").validator(
 {
-   effect           : 'wall',
-   container        : '#c###UID###-powermail-prompt',
-   // do not validate inputs when they are edited
-   errorInputEvent  : null
-// custom form submission logic
-}).submit(function(e)  
-{
-  // when data is valid
-  if (!e.isDefaultPrevented()) 
-  {
-    // tell user that everything is OK
-    $("#c###UID###-powermail-prompt").html("<h2>All good</h2>");
-    // prevent the form data being submitted to the server
-    e.preventDefault();
-  }
+  inputEvent  : 'blur',
+  lang        : 'de'
+  //singleError : true // No effect!
 }); // $("#c###UID###-accordion-powermail form").validator ...
 
