@@ -241,7 +241,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   wall.append( "<h3>Warnung</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
-    selector = "input[name='" + error.input.attr("name") + " ']";
+    selector = "input[name='" + error.input.attr("name") + "']";
     alert ( selector );
     alert ( $.trim( $( selector ).prev( ).text( ) ) );
     switch( error.input.attr("type") )
