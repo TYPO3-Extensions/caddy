@@ -289,7 +289,8 @@ var initValidator = function( selector, validate ) {
   }); // $("#c###UID###-accordion-powermail form").validator ...
   if( validate == "validate" )
   {
-    alert( $("input[name*='tx_powermail_pi1[field][628]']").attr( "checked" ) );
+    alert( $("input[{name*='tx_powermail_pi1[field][628]',type=checkbox}]").attr( "type" ) );
+    alert( $("input[{name*='tx_powermail_pi1[field][628]',type=checkbox}]").attr( "checked" ) );
     success = validatePowermailForm.data('validator').checkValidity( );
   }
   return success;
