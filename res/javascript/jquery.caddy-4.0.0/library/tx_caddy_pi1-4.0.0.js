@@ -77,6 +77,7 @@ var fnInit = function() {
   fnAccordion();
   addPowermailTabsToCaddy();
   movePowermailFormToCaddy();
+  movePowermailEvalFields();  
 };
 
 /* Initiate Accordion */
@@ -164,6 +165,11 @@ var movePowermailFormToCaddy = function() {
   });
   initPowermailTabs();
 };  // Move the powermail form into the caddy to the tab powermail
+
+  // move powermail fields to HTML 5, which must evaluated
+var movePowermailEvalFields = function() {
+  $("#powermail_field_contactdataemail").attr("type", "email");
+}; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
