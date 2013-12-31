@@ -173,9 +173,6 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var properPowermailEvalFields = function() {
-  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
-  alert( $.trim( $("input[name*='tx_powermail_pi1[field][628]']").next( ).text( ) ) );
-  alert( $.trim( $("input[name*='tx_powermail_pi1[field][629]']").next( ).text( ) ) );
   // Probleme mit Internet Explorer from d2w6 to 8.
   //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
@@ -244,9 +241,19 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   wall.append( "<h3>Warnung</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
-    wall.append(
-      "<p><strong>" +error.input.attr("name")+ "</strong> " +error.messages[0]+ "</p>"
-    );
+    switch( error.input.attr("type") )
+    {
+      case( "checkbox"):
+        strAppend = "<p><strong>" + error.input.attr("name").next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        break;
+      default:
+        strAppend = "<p><strong>" + error.input.attr("name").prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        break;
+    }
+//  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
+//  alert( $.trim( $("input[name*='tx_powermail_pi1[field][628]']").next( ).text( ) ) );
+//  alert( $.trim( $("input[name*='tx_powermail_pi1[field][629]']").next( ).text( ) ) );
+    wall.append( strAppend );
   });
 // the effect does nothing when all inputs are valid
 }, function( inputs ) 
