@@ -266,6 +266,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
+  success = false;
   validatePowermailForm = $( selector ).validator(
   {
     effect          : 'wall',
@@ -287,8 +288,9 @@ var initValidator = function( selector, validate ) {
   }); // $("#c###UID###-accordion-powermail form").validator ...
   if( validate == "validate" )
   {
-    validatePowermailForm.data('validator').checkValidity( );
+    success = validatePowermailForm.data('validator').checkValidity( );
   }
+  return success;
 };  // $(function() ...
 
 // Must run before the validator method!
