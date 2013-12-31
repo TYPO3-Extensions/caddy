@@ -241,11 +241,11 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
   wall.find( "*" ).remove( );
+  wall.append( "<h3>Warnung</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
     wall.append(
-      "<h2>Warnung</h2>"
-      + "<p><strong>" +error.input.attr("name")+ "</strong> " +error.messages[0]+ "</p>"
+      "<p><strong>" +error.input.attr("name")+ "</strong> " +error.messages[0]+ "</p>"
     );
   });
 // the effect does nothing when all inputs are valid
@@ -255,22 +255,22 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( validate ) {
-  validatePowermailForm = $("#c###UID###-accordion-powermail form").validator(
+  validatePowermailForm = $( "#c###UID###-accordion-powermail form" ).validator(
   {
     effect           : 'wall',
     container        : '#c###UID###-powermail-prompt',
     // do not validate inputs when they are edited
     errorInputEvent  : null
   // custom form submission logic
-  }).submit(function(e)  
+  }).submit( function( e )  
   {
     // when data is valid
-    if (!e.isDefaultPrevented()) 
+    if( !e.isDefaultPrevented( ) ) 
     {
       // tell user that everything is OK
-      $("#c###UID###-powermail-prompt").html("<h2>All good</h2>");
+      $( "#c###UID###-powermail-prompt" ).html( "<h3>All good</h3>" );
       // prevent the form data being submitted to the server
-      e.preventDefault();
+      e.preventDefault( );
     }
   }); // $("#c###UID###-accordion-powermail form").validator ...
   if( validate == "validate" )
@@ -278,18 +278,6 @@ var initValidator = function( validate ) {
     validatePowermailForm.data('validator').checkValidity( );
   }
 };  // $(function() ...
-
-var initValidator2 = function( settings ) {
-  alert( settings ); 
-  test = $("#c###UID###-accordion-powermail form").validator(
-  {
-    inputEvent  : 'blur',
-    lang        : 'de'
-    //singleError : true // No effect!
-  });
-  test.data('validator').checkValidity( ); // $("#c###UID###-accordion-powermail form").validator ...
-};  // $(function() ...
-
 
 // Must run before the validator method!
 properPowermailEvalFields( );  
