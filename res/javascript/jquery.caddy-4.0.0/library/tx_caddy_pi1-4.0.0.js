@@ -169,7 +169,7 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
   alert( $("#powermail_field_contactdataemail").prev( ).text( ) );
-  $("#powermail_field_contactdataemail").attr("type", "email");
+  //$("#powermail_field_contactdataemail").attr("type", "email");
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
