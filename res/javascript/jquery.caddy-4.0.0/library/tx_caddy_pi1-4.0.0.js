@@ -201,9 +201,9 @@ var initPowermailTabs = function() {
       // Get HTML id of the current tab
       var idTabSrce = '#tab-' + indexTabSrce + ' :input';
       // Validate HTML input fields of the current tab
-      alert( idTabSrce );
-      var success = initValidator( idTabSrce, "validate" );
-      var success2 = initValidator( "#c###UID###-accordion-powermail form", "validate" );
+      //alert( idTabSrce );
+      //var success = initValidator( idTabSrce, "validate" );
+      var success = initValidator( "#c###UID###-accordion-powermail form", "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
