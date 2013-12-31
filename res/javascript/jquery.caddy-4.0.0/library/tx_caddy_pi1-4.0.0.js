@@ -265,7 +265,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
   wall.find( "*" ).remove( );
-  wall.append( "<h3>Danke</h3>" );
 });
 
 
@@ -303,3 +302,9 @@ var initValidator = function( selector, validate ) {
 };  // $(function() ...
 
 initValidator( "#c###UID###-accordion-powermail form" );
+
+$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
+  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );
+  // get handle to the API
+  //var api = $(this).data("validator");
+});
