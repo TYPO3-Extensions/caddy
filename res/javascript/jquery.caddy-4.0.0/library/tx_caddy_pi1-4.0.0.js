@@ -275,11 +275,11 @@ var initValidator = function() {
   }); // $("#c###UID###-accordion-powermail form").validator ...
 };  // $(function() ...
 
-var initValidator2 = function() {
+var initValidator2 = function( ) {
   settings : {
     validate : false
   }
-  alert( initValidator2.settings ); 
+  alert( settings ); 
   test = $("#c###UID###-accordion-powermail form").validator(
   {
     inputEvent  : 'blur',
