@@ -36,7 +36,7 @@ var fnAccordion = function() {
         // Hide possible error prompts of accordion tab 2, if destination accordion tab isn't the 2. tab - the powermail form
         if ( indexAccordionDest != 2 )
         {
-          //$( "div.error" ).hide();
+          $( "div.error" ).hide();
         }
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
         if ( indexAccordionDest <= 2 && indexAccordionSrce != 2 )
@@ -51,7 +51,7 @@ var fnAccordion = function() {
           return true;
         }
         // Hide possible error prompts
-        //$( "div.error" ).hide();
+        $( "div.error" ).hide();
         // RETURN : current tab is the tab of the powermail form
         if ( indexAccordionDest == 2 )
         {
