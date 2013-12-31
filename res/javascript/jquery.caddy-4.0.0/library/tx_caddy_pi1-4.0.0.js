@@ -242,11 +242,12 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   // add new ones
   $.each( errors, function( index, error ) {
     selector = "input[name='" + error.input.attr("name") + "']";
-    alert ( selector );
-    alert ( $.trim( $( selector ).prev( ).text( ) ) );
-    switch( error.input.attr("type") )
+//    alert ( selector );
+//    alert ( $.trim( $( selector ).prev( ).text( ) ) );
+    switch( error.input.attr("name") )
     {
-      case( "checkbox"):
+      case( "tx_powermail_pi1[field][628][0]"):
+      case( "tx_powermail_pi1[field][629][0]"):
         strAppend = "<p><strong>" + $( selector ).next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
         break;
       default:
