@@ -169,11 +169,15 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
   alert( $("#powermail_field_contactdataemail").prev( ).text( ) );
-  // Probleme mit IE
+  alert( $("#powermail_field_orderterms_1").prev( ).text( ) );
+  alert( $("#powermail_field_orderrevocation_1").prev( ).text( ) );
+  // Probleme mit Internet Explorer from d2w6 to 8.
   //$("#powermail_field_contactdataemail").attr("type", "email");
   marker = $("<span />").insertBefore( "#powermail_field_contactdataemail" );
   $( "#powermail_field_contactdataemail" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
+  $( "#powermail_field_orderterms_1" ).prop( "required", "required" );
+  $( "#powermail_field_orderrevocation_1" ).prop( "required", "required" );
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
