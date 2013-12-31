@@ -265,8 +265,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
-  // Must run before the validator method!
-  properPowermailEvalFields( );  
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
@@ -296,4 +294,6 @@ var initValidator = function( selector, validate ) {
   return success;
 };  // $(function() ...
 
+// Must run before the validator method!
+properPowermailEvalFields( );  
 initValidator( "#c###UID###-accordion-powermail form" );
