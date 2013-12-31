@@ -202,7 +202,7 @@ var initPowermailTabs = function() {
       var idTabSrce = '#tab-' + indexTabSrce + ' :input';
       // Validate HTML input fields of the current tab
       //var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
-      var success = $(idTabSrce).initValidator( "validate" );
+      var success = initValidator( idTabSrce, "validate" );
       //var success = initValidator2( "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
@@ -265,8 +265,8 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 });
 
 
-var initValidator = function( validate ) {
-  validatePowermailForm = $( "#c###UID###-accordion-powermail form" ).validator(
+var initValidator = function( selector, validate ) {
+  validatePowermailForm = $( selector ).validator(
   {
     effect          : 'wall',
     container       : '#c###UID###-powermail-prompt',
@@ -293,4 +293,4 @@ var initValidator = function( validate ) {
 
 // Must run before the validator method!
 properPowermailEvalFields( );  
-initValidator( );
+initValidator( "#c###UID###-accordion-powermail form" );
