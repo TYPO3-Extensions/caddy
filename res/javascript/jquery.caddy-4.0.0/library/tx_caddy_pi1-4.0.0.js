@@ -281,7 +281,8 @@ var initValidator2 = function() {
     inputEvent  : 'blur',
     lang        : 'de'
     //singleError : true // No effect!
-  }).data('validator').checkValidity( ); // $("#c###UID###-accordion-powermail form").validator ...
+  });
+  this.data('validator').checkValidity( ); // $("#c###UID###-accordion-powermail form").validator ...
 };  // $(function() ...
 
 
