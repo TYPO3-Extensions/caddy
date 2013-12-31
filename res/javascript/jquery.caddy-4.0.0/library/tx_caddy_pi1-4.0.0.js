@@ -229,6 +229,9 @@ $.tools.validator.localize("de", {
 }); // $.tools.validator.localize ...
 /* Validator end */
 
+  // Must run before validator!
+movePowermailEvalFields( );  
+
 $("#c###UID###-accordion-powermail form").validator(
 {
   inputEvent  : 'blur',
@@ -236,5 +239,3 @@ $("#c###UID###-accordion-powermail form").validator(
   //singleError : true // No effect!
 }); // $("#c###UID###-accordion-powermail form").validator ...
 
-  // Must run after validator!
-movePowermailEvalFields( );  
