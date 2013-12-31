@@ -201,8 +201,9 @@ var initPowermailTabs = function() {
       // Get HTML id of the current tab
       var idTabSrce = '#tab-' + indexTabSrce + ' :input';
       // Validate HTML input fields of the current tab
-      //var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+      alert( idTabSrce );
       var success = initValidator( idTabSrce, "validate" );
+      var success2 = initValidator( "#c###UID###-accordion-powermail form", "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
@@ -236,7 +237,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   // get the message wall
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
-  //wall.find( "*" ).remove( );
   wall.html( null );
   wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
   // add new ones
