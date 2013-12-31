@@ -30,7 +30,7 @@ var fnAccordion = function() {
         // If index is undefined, accordion tab is the initial tab
         if( indexAccordionSrce == undefined )
         {
-          alert( "indexAccordionSrce == undefined" );
+          alert( "return true: indexAccordionSrce == undefined" );
           // RETURN : follow the users workflow
           return true;
         }
@@ -42,14 +42,14 @@ var fnAccordion = function() {
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
         if ( indexAccordionDest <= 2 || indexAccordionDest == 3 )
         {
-          alert( "indexAccordionDest <= 2 || indexAccordionDest == 3" );
+          alert( "return true: indexAccordionDest <= 2 || indexAccordionDest == 3" );
           return true;
         }
         // Are all values proper of the powermail form?
         var success = $("#c###UID###-accordion-powermail form").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
         if( success )
         {
-          alert( "success" );
+          alert( "return true: success" );
           // RETURN : all values are proper
           return true;
         }
@@ -58,6 +58,7 @@ var fnAccordion = function() {
         // RETURN : current tab is the tab of the powermail form
         if ( indexAccordionDest == 2 )
         {
+          alert( "return false: indexAccordionDest == 2" );
           return false;
         }
         // Select the second tab - the powermail form
@@ -69,6 +70,7 @@ var fnAccordion = function() {
         $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
         // Prompt a message in a lightbox (overflow)
         $("#promptPowermailInvalid").click(); // ???, 131231, dwildt
+        alert( "return false: indexAccordionDest == 2" );
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
