@@ -241,13 +241,14 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   wall.append( "<h3>Warnung</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
+    selector = "input[name*='" + error.input.attr("name") + " ']";
     switch( error.input.attr("type") )
     {
       case( "checkbox"):
-        strAppend = "<p><strong>" + $( error.input.attr("name") ).next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( selector ).next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
         break;
       default:
-        strAppend = "<p><strong>" + $( error.input.attr("name") ).prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( selector ).prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
         break;
     }
 //  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
