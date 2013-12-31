@@ -178,8 +178,8 @@ var properPowermailEvalFields = function() {
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
   $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
-  $( "input[name*='tx_powermail_pi1[field][628]']" ).attr( "required", "required" );
-  $( "input[name*='tx_powermail_pi1[field][629]']" ).attr( "required", "required" );
+  $( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]" ).attr( "required", "required" );
+  $( "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]" ).attr( "required", "required" );
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
