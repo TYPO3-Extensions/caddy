@@ -238,7 +238,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
   wall.find( "*" ).remove( );
-  wall.append( "<h3>Warnung</h3>" );
+  wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
   // add new ones
   $.each( errors, function( index, error ) {
     selector = "input[name='" + error.input.attr("name") + "']";
@@ -248,10 +248,10 @@ $.tools.validator.addEffect( "wall", function( errors, event )
     {
       case( "tx_powermail_pi1[field][628][0]"):
       case( "tx_powermail_pi1[field][629][0]"):
-        strAppend = "<p><strong>" + $( selector ).next( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( selector ).next( ).text( ) + ":</strong> " + error.messages[0] + "</p>";
         break;
       default:
-        strAppend = "<p><strong>" + $( selector ).prev( ).text( ) + "</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p><strong>" + $( selector ).prev( ).text( ) + ":</strong> " + error.messages[0] + "</p>";
         break;
     }
 //  alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );

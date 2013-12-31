@@ -41,27 +41,10 @@
   padding:0;
 } 
 #c###UID###-powermail-prompt {
-  background:red;
-  color:white;
-  font-weight:bold;
   padding:1em;
-  text-align:center;
 }
-#errors {
-	background-color:#163356;
-	color:#fff;
-	width:400px;
-	padding:20px;
-	margin:5px auto;
-	display:none;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-}
-
-/* title */
-#errors h2 {
-	margin:-5px 0;
-	color:yellow;
+#c###UID###-powermail-prompt h3 {
+  font-size:1.2em;
 }
 
 /* tab pane */
