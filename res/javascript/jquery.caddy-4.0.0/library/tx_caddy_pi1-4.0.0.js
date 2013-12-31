@@ -25,6 +25,7 @@ var fnAccordion = function() {
       effect        : 'slide',
       initialIndex  : 0,
       onBeforeClick : function( event, indexAccordionDest ) {
+        alert( "fnAccordion: onBeforeClick" );
         // Get index of the current accordion tab
         var indexAccordionSrce = this.getIndex();
         // If index is undefined, accordion tab is the initial tab
