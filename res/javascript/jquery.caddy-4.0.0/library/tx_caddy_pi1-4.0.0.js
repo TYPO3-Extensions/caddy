@@ -168,8 +168,9 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
-  alert( $("#powermail_field_contactdataemail").prev( ).text( ) );
-  alert( $("#powermail_field_orderterms_1").prev( ).text( ) );
+  prompt = $("#powermail_field_contactdataemail").prev( ).text( );
+  alert ( prompt.trim( ) );
+  alert( $("#powermail_field_orderterms_1").next( ).text( ) );
   alert( $("#powermail_field_orderrevocation_1").next( ).text( ) );
   // Probleme mit Internet Explorer from d2w6 to 8.
   //$("#powermail_field_contactdataemail").attr("type", "email");
