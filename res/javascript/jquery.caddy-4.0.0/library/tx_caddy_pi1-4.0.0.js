@@ -265,6 +265,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
   wall.find( "*" ).remove( );
+  wall.append( "<h3>Danke</h3>" );
 });
 
 
