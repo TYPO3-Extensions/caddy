@@ -261,6 +261,8 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 // the effect does nothing when all inputs are valid
 }, function( inputs ) 
 {
+  // get the message wall
+  var wall = $( this.getConf( ).container ).fadeIn( );
   // remove all existing messages
   wall.find( "*" ).remove( );
 });
