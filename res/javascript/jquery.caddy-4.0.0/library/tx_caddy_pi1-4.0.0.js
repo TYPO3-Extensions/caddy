@@ -39,7 +39,7 @@ var fnAccordion = function() {
           $( "div.error" ).hide();
         }
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
-        if ( indexAccordionDest <= 2 && indexAccordionSrce != 2 )
+        if ( indexAccordionDest <= 2 || indexAccordionDest == 3 )
         {
           return true;
         }
@@ -65,7 +65,7 @@ var fnAccordion = function() {
         // Validate HTML input fields of the current tab (fieldset)
         $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
         // Prompt a message in a lightbox (overflow)
-        $("#promptPowermailInvalid").click();
+        $("#promptPowermailInvalid").click(); // ???, 131231, dwildt
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
