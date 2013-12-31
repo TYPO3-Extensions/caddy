@@ -204,7 +204,8 @@ var initPowermailTabs = function() {
       // Get HTML id of the current tab
       var idTabSrce = '#tab-' + indexTabSrce + ' :input';
       // Validate HTML input fields of the current tab
-      var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+      //var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
+      var success = initValidator( );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
