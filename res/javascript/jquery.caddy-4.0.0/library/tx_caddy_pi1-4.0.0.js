@@ -206,7 +206,7 @@ var initPowermailTabs = function() {
       // Validate HTML input fields of the current tab
       //var success = $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
       //var success = initValidator( );
-      var success = initValidator2( );
+      var success = initValidator2( "validate" );
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
@@ -275,10 +275,7 @@ var initValidator = function() {
   }); // $("#c###UID###-accordion-powermail form").validator ...
 };  // $(function() ...
 
-var initValidator2 = function( ) {
-  settings : {
-    validate : false
-  }
+var initValidator2 = function( settings ) {
   alert( settings ); 
   test = $("#c###UID###-accordion-powermail form").validator(
   {
