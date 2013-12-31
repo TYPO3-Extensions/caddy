@@ -306,16 +306,16 @@ var initValidator = function( selector, validate ) {
 
 initValidator( "#c###UID###-accordion-powermail form" );
 
-$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
-  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );
-  // get handle to the API
-  //var api = $(this).data("validator");
-});
-$("input[name*='tx_powermail_pi1[field][624]']").oninvalid(function(event, errorMessage) {
-  alert( "input[name*='tx_powermail_pi1[field][624]']: " + errorMessage );
-  // get handle to the API
-  //var api = $(this).data("validator");
-});
+//$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
+//  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );
+//  // get handle to the API
+//  //var api = $(this).data("validator");
+//});
+//$("input[name*='tx_powermail_pi1[field][624]']").oninvalid(function(event, errorMessage) {
+//  alert( "input[name*='tx_powermail_pi1[field][624]']: " + errorMessage );
+//  // get handle to the API
+//  //var api = $(this).data("validator");
+//});
 
 // Must run before the validator method!
 properPowermailEvalFields( );  
