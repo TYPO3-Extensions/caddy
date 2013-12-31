@@ -160,7 +160,7 @@ var movePowermailFormToCaddy = function() {
   // Move the powermail form TYPO3 content element to the powermail accordian div
   $('#c###UID_POWERMAIL_FORM### > div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
   // Remove the default powermail-can't-move-error
-  $('#c###UID###-powermail-alert').remove();
+  $('#c###UID###-powermail-prompt').css( "display", "none" );
   // Remove the powermail default h3-header
   $('#c###UID###-accordion div.caddy-powermail form h3').remove();
   // Add IDs to each fieldset
@@ -171,7 +171,7 @@ var movePowermailFormToCaddy = function() {
 };  // Move the powermail form into the caddy to the tab powermail
 
   // move powermail fields to HTML 5, which must evaluated
-var movePowermailEvalFields = function() {
+var properPowermailEvalFields = function() {
   alert ( $.trim( $("input[name*='tx_powermail_pi1[field][624]']").prev( ).text( ) ) );
   alert( $.trim( $("input[name*='tx_powermail_pi1[field][628]']").next( ).text( ) ) );
   alert( $.trim( $("input[name*='tx_powermail_pi1[field][629]']").next( ).text( ) ) );
@@ -220,17 +220,17 @@ var initPowermailTabs = function() {
 $.tools.validator.localize("de", {
   // Isn't localised
   //'*'		: 'Der Wert wird nicht akzeptiert',
-  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse.',
-  ':number' 	: 'Bitte nur Zahlen.',
-  ':url' 	: 'Bitte eine korrekte URL.',
+  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse eingeben.',
+  ':number' 	: 'Bitte nur Zahlen eingeben.',
+  ':url' 	: 'Bitte eine korrekte URL eingeben.',
   '[max]'	: 'Maximal $1 ist erlaubt.',
   '[min]'	: 'Mindestens $1 ist n&ouml;tig.',
   '[required]'	: 'Dieses Feld bitte ausfüllen.'
 }); // $.tools.validator.localize ...
 /* Validator end */
 
-  // Must run before validator!
-movePowermailEvalFields( );  
+  // Must run before the validator method!
+properPowermailEvalFields( );  
 
 $("#c###UID###-accordion-powermail form").validator(
 {
