@@ -265,10 +265,11 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 var initValidator = function( validate ) {
   validatePowermailForm = $( "#c###UID###-accordion-powermail form" ).validator(
   {
-    effect           : 'wall',
-    container        : '#c###UID###-powermail-prompt',
+    effect          : 'wall',
+    container       : '#c###UID###-powermail-prompt',
+    lang            : 'de',
     // do not validate inputs when they are edited
-    errorInputEvent  : null
+    errorInputEvent : null
   // custom form submission logic
   }).submit( function( e )  
   {
