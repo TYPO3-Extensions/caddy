@@ -282,7 +282,6 @@ plugin.tx_caddy_pi1 {
       width:10em;
     }
     div.tx-powermail .powermail_fieldwrap {
-      /* height:2em; */
       padding: 0 0 1em 0;
     }
     div.tx-powermail input[type=text] {

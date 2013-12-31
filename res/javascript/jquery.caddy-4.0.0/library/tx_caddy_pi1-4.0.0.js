@@ -30,6 +30,7 @@ var fnAccordion = function() {
         // If index is undefined, accordion tab is the initial tab
         if( indexAccordionSrce == undefined )
         {
+          alert( "indexAccordionSrce == undefined" );
           // RETURN : follow the users workflow
           return true;
         }
@@ -41,12 +42,14 @@ var fnAccordion = function() {
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
         if ( indexAccordionDest <= 2 || indexAccordionDest == 3 )
         {
+          alert( "indexAccordionDest <= 2 || indexAccordionDest == 3" );
           return true;
         }
         // Are all values proper of the powermail form?
         var success = $("#c###UID###-accordion-powermail form").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
         if( success )
         {
+          alert( "success" );
           // RETURN : all values are proper
           return true;
         }
@@ -216,12 +219,12 @@ var initPowermailTabs = function() {
 $.tools.validator.localize("de", {
   // Isn't localised
   //'*'		: 'Der Wert wird nicht akzeptiert',
-  ':email'  	: 'Gib eine korrekte E-Mail-Adresse ab',
-  ':number' 	: 'Gib eine Nummer an',
-  ':url' 	: 'Gib eine URL an',
-  '[max]'	: 'Maximal $1 ist erlaubt',
-  '[min]'	: 'Mindestens $1 ist n&ouml;tig',
-  '[required]'	: 'Gib einen Wert an'
+  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse.',
+  ':number' 	: 'Bitte nur Zahlen.',
+  ':url' 	: 'Bitte eine korrekte URL.',
+  '[max]'	: 'Maximal $1 ist erlaubt.',
+  '[min]'	: 'Mindestens $1 ist n&ouml;tig.',
+  '[required]'	: 'Dieses Feld bitte ausfüllen.'
 }); // $.tools.validator.localize ...
 /* Validator end */
 
