@@ -82,7 +82,6 @@ var fnInit = function() {
   fnAccordion();
   addPowermailTabsToCaddy();
   movePowermailFormToCaddy();
-  movePowermailEvalFields();  
 };
 
 /* Initiate Accordion */
@@ -236,3 +235,6 @@ $("#c###UID###-accordion-powermail form").validator(
   lang        : 'de'
   //singleError : true // No effect!
 }); // $("#c###UID###-accordion-powermail form").validator ...
+
+  // Must run after validator!
+movePowermailEvalFields( );  
