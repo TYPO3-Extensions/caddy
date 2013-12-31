@@ -227,7 +227,7 @@ $.tools.validator.localize("de", {
   ':url' 	: 'Bitte eine korrekte URL eingeben.',
   '[max]'	: 'Maximal $1 ist erlaubt.',
   '[min]'	: 'Mindestens $1 ist n&ouml;tig.',
-  '[required]'	: 'Dieses Feld bitte ausfüllen.'
+  '[required]'	: 'Bitte ausfüllen.'
 }); // $.tools.validator.localize ...
 /* Validator end */
 
@@ -266,6 +266,8 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
+  // Must run before the validator method!
+  properPowermailEvalFields( );  
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
@@ -293,6 +295,4 @@ var initValidator = function( selector, validate ) {
   return success;
 };  // $(function() ...
 
-// Must run before the validator method!
-properPowermailEvalFields( );  
 initValidator( "#c###UID###-accordion-powermail form" );
