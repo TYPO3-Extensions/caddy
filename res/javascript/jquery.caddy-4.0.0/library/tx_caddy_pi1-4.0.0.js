@@ -170,7 +170,7 @@ var movePowermailFormToCaddy = function() {
 var movePowermailEvalFields = function() {
   alert( $("#powermail_field_contactdataemail").prev( ).text( ) );
   alert( $("#powermail_field_orderterms_1").prev( ).text( ) );
-  alert( $("#powermail_field_orderrevocation_1").prev( ).text( ) );
+  alert( $("#powermail_field_orderrevocation_1").next( ).text( ) );
   // Probleme mit Internet Explorer from d2w6 to 8.
   //$("#powermail_field_contactdataemail").attr("type", "email");
   marker = $("<span />").insertBefore( "#powermail_field_contactdataemail" );
