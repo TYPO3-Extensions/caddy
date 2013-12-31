@@ -30,7 +30,7 @@ var fnAccordion = function() {
         // If index is undefined, accordion tab is the initial tab
         if( indexAccordionSrce == undefined )
         {
-          alert( "return true: indexAccordionSrce == undefined" );
+          //alert( "return true: indexAccordionSrce == undefined" );
           // RETURN : follow the users workflow
           return true;
         }
@@ -42,14 +42,14 @@ var fnAccordion = function() {
         // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
         if ( indexAccordionDest <= 2 || indexAccordionDest == 3 )
         {
-          alert( "return true: indexAccordionDest <= 2 || indexAccordionDest == 3" );
+          //alert( "return true: indexAccordionDest <= 2 || indexAccordionDest == 3" );
           return true;
         }
         // Are all values proper of the powermail form?
         var success = $("#c###UID###-accordion-powermail form").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
         if( success )
         {
-          alert( "return true: success" );
+          //alert( "return true: success" );
           // RETURN : all values are proper
           return true;
         }
@@ -58,7 +58,7 @@ var fnAccordion = function() {
         // RETURN : current tab is the tab of the powermail form
         if ( indexAccordionDest == 2 )
         {
-          alert( "return false: indexAccordionDest == 2" );
+          //alert( "return false: indexAccordionDest == 2" );
           return false;
         }
         // Select the second tab - the powermail form
@@ -70,7 +70,7 @@ var fnAccordion = function() {
         $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
         // Prompt a message in a lightbox (overflow)
         $("#promptPowermailInvalid").click(); // ???, 131231, dwildt
-        alert( "return false: indexAccordionDest == 2" );
+        //alert( "return false: end );
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
@@ -173,6 +173,7 @@ var movePowermailFormToCaddy = function() {
 
   // move powermail fields to HTML 5, which must evaluated
 var movePowermailEvalFields = function() {
+  alert ( $.trim( $("input[name=tx_powermail_pi1[field][624]]").prev( ).text( ) ) );
   alert ( $.trim( $("#powermail_field_contactdataemail").prev( ).text( ) ) );
   alert( $.trim( $("#powermail_field_orderterms_1").next( ).text( ) ) );
   alert( $.trim( $("#powermail_field_orderrevocation_1").next( ).text( ) ) );
