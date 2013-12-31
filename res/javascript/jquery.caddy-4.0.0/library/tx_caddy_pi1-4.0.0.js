@@ -83,7 +83,6 @@ var fnInit = function() {
   fnAccordion();
   addPowermailTabsToCaddy();
   movePowermailFormToCaddy();
-  properPowermailEvalFields( );  
 };
 
 /* Initiate Accordion */
@@ -265,6 +264,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
+  properPowermailEvalFields( );  
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
