@@ -25,7 +25,7 @@ var fnAccordion = function() {
       effect        : 'slide',
       initialIndex  : 0,
       onBeforeClick : function( event, indexAccordionDest ) {
-        alert( "fnAccordion: onBeforeClick" );
+        //alert( "fnAccordion: onBeforeClick" );
         // Get index of the current accordion tab
         var indexAccordionSrce = this.getIndex();
         // If index is undefined, accordion tab is the initial tab
@@ -208,9 +208,11 @@ var initPowermailTabs = function() {
       // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
       if( success )
       {
+        //alert( "initPowermailTabs > onBeforeClick > success" );
         return true;
       }
       // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
+      //alert( "initPowermailTabs > onBeforeClick > false" );
       return false;
     }
   });
@@ -229,9 +231,6 @@ $.tools.validator.localize("de", {
   '[required]'	: 'Dieses Feld bitte ausfüllen.'
 }); // $.tools.validator.localize ...
 /* Validator end */
-
-  // Must run before the validator method!
-properPowermailEvalFields( );  
 
 // adds an effect called "wall" to the validator
 $.tools.validator.addEffect( "wall", function( errors, event ) 
@@ -252,22 +251,28 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 {
 });
 
-$("#c###UID###-accordion-powermail form").validator(
-{
-   effect           : 'wall',
-   container        : '#c###UID###-powermail-prompt',
-   // do not validate inputs when they are edited
-   errorInputEvent  : null
-// custom form submission logic
-}).submit(function(e)  
-{
-  // when data is valid
-  if (!e.isDefaultPrevented()) 
-  {
-    // tell user that everything is OK
-    $("#c###UID###-powermail-prompt").html("<h2>All good</h2>");
-    // prevent the form data being submitted to the server
-    e.preventDefault();
-  }
-}); // $("#c###UID###-accordion-powermail form").validator ...
 
+var initValidator = function() {
+  $("#c###UID###-accordion-powermail form").validator(
+  {
+    effect           : 'wall',
+    container        : '#c###UID###-powermail-prompt',
+    // do not validate inputs when they are edited
+    errorInputEvent  : null
+  // custom form submission logic
+  }).submit(function(e)  
+  {
+    // when data is valid
+    if (!e.isDefaultPrevented()) 
+    {
+      // tell user that everything is OK
+      $("#c###UID###-powermail-prompt").html("<h2>All good</h2>");
+      // prevent the form data being submitted to the server
+      e.preventDefault();
+    }
+  }); // $("#c###UID###-accordion-powermail form").validator ...
+};  // $(function() ...
+
+// Must run before the validator method!
+properPowermailEvalFields( );  
+initValidator( );
