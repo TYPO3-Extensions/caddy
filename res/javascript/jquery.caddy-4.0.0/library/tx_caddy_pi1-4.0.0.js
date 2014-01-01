@@ -156,6 +156,7 @@ var properPowermailEvalFields = function() {
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
   $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
+  // Checkbox for terms and conditions
   selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
   selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
@@ -173,8 +174,9 @@ var properPowermailEvalFields = function() {
       $( selectorHidden ).remove( );
       break;
   } 
-  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
-  selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
+  // Checkbox for revocation 
+  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]";
+  selectorHidden    = "input[name*='tx_powermail_pi1[field][629]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
   {
     case( false ):
