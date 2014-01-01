@@ -80,7 +80,8 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   e.preventDefault( ); // Don't execute the click
   
   alert( currAccordionIndex );
-  return;
+  fnAccordion.click( currAccordionIndex + 1 );
+  return false;
 
   // RETURN : current id isn't part of the DOM
   //if( ! $( "#c###UID###" ).length )
