@@ -85,7 +85,26 @@ plugin.tx_caddy_pi1 {
             marker  =
             marker {
                 // Uid of the powermail field e-mail
-              pmuidfieldemail = {$plugin.caddy.powermail.fields.email}
+              pmuidfieldemail = COA
+              pmuidfieldemail = {
+                  // uid, if constant is set
+                10 = TEXT
+                10 {
+                  if {
+                    isTrue = {$plugin.caddy.powermail.fields.email}
+                  }
+                  value = {$plugin.caddy.powermail.fields.email}
+                }
+                  // constant label, if constant isn't set
+                20 = TEXT
+                20 {
+                  if {
+                    isFalse = {$plugin.caddy.powermail.fields.email}
+                  }
+                  value = 'plugin.caddy.powermail.fields.email is empty!'
+                }
+              }
+
                 // Uid of the powermail field revocation
               pmuidfieldrevocation = {$plugin.caddy.powermail.fields.revocation}
                 // Uid of the powermail field terms and conditions

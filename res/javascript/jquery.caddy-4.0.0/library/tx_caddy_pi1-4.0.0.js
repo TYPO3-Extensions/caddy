@@ -12,6 +12,7 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
+var pmuidfieldemail     = ###PMUIDFIELDEMAIL###
 var t3caddyAlert        = ###T3CADDYALERT###;
 var t3caddyConsoleDebug = ###T3CADDYCONSOLEDEBUG###;
 
@@ -153,7 +154,7 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5
 var movePowermailFieldsToHtml5 = function() {
   // Move e-mail from type=text to type=email
-  selectorEmailText = "input[name='tx_powermail_pi1[field][624]'][type=text]";
+  selectorEmailText = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
   switch( $( selectorEmailText ).length )
   {
     case( 0 ):
@@ -332,8 +333,8 @@ initValidator( "#c###UID###-accordion-powermail form" );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
-//$("input[name*='tx_powermail_pi1[field][624]']").oninvalid(function(event, errorMessage) {
-//  alert( "input[name*='tx_powermail_pi1[field][624]']: " + errorMessage );
+//$("input[name*='tx_powermail_pi1[field][" + pmuidfieldemail + "]']").oninvalid(function(event, errorMessage) {
+//  alert( "input[name*='tx_powermail_pi1[field][" + pmuidfieldemail + "]']: " + errorMessage );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
