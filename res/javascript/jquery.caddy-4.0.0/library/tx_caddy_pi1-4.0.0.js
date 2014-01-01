@@ -12,7 +12,8 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var t3caddyAlert = ###T3CADDYALERT###;
+var t3caddyAlert        = ###T3CADDYALERT###;
+var t3caddyConsoleDebug = ###T3CADDYCONSOLEDEBUG###;
 
 
 /* Accordion begin */
@@ -161,7 +162,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
-        console.debug( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
+        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
       }
       break;
     default:
@@ -182,7 +183,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.debug( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for terms and conditions.");
       }
       break;
     default:
@@ -203,7 +204,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.debug( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for revocation.");
       }
       break;
     default:

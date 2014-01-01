@@ -55,6 +55,11 @@ plugin.tx_caddy_pi1 {
               t3caddyalert {
                 value = 1
               }
+                // Enable/Disable JSS alerts
+              t3caddyconsoledebug = TEXT
+              t3caddyconsoledebug {
+                value = 1
+              }
               typenum = TEXT
               typenum {
                 value = {$plugin.caddy.typeNum.caddyCheckOut}
