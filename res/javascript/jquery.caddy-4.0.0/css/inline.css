@@ -40,6 +40,20 @@
   margin:0;
   padding:0;
 } 
+
+dl.powermail_all {
+  padding: 5px 0;
+}
+dl.powermail_all dt {
+  font-weight: bold;
+  float: left;
+  width: 150px;
+  clear: left;
+}
+dl.powermail_all dd {
+  float: left;
+  width: 420px;
+}
 #c###UID###-powermail-prompt {
   padding:1em 2px;
 }
