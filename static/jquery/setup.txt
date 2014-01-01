@@ -47,7 +47,7 @@ plugin.tx_caddy_pi1 {
           css {
               // [STRING] Path to the jquery inline css
             path = EXT:caddy/res/javascript/jquery.caddy-4.0.0/css/inline.css
-              // t3caddyalert, typenum
+              // t3caddyalert, t3caddyconsoledebug, typenum
             marker  =
             marker {
                 // Enable/Disable JSS alerts
@@ -55,7 +55,7 @@ plugin.tx_caddy_pi1 {
               t3caddyalert {
                 value = 1
               }
-                // Enable/Disable JSS alerts
+                // Enable/Disable debug prompts to the firebug console
               t3caddyconsoledebug = TEXT
               t3caddyconsoledebug {
                 value = 1
@@ -75,12 +75,17 @@ plugin.tx_caddy_pi1 {
             footer = 1
               // [Boolean] 0: link to the script file, 1 (default): include the script inline
             inline = 1
-              // t3caddyalert, typenum
+              // t3caddyalert, t3caddyconsoledebug, typenum
             marker =
             marker {
                 // Enable/Disable JSS alerts
               t3caddyalert = TEXT
               t3caddyalert {
+                value = 1
+              }
+                // Enable/Disable debug prompts to the firebug console
+              t3caddyconsoledebug = TEXT
+              t3caddyconsoledebug {
                 value = 1
               }
               typenum = TEXT
