@@ -47,9 +47,15 @@ plugin.tx_caddy_pi1 {
           css {
               // [STRING] Path to the jquery inline css
             path = EXT:caddy/res/javascript/jquery.caddy-4.0.0/css/inline.css
-              // t3caddyalert, t3caddyconsoledebug, typenum
+              // pmuidfieldemail, pmuidfieldrevocation, pmuidfieldterms, t3caddyalert, t3caddyconsoledebug, typenum
             marker  =
             marker {
+                // Uid of the powermail field e-mail
+              pmuidfieldemail = {$plugin.caddy.powermail.fields.email}
+                // Uid of the powermail field revocation
+              pmuidfieldrevocation = {$plugin.caddy.powermail.fields.revocation}
+                // Uid of the powermail field terms and conditions
+              pmuidfieldterms = {$plugin.caddy.powermail.fields.terms}
                 // Enable/Disable JSS alerts
               t3caddyalert = TEXT
               t3caddyalert {
@@ -75,9 +81,15 @@ plugin.tx_caddy_pi1 {
             footer = 1
               // [Boolean] 0: link to the script file, 1 (default): include the script inline
             inline = 1
-              // t3caddyalert, t3caddyconsoledebug, typenum
-            marker =
+              // pmuidfieldemail, pmuidfieldrevocation, pmuidfieldterms, t3caddyalert, t3caddyconsoledebug, typenum
+            marker  =
             marker {
+                // Uid of the powermail field e-mail
+              pmuidfieldemail = {$plugin.caddy.powermail.fields.email}
+                // Uid of the powermail field revocation
+              pmuidfieldrevocation = {$plugin.caddy.powermail.fields.revocation}
+                // Uid of the powermail field terms and conditions
+              pmuidfieldterms = {$plugin.caddy.powermail.fields.terms}
                 // Enable/Disable JSS alerts
               t3caddyalert = TEXT
               t3caddyalert {
