@@ -91,8 +91,8 @@ $(document).on("click", ".loadCaddyByAjax", function(e) {
   var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
 alert( url );
 alert( $( this ).attr( "name" ) );
-alert( $( this ).closest( "form" ).attr( "href") );
-  url                       = $( this ).t3caddy( 'url_autoQm', $( this ).closest( "form" ).attr( "href"), "type=###TYPENUM###" );
+alert( $( this ).closest( "form" ).attr( "action") );
+  url                       = $( this ).t3caddy( 'url_autoQm', $( this ).closest( "form" ).attr( "action"), "type=###TYPENUM###" );
 alert( url );
 return;  
   //var html_element              = "#c###UID###";
