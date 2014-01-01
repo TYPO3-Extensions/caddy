@@ -161,7 +161,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
-        console.log( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
+        console.debug( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
       }
       break;
     default:
@@ -182,7 +182,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.log( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+        console.debug( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
       }
       break;
     default:
@@ -203,7 +203,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyAlert )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.log( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+        console.debug( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
       }
       break;
     default:
