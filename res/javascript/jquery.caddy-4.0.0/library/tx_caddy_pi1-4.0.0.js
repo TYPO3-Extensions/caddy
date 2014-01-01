@@ -94,7 +94,7 @@ alert( $( this ).attr( "name" ) );
 alert( $( this ).closest( "form" ).attr( "action") );
   url                       = $( this ).t3caddy( 'url_autoQm', $( this ).closest( "form" ).attr( "action"), "type=###TYPENUM###" );
 alert( url );
-return;  
+//return;  
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
