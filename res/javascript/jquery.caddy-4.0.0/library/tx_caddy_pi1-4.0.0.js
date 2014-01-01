@@ -16,13 +16,14 @@ var pmuidfieldemail     = ###PMUIDFIELDEMAIL###;
 var t3caddyAlert        = ###T3CADDYALERT###;
 var t3caddyConsoleDebug = ###T3CADDYCONSOLEDEBUG###;
 var currAccordionIndex  = undefined;
+var accordionApi        = undefined;
 
 
 /* Accordion begin */
 var fnAccordion = function() {
   $(function() {
     // The accordian panes of the caddy
-    var accordionApi = $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
+    accordionApi = $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
     {
       tabs          : 'h2',
       effect        : 'slide',
