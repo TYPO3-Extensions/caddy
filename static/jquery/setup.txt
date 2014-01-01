@@ -71,9 +71,45 @@ plugin.tx_caddy_pi1 {
                 }
               }
                 // Uid of the powermail field revocation
-              pmuidfieldrevocation = {$plugin.caddy.powermail.fields.revocation}
+              pmuidfieldrevocation = COA
+              pmuidfieldrevocation {
+                  // uid, if constant is set
+                10 = TEXT
+                10 {
+                  if {
+                    isTrue = {$plugin.caddy.powermail.fields.revocation}
+                  }
+                  value = {$plugin.caddy.powermail.fields.revocation}
+                }
+                  // constant label, if constant isn't set
+                20 = TEXT
+                20 {
+                  if {
+                    isFalse = {$plugin.caddy.powermail.fields.revocation}
+                  }
+                  value = "plugin.caddy.powermail.fields.revocation is empty!"
+                }
+              }
                 // Uid of the powermail field terms and conditions
-              pmuidfieldterms = {$plugin.caddy.powermail.fields.terms}
+              pmuidfieldterms = COA
+              pmuidfieldterms {
+                  // uid, if constant is set
+                10 = TEXT
+                10 {
+                  if {
+                    isTrue = {$plugin.caddy.powermail.fields.terms}
+                  }
+                  value = {$plugin.caddy.powermail.fields.terms}
+                }
+                  // constant label, if constant isn't set
+                20 = TEXT
+                20 {
+                  if {
+                    isFalse = {$plugin.caddy.powermail.fields.terms}
+                  }
+                  value = "plugin.caddy.powermail.fields.terms is empty!"
+                }
+              }
                 // Enable/Disable JSS alerts
               t3caddyalert = TEXT
               t3caddyalert {
@@ -123,9 +159,45 @@ plugin.tx_caddy_pi1 {
                 }
               }
                 // Uid of the powermail field revocation
-              pmuidfieldrevocation = {$plugin.caddy.powermail.fields.revocation}
+              pmuidfieldrevocation = COA
+              pmuidfieldrevocation {
+                  // uid, if constant is set
+                10 = TEXT
+                10 {
+                  if {
+                    isTrue = {$plugin.caddy.powermail.fields.revocation}
+                  }
+                  value = {$plugin.caddy.powermail.fields.revocation}
+                }
+                  // constant label, if constant isn't set
+                20 = TEXT
+                20 {
+                  if {
+                    isFalse = {$plugin.caddy.powermail.fields.revocation}
+                  }
+                  value = "plugin.caddy.powermail.fields.revocation is empty!"
+                }
+              }
                 // Uid of the powermail field terms and conditions
-              pmuidfieldterms = {$plugin.caddy.powermail.fields.terms}
+              pmuidfieldterms = COA
+              pmuidfieldterms {
+                  // uid, if constant is set
+                10 = TEXT
+                10 {
+                  if {
+                    isTrue = {$plugin.caddy.powermail.fields.terms}
+                  }
+                  value = {$plugin.caddy.powermail.fields.terms}
+                }
+                  // constant label, if constant isn't set
+                20 = TEXT
+                20 {
+                  if {
+                    isFalse = {$plugin.caddy.powermail.fields.terms}
+                  }
+                  value = "plugin.caddy.powermail.fields.terms is empty!"
+                }
+              }
                 // Enable/Disable JSS alerts
               t3caddyalert = TEXT
               t3caddyalert {
