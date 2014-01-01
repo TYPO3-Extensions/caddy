@@ -103,8 +103,10 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   setTimeout( function( ) {
     fnInit( ); /* Initiate Accordion */
   }, 2000 );
-  alert( currAccordionIndex );
-  accordionApi.click( currAccordionIndex );
+  temp = currAccordionIndex;
+  alert( temp );
+  fnInit( );
+  accordionApi.click( temp );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
