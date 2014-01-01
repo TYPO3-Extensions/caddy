@@ -154,7 +154,8 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5
 var movePowermailFieldsToHtml5 = function() {
   // Move e-mail from type=text to type=email
-  selectorEmailText = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
+  selectorEmailText   = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
+  selectorEmailEmail  = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=email]";
   switch( $( selectorEmailText ).length )
   {
     case( 0 ):
@@ -162,8 +163,11 @@ var movePowermailFieldsToHtml5 = function() {
     case( undefined ):
       if( t3caddyConsoleDebug )
       {
-        //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
-        console.debug( "The selector " + selectorEmailText + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
+        if( selectorEmailEmail != true )
+        {
+          //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
+          console.debug( "The selector " + selectorEmailText + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
+        }
       }
       break;
     default:
