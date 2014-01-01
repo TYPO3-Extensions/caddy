@@ -71,8 +71,8 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on("click", ".loadCaddybyAjax", function(e) {
-  // User has clicked a tag with the class loadCaddybyAjax
+$(document).on("click", ".loadCaddyByAjaxXX", function(e) {
+  // User has clicked a tag with the class loadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
 
   // RETURN : current id isn't part of the DOM
@@ -349,9 +349,31 @@ $( "form#caddy" ).submit( function( e )
     {
       alert( 1 );
       alert( this.css( ) );
-      // tell user that everything is OK
-      //$( "#c###UID###-powermail-prompt" ).html( "<h3>All good</h3>" );
-      // prevent the form data being submitted to the server
-      //e.preventDefault( );
+      // RETURN : current id isn't part of the DOM
+      //if( ! $( "#c###UID###" ).length )
+      if( ! $( "#content" ).length )
+      {
+        if( t3caddyAlert )
+        {
+          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
+          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
+        }
+        return;
+      } // RETURN : current id isn't part of the DOM
+
+      // Update the content with the id #c###UID###-###VIEW###view
+      alert( $( this ).attr( "action" ) );
+      //e.preventDefault( ); // Don't execute the click
+      return;
+      var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
+      //var html_element              = "#c###UID###";
+      var html_element              = "#content";
+      var html_element_wi_selector  = html_element + " > *";
+      $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
+      // Update the content with the id #c###UID###-###VIEW###view
+      // Reload functions after content is updated (after 2000 miliseconds)
+      setTimeout(function() {
+        fnInit(); /* Initiate Accordion */
+      }, 2000 );
     }
   });
