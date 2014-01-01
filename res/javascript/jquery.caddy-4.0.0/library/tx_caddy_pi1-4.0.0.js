@@ -71,7 +71,7 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on("click", ".loadCaddyByAjax", function(e) {
+$(document).on( "change", ".loadCaddyByAjax", function( e ) {
   // User has clicked a tag with the class loadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
 
@@ -88,21 +88,16 @@ $(document).on("click", ".loadCaddyByAjax", function(e) {
   } // RETURN : current id isn't part of the DOM
 
   // Update the content with the id #c###UID###-###VIEW###view
-  var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
-alert( url );
-alert( $( this ).attr( "name" ) );
-alert( $( this ).closest( "form" ).attr( "action") );
-  url                       = $( this ).t3caddy( 'url_autoQm', $( this ).closest( "form" ).attr( "action"), "type=###TYPENUM###" );
-alert( url );
-//return;  
+  formAction                    = $( this ).closest( "form" ).attr( "action");
+  var url                       = $( this ).t3caddy( 'url_autoQm', formAction, "type=###TYPENUM###" );
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
-  setTimeout(function() {
-    fnInit(); /* Initiate Accordion */
+  setTimeout( function( ) {
+    fnInit( ); /* Initiate Accordion */
   }, 2000 );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */

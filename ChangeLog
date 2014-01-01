@@ -33,6 +33,13 @@ TODO
               * css
                 * setup.txt
               * setup.txt
+  Bugfix
+  * #i0041: ###TARGET### wasn't handled
+            Effected files:
+            * static
+              * 4.0.0
+                * setup.txt
+              * setup.txt
 
 4.0.2
   2013-11-29
