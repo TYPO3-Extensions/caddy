@@ -71,8 +71,8 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on("click", ".c###UID###-step", function(e) {
-  // User has clicked a tag with the cUID-step class
+$(document).on("click", ".loadCaddybyAjax", function(e) {
+  // User has clicked a tag with the class loadCaddybyAjax
   e.preventDefault( ); // Don't execute the click
 
   // RETURN : current id isn't part of the DOM
@@ -342,3 +342,16 @@ initValidator( "#c###UID###-accordion-powermail form" );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
+
+$( "form#caddy" ).submit( function( e )  
+  {
+    if( ! e.isDefaultPrevented( ) ) 
+    {
+      alert( 1 );
+      alert( this.css( ) );
+      // tell user that everything is OK
+      //$( "#c###UID###-powermail-prompt" ).html( "<h3>All good</h3>" );
+      // prevent the form data being submitted to the server
+      //e.preventDefault( );
+    }
+  });
