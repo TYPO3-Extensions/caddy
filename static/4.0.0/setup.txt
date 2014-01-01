@@ -343,7 +343,7 @@ plugin.tx_caddy_pi1 {
         optionsspecialssumrate                           < .optionspaymentsumrate
         optionsspecialssumrate.10.userFunc.number.field  = optionsspecialssumrate
       }
-        // payment, shipping, specials, items, sum
+        // payment, shipping, specials, items, sum, target
       values =
       values {
         optionspaymentsumgross = COA
