@@ -23,7 +23,7 @@ var accordionApi        = undefined;
 var fnAccordion = function() {
   $(function() {
     // The accordian panes of the caddy
-    accordionApi = $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
+    $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
     {
       tabs          : 'h2',
       effect        : 'slide',
@@ -60,6 +60,7 @@ var fnAccordion = function() {
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
+    accordionApi = $("#c###UID###-accordion").data( "tabs" );
   });
   //  alert( 1 );
 }; /* Accordion end */
