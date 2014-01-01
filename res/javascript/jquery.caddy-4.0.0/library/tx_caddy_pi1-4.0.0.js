@@ -15,6 +15,7 @@
 var pmuidfieldemail     = ###PMUIDFIELDEMAIL###;
 var t3caddyAlert        = ###T3CADDYALERT###;
 var t3caddyConsoleDebug = ###T3CADDYCONSOLEDEBUG###;
+var currAccordionIndex  = undefined;
 
 
 /* Accordion begin */
@@ -29,7 +30,8 @@ var fnAccordion = function() {
       onBeforeClick : function( event, indexAccordionDest ) {
         //alert( "fnAccordion: onBeforeClick" );
         // Get index of the current accordion tab
-        var indexAccordionSrce = this.getIndex();
+        var indexAccordionSrce  = this.getIndex();
+        currAccordionIndex      = indexAccordionSrce;
 
         // RETURN if current accordion isn't the powermail pane
         switch( indexAccordionSrce )
@@ -41,6 +43,7 @@ var fnAccordion = function() {
             // No evaluation is needed
             // RETURN and follow the users workflow
             //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
+            currAccordionIndex = indexAccordionDest;
             return true;
             break;
         }
@@ -49,6 +52,7 @@ var fnAccordion = function() {
         {
           //alert( "return true: success" );
           // RETURN : all values are proper
+          currAccordionIndex = indexAccordionDest;
           return true;
         }
         alert( "Bitte füllen Sie erst das Formular vollständig aus." );
@@ -71,9 +75,12 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on( "change", ".loadCaddyByAjax", function( e ) {
-  // User has clicked a tag with the class loadCaddyByAjax
+$(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+  // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
+  
+  alert( currAccordionIndex );
+  return;
 
   // RETURN : current id isn't part of the DOM
   //if( ! $( "#c###UID###" ).length )
@@ -298,7 +305,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   $( "#c###UID###-powermail-prompt" ).html( "" );
 });
 
-
+// initValidator
 var initValidator = function( selector, validate ) {
   movePowermailFieldsToHtml5( );  
   success = false;
@@ -329,7 +336,7 @@ var initValidator = function( selector, validate ) {
     //alert( success );
   }
   return success;
-};  // $(function() ...
+};  // initValidator
 
 initValidator( "#c###UID###-accordion-powermail form" );
 
@@ -343,45 +350,3 @@ initValidator( "#c###UID###-accordion-powermail form" );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
-
-$( document ).ready( function ( ) {
-//$( "form#caddy" ).submit( function( e )  
-$( "#caddy" ).submit( function( e )  
-{
-  alert( $( this ).attr( "id" ) );
-  alert( e.isDefaultPrevented( ) );
-  e.preventDefault( ); // Don't execute the click
-  return false;
-  if( ! e.isDefaultPrevented( ) ) 
-  {
-    alert( 2 );
-    alert( $( this ).css( ) );
-    // RETURN : current id isn't part of the DOM
-    //if( ! $( "#c###UID###" ).length )
-    if( ! $( "#content" ).length )
-    {
-      if( t3caddyAlert )
-      {
-        //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
-        alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
-      }
-      return;
-    } // RETURN : current id isn't part of the DOM
-
-    // Update the content with the id #c###UID###-###VIEW###view
-    alert( $( this ).attr( "action" ) );
-    //e.preventDefault( ); // Don't execute the click
-    return;
-    var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
-    //var html_element              = "#c###UID###";
-    var html_element              = "#content";
-    var html_element_wi_selector  = html_element + " > *";
-    $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
-    // Update the content with the id #c###UID###-###VIEW###view
-    // Reload functions after content is updated (after 2000 miliseconds)
-    setTimeout(function() {
-      fnInit(); /* Initiate Accordion */
-    }, 2000 );
-  }
-});
-});

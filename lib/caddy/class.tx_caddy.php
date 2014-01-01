@@ -2489,7 +2489,7 @@ class tx_caddy extends tslib_pibase
 
     $hashMarker = strtoupper( $optionType );
 
-    $content  = '<input type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" '
+    $content  = '<input class="onChangeloadCaddyByAjax" type="checkbox" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . '][]" '
               . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '" '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
@@ -2606,7 +2606,7 @@ class tx_caddy extends tslib_pibase
 
     $hashMarker = strtoupper( $optionType );
 
-    $content  = '<input type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" '
+    $content  = '<input class="onChangeloadCaddyByAjax" type="radio" onchange="this.form.submit()" name="tx_caddy_pi1[' . $optionType . ']" '
               . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
