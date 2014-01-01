@@ -159,6 +159,7 @@ var properPowermailEvalFields = function() {
   // Checkbox for terms and conditions
   selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
   selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
+  alert( selectorCheckbox + ": " + $( selectorCheckbox ).length );
   switch( $( selectorCheckbox ).length )
   {
     case( false ):
