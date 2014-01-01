@@ -88,6 +88,7 @@ $(document).on("click", ".loadCaddyByAjax", function(e) {
   } // RETURN : current id isn't part of the DOM
 
   // Update the content with the id #c###UID###-###VIEW###view
+alert( $( this ).atrr( "name" ) );
   var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
 alert( url );
 alert( $( this ).attr( "name" ) );
@@ -346,13 +347,18 @@ initValidator( "#c###UID###-accordion-powermail form" );
 //  //var api = $(this).data("validator");
 //});
 
-$( "form#caddy" ).submit( function( e )  
+$( document ).ready( function ( ) {
+//$( "form#caddy" ).submit( function( e )  
+$( "#caddy" ).submit( function( e )  
 {
-  alert( 1 );
+  alert( $( this ).attr( "id" ) );
+  alert( e.isDefaultPrevented( ) );
+  e.preventDefault( ); // Don't execute the click
+  return false;
   if( ! e.isDefaultPrevented( ) ) 
   {
     alert( 2 );
-    alert( this.css( ) );
+    alert( $( this ).css( ) );
     // RETURN : current id isn't part of the DOM
     //if( ! $( "#c###UID###" ).length )
     if( ! $( "#content" ).length )
@@ -380,4 +386,5 @@ $( "form#caddy" ).submit( function( e )
       fnInit(); /* Initiate Accordion */
     }, 2000 );
   }
+});
 });
