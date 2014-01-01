@@ -156,12 +156,36 @@ var properPowermailEvalFields = function() {
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
   $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
-  // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
-  $( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]" ).attr( "required", "required" );
-  $( "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]" ).attr( "required", "required" );
-  // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
-  $( "input[name*='tx_powermail_pi1[field][628]'][type=hidden]" ).remove( );
-  $( "input[name*='tx_powermail_pi1[field][629]'][type=hidden]" ).remove( );
+  selector = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
+  switch( $( selector ).length )
+  {
+    case( false ):
+      if( t3caddyAlert )
+      {
+        alert( "WARNING: The selector " + selector + " isn't part of the DOM!");
+      }
+      break;
+    default:
+      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
+      $( selector ).attr( "required", "required" );
+      $( selector ).remove( );
+      break;
+  } 
+  selector = "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]";
+  switch( $( selector ).length )
+  {
+    case( false ):
+      if( t3caddyAlert )
+      {
+        alert( "WARNING: The selector " + selector + " isn't part of the DOM!");
+      }
+      break;
+    default:
+      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
+      $( selector ).attr( "required", "required" );
+      $( selector ).remove( );
+      break;
+  } 
 }; // Add the powermail tabs to the caddy tab powermail
 
 /* Powermail tabs begin */
