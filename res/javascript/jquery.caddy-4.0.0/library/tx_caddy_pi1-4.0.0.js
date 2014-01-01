@@ -223,12 +223,12 @@ var initPowermailTabs = function() {
 $.tools.validator.localize("de", {
   // Isn't localised
   //'*'		: 'Der Wert wird nicht akzeptiert',
-  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse eingeben.',
-  ':number' 	: 'Bitte nur Zahlen eingeben.',
-  ':url' 	: 'Bitte eine korrekte URL eingeben.',
-  '[max]'	: 'Maximal $1 ist erlaubt.',
-  '[min]'	: 'Mindestens $1 ist n&ouml;tig.',
-  '[required]'	: 'Bitte ausfüllen.'
+  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse eingeben',
+  ':number' 	: 'Bitte nur Zahlen eingeben',
+  ':url' 	: 'Bitte eine korrekte URL eingeben',
+  '[max]'	: 'Maximal $1 ist erlaubt',
+  '[min]'	: 'Mindestens $1 ist n&ouml;tig',
+  '[required]'	: 'Bitte ausfüllen'
 }); // $.tools.validator.localize ...
 /* Validator end */
 
