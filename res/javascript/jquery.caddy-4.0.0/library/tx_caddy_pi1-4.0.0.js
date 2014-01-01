@@ -65,10 +65,10 @@ var fnAccordion = function() {
   //  alert( 1 );
 }; /* Accordion end */
 
-var fnInit = function() {
-  fnAccordion();
-  addPowermailTabsToCaddy();
-  movePowermailFormToCaddy();
+var fnInit = function( ) {
+  fnAccordion( );
+  addPowermailTabsToCaddy( );
+  movePowermailFormToCaddy( );
 };
 
 /* Initiate Accordion */
@@ -77,7 +77,7 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+var fnAjax = function( e ) {
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
@@ -107,7 +107,20 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
 //    alert( accordionIndex );
 //    accordionApi.click( accordionIndex );
 //  }, 2000 );
-}) // User has clicked a tag with the cUID-step class
+} // User has clicked a tag with the cUID-step class
+/* AJAX end */
+
+$( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+  fnAjax( e );
+}); // User has clicked a tag with the cUID-step class
+$( "form.powermail_form" )..submit( function( e )  
+{
+  if( !e.isDefaultPrevented( ) ) 
+  {
+    e.preventDefault( ); // Don't execute the click
+    fnAjax( e );
+  }
+});
 /* AJAX end */
 
 /* Overlay begin */
