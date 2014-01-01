@@ -247,10 +247,10 @@ $.tools.validator.addEffect( "wall", function( errors, event )
     {
       case( "tx_powermail_pi1[field][628][0]"):
       case( "tx_powermail_pi1[field][629][0]"):
-        strAppend = "<p><strong>" + $( selector ).next( ).text( ) + ":</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).next( ).text( ) + "</strong></p>"
         break;
       default:
-        strAppend = "<p><strong>" + $( selector ).prev( ).text( ) + ":</strong> " + error.messages[0] + "</p>";
+        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).prev( ).text( ) + "</strong></p>";
         break;
     }
     wall.append( strAppend );
