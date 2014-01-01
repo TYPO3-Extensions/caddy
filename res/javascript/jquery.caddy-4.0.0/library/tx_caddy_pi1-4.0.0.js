@@ -22,7 +22,7 @@ var currAccordionIndex  = undefined;
 var fnAccordion = function() {
   $(function() {
     // The accordian panes of the caddy
-    $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
+    var accordionApi = $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
     {
       tabs          : 'h2',
       effect        : 'slide',
@@ -80,7 +80,7 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   e.preventDefault( ); // Don't execute the click
   
   alert( currAccordionIndex );
-  fnAccordion.click( currAccordionIndex + 1 );
+  accordionApi.click( currAccordionIndex + 1 );
   return false;
 
   // RETURN : current id isn't part of the DOM
