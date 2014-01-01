@@ -28,50 +28,55 @@ var fnAccordion = function() {
         //alert( "fnAccordion: onBeforeClick" );
         // Get index of the current accordion tab
         var indexAccordionSrce = this.getIndex();
-        // If index is undefined, accordion tab is the initial tab
-        if( indexAccordionSrce == undefined )
+
+        // RETURN if current accordion isn't the powermail pane
+        switch( indexAccordionSrce )
         {
-          //alert( "return true: indexAccordionSrce == undefined" );
-          // RETURN : follow the users workflow
-          return true;
+          case( 2 ): // Powermail form
+            // Follow the workflow
+            break;
+          default:
+            // No evaluation is needed
+            // RETURN and follow the users workflow
+            //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
+            return true;
+            break;
         }
-        // Hide possible error prompts of accordion tab 2, if destination accordion tab isn't the 2. tab - the powermail form
-        if ( indexAccordionDest != 2 )
-        {
-          $( "div.error" ).hide();
-        }
-        // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
-        if ( indexAccordionDest <= 2 || indexAccordionDest == 3 )
-        {
-          //alert( "return true: indexAccordionDest <= 2 || indexAccordionDest == 3" );
-          return true;
-        }
+//        // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
+//        switch( indexAccordionDest )
+//        {
+//          case( 0 ):  // Caddy
+//          case( 1 ):  // Costs for service and shipping
+//          case( 3 ):  // Payment method
+//            return true;
+//            break;
+//          default:
+//            // Follow the workflow
+//            break;
+//        }
         // Are all values proper of the powermail form?
-        var success = $("#c###UID###-accordion-powermail form").validator({ inputEvent: 'blur', lang: 'de' }).data('validator').checkValidity();
-        if( success )
+        if( initValidator( "#c###UID###-accordion-powermail form", "validate" ) )
         {
           //alert( "return true: success" );
           // RETURN : all values are proper
           return true;
         }
-        // Hide possible error prompts
-        $( "div.error" ).hide();
-        // RETURN : current tab is the tab of the powermail form
-        if ( indexAccordionDest == 2 )
-        {
-          //alert( "return false: indexAccordionDest == 2" );
-          return false;
-        }
-        // Select the second tab - the powermail form
-        this.click( 2 );
-        // Get the current tab (fieldset) of the powermail form
-        var indexTabSrce  = $("ul.css-tabs").data("tabs").getIndex();
-        var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
-        // Validate HTML input fields of the current tab (fieldset)
-        $(idTabSrce).validator({ lang : 'de' }).data('validator').checkValidity();
-        // Prompt a message in a lightbox (overflow)
-        $("#promptPowermailInvalid").click(); // ???, 131231, dwildt
-        //alert( "return false: end );
+//        // Hide possible error prompts
+//        $( "div.error" ).hide();
+//        // RETURN : current tab is the tab of the powermail form
+//        if ( indexAccordionDest == 2 )
+//        {
+//          //alert( "return false: indexAccordionDest == 2" );
+//          return false;
+//        }
+//        // Select the third accordion - the powermail pane
+//        this.click( 2 );
+//        // Get the current tab (fieldset) of the powermail form
+//        var indexTabSrce  = $("ul.css-tabs").data("tabs").getIndex();
+//        var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
+//        // Validate HTML input fields of the current tab (fieldset)
+//        initValidator( idTabSrce, "validate" );
+//        //alert( "return false: end );
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
