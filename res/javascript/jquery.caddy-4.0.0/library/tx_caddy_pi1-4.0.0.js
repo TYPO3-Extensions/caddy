@@ -102,12 +102,11 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
+    accordionIndex = currAccordionIndex;
     fnInit( ); /* Initiate Accordion */
+    alert( accordionIndex );
+    accordionApi.click( accordionIndex );
   }, 2000 );
-  temp = currAccordionIndex;
-  alert( temp );
-  fnInit( );
-  accordionApi.click( temp );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
