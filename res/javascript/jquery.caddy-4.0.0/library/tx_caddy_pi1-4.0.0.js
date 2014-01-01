@@ -76,7 +76,7 @@ var fnAccordion = function() {
 //        var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
 //        // Validate HTML input fields of the current tab (fieldset)
 //        initValidator( idTabSrce, "validate" );
-        alert( "Bitte f&auml;llen Sie erst das Formular vollständig aus." );
+        alert( "Bitte füllen Sie erst das Formular vollständig aus." );
         return false;
       } // onBeforeClick ...
     }); // $("#c###UID###-accordion").panes ...
