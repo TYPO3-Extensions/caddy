@@ -88,10 +88,10 @@ $(document).on("click", ".loadCaddyByAjax", function(e) {
   } // RETURN : current id isn't part of the DOM
 
   // Update the content with the id #c###UID###-###VIEW###view
-alert( $( this ).attr( "name" ) );
   var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
 alert( url );
 alert( $( this ).attr( "name" ) );
+alert( $( this ).closest( "form" ).attr( "id") );
 return;  
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
