@@ -52,7 +52,7 @@ plugin.tx_caddy_pi1 {
             marker {
                 // Uid of the powermail field e-mail
               pmuidfieldemail = COA
-              pmuidfieldemail = {
+              pmuidfieldemail {
                   // uid, if constant is set
                 10 = TEXT
                 10 {
@@ -104,7 +104,7 @@ plugin.tx_caddy_pi1 {
             marker {
                 // Uid of the powermail field e-mail
               pmuidfieldemail = COA
-              pmuidfieldemail = {
+              pmuidfieldemail {
                   // uid, if constant is set
                 10 = TEXT
                 10 {
