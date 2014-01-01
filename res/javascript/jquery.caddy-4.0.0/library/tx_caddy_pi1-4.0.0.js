@@ -152,7 +152,7 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5
 var movePowermailFieldsToHtml5 = function() {
   // Move e-mail from type=text to type=email
-  selectorEmailText = "input[name='tx_powermail_pi1[field][624][type=text]']";
+  selectorEmailText = "input[name='tx_powermail_pi1[field][624]'[type=text]]";
   switch( $( selectorEmailText ).length )
   {
     case( 0 ):
@@ -171,8 +171,8 @@ var movePowermailFieldsToHtml5 = function() {
       break;
   } // Move e-mail from type=text to type=email
   // Make checkbox for terms and conditions required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][628][0][type=checkbox]']";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][628][0][type=hidden]']";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][628][0]'[type=checkbox]]";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][628][0]'[type=hidden]]";
   alert( selectorCheckbox + ": " + $( selectorCheckbox ).length );
   switch( $( selectorCheckbox ).length )
   {
@@ -192,8 +192,8 @@ var movePowermailFieldsToHtml5 = function() {
       break;
   } // Make checkbox for terms and conditions required and remove hidden field with the same name
   // Make checkbox for revocation required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][629][0][type=checkbox]']";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][629][0][type=hidden]']";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][629][0]'[type=checkbox]]";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][629][0]'[type=hidden]]";
   switch( $( selectorCheckbox ).length )
   {
     case( 0 ):
