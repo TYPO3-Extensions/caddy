@@ -102,7 +102,7 @@
                         // Send the AJAX request
                         // Replace the content of the html element with the delivered data
                       var url_wi_selector = url + " " + html_element_wi_selector;
-                      $( html_element ).load(url_wi_selector, function( response, status, xhr )
+                      $( html_element ).load( url_wi_selector, function( response, status, xhr )
                       {
                           // ERROR server has an error and has send a message
                         if (status == "error")
@@ -131,6 +131,10 @@
 
                           // Fade out the loading *.gif, initiate buttons again
                         clean_up( html_element );
+    accordionIndex = currAccordionIndex;
+    fnInit( ); /* Initiate Accordion */
+    alert( accordionIndex );
+    accordionApi.click( accordionIndex );
                       });
                         // Send the AJAX request
                     });

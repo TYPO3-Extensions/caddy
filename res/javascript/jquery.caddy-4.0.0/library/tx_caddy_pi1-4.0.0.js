@@ -101,12 +101,12 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
-  setTimeout( function( ) {
-    accordionIndex = currAccordionIndex;
-    fnInit( ); /* Initiate Accordion */
-    alert( accordionIndex );
-    accordionApi.click( accordionIndex );
-  }, 2000 );
+//  setTimeout( function( ) {
+//    accordionIndex = currAccordionIndex;
+//    fnInit( ); /* Initiate Accordion */
+//    alert( accordionIndex );
+//    accordionApi.click( accordionIndex );
+//  }, 2000 );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
