@@ -113,7 +113,7 @@ var fnAjax = function( e ) {
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   fnAjax( e );
 }); // User has clicked a tag with the cUID-step class
-$( "form.powermail_form" )..submit( function( e )  
+$( "form.powermail_form" ).submit( function( e )  
 {
   if( !e.isDefaultPrevented( ) ) 
   {
