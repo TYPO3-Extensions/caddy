@@ -42,18 +42,6 @@ var fnAccordion = function() {
             return true;
             break;
         }
-//        // RETURN : follow the users workflow, if destination accordion tab is 'before' the 2. tab or is the 2. tab - the powermail form
-//        switch( indexAccordionDest )
-//        {
-//          case( 0 ):  // Caddy
-//          case( 1 ):  // Costs for service and shipping
-//          case( 3 ):  // Payment method
-//            return true;
-//            break;
-//          default:
-//            // Follow the workflow
-//            break;
-//        }
         // Are all values proper of the powermail form?
         if( initValidator( "#c###UID###-accordion-powermail form", "validate" ) )
         {
@@ -61,21 +49,6 @@ var fnAccordion = function() {
           // RETURN : all values are proper
           return true;
         }
-//        // Hide possible error prompts
-//        $( "div.error" ).hide();
-//        // RETURN : current tab is the tab of the powermail form
-//        if ( indexAccordionDest == 2 )
-//        {
-//          //alert( "return false: indexAccordionDest == 2" );
-//          return false;
-//        }
-//        // Select the third accordion - the powermail pane
-//        this.click( 2 );
-//        // Get the current tab (fieldset) of the powermail form
-//        var indexTabSrce  = $("ul.css-tabs").data("tabs").getIndex();
-//        var idTabSrce     = '#tabs-' + indexTabSrce + ' :input';
-//        // Validate HTML input fields of the current tab (fieldset)
-//        initValidator( idTabSrce, "validate" );
         alert( "Bitte füllen Sie erst das Formular vollständig aus." );
         return false;
       } // onBeforeClick ...
@@ -285,9 +258,9 @@ var initValidator = function( selector, validate ) {
     if( !e.isDefaultPrevented( ) ) 
     {
       // tell user that everything is OK
-      $( "#c###UID###-powermail-prompt" ).html( "<h3>All good</h3>" );
+      //$( "#c###UID###-powermail-prompt" ).html( "<h3>All good</h3>" );
       // prevent the form data being submitted to the server
-      e.preventDefault( );
+      //e.preventDefault( );
     }
   }); // $("#c###UID###-accordion-powermail form").validator ...
   if( validate == "validate" )
