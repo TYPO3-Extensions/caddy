@@ -71,7 +71,7 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-$(document).on("click", ".loadCaddyByAjaxXX", function(e) {
+$(document).on("click", ".loadCaddyByAjax", function(e) {
   // User has clicked a tag with the class loadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
 
@@ -89,6 +89,9 @@ $(document).on("click", ".loadCaddyByAjaxXX", function(e) {
 
   // Update the content with the id #c###UID###-###VIEW###view
   var url                       = $( this ).t3caddy( 'url_autoQm', $( this ).attr( "href" ), "type=###TYPENUM###" );
+alert( url );
+alert( $( this ).attr( "name" ) );
+return;  
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
