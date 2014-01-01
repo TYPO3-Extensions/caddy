@@ -159,7 +159,7 @@ var movePowermailFieldsToHtml5 = function() {
     case( 0 ):
     case( false ):
     case( undefined ):
-      if( t3caddyAlert )
+      if( t3caddyConsoleDebug )
       {
         //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
         console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
@@ -180,7 +180,7 @@ var movePowermailFieldsToHtml5 = function() {
     case( 0 ):
     case( false ):
     case( undefined ):
-      if( t3caddyAlert )
+      if( t3caddyConsoleDebug )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
         console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for terms and conditions.");
@@ -201,7 +201,7 @@ var movePowermailFieldsToHtml5 = function() {
     case( 0 ):
     case( false ):
     case( undefined ):
-      if( t3caddyAlert )
+      if( t3caddyConsoleDebug )
       {
         //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
         console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for revocation.");
