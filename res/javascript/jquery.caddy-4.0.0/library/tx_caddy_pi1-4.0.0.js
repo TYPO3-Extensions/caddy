@@ -78,11 +78,6 @@ $(function() {
 $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
-  
-  alert( currAccordionIndex );
-  accordionApi.click( currAccordionIndex + 1 );
-  return false;
-
   // RETURN : current id isn't part of the DOM
   //if( ! $( "#c###UID###" ).length )
   if( ! $( "#content" ).length )
@@ -107,6 +102,7 @@ $(document).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   setTimeout( function( ) {
     fnInit( ); /* Initiate Accordion */
   }, 2000 );
+  accordionApi.click( currAccordionIndex );
 }) // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
