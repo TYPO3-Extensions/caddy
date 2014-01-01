@@ -149,44 +149,48 @@ var movePowermailFormToCaddy = function() {
   initPowermailTabs();
 };  // Move the powermail form into the caddy to the tab powermail
 
-  // move powermail fields to HTML 5, which must evaluated
+  // move powermail fields to HTML 5
 var properPowermailEvalFields = function() {
   // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
   //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
   marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
   $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
   marker.remove( );
-  selector = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
-  switch( $( selector ).length )
+  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
+  selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
+  switch( $( selectorCheckbox ).length )
   {
     case( false ):
       if( t3caddyAlert )
       {
-        alert( "WARNING: The selector " + selector + " isn't part of the DOM!");
+        alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
       }
       break;
     default:
       // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
-      $( selector ).attr( "required", "required" );
-      $( selector ).remove( );
+      $( selectorCheckbox ).attr( "required", "required" );
+      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
+      $( selectorHidden ).remove( );
       break;
   } 
-  selector = "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]";
-  switch( $( selector ).length )
+  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
+  selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
+  switch( $( selectorCheckbox ).length )
   {
     case( false ):
       if( t3caddyAlert )
       {
-        alert( "WARNING: The selector " + selector + " isn't part of the DOM!");
+        alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
       }
       break;
     default:
       // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
-      $( selector ).attr( "required", "required" );
-      $( selector ).remove( );
+      $( selectorCheckbox ).attr( "required", "required" );
+      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
+      $( selectorHidden ).remove( );
       break;
   } 
-}; // Add the powermail tabs to the caddy tab powermail
+};  // move powermail fields to HTML 5
 
 /* Powermail tabs begin */
 var initPowermailTabs = function() {
