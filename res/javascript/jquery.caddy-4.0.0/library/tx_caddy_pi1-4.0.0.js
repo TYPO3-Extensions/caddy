@@ -162,7 +162,7 @@ var movePowermailFieldsToHtml5 = function() {
       if( t3caddyConsoleDebug )
       {
         //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
-        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
+        console.debug( "The selector " + selectorEmailText + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
       }
       break;
     default:
