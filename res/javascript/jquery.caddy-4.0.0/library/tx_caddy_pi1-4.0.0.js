@@ -162,7 +162,9 @@ var properPowermailEvalFields = function() {
   alert( selectorCheckbox + ": " + $( selectorCheckbox ).length );
   switch( $( selectorCheckbox ).length )
   {
+    case( 0 ):
     case( false ):
+    case( undefined ):
       if( t3caddyAlert )
       {
         alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
@@ -180,7 +182,9 @@ var properPowermailEvalFields = function() {
   selectorHidden    = "input[name*='tx_powermail_pi1[field][629]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
   {
+    case( 0 ):
     case( false ):
+    case( undefined ):
       if( t3caddyAlert )
       {
         alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
