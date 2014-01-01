@@ -150,13 +150,28 @@ var movePowermailFormToCaddy = function() {
 };  // Move the powermail form into the caddy to the tab powermail
 
   // move powermail fields to HTML 5
-var properPowermailEvalFields = function() {
+var movePowermailFieldsToHtml5 = function() {
+  // Move e-mail from type=text to type=email
   // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
   //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
-  marker = $("<span />").insertBefore( "input[name*='tx_powermail_pi1[field][624]']" );
-  $( "input[name*='tx_powermail_pi1[field][624]']" ).detach( ).attr( "type","email").insertAfter( marker );
-  marker.remove( );
-  // Checkbox for terms and conditions
+  selectorEmailText = "input[name*='tx_powermail_pi1[field][624]'][type=text]";
+  switch( $( selectorEmailText ).length )
+  {
+    case( 0 ):
+    case( false ):
+    case( undefined ):
+      if( t3caddyAlert )
+      {
+        alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
+      }
+      break;
+    default:
+      marker = $("<span />").insertBefore( selectorEmailText );
+      $( selectorEmailText ).detach( ).attr( "type","email").insertAfter( marker );
+      marker.remove( );
+      break;
+  } // Move e-mail from type=text to type=email
+  // Make checkbox for terms and conditions required and remove hidden field with the same name
   selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
   selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
   alert( selectorCheckbox + ": " + $( selectorCheckbox ).length );
@@ -176,8 +191,8 @@ var properPowermailEvalFields = function() {
       // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
       $( selectorHidden ).remove( );
       break;
-  } 
-  // Checkbox for revocation 
+  } // Make checkbox for terms and conditions required and remove hidden field with the same name
+  // Make checkbox for revocation required and remove hidden field with the same name
   selectorCheckbox  = "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]";
   selectorHidden    = "input[name*='tx_powermail_pi1[field][629]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
@@ -196,7 +211,7 @@ var properPowermailEvalFields = function() {
       // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
       $( selectorHidden ).remove( );
       break;
-  } 
+  } // Make checkbox for revocation required and remove hidden field with the same name
 };  // move powermail fields to HTML 5
 
 /* Powermail tabs begin */
@@ -277,7 +292,7 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 
 var initValidator = function( selector, validate ) {
-  properPowermailEvalFields( );  
+  movePowermailFieldsToHtml5( );  
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
