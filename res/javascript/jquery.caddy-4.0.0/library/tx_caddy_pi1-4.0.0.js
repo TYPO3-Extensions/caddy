@@ -152,9 +152,7 @@ var movePowermailFormToCaddy = function() {
   // move powermail fields to HTML 5
 var movePowermailFieldsToHtml5 = function() {
   // Move e-mail from type=text to type=email
-  // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
-  //$("input[name*='tx_powermail_pi1[field][624]']").attr("type", "email");
-  selectorEmailText = "input[name*='tx_powermail_pi1[field][624]'][type=text]";
+  selectorEmailText = "input[name='tx_powermail_pi1[field][624][type=text]']";
   switch( $( selectorEmailText ).length )
   {
     case( 0 ):
@@ -167,13 +165,14 @@ var movePowermailFieldsToHtml5 = function() {
       break;
     default:
       marker = $("<span />").insertBefore( selectorEmailText );
+      // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
       $( selectorEmailText ).detach( ).attr( "type","email").insertAfter( marker );
       marker.remove( );
       break;
   } // Move e-mail from type=text to type=email
   // Make checkbox for terms and conditions required and remove hidden field with the same name
-  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]";
-  selectorHidden    = "input[name*='tx_powermail_pi1[field][628]'][type=hidden]";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][628][0][type=checkbox]']";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][628][0][type=hidden]']";
   alert( selectorCheckbox + ": " + $( selectorCheckbox ).length );
   switch( $( selectorCheckbox ).length )
   {
@@ -193,8 +192,8 @@ var movePowermailFieldsToHtml5 = function() {
       break;
   } // Make checkbox for terms and conditions required and remove hidden field with the same name
   // Make checkbox for revocation required and remove hidden field with the same name
-  selectorCheckbox  = "input[name*='tx_powermail_pi1[field][629]'][type=checkbox]";
-  selectorHidden    = "input[name*='tx_powermail_pi1[field][629]'][type=hidden]";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][629][0][type=checkbox]']";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][629][0][type=hidden]']";
   switch( $( selectorCheckbox ).length )
   {
     case( 0 ):
