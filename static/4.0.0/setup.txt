@@ -453,6 +453,15 @@ plugin.tx_caddy_pi1 {
           // Sum tax over all 
         sumsumtaxsum          < .optionspaymentsumgross
         sumsumtaxsum.10.userFunc.number.field         = sumsumtaxsum
+        target  = TEXT
+        target {
+          typolink {
+            parameter {
+              data = TSFE:id
+            }
+            returnLast = url
+          }
+        }
       }
     }
   }
