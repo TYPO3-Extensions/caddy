@@ -334,6 +334,19 @@
         initPowermailTabs( settings.accordion.powermailFormSelector, settings.accordion.powermailWallHtmlId );
       }
     };  // Move the powermail form into the caddy to the tab powermail
+    
+    function confToolsValidator( ) {
+      $.tools.validator.localize( "de", {
+        // "*" Isn't localised
+        //"*"           : "Der Wert wird nicht akzeptiert",
+        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
+        ":number"     : "Bitte nur Zahlen eingeben",
+        ":url"        : "Bitte eine korrekte URL eingeben",
+        "[max]"       : "Maximal $1 ist erlaubt",
+        "[min]"       : "Mindestens $1 ist n&ouml;tig",
+        "[required]"  : "Bitte ausfüllen"
+      }); // $.tools.validator.localize ...
+    }
 
     var settings = {
       accordion : {
@@ -402,6 +415,7 @@
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
+                      confToolsValidator( );
                       return $( settings.accordion.accordionSelector ).data( "tabs" );
 
                     }, /* accordion */
