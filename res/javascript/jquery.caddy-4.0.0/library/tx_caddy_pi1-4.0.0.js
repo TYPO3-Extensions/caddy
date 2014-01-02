@@ -80,7 +80,7 @@ var fnAjax = function( formAction, formData, e ) {
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( "update", {
-    accordionApi              : accordionApi;
+    accordionApi              : accordionApi,
     currAccordionIndex        : currAccordionIndex,
     formData                  : formData,
     html_element              : html_element, 
