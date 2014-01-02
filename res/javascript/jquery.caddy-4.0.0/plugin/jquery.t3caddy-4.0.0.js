@@ -249,13 +249,13 @@
       // Prompt informations
 
     function initEvents( ) {
-      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
-      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
-        accordionApi.next();
-      });
-      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
-        accordionApi.prev();
-      });      
+//      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+//      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
+//        accordionApi.next();
+//      });
+//      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
+//        accordionApi.prev();
+//      });      
 //      $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
 //        formAction  = $( this ).closest( "form" ).attr( "action");
 //        formData    = $( this ).closest( "form" ).serialize( );

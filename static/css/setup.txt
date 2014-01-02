@@ -1,6 +1,10 @@
 plugin.tx_caddy_pi1 {
   _CSS_DEFAULT_STYLE (
     
+    .clear {
+      clear:both;
+    }
+
     /* order form */
 
     form.caddy {
@@ -217,7 +221,9 @@ plugin.tx_caddy_pi1 {
     div.linktoshop,
     .caddy select,
     form.caddy button.submit,
-    img.caddy_delete { 
+    img.caddy_delete,
+    .caddy-powermail input[type=submit]
+    { 
       background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
       background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{$plugin.caddy.html.color.button.gradient1}), color-stop(50%,{$plugin.caddy.html.color.button.gradient2}), color-stop(51%,{$plugin.caddy.html.color.button.gradient3}), color-stop(100%,{$plugin.caddy.html.color.button.gradient4})); /* Chrome,Safari4+ */
