@@ -69,10 +69,10 @@
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
       accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
-      $( document ).on( "click", accordionNext, function( e ) {
+      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
         accordionApi.next();
       });
-      $( document ).on( "click", accordionPrev, function( e ) {
+      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
         accordionApi.prev();
       });      
     } /* accordion */
