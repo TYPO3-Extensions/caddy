@@ -14,61 +14,63 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
-var t3caddyAlert          = ###T3CADDYALERT###;
-var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
-var currAccordionIndex    = undefined;
 var accordionApi          = undefined;
 var accordionSelector     = "#c###UID###-accordion";
+var currAccordionIndex    = undefined;
 var powermailFormSelector = "#c###UID###-accordion-powermail form";
+var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
+var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
+var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
+var t3caddyAlert          = ###T3CADDYALERT###;
+var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
 
 
-/* Accordion begin */
-var fnAccordion = function( accordionSelector, powermailFormSelector ) {
-  $(function() {
-    // The accordian panes of the caddy
-    $(accordionSelector).tabs( "div.pane",
-    {
-      tabs          : 'h2',
-      effect        : 'slide',
-      initialIndex  : 0,
-      onBeforeClick : function( event, indexAccordionDest ) {
-        //alert( "fnAccordion: onBeforeClick" );
-        // Get index of the current accordion tab
-        var indexAccordionSrce  = this.getIndex();
-        currAccordionIndex      = indexAccordionSrce;
-
-        // RETURN if current accordion isn't the powermail pane
-        switch( true )
-        {
-          case( indexAccordionDest == 4 ): // Ordering
-          case( indexAccordionSrce == 2 ): // Powermail form
-            // Follow the workflow
-            break;
-          default:
-            // No evaluation is needed
-            // RETURN and follow the users workflow
-            //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
-            currAccordionIndex = indexAccordionDest;
-            return true;
-            break;
-        }
-        // Are all values proper of the powermail form?
-        if( initValidator( powermailFormSelector, "validate" ) )
-        {
-          //alert( "return true: success" );
-          // RETURN : all values are proper
-          currAccordionIndex = indexAccordionDest;
-          return true;
-        }
-        this.click( 2 );
-        alert( "Bitte füllen Sie erst das Formular vollständig aus." );
-        return false;
-      } // onBeforeClick ...
-    }); // $(accordionSelector).panes ...
-  });
-  //  alert( 1 );
-}; /* Accordion end */
+///* Accordion begin */
+//var fnAccordion = function( accordionSelector, powermailFormSelector ) {
+//  $(function() {
+//    // The accordian panes of the caddy
+//    $(accordionSelector).tabs( "div.pane",
+//    {
+//      tabs          : 'h2',
+//      effect        : 'slide',
+//      initialIndex  : 0,
+//      onBeforeClick : function( event, indexAccordionDest ) {
+//        //alert( "fnAccordion: onBeforeClick" );
+//        // Get index of the current accordion tab
+//        var indexAccordionSrce  = this.getIndex();
+//        currAccordionIndex      = indexAccordionSrce;
+//
+//        // RETURN if current accordion isn't the powermail pane
+//        switch( true )
+//        {
+//          case( indexAccordionDest == 4 ): // Ordering
+//          case( indexAccordionSrce == 2 ): // Powermail form
+//            // Follow the workflow
+//            break;
+//          default:
+//            // No evaluation is needed
+//            // RETURN and follow the users workflow
+//            //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
+//            currAccordionIndex = indexAccordionDest;
+//            return true;
+//            break;
+//        }
+//        // Are all values proper of the powermail form?
+//        if( initValidator( powermailFormSelector, "validate" ) )
+//        {
+//          //alert( "return true: success" );
+//          // RETURN : all values are proper
+//          currAccordionIndex = indexAccordionDest;
+//          return true;
+//        }
+//        this.click( 2 );
+//        alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+//        return false;
+//      } // onBeforeClick ...
+//    }); // $(accordionSelector).panes ...
+//  });
+//  //  alert( 1 );
+//}; /* Accordion end */
 
 $( document ).on( "click", "button.next", function( e ) {
   accordionApi.next();
@@ -77,7 +79,7 @@ $( document ).on( "click", "button.prev", function( e ) {
   accordionApi.prev();
 });
 
-var fnInit = function( ) {
+var fnInit = function( accordionSelector, powermailFormSelector ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( 'accordion', accordionSelector, powermailFormSelector )
   accordionApi = $(accordionSelector).data( "tabs" );
@@ -87,7 +89,7 @@ var fnInit = function( ) {
 
 /* Initiate Accordion */
 $(function() {
-  fnInit();
+  fnInit( accordionSelector, powermailFormSelector );
 }); /* Initiate Accordion */
 
 /* AJAX begin */
@@ -129,16 +131,6 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
 }); // User has clicked a tag with the cUID-step class
-//$( "#c###UID_POWERMAIL_FORM### div form" ).submit( function( e )  
-//{
-//  formAction  = $( this ).attr( "action");
-//  formData    = $( this ).serialize( );
-//  if( !e.isDefaultPrevented( ) ) 
-//  {
-//    e.preventDefault( ); // Don't execute the click
-//    fnAjax( formAction, formData, e );
-//  }
-//});
 $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
@@ -172,30 +164,21 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
-/* Overlay begin */
-$(function() {
-  // Workaround: Use buttons to initial overlays
-  $("button[rel]").overlay({
-    mask    : '#000',
-    effect  : 'apple'
-  });
-}); /* Overlay end */
-
   // Add the powermail tabs to the caddy tab powermail
-var addPowermailTabsToCaddy = function() {
+var addPowermailTabsToCaddy = function( ) {
   // Get the URL
-  urlWoSearch = $(location).attr("protocol") + "://" + $(location).attr("host") + $(location).attr("pathname");
-  urlSearch   = $(location).attr("search");
+  urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
+  urlSearch   = $( location ).attr( "search" );
   if( urlSearch )
   {
-    urlSerach = "?" + urlSearch; 
+    urlSearch = "?" + urlSearch; 
   }
   tabs = "";
   // LOOP all powermail fieldsets
-  $("#c###UID_POWERMAIL_FORM### div form > fieldset > legend").each(function(i) {
+  $( "#c###UID_POWERMAIL_FORM### div form > fieldset > legend" ).each( function( i ) {
     href  = urlWoSearch + "#tab-" + i + urlSearch;
     tabs  = tabs
-          + '<li><a href="' + href + '">' + $(this).text() + '</a></li>'
+          + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
           ;
   }); // LOOP all powermail fieldsets
   tabs  = '<ul class="css-tabs">'
@@ -204,19 +187,19 @@ var addPowermailTabsToCaddy = function() {
         ;
   //alert( tabs );
   // Add the powermail tabs to the caddy tab powermail
-  $(tabs).appendTo('#c###UID###-accordion div.caddy-powermail');
+  $( tabs ).appendTo( "#c###UID###-accordion div.caddy-powermail" );
 }; // Add the powermail tabs to the caddy tab powermail
 
   // Move the powermail form into the caddy to the tab powermail
 var movePowermailFormToCaddy = function() {
   // Move the powermail form TYPO3 content element to the powermail accordian div
-  $('#c###UID_POWERMAIL_FORM### > div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
+  $("#c###UID_POWERMAIL_FORM### > div").detach().appendTo("#c###UID###-accordion div.caddy-powermail");
   // Remove the default powermail-can't-move-error
-  $('#c###UID###-powermail-prompt').css( "display", "none" );
+  $("#c###UID###-powermail-prompt").css( "display", "none" );
   if( $( "#c###UID###-accordion div.caddy-powermail form" ).length )  
   {
     // Remove the powermail default h3-header
-    $('#c###UID###-accordion div.caddy-powermail form h3').remove();
+    $("#c###UID###-accordion div.caddy-powermail form h3").remove();
     // Add IDs to each fieldset
     $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
       $(this).attr("id", "tab-" + i );
@@ -252,8 +235,8 @@ var movePowermailFieldsToHtml5 = function() {
       break;
   } // Move e-mail from type=text to type=email
   // Make checkbox for terms and conditions required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][628][0]'][type=checkbox]";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][628][0]'][type=hidden]";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=checkbox]";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
   {
     case( 0 ):
@@ -273,8 +256,8 @@ var movePowermailFieldsToHtml5 = function() {
       break;
   } // Make checkbox for terms and conditions required and remove hidden field with the same name
   // Make checkbox for revocation required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][629][0]'][type=checkbox]";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][629][0]'][type=hidden]";
+  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=checkbox]";
+  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=hidden]";
   switch( $( selectorCheckbox ).length )
   {
     case( 0 ):
@@ -312,7 +295,7 @@ var initPowermailTabs = function() {
         return true;
       }
       // Get HTML id of the current tab
-      var idTabSrce = '#tab-' + indexTabSrce + ' :input';
+      var idTabSrce = "#tab-" + indexTabSrce + " :input";
       // Validate HTML input fields of the current tab
       //alert( idTabSrce );
       var success = initValidator( idTabSrce, "validate" );
@@ -331,13 +314,13 @@ var initPowermailTabs = function() {
 /* Validator begin */
 $.tools.validator.localize("de", {
   // Isn't localised
-  //'*'		: 'Der Wert wird nicht akzeptiert',
-  ':email'  	: 'Bitte eine korrekte E-Mail-Adresse eingeben',
-  ':number' 	: 'Bitte nur Zahlen eingeben',
-  ':url' 	: 'Bitte eine korrekte URL eingeben',
-  '[max]'	: 'Maximal $1 ist erlaubt',
-  '[min]'	: 'Mindestens $1 ist n&ouml;tig',
-  '[required]'	: 'Bitte ausfüllen'
+  //"*"		: "Der Wert wird nicht akzeptiert",
+  ":email"  	: "Bitte eine korrekte E-Mail-Adresse eingeben",
+  ":number" 	: "Bitte nur Zahlen eingeben",
+  ":url" 	: "Bitte eine korrekte URL eingeben",
+  "[max]"	: "Maximal $1 ist erlaubt",
+  "[min]"	: "Mindestens $1 ist n&ouml;tig",
+  "[required]"	: "Bitte ausfüllen"
 }); // $.tools.validator.localize ...
 /* Validator end */
 
@@ -354,8 +337,8 @@ $.tools.validator.addEffect( "wall", function( errors, event )
     selector = "input[name='" + error.input.attr("name") + "']";
     switch( error.input.attr("name") )
     {
-      case( "tx_powermail_pi1[field][628][0]"):
-      case( "tx_powermail_pi1[field][629][0]"):
+      case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
+      case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
         strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).next( ).text( ) + "</strong></p>"
         break;
       default:
@@ -377,9 +360,9 @@ var initValidator = function( selector, validate ) {
   success = false;
   validatePowermailForm = $( selector ).validator(
   {
-    effect          : 'wall',
-    container       : '#c###UID###-powermail-prompt',
-    lang            : 'de',
+    effect          : "wall",
+    container       : "#c###UID###-powermail-prompt",
+    lang            : "de",
     // do not validate inputs when they are edited
     errorInputEvent : null
   // custom form submission logic
@@ -396,8 +379,8 @@ var initValidator = function( selector, validate ) {
   }); // $(powermailFormSelector).validator ...
   if( validate == "validate" )
   {
-//    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "type" ) );
-//    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "checked" ) );
+//    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "type" ) );
+//    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "checked" ) );
     success = validatePowermailForm.data('validator').checkValidity( );
     //alert( success );
   }
@@ -406,8 +389,8 @@ var initValidator = function( selector, validate ) {
 
 initValidator( powermailFormSelector );
 
-//$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
-//  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );
+//$("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").oninvalid(function(event, errorMessage) {
+//  alert( "input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]: " + errorMessage );
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
