@@ -99,6 +99,7 @@ var fnAjax = function( formAction, formData, e ) {
 
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   console.debug( currAccordionIndex );
+  console.debug( accordionApi.getIndex( ) );
   formAction  = $( this ).closest( "form" ).attr( "action");
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
