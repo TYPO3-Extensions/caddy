@@ -14,8 +14,10 @@ plugin.tx_caddy_pi1 {
     /* div based caddy */
     
     div.accordionNextPrev {
-      height: 3.2em;
       text-align:right;
+    }
+    .caddy-product-table div.accordionNextPrev {
+      height: 3.2em;
     }
 
     div.caddy form {
