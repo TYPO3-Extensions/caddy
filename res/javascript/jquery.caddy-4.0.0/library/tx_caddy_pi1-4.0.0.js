@@ -43,12 +43,6 @@ $(function( ) {
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
-  $( document ).on( "click", "button.accordionNext", function( e ) {
-    accordionApi.next();
-  });
-  $( document ).on( "click", "button.accordionPrev", function( e ) {
-    accordionApi.prev();
-  });
 }); /* Initiate Accordion */
 
 /* AJAX begin */

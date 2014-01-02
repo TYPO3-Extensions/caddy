@@ -474,6 +474,13 @@
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
+                      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+  $( document ).on( "click", "button.accordionNext", function( e ) {
+    accordionApi.next();
+  });
+  $( document ).on( "click", "button.accordionPrev", function( e ) {
+    accordionApi.prev();
+  });
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
