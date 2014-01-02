@@ -22,7 +22,7 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( ) {
-      //console.debug( settings.accordion.pmuidfieldemail );
+      console.debug( settings.accordion.currAccordionIndex );
       // The accordian panes of the caddy
       $(settings.accordion.accordionSelector).tabs( "div.pane",
       {
@@ -30,6 +30,7 @@
         effect        : 'slide',
         initialIndex  : 0,
         onBeforeClick : function( event, indexAccordionDest ) {
+          console.debug( settings.accordion.currAccordionIndex );
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();

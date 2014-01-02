@@ -28,11 +28,17 @@ var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 
 /* Initiate Accordion */
-$(function( ) {
+$(function( ) {  
+  currAccordionIndex = parseInt( $_POST["tx_caddy_pi1[accordion]"] );
+  if( ! currAccordionIndex )
+  {
+    currAccordionIndex = parseInt( $_GET["tx_caddy_pi1[accordion]"] );
+  }
   console.debug( currAccordionIndex );
   //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
+    currAccordionIndex    : currAccordionIndex,
     powermailFormSelector : "#c###UID###-accordion-powermail div form",
     powermailWallHtmlId   : "#c###UID###-powermail-prompt",
     powermailUid          : "#c###UID_POWERMAIL_FORM###",
