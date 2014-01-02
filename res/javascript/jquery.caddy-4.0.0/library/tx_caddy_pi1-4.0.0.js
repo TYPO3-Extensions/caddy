@@ -116,7 +116,16 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   fnAjax( formAction, formData, e );
 }); // User has clicked a tag with the cUID-step class
 //$( "#c###UID_POWERMAIL_FORM### div form" ).submit( function( e )  
-$( "#c###UID_POWERMAIL_FORM###" ).find( "form" ).submit( function( e )  
+//{
+//  formAction  = $( this ).attr( "action");
+//  formData    = $( this ).serialize( );
+//  if( !e.isDefaultPrevented( ) ) 
+//  {
+//    e.preventDefault( ); // Don't execute the click
+//    fnAjax( formAction, formData, e );
+//  }
+//});
+$( "input.powermail_confirmation_form", "input.powermail_confirmation_submit", "input.powermail_submit" ).closest( "form" ).submit( function( e )  
 {
   formAction  = $( this ).attr( "action");
   formData    = $( this ).serialize( );
