@@ -360,7 +360,7 @@
           selector = "input[name='" + error.input.attr( "name" ) + "']";
 
           idOfFieldset = $( selector ).closest( "fieldset").attr( "id");
-          console.debug( $( "#" + idOfFieldset + " legend", "#" + idOfFieldset + " legend" ).text( ) );
+          console.debug( "#" + idOfFieldset + " legend", $( "#" + idOfFieldset + " legend" ).text( ) );
           switch( error.input.attr( "name" ) )
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
