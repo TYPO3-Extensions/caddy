@@ -170,3 +170,14 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   }
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
+
+$( document ).ready( function( ) {
+  if( $( ".powermail_confirmation_form[type=submit]").length )
+  {
+    $( ".powermail_confirmation_form[type=submit]").attr( "value", "Ändern");
+  }
+  if( $( ".powermail_confirmation_submit[type=submit]").length )
+  {
+    $( ".powermail_confirmation_submit[type=submit]").css( "display", "none");
+  }
+});
