@@ -14,18 +14,20 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var pmuidfieldemail     = ###PMUIDFIELDEMAIL###;
-var t3caddyAlert        = ###T3CADDYALERT###;
-var t3caddyConsoleDebug = ###T3CADDYCONSOLEDEBUG###;
-var currAccordionIndex  = undefined;
-var accordionApi        = undefined;
+var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
+var t3caddyAlert          = ###T3CADDYALERT###;
+var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
+var currAccordionIndex    = undefined;
+var accordionApi          = undefined;
+var accordionSelector     = "#c###UID###-accordion";
+var powermailFormSelector = "#c###UID###-accordion-powermail form";
 
 
 /* Accordion begin */
-var fnAccordion = function() {
+var fnAccordion = function( accordionSelector, powermailFormSelector ) {
   $(function() {
     // The accordian panes of the caddy
-    $("#c###UID###-accordion").tabs( "div.pane",
+    $(accordionSelector).tabs( "div.pane",
     {
       tabs          : 'h2',
       effect        : 'slide',
@@ -52,7 +54,7 @@ var fnAccordion = function() {
             break;
         }
         // Are all values proper of the powermail form?
-        if( initValidator( "#c###UID###-accordion-powermail form", "validate" ) )
+        if( initValidator( powermailFormSelector, "validate" ) )
         {
           //alert( "return true: success" );
           // RETURN : all values are proper
@@ -63,8 +65,7 @@ var fnAccordion = function() {
         alert( "Bitte füllen Sie erst das Formular vollständig aus." );
         return false;
       } // onBeforeClick ...
-    }); // $("#c###UID###-accordion").panes ...
-    accordionApi = $("#c###UID###-accordion").data( "tabs" );
+    }); // $(accordionSelector).panes ...
   });
   //  alert( 1 );
 }; /* Accordion end */
@@ -77,7 +78,9 @@ $( document ).on( "click", "button.prev", function( e ) {
 });
 
 var fnInit = function( ) {
-  fnAccordion( );
+  //fnAccordion( accordionSelector, powermailFormSelector );
+  $( this ).t3caddy( 'accordion', accordionSelector, powermailFormSelector )
+  accordionApi = $(accordionSelector).data( "tabs" );
   addPowermailTabsToCaddy( );
   movePowermailFormToCaddy( );
 };
@@ -158,7 +161,7 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    if( ! initValidator( "#c###UID###-accordion-powermail form", "validate" ) )
+    if( ! initValidator( powermailFormSelector, "validate" ) )
     {
       return;
     }
@@ -390,7 +393,7 @@ var initValidator = function( selector, validate ) {
       // prevent the form data being submitted to the server
       //e.preventDefault( );
     }
-  }); // $("#c###UID###-accordion-powermail form").validator ...
+  }); // $(powermailFormSelector).validator ...
   if( validate == "validate" )
   {
 //    alert( $("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").attr( "type" ) );
@@ -401,7 +404,7 @@ var initValidator = function( selector, validate ) {
   return success;
 };  // initValidator
 
-initValidator( "#c###UID###-accordion-powermail form" );
+initValidator( powermailFormSelector );
 
 //$("input[name*='tx_powermail_pi1[field][628]'][type=checkbox]").oninvalid(function(event, errorMessage) {
 //  alert( "input[name*='tx_powermail_pi1[field][628]'][type=checkbox]: " + errorMessage );

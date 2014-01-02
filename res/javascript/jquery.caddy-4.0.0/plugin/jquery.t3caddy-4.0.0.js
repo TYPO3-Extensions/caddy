@@ -21,6 +21,8 @@
 
   $.fn.t3caddy = function( method )
   {
+    var indexAccordionOrdering  = 4; // Ordering
+    var indexAccordionPowermail = 2; // Powermail form
       // Fade out the loading *.gif, initiate buttons again
     var clean_up = function( html_element ) {
       $( "#tx-caddy-pi1-loader" ).hide( );
@@ -152,6 +154,48 @@
     };
 
     var methods = {
+      accordion   : function( accordionSelector, powermailFormSelector ) {
+                      // The accordian panes of the caddy
+                      $(accordionSelector).tabs( "div.pane",
+                      {
+                        tabs          : 'h2',
+                        effect        : 'slide',
+                        initialIndex  : 0,
+                        onBeforeClick : function( event, indexAccordionDest ) {
+                          //alert( "fnAccordion: onBeforeClick" );
+                          // Get index of the current accordion tab
+                          var indexAccordionSrce  = this.getIndex();
+                          currAccordionIndex      = indexAccordionSrce;
+
+                          // RETURN if current accordion isn't the powermail pane
+                          switch( true )
+                          {
+                            case( indexAccordionDest == indexAccordionOrdering ): // Ordering
+                            case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
+                              // Follow the workflow
+                              break;
+                            default:
+                              // No evaluation is needed
+                              // RETURN and follow the users workflow
+                              //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
+                              currAccordionIndex = indexAccordionDest;
+                              return true;
+                              break;
+                          }
+                          // Are all values proper of the powermail form?
+                          if( initValidator( powermailFormSelector, "validate" ) )
+                          {
+                            //alert( "return true: success" );
+                            // RETURN : all values are proper
+                            currAccordionIndex = indexAccordionDest;
+                            return true;
+                          }
+                          this.click( indexAccordionPowermail );
+                          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+                          return false;
+                        } // onBeforeClick ...
+                      }); // $(accordionSelector).panes ...
+                    }, /* accordion */
       init        : function( settings_ )
                     {
                       return this.each( function( ) {
@@ -160,7 +204,7 @@
                           $.extend( settings, settings_ );
                         }
                       });
-                    },
+                    }, /* init */
       update      : function( html_element, url, data, html_element_wi_selector )
                     {
                         // update():  replace the content of the given html element with the content
@@ -226,119 +270,32 @@
                         });
                           // Send the AJAX request
                       });
-
-//                        // Cover the current html element with the loader *.gif
-//                      function cover_wi_loader( html_element ) {
-//                        $( "#tx-caddy-pi1-loader" ).css({
-//                          height: $( "#tx-caddy-pi1-loader" ).parent( ).height( ),    
-//                          width:  $( "#tx-caddy-pi1-loader" ).parent( ).width( )    
-//                        });
-//                        $( "#tx-caddy-pi1-loader" ).show( );
-//                      };
-//                        // Cover the current html element with the loader *.gif
-//
-////                        // Fade out the loading *.gif, initiate buttons again
-////                      function clean_up( html_element ) {
-////                        $( "#tx-caddy-pi1-loader" ).hide( );
-////                          // Initiate the ui button layout again
-////                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
-////                      };
-////                        // Fade out the loading *.gif, initiate buttons again
-//
-//                        // Prompt errors
-//                      function err_prompt( selector, label, prompt ) {
-//                        if( !$( "#update-prompt" ).length ) {
-//                          if( t3caddyAlert )
-//                          {
-//                            alert( label + " " + prompt);
-//                          }
-//                          return;
-//                        }
-//                        element = format( settings.templates.uiErr, label, prompt);
-//                        $( selector ).append( element );
-//                      };
-//                        // Prompt errors
-//
-//                        // Prompt informations
-//                      function inf_prompt( selector, label, prompt ) {
-//                        if( !$( "#update-prompt" ).length ) {
-//                          if( t3caddyAlert )
-//                          {
-//                            alert( label + " " + prompt);
-//                          }
-//                          return;
-//                        }
-//                        element = format( settings.templates.uiInf, label, prompt);
-//                        $( selector ).append( element );
-//                      };
-//                        // Prompt informations
-//
-//                        // Replace vars in the source with the given params
-//                      function format( source, params ) {
-//                          // ERROR with source
-//                        if( typeof source == "undefined" )
-//                        {
-//                          source =  'ERROR in jquery.t3caddy-4.0.0.js: source is undefined. It seems that there is ' +
-//                                    'a problem with a not defined variable. Function format( source, params ).';
-//                        }
-//                          // ERROR with params
-//                        if( typeof params == "undefined" )
-//                        {
-//                          params = new Array();
-//                          params[0] = 'ERROR in jquery.t3caddy-4.0.0.js:';
-//                          params[1] = 'params are undefined. It seems that there is a problem with a not defined variable. ' +
-//                                      'Function format( source, params ). Please check settings { ... }.';
-//                        }
-//                        if ( arguments.length == 1 )
-//                        {
-//                          return function() {
-//                            var args = $.makeArray(arguments);
-//                            args.unshift(source);
-//                            return $.t3caddy.format.apply( this, args );
-//                          };
-//                        }
-//                        if ( arguments.length > 2 && params.constructor != Array  )
-//                        {
-//                          params = $.makeArray(arguments).slice(1);
-//                        }
-//                        if ( params.constructor != Array )
-//                        {
-//                          params = [ params ];
-//                        }
-//                        $.each(params, function(i, n)
-//                        {
-//                          source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
-//                        });
-//                        return source;
-//                      };
-//                        // Replace vars in the source with the given params
-                    },
-                      // update( )
+                    }, /* update( ) */
       url_autoQm  : function( url, param )
                     {
                         // Concatenate the url and the param in dependence of a question mark.
                         // If url contains a question mark, param will added with ?param
                         // otherwise with &param
-                      if( typeof url == "undefined" )
+                      switch( true )
                       {
-                        url   = "";
-                        param = "";
-                      }
-                      if( url.indexOf( "?" ) >= 0 )
-                      {
-                        url = url + "&" + param;
-                      }
-                      if( ! ( url.indexOf( "?" ) >= 0 ) )
-                      {
-                        url = url + "?" + param;
+                        case( url.indexOf( "?" ) >= 0 ):
+                          url = url + "&" + param;
+                          break;
+                        case( ! ( url.indexOf( "?" ) >= 0 ) ):
+                          url = url + "?" + param;
+                          break;
+                        case( typeof url == "undefined" ):
+                        default:
+                          url   = "";
+                          param = "";
+                          break;
                       }
                       return url;
-                    }
-                      // url_autoQm
-    };
+                    } /* url_autoQm */
+    }; /* methods */
+    
       // Method calling logic
       // See http://docs.jquery.com/Plugins/Authoring#Plugin_Methods
-
       // Return executed method
     if ( methods[method] )
     {
