@@ -1,5 +1,7 @@
 /**
  *
+ * tx_caddy_pi1-4.0.0.js
+ * 
  * Copyright (c) 2013-2014 Dirk Wildt
  * http://wildt.at.die-netzmacher.de/
  *
@@ -23,7 +25,7 @@ var accordionApi        = undefined;
 var fnAccordion = function() {
   $(function() {
     // The accordian panes of the caddy
-    $("#c###UID###-accordion").tabs( "#c###UID###-accordion div.pane",
+    $("#c###UID###-accordion").tabs( "div.pane",
     {
       tabs          : 'h2',
       effect        : 'slide',

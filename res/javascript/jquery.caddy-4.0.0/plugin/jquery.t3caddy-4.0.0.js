@@ -1,6 +1,10 @@
 /**
  * jquery.t3caddy-4.0.0.js
  *
+ * Copyright (c) 2013-2014 Dirk Wildt
+ * http://wildt.at.die-netzmacher.de/
+ *
+ * Version 4.0.3
  * http://docs.jquery.com/Plugins/t3caddy
  *
  * Copyright (c) 2013-2014 - Dirk Wildt
