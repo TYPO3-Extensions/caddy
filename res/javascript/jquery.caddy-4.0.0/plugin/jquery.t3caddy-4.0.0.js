@@ -231,7 +231,6 @@
     /* Powermail tabs begin */
 
     function initValidator( selector, validate ) {
-      //movePowermailFieldsToHtml5( );  
       success = false;
       validatePowermailForm = $( selector ).validator(
       {
@@ -486,12 +485,12 @@
                           currAccordionIndex  : null
                         }
                       }
-                      addAccordion( );
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
+                      addAccordion( );
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
