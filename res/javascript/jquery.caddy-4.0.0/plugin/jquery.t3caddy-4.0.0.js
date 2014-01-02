@@ -17,6 +17,14 @@
 
   $.fn.t3caddy = function( method )
   {
+                        // Fade out the loading *.gif, initiate buttons again
+                      function clean_up( html_element ) {
+                        $( "#tx-caddy-pi1-loader" ).hide( );
+                          // Initiate the ui button layout again
+                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
+                      };
+                        // Fade out the loading *.gif, initiate buttons again
+
     var settings = {
       messages: {
         errMissingTagPropertyLabel: "Tag is missing:",
@@ -148,13 +156,13 @@
                       };
                         // Cover the current html element with the loader *.gif
 
-                        // Fade out the loading *.gif, initiate buttons again
-                      function clean_up( html_element ) {
-                        $( "#tx-caddy-pi1-loader" ).hide( );
-                          // Initiate the ui button layout again
-                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
-                      };
-                        // Fade out the loading *.gif, initiate buttons again
+//                        // Fade out the loading *.gif, initiate buttons again
+//                      function clean_up( html_element ) {
+//                        $( "#tx-caddy-pi1-loader" ).hide( );
+//                          // Initiate the ui button layout again
+//                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
+//                      };
+//                        // Fade out the loading *.gif, initiate buttons again
 
                         // Prompt errors
                       function err_prompt( selector, label, prompt ) {
