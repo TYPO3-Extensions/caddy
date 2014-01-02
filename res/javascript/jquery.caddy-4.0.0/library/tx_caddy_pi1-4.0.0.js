@@ -43,14 +43,13 @@ $(function( ) {
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
+  $( document ).on( "click", "button.accordionNext", function( e ) {
+    accordionApi.next();
+  });
+  $( document ).on( "click", "button.accordionPrev", function( e ) {
+    accordionApi.prev();
+  });
 }); /* Initiate Accordion */
-
-$( document ).on( "click", "button.accordionNext", function( e ) {
-  accordionApi.next();
-});
-$( document ).on( "click", "button.accordionPrev", function( e ) {
-  accordionApi.prev();
-});
 
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
