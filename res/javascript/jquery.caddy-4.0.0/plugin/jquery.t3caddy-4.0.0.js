@@ -260,8 +260,9 @@
     };  // Move the powermail form into the caddy to the tab powermail
 
     var settings = {
+      pmuidfieldemail : 0,
       accordion : {
-        //pmuidfieldemail : 0
+        pmuidfieldemail : 0
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
@@ -313,7 +314,8 @@
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
                       movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
-                      alert( settings.accordion.pmuidfieldemail );
+                      //alert( settings.accordion.pmuidfieldemail );
+                      alert( settings.pmuidfieldemail );
                     }, /* accordion */
       init        : function( settings_ )
                     {
@@ -322,7 +324,8 @@
                         if ( settings_ ) {
                           $.extend( settings, settings_ );
                         }
-                        alert( settings.accordion.pmuidfieldemail );
+                        //alert( settings.accordion.pmuidfieldemail );
+                        alert( settings.pmuidfieldemail );
                       });
                     }, /* init */
       update      : function( html_element, url, data, html_element_wi_selector )
