@@ -271,7 +271,7 @@
         pmuidfieldrevocation  : undefined,  // e.g.: 629
         pmuidfieldterms       : undefined,  // e.g.: 628
         t3caddyAlert          : 1,          // [e.g.:]0-1] 
-        t3caddyConsoleDebug   : 1,          // [e.g.:]0-1]
+        t3caddyConsoleDebug   : 1          // [e.g.:]0-1]
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
@@ -325,8 +325,6 @@
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
                       movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
-                      //alert( settings.accordion.pmuidfieldemail );
-                      alert( settings.pmuidfieldemail );
                       alert( settings.accordion.pmuidfieldemail );
                     }, /* accordion */
       init        : function( settings_ )
