@@ -27,32 +27,8 @@ var t3caddyAlert          = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 
-$( document ).on( "click", "button.next", function( e ) {
-  accordionApi.next();
-});
-$( document ).on( "click", "button.prev", function( e ) {
-  accordionApi.prev();
-});
-
-var fnInit = function( ) {
-  //fnAccordion( accordionSelector, powermailFormSelector );
-  return $( this ).t3caddy( "accordion", {
-    accordion : { 
-      accordionSelector     : "#c###UID###-accordion",
-      powermailFormSelector : "#c###UID###-accordion-powermail div form",
-      powermailWallHtmlId   : "#c###UID###-powermail-prompt",
-      powermailUid          : "#c###UID_POWERMAIL_FORM###",
-      pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
-      pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
-      pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
-      t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
-      t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
-    }
-  } );
-};
-
 /* Initiate Accordion */
-$(function() {
+$(function( ) {
   //accordionApi = fnInit( );
   accordionApi =  $( this ).t3caddy( "accordion", {
     accordion : { 
@@ -66,8 +42,25 @@ $(function() {
       t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
       t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
     }
-  } );
+  });
+  $.tools.validator.localize("de", {
+    // Isn't localised
+    //"*"		: "Der Wert wird nicht akzeptiert",
+    ":email"  	: "Bitte eine korrekte E-Mail-Adresse eingeben",
+    ":number" 	: "Bitte nur Zahlen eingeben",
+    ":url" 	: "Bitte eine korrekte URL eingeben",
+    "[max]"	: "Maximal $1 ist erlaubt",
+    "[min]"	: "Mindestens $1 ist n&ouml;tig",
+    "[required]"	: "Bitte ausfüllen"
+  }); // $.tools.validator.localize ...
 }); /* Initiate Accordion */
+
+$( document ).on( "click", "button.next", function( e ) {
+  accordionApi.next();
+});
+$( document ).on( "click", "button.prev", function( e ) {
+  accordionApi.prev();
+});
 
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
@@ -143,18 +136,6 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
 
 
 
-/* Validator begin */
-$.tools.validator.localize("de", {
-  // Isn't localised
-  //"*"		: "Der Wert wird nicht akzeptiert",
-  ":email"  	: "Bitte eine korrekte E-Mail-Adresse eingeben",
-  ":number" 	: "Bitte nur Zahlen eingeben",
-  ":url" 	: "Bitte eine korrekte URL eingeben",
-  "[max]"	: "Maximal $1 ist erlaubt",
-  "[min]"	: "Mindestens $1 ist n&ouml;tig",
-  "[required]"	: "Bitte ausfüllen"
-}); // $.tools.validator.localize ...
-/* Validator end */
 
 // adds an effect called "wall" to the validator
 $.tools.validator.addEffect( "wall", function( errors, event ) 
