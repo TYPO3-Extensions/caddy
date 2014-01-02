@@ -674,7 +674,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
+                          //$( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
                           $( settings.accordion.accordionSelector ).tabs( "div.pane").destroy( );
                           accordionApi = methods.accordion( settings.accordion );
                           clean_up( settings.update.html_element );
