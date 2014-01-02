@@ -322,8 +322,8 @@
                         if ( settings_ ) {
                           $.extend( settings, settings_ );
                         }
+                        alert( settings.accordion.pmuidfieldemail );
                       });
-                      alert( settings.accordion.pmuidfieldemail );
                     }, /* init */
       update      : function( html_element, url, data, html_element_wi_selector )
                     {
