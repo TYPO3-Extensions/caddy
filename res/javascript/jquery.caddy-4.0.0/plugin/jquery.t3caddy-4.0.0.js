@@ -21,10 +21,10 @@
 
   $.fn.t3caddy = function( method )
   {
-    function addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId ) {
+    function addAccordion( ) {
       console.debug( settings.accordion.pmuidfieldemail );
       // The accordian panes of the caddy
-      $(accordionSelector).tabs( "div.pane",
+      $(settings.accordion.accordionSelector).tabs( "div.pane",
       {
         tabs          : 'h2',
         effect        : 'slide',
@@ -51,7 +51,7 @@
               break;
           }
           // Are all values proper of the powermail form?
-          if( initValidator( powermailFormSelector, "validate", powermailWallHtmlId ) )
+          if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
           {
             //alert( "return true: success" );
             // RETURN : all values are proper
@@ -62,10 +62,10 @@
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           return false;
         } // onBeforeClick ...
-      }); // $(accordionSelector).panes ...
+      }); // $(settings.accordion.accordionSelector).panes ...
     }; /* accordion */
       // Add the powermail tabs to the caddy tab powermail
-    function addPowermailTabsToCaddy( accordionSelector, powermailUid ) {
+    function addPowermailTabsToCaddy( ) {
       // Get the URL
       urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
       urlSearch   = $( location ).attr( "search" );
@@ -75,8 +75,8 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
-      //console.debug( powermailUid + " div form > fieldset > legend" );
-      $( powermailUid + " div form > fieldset > legend" ).each( function( i ) {
+      //console.debug( settings.accordion.powermailUid + " div form > fieldset > legend" );
+      $( settings.accordion.powermailUid + " div form > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
               + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
@@ -88,7 +88,7 @@
             ;
       //console.debug( tabs );
       // Add the powermail tabs to the caddy tab powermail
-      $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
+      $( tabs ).appendTo( settings.accordion.accordionSelector + " div.caddy-powermail" );
     }; // Add the powermail tabs to the caddy tab powermail
 
     indexAccordionOrdering  = 4; // Ordering
@@ -140,9 +140,9 @@
       // Prompt informations
 
     /* Powermail tabs begin */
-    function initPowermailTabs( powermailFormSelector, powermailWallHtmlId ) {
+    function initPowermailTabs( ) {
       // Configure the tabs of the powermail form
-      $( "ul.css-tabs" ).tabs( powermailFormSelector + " > fieldset.powermail_fieldset",
+      $( "ul.css-tabs" ).tabs( settings.accordion.powermailFormSelector + " > fieldset.powermail_fieldset",
       {
         initialIndex  : 0, // first tab
         onBeforeClick : function( event, indexTabDest ) {
@@ -158,7 +158,7 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-          var success = initValidator( idTabSrce, "validate", powermailWallHtmlId );
+          var success = initValidator( idTabSrce, "validate" );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
@@ -171,14 +171,14 @@
     };  // $(function() ...
     /* Powermail tabs begin */
 
-    function initValidator( selector, validate, powermailWallHtmlId ) {
+    function initValidator( selector, validate ) {
       //movePowermailFieldsToHtml5( );  
       success = false;
-//      console.debug( selector, powermailWallHtmlId )
+//      console.debug( selector, settings.accordion.powermailWallHtmlId )
       validatePowermailForm = $( selector ).validator(
       {
         effect          : "wall",
-        container       : powermailWallHtmlId,
+        container       : settings.accordion.powermailWallHtmlId,
         lang            : "de",
         // do not validate inputs when they are edited
         errorInputEvent : null
@@ -189,11 +189,11 @@
         if( !e.isDefaultPrevented( ) ) 
         {
           // tell user that everything is OK
-          //$( powermailWallHtmlId ).html( "<h3>All good</h3>" );
+          //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
           // prevent the form data being submitted to the server
           //e.preventDefault( );
         }
-      }); // $(powermailFormSelector).validator ...
+      }); // $(settings.accordion.powermailFormSelector).validator ...
       if( validate == "validate" )
       {
         success = validatePowermailForm.data('validator').checkValidity( );
@@ -243,20 +243,20 @@
       // Replace vars in the source with the given params
 
       // Move the powermail form into the caddy to the tab powermail
-    function movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId ) {
+    function movePowermailFormToCaddy( ) {
       // Move the powermail form TYPO3 content element to the powermail accordian div
-      $( powermailUid + " > div" ).detach( ).appendTo(accordionSelector + " div.caddy-powermail" );
+      $( settings.accordion.powermailUid + " > div" ).detach( ).appendTo(settings.accordion.accordionSelector + " div.caddy-powermail" );
       // Remove the default powermail-can't-move-error
-      $( powermailWallHtmlId ).css( "display", "none" );
-      if( $( accordionSelector + " div.caddy-powermail form" ).length )  
+      $( settings.accordion.powermailWallHtmlId ).css( "display", "none" );
+      if( $( settings.accordion.accordionSelector + " div.caddy-powermail form" ).length )  
       {
         // Remove the powermail default h3-header
-        $( accordionSelector + " div.caddy-powermail form h3").remove( );
+        $( settings.accordion.accordionSelector + " div.caddy-powermail form h3").remove( );
         // Add IDs to each fieldset
-        $( accordionSelector + " div.caddy-powermail form > fieldset" ).each( function( i ) {
+        $( settings.accordion.accordionSelector + " div.caddy-powermail form > fieldset" ).each( function( i ) {
           $( this ).attr("id", "tab-" + i );
         });
-        initPowermailTabs( powermailFormSelector, powermailWallHtmlId );
+        initPowermailTabs( settings.accordion.powermailFormSelector, settings.accordion.powermailWallHtmlId );
       }
     };  // Move the powermail form into the caddy to the tab powermail
 
@@ -323,10 +323,10 @@
                       //options = $.extend({}, settings, options);
                       options = $.extend(settings, options);
                       console.debug( settings.accordion.pmuidfieldemail );
-                      addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId );
-                      addPowermailTabsToCaddy( accordionSelector, powermailUid );
-                      movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
-                      initValidator( powermailFormSelector, null, powermailWallHtmlId );
+                      addAccordion( );
+                      addPowermailTabsToCaddy( );
+                      movePowermailFormToCaddy( );
+                      initValidator( settings.accordion.powermailFormSelector, null );
                       alert( settings.accordion.pmuidfieldemail );
                     }, /* accordion */
       init        : function( settings_ )
