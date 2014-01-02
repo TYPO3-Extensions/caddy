@@ -36,12 +36,12 @@ $( document ).on( "click", "button.prev", function( e ) {
 
 var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
-  $( this ).t3caddy({
+  $( this ).t3caddy( "init", {
     accordion: {
       pmuidfieldemail : '###PMUIDFIELDEMAIL###'
     }
   });
-  $( this ).t3caddy( 'accordion', accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId )
+  $( this ).t3caddy( "accordion", accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId )
   //addPowermailTabsToCaddy( accordionSelector, powermailUid );
   //movePowermailFormToCaddy( powermailUid );
 };
