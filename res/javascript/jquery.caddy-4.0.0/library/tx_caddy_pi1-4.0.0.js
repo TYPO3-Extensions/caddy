@@ -57,6 +57,7 @@ var fnAccordion = function() {
           currAccordionIndex = indexAccordionDest;
           return true;
         }
+        $( this ).click( 2 );
         alert( "Bitte füllen Sie erst das Formular vollständig aus." );
         return false;
       } // onBeforeClick ...
