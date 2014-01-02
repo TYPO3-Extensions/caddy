@@ -77,7 +77,7 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-var fnAjax = function( e ) {
+var fnAjax = function( formAction, e ) {
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
@@ -93,7 +93,6 @@ var fnAjax = function( e ) {
   } // RETURN : current id isn't part of the DOM
 
   // Update the content with the id #c###UID###-###VIEW###view
-  formAction                    = $( this ).closest( "form" ).attr( "action");
   var url                       = $( this ).t3caddy( 'url_autoQm', formAction, "type=###TYPENUM###" );
   //var html_element              = "#c###UID###";
   var html_element              = "#content";
@@ -102,19 +101,21 @@ var fnAjax = function( e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
-    accordionIndex = currAccordionIndex;
+//    accordionIndex = currAccordionIndex;
     fnInit( ); /* Initiate Accordion */
-    alert( accordionIndex );
-    accordionApi.click( accordionIndex );
+//    alert( accordionIndex );
+//    accordionApi.click( accordionIndex );
   }, 2000 );
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-  fnAjax( e );
+  formAction = $( this ).closest( "form" ).attr( "action");
+  fnAjax( formAction, e );
 }); // User has clicked a tag with the cUID-step class
 $( "form.powermail_form" ).submit( function( e )  
 {
+  formAction = $( this ).attr( "action");
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
