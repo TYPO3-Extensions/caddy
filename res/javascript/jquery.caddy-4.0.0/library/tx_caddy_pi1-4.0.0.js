@@ -105,6 +105,15 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
 }); // User has clicked a tag with the cUID-step class
+$( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
+  if( !e.isDefaultPrevented( ) ) 
+  {
+    e.preventDefault( ); // Don't execute the click
+    formAction  = $( this ).attr( "href");
+    formData    = null;
+    fnAjax( formAction, formData, e );
+  }
+}); // User has clicked a tag with the cUID-step class
 $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
