@@ -45,7 +45,6 @@ $(function( ) {
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
-  alert( currAccordionIndex );
 }); /* Initiate Accordion */
 
 $( document ).on( "click", "button.next", function( e ) {
@@ -77,7 +76,13 @@ var fnAjax = function( formAction, formData, e ) {
 //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
-  $( this ).t3caddy( 'update', html_element, url, formData, html_element_wi_selector )
+  $( this ).t3caddy( "update", {
+    currAccordionIndex        : currAccordionIndex,
+    formData                  : formData,
+    html_element              : html_element, 
+    html_element_wi_selector  : html_element_wi_selector, 
+    url                       : url
+  });
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
 //  setTimeout( function( ) {

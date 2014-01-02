@@ -437,6 +437,13 @@
                     '</p>' +
                   '</div>' +
                 '</div>'
+      },
+      update: {
+        currAccordionIndex        : undefined, // [0-4]
+        formData                  : undefined, // serialized
+        html_element              : undefined, 
+        html_element_wi_selector  : undefined, 
+        url                       : undefined
       }
     };
 
@@ -465,9 +472,11 @@
                         }
                       });
                     }, /* init */
-      update      : function( html_element, url, data, html_element_wi_selector )
+      update      : function( options )
                     {
+                      options = $.extend( settings.update, options );
                       console.debug( settings.accordion.currAccordionIndex );
+                      console.debug( settings.update.html_element );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
 
