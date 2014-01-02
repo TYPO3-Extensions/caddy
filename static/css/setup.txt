@@ -206,6 +206,9 @@ plugin.tx_caddy_pi1 {
       margin: 0; 
       padding: 0; 
     }
+    button.accordion[disabled=disabled] {
+      opacity:.5;
+    }
     button.accordion,
     div.linktocaddy,
     div.linktoshop,
