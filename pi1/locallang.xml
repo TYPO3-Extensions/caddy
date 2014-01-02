@@ -6,6 +6,8 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
+      <label index="accordionnext">Next</label>
+      <label index="accordionprev">Prev</label>
       <label index="caddyempty">Caddy is empty</label>
       <label index="caddyemptyyou">Your caddy is empty</label>
       <label index="caddyempty">Caddy is empty</label>
@@ -77,6 +79,8 @@
       <label index="tax_turnover_abbr_percent">VAT %</label>
     </languageKey>
     <languageKey index="de" type="array">
+      <label index="accordionnext">Weiter</label>
+      <label index="accordionprev">Zur<![CDATA[&uuml;]]>ck</label>
       <label index="caddyempty">Der Warenkorb ist leer</label>
       <label index="caddyemptyyou">Dein Warenkorb ist leer</label>
       <label index="delete">Diesen Artikel aus dem Warenkorb entfernen.</label>
