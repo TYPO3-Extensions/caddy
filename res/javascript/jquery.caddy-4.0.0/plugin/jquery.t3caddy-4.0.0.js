@@ -22,7 +22,7 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( ) {
-      console.debug( settings.accordion.pmuidfieldemail );
+      //console.debug( settings.accordion.pmuidfieldemail );
       // The accordian panes of the caddy
       $(settings.accordion.accordionSelector).tabs( "div.pane",
       {

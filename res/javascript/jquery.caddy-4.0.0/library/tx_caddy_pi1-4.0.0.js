@@ -49,15 +49,24 @@ var fnInit = function( ) {
       t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
     }
   } );
-//  return $( accordionSelector ).data( "tabs" );
-  //addPowermailTabsToCaddy( accordionSelector, powermailUid );
-  //movePowermailFormToCaddy( powermailUid );
 };
 
 /* Initiate Accordion */
 $(function() {
-  accordionApi = fnInit( );
-  //accordionApi = $( accordionSelector ).data( "tabs" );
+  //accordionApi = fnInit( );
+  accordionApi =  $( this ).t3caddy( "accordion", {
+    accordion : { 
+      accordionSelector     : "#c###UID###-accordion",
+      powermailFormSelector : "#c###UID###-accordion-powermail div form",
+      powermailWallHtmlId   : "#c###UID###-powermail-prompt",
+      powermailUid          : "#c###UID_POWERMAIL_FORM###",
+      pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
+      pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
+      pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
+      t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
+      t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
+    }
+  } );
 }); /* Initiate Accordion */
 
 /* AJAX begin */
