@@ -20,11 +20,11 @@ var currAccordionIndex    = undefined;
 var powermailFormSelector = "#c###UID###-accordion-powermail div form";
 var powermailWallHtmlId   = "#c###UID###-powermail-prompt"
 var powermailUid          = "#c###UID_POWERMAIL_FORM###";
-var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
-var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
-var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
-var t3caddyAlert          = ###T3CADDYALERT###;
-var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
+var pmuidfieldemail       = parseInt( "###PMUIDFIELDEMAIL###" );
+var pmuidfieldrevocation  = parseInt( "###PMUIDFIELDREVOCATION###" );
+var pmuidfieldterms       = parseInt( "###PMUIDFIELDTERMS###" );
+var t3caddyAlert          = parseInt( "###T3CADDYALERT###" );
+var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 
 $( document ).on( "click", "button.next", function( e ) {
@@ -38,11 +38,15 @@ var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, p
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( "accordion", {
     accordion : { 
-      accordionSelector     : accordionSelector,
-      powermailUid          : powermailUid,
-      powermailFormSelector : powermailFormSelector, 
-      powermailWallHtmlId   : powermailWallHtmlId,
-      pmuidfieldemail       : pmuidfieldemail 
+      accordionSelector     : "#c###UID###-accordion",
+      powermailFormSelector : "#c###UID###-accordion-powermail div form",
+      powermailWallHtmlId   : "#c###UID###-powermail-prompt",
+      powermailUid          : "#c###UID_POWERMAIL_FORM###",
+      pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
+      pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
+      pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
+      t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
+      t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
     }
   } );
   //addPowermailTabsToCaddy( accordionSelector, powermailUid );
