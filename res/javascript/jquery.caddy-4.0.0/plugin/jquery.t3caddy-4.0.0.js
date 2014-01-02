@@ -261,6 +261,7 @@
 
     var settings = {
       accordion : {
+        pmuidfieldemail : 0
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
