@@ -75,6 +75,10 @@
             settings.accordion.currAccordionIndex = indexAccordionDest;
             $( accordionButtonId ).removeAttr( "disabled" );
 //            console.debug( settings.accordion.currAccordionIndex );
+            if( indexAccordionSrce == indexAccordionPowermail )
+            {
+              submitPowermail( );
+            }
             return true;
           }
           this.click( indexAccordionPowermail );
@@ -460,6 +464,10 @@
       }
     }  // Move the powermail form into the caddy to the tab powermail
     
+    // Move the powermail form into the caddy to the tab powermail
+    function submitPowermail( ) {
+      $( ".powermail_form powermail_form_30" ).submit( );
+    }
 //    /* AJAX begin */
 //    function runAjax( formAction, formData, e ) {
 //      currAccordionIndex = accordionApi.getIndex( );
