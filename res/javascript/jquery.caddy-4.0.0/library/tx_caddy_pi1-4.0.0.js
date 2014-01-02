@@ -45,6 +45,7 @@ $(function( ) {
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
+  console.debug( currAccordionIndex );
 }); /* Initiate Accordion */
 
 $( document ).on( "click", "button.next", function( e ) {
@@ -56,6 +57,7 @@ $( document ).on( "click", "button.prev", function( e ) {
 
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
+  console.debug( currAccordionIndex );
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
@@ -96,6 +98,7 @@ var fnAjax = function( formAction, formData, e ) {
 /* AJAX end */
 
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+  console.debug( currAccordionIndex );
   formAction  = $( this ).closest( "form" ).attr( "action");
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
