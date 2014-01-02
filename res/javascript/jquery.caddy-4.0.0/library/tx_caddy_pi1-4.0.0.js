@@ -20,11 +20,11 @@ var currAccordionIndex    = undefined;
 var powermailFormSelector = "#c###UID###-accordion-powermail div form";
 var powermailWallHtmlId   = "#c###UID###-powermail-prompt"
 var powermailUid          = "#c###UID_POWERMAIL_FORM###";
-//var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
-//var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
-//var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
-//var t3caddyAlert          = ###T3CADDYALERT###;
-//var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
+var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
+var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
+var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
+var t3caddyAlert          = ###T3CADDYALERT###;
+var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
 
 
 $( document ).on( "click", "button.next", function( e ) {
