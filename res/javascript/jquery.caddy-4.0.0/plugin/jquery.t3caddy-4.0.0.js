@@ -602,6 +602,15 @@
 //                      }
 
                     }, /* accordion */
+      init        : function( settings_ )
+                    {
+                      return this.each( function( ) {
+                          // If settings_ exist, lets merge them with our default settings
+                        if ( settings_ ) {
+                          $.extend( settings, settings_ );
+                        }
+                      });
+                    }, /* init */
       update      : function( options )
                     {
                       options = $.extend( settings, options );
