@@ -467,7 +467,7 @@
     // Move the powermail form into the caddy to the tab powermail
     function submitPowermail( ) {
       console.debug( "submitPowermail( )" )
-      $( ".powermail_form powermail_form_30" ).submit( );
+      $( ".powermail_form_30" ).submit( );
     }
 //    /* AJAX begin */
 //    function runAjax( formAction, formData, e ) {
