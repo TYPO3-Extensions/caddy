@@ -263,6 +263,9 @@ plugin.tx_caddy_pi1 {
       font-weight:bold;
       text-align:right;
     }
+    div.linktoshopwofloat {
+      clear:both;
+    }
     div.linktoshop a,
     div.linktoshop a:link,
     div.linktoshop a:visited,

@@ -2455,7 +2455,7 @@ plugin.tx_caddy_pi1 {
             de = Summe
             en = Amount
           }
-          noTrimWrap = | <span class="content">(||
+          noTrimWrap = |(||
         }
           // value
         20 = USER
@@ -2756,7 +2756,7 @@ plugin.tx_caddy_pi1 {
           }
         }
       }
-      wrap = <div class="linktoshop caddylinktoshop">|</div>
+      wrap = <div class="linktoshop linktoshopwofloat caddylinktoshop">|</div>
     }
   }
 }
