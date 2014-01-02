@@ -360,15 +360,15 @@
           selector = "input[name='" + error.input.attr( "name" ) + "']";
 
           idOfFieldset = $( selector ).closest( "fieldset").attr( "id");
-          console.debug( "#" + idOfFieldset + " legend", $( "#" + idOfFieldset + " legend" ).text( ) );
+          legend       = $( "#" + idOfFieldset + " legend" ).text( );
           switch( error.input.attr( "name" ) )
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
             case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
-              strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).next( ).text( ) + "</strong></p>"
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
               break;
             default:
-              strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).prev( ).text( ) + "</strong></p>";
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
               break;
           }
           wall.append( strAppend );
