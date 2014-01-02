@@ -577,6 +577,7 @@
 
     var methods = {
       accordion   : function( options ) {
+                      $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
                       console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
@@ -674,7 +675,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          accordionApi.destroy( );
+                          accordionApi.remove( );
                           accordionApi = methods.accordion( settings.accordion );
                           clean_up( settings.update.html_element );
                           return accordionApi;
