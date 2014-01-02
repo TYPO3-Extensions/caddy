@@ -23,6 +23,10 @@
   {
     function addAccordion( ) {
       initialIndex = parseInt( settings.accordion.currAccordionIndex );
+      if( isNaN( initialIndex ) )
+      {
+        initialIndex = 0;
+      }
       console.debug( initialIndex );
 
       // The accordian panes of the caddy
