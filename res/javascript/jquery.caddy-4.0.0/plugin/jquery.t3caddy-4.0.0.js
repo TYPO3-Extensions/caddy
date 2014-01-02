@@ -57,7 +57,7 @@
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
             accordionButtonId = settings.accordion.accordionButtonId;
-            $( accordionButtonId ).attr( "disabled" ).remove( );
+            $( accordionButtonId ).removeAttr( "disabled" );
 //            console.debug( settings.accordion.currAccordionIndex );
             return true;
           }
