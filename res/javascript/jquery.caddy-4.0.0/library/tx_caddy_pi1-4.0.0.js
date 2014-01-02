@@ -29,15 +29,15 @@ var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 /* Initiate Accordion */
 $(function( ) {  
-  switch( true )
-  { 
-    case( $_GET["tx_caddy_pi1[accordion]"] ):
-      currAccordionIndex = parseInt( $_GET["tx_caddy_pi1[accordion]"] );
-      break;
-    case( $_POST["tx_caddy_pi1[accordion]"] ):
-      currAccordionIndex = parseInt( $_POST["tx_caddy_pi1[accordion]"] );
-      break;
-  }
+//  switch( true )
+//  { 
+//    case( $_GET["tx_caddy_pi1[accordion]"] ):
+//      currAccordionIndex = parseInt( $_GET["tx_caddy_pi1[accordion]"] );
+//      break;
+//    case( $_POST["tx_caddy_pi1[accordion]"] ):
+//      currAccordionIndex = parseInt( $_POST["tx_caddy_pi1[accordion]"] );
+//      break;
+//  }
   console.debug( currAccordionIndex );
   //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
