@@ -310,6 +310,7 @@
 
     var methods = {
       accordion   : function( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId, options ) {
+                      //options = $.extend({}, settings, options);
                       options = $.extend({}, settings, options);
                       addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId );
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
