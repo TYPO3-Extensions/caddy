@@ -17,7 +17,7 @@
 var accordionApi          = undefined;
 var accordionSelector     = "#c###UID###-accordion";
 var currAccordionIndex    = undefined;
-var powermailFormSelector = "#c###UID###-accordion-powermail form";
+var powermailFormSelector = "#c###UID###-accordion-powermail div form";
 var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
 var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
 var pmuidfieldterms       = ###PMUIDFIELDTERMS###;

@@ -85,7 +85,7 @@
             + tabs
             + '</ul>'
             ;
-      //alert( tabs );
+      console.debug( tabs );
       // Add the powermail tabs to the caddy tab powermail
       $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
     }; // Add the powermail tabs to the caddy tab powermail
