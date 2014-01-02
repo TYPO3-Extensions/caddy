@@ -36,7 +36,7 @@ $( document ).on( "click", "button.prev", function( e ) {
 
 var fnInit = function( ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
-  $( this ).t3caddy( "accordion", {
+  return $( this ).t3caddy( "accordion", {
     accordion : { 
       accordionSelector     : "#c###UID###-accordion",
       powermailFormSelector : "#c###UID###-accordion-powermail div form",
@@ -49,7 +49,7 @@ var fnInit = function( ) {
       t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
     }
   } );
-  return $( accordionSelector ).data( "tabs" );
+//  return $( accordionSelector ).data( "tabs" );
   //addPowermailTabsToCaddy( accordionSelector, powermailUid );
   //movePowermailFormToCaddy( powermailUid );
 };

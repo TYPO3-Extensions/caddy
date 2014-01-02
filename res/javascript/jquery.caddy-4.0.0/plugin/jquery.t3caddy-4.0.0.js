@@ -402,6 +402,8 @@
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
+                      return $( settings.accordion.accordionSelector ).data( "tabs" );
+
                     }, /* accordion */
       init        : function( settings_ )
                     {
