@@ -306,7 +306,7 @@
 
     var methods = {
       accordion   : function( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId ) {
-                      addAccordion( accordionSelector, powermailFormSelector );
+                      addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId );
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
                       movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
