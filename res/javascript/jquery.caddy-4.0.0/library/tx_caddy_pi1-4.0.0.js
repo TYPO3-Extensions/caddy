@@ -34,7 +34,7 @@ $( document ).on( "click", "button.prev", function( e ) {
   accordionApi.prev();
 });
 
-var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId ) {
+var fnInit = function( ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( "accordion", {
     accordion : { 
@@ -55,7 +55,7 @@ var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, p
 
 /* Initiate Accordion */
 $(function() {
-  fnInit( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId );
+  fnInit( );
   accordionApi = $( accordionSelector ).data( "tabs" );
 }); /* Initiate Accordion */
 
@@ -132,74 +132,74 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
 /* AJAX end */
 
   // move powermail fields to HTML 5
-var movePowermailFieldsToHtml5 = function() {
-  // Move e-mail from type=text to type=email
-  selectorEmailText   = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
-  selectorEmailEmail  = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=email]";
-  switch( $( selectorEmailText ).length )
-  {
-    case( 0 ):
-    case( false ):
-    case( undefined ):
-      if( t3caddyConsoleDebug )
-      {
-        if( $( selectorEmailEmail ).length != true )
-        {
-          //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
-          console.debug( "The selector " + selectorEmailText + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
-        }
-      }
-      break;
-    default:
-      marker = $("<span />").insertBefore( selectorEmailText );
-      // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
-      $( selectorEmailText ).detach( ).attr( "type","email").insertAfter( marker );
-      marker.remove( );
-      break;
-  } // Move e-mail from type=text to type=email
-  // Make checkbox for terms and conditions required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=checkbox]";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=hidden]";
-  switch( $( selectorCheckbox ).length )
-  {
-    case( 0 ):
-    case( false ):
-    case( undefined ):
-      if( t3caddyConsoleDebug )
-      {
-        //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for terms and conditions.");
-      }
-      break;
-    default:
-      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
-      $( selectorCheckbox ).attr( "required", "required" );
-      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
-      $( selectorHidden ).remove( );
-      break;
-  } // Make checkbox for terms and conditions required and remove hidden field with the same name
-  // Make checkbox for revocation required and remove hidden field with the same name
-  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=checkbox]";
-  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=hidden]";
-  switch( $( selectorCheckbox ).length )
-  {
-    case( 0 ):
-    case( false ):
-    case( undefined ):
-      if( t3caddyConsoleDebug )
-      {
-        //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
-        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for revocation.");
-      }
-      break;
-    default:
-      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
-      $( selectorCheckbox ).attr( "required", "required" );
-      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
-      $( selectorHidden ).remove( );
-      break;
-  } // Make checkbox for revocation required and remove hidden field with the same name
-};  // move powermail fields to HTML 5
+//var movePowermailFieldsToHtml5 = function() {
+//  // Move e-mail from type=text to type=email
+//  selectorEmailText   = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
+//  selectorEmailEmail  = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=email]";
+//  switch( $( selectorEmailText ).length )
+//  {
+//    case( 0 ):
+//    case( false ):
+//    case( undefined ):
+//      if( t3caddyConsoleDebug )
+//      {
+//        if( $( selectorEmailEmail ).length != true )
+//        {
+//          //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
+//          console.debug( "The selector " + selectorEmailText + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode.");
+//        }
+//      }
+//      break;
+//    default:
+//      marker = $("<span />").insertBefore( selectorEmailText );
+//      // BE AWARE: Internet Explorer from 6 to 8 will not accept the attr changing!
+//      $( selectorEmailText ).detach( ).attr( "type","email").insertAfter( marker );
+//      marker.remove( );
+//      break;
+//  } // Move e-mail from type=text to type=email
+//  // Make checkbox for terms and conditions required and remove hidden field with the same name
+//  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=checkbox]";
+//  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldterms + "][0]'][type=hidden]";
+//  switch( $( selectorCheckbox ).length )
+//  {
+//    case( 0 ):
+//    case( false ):
+//    case( undefined ):
+//      if( t3caddyConsoleDebug )
+//      {
+//        //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+//        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for terms and conditions.");
+//      }
+//      break;
+//    default:
+//      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
+//      $( selectorCheckbox ).attr( "required", "required" );
+//      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
+//      $( selectorHidden ).remove( );
+//      break;
+//  } // Make checkbox for terms and conditions required and remove hidden field with the same name
+//  // Make checkbox for revocation required and remove hidden field with the same name
+//  selectorCheckbox  = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=checkbox]";
+//  selectorHidden    = "input[name='tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]'][type=hidden]";
+//  switch( $( selectorCheckbox ).length )
+//  {
+//    case( 0 ):
+//    case( false ):
+//    case( undefined ):
+//      if( t3caddyConsoleDebug )
+//      {
+//        //alert( "WARNING: The selector " + selectorCheckbox + " isn't part of the DOM!");
+//        console.debug( "The selector " + selectorCheckbox + " isn't part of the DOM! This is proper, if powermail form is loaded in confirmation mode or if there isn't any checkbox for revocation.");
+//      }
+//      break;
+//    default:
+//      // Add required to required checkboxes (PM 2.x didn't set the attribute!)'
+//      $( selectorCheckbox ).attr( "required", "required" );
+//      // Remove hidden fields, which are set by PM 2.x: name is double, validator doesn't wor proper'
+//      $( selectorHidden ).remove( );
+//      break;
+//  } // Make checkbox for revocation required and remove hidden field with the same name
+//};  // move powermail fields to HTML 5
 
 
 /* Validator begin */
@@ -246,4 +246,4 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 });
 
 
-movePowermailFieldsToHtml5( );  
+//movePowermailFieldsToHtml5( );  
