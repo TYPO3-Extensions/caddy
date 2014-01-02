@@ -173,7 +173,7 @@
     function initValidator( selector, validate, powermailWallHtmlId ) {
       //movePowermailFieldsToHtml5( );  
       success = false;
-      console.debug( selector, powermailWallHtmlId )
+//      console.debug( selector, powermailWallHtmlId )
       validatePowermailForm = $( selector ).validator(
       {
         effect          : "wall",
@@ -310,6 +310,7 @@
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
                       movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
+                      alert( settings.accordion.pmuidfieldemail );
                     }, /* accordion */
       init        : function( settings_ )
                     {
