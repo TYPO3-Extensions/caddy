@@ -88,7 +88,7 @@ var fnAjax = function( formAction, formData, e ) {
     url                 : formAction, 
     param               : "type=###TYPENUM###"
   });
-//console.debug( url );
+console.debug( url );
 //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
