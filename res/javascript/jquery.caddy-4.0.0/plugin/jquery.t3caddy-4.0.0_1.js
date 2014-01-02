@@ -3,7 +3,7 @@
  *
  * http://docs.jquery.com/Plugins/t3caddy
  *
- * Copyright (c) 2013-2014 - Dirk Wildt
+ * Copyright (c) 2013 Dirk Wildt
  * http://wildt.at.die-netzmacher.de/
  *
  * Dual licensed under the MIT and GPL licenses:
