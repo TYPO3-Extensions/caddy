@@ -173,7 +173,7 @@
     function initValidator( selector, validate, powermailWallHtmlId ) {
       //movePowermailFieldsToHtml5( );  
       success = false;
-      console.debug( selector )
+      console.debug( selector, powermailWallHtmlId )
       validatePowermailForm = $( selector ).validator(
       {
         effect          : "wall",
