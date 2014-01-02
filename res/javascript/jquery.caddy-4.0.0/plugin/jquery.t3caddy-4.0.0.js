@@ -291,6 +291,9 @@
           }
           formAction  = $( this ).closest( "form" ).attr( "action");
           formData    = $( this ).closest( "form" ).serialize( );
+          console.debug( $( this ).attr( "class" ) );
+          console.debug( formAction );
+          console.debug( formData );
           runAjax( formAction, formData, e );
         }
       }); // User has clicked a tag with the cUID-step class      
