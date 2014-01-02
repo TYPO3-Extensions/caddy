@@ -101,7 +101,7 @@ var fnAjax = function( formAction, formData, e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
-    console.debug( accordionApi.getIndex( ) );
+    console.debug( currAccordionIndex );
     accordionApi = accordion( );
   }, 2000 );
 } // User has clicked a tag with the cUID-step class
