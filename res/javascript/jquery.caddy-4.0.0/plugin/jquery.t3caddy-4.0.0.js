@@ -483,16 +483,16 @@
                       return this.each( function ( )
                       {
                           // ERROR html_element is missing. Don't use AJAX but forward
-                        if( !$( html_element ).length ) {
-                          if( t3caddyAlert )
+                        if( !$( settings.update.html_element ).length ) {
+                          if( settings.update.t3caddyAlert )
                           {
-                            prompt = format( settings.messages.errMissingTagPropertyPrmpt, html_element);
+                            prompt = format( settings.messages.errMissingTagPropertyPrmpt, settings.update.html_element);
                             alert( settings.messages.errMissingTagPropertyLabel + " " + prompt );
-                            prompt = format( settings.messages.hlpMissingTagPropertyPrmpt, html_element);
+                            prompt = format( settings.messages.hlpMissingTagPropertyPrmpt, settings.update.html_element);
                             alert( settings.messages.hlpMissingTagPropertyLabel + " " + prompt );
                             //alert(settings.messages.hlpAjaxConflictLabel + " " + settings.messages.hlpAjaxConflictPrmpt );
                           }
-                          fq_url = window.location.protocol + "//" + window.location.host + "/" + url;
+                          fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                           window.location.href = fq_url;
                           return;
                         }
@@ -503,12 +503,12 @@
                         $("#update-prompt div").remove( );
 
                           // Cover the html_element with the loading *.gif
-                        cover_wi_loader( html_element );
+                        cover_wi_loader( settings.update.html_element );
 
                           // Send the AJAX request
                           // Replace the content of the html element with the delivered data
-                        var url_wi_selector = url + " " + settings.update.html_element_wi_selector;
-                        $( settings.update.html_element ).load( url_wi_selector, data, function( response, status, xhr )
+                        var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
+                        $( settings.update.html_element ).load( url_wi_selector, settings.update.data, function( response, status, xhr )
                         {
                             // ERROR server has an error and has send a message
                           if (status == "error")
@@ -516,7 +516,7 @@
                               // Add error messages and helpful informations to the update prompt
                             err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.errServerErrorPrmpt);
                             inf_prompt( "#update-prompt", settings.messages.hlpPageObjectLabel, settings.messages.hlpPageObjectPrmpt );
-                            fq_url = window.location.protocol + "//" + window.location.host + "/" + url;
+                            fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                             a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
                             prompt = format( settings.messages.hlpUrlPrmpt, a_fq_url);
                             inf_prompt( "#update-prompt", settings.messages.hlpUrlLabel, prompt );
