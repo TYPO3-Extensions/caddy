@@ -65,7 +65,7 @@
       ); // $(accordionSelector).panes ...
     }; /* accordion */
       // Add the powermail tabs to the caddy tab powermail
-    var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector ) {
+    var addPowermailTabsToCaddy = function( accordionSelector, powermailUid ) {
       // Get the URL
       urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
       urlSearch   = $( location ).attr( "search" );
@@ -75,8 +75,8 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
-      console.debug( powermailFormSelector + " > fieldset > legend" );
-      $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
+      console.debug( powermailUid + " div form > fieldset > legend" );
+      $( powermailUid + " div form > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
               + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
@@ -225,9 +225,9 @@
     };
 
     var methods = {
-      accordion   : function( accordionSelector, powermailFormSelector ) {
+      accordion   : function( accordionSelector, powermailUid, powermailFormSelector ) {
                       addAccordion( accordionSelector, powermailFormSelector );
-                      //addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
+                      addPowermailTabsToCaddy( accordionSelector, powermailUid );
                     }, /* accordion */
       init        : function( settings_ )
                     {
