@@ -57,6 +57,7 @@ $( document ).on( "click", "button.prev", function( e ) {
 
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
+  currAccordionIndex = accordionApi.getIndex( );
   console.debug( currAccordionIndex );
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
@@ -98,8 +99,6 @@ var fnAjax = function( formAction, formData, e ) {
 /* AJAX end */
 
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-  console.debug( currAccordionIndex );
-  console.debug( accordionApi.getIndex( ) );
   formAction  = $( this ).closest( "form" ).attr( "action");
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
