@@ -135,29 +135,33 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
 //  }
 //});
 $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
-  formAction  = $( this ).closest( "form" ).attr( "action");
-  formData    = $( this ).closest( "form" ).serialize( );
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
+    formAction  = $( this ).closest( "form" ).attr( "action");
+    formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
 }); // User has clicked a tag with the cUID-step class
 $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
-  formAction  = $( this ).closest( "form" ).attr( "action");
-  formData    = $( this ).closest( "form" ).serialize( );
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
+    formAction  = $( this ).closest( "form" ).attr( "action");
+    formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
 }); // User has clicked a tag with the cUID-step class
 $( document ).on( "click", "input.powermail_submit", function( e ) {
-  formAction  = $( this ).closest( "form" ).attr( "action");
-  formData    = $( this ).closest( "form" ).serialize( );
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
+    if( ! initValidator( "#c###UID###-accordion-powermail form", "validate" ) )
+    {
+      return;
+    }
+    formAction  = $( this ).closest( "form" ).attr( "action");
+    formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
 }); // User has clicked a tag with the cUID-step class
