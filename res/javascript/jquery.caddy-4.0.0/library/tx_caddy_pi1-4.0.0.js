@@ -128,6 +128,7 @@ var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector
   }
   tabs = "";
   // LOOP all powermail fieldsets
+  console.debug( powermailFormSelector + " > fieldset > legend" );
   $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
     href  = urlWoSearch + "#tab-" + i + urlSearch;
     tabs  = tabs
@@ -138,7 +139,19 @@ var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector
         + tabs
         + '</ul>'
         ;
-  //alert( tabs );
+  console.debug( tabs );
+  console.debug( "#c###UID_POWERMAIL_FORM### div form > fieldset > legend" );
+  $("#c###UID_POWERMAIL_FORM### div form > fieldset > legend").each(function(i) {
+    href  = urlWoSearch + "#tab-" + i + urlSearch;
+    tabs  = tabs
+          + '<li><a href="' + href + '">' + $(this).text() + '</a></li>'
+          ;
+  }); // LOOP all powermail fieldsets
+  tabs  = '<ul class="css-tabs">'
+        + tabs
+        + '</ul>'
+        ;
+  console.debug( tabs );
   // Add the powermail tabs to the caddy tab powermail
   $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
 }; // Add the powermail tabs to the caddy tab powermail
