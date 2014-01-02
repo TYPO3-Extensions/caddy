@@ -523,8 +523,8 @@
         accordionApi            : undefined,  // API of the accordion
         accordionSelector       : undefined,  // e.g.: "#c2997-accordion"
         currAccordionIndex      : undefined,  // index of the current accordion pane: [0-4]
-        indexAccordionOrdering  : 4, // Ordering
-        indexAccordionPowermail : 2, // Powermail form
+        indexAccordionOrdering  : 3, // Ordering
+        indexAccordionPowermail : 4, // Powermail form
         powermailFormSelector   : undefined,  // e.g.: "#c2997-accordion-powermail div form",
         powermailWallHtmlId     : undefined,  // e.g.: "#c2997-powermail-prompt",
         powermailUid            : undefined,  // e.g.: "#c2995",
