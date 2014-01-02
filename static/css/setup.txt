@@ -236,6 +236,9 @@ plugin.tx_caddy_pi1 {
       position:relative;
       top:.1em;
     }
+    button.accordionSubmit {
+      float:right;
+    }
     .caddy select  { 
       padding: .7em 0 .4em .5em
     }
@@ -264,7 +267,7 @@ plugin.tx_caddy_pi1 {
       text-align:right;
     }
     div.linktoshopwofloat {
-      clear:both;
+      float:none;
     }
     div.linktoshop a,
     div.linktoshop a:link,
