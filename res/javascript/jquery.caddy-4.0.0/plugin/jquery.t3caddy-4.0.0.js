@@ -68,6 +68,13 @@
           return false;
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
+      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+      $( document ).on( "click", accordionNext, function( e ) {
+        accordionApi.next();
+      });
+      $( document ).on( "click", accordionPrev, function( e ) {
+        accordionApi.prev();
+      });      
     } /* accordion */
 
     // Add the powermail tabs to the caddy tab powermail
@@ -389,6 +396,8 @@
     var settings = {
       accordion : {
         accordionButtonId     : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
+        accordionNext         : "button.accordionNext",       // default: button.accordionNext
+        accordionPrev         : "button.accordionPrev",       // default: button.accordionPrev
         accordionApi          : undefined,  // API of the accordion
         accordionSelector     : undefined,  // e.g.: "#c2997-accordion"
         currAccordionIndex    : undefined,  // index of the current accordion pane: [0-4]
@@ -474,13 +483,6 @@
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
-                      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
-  $( document ).on( "click", "button.accordionNext", function( e ) {
-    accordionApi.next();
-  });
-  $( document ).on( "click", "button.accordionPrev", function( e ) {
-    accordionApi.prev();
-  });
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
