@@ -23,7 +23,7 @@
   {
     function addAccordion( ) {
       // The accordian panes of the caddy
-      $(settings.accordion.accordionSelector).tabs( "div.pane",
+      $( settings.accordion.accordionSelector ).tabs( "div.pane",
       {
         tabs          : 'h2',
         effect        : 'slide',
@@ -457,6 +457,10 @@
       accordion   : function( options ) {
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
+                      if( ! $( settings.accordion.accordionSelector ).length ) {
+                        console.debug( "return: " + settings.accordion.accordionSelector + " isn't set." )
+                        return;
+                      }
                       addAccordion( );
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
