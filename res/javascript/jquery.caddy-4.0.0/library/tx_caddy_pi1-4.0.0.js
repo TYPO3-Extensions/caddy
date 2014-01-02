@@ -135,6 +135,11 @@ $( "input.powermail_confirmation_form", "input.powermail_confirmation_submit", "
     fnAjax( formAction, formData, e );
   }
 });
+$( document ).on( "change", "input.powermail_submit", function( e ) {
+  formAction  = $( this ).closest( "form" ).attr( "action");
+  formData    = $( this ).closest( "form" ).serialize( );
+  fnAjax( formAction, formData, e );
+}); // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
 /* Overlay begin */
