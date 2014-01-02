@@ -21,8 +21,78 @@
 
   $.fn.t3caddy = function( method )
   {
+      var addAccordion = function( accordionSelector, powermailFormSelector ) {
+        // The accordian panes of the caddy
+        $(accordionSelector).tabs( "div.pane",
+        {
+          tabs          : 'h2',
+          effect        : 'slide',
+          initialIndex  : 0,
+          onBeforeClick : function( event, indexAccordionDest ) {
+            //alert( "fnAccordion: onBeforeClick" );
+            // Get index of the current accordion tab
+            var indexAccordionSrce  = this.getIndex();
+            currAccordionIndex      = indexAccordionSrce;
+
+            // RETURN if current accordion isn't the powermail pane
+            switch( true )
+            {
+              case( indexAccordionDest == indexAccordionOrdering ): // Ordering
+              case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
+                // Follow the workflow
+                break;
+              default:
+                // No evaluation is needed
+                // RETURN and follow the users workflow
+                //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
+                currAccordionIndex = indexAccordionDest;
+                return true;
+                break;
+            }
+            // Are all values proper of the powermail form?
+            if( initValidator( powermailFormSelector, "validate" ) )
+            {
+              //alert( "return true: success" );
+              // RETURN : all values are proper
+              currAccordionIndex = indexAccordionDest;
+              return true;
+            }
+            this.click( indexAccordionPowermail );
+            alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+            return false;
+          } // onBeforeClick ...
+        }
+      ); // $(accordionSelector).panes ...
+    }; /* accordion */
+      // Add the powermail tabs to the caddy tab powermail
+    var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector ) {
+      // Get the URL
+      urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
+      urlSearch   = $( location ).attr( "search" );
+      if( urlSearch )
+      {
+        urlSearch = "?" + urlSearch; 
+      }
+      tabs = "";
+      // LOOP all powermail fieldsets
+      $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
+        href  = urlWoSearch + "#tab-" + i + urlSearch;
+        tabs  = tabs
+              + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
+              ;
+      }); // LOOP all powermail fieldsets
+      tabs  = '<ul class="css-tabs">'
+            + tabs
+            + '</ul>'
+            ;
+      //alert( tabs );
+      // Add the powermail tabs to the caddy tab powermail
+      $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
+    }; // Add the powermail tabs to the caddy tab powermail
+
     var indexAccordionOrdering  = 4; // Ordering
     var indexAccordionPowermail = 2; // Powermail form
+    
       // Fade out the loading *.gif, initiate buttons again
     var clean_up = function( html_element ) {
       $( "#tx-caddy-pi1-loader" ).hide( );
@@ -155,46 +225,8 @@
 
     var methods = {
       accordion   : function( accordionSelector, powermailFormSelector ) {
-                      // The accordian panes of the caddy
-                      $(accordionSelector).tabs( "div.pane",
-                      {
-                        tabs          : 'h2',
-                        effect        : 'slide',
-                        initialIndex  : 0,
-                        onBeforeClick : function( event, indexAccordionDest ) {
-                          //alert( "fnAccordion: onBeforeClick" );
-                          // Get index of the current accordion tab
-                          var indexAccordionSrce  = this.getIndex();
-                          currAccordionIndex      = indexAccordionSrce;
-
-                          // RETURN if current accordion isn't the powermail pane
-                          switch( true )
-                          {
-                            case( indexAccordionDest == indexAccordionOrdering ): // Ordering
-                            case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
-                              // Follow the workflow
-                              break;
-                            default:
-                              // No evaluation is needed
-                              // RETURN and follow the users workflow
-                              //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
-                              currAccordionIndex = indexAccordionDest;
-                              return true;
-                              break;
-                          }
-                          // Are all values proper of the powermail form?
-                          if( initValidator( powermailFormSelector, "validate" ) )
-                          {
-                            //alert( "return true: success" );
-                            // RETURN : all values are proper
-                            currAccordionIndex = indexAccordionDest;
-                            return true;
-                          }
-                          this.click( indexAccordionPowermail );
-                          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
-                          return false;
-                        } // onBeforeClick ...
-                      }); // $(accordionSelector).panes ...
+                      addAccordion( accordionSelector, powermailFormSelector );
+                      addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
                     }, /* accordion */
       init        : function( settings_ )
                     {

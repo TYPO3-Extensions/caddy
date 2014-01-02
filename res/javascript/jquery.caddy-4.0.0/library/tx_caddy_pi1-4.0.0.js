@@ -25,53 +25,6 @@ var t3caddyAlert          = ###T3CADDYALERT###;
 var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
 
 
-///* Accordion begin */
-//var fnAccordion = function( accordionSelector, powermailFormSelector ) {
-//  $(function() {
-//    // The accordian panes of the caddy
-//    $(accordionSelector).tabs( "div.pane",
-//    {
-//      tabs          : 'h2',
-//      effect        : 'slide',
-//      initialIndex  : 0,
-//      onBeforeClick : function( event, indexAccordionDest ) {
-//        //alert( "fnAccordion: onBeforeClick" );
-//        // Get index of the current accordion tab
-//        var indexAccordionSrce  = this.getIndex();
-//        currAccordionIndex      = indexAccordionSrce;
-//
-//        // RETURN if current accordion isn't the powermail pane
-//        switch( true )
-//        {
-//          case( indexAccordionDest == 4 ): // Ordering
-//          case( indexAccordionSrce == 2 ): // Powermail form
-//            // Follow the workflow
-//            break;
-//          default:
-//            // No evaluation is needed
-//            // RETURN and follow the users workflow
-//            //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
-//            currAccordionIndex = indexAccordionDest;
-//            return true;
-//            break;
-//        }
-//        // Are all values proper of the powermail form?
-//        if( initValidator( powermailFormSelector, "validate" ) )
-//        {
-//          //alert( "return true: success" );
-//          // RETURN : all values are proper
-//          currAccordionIndex = indexAccordionDest;
-//          return true;
-//        }
-//        this.click( 2 );
-//        alert( "Bitte füllen Sie erst das Formular vollständig aus." );
-//        return false;
-//      } // onBeforeClick ...
-//    }); // $(accordionSelector).panes ...
-//  });
-//  //  alert( 1 );
-//}; /* Accordion end */
-
 $( document ).on( "click", "button.next", function( e ) {
   accordionApi.next();
 });
@@ -82,14 +35,14 @@ $( document ).on( "click", "button.prev", function( e ) {
 var fnInit = function( accordionSelector, powermailFormSelector ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( 'accordion', accordionSelector, powermailFormSelector )
-  accordionApi = $(accordionSelector).data( "tabs" );
-  addPowermailTabsToCaddy( );
+  //addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
   movePowermailFormToCaddy( );
 };
 
 /* Initiate Accordion */
 $(function() {
   fnInit( accordionSelector, powermailFormSelector );
+  accordionApi = $( accordionSelector ).data( "tabs" );
 }); /* Initiate Accordion */
 
 /* AJAX begin */
@@ -164,44 +117,44 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
-  // Add the powermail tabs to the caddy tab powermail
-var addPowermailTabsToCaddy = function( ) {
-  // Get the URL
-  urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
-  urlSearch   = $( location ).attr( "search" );
-  if( urlSearch )
-  {
-    urlSearch = "?" + urlSearch; 
-  }
-  tabs = "";
-  // LOOP all powermail fieldsets
-  $( "#c###UID_POWERMAIL_FORM### div form > fieldset > legend" ).each( function( i ) {
-    href  = urlWoSearch + "#tab-" + i + urlSearch;
-    tabs  = tabs
-          + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
-          ;
-  }); // LOOP all powermail fieldsets
-  tabs  = '<ul class="css-tabs">'
-        + tabs
-        + '</ul>'
-        ;
-  //alert( tabs );
-  // Add the powermail tabs to the caddy tab powermail
-  $( tabs ).appendTo( "#c###UID###-accordion div.caddy-powermail" );
-}; // Add the powermail tabs to the caddy tab powermail
+//  // Add the powermail tabs to the caddy tab powermail
+//var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector ) {
+//  // Get the URL
+//  urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
+//  urlSearch   = $( location ).attr( "search" );
+//  if( urlSearch )
+//  {
+//    urlSearch = "?" + urlSearch; 
+//  }
+//  tabs = "";
+//  // LOOP all powermail fieldsets
+//  $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
+//    href  = urlWoSearch + "#tab-" + i + urlSearch;
+//    tabs  = tabs
+//          + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
+//          ;
+//  }); // LOOP all powermail fieldsets
+//  tabs  = '<ul class="css-tabs">'
+//        + tabs
+//        + '</ul>'
+//        ;
+//  //alert( tabs );
+//  // Add the powermail tabs to the caddy tab powermail
+//  $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
+//}; // Add the powermail tabs to the caddy tab powermail
 
   // Move the powermail form into the caddy to the tab powermail
 var movePowermailFormToCaddy = function() {
   // Move the powermail form TYPO3 content element to the powermail accordian div
-  $("#c###UID_POWERMAIL_FORM### > div").detach().appendTo("#c###UID###-accordion div.caddy-powermail");
+  $("#c###UID_POWERMAIL_FORM### > div").detach().appendTo(accordionSelector + " div.caddy-powermail");
   // Remove the default powermail-can't-move-error
   $("#c###UID###-powermail-prompt").css( "display", "none" );
-  if( $( "#c###UID###-accordion div.caddy-powermail form" ).length )  
+  if( $( accordionSelector + " div.caddy-powermail form" ).length )  
   {
     // Remove the powermail default h3-header
-    $("#c###UID###-accordion div.caddy-powermail form h3").remove();
+    $(accordionSelector + " div.caddy-powermail form h3").remove();
     // Add IDs to each fieldset
-    $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
+    $(accordionSelector + " div.caddy-powermail form > fieldset").each(function(i) {
       $(this).attr("id", "tab-" + i );
     });
     initPowermailTabs();
@@ -282,7 +235,7 @@ var movePowermailFieldsToHtml5 = function() {
 var initPowermailTabs = function() {
   // Configure the tabs of the powermail form
   $("ul.css-tabs").tabs(
-  "#c###UID###-accordion-powermail form > fieldset.powermail_fieldset",
+  powermailFormSelector + " > fieldset.powermail_fieldset",
   {
     initialIndex  : 0, // first tab
     onBeforeClick : function( event, indexTabDest ) {
