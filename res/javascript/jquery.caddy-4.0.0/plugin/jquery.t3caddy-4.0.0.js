@@ -260,9 +260,18 @@
     };  // Move the powermail form into the caddy to the tab powermail
 
     var settings = {
-      pmuidfieldemail : 0,
       accordion : {
-        pmuidfieldemail : 0
+        accordionApi          : undefined,  // API of the accordion
+        accordionSelector     : undefined,  // e.g.: "#c2997-accordion"
+        currAccordionIndex    : undefined,  // [0-4]
+        powermailFormSelector : undefined,  // e.g.: "#c2997-accordion-powermail div form",
+        powermailWallHtmlId   : undefined,  // e.g.: "#c2997-powermail-prompt",
+        powermailUid          : undefined,  // e.g.: "#c2995",
+        pmuidfieldemail       : undefined,  // e.g.: 624
+        pmuidfieldrevocation  : undefined,  // e.g.: 629
+        pmuidfieldterms       : undefined,  // e.g.: 628
+        t3caddyAlert          : 1,          // [e.g.:]0-1] 
+        t3caddyConsoleDebug   : 1,          // [e.g.:]0-1]
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
