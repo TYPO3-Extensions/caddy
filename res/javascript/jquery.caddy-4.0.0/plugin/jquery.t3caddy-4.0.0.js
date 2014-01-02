@@ -476,8 +476,8 @@
       update      : function( options )
                     {
                       options = $.extend( settings.update, options );
-                      console.debug( settings.accordion.currAccordionIndex );
                       console.debug( settings.update.currAccordionIndex );
+                      accordionApi = settings.update.accordionApi;
                       console.debug( settings.update.html_element );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
@@ -529,6 +529,7 @@
                               // Add error messages and helpful informations to the update prompt
 
                               // Fade out the loading *.gif, initiate buttons again
+                            accordionApi.click( settings.update.currAccordionIndex );
                             clean_up( settings.update.html_element );
                               // Fade in the update prompt
                             $( "#update-prompt:hidden" ).slideDown( 'fast' );
@@ -538,6 +539,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
+                          accordionApi.click( settings.update.currAccordionIndex );
                           clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
