@@ -38,7 +38,7 @@ var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, p
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( "init", {
     accordion: {
-      pmuidfieldemail : '###PMUIDFIELDEMAIL###'
+      pmuidfieldemail : ###PMUIDFIELDEMAIL###
     }
   });
   $( this ).t3caddy( "accordion", accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId )
