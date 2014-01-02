@@ -15,6 +15,8 @@
  */
 
 var accordionApi          = undefined;
+var accordionNext         = "button.accordionNext";       // default: button.accordionNext
+var accordionPrev         = "button.accordionPrev";       // default: button.accordionPrev
 var accordionSelector     = "#c###UID###-accordion";
 var currAccordionIndex    = undefined;
 var powermailFormSelector = "#c###UID###-accordion-powermail div form";
@@ -106,6 +108,13 @@ var fnAjax = function( formAction, formData, e ) {
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
+//accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+$( document ).on( "click", accordionNext, function( e ) {
+  accordionApi.next();
+});
+$( document ).on( "click", accordionPrev, function( e ) {
+  accordionApi.prev();
+});      
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   formAction  = $( this ).closest( "form" ).attr( "action");
   formData    = $( this ).closest( "form" ).serialize( );

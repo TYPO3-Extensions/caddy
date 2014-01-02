@@ -27,7 +27,7 @@
       {
         initialIndex = 0;
       }
-      console.debug( initialIndex );
+      //console.debug( initialIndex );
 
       // The accordian panes of the caddy
       $( settings.accordion.accordionSelector ).tabs( "div.pane",
@@ -584,7 +584,7 @@
 
     var methods = {
       accordion   : function( options ) {
-                      console.debug( "XXX" );
+                      //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
