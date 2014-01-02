@@ -20,11 +20,11 @@ var currAccordionIndex    = undefined;
 var powermailFormSelector = "#c###UID###-accordion-powermail div form";
 var powermailWallHtmlId   = "#c###UID###-powermail-prompt"
 var powermailUid          = "#c###UID_POWERMAIL_FORM###";
-var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
-var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
-var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
-var t3caddyAlert          = ###T3CADDYALERT###;
-var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
+//var pmuidfieldemail       = ###PMUIDFIELDEMAIL###;
+//var pmuidfieldrevocation  = ###PMUIDFIELDREVOCATION###;
+//var pmuidfieldterms       = ###PMUIDFIELDTERMS###;
+//var t3caddyAlert          = ###T3CADDYALERT###;
+//var t3caddyConsoleDebug   = ###T3CADDYCONSOLEDEBUG###;
 
 
 $( document ).on( "click", "button.next", function( e ) {
@@ -108,7 +108,7 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    if( ! initValidator( powermailFormSelector, "validate" ) )
+    if( ! initValidator( powermailFormSelector, "validate", powermailWallHtmlId ) )
     {
       return;
     }
@@ -234,7 +234,7 @@ var movePowermailFieldsToHtml5 = function() {
 };  // move powermail fields to HTML 5
 
 ///* Powermail tabs begin */
-//var initPowermailTabs = function( powermailFormSelector ) {
+//var initPowermailTabs = function( powermailFormSelector, powermailWallHtmlId ) {
 //  // Configure the tabs of the powermail form
 //  $( "ul.css-tabs" ).tabs(
 //  powermailFormSelector + " > fieldset.powermail_fieldset",
@@ -253,7 +253,7 @@ var movePowermailFieldsToHtml5 = function() {
 //      var idTabSrce = "#tab-" + indexTabSrce + " :input";
 //      // Validate HTML input fields of the current tab
 //      //alert( idTabSrce );
-//      var success = initValidator( idTabSrce, "validate" );
+//      var success = initValidator( idTabSrce, "validate", powermailWallHtmlId );
 //      // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
 //      if( success )
 //      {
@@ -309,40 +309,40 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   $( "#c###UID###-powermail-prompt" ).html( "" );
 });
 
-// initValidator
-var initValidator = function( selector, validate, powermailWallHtmlId ) {
-  movePowermailFieldsToHtml5( );  
-  success = false;
-  validatePowermailForm = $( selector ).validator(
-  {
-    effect          : "wall",
-    container       : powermailWallHtmlId,
-    lang            : "de",
-    // do not validate inputs when they are edited
-    errorInputEvent : null
-  // custom form submission logic
-  }).submit( function( e )  
-  {
-    // when data is valid
-    if( !e.isDefaultPrevented( ) ) 
-    {
-      // tell user that everything is OK
-      //$( powermailWallHtmlId ).html( "<h3>All good</h3>" );
-      // prevent the form data being submitted to the server
-      //e.preventDefault( );
-    }
-  }); // $(powermailFormSelector).validator ...
-  if( validate == "validate" )
-  {
-//    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "type" ) );
-//    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "checked" ) );
-    success = validatePowermailForm.data('validator').checkValidity( );
-    //alert( success );
-  }
-  return success;
-};  // initValidator
-
-initValidator( powermailFormSelector );
+//// initValidator
+//var initValidator = function( selector, validate, powermailWallHtmlId ) {
+//  movePowermailFieldsToHtml5( );  
+//  success = false;
+//  validatePowermailForm = $( selector ).validator(
+//  {
+//    effect          : "wall",
+//    container       : powermailWallHtmlId,
+//    lang            : "de",
+//    // do not validate inputs when they are edited
+//    errorInputEvent : null
+//  // custom form submission logic
+//  }).submit( function( e )  
+//  {
+//    // when data is valid
+//    if( !e.isDefaultPrevented( ) ) 
+//    {
+//      // tell user that everything is OK
+//      //$( powermailWallHtmlId ).html( "<h3>All good</h3>" );
+//      // prevent the form data being submitted to the server
+//      //e.preventDefault( );
+//    }
+//  }); // $(powermailFormSelector).validator ...
+//  if( validate == "validate" )
+//  {
+////    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "type" ) );
+////    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "checked" ) );
+//    success = validatePowermailForm.data('validator').checkValidity( );
+//    //alert( success );
+//  }
+//  return success;
+//};  // initValidator
+//
+//initValidator( powermailFormSelector, null, powermailWallHtmlId );
 
 //$("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").oninvalid(function(event, errorMessage) {
 //  alert( "input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]: " + errorMessage );
