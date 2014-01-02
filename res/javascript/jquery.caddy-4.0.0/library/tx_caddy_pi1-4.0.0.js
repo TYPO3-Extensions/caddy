@@ -35,9 +35,10 @@ var fnAccordion = function() {
         currAccordionIndex      = indexAccordionSrce;
 
         // RETURN if current accordion isn't the powermail pane
-        switch( indexAccordionSrce )
+        switch( true )
         {
-          case( 2 ): // Powermail form
+          case( indexAccordionDest == 4 ): // Ordering
+          case( indexAccordionSrce == 2 ): // Powermail form
             // Follow the workflow
             break;
           default:
