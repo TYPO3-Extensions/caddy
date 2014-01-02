@@ -33,7 +33,7 @@
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();
-          currAccordionIndex      = indexAccordionSrce;
+          settings.accordion.currAccordionIndex      = indexAccordionSrce;
 
           // RETURN if current accordion isn't the powermail pane
           switch( true )
@@ -46,7 +46,7 @@
               // No evaluation is needed
               // RETURN and follow the users workflow
               //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
-              currAccordionIndex = indexAccordionDest;
+              settings.accordion.currAccordionIndex = indexAccordionDest;
               return true;
               break;
           }
@@ -55,10 +55,11 @@
           {
             //alert( "return true: success" );
             // RETURN : all values are proper
-            currAccordionIndex = indexAccordionDest;
+            settings.accordion.currAccordionIndex = indexAccordionDest;
             return true;
           }
           this.click( indexAccordionPowermail );
+          alert( settings.accordion.currAccordionIndex );
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           return false;
         } // onBeforeClick ...
@@ -383,7 +384,7 @@
       accordion : {
         accordionApi          : undefined,  // API of the accordion
         accordionSelector     : undefined,  // e.g.: "#c2997-accordion"
-        currAccordionIndex    : undefined,  // [0-4]
+        currAccordionIndex    : undefined,  // index of the current accordion pane: [0-4]
         powermailFormSelector : undefined,  // e.g.: "#c2997-accordion-powermail div form",
         powermailWallHtmlId   : undefined,  // e.g.: "#c2997-powermail-prompt",
         powermailUid          : undefined,  // e.g.: "#c2995",
