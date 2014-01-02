@@ -464,6 +464,7 @@
                     }, /* init */
       update      : function( html_element, url, data, html_element_wi_selector )
                     {
+                      console.debug( settings.accordion.currAccordionIndex );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
 
