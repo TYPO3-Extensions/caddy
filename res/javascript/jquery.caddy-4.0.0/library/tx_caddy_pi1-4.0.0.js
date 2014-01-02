@@ -104,6 +104,14 @@ var fnAjax = function( formAction, formData, e ) {
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
     accordionApi = accordion( );
+    if( $( ".powermail_confirmation_form[type=submit]").length( ) )
+    {
+      $( ".powermail_confirmation_form[type=submit]").attr( "value", "Ändern");
+    }
+    if( $( ".powermail_confirmation_submit[type=submit]").length( ) )
+    {
+      $( ".powermail_confirmation_submit[type=submit]").css( "display", "none");
+    }
   }, 2000 );
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
