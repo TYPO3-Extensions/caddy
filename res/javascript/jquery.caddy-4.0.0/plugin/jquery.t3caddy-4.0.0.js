@@ -53,7 +53,7 @@
           // RETURN if current accordion isn't the powermail pane
           switch( true )
           {
-            case( indexAccordionDest == indexAccordionOrdering  ): // Ordering
+            //case( indexAccordionDest == indexAccordionOrdering  ): // Ordering
             case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
               // Follow the workflow
               break;
@@ -83,7 +83,7 @@
           }
           this.click( indexAccordionPowermail );
 //          console.debug( settings.accordion.currAccordionIndex );
-          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+//          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           $( accordionButtonId ).attr( "disabled", "disabled" );
           return true;
           return false;
