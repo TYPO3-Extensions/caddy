@@ -207,6 +207,7 @@ plugin.tx_caddy_pi1 {
       padding: 0; 
     }
     button.accordion[disabled=disabled] {
+      cursor:default;
       opacity:.5;
     }
     button.accordion,
