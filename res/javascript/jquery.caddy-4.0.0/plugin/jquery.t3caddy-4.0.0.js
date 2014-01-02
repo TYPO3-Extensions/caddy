@@ -131,10 +131,6 @@
 
                           // Fade out the loading *.gif, initiate buttons again
                         clean_up( html_element );
-    accordionIndex = currAccordionIndex;
-    fnInit( ); /* Initiate Accordion */
-    alert( accordionIndex );
-    accordionApi.click( accordionIndex );
                       });
                         // Send the AJAX request
                     });
