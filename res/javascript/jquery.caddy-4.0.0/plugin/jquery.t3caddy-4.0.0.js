@@ -577,6 +577,7 @@
 
     var methods = {
       accordion   : function( options ) {
+                      console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
