@@ -75,24 +75,38 @@ var fnAjax = function( formAction, formData, e ) {
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( "update", {
-    accordionApi              : accordionApi,
-    currAccordionIndex        : currAccordionIndex,
-    formData                  : formData,
-    html_element              : html_element, 
-    html_element_wi_selector  : html_element_wi_selector, 
-    t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
-    url                       : url
+    accordion : {
+      accordionSelector     : "#c###UID###-accordion",
+      currAccordionIndex    : currAccordionIndex,
+      powermailFormSelector : "#c###UID###-accordion-powermail div form",
+      powermailWallHtmlId   : "#c###UID###-powermail-prompt",
+      powermailUid          : "#c###UID_POWERMAIL_FORM###",
+      pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
+      pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
+      pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
+      t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
+      t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
+    },
+    update : {
+      accordionApi              : accordionApi,
+      currAccordionIndex        : currAccordionIndex,
+      formData                  : formData,
+      html_element              : html_element, 
+      html_element_wi_selector  : html_element_wi_selector, 
+      t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
+      url                       : url
+    }
   });
 
-  // Update the content with the id #c###UID###-###VIEW###view
-  // Reload functions after content is updated (after 2000 miliseconds)
-  setTimeout( function( ) {
-//    accordionIndex = currAccordionIndex;
-    accordionApi = accordion( );
-//    fnInit( ); /* Initiate Accordion */
-//    alert( accordionIndex );
-//    accordionApi.click( accordionIndex );
-  }, 2000 );
+//  // Update the content with the id #c###UID###-###VIEW###view
+//  // Reload functions after content is updated (after 2000 miliseconds)
+//  setTimeout( function( ) {
+////    accordionIndex = currAccordionIndex;
+//    accordionApi = accordion( );
+////    fnInit( ); /* Initiate Accordion */
+////    alert( accordionIndex );
+////    accordionApi.click( accordionIndex );
+//  }, 2000 );
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
 

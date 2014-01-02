@@ -581,7 +581,7 @@
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
-                        console.debug( "return: " + settings.accordion.accordionSelector + " isn't set." )
+                        console.debug( "return: settings.accordion.accordionSelector isn't set." )
                         return null;
 //                        return {
 //                          accordionApi        : null,
@@ -613,7 +613,7 @@
                     }, /* init */
       update      : function( options )
                     {
-                      options = $.extend( settings.update, options );
+                      options = $.extend( settings, options );
                       accordionApi = settings.update.accordionApi;
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
@@ -676,7 +676,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          methods.accordion( );
+                          methods.accordion( settings.accordion );
                           clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
