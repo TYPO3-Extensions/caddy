@@ -347,14 +347,15 @@ $.tools.validator.addEffect( "wall", function( errors, event )
   // add new ones
   $.each( errors, function( index, error ) {
     selector = "input[name='" + error.input.attr("name") + "']";
+    legend   = $( selector ).closest( "legend" ).text( );
     switch( error.input.attr("name") )
     {
       case( "tx_powermail_pi1[field][628][0]"):
       case( "tx_powermail_pi1[field][629][0]"):
-        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).next( ).text( ) + "</strong></p>"
+        strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
         break;
       default:
-        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).prev( ).text( ) + "</strong></p>";
+        strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
         break;
     }
     wall.append( strAppend );
