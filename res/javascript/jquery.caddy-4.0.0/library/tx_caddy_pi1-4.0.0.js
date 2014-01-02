@@ -65,6 +65,13 @@ var fnAccordion = function() {
   //  alert( 1 );
 }; /* Accordion end */
 
+$( document ).on( "click", "button.next", function( e ) {
+  accordionApi.next();
+});
+$( document ).on( "click", "button.prev", function( e ) {
+  accordionApi.prev();
+});
+
 var fnInit = function( ) {
   fnAccordion( );
   addPowermailTabsToCaddy( );
@@ -81,8 +88,8 @@ var fnAjax = function( formAction, formData, e ) {
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
-  if( ! $( "#c###UID###" ).length )
-  //if( ! $( "#content" ).length )
+  //if( ! $( "#c###UID###" ).length )
+  if( ! $( "#content" ).length )
   {
     if( t3caddyAlert )
     {
@@ -95,8 +102,8 @@ var fnAjax = function( formAction, formData, e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   var url                       = $( this ).t3caddy( 'url_autoQm', formAction, "type=###TYPENUM###" );
 console.debug( url );
-  var html_element              = "#c###UID###";
-  //var html_element              = "#content";
+//var html_element              = "#c###UID###";
+  var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
   $( this ).t3caddy( 'update', html_element, url, formData, html_element_wi_selector )
   // Update the content with the id #c###UID###-###VIEW###view
