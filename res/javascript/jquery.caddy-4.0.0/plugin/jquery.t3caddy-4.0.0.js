@@ -318,7 +318,7 @@
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
                       //alert( settings.accordion.pmuidfieldemail );
                       alert( settings.pmuidfieldemail );
-                      alert( options );
+                      alert( settings.accordion.pmuidfieldemail );
                     }, /* accordion */
       init        : function( settings_ )
                     {
@@ -327,8 +327,6 @@
                         if ( settings_ ) {
                           $.extend( settings, settings_ );
                         }
-                        //alert( settings.accordion.pmuidfieldemail );
-                        alert( settings.pmuidfieldemail );
                       });
                     }, /* init */
       update      : function( html_element, url, data, html_element_wi_selector )
