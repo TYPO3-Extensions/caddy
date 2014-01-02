@@ -676,6 +676,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
+                          methods.accordion( );
                           clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
