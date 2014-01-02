@@ -38,11 +38,11 @@ var fnInit = function( accordionSelector, powermailUid, powermailFormSelector, p
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( "accordion", {
     accordion : { 
-      "accordionSelector"     : accordionSelector,
-      "powermailUid"          : powermailUid,
-      "powermailFormSelector" : powermailFormSelector, 
-      "powermailWallHtmlId"   : powermailWallHtmlId,
-      "pmuidfieldemail"       : pmuidfieldemail 
+      accordionSelector     : accordionSelector,
+      powermailUid          : powermailUid,
+      powermailFormSelector : powermailFormSelector, 
+      powermailWallHtmlId   : powermailWallHtmlId,
+      pmuidfieldemail       : pmuidfieldemail 
     }
   } );
   //addPowermailTabsToCaddy( accordionSelector, powermailUid );
