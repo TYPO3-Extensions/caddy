@@ -614,12 +614,11 @@
       update      : function( options )
                     {
                       options = $.extend( settings, options );
-                      accordionApi = settings.update.accordionApi;
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
 
-                      return this.each( function ( )
-                      {
+//                      return this.each( function ( )
+//                      {
                           // ERROR html_element is missing. Don't use AJAX but forward
                         if( !$( settings.update.html_element ).length ) {
                           if( settings.update.t3caddyAlert )
@@ -632,7 +631,7 @@
                           }
                           fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                           window.location.href = fq_url;
-                          return;
+                          return false;
                         }
                           // ERROR html_elementis missing. Don't use AJAX but forward
 
@@ -666,12 +665,11 @@
                               // Add error messages and helpful informations to the update prompt
 
                               // Fade out the loading *.gif, initiate buttons again
-                            accordionApi.click( settings.update.currAccordionIndex );
                             clean_up( settings.update.html_element );
                               // Fade in the update prompt
                             $( "#update-prompt:hidden" ).slideDown( 'fast' );
                             $( "#update-prompt" ).append( response );
-                            return;
+                            return false;
                           }
                             // ERROR server has an error and has send a message
 
@@ -679,9 +677,10 @@
                           accordionApi = methods.accordion( settings.accordion );
                           clean_up( settings.update.html_element );
                           return accordionApi;
-                        });
+//                        });
                           // Send the AJAX request
                       });
+                      return false;
                     }, /* update( ) */
       url_autoQm  : function( options )
                     {
