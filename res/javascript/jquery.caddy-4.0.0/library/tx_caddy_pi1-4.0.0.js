@@ -83,16 +83,16 @@ var fnAjax = function( formAction, formData, e ) {
     t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
     url                       : url
   });
-  accordionApi = accordion( );
 
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
-//  setTimeout( function( ) {
-////    accordionIndex = currAccordionIndex;
+  setTimeout( function( ) {
+//    accordionIndex = currAccordionIndex;
+    accordionApi = accordion( );
 //    fnInit( ); /* Initiate Accordion */
-////    alert( accordionIndex );
-////    accordionApi.click( accordionIndex );
-//  }, 2000 );
+//    alert( accordionIndex );
+//    accordionApi.click( accordionIndex );
+  }, 2000 );
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
