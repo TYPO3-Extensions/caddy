@@ -47,6 +47,7 @@
               // RETURN and follow the users workflow
               //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
               settings.accordion.currAccordionIndex = indexAccordionDest;
+              console.debug( settings.accordion.currAccordionIndex );
               return true;
               break;
           }
@@ -56,10 +57,11 @@
             //alert( "return true: success" );
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
+            console.debug( settings.accordion.currAccordionIndex );
             return true;
           }
           this.click( indexAccordionPowermail );
-          alert( settings.accordion.currAccordionIndex );
+          console.debug( settings.accordion.currAccordionIndex );
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           return false;
         } // onBeforeClick ...
