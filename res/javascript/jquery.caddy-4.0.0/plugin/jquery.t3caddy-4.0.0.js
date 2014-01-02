@@ -443,14 +443,17 @@
     var methods = {
       accordion   : function( options ) {
                       //options = $.extend({}, settings, options);
-                      options = $.extend(settings, options);
+                      options = $.extend( settings, options );
                       addAccordion( );
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
-                      return $( settings.accordion.accordionSelector ).data( "tabs" );
+                      return {
+                        accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
+                        currAccordionIndex  : settings.accordion.currAccordionIndex
+                      }
 
                     }, /* accordion */
       init        : function( settings_ )
