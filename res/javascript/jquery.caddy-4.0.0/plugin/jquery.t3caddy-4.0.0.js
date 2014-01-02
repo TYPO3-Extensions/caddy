@@ -363,6 +363,7 @@
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
             case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
+              console.debug( $( selector ).closest( "fieldset").closest( "fieldset").html( ) );
               idOfFieldset = $( selector ).closest( "fieldset").closest( "fieldset").attr( "id");
               legend       = $( "#" + idOfFieldset + " legend" ).text( );
               strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
