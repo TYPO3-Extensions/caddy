@@ -577,10 +577,10 @@
 
     var methods = {
       accordion   : function( options ) {
-                      $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
                       console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
+                      $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: settings.accordion.accordionSelector isn't set." )
                         return null;
