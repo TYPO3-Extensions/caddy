@@ -45,10 +45,10 @@ $(function( ) {
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
 }); /* Initiate Accordion */
 
-$( document ).on( "click", "button.next", function( e ) {
+$( document ).on( "click", "button.accordionNext", function( e ) {
   accordionApi.next();
 });
-$( document ).on( "click", "button.prev", function( e ) {
+$( document ).on( "click", "button.accordionPrev", function( e ) {
   accordionApi.prev();
 });
 
