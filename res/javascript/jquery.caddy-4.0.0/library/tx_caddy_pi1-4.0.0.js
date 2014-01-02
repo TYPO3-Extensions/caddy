@@ -115,7 +115,7 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
   formData    = $( this ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
 }); // User has clicked a tag with the cUID-step class
-$( "form.powermail_form" ).submit( function( e )  
+$( "#c###UID_POWERMAIL_FORM### div form" ).submit( function( e )  
 {
   formAction  = $( this ).attr( "action");
   formData    = $( this ).serialize( );
@@ -168,13 +168,16 @@ var movePowermailFormToCaddy = function() {
   $('#c###UID_POWERMAIL_FORM### > div').detach().appendTo('#c###UID###-accordion div.caddy-powermail');
   // Remove the default powermail-can't-move-error
   $('#c###UID###-powermail-prompt').css( "display", "none" );
-  // Remove the powermail default h3-header
-  $('#c###UID###-accordion div.caddy-powermail form h3').remove();
-  // Add IDs to each fieldset
-  $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
-    $(this).attr("id", "tab-" + i );
-  });
-  initPowermailTabs();
+  if( $( "#c###UID###-accordion div.caddy-powermail form" ).length )  
+  {
+    // Remove the powermail default h3-header
+    $('#c###UID###-accordion div.caddy-powermail form h3').remove();
+    // Add IDs to each fieldset
+    $("#c###UID###-accordion div.caddy-powermail form > fieldset").each(function(i) {
+      $(this).attr("id", "tab-" + i );
+    });
+    initPowermailTabs();
+  }
 };  // Move the powermail form into the caddy to the tab powermail
 
   // move powermail fields to HTML 5
