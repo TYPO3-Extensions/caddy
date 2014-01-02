@@ -438,19 +438,24 @@
                   '</div>' +
                 '</div>'
       },
-      update: {
+      update  : {
         currAccordionIndex        : undefined, // [0-4]
         formData                  : undefined, // serialized
         html_element              : undefined, 
         html_element_wi_selector  : undefined, 
         url                       : undefined
+      },
+      url_autoQm : {
+        currAccordionIndex  : undefined,
+        url                 : undefined, 
+        param               : undefined
       }
     };
 
     var methods = {
       accordion   : function( options ) {
                       //options = $.extend({}, settings, options);
-                      options = $.extend( settings, options );
+                      options = $.extend( settings.accordion, options );
                       addAccordion( );
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
@@ -545,8 +550,19 @@
                           // Send the AJAX request
                       });
                     }, /* update( ) */
-      url_autoQm  : function( url, param )
+      url_autoQm  : function( )
                     {
+                      options = $.extend( settings.url_autoQm, options );
+                      currAccordionIndex  = settings.url_autoQm.currAccordionIndex;
+                      url                 = settings.url_autoQm.url;
+                      param               = settings.url_autoQm.param;
+                      
+                      if( currAccordionIndex > 0 )
+                      {
+                        param = param + "&tx_caddy_pi1[accordion]=" + currAccordionIndex;
+                      }
+                      console.debug( param );
+                      
                         // Concatenate the url and the param in dependence of a question mark.
                         // If url contains a question mark, param will added with ?param
                         // otherwise with &param

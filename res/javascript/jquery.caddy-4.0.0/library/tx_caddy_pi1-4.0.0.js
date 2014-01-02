@@ -32,17 +32,15 @@ $(function( ) {
   console.debug( currAccordionIndex );
   //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
-    accordion : { 
-      accordionSelector     : "#c###UID###-accordion",
-      powermailFormSelector : "#c###UID###-accordion-powermail div form",
-      powermailWallHtmlId   : "#c###UID###-powermail-prompt",
-      powermailUid          : "#c###UID_POWERMAIL_FORM###",
-      pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
-      pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
-      pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
-      t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
-      t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
-    }
+    accordionSelector     : "#c###UID###-accordion",
+    powermailFormSelector : "#c###UID###-accordion-powermail div form",
+    powermailWallHtmlId   : "#c###UID###-powermail-prompt",
+    powermailUid          : "#c###UID_POWERMAIL_FORM###",
+    pmuidfieldemail       : parseInt( "###PMUIDFIELDEMAIL###" ),
+    pmuidfieldrevocation  : parseInt( "###PMUIDFIELDREVOCATION###" ),
+    pmuidfieldterms       : parseInt( "###PMUIDFIELDTERMS###" ),
+    t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
+    t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
@@ -75,7 +73,11 @@ var fnAjax = function( formAction, formData, e ) {
   } // RETURN : current id isn't part of the DOM
 
   // Update the content with the id #c###UID###-###VIEW###view
-  var url                       = $( this ).t3caddy( 'url_autoQm', formAction, "type=###TYPENUM###" );
+  var url = $( this ).t3caddy( 'url_autoQm', {
+    currAccordionIndex  : currAccordionIndex,
+    url                 : formAction, 
+    param               : "type=###TYPENUM###"
+  });
 //console.debug( url );
 //var html_element              = "#c###UID###";
   var html_element              = "#content";
