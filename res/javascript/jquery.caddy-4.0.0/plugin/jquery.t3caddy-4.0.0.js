@@ -75,6 +75,7 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
+      console.debug( powermailFormSelector + " > fieldset > legend" );
       $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
@@ -226,7 +227,7 @@
     var methods = {
       accordion   : function( accordionSelector, powermailFormSelector ) {
                       addAccordion( accordionSelector, powermailFormSelector );
-                      addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
+                      //addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
                     }, /* accordion */
       init        : function( settings_ )
                     {

@@ -12,7 +12,7 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var t3caddyAlert = ###T3CADDYALERT###;
+//var t3caddyAlert = ###T3CADDYALERT###;
 
 
 /* Accordion begin */

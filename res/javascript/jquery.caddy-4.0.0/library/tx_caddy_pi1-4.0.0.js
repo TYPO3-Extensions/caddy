@@ -35,7 +35,7 @@ $( document ).on( "click", "button.prev", function( e ) {
 var fnInit = function( accordionSelector, powermailFormSelector ) {
   //fnAccordion( accordionSelector, powermailFormSelector );
   $( this ).t3caddy( 'accordion', accordionSelector, powermailFormSelector )
-  //addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
+  addPowermailTabsToCaddy( accordionSelector, powermailFormSelector );
   movePowermailFormToCaddy( );
 };
 
@@ -117,31 +117,31 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
-//  // Add the powermail tabs to the caddy tab powermail
-//var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector ) {
-//  // Get the URL
-//  urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
-//  urlSearch   = $( location ).attr( "search" );
-//  if( urlSearch )
-//  {
-//    urlSearch = "?" + urlSearch; 
-//  }
-//  tabs = "";
-//  // LOOP all powermail fieldsets
-//  $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
-//    href  = urlWoSearch + "#tab-" + i + urlSearch;
-//    tabs  = tabs
-//          + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
-//          ;
-//  }); // LOOP all powermail fieldsets
-//  tabs  = '<ul class="css-tabs">'
-//        + tabs
-//        + '</ul>'
-//        ;
-//  //alert( tabs );
-//  // Add the powermail tabs to the caddy tab powermail
-//  $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
-//}; // Add the powermail tabs to the caddy tab powermail
+  // Add the powermail tabs to the caddy tab powermail
+var addPowermailTabsToCaddy = function( accordionSelector, powermailFormSelector ) {
+  // Get the URL
+  urlWoSearch = $( location ).attr( "protocol" ) + "://" + $( location ).attr( "host" ) + $( location ).attr( "pathname" );
+  urlSearch   = $( location ).attr( "search" );
+  if( urlSearch )
+  {
+    urlSearch = "?" + urlSearch; 
+  }
+  tabs = "";
+  // LOOP all powermail fieldsets
+  $( powermailFormSelector + " > fieldset > legend" ).each( function( i ) {
+    href  = urlWoSearch + "#tab-" + i + urlSearch;
+    tabs  = tabs
+          + '<li><a href="' + href + '">' + $( this ).text( ) + '</a></li>'
+          ;
+  }); // LOOP all powermail fieldsets
+  tabs  = '<ul class="css-tabs">'
+        + tabs
+        + '</ul>'
+        ;
+  //alert( tabs );
+  // Add the powermail tabs to the caddy tab powermail
+  $( tabs ).appendTo( accordionSelector + " div.caddy-powermail" );
+}; // Add the powermail tabs to the caddy tab powermail
 
   // Move the powermail form into the caddy to the tab powermail
 var movePowermailFormToCaddy = function() {
