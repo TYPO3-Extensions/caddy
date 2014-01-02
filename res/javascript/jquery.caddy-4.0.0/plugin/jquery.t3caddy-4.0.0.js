@@ -481,7 +481,8 @@
     //var html_element              = "#c###UID###";
       var html_element              = "#content";
       var html_element_wi_selector  = html_element + " > *";
-      $( this ).t3caddy( "update", {
+      //$( this ).t3caddy( "update", {
+      this.t3caddy( "update", {
         accordionApi              : accordionApi,
         currAccordionIndex        : currAccordionIndex,
         formData                  : formData,
