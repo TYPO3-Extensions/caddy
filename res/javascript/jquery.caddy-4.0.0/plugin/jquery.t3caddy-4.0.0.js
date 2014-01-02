@@ -358,7 +358,7 @@
         // add new ones
         $.each( errors, function( index, error ) {
           selector = "input[name='" + error.input.attr( "name" ) + "']";
-          consolde.debug( $( selector ).closest( "fieldset").attr( "id") );
+          console.debug( $( selector ).closest( "fieldset").attr( "id") );
           switch( error.input.attr( "name" ) )
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
