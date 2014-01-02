@@ -118,6 +118,13 @@ var fnAjax = function( formAction, formData, e ) {
 /* AJAX end */
 
 //accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+$( ".powermail_form_30" ).submit( function( e ) {
+  if( !e.isDefaultPrevented( ) ) 
+  {
+    e.preventDefault( ); // Don't execute the click
+    alert( "HäHä" );
+  }
+});
 $( document ).on( "click", accordionNext, function( e ) {
   accordionApi.next();
 });
