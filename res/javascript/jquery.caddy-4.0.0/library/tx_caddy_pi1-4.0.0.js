@@ -29,6 +29,7 @@ var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 /* Initiate Accordion */
 $(function( ) {
+  console.debug( currAccordionIndex );
   //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
     accordion : { 
