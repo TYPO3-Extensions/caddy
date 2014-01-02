@@ -550,7 +550,7 @@
                           // Send the AJAX request
                       });
                     }, /* update( ) */
-      url_autoQm  : function( )
+      url_autoQm  : function( options )
                     {
                       options = $.extend( settings.url_autoQm, options );
                       currAccordionIndex  = settings.url_autoQm.currAccordionIndex;
