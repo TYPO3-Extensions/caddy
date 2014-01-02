@@ -475,7 +475,7 @@
       update      : function( options )
                     {
                       options = $.extend( settings.update, options );
-                      console.debug( settings.accordion.currAccordionIndex );
+                      console.debug( settings.update.currAccordionIndex );
                       console.debug( settings.update.html_element );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
