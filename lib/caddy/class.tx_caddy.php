@@ -1644,7 +1644,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $label = $this->getPaymentOptionLabelBySessionId( $this->pidCaddy );
+    $label = $this->getPaymentOptionLabelBySessionId( $paymentId );
 
     $arrReturn['id']                    = $paymentId;
     $arrReturn['label']                 = $label;
@@ -1826,7 +1826,7 @@ class tx_caddy extends tslib_pibase
   * @version    4.0.3
   * @since      2.0.0
   */
-  private function getPaymentOptionLabelBySessionId( )
+  private function getPaymentOptionLabelBySessionId( $paymentId )
   {
       // Get session array
     // #54634, 131128, dwildt, 1-
@@ -1839,6 +1839,8 @@ class tx_caddy extends tslib_pibase
 
       // Get key for the option
     $key    = $sesArray['options']['payment']['id'] . '.';
+      // #i0043, 140103, dwildt, 1+
+    $key    = $paymentId;
 
       // Render the option label
     $name  = $optionsConf[ $key ]['title'];
