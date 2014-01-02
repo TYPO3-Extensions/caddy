@@ -99,7 +99,8 @@
     indexAccordionPowermail = 2; // Powermail form
     
       // Fade out the loading *.gif, initiate buttons again
-    function clean_up( html_element ) {
+    function clean_up( html_element ) {      
+      $( "#currAccordionIndex" ).text( 2 );
       $( "#tx-caddy-pi1-loader" ).hide( );
         // Initiate the ui button layout again
       $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
