@@ -243,8 +243,8 @@
       // Replace vars in the source with the given params
 
     function movePowermailFieldsToHtml5( ) {
-      pmuidfieldemail = settings.accordion.pmuidfieldemail;
-      pmuidfieldemail = settings.accordion.t3caddyConsoleDebug;
+      pmuidfieldemail     = settings.accordion.pmuidfieldemail;
+      t3caddyConsoleDebug = settings.accordion.t3caddyConsoleDebug;
       // Move e-mail from type=text to type=email
       selectorEmailText   = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=text]";
       selectorEmailEmail  = "input[name='tx_powermail_pi1[field][" + pmuidfieldemail + "]'][type=email]";
@@ -259,7 +259,7 @@
             {
               //alert( "WARNING: The selector " + selectorEmailText + " isn't part of the DOM!");
               console.debug(    "The selector " + selectorEmailText + " isn't part of the DOM! " 
-                              + " his is proper, if powermail form is loaded in confirmation mode.");
+                              + "This is proper, if powermail form is loaded in confirmation mode.");
             }
           }
           break;
