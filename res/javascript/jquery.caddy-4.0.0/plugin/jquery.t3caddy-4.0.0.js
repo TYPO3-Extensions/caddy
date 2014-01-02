@@ -33,7 +33,7 @@
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();
-          settings.accordion.currAccordionIndex      = indexAccordionSrce;
+          settings.accordion.currAccordionIndex = indexAccordionSrce;
 
           // RETURN if current accordion isn't the powermail pane
           switch( true )
@@ -457,6 +457,7 @@
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
+                      console.debug( settings.accordion.currAccordionIndex );
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
