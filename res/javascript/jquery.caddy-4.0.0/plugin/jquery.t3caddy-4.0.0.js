@@ -507,8 +507,8 @@
 
                           // Send the AJAX request
                           // Replace the content of the html element with the delivered data
-                        var url_wi_selector = url + " " + html_element_wi_selector;
-                        $( html_element ).load( url_wi_selector, data, function( response, status, xhr )
+                        var url_wi_selector = url + " " + settings.update.html_element_wi_selector;
+                        $( settings.update.html_element ).load( url_wi_selector, data, function( response, status, xhr )
                         {
                             // ERROR server has an error and has send a message
                           if (status == "error")
@@ -520,14 +520,14 @@
                             a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
                             prompt = format( settings.messages.hlpUrlPrmpt, a_fq_url);
                             inf_prompt( "#update-prompt", settings.messages.hlpUrlLabel, prompt );
-                            prompt = format( settings.messages.hlpUrlSelectorPrmpt, html_element_wi_selector);
+                            prompt = format( settings.messages.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
                             //inf_prompt( "#update-prompt", settings.messages.hlpUrlSelectorLabel, prompt );
                             inf_prompt( "#update-prompt", settings.messages.hlpForumLabel, settings.messages.hlpForumPrmpt );
                             inf_prompt( "#update-prompt", settings.messages.hlpGetRidOfLabel, settings.messages.hlpGetRidOfPrmpt );
                               // Add error messages and helpful informations to the update prompt
 
                               // Fade out the loading *.gif, initiate buttons again
-                            clean_up( html_element );
+                            clean_up( settings.update.html_element );
                               // Fade in the update prompt
                             $( "#update-prompt:hidden" ).slideDown( 'fast' );
                             $( "#update-prompt" ).append( response );
@@ -536,7 +536,7 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          clean_up( html_element );
+                          clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
                       });

@@ -81,6 +81,7 @@ var fnAjax = function( formAction, formData, e ) {
     formData                  : formData,
     html_element              : html_element, 
     html_element_wi_selector  : html_element_wi_selector, 
+    t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
     url                       : url
   });
   // Update the content with the id #c###UID###-###VIEW###view
