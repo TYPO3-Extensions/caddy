@@ -14,19 +14,21 @@
  *   http://www.gnu.org/licenses/gpl.html
  */
 
-var accordionApi          = undefined;
-var accordionNext         = "button.accordionNext";       // default: button.accordionNext
-var accordionPrev         = "button.accordionPrev";       // default: button.accordionPrev
-var accordionSelector     = "#c###UID###-accordion";
-var currAccordionIndex    = undefined;
-var powermailFormSelector = "#c###UID###-accordion-powermail div form";
-var powermailWallHtmlId   = "#c###UID###-powermail-prompt"
-var powermailUid          = "#c###UID_POWERMAIL_FORM###";
-var pmuidfieldemail       = parseInt( "###PMUIDFIELDEMAIL###" );
-var pmuidfieldrevocation  = parseInt( "###PMUIDFIELDREVOCATION###" );
-var pmuidfieldterms       = parseInt( "###PMUIDFIELDTERMS###" );
-var t3caddyAlert          = parseInt( "###T3CADDYALERT###" );
-var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
+var accordionApi            = undefined;
+var accordionNext           = "button.accordionNext";       // default: button.accordionNext
+var accordionPrev           = "button.accordionPrev";       // default: button.accordionPrev
+var accordionSelector       = "#c###UID###-accordion";
+var currAccordionIndex      = undefined;
+var indexAccordionOrdering  = 4; // Ordering
+var indexAccordionPowermail = 2; // Powermail form
+var powermailFormSelector   = "#c###UID###-accordion-powermail div form";
+var powermailWallHtmlId     = "#c###UID###-powermail-prompt"
+var powermailUid            = "#c###UID_POWERMAIL_FORM###";
+var pmuidfieldemail         = parseInt( "###PMUIDFIELDEMAIL###" );
+var pmuidfieldrevocation    = parseInt( "###PMUIDFIELDREVOCATION###" );
+var pmuidfieldterms         = parseInt( "###PMUIDFIELDTERMS###" );
+var t3caddyAlert            = parseInt( "###T3CADDYALERT###" );
+var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 var accordion =  function( ) {
   return $( this ).t3caddy( "accordion", {
@@ -122,7 +124,8 @@ $( ".powermail_form_30" ).submit( function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    alert( "HäHä" );
+    accordionApi.click( indexAccordionPowermail );
+    alert( "Ihre Daten werden zwischengespeichert." );
   }
 });
 $( document ).on( "click", accordionNext, function( e ) {

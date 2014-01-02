@@ -115,9 +115,6 @@
       $( tabs ).appendTo( settings.accordion.accordionSelector + " div.caddy-powermail" );
     } // Add the powermail tabs to the caddy tab powermail
 
-    indexAccordionOrdering  = 4; // Ordering
-    indexAccordionPowermail = 2; // Powermail form
-      
       // Fade out the loading *.gif, initiate buttons again
     function clean_up( html_element ) {
       $( "#tx-caddy-pi1-loader" ).hide( );
@@ -467,7 +464,6 @@
     // Move the powermail form into the caddy to the tab powermail
     function submitPowermail( ) {
       console.debug( "submitPowermail( )" )
-      alert( "Ihre Daten werden zwischengespeichert." );
       $( ".powermail_form_30" ).submit( );
     }
 //    /* AJAX begin */
@@ -521,20 +517,22 @@
 
     var settings = {
       accordion : {
-        accordionButtonId     : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
-        accordionNext         : "button.accordionNext",       // default: button.accordionNext
-        accordionPrev         : "button.accordionPrev",       // default: button.accordionPrev
-        accordionApi          : undefined,  // API of the accordion
-        accordionSelector     : undefined,  // e.g.: "#c2997-accordion"
-        currAccordionIndex    : undefined,  // index of the current accordion pane: [0-4]
-        powermailFormSelector : undefined,  // e.g.: "#c2997-accordion-powermail div form",
-        powermailWallHtmlId   : undefined,  // e.g.: "#c2997-powermail-prompt",
-        powermailUid          : undefined,  // e.g.: "#c2995",
-        pmuidfieldemail       : undefined,  // e.g.: 624
-        pmuidfieldrevocation  : undefined,  // e.g.: 629
-        pmuidfieldterms       : undefined,  // e.g.: 628
-        t3caddyAlert          : 1,          // [e.g.:]0-1] 
-        t3caddyConsoleDebug   : 1           // [e.g.:]0-1]
+        accordionButtonId       : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
+        accordionNext           : "button.accordionNext",       // default: button.accordionNext
+        accordionPrev           : "button.accordionPrev",       // default: button.accordionPrev
+        accordionApi            : undefined,  // API of the accordion
+        accordionSelector       : undefined,  // e.g.: "#c2997-accordion"
+        currAccordionIndex      : undefined,  // index of the current accordion pane: [0-4]
+        indexAccordionOrdering  : 4, // Ordering
+        indexAccordionPowermail : 2, // Powermail form
+        powermailFormSelector   : undefined,  // e.g.: "#c2997-accordion-powermail div form",
+        powermailWallHtmlId     : undefined,  // e.g.: "#c2997-powermail-prompt",
+        powermailUid            : undefined,  // e.g.: "#c2995",
+        pmuidfieldemail         : undefined,  // e.g.: 624
+        pmuidfieldrevocation    : undefined,  // e.g.: 629
+        pmuidfieldterms         : undefined,  // e.g.: 628
+        t3caddyAlert            : 1,          // [e.g.:]0-1] 
+        t3caddyConsoleDebug     : 1           // [e.g.:]0-1]
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
