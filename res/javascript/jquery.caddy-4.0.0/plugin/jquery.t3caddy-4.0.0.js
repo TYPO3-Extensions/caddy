@@ -602,15 +602,6 @@
 //                      }
 
                     }, /* accordion */
-      init        : function( settings_ )
-                    {
-                      return this.each( function( ) {
-                          // If settings_ exist, lets merge them with our default settings
-                        if ( settings_ ) {
-                          $.extend( settings, settings_ );
-                        }
-                      });
-                    }, /* init */
       update      : function( options )
                     {
                       options = $.extend( settings, options );
@@ -674,9 +665,9 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-//                          $( settings.update.accordionApi ).destroy( );
-                          accordionApi = methods.accordion( settings.accordion );
-                          accordionApi.destroy( );
+                          accordionApi = $( settings.update.accordionApi );
+                          //accordionApi = methods.accordion( settings.accordion );
+                          //accordionApi.destroy( );
                           clean_up( settings.update.html_element );
                           return accordionApi;
 //                        });
