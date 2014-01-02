@@ -142,9 +142,34 @@ plugin.tx_caddy_pi1 {
         imageLinkWrap = 1
         imageLinkWrap {
           enable = 1
-          typolink.parameter.data = page:alias//TSFE:id
-          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = uid
+          typolink {
+            parameter {
+              cObject = COA
+              cObject {
+                  // URL
+                10 = TEXT
+                10 {
+                  data = page:alias//TSFE:id
+                }
+                  // target
+                20 = TEXT
+                20 {
+                  value       = -
+                  noTrimWrap  = | ||
+                }
+                  // class
+                30 = TEXT
+                30 {
+                  value       = onClickloadCaddyByAjax 
+                  noTrimWrap  = | ||
+                }
+              }
+            }
+            additionalParams {
+              wrap  = &tx_caddy_pi1[del]=|
+              field = uid
+            }
+          }
         }
       }
         // gross costs of the item
