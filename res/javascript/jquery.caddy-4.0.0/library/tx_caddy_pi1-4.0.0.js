@@ -123,36 +123,3 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   }
 }); // User has clicked a tag with the cUID-step class
 /* AJAX end */
-
-
-
-
-// adds an effect called "wall" to the validator
-$.tools.validator.addEffect( "wall", function( errors, event ) 
-{
-  // get the message wall
-  var wall = $( this.getConf( ).container ).fadeIn( );
-  // remove all existing messages
-  wall.html( null );
-  wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
-  // add new ones
-  $.each( errors, function( index, error ) {
-    selector = "input[name='" + error.input.attr("name") + "']";
-    switch( error.input.attr("name") )
-    {
-      case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
-      case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
-        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).next( ).text( ) + "</strong></p>"
-        break;
-      default:
-        strAppend = "<p>" + error.messages[0] + ": <strong>" + $( selector ).prev( ).text( ) + "</strong></p>";
-        break;
-    }
-    wall.append( strAppend );
-  });
-// the effect does nothing when all inputs are valid
-}, function( inputs ) 
-{
-  // remove all existing messages
-  $( "#c###UID###-powermail-prompt" ).html( "" );
-});
