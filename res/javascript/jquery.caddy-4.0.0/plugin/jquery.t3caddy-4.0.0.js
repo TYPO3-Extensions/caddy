@@ -99,8 +99,7 @@
     indexAccordionPowermail = 2; // Powermail form
     
       // Fade out the loading *.gif, initiate buttons again
-    function clean_up( html_element ) {      
-      $( "#currAccordionIndex" ).text( 2 );
+    function clean_up( html_element ) {
       $( "#tx-caddy-pi1-loader" ).hide( );
         // Initiate the ui button layout again
       $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
@@ -548,6 +547,7 @@
 
                             // Fade out the loading *.gif, initiate buttons again
                           accordionApi.click( settings.update.currAccordionIndex );
+                          $( "#currAccordionIndex" ).text( 2 );
                           clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
