@@ -516,6 +516,7 @@
                           // Send the AJAX request
                           // Replace the content of the html element with the delivered data
                         var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
+                        console.debug( url_wi_selector );
                         $( settings.update.html_element ).load( url_wi_selector, settings.update.data, function( response, status, xhr )
                         {
                             // ERROR server has an error and has send a message
