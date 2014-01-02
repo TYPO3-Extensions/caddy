@@ -29,6 +29,15 @@
         effect        : 'slide',
         initialIndex  : 0,
         onBeforeClick : function( event, indexAccordionDest ) {
+          accordionButtonId = settings.accordion.accordionButtonId;
+          if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
+          {
+            $( accordionButtonId ).removeAttr( "disabled" );
+          }
+          else
+          {
+            $( accordionButtonId ).attr( "disabled", "disabled" );
+          }
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();
