@@ -311,7 +311,6 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 
 //// initValidator
 //var initValidator = function( selector, validate, powermailWallHtmlId ) {
-//  movePowermailFieldsToHtml5( );  
 //  success = false;
 //  validatePowermailForm = $( selector ).validator(
 //  {
@@ -354,3 +353,5 @@ $.tools.validator.addEffect( "wall", function( errors, event )
 //  // get handle to the API
 //  //var api = $(this).data("validator");
 //});
+
+movePowermailFieldsToHtml5( );  

@@ -194,8 +194,6 @@
       }); // $(powermailFormSelector).validator ...
       if( validate == "validate" )
       {
-    //    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "type" ) );
-    //    alert( $("input[name*='tx_powermail_pi1[field][" + pmuidfieldterms + "]'][type=checkbox]").attr( "checked" ) );
         success = validatePowermailForm.data('validator').checkValidity( );
         //alert( success );
       }
