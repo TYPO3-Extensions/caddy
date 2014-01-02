@@ -674,8 +674,8 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          accordionApi = $( settings.update.accordionApi );
-                          accordionApi = methods.accordion.call( settings.accordion );
+//                          accordionApi = $( settings.update.accordionApi );
+//                          accordionApi = methods.accordion.call( settings.accordion );
                           //accordionApi = methods.accordion( settings.accordion );
                           //accordionApi.destroy( );
                           clean_up( settings.update.html_element );

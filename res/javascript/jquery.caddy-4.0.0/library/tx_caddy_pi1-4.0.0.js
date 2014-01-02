@@ -100,7 +100,10 @@ var fnAjax = function( formAction, formData, e ) {
 
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
-//  setTimeout( function( ) {
+$(document).ready(function(){
+  accordionApi = accordion( );
+});
+////  setTimeout( function( ) {
 ////    accordionIndex = currAccordionIndex;
 //    accordionApi = accordion( );
 ////    fnInit( ); /* Initiate Accordion */
