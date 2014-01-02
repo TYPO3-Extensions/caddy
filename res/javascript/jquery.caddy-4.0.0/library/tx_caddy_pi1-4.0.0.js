@@ -119,7 +119,7 @@ $( "form.powermail_form" ).submit( function( e )
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    fnAjax( e );
+    fnAjax( formAction, e );
   }
 });
 /* AJAX end */
