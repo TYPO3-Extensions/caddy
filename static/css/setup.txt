@@ -13,6 +13,11 @@ plugin.tx_caddy_pi1 {
 
     /* div based caddy */
     
+    div.accordionNextPrev {
+      float:right;
+      position:relative;
+    }
+
     div.caddy form {
       border-bottom: 1px solid {$plugin.caddy.html.color.border};
     }
