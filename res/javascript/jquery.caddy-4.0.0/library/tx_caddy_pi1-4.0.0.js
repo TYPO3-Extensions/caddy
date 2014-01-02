@@ -74,7 +74,7 @@ var fnAjax = function( formAction, formData, e ) {
 //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
-  accordionApi = $( this ).t3caddy( "update", {
+  $( this ).t3caddy( "update", {
     accordion : {
       accordionSelector     : "#c###UID###-accordion",
       currAccordionIndex    : currAccordionIndex,

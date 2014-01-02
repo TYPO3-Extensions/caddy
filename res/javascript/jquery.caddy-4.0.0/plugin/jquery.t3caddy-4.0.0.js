@@ -614,7 +614,6 @@
       update      : function( options )
                     {
                       options = $.extend( settings, options );
-                      $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
 
@@ -675,9 +674,13 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          accordionApi = methods.accordion( settings.accordion );
+//                          $( settings.accordion.accordionSelector ).data( "tabs" ).destroy( );
+//                          accordionApi = methods.accordion( settings.accordion );
+                          movePowermailFormToCaddy( );
+                          movePowermailFieldsToHtml5( );
                           clean_up( settings.update.html_element );
-                          return accordionApi;
+                          return false;
+//                          return accordionApi;
 //                        });
                           // Send the AJAX request
                       });
