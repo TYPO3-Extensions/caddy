@@ -37,7 +37,7 @@
           // RETURN if current accordion isn't the powermail pane
           switch( true )
           {
-            case( indexAccordionDest == indexAccordionOrdering ): // Ordering
+            case( indexAccordionDest == indexAccordionOrdering  ): // Ordering
             case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
               // Follow the workflow
               break;
@@ -56,6 +56,8 @@
             //alert( "return true: success" );
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
+            accordionButtonId = settings.accordion.accordionButtonId;
+            $( accordionButtonId ).attr( "disabled" ).remove( );
 //            console.debug( settings.accordion.currAccordionIndex );
             return true;
           }
@@ -385,6 +387,7 @@
 
     var settings = {
       accordion : {
+        accordionButtonId     : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
         accordionApi          : undefined,  // API of the accordion
         accordionSelector     : undefined,  // e.g.: "#c2997-accordion"
         currAccordionIndex    : undefined,  // index of the current accordion pane: [0-4]
@@ -395,7 +398,7 @@
         pmuidfieldrevocation  : undefined,  // e.g.: 629
         pmuidfieldterms       : undefined,  // e.g.: 628
         t3caddyAlert          : 1,          // [e.g.:]0-1] 
-        t3caddyConsoleDebug   : 1          // [e.g.:]0-1]
+        t3caddyConsoleDebug   : 1           // [e.g.:]0-1]
       },
       messages  : {
         errMissingTagPropertyLabel: "Tag is missing:",
@@ -459,7 +462,10 @@
                       options = $.extend( settings.accordion, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: " + settings.accordion.accordionSelector + " isn't set." )
-                        return;
+                        return {
+                          accordionApi        : null,
+                          currAccordionIndex  : null
+                        }
                       }
                       addAccordion( );
                       addPowermailTabsToCaddy( );
