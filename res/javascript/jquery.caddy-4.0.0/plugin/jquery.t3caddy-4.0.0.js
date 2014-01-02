@@ -69,7 +69,7 @@
                       }
                     });
                   },
-    update      : function( html_element, url, html_element_wi_selector )
+    update      : function( html_element, url, data, html_element_wi_selector )
                   {
                       // update():  replace the content of the given html element with the content
                       //            of the requested url. The content is the content of the html element with selector.

@@ -77,7 +77,7 @@ $(function() {
 }); /* Initiate Accordion */
 
 /* AJAX begin */
-var fnAjax = function( formAction, e ) {
+var fnAjax = function( formAction, formData, e ) {
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
@@ -98,7 +98,7 @@ console.debug( url );
 //var html_element              = "#c###UID###";
   var html_element              = "#content";
   var html_element_wi_selector  = html_element + " > *";
-  $( this ).t3caddy( 'update', html_element, url, html_element_wi_selector )
+  $( this ).t3caddy( 'update', html_element, url, formData, html_element_wi_selector )
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
@@ -111,16 +111,18 @@ console.debug( url );
 /* AJAX end */
 
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-  formAction = $( this ).closest( "form" ).attr( "action");
-  fnAjax( formAction, e );
+  formAction  = $( this ).closest( "form" ).attr( "action");
+  formData    = $( this ).closest( "form" ).serialize( );
+  fnAjax( formAction, formData, e );
 }); // User has clicked a tag with the cUID-step class
 $( "form.powermail_form" ).submit( function( e )  
 {
-  formAction = $( this ).attr( "action");
+  formAction  = $( this ).attr( "action");
+  formData    = $( this ).serialize( );
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    fnAjax( formAction, e );
+    fnAjax( formAction, formData, e );
   }
 });
 /* AJAX end */
