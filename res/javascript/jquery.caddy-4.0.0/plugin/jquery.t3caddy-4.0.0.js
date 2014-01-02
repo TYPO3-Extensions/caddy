@@ -359,15 +359,17 @@
         $.each( errors, function( index, error ) {
           selector = "input[name='" + error.input.attr( "name" ) + "']";
 
-          idOfFieldset = $( selector ).closest( "fieldset").attr( "id");
-          legend       = $( "#" + idOfFieldset + " legend" ).text( );
           switch( error.input.attr( "name" ) )
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
             case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
+              idOfFieldset = $( selector ).closest( "fieldset").closest( "fieldset").attr( "id");
+              legend       = $( "#" + idOfFieldset + " legend" ).text( );
               strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
               break;
             default:
+              idOfFieldset = $( selector ).closest( "fieldset").attr( "id");
+              legend       = $( "#" + idOfFieldset + " legend" ).text( );
               strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
               break;
           }
