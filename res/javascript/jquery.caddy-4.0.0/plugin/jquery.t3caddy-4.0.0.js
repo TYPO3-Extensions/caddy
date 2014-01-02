@@ -77,13 +77,6 @@
           return false;
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
-      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
-      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
-        accordionApi.next();
-      });
-      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
-        accordionApi.prev();
-      });      
     } /* accordion */
 
     // Add the powermail tabs to the caddy tab powermail
@@ -113,14 +106,64 @@
 
     indexAccordionOrdering  = 4; // Ordering
     indexAccordionPowermail = 2; // Powermail form
-    
+      
       // Fade out the loading *.gif, initiate buttons again
     function clean_up( html_element ) {
       $( "#tx-caddy-pi1-loader" ).hide( );
         // Initiate the ui button layout again
       $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
     }
+    
       // Fade out the loading *.gif, initiate buttons again
+    function confToolsValidator( ) {
+      $.tools.validator.localize( "de", {
+        // "*" Isn't localised
+        //"*"           : "Der Wert wird nicht akzeptiert",
+        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
+        ":number"     : "Bitte nur Zahlen eingeben",
+        ":url"        : "Bitte eine korrekte URL eingeben",
+        "[max]"       : "Maximal $1 ist erlaubt",
+        "[min]"       : "Mindestens $1 ist n&ouml;tig",
+        "[required]"  : "Bitte ausfüllen"
+      }); // $.tools.validator.localize ...
+      // adds the "wall" effect to the validator
+      $.tools.validator.addEffect( "wall", function( errors, event ) 
+      {
+        pmuidfieldterms       = settings.accordion.pmuidfieldterms;
+        pmuidfieldrevocation  = settings.accordion.pmuidfieldrevocation;
+        // get the message wall
+        var wall = $( this.getConf( ).container ).fadeIn( );
+        // remove all existing messages
+        wall.html( null );
+        wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
+        // add new ones
+        $.each( errors, function( index, error ) {
+          selector = "input[name='" + error.input.attr( "name" ) + "']";
+          switch( error.input.attr( "name" ) )
+          {
+            case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
+            case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
+              idPmFieldwrapCheck = $( selector ).closest( "div.powermail_fieldwrap_check" ).attr( "id" );
+              idOfFieldset = $( "#" + idPmFieldwrapCheck ).closest( "fieldset" ).attr( "id" );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
+              break;
+            default:
+              idOfFieldset = $( selector ).closest( "fieldset" ).attr( "id" );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
+              break;
+          }
+          wall.append( strAppend );
+        });
+      // the effect does nothing when all inputs are valid
+      }, function( inputs ) 
+      {
+        // remove all existing messages
+        $( settings.accordion.powermailWallHtmlId ).html( "" );
+      }); // adds the "wall" effect to the validator      
+    }
+    
       // Cover the current html element with the loader *.gif
     function cover_wi_loader( html_element ) {
       $( "#tx-caddy-pi1-loader" ).css({
@@ -198,6 +241,61 @@
     }
       // Prompt informations
 
+    function initEvents( ) {
+      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
+      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
+        accordionApi.next();
+      });
+      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
+        accordionApi.prev();
+      });      
+      $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+        formAction  = $( this ).closest( "form" ).attr( "action");
+        formData    = $( this ).closest( "form" ).serialize( );
+        runAjax( formAction, formData, e );
+      }); // User has clicked a tag with the cUID-step class
+      $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          e.preventDefault( ); // Don't execute the click
+          formAction  = $( this ).attr( "href");
+          formData    = null;
+          runAjax( formAction, formData, e );
+        }
+      }); // User has clicked a tag with the cUID-step class
+      $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          e.preventDefault( ); // Don't execute the click
+          formAction  = $( this ).closest( "form" ).attr( "action");
+          formData    = $( this ).closest( "form" ).serialize( );
+          runAjax( formAction, formData, e );
+        }
+      }); // User has clicked a tag with the cUID-step class
+      $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          e.preventDefault( ); // Don't execute the click
+          formAction  = $( this ).closest( "form" ).attr( "action");
+          formData    = $( this ).closest( "form" ).serialize( );
+          runAjax( formAction, formData, e );
+        }
+      }); // User has clicked a tag with the cUID-step class
+      $( document ).on( "click", "input.powermail_submit", function( e ) {
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          e.preventDefault( ); // Don't execute the click
+          if( ! initValidator( settings.accordion.powermailFormSelector, "validate" ) )
+          {
+            return;
+          }
+          formAction  = $( this ).closest( "form" ).attr( "action");
+          formData    = $( this ).closest( "form" ).serialize( );
+          runAjax( formAction, formData, e );
+        }
+      }); // User has clicked a tag with the cUID-step class      
+    }
+    
     /* Powermail tabs begin */
     function initPowermailTabs( ) {
       // Configure the tabs of the powermail form
@@ -352,54 +450,53 @@
       }
     }  // Move the powermail form into the caddy to the tab powermail
     
-    function confToolsValidator( ) {
-      $.tools.validator.localize( "de", {
-        // "*" Isn't localised
-        //"*"           : "Der Wert wird nicht akzeptiert",
-        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
-        ":number"     : "Bitte nur Zahlen eingeben",
-        ":url"        : "Bitte eine korrekte URL eingeben",
-        "[max]"       : "Maximal $1 ist erlaubt",
-        "[min]"       : "Mindestens $1 ist n&ouml;tig",
-        "[required]"  : "Bitte ausfüllen"
-      }); // $.tools.validator.localize ...
-      // adds the "wall" effect to the validator
-      $.tools.validator.addEffect( "wall", function( errors, event ) 
+    /* AJAX begin */
+    function runAjax( formAction, formData, e ) {
+      currAccordionIndex = accordionApi.getIndex( );
+      console.debug( currAccordionIndex );
+      // User has clicked a tag with the class onChangeloadCaddyByAjax
+      e.preventDefault( ); // Don't execute the click
+      // RETURN : current id isn't part of the DOM
+      //if( ! $( "#c###UID###" ).length )
+      if( ! $( "#content" ).length )
       {
-        pmuidfieldterms       = settings.accordion.pmuidfieldterms;
-        pmuidfieldrevocation  = settings.accordion.pmuidfieldrevocation;
-        // get the message wall
-        var wall = $( this.getConf( ).container ).fadeIn( );
-        // remove all existing messages
-        wall.html( null );
-        wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
-        // add new ones
-        $.each( errors, function( index, error ) {
-          selector = "input[name='" + error.input.attr( "name" ) + "']";
-          switch( error.input.attr( "name" ) )
-          {
-            case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
-            case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
-              idPmFieldwrapCheck = $( selector ).closest( "div.powermail_fieldwrap_check" ).attr( "id" );
-              idOfFieldset = $( "#" + idPmFieldwrapCheck ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
-              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
-              break;
-            default:
-              idOfFieldset = $( selector ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
-              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
-              break;
-          }
-          wall.append( strAppend );
-        });
-      // the effect does nothing when all inputs are valid
-      }, function( inputs ) 
-      {
-        // remove all existing messages
-        $( settings.accordion.powermailWallHtmlId ).html( "" );
-      }); // adds the "wall" effect to the validator      
-    }
+        if( t3caddyAlert )
+        {
+          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
+          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
+        }
+        return;
+      } // RETURN : current id isn't part of the DOM
+
+      // Update the content with the id #c###UID###-###VIEW###view
+      var url = $( this ).t3caddy( 'url_autoQm', {
+        currAccordionIndex  : currAccordionIndex,
+        url                 : formAction, 
+        param               : "type=###TYPENUM###"
+      });
+      console.debug( url );
+    //var html_element              = "#c###UID###";
+      var html_element              = "#content";
+      var html_element_wi_selector  = html_element + " > *";
+      $( this ).t3caddy( "update", {
+        accordionApi              : accordionApi,
+        currAccordionIndex        : currAccordionIndex,
+        formData                  : formData,
+        html_element              : html_element, 
+        html_element_wi_selector  : html_element_wi_selector, 
+        t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
+        url                       : url
+      });
+      // Update the content with the id #c###UID###-###VIEW###view
+      // Reload functions after content is updated (after 2000 miliseconds)
+    //  setTimeout( function( ) {
+    ////    accordionIndex = currAccordionIndex;
+    //    fnInit( ); /* Initiate Accordion */
+    ////    alert( accordionIndex );
+    ////    accordionApi.click( accordionIndex );
+    //  }, 2000 );
+    } // User has clicked a tag with the cUID-step class
+    /* AJAX end */
 
     var settings = {
       accordion : {
@@ -491,6 +588,7 @@
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
                       addAccordion( );
+                      initEvents( );
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
