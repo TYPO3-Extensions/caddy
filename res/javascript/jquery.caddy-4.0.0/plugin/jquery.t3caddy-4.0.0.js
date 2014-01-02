@@ -581,10 +581,11 @@
                       options = $.extend( settings.accordion, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: " + settings.accordion.accordionSelector + " isn't set." )
-                        return {
-                          accordionApi        : null,
-                          currAccordionIndex  : null
-                        }
+                        return null;
+//                        return {
+//                          accordionApi        : null,
+//                          currAccordionIndex  : null
+//                        }
                       }
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
@@ -593,10 +594,11 @@
                       confToolsValidator( );
                       addAccordion( );
                       initEvents( );
-                      return {
-                        accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
-                        currAccordionIndex  : settings.accordion.currAccordionIndex
-                      }
+                      return $( settings.accordion.accordionSelector ).data( "tabs" );
+//                      return {
+//                        accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
+//                        currAccordionIndex  : settings.accordion.currAccordionIndex
+//                      }
 
                     }, /* accordion */
       init        : function( settings_ )

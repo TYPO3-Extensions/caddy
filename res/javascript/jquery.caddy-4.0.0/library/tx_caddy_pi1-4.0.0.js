@@ -26,10 +26,8 @@ var pmuidfieldterms       = parseInt( "###PMUIDFIELDTERMS###" );
 var t3caddyAlert          = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
-
-/* Initiate Accordion */
-$(function( ) {  
-  accordionJSONobject =  $( this ).t3caddy( "accordion", {
+var accordionApi =  function( ) {
+  $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
     currAccordionIndex    : currAccordionIndex,
     powermailFormSelector : "#c###UID###-accordion-powermail div form",
@@ -41,8 +39,11 @@ $(function( ) {
     t3caddyAlert          : parseInt( "###T3CADDYALERT###" ),
     t3caddyConsoleDebug   : parseInt( "###T3CADDYCONSOLEDEBUG###" )
   });
-  accordionApi        = accordionJSONobject.accordionApi;
-  currAccordionIndex  = accordionJSONobject.currAccordionIndex;
+};
+
+/* Initiate Accordion */
+$(function( ) {  
+  accordionApi = accordionApi( );
 }); /* Initiate Accordion */
 
 /* AJAX begin */
