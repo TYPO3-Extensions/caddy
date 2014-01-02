@@ -318,6 +318,7 @@
                       initValidator( powermailFormSelector, null, powermailWallHtmlId );
                       //alert( settings.accordion.pmuidfieldemail );
                       alert( settings.pmuidfieldemail );
+                      alert( options );
                     }, /* accordion */
       init        : function( settings_ )
                     {
