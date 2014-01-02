@@ -456,7 +456,7 @@
     /* AJAX begin */
     function runAjax( formAction, formData, e ) {
       currAccordionIndex = accordionApi.getIndex( );
-      console.debug( currAccordionIndex );
+      //console.debug( currAccordionIndex );
       // User has clicked a tag with the class onChangeloadCaddyByAjax
       e.preventDefault( ); // Don't execute the click
       // RETURN : current id isn't part of the DOM
@@ -643,7 +643,7 @@
                           // Replace the content of the html element with the delivered data
                         var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
                         //console.debug( url_wi_selector );
-                        $( settings.update.html_element ).load( url_wi_selector, settings.update.data, function( response, status, xhr )
+                        $( settings.update.html_element ).load( url_wi_selector, settings.update.formData, function( response, status, xhr )
                         {
                             // ERROR server has an error and has send a message
                           if (status == "error")
