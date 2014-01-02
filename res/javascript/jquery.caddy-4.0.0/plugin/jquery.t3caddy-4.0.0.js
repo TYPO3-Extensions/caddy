@@ -22,6 +22,7 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId ) {
+      console.debug( settings.accordion.pmuidfieldemail );
       // The accordian panes of the caddy
       $(accordionSelector).tabs( "div.pane",
       {
@@ -318,9 +319,10 @@
     };
 
     var methods = {
-      accordion   : function( accordionSelector, powermailUid, powermailFormSelector, powermailWallHtmlId, options ) {
+      accordion   : function( options ) {
                       //options = $.extend({}, settings, options);
                       options = $.extend(settings, options);
+                      console.debug( settings.accordion.pmuidfieldemail );
                       addAccordion( accordionSelector, powermailFormSelector, powermailWallHtmlId );
                       addPowermailTabsToCaddy( accordionSelector, powermailUid );
                       movePowermailFormToCaddy( powermailUid, powermailFormSelector, powermailWallHtmlId );
