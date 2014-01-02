@@ -29,7 +29,9 @@
       {
         tabs          : 'h2',
         effect        : 'slide',
-        initialIndex  : parseInt( settings.accordion.currAccordionIndex ),
+        initialIndex  : function( ) {
+                          return parseInt( settings.accordion.currAccordionIndex );
+                        },
         onBeforeClick : function( event, indexAccordionDest ) {
           accordionButtonId = settings.accordion.accordionButtonId;
           if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
