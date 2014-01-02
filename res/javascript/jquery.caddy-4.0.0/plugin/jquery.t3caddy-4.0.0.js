@@ -358,7 +358,9 @@
         // add new ones
         $.each( errors, function( index, error ) {
           selector = "input[name='" + error.input.attr( "name" ) + "']";
-          console.debug( $( selector ).closest( "fieldset").attr( "id") );
+
+          idOfFieldset = $( selector ).closest( "fieldset").attr( "id");
+          console.debug( $( idOfFieldset + " legend" ).text( ) );
           switch( error.input.attr( "name" ) )
           {
             case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
