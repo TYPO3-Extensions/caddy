@@ -38,7 +38,8 @@ $(function( ) {
 //      currAccordionIndex = parseInt( $_POST["tx_caddy_pi1[accordion]"] );
 //      break;
 //  }
-  console.debug( currAccordionIndex );
+  urlSearch   = $( location ).attr( "search" );
+  console.debug( urlSearch );
   //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
