@@ -50,13 +50,13 @@
               return true;
               break;
           }
+          accordionButtonId = settings.accordion.accordionButtonId;
           // Are all values proper of the powermail form?
           if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
           {
             //alert( "return true: success" );
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
-            accordionButtonId = settings.accordion.accordionButtonId;
             $( accordionButtonId ).removeAttr( "disabled" );
 //            console.debug( settings.accordion.currAccordionIndex );
             return true;
