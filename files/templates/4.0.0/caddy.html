@@ -112,7 +112,9 @@ INDEX
   ###_HTMLMARKER_CADDY_HEADER_ITEMS###
   <div id="c###UID###-accordion-items" class="caddy caddy-product-table pane">
     ###MINPRICE###
-    <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    <div class="accordionNextPrev">
+      <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    </div>
     <form name="caddy" id="caddy" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
       ###VARIANTS###
@@ -155,8 +157,10 @@ INDEX
   <!-- ###OPTIONS### begin -->
   ###_HTMLMARKER_CADDY_HEADER_OPTIONSWOPAYMENT###
   <div id="c###UID###-accordion-options" class="caddy caddy-options pane">
-    <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
-    <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    <div class="accordionNextPrev">
+      <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
+      <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    </div>
     <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
       <div class="caddy_options">
@@ -170,8 +174,10 @@ INDEX
   <!-- ###POWERMAIL### begin -->
   ###_HTMLMARKER_CADDY_HEADER_POWERMAIL###
   <div id="c###UID###-accordion-powermail" class="caddy caddy-powermail pane">
-    <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
-    <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    <div class="accordionNextPrev">
+      <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
+      <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    </div>
     <div id="c###UID###-powermail-prompt">
       <p>
         <em>
@@ -184,8 +190,10 @@ INDEX
   <!-- ###PAYMENT_METHOD### begin -->
   ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD###
   <div id="c###UID###-accordion-paymentmethod" class="caddy caddy-payment-method pane">
-    <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
-    <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    <div class="accordionNextPrev">
+      <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
+      <button class="accordionNext">###_LOCAL_LANG_ACCORDIONNEXT### &raquo;</button>
+    </div>
     <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
       <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
       <div class="caddy_options">
@@ -198,8 +206,10 @@ INDEX
   <!-- ###ORDER### begin -->
   ###_HTMLMARKER_CADDY_HEADER_ORDER###
   <div id="c###UID###-accordion-order" class="caddy caddy-order pane">
-    <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
-    <button class="order">Order &raquo;</button>
+    <div class="accordionNextPrev">
+      <button class="accordionPrev">&laquo; ###_LOCAL_LANG_ACCORDIONPREV###</button>
+      <button class="order">Order &raquo;</button>
+    </div>
     <em>Warenkorb</em>
   </div> <!-- /caddy caddy-order pane -->
   <!-- ###ORDER### end -->
