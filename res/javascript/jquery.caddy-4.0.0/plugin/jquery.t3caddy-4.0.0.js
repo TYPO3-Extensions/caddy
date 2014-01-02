@@ -364,12 +364,12 @@
             case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
               idPmFieldwrapCheck = $( selector ).closest( "div.powermail_fieldwrap_check" ).attr( "id" );
               idOfFieldset = $( "#" + idPmFieldwrapCheck ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " legend" ).text( );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
               strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
               break;
             default:
               idOfFieldset = $( selector ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " legend" ).text( );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
               strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
               break;
           }
