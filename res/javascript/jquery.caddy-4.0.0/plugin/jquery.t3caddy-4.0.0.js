@@ -675,6 +675,13 @@
 
                             // Fade out the loading *.gif, initiate buttons again
                           accordionApi = $( settings.update.accordionApi );
+  setTimeout( function( ) {
+//    accordionIndex = currAccordionIndex;
+    accordionApi = methods.accordion( settings.accordion );
+//    fnInit( ); /* Initiate Accordion */
+//    alert( accordionIndex );
+//    accordionApi.click( accordionIndex );
+  }, 2000 );
                           //accordionApi = methods.accordion( settings.accordion );
                           //accordionApi.destroy( );
                           clean_up( settings.update.html_element );
