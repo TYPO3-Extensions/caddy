@@ -83,6 +83,8 @@ var fnAjax = function( formAction, formData, e ) {
     t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
     url                       : url
   });
+  accordionApi = accordion( );
+
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
 //  setTimeout( function( ) {
