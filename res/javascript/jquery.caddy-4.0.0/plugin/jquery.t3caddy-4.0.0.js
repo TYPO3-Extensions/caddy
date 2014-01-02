@@ -17,13 +17,90 @@
 
   $.fn.t3caddy = function( method )
   {
-                        // Fade out the loading *.gif, initiate buttons again
-                      function clean_up( html_element ) {
-                        $( "#tx-caddy-pi1-loader" ).hide( );
-                          // Initiate the ui button layout again
-                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
-                      };
-                        // Fade out the loading *.gif, initiate buttons again
+      // Fade out the loading *.gif, initiate buttons again
+    var clean_up = function( html_element ) {
+      $( "#tx-caddy-pi1-loader" ).hide( );
+        // Initiate the ui button layout again
+      $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
+    };
+      // Fade out the loading *.gif, initiate buttons again
+      // Cover the current html element with the loader *.gif
+    var cover_wi_loader = function( html_element ) {
+      $( "#tx-caddy-pi1-loader" ).css({
+        height: $( "#tx-caddy-pi1-loader" ).parent( ).height( ),    
+        width:  $( "#tx-caddy-pi1-loader" ).parent( ).width( )    
+      });
+      $( "#tx-caddy-pi1-loader" ).show( );
+    };
+      // Cover the current html element with the loader *.gif
+
+      // Prompt errors
+    var err_prompt = function( selector, label, prompt ) {
+      if( !$( "#update-prompt" ).length ) {
+        if( t3caddyAlert )
+        {
+          alert( label + " " + prompt);
+        }
+        return;
+      }
+      element = format( settings.templates.uiErr, label, prompt);
+      $( selector ).append( element );
+    };
+      // Prompt errors
+
+      // Prompt informations
+    var inf_prompt = function( selector, label, prompt ) {
+      if( !$( "#update-prompt" ).length ) {
+        if( t3caddyAlert )
+        {
+          alert( label + " " + prompt);
+        }
+        return;
+      }
+      element = format( settings.templates.uiInf, label, prompt);
+      $( selector ).append( element );
+    };
+      // Prompt informations
+
+      // Replace vars in the source with the given params
+    var format = function( source, params ) {
+        // ERROR with source
+      if( typeof source == "undefined" )
+      {
+        source =  'ERROR in jquery.t3caddy-4.0.0.js: source is undefined. It seems that there is ' +
+                  'a problem with a not defined variable. Function format( source, params ).';
+      }
+        // ERROR with params
+      if( typeof params == "undefined" )
+      {
+        params = new Array();
+        params[0] = 'ERROR in jquery.t3caddy-4.0.0.js:';
+        params[1] = 'params are undefined. It seems that there is a problem with a not defined variable. ' +
+                    'Function format( source, params ). Please check settings { ... }.';
+      }
+      if ( arguments.length == 1 )
+      {
+        return function() {
+          var args = $.makeArray(arguments);
+          args.unshift(source);
+          return $.t3caddy.format.apply( this, args );
+        };
+      }
+      if ( arguments.length > 2 && params.constructor != Array  )
+      {
+        params = $.makeArray(arguments).slice(1);
+      }
+      if ( params.constructor != Array )
+      {
+        params = [ params ];
+      }
+      $.each(params, function(i, n)
+      {
+        source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
+      });
+      return source;
+    };
+      // Replace vars in the source with the given params
 
     var settings = {
       messages: {
@@ -146,91 +223,91 @@
                           // Send the AJAX request
                       });
 
-                        // Cover the current html element with the loader *.gif
-                      function cover_wi_loader( html_element ) {
-                        $( "#tx-caddy-pi1-loader" ).css({
-                          height: $( "#tx-caddy-pi1-loader" ).parent( ).height( ),    
-                          width:  $( "#tx-caddy-pi1-loader" ).parent( ).width( )    
-                        });
-                        $( "#tx-caddy-pi1-loader" ).show( );
-                      };
-                        // Cover the current html element with the loader *.gif
-
-//                        // Fade out the loading *.gif, initiate buttons again
-//                      function clean_up( html_element ) {
-//                        $( "#tx-caddy-pi1-loader" ).hide( );
-//                          // Initiate the ui button layout again
-//                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
+//                        // Cover the current html element with the loader *.gif
+//                      function cover_wi_loader( html_element ) {
+//                        $( "#tx-caddy-pi1-loader" ).css({
+//                          height: $( "#tx-caddy-pi1-loader" ).parent( ).height( ),    
+//                          width:  $( "#tx-caddy-pi1-loader" ).parent( ).width( )    
+//                        });
+//                        $( "#tx-caddy-pi1-loader" ).show( );
 //                      };
-//                        // Fade out the loading *.gif, initiate buttons again
-
-                        // Prompt errors
-                      function err_prompt( selector, label, prompt ) {
-                        if( !$( "#update-prompt" ).length ) {
-                          if( t3caddyAlert )
-                          {
-                            alert( label + " " + prompt);
-                          }
-                          return;
-                        }
-                        element = format( settings.templates.uiErr, label, prompt);
-                        $( selector ).append( element );
-                      };
-                        // Prompt errors
-
-                        // Prompt informations
-                      function inf_prompt( selector, label, prompt ) {
-                        if( !$( "#update-prompt" ).length ) {
-                          if( t3caddyAlert )
-                          {
-                            alert( label + " " + prompt);
-                          }
-                          return;
-                        }
-                        element = format( settings.templates.uiInf, label, prompt);
-                        $( selector ).append( element );
-                      };
-                        // Prompt informations
-
-                        // Replace vars in the source with the given params
-                      function format( source, params ) {
-                          // ERROR with source
-                        if( typeof source == "undefined" )
-                        {
-                          source =  'ERROR in jquery.t3caddy-4.0.0.js: source is undefined. It seems that there is ' +
-                                    'a problem with a not defined variable. Function format( source, params ).';
-                        }
-                          // ERROR with params
-                        if( typeof params == "undefined" )
-                        {
-                          params = new Array();
-                          params[0] = 'ERROR in jquery.t3caddy-4.0.0.js:';
-                          params[1] = 'params are undefined. It seems that there is a problem with a not defined variable. ' +
-                                      'Function format( source, params ). Please check settings { ... }.';
-                        }
-                        if ( arguments.length == 1 )
-                        {
-                          return function() {
-                            var args = $.makeArray(arguments);
-                            args.unshift(source);
-                            return $.t3caddy.format.apply( this, args );
-                          };
-                        }
-                        if ( arguments.length > 2 && params.constructor != Array  )
-                        {
-                          params = $.makeArray(arguments).slice(1);
-                        }
-                        if ( params.constructor != Array )
-                        {
-                          params = [ params ];
-                        }
-                        $.each(params, function(i, n)
-                        {
-                          source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
-                        });
-                        return source;
-                      };
-                        // Replace vars in the source with the given params
+//                        // Cover the current html element with the loader *.gif
+//
+////                        // Fade out the loading *.gif, initiate buttons again
+////                      function clean_up( html_element ) {
+////                        $( "#tx-caddy-pi1-loader" ).hide( );
+////                          // Initiate the ui button layout again
+////                        $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
+////                      };
+////                        // Fade out the loading *.gif, initiate buttons again
+//
+//                        // Prompt errors
+//                      function err_prompt( selector, label, prompt ) {
+//                        if( !$( "#update-prompt" ).length ) {
+//                          if( t3caddyAlert )
+//                          {
+//                            alert( label + " " + prompt);
+//                          }
+//                          return;
+//                        }
+//                        element = format( settings.templates.uiErr, label, prompt);
+//                        $( selector ).append( element );
+//                      };
+//                        // Prompt errors
+//
+//                        // Prompt informations
+//                      function inf_prompt( selector, label, prompt ) {
+//                        if( !$( "#update-prompt" ).length ) {
+//                          if( t3caddyAlert )
+//                          {
+//                            alert( label + " " + prompt);
+//                          }
+//                          return;
+//                        }
+//                        element = format( settings.templates.uiInf, label, prompt);
+//                        $( selector ).append( element );
+//                      };
+//                        // Prompt informations
+//
+//                        // Replace vars in the source with the given params
+//                      function format( source, params ) {
+//                          // ERROR with source
+//                        if( typeof source == "undefined" )
+//                        {
+//                          source =  'ERROR in jquery.t3caddy-4.0.0.js: source is undefined. It seems that there is ' +
+//                                    'a problem with a not defined variable. Function format( source, params ).';
+//                        }
+//                          // ERROR with params
+//                        if( typeof params == "undefined" )
+//                        {
+//                          params = new Array();
+//                          params[0] = 'ERROR in jquery.t3caddy-4.0.0.js:';
+//                          params[1] = 'params are undefined. It seems that there is a problem with a not defined variable. ' +
+//                                      'Function format( source, params ). Please check settings { ... }.';
+//                        }
+//                        if ( arguments.length == 1 )
+//                        {
+//                          return function() {
+//                            var args = $.makeArray(arguments);
+//                            args.unshift(source);
+//                            return $.t3caddy.format.apply( this, args );
+//                          };
+//                        }
+//                        if ( arguments.length > 2 && params.constructor != Array  )
+//                        {
+//                          params = $.makeArray(arguments).slice(1);
+//                        }
+//                        if ( params.constructor != Array )
+//                        {
+//                          params = [ params ];
+//                        }
+//                        $.each(params, function(i, n)
+//                        {
+//                          source = source.replace(new RegExp("\\{" + i + "\\}", "g"), n);
+//                        });
+//                        return source;
+//                      };
+//                        // Replace vars in the source with the given params
                     },
                       // update( )
       url_autoQm  : function( url, param )
