@@ -93,49 +93,49 @@ var fnAjax = function( formAction, formData, e ) {
 } // User has clicked a tag with the cUID-step class
 /* AJAX end */
 
-$( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-  formAction  = $( this ).closest( "form" ).attr( "action");
-  formData    = $( this ).closest( "form" ).serialize( );
-  fnAjax( formAction, formData, e );
-}); // User has clicked a tag with the cUID-step class
-$( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
-  if( !e.isDefaultPrevented( ) ) 
-  {
-    e.preventDefault( ); // Don't execute the click
-    formAction  = $( this ).attr( "href");
-    formData    = null;
-    fnAjax( formAction, formData, e );
-  }
-}); // User has clicked a tag with the cUID-step class
-$( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
-  if( !e.isDefaultPrevented( ) ) 
-  {
-    e.preventDefault( ); // Don't execute the click
-    formAction  = $( this ).closest( "form" ).attr( "action");
-    formData    = $( this ).closest( "form" ).serialize( );
-    fnAjax( formAction, formData, e );
-  }
-}); // User has clicked a tag with the cUID-step class
-$( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
-  if( !e.isDefaultPrevented( ) ) 
-  {
-    e.preventDefault( ); // Don't execute the click
-    formAction  = $( this ).closest( "form" ).attr( "action");
-    formData    = $( this ).closest( "form" ).serialize( );
-    fnAjax( formAction, formData, e );
-  }
-}); // User has clicked a tag with the cUID-step class
-$( document ).on( "click", "input.powermail_submit", function( e ) {
-  if( !e.isDefaultPrevented( ) ) 
-  {
-    e.preventDefault( ); // Don't execute the click
-    if( ! initValidator( powermailFormSelector, "validate", powermailWallHtmlId ) )
-    {
-      return;
-    }
-    formAction  = $( this ).closest( "form" ).attr( "action");
-    formData    = $( this ).closest( "form" ).serialize( );
-    fnAjax( formAction, formData, e );
-  }
-}); // User has clicked a tag with the cUID-step class
+//$( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
+//  formAction  = $( this ).closest( "form" ).attr( "action");
+//  formData    = $( this ).closest( "form" ).serialize( );
+//  fnAjax( formAction, formData, e );
+//}); // User has clicked a tag with the cUID-step class
+//$( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
+//  if( !e.isDefaultPrevented( ) ) 
+//  {
+//    e.preventDefault( ); // Don't execute the click
+//    formAction  = $( this ).attr( "href");
+//    formData    = null;
+//    fnAjax( formAction, formData, e );
+//  }
+//}); // User has clicked a tag with the cUID-step class
+//$( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
+//  if( !e.isDefaultPrevented( ) ) 
+//  {
+//    e.preventDefault( ); // Don't execute the click
+//    formAction  = $( this ).closest( "form" ).attr( "action");
+//    formData    = $( this ).closest( "form" ).serialize( );
+//    fnAjax( formAction, formData, e );
+//  }
+//}); // User has clicked a tag with the cUID-step class
+//$( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
+//  if( !e.isDefaultPrevented( ) ) 
+//  {
+//    e.preventDefault( ); // Don't execute the click
+//    formAction  = $( this ).closest( "form" ).attr( "action");
+//    formData    = $( this ).closest( "form" ).serialize( );
+//    fnAjax( formAction, formData, e );
+//  }
+//}); // User has clicked a tag with the cUID-step class
+//$( document ).on( "click", "input.powermail_submit", function( e ) {
+//  if( !e.isDefaultPrevented( ) ) 
+//  {
+//    e.preventDefault( ); // Don't execute the click
+//    if( ! initValidator( powermailFormSelector, "validate", powermailWallHtmlId ) )
+//    {
+//      return;
+//    }
+//    formAction  = $( this ).closest( "form" ).attr( "action");
+//    formData    = $( this ).closest( "form" ).serialize( );
+//    fnAjax( formAction, formData, e );
+//  }
+//}); // User has clicked a tag with the cUID-step class
 /* AJAX end */
