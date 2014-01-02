@@ -85,6 +85,7 @@
 //          console.debug( settings.accordion.currAccordionIndex );
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           $( accordionButtonId ).attr( "disabled", "disabled" );
+          return true;
           return false;
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
@@ -333,6 +334,7 @@
             return true;
           }
           // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
+          return true;
           return false;
         }
       });
