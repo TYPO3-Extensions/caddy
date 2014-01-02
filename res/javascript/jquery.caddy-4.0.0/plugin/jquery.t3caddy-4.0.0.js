@@ -64,6 +64,7 @@
           this.click( indexAccordionPowermail );
 //          console.debug( settings.accordion.currAccordionIndex );
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+          $( accordionButtonId ).attr( "disabled", "disabled" );
           return false;
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
