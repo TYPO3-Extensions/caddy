@@ -29,18 +29,6 @@ var t3caddyConsoleDebug   = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 /* Initiate Accordion */
 $(function( ) {  
-//  switch( true )
-//  { 
-//    case( $_GET["tx_caddy_pi1[accordion]"] ):
-//      currAccordionIndex = parseInt( $_GET["tx_caddy_pi1[accordion]"] );
-//      break;
-//    case( $_POST["tx_caddy_pi1[accordion]"] ):
-//      currAccordionIndex = parseInt( $_POST["tx_caddy_pi1[accordion]"] );
-//      break;
-//  }
-  //urlSearch   = $( location ).attr( "search" );
-  console.debug( window.location.search );
-  //accordionApi = fnInit( );
   accordionJSONobject =  $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
     currAccordionIndex    : currAccordionIndex,
@@ -55,7 +43,6 @@ $(function( ) {
   });
   accordionApi        = accordionJSONobject.accordionApi;
   currAccordionIndex  = accordionJSONobject.currAccordionIndex;
-  console.debug( currAccordionIndex );
 }); /* Initiate Accordion */
 
 $( document ).on( "click", "button.next", function( e ) {

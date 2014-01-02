@@ -22,7 +22,6 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( ) {
-      console.debug( settings.accordion.currAccordionIndex );
       // The accordian panes of the caddy
       $(settings.accordion.accordionSelector).tabs( "div.pane",
       {
@@ -30,7 +29,6 @@
         effect        : 'slide',
         initialIndex  : 0,
         onBeforeClick : function( event, indexAccordionDest ) {
-          console.debug( settings.accordion.currAccordionIndex );
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();
@@ -48,7 +46,7 @@
               // RETURN and follow the users workflow
               //alert( "return true: indexAccordionSrce = " + indexAccordionSrce );
               settings.accordion.currAccordionIndex = indexAccordionDest;
-              console.debug( settings.accordion.currAccordionIndex );
+//              console.debug( settings.accordion.currAccordionIndex );
               return true;
               break;
           }
@@ -58,11 +56,11 @@
             //alert( "return true: success" );
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
-            console.debug( settings.accordion.currAccordionIndex );
+//            console.debug( settings.accordion.currAccordionIndex );
             return true;
           }
           this.click( indexAccordionPowermail );
-          console.debug( settings.accordion.currAccordionIndex );
+//          console.debug( settings.accordion.currAccordionIndex );
           alert( "Bitte füllen Sie erst das Formular vollständig aus." );
           return false;
         } // onBeforeClick ...
@@ -79,7 +77,6 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
-      //console.debug( settings.accordion.powermailUid + " div form > fieldset > legend" );
       $( settings.accordion.powermailUid + " div form > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
@@ -90,7 +87,6 @@
             + tabs
             + '</ul>'
             ;
-      //console.debug( tabs );
       // Add the powermail tabs to the caddy tab powermail
       $( tabs ).appendTo( settings.accordion.accordionSelector + " div.caddy-powermail" );
     }; // Add the powermail tabs to the caddy tab powermail
@@ -178,7 +174,6 @@
     function initValidator( selector, validate ) {
       //movePowermailFieldsToHtml5( );  
       success = false;
-//      console.debug( selector, settings.accordion.powermailWallHtmlId )
       validatePowermailForm = $( selector ).validator(
       {
         effect          : "wall",
@@ -463,7 +458,6 @@
                       movePowermailFieldsToHtml5( );
                       initValidator( settings.accordion.powermailFormSelector, null );
                       confToolsValidator( );
-                      console.debug( settings.accordion.currAccordionIndex );
                       return {
                         accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
                         currAccordionIndex  : settings.accordion.currAccordionIndex
@@ -482,9 +476,7 @@
       update      : function( options )
                     {
                       options = $.extend( settings.update, options );
-                      console.debug( settings.update.currAccordionIndex );
                       accordionApi = settings.update.accordionApi;
-                      console.debug( settings.update.html_element );
                         // update():  replace the content of the given html element with the content
                         //            of the requested url. The content is the content of the html element with selector.
 
@@ -516,7 +508,7 @@
                           // Send the AJAX request
                           // Replace the content of the html element with the delivered data
                         var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
-                        console.debug( url_wi_selector );
+                        //console.debug( url_wi_selector );
                         $( settings.update.html_element ).load( url_wi_selector, settings.update.data, function( response, status, xhr )
                         {
                             // ERROR server has an error and has send a message
@@ -546,8 +538,6 @@
                             // ERROR server has an error and has send a message
 
                             // Fade out the loading *.gif, initiate buttons again
-                          accordionApi.click( settings.update.currAccordionIndex );
-                          $( "#currAccordionIndex" ).text( 2 );
                           clean_up( settings.update.html_element );
                         });
                           // Send the AJAX request
@@ -556,15 +546,15 @@
       url_autoQm  : function( options )
                     {
                       options = $.extend( settings.url_autoQm, options );
-                      currAccordionIndex  = settings.url_autoQm.currAccordionIndex;
+                      //currAccordionIndex  = settings.url_autoQm.currAccordionIndex;
                       url                 = settings.url_autoQm.url;
                       param               = settings.url_autoQm.param;
                       
-                      if( currAccordionIndex > 0 )
-                      {
-                        param = param + "&tx_caddy_pi1[accordion]=" + currAccordionIndex;
-                      }
-                      console.debug( param );
+//                      if( currAccordionIndex > 0 )
+//                      {
+//                        param = param + "&tx_caddy_pi1[accordion]=" + currAccordionIndex;
+//                      }
+                      //console.debug( param );
                       
                         // Concatenate the url and the param in dependence of a question mark.
                         // If url contains a question mark, param will added with ?param
