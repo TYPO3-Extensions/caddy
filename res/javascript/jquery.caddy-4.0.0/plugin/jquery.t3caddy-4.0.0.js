@@ -22,12 +22,14 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( ) {
+      console.debug( settings.accordion.currAccordionIndex );
+
       // The accordian panes of the caddy
       $( settings.accordion.accordionSelector ).tabs( "div.pane",
       {
         tabs          : 'h2',
         effect        : 'slide',
-        initialIndex  : 0,
+        initialIndex  : parseInt( settings.accordion.currAccordionIndex ),
         onBeforeClick : function( event, indexAccordionDest ) {
           accordionButtonId = settings.accordion.accordionButtonId;
           if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
