@@ -467,6 +467,7 @@
     // Move the powermail form into the caddy to the tab powermail
     function submitPowermail( ) {
       console.debug( "submitPowermail( )" )
+      alert( "Ihre Daten werden zwischengespeichert." );
       $( ".powermail_form_30" ).submit( );
     }
 //    /* AJAX begin */
