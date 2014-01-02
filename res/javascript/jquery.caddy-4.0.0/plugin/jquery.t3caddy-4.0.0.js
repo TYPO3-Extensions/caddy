@@ -482,7 +482,7 @@
       var html_element              = "#content";
       var html_element_wi_selector  = html_element + " > *";
       //$( this ).t3caddy( "update", {
-      this( "update", {
+      $( this).update( {
         accordionApi              : accordionApi,
         currAccordionIndex        : currAccordionIndex,
         formData                  : formData,
