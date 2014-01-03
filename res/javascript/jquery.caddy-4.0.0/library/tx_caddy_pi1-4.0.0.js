@@ -31,6 +31,7 @@ var t3caddyAlert            = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 var accordion =  function( ) {
+  console.debug( currAccordionIndex );
   return $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
     currAccordionIndex    : currAccordionIndex,
