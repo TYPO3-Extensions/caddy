@@ -416,7 +416,7 @@
         selector  : selector,
         validate  : validate
       };
-      return method.validate( options );
+      return method.validator( options );
 //      success = false;
 //      validatePowermailForm = $( selector ).validator(
 //      {
