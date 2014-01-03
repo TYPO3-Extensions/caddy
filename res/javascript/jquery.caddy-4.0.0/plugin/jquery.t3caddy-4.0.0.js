@@ -352,7 +352,7 @@
         container       : settings.accordion.powermailWallHtmlId,
         lang            : "de",
         // do not validate inputs when they are edited
-        errorInputEvent : null
+        //errorInputEvent : null  // keyup (default), change, blur, null
       // custom form submission logic
       }).submit( function( e )  
       {
