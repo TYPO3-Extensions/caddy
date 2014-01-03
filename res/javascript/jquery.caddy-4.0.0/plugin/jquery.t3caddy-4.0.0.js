@@ -415,14 +415,6 @@
           // prevent the form data being submitted to the server
           e.preventDefault( );
         } // submit
-      }).focusout( function ( e )
-      {
-        // runs after a field is left
-//        if( !e.isDefaultPrevented( ) ) 
-//        {
-//          alert ( "Focus out: Aber Hallo" );
-//          e.preventDefault( );
-//        } // focusout
       }); // $( selector ).validator
       if( validate == "validate" )
       {
