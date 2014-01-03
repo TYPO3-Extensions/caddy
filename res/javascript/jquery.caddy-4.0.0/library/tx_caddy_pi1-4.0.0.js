@@ -127,7 +127,6 @@ $( ".powermail_form_30" ).submit( function( e ) {
     e.preventDefault( ); // Don't execute the click
     accordionApi.click( indexAccordionPowermail );
     alert( "Ihre Daten werden zwischengespeichert." );
-    console.debug( $( ".powermail_form_30" ).attr( "action") );
     formAction  = $( this ).closest( "form" ).attr( "action");
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
@@ -175,10 +174,7 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-//    if( ! initValidator( powermailFormSelector, "validate", powermailWallHtmlId ) )
-//    {
-//      return;
-//    }
+    alert( "Ihre Daten werden zwischengespeichert." );
     formAction  = $( this ).closest( "form" ).attr( "action");
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
