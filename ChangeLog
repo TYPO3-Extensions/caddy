@@ -34,6 +34,7 @@ TODO
                 * setup.txt
               * setup.txt
   Bugfix
+  * #i0044: Unsupported operand types in lib/caddy/class.tx_caddy.php on line 898 
   * #i0043: getPaymentOptionLabelBySessionId seem's to be unproper
   * #i0041: ###TARGET### wasn't handled
             Effected files:

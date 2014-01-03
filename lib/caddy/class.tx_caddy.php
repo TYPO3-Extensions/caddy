@@ -893,8 +893,8 @@ class tx_caddy extends tslib_pibase
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131229, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-    $sesArray = $calcedCaddy
-              + $sesArray
+    $sesArray = ( array ) $calcedCaddy
+              + ( array ) $sesArray
               ;
 //    $sesArray['paymentLabel']   = $paymentLabel;
 //    $sesArray['paymentId']        = $paymentId;
