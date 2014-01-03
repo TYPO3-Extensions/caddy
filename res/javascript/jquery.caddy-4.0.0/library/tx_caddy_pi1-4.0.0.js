@@ -31,7 +31,7 @@ var t3caddyAlert            = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
 var accordion =  function( ) {
-  console.debug( currAccordionIndex );
+  //console.debug( currAccordionIndex );
   return $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
     currAccordionIndex    : currAccordionIndex,
@@ -54,7 +54,7 @@ $(function( ) {
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
   currAccordionIndex = accordionApi.getIndex( );
-  console.debug( currAccordionIndex );
+//  console.debug( currAccordionIndex );
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
@@ -71,7 +71,7 @@ var fnAjax = function( formAction, formData, e ) {
 
   // Update the content with the id #c###UID###-###VIEW###view
   var url = $( this ).t3caddy( 'url_autoQm', {
-    currAccordionIndex  : currAccordionIndex,
+//    currAccordionIndex  : currAccordionIndex,
     url                 : formAction, 
     param               : "type=###TYPENUM###"
   });
@@ -106,7 +106,7 @@ var fnAjax = function( formAction, formData, e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
-    accordionApi = accordion( currAccordionIndex );
+    accordionApi = accordion( );
     //console.debug( ".powermail_confirmation_form[type=submit]", $( ".powermail_confirmation_form[type=submit]").length );
     if( $( ".powermail_confirmation_form[type=submit]").length )
     {

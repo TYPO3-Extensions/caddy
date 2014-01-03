@@ -54,6 +54,10 @@
           switch( true )
           {
             //case( indexAccordionDest == indexAccordionOrdering  ): // Ordering
+            case( indexAccordionDest == indexAccordionPowermail ): // Powermail form
+              settings.accordion.currAccordionIndex = indexAccordionDest;
+              return true;
+              break;
             case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
               // Follow the workflow
               break;
