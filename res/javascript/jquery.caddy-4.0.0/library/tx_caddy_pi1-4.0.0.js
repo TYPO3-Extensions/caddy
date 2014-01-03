@@ -117,7 +117,7 @@ var fnAjax = function( formAction, formData, e ) {
       $( ".powermail_confirmation_submit[type=submit]").css( "display", "none");
     }
   }, 2000 );
-} // User has clicked a tag with the cUID-step class
+} 
 /* AJAX end */
 
 //accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
@@ -146,7 +146,7 @@ $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
-}); // User has clicked a tag with the cUID-step class
+}); 
 $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
@@ -155,7 +155,7 @@ $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
     formData    = null;
     fnAjax( formAction, formData, e );
   }
-}); // User has clicked a tag with the cUID-step class
+}); 
 $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
@@ -164,7 +164,7 @@ $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
-}); // User has clicked a tag with the cUID-step class
+}); 
 $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
@@ -173,7 +173,7 @@ $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) 
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
-}); // User has clicked a tag with the cUID-step class
+}); 
 $( document ).on( "click", "input.powermail_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
@@ -183,7 +183,14 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
     formData    = $( this ).closest( "form" ).serialize( );
     fnAjax( formAction, formData, e );
   }
-}); // User has clicked a tag with the cUID-step class
+});
+$( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
+  selector    = $( "input.powermail_confirmation_submit" );
+  formAction  = $( selector ).closest( "form" ).attr( "action");
+  formData    = $( selector ).closest( "form" ).serialize( );
+  fnAjax( formAction, formData, e );
+});
+
 /* AJAX end */
 
 $( document ).ready( function( ) {
