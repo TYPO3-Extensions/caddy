@@ -76,26 +76,26 @@
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
-          // Are all values proper of the powermail form?
-          effect    = "wall";
-          if( initValidator( lang, selector, effect, validate ) )
-          {
-            //alert( "return true: success" );
-            // RETURN : all values are proper
-            settings.accordion.currAccordionIndex = indexAccordionDest;
-//            console.debug( settings.accordion.currAccordionIndex );
-            if( indexAccordionSrce == indexAccordionPowermail )
-            {
-              submitPowermail( );
-            }
-            return true;
-          }
-          this.click( indexAccordionPowermail );
-//          console.debug( settings.accordion.currAccordionIndex );
-//          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
-          $( accordionButtonId ).attr( "disabled", "disabled" );
-          return true;
-          return false;
+//          // Are all values proper of the powermail form?
+//          effect    = "wall";
+//          if( initValidator( lang, selector, effect, validate ) )
+//          {
+//            //alert( "return true: success" );
+//            // RETURN : all values are proper
+//            settings.accordion.currAccordionIndex = indexAccordionDest;
+////            console.debug( settings.accordion.currAccordionIndex );
+//            if( indexAccordionSrce == indexAccordionPowermail )
+//            {
+//              submitPowermail( );
+//            }
+//            return true;
+//          }
+//          this.click( indexAccordionPowermail );
+////          console.debug( settings.accordion.currAccordionIndex );
+////          alert( "Bitte füllen Sie erst das Formular vollständig aus." );
+//          $( accordionButtonId ).attr( "disabled", "disabled" );
+//          return true;
+//          return false;
         } // onBeforeClick ...
       }); // $(settings.accordion.accordionSelector).panes ...
     } /* accordion */
@@ -210,24 +210,24 @@
       // Prompt informations
 
     function initEvents( ) {
-      $( document ).on( "click", "input.powermail_submit", function( e ) {
+      $( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
         if( !e.isDefaultPrevented( ) ) 
         {
           e.preventDefault( ); // Don't execute the click
           lang      = settings.accordion.lang;
-          selector  = settings.accordion.powermailFormSelector;
-          effect    = "wall";
+          selector  = idTabSrce;
+          effect    = "woPrompt";
           validate  = "validate";
-          if( ! initValidator( lang, selector, effect, validate ) )
+          switch( initValidator( lang, selector, effect, validate ) )
           {
-            return;
+            case( true ):
+              $( accordionButtonId ).removeAttr( "disabled" );
+              break;
+            case( false ):
+            default:
+              $( accordionButtonId ).attr( "disabled", "disabled" );
+              break;
           }
-          formAction  = $( this ).closest( "form" ).attr( "action");
-          formData    = $( this ).closest( "form" ).serialize( );
-          console.debug( $( this ).attr( "class" ) );
-          console.debug( formAction );
-          console.debug( formData );
-          runAjax( formAction, formData, e );
         }
       }); // User has clicked a tag with the cUID-step class      
 //      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
