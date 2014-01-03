@@ -234,7 +234,7 @@ class tx_caddy_session
  */
   private function getPid( $pid )
   {
-    if( $pid === null )
+    if( $pid === null || $pid === '' )
     {
       if( $this->drs->drsError )
       {
