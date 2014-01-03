@@ -64,15 +64,17 @@
           }
           lang      = settings.accordion.lang;
           selector  = settings.accordion.powermailFormSelector;
-          effect    = "wall";
+          effect    = "woPrompt";
           validate  = "validate";
-          if( initValidator( lang, selector, effect, validate ) )
+          switch( initValidator( lang, selector, effect, validate ) )
           {
-            $( accordionButtonId ).removeAttr( "disabled" );
-          }
-          else
-          {
-            $( accordionButtonId ).attr( "disabled", "disabled" );
+            case( true ):
+              $( accordionButtonId ).removeAttr( "disabled" );
+              break;
+            case( false ):
+            default:
+              $( accordionButtonId ).attr( "disabled", "disabled" );
+              break;
           }
           // Are all values proper of the powermail form?
           if( initValidator( lang, selector, effect, validate ) )
@@ -80,7 +82,6 @@
             //alert( "return true: success" );
             // RETURN : all values are proper
             settings.accordion.currAccordionIndex = indexAccordionDest;
-            $( accordionButtonId ).removeAttr( "disabled" );
 //            console.debug( settings.accordion.currAccordionIndex );
             if( indexAccordionSrce == indexAccordionPowermail )
             {
@@ -310,21 +311,31 @@
           //alert( idTabSrce );
           lang      = settings.accordion.lang;
           selector  = idTabSrce;
-          //effect    = "wall";
           effect    = "woPrompt";
           validate  = "validate";
-          //var success = initValidator( lang, selector, effect, validate );
-          var success = initValidator( lang, selector, effect, validate );
-          // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
-          if( success )
+          switch( initValidator( lang, selector, effect, validate ) )
           {
-            //alert( "OK" );
-            return true;
+            case( true ):
+              $( accordionButtonId ).removeAttr( "disabled" );
+              break;
+            case( false ):
+            default:
+              $( accordionButtonId ).attr( "disabled", "disabled" );
+              break;
           }
-          // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
-          //return true;
-          //alert( "UNPROPER" );
-          return false;
+          effect = "wall";
+          switch( initValidator( lang, selector, effect, validate ) )
+          {
+            case( true ):
+              //alert( "OK" );
+              return true;
+              break;
+            case( false ):
+            default:
+              //alert( "UNPROPER" );
+              return false;
+              break;
+          }
         }
       });
     }  // $(function() ...
@@ -389,7 +400,11 @@
     } // initToolsValifator
 
     function initValidator( lang, selector, effect, validate ) {
-      errorInputEvent = null;
+      errorInputEvent = "null";
+      if( effect == "woPrompt" )
+      {
+        errorInputEvent = "blur";
+      }
       if( lang == '###LANG###' )
       {
         lang = "en";
@@ -397,12 +412,12 @@
       success = false;
       validatePowermailForm = $( selector ).validator(
       {
-        effect          : effect,   // default (default), own custom effect
+        effect          : effect,           // default (default), own custom effect
         errorClass      : "invalid",
         container       : settings.accordion.powermailWallHtmlId,
         lang            : lang,
         // input validation for a single field
-        errorInputEvent : errorInputEvent  // keyup (default), change, blur, null
+        errorInputEvent : errorInputEvent   // keyup (default), change, blur, null
       // custom form submission logic
       }).submit( function( e )  
       {
