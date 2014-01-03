@@ -184,6 +184,8 @@ class tx_caddy_session
     $currentNumber  = $sesArray['numberOrderCurrent'];
 //    if( $this->drs->drsInfo )
 //    {
+      $prompt = '$GLOBALS["TSFE"]->id = ' . $GLOBALS["TSFE"]->id;
+      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
       $prompt = 'pid = ' . $pid;
       t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
       $prompt = 'ordernumber = ' . $currentNumber;
