@@ -118,7 +118,7 @@ class tx_caddy_session
 
  /***********************************************
   *
-  * Getting methods
+  * Getting methods - user methods
   *
   **********************************************/
 
@@ -128,12 +128,25 @@ class tx_caddy_session
  * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	string
  * @access public
- * @version     3.0.1
+ * @internal    #54634
+ * @version     4.0.3
  * @since       2.0.0
  */
-  public function getNumberDeliveryorder( $pid=null )
+  public function getNumberDeliveryorder( $content = '', $conf = array( ) )
   {
-    $pid = $this->getPid( $pid );
+    unset( $content );
+    $this->conf = $conf;
+        
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
+    {
+      $this->drsUserfunc = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
     //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -149,12 +162,25 @@ class tx_caddy_session
  * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	string
  * @access public
- * @version     3.0.1
+ * @internal    #54634
+ * @version     4.0.3
  * @since       2.0.0
  */
-  public function getNumberInvoice( $pid=null )
+  public function getNumberInvoice( $content = '', $conf = array( ) )
   {
-    $pid = $this->getPid( $pid );
+    unset( $content );
+    $this->conf = $conf;
+        
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
+    {
+      $this->drsUserfunc = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
     //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -170,12 +196,25 @@ class tx_caddy_session
  * @param       integer : $pid  : uid of the page, which contains the caddy plugin
  * @return	string
  * @access public
- * @version     3.0.1
+ * @internal    #54634
+ * @version     4.0.3
  * @since       2.0.0
  */
-  public function getNumberOrder( $pid=null )
+  public function getNumberOrder( $content = '', $conf = array( ) )
   {
-    $pid = $this->getPid( $pid );
+    unset( $content );
+    $this->conf = $conf;
+        
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
+    {
+      $this->drsUserfunc = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+    $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
     //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
@@ -232,14 +271,20 @@ class tx_caddy_session
  * @version     4.0.3
  * @since       3.0.1
  */
-  private function getPid( $pid )
+  private function getPid( $pid=null )
   {
+      // #54634, 140103, dwildt, 9+
+    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    {
+      $pid = ( int ) $this->conf['userFunc.']['caddyPid'];
+    }
+    
       // #i0045, 140103, dwildt, 1-
     //if( $pid === null )
       // #i0045, 140103, dwildt, 1+
     if( $pid === null || $pid === '' )
     {
-      if( $this->drs->drsError )
+      if( $this->drs->drsError || $this->drsUserfunc )
       {
         $prompt = 'Given pid of the Caddy is empty!';
         t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );

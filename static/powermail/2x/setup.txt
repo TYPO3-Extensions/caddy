@@ -22,7 +22,8 @@ plugin.tx_caddy_pi1 {
     caddy {
       userFunc = tx_caddy_powermail->caddyForEmail
       userFunc {
-        drs = {$plugin.caddy.debug.userfunc}
+        drs       = {$plugin.caddy.debug.userfunc}
+        caddyPid  = {$plugin.caddy.pages.caddy}
       }
     }
       // Delivery order number
@@ -30,7 +31,8 @@ plugin.tx_caddy_pi1 {
     caddydeliveryordernumber {
       userFunc = tx_caddy_session->getNumberDeliveryorder
       userFunc {
-        drs = {$plugin.caddy.debug.userfunc}
+        drs       = {$plugin.caddy.debug.userfunc}
+        caddyPid  = {$plugin.caddy.pages.caddy}
       }
     }
       // Invoice number
@@ -38,7 +40,8 @@ plugin.tx_caddy_pi1 {
     caddyinvoicenumber {
       userFunc = tx_caddy_session->getNumberInvoice
       userFunc {
-        drs = {$plugin.caddy.debug.userfunc}
+        drs       = {$plugin.caddy.debug.userfunc}
+        caddyPid  = {$plugin.caddy.pages.caddy}
       }
     }
       // Order number
@@ -46,7 +49,8 @@ plugin.tx_caddy_pi1 {
     caddyordernumber {
       userFunc = tx_caddy_session->getNumberOrder
       userFunc {
-        drs = {$plugin.caddy.debug.userfunc}
+        drs       = {$plugin.caddy.debug.userfunc}
+        caddyPid  = {$plugin.caddy.pages.caddy}
       }
     }
       // Clear the caddy session
@@ -54,7 +58,8 @@ plugin.tx_caddy_pi1 {
     clearcaddysession {
       userFunc = tx_caddy_session->sessionDelete
       userFunc {
-        drs = {$plugin.caddy.debug.userfunc}
+        drs       = {$plugin.caddy.debug.userfunc}
+        caddyPid  = {$plugin.caddy.pages.caddy}
       }
     }
   }

@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -74,7 +74,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	4.0.3
  * @since       2.0.0
  */
 class tx_caddy_powermail extends tslib_pibase
@@ -169,14 +169,34 @@ class tx_caddy_powermail extends tslib_pibase
   *
   * @return  string    caddy content
   * @access public
-  * @version 2.0.2
+  * @version 4.0.3
   * @since  2.0.2
   */
   public function caddyForEmail( $content = '', $conf = array( ) )
   {   
-    unset( $conf );
     unset( $content );
-    
+    $this->conf = $conf;
+        
+      // DRS
+    if( $this->conf['userFunc.']['drs'] )
+    {
+      $this->drsUserfunc = true;
+      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+    }
+      // DRS
+      
+      // #54634, 140103, dwildt, 9+
+    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    {
+      if( $this->drsUserfunc )
+      {
+        $prompt = '$GLOBALS["TSFE"]->id is set by userFunc.caddyPid to ' . ( int ) $this->conf['userFunc.']['caddyPid'];
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+      $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
+    }
+      
       // Get the typoscript configuration of the caddy plugin 1
     $this->conf = $this->caddyForEmailInitConf( );
     
@@ -1655,7 +1675,7 @@ class tx_caddy_powermail extends tslib_pibase
   *
   * @return	string		$path : path to the attachment, which should send
   * @access public
-  * @version 2.0.0
+  * @version 4.0.3
   * @since   2.0.0
   */
   public function sendToCustomer( $content = '', $conf = array( ) )
@@ -1891,7 +1911,7 @@ class tx_caddy_powermail extends tslib_pibase
   *
   * @return	string		$path : path to the attachment, which should send
   * @access public
-  * @version 2.0.0
+  * @version 4.0.3
   * @since   2.0.0
   */
   public function sendToVendor( $content = '', $conf = array( ) )
