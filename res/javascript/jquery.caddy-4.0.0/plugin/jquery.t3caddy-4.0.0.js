@@ -142,7 +142,6 @@
         "[min]"       : "Mindestens $1 ist n&ouml;tig",
         "[required]"  : "Bitte ausfüllen"
       }); // $.tools.validator.localize ...
-      // adds the "wall" effect to the validator
       $.tools.validator.addEffect( "wall", function( errors, event ) 
       {
         pmuidfieldterms       = settings.accordion.pmuidfieldterms;
@@ -178,6 +177,15 @@
         // remove all existing messages
         $( settings.accordion.powermailWallHtmlId ).html( "" );
       }); // adds the "wall" effect to the validator      
+      // adds the "woPrompt" effect to the validator
+      $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
+      {
+        // prompt nothing
+      // the effect does nothing when all inputs are valid
+      }, function( inputs ) 
+      {
+        // remove nothing
+      }); // adds the "woPrompt" effect to the validator      
     }
     
       // Cover the current html element with the loader *.gif
@@ -343,14 +351,16 @@
           effect    = "wall";
           validate  = "validate";
           //var success = initValidator( lang, selector, effect, validate );
-          var success = initValidator( lang, selector, "default", validate );
+          var success = initValidator( lang, selector, "noPrompt", validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
+            alert( "OK" );
             return true;
           }
           // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
           //return true;
+          alert( "UNPROPER" );
           return false;
         }
       });
