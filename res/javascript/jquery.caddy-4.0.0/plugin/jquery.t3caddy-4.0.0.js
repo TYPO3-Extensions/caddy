@@ -350,7 +350,7 @@
             return true;
           }
           // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
-          return true;
+          //return true;
           return false;
         }
       });
