@@ -62,7 +62,11 @@
               return true;
               break;
           }
-          if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
+          lang      = settings.accordion.lang;
+          selector  = settings.accordion.powermailFormSelector;
+          effect    = "wall";
+          validate  = "validate";
+          if( initValidator( lang, selector, effect, validate ) )
           {
             $( accordionButtonId ).removeAttr( "disabled" );
           }
@@ -71,7 +75,7 @@
             $( accordionButtonId ).attr( "disabled", "disabled" );
           }
           // Are all values proper of the powermail form?
-          if( initValidator( settings.accordion.powermailFormSelector, "validate" ) )
+          if( initValidator( lang, selector, effect, validate ) )
           {
             //alert( "return true: success" );
             // RETURN : all values are proper
@@ -297,7 +301,11 @@
 //        if( !e.isDefaultPrevented( ) ) 
 //        {
 //          e.preventDefault( ); // Don't execute the click
-//          if( ! initValidator( settings.accordion.powermailFormSelector, "validate" ) )
+//          lang      = settings.accordion.lang;
+//          selector  = settings.accordion.powermailFormSelector;
+//          effect    = "wall";
+//          validate  = "validate";
+//          if( ! initValidator( lang, selector, effect, validate ) )
 //          {
 //            return;
 //          }
@@ -330,7 +338,11 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-          var success = initValidator( idTabSrce, "validate" );
+          lang      = settings.accordion.lang;
+          selector  = idTabSrce;
+          effect    = "wall";
+          validate  = "validate";
+          var success = initValidator( lang, selector, effect, validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
@@ -344,7 +356,11 @@
     }  // $(function() ...
     /* Powermail tabs begin */
 
-    function initValidator( selector, validate, effect ) {
+    function initValidator( lang, selector, effect, validate ) {
+      if( lang == '###LANG###' )
+      {
+        lang = "en";
+      }
       if( ! effect )
       {
         effect = "wall";
@@ -617,7 +633,11 @@
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
-                      initValidator( settings.accordion.powermailFormSelector, null );
+                      lang      = settings.accordion.lang;
+                      selector  = settings.accordion.powermailFormSelector;
+                      effect    = "wall";
+                      validate  = "noValidate";
+                      initValidator( lang, selector, effect, validate );
                       confToolsValidator( );
                       addAccordion( );
                       initEvents( );

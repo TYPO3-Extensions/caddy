@@ -21,6 +21,7 @@ var accordionSelector       = "#c###UID###-accordion";
 var currAccordionIndex      = undefined;
 var indexAccordionOrdering  = 3; // Ordering
 var indexAccordionPowermail = 4; // Powermail form
+var lang                    = '###LANG###';
 var powermailFormSelector   = "#c###UID###-accordion-powermail div form";
 var powermailWallHtmlId     = "#c###UID###-powermail-prompt"
 var powermailUid            = "#c###UID_POWERMAIL_FORM###";
@@ -35,6 +36,7 @@ var accordion =  function( ) {
   return $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
     currAccordionIndex    : currAccordionIndex,
+    lang                  : lang,
     powermailFormSelector : "#c###UID###-accordion-powermail div form",
     powermailWallHtmlId   : "#c###UID###-powermail-prompt",
     powermailUid          : "#c###UID_POWERMAIL_FORM###",
