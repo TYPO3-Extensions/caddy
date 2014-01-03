@@ -342,7 +342,8 @@
           selector  = idTabSrce;
           effect    = "wall";
           validate  = "validate";
-          var success = initValidator( lang, selector, effect, validate );
+          //var success = initValidator( lang, selector, effect, validate );
+          var success = initValidator( lang, selector, null, validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
