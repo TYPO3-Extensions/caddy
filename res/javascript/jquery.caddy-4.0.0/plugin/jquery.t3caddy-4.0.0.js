@@ -77,6 +77,7 @@
               break;
           }
           // Are all values proper of the powermail form?
+          effect    = "wall";
           if( initValidator( lang, selector, effect, validate ) )
           {
             //alert( "return true: success" );
