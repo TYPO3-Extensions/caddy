@@ -76,7 +76,8 @@ plugin.tx_powermail {
         addAttachment {
           userFunc = tx_caddy_powermail->sendToVendor
           userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
+            drs       = {$plugin.caddy.debug.userfunc}
+            caddyPid  = {$plugin.caddy.pages.caddy}
           }
         }
       }
@@ -86,7 +87,8 @@ plugin.tx_powermail {
         addAttachment {
           userFunc = tx_caddy_powermail->sendToCustomer
           userFunc {
-            drs = {$plugin.caddy.debug.userfunc}
+            drs       = {$plugin.caddy.debug.userfunc}
+            caddyPid  = {$plugin.caddy.pages.caddy}
           }
         }
       }

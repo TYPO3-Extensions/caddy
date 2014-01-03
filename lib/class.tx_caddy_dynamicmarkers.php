@@ -218,7 +218,10 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   public function initPidCaddy( $pidCaddy=null )
   {
     $this->pidCaddy = ( int ) $pidCaddy;
-    if( $pidCaddy === null )
+      // #i0045, 140103, dwildt, 1-
+    //if( $pid === null )
+      // #i0045, 140103, dwildt, 1+
+    if( $pidCaddy === null || $pidCaddy === '' )
     {
       $this->pidCaddy = ( int ) $GLOBALS["TSFE"]->id;
     }

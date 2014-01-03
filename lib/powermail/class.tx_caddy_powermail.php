@@ -1675,6 +1675,17 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+    
+      // #54634, 140103, dwildt, 9+
+    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    {
+      if( $this->drsUserfunc )
+      {
+        $prompt = '$GLOBALS["TSFE"]->id is set by userFunc.caddyPid to ' . ( int ) $this->conf['userFunc.']['caddyPid'];
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+      $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
+    }
       
     $this->initPowermailVersionAppendix( );
     
@@ -1900,6 +1911,17 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
+      
+      // #54634, 140103, dwildt, 9+
+    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    {
+      if( $this->drsUserfunc )
+      {
+        $prompt = '$GLOBALS["TSFE"]->id is set by userFunc.caddyPid to ' . ( int ) $this->conf['userFunc.']['caddyPid'];
+        t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
+      }
+      $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
+    }
       
     $this->initPowermailVersionAppendix( );
 

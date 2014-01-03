@@ -16,6 +16,8 @@ TODO
                 * setup.txt
               * setup.txt
   * #54634: Enable controlling of the caddy (pi1) by pid
+            * tx_caddy_powermail->sendToVendor plus caddyPid
+            * tx_caddy_powermail->sendToCustomer plus caddyPid
             Effected files:
             * lib
               * class.tx_caddy_dynamicmarkers.php
