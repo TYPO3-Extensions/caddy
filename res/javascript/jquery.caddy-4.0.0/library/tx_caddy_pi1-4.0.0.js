@@ -61,6 +61,16 @@ var accordion =  function( ) {
   });
 };
 
+var powermailValidator =  function( effect ) {
+  return $( this ).t3caddy( "validator", {
+    container       : "#c###UID###-powermail-prompt",
+    effect          : "wall",       // default (default), wall, woPrompt
+    errorInputEvent : "null",       // keyup (default), change, blur, null
+    lang            : lang,
+    selector        : "#c###UID###-accordion-powermail div form"
+  });
+};
+
 /* Initiate Accordion */
 $(function( ) {  
   accordionApi = accordion( );
@@ -199,7 +209,19 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
     fnAjax( formAction, formData, e );
   }
 });
-$( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
+$( document ).on( "click", accordionButtonId, function( e ) {
+        alert( accordionButtonId );
+        switch( powermailValidator( "woPrompt" ) )
+        {
+          case( true ):
+            $( accordionButtonId ).removeAttr( "disabled" );
+            break;
+          case( false ):
+          default:
+            $( accordionButtonId ).attr( "disabled", "disabled" );
+            break;
+        }
+        return;
   selector    = $( "input.powermail_confirmation_submit" );
   formAction  = $( selector ).closest( "form" ).attr( "action");
   formData    = $( selector ).closest( "form" ).serialize( );

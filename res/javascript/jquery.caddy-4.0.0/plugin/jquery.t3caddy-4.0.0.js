@@ -210,24 +210,24 @@
       // Prompt informations
 
     function initEvents( ) {
-      accordionButtonId = settings.accordion.accordionButtonId;
-      $( document ).on( "click", accordionButtonId, function( e ) {
-        alert( accordionButtonId );
-        settings.validator.lang      = settings.accordion.lang;
-        settings.validator.selector  = settings.accordion.powermailFormSelector;
-        settings.validator.effect    = "woPrompt";
-        settings.validator.validate  = "validate";
-        switch( initValidator( ) )
-        {
-          case( true ):
-            $( accordionButtonId ).removeAttr( "disabled" );
-            break;
-          case( false ):
-          default:
-            $( accordionButtonId ).attr( "disabled", "disabled" );
-            break;
-        }
-      }); 
+//      accordionButtonId = settings.accordion.accordionButtonId;
+//      $( document ).on( "click", accordionButtonId, function( e ) {
+//        alert( accordionButtonId );
+//        settings.validator.lang      = settings.accordion.lang;
+//        settings.validator.selector  = settings.accordion.powermailFormSelector;
+//        settings.validator.effect    = "woPrompt";
+//        settings.validator.validate  = "validate";
+//        switch( initValidator( ) )
+//        {
+//          case( true ):
+//            $( accordionButtonId ).removeAttr( "disabled" );
+//            break;
+//          case( false ):
+//          default:
+//            $( accordionButtonId ).attr( "disabled", "disabled" );
+//            break;
+//        }
+//      }); 
 //      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
 //      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
 //        accordionApi.next();
