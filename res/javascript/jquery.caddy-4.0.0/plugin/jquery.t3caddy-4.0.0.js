@@ -208,6 +208,26 @@
       // Prompt informations
 
     function initEvents( ) {
+      $( document ).on( "click", "input.powermail_submit", function( e ) {
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          e.preventDefault( ); // Don't execute the click
+          lang      = settings.accordion.lang;
+          selector  = settings.accordion.powermailFormSelector;
+          effect    = "wall";
+          validate  = "validate";
+          if( ! initValidator( lang, selector, effect, validate ) )
+          {
+            return;
+          }
+          formAction  = $( this ).closest( "form" ).attr( "action");
+          formData    = $( this ).closest( "form" ).serialize( );
+          console.debug( $( this ).attr( "class" ) );
+          console.debug( formAction );
+          console.debug( formData );
+          runAjax( formAction, formData, e );
+        }
+      }); // User has clicked a tag with the cUID-step class      
 //      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
 //      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
 //        accordionApi.next();
@@ -293,16 +313,16 @@
           effect    = "wall";
           validate  = "validate";
           //var success = initValidator( lang, selector, effect, validate );
-          var success = initValidator( lang, selector, "woPrompt", validate );
+          var success = initValidator( lang, selector, effect, validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
-            alert( "OK" );
+            //alert( "OK" );
             return true;
           }
           // RETURN false : values of the current tab (fieldset) aren't proper, user can't left the current tab
           //return true;
-          alert( "UNPROPER" );
+          //alert( "UNPROPER" );
           return false;
         }
       });
@@ -378,7 +398,7 @@
         errorClass      : "invalid",
         container       : settings.accordion.powermailWallHtmlId,
         lang            : lang,
-        // do not validate inputs when they are edited
+        // input validation for a single field
         errorInputEvent : null  // keyup (default), change, blur, null
       // custom form submission logic
       }).submit( function( e )  
@@ -386,7 +406,18 @@
         // if data is valid
         if( !e.isDefaultPrevented( ) ) 
         {
-          alert ( "Aber Hallo" );
+          alert ( "Submit: Aber Hallo" );
+          // tell user that everything is OK
+          //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
+          // prevent the form data being submitted to the server
+          e.preventDefault( );
+        }
+      }).focusout( function ( e )
+      {
+        // if data is valid
+        if( !e.isDefaultPrevented( ) ) 
+        {
+          alert ( "Focus out: Aber Hallo" );
           // tell user that everything is OK
           //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
           // prevent the form data being submitted to the server
