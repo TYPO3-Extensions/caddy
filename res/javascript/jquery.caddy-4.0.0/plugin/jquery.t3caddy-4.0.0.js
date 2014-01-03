@@ -343,7 +343,7 @@
           effect    = "wall";
           validate  = "validate";
           //var success = initValidator( lang, selector, effect, validate );
-          var success = initValidator( lang, selector, "noEffect", validate );
+          var success = initValidator( lang, selector, "default", validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
@@ -362,17 +362,13 @@
       {
         lang = "en";
       }
-      if( ! effect )
-      {
-        effect = "wall";
-      }
       success = false;
       validatePowermailForm = $( selector ).validator(
       {
-        effect          : effect,
+        effect          : effect,   // default (default), own custom effect
         errorClass      : "invalid",
         container       : settings.accordion.powermailWallHtmlId,
-        lang            : "de",
+        lang            : lang,
         // do not validate inputs when they are edited
         errorInputEvent : null  // keyup (default), change, blur, null
       // custom form submission logic
