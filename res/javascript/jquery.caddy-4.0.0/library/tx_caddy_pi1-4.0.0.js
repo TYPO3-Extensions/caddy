@@ -53,7 +53,7 @@ $(function( ) {
 /* AJAX begin */
 var fnAjax = function( formAction, formData, e ) {
   currAccordionIndex = accordionApi.getIndex( );
-  //console.debug( currAccordionIndex );
+  console.debug( currAccordionIndex );
   // User has clicked a tag with the class onChangeloadCaddyByAjax
   e.preventDefault( ); // Don't execute the click
   // RETURN : current id isn't part of the DOM
