@@ -210,7 +210,9 @@
       // Prompt informations
 
     function initEvents( ) {
-      $( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
+      accordionButtonId = settings.accordion.accordionButtonId;
+      $( document ).on( "click", accordionButtonId, function( e ) {
+        alert( accordionButtonId );
         lang      = settings.accordion.lang;
         selector  = settings.accordion.powermailFormSelector;
         effect    = "woPrompt";
@@ -302,6 +304,7 @@
             // follow the workflow
             return true;
           }
+          accordionButtonId = settings.accordion.accordionButtonId;
           // Get HTML id of the current tab
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
