@@ -31,6 +31,13 @@ var pmuidfieldterms         = parseInt( "###PMUIDFIELDTERMS###" );
 var t3caddyAlert            = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
+  // lang: if marker isn't replaced, set lang to default language'
+if( lang == '###' + 'LANG' + '###' )
+{
+  lang = "en";  // default language
+}
+
+
 var accordion =  function( ) {
   //console.debug( currAccordionIndex );
   return $( this ).t3caddy( "accordion", {

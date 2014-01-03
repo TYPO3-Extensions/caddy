@@ -648,18 +648,28 @@
                   '</div>' +
                 '</div>'
       },
-      update  : {
+      update      : {
         currAccordionIndex        : undefined, // [0-4]
         formData                  : undefined, // serialized
         html_element              : undefined, 
         html_element_wi_selector  : undefined, 
         url                       : undefined
       },
-      url_autoQm : {
+      url_autoQm  : {
         currAccordionIndex  : undefined,
         url                 : undefined, 
         param               : undefined
+      },
+      validator   : {
+        container       : "validatorWall",  //     
+        effect          : "default",        // default (default), own custom effect
+        errorClass      : "invalid",
+        errorInputEvent : "keyup",   // keyup (default), change, blur, null
+        lang            : "en", 
+        selector        : undefined,
+        validate        : "noValidate"      // noValidate (default), validate
       }
+      
     };
 
     var methods = {
@@ -682,8 +692,8 @@
                       selector  = settings.accordion.powermailFormSelector;
                       effect    = "wall";
                       validate  = "noValidate";
-                      initValidator( lang, selector, effect, validate );
                       initToolsValidator( );
+                      initValidator( lang, selector, effect, validate );
                       addAccordion( );
                       initEvents( );
                       return $( settings.accordion.accordionSelector ).data( "tabs" );
@@ -807,7 +817,26 @@
                           break;
                       }
                       return url;
-                    } /* url_autoQm */
+                    }, /* url_autoQm */
+    validator       : function( options )
+                    {
+                      options = $.extend( settings.validator, options );
+                      validateForm = $( settings.validator.selector ).validator(
+                      {
+                        effect          : settings.validator.effect,          // default (default), own custom effect
+                        errorClass      : settings.validator.errorClass,
+                        container       : settings.validator.container,
+                        lang            : settings.validator.lang,
+                        errorInputEvent : settings.validator.errorInpuEvent   // keyup (default), change, blur, null
+                      });
+                      if( settings.validator.validate != "validate" )
+                      {
+                        return false;
+                      }
+                      success = validateForm.data( "validator" ).checkValidity( );
+                      return success;
+                    }  /* validator */
+                    
     }; /* methods */
     
       // Method calling logic
