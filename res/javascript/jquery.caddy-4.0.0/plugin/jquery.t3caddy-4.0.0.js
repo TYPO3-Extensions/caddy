@@ -310,7 +310,8 @@
           //alert( idTabSrce );
           lang      = settings.accordion.lang;
           selector  = idTabSrce;
-          effect    = "wall";
+          //effect    = "wall";
+          effect    = "woPrompt";
           validate  = "validate";
           //var success = initValidator( lang, selector, effect, validate );
           var success = initValidator( lang, selector, effect, validate );
@@ -387,6 +388,7 @@
     } // initToolsValifator
 
     function initValidator( lang, selector, effect, validate ) {
+      errorInputEvent = blur;
       if( lang == '###LANG###' )
       {
         lang = "en";
@@ -399,7 +401,7 @@
         container       : settings.accordion.powermailWallHtmlId,
         lang            : lang,
         // input validation for a single field
-        errorInputEvent : null  // keyup (default), change, blur, null
+        errorInputEvent : errorInputEvent  // keyup (default), change, blur, null
       // custom form submission logic
       }).submit( function( e )  
       {
@@ -411,18 +413,15 @@
           //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
           // prevent the form data being submitted to the server
           e.preventDefault( );
-        }
+        } // submit
       }).focusout( function ( e )
       {
-        // if data is valid
-        if( !e.isDefaultPrevented( ) ) 
-        {
-          alert ( "Focus out: Aber Hallo" );
-          // tell user that everything is OK
-          //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
-          // prevent the form data being submitted to the server
-          e.preventDefault( );
-        }
+        // runs after a field is left
+//        if( !e.isDefaultPrevented( ) ) 
+//        {
+//          alert ( "Focus out: Aber Hallo" );
+//          e.preventDefault( );
+//        } // focusout
       }); // $( selector ).validator
       if( validate == "validate" )
       {
