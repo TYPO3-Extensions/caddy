@@ -128,65 +128,7 @@
       $( "#tx-caddy-pi1-loader" ).hide( );
         // Initiate the ui button layout again
       $( "input:submit, input:button, a.backbutton", ".tx-caddy-pi1" ).button( );
-    }
-    
-      // Fade out the loading *.gif, initiate buttons again
-    function confToolsValidator( ) {
-      $.tools.validator.localize( "de", {
-        // "*" Isn't localised
-        //"*"           : "Der Wert wird nicht akzeptiert",
-        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
-        ":number"     : "Bitte nur Zahlen eingeben",
-        ":url"        : "Bitte eine korrekte URL eingeben",
-        "[max]"       : "Maximal $1 ist erlaubt",
-        "[min]"       : "Mindestens $1 ist n&ouml;tig",
-        "[required]"  : "Bitte ausfüllen"
-      }); // $.tools.validator.localize ...
-      $.tools.validator.addEffect( "wall", function( errors, event ) 
-      {
-        pmuidfieldterms       = settings.accordion.pmuidfieldterms;
-        pmuidfieldrevocation  = settings.accordion.pmuidfieldrevocation;
-        // get the message wall
-        var wall = $( this.getConf( ).container ).fadeIn( );
-        // remove all existing messages
-        wall.html( null );
-        wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
-        // add new ones
-        $.each( errors, function( index, error ) {
-          selector = "input[name='" + error.input.attr( "name" ) + "']";
-          switch( error.input.attr( "name" ) )
-          {
-            case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
-            case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
-              idPmFieldwrapCheck = $( selector ).closest( "div.powermail_fieldwrap_check" ).attr( "id" );
-              idOfFieldset = $( "#" + idPmFieldwrapCheck ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
-              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
-              break;
-            default:
-              idOfFieldset = $( selector ).closest( "fieldset" ).attr( "id" );
-              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
-              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
-              break;
-          }
-          wall.append( strAppend );
-        });
-      // the effect does nothing when all inputs are valid
-      }, function( inputs ) 
-      {
-        // remove all existing messages
-        $( settings.accordion.powermailWallHtmlId ).html( "" );
-      }); // adds the "wall" effect to the validator      
-      // adds the "woPrompt" effect to the validator
-      $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
-      {
-        // prompt nothing
-      // the effect does nothing when all inputs are valid
-      }, function( inputs ) 
-      {
-        // remove nothing
-      }); // adds the "woPrompt" effect to the validator      
-    }
+    } // Fade out the loading *.gif, initiate buttons again
     
       // Cover the current html element with the loader *.gif
     function cover_wi_loader( html_element ) {
@@ -351,7 +293,7 @@
           effect    = "wall";
           validate  = "validate";
           //var success = initValidator( lang, selector, effect, validate );
-          var success = initValidator( lang, selector, "noPrompt", validate );
+          var success = initValidator( lang, selector, "woPrompt", validate );
           // RETURN true : values of the current tab (fieldset) are proper, user can left the current tab
           if( success )
           {
@@ -366,6 +308,63 @@
       });
     }  // $(function() ...
     /* Powermail tabs begin */
+
+    function initToolsValidator( ) {
+      $.tools.validator.localize( "de", {
+        // "*" Isn't localised
+        //"*"           : "Der Wert wird nicht akzeptiert",
+        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
+        ":number"     : "Bitte nur Zahlen eingeben",
+        ":url"        : "Bitte eine korrekte URL eingeben",
+        "[max]"       : "Maximal $1 ist erlaubt",
+        "[min]"       : "Mindestens $1 ist n&ouml;tig",
+        "[required]"  : "Bitte ausfüllen"
+      }); // $.tools.validator.localize ...
+      $.tools.validator.addEffect( "wall", function( errors, event ) 
+      {
+        pmuidfieldterms       = settings.accordion.pmuidfieldterms;
+        pmuidfieldrevocation  = settings.accordion.pmuidfieldrevocation;
+        // get the message wall
+        var wall = $( this.getConf( ).container ).fadeIn( );
+        // remove all existing messages
+        wall.html( null );
+        wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
+        // add new ones
+        $.each( errors, function( index, error ) {
+          selector = "input[name='" + error.input.attr( "name" ) + "']";
+          switch( error.input.attr( "name" ) )
+          {
+            case( "tx_powermail_pi1[field][" + pmuidfieldterms + "][0]"):
+            case( "tx_powermail_pi1[field][" + pmuidfieldrevocation + "][0]"):
+              idPmFieldwrapCheck = $( selector ).closest( "div.powermail_fieldwrap_check" ).attr( "id" );
+              idOfFieldset = $( "#" + idPmFieldwrapCheck ).closest( "fieldset" ).attr( "id" );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).next( ).text( ) + "</strong></p>"
+              break;
+            default:
+              idOfFieldset = $( selector ).closest( "fieldset" ).attr( "id" );
+              legend       = $( "#" + idOfFieldset + " > legend" ).text( );
+              strAppend = "<p>" + error.messages[0] + ": <strong>[" + legend + "] " + $( selector ).prev( ).text( ) + "</strong></p>";
+              break;
+          }
+          wall.append( strAppend );
+        });
+      // the effect does nothing when all inputs are valid
+      }, function( inputs ) 
+      {
+        // remove all existing messages
+        $( settings.accordion.powermailWallHtmlId ).html( "" );
+      }); // adds the "wall" effect to the validator      
+      // adds the "woPrompt" effect to the validator
+      $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
+      {
+        // prompt nothing
+      // the effect does nothing when all inputs are valid
+      }, function( inputs ) 
+      {
+        // remove nothing
+      }); // adds the "woPrompt" effect to the validator      
+    } // initToolsValifator
 
     function initValidator( lang, selector, effect, validate ) {
       if( lang == '###LANG###' )
@@ -400,7 +399,7 @@
         //alert( success );
       }
       return success;
-    }  // initValidator
+    }  // initValidator( )
 
     function movePowermailFieldsToHtml5( ) {
       pmuidfieldemail     = settings.accordion.pmuidfieldemail;
@@ -645,7 +644,7 @@
                       effect    = "wall";
                       validate  = "noValidate";
                       initValidator( lang, selector, effect, validate );
-                      confToolsValidator( );
+                      initToolsValidator( );
                       addAccordion( );
                       initEvents( );
                       return $( settings.accordion.accordionSelector ).data( "tabs" );
