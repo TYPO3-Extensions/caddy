@@ -15,6 +15,7 @@
  */
 
 var accordionApi            = undefined;
+var accordionButtonId       = "#accordionPowermailSubmit";
 var accordionNext           = "button.accordionNext";       // default: button.accordionNext
 var accordionPrev           = "button.accordionPrev";       // default: button.accordionPrev
 var accordionSelector       = "#c###UID###-accordion";
