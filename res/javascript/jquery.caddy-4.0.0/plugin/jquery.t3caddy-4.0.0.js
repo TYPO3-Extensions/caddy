@@ -401,43 +401,39 @@
     } // initToolsValifator
 
     function initValidator( lang, selector, effect, validate ) {
-      errorInputEvent = "null";
-      if( effect == "woPrompt" )
-      {
-        errorInputEvent = "blur";
-      }
-      if( lang == '###LANG###' )
-      {
-        lang = "en";
-      }
-      success = false;
-      validatePowermailForm = $( selector ).validator(
-      {
-        effect          : effect,           // default (default), own custom effect
-        errorClass      : "invalid",
-        container       : settings.accordion.powermailWallHtmlId,
-        lang            : lang,
-        // input validation for a single field
-        errorInputEvent : errorInputEvent   // keyup (default), change, blur, null
-      // custom form submission logic
-      }).submit( function( e )  
-      {
-        // if data is valid
-        if( !e.isDefaultPrevented( ) ) 
-        {
-          alert ( "Submit: Aber Hallo" );
-          // tell user that everything is OK
-          //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
-          // prevent the form data being submitted to the server
-          e.preventDefault( );
-        } // submit
-      }); // $( selector ).validator
-      if( validate == "validate" )
-      {
-        success = validatePowermailForm.data('validator').checkValidity( );
-        //alert( success );
-      }
-      return success;
+      options = {
+        effect          : effect,
+        errorInputEvent : function ( ) 
+                          { 
+                            errorInputEvent = "null";
+                            if( effect == "woPrompt" )
+                            {
+                              errorInputEvent = "blur";
+                            }
+                            return errorInputEvent;
+                          },
+        lang      : lang,
+        selector  : selector,
+        validate  : validate
+      };
+      return method.validate( options );
+//      success = false;
+//      validatePowermailForm = $( selector ).validator(
+//      {
+//        effect          : effect,           // default (default), own custom effect
+//        errorClass      : "invalid",
+//        container       : settings.accordion.powermailWallHtmlId,
+//        lang            : lang,
+//        // input validation for a single field
+//        errorInputEvent : errorInputEvent   // keyup (default), change, blur, null
+//      // custom form submission logic
+//      }); // $( selector ).validator
+//      if( validate == "validate" )
+//      {
+//        success = validatePowermailForm.data('validator').checkValidity( );
+//        //alert( success );
+//      }
+//      return success;
     }  // initValidator( )
 
     function movePowermailFieldsToHtml5( ) {
