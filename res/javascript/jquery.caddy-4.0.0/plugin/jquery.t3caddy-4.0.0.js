@@ -402,6 +402,7 @@
 
     function initValidator( lang, selector, effect, validate ) {
       options = {
+        container       : settings.accordion.powermailWallHtmlId,
         effect          : effect,
         errorInputEvent : function ( ) 
                           { 
@@ -412,7 +413,6 @@
                             }
                             return errorInputEvent;
                           },
-        lang      : lang,
         selector  : selector,
         validate  : validate
       };
