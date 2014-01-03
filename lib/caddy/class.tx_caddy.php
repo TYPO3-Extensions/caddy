@@ -83,9 +83,9 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * 1704:     private function calcSumInitInstance( )
  *
  *              SECTION: Getting methods
- * 1727:     public function getPaymentOptionLabelBySessionId( )
- * 1753:     public function getShippingOptionLabelBySessionId( )
- * 1779:     public function getSpecialOptionLabelsBySessionId( )
+ * 1727:     public function getPaymentOptionLabelById( )
+ * 1753:     public function getShippingOptionLabelById( )
+ * 1779:     public function getSpecialOptionLabelsById( )
  * 1810:     private function getServiceAttributes( )
  *
  *              SECTION: Init
@@ -1644,7 +1644,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $label = $this->getPaymentOptionLabelBySessionId( $paymentId );
+    $label = $this->getPaymentOptionLabelById( $paymentId );
 
     $arrReturn['id']                    = $paymentId;
     $arrReturn['label']                 = $label;
@@ -1702,7 +1702,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $label = $this->getShippingOptionLabelBySessionId( );
+    $label = $this->getShippingOptionLabelById( $paymentId );
 
     $arrReturn['id']                    = $shippingId;
     $arrReturn['label']                 = $label;
@@ -1755,7 +1755,7 @@ class tx_caddy extends tslib_pibase
       }
     }
 
-    $labels = $this->getSpecialOptionLabelsBySessionId( );
+    $labels = $this->getSpecialOptionLabelsById( $specialIds );
 
     $arrReturn['ids']                   = $specialIds;
     $arrReturn['labels']                = $labels;
@@ -1819,26 +1819,26 @@ class tx_caddy extends tslib_pibase
   **********************************************/
 
  /**
-  * getPaymentOptionLabelBySessionId( )
+  * getPaymentOptionLabelById( )
   *
   * @return	array
   * @access     private
   * @version    4.0.3
   * @since      2.0.0
   */
-  private function getPaymentOptionLabelBySessionId( $paymentId )
+  private function getPaymentOptionLabelById( $paymentId )
   {
-      // Get session array
-    // #54634, 131128, dwildt, 1-
-    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+//      // Get session array
+//    // #54634, 131128, dwildt, 1-
+//    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+//    // #54634, 131128, dwildt, 1+
+//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['payment.']['options.'];
 
-      // Get key for the option
-    $key    = $sesArray['options']['payment']['id'] . '.';
+//      // Get key for the option
+//    $key    = $sesArray['options']['payment']['id'] . '.';
       // #i0043, 140103, dwildt, 1+
     $key    = $paymentId . '.';
 
@@ -1901,7 +1901,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * getShippingOptionLabelBySessionId( )
+  * getShippingOptionLabelById( )
   *
   * @param      integer : $pid  : uid of the page, which contains the caddy plugin
   * @return	array
@@ -1909,20 +1909,21 @@ class tx_caddy extends tslib_pibase
   * @version    4.0.3
   * @since      2.0.0
   */
-  private function getShippingOptionLabelBySessionId( )
+  private function getShippingOptionLabelById( $paymentId )
   {
-
-      // Get session array
-    // #54634, 131128, dwildt, 1-
-    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+//      // Get session array
+//    // #54634, 131128, dwildt, 1-
+//    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+//    // #54634, 131128, dwildt, 1+
+//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
     $optionsConf = $this->conf['options.']['shipping.']['options.'];
 
-      // Get key for option
-    $key    = $sesArray['options']['shipping']['id'] . '.';
+//      // Get key for option
+//    $key    = $sesArray['options']['shipping']['id'] . '.';
+      // #i0043, 140103, dwildt, 1+
+    $key    = $paymentId . '.';
 
       // Render the option label
     $name   = $optionsConf[ $key ]['title'];
@@ -1932,23 +1933,23 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * getSpecialOptionLabelsBySessionId( )
+  * getSpecialOptionLabelsById( )
   *
   * @return	array
   * @access     private
   * @version    4.0.3
   * @since      2.0.0
   */
-  private function getSpecialOptionLabelsBySessionId( )
+  private function getSpecialOptionLabelsById( $specialIds )
   {
     $value  = null;
     $values = null;
 
-      // Get session array
-    // #54634, 131128, dwildt, 1-
-    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+//      // Get session array
+//    // #54634, 131128, dwildt, 1-
+//    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+//    // #54634, 131128, dwildt, 1+
+//    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get the devider
     $name     = $this->conf['options.']['specials.']['devider'];
@@ -1960,7 +1961,10 @@ class tx_caddy extends tslib_pibase
     $optionsConf = $this->conf['options.']['specials.']['options.'];
 
       // Render the option label
-    foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
+      // #i0043, 140103, dwildt, 1-
+//    foreach( ( array ) $sesArray['options']['specials']['ids'] as $key )
+      // #i0043, 140103, dwildt, 1+
+    foreach( ( array ) $specialIds as $key )
     {
       $name     = $optionsConf[ $key . '.' ]['title'];
       $conf     = $optionsConf[ $key . '.' ]['title.'];
