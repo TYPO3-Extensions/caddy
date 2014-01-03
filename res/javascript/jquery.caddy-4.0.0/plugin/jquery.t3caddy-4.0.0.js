@@ -212,7 +212,7 @@
     function initEvents( ) {
       $( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
         lang      = settings.accordion.lang;
-        selector  = idTabSrce;
+        selector  = settings.accordion.powermailFormSelector;
         effect    = "woPrompt";
         validate  = "validate";
         switch( initValidator( lang, selector, effect, validate ) )
@@ -307,7 +307,7 @@
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
           lang      = settings.accordion.lang;
-          selector  = idTabSrce;
+          selector  = settings.accordion.powermailFormSelector;
           effect    = "woPrompt";
           validate  = "validate";
           switch( initValidator( lang, selector, effect, validate ) )
@@ -320,7 +320,8 @@
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
-          effect = "wall";
+          selector  = idTabSrce;
+          effect    = "wall";
           switch( initValidator( lang, selector, effect, validate ) )
           {
             case( true ):
