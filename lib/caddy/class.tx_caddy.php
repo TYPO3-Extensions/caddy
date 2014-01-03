@@ -1855,12 +1855,15 @@ class tx_caddy extends tslib_pibase
  * @param       integer         $pid  : given pid (may be null)
  * @return	integer		$pid  : id of the page with the caddy plugin
  * @internal    #54634
- * @version     3.0.1
+ * @version     4.0.3
  * @since       3.0.1
  */
   private function getPid( $pid )
   {
-    if( $pid === null )
+      // #i0045, 140103, dwildt, 1-
+    //if( $pid === null )
+      // #i0045, 140103, dwildt, 1+
+    if( $pid === null || $pid === '' )
     {
       $pid = $GLOBALS["TSFE"]->id;
     }

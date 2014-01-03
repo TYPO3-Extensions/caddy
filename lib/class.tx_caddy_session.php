@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -184,13 +184,13 @@ class tx_caddy_session
     $currentNumber  = $sesArray['numberOrderCurrent'];
 //    if( $this->drs->drsInfo )
 //    {
-      $prompt = '$GLOBALS["TSFE"]->id = ' . $GLOBALS["TSFE"]->id;
-      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
-      $prompt = 'pid = ' . $pid;
-      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
-      $prompt = 'ordernumber = ' . $currentNumber;
-      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
-      exit;
+//      $prompt = '$GLOBALS["TSFE"]->id = ' . $GLOBALS["TSFE"]->id;
+//      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+//      $prompt = 'pid = ' . $pid;
+//      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+//      $prompt = 'ordernumber = ' . $currentNumber;
+//      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+//      exit;
 //    }
     return $currentNumber;
   }
@@ -229,11 +229,14 @@ class tx_caddy_session
  * @param       integer         $pid  : given pid (may be null)
  * @return	integer		$pid  : id of the page with the caddy plugin
  * @internal    #54634
- * @version     3.0.1
+ * @version     4.0.3
  * @since       3.0.1
  */
   private function getPid( $pid )
   {
+      // #i0045, 140103, dwildt, 1-
+    //if( $pid === null )
+      // #i0045, 140103, dwildt, 1+
     if( $pid === null || $pid === '' )
     {
       if( $this->drs->drsError )
