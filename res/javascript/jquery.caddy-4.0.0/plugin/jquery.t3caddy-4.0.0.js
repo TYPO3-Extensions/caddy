@@ -389,7 +389,7 @@
     } // initToolsValifator
 
     function initValidator( lang, selector, effect, validate ) {
-      errorInputEvent = blur;
+      errorInputEvent = null;
       if( lang == '###LANG###' )
       {
         lang = "en";
