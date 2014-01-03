@@ -139,9 +139,13 @@ $( document ).on( "click", accordionPrev, function( e ) {
   accordionApi.prev();
 });      
 $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-  formAction  = $( this ).closest( "form" ).attr( "action");
-  formData    = $( this ).closest( "form" ).serialize( );
-  fnAjax( formAction, formData, e );
+  if( !e.isDefaultPrevented( ) ) 
+  {
+    e.preventDefault( ); // Don't execute the click
+    formAction  = $( this ).closest( "form" ).attr( "action");
+    formData    = $( this ).closest( "form" ).serialize( );
+    fnAjax( formAction, formData, e );
+  }
 }); // User has clicked a tag with the cUID-step class
 $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
