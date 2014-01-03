@@ -211,25 +211,21 @@
 
     function initEvents( ) {
       $( document ).on( "click", "#accordionPowermailSubmit", function( e ) {
-        if( !e.isDefaultPrevented( ) ) 
+        lang      = settings.accordion.lang;
+        selector  = idTabSrce;
+        effect    = "woPrompt";
+        validate  = "validate";
+        switch( initValidator( lang, selector, effect, validate ) )
         {
-          e.preventDefault( ); // Don't execute the click
-          lang      = settings.accordion.lang;
-          selector  = idTabSrce;
-          effect    = "woPrompt";
-          validate  = "validate";
-          switch( initValidator( lang, selector, effect, validate ) )
-          {
-            case( true ):
-              $( accordionButtonId ).removeAttr( "disabled" );
-              break;
-            case( false ):
-            default:
-              $( accordionButtonId ).attr( "disabled", "disabled" );
-              break;
-          }
+          case( true ):
+            $( accordionButtonId ).removeAttr( "disabled" );
+            break;
+          case( false ):
+          default:
+            $( accordionButtonId ).attr( "disabled", "disabled" );
+            break;
         }
-      }); // User has clicked a tag with the cUID-step class      
+      }); 
 //      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
 //      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
 //        accordionApi.next();
@@ -241,7 +237,7 @@
 //        formAction  = $( this ).closest( "form" ).attr( "action");
 //        formData    = $( this ).closest( "form" ).serialize( );
 //        runAjax( formAction, formData, e );
-//      }); // User has clicked a tag with the cUID-step class
+//      }); 
 //      $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
 //        if( !e.isDefaultPrevented( ) ) 
 //        {
@@ -250,7 +246,7 @@
 //          formData    = null;
 //          runAjax( formAction, formData, e );
 //        }
-//      }); // User has clicked a tag with the cUID-step class
+//      }); 
 //      $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
 //        if( !e.isDefaultPrevented( ) ) 
 //        {
@@ -259,7 +255,7 @@
 //          formData    = $( this ).closest( "form" ).serialize( );
 //          runAjax( formAction, formData, e );
 //        }
-//      }); // User has clicked a tag with the cUID-step class
+//      }); 
 //      $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
 //        if( !e.isDefaultPrevented( ) ) 
 //        {
@@ -268,7 +264,7 @@
 //          formData    = $( this ).closest( "form" ).serialize( );
 //          runAjax( formAction, formData, e );
 //        }
-//      }); // User has clicked a tag with the cUID-step class
+//      }); 
 //      $( document ).on( "click", "input.powermail_submit", function( e ) {
 //        if( !e.isDefaultPrevented( ) ) 
 //        {
@@ -288,7 +284,7 @@
 //          console.debug( formData );
 //          runAjax( formAction, formData, e );
 //        }
-//      }); // User has clicked a tag with the cUID-step class      
+//      }); 
     }
     
     /* Powermail tabs begin */
@@ -584,7 +580,7 @@
 //    ////    alert( accordionIndex );
 //    ////    accordionApi.click( accordionIndex );
 //    //  }, 2000 );
-//    } // User has clicked a tag with the cUID-step class
+//    } 
 //    /* AJAX end */
 
     var settings = {
