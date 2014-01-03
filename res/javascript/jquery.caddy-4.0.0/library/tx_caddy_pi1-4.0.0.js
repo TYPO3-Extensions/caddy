@@ -106,9 +106,7 @@ var fnAjax = function( formAction, formData, e ) {
   // Update the content with the id #c###UID###-###VIEW###view
   // Reload functions after content is updated (after 2000 miliseconds)
   setTimeout( function( ) {
-    accordionApi = accordion( {
-      currAccordionIndex : currAccordionIndex
-    });
+    accordionApi = accordion( currAccordionIndex );
     //console.debug( ".powermail_confirmation_form[type=submit]", $( ".powermail_confirmation_form[type=submit]").length );
     if( $( ".powermail_confirmation_form[type=submit]").length )
     {
