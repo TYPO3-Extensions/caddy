@@ -22,19 +22,20 @@
   $.fn.t3caddy = function( method )
   {
     function addAccordion( ) {
-      initialIndex = parseInt( settings.accordion.currAccordionIndex );
-      if( isNaN( initialIndex ) )
-      {
-        initialIndex = 0;
-      }
-      //console.debug( initialIndex );
-
       // The accordian panes of the caddy
       $( settings.accordion.accordionSelector ).tabs( "div.pane",
       {
-        tabs          : 'h2',
-        effect        : 'slide',
-        initialIndex  : initialIndex,
+        tabs          : settings.accordion.tabs,
+        effect        : settings.accordion.effect,
+        initialIndex  : function( ) {
+                          initialIndex = parseInt( settings.accordion.currAccordionIndex );
+                          if( isNaN( initialIndex ) )
+                          {
+                            initialIndex = 0;
+                          }
+                          //console.debug( initialIndex );
+                          return initialIndex;
+                        },
         onBeforeClick : function( event, indexAccordionDest ) {
           accordionButtonId = settings.accordion.accordionButtonId;
           //alert( "fnAccordion: onBeforeClick" );
@@ -570,6 +571,7 @@
         accordionApi            : undefined,  // API of the accordion
         accordionSelector       : undefined,  // e.g.: "#c2997-accordion"
         currAccordionIndex      : undefined,  // index of the current accordion pane: [0-4]
+        effect                  : 'slide',
         indexAccordionOrdering  : 3, // Ordering
         indexAccordionPowermail : 4, // Powermail form
         powermailFormSelector   : undefined,  // e.g.: "#c2997-accordion-powermail div form",
@@ -578,6 +580,7 @@
         pmuidfieldemail         : undefined,  // e.g.: 624
         pmuidfieldrevocation    : undefined,  // e.g.: 629
         pmuidfieldterms         : undefined,  // e.g.: 628
+        tabs                    : 'h2',
         t3caddyAlert            : 1,          // [e.g.:]0-1] 
         t3caddyConsoleDebug     : 1           // [e.g.:]0-1]
       },
@@ -800,9 +803,9 @@
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
                         errorClass      : settings.validator.errorClass,
+                        errorInputEvent : settings.validator.errorInpuEvent,  // keyup (default), change, blur, null
                         container       : settings.validator.container,
-                        lang            : settings.validator.lang,
-                        errorInputEvent : settings.validator.errorInpuEvent   // keyup (default), change, blur, null
+                        lang            : settings.validator.lang
                       });
                       if( settings.validator.validate != "validate" )
                       {

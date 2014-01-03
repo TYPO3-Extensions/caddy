@@ -45,7 +45,7 @@ switch( true )
 }
 
 
-var accordion =  function( ) {
+function accordion( ) {
   //console.debug( currAccordionIndex );
   return $( this ).t3caddy( "accordion", {
     accordionSelector     : "#c###UID###-accordion",
@@ -62,13 +62,14 @@ var accordion =  function( ) {
   });
 };
 
-var powermailValidator =  function( effect ) {
+function powermailValidator( effect ) {
   return $( this ).t3caddy( "validator", {
     container       : "#c###UID###-powermail-prompt",
     effect          : "wall",       // default (default), wall, woPrompt
     errorInputEvent : "null",       // keyup (default), change, blur, null
     lang            : lang,
-    selector        : "#c###UID###-accordion-powermail div form"
+    selector        : "#c###UID###-accordion-powermail div form",
+    validate        : "validate"
   });
 };
 
