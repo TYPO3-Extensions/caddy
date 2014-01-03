@@ -344,27 +344,33 @@
     }  // $(function() ...
     /* Powermail tabs begin */
 
-    function initValidator( selector, validate ) {
+    function initValidator( selector, validate, effect ) {
+      if( ! effect )
+      {
+        effect = "wall";
+      }
       success = false;
       validatePowermailForm = $( selector ).validator(
       {
-        effect          : "wall",
+        effect          : effect,
+        errorClass      : "invalid",
         container       : settings.accordion.powermailWallHtmlId,
         lang            : "de",
         // do not validate inputs when they are edited
-        //errorInputEvent : null  // keyup (default), change, blur, null
+        errorInputEvent : null  // keyup (default), change, blur, null
       // custom form submission logic
       }).submit( function( e )  
       {
-        // when data is valid
+        // if data is valid
         if( !e.isDefaultPrevented( ) ) 
         {
+          alert ( "Aber Hallo" );
           // tell user that everything is OK
           //$( settings.accordion.powermailWallHtmlId ).html( "<h3>All good</h3>" );
           // prevent the form data being submitted to the server
-          //e.preventDefault( );
+          e.preventDefault( );
         }
-      }); // $(settings.accordion.powermailFormSelector).validator ...
+      }); // $( selector ).validator
       if( validate == "validate" )
       {
         success = validatePowermailForm.data('validator').checkValidity( );
