@@ -182,6 +182,13 @@ class tx_caddy_session
     // #54634, 131128, dwildt, 1+
     $sesArray       = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
     $currentNumber  = $sesArray['numberOrderCurrent'];
+    if( $this->drs->drsInfo )
+    {
+      $prompt = 'pid = ' . $pid;
+      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+      $prompt = 'ordernumber = ' . $currentNumber;
+      t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+    }
     return $currentNumber;
   }
   
