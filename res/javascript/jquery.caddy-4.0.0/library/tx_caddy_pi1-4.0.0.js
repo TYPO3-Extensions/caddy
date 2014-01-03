@@ -21,7 +21,7 @@ var accordionSelector       = "#c###UID###-accordion";
 var currAccordionIndex      = undefined;
 var indexAccordionOrdering  = 3; // Ordering
 var indexAccordionPowermail = 4; // Powermail form
-var lang                    = '###LANG###';
+var lang                    = '###LANG###';                 // en (default), de
 var powermailFormSelector   = "#c###UID###-accordion-powermail div form";
 var powermailWallHtmlId     = "#c###UID###-powermail-prompt"
 var powermailUid            = "#c###UID_POWERMAIL_FORM###";
@@ -32,9 +32,15 @@ var t3caddyAlert            = parseInt( "###T3CADDYALERT###" );
 var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
 
   // lang: if marker isn't replaced, set lang to default language'
-if( lang == '###' + 'LANG' + '###' )
+switch( true )
 {
-  lang = "en";  // default language
+  case( lang = "default" ):
+  case( lang == '###' + 'LANG' + '###' ):
+    lang = "en";  // default language
+    break;
+  default:
+    // Do nothing;
+    break;
 }
 
 
