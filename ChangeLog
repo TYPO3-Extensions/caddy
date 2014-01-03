@@ -24,9 +24,13 @@ TODO
               * class.tx_caddy_session.php
               * caddy
                 * class.tx_caddy.php
+              * powermail
+                * class.tx_caddy_powermail.php
             * pi1
               * class.tx_caddy_pi1.php
               * class.tx_caddy_pi1_clean.php
+            * static
+              * powermail/2x/setup.txt
   Improvement
   * #i0038: Caddy HTML
             Effected files:
