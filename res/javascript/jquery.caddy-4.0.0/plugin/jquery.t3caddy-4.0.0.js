@@ -33,7 +33,7 @@
                           {
                             initialIndex = 0;
                           }
-                          //console.debug( initialIndex );
+                          console.debug( initialIndex );
                           return initialIndex;
                         },
         onBeforeClick : function( event, indexAccordionDest ) {
