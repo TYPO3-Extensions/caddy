@@ -35,6 +35,11 @@ TODO
               * setup.txt
   Bugfix
   * #i0045: unproper replace of an empty pid in session -> getPid( )
+            Effected files:
+            * lib
+              * caddy
+                * class.tx_caddy.php
+              * class.tx_caddy_session.php
   * #i0044: Unsupported operand types in lib/caddy/class.tx_caddy.php on line 898 
   * #i0043: getPaymentOptionLabelBySessionId seem's to be unproper
   * #i0041: ###TARGET### wasn't handled
