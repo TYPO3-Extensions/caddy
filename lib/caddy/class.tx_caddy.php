@@ -1840,7 +1840,7 @@ class tx_caddy extends tslib_pibase
       // Get key for the option
     $key    = $sesArray['options']['payment']['id'] . '.';
       // #i0043, 140103, dwildt, 1+
-    $key    = $paymentId;
+    $key    = $paymentId . '.';
 
       // Render the option label
     $name  = $optionsConf[ $key ]['title'];
