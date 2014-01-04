@@ -62,7 +62,7 @@ plugin.caddy {
   fancybox.sponsors = Click me!
 
   # cat=caddy - jquery/enable/101;    type=options[enabled,disabled];      label= Fancybox: Include the jQuery fancybox library (1.3.4) and CSS provided by caddy. If you are using another fancybox library and CSS, please set this option to "disabled"
-  jquery.fancybox = enabled
+  jquery.fancybox = disabled
   # cat=caddy - jquery/enable/102;    type=options[top,bottom];            label= Fancybox position: Place the jQuery fancybox library at the top of the page (HTML head) or at the bottom
   jquery.fancyboxPosition = bottom
   # cat=caddy - jquery/enable/103;    type=string;                         label= Fancybox library
