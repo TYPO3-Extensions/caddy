@@ -380,7 +380,7 @@
       $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
       {
         // prompt nothing
-        alert( "woPrompt" );
+        //alert( "woPrompt" );
       // the effect does nothing when all inputs are valid
       }, function( inputs ) 
       {
