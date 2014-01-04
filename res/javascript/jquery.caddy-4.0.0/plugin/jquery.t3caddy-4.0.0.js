@@ -23,19 +23,17 @@
   {
     function addAccordion( ) {
       // The accordian panes of the caddy
+      initialIndex = parseInt( settings.accordion.currAccordionIndex );
+      if( isNaN( initialIndex ) )
+      {
+        initialIndex = 0;
+      }
+      console.debug( initialIndex );
       $( settings.accordion.accordionSelector ).tabs( "div.pane",
       {
         tabs          : settings.accordion.tabs,
         effect        : settings.accordion.effect,
-        initialIndex  : function( ) {
-                          initialIndex = parseInt( settings.accordion.currAccordionIndex );
-                          if( isNaN( initialIndex ) )
-                          {
-                            initialIndex = 0;
-                          }
-                          console.debug( initialIndex );
-                          return initialIndex;
-                        },
+        initialIndex  : initialIndex,
         onBeforeClick : function( event, indexAccordionDest ) {
           accordionButtonId = settings.accordion.accordionButtonId;
           //alert( "fnAccordion: onBeforeClick" );
