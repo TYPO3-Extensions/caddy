@@ -28,7 +28,7 @@
       {
         initialIndex = 0;
       }
-      console.debug( initialIndex );
+      //console.debug( initialIndex );
       $( settings.accordion.accordionSelector ).tabs( "div.pane",
       {
         tabs          : settings.accordion.tabs,
@@ -36,19 +36,20 @@
         initialIndex  : initialIndex,
         onBeforeClick : function( event, indexAccordionDest ) {
           accordionButtonId = settings.accordion.accordionButtonId;
+          $( accordionButtonId ).attr( "disabled", "disabled" );
           //alert( "fnAccordion: onBeforeClick" );
           // Get index of the current accordion tab
           var indexAccordionSrce  = this.getIndex();
           settings.accordion.currAccordionIndex = indexAccordionSrce;
 
-          // RETURN if current accordion isn't the powermail pane
           switch( true )
           {
-            //case( indexAccordionDest == indexAccordionOrdering  ): // Ordering
+            // RETURN true, if destination accordion pane is the powermail pane
             case( indexAccordionDest == indexAccordionPowermail ): // Powermail form
               settings.accordion.currAccordionIndex = indexAccordionDest;
               return true;
               break;
+            // Follow the workflow, if source accordion pane is the powermail pane
             case( indexAccordionSrce == indexAccordionPowermail ): // Powermail form
               // Follow the workflow
               break;
