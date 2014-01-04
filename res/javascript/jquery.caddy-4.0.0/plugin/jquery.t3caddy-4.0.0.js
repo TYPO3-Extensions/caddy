@@ -291,12 +291,14 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
+          console.debug( 1 );
           settings.validator.effect           = "woPrompt";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "keyup";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
+          console.debug( 2 );
           switch( initValidator( ) )
           {
             case( true ):
@@ -307,12 +309,14 @@
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
+          console.debug( 3 );
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "null";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
+          console.debug( 4 );
           switch( initValidator( ) )
           {
             case( true ):
