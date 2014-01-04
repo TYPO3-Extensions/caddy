@@ -63,7 +63,7 @@
               break;
           }
           settings.validator.effect           = "woPrompt";
-          settings.validator.errorInputEvent  = "change";
+          settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "change";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
@@ -312,7 +312,7 @@
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
           settings.validator.effect           = "woPrompt";
-          settings.validator.errorInputEvent  = "change";
+          settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "change";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
