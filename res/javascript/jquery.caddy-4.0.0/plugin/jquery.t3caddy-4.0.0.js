@@ -317,16 +317,25 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
-          switch( initValidator( ) )
-          {
-            case( true ):
-              $( accordionButtonId ).removeAttr( "disabled" );
-              break;
-            case( false ):
-            default:
-              $( accordionButtonId ).attr( "disabled", "disabled" );
-              break;
-          }
+                      validateForm = $( settings.validator.selector ).validator(
+                      {
+                        effect          : settings.validator.effect,          // default (default), own custom effect
+                        errorClass      : settings.validator.errorClass,
+                        errorInputEvent : settings.validator.errorinputEvent,  // keyup (default), change, blur, null
+                        inputEvent      : settings.validator.inputEvent,       // null (default), keyup, change, blur
+                        container       : settings.validator.container,
+                        lang            : settings.validator.lang
+                      });
+//          switch( initValidator( ) )
+//          {
+//            case( true ):
+//              $( accordionButtonId ).removeAttr( "disabled" );
+//              break;
+//            case( false ):
+//            default:
+//              $( accordionButtonId ).attr( "disabled", "disabled" );
+//              break;
+//          }
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.selector  = idTabSrce;
