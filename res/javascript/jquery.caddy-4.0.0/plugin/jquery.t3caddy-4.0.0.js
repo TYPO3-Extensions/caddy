@@ -400,16 +400,14 @@
     } // initToolsValifator
 
     function initValidator( ) {
+      errorInputEvent = "blur";
+      if( settings.validator.effect != "woPrompt" )
+      {
+        errorInputEvent = "null";
+      }
       options = {
         container       : settings.accordion.powermailWallHtmlId,
-        errorInputEvent : function ( ) 
-                          { 
-                            if( settings.validator.effect != "woPrompt" )
-                            {
-                              return "null";
-                            }
-                            return "blur";
-                          }
+        errorInputEvent : errorInputEvent
       };
       return methods.validator( options );
     }  // initValidator( )
