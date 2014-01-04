@@ -401,7 +401,7 @@
     } // initToolsValifator
 
     function initValidator( ) {
-      errorInputEvent = "blur";
+      errorInputEvent = "change";
       if( settings.validator.effect != "woPrompt" )
       {
         errorInputEvent = "null";
