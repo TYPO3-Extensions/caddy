@@ -379,12 +379,7 @@
       // adds the "woPrompt" effect to the validator
       $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
       {
-        // prompt nothing
-        //alert( "woPrompt" );
-      // the effect does nothing when all inputs are valid
-      }, function( inputs ) 
-      {
-        // remove nothing
+        /* effect is needed for enabling and disabling submit button only */
       }); // adds the "woPrompt" effect to the validator      
     } // initToolsValifator
 

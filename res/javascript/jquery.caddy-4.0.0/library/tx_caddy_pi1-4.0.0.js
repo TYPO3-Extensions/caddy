@@ -153,10 +153,10 @@ $( ".powermail_form_30" ).submit( function( e ) {
   {
     e.preventDefault( ); // Don't execute the click
     accordionApi.click( indexAccordionPowermail );
-    alert( "Ihre Daten werden zwischengespeichert." );
-    formAction  = $( this ).closest( "form" ).attr( "action");
-    formData    = $( this ).closest( "form" ).serialize( );
-    fnAjax( formAction, formData, e );
+    alert( "Hier würde jetzt der AJAX reload starten." );
+//    formAction  = $( this ).closest( "form" ).attr( "action");
+//    formData    = $( this ).closest( "form" ).serialize( );
+//    fnAjax( formAction, formData, e );
   }
 });
 $( document ).on( "click", accordionNext, function( e ) {
@@ -224,7 +224,8 @@ $( document ).on( "click", accordionButtonId, function( e ) {
             break;
         }
         return;
-  selector    = $( "input.powermail_confirmation_submit" );
+  selector    = $( "input.powermail_submit" );
+//  selector    = $( "input.powermail_confirmation_submit" );
   formAction  = $( selector ).closest( "form" ).attr( "action");
   formData    = $( selector ).closest( "form" ).serialize( );
   fnAjax( formAction, formData, e );
