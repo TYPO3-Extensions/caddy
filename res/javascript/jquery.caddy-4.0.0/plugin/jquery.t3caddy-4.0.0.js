@@ -64,6 +64,7 @@
           }
           settings.validator.effect           = "woPrompt";
           settings.validator.errorInputEvent  = "change";
+          settings.validator.inputEvent       = "change";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
@@ -633,10 +634,11 @@
         param               : undefined
       },
       validator   : {
-        container       : "validatorWall",  //     
+        container       : "validatorWall",  
         effect          : "default",        // default (default), own custom effect
         errorClass      : "invalid",
-        errorInputEvent : "keyup",   // keyup (default), change, blur, null
+        errorInputEvent : "keyup",          // keyup (default), change, blur, null
+        inputEvent      : "null",           // null (default), keyup, change, blur
         lang            : "en", 
         selector        : undefined,
         validate        : "noValidate"      // noValidate (default), validate
@@ -794,12 +796,13 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-                      console.debug( settings.validator.effect, settings.validator.errorInputEvent )
+                      console.debug( settings.validator.effect, settings.validator.errorInputEvent, settings.validator.inputEvent )
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
                         errorClass      : settings.validator.errorClass,
                         errorInputEvent : settings.validator.errorInpuEvent,  // keyup (default), change, blur, null
+                        inputEvent      : settings.validator.inpuEvent,       // null (default), keyup, change, blur
                         container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
