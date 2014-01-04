@@ -212,7 +212,7 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   }
 });
 $( document ).on( "click", accordionButtonId, function( e ) {
-        alert( accordionButtonId );
+        alert( "Jetzt geht die Bestellung los" );
         switch( powermailValidator( "woPrompt" ) )
         {
           case( true ):
@@ -223,7 +223,6 @@ $( document ).on( "click", accordionButtonId, function( e ) {
             $( accordionButtonId ).attr( "disabled", "disabled" );
             break;
         }
-        return;
   selector    = $( "input.powermail_submit" );
 //  selector    = $( "input.powermail_confirmation_submit" );
   formAction  = $( selector ).closest( "form" ).attr( "action");
