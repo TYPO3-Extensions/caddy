@@ -302,21 +302,22 @@
           switch( initValidator( ) )
           {
             case( true ):
+              console.debug( 3 );
               $( accordionButtonId ).removeAttr( "disabled" );
               break;
             case( false ):
             default:
+              console.debug( 4 );
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
-          console.debug( 3 );
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "null";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
-          console.debug( 4 );
+          console.debug( 5 );
           switch( initValidator( ) )
           {
             case( true ):
