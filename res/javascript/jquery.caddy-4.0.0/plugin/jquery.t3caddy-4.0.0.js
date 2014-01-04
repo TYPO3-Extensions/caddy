@@ -313,7 +313,7 @@
           //alert( idTabSrce );
           settings.validator.effect           = "woPrompt";
           settings.validator.errorInputEvent  = "null";
-          settings.validator.inputEvent       = "change";
+          settings.validator.inputEvent       = "keyup";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
@@ -407,7 +407,7 @@
 
     function initValidator( ) {
       options = {
-        container : settings.accordion.powermailWallHtmlId,
+        container : settings.accordion.powermailWallHtmlId
       };
       return methods.validator( options );
     }  // initValidator( )
