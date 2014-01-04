@@ -291,22 +291,22 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-//          settings.validator.effect           = "woPrompt";
-//          settings.validator.errorInputEvent  = "null";
-//          settings.validator.inputEvent       = "keyup";
-//          settings.validator.lang             = settings.accordion.lang;
-//          settings.validator.selector         = settings.accordion.powermailFormSelector;
-//          settings.validator.validate         = "validate";
-//          switch( initValidator( ) )
-//          {
-//            case( true ):
-//              $( accordionButtonId ).removeAttr( "disabled" );
-//              break;
-//            case( false ):
-//            default:
-//              $( accordionButtonId ).attr( "disabled", "disabled" );
-//              break;
-//          }
+          settings.validator.effect           = "woPrompt";
+          settings.validator.errorInputEvent  = "null";
+          settings.validator.inputEvent       = "keyup";
+          settings.validator.lang             = settings.accordion.lang;
+          settings.validator.selector         = settings.accordion.powermailFormSelector;
+          settings.validator.validate         = "validate";
+          switch( initValidator( ) )
+          {
+            case( true ):
+              $( accordionButtonId ).removeAttr( "disabled" );
+              break;
+            case( false ):
+            default:
+              $( accordionButtonId ).attr( "disabled", "disabled" );
+              break;
+          }
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "null";
@@ -317,13 +317,11 @@
           {
             case( true ):
               //alert( "OK" );
-              $( accordionButtonId ).removeAttr( "disabled" );
               return true;
               break;
             case( false ):
             default:
               //alert( "UNPROPER" );
-              $( accordionButtonId ).attr( "disabled", "disabled" );
               return false;
               break;
           }
