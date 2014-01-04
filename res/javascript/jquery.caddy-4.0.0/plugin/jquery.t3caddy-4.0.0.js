@@ -781,7 +781,14 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-                      //console.debug( settings.validator.effect, settings.validator.errorInputEvent, settings.validator.inputEvent )
+                      console.debug( 
+                        settings.validator.effect, 
+                        settings.validator.errorClass,
+                        settings.validator.errorInputEvent, 
+                        settings.validator.inputEvent,
+                        settings.validator.container,
+                        settings.validator.lang
+                      );
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
@@ -791,11 +798,14 @@
                         container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
+                      console.debug( "A" );
                       if( settings.validator.validate != "validate" )
                       {
+                        console.debug( "B" );
                         return false;
                       }
                       success = validateForm.data( "validator" ).checkValidity( );
+                      console.debug( "C" );
                       return success;
                     }  /* validator */
                     
