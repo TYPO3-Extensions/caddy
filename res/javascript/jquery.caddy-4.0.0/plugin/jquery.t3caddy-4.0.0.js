@@ -62,10 +62,11 @@
               return true;
               break;
           }
-          settings.validator.lang      = settings.accordion.lang;
-          settings.validator.selector  = settings.accordion.powermailFormSelector;
-          settings.validator.effect    = "woPrompt";
-          settings.validator.validate  = "validate";
+          settings.validator.effect           = "woPrompt";
+          settings.validator.errorInputEvent  = "change";
+          settings.validator.lang             = settings.accordion.lang;
+          settings.validator.selector         = settings.accordion.powermailFormSelector;
+          settings.validator.validate         = "validate";
           switch( initValidator( ) )
           {
             case( true ):
@@ -309,10 +310,11 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-          settings.validator.lang      = settings.accordion.lang;
-          settings.validator.selector  = settings.accordion.powermailFormSelector;
-          settings.validator.effect    = "woPrompt";
-          settings.validator.validate  = "validate";
+          settings.validator.effect           = "woPrompt";
+          settings.validator.errorInputEvent  = "change";
+          settings.validator.lang             = settings.accordion.lang;
+          settings.validator.selector         = settings.accordion.powermailFormSelector;
+          settings.validator.validate         = "validate";
           switch( initValidator( ) )
           {
             case( true ):
@@ -323,8 +325,9 @@
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
+          settings.validator.effect           = "wall";
+          settings.validator.errorInputEvent  = "null";
           settings.validator.selector  = idTabSrce;
-          settings.validator.effect    = "wall";
           switch( initValidator( ) )
           {
             case( true ):
@@ -401,14 +404,8 @@
     } // initToolsValifator
 
     function initValidator( ) {
-      errorInputEvent = "change";
-      if( settings.validator.effect != "woPrompt" )
-      {
-        errorInputEvent = "null";
-      }
       options = {
-        container       : settings.accordion.powermailWallHtmlId,
-        errorInputEvent : errorInputEvent
+        container : settings.accordion.powermailWallHtmlId,
       };
       return methods.validator( options );
     }  // initValidator( )
@@ -663,10 +660,11 @@
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
                       movePowermailFieldsToHtml5( );
-                      settings.validator.lang      = settings.accordion.lang;
-                      settings.validator.selector  = settings.accordion.powermailFormSelector;
-                      settings.validator.effect    = "wall";
-                      settings.validator.validate  = "noValidate";
+                      settings.validator.effect           = "wall";
+                      settings.validator.errorInputEvent  = "null";
+                      settings.validator.lang             = settings.accordion.lang;
+                      settings.validator.selector         = settings.accordion.powermailFormSelector;
+                      settings.validator.validate         = "noValidate";
                       initToolsValidator( );
                       initValidator( );
                       addAccordion( );
@@ -796,6 +794,7 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
+                      console.debug( settings.validator.effect, settings.validator.errorInpuEvent )
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
