@@ -794,7 +794,7 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-                      console.debug( settings.validator.effect, settings.validator.errorInpuEvent )
+                      console.debug( settings.validator.effect, settings.validator.errorInputEvent )
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
