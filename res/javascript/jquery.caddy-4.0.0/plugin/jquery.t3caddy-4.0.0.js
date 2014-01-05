@@ -634,8 +634,8 @@
 
     var methods = {
       accordion   : function( options ) {
-                      prompt = format( this.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-                      alert( this.messages.update.errMissingTagPropertyLabel + " " + prompt );
+                      prompt = format( $( this ).messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                      alert( $( this ).messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
