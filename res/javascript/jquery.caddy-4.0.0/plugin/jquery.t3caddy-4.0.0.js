@@ -297,9 +297,9 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
-          console.debug( "A" );
-          success = initValidator( );
-          switch( success )
+          //console.debug( "A" );
+          valid = initValidator( );
+          switch( valid )
           {
             case( true ):
               $( accordionButtonId ).removeAttr( "disabled" );
@@ -315,24 +315,10 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
-          console.debug( "B" );
-          success = initValidator( );
-          switch( success )
-          {
-            case( true ):
-              //alert( "OK" );
-              console.debug( "C" );
-              return true;
-              break;
-            case( false ):
-            default:
-              //alert( "UNPROPER" );
-              console.debug( "C" );
-              return false;
-              break;
-          }
-          console.debug( "C" );
-          return success;
+          //console.debug( "B" );
+          valid = initValidator( );
+          //console.debug( "C" );
+          return valid;
         }
       });
     }  // $(function() ...
@@ -399,9 +385,9 @@
         container : settings.accordion.powermailWallHtmlId
       };
       console.debug( "AA" );
-      success =  methods.validator( options );
+      valid =  methods.validator( options );
       console.debug( "AB" );
-      return success;
+      return valid;
     }  // initValidator( )
 
     function movePowermailFieldsToHtml5( ) {
@@ -572,28 +558,29 @@
         t3caddyAlert            : 1,          // [e.g.:]0-1] 
         t3caddyConsoleDebug     : 1           // [e.g.:]0-1]
       },
-      messages  : {
-        errMissingTagPropertyLabel: "Tag is missing:",
-        errMissingTagPropertyPrmpt: "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
-        errServerErrorPrmpt:        "This is a message from the server. Maybe the server has some problems in general. " +
-                                    "If the server delivers content, you will see the content below this prompts.",
-        hlpForumLabel:              "Interactive support:",
-        hlpForumPrmpt:              "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
-                                    "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
-                                    "in English and German.",
-        hlpMissingTagPropertyLabel: "Be aware of a proper HTML template:",
-        hlpMissingTagPropertyPrmpt: "Please add something like <div id=\"{0}\">...</div> to your template.",
-        hlpPageObjectLabel:         "You can check TYPO3:",
-        hlpPageObjectPrmpt:         "Is there a proper page object? Is there a proper typeNum?",
-        //hlpAjaxConflictLabel: "Maybe there is a conflict:",
-        //hlpAjaxConflictPrmpt: "Don't use AJAX in the single view. See flexform/plugin sheet [jQuery] field [AJAX].",
-        hlpUrlLabel:                "You can check the URL manually:",
-        hlpUrlPrmpt:                "Click on {0}",
-        hlpUrlSelectorLabel:        "Be aware of the jQuery selector:",
-        hlpUrlSelectorPrmpt:        "The request takes content into account only if this selector gets a result: {0}",
-        hlpGetRidOfLabel:           "Get rid of this messages?",
-        hlpGetRidOfPrmpt:           "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
-      },
+//      messages  : {
+//        update : {
+//          errMissingTagPropertyLabel  : "Tag is missing:",
+//          errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
+//          errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
+//                                        "If the server delivers content, you will see the content below this prompts.",
+//          hlpForumLabel               : "Interactive support:",
+//          hlpForumPrmpt               : "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
+//                                        "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
+//                                        "in English and German.",
+//          hlpMissingTagPropertyLabel  : "Be aware of a proper HTML template:",
+//          hlpMissingTagPropertyPrmpt  : "Please add something like <div id=\"{0}\">...</div> to your template.",
+//          hlpPageObjectLabel          : "You can check TYPO3:",
+//          hlpPageObjectPrmpt          : "Is there a proper page object? Is there a proper typeNum?",
+//          hlpUrlLabel                 : "You can check the URL manually:",
+//          hlpUrlPrmpt                 : "Click on {0}",
+//          hlpUrlSelectorLabel         : "Be aware of the jQuery selector:",
+//          hlpUrlSelectorPrmpt         : "The request takes content into account only if this selector gets a result: {0}",
+//          hlpGetRidOfLabel            : "Get rid of this messages?",
+//          hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
+//        }
+//      },
+      messages  : [ ],
       templates: {
         uiErr : '<div class="ui-widget">' +
                   '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
@@ -641,6 +628,8 @@
 
     var methods = {
       accordion   : function( options ) {
+                      prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                      alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
@@ -692,11 +681,10 @@
                         if( !$( settings.update.html_element ).length ) {
                           if( settings.update.t3caddyAlert )
                           {
-                            prompt = format( settings.messages.errMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.errMissingTagPropertyLabel + " " + prompt );
-                            prompt = format( settings.messages.hlpMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.hlpMissingTagPropertyLabel + " " + prompt );
-                            //alert(settings.messages.hlpAjaxConflictLabel + " " + settings.messages.hlpAjaxConflictPrmpt );
+                            prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                            alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
+                            prompt = format( settings.messages.update.hlpMissingTagPropertyPrmpt, settings.update.html_element);
+                            alert( settings.messages.update.hlpMissingTagPropertyLabel + " " + prompt );
                           }
                           fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                           window.location.href = fq_url;
@@ -721,16 +709,16 @@
                           if (status == "error")
                           {
                               // Add error messages and helpful informations to the update prompt
-                            err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.errServerErrorPrmpt);
-                            inf_prompt( "#update-prompt", settings.messages.hlpPageObjectLabel, settings.messages.hlpPageObjectPrmpt );
+                            err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.update.errServerErrorPrmpt);
+                            inf_prompt( "#update-prompt", settings.messages.update.hlpPageObjectLabel, settings.messages.update.hlpPageObjectPrmpt );
                             fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                             a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
-                            prompt = format( settings.messages.hlpUrlPrmpt, a_fq_url);
-                            inf_prompt( "#update-prompt", settings.messages.hlpUrlLabel, prompt );
-                            prompt = format( settings.messages.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
-                            //inf_prompt( "#update-prompt", settings.messages.hlpUrlSelectorLabel, prompt );
-                            inf_prompt( "#update-prompt", settings.messages.hlpForumLabel, settings.messages.hlpForumPrmpt );
-                            inf_prompt( "#update-prompt", settings.messages.hlpGetRidOfLabel, settings.messages.hlpGetRidOfPrmpt );
+                            prompt = format( settings.messages.update.hlpUrlPrmpt, a_fq_url);
+                            inf_prompt( "#update-prompt", settings.messages.update.hlpUrlLabel, prompt );
+                            prompt = format( settings.messages.update.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
+                            //inf_prompt( "#update-prompt", settings.messages.update.hlpUrlSelectorLabel, prompt );
+                            inf_prompt( "#update-prompt", settings.messages.update.hlpForumLabel, settings.messages.update.hlpForumPrmpt );
+                            inf_prompt( "#update-prompt", settings.messages.update.hlpGetRidOfLabel, settings.messages.update.hlpGetRidOfPrmpt );
                               // Add error messages and helpful informations to the update prompt
 
                               // Fade out the loading *.gif, initiate buttons again
@@ -789,17 +777,17 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-                      console.debug( 
-                        settings.validator.container,
-                        settings.validator.effect, 
-                        settings.validator.errorClass,
-                        settings.validator.errorInputEvent, 
-                        settings.validator.inputEvent,
-                        settings.validator.lang,
-                        settings.validator.selector
-                      );
+//                      console.debug( 
+//                        settings.validator.container,
+//                        settings.validator.effect, 
+//                        settings.validator.errorClass,
+//                        settings.validator.errorInputEvent, 
+//                        settings.validator.inputEvent,
+//                        settings.validator.lang,
+//                        settings.validator.selector
+//                      );
                       // woPrompt invalid null keyup #c2997-powermail-prompt default
-                      console.debug( 1 );
+                      //console.debug( 1 );
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         container       : settings.validator.container,
@@ -809,15 +797,15 @@
                         inputEvent      : settings.validator.inputEvent,       // null (default), keyup, change, blur
                         lang            : settings.validator.lang
                       });
-                      console.debug( 2 );
+                      //console.debug( 2 );
                       if( settings.validator.validate != "validate" )
                       {
-                        console.debug( 3 );
+                        //console.debug( 3 );
                         return false;
                       }
-                      success = validateForm.data( "validator" ).checkValidity( );
-                      console.debug( 4 );
-                      return success;
+                      valid = validateForm.data( "validator" ).checkValidity( );
+                      //console.debug( 4 );
+                      return valid;
                     }  /* validator */
                     
     }; /* methods */

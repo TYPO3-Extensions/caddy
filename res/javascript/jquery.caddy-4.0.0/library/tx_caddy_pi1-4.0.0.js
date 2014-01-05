@@ -205,15 +205,13 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   if( !e.isDefaultPrevented( ) ) 
   {
     e.preventDefault( ); // Don't execute the click
-    alert( "Ihre Daten werden zwischengespeichert." );
-//    formAction  = $( this ).closest( "form" ).attr( "action");
-//    formData    = $( this ).closest( "form" ).serialize( );
-//    fnAjax( formAction, formData, e );
+    //alert( "Ihre Daten werden zwischengespeichert." );
   }
 });
 $( document ).on( "click", accordionButtonId, function( e ) {
   alert( "Jetzt geht die Bestellung los" );
-  switch( powermailValidator( "woPrompt" ) )
+  valid = powermailValidator( "woPrompt" );
+  switch( valid )
   {
     case( true ):
       //$( accordionButtonId ).removeAttr( "disabled" );
