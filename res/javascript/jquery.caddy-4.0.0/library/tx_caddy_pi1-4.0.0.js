@@ -206,9 +206,9 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   {
     e.preventDefault( ); // Don't execute the click
     alert( "Ihre Daten werden zwischengespeichert." );
-    formAction  = $( this ).closest( "form" ).attr( "action");
-    formData    = $( this ).closest( "form" ).serialize( );
-    fnAjax( formAction, formData, e );
+//    formAction  = $( this ).closest( "form" ).attr( "action");
+//    formData    = $( this ).closest( "form" ).serialize( );
+//    fnAjax( formAction, formData, e );
   }
 });
 $( document ).on( "click", accordionButtonId, function( e ) {
