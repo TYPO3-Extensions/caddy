@@ -298,6 +298,7 @@
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
           console.debug( "A" );
+          success = initValidator( );
 //          switch( initValidator( ) )
 //          {
 //            case( true ):
@@ -315,6 +316,7 @@
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
           console.debug( "B" );
+          success = initValidator( );
 //          switch( initValidator( ) )
 //          {
 //            case( true ):
