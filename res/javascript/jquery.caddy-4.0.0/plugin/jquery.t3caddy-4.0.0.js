@@ -796,6 +796,10 @@
                         container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
+                      validateForm.onSuccess( function( e, els ) {
+                        var inputName = els.jquery ? els.attr("name") : els;
+                        alert( inputName );
+                      });
                       if( settings.validator.validate != "validate" )
                       {
                         console.debug( 2 );
