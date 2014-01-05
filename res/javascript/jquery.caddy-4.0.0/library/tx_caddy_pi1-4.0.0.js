@@ -212,22 +212,22 @@ $( document ).on( "click", "input.powermail_submit", function( e ) {
   }
 });
 $( document ).on( "click", accordionButtonId, function( e ) {
-        alert( "Jetzt geht die Bestellung los" );
-        switch( powermailValidator( "woPrompt" ) )
-        {
-          case( true ):
-            $( accordionButtonId ).removeAttr( "disabled" );
-            break;
-          case( false ):
-          default:
-            $( accordionButtonId ).attr( "disabled", "disabled" );
-            break;
-        }
-  selector    = $( "input.powermail_submit" );
-//  selector    = $( "input.powermail_confirmation_submit" );
-  formAction  = $( selector ).closest( "form" ).attr( "action");
-  formData    = $( selector ).closest( "form" ).serialize( );
-  fnAjax( formAction, formData, e );
+  alert( "Jetzt geht die Bestellung los" );
+  switch( powermailValidator( "woPrompt" ) )
+  {
+    case( true ):
+      //$( accordionButtonId ).removeAttr( "disabled" );
+      selector    = $( "input.powermail_submit" );
+      //selector    = $( "input.powermail_confirmation_submit" );
+      formAction  = $( selector ).closest( "form" ).attr( "action");
+      formData    = $( selector ).closest( "form" ).serialize( );
+      fnAjax( formAction, formData, e );
+      break;
+    case( false ):
+    default:
+      $( accordionButtonId ).attr( "disabled", "disabled" );
+      break;
+  }
 });
 
 /* AJAX end */
