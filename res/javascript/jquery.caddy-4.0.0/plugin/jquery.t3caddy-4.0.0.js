@@ -297,6 +297,7 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
+          console.debug( "A" );
           switch( initValidator( ) )
           {
             case( true ):
@@ -313,6 +314,7 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
+          console.debug( "B" );
           switch( initValidator( ) )
           {
             case( true ):
@@ -325,6 +327,7 @@
               return false;
               break;
           }
+          console.debug( "C" );
         }
       });
     }  // $(function() ...
