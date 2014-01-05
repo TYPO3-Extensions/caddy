@@ -14,7 +14,7 @@
 
 
 
-  $( this ).t3caddy.messages.update = {
+  $.t3caddy.messages.update = {
     errMissingTagPropertyLabel  : "Tag is missing:",
     errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
     errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
