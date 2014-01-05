@@ -804,11 +804,11 @@
                         inputEvent      : settings.validator.inputEvent,       // null (default), keyup, change, blur
                         lang            : settings.validator.lang
                       });
-                      if( settings.validator.validate != "validate" )
-                      {
-                        console.debug( 2 );
-                        return false;
-                      }
+//                      if( settings.validator.validate != "validate" )
+//                      {
+//                        console.debug( 2 );
+//                        return false;
+//                      }
                       console.debug( 3 );
                       api = validateForm.data( "validator" );
                       api.onFail( function( e, errors ) {
