@@ -540,6 +540,7 @@
 
     var methods = {
       accordion   : function( options ) {
+                      settings = $.fn.t3caddy.settings;
                       prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
                       alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
