@@ -785,6 +785,7 @@
                         settings.validator.lang
                       );
                       // woPrompt invalid null keyup #c2997-powermail-prompt default
+                      console.debug( 1 );
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
@@ -796,9 +797,12 @@
                       });
                       if( settings.validator.validate != "validate" )
                       {
+                        console.debug( 2 );
                         return false;
                       }
+                      console.debug( 3 );
                       success = validateForm.data( "validator" ).checkValidity( );
+                      console.debug( 4 );
                       return success;
                     }  /* validator */
                     
