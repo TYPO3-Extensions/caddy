@@ -299,16 +299,16 @@
           settings.validator.validate         = "validate";
           console.debug( "A" );
           success = initValidator( );
-//          switch( initValidator( ) )
-//          {
-//            case( true ):
-//              $( accordionButtonId ).removeAttr( "disabled" );
-//              break;
-//            case( false ):
-//            default:
-//              $( accordionButtonId ).attr( "disabled", "disabled" );
-//              break;
-//          }
+          switch( success )
+          {
+            case( true ):
+              $( accordionButtonId ).removeAttr( "disabled" );
+              break;
+            case( false ):
+            default:
+              $( accordionButtonId ).attr( "disabled", "disabled" );
+              break;
+          }
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "null";
@@ -317,18 +317,20 @@
           settings.validator.validate         = "validate";
           console.debug( "B" );
           success = initValidator( );
-//          switch( initValidator( ) )
-//          {
-//            case( true ):
-//              //alert( "OK" );
-//              return true;
-//              break;
-//            case( false ):
-//            default:
-//              //alert( "UNPROPER" );
-//              return false;
-//              break;
-//          }
+          switch( success )
+          {
+            case( true ):
+              //alert( "OK" );
+              console.debug( "C" );
+              return true;
+              break;
+            case( false ):
+            default:
+              //alert( "UNPROPER" );
+              console.debug( "C" );
+              return false;
+              break;
+          }
           console.debug( "C" );
           return success;
         }
@@ -825,7 +827,7 @@
                         $( accordionButtonId ).removeAttr( "disabled" );
                         success = true;
                       });
-                      //success = api.checkValidity( );
+                      success = api.checkValidity( );
                       console.debug( 4 );
                       return success;
                     }  /* validator */
