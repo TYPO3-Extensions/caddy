@@ -811,10 +811,6 @@
                       }
                       console.debug( 3 );
                       api = validateForm.data( "validator" );
-                      api.onSuccess( function( e, input ) {
-                        var inputName = input.jquery ? input.attr("name") : input;
-                        alert( e + ": " + inputName );
-                      });
                       success = api.checkValidity( );
                       console.debug( 4 );
                       return success;
