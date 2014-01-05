@@ -291,13 +291,13 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-//          settings.validator.effect           = "woPrompt";
-//          settings.validator.errorInputEvent  = "null";
-//          settings.validator.inputEvent       = "keyup";
-//          settings.validator.lang             = settings.accordion.lang;
-//          settings.validator.selector         = settings.accordion.powermailFormSelector;
-//          settings.validator.validate         = "validate";
-//          console.debug( "A" );
+          settings.validator.effect           = "woPrompt";
+          settings.validator.errorInputEvent  = "null";
+          settings.validator.inputEvent       = "keyup";
+          settings.validator.lang             = settings.accordion.lang;
+          settings.validator.selector         = settings.accordion.powermailFormSelector;
+          settings.validator.validate         = "validate";
+          console.debug( "A" );
 //          switch( initValidator( ) )
 //          {
 //            case( true ):
@@ -315,18 +315,18 @@
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
           console.debug( "B" );
-          switch( initValidator( ) )
-          {
-            case( true ):
-              //alert( "OK" );
-              return true;
-              break;
-            case( false ):
-            default:
-              //alert( "UNPROPER" );
-              return false;
-              break;
-          }
+//          switch( initValidator( ) )
+//          {
+//            case( true ):
+//              //alert( "OK" );
+//              return true;
+//              break;
+//            case( false ):
+//            default:
+//              //alert( "UNPROPER" );
+//              return false;
+//              break;
+//          }
           console.debug( "C" );
         }
       });
