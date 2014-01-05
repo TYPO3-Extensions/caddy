@@ -17,7 +17,11 @@
 
 ;(function( $ )
 {
-
+  $.t3caddy = {
+    messages  : {
+      update : [ ]
+    }  
+  },
 
   $.fn.t3caddy = function( method )
   {
@@ -630,8 +634,8 @@
 
     var methods = {
       accordion   : function( options ) {
-                      prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-                      alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
+                      prompt = format( messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                      alert( messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
                       options = $.extend( settings.accordion, options );
@@ -683,10 +687,10 @@
                         if( !$( settings.update.html_element ).length ) {
                           if( settings.update.t3caddyAlert )
                           {
-                            prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
-                            prompt = format( settings.messages.update.hlpMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.update.hlpMissingTagPropertyLabel + " " + prompt );
+                            prompt = format( messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                            alert( messages.update.errMissingTagPropertyLabel + " " + prompt );
+                            prompt = format( messages.update.hlpMissingTagPropertyPrmpt, settings.update.html_element);
+                            alert( messages.update.hlpMissingTagPropertyLabel + " " + prompt );
                           }
                           fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                           window.location.href = fq_url;
@@ -711,16 +715,16 @@
                           if (status == "error")
                           {
                               // Add error messages and helpful informations to the update prompt
-                            err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.update.errServerErrorPrmpt);
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpPageObjectLabel, settings.messages.update.hlpPageObjectPrmpt );
+                            err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", messages.update.errServerErrorPrmpt);
+                            inf_prompt( "#update-prompt", messages.update.hlpPageObjectLabel, messages.update.hlpPageObjectPrmpt );
                             fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
                             a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
-                            prompt = format( settings.messages.update.hlpUrlPrmpt, a_fq_url);
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpUrlLabel, prompt );
-                            prompt = format( settings.messages.update.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
-                            //inf_prompt( "#update-prompt", settings.messages.update.hlpUrlSelectorLabel, prompt );
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpForumLabel, settings.messages.update.hlpForumPrmpt );
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpGetRidOfLabel, settings.messages.update.hlpGetRidOfPrmpt );
+                            prompt = format( messages.update.hlpUrlPrmpt, a_fq_url);
+                            inf_prompt( "#update-prompt", messages.update.hlpUrlLabel, prompt );
+                            prompt = format( messages.update.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
+                            //inf_prompt( "#update-prompt", messages.update.hlpUrlSelectorLabel, prompt );
+                            inf_prompt( "#update-prompt", messages.update.hlpForumLabel, messages.update.hlpForumPrmpt );
+                            inf_prompt( "#update-prompt", messages.update.hlpGetRidOfLabel, messages.update.hlpGetRidOfPrmpt );
                               // Add error messages and helpful informations to the update prompt
 
                               // Fade out the loading *.gif, initiate buttons again
