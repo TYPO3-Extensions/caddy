@@ -374,7 +374,7 @@
           wall.append( strAppend );
         });
       // the effect does nothing when all inputs are valid
-      }, function( inputs ) 
+      }, function( inputs ) // 140105, dwildt: never remove this function!
       {
         // remove all existing messages
         $( settings.accordion.powermailWallHtmlId ).html( "" );
@@ -384,10 +384,8 @@
       {
         alert( "woPrompt" );
         /* effect is needed for enabling and disabling submit button only */
-      }, function( inputs ) 
+      }, function( inputs ) // 140105, dwildt: never remove this function!
       {
-        // remove all existing messages
-        alert( inputs );
       }); // adds the "woPrompt" effect to the validator      
     } // initToolsValifator
 
