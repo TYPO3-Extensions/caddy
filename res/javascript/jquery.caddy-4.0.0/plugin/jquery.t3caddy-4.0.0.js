@@ -391,7 +391,10 @@
       options = {
         container : settings.accordion.powermailWallHtmlId
       };
-      return methods.validator( options );
+      console.debug( "AA" );
+      success =  methods.validator( options );
+      console.debug( "AB" );
+      return success;
     }  // initValidator( )
 
     function movePowermailFieldsToHtml5( ) {
@@ -792,11 +795,11 @@
                       console.debug( 1 );
                       validateForm = $( settings.validator.selector ).validator(
                       {
+                        container       : settings.validator.container,
                         effect          : settings.validator.effect,          // default (default), own custom effect
                         errorClass      : settings.validator.errorClass,
                         errorInputEvent : settings.validator.errorinputEvent,  // keyup (default), change, blur, null
                         inputEvent      : settings.validator.inputEvent,       // null (default), keyup, change, blur
-                        container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
                       if( settings.validator.validate != "validate" )
@@ -810,7 +813,7 @@
                         var inputName = input.jquery ? input.attr("name") : input;
                         alert( e + ": " + inputName );
                       });
-                      success = validateForm.data( "validator" ).checkValidity( );
+                      success = api.checkValidity( );
                       console.debug( 4 );
                       return success;
                     }  /* validator */
