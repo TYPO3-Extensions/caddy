@@ -796,16 +796,17 @@
                         container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
-                      validateForm.onSuccess( function( e, els ) {
-                        var inputName = els.jquery ? els.attr("name") : els;
-                        alert( inputName );
-                      });
                       if( settings.validator.validate != "validate" )
                       {
                         console.debug( 2 );
                         return false;
                       }
                       console.debug( 3 );
+                      api = validateForm.data( "validator" );
+                      api.onSuccess( function( e, input ) {
+                        var inputName = input.jquery ? input.attr("name") : input;
+                        alert( e + ": " + inputName );
+                      });
                       success = validateForm.data( "validator" ).checkValidity( );
                       console.debug( 4 );
                       return success;
