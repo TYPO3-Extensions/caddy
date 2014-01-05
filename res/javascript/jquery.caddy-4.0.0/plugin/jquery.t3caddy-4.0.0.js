@@ -384,6 +384,10 @@
       {
         alert( "woPrompt" );
         /* effect is needed for enabling and disabling submit button only */
+      }, function( inputs ) 
+      {
+        // remove all existing messages
+        alert( inputs );
       }); // adds the "woPrompt" effect to the validator      
     } // initToolsValifator
 
