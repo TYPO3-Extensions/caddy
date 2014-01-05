@@ -545,10 +545,10 @@
 //                      alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
-                      var settings = $.extend( settings.accordion, options );
+//                      options = $.extend( settings.accordion, options );
+                      var settings = $.extend( true, {}, $.fn.t3caddy.defaults, options );
                       prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
                       alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
-                      var settings = $.extend( true, {}, $.fn.t3caddy.defaults, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: settings.accordion.accordionSelector isn't set." )
                         return null;
