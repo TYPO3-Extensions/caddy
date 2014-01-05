@@ -546,7 +546,8 @@
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
 //                      options = $.extend( settings.accordion, options );
-                      settings = $.extend( true, {}, $.fn.t3caddy.defaults, options );
+                      var settings = $.fn.t3caddy.defaults;
+                      settings = $.extend( true, {}, settings.accordion, options );
                       prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
                       alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
