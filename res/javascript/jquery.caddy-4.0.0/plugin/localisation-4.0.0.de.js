@@ -14,25 +14,25 @@
 
 
 
-  $.fn.t3caddy.settings.messages.update = {
-    errMissingTagPropertyLabel  : "Tag is missing:",
-    errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
-    errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
-                                  "If the server delivers content, you will see the content below this prompts.",
-    hlpForumLabel               : "Interactive support:",
-    hlpForumPrmpt               : "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
-                                  "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
-                                  "in English and German.",
-    hlpMissingTagPropertyLabel  : "Be aware of a proper HTML template:",
-    hlpMissingTagPropertyPrmpt  : "Please add something like <div id=\"{0}\">...</div> to your template.",
-    hlpPageObjectLabel          : "You can check TYPO3:",
-    hlpPageObjectPrmpt          : "Is there a proper page object? Is there a proper typeNum?",
-    hlpUrlLabel                 : "You can check the URL manually:",
-    hlpUrlPrmpt                 : "Click on {0}",
-    hlpUrlSelectorLabel         : "Be aware of the jQuery selector:",
-    hlpUrlSelectorPrmpt         : "The request takes content into account only if this selector gets a result: {0}",
-    hlpGetRidOfLabel            : "Get rid of this messages?",
-    hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
+  $.fn.t3caddy.defaults.messages.update = {
+    errMissingTagPropertyLabel  : "HTML-Tag fehlt:",
+    errMissingTagPropertyPrmpt  : "Ein HTML-Tag mit dem Attribut {0} fehlt. AJAX kann nicht richtig funktionieren!",
+    errServerErrorPrmpt         : "Dies ist eine Nachricht vom Server. Vielleicht hat der Server ein grundsätzliches Problem. " +
+                                  "Wenn der Server eine Antwort mit Inhalt (HTML-Code) liefert, siehst Du das Ergebnis in der nächsten Meldung.",
+    hlpForumLabel               : "Interaktive Hilfe:",
+    hlpForumPrmpt               : "Wenn Du nicht weiter weißt, besuche das TYPO3-Caddy-Forum: " +
+                                  "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. " +
+                                  "Beiträge sind Willkommen auf Deutsch und Englisch.",
+    hlpMissingTagPropertyLabel  : "Kümmer Dich bitte um ein korrektes HTML-Template:",
+    hlpMissingTagPropertyPrmpt  : "Bitte füge Deinem Template etwas wie <div id=\"{0}\">...</div> hinzu.",
+    hlpPageObjectLabel          : "Du kannst TYPO3 überprüfen:",
+    hlpPageObjectPrmpt          : "Gibt es ein korrektes Page-Objekt? Hat es einen korrekten typeNum?",
+    hlpUrlLabel                 : "Du kannst die URL manuell überprüfen:",
+    hlpUrlPrmpt                 : "klicke auf {0}",
+    hlpUrlSelectorLabel         : "Überprüfe bitte den jQuery-Selektor:",
+    hlpUrlSelectorPrmpt         : "Die Anfrage übernimmt Inhalt vom Server nur von innerhalb dieses Selektors: {0}",
+    hlpGetRidOfLabel            : "Hast Du genug von diesen Nachrichten?",
+    hlpGetRidOfPrmpt            : "Deaktiveire das jQuery Plugin t3caddy. Allerdings hast Du dann auch keinen AJAX-Funktionalität."
   };
   
   $.tools.validator.localize( "de", {

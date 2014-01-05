@@ -545,10 +545,10 @@
 //                      alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
-//                      options = $.extend( settings.accordion, options );
+                      var settings = $.extend( settings.accordion, options );
                       prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
                       alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
-                      var settings = $.extend( true, {}, $.fn.t3caddy.settings, options );
+                      var settings = $.extend( true, {}, $.fn.t3caddy.defaults, options );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: settings.accordion.accordionSelector isn't set." )
                         return null;
@@ -747,7 +747,7 @@
 
 })( jQuery );
 
-$.fn.t3caddy.settings = {
+$.fn.t3caddy.defaults = {
       accordion : {
         accordionButtonId       : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
         accordionNext           : "button.accordionNext",       // default: button.accordionNext
@@ -791,7 +791,26 @@ $.fn.t3caddy.settings = {
 //        }
 //      },
       messages  : {
-        update :  [ ]
+        update :  {
+          errMissingTagPropertyLabel  : "Tag is missing:",
+          errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
+          errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
+                                        "If the server delivers content, you will see the content below this prompts.",
+          hlpForumLabel               : "Interactive support:",
+          hlpForumPrmpt               : "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
+                                        "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
+                                        "in English and German.",
+          hlpMissingTagPropertyLabel  : "Be aware of a proper HTML template:",
+          hlpMissingTagPropertyPrmpt  : "Please add something like <div id=\"{0}\">...</div> to your template.",
+          hlpPageObjectLabel          : "You can check TYPO3:",
+          hlpPageObjectPrmpt          : "Is there a proper page object? Is there a proper typeNum?",
+          hlpUrlLabel                 : "You can check the URL manually:",
+          hlpUrlPrmpt                 : "Click on {0}",
+          hlpUrlSelectorLabel         : "Be aware of the jQuery selector:",
+          hlpUrlSelectorPrmpt         : "The request takes content into account only if this selector gets a result: {0}",
+          hlpGetRidOfLabel            : "Get rid of this messages?",
+          hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
+        }
       },
       templates: {
         uiErr : '<div class="ui-widget">' +
