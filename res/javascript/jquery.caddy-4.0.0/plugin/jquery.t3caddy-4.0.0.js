@@ -810,24 +810,12 @@
                         lang            : settings.validator.lang
                       });
                       console.debug( 2 );
-                      success = false;
-                      api = validateForm.data( "validator" );
-                      api.onFail( function( e, errors ) {
-                        alert( "onFail");
-                        $( accordionButtonId ).attr( "disabled", "disabled" );
-                        success = false;
-                      });
-                      api.onSuccess( function( e, errors ) {
-                        alert( "onSuccess");
-                        $( accordionButtonId ).removeAttr( "disabled" );
-                        success = true;
-                      });
                       if( settings.validator.validate != "validate" )
                       {
                         console.debug( 3 );
                         return false;
                       }
-                      success = api.checkValidity( );
+                      success = validateForm.data( "validator" ).checkValidity( );
                       console.debug( 4 );
                       return success;
                     }  /* validator */
