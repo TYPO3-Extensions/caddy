@@ -580,7 +580,9 @@
 //          hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
 //        }
 //      },
-      messages  : [ ],
+      messages  : {
+        update : [ ]
+      },
       templates: {
         uiErr : '<div class="ui-widget">' +
                   '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
