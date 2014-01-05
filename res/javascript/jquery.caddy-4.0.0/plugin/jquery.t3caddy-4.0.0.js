@@ -777,12 +777,13 @@
                     {
                       options = $.extend( settings.validator, options );
                       console.debug( 
+                        settings.validator.container,
                         settings.validator.effect, 
                         settings.validator.errorClass,
                         settings.validator.errorInputEvent, 
                         settings.validator.inputEvent,
-                        settings.validator.container,
-                        settings.validator.lang
+                        settings.validator.lang,
+                        settings.validator.selector
                       );
                       // woPrompt invalid null keyup #c2997-powermail-prompt default
                       console.debug( 1 );
