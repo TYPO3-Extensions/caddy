@@ -811,9 +811,14 @@
                       }
                       console.debug( 3 );
                       api = validateForm.data( "validator" );
-                      api.onFail( function( e, input ) {
-                        var inputName = input.jquery ? input.attr("name") : input;
-                        alert( e + ": " + inputName );
+                      api.onFail( function( e, errors ) {
+                        alert( "Fail");
+//                        $.each( errors, function( ) {
+//                          var input = this.input;
+//                          input.css({borderColor: 'red'}).focus(function()  {
+//                            input.css({borderColor: '#444'});
+//                          });
+//                        });
                       });
                       success = api.checkValidity( );
                       console.debug( 4 );
