@@ -330,6 +330,7 @@
 //              break;
 //          }
           console.debug( "C" );
+          return success;
         }
       });
     }  // $(function() ...
