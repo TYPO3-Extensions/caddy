@@ -537,96 +537,6 @@
 //    } 
 //    /* AJAX end */
 
-    var settings = {
-      accordion : {
-        accordionButtonId       : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
-        accordionNext           : "button.accordionNext",       // default: button.accordionNext
-        accordionPrev           : "button.accordionPrev",       // default: button.accordionPrev
-        accordionApi            : undefined,  // API of the accordion
-        accordionSelector       : undefined,  // e.g.: "#c2997-accordion"
-        currAccordionIndex      : undefined,  // index of the current accordion pane: [0-4]
-        effect                  : 'slide',
-        indexAccordionOrdering  : 3, // Ordering
-        indexAccordionPowermail : 4, // Powermail form
-        powermailFormSelector   : undefined,  // e.g.: "#c2997-accordion-powermail div form",
-        powermailWallHtmlId     : undefined,  // e.g.: "#c2997-powermail-prompt",
-        powermailUid            : undefined,  // e.g.: "#c2995",
-        pmuidfieldemail         : undefined,  // e.g.: 624
-        pmuidfieldrevocation    : undefined,  // e.g.: 629
-        pmuidfieldterms         : undefined,  // e.g.: 628
-        tabs                    : 'h2',
-        t3caddyAlert            : 1,          // [e.g.:]0-1] 
-        t3caddyConsoleDebug     : 1           // [e.g.:]0-1]
-      },
-//      messages  : {
-//        update : {
-//          errMissingTagPropertyLabel  : "Tag is missing:",
-//          errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
-//          errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
-//                                        "If the server delivers content, you will see the content below this prompts.",
-//          hlpForumLabel               : "Interactive support:",
-//          hlpForumPrmpt               : "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
-//                                        "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
-//                                        "in English and German.",
-//          hlpMissingTagPropertyLabel  : "Be aware of a proper HTML template:",
-//          hlpMissingTagPropertyPrmpt  : "Please add something like <div id=\"{0}\">...</div> to your template.",
-//          hlpPageObjectLabel          : "You can check TYPO3:",
-//          hlpPageObjectPrmpt          : "Is there a proper page object? Is there a proper typeNum?",
-//          hlpUrlLabel                 : "You can check the URL manually:",
-//          hlpUrlPrmpt                 : "Click on {0}",
-//          hlpUrlSelectorLabel         : "Be aware of the jQuery selector:",
-//          hlpUrlSelectorPrmpt         : "The request takes content into account only if this selector gets a result: {0}",
-//          hlpGetRidOfLabel            : "Get rid of this messages?",
-//          hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
-//        }
-//      },
-      messages  : {
-        update :  [ ]
-      },
-      templates: {
-        uiErr : '<div class="ui-widget">' +
-                  '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
-                    '<p>' +
-                      '<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>' +
-                      '<strong>{0}</strong> ' +
-                      '{1}' +
-                    '</p>' +
-                  '</div>' +
-                '</div>',
-        uiInf : '<div class="ui-widget">' +
-                  '<div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">' +
-                    '<p>' +
-                      '<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>' +
-                      '<strong>{0}</strong> ' +
-                      '{1}' +
-                    '</p>' +
-                  '</div>' +
-                '</div>'
-      },
-      update      : {
-        currAccordionIndex        : undefined, // [0-4]
-        formData                  : undefined, // serialized
-        html_element              : undefined, 
-        html_element_wi_selector  : undefined, 
-        url                       : undefined
-      },
-      url_autoQm  : {
-        currAccordionIndex  : undefined,
-        url                 : undefined, 
-        param               : undefined
-      },
-      validator   : {
-        container       : "validatorWall",  
-        effect          : "default",        // default (default), own custom effect
-        errorClass      : "invalid",
-        errorInputEvent : "keyup",          // keyup (default), change, blur, null
-        inputEvent      : "null",           // null (default), keyup, change, blur
-        lang            : "en", 
-        selector        : undefined,
-        validate        : "noValidate"      // noValidate (default), validate
-      }
-      
-    };
 
     var methods = {
       accordion   : function( options ) {
@@ -832,4 +742,95 @@
   };
 
 })( jQuery );
+
+$.fn.t3caddy.settings = {
+      accordion : {
+        accordionButtonId       : "#accordionPowermailSubmit",  // default: #accordionPowermailSubmit
+        accordionNext           : "button.accordionNext",       // default: button.accordionNext
+        accordionPrev           : "button.accordionPrev",       // default: button.accordionPrev
+        accordionApi            : undefined,  // API of the accordion
+        accordionSelector       : undefined,  // e.g.: "#c2997-accordion"
+        currAccordionIndex      : undefined,  // index of the current accordion pane: [0-4]
+        effect                  : 'slide',
+        indexAccordionOrdering  : 3, // Ordering
+        indexAccordionPowermail : 4, // Powermail form
+        powermailFormSelector   : undefined,  // e.g.: "#c2997-accordion-powermail div form",
+        powermailWallHtmlId     : undefined,  // e.g.: "#c2997-powermail-prompt",
+        powermailUid            : undefined,  // e.g.: "#c2995",
+        pmuidfieldemail         : undefined,  // e.g.: 624
+        pmuidfieldrevocation    : undefined,  // e.g.: 629
+        pmuidfieldterms         : undefined,  // e.g.: 628
+        tabs                    : 'h2',
+        t3caddyAlert            : 1,          // [e.g.:]0-1] 
+        t3caddyConsoleDebug     : 1           // [e.g.:]0-1]
+      },
+//      messages  : {
+//        update : {
+//          errMissingTagPropertyLabel  : "Tag is missing:",
+//          errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",
+//          errServerErrorPrmpt         : "This is a message from the server. Maybe the server has some problems in general. " +
+//                                        "If the server delivers content, you will see the content below this prompts.",
+//          hlpForumLabel               : "Interactive support:",
+//          hlpForumPrmpt               : "If you need interactive help, please visit the TYPO3-Caddy-Forum at " +
+//                                        "<a href=\"http://typo3-browser-forum.de/\">typo3-browser-forum.de</a>. Posts are welcome " +
+//                                        "in English and German.",
+//          hlpMissingTagPropertyLabel  : "Be aware of a proper HTML template:",
+//          hlpMissingTagPropertyPrmpt  : "Please add something like <div id=\"{0}\">...</div> to your template.",
+//          hlpPageObjectLabel          : "You can check TYPO3:",
+//          hlpPageObjectPrmpt          : "Is there a proper page object? Is there a proper typeNum?",
+//          hlpUrlLabel                 : "You can check the URL manually:",
+//          hlpUrlPrmpt                 : "Click on {0}",
+//          hlpUrlSelectorLabel         : "Be aware of the jQuery selector:",
+//          hlpUrlSelectorPrmpt         : "The request takes content into account only if this selector gets a result: {0}",
+//          hlpGetRidOfLabel            : "Get rid of this messages?",
+//          hlpGetRidOfPrmpt            : "Deactivate the jQuery plugin t3caddy. But you won't have any AJAX support."
+//        }
+//      },
+      messages  : {
+        update :  [ ]
+      },
+      templates: {
+        uiErr : '<div class="ui-widget">' +
+                  '<div class="ui-state-error ui-corner-all" style="padding: 0 .7em;">' +
+                    '<p>' +
+                      '<span class="ui-icon ui-icon-alert" style="float: left; margin-right: .3em;"></span>' +
+                      '<strong>{0}</strong> ' +
+                      '{1}' +
+                    '</p>' +
+                  '</div>' +
+                '</div>',
+        uiInf : '<div class="ui-widget">' +
+                  '<div class="ui-state-highlight ui-corner-all" style="padding: 0 .7em;">' +
+                    '<p>' +
+                      '<span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>' +
+                      '<strong>{0}</strong> ' +
+                      '{1}' +
+                    '</p>' +
+                  '</div>' +
+                '</div>'
+      },
+      update      : {
+        currAccordionIndex        : undefined, // [0-4]
+        formData                  : undefined, // serialized
+        html_element              : undefined, 
+        html_element_wi_selector  : undefined, 
+        url                       : undefined
+      },
+      url_autoQm  : {
+        currAccordionIndex  : undefined,
+        url                 : undefined, 
+        param               : undefined
+      },
+      validator   : {
+        container       : "validatorWall",  
+        effect          : "default",        // default (default), own custom effect
+        errorClass      : "invalid",
+        errorInputEvent : "keyup",          // keyup (default), change, blur, null
+        inputEvent      : "null",           // null (default), keyup, change, blur
+        lang            : "en", 
+        selector        : undefined,
+        validate        : "noValidate"      // noValidate (default), validate
+      }
+      
+};
 
