@@ -810,6 +810,7 @@
 //                        return false;
 //                      }
                       console.debug( 3 );
+                      success = false;
                       api = validateForm.data( "validator" );
                       api.onFail( function( e, errors ) {
                         alert( "onFail");
