@@ -16,7 +16,7 @@
 
   $.fn.t3caddy.defaults.messages.update = {
     errMissingTagPropertyLabel  : "HTML-Tag fehlt:",
-    errMissingTagPropertyPrmpt  : "Ein HTML-Tag mit dem Attribut {0} fehlt. AJAX kann nicht richtig funktionieren!",
+    errMissingTagPropertyPrmpt  : "Ein HTML-Tag mit dem Attribut \"{0}\" fehlt. AJAX kann nicht richtig funktionieren!",
     errServerErrorPrmpt         : "Dies ist eine Nachricht vom Server. Vielleicht hat der Server ein grundsätzliches Problem. " +
                                   "Wenn der Server eine Antwort mit Inhalt (HTML-Code) liefert, siehst Du das Ergebnis in der nächsten Meldung.",
     hlpForumLabel               : "Interaktive Hilfe:",
