@@ -39,15 +39,6 @@ $( document ).ready( function( )
     }
   };
   
-  $( this ).t3caddy( "validator", {
-    container       : "#c###UID###-powermail-prompt",
-    effect          : "wall",       // default (default), wall, woPrompt
-    errorInputEvent : "null",       // keyup (default), change, blur, null
-    lang            : lang,
-    selector        : "#c###UID###-accordion-powermail div form",
-    validate        : "validate"
-  });
-  
   $.tools.validator.localize( "de", {
     // "*" Isn't localised
     //"*"           : "Der Wert wird nicht akzeptiert",
