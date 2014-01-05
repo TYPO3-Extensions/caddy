@@ -14,8 +14,6 @@
 
 
 
-$( document ).ready( function( )
-{
   $( this ).t3caddy.messages = {
     update : {
       errMissingTagPropertyLabel  : "Tag is missing:",
@@ -50,4 +48,3 @@ $( document ).ready( function( )
     "[required]"  : "Bitte ausfüllen"
   }); // $.tools.validator.localize ...
 
-});
