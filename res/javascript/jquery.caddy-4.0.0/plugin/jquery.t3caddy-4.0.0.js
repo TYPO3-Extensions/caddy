@@ -776,14 +776,14 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-//                      console.debug( 
-//                        settings.validator.effect, 
-//                        settings.validator.errorClass,
-//                        settings.validator.errorInputEvent, 
-//                        settings.validator.inputEvent,
-//                        settings.validator.container,
-//                        settings.validator.lang
-//                      );
+                      console.debug( 
+                        settings.validator.effect, 
+                        settings.validator.errorClass,
+                        settings.validator.errorInputEvent, 
+                        settings.validator.inputEvent,
+                        settings.validator.container,
+                        settings.validator.lang
+                      );
                       // woPrompt invalid null keyup #c2997-powermail-prompt default
                       validateForm = $( settings.validator.selector ).validator(
                       {
