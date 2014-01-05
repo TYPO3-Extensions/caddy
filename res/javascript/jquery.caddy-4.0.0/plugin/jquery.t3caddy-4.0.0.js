@@ -291,23 +291,19 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-          console.debug( 1 );
           settings.validator.effect           = "woPrompt";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "keyup";
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = settings.accordion.powermailFormSelector;
           settings.validator.validate         = "validate";
-          console.debug( 2 );
           switch( initValidator( ) )
           {
             case( true ):
-              console.debug( 3 );
               $( accordionButtonId ).removeAttr( "disabled" );
               break;
             case( false ):
             default:
-              console.debug( 4 );
               $( accordionButtonId ).attr( "disabled", "disabled" );
               break;
           }
@@ -317,7 +313,6 @@
           settings.validator.lang             = settings.accordion.lang;
           settings.validator.selector         = idTabSrce;
           settings.validator.validate         = "validate";
-          console.debug( 5 );
           switch( initValidator( ) )
           {
             case( true ):
@@ -781,14 +776,15 @@
     validator       : function( options )
                     {
                       options = $.extend( settings.validator, options );
-                      console.debug( 
-                        settings.validator.effect, 
-                        settings.validator.errorClass,
-                        settings.validator.errorInputEvent, 
-                        settings.validator.inputEvent,
-                        settings.validator.container,
-                        settings.validator.lang
-                      );
+//                      console.debug( 
+//                        settings.validator.effect, 
+//                        settings.validator.errorClass,
+//                        settings.validator.errorInputEvent, 
+//                        settings.validator.inputEvent,
+//                        settings.validator.container,
+//                        settings.validator.lang
+//                      );
+                      // woPrompt invalid null keyup #c2997-powermail-prompt default
                       validateForm = $( settings.validator.selector ).validator(
                       {
                         effect          : settings.validator.effect,          // default (default), own custom effect
@@ -798,14 +794,11 @@
                         container       : settings.validator.container,
                         lang            : settings.validator.lang
                       });
-                      console.debug( "A" );
                       if( settings.validator.validate != "validate" )
                       {
-                        console.debug( "B" );
                         return false;
                       }
                       success = validateForm.data( "validator" ).checkValidity( );
-                      console.debug( "C" );
                       return success;
                     }  /* validator */
                     
