@@ -291,23 +291,23 @@
           var idTabSrce = "#tab-" + indexTabSrce + " :input";
           // Validate HTML input fields of the current tab
           //alert( idTabSrce );
-          settings.validator.effect           = "woPrompt";
-          settings.validator.errorInputEvent  = "null";
-          settings.validator.inputEvent       = "keyup";
-          settings.validator.lang             = settings.accordion.lang;
-          settings.validator.selector         = settings.accordion.powermailFormSelector;
-          settings.validator.validate         = "validate";
-          console.debug( "A" );
-          switch( initValidator( ) )
-          {
-            case( true ):
-              $( accordionButtonId ).removeAttr( "disabled" );
-              break;
-            case( false ):
-            default:
-              $( accordionButtonId ).attr( "disabled", "disabled" );
-              break;
-          }
+//          settings.validator.effect           = "woPrompt";
+//          settings.validator.errorInputEvent  = "null";
+//          settings.validator.inputEvent       = "keyup";
+//          settings.validator.lang             = settings.accordion.lang;
+//          settings.validator.selector         = settings.accordion.powermailFormSelector;
+//          settings.validator.validate         = "validate";
+//          console.debug( "A" );
+//          switch( initValidator( ) )
+//          {
+//            case( true ):
+//              $( accordionButtonId ).removeAttr( "disabled" );
+//              break;
+//            case( false ):
+//            default:
+//              $( accordionButtonId ).attr( "disabled", "disabled" );
+//              break;
+//          }
           settings.validator.effect           = "wall";
           settings.validator.errorInputEvent  = "null";
           settings.validator.inputEvent       = "null";
@@ -812,15 +812,16 @@
                       console.debug( 3 );
                       api = validateForm.data( "validator" );
                       api.onFail( function( e, errors ) {
-                        alert( "Fail");
-//                        $.each( errors, function( ) {
-//                          var input = this.input;
-//                          input.css({borderColor: 'red'}).focus(function()  {
-//                            input.css({borderColor: '#444'});
-//                          });
-//                        });
+                        alert( "onFail");
+                        $( accordionButtonId ).attr( "disabled", "disabled" );
+                        success = false;
                       });
-                      success = api.checkValidity( );
+                      api.onSuccess( function( e, errors ) {
+                        alert( "onSuccess");
+                        $( accordionButtonId ).removeAttr( "disabled" );
+                        success = true;
+                      });
+                      //success = api.checkValidity( );
                       console.debug( 4 );
                       return success;
                     }  /* validator */
