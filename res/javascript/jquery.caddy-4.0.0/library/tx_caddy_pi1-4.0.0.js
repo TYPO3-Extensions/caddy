@@ -35,7 +35,7 @@ var t3caddyConsoleDebug     = parseInt( "###T3CADDYCONSOLEDEBUG###" );
   // lang: if marker isn't replaced, set lang to default language'
 switch( true )
 {
-  case( lang = "default" ):
+  case( lang == "default" ):
   case( lang == '###' + 'LANG' + '###' ):
     lang = "en";  // default language
     break;
