@@ -267,6 +267,13 @@ class tx_caddy_powermail extends tslib_pibase
       // Init instances
     $this->caddyForEmailInstances( );    
 
+      // DIE, if there is an error with the payment
+    $this->caddyForEmailPaymentErrorDie( );
+    
+//    $prompt = __METHOD__ . ' returns null.';
+//    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+//    return false;
+      
       // RETURN false : no products
     if( ! $this->caddyForEmailInitProducts( ) )
     {
@@ -292,7 +299,30 @@ class tx_caddy_powermail extends tslib_pibase
     
     return $conf;
   }
-
+  
+ /**
+  * caddyForEmailPaymentErrorDie( ) : Dies, if there is an error with the payment
+  *
+  * @return  void
+  * @access public
+  * @version 4.0.3
+  * @since  4.0.3
+  */
+  public function caddyForEmailPaymentErrorDie( )
+  {   
+    $prompt = 'ERROR: E-payment<br />
+      There is a problem with your e-payment.<br />
+      Sorry for the trouble.<br />
+      <a href="javascript:history.back( )">Back</a><br />
+      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );
+    
+//    $prompt = __METHOD__ . ' returns null.';
+//    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+//    return false;
+  }
+  
  /**
   * caddyForEmailInitProducts( )  : 
   *
@@ -321,9 +351,6 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
     
-    $prompt = __METHOD__ . ' returns null.';
-    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
-    return false;
     return true;
   }
   
