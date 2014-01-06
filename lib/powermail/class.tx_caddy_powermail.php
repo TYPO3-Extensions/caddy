@@ -317,6 +317,8 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[DEV/EPAYMENT/POWERMAIL] ' . $prompt, $this->extKey, 2 );
     }
       // DRS
+    
+    return true;
 
       // DRS
     if( $this->drsUserfunc )
