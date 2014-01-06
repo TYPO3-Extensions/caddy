@@ -321,6 +321,9 @@ class tx_caddy_powermail extends tslib_pibase
     }
       // RETURN : empty content, no product in session
     
+    $prompt = __METHOD__ . ' returns null.';
+    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+    return true;
     return true;
   }
   
