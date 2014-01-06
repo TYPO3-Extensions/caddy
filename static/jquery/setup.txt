@@ -138,6 +138,10 @@ plugin.tx_caddy_pi1 {
               // pmuidfieldemail, pmuidfieldrevocation, pmuidfieldterms, t3caddyalert, t3caddyconsoledebug, typenum
             marker  =
             marker {
+              lang = TEXT
+              lang {
+                data  = TSFE:lang
+              }
                 // Uid of the powermail field e-mail
               pmuidfieldemail = COA
               pmuidfieldemail {
