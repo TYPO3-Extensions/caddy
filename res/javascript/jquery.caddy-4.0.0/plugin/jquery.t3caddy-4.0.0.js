@@ -93,8 +93,6 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
-prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
       $( settings.accordion.powermailUid + " div form > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
@@ -544,15 +542,9 @@ alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
       accordion   : function( options ) {
                       settings = $.fn.t3caddy.defaults;
                       settings.accordion = $.extend( true, {}, settings.accordion, options );
-                      prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-                      alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       if( ! $( settings.accordion.accordionSelector ).length ) {
                         console.debug( "return: settings.accordion.accordionSelector isn't set." )
                         return null;
-//                        return {
-//                          accordionApi        : null,
-//                          currAccordionIndex  : null
-//                        }
                       }
                       addPowermailTabsToCaddy( );
                       movePowermailFormToCaddy( );
@@ -567,11 +559,6 @@ alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                       addAccordion( );
                       initEvents( );
                       return $( settings.accordion.accordionSelector ).data( "tabs" );
-//                      return {
-//                        accordionApi        : $( settings.accordion.accordionSelector ).data( "tabs" ),
-//                        currAccordionIndex  : settings.accordion.currAccordionIndex
-//                      }
-
                     }, /* accordion */
       init        : function( settings_ )
                     {
@@ -584,80 +571,76 @@ alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                     }, /* init */
       update      : function( options )
                     {
-                      options = $.extend( settings, options );
-                        // update():  replace the content of the given html element with the content
-                        //            of the requested url. The content is the content of the html element with selector.
-
-//                      return this.each( function ( )
-//                      {
-                          // ERROR html_element is missing. Don't use AJAX but forward
-                        if( !$( settings.update.html_element ).length ) {
-                          if( settings.update.t3caddyAlert )
-                          {
-                            prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
-                            prompt = format( settings.messages.update.hlpMissingTagPropertyPrmpt, settings.update.html_element);
-                            alert( settings.messages.update.hlpMissingTagPropertyLabel + " " + prompt );
-                          }
-                          fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
-                          window.location.href = fq_url;
-                          return false;
-                        }
-                          // ERROR html_elementis missing. Don't use AJAX but forward
-
-                          // Fade out the update prompt
-                        $("#update-prompt:visible").slideUp( 'fast' );
-                        $("#update-prompt div").remove( );
-
-                          // Cover the html_element with the loading *.gif
-                        cover_wi_loader( settings.update.html_element );
-
-                          // Send the AJAX request
-                          // Replace the content of the html element with the delivered data
-                        var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
-                        //console.debug( url_wi_selector );
-                        $( settings.update.html_element ).load( url_wi_selector, settings.update.formData, function( response, status, xhr )
+                      settings = $.fn.t3caddy.defaults;
+                      settings = $.extend( true, {}, settings, options );
+                        // ERROR html_element is missing. Don't use AJAX but forward
+                      if( !$( settings.update.html_element ).length ) {
+                        if( settings.update.t3caddyAlert )
                         {
-                            // ERROR server has an error and has send a message
-                          if (status == "error")
-                          {
-                              // Add error messages and helpful informations to the update prompt
-                            err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.update.errServerErrorPrmpt);
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpPageObjectLabel, settings.messages.update.hlpPageObjectPrmpt );
-                            fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
-                            a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
-                            prompt = format( settings.messages.update.hlpUrlPrmpt, a_fq_url);
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpUrlLabel, prompt );
-                            prompt = format( settings.messages.update.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
-                            //inf_prompt( "#update-prompt", settings.messages.update.hlpUrlSelectorLabel, prompt );
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpForumLabel, settings.messages.update.hlpForumPrmpt );
-                            inf_prompt( "#update-prompt", settings.messages.update.hlpGetRidOfLabel, settings.messages.update.hlpGetRidOfPrmpt );
-                              // Add error messages and helpful informations to the update prompt
+                          prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+                          alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
+                          prompt = format( settings.messages.update.hlpMissingTagPropertyPrmpt, settings.update.html_element);
+                          alert( settings.messages.update.hlpMissingTagPropertyLabel + " " + prompt );
+                        }
+                        fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
+                        window.location.href = fq_url;
+                        return false;
+                      }
+                        // ERROR html_elementis missing. Don't use AJAX but forward
 
-                              // Fade out the loading *.gif, initiate buttons again
-                            clean_up( settings.update.html_element );
-                              // Fade in the update prompt
-                            $( "#update-prompt:hidden" ).slideDown( 'fast' );
-                            $( "#update-prompt" ).append( response );
-                            return false;
-                          }
-                            // ERROR server has an error and has send a message
+                        // Fade out the update prompt
+                      $("#update-prompt:visible").slideUp( 'fast' );
+                      $("#update-prompt div").remove( );
+
+                        // Cover the html_element with the loading *.gif
+                      cover_wi_loader( settings.update.html_element );
+
+                        // Send the AJAX request
+                        // Replace the content of the html element with the delivered data
+                      var url_wi_selector = settings.update.url + " " + settings.update.html_element_wi_selector;
+                      //console.debug( url_wi_selector );
+                      $( settings.update.html_element ).load( url_wi_selector, settings.update.formData, function( response, status, xhr )
+                      {
+                          // ERROR server has an error and has send a message
+                        if (status == "error")
+                        {
+                            // Add error messages and helpful informations to the update prompt
+                          err_prompt( "#update-prompt", xhr.statusText + " (" + xhr.status + "):", settings.messages.update.errServerErrorPrmpt);
+                          inf_prompt( "#update-prompt", settings.messages.update.hlpPageObjectLabel, settings.messages.update.hlpPageObjectPrmpt );
+                          fq_url = window.location.protocol + "//" + window.location.host + "/" + settings.update.url;
+                          a_fq_url = '<a href="' + fq_url + '">' + fq_url + '</a>';
+                          prompt = format( settings.messages.update.hlpUrlPrmpt, a_fq_url);
+                          inf_prompt( "#update-prompt", settings.messages.update.hlpUrlLabel, prompt );
+                          prompt = format( settings.messages.update.hlpUrlSelectorPrmpt, settings.update.html_element_wi_selector);
+                          //inf_prompt( "#update-prompt", settings.messages.update.hlpUrlSelectorLabel, prompt );
+                          inf_prompt( "#update-prompt", settings.messages.update.hlpForumLabel, settings.messages.update.hlpForumPrmpt );
+                          inf_prompt( "#update-prompt", settings.messages.update.hlpGetRidOfLabel, settings.messages.update.hlpGetRidOfPrmpt );
+                            // Add error messages and helpful informations to the update prompt
 
                             // Fade out the loading *.gif, initiate buttons again
+                          clean_up( settings.update.html_element );
+                            // Fade in the update prompt
+                          $( "#update-prompt:hidden" ).slideDown( 'fast' );
+                          $( "#update-prompt" ).append( response );
+                          return false;
+                        }
+                          // ERROR server has an error and has send a message
+
+                          // Fade out the loading *.gif, initiate buttons again
 //                          accordionApi = $( settings.update.accordionApi );
 //                          accordionApi = methods.accordion.call( settings.accordion );
-                          //accordionApi = methods.accordion( settings.accordion );
-                          //accordionApi.destroy( );
-                          clean_up( settings.update.html_element );
-                          return accordionApi;
-//                        });
-                          // Send the AJAX request
+                        //accordionApi = methods.accordion( settings.accordion );
+                        //accordionApi.destroy( );
+                        clean_up( settings.update.html_element );
+                        return accordionApi;
+                        // Send the AJAX request
                       });
                       return false;
                     }, /* update( ) */
       url_autoQm  : function( options )
                     {
-                      options = $.extend( settings.url_autoQm, options );
+                      settings = $.fn.t3caddy.defaults;
+                      settings.url_autoQm = $.extend( true, {}, settings.url_autoQm, options );
                       //currAccordionIndex  = settings.url_autoQm.currAccordionIndex;
                       url                 = settings.url_autoQm.url;
                       param               = settings.url_autoQm.param;
@@ -689,7 +672,8 @@ alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
                     }, /* url_autoQm */
     validator       : function( options )
                     {
-                      options = $.extend( settings.validator, options );
+                      settings = $.fn.t3caddy.defaults;
+                      settings.validator = $.extend( true, {}, settings.validator, options );
 //                      console.debug( 
 //                        settings.validator.container,
 //                        settings.validator.effect, 
