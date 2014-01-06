@@ -1,14 +1,11 @@
 /**
  * jquery.t3caddy-4.0.0.js
  *
- * Copyright (c) 2013-2014 Dirk Wildt
+ * Copyright (c) 2013-2014 - Dirk Wildt (Die Netzmacher)
  * http://wildt.at.die-netzmacher.de/
  *
  * Version 4.0.3
  * http://docs.jquery.com/Plugins/t3caddy
- *
- * Copyright (c) 2013-2014 - Dirk Wildt
- * http://wildt.at.die-netzmacher.de/
  *
  * Dual licensed under the MIT and GPL licenses:
  *   http://www.opensource.org/licenses/mit-license.php
@@ -191,86 +188,6 @@
     }
       // Prompt informations
 
-    function initEvents( ) {
-//      accordionButtonId = settings.accordion.accordionButtonId;
-//      $( document ).on( "click", accordionButtonId, function( e ) {
-//        alert( accordionButtonId );
-//        settings.validator.lang      = settings.accordion.lang;
-//        settings.validator.selector  = settings.accordion.powermailFormSelector;
-//        settings.validator.effect    = "woPrompt";
-//        settings.validator.validate  = "validate";
-//        switch( initValidator( ) )
-//        {
-//          case( true ):
-//            $( accordionButtonId ).removeAttr( "disabled" );
-//            break;
-//          case( false ):
-//          default:
-//            $( accordionButtonId ).attr( "disabled", "disabled" );
-//            break;
-//        }
-//      }); 
-//      accordionApi = $( settings.accordion.accordionSelector ).data( "tabs" );
-//      $( document ).on( "click", settings.accordion.accordionNext, function( e ) {
-//        accordionApi.next();
-//      });
-//      $( document ).on( "click", settings.accordion.accordionPrev, function( e ) {
-//        accordionApi.prev();
-//      });      
-//      $( document ).on( "change", ".onChangeloadCaddyByAjax", function( e ) {
-//        formAction  = $( this ).closest( "form" ).attr( "action");
-//        formData    = $( this ).closest( "form" ).serialize( );
-//        runAjax( formAction, formData, e );
-//      }); 
-//      $( document ).on( "click", "a.onClickloadCaddyByAjax", function( e ) {
-//        if( !e.isDefaultPrevented( ) ) 
-//        {
-//          e.preventDefault( ); // Don't execute the click
-//          formAction  = $( this ).attr( "href");
-//          formData    = null;
-//          runAjax( formAction, formData, e );
-//        }
-//      }); 
-//      $( document ).on( "click", "input.powermail_confirmation_form", function( e ) {
-//        if( !e.isDefaultPrevented( ) ) 
-//        {
-//          e.preventDefault( ); // Don't execute the click
-//          formAction  = $( this ).closest( "form" ).attr( "action");
-//          formData    = $( this ).closest( "form" ).serialize( );
-//          runAjax( formAction, formData, e );
-//        }
-//      }); 
-//      $( document ).on( "click", "input.powermail_confirmation_submit", function( e ) {
-//        if( !e.isDefaultPrevented( ) ) 
-//        {
-//          e.preventDefault( ); // Don't execute the click
-//          formAction  = $( this ).closest( "form" ).attr( "action");
-//          formData    = $( this ).closest( "form" ).serialize( );
-//          runAjax( formAction, formData, e );
-//        }
-//      }); 
-//      $( document ).on( "click", "input.powermail_submit", function( e ) {
-//        if( !e.isDefaultPrevented( ) ) 
-//        {
-//          e.preventDefault( ); // Don't execute the click
-//          settings.validator.lang      = settings.accordion.lang;
-//          settings.validator.selector  = settings.accordion.powermailFormSelector;
-//          settings.validator.effect    = "wall";
-//          settings.validator.validate  = "validate";
-//          if( ! initValidator( ) )
-//          {
-//            return;
-//          }
-//          formAction  = $( this ).closest( "form" ).attr( "action");
-//          formData    = $( this ).closest( "form" ).serialize( );
-//          console.debug( $( this ).attr( "class" ) );
-//          console.debug( formAction );
-//          console.debug( formData );
-//          runAjax( formAction, formData, e );
-//        }
-//      }); 
-    }
-    
     /* Powermail tabs begin */
     function initPowermailTabs( ) {
       // Configure the tabs of the powermail form
@@ -325,16 +242,16 @@
     /* Powermail tabs begin */
 
     function initToolsValidator( ) {
-      $.tools.validator.localize( "de", {
-        // "*" Isn't localised
-        //"*"           : "Der Wert wird nicht akzeptiert",
-        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
-        ":number"     : "Bitte nur Zahlen eingeben",
-        ":url"        : "Bitte eine korrekte URL eingeben",
-        "[max]"       : "Maximal $1 ist erlaubt",
-        "[min]"       : "Mindestens $1 ist n&ouml;tig",
-        "[required]"  : "Bitte ausfüllen"
-      }); // $.tools.validator.localize ...
+//      $.tools.validator.localize( "de", {
+//        // "*" Isn't localised
+//        //"*"           : "Der Wert wird nicht akzeptiert",
+//        ":email"      : "Bitte eine korrekte E-Mail-Adresse eingeben",
+//        ":number"     : "Bitte nur Zahlen eingeben",
+//        ":url"        : "Bitte eine korrekte URL eingeben",
+//        "[max]"       : "Maximal $1 ist erlaubt",
+//        "[min]"       : "Mindestens $1 ist n&ouml;tig",
+//        "[required]"  : "Bitte ausfüllen"
+//      }); // $.tools.validator.localize ...
       $.tools.validator.addEffect( "wall", function( errors, event ) 
       {
         pmuidfieldterms       = settings.accordion.pmuidfieldterms;
@@ -343,7 +260,7 @@
         var wall = $( this.getConf( ).container ).fadeIn( );
         // remove all existing messages
         wall.html( null );
-        wall.append( "<h3>Bitte füllen Sie das Formular vollständig aus.</h3>" );
+        wall.append( "<h3>" + settings.messages.powermail.fillFormCompletely + "</h3>" );
         // add new ones
         $.each( errors, function( index, error ) {
           selector = "input[name='" + error.input.attr( "name" ) + "']";
@@ -486,55 +403,6 @@
       console.debug( "submitPowermail( )" )
       $( ".powermail_form_30" ).submit( );
     }
-//    /* AJAX begin */
-//    function runAjax( formAction, formData, e ) {
-//      currAccordionIndex = accordionApi.getIndex( );
-//      //console.debug( currAccordionIndex );
-//      // User has clicked a tag with the class onChangeloadCaddyByAjax
-//      e.preventDefault( ); // Don't execute the click
-//      // RETURN : current id isn't part of the DOM
-//      //if( ! $( "#c###UID###" ).length )
-//      if( ! $( "#content" ).length )
-//      {
-//        if( t3caddyAlert )
-//        {
-//          //alert( "ERROR: The selector \"#c###UID###\" isn't part of the DOM!");
-//          alert( "ERROR: The selector \"#content\" isn't part of the DOM!");
-//        }
-//        return;
-//      } // RETURN : current id isn't part of the DOM
-//
-//      // Update the content with the id #c###UID###-###VIEW###view
-//      var url = $( this ).t3caddy( 'url_autoQm', {
-//        currAccordionIndex  : currAccordionIndex,
-//        url                 : formAction, 
-//        param               : "type=###TYPENUM###"
-//      });
-//      console.debug( url );
-//    //var html_element              = "#c###UID###";
-//      var html_element              = "#content";
-//      var html_element_wi_settings  = html_element + " > *";
-//      //$( this ).t3caddy( "update", {
-//      $( this).update( {
-//        accordionApi              : accordionApi,
-//        currAccordionIndex        : currAccordionIndex,
-//        formData                  : formData,
-//        html_element              : html_element, 
-//        html_element_wi_selector  : html_element_wi_selector, 
-//        t3caddyAlert              : parseInt( "###T3CADDYALERT###" ),
-//        url                       : url
-//      });
-//      // Update the content with the id #c###UID###-###VIEW###view
-//      // Reload functions after content is updated (after 2000 miliseconds)
-//    //  setTimeout( function( ) {
-//    ////    accordionIndex = currAccordionIndex;
-//    //    fnInit( ); /* Initiate Accordion */
-//    ////    alert( accordionIndex );
-//    ////    accordionApi.click( accordionIndex );
-//    //  }, 2000 );
-//    } 
-//    /* AJAX end */
-
 
     var methods = {
       accordion   : function( options ) {
@@ -555,7 +423,6 @@
                       initToolsValidator( );
                       initValidator( );
                       addAccordion( );
-                      initEvents( );
                       return $( settings.accordion.accordionSelector ).data( "tabs" );
                     }, /* accordion */
       init        : function( settings_ )
@@ -770,6 +637,9 @@ $.fn.t3caddy.defaults = {
 //        }
 //      },
       messages  : {
+        powermail : {
+          fillFormCompletely : "Please fill in the form completely."
+        },
         update :  {
           errMissingTagPropertyLabel  : "Tag is missing:",
           errMissingTagPropertyPrmpt  : "A HTML tag with an attribute {0} is missing. AJAX can't work proper!",

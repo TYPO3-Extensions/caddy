@@ -14,6 +14,9 @@
 
 
 
+  $.fn.t3caddy.defaults.messages.powermail = {
+    fillFormCompletely          : "Bitte füllen Sie das Formular vollständig aus."
+  };
   $.fn.t3caddy.defaults.messages.update = {
     errMissingTagPropertyLabel  : "HTML-Tag fehlt:",
     errMissingTagPropertyPrmpt  : "Ein HTML-Tag mit dem Attribut \"{0}\" fehlt. AJAX kann nicht richtig funktionieren!",
@@ -32,7 +35,7 @@
     hlpUrlSelectorLabel         : "Überprüfe bitte den jQuery-Selektor:",
     hlpUrlSelectorPrmpt         : "Die Anfrage übernimmt Inhalt vom Server nur von innerhalb dieses Selektors: {0}",
     hlpGetRidOfLabel            : "Hast Du genug von diesen Nachrichten?",
-    hlpGetRidOfPrmpt            : "Deaktiveire das jQuery Plugin t3caddy. Allerdings hast Du dann auch keinen AJAX-Funktionalität."
+    hlpGetRidOfPrmpt            : "Deaktiviere das jQuery Plugin t3caddy. Allerdings hast Du dann auch keinen AJAX-Funktionalität."
   };
   
   $.tools.validator.localize( "de", {
