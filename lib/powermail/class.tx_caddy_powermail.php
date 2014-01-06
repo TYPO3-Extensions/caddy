@@ -303,24 +303,36 @@ class tx_caddy_powermail extends tslib_pibase
  /**
   * caddyForEmailPaymentErrorDie( ) : Dies, if there is an error with the payment
   *
-  * @return  void
+  * @return  boolean                  true, if e-payment is proper
   * @access public
   * @version 4.0.3
   * @since  4.0.3
   */
   public function caddyForEmailPaymentErrorDie( )
   {   
+      // DRS
+    if( $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ': :TODO: interface e-payment';
+      t3lib_div::devlog( '[DEV/EPAYMENT/POWERMAIL] ' . $prompt, $this->extKey, 2 );
+    }
+      // DRS
+
+      // DRS
+    if( $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ': E-payment has an an error!';
+      t3lib_div::devlog( '[ERROR/EPAYMENT/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+    }
+      // DRS
+
     $prompt = 'ERROR: E-payment<br />
       There is a problem with your e-payment.<br />
       Sorry for the trouble.<br />
       <a href="javascript:history.back( )">Back</a><br />
       Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
       TYPO3 extension: ' . $this->extKey;
-    die( $prompt );
-    
-//    $prompt = __METHOD__ . ' returns null.';
-//    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
-//    return false;
+    die( $prompt );   
   }
   
  /**
