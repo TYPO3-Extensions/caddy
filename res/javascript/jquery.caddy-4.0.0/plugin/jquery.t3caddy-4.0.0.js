@@ -93,6 +93,8 @@
       }
       tabs = "";
       // LOOP all powermail fieldsets
+prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
+alert( settings.messages.update.errMissingTagPropertyLabel + " " + prompt );
       $( settings.accordion.powermailUid + " div form > fieldset > legend" ).each( function( i ) {
         href  = urlWoSearch + "#tab-" + i + urlSearch;
         tabs  = tabs
@@ -546,7 +548,7 @@
                       //console.debug( "XXX" );
                       //options = $.extend({}, settings, options);
 //                      options = $.extend( settings.accordion, options );
-                      var settings = $.fn.t3caddy.defaults;
+                      settings = $.fn.t3caddy.defaults;
                       settings.accordion = $.extend( true, {}, settings.accordion, options );
                       //$.extend( true, settings.accordion, options );
                       prompt = format( settings.messages.update.errMissingTagPropertyPrmpt, settings.update.html_element);
