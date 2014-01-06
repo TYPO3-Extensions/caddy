@@ -373,7 +373,7 @@
       // adds the "woPrompt" effect to the validator
       $.tools.validator.addEffect( "woPrompt", function( errors, event ) 
       {
-        alert( "woPrompt" );
+        //alert( "woPrompt" );
         /* effect is needed for enabling and disabling submit button only */
       }, function( inputs ) // 140105, dwildt: never remove this function!
       {
@@ -384,9 +384,7 @@
       options = {
         container : settings.accordion.powermailWallHtmlId
       };
-      console.debug( "AA" );
       valid =  methods.validator( options );
-      console.debug( "AB" );
       return valid;
     }  // initValidator( )
 
