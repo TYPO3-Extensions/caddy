@@ -139,7 +139,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (nur Dev!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/foundation/4x/',    'Caddy (1) - foundation 4.x (nur Dev!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy (1) - foundation 4.x (nur Dev!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - Deutsch');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS (blau)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (4+) - CSS orange');
@@ -164,7 +164,7 @@ switch( true )
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/4.0.0/',            'Caddy (1) - v4.x (dev only!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/foundation/4x/',    'Caddy (1) - foundation 4.x (dev only!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy (1) - foundation 4.x (dev only!)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - German');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3+) - CSS (blue)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (4+) - CSS orange');
