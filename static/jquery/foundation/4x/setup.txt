@@ -1,0 +1,37 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1
+  // page.includeCss
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1
+  // page.includeCss
+
+plugin.tx_caddy_pi1 {
+  javascript {
+    jquery {
+      foundation =
+      foundation {
+      }
+    }
+  }
+}
+  // plugin.tx_caddy_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // page.includeCss
+
+page {
+  includeCSS {
+    caddyJQuery = EXT:caddy/res/javascript/jquery.caddy-4.0.0/css/static.css
+  }
+}
+  // page.includeCss
