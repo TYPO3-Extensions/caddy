@@ -112,7 +112,7 @@ class tx_caddy_template
               Please check the current configuration with the Caddy plugin -> tab [Check it!]
             </li>
             <li>
-              Please check your template configuration. See TypoSCript Constant Editor > CADDY - TEMPLATES
+              Please check your template configuration. See TypoScript Constant Editor > CADDY - TEMPLATES
             </li>
             <li>
               Please enable the DRS - the Development Reporting System. It tries to offer a fix.
