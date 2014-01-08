@@ -139,7 +139,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.3
+ * @version	4.0.4
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -781,7 +781,6 @@ class tx_caddy extends tslib_pibase
       $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
-//var_dump( __METHOD__, __LINE__, $marker );
 
     return $marker;
   }
@@ -2447,6 +2446,8 @@ class tx_caddy extends tslib_pibase
   * @param	string		$condition        :
   * @param	array		$optionItemConf   : ...
   * @return	array           $marker           :
+  * @version  4.0.4
+  * @since    2.0.0
   */
   private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $optionItemConf )
   {
@@ -2494,7 +2495,9 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionIds        : current option ids
-  * @return	array           $marker           :
+  * @return	string          $content          :
+  * @version  4.0.4
+  * @since    2.0.0
   */
   private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
   {
@@ -2620,7 +2623,9 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionId         : current option id
-  * @return	array           $marker           :
+  * @return	array           $content          :
+  * @version  4.0.4
+  * @since    2.0.0
   */
   private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
   {
