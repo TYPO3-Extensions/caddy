@@ -2471,6 +2471,7 @@ class tx_caddy extends tslib_pibase
           // #54832, 140108, dwildt, 2+
         $label    = $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf );
         $element  = str_replace( '|', $input, $label );
+var_dump( __METHOD__, __LINE__, $element );
 
           // #54832, 140108, dwildt, 4-
 //    $marker = ( array ) $marker
