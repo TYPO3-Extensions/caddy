@@ -2639,6 +2639,9 @@ var_dump( __METHOD__, __LINE__, $element );
               . 'id="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '"  '
               . 'value="' . intval( $optionItemKey ) . '"' . $checked . $disabled . '/>';
 
+      // #54832, 140108, dwildt, 1+
+    return $content;
+    
     $marker = array
     (
       '###' . $hashMarker . '_RADIO###' => $content
