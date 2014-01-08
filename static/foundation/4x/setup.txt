@@ -2482,7 +2482,7 @@ plugin.tx_caddy_pi1 {
       // label, content, value
     caddy_header_items = COA
     caddy_header_items {
-      wrap = |<div class="caddy_cleaner"></div>
+      wrap = <a href="#">|</a>
         // label
       10 = TEXT
       10 {
@@ -2491,12 +2491,12 @@ plugin.tx_caddy_pi1 {
           de = Warenkorb
           en = Caddy
         }
-        wrap  = <div class="h-accordion-label"><a href="#">|</a></div>
+        wrap = <span class="large-2 columns"></div>
       }
         // quantity, item || items
       20 = COA
       20 {
-        wrap = <div class="h-accordion-content"><a href="#">|</a></div>
+        wrap = <span class="large-2 columns"></div>
           // quantity
         10 = TEXT
         10 {
@@ -2553,7 +2553,7 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value"><a href="#">|</a></div>
+        wrap = <span class="large-1 columns"></div>
       }
     }
     caddy_header_optionswopayment = COA
