@@ -2455,15 +2455,31 @@ class tx_caddy extends tslib_pibase
     switch( true )
     {
       case( $optionType != 'specials' ):
-        $marker = $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+          // #54832, 140108, dwildt, 1-
+        //$marker = $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+          // #54832, 140108, dwildt, 1+
+        $input = $this->optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
       case( $optionType == 'specials' ):
       default:
-        $marker = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+          // #54832, 140108, dwildt, 1-
+        //$marker = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
+          // #54832, 140108, dwildt, 1+
+        $input = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
     }
+          // #54832, 140108, dwildt, 2+
+        $label    = $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf );
+        $element  = str_replace( '|', $input, $label );
 
-    $marker = ( array ) $marker
+          // #54832, 140108, dwildt, 4-
+//    $marker = ( array ) $marker
+//            + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
+//            + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
+//            ;
+
+          // #54832, 140108, dwildt, 4+
+    $marker = ( array ) $element
             + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
             + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
             ;
@@ -2574,7 +2590,11 @@ class tx_caddy extends tslib_pibase
 
     $hashMarker = strtoupper( $optionType );
 
-    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">'
+      // #54832, 140108, dwildt, 1-
+//    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">'
+//              . $title . '</label>';
+      // #54832, 140108, dwildt, 1+
+    $content  = '<label for="tx_caddy_pi1_' . $optionType . '_' . intval( $optionItemKey ) . '">| '
               . $title . '</label>';
 
     $marker['###' . $hashMarker . '_TITLE###'] = $content;
