@@ -2573,20 +2573,26 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_optionswopayment = COA
     caddy_header_optionswopayment {
-      wrap = <h2 class="optionswopayment">|</h2>
+      wrap = <a href="#">|</a>
         // label
-      10 = TEXT
+      10 = COA
       10 {
+        wrap = <span class="small-7 large-7 columns">|</span>
         value = Costs for shipping and service
         lang {
           de = Service- und Versandkosten
           en = Costs for shipping and service
         }
-        wrap  = <div class="h-accordion-label">|</div>
       }
-        // value
-      30 = COA
+        // &nbsp;
+      30 = TEXT
       30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
           // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
@@ -2606,7 +2612,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value">|</div>
+        wrap = <span class="small-2 large-2 columns">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
     caddy_header_powermail = TEXT
