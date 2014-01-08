@@ -2575,7 +2575,7 @@ plugin.tx_caddy_pi1 {
     caddy_header_optionswopayment {
       wrap = <a href="#">|</a>
         // label
-      10 = COA
+      10 = TEXT
       10 {
         wrap = <span class="small-7 large-7 columns">|</span>
         value = Costs for shipping and service
