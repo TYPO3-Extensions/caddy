@@ -52,8 +52,8 @@
     <!-- ###CADDY### begin --> 
     <div id="c###UID###-accordion">
       <div class="section-container accordion large-12 columns" data-section="accordion">
+        <!-- ###CADDY-PRODUCT-TABLE### begin --> 
         <section>
-          <!-- ###CADDY-PRODUCT-TABLE### begin --> 
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_ITEMS###
@@ -61,7 +61,7 @@
           </div>
           <div class="content" data-section-content>
             ###MINPRICE###
-            <form name="caddy" id="caddy" action="###TARGET###" method="post">
+            <form name="caddy-items" id="caddy-items" action="###TARGET###" method="post">
               <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
               ###VARIANTS###
               <!-- ###HEADER### begin -->
@@ -98,27 +98,56 @@
               <!-- ###FOOTER### end -->
             </form> <!-- /caddy -->
           </div> <!-- /content -->
-          <!-- ###CADDY-PRODUCT-TABLE### end --> 
         </section>
+        <!-- ###CADDY-PRODUCT-TABLE### end --> 
+        <!-- ###OPTIONS### begin -->
         <section>
-          <!-- ###OPTIONS### begin -->
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_OPTIONSWOPAYMENT###
             </div>
           </div>
           <div class="content" data-section-content>
-            <form name="caddy" id="caddy-options" action="###TARGET###" method="post">
+            <form name="caddy-optionswopayment" id="caddy-optionswopayment" action="###TARGET###" method="post">
               <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
-              <div class="caddy_options">
-                ###SHIPPING_RADIO###
-                ###SPECIALS_CHECKBOX###
-                <div class="caddy_cleaner"></div>
+              <div class="row caddy_options">
+                <div id="caddy_shipping" class="small-6 large-4 columns">
+                  ###SHIPPING_RADIO###
+                </div>
+                <div id="caddy_specials" class="small-6 large-4 columns">
+                  ###SPECIALS_CHECKBOX###
+                  <div class="caddy_cleaner"></div>
+                </div>
+                <div class="small-0 large-4 columns">
+                  &nbsp;
+                </div>
               </div>
-            </form> <!-- /caddy -->
+            </form> <!-- /caddy-optionswopayment -->
           </div> <!-- /content -->
-          <!-- ###OPTIONS### end -->
         </section>
+        <!-- ###OPTIONS### end -->
+        <!-- ###PAYMENT_METHOD### begin -->
+        <section>
+          <div class="title" data-section-title>
+            <div class="row">
+              ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD###
+            </div>
+          </div>
+          <div class="content" data-section-content>
+            <form name="caddy-payment" id="caddy-payment" action="###TARGET###" method="post">
+              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
+              <div class="row caddy_options">
+                <div id="caddy_payment" class="small-12 large-4 columns">
+                  ###PAYMENT_RADIO###
+                </div>
+                <div class="small-0 large-8 columns">
+                  &nbsp;
+                </div>
+              </div>
+            </form> <!-- /caddy-payment -->
+          </div> <!-- /content -->
+        </section>
+        <!-- ###PAYMENT_METHOD### end -->
       </div>
     </div>
     <!-- ###CADDY### end -->
