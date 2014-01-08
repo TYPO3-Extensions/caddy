@@ -2491,12 +2491,12 @@ plugin.tx_caddy_pi1 {
           de = Warenkorb
           en = Caddy
         }
-        wrap = <span class="small-4 large-2 columns">|</span>
+        wrap = <span class="small-4 large-1 columns">|</span>
       }
         // quantity, item || items
       20 = COA
       20 {
-        wrap = <span class="small-4 large-2 columns">|</span>
+        wrap = <span class="small-4 large-5 columns">|</span>
           // quantity
         10 = TEXT
         10 {
@@ -2553,13 +2553,19 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-1 columns">|</span>
+        wrap = <span class="small-2 large-2 columns">|</span>
       }
         // &nbsp;
       40 = TEXT
       40 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-7 columns">|</span>
+        wrap  = <span class="small-1 large-2 columns">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-2 columns">|</span>
       }
     }
     caddy_header_optionswopayment = COA
