@@ -2486,7 +2486,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = COA
       10 {
-        wrap = <span class="small-4 large-7 columns">|</span>
+        wrap = <span class="small-7 large-7 columns">|</span>
         10 = TEXT
         10 {
           value = Caddy
@@ -2538,7 +2538,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-2 columns">|</span>
+        wrap  = <span class="small-2 large-2 columns">|</span>
       }
         // value, currency
       40 = COA
