@@ -2556,8 +2556,8 @@ plugin.tx_caddy_pi1 {
         wrap = <span class="small-2 large-1 columns">|</span>
       }
         // &nbsp;
-      30 = TEXT
-      30 {
+      40 = TEXT
+      40 {
         value = &nbsp;
         wrap  = <span class="small-2 large-7 columns">|</span>
       }
