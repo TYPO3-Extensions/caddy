@@ -2478,9 +2478,8 @@ class tx_caddy extends tslib_pibase
 //            + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
 //            ;
 
-          // #54832, 140108, dwildt, 4+
+          // #54832, 140108, dwildt, 3+
     $marker = ( array ) $element
-            + ( array ) $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
             + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
             ;
     
