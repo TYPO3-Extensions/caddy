@@ -53,7 +53,7 @@
     <div id="c###UID###-accordion">
       <div class="section-container accordion large-12 columns" data-section="accordion">
         <!-- ###CADDY-PRODUCT-TABLE### begin --> 
-        <section>
+        <section class="caddy-accordion">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_ITEMS###
@@ -63,6 +63,7 @@
             ###MINPRICE###
             <form name="caddy-items" id="caddy-items" action="###TARGET###" method="post">
               <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="1">
               ###VARIANTS###
               <!-- ###HEADER### begin -->
               <div class="row">
@@ -101,7 +102,7 @@
         </section>
         <!-- ###CADDY-PRODUCT-TABLE### end --> 
         <!-- ###OPTIONS### begin -->
-        <section>
+        <section class="caddy-accordion">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_OPTIONSWOPAYMENT###
@@ -110,6 +111,7 @@
           <div class="content" data-section-content>
             <form name="caddy-optionswopayment" id="caddy-optionswopayment" action="###TARGET###" method="post">
               <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="2">
               <div class="row caddy_options">
                 <div id="caddy_shipping" class="small-6 large-6 columns">
                   ###SHIPPING_RADIO###
@@ -127,7 +129,7 @@
         </section>
         <!-- ###OPTIONS### end -->
         <!-- ###PAYMENT_METHOD### begin -->
-        <section>
+        <section class="caddy-accordion active">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD###
@@ -136,6 +138,7 @@
           <div class="content" data-section-content>
             <form name="caddy-payment" id="caddy-payment" action="###TARGET###" method="post">
               <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3">
               <div class="row caddy_options">
                 <div id="caddy_payment" class="small-12 large-6 columns">
                   ###PAYMENT_RADIO###
