@@ -444,6 +444,11 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function htmlActiveMarker( $tmpl )
   {
+    if( isset ( t3lib_div::_GP( 'tx_powermail' ) ) )
+    {
+      return $tmpl;
+    }
+
       // Set default value;
     $accordion = 1;
     if( isset( $this->piVars['accordion'] ) )
