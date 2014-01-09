@@ -453,7 +453,11 @@ class tx_caddy_pi1 extends tslib_pibase
     
     $marker = '###CADDY_ACTIVE_' . $accordion . '###';
     
-    $tmpl = str_replace( $marker, 'active', $tmpl );
+    $tmpl = str_replace( $marker, ' active ', $tmpl );
+    $tmpl = str_replace( '  active', ' active', $tmpl );
+    $tmpl = str_replace( 'active  ', 'active ', $tmpl );
+    $tmpl = str_replace( '" active', '"active', $tmpl );
+    $tmpl = str_replace( 'active "', 'active"', $tmpl );
     
     return $tmpl;
   }
