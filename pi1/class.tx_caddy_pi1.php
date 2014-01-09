@@ -330,7 +330,10 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $payment = $this->piVars['payment'];
     }
-    $this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
+      // #54858, 140109, dwildt, 1-
+    //$this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
+      // #54858, 140109, dwildt, 1+
+    $this->session->paymentUpdate( $payment, $this->pid );
 
       // change shipping
       // #54858, 140109, dwildt, 1-
@@ -341,7 +344,10 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $shipping = $this->piVars['shipping'];
     }
-    $this->session->shippingUpdate( $this->piVars['shipping'], $this->pid );
+      // #54858, 140109, dwildt, 1-
+    //$this->session->shippingUpdate( $this->piVars['shipping'], $this->pid );
+      // #54858, 140109, dwildt, 1+
+    $this->session->shippingUpdate( $shipping, $this->pid );
 
       // change special
       // #54858, 140109, dwildt, 1-
@@ -352,7 +358,10 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $special = $this->piVars['specials'];
     }
-    $this->session->specialUpdate( $this->piVars['specials'], $this->pid );
+      // #54858, 140109, dwildt, 1-
+    //$this->session->specialUpdate( $this->piVars['specials'], $this->pid );
+      // #54858, 140109, dwildt, 1+
+    $this->session->specialUpdate( $specials, $this->pid );
   }
 
 
