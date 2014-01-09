@@ -2632,30 +2632,26 @@ plugin.tx_caddy_pi1 {
     }
     caddy_header_order = COA
     caddy_header_order {
-      wrap = <h2 class="order">|</h2>
+      wrap = <a href="#">|</a>
         // label
       10 = TEXT
       10 {
-        value = Your order
-        lang {
-          de = Ihre Bestellung
-          en = Your order
-        }
-        wrap  = <div class="h-accordion-label">|</div>
-      }
-        // content
-      20 = TEXT
-      20 {
+        wrap = <span class="small-7 large-7 columns">|</span>
         value = Amount
         lang {
           de = Summe
           en = Amount
         }
-        wrap  = <div class="h-accordion-content">|</div>
       }
-        // value
-      30 = COA
+        // &nbsp;
+      30 = TEXT
       30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
           // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
@@ -2675,7 +2671,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value">|</div>
+        wrap = <span class="small-2 large-2 columns">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
     caddy_header_paymentmethod = COA
