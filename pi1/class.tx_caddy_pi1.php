@@ -198,7 +198,10 @@ class tx_caddy_pi1 extends tslib_pibase
     $marker   = $caddy['marker'];
     $subparts = $caddy['subparts'];
     $tmpl     = $caddy['tmpl'];
-var_dump( __METHOD__, __LINE__ , $tmpl );
+    
+      // 140109, dwildt, 1+
+    $tmpl     = $this->htmlActiveMarker( $tmpl );
+//var_dump( __METHOD__, __LINE__ , $tmpl );
     unset( $caddy );
 
     $content = $this->powermail->formCss( $content );
@@ -361,7 +364,7 @@ var_dump( __METHOD__, __LINE__ , $tmpl );
       // #54858, 140109, dwildt, 1-
     //$this->session->specialUpdate( $this->piVars['specials'], $this->pid );
       // #54858, 140109, dwildt, 1+
-    $this->session->specialUpdate( $specials, $this->pid );
+    $this->session->specialUpdate( $special, $this->pid );
   }
 
 
@@ -420,6 +423,39 @@ var_dump( __METHOD__, __LINE__ , $tmpl );
     t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
     t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
       // output debug prompt
+  }
+
+
+
+  /***********************************************
+  *
+  * HTML
+  *
+  **********************************************/
+
+ /**
+  * htmlActiveMarker( ) : Replace the ###ACTIVE### marker
+  *
+  * @param      string    $tmpl: current template
+  * @return	string    $tmpl: handled template
+  * @access private
+  * @version    4.0.4
+  * @since      4.0.4
+  */
+  private function htmlActiveMarker( $tmpl )
+  {
+      // Set default value;
+    $accordion = 1;
+    if( isset( $this->piVars['accordion'] ) )
+    {
+      $accordion = ( int ) $this->piVars['accordion'];
+    }
+    
+    $marker = '###CADDY_ACTIVE_' . $accordion . '###';
+    
+    $tmpl = str_replace( $marker, 'active', $tmpl );
+    
+    return $tmpl;
   }
 
 
