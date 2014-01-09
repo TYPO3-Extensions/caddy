@@ -198,7 +198,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $marker   = $caddy['marker'];
     $subparts = $caddy['subparts'];
     $tmpl     = $caddy['tmpl'];
-//var_dump( __METHOD__, __LINE__ , $caddy ) ;      
+var_dump( __METHOD__, __LINE__ , $tmpl );
     unset( $caddy );
 
     $content = $this->powermail->formCss( $content );
