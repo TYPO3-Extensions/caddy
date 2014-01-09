@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -91,7 +91,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	4.0.4
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -309,7 +309,7 @@ class tx_caddy_pi1 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    4.0.4
   * @since      2.0.0
   */
   private function caddyUpdateOptions( )
@@ -322,7 +322,10 @@ class tx_caddy_pi1 extends tslib_pibase
       // RETURN : Don't update options, if form isnt by itself 
 
       // change payment
-    $payment = null;
+      // #54858, 140109, dwildt, 1-
+    //$payment = null;
+      // #54858, 140109, dwildt, 1+
+    $payment = $this->session->paymentGet( $this->pid );
     if( isset( $this->piVars['payment'] ) )
     {
       $payment = $this->piVars['payment'];
@@ -330,7 +333,10 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
 
       // change shipping
-    $shipping = null;
+      // #54858, 140109, dwildt, 1-
+    //$shipping = null;
+      // #54858, 140109, dwildt, 1+
+    $shipping = $this->session->shippingGet( $this->pid );
     if( isset( $this->piVars['shipping'] ) )
     {
       $shipping = $this->piVars['shipping'];
@@ -338,7 +344,10 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->session->shippingUpdate( $this->piVars['shipping'], $this->pid );
 
       // change special
-    $special = null;
+      // #54858, 140109, dwildt, 1-
+    //$special = null;
+      // #54858, 140109, dwildt, 1+
+    $special = $this->session->specialGet( $this->pid );
     if( isset( $this->piVars['specials'] ) )
     {
       $special = $this->piVars['specials'];
