@@ -444,7 +444,7 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function htmlActiveMarker( $tmpl )
   {
-    if( isset ( t3lib_div::_GP( 'tx_powermail' ) ) )
+    if( isset ( t3lib_div::_GP( 'tx_powermail_pi1' ) ) )
     {
       return $tmpl;
     }
