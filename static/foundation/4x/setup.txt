@@ -2621,15 +2621,6 @@ plugin.tx_caddy_pi1 {
         wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
-    caddy_header_powermail = TEXT
-    caddy_header_powermail {
-      wrap = <h2 class="powermail"><div class="h-accordion-label">|</div></h2>
-      value = Your data, power of revocation
-      lang {
-        de = Ihre Daten, Widerrufsbelehrung
-        en = Your data, power of revocation
-      }
-    }
     caddy_header_order = COA
     caddy_header_order {
       wrap = <a href="#">|</a>
@@ -2738,6 +2729,15 @@ plugin.tx_caddy_pi1 {
       50 {
         value = &nbsp;
         wrap  = <span class="small-1 large-1 columns">|</span>
+      }
+    }
+    caddy_header_powermail = TEXT
+    caddy_header_powermail {
+      wrap = <a href="#"><span class="small-7 large-7 columns">|</span></a>
+      value = Your data, power of revocation
+      lang {
+        de = Ihre Daten, Widerrufsbelehrung
+        en = Your data, power of revocation
       }
     }
       // item || items
