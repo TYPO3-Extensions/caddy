@@ -2562,7 +2562,7 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns">|</span>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
       }
         // &nbsp;
       50 = TEXT
@@ -2612,7 +2612,7 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns">|</span>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
       }
         // &nbsp;
       50 = TEXT
@@ -2662,7 +2662,7 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns">|</span>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
       }
         // &nbsp;
       50 = TEXT
@@ -2722,7 +2722,7 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns">|</span>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
       }
         // &nbsp;
       50 = TEXT
