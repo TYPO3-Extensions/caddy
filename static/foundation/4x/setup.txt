@@ -205,11 +205,6 @@ plugin.tx_caddy_pi1 {
         // net costs of the item
       net < .gross
       net.10.userFunc.number.field = net
-        // uid of the item
-      uid = TEXT
-      uid {
-        field = uid
-      }
         // quantity of the item
       qty = TEXT
       qty {
@@ -281,6 +276,7 @@ plugin.tx_caddy_pi1 {
           additionalParams {
             wrap  = &tx_browser_pi1[showUid]=|
             field = {$plugin.caddy.db.table}.uid
+            field = uid
           }
           useCacheHash = 1
           title {
@@ -291,6 +287,11 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
+      }
+        // uid of the item
+      uid = TEXT
+      uid {
+        field = uid
       }
     }
       // labels, rates, values

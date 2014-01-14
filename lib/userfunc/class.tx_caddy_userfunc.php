@@ -1025,13 +1025,6 @@ class tx_caddy_userfunc
             </div>
           </div>
           ';
-//        $prompt = $prompt . '
-//          <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
-//            <div class="message-body">
-//              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorIncludeCss4-6'). '
-//            </div>
-//          </div>
-//          ';
         break;
       case( $this->typo3Version < 4006000 ):
           // Greater than 4.7
@@ -1042,13 +1035,6 @@ class tx_caddy_userfunc
             </div>
           </div>
           ';
-//        $prompt = $prompt . '
-//          <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
-//            <div class="message-body">
-//              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorIncludeCss4-6'). '
-//            </div>
-//          </div>
-//          ';
         break;
       case( $this->typo3Version < 4007000 ):
           // Greater than 4.7
@@ -1059,13 +1045,6 @@ class tx_caddy_userfunc
             </div>
           </div>
           ';
-//        $prompt = $prompt . '
-//          <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
-//            <div class="message-body">
-//              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorIncludeCss4-6'). '
-//            </div>
-//          </div>
-//          ';
         break;
       case( $this->typo3Version < 4008000 ):
           // Greater than 4.7
@@ -1077,13 +1056,32 @@ class tx_caddy_userfunc
           </div>
           ';
         break;
-//      case( ( $this->typo3Version >= 4006000 ) && ( $this->typo3Version < 4007000 ) ):
+      case( $this->typo3Version < 6001000 ):
+          // Greater than 4.7
+        $prompt = $prompt . '
+          <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
+            <div class="message-body">
+              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorTYPO3version61smaller'). '
+            </div>
+          </div>
+          ';
+        break;
+      case( $this->typo3Version < 6002000 ):
+          // Greater than 4.7
+        $prompt = $prompt . '
+          <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
+            <div class="message-body">
+              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorTYPO3version62smaller'). '
+            </div>
+          </div>
+          ';
+        break;
       default:
           // Equal to 4.6
         $prompt = $prompt . '
           <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
             <div class="message-body">
-              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorTYPO3version48orGreater'). '
+              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorTYPO3version62orGreater'). '
             </div>
           </div>
           ';

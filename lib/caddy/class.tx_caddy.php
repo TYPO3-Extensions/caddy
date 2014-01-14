@@ -485,7 +485,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 1 );
     }
       // DRS
-
+//var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
       // FOREACH  : settings property
     foreach( array_keys( ( array ) $this->conf['marker.']['item.'] ) as $key )
     {
