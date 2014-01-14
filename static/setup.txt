@@ -252,13 +252,13 @@ plugin.tx_caddy_pi1 {
       title {
         field = title
         typolink {
-          parameter = {$plugin.caddy.pages.shop} - linktosingle
           additionalParams {
             wrap  = &tx_browser_pi1[showUid]=|
             field = {$plugin.caddy.db.table}.uid
             field = uid
           }
-          useCacheHash = 1
+          forceAbsoluteUrl = 1
+          parameter = {$plugin.caddy.pages.shop} - linktosingle
           title {
             value = Item
             lang {
@@ -266,6 +266,7 @@ plugin.tx_caddy_pi1 {
               en = Item
             }
           }
+          useCacheHash = 1
         }
       }
         // uid of the item
