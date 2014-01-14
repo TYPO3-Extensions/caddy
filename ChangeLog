@@ -4,6 +4,7 @@ TODO
 4.0.4
   2014-01-03
   Features
+  * #54968: Powermail improvement
   * #54967: Responsive framework foundation
   * #54858: Split the form in different parts
   * #54832: Another label wrap for radiobuttons and checkboxes  * #i0047: Foundation
