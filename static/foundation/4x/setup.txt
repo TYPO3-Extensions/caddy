@@ -276,6 +276,21 @@ plugin.tx_caddy_pi1 {
       title = TEXT
       title {
         field = title
+        typolink {
+          parameter = {$plugin.caddy.pages.shop} - linktosingle
+          additionalParams {
+            wrap  = &tx_browser_pi1[showUid]=|
+            field = {$plugin.caddy.db.table}.uid
+          }
+          useCacheHash = 1
+          title {
+            value = Item
+            lang {
+              de = Artikel
+              en = Item
+            }
+          }
+        }
       }
     }
       // labels, rates, values

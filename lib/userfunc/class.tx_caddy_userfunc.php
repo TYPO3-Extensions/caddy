@@ -1085,6 +1085,7 @@ class tx_caddy_userfunc
             <div class="message-body">
               ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEvaluatorTYPO3version48orGreater'). '
             </div>
+          </div>
           ';
         break;
     }
