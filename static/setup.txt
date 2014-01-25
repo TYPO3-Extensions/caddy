@@ -142,9 +142,34 @@ plugin.tx_caddy_pi1 {
         imageLinkWrap = 1
         imageLinkWrap {
           enable = 1
-          typolink.parameter.data = page:alias//TSFE:id
-          typolink.additionalParams.wrap = &tx_caddy_pi1[del]=|
-          typolink.additionalParams.field = uid
+          typolink {
+            parameter {
+              cObject = COA
+              cObject {
+                  // URL
+                10 = TEXT
+                10 {
+                  data = page:alias//TSFE:id
+                }
+                  // target
+                20 = TEXT
+                20 {
+                  value       = -
+                  noTrimWrap  = | ||
+                }
+                  // class
+                30 = TEXT
+                30 {
+                  value       = onClickloadCaddyByAjax 
+                  noTrimWrap  = | ||
+                }
+              }
+            }
+            additionalParams {
+              wrap  = &tx_caddy_pi1[del]=|
+              field = uid
+            }
+          }
         }
       }
         // gross costs of the item
@@ -180,11 +205,6 @@ plugin.tx_caddy_pi1 {
         // net costs of the item
       net < .gross
       net.10.userFunc.number.field = net
-        // uid of the item
-      uid = TEXT
-      uid {
-        field = uid
-      }
         // quantity of the item
       qty = TEXT
       qty {
@@ -415,35 +435,64 @@ plugin.tx_caddy_pi1 {
         optionsspecialssumtaxreduced  < .optionspaymentsumgross
         optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
 
+          // Sum gross of items
         sumitemsgross         < .optionspaymentsumgross
         sumitemsgross.10.userFunc.number.field        = sumitemsgross
+          // Sum net of items
         sumitemsnet           < .optionspaymentsumgross
         sumitemsnet.10.userFunc.number.field          = sumitemsnet
+          // Sum tax normal of items
         sumitemstaxnormal     < .optionspaymentsumgross
         sumitemstaxnormal.10.userFunc.number.field    = sumitemstaxnormal
+          // Sum reduced of items
         sumitemstaxreduced    < .optionspaymentsumgross
         sumitemstaxreduced.10.userFunc.number.field   = sumitemstaxreduced
 
+          // Sum gross of payment, shipping and specials
         sumoptionsgross       < .optionspaymentsumgross
         sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
+          // Sum net of payment, shipping and specials
         sumoptionsnet         < .optionspaymentsumgross
         sumoptionsnet.10.userFunc.number.field        = sumoptionsnet
+          // Sum tax normal of payment, shipping and specials
         sumoptionstaxnormal   < .optionspaymentsumgross
         sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
+          // Sum tax reduced of payment, shipping and specials
         sumoptionstaxreduced  < .optionspaymentsumgross
         sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
+
+          // Sum gross of options without payment
+        sumoptionswopaymentgross       < .optionspaymentsumgross
+        sumoptionswopaymentgross.10.userFunc.number.field      = sumoptionswopaymentgross
+          // Sum net of options without payment
+        sumoptionswopaymentnet         < .optionspaymentsumgross
+        sumoptionswopaymentnet.10.userFunc.number.field        = sumoptionswopaymentnet
+          // Sum tax normal of options without payment
+        sumoptionswopaymenttaxnormal   < .optionspaymentsumgross
+        sumoptionswopaymenttaxnormal.10.userFunc.number.field  = sumoptionswopaymenttaxnormal
+          // Sum tax reduced of options without payment
+        sumoptionswopaymenttaxreduced  < .optionspaymentsumgross
+        sumoptionswopaymenttaxreduced.10.userFunc.number.field = sumoptionswopaymenttaxreduced
+
+          // Quantity over all items
         sumsumqty = TEXT
         sumsumqty {
           field = sumsumqty
         }
+
+          // Sum gross over all 
         sumsumgross           < .optionspaymentsumgross
         sumsumgross.10.userFunc.number.field          = sumsumgross
+          // Sum net over all 
         sumsumnet             < .optionspaymentsumgross
         sumsumnet.10.userFunc.number.field            = sumsumnet
+          // Sum tax normal over all 
         sumsumtaxnormal       < .optionspaymentsumgross
         sumsumtaxnormal.10.userFunc.number.field      = sumsumtaxnormal
+          // Sum tax reduced over all 
         sumsumtaxreduced      < .optionspaymentsumgross
         sumsumtaxreduced.10.userFunc.number.field     = sumsumtaxreduced
+          // Sum tax over all 
         sumsumtaxsum          < .optionspaymentsumgross
         sumsumtaxsum.10.userFunc.number.field         = sumsumtaxsum
         target  = TEXT
@@ -477,7 +526,6 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
-            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 0.00
@@ -491,7 +539,6 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-            noTrimWrap = || (3 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 3.00
@@ -505,7 +552,6 @@ plugin.tx_caddy_pi1 {
           title = TEXT
           title {
             data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
-            noTrimWrap = || (15 {$plugin.caddy.main.currencySymbol})|
           }
             // extra cost (gross price) of payment method
           extra = 15.00
@@ -2403,61 +2449,117 @@ plugin.tx_caddy_pi1 {
     // linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
-      // label, content, value
-    caddy_header_items = COA
-    caddy_header_items {
-      wrap = <h2 class="current">|</h2>
+    caddy_buttonsubmit = COA
+    caddy_buttonsubmit {
         // label
       10 = TEXT
       10 {
-        value = Caddy
+        value = Order with costs
         lang {
-          de = Warenkorb
-          en = Caddy
+          de = Kostenpflichtig bestellen
+          en = Order with costs
         }
-        wrap  = <div class="h-accordion-label">|</div>
+        noTrimWrap = |<span class="label">|</span> |
       }
-        // quantity, item || items
-      20 = COA
-      20 {
-        wrap = <div class="h-accordion-content">|</div>
-          // quantity
-        10 = TEXT
-        10 {
-          field       = sumsumqty
-          noTrimWrap  = || |
-        }
-          // item || items
-        20 = COA
-        20 {
-            // in case of one item
-          10 = TEXT
-          10 {
-            if {
-              value = 2 
-              isLessThan {
-                field = sumsumqty
-              }
-            }
-            data = LLL:EXT:caddy/pi3/locallang.xml:item
-          }
-            // in case of more than one item
-          20 = TEXT
-          20 {
-            if {
-              value = 2 
-              isLessThan {
-                field = sumsumqty
-              }
-              negate  = 1
-            }
-            data = LLL:EXT:caddy/pi3/locallang.xml:items
-          }
-        }
-      }
-        // value, currency
+        // value
       30 = COA
       30 {
+          // content
+        10 = TEXT
+        10 {
+          value = Amount
+          lang {
+            de = Summe
+            en = Amount
+          }
+          noTrimWrap = |(||
+        }
+          // value
+        20 = USER
+        20.userFunc = tx_caddy_userfunc->numberformat
+        20.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        30 = TEXT
+        30 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = ||)</span>|
+        }
+        wrap = <span class="value">|</span>
+      }
+    }
+      // label, content, value
+    caddy_header_items = COA
+    caddy_header_items {
+      wrap = <a href="#">|</a>
+        // label
+      10 = COA
+      10 {
+        wrap = <span class="small-7 large-7 columns">|</span>
+        10 = TEXT
+        10 {
+          value = Caddy
+          lang {
+            de = Warenkorb
+            en = Caddy
+          }
+          noTrimWrap = ||: |
+        }
+          // quantity, item || items
+        20 = COA
+        20 {
+            // quantity
+          10 = TEXT
+          10 {
+            field       = sumsumqty
+            noTrimWrap  = || |
+          }
+            // item || items
+          20 = COA
+          20 {
+              // in case of one item
+            10 = TEXT
+            10 {
+              if {
+                value = 2 
+                isLessThan {
+                  field = sumsumqty
+                }
+              }
+              data = LLL:EXT:caddy/pi3/locallang.xml:item
+            }
+              // in case of more than one item
+            20 = TEXT
+            20 {
+              if {
+                value = 2 
+                isLessThan {
+                  field = sumsumqty
+                }
+                negate  = 1
+              }
+              data = LLL:EXT:caddy/pi3/locallang.xml:items
+            }
+          }
+        }
+      }
+        // &nbsp;
+      30 = TEXT
+      30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
           // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
@@ -2477,31 +2579,37 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value">|</div>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
-    caddy_header_options = COA
-    caddy_header_options {
-      wrap = <h2>|</h2>
+    caddy_header_optionswopayment = COA
+    caddy_header_optionswopayment {
+      wrap = <a href="#">|</a>
         // label
       10 = TEXT
       10 {
-        value = Servicecosts
+        wrap = <span class="small-7 large-7 columns">|</span>
+        value = Costs for shipping and service
         lang {
-          de = Bestelloptionen
-          en = Servicecosts
+          de = Service- und Versandkosten
+          en = Costs for shipping and service
         }
-        wrap  = <div class="h-accordion-label">|</div>
       }
-        // content
-      20 = TEXT
-      20 {
-        value = &nbsp;
-        wrap  = <div class="h-accordion-content">|</div>
-      }
-        // value
-      30 = COA
+        // &nbsp;
+      30 = TEXT
       30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
           // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
@@ -2509,7 +2617,7 @@ plugin.tx_caddy_pi1 {
           drs           = {$plugin.caddy.debug.userfunc}
           number        = TEXT
           number {
-            field = sumoptionsgross
+            field = sumoptionswopaymentgross
           }
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}
@@ -2521,39 +2629,37 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value">|</div>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
       }
-    }
-    caddy_header_powermail = TEXT
-    caddy_header_powermail {
-      value = <h2>Adresse, Kontakt, Wiederrufsbelehrung</h2>
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
+      }
     }
     caddy_header_order = COA
     caddy_header_order {
-      wrap = <h2>|</h2>
+      wrap = <a href="#">|</a>
         // label
       10 = TEXT
       10 {
-        value = Your order
-        lang {
-          de = Ihre Bestellung
-          en = Your order
-        }
-        wrap  = <div class="h-accordion-label">|</div>
-      }
-        // content
-      20 = TEXT
-      20 {
+        wrap = <span class="small-7 large-7 columns">|</span>
         value = Amount
         lang {
           de = Summe
           en = Amount
         }
-        wrap  = <div class="h-accordion-content">|</div>
       }
-        // value
-      30 = COA
+        // &nbsp;
+      30 = TEXT
       30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
           // value
         10 = USER
         10.userFunc = tx_caddy_userfunc->numberformat
@@ -2573,12 +2679,83 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <div class="h-accordion-value">|</div>
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
-    caddy_header_paymentmethod = TEXT
+    caddy_header_paymentmethod = COA
     caddy_header_paymentmethod {
-      value = <h2><div class="h-accordion-label">Zahlungsart</div><div class="h-accordion-content">Lastschrift</div><div class="h-accordion-value">0,00 &euro;</div></h2>
+      wrap = <a href="#">|</a>
+        // label
+      10 = COA
+      10 {
+        wrap = <span class="small-7 large-7 columns">|</span>
+          // label
+        10 = TEXT
+        10 {
+          value = Payment method
+          lang {
+            de = Zahlungsmethode
+            en = Payment method
+          }
+          noTrimWrap = ||: |
+        }
+          // content
+        20 = TEXT
+        20 {
+          field = optionspaymentlabel
+        }
+      }
+        // &nbsp;
+      30 = TEXT
+      30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = optionspaymentsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
+      }
+    }
+    caddy_header_powermail = TEXT
+    caddy_header_powermail {
+      wrap = <a href="#"><span class="small-7 large-7 columns">|</span></a>
+      value = Your data, power of revocation
+      lang {
+        de = Ihre Daten, Widerrufsbelehrung
+        en = Your data, power of revocation
+      }
     }
       // item || items
     caddy_item_label = COA
@@ -2605,6 +2782,42 @@ plugin.tx_caddy_pi1 {
           negate  = 1
         }
         data = LLL:EXT:caddy/pi3/locallang.xml:items
+      }
+    }
+    caddy_prompt_order = COA
+    caddy_prompt_order {
+        // label
+      10 = TEXT
+      10 {
+        value = Amount of your order
+        lang {
+          de = Gesamtsumme Ihrer Bestellung
+          en = Amount of your order
+        }
+        noTrimWrap = ||: |
+      }
+        // value, currency
+      20 = COA
+      20 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
       }
     }
       // label, icon. Replaces _HTMLMARKER_LINTOSHOP
@@ -2641,7 +2854,7 @@ plugin.tx_caddy_pi1 {
           }
         }
       }
-      wrap = <div class="linktoshop caddylinktoshop">|</div>
+      wrap = <div class="linktoshopwofloat linktoshop caddylinktoshop">|</div>
     }
   }
 }
