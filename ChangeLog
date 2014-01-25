@@ -2,8 +2,20 @@ TODO
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
 4.0.5
+  2014-01-25
+  Major Feature 
+  * #53678: e-payment
+            Integration of paymill step 2
+            * removing res/e-payment/paymill/paymill-php-3.0.2
   Feature 
   * #54999: Link to an item (to the single view)
+  Improvement
+  * #55322: Clean up TypoScript structur
+            Effected files:
+            * static
+              * 4.0.0             ( removed )
+              * constants.txt
+              * setup.txt
   Bugfixing
   * #i0047: Unproper form in the extension manager (TYPO3 6.x)
 
