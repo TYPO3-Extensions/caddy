@@ -123,10 +123,10 @@ plugin.caddy {
   # cat=caddy - html colors/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.color.sponsors = Click me!
 
-  # cat=caddy - marker//200;              type=options[CADDY,CADDYACCORDION];  label= Font family: The font family of your PDF attachments
+  # cat=caddy - html marker//200;              type=options[CADDY];  label= Subpart Marker: The subpart marker for the caddy in your Caddy HTML template. Usually ###CADDY###.
   html.marker.caddy = CADDY
-  # cat=caddy - marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  html.width.sponsors = Click me!
+  # cat=caddy - html marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  html.marker.sponsors = Click me!
 
   # cat=caddy - html width//200;              type=text;  label= Width column Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.qty = 10%

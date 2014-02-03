@@ -163,13 +163,13 @@ switch( true )
   default:
       // English
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy [1]');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy [1] + foundation 4.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy [1] + Foundation 4.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy [2] + German');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy [3] CSS (blue)');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy [3.1] + orange');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy [3.1] + green');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy [3.1] + red');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/foundation/4x/','Caddy [4] CSS foundation');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/foundation/4x/','Caddy [4] CSS Foundation 4.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy [5] Powermail 1.x');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy [5] Powermail 2.x Main');
     t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy [5.1] + Powermail 2.x CSS fancy');

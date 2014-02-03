@@ -92,11 +92,6 @@ TODO
 
 4.0.2
   2013-11-29
-  Bugfix
-  * #i0039: Caddy included TypoScript template for Caddy 4.x. Proper is tenplate for Caddy 2.x
-
-4.0.0
-  2013-11-28
   Major Feature 
   * #53678: e-payment
             Integration of paymill step 1
@@ -134,6 +129,8 @@ TODO
               * jquery.caddy-4.0.0 > jquery.caddy-3.0.0
             * static
               * setup.txt
+  Bugfix
+  * #i0039: Caddy included TypoScript template for Caddy 4.x. Proper is template for Caddy 2.x
 
 4.0.1
   2013-11-21

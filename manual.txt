@@ -1,8 +1,0 @@
-* e-payment
-  * :TODO: option costs won't calculated proper
-  * paymill with HTML foundation layout only, because without foundation there isn't any HTML layout
-    ? :TODO: extend default HTML layout for e-payment?
-* php
-  * you need curl
-* t3foundation 
-  * Foundation [2] 4x + Powermail 2x isn't compatible with TYPO3 4.x
