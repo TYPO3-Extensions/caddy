@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="creditcard">Credit card</label>
+      <label index="creditcard-cvc">CVC</label>
+      <label index="creditcard-cvc-tooltip">What is a CVV/CVC number? Prospective credit cards will have a 3 to 4-digit number, usually on the back of the card. It ascertains that the payment is carried out by the credit card holder and the card account is legitimate. On Visa the CVV (Card Verification Value) appears after and to the right of your card number. Same goes for Mastercard's CVC (Card Verfication Code), which also appears after and to the right of  your card number, and has 3-digits. Diners Club, Discover, and JCB credit and debit cards have a three-digit card security code which also appears after and to the right of your card number. The American Express CID (Card Identification Number) is a 4-digit number printed on the front of your card. It appears above and to the right of your card number. On Maestro the CVV appears after and to the right of your number. If you don’t have a CVV for your Maestro card you can use 000.</label>
+      <label index="creditcard-expiry">Expires</label>
+      <label index="creditcard-holder">Card holder</label>
+      <label index="creditcard-number">Card number</label>
+      <label index="creditcard-submit">Check credit card and select it</label>
+      <label index="currency">Currency</label>
+      <label index="elv-account">Account number</label>
+      <label index="elv-bankcode">Bank code</label>
+      <label index="elv-bankname">Bank name</label>
+      <label index="elv-bic">BIC</label>
+      <label index="elv-holder">Account holder</label>
+      <label index="elv-iban">IBAN</label>
+      <label index="elv-iban-holder">Account holder</label>
+      <label index="elv-paymentname">Direct debit</label>
+      <label index="elv-paymentname-iban">Direct debit (IBAN/BIC)</label>
+      <label index="elv-submit">Check data for the direct debit and enable it.</label>
+      <label index="elv-submit-iban">Check data for the direct debit (IBAN/BIC) and enable it.</label>
+      <label index="error-account-empty">Sorry: Account data are empty.</label>
+      <label index="error-assumption-new-object-with-wasted-token">Assumption: the e-payment interface tries to init paymill objects twice with the same token.</label>
+      <label index="error-invalid-amount-int">Value isn't an integer</label>
+      <label index="error-invalid-card-number">Invalid card number.</label>
+      <label index="error-invalid-card-cvc">Invalid CVC.</label>
+      <label index="error-invalid-card-expiry-date">Invalid expire date.</label>
+      <label index="error-invalid-card-holdername">Please enter the proper name of the card holder.</label>
+      <label index="error-invalid-currency">Please enter a proper currency.</label>
+      <label index="error-invalid-elv-accountnumber">Please enter a valid account number.</label>
+      <label index="error-invalid-elv-bankcode">Please enter a valid bank code.</label>
+      <label index="error-invalid-elv-bic">Please enter a valid BIC.</label>
+      <label index="error-invalid-elv-holder">Please enter the proper name of the account holder.</label>
+      <label index="error-invalid-elv-iban">Please enter a valid IBAN.</label>
+      <label index="error-invalid-elv-iban-holder">Please enter the proper name of the account holder.</label>
+      <label index="error-parameter-is-mandatory">Another payment isn't possible. The Paymill token is wasted.</label>
+      <label index="error-unknown_error">Undefined error: Maybe the Paymill public API key is missing in the form.</label>
+      <label index="paymill-live-mode">Enable live mode: Constant Editor > Category [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
+      <label index="paymill-test-mode">Paymill is running in test mode: Test it with the proposed data!</label>
+      <label index="prompt-creditcard-ok">The data of your credit card seem to be proper.</label>
+      <label index="prompt-elv-ok">Your data for the direct debit seem to be proper.</label>
+      <label index="prompt-elv-iban-ok">Your data for the direct debit (IBAN/BIC) seem to be proper.</label>
+      <label index="prompt-guineapig">Guinea pig</label>
+      <label index="prompt-paywith-creditcard">Payment method enabled: credit card.</label>
+      <label index="prompt-paywith-elv">Payment method enabled: direct debit.</label>
+      <label index="prompt-paywith-elv-iban">Payment method enabled: direct debit (IBAN/BIC).</label>
+      <label index="prompt-paywith-undefined">Error: payment method is undefined. Please send a report to the shop provider.</label>
+      <label index="prompt-send-bugreport">Please send a message, if the error occurs again. Sorry for the trouble.</label>
+      <label index="prompt-token-error">Error: your data seem to be unproper.</label>
+      <label index="prompt-token-info1">Please send your data again or take another payment method. </label>
+      <label index="prompt-token-info2">If the error occurs again, please send us a message. Sorry for the trouble.</label>
+      <label index="prompt-without-any-content">Empty prompt.</label>
+      <label index="transaction-error-undefined">Sorry: an unknown error occured.</label>
+      <label index="transaction-not-operated">Transaction isn't operated.</label>
+      <label index="transaction-todo-default"><![CDATA[You can do the following:
+      <ul style="margin-left:1em;padding:1em 0 0 0;">
+        <li>
+          go back to your order
+        </li>
+        <li>
+          reload the form with your mouse or the key <F5> or the keys <CTRL> + <R>
+        </li>
+        <li>
+          send your order again
+        </li>
+        <li>
+          if you will receive an error again, select another payment type.
+        </li>
+      </ul>
+      If the error occurs again, please send a message.
+      ]]></label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="creditcard">Kreditkarte</label>
+      <label index="creditcard-cvc">CVC</label>
+      <label index="creditcard-cvc-tooltip">Hinter dem CVV-Code bzw. CVC verbirgt sich ein Sicherheitsmerkmal von Kreditkarten, üblicherweise handelt es sich dabei um eine drei- bis vierstelligen Nummer. Der CVV-Code befindet sich auf VISA-Kreditkarten. Der gleiche Code ist auch auf MasterCard-Kreditkarten zu finden, hier allerdings unter dem Namen CVC. Die Abkürzung CVC steht dabei für Card Validation Code. Bei VISA wird der Code als Card Verification Value-Code bezeichnet. Ähnlich wie bei Mastercard und VISA gibt es auch bei Diners Club, Discover und JCB eine dreistellige  Nummer, die meist auf der Rückseite der Karte zu finden ist. Bei Maestro-Karten gibt es mit und ohne dreistelligen CVV. Wird eine Maestro-Karte ohne CVV verwendet kann einfach 000 eingetragen werden. American Express verwendet die CID (Card Identification Number). Dabei handelt es sich um eine vierstellige Nummer, die meist auf der Vorderseite der Karte, rechts oberhalb der Kartennummer zu finden ist.</label>
+      <label index="creditcard-expiry">Läuft ab</label>
+      <label index="creditcard-holder">Karteninhaber</label>
+      <label index="creditcard-number">Kartennummer</label>
+      <label index="creditcard-submit">Kreditkarte prüfen und auswählen</label>
+      <label index="currency">Währung</label>
+      <label index="elv-account">Kontonummer</label>
+      <label index="elv-bankcode">Bankleitzahl</label>
+      <label index="elv-bankname">Name der Bank</label>
+      <label index="elv-bic">BIC</label>
+      <label index="elv-holder">Kontoinhaber</label>
+      <label index="elv-iban">IBAN</label>
+      <label index="elv-iban-holder">Kontoinhaber</label>
+      <label index="elv-paymentname">Lastschrift</label>
+      <label index="elv-paymentname-iban">Lastschrift (IBAN/BIC)</label>
+      <label index="elv-submit">Bankverbindung prüfen und auswählen</label>
+      <label index="elv-submit-iban">Bankverbindung (IBAN/BIC) prüfen und auswählen</label>
+      <label index="error-account-empty">Sorry: Die Konto-Daten sind nicht gültig.</label>
+      <label index="error-assumption-new-object-with-wasted-token">Vermutung: Die E-Payment-Schnittstelle hat versucht, Paymill-Objekte zweimal mit dem selben Token zu erzeugen.</label>
+      <label index="error-invalid-amount-int">Der Wert ist kein Integer</label>
+      <label index="error-invalid-card-number">Ungültige Kartennummer.</label>
+      <label index="error-invalid-card-cvc">Ungültige CVC.</label>
+      <label index="error-invalid-card-expiry-date">Ungültiges Gültigkeitsdatum.</label>
+      <label index="error-invalid-card-holdername">Bitte geben Sie den korrekten Karteninhaber an.</label>
+      <label index="error-invalid-currency">Bitte geben Sie eine korrekte Währung an.</label>
+      <label index="error-invalid-elv-accountnumber">Bitte geben Sie eine gültige Kontonummer an.</label>
+      <label index="error-invalid-elv-bankcode">Bitte geben Sie eine gültige BLZ an.</label>
+      <label index="error-invalid-elv-bic">Bitte geben Sie eine gültige BIC ein.</label>
+      <label index="error-invalid-elv-holder">Bitte geben Sie den korrekten Karteninhaber an.</label>
+      <label index="error-invalid-elv-iban">Bitte geben Sie eine gültige IBAN ein.</label>
+      <label index="error-invalid-elv-iban-holder">Bitte geben Sie den korrekten Kontoinhaber an.</label>
+      <label index="error-parameter-is-mandatory">Eine (weitere) Zahlung ist nicht möglich. Der Paymill-Token ist verbraucht.</label>
+      <label index="error-unknown_error">Unbekannter Fehler: Möglicherweise fehlt im Formular der Paymill-Public-API-Key.</label>
+      <label index="paymill-live-mode">Live-Modus aktivieren: Konstanten Editor > Kategorie [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
+      <label index="paymill-test-mode">Paymill läuft im Test-Modus: Teste Zahlungen mit den vorgeschlagenen Daten!</label>
+      <label index="prompt-creditcard-ok">Ihre Kreditkarten-Daten wurden erfolgreich geprüft.</label>
+      <label index="prompt-elv-ok">Ihre Konto-Daten (Lastschrift) wurden erfolgreich geprüft.</label>
+      <label index="prompt-elv-iban-ok">Ihre Konto-Daten (Lastschrift IBAN/BIC) wurden erfolgreich geprüft.</label>
+      <label index="prompt-guineapig">Versuchskaninchen</label>
+      <label index="prompt-paywith-creditcard">Ausgewählte Zahlungsmethode: Ihre Kreditkarte. Sie können die Bestellung fortsetzen.</label>
+      <label index="prompt-paywith-elv">Ausgewählte Zahlungsmethode: Lastschrift. Sie können die Bestellung fortsetzen.</label>
+      <label index="prompt-paywith-elv-iban">Ausgewählte Zahlungsmethode: Lastschrift (IBAN/BIC). Sie können die Bestellung fortsetzen.</label>
+      <label index="prompt-paywith-undefined">Fehler: die Bezahlmethode ist unbekannt. Bitte informieren Sie den Shop-Betreiber.</label>
+      <label index="prompt-send-bugreport">Bitte benachrichtigen Sie uns, sollte der Fehler weiterhin auftreten. Entschuldigen Sie die Umstände.</label>
+      <label index="prompt-token-error">Fehler: Es scheint mit Ihren Daten etwas nicht zu stimmen.</label>
+      <label index="prompt-token-info1">Geben Sie Ihre Daten erneut ein oder wählen Sie eine andere Zahlungsmethode.</label>
+      <label index="prompt-token-info2">Bitte benachrichtigen Sie uns, falls der Fehler weiterhin auftritt. Entschuldigen Sie die Umstände.</label>
+      <label index="prompt-without-any-content">Leere Fehlermeldung.</label>
+      <label index="transaction-error-undefined">Entschuldigung: Es ist ein unbekannter Fehler aufgetreten.</label>
+      <label index="transaction-todo-default"><![CDATA[Das können Sie tun:<br />
+      <ul style="margin-left:1em;padding:1em 0 0 0;">
+        <li>
+          Gehen Sie zurück zu Ihrer Bestellung.
+        </li>
+        <li>
+          Laden Sie das Formular neu mit der Maus oder der Taste <F5> oder den Tasten <STRG> + <R>
+        </li>
+        <li>
+          Senden Sie Ihre Bestellung erneut ab.
+        </li>
+        <li>
+          Erhalten Sie weiterhin einen Fehler, ändern Sie Ihre Zahlungsmethode.
+        </li>
+      </ul>
+      Bitte benachrichtigen Sie uns, falls der Fehler weiterhin auftritt.
+      ]]></label>
+      <label index="transaction-not-operated">Es wurde keine Zahlung ausgelöst.</label>
+    </languageKey>
+  </data>
+</T3locallang>

@@ -113,6 +113,143 @@
         Please add the powermail form!
       ]]></label>
       <label index="promptCurrIPBody">Your current IP</label>
+      <label index="promptEpayment"><![CDATA[
+        <h1 style="text-align:left;">
+          E-Payment
+        </h1>
+        <h2 style="text-align:left;">
+          Configuration steps
+        </h2>
+        <p>
+          ...
+        </p>
+        <ol style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            Please include the static template of your e-payment provider.<br />
+            You will get the new category [CADDY - EPAYMENT <i>PROVIDER</i>] in your Constant Editor.
+          </li>
+          <li style="margin-bottom:.6em;">
+            Please configure than the new category [CADDY - EPAYMENT <i>PROVIDER</i>].<br />
+          </li>
+        </ol>
+        <p>
+          That's all.
+        </p>
+        <h2 style="text-align:left;">
+          More information about Caddy and e-payment
+        </h2>
+        <p>
+          <a href="../typo3conf/ext/caddy/doc/manual.pdf" 
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Caddy manual"
+            title="Caddy manual"
+            target="_blank">Caddy manual (PDF) &raquo;</a><br />
+            Look for the section e-payment.
+        </p>
+      ]]></label>
+      <label index="promptEpaymentPaymill"><![CDATA[
+        <h1 style="text-align:left;">
+          Paymill
+        </h1>
+        <p>
+          You need a Paymill account. The account is without costs in test mode.
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="https://www.paymill.com/en-gb/" 
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://www.paymill.com/en-gb/pricing/" 
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill pricing &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="https://app.paymill.com/en-gb/auth/register" 
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill register &raquo;</a>
+          </li>
+        </ul>
+        <p>
+          You have to enable Paymill with the Constant Editor > [CADDY - E-PAYMENT] > Provider: Paymill.<br />
+          Without enabling Paymill the configuration below won't have any effect.
+        </p>
+        <p>
+          You can use Paymill in a test mode and in a live mode:
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            Test mode: 
+            <ul style="list-style:outside;margin-left:2em;">
+              <li style="margin-bottom:.6em;">
+                Payment: You can check, if payment is proper. Paymill will display each transaction on the dashboard. <br />
+                BE AWARE that transactions hasn't any effect in test mode: You won't get any money!
+              </li>
+              <li style="margin-bottom:.6em;">
+                Shop: The test mode hasn't any effect to your shop! BE AWARE that customer can order and "pay" your items, but you won't get any money!
+              </li>
+            </ul>
+          </li>
+          <li style="margin-bottom:.6em;">
+            Live mode: 
+            <ul style="list-style:outside;margin-left:2em;">
+              <li style="margin-bottom:.6em;">
+                Payment: each transaction is a real transaction. You will receive the money at your bank account.<br />
+                BE AWARE: each transaction costs money!
+              </li>
+              <li style="margin-bottom:.6em;">
+                Shop: everything should run proper. A customer can order an item only, if he pays this items.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h1 style="text-align:left;">
+          No warranty - if you have any bug ...
+        </h1>
+        <p>
+          Caddy is open source software. You didn't pay anything for using this software. This is a big advantage. The disadvantage is: there isn't any warranty.
+        </p>
+        <p>
+          But if you have any bug, please report this bug at
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://forge.typo3.org/projects/extension-caddy" 
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy on TYPO3 forge"
+              title="Caddy on TYPO3 forge"
+              target="_blank">Caddy on TYPO3 forge &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://wildt.at.die-netzmacher.de/" 
+              alt="Send an e-mail to the developer of Caddy"
+              title="Send an e-mail to the developer of Caddy"
+              target="_blank">E-mail to Dirk Wildt - the developer of Caddy &raquo;</a>
+          </li>
+        </ul>
+        <h1 style="text-align:left;">
+          More information about Caddy and e-payment
+        </h1>
+        <p>
+          Please take a look in the manual:
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="../typo3conf/ext/caddy/doc/manual.pdf" 
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy manual"
+              title="Caddy manual"
+              target="_blank">Caddy manual (PDF) &raquo;</a>
+          </li>
+        </ul>
+      ]]></label>
       <label index="promptEvaluatorTYPO3version45smaller">Your are using a TYPO3 version smaller than 4.5. Caddy isn't tested in this version. Try it!</label>
       <label index="promptEvaluatorTYPO3version46smaller">You are using TYPO3 4.5. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version47smaller">You are using TYPO3 4.6. This is perfect!</label>

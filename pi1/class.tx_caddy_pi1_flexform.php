@@ -28,16 +28,21 @@
  *
  *
  *
- *   55: class tx_caddy_pi1_flexform
- *   87:     function main()
+ *   60: class tx_caddy_pi1_flexform
+ *  136:     function main()
  *
  *              SECTION: Sheets
- *  111:     private function sheetSdef( )
+ *  165:     private function sheetDeliveryorder( )
+ *  214:     private function sheetEmail( )
+ *  273:     private function sheetInvoice( )
+ *  322:     private function sheetOrigin( )
+ *  361:     private function sheetPaths( )
+ *  395:     private function sheetSdef( )
  *
  *              SECTION: Zz
- *  152:     public function zzFfValue( $sheet, $field, $drs=true )
+ *  436:     public function zzFfValue( $sheet, $field, $drs=true )
  *
- * TOTAL FUNCTIONS: 3
+ * TOTAL FUNCTIONS: 8
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -153,7 +158,6 @@ class tx_caddy_pi1_flexform
 /**
  * sheetDeliveryorder( )  :
  *
- *
  * @return	void
  * @version 2.0.0
  * @since   2.0.0
@@ -261,7 +265,6 @@ class tx_caddy_pi1_flexform
 
 /**
  * sheetInvoice( )  :
- *
  *
  * @return	void
  * @version 2.0.0

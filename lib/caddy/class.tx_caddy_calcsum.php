@@ -31,31 +31,45 @@
  *
  *
  *
- *   72: class tx_caddy_calcsum
+ *   86: class tx_caddy_calcsum
+ *
+ *              SECTION: Init
+ *  114:     private function init( )
+ *  128:     private function initInstances( )
+ *  160:     public function initPidCaddy( $pidCaddy )
  *
  *              SECTION: Main
- *  106:     public function sum( $items, $options )
+ *  192:     public function sum( $items, $options )
  *
  *              SECTION: Calculating Items
- *  144:     private function sumItems( $items )
+ *  238:     private function sumItems( $items )
  *
  *              SECTION: Calculating Options
- *  176:     private function sumOptions( $options )
- *  197:     private function sumOptionsGross( $options )
- *  216:     private function sumOptionsNet( $options )
- *  235:     private function sumOptionsTax( $options )
- *  255:     private function sumOptionsTaxNormal( $options )
- *  274:     private function sumOptionsTaxReduced( $options )
+ *  270:     private function sumOptions( $options )
+ *  291:     private function sumOptionsGross( $options )
+ *  310:     private function sumOptionsNet( $options )
+ *  329:     private function sumOptionsTax( $options )
+ *  352:     private function sumOptionsTaxNormal( $options )
+ *  371:     private function sumOptionsTaxReduced( $options )
+ *
+ *              SECTION: Calculating OptionsWoPayment
+ *  406:     private function sumOptionsWoPayment( $options )
+ *  427:     private function sumOptionsWoPaymentGross( $options )
+ *  445:     private function sumOptionsWoPaymentNet( $options )
+ *  463:     private function sumOptionsWoPaymentTax( $options )
+ *  486:     private function sumOptionsWoPaymentTaxNormal( $options )
+ *  504:     private function sumOptionsWoPaymentTaxReduced( $options )
  *
  *              SECTION: Calculating Sum
- *  310:     private function sumSum( $items, $options )
- *  332:     private function sumSumGross( $items, $options )
- *  351:     private function sumSumNet( $items, $options )
- *  370:     private function sumSumTax( $items, $options )
- *  391:     private function sumSumTaxNormal( $items, $options )
- *  410:     private function sumSumTaxReduced( $items, $options )
+ *  539:     private function sumSum( $items, $options )
+ *  563:     private function sumSumGross( $items, $options )
+ *  582:     private function sumSumNet( $items, $options )
+ *  600:     private function sumSumQty( )
+ *  625:     private function sumSumTax( $items, $options )
+ *  649:     private function sumSumTaxNormal( $items, $options )
+ *  668:     private function sumSumTaxReduced( $items, $options )
  *
- * TOTAL FUNCTIONS: 14
+ * TOTAL FUNCTIONS: 24
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -75,7 +89,7 @@ class tx_caddy_calcsum
   public  $extKey         = 'caddy';
   public  $prefixId       = 'tx_caddy_pi1';
   public  $scriptRelPath  = 'pi1/class.tx_caddy_pi1.php';
-  
+
   public  $drs            = null;
   private $initInstances  = null;
   private $pidCaddy       = null;
@@ -136,6 +150,7 @@ class tx_caddy_calcsum
  /**
   * initPidCaddy( )
   *
+  * @param	[type]		$$pidCaddy: ...
   * @return	void
   * @access public
   * @internal   #54628
@@ -147,8 +162,8 @@ class tx_caddy_calcsum
     $this->pidCaddy = $pidCaddy;
   }
 
-  
-  
+
+
   /***********************************************
   *
   * Main
@@ -178,7 +193,7 @@ class tx_caddy_calcsum
   {
       // #54628, 131229, dwildt, 1+
     $this->init( );
-    
+
     $sumItems             = $this->sumItems( $items );
     $sumOptions           = $this->sumOptions( $options );
       // #i0039, 131230, dwildt, 1+
@@ -524,7 +539,7 @@ class tx_caddy_calcsum
   private function sumSum( $items, $options )
   {
     $sum = array
-    ( 
+    (
         // #54628, 131229, dwildt, 1+
       'qty'   =>  $this->sumSumQty( ),
       'gross' =>  $this->sumSumGross( $items, $options ),
@@ -586,14 +601,14 @@ class tx_caddy_calcsum
   {
     $qty      = 0;
     $products = $this->session->productsGet( $this->pidCaddy );
-    
+
     foreach( ( array ) $products as  $product )
     {
         $qty  = $qty
               + $product['qty']
               ;
     }
-    
+
     return $qty;
   }
 

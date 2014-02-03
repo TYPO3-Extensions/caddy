@@ -36,6 +36,7 @@
       <label index="optionsnet">Service- and Shipping costs (net)</label>
       <label index="order">Order</label>
       <label index="ordernumber">Order number</label>
+      <label index="paymentEnterMethod">Please select a payment method.</label>
       <label index="paymentlabel">Type of billing</label>
       <label index="paymentoption_cashinadvance">Cash in advance</label>
       <label index="paymentoption_cashondelivery">Cash on delivery</label>      
@@ -51,6 +52,7 @@
       <label index="qty">Amount</label>
       <label index="service_each">each</label>
       <label index="service_from">from</label>
+      <label index="shippingEnterMethod">Please select a shipping method.</label>
       <label index="shippinglabel">Shipping</label>
       <label index="shippingoption_maildefault">Post</label>
       <label index="shippingoption_mailexpress">Post express</label>      
@@ -107,6 +109,7 @@
       <label index="optionsnet">Service- und Versandkosten (netto)</label>
       <label index="order">Bestellung</label>
       <label index="ordernumber">Bestellnummer</label>
+      <label index="paymentEnterMethod">Bitte wählen Sie eine Zahlungsmethode aus.</label>
       <label index="paymentlabel">Zahlung per</label>
       <label index="paymentoption_cashinadvance">Vorkasse</label>
       <label index="paymentoption_cashondelivery">Nachnahme</label>      
@@ -122,6 +125,7 @@
       <label index="qty">Menge</label>
       <label index="service_each">je</label>
       <label index="service_from">ab</label>
+      <label index="shippingEnterMethod">Bitte wählen Sie eine Versandart aus.</label>
       <label index="shippinglabel">Versand</label>
       <label index="shippingoption_maildefault">DHL Standard</label>
       <label index="shippingoption_mailexpress">DHL Express</label>      

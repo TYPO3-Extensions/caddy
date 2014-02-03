@@ -31,65 +31,76 @@
  *
  *
  *
- *  106: class tx_caddy_session
+ *  117: class tx_caddy_session
  *
- *              SECTION: Getting methods
- *  133:     private function getQuantityItems( )
- *  155:     public function getNumberDeliveryorder( )
- *  170:     public function getNumberInvoice( )
- *  185:     public function getNumberOrder( )
+ *              SECTION: Getting methods - user methods
+ *  147:     public function getNumberDeliveryorder( $content = '', $conf = array( ) )
+ *  182:     public function getNumberInvoice( $content = '', $conf = array( ) )
+ *  217:     public function getNumberOrder( $content = '', $conf = array( ) )
+ *  260:     private function getQuantityItems( $pid=null )
+ *  288:     private function getPid( $pid=null )
  *
  *              SECTION: Payment
- *  209:     public function paymentUpdate( $value )
- *  228:     public function paymentGet( )
+ *  330:     public function paymentUpdate( $value, $pid=null )
+ *  357:     public function paymentGet( $pid=null )
  *
  *              SECTION: Product
- *  260:     public function productAdd( $product )
- *  364:     public function productDelete( )
- *  428:     public function productGetDetails( $gpvar )
- *  449:     private function productsGetFirstKey( )
- *  467:     private function productGetDetailsSql($gpvar)
- *  520:     private function productGetDetailsTs( $gpvar )
- *  617:     private function productGetVariantGpvar( )
- *  650:     private function productGetVariantTs( $product )
- *  688:     private function productSetQuantity( $quantity, $uid )
- *  741:     public function productsGet( )
- *  755:     public function productsGetGross( $pid )
+ *  396:     public function productAdd( $newProduct, $pid=null )
+ *  467:     private function productAddRequirements( $product )
+ *  507:     public function productDelete( $pid=null )
+ *  588:     public function productGetDetails( $gpvar )
+ *  609:     private function productsGetFirstKey( )
+ *  627:     private function productGetDetailsSql( $gpvar )
+ *  757:     private function productGetDetailsSqlIsNotNeeded( )
+ *  813:     private function productGetDetailsTs( $gpvar )
+ * 1003:     private function productGetVariantGpvar( )
+ * 1037:     public function productGetVariantTs( $product )
+ * 1073:     public function productResetErrorPrompt( $products )
+ * 1095:     private function productSetQuantity( $quantity, $uid )
+ * 1155:     public function productsGet( $pid = null )
+ * 1172:     public function productsGetGross( $pid=null )
  *
  *              SECTION: Quantity
- *  795:     private function quantityCheckMinMax( $product )
- *  826:     private function quantityCheckMinMaxDrs( )
- *  872:     private function quantityCheckMinMaxItemMax( $product )
- *  941:     private function quantityCheckMinMaxItemMin( $product )
- * 1016:     private function quantityCheckMinMaxItemsMax( $product )
- * 1110:     private function quantityCheckMinMaxItemsMin( $product )
- * 1194:     private function quantityGet( )
- * 1230:     private function quantityGetAdd( )
- * 1268:     private function quantityGetDelete( )
- * 1292:     private function quantityGetUpdate( )
- * 1316:     private function quantityGetVariant( )
- * 1392:     public function quantityUpdate( )
+ * 1214:     private function quantityCheckMinMax( $product )
+ * 1245:     private function quantityCheckMinMaxDrs( )
+ * 1291:     private function quantityCheckMinMaxItemMax( $product )
+ * 1357:     private function quantityCheckMinMaxItemMin( $product )
+ * 1429:     private function quantityCheckMinMaxItemsMax( $product )
+ * 1523:     private function quantityCheckMinMaxItemsMin( $product )
+ * 1607:     private function quantityGet( )
+ * 1643:     private function quantityGetAdd( )
+ * 1702:     private function quantityGetDelete( )
+ * 1726:     private function quantityGetUpdate( )
+ * 1750:     private function quantityGetVariant( )
+ * 1830:     public function quantityUpdate( $pid = null )
  *
  *              SECTION: Session
- * 1551:     public function sessionDelete( $content = '', $conf = array( ) )
- * 1586:     private function sessionDeleteIncreaseNumbers( $drs )
+ * 2003:     public function sessionDelete( $content = '', $conf = array( ), $pid=null )
+ * 2044:     private function sessionDeleteIncreaseNumbers( $drs, $pid )
  *
  *              SECTION: Setting methods
- * 1654:     public function setParentObject( $pObj )
+ * 2115:     public function setParentObject( $pObj )
  *
  *              SECTION: Shipping
- * 1738:     public function shippingUpdate($value)
- * 1753:     public function shippingGet( )
+ * 2209:     public function shippingUpdate( $value, $pid=null )
+ * 2236:     public function shippingGet( $pid=null )
  *
  *              SECTION: Special
- * 1774:     public function specialUpdate($specials_arr)
- * 1789:     public function specialGet()
+ * 2266:     public function specialUpdate( $specials_arr, $pid=null )
+ * 2293:     public function specialGet( $pid=null )
+ *
+ *              SECTION: Variants
+ * 2323:     private function variantsInit( $newProductUid )
+ * 2403:     private function variantsMatched( $variants, $product )
+ * 2450:     private function variantsSet( $variants, $product )
  *
  *              SECTION: ZZ
- * 1817:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
- * 1878:     private function zz_sqlReplaceMarker( )
+ * 2485:     private function zz_commaToDot( $strWiComma )
+ * 2505:     private function zz_msg($str, $pos = 0, $die = 0, $prefix = 1, $id = '')
+ * 2561:     private function zz_mysqlEscapeString( $string )
+ * 2601:     private function zz_sqlReplaceMarker( )
  *
- * TOTAL FUNCTIONS: 38
+ * TOTAL FUNCTIONS: 47
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -125,7 +136,8 @@ class tx_caddy_session
 /**
  * getNumberDeliveryorder( )  : Get the current order number
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
+ * @param	[type]		$conf: ...
  * @return	string
  * @access public
  * @internal    #54634
@@ -136,7 +148,7 @@ class tx_caddy_session
   {
     unset( $content );
     $this->conf = $conf;
-        
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -145,7 +157,7 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
     $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
@@ -159,7 +171,8 @@ class tx_caddy_session
 /**
  * getNumberInvoice( )  : Get the current order number
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
+ * @param	[type]		$conf: ...
  * @return	string
  * @access public
  * @internal    #54634
@@ -170,7 +183,7 @@ class tx_caddy_session
   {
     unset( $content );
     $this->conf = $conf;
-        
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -179,7 +192,7 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
     $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
@@ -193,7 +206,8 @@ class tx_caddy_session
 /**
  * getNumberOrder( )  : Get the current order number
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
+ * @param	[type]		$conf: ...
  * @return	string
  * @access public
  * @internal    #54634
@@ -204,7 +218,7 @@ class tx_caddy_session
   {
     unset( $content );
     $this->conf = $conf;
-        
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -213,7 +227,7 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
     $pid = $this->getPid( );
 
     // #54634, 131128, dwildt, 1-
@@ -233,11 +247,11 @@ class tx_caddy_session
 //    }
     return $currentNumber;
   }
-  
+
 /**
  * getQuantityItems( )  : Get the amount of quantities
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
  * @return	integer		$quantityItems :
  * @access private
  * @version     3.0.1
@@ -265,7 +279,7 @@ class tx_caddy_session
 /**
  * getPid( )  : Returns the globlas tsfe id, if the given pid is null
  *
- * @param       integer         $pid  : given pid (may be null)
+ * @param	integer		$pid  : given pid (may be null)
  * @return	integer		$pid  : id of the page with the caddy plugin
  * @internal    #54634
  * @version     4.0.3
@@ -278,7 +292,7 @@ class tx_caddy_session
     {
       $pid = ( int ) $this->conf['userFunc.']['caddyPid'];
     }
-    
+
       // #i0045, 140103, dwildt, 1-
     //if( $pid === null )
       // #i0045, 140103, dwildt, 1+
@@ -306,8 +320,8 @@ class tx_caddy_session
 /**
  * paymentUpdate( ) : Change the payment method in session
  *
- * @param	integer	: $value
- * @param       integer : $pid   : uid of the page, which contains the caddy plugin
+ * @param	integer		: $value
+ * @param	integer		: $pid   : uid of the page, which contains the caddy plugin
  * @return	void
  * @access public
  * @version     3.0.1
@@ -334,7 +348,7 @@ class tx_caddy_session
 /**
  * paymentGet( )  : get the payment method from session
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
  * @access public
  * @version     3.0.1
@@ -372,11 +386,10 @@ class tx_caddy_session
  *      'sku' => 'P234whatever'
  *    )
  *
- * @param	array	: $newProduct :
- * @param       integer : $pid        : uid of the page, which contains the caddy plugin
+ * @param	array		: $newProduct :
+ * @param	integer		: $pid        : uid of the page, which contains the caddy plugin
  * @return	void
- * 
- * @access      public
+ * @access public
  * @version     3.0.1
  * @since       2.0.11
  */
@@ -404,8 +417,8 @@ class tx_caddy_session
       // remove product from current products, sum quantity
       // FOREACH  : current product
     foreach( ( array ) $currProducts as $key => $currProduct )
-    { 
-      $matchedVariants = $this->variantsMatched( $variants, $currProduct ); 
+    {
+      $matchedVariants = $this->variantsMatched( $variants, $currProduct );
 
       // all conditions fit
       if( $matchedVariants == count( $variants ) )
@@ -424,7 +437,7 @@ class tx_caddy_session
       // move comma to dot
     $newProduct['gross'] = $this->zz_commaToDot( $newProduct['gross'] );
 
-    $newProduct = $this->variantsSet( $variants, $newProduct ); 
+    $newProduct = $this->variantsSet( $variants, $newProduct );
 
       // add product to the session array
     $currProducts[ ] = $newProduct;
@@ -442,12 +455,11 @@ class tx_caddy_session
   }
 
 /**
- * productAddRequirements( ) : 
+ * productAddRequirements( ) :
  *
  * @param	array		$product:
- * @return	boolean         true, if requirements are matched
- * 
- * @access      private
+ * @return	boolean		true, if requirements are matched
+ * @access private
  * @internal    #i0024
  * @version     2.0.11
  * @since       2.0.11
@@ -477,9 +489,9 @@ class tx_caddy_session
         break;
     }
       // RETURN : without price or without title
-    
+
     unset( $product );
-    
+
     return true;
 
   }
@@ -487,7 +499,7 @@ class tx_caddy_session
  /**
   * productDelete( )  : Remove product from session with given uid
   *
-  * @param       integer : $pid   : uid of the page, which contains the caddy plugin
+  * @param	integer		: $pid   : uid of the page, which contains the caddy plugin
   * @return	void
   * @version  3.0.1
   * @since    1.4.6
@@ -510,10 +522,10 @@ class tx_caddy_session
 
     // loop every product
     foreach( array_keys( ( array ) $sesArray['products'] ) as $key )
-    { 
+    {
         // Reset error messages
       unset( $sesArray['products'][$key]['error'] );
-        
+
         // Counter for condition
       $int_counter = 0;
 
@@ -620,7 +632,7 @@ class tx_caddy_session
       return false;
     }
       // RETURN : any sql result isn't needed
-    
+
       // replace gp:marker and enable_fields:marker in $pObj->conf['db.']['sql']
     $this->zz_sqlReplaceMarker( );
       // #42154, 101218, dwildt, 1-
@@ -629,7 +641,7 @@ class tx_caddy_session
     $name   = $this->pObj->conf['db.']['sql'];
     $conf   = $this->pObj->conf['db.']['sql.'];
     $query  = $this->pObj->cObj->cObjGetSingle( $name, $conf );
-    
+
 
       // execute the query
     $res    = $GLOBALS['TYPO3_DB']->sql_query( $query );
@@ -646,7 +658,7 @@ class tx_caddy_session
         $prompt = $error;
         t3lib_div::devlog( '[ERROR/SQL] ' . $prompt, $this->extKey, 2 );
       }
-      
+
       $GP = t3lib_div::_GET( )
           + t3lib_div::_POST( )
           ;
@@ -661,7 +673,7 @@ class tx_caddy_session
               . '</pre>' . PHP_EOL
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
-              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . 'TYPO3 Caddy<br />' . PHP_EOL
               . __METHOD__ . ' (' . __LINE__ . ')'
               . '</p>' . PHP_EOL
               ;
@@ -692,7 +704,7 @@ class tx_caddy_session
       }
     }
       // WHILE  : get a row with a title field
-    
+
     if( empty( $row ) )
     {
       $GP = t3lib_div::_GET( )
@@ -710,7 +722,7 @@ class tx_caddy_session
               . '</pre>' . PHP_EOL
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db.sql<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
-              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . 'TYPO3 Caddy<br />' . PHP_EOL
               . __METHOD__ . ' (' . __LINE__ . ')'
               . '</p>' . PHP_EOL
               ;
@@ -735,10 +747,10 @@ class tx_caddy_session
   }
 
 /**
- * productGetDetailsSqlIsNotNeeded( )  : 
+ * productGetDetailsSqlIsNotNeeded( )  :
  *
- * @return  boolean         true, if SQL result is not needed
- * @access  private
+ * @return	boolean		true, if SQL result is not needed
+ * @access private
  * @version 2.0.11
  * @since   2.0.11
  */
@@ -756,7 +768,7 @@ class tx_caddy_session
         + t3lib_div::_POST( )
         ;
 //var_dump( $GP, $this->pObj->piVars );
-    
+
       // RETURN : no sql result needed
     switch( true )
     {
@@ -770,7 +782,7 @@ class tx_caddy_session
       case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
         // case is ordering is sent
       case( $GP['tx_powermail_pi1']['action'] == 'create' ):
-        // ordering is canceled 
+        // ordering is canceled
       case( $GP['tx_powermail_pi1']['action'] == 'form' ):
         return true;
         break;
@@ -783,9 +795,9 @@ class tx_caddy_session
         break;
     }
       // RETURN : no sql result needed
-    
+
     unset( $GP );
-    
+
     return false;
   }
 
@@ -818,15 +830,15 @@ class tx_caddy_session
     }
 
     $table  = $this->pObj->conf['db.']['table'];
-    $select = $table . '.' . $this->pObj->conf['db.']['title'] . ', ' 
-            . $table . '.' . $this->pObj->conf['db.']['gross'] . ', ' 
+    $select = $table . '.' . $this->pObj->conf['db.']['title'] . ', '
+            . $table . '.' . $this->pObj->conf['db.']['gross'] . ', '
             . $table . '.' . $this->pObj->conf['db.']['tax']
             ;
-    
+
     $sku = $this->pObj->conf['db.']['sku'];
     if( $sku != '' && $sku != '{$plugin.caddy.db.sku}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $sku
               ;
     }
@@ -834,49 +846,49 @@ class tx_caddy_session
     $min = $this->pObj->conf['db.']['min'];
     if( $min != '' && $min != '{$plugin.caddy.db.min}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $min
               ;
     }
-    
+
     $max = $this->pObj->conf['db.']['max'];
     if( $max != '' && $max != '{$plugin.caddy.db.max}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $max
               ;
     }
-    
+
     $service_attribute_1 = $this->pObj->conf['db.']['service_attribute_1'];
     if( $service_attribute_1 != '' && $service_attribute_1 != '{$plugin.caddy.db.service_attribute_1}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $service_attribute_1
               ;
     }
     $service_attribute_2 = $this->pObj->conf['db.']['service_attribute_2'];
     if( $service_attribute_2 != '' && $service_attribute_2 != '{$plugin.caddy.db.service_attribute_2}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $service_attribute_2
               ;
     }
     $service_attribute_3 = $this->pObj->conf['db.']['service_attribute_3'];
     if( $service_attribute_3 != '' && $service_attribute_3 != '{$plugin.caddy.db.service_attribute_3}' )
     {
-      $select = $select . ', ' 
+      $select = $select . ', '
               . $table . '.' . $service_attribute_3
               ;
     }
-    
+
       // #49428, 130628, dwildt, +
       // Load the TCA
     if( ! is_array( $GLOBALS[ 'TCA' ][ $table ][ 'columns' ] ) )
     {
-      t3lib_div::loadTCA( $table );    
+      t3lib_div::loadTCA( $table );
     }
       // Load the TCA
-    
+
       // Load language fields
     $languageField          = null;
     $transOrigPointerField  = null;
@@ -903,7 +915,7 @@ class tx_caddy_session
     switch( $boolIsTranslated )
     {
       case( true ):
-        $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR ' . $transOrigPointerField . '  = ' . $uid . ' ) ' 
+        $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR ' . $transOrigPointerField . '  = ' . $uid . ' ) '
                   . 'AND ' . $languageField . ' = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
                   . tslib_cObj::enableFields( $table )
                   ;
@@ -916,7 +928,7 @@ class tx_caddy_session
         break;
     }
       // andWhere in dependence of localisation status
-//    $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR l10n_parent = ' . $uid . ' ) ' 
+//    $where    = ' ( ' . $table . '.uid = ' . $uid . ' OR l10n_parent = ' . $uid . ' ) '
 //              . 'AND sys_language_uid = ' .$GLOBALS['TSFE']->sys_language_uid . ' '
 //              . tslib_cObj::enableFields( $table )
 //              ;
@@ -928,7 +940,7 @@ class tx_caddy_session
 
     $res    = $GLOBALS['TYPO3_DB']->exec_SELECTquery( $select, $table, $where, $groupBy, $orderBy, $limit );
     $error  = $GLOBALS['TYPO3_DB']->sql_error( );
-    
+
     if( $error )
     {
       $prompt = '<h1>caddy: SQL-Error</h1>' . PHP_EOL
@@ -937,7 +949,7 @@ class tx_caddy_session
               . '<p>' . PHP_EOL
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
-              . 'TYPO3 Caddy<br />' . PHP_EOL 
+              . 'TYPO3 Caddy<br />' . PHP_EOL
               . __METHOD__ . ' (' . __LINE__ . ')';
               ;
       die( $prompt );
@@ -1018,44 +1030,43 @@ class tx_caddy_session
  *
  * @param	array		$product: array with product uid, title, tax, etc...
  * @return	array		$arr_variants: array with variant key/value pairs
- * 
- * @access    public
+ * @access public
  * @version 2.0.11
  * @since 1.4.6
  */
     public function productGetVariantTs( $product )
     {
-        $arr_variants = null;
+      $arr_variants = null;
 
-        // return there isn't any variant
-        if (!is_array($this->pObj->conf['settings.']['variant.']))
-        {
-            return $arr_variants;
-        }
-        // return there isn't any variant
+      // return there isn't any variant
+      if (!is_array($this->pObj->conf['settings.']['variant.']))
+      {
+          return $arr_variants;
+      }
+      // return there isn't any variant
 
-        // loop through ts array variant
-        foreach ($this->pObj->conf['settings.']['variant.'] as $key_variant)
-        {
-            // product contains variant key from ts
-            if (in_array($key_variant, array_keys($product)))
-            {
-                $arr_variants[$key_variant] = $product[$key_variant];
-                if (empty($arr_variants[$key_variant]))
-                {
-                    unset($arr_variants[$key_variant]);
-                }
-            }
-        }
+      // loop through ts array variant
+      foreach ($this->pObj->conf['settings.']['variant.'] as $key_variant)
+      {
+          // product contains variant key from ts
+          if (in_array($key_variant, array_keys($product)))
+          {
+              $arr_variants[$key_variant] = $product[$key_variant];
+              if (empty($arr_variants[$key_variant]))
+              {
+                  unset($arr_variants[$key_variant]);
+              }
+          }
+      }
 
-        return $arr_variants;
+      return $arr_variants;
     }
 
 /**
  * productResetErrorPrompt( )  :
  *
  * @param	array		$products:
- * @return	array           $products:
+ * @return	array		$products:
  * @version     2.0.11
  * @since       1.4.6
  */
@@ -1063,11 +1074,11 @@ class tx_caddy_session
   {
       // FOREACH  : current product
     foreach( array_keys( ( array ) $products ) as $product )
-    { 
+    {
         // Reset error messages
       unset( $products[ $product ][ 'error' ] );
     }
-    
+
     return $products;
   }
 
@@ -1136,8 +1147,8 @@ class tx_caddy_session
 /**
  * productsGet( ) : Read products from session
  *
- * @param      integer : $pidCaddy : uid of the page, which contains the caddy plugin
- * @return	array   : $arr      : array with all products from session
+ * @param	integer		: $pidCaddy : uid of the page, which contains the caddy plugin
+ * @return	array		: $arr      : array with all products from session
  * @version    3.0.1
  * @since      2.0.0
  */
@@ -1153,7 +1164,7 @@ class tx_caddy_session
  * productsGetGross( )  : Count gross price of all products in a cart
  *                        Is used by pi3 only
  *
- * @param       integer : $pidCaddy : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pidCaddy : uid of the page, which contains the caddy plugin
  * @return	integer
  * @version    3.0.1
  * @since      2.0.0
@@ -1635,7 +1646,7 @@ class tx_caddy_session
     $quantityAdd = ( int ) $this->pObj->gpvar['qty'];
     $quantityAll = 0;
     $quantitySum = 0;
-    
+
       // DRS
     if( $this->drs->drsCalc )
     {
@@ -1818,7 +1829,7 @@ class tx_caddy_session
   // #54634, 131128, dwildt, 1+
   public function quantityUpdate( $pid = null )
   {
-    $pid = $this->getPid( $pid );    
+    $pid = $this->getPid( $pid );
     // variants
     // add variant key/value pairs from piVars
     $arr_variant = $this->quantityGetVariant( );
@@ -1981,9 +1992,9 @@ class tx_caddy_session
  /**
   * sessionDelete( )
   *
-  * @param	string	: $content  : current content (will be empty)
-  * @param	array   : $conf     : current TypoScript configuration
-  * @param      integer : $pid      : uid of the page, which contains the caddy plugin
+  * @param	string		: $content  : current content (will be empty)
+  * @param	array		: $conf     : current TypoScript configuration
+  * @param	integer		: $pid      : uid of the page, which contains the caddy plugin
   * @return	void
   * @access public
   * @version    3.0.1
@@ -2024,6 +2035,7 @@ class tx_caddy_session
   * sessionDeleteIncreaseNumbers( )
   *
   * @param	[type]		$$drs: ...
+  * @param	[type]		$pid: ...
   * @return	void
   * @access private
   * @version    2.0.0
@@ -2188,15 +2200,15 @@ class tx_caddy_session
 /**
  * shippingUpdate( )  : Change the shipping method in session
  *
- * @param	integer : 
- * @param       integer : $pid      : uid of the page, which contains the caddy plugin
+ * @param	integer		:
+ * @param	integer		: $pid      : uid of the page, which contains the caddy plugin
  * @return	void
  * @version     3.0.1
  * @since       1.4.0
  */
   public function shippingUpdate( $value, $pid=null )
   {
-    $pid = $this->getPid( $pid );    
+    $pid = $this->getPid( $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
@@ -2216,14 +2228,14 @@ class tx_caddy_session
 /**
  * shippingGet( ) : Get the shipping method from session
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
  * @version     3.0.1
  * @since       1.4.0
-*/
+ */
   public function shippingGet( $pid=null )
   {
-    $pid = $this->getPid( $pid );    
+    $pid = $this->getPid( $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
@@ -2245,15 +2257,15 @@ class tx_caddy_session
 /**
  * specialUpdate( ) : Change the special method in session
  *
- * @param	array	: $arr  : array to change
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	array		: $arr  : array to change
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
  * @return	void
  * @version     3.0.1
  * @since       1.4.0
  */
   public function specialUpdate( $specials_arr, $pid=null )
   {
-    $pid = $this->getPid( $pid );    
+    $pid = $this->getPid( $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
@@ -2273,14 +2285,14 @@ class tx_caddy_session
 /**
  * specialGet( )  : get the special method from session
  *
- * @param       integer : $pid  : uid of the page, which contains the caddy plugin
+ * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
  * @return	integer
  * @version     3.0.1
  * @since       1.4.0
  */
   public function specialGet( $pid=null )
   {
-    $pid = $this->getPid( $pid );    
+    $pid = $this->getPid( $pid );
 
     // get products from session
     // #54634, 131128, dwildt, 1-
@@ -2303,9 +2315,8 @@ class tx_caddy_session
  * variantsInit( )  :
  *
  * @param	array		$newProduct :
- * @return	array           $variants :
- * 
- * @access      private
+ * @return	array		$variants :
+ * @access private
  * @version     2.0.11
  * @since       2.0.11
  */
@@ -2329,7 +2340,7 @@ class tx_caddy_session
       return $variants;
     }
       // RETURN : variants aren't configured
-    
+
       // POST has precedence!
     $GP = t3lib_div::_POST( ) + t3lib_div::_GET( );
 
@@ -2361,9 +2372,9 @@ class tx_caddy_session
           // DRS
         continue;
       }
-      
+
       $variant = $this->zz_mysqlEscapeString( $GP[$table][$field] );
-      
+
         // DRS
       if( $this->drs->drsVariants )
       {
@@ -2375,18 +2386,17 @@ class tx_caddy_session
       $variants[$tableField] = $variant;
     }
       // FOREACH variant
-    
+
     return $variants;
   }
 
 /**
- * variantsMatched( ) 
+ * variantsMatched( )
  *
  * @param	array		$variants :
  * @param	array		$product  :
- * @return	integer         $matchedVariants
- * 
- * @access      private
+ * @return	integer		$matchedVariants
+ * @access private
  * @version     2.0.11
  * @since       2.0.11
  */
@@ -2404,7 +2414,7 @@ class tx_caddy_session
       }
     }
       // FOREACH variant
-    
+
       // DRS
     if( $this->drs->drsVariants )
     {
@@ -2428,13 +2438,12 @@ class tx_caddy_session
   }
 
 /**
- * variantsMatched( ) 
+ * variantsMatched( )
  *
  * @param	array		$variants :
  * @param	array		$product  :
- * @return	integer         $matchedVariants
- * 
- * @access      private
+ * @return	integer		$matchedVariants
+ * @access private
  * @version     2.0.11
  * @since       2.0.11
  */
@@ -2444,20 +2453,20 @@ class tx_caddy_session
     {
       return $product;
     }
-     
+
       // remove uid from variant array
     unset( $variants[ 'uid' ] );
 
-      // add variant 
+      // add variant
     foreach( $variants as $tableField => $variant )
     {
       $product[ $tableField ] = $variant;
     }
-    
+
     return $product;
   }
-  
-  
+
+
  /***********************************************
   *
   * ZZ
@@ -2468,8 +2477,7 @@ class tx_caddy_session
  * zz_commaToDot( ) :
  *
  * @param	string		$strWiComma :
- * @return      string          $strWiDot   :
- * 
+ * @return	string		$strWiDot   :
  * @access private
  * @version 2.0.0
  * @since 1.4.6
@@ -2477,10 +2485,10 @@ class tx_caddy_session
   private function zz_commaToDot( $strWiComma )
   {
     $strWiDot = str_replace( ',', '.', $strWiComma );
-    
+
     return $strWiDot;
   }
-  
+
 /**
  * returns message with optical flair
  *
@@ -2545,16 +2553,15 @@ class tx_caddy_session
  * variantsInit( )  :
  *
  * @param	string		$string :
- * @return	string           $string :
- * 
- * @access      private
+ * @return	string		$string :
+ * @access private
  * @version     2.0.11
  * @since       2.0.11
  */
   private function zz_mysqlEscapeString( $string )
   {
     $mysqlEscapeString = mysql_escape_string( $string );
-    
+
     if( $mysqlEscapeString )
     {
       return $mysqlEscapeString;

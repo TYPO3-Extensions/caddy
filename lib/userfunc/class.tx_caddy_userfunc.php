@@ -38,17 +38,65 @@
  *
  *
  *
- *   49: class tx_caddy_userfunc
- *   67:     function promptCheckUpdate()
- *  102:     function promptCurrIP()
+ *   97: class tx_caddy_userfunc
  *
- * TOTAL FUNCTIONS: 2
+ *              SECTION: Numberformat
+ *  171:     public function calcDueDate( $content = '', $conf = array( ) )
+ *  212:     public function calcMultiply( $content = '', $conf = array( ) )
+ *
+ *              SECTION: Database
+ *  262:     private function databaseCheck( )
+ *
+ *              SECTION: Empty
+ *  297:     private function emptyCheck( )
+ *
+ *              SECTION: Extension Management
+ *  344:     public function extMgmVersion( $_EXTKEY )
+ *
+ *              SECTION: Flexform
+ *  387:     private function flexformCheck( )
+ *  406:     private function flexformCheckAddresses( )
+ *  507:     private function flexformCheckEmailCustomeremail( )
+ *  541:     private function flexformCheckNoteNote( )
+ *
+ *              SECTION: Numberformat
+ *  582:     public function numberformat( $content = '', $conf = array( ) )
+ *
+ *              SECTION: Plugin 1 report
+ *  635:     public function pi1FfSdefReport( $plugin )
+ *  734:     private function pi1FfSdefReportInit( )
+ *  772:     private function pi1FfSdefReportInitDrs( )
+ *
+ *              SECTION: Powermail
+ *  841:     private function powermailCheck( )
+ *  863:     private function powermailCheckContent( )
+ *  899:     private function powermailCheckMarker( )
+ *
+ *              SECTION: Prompts
+ * 1029:     public function promptCurrIP( )
+ * 1051:     public function promptEpaymentPaymill()
+ * 1079:     public function promptEpayment()
+ * 1107:     public function promptEvaluatorTYPO3version()
+ * 1206:     public function promptExternalLinks()
+ * 1232:     public function promptSponsors()
+ *
+ *              SECTION: TYPO3
+ * 1266:     private function set_TYPO3Version( )
+ *
+ *              SECTION: Typoscript
+ * 1319:     private function typoscriptCheck( )
+ * 1347:     private function typoscriptInit( )
+ * 1376:     private function typoscriptInitPageObj( )
+ * 1398:     private function typoscriptInitPageUid( )
+ * 1438:     private function typoscriptInitTsObj( $arr_rows_of_all_pages_inRootLine )
+ *
+ * TOTAL FUNCTIONS: 28
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
 class tx_caddy_userfunc
 {
-  
+
  /**
   * Extension key
   *
@@ -62,28 +110,28 @@ class tx_caddy_userfunc
   * @var array
   */
   private $arr_extConf = null;
-  
+
  /**
   * Plugin / flexform configuration
   *
   * @var array
   */
   private $plugin = null;
-  
+
  /**
   * Max width of div tags
   *
   * @var string
   */
   private $maxWidth = "600px";
-  
+
  /**
   * Version of TYPO3 (sample: 4.7.7 -> 4007007)
   *
   * @var string
   */
   public $typo3Version = null;
-  
+
   private $conf       = null;
   public $drs        = null;
   private $pid        = null;
@@ -107,17 +155,15 @@ class tx_caddy_userfunc
 //    $this->pObj = $pObj;
 //  }
 
-  
-  
+
+
   /***********************************************
    *
    * Numberformat
    *
    **********************************************/
-  
+
   /**
- * 
- *
  * @param	[type]		$$content: ...
  * @param	[type]		$conf: ...
  * @return	string		formatted number
@@ -126,7 +172,7 @@ class tx_caddy_userfunc
   {
     unset( $content );
     $conf       = $conf['userFunc.'];
-    
+
     $strtotime  = $conf['strtotime'];
     if( empty ( $strtotime ) )
     {
@@ -159,8 +205,6 @@ class tx_caddy_userfunc
     return $dueDate;
   }
   /**
- * 
- *
  * @param	[type]		$$content: ...
  * @param	[type]		$conf: ...
  * @return	string		formatted number
@@ -175,7 +219,7 @@ class tx_caddy_userfunc
     {
       $content  = ( double ) $local_cObj->cObjGetSingle( $conf['number'], $conf['number.'] ); // get number
     }
-    
+
     $content = $content * ( double ) $conf['multiplier'];
 
     $numberFormat =  number_format( $content, $conf['decimal'], $conf['dec_point'], $conf['thousands_sep'] );
@@ -198,20 +242,20 @@ class tx_caddy_userfunc
 
     return $numberFormat;
   }
-  
-  
-  
+
+
+
   /***********************************************
    *
    * Database
    *
    **********************************************/
-    
+
 /**
- * databaseCheck( ): 
+ * databaseCheck( ):
  *
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -232,24 +276,24 @@ class tx_caddy_userfunc
 
     return;
   }
- 
-  
-  
+
+
+
   /***********************************************
    *
    * Empty
    *
    **********************************************/
-  
+
   /**
-   * emptyCheck():
-   *
-   * @param   string    $prompt
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * emptyCheck():
+ *
+ * @param	string		$prompt
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function emptyCheck( )
   {
 //.message-notice
@@ -263,7 +307,7 @@ class tx_caddy_userfunc
       return null;
     }
       // RETURN : flexform isn't empty
-    
+
       // RETURN prompt : felxform is empty
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
@@ -273,12 +317,12 @@ class tx_caddy_userfunc
       </div>
       ';
       // RETURN prompt : felxform is empty
-    
+
     return $prompt;
   }
 
-  
-  
+
+
   /***********************************************
    *
    * Extension Management
@@ -291,8 +335,8 @@ class tx_caddy_userfunc
   *                   * int: 4007007
   *                   * str: 4.7.7
   *
-  * @param    string        $_EXTKEY    : extension key
-  * @return    array        $arrReturn  : version as int (integer) and str (string)
+  * @param	string		$_EXTKEY    : extension key
+  * @return	array		$arrReturn  : version as int (integer) and str (string)
   * @access public
   * @version 0.0.1
   * @since 0.0.1
@@ -300,7 +344,7 @@ class tx_caddy_userfunc
   public function extMgmVersion( $_EXTKEY )
   {
     $arrReturn = null;
-    
+
     if( ! t3lib_extMgm::isLoaded( $_EXTKEY ) )
     {
       $arrReturn['int'] = 0;
@@ -318,47 +362,47 @@ class tx_caddy_userfunc
     $intVersion = $intVersion + ( ( int ) $sub ) * 1000;
     $intVersion = $intVersion + ( ( int ) $bugfix ) * 1;
       // Set version as integer (sample: 4.7.7 -> 4007007)
-    
+
     $arrReturn['int'] = $intVersion;
     $arrReturn['str'] = $strVersion;
     return $arrReturn;
   }
- 
-  
-  
+
+
+
   /***********************************************
    *
    * Flexform
    *
    **********************************************/
-  
+
   /**
-   * flexformCheck():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * flexformCheck():
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function flexformCheck( )
   {
     $prompt = null;
-    
+
     $prompt = $this->flexformCheckEmailCustomeremail( )
             . $this->flexformCheckAddresses( )
             ;
 
     return $prompt;
-  }  
-  
+  }
+
   /**
-   * flexformCheckAddresses( ):
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * flexformCheckAddresses( ):
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function flexformCheckAddresses( )
   {
 //.message-notice
@@ -366,7 +410,7 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
-      
+
       // Sheet deliveryorder
     $sheet = 'deliveryorder';
     $field = 'company';
@@ -384,7 +428,7 @@ class tx_caddy_userfunc
     $field = 'country';
     $deliveryorderCountry   = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
       // Sheet deliveryorder
-      
+
       // Sheet invoice
     $sheet = 'invoice';
     $field = 'company';
@@ -423,7 +467,7 @@ class tx_caddy_userfunc
       default:
         return null;
     }
-    
+
     unset( $deliveryorderCompany );
     unset( $deliveryorderFirstname );
     unset( $deliveryorderLastname );
@@ -448,18 +492,18 @@ class tx_caddy_userfunc
       </div>
       ';
       // RETURN prompt : there isn't any flexform form
-    
+
     return $prompt;
   }
-  
+
   /**
-   * flexformCheckEmailCustomeremail( ):
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * flexformCheckEmailCustomeremail( ):
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function flexformCheckEmailCustomeremail( )
   {
     $sheet = 'email';
@@ -472,7 +516,7 @@ class tx_caddy_userfunc
       return null;
     }
       // RETURN : there is a flexform form
-    
+
       // RETURN prompt : there isn't any flexform form
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
@@ -482,18 +526,18 @@ class tx_caddy_userfunc
       </div>
       ';
       // RETURN prompt : there isn't any flexform form
-    
+
     return $prompt;
   }
-  
+
   /**
-   * flexformCheckNoteNote( ):
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * flexformCheckNoteNote( ):
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function flexformCheckNoteNote( )
   {
     $sheet    = 'note';
@@ -506,7 +550,7 @@ class tx_caddy_userfunc
       return null;
     }
       // RETURN : there is a flexform form
-    
+
       // RETURN prompt : there isn't any flexform form
     $prompt = '
       <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
@@ -516,18 +560,18 @@ class tx_caddy_userfunc
       </div>
       ';
       // RETURN prompt : there isn't any flexform form
-    
+
     return $prompt;
   }
- 
-  
-  
+
+
+
   /***********************************************
    *
    * Numberformat
    *
    **********************************************/
-  
+
   /**
  * number Format for typoscript
  *
@@ -567,27 +611,27 @@ class tx_caddy_userfunc
 
     return $numberFormat;
   }
-  
-  
-  
+
+
+
   /***********************************************
    *
    * Plugin 1 report
    *
-   **********************************************/    
+   **********************************************/
 
   /**
-   * pi1FfSdefReport()  : Check the configuration of
-   *                      * the plugin / flexform
-   *                      * the powermail form
-   *                      * the typoscript 
-   *
-   * @param    array        $plugin : Configuration of the plugin / flexform
-   * @return  string        $prompt         : Prompt
-   * @access  public
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * pi1FfSdefReport()  : Check the configuration of
+ *                      * the plugin / flexform
+ *                      * the powermail form
+ *                      * the typoscript
+ *
+ * @param	array		$plugin : Configuration of the plugin / flexform
+ * @return	string		$prompt         : Prompt
+ * @access public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   public function pi1FfSdefReport( $plugin )
   {
 //.message-notice
@@ -598,7 +642,7 @@ class tx_caddy_userfunc
 
     $this->plugin           = $plugin;
     $this->pluginPiFlexform = t3lib_div::xml2array( $this->plugin['row']['pi_flexform'] );
-    
+
     $prompt = null;
 
     $sheet            = 'sDEF';
@@ -619,7 +663,7 @@ class tx_caddy_userfunc
           </div>
         </div>
         ';
-      return $prompt;    
+      return $prompt;
     }
 
       // RETURN : Check it! report is disabled
@@ -639,7 +683,7 @@ class tx_caddy_userfunc
     $this->pi1FfSdefReportInit( );
 
     $prompt = null;
-    
+
     $prompt = $this->flexformCheckNoteNote( )
             . $this->typoscriptCheck( )
             . $this->databaseCheck( )
@@ -655,12 +699,12 @@ class tx_caddy_userfunc
           </div>
         </div>
         ';
-      return $prompt;    
+      return $prompt;
     }
 
       // OK prompt, if there isn't any other prompt
     if( empty( $prompt ) )
-    { 
+    {
       $prompt = '
         <div class="typo3-message message-ok" style="max-width:' . $this->maxWidth . ';">
           <div class="message-body">
@@ -675,17 +719,18 @@ class tx_caddy_userfunc
         ';
     }
       // OK prompt, if there isn't any other prompt
-    
+
     return $prompt;
   }
-  
+
   /**
-   * pi1FfSdefReportInit( ): Displays the quick start message.
-   *
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * pi1FfSdefReportInit( ): Displays the quick start message.
+ *
+ * @return	[type]		...
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function pi1FfSdefReportInit( )
   {
 //.message-notice
@@ -693,10 +738,10 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
-    
-    
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/'; 
-    
+
+
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
@@ -707,7 +752,7 @@ class tx_caddy_userfunc
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc         = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
-    
+
     $this->pi1FfSdefReportInitDrs( );
 
     $this->powermail->pObj  = $this;
@@ -715,14 +760,15 @@ class tx_caddy_userfunc
 
     return true;
   }
-  
+
   /**
-   * pi1FfSdefReportInitDrs( ): Displays the quick start message.
-   *
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * pi1FfSdefReportInitDrs( ): Displays the quick start message.
+ *
+ * @return	[type]		...
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function pi1FfSdefReportInitDrs( )
   {
     $sheet    = 'sDEF';
@@ -732,14 +778,14 @@ class tx_caddy_userfunc
     {
       $sdefDrs  = $this->pluginPiFlexform['data'][$sheet]['lDEF'][$field]['vDEF'];
     }
-    
-//var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );    
-    
+
+//var_dump( $sdefDrs, $this->plugin['row']['pi_flexform'] );
+
     if( empty( $sdefDrs ) )
     {
       return;
     }
-    
+
     $this->drs->zzDrsPromptsTrue( );
 
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform (backend mode).';
@@ -767,7 +813,7 @@ class tx_caddy_userfunc
 //    /* Pull the current fieldname and value from constants */
 //    $fieldName  = $params['fieldName'];
 //    $fieldValue = $params['fieldValue'];
-//    
+//
 //    $input = '<input style="margin-right: 3px;" name="'. $fieldName .'" value="'. $fieldValue .'" />';
 //
 //    /* @todo     Don't hardcode the inclusion of the wizard this way.  Use more backend APIs. */
@@ -775,23 +821,23 @@ class tx_caddy_userfunc
 //
 //    return $input.$wizard;
 //  }
- 
-  
-  
+
+
+
   /***********************************************
    *
    * Powermail
    *
    **********************************************/
-  
+
   /**
-   * powermailCheck():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * powermailCheck():
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function powermailCheck( )
   {
     $prompt = $this->powermailCheckContent( );
@@ -799,21 +845,21 @@ class tx_caddy_userfunc
     {
       return $prompt;
     }
-        
+
     $prompt = $this->powermailCheckMarker( );
 
     return $prompt;
-  }  
-  
+  }
+
   /**
-   * powermailCheckContent():
-   *
-   * @param   string    $prompt
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * powermailCheckContent():
+ *
+ * @param	string		$prompt
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function powermailCheckContent( )
   {
 //.message-notice
@@ -827,7 +873,7 @@ class tx_caddy_userfunc
       return null;
     }
       // RETURN : there is a powermail form
-    
+
       // RETURN prompt : there isn't any powermail form
     $prompt = '
       <div class="typo3-message message-error" style="max-width:' . $this->maxWidth . ';">
@@ -837,19 +883,19 @@ class tx_caddy_userfunc
       </div>
       ';
       // RETURN prompt : there isn't any powermail form
-    
+
     return $prompt;
   }
-  
-  
+
+
   /**
-   * powermailCheckMarker():
-   *
-   * @return  string    $prompt : message wrapped in HTML
-   * @access  private
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * powermailCheckMarker():
+ *
+ * @return	string		$prompt : message wrapped in HTML
+ * @access private
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   private function powermailCheckMarker( )
   {
 //.message-notice
@@ -857,7 +903,7 @@ class tx_caddy_userfunc
 //.message-ok
 //.message-warning
 //.message-error
-    $prompt = null; 
+    $prompt = null;
 
     switch( true )
     {
@@ -883,7 +929,7 @@ class tx_caddy_userfunc
         die( $prompt );
         break;
     }
-    
+
     if( ! $this->powermail->markerReceiver )
     {
       $prompt = $prompt . '
@@ -894,7 +940,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( $this->powermail->markerReceiverWtcart )
     {
       $prompt = $prompt . '
@@ -905,7 +951,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( ! $this->powermail->markerSender )
     {
       $prompt = $prompt . '
@@ -916,7 +962,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( $this->powermail->markerSenderWtcart )
     {
       $prompt = $prompt . '
@@ -927,7 +973,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( ! $this->powermail->markerSubjectReceiver )
     {
       $prompt = $prompt . '
@@ -938,7 +984,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( ! $this->powermail->markerSubjectSender )
     {
       $prompt = $prompt . '
@@ -949,7 +995,7 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     if( ! $this->powermail->markerThanks )
     {
       $prompt = $prompt . '
@@ -960,26 +1006,26 @@ class tx_caddy_userfunc
       </div>
       ';
     }
-    
+
     return $prompt;
   }
- 
-  
-  
+
+
+
   /***********************************************
    *
    * Prompts
    *
-   **********************************************/    
+   **********************************************/
 
   /**
-   * promptCurrIP( ): Displays the IP of the current backend user
-   *
-   * @return    string        message wrapped in HTML
-   * @access  public
-   * @version 0.0.1
-   * @since   0.0.1
-   */
+ * promptCurrIP( ): Displays the IP of the current backend user
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 0.0.1
+ * @since   0.0.1
+ */
   public function promptCurrIP( )
   {
       $prompt = null;
@@ -993,15 +1039,71 @@ class tx_caddy_userfunc
 
     return $prompt;
   }
-  
+
   /**
-   * promptEvaluatorTYPO3version(): Displays the quick start message.
-   *
-   * @return  string    message wrapped in HTML
-   * @access  public
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * promptEpaymentPaymill( ):
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 4.0.5
+ * @since   4.0.5
+ */
+  public function promptEpaymentPaymill()
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+      $prompt = null;
+
+      $prompt = $prompt . '
+          <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
+            <div class="message-body">
+              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEpaymentPaymill') . '
+            </div>
+          </div>';
+
+    return $prompt;
+  }
+
+  /**
+ * promptEpayment( ):
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 4.0.5
+ * @since   4.0.5
+ */
+  public function promptEpayment()
+  {
+//.message-notice
+//.message-information
+//.message-ok
+//.message-warning
+//.message-error
+
+      $prompt = null;
+
+      $prompt = $prompt . '
+          <div class="typo3-message message-information" style="max-width:' . $this->maxWidth . ';">
+            <div class="message-body">
+              ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptEpayment') . '
+            </div>
+          </div>';
+
+    return $prompt;
+  }
+
+  /**
+ * promptEvaluatorTYPO3version(): Displays the quick start message.
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   public function promptEvaluatorTYPO3version()
   {
 //.message-notice
@@ -1013,7 +1115,7 @@ class tx_caddy_userfunc
     $prompt = null;
 
     $this->set_TYPO3Version( );
-    
+
     switch( true )
     {
       case( $this->typo3Version < 4005000 ):
@@ -1087,20 +1189,20 @@ class tx_caddy_userfunc
           ';
         break;
     }
-        
+
     return $prompt;
   }
 
-  
-  
+
+
   /**
-   * promptExternalLinks(): Displays the quick start message.
-   *
-   * @return  string    message wrapped in HTML
-   * @access  public
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * promptExternalLinks(): Displays the quick start message.
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   public function promptExternalLinks()
   {
 //.message-notice
@@ -1112,21 +1214,21 @@ class tx_caddy_userfunc
       $prompt = null;
 
       $prompt = $prompt . '
-<div class="message-body" style="max-width:600px;">
+<div class="message-body" style="max-width:' . $this->maxWidth . ';">
   ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptExternalLinksBody') . '
 </div>';
 
     return $prompt;
   }
-  
+
   /**
-   * promptSponsors( ): Displays the quick start message.
-   *
-   * @return  string    message wrapped in HTML
-   * @access  public
-   * @version 2.0.0
-   * @since   2.0.0
-   */
+ * promptSponsors( ): Displays the quick start message.
+ *
+ * @return	string		message wrapped in HTML
+ * @access public
+ * @version 2.0.0
+ * @since   2.0.0
+ */
   public function promptSponsors()
   {
 //.message-notice
@@ -1138,29 +1240,29 @@ class tx_caddy_userfunc
       $prompt = null;
 
       $prompt = $prompt . '
-<div class="message-body" style="max-width:600px;">
+<div class="message-body" style="max-width:' . $this->maxWidth . ';">
   ' . $GLOBALS['LANG']->sL('LLL:EXT:caddy/lib/userfunc/locallang.xml:promptSponsors') . '
 </div>';
 
     return $prompt;
   }
-   
-  
-  
+
+
+
   /***********************************************
    *
    * TYPO3
    *
-   **********************************************/    
+   **********************************************/
 
  /**
-   * set_TYPO3Version( ):
-   *
-   * @return  void
-   * @access  private
-   * @version 2.0.0
-   * @since 2.0.0
-   */
+  * set_TYPO3Version( ):
+  *
+  * @return	void
+  * @access private
+  * @version 2.0.0
+  * @since 2.0.0
+  */
   private function set_TYPO3Version( )
   {
       // RETURN : typo3Version is set
@@ -1169,7 +1271,7 @@ class tx_caddy_userfunc
       return;
     }
       // RETURN : typo3Version is set
-    
+
       // Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
     list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
     $version = ( ( int ) $main ) * 1000000;
@@ -1197,20 +1299,20 @@ class tx_caddy_userfunc
       die ( $prompt );
     }
   }
-  
-  
-  
+
+
+
   /***********************************************
    *
    * Typoscript
    *
    **********************************************/
-    
+
 /**
- * typoscriptCheck( ): 
+ * typoscriptCheck( ):
  *
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -1230,15 +1332,15 @@ class tx_caddy_userfunc
         </div>
       </div>
       ';
-    
+
     return $prompt;
   }
-   
+
 /**
- * typoscriptInit( ): 
+ * typoscriptInit( ):
  *
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -1267,7 +1369,7 @@ class tx_caddy_userfunc
  * typoscriptInitPageObj(): Initiate an page object.
  *
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -1289,7 +1391,7 @@ class tx_caddy_userfunc
  * typoscriptInitPageUid(): Initiate the page uid.
  *
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -1329,7 +1431,7 @@ class tx_caddy_userfunc
  *
  * @param	array		$arr_rows_of_all_pages_inRootLine: Agregate the TypoScript of all pages in the rootline
  * @return	void
- * @access    private
+ * @access private
  * @version 2.0.0
  * @since 2.0.0
  */
@@ -1351,7 +1453,7 @@ class tx_caddy_userfunc
 
     return;
   }
-  
+
 
 
 }

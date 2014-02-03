@@ -1,35 +1,3 @@
-plugin
-  tx_caddy_pi1
-    conditions
-    db
-    debug
-    getpost
-    marker
-    options
-    pdf
-    pid
-    pluginCheck
-    symbols
-    templates
-    tax
-
-plugin
-  tx_caddy_pi1
-    api
-      conditions
-      getpost
-      marker
-      options
-      symbols
-      tax
-    db
-    debug
-    pdf
-    pid
-    pluginCheck
-    templates
-
-
 5.0.0
   Feature
   * #47014: Extend caddy for a localised powermail configuration

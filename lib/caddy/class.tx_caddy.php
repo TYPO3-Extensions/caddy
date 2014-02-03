@@ -30,105 +30,125 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *  145: class tx_caddy extends tslib_pibase
- *
- *              SECTION: Caddy
- *  210:     public function caddy( )
- *  245:     private function caddyWiMinPriceUndercut( )
- *  266:     private function caddyWiItems( )
- *  347:     private function caddyWiItemsFieldHidden( )
- *  362:     private function caddyWiItemsInCaseOfPaymentDEPRECATED( )
+ *  165: class tx_caddy extends tslib_pibase
+ *  243:     public function caddy( $pidCaddy=null )
+ *  287:     private function caddyWiMinPriceUndercut( )
+ *  308:     private function caddyWiItems( )
+ *  380:     private function caddyWiItemsEval( $caddy )
+ *  408:     private function caddyWiItemsEvalEpayment( )
+ *  434:     private function caddyWiItemsEvalEpaymentWiPowermailCreate( )
+ *  447:     private function caddyWiItemsEvalEpaymentWoPowermailCreate( )
+ *  472:     private function caddyWiItemsEvalPayment( )
+ *  492:     private function caddyWiItemsEvalShipping( )
+ *  524:     private function caddyWiItemsEvalPrompt( $caddy, $prompts )
+ *  558:     private function caddyWiItemsFieldHidden( )
  *
  *              SECTION: Caddy Marker
- *  428:     private function caddyWiItemsMarkerItems( $calcedCaddy )
- *  490:     private function caddyWiItemsMarkerItemsItem( $product )
- *  548:     private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
- *  582:     private function caddyWiItemsMarkerSumLabels( )
- *  629:     private function caddyWiItemsMarkerSumTaxRates( )
- *  676:     private function caddyWiItemsMarkerSumValues( )
+ *  583:     private function caddyWiItemsMarkerItems( $calcedCaddy )
+ *  627:     private function caddyWiItemsMarkerItemsItem( $product )
+ *  685:     private function caddyWiItemsMarkerItemsItemErrorMsg( $product )
+ *  719:     private function caddyWiItemsMarkerSumLabels( )
+ *  766:     private function caddyWiItemsMarkerSumTaxRates( )
+ *  813:     private function caddyWiItemsMarkerSumValues( )
  *
  *              SECTION: Caddy Options
- *  734:     private function caddyWiItemsOptions( $calcedCaddy )
- *  760:     private function caddyWiItemsOptionsPayment( $paymentId )
- *  785:     private function caddyWiItemsOptionsShipping( $shippingId )
- *  811:     private function caddyWiItemsOptionsSpecials( $specialIds )
- *  836:     private function caddyWiItemsItemServiceAttributes( $product )
- *  903:     private function caddyWiItemsSetSession( $calcedCaddy )
+ *  871:     private function caddyWiItemsOptions( $calcedCaddy )
+ *  898:     private function caddyWiItemsOptionsEpayment( $paymentId )
+ *  924:     private function caddyWiItemsOptionsEpaymentWiPowermailCreate( )
+ *  939:     private function caddyWiItemsOptionsEpaymentWiProvider( $paymentId )
+ *  967:     private function caddyWiItemsOptionsEpaymentWoProvider( )
+ *  986:     private function caddyWiItemsOptionsPayment( $paymentId )
+ * 1025:     private function caddyWiItemsOptionsShipping( $shippingId )
+ * 1056:     private function caddyWiItemsOptionsSpecials( $specialIds )
+ * 1086:     private function caddyWiItemsItemServiceAttributes( $product )
+ * 1153:     private function caddyWiItemsSetSession( $calcedCaddy )
+ * 1194:     private function caddyWiItemsSetSubpartsToNull( $caddy )
  *
  *              SECTION: Caddy without items (empty)
- *  945:     private function caddyWoItems( )
+ * 1234:     private function caddyWoItems( )
  *
  *              SECTION: Calculating
- *  977:     public function calc( )
+ * 1266:     private function calc( )
  *
  *              SECTION: Calculating Items
- * 1029:     private function calcItems( )
- * 1117:     private function calcItemsTax( $product )
+ * 1334:     private function calcItems( )
+ * 1421:     private function calcItemsTax( $product )
  *
  *              SECTION: Calculating Minimum Rate
- * 1183:     private function calcMinRateUndercut( $calcedCaddy )
+ * 1576:     private function calcMinRateUndercut( $calcedCaddy )
  *
  *              SECTION: Calculating Options
- * 1213:     private function calcOptionCosts( $optionType, $optionId )
- * 1264:     private function calcOptionCostsGross( $optionType, $optionId )
- * 1339:     private function calcOptionCostsGrossByExtra( $extras, $value )
- * 1406:     private function calcOptionCostsIsFree( $optionType, $optionId )
- * 1488:     private function calcOptions( )
- * 1508:     private function calcOptionsPayment( )
- * 1566:     private function calcOptionsShipping( )
- * 1624:     private function calcOptionsSpecials( )
+ * 1609:     private function calcOptionCosts( $optionType, $optionId )
+ * 1660:     private function calcOptionCostsGross( $optionType, $optionId )
+ * 1740:     private function calcOptionCostsGrossByExtra( $extras, $value )
+ * 1807:     private function calcOptionCostsIsFree( $optionType, $optionId )
+ * 1889:     private function calcOptions( )
+ * 1921:     private function calcOptionsEpayment( $paymentId )
+ * 1953:     private function calcOptionsPayment( )
+ * 2010:     private function calcOptionsShipping( )
+ * 2068:     private function calcOptionsSpecials( )
  *
  *              SECTION: Calculation Sum
- * 1688:     private function calcSum( $items, $options )
- * 1704:     private function calcSumInitInstance( )
+ * 2132:     private function calcSum( $items, $options )
+ * 2148:     private function calcSumInitInstance( )
  *
  *              SECTION: Getting methods
- * 1727:     public function getPaymentOptionLabelById( )
- * 1753:     public function getShippingOptionLabelById( )
- * 1779:     public function getSpecialOptionLabelsById( )
- * 1810:     private function getServiceAttributes( )
+ * 2173:     private function getEpaymentProvider( )
+ * 2208:     private function getPaymentOptionLabelById( $paymentId )
+ * 2240:     private function getPid( $pid )
+ * 2261:     private function getServiceAttributes( )
+ * 2294:     private function getShippingOptionLabelById( $paymentId )
+ * 2326:     private function getSpecialOptionLabelsById( $specialIds )
  *
  *              SECTION: Init
- * 1850:     private function init( )
- * 1868:     private function initDie( )
- * 1912:     private function initInstances( )
+ * 2377:     private function init( )
+ * 2396:     private function initDie( )
+ * 2442:     private function initEpayment( )
+ * 2469:     private function initInstances( )
  *
  *              SECTION: Options
- * 1959:     private function optionList( $optionType, $optionId )
+ * 2516:     private function optionList( $optionType, $optionId )
  *
  *              SECTION: Options Conditions
- * 2049:     private function optionListCondition( $keepingTheLimit, $optionType, $conf )
- * 2083:     private function optionListConditionByType( $condition, $optionType, $conf )
- * 2124:     private function optionListConditionGross( $optionItemKey, $optionType, $conf )
- * 2148:     private function optionListConditionGrossEach( $conf )
- * 2173:     private function optionListConditionGrossOther( $optionItemKey, $optionType )
- * 2198:     private function optionListConditionNotEach( $optionType, $conf )
- * 2226:     private function optionListGrossIsKeepingTheLimit( $confOption )
+ * 2619:     private function optionListCondition( $keepingTheLimit, $optionType, $conf )
+ * 2653:     private function optionListConditionByType( $condition, $optionType, $conf )
+ * 2694:     private function optionListConditionGross( $optionItemKey, $optionType, $conf )
+ * 2720:     private function optionListConditionGrossEach( $conf )
+ * 2747:     private function optionListConditionGrossOther( $optionItemKey, $optionType )
+ * 2774:     private function optionListConditionNotEach( $optionType, $conf )
+ * 2805:     private function optionListGrossIsKeepingTheLimit( $confOption )
+ * 2859:     private function optionListLabel( $optionItemConf )
  *
  *              SECTION: Options Marker
- * 2294:     private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $gross, $optionItemConf )
- * 2321:     private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
- * 2361:     private function optionListMarkerCondition( $optionType, $condition )
- * 2401:     private function optionListMarkerLabel( $optionType, $optionItemKey, $gross, $optionItemConf )
- * 2432:     private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
- * 2469:     private function optionListSymbolByExtra( $extraType )
+ * 2887:     private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $optionItemConf )
+ * 2938:     private function optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionIds )
+ * 2985:     private function optionListMarkerCondition( $optionType, $condition )
+ * 3027:     private function optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
+ * 3066:     private function optionListMarkerRadio( $keepingTheLimit, $optionType, $optionItemKey, $optionId )
+ * 3111:     private function optionListSymbolByExtra( $extraType )
+ * 3150:     private function powermailInActionCreate( )
  *
  *              SECTION: Setting methods
- * 2517:     public function setContentRow( $row )
- * 2540:     public function setParentObject( $pObj )
- * 2626:     public function setProducts( $products )
+ * 3191:     public function setContentRow( $row )
+ * 3214:     public function setParentObject( $pObj )
+ * 3244:     private function setParentObjectConf( $pObj )
+ * 3267:     private function setParentObjectCObj( $pObj )
+ * 3290:     private function setParentObjectDrs( $pObj )
+ * 3315:     private function setParentObjectLocalCObj( $pObj )
+ * 3338:     private function setParentObjectTemplate( $pObj )
+ * 3362:     public function setProducts( $products )
  *
  *              SECTION: ZZ
- * 2664:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
- * 2702:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
- * 2737:     private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
- * 2795:     private function zz_calcNet( $taxType, $gross )
- * 2841:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
- * 2863:     private function zz_price_format( $value )
- * 2901:     private function zz_setData( $data, $table )
- * 2929:     private function zz_setDataBySession( )
+ * 3400:     private function zz_addQtynameMarker($product, $markerArray, $pObj)
+ * 3438:     private function zz_addVariantGpvarToImagelinkwrap($product, $ts_key, $ts_conf, $pObj)
+ * 3473:     private function zz_checkOptionIsNotAvailable( $optionType, $optionId )
+ * 3531:     private function zz_calcNet( $taxType, $gross )
+ * 3577:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 3599:     private function zz_price_format( $value )
+ * 3637:     private function zz_setData( $data, $table )
+ * 3665:     private function zz_setDataBySession( )
  *
- * TOTAL FUNCTIONS: 64
+ * TOTAL FUNCTIONS: 86
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -159,6 +179,13 @@ class tx_caddy extends tslib_pibase
   private $caddyServiceAttribute3Sum  = 0;
   private $productsGross              = 0;
 
+    // #55333, 140125, dwildt, 4+
+  private $optionsEpaymentHtml      = null;
+  private $optionsPaymentAreEmpty   = false;
+  private $optionsShippingAreEmpty  = false;
+  private $optionsSpecialsAreEmpty  = false;
+
+
     // [array] current typoscript configuration
   public $conf = null;
 
@@ -173,8 +200,8 @@ class tx_caddy extends tslib_pibase
   private $pObj       = null;
   public  $cObj       = null;
   private $local_cObj = null;
-  
-  private $pidCaddy   = null;
+
+  public $pidCaddy   = null;
 
   // [object] parent powermail object
   private $powermail = null;
@@ -203,7 +230,7 @@ class tx_caddy extends tslib_pibase
 
  /**
   * caddy( )  : Returns a caddy with HTML form and HTML options among others
-  * 
+  *
   * @param      integer : $pidCaddy   : uid of the page, which contains the caddy plugin
   * @return	array	: $arrReturn  : array with elements caddy, tmpl, outerMarkerArray
   * @access public
@@ -223,7 +250,7 @@ class tx_caddy extends tslib_pibase
 
       // #54628, 131229, dwildt, 1+
     $this->pidCaddy = $pidCaddy;
-    
+
     $this->init( );
 
       // get products from session
@@ -259,7 +286,7 @@ class tx_caddy extends tslib_pibase
   */
   private function caddyWiMinPriceUndercut( )
   {
-    $minimumRate  = floatval( $this->conf['conditions.']['limits.']['items.']['gross.']['min'] );
+    $minimumRate  = floatval( $this->conf['api.']['conditions.']['limits.']['items.']['gross.']['min'] );
     $caddyMinStr  = $this->zz_price_format( $minimumRate );
 
     $tmpl           = $this->tmpl['minprice'];
@@ -332,6 +359,191 @@ class tx_caddy extends tslib_pibase
       'subparts'  => $subparts,
       'tmpl'      => $this->tmpl['all']
     );
+
+      // Remove subparts, if they aren't needed
+    $caddy = $this->caddyWiItemsSetSubpartsToNull( $caddy );
+      // Hide the powermail form (by css), if caddy doesn't match the requirements for an order
+    $caddy = $this->caddyWiItemsEval( $caddy );
+
+    return $caddy;
+  }
+
+ /**
+  * caddyWiItemsEval( )  : Hide the powermail form (by css), if caddy doesn't match the requirements for an order
+  *
+  * @param	array		$caddy    :
+  * @return	array		$caddy    :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEval( $caddy )
+  {
+    $prompts  = array( );
+
+    $prompt = $this->caddyWiItemsEvalPayment( );
+    if( $prompt )
+    {
+      $prompts[ ] = $prompt;
+    }
+    $prompt = $this->caddyWiItemsEvalShipping( );
+    if( $prompt )
+    {
+      $prompts[ ] = $prompt;
+    }
+
+    $caddy = $this->caddyWiItemsEvalPrompt( $caddy, $prompts );
+
+    return $caddy;
+  }
+
+ /**
+  * caddyWiItemsEvalEpayment( )  :
+  *
+  * @return	string		$prompt  :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEvalEpayment( )
+  {
+    $prompt = null;
+
+    switch( true )
+    {
+      case( $this->powermailInActionCreate( ) ):
+        $prompt = $this->caddyWiItemsEvalEpaymentWiPowermailCreate( );
+        break;
+      default:
+        $prompt = $this->caddyWiItemsEvalEpaymentWoPowermailCreate( );
+        break;
+    }
+
+    return $prompt;
+
+  }
+
+ /**
+  * caddyWiItemsEvalEpaymentWiPowermailCreate( )  :
+  *
+  * @return	string		$prompt  :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEvalEpaymentWiPowermailCreate( )
+  {
+    return;
+  }
+
+ /**
+  * caddyWiItemsEvalEpaymentWoPowermailCreate( )  :
+  *
+  * @return	string		$prompt  :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEvalEpaymentWoPowermailCreate( )
+  {
+    $sesArray   = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+    $paymentId  = $sesArray['payment'];
+    //var_dump( __METHOD__, __LINE__, $paymentId, $sesArray['payment'] );
+
+      // RETURN : a payment method is selected
+    if( $paymentId > 0 )
+    {
+      return;
+    }
+
+      // RETURN : a prompt, because customer hasn't select any payment method
+    return $this->pi_getLL( 'paymentEnterMethod' );
+  }
+
+ /**
+  * caddyWiItemsEvalPayment( )  : Evaluate payment method. Returns a prompt,
+  *                               if customer hasn't select any payment method
+  *
+  * @return	string		$prompt  :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEvalPayment( )
+  {
+      // RETURN : there aren't any payment options
+    if( $this->optionsPaymentAreEmpty )
+    {
+      return;
+    }
+
+    return $this->caddyWiItemsEvalEpayment( );
+  }
+
+ /**
+  * caddyWiItemsEvalShipping( ) : Evaluate shipping method. Returns a prompt,
+  *                               if customer hasn't select any shipping method
+  *
+  * @return	string		$prompt  :
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsEvalShipping( )
+  {
+      // RETURN : there aren't any shipping options
+    if( $this->optionsShippingAreEmpty )
+    {
+      return;
+    }
+
+      // Get the current payment method
+    $calcedCaddy  = $this->calc( );
+    $shippingId   = $calcedCaddy['options']['shipping']['id'];
+
+      // RETURN : a shipping method is selected
+    if( $shippingId > 0 )
+    {
+      return;
+    }
+
+      // RETURN : a prompt, because customer hasn't select any shipping method
+    return $this->pi_getLL( 'shippingEnterMethod' );
+  }
+
+  /**
+ * caddyWiItemsEvalPrompt( )  :
+ *
+ * @param	array		$caddy    :
+ * @param	array		$prompts  :
+ * @return	array		$caddy    :
+ * @access private
+ * @version    4.0.5
+ * @since      4.0.5
+ */
+  private function caddyWiItemsEvalPrompt( $caddy, $prompts )
+  {
+        // RETURN : Remove subpart CADDY_REQUIREMENTS
+    if( empty( $prompts ) )
+    {
+      $caddy['tmpl'] = $this->pObj->cObj->substituteSubpart( $caddy['tmpl'], '###CADDY_REQUIREMENTS###', null );
+      return $caddy;
+    }
+
+      // Hide the powermail form
+    $this->powermail->formHide( );
+    //var_dump( __METHOD__, __LINE__ );
+
+      // Generate the prompt
+    //$prompt = '<ul><li>' . implode( '</li><li>', $prompts ) . '</li></ul>';
+    $prompt = implode( '<br />', $prompts );
+    $marker['###PROMPT###'] = $prompt;
+      // Handle the subpart marker
+    $subpart                = $this->local_cObj->getSubpart( $caddy['tmpl'], '###CADDY_REQUIREMENTS###' );
+    $subpart                = $this->local_cObj->substituteMarkerArrayCached( $subpart, $marker);
+    $caddy['tmpl']          = $this->pObj->cObj->substituteSubpart( $caddy['tmpl'], '###CADDY_REQUIREMENTS###', $subpart );
+
+      // RETURN : caddy with perompt and without powermail form
     return $caddy;
   }
 
@@ -346,62 +558,6 @@ class tx_caddy extends tslib_pibase
   private function caddyWiItemsFieldHidden( )
   {
     $content = '<input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">';
-
-    return $content;
-  }
-
-  /**
- * caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
- *
- * @return	string		$content : rendered item
- * @access private
- * @version    2.0.2
- * @since      2.0.0
- */
-  private function caddyWiItemsInCaseOfPaymentDEPRECATED( )
-  {
-
-     /**
-      * DEPRECATED!caddyWiItemsInCaseOfPaymentDEPRECATED( )  : Render the item (product)
-      *
-      * Seems to be deprecated:
-      *   * $this->tmpl['specials_item'] is ###CADDY_SPECIALS### ###ITEM###
-      *   * Subpart ###ITEM### doesnt't contain any marker from below.
-      *
-      * dwildt, 130324
-      */
-
-    $content = null;
-
-      // item for payment
-    $paymentId = $this->session->paymentGet( $this->pidCaddy );
-    if( ! $paymentId )
-    {
-      return $content;
-    }
-
-      // quantity
-//    $this->markerArray['###QTY###'] = 1;
-    $markerArray['###QTY###'] = 1;
-
-      // title
-    $name   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title'];
-    $conf   = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['title.'];
-    $title  = $this->zz_cObjGetSingle( $name, $conf );
-//    $this->markerArray['###TITLE###'] = $title;
-    $markerArray['###TITLE###'] = $title;
-
-      // price and prce_total
-    $price  = $this->conf['options.']['payment.']['options.'][$paymentId . '.']['extra'];
-//    $this->markerArray['###PRICE###']       = $price;
-//    $this->markerArray['###SUMGROSS###'] = $price;
-    $markerArray['###PRICE###']       = $price;
-    $markerArray['###SUMGROSS###'] = $price;
-
-    // add inner html to variable
-    $tmpl = $this->tmpl['specials_item'];
-//    $this->markerArray = $markerArray + $this->markerArray;
-    $content  = $this->cObj->substituteMarkerArrayCached( $tmpl, $markerArray );
 
     return $content;
   }
@@ -451,11 +607,6 @@ class tx_caddy extends tslib_pibase
     }
       // FOREACH  : item
 
-      // 131129, dwildt, 4-
-//    $content  = $content
-//              . $this->caddyWiItemsInCaseOfPaymentDEPRECATED( )
-//              . $this->caddyWiItemsFieldHidden( )
-//              ;
     $marker = array
     (
       '###CONTENT###' => $content,
@@ -487,15 +638,15 @@ class tx_caddy extends tslib_pibase
       // DRS
 //var_dump( __METHOD__, __LINE__, $this->local_cObj->data );
       // FOREACH  : settings property
-    foreach( array_keys( ( array ) $this->conf['marker.']['item.'] ) as $key )
+    foreach( array_keys( ( array ) $this->conf['api.']['marker.']['item.'] ) as $key )
     {
       if( stristr( $key, '.' ) )
       {
         continue;
       }
 
-      $name = $this->conf['marker.']['item.'][$key];
-      $conf = $this->conf['marker.']['item.'][$key . '.'];
+      $name = $this->conf['api.']['marker.']['item.'][$key];
+      $conf = $this->conf['api.']['marker.']['item.'][$key . '.'];
 
       if( $key == 'delete' )
       {
@@ -569,7 +720,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['marker.']['sum.']['labels.'];
+    $sumConf = ( array ) $this->conf['api.']['marker.']['sum.']['labels.'];
 
       // DRS
     if( $this->drs->drsMarker )
@@ -616,7 +767,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['marker.']['sum.']['rates.'];
+    $sumConf = ( array ) $this->conf['api.']['marker.']['sum.']['rates.'];
 
       // DRS
     if( $this->drs->drsMarker )
@@ -663,7 +814,7 @@ class tx_caddy extends tslib_pibase
   {
     $markerArray = null;
 
-    $sumConf = ( array ) $this->conf['marker.']['sum.']['values.'];
+    $sumConf = ( array ) $this->conf['api.']['marker.']['sum.']['values.'];
 
       // DRS
     if( $this->drs->drsMarker )
@@ -735,6 +886,95 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
+  * caddyWiItemsOptionsEpayment( )  :
+  *
+  * @param	integer		$paymentId: ...
+  * @return	boolean
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsOptionsEpayment( $paymentId )
+  {
+    if( $this->caddyWiItemsOptionsEpaymentWoProvider( ) )
+    {
+      return false;
+    }
+
+    if( $this->caddyWiItemsOptionsEpaymentWiPowermailCreate( ) )
+    {
+      return false;
+    }
+
+    $this->caddyWiItemsOptionsEpaymentWiProvider( $paymentId );
+
+    return true;
+  }
+
+ /**
+  * caddyWiItemsOptionsEpaymentWiPowermailCreate( )  :
+  *
+  * @return	void
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsOptionsEpaymentWiPowermailCreate( )
+  {
+    return $this->powermailInActionCreate( );
+  }
+
+ /**
+  * caddyWiItemsOptionsEpaymentWiProvider( )  :
+  *
+  * @param	integer		$paymentId: ...
+  * @return	void
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsOptionsEpaymentWiProvider( $paymentId )
+  {
+    $provider = $this->getEpaymentProvider( );
+    $content  = null;
+
+    switch( $provider )
+    {
+      case( 'Paymill' ):
+        $content = $this->epayment->main( $paymentId, $this->pidCaddy );
+        break;
+      default:
+        $content = 'e-payment by undefined: ' . $provider;
+        break;
+    }
+
+    unset( $paymentId );
+    $this->optionsEpaymentHtml = $content;
+  }
+
+ /**
+  * caddyWiItemsOptionsEpaymentWoProvider( )  :
+  *
+  * @return	boolean
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsOptionsEpaymentWoProvider( )
+  {
+    if( ! $this->getEpaymentProvider( ) )
+    {
+      return true;
+    }
+
+    return false;
+  }
+
+ /**
   * caddyWiItemsOptionsPayment( )  :
   *
   * @param	integer		$paymentId: ...
@@ -748,6 +988,13 @@ class tx_caddy extends tslib_pibase
     $marker = null;
     $paymentArray = null;
 
+      // #53678, 140126, dwildt, 5+
+    if( $this->caddyWiItemsOptionsEpayment( $paymentId ) )
+    {
+        // Html will handled by $this->optionsEpaymentHtml
+      return null;
+    }
+
     $paymentArray['###CONTENT###'] = $this->optionList( 'payment', $paymentId );
     $marker['###PAYMENT_RADIO###'] = '';
     if( $paymentArray['###CONTENT###'] )
@@ -755,6 +1002,13 @@ class tx_caddy extends tslib_pibase
       $marker['###PAYMENT_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['payment_all'], null, $paymentArray );
     }
+
+      // #55333, 140125, dwildt, 4+
+    if( ! $paymentArray['###CONTENT###'] )
+    {
+      $this->optionsPaymentAreEmpty = true;
+    }
+
 
     return $marker;
   }
@@ -781,6 +1035,11 @@ class tx_caddy extends tslib_pibase
       $marker['###SHIPPING_RADIO###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['shipping_all'], null, $shippingArray );
     }
+      // #55333, 140125, dwildt, 4+
+    if( ! $shippingArray['###CONTENT###'] )
+    {
+      $this->optionsShippingAreEmpty = true;
+    }
 
     return $marker;
   }
@@ -805,6 +1064,11 @@ class tx_caddy extends tslib_pibase
     {
       $marker['###SPECIALS_CHECKBOX###'] =
         $this->cObj->substituteMarkerArrayCached( $this->tmpl['specials_all'], null, $specialArray );
+    }
+      // #55333, 140125, dwildt, 4+
+    if( ! $specialArray['###CONTENT###'] )
+    {
+      $this->optionsSpecialsAreEmpty = true;
     }
 
     return $marker;
@@ -917,6 +1181,39 @@ class tx_caddy extends tslib_pibase
     return $sesArray;
   }
 
+ /**
+  * caddyWiItemsSetSubpartsToNull( )  : Remove subparts, if they aren't needed
+  *
+  * @param	array		$caddy  :
+  * @return	array		$caddy  :
+  * @access private
+  * @internal   #55333
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyWiItemsSetSubpartsToNull( $caddy )
+  {
+      // Remove ###OPTIONS###, if shipping options and special options are empty
+    if( $this->optionsShippingAreEmpty && $this->optionsSpecialsAreEmpty )
+    {
+      $caddy['tmpl'] = $this->pObj->cObj->substituteSubpart( $caddy['tmpl'], '###OPTIONS###', null );
+    }
+
+      // Remove ###PAYMENT_METHOD###, if payment options are empty
+    if( $this->optionsPaymentAreEmpty )
+    {
+      $caddy['tmpl'] = $this->pObj->cObj->substituteSubpart( $caddy['tmpl'], '###PAYMENT_METHOD###', null );
+    }
+
+      // Remove ###OPTIONS###, if payment options are empty
+    if( $this->optionsEpaymentHtml )
+    {
+      $caddy['tmpl'] = $this->pObj->cObj->substituteSubpart( $caddy['tmpl'], '###PAYMENT_METHOD_CONTENT###', $this->optionsEpaymentHtml );
+    }
+
+    return $caddy;
+  }
+
 
 
   /***********************************************
@@ -963,11 +1260,17 @@ class tx_caddy extends tslib_pibase
   *
   * @return	array		$calc :
   * @access public
-  * @version    4.0.3
+  * @version    4.0.5
   * @since      2.0.0
   */
   private function calc( )
   {
+      // 140128, dwildt, +
+    if( $this->calc !== null )
+    {
+      return $this->calc;
+    }
+
     $this->init( );
 
     $calc         = null;
@@ -989,7 +1292,7 @@ class tx_caddy extends tslib_pibase
 
       // Get all sums (gross, net, tax.normal, tax.reduced for items, options and both (sum)
     $sum = $this->calcSum( $calcedItems, $options );
-    
+
     $calc = array
     (
 //      'content'           => $content,
@@ -1001,10 +1304,13 @@ class tx_caddy extends tslib_pibase
 
       // 130628, dwildt, 2+
     $sumOneDim = t3lib_BEfunc::implodeTSParams( $sum, 'sum' );
-    
+
     $calc = array_merge( $calc, $sumOneDim );
 //var_dump( __METHOD__, __LINE__, $sumOneDim, $calc );
 //exit;
+
+      // 140128, dwildt, 1+
+    $this->calc = $calc;
 
     return $calc;
   }
@@ -1125,7 +1431,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // #49430, 130628, dwildt, +
     if( $product[ 'tax' ] == 'reduced' )
     {
@@ -1157,16 +1463,16 @@ class tx_caddy extends tslib_pibase
         break;
       case( 7.00 ):  // :TODO: 7.00
       case( 1 ):
-      case( $this->conf['tax.']['reducedCalc'] ):
-        $product['taxrate']     = $this->conf['tax.']['reducedCalc'];
+      case( $this->conf['api.']['tax.']['reducedCalc'] ):
+        $product['taxrate']     = $this->conf['api.']['tax.']['reducedCalc'];
           // #50045, dwildt, 3-
 //        $product['sumnet']      = $product['sumgross'] / ( 1 + $product['taxrate'] );
 //        $product['sumtax']      = $product['sumnet'] * $product['taxrate'];
 //        $product['taxReduced']  = $product['sumtax'];
         break;
       case( 2 ):
-      case( $this->conf['tax.']['normalCalc'] ):
-        $product['taxrate']   = $this->conf['tax.']['normalCalc'];
+      case( $this->conf['api.']['tax.']['normalCalc'] ):
+        $product['taxrate']   = $this->conf['api.']['tax.']['normalCalc'];
           // #50045, dwildt, 3-
 //        $product['sumnet']    = $product['sumgross'] / ( 1 + $product['taxrate'] );
 //        $product['sumtax']    = $product['sumnet'] * $product['taxrate'];
@@ -1184,7 +1490,7 @@ class tx_caddy extends tslib_pibase
                     Are you sure, that you included the caddy static template?
                 </p>
                 <p>
-                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . ' 
+                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . '
                 </p>
                 <p>
                   Sorry for the trouble.<br />
@@ -1212,11 +1518,11 @@ class tx_caddy extends tslib_pibase
         break;
       case( 7.00 ):  // :TODO: 7.00
       case( 1 ):
-      case( $this->conf['tax.']['reducedCalc'] ):
+      case( $this->conf['api.']['tax.']['reducedCalc'] ):
         $product['taxReduced']  = $product['sumtax'];
         break;
       case( 2 ):
-      case( $this->conf['tax.']['normalCalc'] ):
+      case( $this->conf['api.']['tax.']['normalCalc'] ):
         $product['taxNormal'] = $product['sumtax'];
         break;
       default:
@@ -1232,7 +1538,7 @@ class tx_caddy extends tslib_pibase
                     Are you sure, that you included the caddy static template?
                 </p>
                 <p>
-                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . ' 
+                  Method: ' . __METHOD__ . ' at line #' . __LINE__ . '
                 </p>
                 <p>
                   Sorry for the trouble.<br />
@@ -1244,7 +1550,7 @@ class tx_caddy extends tslib_pibase
       // #50045, dwildt, +
 
     $product['net'] = round( ( $product['sumnet'] / $product['qty'] ), 2 );
-        
+
     // price netto
 
     return $product;
@@ -1269,7 +1575,7 @@ class tx_caddy extends tslib_pibase
   */
   private function calcMinRateUndercut( $calcedCaddy )
   {
-    $minimumRate            = floatval( $this->conf['conditions.']['limits.']['items.']['gross.']['min'] );
+    $minimumRate            = floatval( $this->conf['api.']['conditions.']['limits.']['items.']['gross.']['min'] );
     $minimumRateIsUndercut  = false;
       // 130721, dwildt, 1-
     //if ( $minimumRate >= $calcedCaddy['sum']['items']['gross'] )
@@ -1348,7 +1654,7 @@ class tx_caddy extends tslib_pibase
   * @param	integer		$optionId     : current option id
   * @return	array		$optionCosts  : gross, net, rate
   * @access private
-  * @version    2.0.2
+  * @version    4.0.5
   * @since      2.0.2
   */
   private function calcOptionCostsGross( $optionType, $optionId )
@@ -1356,7 +1662,12 @@ class tx_caddy extends tslib_pibase
     $gross  = 0.00;
 
       // configuration of current options array
-    $confOptions  = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
+    $confOptions  = $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId . '.'];
+//      // #55333
+//    $name         = $confOptions['extra'];
+//    $conf         = $confOptions['extra.'];
+//    $extra        = $this->zz_cObjGetSingle( $name, $conf );
+//    $extras       = $confOptions['extras.'];
     $extra        = $confOptions['extra'];
     $extras       = $confOptions['extra.'];
     $taxType      = $confOptions['tax'];
@@ -1365,7 +1676,7 @@ class tx_caddy extends tslib_pibase
       // DRS
     if( $this->drs->drsFormula )
     {
-      $prompt = 'extraType: ' . $extra;
+      $prompt = 'extraType: ' . $extras;
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
       $prompt = 'taxType: ' . $taxType;
       t3lib_div::devlog( '[INFO/FORMULA] ' . $prompt, $this->extKey, 0 );
@@ -1373,7 +1684,7 @@ class tx_caddy extends tslib_pibase
       // DRS
 
       // SWITCH : extra costs
-    switch( $extra )
+    switch( $extras )
     {
       case 'by_price':
         $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->productsGross );
@@ -1497,7 +1808,7 @@ class tx_caddy extends tslib_pibase
   {
     $optionIsFree = false;
 
-    $confOptions = $this->conf['options.'][$optionType . '.']['options.'][$optionId . '.'];
+    $confOptions = $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId . '.'];
 
     $free_from  = $confOptions['free_from'];
     $free_to    = $confOptions['free_until'];
@@ -1577,24 +1888,48 @@ class tx_caddy extends tslib_pibase
   */
   private function calcOptions( )
   {
-//      // #i0039, 131230, dwildt, 3+
-//    $shipping = $this->calcOptionsShipping( );
-//    $specials = $this->calcOptionsSpecials( );
-//    $service  = $shipping + $specials;
-    
     $options = array
     (
-      'payment'   => $this->calcOptionsPayment( ),
-        // #i0039, 131230, dwildt, 2-
+      'payment'  => $this->calcOptionsPayment( ),
       'shipping' => $this->calcOptionsShipping( ),
       'specials' => $this->calcOptionsSpecials( )
-//        // #i0039, 131230, dwildt, 3+
-//      'service'   => $service,
-//      'shipping'  => $shipping,
-//      'specials'  => $specials
     );
 
     return $options;
+  }
+
+ /**
+  * calcOptionsEpayment( ) :
+  *
+  * @param	[type]		$$paymentId: ...
+  * @return	array		$array : cartTaxReduced, cartTaxNormal, id, gross, net
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function calcOptionsEpayment( $paymentId )
+  {
+    $arrReturn  = null;
+
+    switch( $provider = $this->getEpaymentProvider( ) )
+    {
+      case( 'Paymill' ):
+        $label = 'e-payment by Paymill';
+        break;
+      default:
+        $label = 'e-payment by undefined: ';
+        break;
+    }
+    $arrReturn['id']                    = $paymentId;
+    $arrReturn['label']                 = $label;
+    $arrReturn['sum']['gross']          = 0;
+    $arrReturn['sum']['net']            = 0;
+    $arrReturn['sum']['rate']           = 0;
+    $arrReturn['sum']['tax']['normal']  = 0;
+    $arrReturn['sum']['tax']['reduced'] = 0;
+
+    return $arrReturn;
   }
 
  /**
@@ -1608,7 +1943,6 @@ class tx_caddy extends tslib_pibase
   private function calcOptionsPayment( )
   {
     $arrReturn = null;
-
     $paymentId = $this->session->paymentGet( $this->pidCaddy );
 
     $gross        = 0.00;
@@ -1618,7 +1952,7 @@ class tx_caddy extends tslib_pibase
 
     if( ! $paymentId )
     {
-      $paymentId = intval( $this->conf['options.']['payment.']['preset'] );
+      $paymentId = intval( $this->conf['api.']['options.']['payment.']['preset'] );
       $this->session->paymentUpdate( $paymentId, $this->pidCaddy );
     }
       // check if selected payment option is available
@@ -1634,7 +1968,7 @@ class tx_caddy extends tslib_pibase
     $net        = $arrResult['net'];
     $rate       = $arrResult['rate'];
 
-    if( $this->conf['options.']['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
+    if( $this->conf['api.']['options.']['payment.']['options.'][$paymentId . '.']['tax'] == 'reduced' )
     {
       $taxReduced = $gross - $net;
     }
@@ -1676,7 +2010,7 @@ class tx_caddy extends tslib_pibase
 
     if( ! $shippingId )
     {
-      $shippingId = intval( $this->conf['options.']['shipping.']['preset'] );
+      $shippingId = intval( $this->conf['api.']['options.']['shipping.']['preset'] );
       $this->session->shippingUpdate( $shippingId, $this->pidCaddy );
     }
       // check if selected shipping option is available
@@ -1692,7 +2026,7 @@ class tx_caddy extends tslib_pibase
     $net        = $arrResult['net'];
     $rate       = $arrResult['rate'];
 
-    if( $this->conf['options.']['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
+    if( $this->conf['api.']['options.']['shipping.']['options.'][$shippingId . '.']['tax'] == 'reduced' )
     {
       $taxReduced = $gross - $net;
     }
@@ -1701,7 +2035,7 @@ class tx_caddy extends tslib_pibase
       $taxNormal = $gross - $net;
     }
 
-    $label = $this->getShippingOptionLabelById( $paymentId );
+    $label = $this->getShippingOptionLabelById( $shippingId );
 
     $arrReturn['id']                    = $shippingId;
     $arrReturn['label']                 = $label;
@@ -1744,7 +2078,7 @@ class tx_caddy extends tslib_pibase
 
       $sumNet   = $sumNet    + $net;
       $sumGross = $sumGross  + $arrResult['gross'];
-      if( $this->conf['options.']['specials.']['options.'][$specialId . '.']['tax'] == 'reduced' )
+      if( $this->conf['api.']['options.']['specials.']['options.'][$specialId . '.']['tax'] == 'reduced' )
       {
         $taxReduced = $taxReduced + $gross - $net;
       }
@@ -1818,10 +2152,46 @@ class tx_caddy extends tslib_pibase
   **********************************************/
 
  /**
+  * getEpaymentProvider( ) :
+  *
+  * @return	string		$provider :
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function getEpaymentProvider( )
+  {
+    $provider = $this->conf['api.']['e-payment.']['provider'];
+
+    switch( $provider )
+    {
+      case( 'Paymill' ):
+          // Follow the workflow;
+        break;
+      case( null ):
+      case( false ):
+          // Don't do anything
+        return;
+      default:
+        $prompt = 'Fatal error: undefined e-payment provider "' . $provider . '"<br />'
+                . 'Method ' . __METHOD__ . ' at line ' . __LINE__ . ' <br />'
+                . 'Sorry for the trouble<br />'
+                . 'Caddy - your TYPO3 shopping cart<br />'
+                ;
+        die( $prompt );
+        break;
+    }
+
+    return $provider;
+  }
+
+ /**
   * getPaymentOptionLabelById( )
   *
+  * @param	[type]		$$paymentId: ...
   * @return	array
-  * @access     private
+  * @access private
   * @version    4.0.3
   * @since      2.0.0
   */
@@ -1834,7 +2204,7 @@ class tx_caddy extends tslib_pibase
 //    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
-    $optionsConf = $this->conf['options.']['payment.']['options.'];
+    $optionsConf = $this->conf['api.']['options.']['payment.']['options.'];
 
 //      // Get key for the option
 //    $key    = $sesArray['options']['payment']['id'] . '.';
@@ -1851,7 +2221,7 @@ class tx_caddy extends tslib_pibase
 /**
  * getPid( )  : Returns the globlas tsfe id, if the given pid is null
  *
- * @param       integer         $pid  : given pid (may be null)
+ * @param	integer		$pid  : given pid (may be null)
  * @return	integer		$pid  : id of the page with the caddy plugin
  * @internal    #54634
  * @version     4.0.3
@@ -1869,7 +2239,7 @@ class tx_caddy extends tslib_pibase
 
     return $pid;
   }
-  
+
  /**
   * getServiceAttributes( )
   *
@@ -1905,13 +2275,13 @@ class tx_caddy extends tslib_pibase
  /**
   * getShippingOptionLabelById( )
   *
-  * @param      integer : $pid  : uid of the page, which contains the caddy plugin
+  * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
   * @return	array
-  * @access     private
+  * @access private
   * @version    4.0.3
   * @since      2.0.0
   */
-  private function getShippingOptionLabelById( $paymentId )
+  private function getShippingOptionLabelById( $shippingId )
   {
 //      // Get session array
 //    // #54634, 131128, dwildt, 1-
@@ -1920,12 +2290,12 @@ class tx_caddy extends tslib_pibase
 //    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get configuration
-    $optionsConf = $this->conf['options.']['shipping.']['options.'];
+    $optionsConf = $this->conf['api.']['options.']['shipping.']['options.'];
 
 //      // Get key for option
 //    $key    = $sesArray['options']['shipping']['id'] . '.';
       // #i0043, 140103, dwildt, 1+
-    $key    = $paymentId . '.';
+    $key    = $shippingId . '.';
 
       // Render the option label
     $name   = $optionsConf[ $key ]['title'];
@@ -1937,8 +2307,9 @@ class tx_caddy extends tslib_pibase
  /**
   * getSpecialOptionLabelsById( )
   *
+  * @param	[type]		$$specialIds: ...
   * @return	array
-  * @access     private
+  * @access private
   * @version    4.0.3
   * @since      2.0.0
   */
@@ -1954,13 +2325,13 @@ class tx_caddy extends tslib_pibase
 //    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
 
       // Get the devider
-    $name     = $this->conf['options.']['specials.']['devider'];
-    $conf     = $this->conf['options.']['specials.']['devider.'];
+    $name     = $this->conf['api.']['options.']['specials.']['devider'];
+    $conf     = $this->conf['api.']['options.']['specials.']['devider.'];
     $devider  = $this->zz_cObjGetSingle( $name, $conf );
       // Get the devider
 
       // Get options configuration
-    $optionsConf = $this->conf['options.']['specials.']['options.'];
+    $optionsConf = $this->conf['api.']['options.']['specials.']['options.'];
 
       // Render the option label
       // #i0043, 140103, dwildt, 1-
@@ -1972,7 +2343,7 @@ class tx_caddy extends tslib_pibase
       $conf     = $optionsConf[ $key . '.' ]['title.'];
       $values[] = $this->zz_cObjGetSingle( $name, $conf );
     }
-    
+
     $value = implode( $devider, ( array ) $values );
     return $value;
   }
@@ -2001,6 +2372,7 @@ class tx_caddy extends tslib_pibase
     $this->initDie( );
 
     $this->initInstances( );
+    $this->initEpayment( );
   }
 
  /**
@@ -2045,6 +2417,35 @@ class tx_caddy extends tslib_pibase
       die( $prompt );
     }
       // DIE  : $local_cObj isn't initiated
+  }
+
+ /**
+  * initEpayment( ) : Requires and initiate the class of the current e-payment provider.
+  *                   If no e-payment provider is enabled, nothing will happen.
+  *
+  * @return	void
+  * @access private
+  * @internal   #53678
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function initEpayment( )
+  {
+    $provider = $this->getEpaymentProvider( );
+
+    if( ! $provider )
+    {
+      return;
+    }
+
+      // Path to the provider class
+    $provider       = strtolower( $provider );
+    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/' . $provider . '/class.tx_caddy_epayment_' . $provider . '.php';
+
+      // Initiate the provider class
+    require_once( $path2provider );
+    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_' . $provider );
+    $this->epayment->setParentObject( $this );
   }
 
  /**
@@ -2106,7 +2507,7 @@ class tx_caddy extends tslib_pibase
   {
     $condition    = null;
     $optionList   = null;
-    $optionItems  = ( array ) $this->conf['options.'][$optionType . '.']['options.'];
+    $optionItems  = ( array ) $this->conf['api.']['options.'][$optionType . '.']['options.'];
     $marker       = null;
 
       // DRS
@@ -2125,6 +2526,21 @@ class tx_caddy extends tslib_pibase
         continue;
       }
 
+        // #55333, 140125, dwildt, ~
+        // Render enabled options only
+      switch( true )
+      {
+        case( $optionItemConf['enabled'] === null ):
+        case( $optionItemConf['enabled'] == '1' ):
+            // Follow the workflow
+          break;
+        case( $optionItemConf['enabled'] == '0' ):
+        default:
+          continue 2;
+          break;
+      }
+        // Render enabled options only
+
         // DRS
       if( $this->drs->drsOptions )
       {
@@ -2142,7 +2558,7 @@ class tx_caddy extends tslib_pibase
       switch( true )
       {
         case( $keepingTheLimit ):
-        case( $this->conf['options.'][$optionType . '.']['show_all_disabled'] ):
+        case( $this->conf['api.']['options.'][$optionType . '.']['show_all_disabled'] ):
           break;
         default:
             // DRS
@@ -2208,7 +2624,7 @@ class tx_caddy extends tslib_pibase
                   . $this->optionListConditionByType( 'available_until', $optionType, $conf );
     }
 
-    if( $conf['extra'] != 'each' )
+    if( $conf['extras'] != 'each' )
     {
       $condition  = $condition
                   . $this->optionListConditionNotEach( $optionType, $conf );
@@ -2271,10 +2687,10 @@ class tx_caddy extends tslib_pibase
 
     switch( true )
     {
-      case( $conf['extra'] != 'each' ):
+      case( $conf['extras'] != 'each' ):
         $gross = $this->optionListConditionGrossOther( $optionItemKey, $optionType );
         break;
-      case( $conf['extra'] == 'each' ):
+      case( $conf['extras'] == 'each' ):
       default:
         $gross = $this->optionListConditionGrossEach( $conf );
         break;
@@ -2288,9 +2704,13 @@ class tx_caddy extends tslib_pibase
  *
  * @param	array		$conf   : configuration of current option item
  * @return	double		$gross
+ * @version   4.0.5
+ * @since     2.0.0
  */
   private function optionListConditionGrossEach( $conf )
   {
+//      // #55333
+//    $gross    = $this->zz_price_format( $conf['extras.']['1.']['extra'] );
     $gross    = $this->zz_price_format( $conf['extra.']['1.']['extra'] );
     $llLabel  = $this->pi_getLL( 'specials_each' );
 
@@ -2338,12 +2758,17 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType : payment, shipping, special
   * @param	array		$conf       : configuration of current option item
   * @return	array		$arrReturn  : content, gross
+  * @version    4.0.5
+  * @since      2.0.0
   */
   private function optionListConditionNotEach( $optionType, $conf )
   {
     $content  = null;
     $gross    = null;
 
+//      // #55333
+//    $unit   = $this->optionListSymbolByExtra( $conf['extras'] );
+//    $extras = ( array ) $conf['extras.'];
     $unit   = $this->optionListSymbolByExtra( $conf['extra'] );
     $extras = ( array ) $conf['extra.'];
 
@@ -2418,13 +2843,13 @@ class tx_caddy extends tslib_pibase
  /**
   * optionListLabel( )
   *
-  * @param	array		$optionItemConf : 
-  * @return	string          $label          :
+  * @param	array		$optionItemConf :
+  * @return	string		$label          :
   */
   private function optionListLabel( $optionItemConf )
   {
     $label = $this->zz_cObjGetSingle( $optionItemConf['title'], $optionItemConf['title.'] );
-    
+
     return $label;
   }
 
@@ -2445,14 +2870,14 @@ class tx_caddy extends tslib_pibase
   * @param	integer		$optionId         : current option id
   * @param	string		$condition        :
   * @param	array		$optionItemConf   : ...
-  * @return	array           $marker           :
+  * @return	array		$marker           :
   * @version  4.0.4
   * @since    2.0.0
   */
   private function optionListMarker( $keepingTheLimit, $optionType, $optionItemKey, $optionId, $condition, $optionItemConf )
   {
     $marker = null;
-    
+
     switch( true )
     {
       case( $optionType != 'specials' ):
@@ -2469,9 +2894,10 @@ class tx_caddy extends tslib_pibase
         $input = $this->optionListMarkerCheckbox( $keepingTheLimit, $optionType, $optionItemKey, $optionId );
         break;
     }
-          // #54832, 140108, dwildt, 2+
-        $label    = $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf );
-        $element  = str_replace( '|', $input, $label );
+
+      // #54832, 140108, dwildt, 2+
+    $label    = $this->optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf );
+    $element  = str_replace( '|', $input, $label );
 //var_dump( __METHOD__, __LINE__, $element );
 
           // #54832, 140108, dwildt, 4-
@@ -2484,7 +2910,7 @@ class tx_caddy extends tslib_pibase
     $marker = ( array ) $element
             + ( array ) $this->optionListMarkerCondition( $optionType, $condition )
             ;
-    
+
     return $marker;
   }
 
@@ -2495,7 +2921,7 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionIds        : current option ids
-  * @return	string          $content          :
+  * @return	string		$content          :
   * @version  4.0.4
   * @since    2.0.0
   */
@@ -2525,7 +2951,7 @@ class tx_caddy extends tslib_pibase
     return $content;
 
     $marker = array(
-      '###' . $hashMarker . '_CHECKBOX###' => $content    
+      '###' . $hashMarker . '_CHECKBOX###' => $content
     );
 
       // DRS
@@ -2535,7 +2961,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $marker;
   }
 
@@ -2544,7 +2970,7 @@ class tx_caddy extends tslib_pibase
   *
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$condition        :
-  * @return	array           $marker           :
+  * @return	array		$marker           :
   */
   private function optionListMarkerCondition( $optionType, $condition )
   {
@@ -2576,7 +3002,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $marker;
   }
 
@@ -2585,12 +3011,12 @@ class tx_caddy extends tslib_pibase
   *
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
-  * @param	integer		$optionItemConf   : 
-  * @return	array           $marker           :
+  * @param	integer		$optionItemConf   :
+  * @return	array		$marker           :
   */
   private function optionListMarkerLabel( $optionType, $optionItemKey, $optionItemConf )
   {
-    $marker = null; 
+    $marker = null;
 
     $title = $this->optionListLabel( $optionItemConf );
 
@@ -2612,7 +3038,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $marker;
   }
 
@@ -2623,7 +3049,7 @@ class tx_caddy extends tslib_pibase
   * @param	string		$optionType       : payment, shipping, special
   * @param	string		$optionItemKey    :
   * @param	integer		$optionId         : current option id
-  * @return	array           $content          :
+  * @return	array		$content          :
   * @version  4.0.4
   * @since    2.0.0
   */
@@ -2649,7 +3075,7 @@ class tx_caddy extends tslib_pibase
 
       // #54832, 140108, dwildt, 1+
     return $content;
-    
+
     $marker = array
     (
       '###' . $hashMarker . '_RADIO###' => $content
@@ -2662,7 +3088,7 @@ class tx_caddy extends tslib_pibase
       t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $marker;
   }
 
@@ -2679,28 +3105,60 @@ class tx_caddy extends tslib_pibase
     switch( $extraType )
     {
       case 'by_price':
-        $symbol = $this->conf['symbols.']['currencySymbol'];
+        $symbol = $this->conf['api.']['symbols.']['currencySymbol'];
         break;
       case 'by_quantity':
-        $symbol = $this->conf['symbols.']['quantitySymbol'];
+        $symbol = $this->conf['api.']['symbols.']['quantitySymbol'];
         break;
       case 'by_service_attribute_1_sum':
       case 'by_service_attribute_1_max':
-        $symbol = $this->conf['symbols.']['service_attribute_1_symbol'];
+        $symbol = $this->conf['api.']['symbols.']['service_attribute_1_symbol'];
         break;
       case 'by_service_attribute_2_sum':
       case 'by_service_attribute_2_max':
-        $symbol = $this->conf['symbols.']['service_attribute_2_symbol'];
+        $symbol = $this->conf['api.']['symbols.']['service_attribute_2_symbol'];
         break;
       case 'by_service_attribute_3_sum':
       case 'by_service_attribute_3_max':
-        $symbol = $this->conf['symbols.']['service_attribute_3_symbol'];
+        $symbol = $this->conf['api.']['symbols.']['service_attribute_3_symbol'];
         break;
       default:
         $symbol = '';
     }
 
     return $symbol;
+  }
+
+ /**
+  * powermailInActionCreate( )  :
+  *
+  * @return	boolean
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function powermailInActionCreate( )
+  {
+    $inActionCreate = false;
+
+    $GP = t3lib_div::_GET( )
+        + t3lib_div::_POST( )
+        ;
+
+    switch( true )
+    {
+      case( $GP['tx_powermail_pi1']['action'] == 'create' ):
+        $inActionCreate = true;
+        break;
+      default:
+        $inActionCreate = false;
+        break;
+    }
+
+    unset( $GP );
+
+    return $inActionCreate;
+
   }
 
 
@@ -2735,7 +3193,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObject( )  : 
+  * setParentObject( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
@@ -2755,7 +3213,7 @@ class tx_caddy extends tslib_pibase
 
     }
     $this->pObj = $pObj;
-    
+
     $this->setParentObjectCObj(       $pObj );
     $this->setParentObjectConf(       $pObj );
     $this->setParentObjectDrs(        $pObj );
@@ -2765,11 +3223,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObjectConf( )  : 
+  * setParentObjectConf( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
@@ -2788,11 +3246,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObjectCObj( )  : 
+  * setParentObjectCObj( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
@@ -2811,11 +3269,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObjectDrs( )  : 
+  * setParentObjectDrs( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
@@ -2836,11 +3294,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObjectLocalCObj( )  : 
+  * setParentObjectLocalCObj( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
@@ -2859,11 +3317,11 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * setParentObjectTemplate( )  : 
+  * setParentObjectTemplate( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
-  * @access     private
+  * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
@@ -3007,20 +3465,20 @@ class tx_caddy extends tslib_pibase
     if
     (
       (
-        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] )
+        isset( $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] )
         &&
         (
-          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ), 2 )
+          round( floatval( $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['available_from'] ), 2 )
           >
           round( $this->productsGross, 2 )
         )
       )
       ||
       (
-        isset( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] )
+        isset( $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] )
         &&
         (
-          round( floatval( $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ), 2 )
+          round( floatval( $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['available_until'] ), 2 )
           <
           round( $this->productsGross, 2 )
         )
@@ -3028,21 +3486,21 @@ class tx_caddy extends tslib_pibase
      )
     {
       // check: fallback is given
-      if (isset($this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback']))
+      if (isset($this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback']))
       {
-        $fallback = $this->conf['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback'];
+        $fallback = $this->conf['api.']['options.'][$optionType . '.']['options.'][$optionId.'.']['fallback'];
         // check: fallback is defined; the availability of fallback will not tested yet
-        if (isset($this->conf['options.'][$optionType . '.']['options.'][$fallback.'.']))
+        if (isset($this->conf['api.']['options.'][$optionType . '.']['options.'][$fallback.'.']))
         {
           $newoption_id = intval($fallback);
         } else {
 // 130227, dwildt, 1-
-//                                  $shippingId = intval($this->conf['options.'][$optionType . '.']['preset']);
+//                                  $shippingId = intval($this->conf['api.']['options.'][$optionType . '.']['preset']);
 // 130227, dwildt, 1+
-          $newoption_id = intval($this->conf['options.'][$optionType . '.']['preset']);
+          $newoption_id = intval($this->conf['api.']['options.'][$optionType . '.']['preset']);
         }
       } else {
-        $newoption_id = intval($this->conf['options.'][$optionType . '.']['preset']);
+        $newoption_id = intval($this->conf['api.']['options.'][$optionType . '.']['preset']);
       }
       return $newoption_id;
     }
@@ -3070,10 +3528,10 @@ class tx_caddy extends tslib_pibase
     switch( $taxType )
     {
       case( 'reduced' ):
-        $rate = $this->conf['tax.']['reducedCalc'];
+        $rate = $this->conf['api.']['tax.']['reducedCalc'];
         break;
       case( 'normal' ):
-        $rate = $this->conf['tax.']['normalCalc'];
+        $rate = $this->conf['api.']['tax.']['normalCalc'];
         break;
       default:
         $rate = 0.00;
@@ -3135,16 +3593,16 @@ class tx_caddy extends tslib_pibase
       $this->conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     }
 
-    $currencySymbol = $this->conf['symbols.']['currencySymbol'];
+    $currencySymbol = $this->conf['api.']['symbols.']['currencySymbol'];
     $price          = number_format
                       (
                         $value,
-                        $this->conf['symbols.']['decimal'],
-                        $this->conf['symbols.']['dec_point'],
-                        $this->conf['symbols.']['thousands_sep']
+                        $this->conf['api.']['symbols.']['decimal'],
+                        $this->conf['api.']['symbols.']['dec_point'],
+                        $this->conf['api.']['symbols.']['thousands_sep']
                       );
     // print currency symbol before or after price
-    if( $this->conf['symbols.']['currencySymbolBeforePrice'] )
+    if( $this->conf['api.']['symbols.']['currencySymbolBeforePrice'] )
     {
       $price = $currencySymbol . ' ' . $price;
     }
@@ -3190,7 +3648,7 @@ class tx_caddy extends tslib_pibase
  * zz_setDataBySession( ) :
  *
  * @return	void
- * @access    private
+ * @access private
  * @version   2.0.2
  * @since     2.0.2
  */

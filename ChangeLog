@@ -1,4 +1,5 @@
 TODO
+  * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
 4.0.5
@@ -7,15 +8,22 @@ TODO
   * #53678: e-payment
             Integration of paymill step 2
             * removing res/e-payment/paymill/paymill-php-3.0.2
+  * #53742: Fancybox is removed
   Feature 
+  * #55333: Configurable options
+            //* Payment extra is a content object now
+            //* extra.1, extra.2, ... is moved to extras.1, extras.2, ...
   * #54999: Link to an item (to the single view)
   Improvement
-  * #55322: Clean up TypoScript structur
-            Effected files:
-            * static
-              * 4.0.0             ( removed )
-              * constants.txt
-              * setup.txt
+  * #55322: Clean up TypoScript structure
+            * plugin.tx_caddy_pi1
+              * conditions  -> moved to: api.conditions
+              * getpost     -> moved to: api.getpost
+              * marker      -> moved to: api.marker
+              * options     -> moved to: api.options
+              * symbols     -> moved to: api.symbols
+              * tax         -> moved to: api.tax
+    api
   Bugfixing
   * #i0047: Unproper form in the extension manager (TYPO3 6.x)
 

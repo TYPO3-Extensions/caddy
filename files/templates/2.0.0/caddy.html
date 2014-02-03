@@ -38,7 +38,7 @@ INDEX
 <div class="caddy">
   ###MINPRICE###
   <form name="caddy" id="caddy" action="###TARGET###" method="post">
-    <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
+    <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
     ###VARIANTS###
     <div class="caddy_header">
       <div class="caddy_col caddy_col1">###_LOCAL_LANG_QTY###</div>
@@ -102,6 +102,11 @@ INDEX
       <div class="caddy_cleaner"></div>
     </div>
   </form>
+  <!-- ###CADDY_REQUIREMENTS### begin -->
+  <div class="caddy-requirements-prompt">
+    ###PROMPT###
+  </div>
+  <!-- ###CADDY_REQUIREMENTS### end -->
   ###_HTMLMARKER_LINKTOSHOP###
   <div class="caddy_cleaner"></div>
 </div>
@@ -158,6 +163,7 @@ INDEX
 <!-- ###CADDY_SPECIALS### begin -->
 <div id="caddy_specials">
   <fieldset>
+    <input type="hidden" name="tx_caddy_pi1[updateByCaddy][specials]" value="1" />
     <legend>###_LOCAL_LANG_SPECIALSLABELS###</legend>
     <!-- ###CONTENT### --><!-- ###ITEM### -->
     <div class="caddy_fieldwrap_checkbox">###SPECIALS_CHECKBOX### ###SPECIALS_TITLE### ###SPECIALS_CONDITION###</div>
@@ -404,10 +410,10 @@ INDEX
 <!-- ###CADDY_FORM### begin --> 
 <div class="caddy_form">
   <form action="###CADDY_FORM_ACTION###">
-    <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid">
-    <input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id">
-    <input type="text" value="1" name="qty">
-    <input type="submit" value="###_LOCAL_LANG_FORM_SUBMIT###">
+    <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid" />
+    <input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id" />
+    <input type="text" value="1" name="qty" />
+    <input type="submit" value="###_LOCAL_LANG_FORM_SUBMIT###" />
   </form>
 </div>
 <!-- ###CADDY_FORM### end -->

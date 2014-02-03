@@ -26,7 +26,7 @@
 require_once( PATH_tslib . 'class.tslib_pibase.php' );
 
 /**
-* plugin 'Minicart' for the 'caddy' extension.
+ * plugin 'Minicart' for the 'caddy' extension.
  *
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
@@ -44,26 +44,26 @@ class tx_caddy_pi3 extends tslib_pibase
   public  $local_cObj       = null;
   public  $conf             = null;
   public  $arr_extConf      = null;
-  
+
 
  /**
   * main( ) : the main method of the PlugIn
   *
-  * @param      string      $content  : plugin content. Usually empty.
-  * @param      array       $conf     : plugin configuration.
-  * @return     string      $content  : The content that is displayed on the website
+  * @param	string		$content  : plugin content. Usually empty.
+  * @param	array		$conf     : plugin configuration.
+  * @return	string		$content  : The content that is displayed on the website
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  public function main( $content, $conf ) 
+  */
+  public function main( $content, $conf )
   {
     $this->conf = $conf;
-    
+
     $this->init( );
-    
+
     $this->products   = $this->session->productsGet( $this->pidCaddy );
     $numberOfProducts = count( $this->products );
-    
+
     switch( true )
     {
       case( $numberOfProducts > 0 ):
@@ -74,9 +74,9 @@ class tx_caddy_pi3 extends tslib_pibase
         $caddy = $this->caddyWoProducts( );
         break;
     }
-    
+
     unset( $numberOfProducts );
-    
+
     $content = $caddy;
 
     return $this->pi_wrapInBaseClass( $content );
@@ -91,19 +91,19 @@ class tx_caddy_pi3 extends tslib_pibase
   **********************************************/
 
  /**
-  * caddyWiProducts( ) : 
+  * caddyWiProducts( ) :
   *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function caddyWiProducts( ) 
+  */
+  private function caddyWiProducts( )
   {
     $tmpl = $this->caddyWiProductsItems( );
 
     $quantity  = $this->zz_quantity( );
-    
+
     $cObjData = array
     (
       'quantity'  => $quantity,
@@ -122,19 +122,19 @@ class tx_caddy_pi3 extends tslib_pibase
     $content  = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $content  = $this->dynamicMarkers->main( $content, $this );
-    
+
     return $content;
   }
 
  /**
-  * caddyWiProductsItems( ) : 
+  * caddyWiProductsItems( ) :
   *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function caddyWiProductsItems( ) 
+  */
+  private function caddyWiProductsItems( )
   {
     $tmpl = null;
     $sdefCaddyMode = $this->flexform->sdefCaddyMode;
@@ -149,23 +149,23 @@ class tx_caddy_pi3 extends tslib_pibase
         $tmpl = $this->caddyWiProductsItemsWiItems( );
         break;
     }
-    
+
     unset( $sdefCaddyMode );
-    
+
     return $tmpl;
   }
 
  /**
-  * caddyWiProductsItemsWiItems( ) : 
+  * caddyWiProductsItemsWiItems( ) :
   *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function caddyWiProductsItemsWiItems( ) 
+  */
+  private function caddyWiProductsItemsWiItems( )
   {
-    $items = null; 
+    $items = null;
 
     foreach( ( array ) $this->products as $product )
     {
@@ -191,8 +191,8 @@ class tx_caddy_pi3 extends tslib_pibase
       $item = $this->local_cObj->substituteMarkerArrayCached( $tmpl, $markerArray);
       $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
       $item = $this->dynamicMarkers->main( $item, $this );
-      
-      $items  = $items 
+
+      $items  = $items
               . $item
               ;
     }
@@ -201,42 +201,42 @@ class tx_caddy_pi3 extends tslib_pibase
     $marker   = '###ITEMS###';
     $value    = $items;
     $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
-   
+
     return $content;
   }
 
  /**
-  * caddyWiProductsItemsWoItems( ) : 
+  * caddyWiProductsItemsWoItems( ) :
   *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function caddyWiProductsItemsWoItems( ) 
+  */
+  private function caddyWiProductsItemsWoItems( )
   {
     $content  = $this->tmpl['caddymini'];
     $marker   = '###ITEMS###';
     $value    = null;
     $content  = $this->cObj->substituteSubpart( $content, $marker, $value );
-   
+
     return $content;
   }
 
  /**
-  * caddyWoProducts( ) : 
+  * caddyWoProducts( ) :
   *
-  * @return     string      $content  : mini caddy in case of no products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of no products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function caddyWoProducts( ) 
+  */
+  private function caddyWoProducts( )
   {
     $content  = $this->tmpl['caddyminiempty'];
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $content  = $this->dynamicMarkers->main( $content, $this );
-    
+
     return $content;
   }
 
@@ -261,7 +261,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->initExtManager( );
 
     $this->initVars( );
-    
+
     $this->initInstances( );
     $this->initFlexform( );
     $this->initDrs( );
@@ -269,7 +269,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $this->initPid( );
     $this->initTemplate( );
   }
-  
+
  /**
   * initDrs( )
   *
@@ -282,7 +282,7 @@ class tx_caddy_pi3 extends tslib_pibase
   {
     $this->drs->init( );
   }
-  
+
  /**
   * init( )
   *
@@ -294,7 +294,7 @@ class tx_caddy_pi3 extends tslib_pibase
   private function initExtManager( )
   {
     $this->arr_extConf = unserialize( $GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf'][$this->extKey] );
-  }  
+  }
 
  /**
   * initFlexform( )
@@ -320,7 +320,7 @@ class tx_caddy_pi3 extends tslib_pibase
   private function initInstances( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-    
+
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
@@ -338,7 +338,7 @@ class tx_caddy_pi3 extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_session.php'); // file for div functions
     $this->session = t3lib_div::makeInstance('tx_caddy_session'); // Create new instance for div functions
     $this->session->setParentObject( $this );
-    
+
 //    require_once( $path2lib . 'class.tx_caddy_template.php' );
 //    $this->template         = t3lib_div::makeInstance( 'tx_caddy_template' );
 //    $this->template->pObj   = $this;
@@ -368,15 +368,15 @@ class tx_caddy_pi3 extends tslib_pibase
       // DIE  : $row is empty
     if( empty( $this->pidCaddy ) )
     {
-      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL 
-              . 'Please take care of a proper configuration.<br />' . PHP_EOL 
-              . 'Please maintain<br />' . PHP_EOL 
-              . '* constant editor > category [CADDY - MAIN] > pid.<br />' . PHP_EOL 
-              . 'or<br />' . PHP_EOL 
-              . '* plugin / flexform > [Plugin] > [Caddy] > Page with the caddy<br />' . PHP_EOL 
-              . '<br />' . PHP_EOL 
-              . 'Sorry for the trouble.<br />' . PHP_EOL 
-              . 'TYPO3 Caddy > minicaddy (plugin 3)<br />' . PHP_EOL 
+      $prompt = 'ERROR: uid of the page with the caddy is empty!' . PHP_EOL
+              . 'Please take care of a proper configuration.<br />' . PHP_EOL
+              . 'Please maintain<br />' . PHP_EOL
+              . '* constant editor > category [CADDY - MAIN] > pid.<br />' . PHP_EOL
+              . 'or<br />' . PHP_EOL
+              . '* plugin / flexform > [Plugin] > [Caddy] > Page with the caddy<br />' . PHP_EOL
+              . '<br />' . PHP_EOL
+              . 'Sorry for the trouble.<br />' . PHP_EOL
+              . 'TYPO3 Caddy > minicaddy (plugin 3)<br />' . PHP_EOL
               . __METHOD__ . ' (' . __LINE__ . ')'
               ;
       die( $prompt );
@@ -414,7 +414,7 @@ class tx_caddy_pi3 extends tslib_pibase
     $template       = $this->cObj->fileResource( $fileRessource );
     $markerAll      = $this->conf['templates.']['html.']['caddymini.']['marker.']['all'];
     $markerItem     = $this->conf['templates.']['html.']['caddymini.']['marker.']['item'];
-    
+
     $this->tmpl['caddymini']      = $this->cObj->getSubpart( $template, $markerAll );
     $this->tmpl['items']          = $this->cObj->getSubpart( $this->tmpl['caddymini'], $markerItem );
     $marker                       = '###CADDYMINIEMPTY###';
@@ -447,17 +447,17 @@ class tx_caddy_pi3 extends tslib_pibase
   **********************************************/
 
  /**
-  * zz_quantity( ) : 
+  * zz_quantity( ) :
   *
-  * @return     string      $content  : mini caddy in case of products
-  * @access   private
+  * @return	string		$content  : mini caddy in case of products
+  * @access private
   * @version  2.0.2
   * @since    2.0.2
-  */	
-  private function zz_quantity( ) 
+  */
+  private function zz_quantity( )
   {
     $quantity = 0;
-    
+
     foreach( ( array ) $this->products as $product )
     {
       $quantity = $quantity

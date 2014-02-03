@@ -15,7 +15,7 @@
     <em>
       VERSION
       =======
-      4.0.5: 14-01-07
+      4.0.5: 14-01-27
       For foundation 4.x
 
       INDEX
@@ -53,7 +53,7 @@
     <div id="c###UID###-accordion">
       <div class="section-container accordion large-12 columns" data-section="accordion">
         <!-- ###CADDY-PRODUCT-TABLE### begin --> 
-        <section class="caddy-accordion###CADDY_ACTIVE_1###">
+        <div class="section caddy-accordion###CADDY_SECTION_1###">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_ITEMS###
@@ -62,8 +62,8 @@
           <div class="content" data-section-content>
             ###MINPRICE###
             <form name="caddy-items" id="caddy-items" action="###TARGET###" method="post">
-              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
-              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="1">
+              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="1" />
               ###VARIANTS###
               <!-- ###HEADER### begin -->
               <div class="row">
@@ -99,10 +99,10 @@
               <!-- ###FOOTER### end -->
             </form> <!-- /caddy -->
           </div> <!-- /content -->
-        </section>
+        </div> <!-- /section -->
         <!-- ###CADDY-PRODUCT-TABLE### end --> 
         <!-- ###OPTIONS### begin -->
-        <section class="caddy-accordion###CADDY_ACTIVE_2###">
+        <div class="section caddy-accordion###CADDY_SECTION_2###">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_OPTIONSWOPAYMENT###
@@ -110,8 +110,8 @@
           </div>
           <div class="content" data-section-content>
             <form name="caddy-optionswopayment" id="caddy-optionswopayment" action="###TARGET###" method="post">
-              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
-              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="2">
+              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="2" />
               <div class="row caddy_options">
                 <div id="caddy_shipping" class="small-6 large-6 columns">
                   ###SHIPPING_RADIO###
@@ -126,19 +126,20 @@
               </div>
             </form> <!-- /caddy-optionswopayment -->
           </div> <!-- /content -->
-        </section>
+        </div> <!-- /section -->
         <!-- ###OPTIONS### end -->
         <!-- ###PAYMENT_METHOD### begin -->
-        <section class="caddy-accordion###CADDY_ACTIVE_3###">
+        <div class="section caddy-accordion###CADDY_SECTION_3###">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD###
             </div>
           </div>
           <div class="content" data-section-content>
+            <!-- ###PAYMENT_METHOD_CONTENT### begin -->
             <form name="caddy-payment" id="caddy-payment" action="###TARGET###" method="post">
-              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1">
-              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3">
+              <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+              <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3" />
               <div class="row caddy_options">
                 <div id="caddy_payment" class="small-12 large-6 columns">
                   ###PAYMENT_RADIO###
@@ -148,11 +149,12 @@
                 </div>
               </div>
             </form> <!-- /caddy-payment -->
+            <!-- ###PAYMENT_METHOD_CONTENT### end -->
           </div> <!-- /content -->
-        </section>
+        </div> <!-- /section -->
         <!-- ###PAYMENT_METHOD### end -->
         <!-- ###ORDER### begin -->
-        <section class="caddy-accordion###CADDY_ACTIVE_4###">
+        <div class="section caddy-accordion###CADDY_SECTION_4###">
           <div class="title" data-section-title>
             <div class="row">
               ###_HTMLMARKER_CADDY_HEADER_ORDER###
@@ -163,14 +165,23 @@
               ###_HTMLMARKER_CADDY_PROMPT_ORDER###
             </p>
           </div> <!-- /content -->
-        </section>
+        </div> <!-- /section -->
         <!-- ###ORDER### end -->
+        <!-- ###CADDY_REQUIREMENTS### begin -->
+        <div data-alert class="alert-box caddy-requirements-prompt-foundation">
+          ###PROMPT###
+          <a href="#" class="close">&times;</a>
+        </div>
+        <!-- ###CADDY_REQUIREMENTS### end -->
       </div>
     </div>
     <!-- ###CADDY### end -->
 
     <!-- ###CADDY_ITEM_ERROR### begin -->
-    <div class="caddy_error">###ERROR_PROMPT###</div>
+    <div data-alert class="alert-box">
+      <span class="prompt">###ERROR_PROMPT###</span>
+      <a href="#" class="close">&times;</a>
+    </div>
     <!-- ###CADDY_ITEM_ERROR### end -->
 
 
@@ -219,6 +230,7 @@
     <!-- ###CADDY_SPECIALS### begin -->
     <div id="caddy_specials">
       <fieldset>
+        <input type="hidden" name="tx_caddy_pi1[updateByCaddy][specials]" value="1" />
         <legend>###_LOCAL_LANG_SPECIALSLABELS###</legend>
         <!-- ###CONTENT### --><!-- ###ITEM### -->
         <div class="caddy_fieldwrap_checkbox">###SPECIALS_CHECKBOX### ###SPECIALS_TITLE### ###SPECIALS_CONDITION###</div>
@@ -235,7 +247,6 @@
       <!-- ###ITEM### --><!-- ###CONTENT### -->
     </ul>
     <!-- ###CADDY_SPECIALS_CONDITIONS### end -->
-
 
     <!-- ###CADDY_EMPTY### begin -->
     <div class="caddy caddyempty">
@@ -465,10 +476,10 @@
     <!-- ###CADDY_FORM### begin --> 
     <div class="caddy_form">
       <form action="###CADDY_FORM_ACTION###">
-        <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid">
-        <input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id">
-        <input type="text" value="1" name="qty">
-        <input type="submit" value="###_LOCAL_LANG_FORM_SUBMIT###">
+        <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid" />
+        <input type="hidden" value="###CADDY_FORM_ACTION_PID###" name="id" />
+        <input type="text" value="1" name="qty" />
+        <input type="submit" value="###_LOCAL_LANG_FORM_SUBMIT###" />
       </form>
     </div>
     <!-- ###CADDY_FORM### end -->

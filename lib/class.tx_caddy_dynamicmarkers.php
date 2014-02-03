@@ -8,7 +8,7 @@
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
  *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
- * 
+ *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -37,7 +37,6 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @version     4.0.0
  * @since       1.4.6
  */
-
 class tx_caddy_dynamicmarkers extends tslib_pibase {
 
   public $extKey = 'caddy';
@@ -53,40 +52,41 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
           '_HTMLMARKER_', // prefix for HTML template part
           '_HTMLMARKER' // prefix for typoscript part
   );
-  
+
   public  $conf;
   public  $cObj;
   private $content;
   private $pObj;
   private $pidCaddy = null;
-  
+
 
  /**
   * main( ) : replace typoscript- and locallang markers
   *
-  * @param      string    $content  : current content with HTML marker
-  * @param      object    $pObj     : parent object
-  * @return	string    $content  : current content with replaced HTML marker
+  * @param	string		$content            : current content with HTML marker
+  * @param	object		$pObj               : parent object
+  * @param	object		$replaceEmptyMarker : true: left over empty marker will replaced
+  * @return	string		$content            : current content with replaced HTML marker
   * @access public
   * @version    4.0.0
   * @since      1.4.0
   */
-  function main( $content, $pObj ) 
+  function main( $content, $pObj, $replaceEmptyMarker=true )
   {
       // config
     $this->pObj     = $pObj;
     $this->conf     = $pObj->conf;
     $this->cObj     = $pObj->cObj;
     $this->content  = $content;
-    
+
       // #54628, 131229, dwildt, 1+
     $this->initPidCaddy( $this->pidCaddy );
-    
+
     $this->pi_loadLL();
-    
+
       // #i0037, dwildt, 1+
     $this->content  = $this->cObjData( );
-    
+
       // #54628, 131229, dwildt, 1+
     $this->setSessionToLocal_cObj( );
 
@@ -97,7 +97,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
                         '#\#\#\#' . $this->locallangmarker_prefix[0] . '(.*)\#\#\##Uis', // regulare expression
                         array
                         (
-                          $this, 
+                          $this,
                           'DynamicLocalLangMarker'
                         ), // open function
                         $this->content // current content
@@ -110,7 +110,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
                         '#\#\#\#' . $this->typoscriptmarker_prefix[0] . '(.*)\#\#\##Uis', // regulare expression
                         array
                         (
-                          $this, 
+                          $this,
                           'DynamicTyposcriptMarker'
                         ), // open function
                         $this->content // current content
@@ -122,29 +122,32 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
       return $this->content;
     }
 
-    $this->content = preg_replace( '|###.*?###|i', '', $this->content );
+    if( $replaceEmptyMarker )
+    {
+      $this->content = preg_replace( '|###.*?###|i', '', $this->content );
+    }
     return $this->content;
-    
+
   }
 
  /**
   * DynamicLocalLangMarker( ) : get automaticly a marker from locallang.xml (###LOCALLANG_BLABLA###)
   *
-  * @param      array     $array
-  * @return	string    $content  : current content with replaced HTML marker
+  * @param	array		$array
+  * @return	string		$content  : current content with replaced HTML marker
   * @access public
   * @version    3.0.1
   * @since      1.4.0
   */
-  private function DynamicLocalLangMarker( $array ) 
+  private function DynamicLocalLangMarker( $array )
   {
     if( ! empty( $array[1] ) )
     {
       $string = $this->pi_getLL
-                ( 
-                  strtolower( $this->locallangmarker_prefix[1] . $array[1] ), 
+                (
+                  strtolower( $this->locallangmarker_prefix[1] . $array[1] ),
                   '<i>' . strtolower( $array[1] ) . '</i>'
-                ); 
+                );
     }
 
     if( ! empty( $string ) )
@@ -156,13 +159,13 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
  /**
   * DynamicTyposcriptMarker( )  : Get automaticly a marker from typoscript
   *
-  * @param      array     $array
-  * @return	string    $content  : current content with replaced HTML marker
+  * @param	array		$array
+  * @return	string		$content  : current content with replaced HTML marker
   * @access public
   * @version    3.0.1
   * @since      1.4.0
   */
-  private function DynamicTyposcriptMarker( $array ) 
+  private function DynamicTyposcriptMarker( $array )
   {
     if( $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )] )
     { // If there is a fitting entry in typoscript
@@ -171,8 +174,8 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
       // #54628, 131229, dwildt, 1+
       $string = $this->pObj->local_cObj->cObjGetSingle
                 (
-                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )], 
-                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] ) . '.'] 
+                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] )],
+                  $this->conf[$this->typoscriptmarker_prefix[1] . '.'][strtolower( $array[1] ) . '.']
                 ); // fill string with typoscript value
     }
 
@@ -185,14 +188,14 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
  /**
   * cObjData( ) : Replace all marker, which correspond with cObjData like ###UID###, ###PID###
   *
-  * @param      string    $content  : current content with HTML marker
-  * @return	string    $content  : current content with replaced HTML marker
-  * @access     private
+  * @param	string		$content  : current content with HTML marker
+  * @return	string		$content  : current content with replaced HTML marker
+  * @access private
   * @internal   #i0037
   * @version    3.0.1
   * @since      1.4.0
   */
-  private function cObjData( ) 
+  private function cObjData( )
   {
     foreach( $this->cObj->data as $key => $value )
     {
@@ -209,6 +212,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
  /**
   * initPidCaddy( )
   *
+  * @param	[type]		$$pidCaddy: ...
   * @return	void
   * @access public
   * @internal   #54628
@@ -225,18 +229,19 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
     {
       $this->pidCaddy = ( int ) $GLOBALS["TSFE"]->id;
     }
-//var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
+//var_dump( __METHOD__, __LINE__, $this->pidCaddy );
   }
 
  /**
-  * setSessionToLocal_cObj( ) : 
+  * setSessionToLocal_cObj( ) :
   *
-  * @access     private
+  * @return	[type]		...
+  * @access private
   * @internal   #54628
   * @version    4.0.0
   * @since      1.4.0
   */
-  private function setSessionToLocal_cObj( ) 
+  private function setSessionToLocal_cObj( )
   {
       // Get the current session array
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' .  $this->pidCaddy );
@@ -265,7 +270,7 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_dynamicmarkers.php']) 
+if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_dynamicmarkers.php'])
 {
   include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/class.tx_caddy_dynamicmarkers.php']);
 }

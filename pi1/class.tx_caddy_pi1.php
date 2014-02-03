@@ -33,54 +33,69 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *
  *
  *
- *   97: class tx_caddy_pi1 extends tslib_pibase
+ *  112: class tx_caddy_pi1 extends tslib_pibase
  *
  *              SECTION: Main
- *  154:     public function main( $content, $conf )
+ *  174:     public function main( $content, $conf )
  *
  *              SECTION: Caddy
- *  228:     private function caddyProductAdd( )
- *  250:     private function caddyProductDelete( )
- *  266:     private function caddyRendered( )
- *  280:     private function caddyUpdate( )
+ *  252:     private function caddyHide( $content )
+ *  283:     private function caddyProductAdd( )
+ *  305:     private function caddyProductDelete( )
+ *  321:     private function caddyRendered( )
+ *  338:     private function caddyUpdate( )
+ *  361:     private function caddyUpdateOptions( )
  *
  *              SECTION: Clean
- *  323:     private function clean( )
+ *  430:     private function clean( )
  *
  *              SECTION: Debug
- *  345:     private function debugOutputBeforeRunning( )
+ *  452:     private function debugOutputBeforeRunning( )
+ *
+ *              SECTION: HTML
+ *  500:     private function htmlActiveSection( $tmpl )
  *
  *              SECTION: Init
- *  382:     private function init( )
- *  402:     private function initAccessByIp( )
- *  448:     private function initDatabase( )
- *  461:     private function initDatabaseTable( )
- *  512:     private function initFlexform( )
- *  525:     private function initGetPost( )
- *  581:     private function initGetPostCid( )
- *  631:     private function initInstances( )
- *  681:     private function initPid( )
- *  720:     private function initPowermail( )
- *  733:     private function initTemplate( )
+ *  541:     private function init( )
+ *  573:     private function initAccessByIp( )
+ *  619:     private function initDatabase( )
+ *  632:     private function initDatabaseTable( )
+ *  683:     private function initFlexform( )
+ *  697:     private function initNumbers( )
+ *  748:     private function initNumbersSession( )
+ *  786:     private function initGetPost( )
+ *  860:     private function initGetPostQty( )
+ *  876:     private function initInstances( )
+ *  934:     private function initJavascript( )
+ *  946:     private function initPid( )
+ *  985:     private function initPidClasses( )
+ * 1000:     private function initPowermail( )
+ * 1013:     private function initTemplate( )
+ *
+ *              SECTION: Powermail
+ * 1034:     private function send( )
  *
  *              SECTION: Send
- *  754:     private function send( )
- *  768:     private function sendCustomer( )
- *  783:     private function sendCustomerDeliveryorder( )
- *  808:     private function sendCustomerInvoice( )
- *  833:     private function sendCustomerTerms( )
- *  858:     private function sendVendor( )
- *  873:     private function sendVendorDeliveryorder( )
- *  898:     private function sendVendorInvoice( )
- *  923:     private function sendVendorTerms( )
+ * 1056:     private function powermailDataToSession( )
+ * 1081:     private function powermailData( )
+ * 1112:     private function sendCustomer( )
+ * 1128:     private function sendCustomerDeliveryorder( )
+ * 1159:     private function sendCustomerInvoice( )
+ * 1190:     private function sendCustomerRevocation( )
+ * 1221:     private function sendCustomerTerms( )
+ * 1252:     private function sendVendor( )
+ * 1268:     private function sendVendorDeliveryorder( )
+ * 1299:     private function sendVendorInvoice( )
+ * 1330:     private function sendVendorRevocation( )
+ * 1361:     private function sendVendorTerms( )
  *
  *              SECTION: Update Wizard
- *  957:     private function updateWizard( $content )
+ * 1401:     private function updateWizard( $content )
  *
  *              SECTION: ZZ
- * 1002:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1447:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
- * TOTAL FUNCTIONS: 29
+ * TOTAL FUNCTIONS: 40
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -91,7 +106,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.4
+ * @version	4.0.5
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -137,7 +152,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private $numberOrderCurrent           =  null;
   private $numberOrderRegistry          =  null;
 
-  
+
 
 
 
@@ -153,7 +168,7 @@ class tx_caddy_pi1 extends tslib_pibase
   * @param	string		$content: The PlugIn content
   * @param	array		$conf: The PlugIn configuration
   * @return	The		content that is displayed on the website
-  * @version    2.0.0
+  * @version    4.0.5
   * @since      1.4.6
   */
   public function main( $content, $conf )
@@ -175,14 +190,6 @@ class tx_caddy_pi1 extends tslib_pibase
       // Prompt of the update wizard
     $content = $this->updateWizard( $content );
 
-      // #53742, 131119, dwildt, 5+
-    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
-    if( $fancybox == 'yes' )
-    {
-      $content  = $content
-                . $this->fancybox->main( );
-    }
-
       // Output debugging prompts in debug mode
     $this->debugOutputBeforeRunning( );
 
@@ -198,13 +205,14 @@ class tx_caddy_pi1 extends tslib_pibase
     $marker   = $caddy['marker'];
     $subparts = $caddy['subparts'];
     $tmpl     = $caddy['tmpl'];
-    
+
       // 140109, dwildt, 1+
-    $tmpl     = $this->htmlActiveMarker( $tmpl );
+    $tmpl     = $this->htmlActiveSection( $tmpl );
 //var_dump( __METHOD__, __LINE__ , $tmpl );
     unset( $caddy );
 
     $content = $this->powermail->formCss( $content );
+    $this->powermailDataToSession( );
 
     $this->send( );
 
@@ -216,6 +224,9 @@ class tx_caddy_pi1 extends tslib_pibase
                             $marker,
                             $subparts
                           );
+
+    $content = $this->caddyHide( $content );
+
 //var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     return $this->pi_wrapInBaseClass( $content );
@@ -228,6 +239,38 @@ class tx_caddy_pi1 extends tslib_pibase
   * Caddy
   *
   **********************************************/
+
+ /**
+  * caddyHide( )  : Hide the caddy, if client has sent the order
+  *
+  * @param	[type]		$$content: ...
+  * @return	string		$content
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function caddyHide( $content )
+  {
+    $GP = t3lib_div::_GET( )
+        + t3lib_div::_POST( )
+        ;
+
+//var_dump( __METHOD__, __LINE__, $GP );
+
+    switch( true )
+    {
+      case( $GP['tx_powermail_pi1']['action'] == 'create' ):
+        $content = null;
+        break;
+      default:
+          // Follow the workflow
+        break;
+    }
+
+    unset( $GP );
+
+    return $content;
+  }
 
  /**
   * caddyProductAdd( )
@@ -302,7 +345,7 @@ class tx_caddy_pi1 extends tslib_pibase
       // #54634, 131128, dwildt, 1+
       $this->session->quantityUpdate( $this->pid );
     }
-    
+
     $this->caddyUpdateOptions( );
 
   }
@@ -317,12 +360,12 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddyUpdateOptions( )
   {
-      // RETURN : Don't update options, if form isnt by itself 
+      // RETURN : Don't update options, if form isnt by itself
     if( ! intval( $this->piVars['updateByCaddy'] ) )
     {
       return;
     }
-      // RETURN : Don't update options, if form isnt by itself 
+      // RETURN : Don't update options, if form isnt by itself
 
       // change payment
       // #54858, 140109, dwildt, 1-
@@ -333,6 +376,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $payment = $this->piVars['payment'];
     }
+
       // #54858, 140109, dwildt, 1-
     //$this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
       // #54858, 140109, dwildt, 1+
@@ -357,7 +401,10 @@ class tx_caddy_pi1 extends tslib_pibase
     //$special = null;
       // #54858, 140109, dwildt, 1+
     $special = $this->session->specialGet( $this->pid );
-    if( isset( $this->piVars['specials'] ) )
+      // 140202, dwildt, 1-
+    //if( isset( $this->piVars['specials'] ) )
+      // 140202, dwildt, 1+
+    if( isset( $this->piVars['updateByCaddy']['specials'] ) )
     {
       $special = $this->piVars['specials'];
     }
@@ -415,13 +462,24 @@ class tx_caddy_pi1 extends tslib_pibase
       // RETURN : Don't output debug prompt
 
       // output debug prompt
-    t3lib_div::debug
+      // 140127, dwildt, -
+      // deprectad since TYPO3 4.5
+//    t3lib_div::debug
+//    (
+//      $this->session->productsGet( $this->pid ), $this->extKey . ': ' . 'Values in session at the beginning'
+//    );
+//    t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
+//    t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
+//    t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
+      // 140127, dwildt, +
+    t3lib_utility_Debug::debug
     (
       $this->session->productsGet( $this->pid ), $this->extKey . ': ' . 'Values in session at the beginning'
     );
-    t3lib_div::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
-    t3lib_div::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
-    t3lib_div::debug($_POST, $this->extKey . ': ' . 'All POST variables');
+    t3lib_utility_Debug::debug($this->gpvar, $this->extKey . ': ' . 'Given params');
+    t3lib_utility_Debug::debug($this->conf, $this->extKey . ': ' . 'Typoscript configuration');
+    t3lib_utility_Debug::debug($_POST, $this->extKey . ': ' . 'All POST variables');
+
       // output debug prompt
   }
 
@@ -434,15 +492,15 @@ class tx_caddy_pi1 extends tslib_pibase
   **********************************************/
 
  /**
-  * htmlActiveMarker( ) : Replace the ###ACTIVE### marker
+  * htmlActiveSection( ) : Replace the ###ACTIVE### marker
   *
-  * @param      string    $tmpl: current template
-  * @return	string    $tmpl: handled template
+  * @param	string		$tmpl: current template
+  * @return	string		$tmpl: handled template
   * @access private
   * @version    4.0.4
   * @since      4.0.4
   */
-  private function htmlActiveMarker( $tmpl )
+  private function htmlActiveSection( $tmpl )
   {
     if( t3lib_div::_GP( 'tx_powermail_pi1' ) )
     {
@@ -455,15 +513,15 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $accordion = ( int ) $this->piVars['accordion'];
     }
-    
-    $marker = '###CADDY_ACTIVE_' . $accordion . '###';
-    
+
+    $marker = '###CADDY_SECTION_' . $accordion . '###';
+
     $tmpl = str_replace( $marker, ' active ', $tmpl );
     $tmpl = str_replace( '  active', ' active', $tmpl );
     $tmpl = str_replace( 'active  ', 'active ', $tmpl );
     $tmpl = str_replace( '" active', '"active', $tmpl );
     $tmpl = str_replace( 'active "', 'active"', $tmpl );
-    
+
     return $tmpl;
   }
 
@@ -501,10 +559,10 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->initJavascript( );
     $this->initDatabase( );
     $this->initNumbers( );
-    
+
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
-    
+
     $this->session->setParentObject( $this );
   }
 
@@ -660,7 +718,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->numberOrderCurrent           = $this->numberOrderRegistry
                                         + $this->flexform->originOrder
                                         + 1;
-    
+
       // DRS
     if( $this->drs->drsInit )
     {
@@ -678,7 +736,7 @@ class tx_caddy_pi1 extends tslib_pibase
       t3lib_div::devlog(' [INFO/INIT] '. $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     $this->initNumbersSession( );
   }
 
@@ -698,11 +756,11 @@ class tx_caddy_pi1 extends tslib_pibase
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
     // #54634, 131229, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $this->pid);
-  
+
     $sesArray['numberDeliveryorderCurrent']  = $this->numberDeliveryorderCurrent  ;
     $sesArray['numberInvoiceCurrent']        = $this->numberInvoiceCurrent  ;
     $sesArray['numberOrderCurrent']          = $this->numberOrderCurrent  ;
-    
+
       // generate session with session array
     // #54634, 131229, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
@@ -730,61 +788,61 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function initGetPost( )
   {
-    
-    foreach( array_keys( ( array ) $this->conf['getpost.'] ) as $getpostKey )
+
+    foreach( array_keys( ( array ) $this->conf['api.']['getpost.'] ) as $getpostKey )
     {
       if( stristr( $getpostKey, '.' ) )
       {
         continue;
       }
-      
-      $name = $this->conf['getpost.'][ $getpostKey ];
-      $conf = $this->conf['getpost.'][ $getpostKey . '.' ];
+
+      $name = $this->conf['api.']['getpost.'][ $getpostKey ];
+      $conf = $this->conf['api.']['getpost.'][ $getpostKey . '.' ];
 
       $this->gpvar[ $getpostKey ] = $this->zz_cObjGetSingle( $name, $conf );
 
     }
-    
+
     $this->initGetPostQty( );
 //var_dump( __METHOD__, __LINE__, $this->gpvar );
     return;
-    
+
 //      // read variables
 //    $conf = $this->conf;
 //
-//    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['getpost.']['title'], $conf['getpost.']['title.'] );
-//    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['getpost.']['gross'], $conf['getpost.']['price.'] );
-//    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['getpost.']['qty'], $conf['getpost.']['qty.'] ) );
-//    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['getpost.']['tax'], $conf['getpost.']['tax.'] );
-//    $this->gpvar['uid']  = intval( $this->zz_cObjGetSingle( $conf['getpost.']['uid'], $conf['getpost.']['uid.'] ) );
-//    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['getpost.']['cid'], $conf['getpost.']['cid.'] ) );
+//    $this->gpvar['title'] = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['title'], $conf['api.']['getpost.']['title.'] );
+//    $this->gpvar['gross'] = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['gross'], $conf['api.']['getpost.']['price.'] );
+//    $this->gpvar['qty']   = intval( $this->zz_cObjGetSingle( $conf['api.']['getpost.']['qty'], $conf['api.']['getpost.']['qty.'] ) );
+//    $this->gpvar['tax']   = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['tax'], $conf['api.']['getpost.']['tax.'] );
+//    $this->gpvar['uid']  = intval( $this->zz_cObjGetSingle( $conf['api.']['getpost.']['uid'], $conf['api.']['getpost.']['uid.'] ) );
+//    $this->gpvar['cid']   = intval ($this->zz_cObjGetSingle( $conf['api.']['getpost.']['cid'], $conf['api.']['getpost.']['cid.'] ) );
 //
-//    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['getpost.']['sku'], $conf['getpost.']['sku.'] );
-//    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['getpost.']['min'], $conf['getpost.']['min.'] );
-//    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['getpost.']['max'], $conf['getpost.']['max.'] );
+//    $this->gpvar['sku'] = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['sku'], $conf['api.']['getpost.']['sku.'] );
+//    $this->gpvar['min'] = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['min'], $conf['api.']['getpost.']['min.'] );
+//    $this->gpvar['max'] = $this->zz_cObjGetSingle( $conf['api.']['getpost.']['max'], $conf['api.']['getpost.']['max.'] );
 //
 //    $this->gpvar['service_attribute_1'] = floatval
 //                                          (
 //                                            $this->zz_cObjGetSingle
 //                                            (
-//                                              $conf['getpost.']['service_attribute_1'],
-//                                              $conf['getpost.']['service_attribute_1.']
+//                                              $conf['api.']['getpost.']['service_attribute_1'],
+//                                              $conf['api.']['getpost.']['service_attribute_1.']
 //                                            )
 //                                          );
 //    $this->gpvar['service_attribute_2'] = floatval
 //                                          (
 //                                            $this->zz_cObjGetSingle
 //                                            (
-//                                              $conf['getpost.']['service_attribute_2'],
-//                                              $conf['getpost.']['service_attribute_2.']
+//                                              $conf['api.']['getpost.']['service_attribute_2'],
+//                                              $conf['api.']['getpost.']['service_attribute_2.']
 //                                            )
 //                                          );
 //    $this->gpvar['service_attribute_3'] = floatval
 //                                          (
 //                                            $this->zz_cObjGetSingle
 //                                            (
-//                                              $conf['getpost.']['service_attribute_3'],
-//                                              $conf['getpost.']['service_attribute_3.']
+//                                              $conf['api.']['getpost.']['service_attribute_3'],
+//                                              $conf['api.']['getpost.']['service_attribute_3.']
 //                                            )
 //                                          );
 //    if( $this->gpvar['qty'] === 0 )
@@ -824,7 +882,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy            = t3lib_div::makeInstance( 'tx_caddy' );
-      // Next two line will set in init( ) 
+      // Next two line will set in init( )
 //    $this->caddy->setParentObject( $this );
 //    $this->caddy->setContentRow( $this->cObj->data );
 
@@ -841,16 +899,6 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj        = $this;
     $this->drs->row         = $this->cObj->data;
-
-      // Class with methods for get flexform values
-    $fancybox = $this->conf['javascript.']['jquery.']['plugins.']['fancybox.']['enabled'];
-    if( $fancybox == 'yes' )
-    {
-      require_once( $path2lib . 'jquery/class.tx_caddy_fancybox.php' );
-      $this->fancybox       = t3lib_div::makeInstance( 'tx_caddy_fancybox' );
-      $this->fancybox->pObj = $this;
-      $this->fancybox->row  = $this->cObj->data;
-    }
 
       // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
@@ -974,7 +1022,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
   /***********************************************
   *
-  * Send
+  * Powermail
   *
   **********************************************/
 
@@ -991,6 +1039,70 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->sendCustomer( );
     $this->sendVendor( );
   }
+
+
+
+  /***********************************************
+  *
+  * Send
+  *
+  **********************************************/
+
+ /**
+  * powermailDataToSession( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function powermailDataToSession( )
+  {
+    if( ! $this->powermailData( ) )
+    {
+      return;
+    }
+
+    $pmUid          = $this->flexform->emailCustomerEmail;
+    $emailCustomer  = $this->powermail->getFieldById( $pmUid );
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $sesArray['powermail']['values']['customer']['email'] = $emailCustomer;
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    $GLOBALS['TSFE']->storeSessionData( );
+
+  }
+
+ /**
+  * powermailData( ):
+  *
+  * @return	boolean
+  * @access private
+  * @version     4.0.5
+  * @since       4.0.5
+  */
+  private function powermailData( )
+  {
+    $GP = t3lib_div::_GET( )
+        + t3lib_div::_POST( )
+        ;
+
+    switch( true )
+    {
+//      case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
+//      case( $GP['tx_powermail_pi1']['action'] == 'create' ):
+//      case( $GP['tx_powermail_pi1']['action'] == 'form' ):
+      case( $GP['tx_powermail_pi1'] ):
+        return true;
+        break;
+      default:
+        return false;
+        break;
+    }
+
+    unset( $GP );
+  }
+
 
  /**
   * sendCustomer( )

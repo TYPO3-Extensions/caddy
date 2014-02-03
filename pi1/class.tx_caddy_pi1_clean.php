@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,15 +28,43 @@
  *
  *
  *
- *   53: class tx_caddy_pi1_clean
- *   78:     public function main( )
- *  115:     private function database( )
- *  143:     private function numbers( )
- *  157:     private function numbersInvoice( )
- *  176:     private function numbersDeliveryorder( )
- *  195:     private function cleanSession( )
+ *   81: class tx_caddy_pi1_clean
+ *  110:     public function main( )
  *
- * TOTAL FUNCTIONS: 6
+ *              SECTION: Database
+ *  159:     private function database( )
+ *  234:     private function databaseCancelWiEpaymentError( )
+ *  265:     private function databaseCancelWoItems( )
+ *  302:     private function databaseFieldsFiles( $sesArray )
+ *  430:     private function databaseFieldsNumbers( $sesArray )
+ *  452:     private function databaseFieldsSum( $sesArray )
+ *
+ *              SECTION: Get powermail fields
+ *  482:     private function getPmFieldDeliveryorderAddress( )
+ *  497:     private function getPmFieldDeliveryorderCity( )
+ *  512:     private function getPmFieldDeliveryorderCompany( )
+ *  527:     private function getPmFieldDeliveryorderCountry( )
+ *  542:     private function getPmFieldDeliveryorderFirstname( )
+ *  557:     private function getPmFieldDeliveryorderLastname( )
+ *  572:     private function getPmFieldDeliveryorderZip( )
+ *  587:     private function getPmFieldEmailCustomerEmail( )
+ *  603:     private function getPmFieldInvoiceAddress( )
+ *  618:     private function getPmFieldInvoiceCity( )
+ *  633:     private function getPmFieldInvoiceCompany( )
+ *  648:     private function getPmFieldInvoiceCountry( )
+ *  663:     private function getPmFieldInvoiceFirstname( )
+ *  678:     private function getPmFieldInvoiceLastname( )
+ *  693:     private function getPmFieldInvoiceZip( )
+ *
+ *              SECTION: Init
+ *  718:     public function initPidCaddy( $pidCaddy=null )
+ *
+ *              SECTION: Session
+ *  744:     private function sessionUpdate( )
+ *  758:     private function sessionUpdateDeliveryorder( )
+ *  797:     private function sessionUpdateInvoice( )
+ *
+ * TOTAL FUNCTIONS: 26
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -47,7 +75,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	4.0.5
  * @since       1.4.6
  */
 class tx_caddy_pi1_clean
@@ -67,7 +95,7 @@ class tx_caddy_pi1_clean
   public $row = null;
 
   private $pidCaddy = null;
-  
+
   private $local_cObj = null;
 
 
@@ -125,7 +153,7 @@ class tx_caddy_pi1_clean
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    4.0.5
   * @since      2.0.0
   */
   private function database( )
@@ -133,32 +161,19 @@ class tx_caddy_pi1_clean
     $sesArray = null;
     $time     = time( );
 
-      // Get the session array
-    // #54634, 131229, dwildt, 1-
-    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #54634, 131229, dwildt, 1+
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-      // RETURN : any product, don't increase numbers!
-    if( empty( $sesArray['products'] ) )
+    if( $this->databaseCancelWoItems( ) )
     {
-      if( $this->pObj->drs->drsError )
-      {
-        $prompt = 'There isn\'t any product! Maybe powermail form is sent twice!';
-        t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
-        $prompt = 'There won\'t added any new record to the database.';
-        t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
-        $prompt = 'GET/POST tx_powermail_pi1 will removed! This prevents another e-mail.';
-        t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
-      }
-      unset( $_GET[ 'tx_powermail_pi1' ] );
-      unset( $_POST[ 'tx_powermail_pi1' ] );
       return;
     }
-      // RETURN : any product, don't increase numbers!
-    
-    
+
+    if( $this->databaseCancelWiEpaymentError( ) )
+    {
+      return;
+    }
+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
     $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
-    
+
       // DRS
     if( $this->pObj->drs->drsCobj )
     {
@@ -197,7 +212,7 @@ class tx_caddy_pi1_clean
       die( $prompt );
     }
       // exit in case of error
-      
+
       // DRS
     if( $this->pObj->drs->drsClean )
     {
@@ -205,13 +220,79 @@ class tx_caddy_pi1_clean
       t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    
+
+  }
+
+ /**
+  * databaseCancelWiEpaymentError( )
+  *
+  * @return	boolen
+  * @access private
+  * @version    4.0.5
+  * @since      4.0.5
+  */
+  private function databaseCancelWiEpaymentError( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+      // RETURN : e-payment transaction was successful
+    if( ! $sesArray['e-payment']['powermail']['error'] )
+    {
+      return false;
+    }
+
+    unset( $_GET[ 'tx_powermail_pi1' ] );
+    unset( $_POST[ 'tx_powermail_pi1' ] );
+
+    $prompt = 'E-payment error is set by powermail';
+    t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+    $prompt = 'There won\'t added any new record to the database.';
+    t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+    $prompt = 'GET/POST tx_powermail_pi1 will removed! This prevents another e-mail.';
+    t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+
+    return true;
+  }
+
+ /**
+  * databaseCancelWoItems( )
+  *
+  * @return	boolen
+  * @access private
+  * @version    4.0.5
+  * @since      2.0.0
+  */
+  private function databaseCancelWoItems( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
+
+      // RETURN : any product, don't increase numbers!
+    if( ! empty( $sesArray['products'] ) )
+    {
+      return false;
+    }
+
+    unset( $_GET[ 'tx_powermail_pi1' ] );
+    unset( $_POST[ 'tx_powermail_pi1' ] );
+
+    if( ! $this->pObj->drs->drsError )
+    {
+      return true;
+    }
+
+    $prompt = 'There isn\'t any product! Maybe powermail form is sent twice!';
+    t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
+    $prompt = 'There won\'t added any new record to the database.';
+    t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+    $prompt = 'GET/POST tx_powermail_pi1 will removed! This prevents another e-mail.';
+    t3lib_div::devlog( '[WARN/SESSION] ' . $prompt, $this->extKey, 2 );
+
+    return true;
   }
 
  /**
   * databaseFieldsFiles( )
   *
-  * @param      array       $sesArray :
+  * @param	array		$sesArray :
   * @return	void
   * @access private
   * @version    2.0.2
@@ -225,7 +306,7 @@ class tx_caddy_pi1_clean
     $fileRevocation     = null;
     $fileTerms          = null;
       // Initiate files
-    
+
       // Get pdf is sent to ...
     $pdfDeliveryorderToCustomer = false;
     $pdfDeliveryorderToVendor   = false;
@@ -236,40 +317,40 @@ class tx_caddy_pi1_clean
     $pdfTermsToCustomer         = false;
     $pdfTermsToVendor           = false;
 
-    if( ! empty ( $sesArray['sendCustomerDeliveryorder'] ) ) 
+    if( ! empty ( $sesArray['sendCustomerDeliveryorder'] ) )
     {
       $pdfDeliveryorderToCustomer = true;
     }
-    if( ! empty ( $sesArray['sendVendorDeliveryorder'] ) ) 
+    if( ! empty ( $sesArray['sendVendorDeliveryorder'] ) )
     {
       $pdfDeliveryorderToVendor = true;
     }
-    if( ! empty ( $sesArray['sendCustomerInvoice'] ) ) 
+    if( ! empty ( $sesArray['sendCustomerInvoice'] ) )
     {
       $pdfInvoiceToCustomer = true;
     }
-    if( ! empty ( $sesArray['sendVendorInvoice'] ) ) 
+    if( ! empty ( $sesArray['sendVendorInvoice'] ) )
     {
       $pdfInvoiceToVendor = true;
     }
-    if( ! empty ( $sesArray['sendCustomerRevocation'] ) ) 
+    if( ! empty ( $sesArray['sendCustomerRevocation'] ) )
     {
       $pdfRevocationToCustomer = true;
     }
-    if( ! empty ( $sesArray['sendVendorRevocation'] ) ) 
+    if( ! empty ( $sesArray['sendVendorRevocation'] ) )
     {
       $pdfRevocationToVendor = true;
     }
-    if( ! empty ( $sesArray['sendCustomerTerms'] ) ) 
+    if( ! empty ( $sesArray['sendCustomerTerms'] ) )
     {
       $pdfTermsToCustomer = true;
     }
-    if( ! empty ( $sesArray['sendVendorTerms'] ) ) 
+    if( ! empty ( $sesArray['sendVendorTerms'] ) )
     {
       $pdfTermsToVendor = true;
     }
       // Get pdf is sent to ...
-    
+
       // Set files
     switch( true )
     {
@@ -315,7 +396,7 @@ class tx_caddy_pi1_clean
                       );
         break;
     }
-    
+
     $record = array
     (
       'fileDeliveryorder'           => $fileDeliveryorder,
@@ -332,14 +413,14 @@ class tx_caddy_pi1_clean
       'pdfTermsToVendor'            => $pdfTermsToVendor,
     );
       // Set record
-    
+
     return $record;
   }
 
  /**
   * databaseFieldsNumbers( )
   *
-  * @param      array       $sesArray :
+  * @param	array		$sesArray :
   * @return	void
   * @access private
   * @version    2.0.2
@@ -354,14 +435,14 @@ class tx_caddy_pi1_clean
       'numberOrder'         => $sesArray['numberOrderCurrent'],
     );
       // Set record
-    
+
     return $record;
   }
 
  /**
   * databaseFieldsSum( )
   *
-  * @param      array       $sesArray :
+  * @param	array		$sesArray :
   * @return	void
   * @access private
   * @version    2.0.2
@@ -377,7 +458,7 @@ class tx_caddy_pi1_clean
       'sumTaxReduced' => $sesArray['sum']['sum']['tax']['reduced'],
     );
       // Set record
-    
+
     return $record;
   }
 
@@ -392,8 +473,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderAddress( )  : Get the delivery order Address from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -407,8 +488,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderCity( )  : Get the delivery order City from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -422,13 +503,13 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderCompany( )  : Get the delivery order Company from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function getPmFieldDeliveryorderCompany( )
-  {                                  
+  {
     $pmUid  = $this->pObj->flexform->deliveryorderCompany;
     $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
@@ -437,8 +518,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderCountry( )  : Get the delivery order Country from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -452,8 +533,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderFirstname( )  : Get the delivery order Firstname from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -467,8 +548,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderLastname( )  : Get the delivery order Lastname from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -482,8 +563,8 @@ class tx_caddy_pi1_clean
  /**
   * getDeliveryorderZip( )  : Get the delivery order Zip from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -497,8 +578,8 @@ class tx_caddy_pi1_clean
  /**
   * getPmFieldEmailCustomerEmail( )  : Get the customer e-mail from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -513,8 +594,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceAddress( )  : Get the invoice Address from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -528,8 +609,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceCity( )  : Get the invoice City from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -543,13 +624,13 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceCompany( )  : Get the invoice Company from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
   private function getPmFieldInvoiceCompany( )
-  {                                  
+  {
     $pmUid  = $this->pObj->flexform->invoiceCompany;
     $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
@@ -558,8 +639,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceCountry( )  : Get the invoice Country from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -573,8 +654,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceFirstname( )  : Get the invoice Firstname from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -588,8 +669,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceLastname( )  : Get the invoice Lastname from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -603,8 +684,8 @@ class tx_caddy_pi1_clean
  /**
   * getInvoiceZip( )  : Get the invoice Zip from powermail POST params
   *
-  * @return	string          $value  : the value
-  * @access     private
+  * @return	string		$value  : the value
+  * @access private
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -614,7 +695,7 @@ class tx_caddy_pi1_clean
     $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
-    
+
 
 
   /***********************************************
@@ -626,6 +707,7 @@ class tx_caddy_pi1_clean
  /**
   * initPidCaddy( )
   *
+  * @param	[type]		$$pidCaddy: ...
   * @return	void
   * @access public
   * @internal   #54628
@@ -639,9 +721,9 @@ class tx_caddy_pi1_clean
     {
       $this->pidCaddy = ( int ) $GLOBALS["TSFE"]->id;
     }
-//var_dump( __METHOD__, __LINE__, $this->pidCaddy );    
+//var_dump( __METHOD__, __LINE__, $this->pidCaddy );
   }
-    
+
 
 
   /***********************************************
@@ -679,7 +761,7 @@ class tx_caddy_pi1_clean
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131229, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-    
+
     $sesArray['deliveryorderAddress']   = $this->getPmFieldDeliveryorderAddress( );
     $sesArray['deliveryorderCity']      = $this->getPmFieldDeliveryorderCity( );
     $sesArray['deliveryorderCompany']   = $this->getPmFieldDeliveryorderCompany( );
@@ -687,7 +769,7 @@ class tx_caddy_pi1_clean
     $sesArray['deliveryorderFirstname'] = $this->getPmFieldDeliveryorderFirstname( );
     $sesArray['deliveryorderLastname']  = $this->getPmFieldDeliveryorderLastname( );
     $sesArray['deliveryorderZip']       = $this->getPmFieldDeliveryorderZip( );
-    
+
     // #54634, 131229, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
     // #54634, 131229, dwildt, 1+
@@ -718,7 +800,7 @@ class tx_caddy_pi1_clean
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     // #54634, 131229, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-    
+
     $sesArray['invoiceAddress']   = $this->getPmFieldInvoiceAddress( );
     $sesArray['invoiceCity']      = $this->getPmFieldInvoiceCity( );
     $sesArray['invoiceCompany']   = $this->getPmFieldInvoiceCompany( );
@@ -726,7 +808,7 @@ class tx_caddy_pi1_clean
     $sesArray['invoiceFirstname'] = $this->getPmFieldInvoiceFirstname( );
     $sesArray['invoiceLastname']  = $this->getPmFieldInvoiceLastname( );
     $sesArray['invoiceZip']       = $this->getPmFieldInvoiceZip( );
-    
+
     // #54634, 131229, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray); // Generate new session
     // #54634, 131229, dwildt, 1+

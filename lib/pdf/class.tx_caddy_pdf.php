@@ -28,59 +28,71 @@
  *
  *
  *
- *   99: class tx_caddy_pdf extends tslib_pibase
+ *  111: class tx_caddy_pdf extends tslib_pibase
  *
  *              SECTION: Caddy
- *  135:     private function caddy( $invoice = false )
- *  168:     private function caddyProduct( $product )
- *  219:     private function  caddySum( $subpartArray )
- *  321:     private function caddyTableItems( $subpartArray )
- *  351:     private function caddyTablehead( $subpartArray )
+ *  147:     private function caddy( )
  *
  *              SECTION: Delivery Order
- *  390:     public function deliveryorder( )
- *  497:     private function deliveryorderAdditionalTextblocks( )
- *  524:     private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
- *  564:     private function deliveryorderDate( )
- *  579:     private function deliveryorderInit( )
- *  622:     private function deliveryorderNumbers( )
+ *  188:     public function deliveryorder( )
+ *  297:     private function deliveryorderAdditionalTextblocks( )
+ *  324:     private function deliveryorderAddress( $fallBackToInvoiceAddress=false )
+ *  364:     private function deliveryorderDate( )
+ *  379:     private function deliveryorderInit( )
+ *  422:     private function deliveryorderNumbers( )
+ *  448:     private function deliveryorderTermOfCredit( )
  *
  *              SECTION: Init
- *  658:     private function init( )
- *  686:     private function initCheckDir( )
- *  706:     private function initCheckProducts( )
+ *  474:     private function init( $case )
+ *  509:     private function initCheckDir( )
+ *  529:     private function initCheckProducts( )
+ *  553:     private function initInstances( )
+ *  582:     private function initTemplate( $case='invoice')
+ *  627:     private function initTemplateTable( $case )
  *
  *              SECTION: Invoice
- *  738:     public function invoice( )
- *  846:     private function invoiceAdditionalTextblocks( )
- *  872:     private function invoiceAddress( )
- *  897:     private function invoiceDate( )
- *  911:     private function invoiceInit( )
- *  954:     private function invoiceNumbers( )
+ *  677:     public function invoice( )
+ *  786:     private function invoiceAdditionalTextblocks( )
+ *  812:     private function invoiceAddress( )
+ *  837:     private function invoiceDate( )
+ *  851:     private function invoiceInit( )
+ *  894:     private function invoiceNumbers( )
+ *  920:     private function invoiceTermOfCredit( )
+ *
+ *              SECTION: Set
+ *  943:     public function setParentObject( $pObj )
  *
  *              SECTION: TCPDF
- *  989:     private function tcpdfInit( $srceFile )
- * 1021:     private function tcpdfOutput( $destPath )
- * 1056:     private function tcpdfSetFont( $font )
- * 1083:     private function tcpdfSetTextColor( $properties )
- * 1137:     private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
+ *  978:     private function tcpdfInit( $srceFile )
+ * 1024:     private function tcpdfOutput( $destPath )
+ * 1059:     private function tcpdfSetFont( $font )
+ * 1086:     private function tcpdfSetFontStretching( $font )
+ * 1115:     private function tcpdfSetTextColor( $properties )
+ * 1169:     private function tcpdfWriteHtmlCell( $properties, $htmlContent, $drsLabel )
+ *
+ *              SECTION: Revocation
+ * 1221:     public function revocation( )
+ * 1323:     private function revocationAdditionalTextblocks( )
+ * 1349:     private function revocationAddress( )
+ * 1363:     private function revocationDate( )
+ * 1377:     private function revocationInit( )
  *
  *              SECTION: Terms
- * 1189:     public function terms( )
- * 1287:     private function termsAdditionalTextblocks( )
- * 1313:     private function termsAddress( )
- * 1327:     private function termsDate( )
- * 1341:     private function termsInit( )
+ * 1428:     public function terms( )
+ * 1530:     private function termsAdditionalTextblocks( )
+ * 1556:     private function termsAddress( )
+ * 1570:     private function termsDate( )
+ * 1584:     private function termsInit( )
  *
  *              SECTION: Write
- * 1394:     private function writeTextblock( $textBlock, $drsLabel )
- * 1426:     private function writeTextblockAddHeader( $header )
+ * 1637:     private function writeTextblock( $textBlock, $drsLabel )
+ * 1669:     private function writeTextblockAddHeader( $header )
  *
  *              SECTION: ZZ
- * 1460:     private function zz_hexToRgb( $hex )
- * 1560:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
+ * 1703:     private function zz_hexToRgb( $hex )
+ * 1803:     private function zz_cObjGetSingle( $cObj_name, $cObj_conf )
  *
- * TOTAL FUNCTIONS: 34
+ * TOTAL FUNCTIONS: 42
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -431,7 +443,6 @@ class tx_caddy_pdf extends tslib_pibase
   * @access private
   * @version    2.0.8
   * @since      2.0.8
-  * 
   * @internal: #i0021
   */
   private function deliveryorderTermOfCredit( )
@@ -454,7 +465,7 @@ class tx_caddy_pdf extends tslib_pibase
   *           * of an unproper dir
   *           * of no products
   *
-  * @param      $string       $case : deliveryorder || invoice || revocation || terms
+  * @param	$string		$case : deliveryorder || invoice || revocation || terms
   * @return	void
   * @access private
   * @version    2.0.0
@@ -476,13 +487,13 @@ class tx_caddy_pdf extends tslib_pibase
 
       // DIE  : if there isn't any product
     $this->initCheckProducts( );
-    
+
     $this->initInstances( );
     $this->initTemplate( $case );
 
     $this->caddy->setParentObject( $this );
     $this->caddy->setContentRow( $this->cObj->data );
-    
+
 
   }
 
@@ -553,7 +564,7 @@ class tx_caddy_pdf extends tslib_pibase
       // #52165, 130921, dwildt
 //    require_once( $path2lib . 'pdf/tcpdf_6.0.031/tcpdf.php' );
 //    require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
-    
+
       // #52313, 130926, dwildt, 2+
     require_once( t3lib_extMgm::extPath('t3_tcpdf') . 'class.tx_t3_tcpdf.php' );
     require_once( $path2lib . 'pdf/fpdi/fpdi.php' );
@@ -562,7 +573,7 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * initTemplate( )
   *
-  * @param      $string       $case : deliveryorder || invoice || revocation || terms
+  * @param	$string		$case : deliveryorder || invoice || revocation || terms
   * @return	void
   * @access private
   * @version    2.0.0
@@ -600,14 +611,14 @@ class tx_caddy_pdf extends tslib_pibase
     $this->tmpl         = array( );
     $this->tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,          $markerAll );
     $this->tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $this->tmpl['all'], $markerItem );
-    
+
     $this->initTemplateTable( $case );
   }
 
  /**
   * initTemplate( )
   *
-  * @param      $string       $case : deliveryorder || invoice || revocation || terms
+  * @param	$string		$case : deliveryorder || invoice || revocation || terms
   * @return	void
   * @access private
   * @version    2.0.0
@@ -643,8 +654,8 @@ class tx_caddy_pdf extends tslib_pibase
     foreach( ( array ) $table as $property => $value )
     {
       $marker = '###' . strtoupper( $property ) . '###';
-      $this->tmpl['all']  = str_replace( $marker, $value, $this->tmpl['all'] );     
-      $this->tmpl['item'] = str_replace( $marker, $value, $this->tmpl['item'] );     
+      $this->tmpl['all']  = str_replace( $marker, $value, $this->tmpl['all'] );
+      $this->tmpl['item'] = str_replace( $marker, $value, $this->tmpl['item'] );
     }
   }
 
@@ -904,7 +915,6 @@ class tx_caddy_pdf extends tslib_pibase
   * @access private
   * @version    2.0.8
   * @since      2.0.8
-  * 
   * @internal: #i0021
   */
   private function invoiceTermOfCredit( )
@@ -913,7 +923,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->writeTextblock( $termOfCredit, 'invoiceTermOfCredit' );
   }
 
-  
+
 
   /***********************************************
   *
@@ -922,7 +932,7 @@ class tx_caddy_pdf extends tslib_pibase
   **********************************************/
 
  /**
-  * setParentObject( )  : 
+  * setParentObject( )  :
   *
   * @param	object		$pObj: ...
   * @return	void
@@ -944,7 +954,7 @@ class tx_caddy_pdf extends tslib_pibase
     $this->pObj = $pObj;
   }
 
-  
+
 
   /***********************************************
   *
@@ -955,20 +965,21 @@ class tx_caddy_pdf extends tslib_pibase
  /**
   * tcpdfInit( ) : Init a TCPDF object and returns ist
   *
+  *             http://www.setasign.de/support/manuals/fpdi/
+  *             http://www.setasign.de/products/pdf-php-solutions/fpdi/demos/
+  *
   * @param	string		$filename : current filename
   * @return	object		$tcpdf    : TCPDF object
   * @access private
   * @internal   http://www.tcpdf.org/doc/code/classTCPDF.html
-  *             http://www.setasign.de/support/manuals/fpdi/
-  *             http://www.setasign.de/products/pdf-php-solutions/fpdi/demos/
   * @version    2.0.0
   * @since      2.0.0
   */
   private function tcpdfInit( $srceFile )
-  {    
+  {
       // #52313
     $tcpdf = new FPDI( );
-    
+
     $author = $this->pi_getLL( 'docauthor' );
     $title  = $this->pi_getLL( 'doctitle' );
 
@@ -979,11 +990,11 @@ class tx_caddy_pdf extends tslib_pibase
 
       // remove default header/footer
     $tcpdf->setPrintHeader( false );
-    $tcpdf->setPrintFooter( false );    
+    $tcpdf->setPrintFooter( false );
 
     $tcpdf->AddPage( );
     $numbersOfPages = $tcpdf->setSourceFile( $srceFile );
-    unset( $numbersOfPages ); 
+    unset( $numbersOfPages );
     $tmplId = $tcpdf->importPage( 1 );
       // Abscissa of the upper-left corner.
     $x = 0;

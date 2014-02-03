@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <script type="text/javascript">
-      //var PAYMILL_PUBLIC_KEY = 'YOUR-PUBLIC-KEY';
-      var PAYMILL_PUBLIC_KEY = '264783270323a4a3374e4bdcdee9f8d2';
+      var PAYMILL_PUBLIC_KEY = 'YOUR-PUBLIC-KEY';
       //var VALIDATE_CVC = true;
     </script>
     <link rel="stylesheet" href="foundation-4.3.2/css/foundation.css" />
@@ -21,110 +20,184 @@
       INDEX
       =====
 
-      * PROVIDER
-      * CC
-      * ELV
-      * IBAN
+      * CONTENT
+        * PAYMILL_TEST_MODE
+        * CC
+        * ELV
+        * IBAN
+      * SERVER_PROMPT_WICLOSE_SUBPART
+      * SERVER_PROMPT_WOCLOSE_SUBPART
     </em>
 
 
-    <!-- ###PROVIDER### begin --> 
-    <form id="payment-form" action="payment.php" method="POST">
-      <div class="section-container auto" data-section>
-        <!-- ###CC### begin --> 
-        <section class="active">    
-          <div class="title" data-section-title>
-            <a id="payment-type-cc" href="#payment-type-cc" class="payment-type payment-type-active" >Credit card</a>
-          </div>
-          <div class="content" data-section-content>            
+    <!-- ###CONTENT### begin --> 
+    <!--<form id="payment-form" action="payment.php" method="POST">-->
+    <script type="text/javascript">
+      var PAYMILL_PUBLIC_KEY = '###_HTMLMARKER_PAYMILL_PUBLIC_KEY###';
+    </script>
+    <div class="section-container accordion paymill-###TEST_OR_LIVE_MODE###" data-section="accordion">
+      <!-- ###PAYMILL_TEST_MODE### begin --> 
+      <div data-alert class="alert-box">
+        <span class="prompt">###PAYMILL_TEST_MODE_PROMPT###</span>
+        <a href="#" class="close">&times;</a>
+      </div>
+      <div data-alert class="alert-box secondary">
+        <span class="prompt">###PAYMILL_LIVE_MODE_PROMPT###</span>
+        <a href="#" class="close">&times;</a>
+      </div>
+      <!-- ###PAYMILL_TEST_MODE### end --> 
+      <!-- ###CC### begin --> 
+      <div class="section###CADDY_PAYMENT_SECTION_1###">    
+        <div class="title" data-section-title>
+          <a id="payment-type-cc" href="#payment-type-cc" class="payment-type###CADDY_PAYMENT_TYPE_1###" >###_LOCAL_LANG_CREDITCARD###</a>
+        </div>
+        <div class="content" data-section-content>            
+          <form id="e-payment_creditcard" name="e-payment_creditcard" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"       value="1" />
             <fieldset>
               <div class="row">
                 <div class="medium-8 large-10 columns">
-                  <label for="card-number" class="card-number-label">Card number</label>
-                  <input id ="card-number" class="card-number" type="text" placeholder="**** **** **** ****" maxlength="19">
+                  <label for="card-number" class="card-number-label">###_LOCAL_LANG_CREDITCARD-NUMBER###</label>
+                  <input id ="card-number" class="card-number" type="text" placeholder="**** **** **** ****" maxlength="19" value="###VALUE_CREDITCARD-NUMBER###"/>
                 </div>
                 <div class="medium-4 large-2 columns">
-                  <label for="card-expiry" class="card-expiry-label">Expires</label>
-                  <input id="card-expiry" class="card-expiry" type="text" placeholder="MM/YY" maxlength="7">
+                  <label for="card-expiry" class="card-expiry-label">###_LOCAL_LANG_CREDITCARD-EXPIRY###</label>
+                  <input id="card-expiry" class="card-expiry" type="text" placeholder="MM/YY" maxlength="7" value="###VALUE_CREDITCARD-EXPIRY###"/>
                 </div>
               </div>
               <div class="row">
-                <div class="medium-8 large-10 columns">
-                  <label for="card-holdername" class="card-holdername-label">Holdername</label>
-                  <input id="card-holdername" class="card-holdername" type="text">
+                <div class="medium-6 large-8 columns">
+                  <label for="card-holdername" class="card-holdername-label">###_LOCAL_LANG_CREDITCARD-HOLDER###</label>
+                  <input id="card-holdername" class="card-holdername" type="text" value="###VALUE_CREDITCARD-HOLDER###"/>
                 </div>
-                <div class="medium-4 large-2 columns">
-                  <label for="card-cvc" class="field-right">CVC</label>
-                  <input id="card-cvc" class="card-cvc" type="text" placeholder="CVC" maxlength="4">
+                <div class="medium-3 large-2 columns">
+                  <label for="card-cvc" class="card-cvc-label">###_LOCAL_LANG_CREDITCARD-CVC###<span data-tooltip class="has-tip" title="###_LOCAL_LANG_CREDITCARD-CVC-TOOLTIP###">?</span></label>
+                  <input id="card-cvc" class="card-cvc" type="text" placeholder="CVC" maxlength="4" value="###VALUE_CREDITCARD-CVC###"/>
+                </div>
+                <div class="medium-3 large-2 columns">
+                  <label for="card-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="card-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
                 </div>
               </div>
             </fieldset>
-          </div>
-        </section>
-        <!-- ###CC### end --> 
-        <!-- ##ELV### begin --> 
-        <section>
-          <div class="title" data-section-title>
-            <a id="payment-type-elv" href="#payment-type-elv" class="payment-type" >Direct debit</a>
-          </div>
-          <div class="content" data-section-content>            
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_CREDITCARD-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </div> <!-- /section -->
+      <!-- ###CC### end --> 
+      <!-- ##ELV### begin --> 
+      <div class="section###CADDY_PAYMENT_SECTION_2###">
+        <div class="title" data-section-title>
+          <a id="payment-type-elv" href="#payment-type-elv" class="payment-type###CADDY_PAYMENT_TYPE_2###" >###_LOCAL_LANG_ELV-PAYMENTNAME###</a>
+        </div>
+        <div class="content" data-section-content>            
+          <form id="e-payment_elv" name="e-payment_elv" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"       value="2" />
             <fieldset>
               <div class="row">
                 <div class="medium-4 large-4 columns">
-                  <label for="elv-account" class="elv-account-label">Account number</label>
-                  <input id="elv-account" class="elv-account" type="text">
+                  <label for="elv-account" class="elv-account-label">###_LOCAL_LANG_ELV-ACCOUNT###</label>
+                  <input id="elv-account" class="elv-account" type="text" value="###VALUE_ELV-ACCOUNT###"/>
                 </div>
                 <div class="medium-4 large-4 columns">
-                  <label for="elv-bankcode" class="elv-bankcode-label">Bank code</label>
-                  <input id="elv-bankcode" class="elv-bankcode" type="text">
+                  <label for="elv-bankcode" class="elv-bankcode-label">###_LOCAL_LANG_ELV-BANKCODE###</label>
+                  <input id="elv-bankcode" class="elv-bankcode" type="text" value="###VALUE_ELV-BANKCODE###"/>
                 </div>
                 <div class="medium-4 large-4 columns">
                   <!--[if gte IE 8]><!-->
-                  <label for="elv-bankname" class="elv-bankname-label">Bank name</label>
+                  <label for="elv-bankname" class="elv-bankname-label">###_LOCAL_LANG_ELV-BANKNAME###</label>
                   <input id="elv-bankname" type="text" size="20" disabled="disabled" style="background-color:#eee;" />
                   <!--<![endif]-->
                 </div>
               </div>
               <div class="row">
                 <div class="medium-6 large-6 columns">
-                  <label for="elv-holdername" class="elv-holdername-label field-full">Holdername</label>
-                  <input id="elv-holdername" class="elv-holdername field-full" type="text">
+                  <label for="elv-holder" class="elv-holder-label field-full">###_LOCAL_LANG_ELV-HOLDER###</label>
+                  <input id="elv-holder" class="elv-holder field-full" type="text" value="###VALUE_ELV-HOLDER###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="elv-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
                 </div>
               </div>
             </fieldset>
-          </div>
-        </section>
-        <!-- ###ELV### end --> 
-        <!-- ##IBAN### begin --> 
-        <section> 
-          <div class="title" data-section-title>
-            <a id="payment-type-iban" href="#payment-type-iban" class="payment-type">Direct debit (SEPA)</a>
-          </div>
-          <div class="content" data-section-content>            
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_ELV-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </div> <!-- /section -->
+      <!-- ###ELV### end --> 
+      <!-- ##IBAN### begin --> 
+      <div class="section###CADDY_PAYMENT_SECTION_3###"> 
+        <div class="title" data-section-title>
+          <a id="payment-type-iban" href="#payment-type-iban" class="payment-type###CADDY_PAYMENT_TYPE_3###">###_LOCAL_LANG_ELV-PAYMENTNAME-IBAN###</a>
+        </div>
+        <div class="content" data-section-content>            
+          <form id="e-payment_elv-iban" name="e-payment_elv-iban" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"     value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"       value="3" />
             <fieldset>
               <div class="row">
                 <div class="medium-6 large-6 columns">
-                  <label for="elv-iban" class="elv-iban-label">IBAN</label>
-                  <input id="elv-iban" class="elv-iban" type="text">
+                  <label for="elv-iban" class="elv-iban-label">###_LOCAL_LANG_ELV-IBAN###</label>
+                  <input id="elv-iban" class="elv-iban" type="text" value="###VALUE_ELV-IBAN###"/>
                 </div>
                 <div class="medium-6 large-6 columns">
-                  <label for="elv-bic" class="elv-bic-label">BIC</label>
-                  <input id="elv-bic" class="elv-bic" type="text">
+                  <label for="elv-bic" class="elv-bic-label">###_LOCAL_LANG_ELV-BIC###</label>
+                  <input id="elv-bic" class="elv-bic" type="text" value="###VALUE_ELV-BIC###"/>
                 </div>
               </div>
               <div class="row">
                 <div class="medium-6 large-6 columns">
-                  <label for="elv-iban-holdername" class="elv-iban-holdername-label field-full">Holdername</label>
-                  <input id="elv-iban-holdername" class="elv-iban-holdername field-full" type="text">
+                  <label for="elv-iban-holder" class="elv-iban-holder-label field-full">###_LOCAL_LANG_ELV-HOLDER###</label>
+                  <input id="elv-iban-holder" class="elv-iban-holder field-full" type="text" value="###VALUE_ELV-IBAN-HOLDER###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-iban-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="elv-iban-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
                 </div>
               </div>
             </fieldset>
-          </div>
-        </section>
-        <!-- ###IBAN### end --> 
-      </div>    
-    </form>
-    <!-- ###PROVIDER### end --> 
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_ELV-SUBMIT-IBAN###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </div> <!-- /section -->
+      <!-- ###IBAN### end --> 
+    </div>    
+    <!-- ###CONTENT### end --> 
+    <!-- ###SERVER_PROMPT_WICLOSE_SUBPART### begin --> 
+    <div data-alert class="alert-box server_prompt ###TYPE###">
+      <span class="prompt">###PROMPT###</span>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <!-- ###SERVER_PROMPT_WICLOSE_SUBPART### end --> 
+    <!-- ###SERVER_PROMPT_WOCLOSE_SUBPART### begin --> 
+    <div data-alert class="alert-box server_prompt ###TYPE###">
+      <span class="prompt">###PROMPT###</span>
+    </div>
+    <!-- ###SERVER_PROMPT_WOCLOSE_SUBPART### end --> 
     <script src="foundation-4.3.2/js/vendor/jquery.js"></script>
     <script src="foundation-4.3.2/js/foundation.min.js"></script>
     <script>

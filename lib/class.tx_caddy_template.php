@@ -31,10 +31,11 @@
  *
  *
  *
- *   51: class tx_caddy_template
- *   70:     public function main( )
+ *   52: class tx_caddy_template
+ *   71:     public function main( )
+ *  181:     private function templateTable( $tmplSubparts )
  *
- * TOTAL FUNCTIONS: 1
+ * TOTAL FUNCTIONS: 2
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -140,12 +141,9 @@ class tx_caddy_template
 
     $tmplSubparts['item_error'] = $cObj->getSubpart( $template, '###CADDY_ITEM_ERROR###' );
 
-    // new for Shipping radiolist and Payment radiolist and Special checkboxlist
-    $tmplSubparts['shipping_all']   = $cObj->getSubpart( $template, '###CADDY_SHIPPING###' );
-    $tmplSubparts['shipping_item']  = $cObj->getSubpart( $tmplSubparts['shipping_all'], '###ITEM###' );
-
-    $tmplSubparts['shipping_condition_all']   = $cObj->getSubpart( $template, '###CADDY_SHIPPING_CONDITIONS###' );
-    $tmplSubparts['shipping_condition_item']  = $cObj->getSubpart( $tmplSubparts['shipping_condition_all'], '###ITEM###' );
+//      // #55333, 140125, dwildt, 2+
+//    $tmplSubparts['options']  = $cObj->getSubpart( $template, '###OPTIONS###' );
+//    $tmplSubparts['payment_method']  = $cObj->getSubpart( $template, '###PAYMENT_METHOD###' );
 
     $tmplSubparts['payment_all']  = $cObj->getSubpart( $template, '###CADDY_PAYMENT###' );
     $tmplSubparts['payment_item'] = $cObj->getSubpart( $tmplSubparts['payment_all'], '###ITEM###' );
@@ -153,22 +151,29 @@ class tx_caddy_template
     $tmplSubparts['payment_condition_all']  = $cObj->getSubpart( $template, '###CADDY_PAYMENT_CONDITIONS###' );
     $tmplSubparts['payment_condition_item'] = $cObj->getSubpart( $tmplSubparts['payment_condition_all'], '###ITEM###' );
 
+    // new for Shipping radiolist and Payment radiolist and Special checkboxlist
+    $tmplSubparts['shipping_all']   = $cObj->getSubpart( $template, '###CADDY_SHIPPING###' );
+    $tmplSubparts['shipping_item']  = $cObj->getSubpart( $tmplSubparts['shipping_all'], '###ITEM###' );
+
+    $tmplSubparts['shipping_condition_all']   = $cObj->getSubpart( $template, '###CADDY_SHIPPING_CONDITIONS###' );
+    $tmplSubparts['shipping_condition_item']  = $cObj->getSubpart( $tmplSubparts['shipping_condition_all'], '###ITEM###' );
+
     $tmplSubparts['specials_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIALS###' );
     $tmplSubparts['specials_item'] = $cObj->getSubpart( $tmplSubparts['specials_all'], '###ITEM###' );
 
     $tmplSubparts['specials_condition_all']  = $cObj->getSubpart( $template, '###CADDY_SPECIALS_CONDITIONS###' );
     $tmplSubparts['specials_condition_item'] = $cObj->getSubpart( $tmplSubparts['specials_condition_all'], '###ITEM###' );
 
-    $tmplSubparts = $this->templateTable( $tmplSubparts ); 
-    
+    $tmplSubparts = $this->templateTable( $tmplSubparts );
+
     return $tmplSubparts;
   }
 
  /**
   * templateTable( )
   *
-  * @param      string        $tmplSubparts : 
-  * @return	string        $tmplSubparts : 
+  * @param	string		$tmplSubparts :
+  * @return	string		$tmplSubparts :
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -180,10 +185,10 @@ class tx_caddy_template
     foreach( ( array ) $table as $property => $value )
     {
       $marker               = '###' . strtoupper( $property ) . '###';
-      $tmplSubparts['all']  = str_replace( $marker, $value, $tmplSubparts['all'] );     
-      $tmplSubparts['item'] = str_replace( $marker, $value, $tmplSubparts['item'] );     
+      $tmplSubparts['all']  = str_replace( $marker, $value, $tmplSubparts['all'] );
+      $tmplSubparts['item'] = str_replace( $marker, $value, $tmplSubparts['item'] );
     }
-    
+
     return $tmplSubparts;
   }
 

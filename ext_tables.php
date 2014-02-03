@@ -136,18 +136,20 @@ switch( true )
 {
   case( $beLanguage == 'de' ):
       // German
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy (1) - foundation 4.x (nur Dev!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - Deutsch');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3.0+) - CSS (blau)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (3.1+) - CSS orange');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy (3.1+) - CSS gruen');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy (3.1+) - CSS rot');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (4.0+) - Powermail 1.x');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (4.0+) - Powermail 2.x Main');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (4.1+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - v4.x jQuery (nur Dev!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy [1]');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy [1] + Foundation 4.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy [2] + Deutsch');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy [3] + CSS (blau)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy [3.1] + orange');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy [3.1] + gruen');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy [3.1] + rot');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/foundation/4x/','Caddy [4] CSS foundation');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy [5] Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy [5] Powermail 2.x Main');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy [5.1] + Powermail 2.x CSS fancy');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/e-payment/paymill/','Caddy [6] + E-Payment Paymill');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy [8] + v4.x jQuery (nur Dev!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy [99] Reset');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):
@@ -160,18 +162,20 @@ switch( true )
     break;
   default:
       // English
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy (0+) - Reset');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy (1)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy (1) - foundation 4.x (dev only!)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy (2+) - German');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy (3.0+) - CSS (blue)');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy (3.1+) - CSS orange');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy (3.1+) - CSS green');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy (3.1+) - CSS red');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy (4.0+) - Powermail 1.x');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy (4.0+) - Powermail 2.x Main');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy (4.1+) - Powermail 2.x CSS fancy');
-    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy (8+) - v4.x jQuery (dev only!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/',                  'Caddy [1]');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/foundation/4x/',    'Caddy [1] + foundation 4.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/properties/de/',    'Caddy [2] + German');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/',              'Caddy [3] CSS (blue)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/orange/',       'Caddy [3.1] + orange');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/green/',        'Caddy [3.1] + green');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/red/',          'Caddy [3.1] + red');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/css/foundation/4x/','Caddy [4] CSS foundation');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/1x/',     'Caddy [5] Powermail 1.x');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/',     'Caddy [5] Powermail 2.x Main');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/powermail/2x/css/', 'Caddy [5.1] + Powermail 2.x CSS fancy');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/e-payment/paymill/','Caddy [6] + E-Payment Paymill');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/jquery/',           'Caddy [8] + v4.x jQuery (dev only!)');
+    t3lib_extMgm::addStaticFile($_EXTKEY, 'static/reset/',            'Caddy [99] Reset');
 //    switch( true )
 //    {
 //      case( $typo3Version < 4007000 ):

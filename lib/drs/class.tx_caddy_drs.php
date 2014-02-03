@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -28,12 +28,13 @@
  *
  *
  *
- *   50: class tx_caddy_drs
- *   91:     public function init( )
- *  113:     private function initByExtmngr( )
- *  160:     private function initByFlexform( )
+ *   51: class tx_caddy_drs
+ *  102:     public function init( )
+ *  124:     private function initByExtmngr( )
+ *  165:     private function initByFlexform( )
+ *  205:     public function zzDrsPromptsTrue( )
  *
- * TOTAL FUNCTIONS: 3
+ * TOTAL FUNCTIONS: 4
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -44,7 +45,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	2.0.0
+ * @version	4.0.5
  * @since       1.4.6
  */
 class tx_caddy_drs
@@ -71,6 +72,7 @@ class tx_caddy_drs
   public $drsCalc       = false;
   public $drsClean      = false;
   public $drsCobj       = false;
+  public $drsEpayment   = false;
   public $drsFlexform   = false;
   public $drsFormula    = false;
   public $drsInit       = false;
@@ -121,7 +123,7 @@ class tx_caddy_drs
   */
   private function initByExtmngr( )
   {
-    
+
     switch( $this->pObj->arr_extConf['debuggingDrs'] )
     {
       case( 'Disabled' ):
@@ -157,12 +159,18 @@ class tx_caddy_drs
   *
   * @return	void
   * @access private
-  * @version    2.0.0
+  * @version    4.0.5
   * @since      2.0.0
   */
   private function initByFlexform( )
   {
 
+      // RETURN : parent object doesn't have any flexform
+    if( ! is_object( $this->pObj->flexform ) )
+    {
+      return;
+
+    }
       // sdefDrs
     $sheet = 'sDEF';
     $field = 'sdefDrs';
@@ -190,7 +198,7 @@ class tx_caddy_drs
   * zzDrsPromptsTrue( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
-  * @access     public
+  * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
@@ -203,6 +211,7 @@ class tx_caddy_drs
     $this->drsCalc        = true;
     $this->drsClean       = true;
     $this->drsCobj        = true;
+    $this->drsEpayment    = true;
     $this->drsFlexform    = true;
     $this->drsFormula     = true;
     $this->drsInit        = true;
@@ -215,7 +224,7 @@ class tx_caddy_drs
     $this->drsTodo        = true;
     $this->drsVariants    = true;
   }
-  
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/drs/class.tx_caddy_drs.php'])

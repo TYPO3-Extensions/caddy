@@ -64,6 +64,17 @@ plugin.caddy {
   # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
 
+  # cat=caddy - e-payment//100;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptEpayment]; label=How to configure e-payment?
+  e-payment.prompt = Click me!
+  # cat=caddy - e-payment//101;           type=options[,Paymill];  label= Provider: 
+  e-payment.provider = 
+  # cat=caddy - e-payment//102;           type=string;  label= Currency:I.e: EUR, USD. Currency has an effect for transactions! Currency have to accord with the currency of your Shop (see: CADDY - MAIN NUMBERFORMAT).
+  e-payment.currency = EUR
+  # cat=caddy - e-payment/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  e-payment.externalLinks = Click me!
+  # cat=caddy - e-payment/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  e-payment.sponsors = Click me!
+
   # cat=caddy - getpost*//100; type=text; label= Uid*: *Obligate! Parameter name for a unique id (integer) of your item. caddy uses this id for SQL requests. I.e. tx_browser_pi1|showUid
   getpost.uid =
   # cat=caddy - getpost*//110; type=text; label= Quantity*: *Obligate! Parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
@@ -138,15 +149,84 @@ plugin.caddy {
   # cat=caddy - html width/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.width.sponsors = Click me!
 
-  # cat=caddy - pages*/enable/301; type=integer; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart
+  # cat=caddy - options payment/enable/100; type=options[0,1,2,3];  label= Default payment option:0: no preset. 1: 1st payment option. 2: 2nd payment option. 3rd payment option.
+  options.payment.default = 1
+  # cat=caddy - options payment/enable/201; type=string; label= 1. label:Label for 1st payment option. Example: cash in advance (German: Vorkasse)
+  options.payment.1.lll = EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
+  # cat=caddy - options payment/enable/202; type=boolean; label= 1. enabled:Disable it, if you don't want to offer the 1st payment option.
+  options.payment.1.enabled = 1
+  # cat=caddy - options payment/enable/203; type=string; label= 1. costs:Extra costs for 1st payment option. Example: 9.99
+  options.payment.1.costs = 0.00
+  # cat=caddy - options payment/enable/204; type=options[normal,reduced]; label= 1. tax rate:Tax rate for extra costs for 1st payment option.
+  options.payment.1.taxrate = normal
+  # cat=caddy - options payment/enable/301; type=string; label= 2. label:Label for 2nd payment option. Example: cash in advance (German: Vorkasse)
+  options.payment.2.lll = EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+  # cat=caddy - options payment/enable/302; type=boolean; label= 2. enabled:Disable it, if you don't want to offer the 2nd payment option.
+  options.payment.2.enabled = 1
+  # cat=caddy - options payment/enable/303; type=string; label= 2. costs:Extra costs for 2nd payment option. Example: 9.99
+  options.payment.2.costs = 3.00
+  # cat=caddy - options payment/enable/304; type=options[normal,reduced]; label= 2. tax rate:Tax rate for extra costs for 2nd payment option.
+  options.payment.2.taxrate = normal
+  # cat=caddy - options payment/enable/401; type=string; label= 3. label:Label for 3rd payment option. Example: cash in advance (German: Vorkasse)
+  options.payment.3.lll = EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
+  # cat=caddy - options payment/enable/402; type=boolean; label= 3. enabled:Disable it, if you don't want to offer the 3rd payment option.
+  options.payment.3.enabled = 1
+  # cat=caddy - options payment/enable/403; type=string; label= 3. costs:Extra costs for 3rd payment option. Example: 9.99
+  options.payment.3.costs = 12.50
+  # cat=caddy - options payment/enable/404; type=options[normal,reduced]; label= 3. tax rate:Tax rate for extra costs for 3rd payment option.
+  options.payment.3.taxrate = normal
+  # cat=caddy - options payment/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  options.payment.externalLinks = Click me!
+  # cat=caddy - options payment/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  options.payment.sponsors = Click me!        
+
+  # cat=caddy - options shipping/enable/100; type=options[0,1,2];  label= Default shipping option:0: no preset. 1: mail. 2: mail express.
+  options.shipping.default = 1
+  # cat=caddy - options shipping/enable/201; type=boolean; label= 1. mail - enabled:Disable it, if you don't want to offer the shipping option mail.
+  options.shipping.1.enabled = 1
+  # cat=caddy - options shipping/enable/202; type=string; label= 1. mail - costs:Extra costs for mail. Example: 9.99.
+  options.shipping.1.costs = 0.00
+  # cat=caddy - options shipping/enable/203; type=options[normal,reduced]; label= 1. mail - tax rate:Tax rate for extra costs for mail.
+  options.shipping.1.taxrate = reduced
+  # cat=caddy - options shipping/enable/301; type=boolean; label= 2. mail express - enabled:Disable it, if you don't want to offer the shipping option mail express.
+  options.shipping.2.enabled = 1
+  # cat=caddy - options shipping/enable/302; type=string; label= 2. mail express - costs:Extra costs for mail express. Example: 9.99.
+  options.shipping.2.costs = 12.00
+  # cat=caddy - options shipping/enable/303; type=options[normal,reduced]; label= 2. mail express - tax rate:Tax rate for extra costs for mail express.
+  options.shipping.2.taxrate = reduced
+  # cat=caddy - options shipping/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  options.shipping.externalLinks = Click me!
+  # cat=caddy - options shipping/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  options.shipping.sponsors = Click me!        
+
+  # cat=caddy - options specials/enable/100; type=options[0,1,2];  label= Default specials option:0: no preset. 1: neutral package. 2: fee for islands (German: Versandkosten Deutsche Inseln).
+  options.specials.default = 0
+  # cat=caddy - options specials/enable/201; type=boolean; label= 1. neutral package - enabled:Disable it, if you don't want to offer the special option neutral package.
+  options.specials.1.enabled = 1
+  # cat=caddy - options specials/enable/202; type=string; label= 1. neutral package - costs:Extra costs for neutral package. Example: 9.99.
+  options.specials.1.costs = 0.00
+  # cat=caddy - options specials/enable/203; type=options[normal,reduced]; label= 1. neutral package - tax rate:Tax rate extra costs for neutral package.
+  options.specials.1.taxrate = normal
+  # cat=caddy - options specials/enable/301; type=boolean; label= 2. fee for islands - enabled:Disable it, if you don't want to offer the special option fee for islands (German: Versandkosten Deutsche Inseln).
+  options.specials.2.enabled = 1
+  # cat=caddy - options specials/enable/302; type=string; label= 2. fee for islands - costs:Extra costs for fee for islands. Example: 9.99. (German: Versandkosten Deutsche Inseln).
+  options.specials.2.costs = 13.00
+  # cat=caddy - options specials/enable/303; type=options[normal,reduced]; label= 2. fee for islands - tax rate:Tax rate for extra costs for fee for islands (German: Versandkosten Deutsche Inseln).
+  options.specials.2.taxrate = reduced
+  # cat=caddy - options specials/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  options.specials.externalLinks = Click me!
+  # cat=caddy - options specials/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  options.specials.sponsors = Click me!        
+
+  # cat=caddy - pages*/enable/301; type=int+; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart
   pages.caddy = 
-  # cat=caddy - pages*/enable/302; type=integer; label= Caddy mini:Uid of the page with the caddy mini - the cart for marginal column
+  # cat=caddy - pages*/enable/302; type=int+; label= Caddy mini:Uid of the page with the caddy mini - the cart for marginal column
   pages.caddymini = 
-  # cat=caddy - pages*/enable/303; type=integer; label= Shop*:*Obligate! Uid of the page which contains the items. Usually the root page.
+  # cat=caddy - pages*/enable/303; type=int+; label= Shop*:*Obligate! Uid of the page which contains the items. Usually the root page.
   pages.shop = 
-  # cat=caddy - pages*/enable/304; type=integer; label= Power of Revocation:Uid of the page with the revocation info (German: Widerrufsbelehrung)
+  # cat=caddy - pages*/enable/304; type=int+; label= Power of Revocation:Uid of the page with the revocation info (German: Widerrufsbelehrung)
   pages.revocation = 
-  # cat=caddy - pages*/enable/306; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
+  # cat=caddy - pages*/enable/306; type=int+; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
   pages.terms = 
   # cat=caddy - pages*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pages.externalLinks = Click me!
@@ -155,7 +235,7 @@ plugin.caddy {
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
-  # cat=caddy - pdf//102;          type=integer;  label= Font Stretching: In percent. 100: no effect. 90: smaller. 110: expanded
+  # cat=caddy - pdf//102;          type=int+;  label= Font Stretching: In percent. 100: no effect. 90: smaller. 110: expanded
   pdfGeneral.fontStretching = 90
   # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdfGeneral.externalLinks = Click me!

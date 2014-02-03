@@ -1,0 +1,13 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // page
+
+page {
+  includeCSS {
+    caddy           = EXT:caddy/files/templates/2.0.0/caddy.css
+    caddyFoundation = EXT:caddy/files/templates/foundation/4x/caddy.css
+  }
+}
+  // page

@@ -30,7 +30,7 @@
 * @version  4.0.0
 * @since    4.0.0
 *
-* @internal     #53679 
+* @internal     #53679
 * @package      TYPO3
 * @subpackage   caddy
 */
@@ -41,32 +41,31 @@
  *
  *
  *   66: class tx_caddy_pi1_javascript
- *   82:     function __construct($parentObj)
+ *   94:     public function addJssFilesJqueryPluginsCaddy( )
+ *  115:     private function addJssFilesJqueryPluginsCaddyCSS( )
+ *  137:     private function addJssFilesJqueryPluginsCaddyLibrary( )
+ *  161:     private function addJssFilesJqueryPluginsCaddyLocalisation( )
+ *  195:     private function addJssFilesJqueryPluginsCaddyPlugin( )
+ *  222:     private function addCssFile( $path, $name, $keyPathTs, $marker )
+ *  281:     private function addJssFilePromptError( $path, $keyPathTs )
+ *  325:     private function addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker )
+ *  376:     private function addJssFileToHead( $path, $absPath, $name, $keyPathTs, $inline, $marker )
+ *  419:     private function addJssFileToFooter( $path, $absPath, $name, $keyPathTs, $inline, $marker )
+ *  454:     private function getHashMarker( $marker )
+ *  486:     private function getPathAbsolute( $path )
+ *  560:     private function getPathRelative( $path )
+ *  589:     private function getTagScript( $inline, $absPath, $path, $marker )
+ *  617:     private function getTagScriptInline( $absPath, $marker )
+ *  641:     private function getTagScriptInlineMarker( $script, $marker )
+ *  683:     private function getTagScriptSrc( $path )
  *
- *              SECTION: CSS
- *  135:     function class_onchange($obj_ts, $arr_ts, $number_of_items)
- *  381:     function wrap_ajax_div($template)
- *
- *              SECTION: Files
- *  505:     function load_jQuery()
- *  615:     function addJssFileToHead( $path, $name, $keyPathTs )
- *
- *              SECTION: Helper
- *  693:     function set_arrSegment()
- *  759:     public function addCssFiles()
- *  809:     public function addJssFiles()
- * 1063:     public function addCssFile($path, $ie_condition, $name, $keyPathTs, $str_type, $inline )
- *
- *              SECTION: Dynamic methods
- * 1245:     function dyn_method_load_all_modes( )
- *
- * TOTAL FUNCTIONS: 10
+ * TOTAL FUNCTIONS: 17
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
 class tx_caddy_pi1_javascript
 {
-  
+
   public $prefixId = 'tx_caddy_pi1';
 
   // same as class name
@@ -79,16 +78,16 @@ class tx_caddy_pi1_javascript
   public $pObj = null;
     // Current row
   public $row = null;
-  
+
   private $local_cObj = null;
 
 
-  
+
 /**
  * addJssFilesJqueryPluginsCaddy( )
  *
  * @return	void
- * @access      public
+ * @access public
  * @version     4.0.0
  * @since       4.0.0
  */
@@ -96,7 +95,7 @@ class tx_caddy_pi1_javascript
   {
 //      // #i0034, 131128, dwildt, 1+
 //    return;
-    
+
     $this->local_cObj = $this->pObj->local_cObj;
 
     $this->addJssFilesJqueryPluginsCaddyCSS( );
@@ -104,12 +103,12 @@ class tx_caddy_pi1_javascript
     $this->addJssFilesJqueryPluginsCaddyLocalisation( );
     $this->addJssFilesJqueryPluginsCaddyLibrary( );
   }
-  
+
 /**
  * addJssFilesJqueryPluginsCaddyCSS( )
  *
  * @return	void
- * @access      private
+ * @access private
  * @version     4.0.0
  * @since       4.0.0
  */
@@ -117,7 +116,7 @@ class tx_caddy_pi1_javascript
   {
       // Short variable
     $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
-    
+
       // Include the inline css
     $name         = 'jquery_plugins_caddy_css';
     $path         = $tsPathToCaddy['css.']['path'];
@@ -131,7 +130,7 @@ class tx_caddy_pi1_javascript
  * addJssFilesJqueryPluginsCaddyLibrary( )
  *
  * @return	void
- * @access      private
+ * @access private
  * @version     4.0.0
  * @since       4.0.0
  */
@@ -139,7 +138,7 @@ class tx_caddy_pi1_javascript
   {
       // Short variable
     $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
-    
+
       // Include the library code
     $name         = 'jquery_plugins_caddy_library';
     $path         = $tsPathToCaddy['library.']['path'];
@@ -150,12 +149,12 @@ class tx_caddy_pi1_javascript
     $bool_success = $this->addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker );
     unset( $bool_success );
   }
-  
+
 /**
  * addJssFilesJqueryPluginsCaddyLocalisation( )
  *
  * @return	void
- * @access      private
+ * @access private
  * @version     4.0.0
  * @since       4.0.0
  */
@@ -170,7 +169,7 @@ class tx_caddy_pi1_javascript
 
       // Short variable
     $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
-    
+
       // Include localised file, if current language isn't English
     $name         = 'jquery_plugins_caddy_localisation';
     $path         = $tsPathToCaddy['localisation.']['path'];
@@ -184,12 +183,12 @@ class tx_caddy_pi1_javascript
       // Include localised file, if current language isn't English
 
   }
-  
+
 /**
  * addJssFilesJqueryPluginsCaddyPlugin( )
  *
  * @return	void
- * @access      private
+ * @access private
  * @version     4.0.0
  * @since       4.0.0
  */
@@ -197,7 +196,7 @@ class tx_caddy_pi1_javascript
   {
       // Short variable
     $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
-    
+
       // Include the plugin code
     $name         = 'jquery_plugins_caddy_plugin';
     $path         = $tsPathToCaddy['plugin.']['path'];
@@ -210,7 +209,7 @@ class tx_caddy_pi1_javascript
 
   }
 /**
- * addCssFile(): 
+ * addCssFile():
  *
  * @param	string		$path       : Path to the Javascript or CSS
  * @param	string		$name       : For the key of additionalHeaderData
@@ -234,7 +233,7 @@ class tx_caddy_pi1_javascript
     }
       // RETURN file is loaded
 
-    $absPath = $this->getPathAbsolute( $path );
+    $absPath = $this->getPathAbsolute( $path, $keyPathTs );
     if( $absPath == false )
     {
       return false;
@@ -249,7 +248,7 @@ class tx_caddy_pi1_javascript
     $css = '<style type="text/css">
 ' . implode ('', file( $absPath )) . '
 </style>';
-    
+
     $marker = $this->getHashMarker( $marker );
 //var_dump( __METHOD__, __LINE__, $marker );
     $css    = $this->pObj->cObj->substituteMarkerArray( $css, $marker );
@@ -319,17 +318,16 @@ class tx_caddy_pi1_javascript
  * @param	boolean		$inline       : Add JSS script inline
  * @param	array		$marker       : marker array
  * @return	boolean		True: success. False: error.
- * 
- * @access      private
+ * @access private
  * @version     4.0.0
  * @since       4.0.0
  */
   private function addJssFileTo( $path, $name, $path_tsConf, $footer, $inline, $marker )
   {
-    $bool_success = false; 
-    
+    $bool_success = false;
+
       // Get absolute path
-    $absPath = $this->getPathAbsolute( $path );
+    $absPath = $this->getPathAbsolute( $path, $path_tsConf );
       // RETURN : there is an error with the absolute path
     if( empty( $absPath ) )
     {
@@ -356,7 +354,7 @@ class tx_caddy_pi1_javascript
         $bool_success = $this->addJssFileToFooter( $path, $absPath, $name, $path_tsConf, $inline, $marker );
         break;
     }
-    
+
     unset( $footer );
 
     return $bool_success;
@@ -403,7 +401,7 @@ class tx_caddy_pi1_javascript
     return true;
   }
 
-  
+
 /**
  * addJssFileToFooter(): Add a JavaScript file at the bottom of the page (the footer section)
  *
@@ -414,7 +412,6 @@ class tx_caddy_pi1_javascript
  * @param	boolean		$inline       : Add JSS script inline
  * @param	array		$marker       : marker array
  * @return	boolean		True: success. False: error.
- * 
  * @internal    #50069
  * @version     4.0.0
  * @since       4.0.0
@@ -446,12 +443,11 @@ class tx_caddy_pi1_javascript
   }
 
 /**
- * getHashMarker( ): 
+ * getHashMarker( ):
  *
  * @param	array		$marker : marker array with key value pairs
  * @return	array		$marker : marker array with hashkey value pairs
- *
- * @access    private 
+ * @access private
  * @since     4.0.3
  * @version   3.0.1
  */
@@ -472,7 +468,7 @@ class tx_caddy_pi1_javascript
       unset( $marker[ $keyWoDot ] );
       unset( $marker[ $key ] );
     }
-    
+
       // #i0041, 131231, dwildt, 1+
     $marker['###UID_POWERMAIL_FORM###'] = $this->pObj->powermail->fieldUid;
     return $marker;
@@ -483,12 +479,11 @@ class tx_caddy_pi1_javascript
  *
  * @param	string		$path : relative or absolute path to Javascript or CSS
  * @return	string		$path : absolute path or false in case of an error
- * 
  * @internal    #50069
  * @since       4.0.0
  * @version     4.0.0
  */
-  private function getPathAbsolute( $path )
+  private function getPathAbsolute( $path, $keyPathTs)
   {
       // RETURN path is empty
     if( empty( $path ) )
@@ -549,7 +544,7 @@ class tx_caddy_pi1_javascript
       return false;
     }
       // RETURN : false, file does not exist
-    
+
     return $path;
   }
 
@@ -558,20 +553,19 @@ class tx_caddy_pi1_javascript
  *
  * @param	string		$path : relative path with or without prefix 'EXT:'
  * @return	string		$path : relative path without prefix 'EXT:'
- * 
  * @internal    #50069
  * @since       4.0.0
  * @version     4.0.0
  */
   private function getPathRelative( $path )
-  { 
+  {
       // RETURN : path hasn't any prefix EXT:
     if( substr( $path, 0, 4 ) != 'EXT:' )
     {
       return $path;
     }
       // RETURN : path hasn't any prefix EXT:
-    
+
       // relative path to the JssFile as measured from the PATH_site (frontend)
     $matches  = array( );
     preg_match( '%^EXT:([a-z0-9_]*)/(.*)$%', $path, $matches );
@@ -588,7 +582,6 @@ class tx_caddy_pi1_javascript
  * @param	string		$path         : path to the Javascript
  * @param	array		$marker       : marker array
  * @return	string		$script       : The script tag
- * 
  * @internal  #50069
  * @since     4.0.0
  * @version   4.0.0
@@ -596,7 +589,7 @@ class tx_caddy_pi1_javascript
   private function getTagScript( $inline, $absPath, $path, $marker )
   {
     $script = null;
-    
+
     switch( $inline )
     {
       case( true ):
@@ -607,7 +600,7 @@ class tx_caddy_pi1_javascript
         $script = $this->getTagScriptSrc( $path );
         break;
     }
-    
+
     return $script;
   }
 
@@ -617,14 +610,13 @@ class tx_caddy_pi1_javascript
  * @param	string		$absPath      : absPath to the Javascript
  * @param	array		$marker       : marker array
  * @return	string		$script       : The script tag
- * 
  * @internal  #50069
  * @since     4.0.0
  * @version   4.0.0
  */
   private function getTagScriptInline( $absPath, $marker )
   {
-    $script = 
+    $script =
 '  <script type="text/javascript">
   <!--
 ' . implode ( null , file( $absPath ) ) . '
@@ -632,17 +624,17 @@ class tx_caddy_pi1_javascript
   </script>';
 
     $script = $this->getTagScriptInlineMarker( $script, $marker );
-    
+
     return $script;
   }
 
 /**
- * getTagScriptInlineMarker( ): 
+ * getTagScriptInlineMarker( ):
  *
  * @param	array		$marker       : marker array
+ * @param	[type]		$marker: ...
  * @return	string		$script       : The script tag
- *
- * @access    private 
+ * @access private
  * @since     4.0.0
  * @version   4.0.0
  */
@@ -653,9 +645,9 @@ class tx_caddy_pi1_javascript
       unset( $marker );
       $marker = array( );
     }
-    
+
     $marker = $this->getHashMarker( $marker );
-    
+
 //    foreach( $this->pObj->cObj->data as $key => $value )
 //    {
 //      $hashKey          = '###' . strtoupper( $key ) . '###';
@@ -672,7 +664,7 @@ class tx_caddy_pi1_javascript
 //    }
 //var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
 //var_dump( __METHOD__, __LINE__, $marker );
-    
+
     $script = $this->pObj->cObj->substituteMarkerArray( $script, $marker );
     $script = $this->pObj->dynamicMarkers->main( $script, $this->pObj );
 
@@ -684,7 +676,6 @@ class tx_caddy_pi1_javascript
  *
  * @param	string		$path         : path to the Javascript
  * @return	string		$script       : The script tag
- * 
  * @internal  #50069
  * @since     4.0.0
  * @version   4.0.0
