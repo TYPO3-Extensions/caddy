@@ -30,86 +30,93 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  *
  *
  *
- *  127: class tx_caddy_epayment_paymill extends tslib_pibase
+ *  134: class tx_caddy_epayment_paymill extends tslib_pibase
  *
  *              SECTION: Main
- *  173:     public function main( $paymentId=null, $pid=null )
+ *  180:     public function getTemplate( $paymentId=null, $pid=null )
  *
  *              SECTION: Init
- *  226:     private function init( $paymentId=null, $pid=null )
- *  242:     private function initDrs( )
- *  255:     private function initInstances( )
- *  283:     private function initVarsPid( $pid=null )
- *  319:     private function initVars( $paymentId, $pid )
+ *  243:     private function init( $paymentId=null, $pid=null )
+ *  259:     private function initDrs( )
+ *  272:     private function initInstances( )
+ *  300:     private function initVarsPid( $pid=null )
+ *  336:     private function initVars( $paymentId, $pid )
  *
  *              SECTION: Payment
- *  350:     private function payment( )
- *  401:     private function paymentByCreditcard( )
- *  430:     private function paymentByElv( )
- *  452:     private function paymentByElvIban( )
- *  475:     private function paymentByUndefined( )
- *  489:     private function paymentIdReset( )
+ *  367:     private function payment( )
+ *  424:     private function paymentByCreditcard( )
+ *  453:     private function paymentByElv( )
+ *  475:     private function paymentByElvIban( )
+ *  498:     private function paymentByUndefined( )
+ *  512:     private function paymentIdReset( )
+ *  525:     private function paymentWiPowermail( )
  *
  *              SECTION: Paymill
- *  510:     private function paymill( )
- *  530:     private function paymentWiPowermail( )
- *  544:     private function paymillError( $error )
- *  583:     private function paymillInit( )
- *  600:     private function paymillInitApiKey( )
- *  617:     private function paymillInitAutoload( )
- *  633:     private function paymillInitPayment( )
- *  653:     private function paymillInitPaymentError( )
- *  691:     private function paymillTokenIsSet( )
- *  709:     private function paymillTokenValue( )
- *  727:     private function paymillInitPaymentBySession( )
- *  761:     private function paymillInitPaymentByToken( )
- *  801:     private function powermailInAction( )
+ *  547:     private function paymill( )
+ *  568:     private function paymillError( $error )
+ *  607:     private function paymillInit( )
+ *  624:     private function paymillInitApiKey( )
+ *  641:     private function paymillInitAutoload( )
+ *  657:     private function paymillInitPayment( )
+ *  677:     private function paymillCheckAccount( )
+ *  715:     private function paymillTokenIsSet( )
+ *  733:     private function paymillTokenValue( )
+ *  751:     private function paymillInitPaymentBySession( )
+ *  785:     private function paymillInitPaymentByToken( )
+ *  825:     private function powermailInAction( )
  *
  *              SECTION: Requirements
- *  838:     private function requirements( )
- *  864:     private function requirementsToken( )
- *  900:     private function requirementsWiPowermail( )
- *  913:     private function requirementsDie( )
+ *  862:     private function requirements( )
+ *  888:     private function requirementsToken( )
+ *  924:     private function requirementsWiPowermail( )
+ *  937:     private function requirementsDie( )
  *
  *              SECTION: Prompts
- *  951:     private function serverPrompt( )
+ *  975:     private function serverPrompt( )
  *
  *              SECTION: Session
- *  993:     private function session( )
- * 1022:     private function sessionDataAdd( )
- * 1053:     private function sessionDataAddTransactionResponseCode( $responseCode )
- * 1074:     private function sessionDataRemove( $force=false )
- * 1122:     private function sessionDataRemoveWiPowermail( )
- * 1135:     private function sessionGetClientId( )
- * 1151:     private function sessionGetPaymentId( )
- * 1167:     private function sessionGetToken( )
+ * 1017:     private function session( )
+ * 1051:     private function sessionDataAdd( )
+ * 1082:     private function sessionDataAddTransactionResponseCode( $responseCode )
+ * 1103:     private function sessionDataRemove( $force=false )
+ * 1155:     private function sessionDataRemoveWiPowermail( )
+ * 1168:     private function sessionGetClientId( )
+ * 1184:     private function sessionGetPaymentId( )
+ * 1200:     private function sessionGetToken( )
  *
  *              SECTION: Setting methods
- * 1192:     public function setParentObject( $pObj )
- * 1233:     public function setTransactionAmount( $amount )
- * 1247:     public function setTransactionCurrency( $currency )
- * 1261:     public function setTransactionDescription( $description )
- * 1275:     public function setTransactionClientEmail( $email )
- * 1289:     public function setTransactionClientName( $name )
+ * 1225:     public function setParentObject( $pObj )
+ * 1266:     public function setTransactionAmount( $amount )
+ * 1280:     public function setTransactionCurrency( $currency )
+ * 1294:     public function setTransactionDescription( $description )
+ * 1308:     public function setTransactionClientEmail( $email )
+ * 1322:     public function setTransactionClientName( $name )
  *
  *              SECTION: Template
- * 1311:     private function template( $subpart )
- * 1399:     private function templateSectionActive( $template )
- * 1439:     private function templateMode( )
- * 1465:     private function templateModeLive( )
- * 1479:     private function templateModeTest( )
- * 1503:     private function templateModeTestData( )
- * 1527:     private function templateModeTestDataCreditcard( )
- * 1548:     private function templateModeTestDataElv( )
- * 1567:     private function templateModeTestDataElvIban( )
- * 1586:     private function templateModeTestDataWiPowermail( )
+ * 1344:     private function template( $subpart )
+ * 1432:     private function templateSectionActive( $template )
+ * 1472:     private function templateMode( )
+ * 1498:     private function templateModeLive( )
+ * 1512:     private function templateModeTest( )
+ * 1536:     private function templateModeTestData( )
+ * 1560:     private function templateModeTestDataCreditcard( )
+ * 1581:     private function templateModeTestDataElv( )
+ * 1600:     private function templateModeTestDataElvIban( )
+ * 1619:     private function templateModeTestDataWiPowermail( )
  *
  *              SECTION: Transaction
- * 1607:     public function transaction( )
- * 1627:     private function transactionInit( )
- * 1642:     private function transactionSend( )
+ * 1640:     public function transaction( )
+ * 1665:     private function transactionInit( )
+ * 1680:     private function transactionRequirements( )
+ * 1717:     private function transactionSend( )
+ * 1782:     private function transactionSendCatch( $exception )
+ * 1830:     private function transactionSendTry( )
+ * 1891:     private function transactionSentEval( $paymillTransactionResponse )
+ * 1906:     private function transactionSentEvalResponseCode( $paymillTransactionResponse )
+ * 1934:     private function transactionUpdate( )
+ * 1948:     private function transactionUpdateClient( )
  *
- * TOTAL FUNCTIONS: 57
+ * TOTAL FUNCTIONS: 64
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
@@ -121,7 +128,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.5
+ * @version     4.0.6
  * @since       4.0.5
  */
 class tx_caddy_epayment_paymill extends tslib_pibase
@@ -161,17 +168,21 @@ class tx_caddy_epayment_paymill extends tslib_pibase
   **********************************************/
 
  /**
-  * main( ):
+  * getTemplate( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @param	[type]		$pid: ...
-  * @return	string		$template   : HTML template
+  * @param	integer		$pid        : ...
+  * @return	array		$payment    : true, if payment was successful
   * @access public
-  * @version     4.0.5
+  * @version     4.0.6
   * @since       4.0.5
   */
-  public function main( $paymentId=null, $pid=null )
+  public function getTemplate( $paymentId=null, $pid=null )
   {
+    $arrReturn = array(
+      'content' => null,
+      'payment' => false
+    );
 
     $this->init( $paymentId, $pid );
 
@@ -184,15 +195,18 @@ class tx_caddy_epayment_paymill extends tslib_pibase
 
     if( ! $this->requirements( ) )
     {
-//var_dump( __METHOD__, __LINE__ );
       $this->sessionDataRemove( );
       $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
       $this->content = $this->dynamicMarkers->main( $this->content, $this );
-      return $this->content;
+      $arrReturn = array(
+        'content' => $this->content,
+        'payment' => false
+      );
+      return $arrReturn;
     }
 
       // Insert payment data into content
-    $this->payment( );
+    $payment = $this->payment( );
       // Insert prompt into content
     $this->serverPrompt( );
       // Insert
@@ -201,8 +215,11 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $this->content = $this->dynamicMarkers->main( $this->content, $this );
 
-    return $this->content;
-
+    $arrReturn = array(
+      'content' => $this->content,
+      'payment' => $payment
+    );
+    return $arrReturn;
   }
 
 
@@ -342,14 +359,15 @@ class tx_caddy_epayment_paymill extends tslib_pibase
   * payment( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
+  * @return	boolean		$paymill  : true, if paymill was successful
   * @access private
-  * @version     4.0.5
+  * @version     4.0.6
   * @since       4.0.5
   */
   private function payment( )
   {
-    $followTheWorkflow = false;
+    $paymill            = false;
+    $followTheWorkflow  = false;
 
     switch( true )
     {
@@ -363,13 +381,15 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     }
     if( ! $followTheWorkflow )
     {
-      return;
+      $paymill = false;
+      return $paymill;
     }
 
     if( ! $this->paymill( ) )
     {
       $this->sessionDataRemove( );
-      return;
+      $paymill = false;
+      return $paymill;
     }
 
     switch( $this->paymentId )
@@ -387,6 +407,9 @@ class tx_caddy_epayment_paymill extends tslib_pibase
         $this->paymentByUndefined( );
         break;
     }
+
+    $paymill = true;
+    return $paymill;
   }
 
  /**
@@ -491,6 +514,20 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     // Will reset by sessionDataRemove( ) later in the workflow.
   }
 
+ /**
+  * paymentWiPowermail( ):
+  *
+  * @return	boolean
+  * @access private
+  * @version     4.0.5
+  * @since       4.0.5
+  */
+  private function paymentWiPowermail( )
+  {
+    return $this->powermailInAction( );
+  }
+
+
 
 
   /***********************************************
@@ -517,19 +554,6 @@ class tx_caddy_epayment_paymill extends tslib_pibase
       return false;
     }
     return true;
-  }
-
- /**
-  * paymentWiPowermail( ):
-  *
-  * @return	boolean
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function paymentWiPowermail( )
-  {
-    return $this->powermailInAction( );
   }
 
  /**
@@ -643,14 +667,14 @@ class tx_caddy_epayment_paymill extends tslib_pibase
   }
 
  /**
-  * paymillInitPaymentError( ) :
+  * paymillCheckAccount( ) :
   *
   * @return	mixed		$error  : returns an error array in case of an error / exception
   * @access private
   * @version     4.0.5
   * @since       4.0.5
   */
-  private function paymillInitPaymentError( )
+  private function paymillCheckAccount( )
   {
     $error = array( );
 
@@ -734,7 +758,7 @@ class tx_caddy_epayment_paymill extends tslib_pibase
       $paymillPayment->setid( $id );
       $this->paymillPaymentResponse = $paymillService->getOne( $paymillPayment );
       //var_dump( __FILE__, __LINE__, $paymillPayment, $this->paymillPaymentResponse );
-      return $this->paymillInitPaymentError( );
+      return $this->paymillCheckAccount( );
     }
     catch( \Paymill\Services\PaymillException $e )
     {
@@ -773,7 +797,7 @@ class tx_caddy_epayment_paymill extends tslib_pibase
       $paymillPayment->setToken( $this->paymillTokenValue( ) );
       $paymillPayment->setClient( $this->paymillClientResponse->getId( ) );
       $this->paymillPaymentResponse = $paymillService->create( $paymillPayment );
-      return $this->paymillInitPaymentError( );
+      return $this->paymillCheckAccount( );
       //var_dump( __FILE__, __LINE__, $paymillPayment, $this->paymillPaymentResponse );
     }
     catch( \Paymill\Services\PaymillException $e )
@@ -992,11 +1016,16 @@ class tx_caddy_epayment_paymill extends tslib_pibase
   */
   private function session( )
   {
-    if( ! isset( $this->pObj->piVars['e-payment']['paymill']['token'] ) )
+var_dump( __METHOD__, __LINE__ );
+
+    //if( ! isset( $this->pObj->piVars['e-payment']['paymill']['token'] ) )
+    if( ! $this->paymillTokenIsSet( ) )
     {
       $this->sessionDataRemove( );
+var_dump( __METHOD__, __LINE__ );
       return;
     }
+var_dump( __METHOD__, __LINE__ );
 
     switch( true )
     {
@@ -1078,13 +1107,16 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     switch( true )
     {
       case( $force ):
+var_dump( __METHOD__, __LINE__ );
         $sessionDataRemove = true;
         break;
       case( $this->requirementsToken( ) ):
       case( $this->requirementsWiPowermail( ) ):
+var_dump( __METHOD__, __LINE__ );
         $sessionDataRemove = false;
         break;
       default:
+var_dump( __METHOD__, __LINE__ );
         $sessionDataRemove = true;
         break;
     }
@@ -1104,6 +1136,7 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     unset( $sesArray['payment'] );
       // Remove options payment
     unset( $sesArray['options']['payment'] );
+var_dump( __METHOD__, __LINE__ );
 
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
       // save session
@@ -1611,7 +1644,12 @@ class tx_caddy_epayment_paymill extends tslib_pibase
       return $this->prompts;
     }
 
-    $prompts = $this->transactionSend( );
+    $arrResult = $this->transactionSend( );
+    if( $arrResult['errors'] )
+    {
+      $prompts = $arrResult['errors'];
+      return $prompts;
+    }
     return $prompts;
   }
 
@@ -1632,54 +1670,82 @@ class tx_caddy_epayment_paymill extends tslib_pibase
   }
 
  /**
-  * transactionSend( ) :
+  * transactionRequirments( ) :
   *
   * @return	array		$this->prompts  : prompts, in case of an error
   * @access private
   * @version    4.0.5
   * @since      4.0.5
   */
-  private function transactionSend( )
+  private function transactionRequirements( )
   {
     $prompts = array( );
 
-      // Initiate paymill objects
-    $paymillService     = new Paymill\Request(PAYMILL_API_KEY);
-    $paymillClient      = new Paymill\Models\Request\Client();
-    $paymillTransaction = new Paymill\Models\Request\Transaction();
+      // Check requirements for transaction
+    $error = $this->paymillCheckAccount( );
+    if( ! $error )
+    {
+      return;
+    }
 
-      // Get paymill payment id and client id from caddy session
-    $paymentId  = $this->sessionGetPaymentId( );
-    $clientId   = $this->sessionGetClientId( );
+    $prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $error['prompt'];
+    return $prompts;
+  }
+
+ /**
+  * transactionSend( )  : Executes the transaction. Returns in case of
+  *                       * success
+  *                         $arrReturn(
+  *                           'error'                       => false,
+  *                           'exception'                   => false,
+  *                           'paymillTransactionResponse'  => $paymillTransactionResponse,
+  *                           'responseCode'                => 20000    // in case of 20000
+  *                         )
+  *                       * failure
+  *                         $arrReturn(
+  *                           'error'                       => true,
+  *                           'errors'                      => [array]
+  *                           'exception'                   => [true || false],
+  *                           'responseCode'                => 0
+  *                         )
+  *
+  * @return	array		$arrReturn  : See method description
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.4
+  */
+  private function transactionSend( )
+  {
+    $arrReturn = array(
+      'error'         => true,
+      'errors'        => array( ),
+      'exception'     => false,
+      'responseCode'  => null,
+      'transactionId' => null
+    );
+
+      // Update the client
+    $prompts = $this->transactionUpdate( );
+    if( $prompts )
+    {
+      $arrReturn['errors'] = $prompts;
+      return $arrReturn;
+    }
+
+      // Check requirements
+    $prompts = $this->transactionRequirements( );
+    if( $prompts )
+    {
+      $arrReturn['errors'] = $prompts;
+      return $arrReturn;
+    }
 
       // try transaction
     try {
-        // Update the client email and description
-      $paymillClient->setId( $clientId );
-      $paymillClient->setEmail( $this->transactionClientEmail );
-      $paymillClient->setDescription( $this->transactionClientName );
-      $paymillClientResponse = $paymillService->update( $paymillClient );
-      //var_dump( __FILE__, __LINE__, $paymillClientResponse );
-      unset( $paymillClientResponse );
+      $arrReturn = $this->transactionSendTry( );
+var_dump( __FILE__, __LINE__, $arrReturn );
+      return $arrReturn;
 
-        // Check requirements for transaction
-      $error = $this->paymillInitPaymentError( );
-      if( $error )
-      {
-        $prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $error['prompt'];
-        return $prompts;
-      }
-
-        // Execute the transaction
-      $paymillTransaction->setPayment( $paymentId );
-      $paymillTransaction->setAmount(       $this->transactionAmount * 100 );
-      $paymillTransaction->setCurrency(     $this->transactionCurrency          );
-      $paymillTransaction->setDescription(  $this->transactionDescription       );
-      $paymillTransactionResponse = $paymillService->create($paymillTransaction);
-      $responseCode = $paymillTransactionResponse->getResponseCode( );
-//var_dump( __FILE__, __LINE__, $paymillTransactionResponse );
-//die( );
-      unset( $paymillTransactionResponse );
 
         // Remove all e-payment data in the session
       $force = true;
@@ -1692,14 +1758,226 @@ class tx_caddy_epayment_paymill extends tslib_pibase
     }
     catch( \Paymill\Services\PaymillException $e )
     {
+      $arrReturn = $this->transactionSendCatch( $e );
+var_dump( __FILE__, __LINE__, $arrReturn );
+      return $arrReturn;
+    }
+  }
+
+ /**
+  * transactionSendCatch( ) : Returns
+  *                               $arrReturn(
+  *                                 'error'         => true,
+  *                                 'errors'        => array( $prompts ),
+  *                                 'exception'     => true,
+  *                                 'responseCode'  => null
+  *                               )
+  *
+  * @param	[type]		$$exception: ...
+  * @return	array		$arrReturn  : See method description
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function transactionSendCatch( $exception )
+  {
+      // transaction failed
+    $prompt = $exception->getErrorMessage( );
+    if( empty( $prompt ) )
+    {
+      $prompt = 'sorry, error prompt is empty.';
+    }
+    $prompt = 'Paymill exception while transaction: ' . $prompt;
+
+    $prompts = array(
+      'SERVER_PROMPT_WICLOSE_SUBPART|alert|'      . $prompt,
+      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|'  . $this->pi_getLL( 'transaction-not-operated' ),
+      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|'  . $this->pi_getLL( 'transaction-todo-default' )
+    );
+
+    $arrReturn  = array(
+      'error'         => true,
+      'errors'        => $prompts,
+      'exception'     => true,
+      'responseCode'  => null,
+      'transactionId' => null
+    );
+    return $arrReturn;
+  }
+
+ /**
+  * transactionSendTry( )  : Try to execute the transaction. Returns in case of
+  *                       * success
+  *                         $arrReturn(
+  *                           'error'         => false,
+  *                           'errors'        => null,
+  *                           'exception'     => false,
+  *                           'responseCode'  => $paymillTransactionResponse->getResponseCode( )
+  *                         )
+  *                       * failure
+  *                         $arrReturn(
+  *                           'error'         => true,
+  *                           'errors'        => $prompts,
+  *                           'exception'     => false,
+  *                           'responseCode'  => $paymillTransactionResponse->getResponseCode( )
+  *                         )
+  *
+  * @return	array		$arrReturn  : See method description
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.4
+  */
+  private function transactionSendTry( )
+  {
+    $arrReturn = array(
+      'error'         => true,
+      'errors'        => array( ),
+      'exception'     => false,
+      'responseCode'  => null,
+      'transactionId' => null
+    );
+
+      // Initiate paymill objects
+    $paymillService     = new Paymill\Request(PAYMILL_API_KEY);
+    $paymillTransaction = new Paymill\Models\Request\Transaction();
+
+      // Set transaction params
+      // Get paymill payment id and client id from caddy session
+    $paymentId  = $this->sessionGetPaymentId( );
+    $paymillTransaction->setPayment(      $paymentId                          );
+    $paymillTransaction->setAmount(       $this->transactionAmount * 100      );
+    $paymillTransaction->setCurrency(     $this->transactionCurrency          );
+    $paymillTransaction->setDescription(  $this->transactionDescription       );
+      // Execute the transaction
+    $paymillTransactionResponse = $paymillService->create($paymillTransaction);
+      // Set the response code
+      // Evaluate the executed transaction object
+    $prompts = $this->transactionSentEval( $paymillTransactionResponse );
+
+      // Transaction failed
+    if( $prompts )
+    {
+      $arrReturn = array(
+        'error'         => true,
+        'errors'        => $prompts,
+        'exception'     => false,
+        'responseCode'  => $paymillTransactionResponse->getResponseCode( ),
+        'transactionId' => $paymillTransactionResponse->getId( )
+      );
+      return $arrReturn;
+    }
+
+      // Transaction was successful
+    $arrReturn = array(
+      'error'         => false,
+      'errors'        => null,
+      'exception'     => false,
+      'responseCode'  => $paymillTransactionResponse->getResponseCode( ),
+      'transactionId' => $paymillTransactionResponse->getId( )
+    );
+    return $arrReturn;
+
+  }
+
+ /**
+  * transactionSentEval( )  :
+  *
+  * @param	[type]		$$paymillTransactionResponse: ...
+  * @return	array		$prompts  : prompts, in case of an error
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function transactionSentEval( $paymillTransactionResponse )
+  {
+    return $this->transactionSentEvalResponseCode( $paymillTransactionResponse );
+  }
+
+ /**
+  * transactionSentEvalResponseCode( )  : Returns prompts, if response code isn't proper
+  *                                       Response code isn't proper, if code isn't 20000
+  *
+  * @param	[type]		$$paymillTransactionResponse: ...
+  * @return	array		$prompts  : prompts, in case of an error
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function transactionSentEvalResponseCode( $paymillTransactionResponse )
+  {
+    $responseCode = $paymillTransactionResponse->getResponseCode( );
+
+    if( $responseCode == 20000 )
+    {
+      return null;
+    }
+
+    // secondary (grey), [empty!] (blue), success (green), error (red)
+    $prompts = array(
+      'SERVER_PROMPT_WOCLOSE_SUBPART||'           . $this->pi_getLL( $responseCode ),
+      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|'  . $this->pi_getLL( 'transaction-not-operated' ),
+      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|'  . $this->pi_getLL( 'transaction-todo-default' )
+    );
+
+    return $prompts;
+  }
+
+ /**
+  * transactionUpdate( ) :
+  *
+  * @return	array		$prompts  : prompts, in case of an error
+  * @access private
+  * @internal   #i0043
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function transactionUpdate( )
+  {
+    $prompts = $this->transactionUpdateClient( );
+    return $prompts;
+  }
+
+ /**
+  * transactionUpdateClient( ) : Updates the description and the e-mail of the client
+  *
+  * @return	array		$prompts  : prompts, in case of an error
+  * @access private
+  * @internal   #i0043
+  * @since      4.0.6
+  */
+  private function transactionUpdateClient( )
+  {
+    $prompts = array( );
+
+      // Initiate paymill objects
+    $paymillService     = new Paymill\Request(PAYMILL_API_KEY);
+    $paymillClient      = new Paymill\Models\Request\Client();
+
+      // Get paymill client id from caddy session
+    $clientId   = $this->sessionGetClientId( );
+
+      // try transaction
+    try {
+        // Update the client email and description
+      $paymillClient->setId( $clientId );
+      $paymillClient->setEmail( $this->transactionClientEmail );
+      $paymillClient->setDescription( $this->transactionClientName );
+      $paymillClientResponse = $paymillService->update( $paymillClient );
+      //var_dump( __FILE__, __LINE__, $paymillClientResponse );
+      unset( $paymillClientResponse );
+
+      return;
+    }
+    catch( \Paymill\Services\PaymillException $e )
+    {
         // transaction failed
       $prompt = $e->getErrorMessage( );
       if( empty( $prompt ) )
       {
         $prompt = 'sorry, error prompt is empty.';
       }
-      $prompt = 'Paymill exception: ' . $prompt;
-      $prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $prompt;
+      $prompt     = 'Paymill exception while updating the client: ' . $prompt;
+      $prompts[]  = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $prompt;
       return $prompts;
     }
   }

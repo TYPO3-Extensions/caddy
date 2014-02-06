@@ -17,7 +17,7 @@ plugin.tx_powermail_pi1 {
       // The caddy content
     caddy = USER
     caddy {
-      userFunc = tx_caddy_powermail->caddyForEmail
+      userFunc = tx_caddy_powermail->caddyEmail
       userFunc {
         drs = {$plugin.caddy.debug.userfunc}
       }

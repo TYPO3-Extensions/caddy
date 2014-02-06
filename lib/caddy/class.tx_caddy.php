@@ -103,7 +103,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  *              SECTION: Init
  * 2377:     private function init( )
  * 2396:     private function initDie( )
- * 2442:     private function initEpayment( )
+ * 2442:     private function initEpaymentMethods( )
  * 2469:     private function initInstances( )
  *
  *              SECTION: Options
@@ -873,6 +873,7 @@ class tx_caddy extends tslib_pibase
     $marker = array( );
 
     $paymentId  = $calcedCaddy['options']['payment']['id'];
+    $paymentId = $this->session->paymentGet( $this->pidCaddy );
     $shippingId = $calcedCaddy['options']['shipping']['id'];
     $specialIds = $calcedCaddy['options']['specials']['ids'];
 
@@ -933,7 +934,7 @@ class tx_caddy extends tslib_pibase
   * @return	void
   * @access private
   * @internal   #53678
-  * @version    4.0.5
+  * @version    4.0.6
   * @since      4.0.5
   */
   private function caddyWiItemsOptionsEpaymentWiProvider( $paymentId )
@@ -944,7 +945,8 @@ class tx_caddy extends tslib_pibase
     switch( $provider )
     {
       case( 'Paymill' ):
-        $content = $this->epayment->main( $paymentId, $this->pidCaddy );
+        $arrResult  = $this->epaymentMethods->main( $paymentId, $this->pidCaddy );
+        $content    = $arrResult['content'];
         break;
       default:
         $content = 'e-payment by undefined: ' . $provider;
@@ -1176,6 +1178,7 @@ class tx_caddy extends tslib_pibase
     // #54634, 131229, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // #54634, 131229, dwildt, 1+
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pidCaddy, $sesArray );
 
     return $sesArray;
@@ -2372,7 +2375,7 @@ class tx_caddy extends tslib_pibase
     $this->initDie( );
 
     $this->initInstances( );
-    $this->initEpayment( );
+    $this->initEpaymentMethods( );
   }
 
  /**
@@ -2420,7 +2423,7 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
-  * initEpayment( ) : Requires and initiate the class of the current e-payment provider.
+  * initEpaymentMethods( ) : Requires and initiate the class of the current e-payment provider.
   *                   If no e-payment provider is enabled, nothing will happen.
   *
   * @return	void
@@ -2429,7 +2432,7 @@ class tx_caddy extends tslib_pibase
   * @version    4.0.5
   * @since      4.0.5
   */
-  private function initEpayment( )
+  private function initEpaymentMethods( )
   {
     $provider = $this->getEpaymentProvider( );
 
@@ -2440,12 +2443,12 @@ class tx_caddy extends tslib_pibase
 
       // Path to the provider class
     $provider       = strtolower( $provider );
-    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/' . $provider . '/class.tx_caddy_epayment_' . $provider . '.php';
+    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/' . $provider . '/class.tx_caddy_' . $provider . '_paymentMethods.php';
 
       // Initiate the provider class
     require_once( $path2provider );
-    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_' . $provider );
-    $this->epayment->setParentObject( $this );
+    $this->epaymentMethods = t3lib_div::makeInstance( 'tx_caddy_' . $provider . '_paymentMethods' );
+    $this->epaymentMethods->setParentObject( $this );
   }
 
  /**

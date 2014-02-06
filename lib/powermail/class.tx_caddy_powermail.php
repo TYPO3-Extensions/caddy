@@ -74,7 +74,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.5
+ * @version	4.0.6
  * @since       2.0.0
  */
 class tx_caddy_powermail extends tslib_pibase
@@ -133,7 +133,7 @@ class tx_caddy_powermail extends tslib_pibase
     // [Object]
   private $userfunc = null;
   
-    // caddyForEmail
+    // caddyEmail
   private $calc                     = null;
   public  $cartCount                = 0;
   public  $cartServiceAttribute1Sum = 0;
@@ -153,6 +153,210 @@ class tx_caddy_powermail extends tslib_pibase
   
   private $pmVersAppendix = null;
 
+  
+  
+ /***********************************************
+  *
+  * Caddy E-Payment
+  *
+  **********************************************/
+
+  
+ /**
+  * caddyEpayment( ) : Dies, if there is an error with the e-payment
+  *
+  * @return  void
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.5
+  */
+  private function caddyEpayment( )
+  {   
+    $arrReturn = array( 
+      'content' => null,
+      'isPayed' => false
+    );
+
+    $isPayed = $this->caddyEpaymentOrderIsPayed( );
+    if( $isPayed )
+    {
+      $arrReturn = array( 
+        'content' => null,
+        'isPayed' => true
+      );
+      return;
+    }
+
+    $provider = $this->conf['api.']['e-payment.']['provider'];
+
+    switch( $provider )
+    {
+      case( 'Paymill' ):
+        $arrReturn = $this->caddyEpaymentPaymill( );
+        $isPayed = $arrReturn['isPayed'];
+        if( ! $isPayed )
+        {
+          var_dump( __METHOD__, __LINE__, 'Expected: $isPayed is true. But result is "' . $isPayed . '"' );
+          die( );
+        }
+        $this->caddyEpaymentOrderSetPayed( $isPayed );
+        return;
+        break;
+      case( null ):
+      case( false ):
+          // folow the workflow
+        return;
+        break;
+      default:
+          // Die
+        $this->caddyEpaymentDie( );
+        break;      
+    }
+    
+    var_dump( __METHOD__, __LINE__, 'Expected: return within switch. But there was no return.' );
+    die( );
+  }
+  
+ /**
+  * caddyEpaymentDie( ) : Dies, if there is an undefined e-payment provider
+  *
+  * @return  void
+  * @access public
+  * @version 4.0.5
+  * @since  4.0.5
+  */
+  private function caddyEpaymentDie( )
+  {   
+      // DRS
+    if( $this->drsUserfunc )
+    {
+      $prompt = __METHOD__ . ': E-payment has an undefined provider!';
+      t3lib_div::devlog( '[ERROR/EPAYMENT/POWERMAIL] ' . $prompt, $this->extKey, 3 );
+    }
+      // DRS
+
+    $prompt = 'ERROR: E-payment<br />
+      The provider isn\'t defined.<br />
+      Sorry for the trouble.<br />
+      <a href="javascript:history.back( )">Back</a><br />
+      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
+      TYPO3 extension: ' . $this->extKey;
+    die( $prompt );   
+  }
+
+ /**
+  * caddyEpaymentOrderIsPayed( ) : Returns the payed status of the current order
+  *
+  * @return  string           $responsecode : paymill response code
+  * @access private
+  * @version 4.0.5
+  * @since  4.0.5
+  */
+  private function caddyEpaymentOrderIsPayed( )
+  {   
+    $isPayed = false;
+    
+    $sesArray     = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    
+    $currentOrderNumber   = $sesArray['numberOrderCurrent'];
+    $epaymentOrderNumber  = $sesArray['e-payment']['order']['numberOrderCurrent'];
+    
+//var_dump( __FILE__, __LINE__, $sesArray['numberOrderCurrent'], $sesArray['e-payment']['order']['numberOrderCurrent'] );
+      // RETURN false : Order isn't payed
+    if( $currentOrderNumber != $epaymentOrderNumber )
+    {
+      $isPayed = false;
+//var_dump( __FILE__, __LINE__, $isPayed );
+      return $isPayed;
+    }
+
+      // Get payed status from session
+    $isPayed = $sesArray['e-payment']['order']['isPayed'];
+      // RETURN payed status
+//var_dump( __FILE__, __LINE__, $sesArray['e-payment'] );
+    return $isPayed;
+  }
+
+ /**
+  * caddyEpaymentOrderSetPayed( ) : Sets the payed status of the current order
+  *
+  * @param    boolean   $isPayed  : true, if order is payed
+  * @return  void
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.6
+  */
+  private function caddyEpaymentOrderSetPayed( $isPayed )
+  {   
+    $sesArray             = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
+    $currentOrderNumber   = $sesArray['numberOrderCurrent'];
+    
+    $sesArray['e-payment']['order']['numberOrderCurrent'] = $currentOrderNumber;
+    $sesArray['e-payment']['order']['isPayed']            = $isPayed;
+    
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
+      // save session
+    $GLOBALS['TSFE']->storeSessionData( );
+    //var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
+//var_dump( __FILE__, __LINE__, $isPayed );
+  }
+
+ /**
+  * caddyEpaymentPaymill( ) : 
+  *
+  * @return  array      $arrReturn  : 
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.5
+  */
+  private function caddyEpaymentPaymill( )
+  {   
+    $arrReturn = array( 
+      'content' => null,
+      'isPayed' => false
+    );
+
+    $this->caddyEpaymentPaymillinit( );
+    $arrReturn = $this->caddyEpaymentPaymillTemplateAfterTransaction( );
+    return $arrReturn;
+  }
+
+ /**
+  * caddyEpaymentPaymillInit( ) : 
+  *
+  * @return  void
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.6
+  */
+  private function caddyEpaymentPaymillInit( )
+  {   
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'e-payment/powermail/class.tx_caddy_epayment_powermail.php' );
+    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_powermail' );
+    $this->epayment->setParentObject( $this );
+  }
+  
+ /**
+  * caddyEpaymentPaymillTemplateAfterTransaction( ) : 
+  *
+  * @return  array    $arrReturn  : 
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.5
+  */
+  private function caddyEpaymentPaymillTemplateAfterTransaction( )
+  {   
+    $arrReturn = array( 
+      'content' => null,
+      'isPayed' => false
+    );
+
+    $arrReturn = $this->epayment->getContentAfterTransaction( );
+//var_dump( __FILE__, __LINE__, $arrReturn );
+    return $arrReturn;
+  }  
 
   
   
@@ -162,17 +366,15 @@ class tx_caddy_powermail extends tslib_pibase
   *
   **********************************************/
 
-
-
  /**
-  * caddyForEmail( )  : Returns a caddy rendered for an e-mail
+  * caddyEmail( )  : Returns a caddy rendered for an e-mail
   *
   * @return  string    caddy content
   * @access public
   * @version 4.0.3
   * @since  2.0.2
   */
-  public function caddyForEmail( $content = '', $conf = array( ) )
+  public function caddyEmail( $content = '', $conf = array( ) )
   {   
     unset( $content );
     $this->conf = $conf;
@@ -198,15 +400,18 @@ class tx_caddy_powermail extends tslib_pibase
     }
       
       // Get the typoscript configuration of the caddy plugin 1
-    $this->conf = $this->caddyForEmailInitConf( );
+    $this->conf = $this->caddyEmailInitConf( );
     
       // RETURN null, if init is unproper
-    if( ! $this->caddyForEmailInit( ) )
+    if( ! $this->caddyEmailInit( ) )
     {
+//var_dump( __METHOD__, __LINE__ );
+//die( );
       return null;
     }
       // RETURN null, if init is unproper
     
+    $this->caddyEmailEpayment( );    
 
       // Get the caddy
     $caddy    = $this->caddy->caddy( );
@@ -223,7 +428,7 @@ class tx_caddy_powermail extends tslib_pibase
                           );
 
 //var_dump( __METHOD__, __LINE__, $content );
-//die( __METHOD__ . '#' . __LINE__ );
+//die( );
 
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
@@ -240,14 +445,14 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
-  * caddyForEmailInit( )  : 
+  * caddyEmailInit( )  : 
   *
   * @return  boolean      : true in case of products
-  * @access public
-  * @version 2.0.0
+  * @access private
+  * @version 4.0.6
   * @since  1.4.6
   */
-  public function caddyForEmailInit( )
+  private function caddyEmailInit( )
   {   
     $this->pi_loadLL();
 
@@ -261,22 +466,15 @@ class tx_caddy_powermail extends tslib_pibase
       // DRS
       
       // Get the HTML template for CADDY_EMAIL
-    $this->tmpl = $this->caddyForEmailInitTemplate( );
+    $this->tmpl = $this->caddyEmailInitTemplate( );
     
     $this->cObj = $GLOBALS['TSFE']->cObj;
 
       // Init instances
-    $this->caddyForEmailInstances( );    
+    $this->caddyEmailInstances( );    
 
-      // DIE, if there is an error with the payment
-    $this->caddyForEmailEpayment( );
-    
-//    $prompt = __METHOD__ . ' returns null.';
-//    t3lib_div::devlog( '[DEV/POWERMAIL] ' . $prompt, $this->extKey, 3 );
-//    return false;
-      
       // RETURN false : no products
-    if( ! $this->caddyForEmailInitProducts( ) )
+    if( ! $this->caddyEmailInitProducts( ) )
     {
       return false;
     }
@@ -285,15 +483,28 @@ class tx_caddy_powermail extends tslib_pibase
       // RETURN true : there are products
     return true;
   }
+
+ /**
+  * caddyEmailEpayment( )  : 
+  *
+  * @return  void
+  * @access private
+  * @version 4.0.6
+  * @since  4.0.6
+  */
+  private function caddyEmailEpayment( )
+  {   
+    $this->caddyEpayment( );
+  }
   
  /**
-  * caddyForEmailInitConf( )  : Take the conf from plugin.tx_caddy_pi1
+  * caddyEmailInitConf( )  : Take the conf from plugin.tx_caddy_pi1
   *
   * @access private
   * @version 2.0.0
   * @since  2.0.0
   */
-  private function caddyForEmailInitConf( )
+  private function caddyEmailInitConf( )
   {   
     $conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $conf = array_merge( ( array ) $this->conf, ( array ) $conf );
@@ -302,113 +513,14 @@ class tx_caddy_powermail extends tslib_pibase
   }
   
  /**
-  * caddyForEmailEpayment( ) : Dies, if there is an error with the e-payment
-  *
-  * @return  boolean              true, if there isn't any e-payment or if e-payment is proper
-  * @access private
-  * @version 4.0.5
-  * @since  4.0.5
-  */
-  private function caddyForEmailEpayment( )
-  {   
-
-    $provider = $this->conf['api.']['e-payment.']['provider'];
-
-    switch( $provider )
-    {
-      case( 'Paymill' ):
-        $this->caddyForEmailEpaymentPaymill( );
-        break;
-      case( null ):
-      case( false ):
-          // folow the workflow
-        return;
-        break;
-      default:
-        $this->caddyForEmailEpaymentDie( );
-        break;      
-    }
-    
-    return;
-  }
-  
- /**
-  * caddyForEmailEpaymentPaymill( ) : Dies, if there is an error with the payment
-  *
-  * @return  boolean                  true, if e-payment is proper
-  * @access private
-  * @version 4.0.5
-  * @since  4.0.5
-  */
-  private function caddyForEmailEpaymentPaymill( )
-  {   
-      // RETURN: transaction is done before
-    if( $this->caddyForEmailEpaymentPaymillResponsecode( ) )
-    {
-      return;
-    }
-
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-
-    require_once( $path2lib . 'e-payment/powermail/class.tx_caddy_epayment_powermail.php' );
-    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_powermail' );
-    $this->epayment->setParentObject( $this );
-
-    $this->epayment->main( );
-  }
-  
- /**
-  * caddyForEmailEpaymentPaymillResponsecode( ) : 
-  *
-  * @return  string           $responsecode : paymill response code
-  * @access private
-  * @version 4.0.5
-  * @since  4.0.5
-  */
-  private function caddyForEmailEpaymentPaymillResponsecode( )
-  {   
-    $sesArray     = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    $responseCode = $sesArray['e-payment']['paymill']['transaction']['responsecode'];
-    
-    return $responseCode;
-  }
-  
- /**
-  * caddyForEmailEpaymentDie( ) : Dies, if there is an undefined e-payment provider
-  *
-  * @return  void
-  * @access public
-  * @version 4.0.5
-  * @since  4.0.5
-  */
-  private function caddyForEmailEpaymentDie( )
-  {   
-      // DRS
-    if( $this->drsUserfunc )
-    {
-      $prompt = __METHOD__ . ': E-payment has an undefined provider!';
-      t3lib_div::devlog( '[ERROR/EPAYMENT/POWERMAIL] ' . $prompt, $this->extKey, 3 );
-    }
-      // DRS
-
-    $prompt = 'ERROR: E-payment<br />
-      The provider isn\'t defined.<br />
-      Sorry for the trouble.<br />
-      <a href="javascript:history.back( )">Back</a><br />
-      Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
-      TYPO3 extension: ' . $this->extKey;
-    die( $prompt );   
-  }
-  
- /**
-  * caddyForEmailInitProducts( )  : 
+  * caddyEmailInitProducts( )  : 
   *
   * @return  boolean          : true in case of products
-  * @access public
+  * @access private
   * @version 2.0.0
   * @since  1.4.6
   */
-  public function caddyForEmailInitProducts( )
+  private function caddyEmailInitProducts( )
   {   
       // Get products from session
     $this->products = $this->session->productsGet( );
@@ -432,13 +544,13 @@ class tx_caddy_powermail extends tslib_pibase
   }
   
  /**
-  * caddyForEmailInitTemplate( )  : Get teh template CADDY_EMAIL
+  * caddyEmailInitTemplate( )  : Get teh template CADDY_EMAIL
   *
   * @access private
   * @version 2.0.0
   * @since  2.0.0
   */
-  private function caddyForEmailInitTemplate( )
+  private function caddyEmailInitTemplate( )
   {   
     $file       = $this->conf['templates.']['e-mail.']['file'];
     $markerAll  = $this->conf['templates.']['e-mail.']['marker.']['all'];
@@ -449,12 +561,12 @@ class tx_caddy_powermail extends tslib_pibase
     $tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,    $markerAll );
     $tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $tmpl['all'], $markerItem );
 
-    $tmpl = $this->caddyForEmailInitTemplateTable( $tmpl ); 
+    $tmpl = $this->caddyEmailInitTemplateTable( $tmpl ); 
     return $tmpl;
   }
 
  /**
-  * caddyForEmailInitTemplateTable( )
+  * caddyEmailInitTemplateTable( )
   *
   * @param      string        $tmpl : 
   * @return	string        $tmpl : 
@@ -462,7 +574,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyForEmailInitTemplateTable( $tmpl )
+  private function caddyEmailInitTemplateTable( $tmpl )
   {
     $table = $this->conf['templates.']['e-mail.']['table.'];
 
@@ -484,7 +596,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @version    2.0.0
   * @since      2.0.0
   */
-  private function caddyForEmailInstances( )
+  private function caddyEmailInstances( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 

@@ -2,8 +2,16 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+4.0.6
+  2014-02-05
+  Bugfix
+  * #i0044: Adding a product removes the session
+  * #i0043: e-payment
+            * payment id is removed after transaction
+            * payment options are missing in e-mail and pdf
+
 4.0.5
-  2014-01-25
+  2014-02-03
   Major Feature 
   * #53678: e-payment
             Integration of paymill step 2

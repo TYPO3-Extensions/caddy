@@ -336,11 +336,13 @@ class tx_caddy_session
     //$sesArray       = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
     // #54634, 131128, dwildt, 1+
     $sesArray             = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
     $sesArray['payment']  = intval( $value );
 
     // #54634, 131128, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
     // #54634, 131128, dwildt, 1+
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     $GLOBALS['TSFE']->storeSessionData();
   }
@@ -441,14 +443,13 @@ class tx_caddy_session
 
       // add product to the session array
     $currProducts[ ] = $newProduct;
-    $sesArray['products'] = $currProducts;
-//var_dump( __METHOD__, __LINE__, $currProducts );
 
-      // generate session with session array
-      // #54634, 131128, dwildt, 1-
-    //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
-      // #54634, 131128, dwildt, 2+
     $pid = $this->getPid( $pid );
+      // #i0044, 140206, dwildt, 1+
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+      // Overwrite products
+    $sesArray['products'] = $currProducts;
+
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
       // save session
     $GLOBALS['TSFE']->storeSessionData( );
@@ -1839,6 +1840,7 @@ class tx_caddy_session
     //$sesArray = $GLOBALS['TSFE']->fe_user->getKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id);
     // #54634, 131128, dwildt, 1+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
 
     $is_cart = intval( $this->pObj->piVars['updateByCaddy'] );
 
@@ -1976,6 +1978,7 @@ class tx_caddy_session
     // #54634, 131128, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // #54634, 131128, dwildt, 1+
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     // save session
     $GLOBALS['TSFE']->storeSessionData( );

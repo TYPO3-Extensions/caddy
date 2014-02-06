@@ -106,7 +106,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.5
+ * @version	4.0.6
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -227,6 +227,8 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $content = $this->caddyHide( $content );
 
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
 //var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     return $this->pi_wrapInBaseClass( $content );
@@ -290,7 +292,11 @@ class tx_caddy_pi1 extends tslib_pibase
       $this->newProduct['service_attribute_1']  = $this->gpvar['service_attribute_1'];
       $this->newProduct['service_attribute_2']  = $this->gpvar['service_attribute_2'];
       $this->newProduct['service_attribute_3']  = $this->gpvar['service_attribute_3'];
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
       $this->session->productAdd( $this->newProduct, $this->pid );
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
     }
   }
 
@@ -360,14 +366,34 @@ class tx_caddy_pi1 extends tslib_pibase
   */
   private function caddyUpdateOptions( )
   {
-      // RETURN : Don't update options, if form isnt by itself
+//    $GP = t3lib_div::_GET( )
+//        + t3lib_div::_POST( )
+//        ;
+//    var_dump( __METHOD__, __LINE__, $GP );    
+
+      // RETURN : Don't update options, if form isn't by itself
     if( ! intval( $this->piVars['updateByCaddy'] ) )
     {
       return;
     }
-      // RETURN : Don't update options, if form isnt by itself
+    
+    $this->caddyUpdateOptionsPayment( );
+    $this->caddyUpdateOptionsShipping( );
+    $this->caddyUpdateOptionsSpecials( );
+  }
 
-      // change payment
+ /**
+  * caddyUpdateOptionsPayment( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function caddyUpdateOptionsPayment( )
+  {
+//$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
       // #54858, 140109, dwildt, 1-
     //$payment = null;
       // #54858, 140109, dwildt, 1+
@@ -381,26 +407,49 @@ class tx_caddy_pi1 extends tslib_pibase
     //$this->session->paymentUpdate( $this->piVars['payment'], $this->pid );
       // #54858, 140109, dwildt, 1+
     $this->session->paymentUpdate( $payment, $this->pid );
+  }
 
-      // change shipping
+ /**
+  * caddyUpdateOptionsShipping( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function caddyUpdateOptionsShipping( )
+  {
       // #54858, 140109, dwildt, 1-
     //$shipping = null;
       // #54858, 140109, dwildt, 1+
     $shipping = $this->session->shippingGet( $this->pid );
+//var_dump( __METHOD__, __LINE__, $shipping );
     if( isset( $this->piVars['shipping'] ) )
     {
       $shipping = $this->piVars['shipping'];
     }
+//var_dump( __METHOD__, __LINE__, $shipping );
       // #54858, 140109, dwildt, 1-
     //$this->session->shippingUpdate( $this->piVars['shipping'], $this->pid );
       // #54858, 140109, dwildt, 1+
     $this->session->shippingUpdate( $shipping, $this->pid );
+  }
 
-      // change special
+ /**
+  * caddyUpdateOptionsSpecials( )
+  *
+  * @return	void
+  * @access private
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function caddyUpdateOptionsSpecials( )
+  {
       // #54858, 140109, dwildt, 1-
     //$special = null;
       // #54858, 140109, dwildt, 1+
     $special = $this->session->specialGet( $this->pid );
+//var_dump( __METHOD__, __LINE__, $special );
       // 140202, dwildt, 1-
     //if( isset( $this->piVars['specials'] ) )
       // 140202, dwildt, 1+
@@ -408,6 +457,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       $special = $this->piVars['specials'];
     }
+//var_dump( __METHOD__, __LINE__, $special );
       // #54858, 140109, dwildt, 1-
     //$this->session->specialUpdate( $this->piVars['specials'], $this->pid );
       // #54858, 140109, dwildt, 1+

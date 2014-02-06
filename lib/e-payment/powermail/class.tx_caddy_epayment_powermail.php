@@ -70,13 +70,13 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  */
 
 /**
- * Paymill e-payment modul for the 'caddy' extension.
+ * Class is for extending the powermail class. Class returns back the content (HTML) after an e-payment transaction.
  *
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.5
+ * @version     4.0.6
  * @since       4.0.5
  */
 class tx_caddy_epayment_powermail extends tslib_pibase
@@ -107,16 +107,22 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   **********************************************/
 
  /**
-  * main( ):
+  * getContentAfterTransaction( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
   * @return	string		$template   : HTML template
   * @access public
-  * @version     4.0.5
-  * @since       4.0.5
+  * @version     4.0.6
+  * @since       4.0.6
   */
-  public function main( )
+  public function getContentAfterTransaction( )
   {
+//var_dump( __METHOD__, __LINE__ );
+    $arrReturn = array( 
+      'content' => null,
+      'isPayed' => false
+    );
+
     $this->init( );
 
     $this->content = $this->template( '###HTML###' );
@@ -138,7 +144,12 @@ class tx_caddy_epayment_powermail extends tslib_pibase
       // Next two lines is for development only!
       //$this->sessionErrorAdd( );
       //die( $this->content );
-      return $this->content;
+      $arrReturn = array( 
+        'content' => $this->content,
+        'isPayed' => true
+      );
+//var_dump( __FILE__, __LINE__, $arrReturn );
+      return $arrReturn;
     }
     
       // error: transaction wasn't possible
@@ -166,26 +177,28 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   *
   * @return	boolean
   * @access private
-  * @version     4.0.5
+  * @version     4.0.6
   * @since       4.0.5
   */
   private function epayment( )
   {
+    $success  = false;
     $provider = $this->getEpaymentProvider( );
 
     switch( $provider )
     {
       case( 'Paymill' ):
-        return $this->epaymentProviderPaymill( );
+        $success = $this->epaymentProviderPaymill( );
         break;
       case( null ):
       case( false ):
       default:
-        $this->epaymentProviderDie( );
+        $this->epaymentProviderDie( $provider );
+        $success  = false;
         break;
     }
 
-    return false;
+    return $success;
   }
 
  /**
@@ -197,10 +210,8 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   * @version    4.0.5
   * @since      4.0.5
   */
-  private function epaymentProviderDie( )
+  private function epaymentProviderDie( $provider )
   {
-    $provider = $this->getEpaymentProvider( );
-
     $prompt = 'Fatal error: undefined e-payment provider "' . $provider . '"<br />'
             . 'Method ' . __METHOD__ . ' at line ' . __LINE__ . ' <br />'
             . 'Sorry for the trouble<br />'
@@ -216,23 +227,19 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   * @return	boolean
   * @access private
   * @internal   #53678
-  * @version    4.0.5
+  * @version    4.0.6
   * @since      4.0.5
   */
   private function epaymentProviderPaymill( )
   {
+    $success = false;
+    
+      // Init paymill
     $this->epaymentProviderPaymillInit( );
 
-    $prompts = $this->paymill->transaction( );
-    if( ! empty( $prompts ) )
-    {
-      $this->prompts  = $this->prompts
-                      + $prompts
-                      ;
-      return false;
-    }
-
-    return true;
+      // Execute the transaction
+    $success = $this->epaymentProviderPaymillTransaction( );
+    return $success;
   }
 
  /**
@@ -241,23 +248,32 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   * @return	void
   * @access private
   * @internal   #53678
-  * @version    4.0.5
+  * @version    4.0.6
   * @since      4.0.5
   */
   private function epaymentProviderPaymillInit( )
   {
-    $provider = $this->getEpaymentProvider( );
+    $this->epaymentProviderPaymillInitClass( );
+    $this->epaymentProviderPaymillInitValues( );
+  }
 
-      // Path to the provider class
-    $provider       = strtolower( $provider );
-    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/' . $provider . '/class.tx_caddy_epayment_' . $provider . '.php';
+ /**
+  * epaymentProviderPaymillInitClass( ) :
+  *
+  * @return	void
+  * @access private
+  * @internal   #53678
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function epaymentProviderPaymillInitClass( )
+  {
+    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php';
 
       // Initiate the provider class
     require_once( $path2provider );
-    $this->paymill = t3lib_div::makeInstance( 'tx_caddy_epayment_' . $provider );
-    $this->paymill->setParentObject( $this );
-
-    $this->epaymentProviderPaymillInitValues( );
+    $this->paymillTransaction = t3lib_div::makeInstance( 'tx_caddy_paymill_transaction' );
+    $this->paymillTransaction->setParentObject( $this );
   }
 
  /**
@@ -284,14 +300,63 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     $description    = $numberOrder . ', ' . $numberInvoice;
 
       // Set values
-    $this->paymill->setTransactionAmount(       $amount );
-    $this->paymill->setTransactionCurrency(     $currency );
-    $this->paymill->setTransactionDescription(  $description );
-    $this->paymill->setTransactionClientEmail(  $clientEmail );
-    $this->paymill->setTransactionClientName(   $clientName );
+    $this->paymillTransaction->setTransactionAmount(       $amount );
+    $this->paymillTransaction->setTransactionCurrency(     $currency );
+    $this->paymillTransaction->setTransactionDescription(  $description );
+    $this->paymillTransaction->setTransactionClientEmail(  $clientEmail );
+    $this->paymillTransaction->setTransactionClientName(   $clientName );
   }
 
+ /**
+  * epaymentProviderTransaction( )  : Returns
+  *                                   * true, if tasaction was successfull.
+  *                                   * false in case of an error. Error prompts will written to $this->prompts.
+  *
+  * @return	boolean
+  * @access private
+  * @internal   #53678
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function epaymentProviderPaymillTransaction( )
+  {
+    // Nur ausfuehren, wenn nicht bereits ausgefuehrt
+    // Session merkt sich order number und status bezahlt/nicht bezahlt
+    
+    $success = false;
+    
+      // Execute the transaction
+    $success = $this->epaymentProviderPaymillTransactionExec( );
+    return $success;
+  }
 
+ /**
+  * epaymentProviderTransactionExec( )  : Returns
+  *                                       * true, if tasaction was successfull.
+  *                                       * false in case of an error. Error prompts will written to $this->prompts.
+  *
+  * @return	boolean
+  * @access private
+  * @internal   #53678
+  * @version    4.0.6
+  * @since      4.0.6
+  */
+  private function epaymentProviderPaymillTransactionExec( )
+  {
+    // Nur ausfuehren, wenn nicht bereits ausgefuehrt
+    // Session merkt sich order number und status bezahlt/nicht bezahlt
+    
+    $prompts = $this->paymillTransaction->transaction( );
+    if( ! empty( $prompts ) )
+    {
+      $this->prompts  = $this->prompts
+                      + $prompts
+                      ;
+      return false;
+    }
+
+    return true;
+  }
 
  /**
   * getEpaymentProvider( ) :
@@ -483,6 +548,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     foreach( $this->prompts as $prompt )
     {
       list( $subpartMarker, $marker['###TYPE###'], $marker['###PROMPT###'] ) = explode( '|', $prompt );
+//var_dump( __METHOD__, __LINE__, $prompt );
       $subpart = $this->template( '###' . $subpartMarker . '###' );
       $subpart = $this->pObj->cObj->substituteMarkerArray( $subpart, $marker );
       $server_prompt  = $server_prompt
@@ -595,7 +661,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   {
     $cObj     = $this->pObj->cObj;
     $conf     = $this->pObj->conf;
-    $template = $cObj->fileResource( $conf['api.']['e-payment.']['powermail.']['files.']['html.']['error'] );
+    $template = $cObj->fileResource( $conf['api.']['e-payment.']['powermail.']['files.']['html.']['transactionPrompts'] );
 
       // Die if there isn't any HTML template
     if( empty ( $template ) )
@@ -616,7 +682,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
               TypoScript Constant Editor: [CADDY - E-PAYMENT - POWERMAIL FILES]
             </li>
             <li>
-              TypoScript Object Browser: plugin.tx_caddy_pi1.api.e-payment.powermail.files.html.error
+              TypoScript Object Browser: plugin.tx_caddy_pi1.api.e-payment.powermail.files.html.transactionPrompts
             </li>
           </ul>
           <p>
@@ -652,7 +718,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
               TypoScript Constant Editor: [CADDY - E-PAYMENT - POWERMAIL FILES]
             </li>
             <li>
-              TypoScript Object Browser: plugin.tx_caddy_pi1.api.e-payment.powermail.files.html.error
+              TypoScript Object Browser: plugin.tx_caddy_pi1.api.e-payment.powermail.files.html.transactionPrompts
             </li>
           </ul>
           <p>

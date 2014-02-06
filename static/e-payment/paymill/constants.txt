@@ -45,7 +45,7 @@ plugin.caddy {
 
 
   # cat=caddy - e-payment - powermail files//101;           type=string;  label= Error template:Path to the html error template
-  e-payment.powermail.files.html.error = EXT:caddy/res/e-payment/powermail/foundation/4x/html/error.html
+  e-payment.powermail.files.html.transactionPrompts = EXT:caddy/res/e-payment/powermail/foundation/4x/html/transactionPrompts.html
   # cat=caddy - e-payment - powermail files/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   e-payment.powermail.files.externalLinks = Click me!
   # cat=caddy - e-payment - powermail files/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

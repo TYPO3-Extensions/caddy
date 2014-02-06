@@ -6,6 +6,44 @@
   </meta>
   <data type="array">
     <languageKey index="default" type="array">
+      <!-- Paymill response codes. See https://www.paymill.com/de-de/dokumentation/referenz/api-referenz/#document-statuscodes -->
+      <label index="10001">General undefined response.</label>
+      <label index="10002">Still waiting on something.</label>
+      <label index="20000">General success response.</label>
+      <label index="40000">General problem with data.</label>
+      <label index="40001">General problem with payment data.</label>
+      <label index="40100">Problem with credit card data.</label>
+      <label index="40101">Problem with cvv.</label>
+      <label index="40102">Card expired or not yet valid.</label>
+      <label index="40103">Limit exceeded.</label>
+      <label index="40104">Card invalid.</label>
+      <label index="40105">Expiry date not valid.</label>
+      <label index="40106">Credit card brand required.</label>
+      <label index="40200">Problem with bank account data.</label>
+      <label index="40201">Bank account data combination mismatch.</label>
+      <label index="40202">User authentication failed.</label>
+      <label index="40300">Problem with 3d secure data.</label>
+      <label index="40301">Currency / amount mismatch.</label>
+      <label index="40400">Problem with input data.</label>
+      <label index="40401">Amount too low or zero.</label>
+      <label index="40402">Usage field too long.</label>
+      <label index="40403">Currency not allowed.</label>
+      <label index="50000">General problem with backend.</label>
+      <label index="50001">Country blacklisted.</label>
+      <label index="50100">Technical error with credit card.</label>
+      <label index="50101">Error limit exceeded.</label>
+      <label index="50102">Card declined by authorization system.</label>
+      <label index="50103">Manipulation or stolen card.</label>
+      <label index="50104">Card restricted.</label>
+      <label index="50105">Invalid card configuration data.</label>
+      <label index="50200">Technical error with bank account.</label>
+      <label index="50201">Card blacklisted.</label>
+      <label index="50300">Technical error with 3D secure.</label>
+      <label index="50400">Decline because of risk issues.</label>
+      <label index="50500">General timeout.</label>
+      <label index="50501">Timeout on side of the acquirer.</label>
+      <label index="50502">Risk management transaction timeout.</label>
+      <label index="50600">Duplicate transaction.</label>
       <label index="creditcard">Credit card</label>
       <label index="creditcard-cvc">CVC</label>
       <label index="creditcard-cvc-tooltip">What is a CVV/CVC number? Prospective credit cards will have a 3 to 4-digit number, usually on the back of the card. It ascertains that the payment is carried out by the credit card holder and the card account is legitimate. On Visa the CVV (Card Verification Value) appears after and to the right of your card number. Same goes for Mastercard's CVC (Card Verfication Code), which also appears after and to the right of  your card number, and has 3-digits. Diners Club, Discover, and JCB credit and debit cards have a three-digit card security code which also appears after and to the right of your card number. The American Express CID (Card Identification Number) is a 4-digit number printed on the front of your card. It appears above and to the right of your card number. On Maestro the CVV appears after and to the right of your number. If you don’t have a CVV for your Maestro card you can use 000.</label>
@@ -65,6 +103,9 @@
         </li>
         <li>
           reload the form with your mouse or the key <F5> or the keys <CTRL> + <R>
+        </li>
+        <li>
+          Check your payment data
         </li>
         <li>
           send your order again
@@ -137,15 +178,21 @@
           Laden Sie das Formular neu mit der Maus oder der Taste <F5> oder den Tasten <STRG> + <R>
         </li>
         <li>
+          Prüfen Sie, ob Sie bei der Zahlmethode die richtigen Daten angegeben haben.
+        </li>
+        <li>
           Senden Sie Ihre Bestellung erneut ab.
         </li>
         <li>
           Erhalten Sie weiterhin einen Fehler, ändern Sie Ihre Zahlungsmethode.
         </li>
       </ul>
-      Bitte benachrichtigen Sie uns, falls der Fehler weiterhin auftritt.
+      Bitte benachrichtigen Sie uns, falls der Fehler dann immer auftreten sollte.
       ]]></label>
       <label index="transaction-not-operated">Es wurde keine Zahlung ausgelöst.</label>
     </languageKey>
   </data>
 </T3locallang>
+
+
+

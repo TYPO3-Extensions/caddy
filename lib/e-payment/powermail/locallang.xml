@@ -12,7 +12,7 @@
       <label index="transaction-error-header">E-payment error</label>
       <label index="transaction-error-title">TYPO3 Quick Shop: e-payment error</label>
       <label index="transaction-success-header">Thanks for your payment</label>
-      <label index="transaction-success-title">TYPO3 Quick Shop: e-payment error</label>
+      <label index="transaction-success-title">TYPO3 Quick Shop: e-payment</label>
       <label index="transaction-success-prompt">And thanks for your order.</label>
     </languageKey>
     <languageKey index="de" type="array">
