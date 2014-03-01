@@ -1,0 +1,3039 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // INDEX
+  //
+  // includeLibs
+  // plugin.tx_caddy_pi1
+  // plugin.tx_caddy_pi2
+  // plugin.tx_caddy_pi3
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // includeLibs
+
+includeLibs {
+  tx_caddy_powermail        = EXT:caddy/lib/powermail/class.tx_caddy_powermail.php
+  tx_caddy_session          = EXT:caddy/lib/class.tx_caddy_session.php
+  tx_caddy_userfunc         = EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php
+}
+  // includeLibs
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1
+
+plugin.tx_caddy_pi1 {
+    // limits
+  conditions =
+  conditions {
+      // items
+    limits =
+    limits {
+        // gross
+      items =
+      items {
+          // min
+        gross =
+        gross {
+            // [double] minimal price. This value will compared with the gross sum of of the items (without service costs)
+          min =
+        }
+      }
+    }
+  }
+    // table, title, gross, tax, sku, min, max, service attributes
+  db =
+  db {
+    table = {$plugin.caddy.db.table}
+    title = {$plugin.caddy.db.title}
+    gross = {$plugin.caddy.db.price}
+    tax   = {$plugin.caddy.db.tax}
+    sku   = {$plugin.caddy.db.sku}
+    min   = {$plugin.caddy.db.min}
+    max   = {$plugin.caddy.db.max}
+    service_attribute_1   = {$plugin.caddy.db.service_attribute_1}
+    service_attribute_2   = {$plugin.caddy.db.service_attribute_2}
+    service_attribute_3   = {$plugin.caddy.db.service_attribute_3}
+  }
+    // dontReplaceEmptyMarker, paramsAndTs, userfunc
+  debug  = 
+  debug {
+      // [Boolean] Debug params/typoscript (frontend): Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
+    dontReplaceEmptyMarker  = {$plugin.caddy.debug.dontReplaceEmptyMarker}
+      // [Boolean] Debug user functions (backend): Enable the DRS for user functions
+    paramsAndTs             = {$plugin.caddy.debug.paramsAndTs}
+      // [Boolean] Don't replace empty marker: Enable it, if empty HTML markers should not removed.
+    userfunc                = {$plugin.caddy.debug.userfunc}
+  }
+
+    // gross, min, max, qty, sku, tax, title, uid, volume, weight
+  getpost =
+  getpost {
+    gross = TEXT
+    gross {
+      data = GP:{$plugin.caddy.getpost.price}
+      htmlSpecialChars = 1
+    }
+    max = TEXT
+    max {
+      data = GP:{$plugin.caddy.getpost.max}
+      htmlSpecialChars = 1
+    }
+    min = TEXT
+    min {
+      data = GP:{$plugin.caddy.getpost.min}
+      htmlSpecialChars = 1
+    }
+    qty = TEXT
+    qty {
+      data = GP:{$plugin.caddy.getpost.qty}
+      intval = 1
+    }
+    sku = TEXT
+    sku {
+      data = GP:{$plugin.caddy.getpost.sku}
+      htmlSpecialChars = 1
+    }
+    tax = TEXT
+    tax {
+      value = {$plugin.caddy.tax.normalCalc}
+    }
+    title = TEXT
+    title {
+      data = GP:{$plugin.caddy.getpost.title}
+      htmlSpecialChars = 1
+    }
+    uid = TEXT
+    uid {
+      data = GP:{$plugin.caddy.getpost.uid}
+      intval = 1
+    }
+    volume = TEXT
+    volume {
+      data = GP:{$plugin.caddy.getpost.volume}
+      floatval = 1
+    }
+    weight = TEXT
+    weight {
+      data = GP:{$plugin.caddy.getpost.weight}
+      floatval = 1
+    }
+  }
+
+    // item, sum
+  marker =
+  marker {
+      // delete, gross, min, max, uid, qty, service attributes (1-3), sku, title, tax
+    item =
+    item {
+        // delete icon: for removing the current item from the caddy
+      delete = IMAGE
+      delete {
+        file = {$plugin.caddy.html.color.icon.delete}
+        altText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
+        titleText.data = LLL:EXT:caddy/pi1/locallang.xml:delete
+        params = class="caddy_delete"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter {
+              cObject = COA
+              cObject {
+                  // URL
+                10 = TEXT
+                10 {
+                  data = page:alias//TSFE:id
+                }
+                  // target
+                20 = TEXT
+                20 {
+                  value       = -
+                  noTrimWrap  = | ||
+                }
+                  // class
+                30 = TEXT
+                30 {
+                  value       = onClickloadCaddyByAjax 
+                  noTrimWrap  = | ||
+                }
+              }
+            }
+            additionalParams {
+              wrap  = &tx_caddy_pi1[del]=|
+              field = uid
+            }
+          }
+        }
+      }
+        // gross costs of the item
+      gross = COA
+      gross {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = gross
+          decimal = 2
+          dec_point = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+      }
+        // minimum quantity for ordering 
+      min = TEXT
+      min {
+        field = min
+      }
+        // maximum quantity for ordering 
+      max = TEXT
+      max {
+        field = max
+      }
+        // net costs of the item
+      net < .gross
+      net.10.userFunc.number.field = net
+        // uid of the item
+      uid = TEXT
+      uid {
+        field = uid
+      }
+        // quantity of the item
+      qty = TEXT
+      qty {
+        field = qty
+      }
+        // service attribute 1
+      service_attribute_1 = TEXT
+      service_attribute_1 {
+        field = service_attribute_1
+      }
+        // service attribute 2
+      service_attribute_2 = TEXT
+      service_attribute_2 {
+        field = service_attribute_2
+      }
+        // service attribute 3
+      service_attribute_3 = TEXT
+      service_attribute_3 {
+        field = service_attribute_3
+      }
+        // stock keeping unit
+      sku = TEXT
+      sku {
+        field = sku
+      }
+        // gross costs sum ( gross costs * quantity )
+      sumgross < .gross
+      sumgross.10.userFunc.number.field = sumgross
+        // net costs sum ( net costs * quantity )
+      sumnet < .gross
+      sumnet.10.userFunc.number.field = sumnet
+        // tax costs sum ( tax costs * quantity )
+      sumtax < .gross
+      sumtax.10.userFunc.number.field = sumtax
+        // tax value of the item (0 , 1, 2)
+      tax = TEXT
+      tax {
+        field = tax
+      }
+        // taxrate of the item
+      taxrate = COA
+      taxrate {
+        10 = USER
+        10 {
+          userFunc = tx_caddy_userfunc->calcMultiply
+          userFunc {
+            number = TEXT
+            number {
+              field         = taxrate
+            }
+            multiplier    = 100
+            decimal       = 0
+            dec_point     = {$plugin.caddy.main.dec_point}
+            thousands_sep = {$plugin.caddy.main.thousands_sep}
+            drs           = {$plugin.caddy.debug.userfunc}
+          }
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.percentSymbol}
+        }
+      }
+        // label of the item
+      title = TEXT
+      title {
+        field = title
+      }
+    }
+      // labels, rates, values
+    sum =
+    sum {
+        // payment, shipping, specials
+      labels =
+      labels {
+          // label, gross
+        optionspaymentlabel = TEXT
+        optionspaymentlabel {
+          field = optionspaymentlabel
+        }
+        optionsshippinglabel = TEXT
+        optionsshippinglabel {
+          field = optionsshippinglabel
+        }
+        optionsspecialslabels = TEXT
+        optionsspecialslabels {
+          field = optionsspecialslabels
+        }
+          // plus value, VAT
+        taxrate_reduced_string = COA
+        taxrate_reduced_string {
+            // plus value
+          10 = TEXT
+          10 {
+            value = plus
+            lang { 
+              de = zuz&uuml;glich 
+              en = plus
+            }
+            noTrimWrap = || {$plugin.caddy.tax.reduced}{$plugin.caddy.main.percentSymbol} |
+          }
+            // VAT
+          20 = TEXT
+          20 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:tax_abbr
+          }
+        }
+          // plus value, VAT
+        taxrate_normal_string = COA
+        taxrate_normal_string {
+            // plus value
+          10 = TEXT
+          10 {
+            value = plus
+            lang { 
+              de = zuz&uuml;glich 
+              en = plus
+            }
+            noTrimWrap = || {$plugin.caddy.tax.normal}{$plugin.caddy.main.percentSymbol} |
+          }
+            // VAT
+          20 = TEXT
+          20 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:tax_abbr
+          }
+        }
+      }
+        // payment, shipping, specials
+      rates =
+      rates {
+        optionspaymentsumrate = COA
+        optionspaymentsumrate {
+          10 = USER
+          10 {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              number = TEXT
+              number {
+                field = optionspaymentsumrate
+              }
+              decimal       = {$plugin.caddy.main.decimal}
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+              drs           = {$plugin.caddy.debug.userfunc}
+            }
+          }
+          20 = TEXT
+          20 {
+            value = {$plugin.caddy.main.percentSymbol}
+            noTrimWrap = | ||
+          }
+        }
+
+        optionsshippingsumrate                           < .optionspaymentsumrate
+        optionsshippingsumrate.10.userFunc.number.field  = optionsshippingsumrate
+
+        optionsspecialssumrate                           < .optionspaymentsumrate
+        optionsspecialssumrate.10.userFunc.number.field  = optionsspecialssumrate
+      }
+        // payment, shipping, specials, items, sum, target
+      values =
+      values {
+        optionspaymentsumgross = COA
+        optionspaymentsumgross {
+          10 = USER
+          10 {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              drs           = {$plugin.caddy.debug.userfunc}
+              number        = TEXT
+              number {
+                field = optionspaymentsumgross
+              }
+              decimal       = {$plugin.caddy.main.decimal}
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+            }
+          }
+          20 = TEXT
+          20 {
+            value = {$plugin.caddy.main.currencySymbol}
+            noTrimWrap = | ||
+          }
+        }
+        optionspaymentsumnet          < .optionspaymentsumgross
+        optionspaymentsumnet.10.userFunc.number.field         = optionspaymentsumnet
+        optionspaymentsumtaxnormal    < .optionspaymentsumgross
+        optionspaymentsumtaxnormal.10.userFunc.number.field   = optionspaymentsumtaxnormal
+        optionspaymentsumtaxreduced   < .optionspaymentsumgross
+        optionspaymentsumtaxreduced.10.userFunc.number.field  = optionspaymentsumtaxreduced
+
+        optionsshippingsumgross       < .optionspaymentsumgross
+        optionsshippingsumgross.10.userFunc.number.field      = optionsshippingsumgross
+        optionsshippingsumnet         < .optionspaymentsumgross
+        optionsshippingsumnet.10.userFunc.number.field        = optionsshippingsumnet
+        optionsshippingsumtaxnormal   < .optionspaymentsumgross
+        optionsshippingsumtaxnormal.10.userFunc.number.field  = optionsshippingsumtaxnormal
+        optionsshippingsumtaxreduced  < .optionspaymentsumgross
+        optionsshippingsumtaxreduced.10.userFunc.number.field = optionsshippingsumtaxreduced
+
+        optionsspecialssumgross       < .optionspaymentsumgross
+        optionsspecialssumgross.10.userFunc.number.field      = optionsspecialssumgross
+        optionsspecialssumnet         < .optionspaymentsumgross
+        optionsspecialssumnet.10.userFunc.number.field        = optionsspecialssumnet
+        optionsspecialssumtaxnormal   < .optionspaymentsumgross
+        optionsspecialssumtaxnormal.10.userFunc.number.field  = optionsspecialssumtaxnormal
+        optionsspecialssumtaxreduced  < .optionspaymentsumgross
+        optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
+
+          // Sum gross of items
+        sumitemsgross         < .optionspaymentsumgross
+        sumitemsgross.10.userFunc.number.field        = sumitemsgross
+          // Sum net of items
+        sumitemsnet           < .optionspaymentsumgross
+        sumitemsnet.10.userFunc.number.field          = sumitemsnet
+          // Sum tax normal of items
+        sumitemstaxnormal     < .optionspaymentsumgross
+        sumitemstaxnormal.10.userFunc.number.field    = sumitemstaxnormal
+          // Sum reduced of items
+        sumitemstaxreduced    < .optionspaymentsumgross
+        sumitemstaxreduced.10.userFunc.number.field   = sumitemstaxreduced
+
+          // Sum gross of payment, shipping and specials
+        sumoptionsgross       < .optionspaymentsumgross
+        sumoptionsgross.10.userFunc.number.field      = sumoptionsgross
+          // Sum net of payment, shipping and specials
+        sumoptionsnet         < .optionspaymentsumgross
+        sumoptionsnet.10.userFunc.number.field        = sumoptionsnet
+          // Sum tax normal of payment, shipping and specials
+        sumoptionstaxnormal   < .optionspaymentsumgross
+        sumoptionstaxnormal.10.userFunc.number.field  = sumoptionstaxnormal
+          // Sum tax reduced of payment, shipping and specials
+        sumoptionstaxreduced  < .optionspaymentsumgross
+        sumoptionstaxreduced.10.userFunc.number.field = sumoptionstaxreduced
+
+          // Sum gross of options without payment
+        sumoptionswopaymentgross       < .optionspaymentsumgross
+        sumoptionswopaymentgross.10.userFunc.number.field      = sumoptionswopaymentgross
+          // Sum net of options without payment
+        sumoptionswopaymentnet         < .optionspaymentsumgross
+        sumoptionswopaymentnet.10.userFunc.number.field        = sumoptionswopaymentnet
+          // Sum tax normal of options without payment
+        sumoptionswopaymenttaxnormal   < .optionspaymentsumgross
+        sumoptionswopaymenttaxnormal.10.userFunc.number.field  = sumoptionswopaymenttaxnormal
+          // Sum tax reduced of options without payment
+        sumoptionswopaymenttaxreduced  < .optionspaymentsumgross
+        sumoptionswopaymenttaxreduced.10.userFunc.number.field = sumoptionswopaymenttaxreduced
+
+          // Quantity over all items
+        sumsumqty = TEXT
+        sumsumqty {
+          field = sumsumqty
+        }
+
+          // Sum gross over all 
+        sumsumgross           < .optionspaymentsumgross
+        sumsumgross.10.userFunc.number.field          = sumsumgross
+          // Sum net over all 
+        sumsumnet             < .optionspaymentsumgross
+        sumsumnet.10.userFunc.number.field            = sumsumnet
+          // Sum tax normal over all 
+        sumsumtaxnormal       < .optionspaymentsumgross
+        sumsumtaxnormal.10.userFunc.number.field      = sumsumtaxnormal
+          // Sum tax reduced over all 
+        sumsumtaxreduced      < .optionspaymentsumgross
+        sumsumtaxreduced.10.userFunc.number.field     = sumsumtaxreduced
+          // Sum tax over all 
+        sumsumtaxsum          < .optionspaymentsumgross
+        sumsumtaxsum.10.userFunc.number.field         = sumsumtaxsum
+        target  = TEXT
+        target {
+          typolink {
+            parameter {
+              data = TSFE:id
+            }
+            returnLast = url
+          }
+        }
+      }
+    }
+  }
+
+    // payment, shipping, special
+  options =
+  options {
+      // preset, options
+    payment =
+    payment {
+        // default method
+      preset = 1
+        // cash in advance, invoice, cash on delivery
+      options =
+      options {
+          // cash in advance: title, extra, tax
+        1 =
+        1 {
+            // label, gross
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
+          }
+            // extra cost (gross price) of payment method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+          // invoice: title, extra, tax
+        2 =
+        2 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+          }
+            // extra cost (gross price) of payment method
+          extra = 3.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+          // cash on delivery: title, extra, tax
+        3 =
+        3 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
+          }
+            // extra cost (gross price) of payment method
+          extra = 15.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+      }
+    }
+      // preset, options
+    shipping =
+    shipping {
+        // default method
+      preset = 1
+        // maildefault, mailexpress
+      options =
+      options {
+          // maildefault: title, extra, tax
+        1 =
+        1 {
+            // title of shipping method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_maildefault
+            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
+          }
+            // extra cost (gross price) of shipping method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = reduced
+        }
+          // title, extra, tax
+        2 =
+        2 {
+            // mailexpress: title of shipping method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_mailexpress
+            noTrimWrap = || (12 {$plugin.caddy.main.currencySymbol})|
+          }
+            // extra cost (gross price) of shipping method
+          extra = 12.00
+            // tax rate which will be applied (reduced or normal)
+          tax = reduced
+        }
+      }
+    }
+      // preset, options
+    specials =
+    specials {
+        // devider for list of options in e-mails und PDF attachments
+      devider = TEXT
+      devider {
+        value       = ,
+        noTrimWrap  = || |
+      }
+        // neutralpackage, addfeeforislands
+      options =
+      options {
+          // neutralpackage: title of payment method
+        1 =
+        1 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_neutralpackage
+            noTrimWrap = || (0 {$plugin.caddy.main.currencySymbol})|
+          }
+            // extra cost (gross price) of payment method
+          extra = 0.00
+            // tax rate which will be applied (reduced or normal)
+          tax = normal
+        }
+          // addfeeforislands: title of payment method
+        2 =
+        2 {
+            // title of payment method
+          title = TEXT
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:specialoption_addfeeforislands
+            noTrimWrap = || (13 {$plugin.caddy.main.currencySymbol})|
+          }
+            // extra cost (gross price) of payment method
+          extra = 13.00
+            // tax rate which will be applied (reduced or normal)
+          tax = reduced
+        }
+      }
+    }
+  }
+
+    // deliveryorder, invoice, revocation, terms
+  pdf =
+  pdf {
+      // delivery order PDF
+    deliveryorder =
+    deliveryorder {
+        // label - delivery order number - date . pdf
+      filename = COA
+      filename {
+          // label: invoice
+        10 = TEXT
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:deliveryorder
+          wrap = |-
+        }
+          // deliver order number
+        20 = TEXT
+        20 {
+          field = numberDeliveryorderCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M%S
+          wrap      = -|
+        }
+          // extension pdf
+        50 = TEXT
+        50 {
+          value = pdf
+          wrap  = .|
+        }
+      }
+        // address, caddy, date, numbers, termOfCredit, additionaltextblocks
+      content = 
+      content {
+          // deliveryorder, invoice
+        address = 
+        address {
+            // body
+          deliveryorder = 
+          deliveryorder {
+              // content
+            header =
+            header {
+                // label for delivery order address
+              content = TEXT
+              content {
+                value = Lieferaddresse
+                lang {
+                  de = Lieferaddresse
+                  en = delivery address
+                }
+                wrap      = |<br>
+              }
+            }
+            header >
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.deliveryorder.address.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.deliveryorder.address.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.address}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = deliveryorderCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = deliveryorderFirstname
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = deliveryorderLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                  wrap      = <br />|
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = deliveryorderAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = deliveryorderZip
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = deliveryorderCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                  wrap      = <br />|
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = deliveryorderCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+            // body
+          invoice < .deliveryorder
+          invoice {
+            body {
+              content = COA
+              content {
+                10 {
+                  field = invoiceCompany
+                }
+                20 {
+                  10 {
+                    field = invoiceFirstname
+                  }
+                  20 {
+                    field = invoiceLastname
+                  }
+                }
+                30 {
+                  field = invoiceAddress
+                }
+                40 {
+                  10 {
+                    field = invoiceZip
+                  }
+                  20 {
+                    field = invoiceCity
+                  }
+                }
+                50 {
+                  field = invoiceCountry
+                }
+              }
+            }
+          }
+        }
+
+          // body
+        caddy = 
+        caddy {
+            // properties
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = {$plugin.caddy.pdf.caddy.width}
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.caddy.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.caddy.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size = {$plugin.caddy.pdf.caddy.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.caddy}
+            }
+          }
+        }
+
+          // body
+        date = 
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = {$plugin.caddy.pdf.date.align} 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.date.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.date.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.date}
+            }
+              // data, strftime
+            content = TEXT
+            content {
+              data      = date : U
+              strftime  = {$plugin.caddy.pdf.date.strftime} 
+            }
+          }
+        }
+
+          // deliveryorder, invoice and order
+        numbers = 
+        numbers {
+            // body
+          deliveryorder = 
+          deliveryorder {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.deliveryorder.number.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.deliveryorder.number.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.deliveryorder.number.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.numberDeliveryorder}
+              }
+                // label, prefix, deliveryordernumber
+              content = COA
+              content {
+                  // label
+                10 = TEXT
+                10 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:deliveryordernumber
+                  noTrimWrap = || |
+                }
+                  // prefix
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
+                }
+                  // deliveryordernumber
+                30 = TEXT
+                30 {
+                  field = numberDeliveryorderCurrent
+                }
+              }
+            }
+          }
+            // body
+          orderAndInvoice = 
+          orderAndInvoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.deliveryorder.number.x}
+                    // [INTEGER] Position from top in millimeter relative to delivery order number
+                  y = TEXT
+                  y {
+                    value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 10
+                    prioriCalc  = intval
+                  }
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points, taken from caddy.fontsize
+                  size = {$plugin.caddy.pdf.caddy.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.numberLine}
+              }
+                // ordernumber devider invoicenumber
+              content = COA
+              content {
+                  // label, prefix, ordernumber
+                10 = COA
+                10 {
+                    // label
+                  10 = TEXT
+                  10 {
+                    data = LLL:EXT:caddy/pi1/locallang.xml:ordernumber
+                    noTrimWrap = || |
+                  }
+                    // prefix
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.pdf.order.number.prefix}
+                  }
+                    // ordernumber
+                  30 = TEXT
+                  30 {
+                    field = numberOrderCurrent
+                  }
+                }
+                  // devider
+                20 = TEXT
+                20 {
+                  value       = |
+                  noTrimWrap  = | | |
+                }
+                  // label, prefix, invoicenumber
+                30 = COA
+                30 {
+                    // label
+                  10 = TEXT
+                  10 {
+                    data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                    noTrimWrap = || |
+                  }
+                    // prefix
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.pdf.invoice.number.prefix}
+                  }
+                    // invoicenumber
+                  30 = TEXT
+                  30 {
+                    field = numberInvoiceCurrent
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+      // invoice PDF
+    invoice =
+    invoice {
+        // label - invoicenumber - date . pdf
+      filename = COA
+      filename {
+          // label: invoice
+        10 = TEXT
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:invoice
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M%S
+          wrap      = -|
+        }
+          // extension pdf
+        50 = TEXT
+        50 {
+          value = pdf
+          wrap  = .|
+        }
+      }
+        // address, caddy, date, numbers, termOfCredit, additionaltextblocks
+      content = 
+      content {
+          // deliveryorder, invoice
+        address = 
+        address {
+            // header, body
+          deliveryorder = 
+          deliveryorder {
+              // content
+            header =
+            header {
+                // label for delivery order address
+              content = TEXT
+              content {
+                data = LLL:EXT:caddy/pi1/locallang.xml:deliveryaddress
+                wrap      = |<br>
+              }
+            }
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = TEXT
+                  x {
+                    value       = {$plugin.caddy.pdf.invoice.address.x} + 100
+                    prioriCalc  = 1
+                  }
+                    // [INTEGER] Position from top in millimeter 
+                  y = TEXT
+                  y {
+                    value       = {$plugin.caddy.pdf.invoice.address.y} - 6
+                    prioriCalc  = 1
+                  }
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.deliveryorder.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.address}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = deliveryorderCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = deliveryorderFirstname
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = deliveryorderLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                  wrap      = <br />|
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = deliveryorderAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = deliveryorderZip
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = deliveryorderCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                  wrap      = <br />|
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = deliveryorderCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+            // body
+          invoice = 
+          invoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.invoice.address.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.invoice.address.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.address}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = invoiceCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = invoiceFirstname
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = invoiceLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = invoiceAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = invoiceZip
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = invoiceCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = invoiceCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+        }
+
+          // body
+        caddy = 
+        caddy {
+            // properties
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = {$plugin.caddy.pdf.caddy.width}
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.caddy.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.caddy.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size = {$plugin.caddy.pdf.caddy.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.caddy}
+            }
+          }
+        }
+
+          // body
+        date = 
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = {$plugin.caddy.pdf.date.align} 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.date.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.date.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.date}
+            }
+              // data, strftime
+            content = TEXT
+            content {
+              data      = date : U
+              strftime  = {$plugin.caddy.pdf.date.strftime} 
+            }
+          }
+        }
+
+          // deliveryorder, invoice and order
+        numbers = 
+        numbers {
+            // body
+          invoice = 
+          invoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.invoice.number.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.invoice.number.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.invoice.number.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.numberInvoice}
+              }
+                // label, prefix, invoicenumber
+              content = COA
+              content {
+                  // label
+                10 = TEXT
+                10 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                  noTrimWrap = || |
+                }
+                  // prefix
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.pdf.invoice.number.prefix}
+                }
+                  // invoicenumber
+                30 = TEXT
+                30 {
+                  field = numberInvoiceCurrent
+                }
+              }
+            }
+          }
+            // body
+          orderAndDeliveryorder = 
+          orderAndDeliveryorder {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.deliveryorder.number.x}
+                    // [INTEGER] Position from top in millimeter relative to delivery order number
+                  y = TEXT
+                  y {
+                    value       = {$plugin.caddy.pdf.deliveryorder.number.y} + 10
+                    prioriCalc  = intval
+                  }
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points, taken from caddy.fontsize
+                  size = {$plugin.caddy.pdf.caddy.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.numberLine}
+              }
+                // ordernumber devider deliveryordernumber
+              content = COA
+              content {
+                  // label, prefix, ordernumber
+                10 = COA
+                10 {
+                    // label
+                  10 = TEXT
+                  10 {
+                    data = LLL:EXT:caddy/pi1/locallang.xml:ordernumber
+                    noTrimWrap = || |
+                  }
+                    // prefix
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.pdf.order.number.prefix}
+                  }
+                    // ordernumber
+                  30 = TEXT
+                  30 {
+                    field = numberOrderCurrent
+                  }
+                }
+                  // devider
+                20 = TEXT
+                20 {
+                  value       = |
+                  noTrimWrap  = | | |
+                }
+                  // label, prefix, deliveryordernumber
+                30 = COA
+                30 {
+                    // label
+                  10 = TEXT
+                  10 {
+                    data = LLL:EXT:caddy/pi1/locallang.xml:deliveryordernumber
+                    noTrimWrap = || |
+                  }
+                    // prefix
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.pdf.deliveryorder.number.prefix}
+                  }
+                    // deliveryordernumber
+                  30 = TEXT
+                  30 {
+                    field = numberDeliveryorderCurrent
+                  }
+                }
+              }
+            }
+          }
+        }
+          // body
+        termOfCredit =
+        termOfCredit {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = left
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.invoice.termOfCredit.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.invoice.termOfCredit.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.invoice.termOfCredit.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.termOfCredit}
+            }
+              // Line 1: Term of credit, Line 2: Recommend us
+            content = COA
+            content {
+                // Line 1: Term of credit
+              10 = COA
+              10 {
+                  // Pay until
+                10 = TEXT
+                10 {
+                  value = Please pay until 
+                  lang {
+                    de = Zahlen Sie bitte bis sp&auml;testens
+                    en = Please pay until
+                  }
+                  noTrimWrap = || |
+                }
+                  // due date
+                20 = USER
+                20 {
+                  userFunc = tx_caddy_userfunc->calcDueDate
+                  userFunc {
+                    strtotime = {$plugin.caddy.main.dueDate}
+                    strftime  = {$plugin.caddy.main.dueDateFormat} 
+                  }
+                }
+                  // space
+                21 = TEXT
+                21 {
+                  value = 
+                  noTrimWrap = || |
+                }
+                  // amount
+                30 = COA
+                30 {
+                    // sum gross
+                  10 = USER
+                  10 {
+                    userFunc = tx_caddy_userfunc->numberformat
+                    userFunc {
+                      number = TEXT
+                      number {
+                        field = sumsumgross
+                      }
+                      decimal       = {$plugin.caddy.main.decimal}
+                      dec_point     = {$plugin.caddy.main.dec_point}
+                      thousands_sep = {$plugin.caddy.main.thousands_sep}
+                      drs           = {$plugin.caddy.debug.userfunc}
+                    }
+                  }
+                    // currency symbol
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.main.currencySymbol}
+                    noTrimWrap = | ||
+                  }
+                  wrap = <b>|</b>
+                }
+                  // invoice number
+                40 = COA
+                40 {
+                    // text
+                  10 = TEXT
+                  10 {
+                    value = with the annotation
+                    lang {
+                      de = mit dem Vermerk
+                      en = with the annotation
+                    }
+                    noTrimWrap  = | | |
+                  }
+                    // invoice number
+                  20 = COA
+                  20 {
+                      // label
+                    10 = TEXT
+                    10 {
+                      data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                      noTrimWrap = || |
+                    }
+                      // prefix
+                    20 = TEXT
+                    20 {
+                      value = {$plugin.caddy.pdf.invoice.number.prefix}
+                    }
+                      // number
+                    30 = TEXT
+                    30 {
+                      field = numberInvoiceCurrent
+                    }
+                    wrap = "<b>|</b>"
+                  }
+                }
+                  // to account
+                50 = TEXT
+                50 {
+                  value = to the account below.
+                  lang {
+                    de = auf das unten angegebene Konto.
+                    en = to the account below.
+                  }
+                  noTrimWrap = | ||
+                }
+                wrap  = |<br />
+              }
+                // Line 2: Recommend us
+              20 = TEXT
+              20 {
+                value = We will be happy, if you recommend us. 
+                lang {
+                  de = Wir w&uuml;rden uns freuen, wenn Sie uns weiterempfehlen.
+                  en = We will be happy, if you recommend us.
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+      // revocation PDF
+    revocation =
+    revocation {
+        // label - invoicenumber - date . pdf
+      filename = COA
+      filename {
+          // label: revocation
+        10 = TEXT
+        10 {
+          value = revocation
+          lang {
+            de = Widerrufsrecht
+            en = revocation
+          }
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M%S
+          wrap      = -|
+        }
+          // extension pdf
+        50 = TEXT
+        50 {
+          value = pdf
+          wrap  = .|
+        }
+      }
+        // address, date, additionaltextblocks
+      content = 
+      content {
+          // invoice
+        address = 
+        address {
+            // body
+          invoice = TEXT
+          invoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.invoice.address.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.invoice.address.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.address}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = invoiceCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = invoiceFirstname
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = invoiceLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = invoiceAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = invoiceZip
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = invoiceCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = invoiceCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+        }
+
+          // body
+        date = 
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = {$plugin.caddy.pdf.date.align} 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.date.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.date.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.date}
+            }
+              // data, strftime
+            content = TEXT
+            content {
+              data      = date : U
+              strftime  = {$plugin.caddy.pdf.date.strftime} 
+            }
+          }
+        }
+
+          // revocation
+        additionaltextblocks =
+        additionaltextblocks {
+            // body
+          revocation =
+          revocation {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = {$plugin.caddy.pdf.revocation.align} 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.revocation.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.revocation.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.revocation.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.revocation}
+              }
+                // content of page with id plugin.caddy.pages.revocation
+              content < styles.content.get
+              content {
+                select {
+                  pidInList = {$plugin.caddy.pages.revocation}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+      // terms PDF
+    terms =
+    terms {
+        // label - invoicenumber - date . pdf
+      filename = COA
+      filename {
+          // label: terms
+        10 = TEXT
+        10 {
+          value = terms
+          lang {
+            de = AGB
+            en = terms
+          }
+          wrap = |-
+        }
+          // invoicenumber
+        20 = TEXT
+        20 {
+          field = numberInvoiceCurrent
+        }
+          // date
+        30 = TEXT
+        30 {
+          data      = date : U
+          strftime  = %Y%m%d%H%M%S
+          wrap      = -|
+        }
+          // extension pdf
+        50 = TEXT
+        50 {
+          value = pdf
+          wrap  = .|
+        }
+      }
+        // address, date, additionaltextblocks
+      content = 
+      content {
+          // invoice
+        address = 
+        address {
+            // body
+          invoice = TEXT
+          invoice {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.invoice.address.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.invoice.address.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.invoice.address.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.address}
+              }
+                // Address: company, first name and last name, street, zip and city, country
+              content = COA
+              content {
+                  // Company
+                10 = TEXT
+                10 {
+                  field     = invoiceCompany
+                  required  = 1
+                  wrap      = <b>|</b>
+                }
+                  // First name and last name
+                20 = COA
+                20 {
+                  // First name
+                  10 = TEXT
+                  10 {
+                    field     = invoiceFirstname
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // Last name
+                  20 = TEXT
+                  20 {
+                    field       = invoiceLastname
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Address
+                30 = TEXT
+                30 {
+                  field     = invoiceAddress
+                  wrap      = <br />|
+                  required  = 1
+                }
+                  // ZIP and city
+                40 = COA
+                40 {
+                    // ZIP
+                  10 = TEXT
+                  10 {
+                    field     = invoiceZip
+                    required  = 1
+                    wrap      = <br />|
+                  }
+                    // City
+                  20 = TEXT
+                  20 {
+                    field       = invoiceCity
+                    noTrimWrap  = | ||
+                    required    = 1
+                  }
+                }
+                  // Country
+                50 = TEXT
+                50 {
+                  field     = invoiceCountry
+                  wrap      = <br />|
+                  required  = 1
+                }
+              }
+            }
+          }
+        }
+
+          // body
+        date = 
+        date {
+            // properties, content
+          body =
+          body {
+              // cell, font, textColor
+            properties =
+            properties {
+                // align, height, width, x, y
+              cell =
+              cell {
+                  // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                align = {$plugin.caddy.pdf.date.align} 
+                  // [INTEGER] Height of content in millimeter 
+                height = 0
+                  // [INTEGER] Width of content in millimeter 
+                width = 0
+                  // [INTEGER] Position from left in millimeter 
+                x = {$plugin.caddy.pdf.date.x}
+                  // [INTEGER] Position from top in millimeter 
+                y = {$plugin.caddy.pdf.date.y}
+              }
+                // family, size, stretching, style
+              font =
+              font {
+                  // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                family = {$plugin.caddy.pdfGeneral.fontfamily}
+                  // [Integer] Font size in points
+                size  = {$plugin.caddy.pdf.date.fontsize}
+                  // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                  // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                style =  
+              }
+                // [String] color in HTML notation like #CC00CC or #FFF
+              textColor = {$plugin.caddy.pdf.textColor.date}
+            }
+              // data, strftime
+            content = TEXT
+            content {
+              data      = date : U
+              strftime  = {$plugin.caddy.pdf.date.strftime} 
+            }
+          }
+        }
+
+          // terms
+        additionaltextblocks =
+        additionaltextblocks {
+            // body
+          terms =
+          terms {
+              // properties, content
+            body =
+            body {
+                // cell, font, textColor
+              properties =
+              properties {
+                  // align, height, width, x, y
+                cell =
+                cell {
+                    // [STRING] L: left. C: center. R: right. empty: left for LTR or right for RTL
+                  align = {$plugin.caddy.pdf.terms.align} 
+                    // [INTEGER] Height of content in millimeter 
+                  height = 0
+                    // [INTEGER] Width of content in millimeter 
+                  width = 0
+                    // [INTEGER] Position from left in millimeter 
+                  x = {$plugin.caddy.pdf.terms.x}
+                    // [INTEGER] Position from top in millimeter 
+                  y = {$plugin.caddy.pdf.terms.y}
+                }
+                  // family, size, stretching, style
+                font =
+                font {
+                    // [String] Arial, Courier, Helvetica, Symbol, Times, ZapfDingbats - or font name
+                  family = {$plugin.caddy.pdfGeneral.fontfamily}
+                    // [Integer] Font size in points
+                  size  = {$plugin.caddy.pdf.terms.fontsize}
+                    // [String] Strecth the font (in percent). 100: no effect, 90: smaller, 110: expanded
+                  stretching = {$plugin.caddy.pdfGeneral.fontStretching}
+                    // empty: regular, B: bold, I: italic, U: underline. Combinations are possible like: BI
+                  style =  
+                }
+                  // [String] color in HTML notation like #CC00CC or #FFF
+                textColor = {$plugin.caddy.pdf.textColor.terms}
+              }
+                // content of page with id plugin.caddy.pages.terms
+              content < styles.content.get
+              content {
+                select {
+                  pidInList = {$plugin.caddy.pages.terms}
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+    // page id of the caddy
+  pid = {$plugin.caddy.pages.caddy}
+
+    // Never remove this property!
+  pluginCheck = dummy
+
+    // decimal, dec_point, thousands_sep, currencySymbol, currencySymbolBeforePrice, quantitySymbol, service_attributes_X_symbol
+  symbols = 
+  symbols {
+    decimal         = {$plugin.caddy.main.decimal}
+    dec_point       = {$plugin.caddy.main.dec_point}
+    thousands_sep   = {$plugin.caddy.main.thousands_sep}
+    currencySymbol  = {$plugin.caddy.main.currencySymbol}
+    currencySymbolBeforePrice = {$plugin.caddy.main.currencySymbolBeforePrice}
+    quantitySymbol  = {$plugin.caddy.symbol.quantitySymbol}
+    service_attribute_1_symbol = {$plugin.caddy.symbol.service_attribute_1_symbol}
+    service_attribute_2_symbol = {$plugin.caddy.symbol.service_attribute_2_symbol}
+    service_attribute_3_symbol = {$plugin.caddy.symbol.service_attribute_3_symbol}
+  }
+
+    // e-mail, fancybox, html, pdf
+  templates =
+  templates {
+      // file, marker, table
+    e-mail =
+    e-mail {
+      file = {$plugin.caddy.templates.e-mail}
+        // all, item
+      marker =
+      marker {
+        all   = ###CADDY_EMAIL###
+        item  = ###ITEM###
+      }
+        // border, cellpadding, cellspacing
+      table = 
+      table {
+        bordercolor             = {$plugin.caddy.html.color.border}
+        width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+        width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+        width_td_item           = {$plugin.caddy.html.width.table.td.item}
+        width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+        width_td_net            = {$plugin.caddy.html.width.table.td.net}
+        width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+        width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+        width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+      }
+    }
+      // caddy, caddymini
+    html =
+    html {
+        // pi1: file, marker, table
+      caddy =
+      caddy {
+        file = {$plugin.caddy.templates.html.caddy}
+          // all, item
+        marker =
+        marker {
+          all   = ###{$plugin.caddy.html.marker.caddy}###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+        }
+      }
+        // pi3: file, marker
+      caddymini =
+      caddymini {
+        file = {$plugin.caddy.templates.html.caddymini}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDYMINI###
+          item  = ###ITEMS###
+        }
+      }
+        // pi2: file, marker
+      caddysum =
+      caddysum {
+        file = {$plugin.caddy.templates.html.caddysum}
+          // all
+        marker =
+        marker {
+          all   = ###CADDYSUM###
+        }
+      }
+    }
+      // delivery order, invoice, revocation, terms
+    pdf =
+    pdf {
+        // file, marker, table
+      deliveryorder =
+      deliveryorder {
+        file = {$plugin.caddy.templates.pdf.deliveryorder}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_EMAILDELIVERY###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+        }
+      }
+        // file, marker, table
+      invoice =
+      invoice {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_EMAIL###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+        }
+      }
+        // #i0013, 130604, dwildt, + // file, marker, table
+      revocation =
+      revocation {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_REVOCATION###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+        }
+      }
+        // #i0013, 130604, dwildt, + // file, marker, table
+      terms =
+      terms {
+        file = {$plugin.caddy.templates.pdf.invoice}
+          // all, item
+        marker =
+        marker {
+          all   = ###CADDY_TERMS###
+          item  = ###ITEM###
+        }
+          // border, cellpadding, cellspacing
+        table = 
+        table {
+          bordercolor             = {$plugin.caddy.html.color.border}
+          width_td_qty            = {$plugin.caddy.html.width.table.td.qty}
+          width_td_sku            = {$plugin.caddy.html.width.table.td.sku}
+          width_td_item           = {$plugin.caddy.html.width.table.td.item}
+          width_td_tax            = {$plugin.caddy.html.width.table.td.tax}
+          width_td_net            = {$plugin.caddy.html.width.table.td.net}
+          width_td_sum            = {$plugin.caddy.html.width.table.td.sum}
+          width_td_skuitemtax     = {$plugin.caddy.html.width.table.td.skuitemtax}
+          width_td_skuitemtaxnet  = {$plugin.caddy.html.width.table.td.skuitemtaxnet}
+        }
+      }
+    }
+  }
+
+    // reduced, normal
+  tax =
+  tax {
+    reduced     = {$plugin.caddy.tax.reduced}
+    reducedCalc = {$plugin.caddy.tax.reducedCalc}
+    normal      = {$plugin.caddy.tax.normal}
+    normalCalc  = {$plugin.caddy.tax.normalCalc}
+  }
+
+}
+  // plugin.tx_caddy_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1._HTMLMARKER
+
+plugin.tx_caddy_pi1 {
+    // linktoshop
+  _HTMLMARKER =
+  _HTMLMARKER {
+    caddy_buttonsubmit = COA
+    caddy_buttonsubmit {
+        // label
+      10 = TEXT
+      10 {
+        value = Order with costs
+        lang {
+          de = Kostenpflichtig bestellen
+          en = Order with costs
+        }
+        noTrimWrap = |<span class="label">|</span> |
+      }
+        // value
+      30 = COA
+      30 {
+          // content
+        10 = TEXT
+        10 {
+          value = Amount
+          lang {
+            de = Summe
+            en = Amount
+          }
+          noTrimWrap = |(||
+        }
+          // value
+        20 = USER
+        20.userFunc = tx_caddy_userfunc->numberformat
+        20.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        30 = TEXT
+        30 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = ||)</span>|
+        }
+        wrap = <span class="value">|</span>
+      }
+    }
+      // label, content, value
+    caddy_header_items = COA
+    caddy_header_items {
+      wrap = <h2 class="items current">|</h2>
+        // label
+      10 = TEXT
+      10 {
+        value = Caddy
+        lang {
+          de = Warenkorb
+          en = Caddy
+        }
+        wrap  = <div class="h-accordion-label">|</div>
+      }
+        // quantity, item || items
+      20 = COA
+      20 {
+        wrap = <div class="h-accordion-content">|</div>
+          // quantity
+        10 = TEXT
+        10 {
+          field       = sumsumqty
+          noTrimWrap  = || |
+        }
+          // item || items
+        20 = COA
+        20 {
+            // in case of one item
+          10 = TEXT
+          10 {
+            if {
+              value = 2 
+              isLessThan {
+                field = sumsumqty
+              }
+            }
+            data = LLL:EXT:caddy/pi3/locallang.xml:item
+          }
+            // in case of more than one item
+          20 = TEXT
+          20 {
+            if {
+              value = 2 
+              isLessThan {
+                field = sumsumqty
+              }
+              negate  = 1
+            }
+            data = LLL:EXT:caddy/pi3/locallang.xml:items
+          }
+        }
+      }
+        // value, currency
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumitemsgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="h-accordion-value">|</div>
+      }
+    }
+    caddy_header_optionswopayment = COA
+    caddy_header_optionswopayment {
+      wrap = <h2 class="optionswopayment">|</h2>
+        // label
+      10 = TEXT
+      10 {
+        value = Costs for shipping and service
+        lang {
+          de = Service- und Versandkosten
+          en = Costs for shipping and service
+        }
+        wrap  = <div class="h-accordion-label">|</div>
+      }
+        // value
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumoptionswopaymentgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="h-accordion-value">|</div>
+      }
+    }
+    caddy_header_powermail = TEXT
+    caddy_header_powermail {
+      wrap = <h2 class="powermail"><div class="h-accordion-label">|</div></h2>
+      value = Your data, power of revocation
+      lang {
+        de = Ihre Daten, Widerrufsbelehrung
+        en = Your data, power of revocation
+      }
+    }
+    caddy_header_order = COA
+    caddy_header_order {
+      wrap = <h2 class="order">|</h2>
+        // label
+      10 = TEXT
+      10 {
+        value = Your order
+        lang {
+          de = Ihre Bestellung
+          en = Your order
+        }
+        wrap  = <div class="h-accordion-label">|</div>
+      }
+        // content
+      20 = TEXT
+      20 {
+        value = Amount
+        lang {
+          de = Summe
+          en = Amount
+        }
+        wrap  = <div class="h-accordion-content">|</div>
+      }
+        // value
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="h-accordion-value">|</div>
+      }
+    }
+    caddy_header_paymentmethod = COA
+    caddy_header_paymentmethod {
+      wrap = <h2 class="paymentmethod">|</h2>
+        // label
+      10 = TEXT
+      10 {
+        value = Payment method
+        lang {
+          de = Zahlungsmethode
+          en = Payment method
+        }
+        wrap  = <div class="h-accordion-label">|</div>
+      }
+        // content
+      20 = TEXT
+      20 {
+        field = optionspaymentlabel
+        wrap  = <div class="h-accordion-content">|</div>
+      }
+        // value
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = optionspaymentsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="h-accordion-value">|</div>
+      }
+    }
+      // item || items
+    caddy_item_label = COA
+    caddy_item_label {
+        // in case of one item
+      10 = TEXT
+      10 {
+        if {
+          value = 2 
+          isLessThan {
+            field = sumsumqty
+          }
+        }
+        data = LLL:EXT:caddy/pi3/locallang.xml:item
+      }
+        // in case of more than one item
+      20 = TEXT
+      20 {
+        if {
+          value = 2 
+          isLessThan {
+            field = sumsumqty
+          }
+          negate  = 1
+        }
+        data = LLL:EXT:caddy/pi3/locallang.xml:items
+      }
+    }
+      // label, icon. Replaces _HTMLMARKER_LINTOSHOP
+    linktoshop = COA
+    linktoshop {
+        // Label
+      10 = TEXT
+      10 {
+        data = LLL:EXT:caddy/pi1/locallang.xml:linktoshop
+        typolink {
+          parameter = {$plugin.caddy.pages.shop}
+          title {
+            data = LLL:EXT:caddy/pi1/locallang.xml:linktoshop
+          }
+        }
+        noTrimWrap  = || |
+      }
+        // Icon
+      20 = IMAGE
+      20 {
+        file = {$plugin.caddy.html.color.icon.caddy}
+        altText {
+          data = LLL:EXT:caddy/pi1/locallang.xml:shop
+        }
+        titleText {
+          data = LLL:EXT:caddy/pi1/locallang.xml:shop
+        }
+        params = class="linktoshop"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.shop}
+          }
+        }
+      }
+      wrap = <div class="linktoshopwofloat linktoshop caddylinktoshop">|</div>
+    }
+  }
+}
+  // plugin.tx_caddy_pi1._HTMLMARKER
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1: _CSS_DEFAULT_STYLE
+
+plugin.tx_caddy_pi1 {
+
+  _CSS_DEFAULT_STYLE (
+    #tx-caddy-pi1-loader {
+      background: #fff url(/typo3conf/ext/caddy/files/img/loader.gif) no-repeat  center ;
+      cursor:wait;
+      display:none;
+      opacity:.8;
+      position: absolute;
+      z-index:10000;
+    }
+)
+}
+  // plugin.tx_caddy_pi1: _CSS_DEFAULT_STYLE
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi2
+
+
+plugin.tx_caddy_pi2 {
+    // item, marker
+  content = 
+  content {
+      // label, sumsumgross
+    sum = COA
+    sum {
+        // label
+      20 = TEXT
+      20 {
+        data        = LLL:EXT:caddy/pi2/locallang.xml:phrasesum
+        noTrimWrap  = |<span class="label sumlabel">|</span> |
+      }
+        // sumsumgross
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumsumgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <span class="gross sumgross">|</span>
+      }
+    }
+  }
+    // page id of the caddy
+  pid = {$plugin.caddy.pages.caddy}
+
+    // e-mail, html, pdf
+  templates =
+  templates < plugin.tx_caddy_pi1.templates
+}
+  // plugin.tx_caddy_pi2
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi3
+
+
+plugin.tx_caddy_pi3 {
+    // item, marker
+  content = 
+  content {
+      // quantity, label, gross
+    item = COA
+    item {
+        // quantity
+      10 = TEXT
+      10 {
+        field = quantity
+        wrap = <div class="quantity itemquantity">|</div>
+      }
+        // label
+      20 = TEXT
+      20 {
+        field = label
+        wrap  = <div class="label itemlabel">|</div>
+      }
+        // gross
+      30 = COA
+      30 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = gross
+
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="gross itemgross">|</div>
+      }
+      wrap = <div class="item minicaddyitem">|</div><div class="caddy_cleaner"></div>
+    }
+      // quantity, label, gross
+    sum = COA
+    sum {
+        // quantity
+      10 = TEXT
+      10 {
+        field = quantity
+        wrap = <div class="quantity sumquantity">|</div>
+      }
+        // label
+      20 = COA
+      20 {
+          // in case of one item
+        10 = TEXT
+        10 {
+          if {
+            value = 2 
+            isLessThan {
+              field = quantity
+            }
+          }
+          data = LLL:EXT:caddy/pi3/locallang.xml:item
+        }
+          // in case of more than one item
+        20 = TEXT
+        20 {
+          if {
+            value = 2 
+            isLessThan {
+              field = quantity
+            }
+            negate  = 1
+          }
+          data = LLL:EXT:caddy/pi3/locallang.xml:items
+        }
+        wrap = <div class="label sumlabel">|</div>
+      }
+        // gross
+      30 = COA
+      30 {
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          number = TEXT
+          number.field = gross
+
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+
+          drs = {$plugin.caddy.debug.userfunc}
+        }
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <div class="gross sumgross">|</div><div class="caddy_cleaner"></div>
+      }
+      wrap = <div class="sum minicaddysum">|</div>
+    }
+  }
+    // page id of the caddy
+  pid = {$plugin.caddy.pages.caddy}
+
+    // e-mail, html, pdf
+  templates =
+  templates < plugin.tx_caddy_pi1.templates
+
+    // linktocaddy, linktoshop
+  _HTMLMARKER =
+  _HTMLMARKER {
+      // label, icon. Replaces _HTMLMARKER_LINTOCADDY
+    linktocaddy = COA
+    linktocaddy {
+        // Label
+      10 = TEXT
+      10 {
+        data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+        typolink {
+          parameter = {$plugin.caddy.pages.caddy}
+          title {
+            data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
+          }
+        }
+        noTrimWrap  = || |
+      }
+        // Icon
+      20 = IMAGE
+      20 {
+        file = {$plugin.caddy.html.color.icon.caddy}
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        params = class="linktocaddy"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.caddy}
+          }
+        }
+      }
+      wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
+    }
+      // label, icon. Replaces _HTMLMARKER_LINTOSHOP
+    linktoshop = COA
+    linktoshop {
+        // Label
+      10 = TEXT
+      10 {
+        data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
+        typolink {
+          parameter = {$plugin.caddy.pages.shop}
+          title {
+            data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
+          }
+        }
+        noTrimWrap  = || |
+      }
+        // Icon
+      20 = IMAGE
+      20 {
+        file = {$plugin.caddy.html.color.icon.caddy}
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
+        }
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
+        }
+        params = class="linktoshop"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.shop}
+          }
+        }
+      }
+      wrap = <div class="linktoshop minicaddylinktoshop">|</div>
+    }
+  }
+}
+  // plugin.tx_caddy_pi3

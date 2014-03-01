@@ -1,0 +1,275 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // INDEX
+  //
+  // plugin.tx_caddy_pi1
+  // page
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1
+
+plugin.tx_caddy_pi1 {
+  api {
+    e-payment {
+      provider {
+        paymill >
+          // files, keys, mode
+        paymill =
+        paymill {
+            // html
+          files =
+          files {
+            html = {$plugin.caddy.e-payment.paymill.files.html}
+            php =
+            php {
+              autoload = {$plugin.caddy.e-payment.paymill.files.php.autoload}
+            }
+          }
+            // private, public
+          keys =
+          keys {
+              // live, test
+            private = COA
+            private {
+                // live
+              10 = TEXT
+              10 {
+                if {
+                  value   = {$plugin.caddy.e-payment.paymill.mode}
+                  equals  = live
+                }
+                value   = {$plugin.caddy.e-payment.paymill.key.live.private}
+              }
+                // test
+              20 = TEXT
+              20 {
+                if {
+                  value   = {$plugin.caddy.e-payment.paymill.mode}
+                  equals  = test
+                }
+                value   = {$plugin.caddy.e-payment.paymill.key.test.private}
+              }
+            }
+              // live, test
+            public = COA
+            public {
+                // live
+              10 = TEXT
+              10 {
+                if {
+                  value   = {$plugin.caddy.e-payment.paymill.mode}
+                  equals  = live
+                }
+                value   = {$plugin.caddy.e-payment.paymill.key.live.public}
+              }
+                // test
+              20 = TEXT
+              20 {
+                if {
+                  value   = {$plugin.caddy.e-payment.paymill.mode}
+                  equals  = test
+                }
+                value   = {$plugin.caddy.e-payment.paymill.key.test.public}
+              }
+            }
+          }
+            // [String] live, test
+          mode = {$plugin.caddy.e-payment.paymill.mode}
+        }
+      }
+        // files, paths
+      powermail =
+      powermail {
+          // html
+        files =
+        files {
+            // transactionPrompts
+          html =
+          html {
+            transactionPrompts = {$plugin.caddy.e-payment.powermail.files.html.transactionPrompts}
+          }
+        }
+          // foundation
+        paths =
+        paths {
+          foundation = {$plugin.caddy.e-payment.powermail.paths.foundation}
+        }
+      }
+    }
+    options {
+      payment {
+          // default method
+        preset = {$plugin.caddy.options.payment.default}
+          // credit card, elv, elv-iban
+        options =
+        options {
+            // credit card: enabled, title, extra, tax
+          4 =
+          4 {
+            enabled = {$plugin.caddy.options.payment.4.enabled}
+              // label, gross
+            title = COA
+            title {
+              10 = TEXT
+              10 {
+                data        = LLL:{$plugin.caddy.options.payment.4.lll}
+                noTrimWrap  = || |
+              }
+                // amount
+              20 = COA
+              20 {
+                  // gross
+                10 = USER
+                10 {
+                  userFunc = tx_caddy_userfunc->numberformat
+                  userFunc {
+                    number = TEXT
+                    number {
+                      value = {$plugin.caddy.options.payment.4.costs}
+                    }
+                    decimal       = {$plugin.caddy.main.decimal}
+                    dec_point     = {$plugin.caddy.main.dec_point}
+                    thousands_sep = {$plugin.caddy.main.thousands_sep}
+                    drs           = {$plugin.caddy.debug.userfunc}
+                  }
+                }
+                  // currency symbol
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.main.currencySymbol}
+                  noTrimWrap = | ||
+                }
+                wrap = (|)
+              }
+            }
+              // extra cost (gross price) of payment method
+            extra = {$plugin.caddy.options.payment.4.costs}
+              // tax rate which will be applied (reduced or normal)
+            tax = {$plugin.caddy.options.payment.4.taxrate}
+          }
+            // elv: enabled, title, extra, tax
+          5 =
+          5 {
+            enabled = {$plugin.caddy.options.payment.5.enabled}
+              // label, gross
+            title = COA
+            title {
+              10 = TEXT
+              10 {
+                data        = LLL:{$plugin.caddy.options.payment.5.lll}
+                noTrimWrap  = || |
+              }
+                // amount
+              20 = COA
+              20 {
+                  // gross
+                10 = USER
+                10 {
+                  userFunc = tx_caddy_userfunc->numberformat
+                  userFunc {
+                    number = TEXT
+                    number {
+                      value = {$plugin.caddy.options.payment.5.costs}
+                    }
+                    decimal       = {$plugin.caddy.main.decimal}
+                    dec_point     = {$plugin.caddy.main.dec_point}
+                    thousands_sep = {$plugin.caddy.main.thousands_sep}
+                    drs           = {$plugin.caddy.debug.userfunc}
+                  }
+                }
+                  // currency symbol
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.main.currencySymbol}
+                  noTrimWrap = | ||
+                }
+                wrap = (|)
+              }
+            }
+              // extra cost (gross price) of payment method
+            extra = {$plugin.caddy.options.payment.5.costs}
+              // tax rate which will be applied (reduced or normal)
+            tax = {$plugin.caddy.options.payment.5.taxrate}
+          }
+            // elv-iban: enabled, title, extra, tax
+          6 =
+          6 {
+            enabled = {$plugin.caddy.options.payment.6.enabled}
+              // label, gross
+            title = COA
+            title {
+              10 = TEXT
+              10 {
+                data        = LLL:{$plugin.caddy.options.payment.6.lll}
+                noTrimWrap  = || |
+              }
+                // amount
+              20 = COA
+              20 {
+                  // gross
+                10 = USER
+                10 {
+                  userFunc = tx_caddy_userfunc->numberformat
+                  userFunc {
+                    number = TEXT
+                    number {
+                      value = {$plugin.caddy.options.payment.6.costs}
+                    }
+                    decimal       = {$plugin.caddy.main.decimal}
+                    dec_point     = {$plugin.caddy.main.dec_point}
+                    thousands_sep = {$plugin.caddy.main.thousands_sep}
+                    drs           = {$plugin.caddy.debug.userfunc}
+                  }
+                }
+                  // currency symbol
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.main.currencySymbol}
+                  noTrimWrap = | ||
+                }
+                wrap = (|)
+              }
+            }
+              // extra cost (gross price) of payment method
+            extra = {$plugin.caddy.options.payment.6.costs}
+              // tax rate which will be applied (reduced or normal)
+            tax = {$plugin.caddy.options.payment.6.taxrate}
+          }
+        }
+      }
+    }
+  }
+}
+
+plugin.tx_caddy_pi1 {
+  _HTMLMARKER {
+    paymill_public_key < plugin.tx_caddy_pi1.api.e-payment.provider.paymill.keys.public
+  }
+}
+  // plugin.tx_caddy_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // page
+
+page {
+  includeCSS {
+    caddyEpaymentPaymill = {$plugin.caddy.e-payment.paymill.files.css}
+  }
+  includeJSlibs {
+    caddyEpaymentPaymillBridge = {$plugin.caddy.e-payment.paymill.files.js.bridge}
+    caddyEpaymentPaymillBridge.external = 1
+  }
+  includeJSFooter {
+    caddyEpaymentPaymillApi = {$plugin.caddy.e-payment.paymill.files.js.api}
+    caddyEpaymentPaymillLang = {$plugin.caddy.e-payment.paymill.files.js.lang}
+  }
+}
+  // page
