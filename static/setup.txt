@@ -535,7 +535,7 @@ plugin.tx_caddy_pi1 {
         options =
         options {
             // enabled, title, extra, tax
-          1 = cash in advance
+          1 = cash in advance (de: Vorkasse)
           1 {
             enabled = {$plugin.caddy.options.payment.1.enabled}
               // label, gross
@@ -579,7 +579,7 @@ plugin.tx_caddy_pi1 {
             tax = {$plugin.caddy.options.payment.1.taxrate}
           }
             // enabled, title, extra, tax
-          2 = invoice
+          2 = invoice (de: Rechnung)
           2 {
             enabled = {$plugin.caddy.options.payment.2.enabled}
               // label, gross
@@ -623,7 +623,7 @@ plugin.tx_caddy_pi1 {
             tax = {$plugin.caddy.options.payment.2.taxrate}
           }
             // enabled, title, extra, tax
-          3 = cash on delivery
+          3 = cash on delivery (de: Nachnahme)
           3 {
             enabled = {$plugin.caddy.options.payment.3.enabled}
               // label, gross
@@ -667,7 +667,7 @@ plugin.tx_caddy_pi1 {
             tax = {$plugin.caddy.options.payment.3.taxrate}
           }
             // enabled, title, extra, tax
-          4 = cash on pick up
+          4 = cash on pick up (de: Bar bei Abholung)
           4 {
             enabled = {$plugin.caddy.options.payment.4.enabled}
               // label, gross
