@@ -5,6 +5,8 @@ TODO
 4.0.8
   2014-03-01
   Feature
+  * #i0047: cash discount
+            * new fields: sumcashdiscountnet, sumcashdiscountgross
   * #i0046: new payment option cash on pick up (german: Bar bei Abholung)
   * #i0045: e-payment
             * enhance payment options from 3 to 6

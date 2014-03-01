@@ -168,27 +168,35 @@ plugin.caddy {
   options.payment.default = 1
   # cat=caddy - options payment/enable/201; type=boolean; label= 1. Cash in advance - enabled:Disable it, if you don't want to offer the payment option cash in advance (de: Vorkasse).
   options.payment.1.enabled = 1
-  # cat=caddy - options payment/enable/202; type=string; label= 1. Cash in advance - costs:Extra costs for the payment option cash in advance. Example: 9.99.
+  # cat=caddy - options payment/enable/202; type=string; label= 1. Cash in advance - discount (%):Cash discount for the payment option cash in advance in per cent. Example: 3.00.
+  options.payment.1.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/203; type=string; label= 1. Cash in advance - costs:Extra costs for the payment option cash in advance. Example: 9.99.
   options.payment.1.costs = 0.00
-  # cat=caddy - options payment/enable/203; type=options[normal,reduced]; label= 1. Cash in advance - tax rate:Tax rate for extra costs for the payment option cash in advance.
+  # cat=caddy - options payment/enable/204; type=options[normal,reduced]; label= 1. Cash in advance - tax rate:Tax rate for extra costs for the payment option cash in advance.
   options.payment.1.taxrate = normal
   # cat=caddy - options payment/enable/211; type=boolean; label= 2. Invoice - enabled:Disable it, if you don't want to offer the payment option invoice (de: Rechnung).
   options.payment.2.enabled = 1
-  # cat=caddy - options payment/enable/212; type=string; label= 2. Invoice - costs:Extra costs for the payment option invoice. Example: 9.99.
-  options.payment.2.costs = 3.00
-  # cat=caddy - options payment/enable/213; type=options[normal,reduced]; label= 2. Invoice - tax rate:Tax rate for extra costs for the payment option invoice.
+  # cat=caddy - options payment/enable/212; type=string; label= 2. Invoice - discount (%):Cash discount for the payment option invoice in per cent. Example: 3.00.
+  options.payment.2.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/213; type=string; label= 2. Invoice - costs:Extra costs for the payment option invoice. Example: 9.99.
+  options.payment.2.costs = 0.00
+  # cat=caddy - options payment/enable/214; type=options[normal,reduced]; label= 2. Invoice - tax rate:Tax rate for extra costs for the payment option invoice.
   options.payment.2.taxrate = normal
   # cat=caddy - options payment/enable/221; type=boolean; label= 3. Cash on delivery - enabled:Disable it, if you don't want to offer the payment option cash on delivery (de: Nachnahme).
   options.payment.3.enabled = 1
-  # cat=caddy - options payment/enable/222; type=string; label= 3. Cash on delivery - costs:Extra costs for the payment option cash on delivery. Example: 9.99.
-  options.payment.3.costs = 12.50
-  # cat=caddy - options payment/enable/223; type=options[normal,reduced]; label= 3. Cash on delivery - tax rate:Tax rate for extra costs for the payment option cash on delivery.
+  # cat=caddy - options payment/enable/222; type=string; label= 3. Cash on delivery - discount (%):Cash discount for the payment option cash on delivery in per cent. Example: 3.00.
+  options.payment.3.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/223; type=string; label= 3. Cash on delivery - costs:Extra costs for the payment option cash on delivery. Example: 9.99.
+  options.payment.3.costs = 0.00
+  # cat=caddy - options payment/enable/224; type=options[normal,reduced]; label= 3. Cash on delivery - tax rate:Tax rate for extra costs for the payment option cash on delivery.
   options.payment.3.taxrate = normal
   # cat=caddy - options payment/enable/231; type=boolean; label= 4. Cash on pick up - enabled:Disable it, if you don't want to offer the the payment option cash on pick up (de: Bar bei Abholung).
   options.payment.4.enabled = 1
-  # cat=caddy - options payment/enable/232; type=string; label= 4. Cash on pick up - costs:Extra costs for the payment option cash on pick up. Example: 9.99.
+  # cat=caddy - options payment/enable/232; type=string; label= 4. Cash on pick up - discount (%):Cash discount for the payment option cash on pick up in per cent. Example: 3.00.
+  options.payment.4.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/233; type=string; label= 4. Cash on pick up - costs:Extra costs for the payment option cash on pick up. Example: 9.99.
   options.payment.4.costs = 0.00
-  # cat=caddy - options payment/enable/233; type=options[normal,reduced]; label= 4. Cash on pick up - tax rate:Tax rate for extra costs for the payment option cash on pick up.
+  # cat=caddy - options payment/enable/234; type=options[normal,reduced]; label= 4. Cash on pick up - tax rate:Tax rate for extra costs for the payment option cash on pick up.
   options.payment.4.taxrate = normal
   # cat=caddy - options payment/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   options.payment.externalLinks = Click me!

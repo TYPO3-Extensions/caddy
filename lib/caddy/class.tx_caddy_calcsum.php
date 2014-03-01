@@ -80,7 +80,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.3
+ * @version	4.0.8
  * @since       2.0.0
  */
 class tx_caddy_calcsum
@@ -186,7 +186,7 @@ class tx_caddy_calcsum
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	array		$sum (see above)
   * @access public
-  * @version    4.0.3
+  * @version    4.0.8
   * @since      2.0.2
   */
   public function sum( $items, $options )
@@ -198,8 +198,11 @@ class tx_caddy_calcsum
     $sumOptions           = $this->sumOptions( $options );
       // #i0039, 131230, dwildt, 1+
     $sumOptionsWoPayment  = $this->sumOptionsWoPayment( $options );
+      // #i0047, 140302, dwildt, 1+
+    $sumCashdiscount      = $this->sumCashdiscount( $options );
 
     $sum = array(
+      'cashdiscount'      => $sumCashdiscount,
       'items'             => $sumItems,
       'options'           => $sumOptions,
         // #i0039, 131230, dwildt, 1+
@@ -207,6 +210,42 @@ class tx_caddy_calcsum
       'sum'               => $this->sumSum( $sumItems, $sumOptions ),
     );
 //var_dump( __METHOD__, __LINE__, $sum );
+
+    return $sum;
+  }
+
+
+
+  /***********************************************
+  *
+  * Calculating cash discount
+  *
+  **********************************************/
+
+ /**
+  * sumCashdiscount( )  : Returns sum for
+  *                       * shipping and specials (without payment)
+  *                       for
+  *                       * gross
+  *                       * net
+  *                       * tax
+  *                       * normal
+  *                       * reduced
+  *
+  * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
+  * @return	array		$sum (see above)
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscount( $options )
+  {
+    $sum = array
+    (
+      'gross' =>  $this->sumOptionsWoPaymentGross( $options ),
+      'net'   =>  $this->sumOptionsWoPaymentNet(   $options ),
+      'tax'   =>  $this->sumOptionsWoPaymentTax(   $options ),
+    );
 
     return $sum;
   }
@@ -388,14 +427,14 @@ class tx_caddy_calcsum
 
 
  /**
-  * sumOptionsWoPayment( ) : Returns sum for
-  *                 * shipping and specials (without payment)
-  *                 for
-  *                 * gross
-  *                 * net
-  *                 * tax
-  *                 * normal
-  *                 * reduced
+  * sumOptionsWoPayment( )  : Returns sum for
+  *                           * shipping and specials (without payment)
+  *                           for
+  *                           * gross
+  *                           * net
+  *                           * tax
+  *                           * normal
+  *                           * reduced
   *
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	array		$sum (see above)

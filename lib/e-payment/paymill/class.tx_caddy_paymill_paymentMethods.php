@@ -444,13 +444,25 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     switch( $this->paymentId )
     {
+      case( 1 ):
+        $this->paymentMethodsCashinadvance( );
+        break;
+      case( 2 ):
+        $this->paymentMethodsInvoice( );
+        break;
+      case( 3 ):
+        $this->paymentMethodsCashondelivery( );
+        break;
       case( 4 ):
+        $this->paymentMethodsCashonpickup( );
+        break;
+      case( 11 ):
         $this->paymentMethodsCreditcard( );
         break;
-      case( 5 ):
+      case( 12 ):
         $this->paymentMethodsElv( );
         break;
-      case( 6 ):
+      case( 13 ):
         $this->paymentMethodsElvIban( );
         break;
       default:
@@ -464,6 +476,63 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   }
 
  /**
+  * paymentMethodsCashinadvance( ):
+  *
+  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  * @return	void
+  * @access private
+  * @version     4.0.8
+  * @since       4.0.8
+  */
+  private function paymentMethodsCashinadvance( )
+  {
+      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashinadvance-ok' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashinadvance' );
+
+    //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
+    //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
+  }
+
+ /**
+  * paymentMethodsCashondelivery( ):
+  *
+  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  * @return	void
+  * @access private
+  * @version     4.0.8
+  * @since       4.0.8
+  */
+  private function paymentMethodsCashondelivery( )
+  {
+      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashondelivery-ok' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashondelivery' );
+
+    //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
+    //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
+  }
+
+ /**
+  * paymentMethodsCashonpickup( ):
+  *
+  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  * @return	void
+  * @access private
+  * @version     4.0.8
+  * @since       4.0.8
+  */
+  private function paymentMethodsCashonpickup( )
+  {
+      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashonpickup-ok' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashonpickup' );
+
+    //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
+    //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
+  }
+
+/**
   * paymentMethodsCreditcard( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
@@ -539,6 +608,25 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   }
 
  /**
+  * paymentMethodsInvoice( ):
+  *
+  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  * @return	void
+  * @access private
+  * @version     4.0.8
+  * @since       4.0.8
+  */
+  private function paymentMethodsInvoice( )
+  {
+      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-invoice-ok' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-invoice' );
+
+    //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
+    //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
+  }
+
+ /**
   * paymentMethodsUndefined( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
@@ -550,7 +638,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   private function paymentMethodsUndefined( )
   {
       // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
-    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|'     . $this->pi_getLL( 'prompt-paywith-undefined' );
+    $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $this->pi_getLL( 'prompt-paywith-undefined' );
   }
 
  /**

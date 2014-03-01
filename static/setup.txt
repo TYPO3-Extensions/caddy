@@ -450,6 +450,13 @@ plugin.tx_caddy_pi1 {
           optionsspecialssumtaxreduced  < .optionspaymentsumgross
           optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
 
+            // Sum gross of cash discount
+          sumcashdiscountgross  < .optionspaymentsumgross
+          sumcashdiscountgross.10.userFunc.number.field = sumcashdiscountgross
+            // Sum net of cash discount
+          sumcashdiscountnet    < .optionspaymentsumgross
+          sumcashdiscountnet.10.userFunc.number.field   = sumcashdiscountnet
+
             // Sum gross of items
           sumitemsgross         < .optionspaymentsumgross
           sumitemsgross.10.userFunc.number.field        = sumitemsgross
@@ -573,142 +580,100 @@ plugin.tx_caddy_pi1 {
                 wrap = (|)
               }
             }
+              // on, percent
+            cash-discount =
+            cash-discount {
+                // items, payment, service, shipping
+              on =
+              on {
+                  // [Boolean] true (default): items get the cash discount. false: items don't get the cash discount.
+                items     = 1
+                  // [Boolean] false (default): payment costs don't get the cash discount. true: payment costs get the cash discount.
+                payment   = 0
+                  // [Boolean] false (default): service costs don't get the cash discount. true: service costs get the cash discount.
+                service   = 0
+                  // [Boolean] false (default): shipping costs don't get the cash discount. true: shipping costs get the cash discount.
+                shipping  = 0
+              }
+                // [Double]
+              percent = {$plugin.caddy.options.payment.1.cashdiscount}
+            }
               // extra cost (gross price) of payment method
             extra = {$plugin.caddy.options.payment.1.costs}
               // tax rate which will be applied (reduced or normal)
             tax = {$plugin.caddy.options.payment.1.taxrate}
           }
-            // enabled, title, extra, tax
+          2 < .1
           2 = invoice (de: Rechnung)
           2 {
             enabled = {$plugin.caddy.options.payment.2.enabled}
-              // label, gross
-            title = COA
             title {
-              10 = TEXT
               10 {
                 data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-                noTrimWrap  = || |
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
                       value = {$plugin.caddy.options.payment.2.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.2.cashdiscount}
+            }
             extra = {$plugin.caddy.options.payment.2.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.2.taxrate}
+            tax   = {$plugin.caddy.options.payment.2.taxrate}
           }
-            // enabled, title, extra, tax
+          3 < .1
           3 = cash on delivery (de: Nachnahme)
           3 {
             enabled = {$plugin.caddy.options.payment.3.enabled}
-              // label, gross
-            title = COA
             title {
-              10 = TEXT
               10 {
                 data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
-                noTrimWrap  = || |
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
                       value = {$plugin.caddy.options.payment.3.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.3.cashdiscount}
+            }
             extra = {$plugin.caddy.options.payment.3.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.3.taxrate}
+            tax   = {$plugin.caddy.options.payment.3.taxrate}
           }
-            // enabled, title, extra, tax
+          4 < .1
           4 = cash on pick up (de: Bar bei Abholung)
           4 {
             enabled = {$plugin.caddy.options.payment.4.enabled}
-              // label, gross
-            title = COA
             title {
-              10 = TEXT
               10 {
                 data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashonpickup
-                noTrimWrap  = || |
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
                       value = {$plugin.caddy.options.payment.4.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.4.cashdiscount}
+            }
             extra = {$plugin.caddy.options.payment.4.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.4.taxrate}
+            tax   = {$plugin.caddy.options.payment.4.taxrate}
           }
         }
       }
@@ -2802,6 +2767,56 @@ plugin.tx_caddy_pi1 {
     caddy_currency {
       value = {$plugin.caddy.e-payment.currency}
     }
+    caddy_header_cashdiscount = COA
+    caddy_header_cashdiscount {
+      wrap = <a href="#">|</a>
+        // label
+      10 = TEXT
+      10 {
+        wrap = <span class="small-7 large-7 columns">|</span>
+        value = Cash discount
+        lang {
+          de = Skonto
+          en = Cash discount
+        }
+      }
+        // &nbsp;
+      30 = TEXT
+      30 {
+        value = &nbsp;
+        wrap  = <span class="small-2 large-2 columns">|</span>
+      }
+        // value, currency
+      40 = COA
+      40 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumcashdiscountgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
+        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+      }
+        // &nbsp;
+      50 = TEXT
+      50 {
+        value = &nbsp;
+        wrap  = <span class="small-1 large-1 columns">|</span>
+      }
+    }
       // label, content, value
     caddy_header_items = COA
     caddy_header_items {
@@ -3054,6 +3069,205 @@ plugin.tx_caddy_pi1 {
         wrap  = <span class="small-1 large-1 columns">|</span>
       }
     }
+    caddy_header_paymentmethod_cashinadvance = COA
+    caddy_header_paymentmethod_cashinadvance {
+        // payment type
+      10 = COA
+      10 {
+          // label
+        10 = TEXT
+        10 {
+          data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
+        }
+          // space, value, currency
+        20 = COA
+        20 {
+          if {
+            value = 0
+            isGreaterThan = {$plugin.caddy.options.payment.1.costs}
+          }
+            // space
+          10 = TEXT
+          10 {
+            value =
+            noTrimWrap = | ||
+          }
+          // value, currency
+          20 = COA
+          20 {
+              // value
+            20 = USER
+            20 {
+              userFunc = tx_caddy_userfunc->numberformat
+              userFunc {
+                number = TEXT
+                number {
+                  value = {$plugin.caddy.options.payment.1.costs}
+                }
+                decimal       = {$plugin.caddy.main.decimal}
+                dec_point     = {$plugin.caddy.main.dec_point}
+                thousands_sep = {$plugin.caddy.main.thousands_sep}
+                drs           = {$plugin.caddy.debug.userfunc}
+              }
+            }
+              // currency
+            30 = TEXT
+            30 {
+              value = {$plugin.caddy.main.currencySymbol}
+              noTrimWrap = | ||
+            }
+            wrap = (|)
+          }
+        }
+      }
+        // cash discount
+      20 = COA
+      20 {
+        if {
+          value = 0
+          isGreaterThan = {$plugin.caddy.options.payment.1.cashdiscount}
+        }
+          // devider
+        10 = TEXT
+        10 {
+          data        = LLL:EXT:caddy/pi1/locallang.xml:cashdiscount
+          noTrimWrap  = |, | |
+        }
+          // Cash discount
+        20 = COA
+        20 {
+            // value
+          10 = USER
+          10 {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              number = TEXT
+              number {
+                value = {$plugin.caddy.options.payment.1.cashdiscount}
+              }
+              decimal       = {$plugin.caddy.main.decimal}
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+              drs           = {$plugin.caddy.debug.userfunc}
+            }
+          }
+            // symbol
+          20 = TEXT
+          20 {
+            value = %
+            noTrimWrap = | ||
+          }
+        }
+      }
+    }
+    caddy_header_paymentmethod_cashondelivery < .caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_cashondelivery {
+      10 {
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.3.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.3.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.3.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.3.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
+    caddy_header_paymentmethod_cashonpickup < .caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_cashonpickup {
+      10 {
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashonpickup
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.4.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.4.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.4.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.4.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
+    caddy_header_paymentmethod_invoice < .caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_invoice {
+      10 {
+        10 {
+          data = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.2.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.2.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.2.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.2.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
     caddy_header_powermail = TEXT
     caddy_header_powermail {
       wrap = <a href="#"><span class="small-7 large-7 columns">|</span></a>
@@ -3088,6 +3302,42 @@ plugin.tx_caddy_pi1 {
           negate  = 1
         }
         data = LLL:EXT:caddy/pi3/locallang.xml:items
+      }
+    }
+    caddy_prompt_cashdiscount = COA
+    caddy_prompt_cashdiscount {
+        // label
+      10 = TEXT
+      10 {
+        value = Amount of your cash discount
+        lang {
+          de = Gesamtsumme Ihres Skontos
+          en = Amount of your cash discount
+        }
+        noTrimWrap = ||: |
+      }
+        // value, currency
+      20 = COA
+      20 {
+          // value
+        10 = USER
+        10.userFunc = tx_caddy_userfunc->numberformat
+        10.userFunc {
+          drs           = {$plugin.caddy.debug.userfunc}
+          number        = TEXT
+          number {
+            field = sumcashdiscountgross
+          }
+          decimal       = 2
+          dec_point     = {$plugin.caddy.main.dec_point}
+          thousands_sep = {$plugin.caddy.main.thousands_sep}
+        }
+          // currency
+        20 = TEXT
+        20 {
+          value = {$plugin.caddy.main.currencySymbol}
+          noTrimWrap = | ||
+        }
       }
     }
     caddy_prompt_order = COA

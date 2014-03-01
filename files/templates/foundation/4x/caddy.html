@@ -15,7 +15,7 @@
     <em>
       VERSION
       =======
-      4.0.5: 14-01-27
+      4.0.8: 140301
       For foundation 4.x
 
       INDEX
@@ -40,19 +40,19 @@
       * CADDY_REVOCATION
       * CADDY_TERMS
 
-      * CADDY_FORM 
+      * CADDY_FORM
 
-      * CADDYMINI 
-      * CADDYMINIEMPTY 
+      * CADDYMINI
+      * CADDYMINIEMPTY
 
       * CADDYSUM
     </em>
 
 
-    <!-- ###CADDY### begin --> 
+    <!-- ###CADDY### begin -->
     <div id="c###UID###-accordion">
       <div class="section-container accordion large-12 columns" data-section="accordion">
-        <!-- ###CADDY-PRODUCT-TABLE### begin --> 
+        <!-- ###CADDY-PRODUCT-TABLE### begin -->
         <div class="section caddy-accordion###CADDY_SECTION_1###">
           <div class="title" data-section-title>
             <div class="row">
@@ -90,7 +90,7 @@
               <!-- ###ITEM### end -->
               <!-- ###CONTENT### end -->
               <!-- ###FOOTER### begin -->
-              <div class="row caddy_footer">                        
+              <div class="row caddy_footer">
                 <div class="small-2 large-2 columns">###SUMSUMQTY###</div>
                 <div class="small-7 large-7 columns">###_HTMLMARKER_CADDY_ITEM_LABEL###</div>
                 <div class="small-2 large-2 columns caddy-right">###SUMITEMSGROSS###</div>
@@ -100,7 +100,7 @@
             </form> <!-- /caddy -->
           </div> <!-- /content -->
         </div> <!-- /section -->
-        <!-- ###CADDY-PRODUCT-TABLE### end --> 
+        <!-- ###CADDY-PRODUCT-TABLE### end -->
         <!-- ###OPTIONS### begin -->
         <div class="section caddy-accordion###CADDY_SECTION_2###">
           <div class="title" data-section-title>
@@ -153,6 +153,20 @@
           </div> <!-- /content -->
         </div> <!-- /section -->
         <!-- ###PAYMENT_METHOD### end -->
+        <!-- ###CASHDISCOUNT### begin -->
+        <div class="section caddy-accordion###CADDY_SECTION_4###">
+          <div class="title" data-section-title>
+            <div class="row">
+              ###_HTMLMARKER_CADDY_HEADER_CASHDISCOUNT###
+            </div>
+          </div>
+          <div class="content" data-section-content>
+            <p>
+              ###_HTMLMARKER_CADDY_PROMPT_CASHDISCOUNT###
+            </p>
+          </div> <!-- /content -->
+        </div> <!-- /section -->
+        <!-- ###CASHDISCOUNT### end -->
         <!-- ###ORDER### begin -->
         <div class="section caddy-accordion###CADDY_SECTION_4###">
           <div class="title" data-section-title>
@@ -473,7 +487,7 @@
     <!-- ###CADDY_TERMS### end -->
 
 
-    <!-- ###CADDY_FORM### begin --> 
+    <!-- ###CADDY_FORM### begin -->
     <div class="caddy_form">
       <form action="###CADDY_FORM_ACTION###">
         <input type="hidden" value="###CADDY_FORM_CONTENTUID###" name="cid" />
@@ -485,7 +499,7 @@
     <!-- ###CADDY_FORM### end -->
 
 
-    <!-- ###CADDYMINI### begin --> 
+    <!-- ###CADDYMINI### begin -->
     <div class="caddymini">
       <!-- ###ITEMS### beginn -->
       ###ITEM###
@@ -496,7 +510,7 @@
     <!-- ###CADDYMINI### end -->
 
 
-    <!-- ###CADDYMINIEMPTY### begin --> 
+    <!-- ###CADDYMINIEMPTY### begin -->
     <div class="caddymini caddyminiempty">
       <div class="empty">
         ###_LOCAL_LANG_CADDYMINIEMPTY###
@@ -506,13 +520,13 @@
     <!-- ###CADDYMINIEMPTY### end -->
 
 
-    <!-- ###CADDYSUM### begin --> 
+    <!-- ###CADDYSUM### begin -->
     <div class="caddysum">
       ###SUM###
     </div>
     <!-- ###CADDYSUM### end -->
 
-    <!-- ###CADDYSUMEMPTY### begin --> 
+    <!-- ###CADDYSUMEMPTY### begin -->
     <div class="caddysum caddysumempty">
       ###_LOCAL_LANG_CADDYSUMEMPTY###
     </div>

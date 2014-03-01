@@ -103,9 +103,27 @@ jQuery(document).ready(function ($) {
     // Absenden Button deaktivieren um weitere Klicks zu vermeiden
     $('.submit-button').attr("disabled", "disabled");
 
-    paymenttype = $('.payment-type-active').length ? $('.payment-type-active').attr( 'href' ) : '#payment-type-cc';
+    // 140301, dwildt, 1-
+    //paymenttype = $('.payment-type-active').length ? $('.payment-type-active').attr( 'href' ) : '#payment-type-cc';
+    // 140301, dwildt, 1+
+    paymenttype = $('.payment-type-active').attr( 'href' );
     //console.debug(paymenttype);
     switch (paymenttype) {
+      case "#payment-type-cashinadvance":
+        $('.submit-button').attr("disabled", "disabled");
+        //paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
+      case "#payment-type-cashondelivery":
+        $('.submit-button').attr("disabled", "disabled");
+        //paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
+      case "#payment-type-cashonpickup":
+        $('.submit-button').attr("disabled", "disabled");
+        //paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
       case "#payment-type-cc":
         $('.submit-button').attr("disabled", "disabled");
         if (false == paymill.validateHolder($('#card-holdername').val())) {
@@ -151,7 +169,14 @@ jQuery(document).ready(function ($) {
           cvc:            $('#card-cvc').val(),
           cardholder:     $('#card-holdername').val()
         };
-        break;
+        paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
+      case "#payment-type-invoice":
+        $('.submit-button').attr("disabled", "disabled");
+        //paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
       case "#payment-type-elv":
         $('.submit-button').attr("disabled", "disabled");
         if (false == $('#elv-holdername').val()) {
@@ -181,7 +206,9 @@ jQuery(document).ready(function ($) {
           bank:           $('#elv-bankcode').val(),
           accountholder:  $('#elv-holdername').val()
         };
-        break;
+        paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
       case "#payment-type-iban":
         $('.submit-button').attr("disabled", "disabled");
         if (false == $('#elv-iban-holdername').val()) {
@@ -211,11 +238,19 @@ jQuery(document).ready(function ($) {
           bic:            $('#elv-bic').val(),
           accountholder:  $('#elv-iban-holdername').val()
         };
-        break;
+        paymill.createToken(params, PaymillResponseHandler);
+        return false;
+        //break;
+      default:
+        $(".payment_errors").text(translation[formlang]["error"]["unknown_payment-method"]);
+        $(".payment_errors").css("display","block");
+        $(".submit-button").removeAttr("disabled");
+        return false;
+        //break;
     }
 
-    paymill.createToken(params, PaymillResponseHandler);
-    return false;
+//    paymill.createToken(params, PaymillResponseHandler);
+//    return false;
   });
 
   // Toggle buttons and forms
@@ -247,7 +282,7 @@ function logResponse(res) {
   };
   console.log(res);
 }
-        
+
 function validateIBAN( iban ) {
   return true;
 }

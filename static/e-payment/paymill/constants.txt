@@ -1,4 +1,24 @@
 plugin.caddy {
+  options {
+    payment {
+      1 {
+          // Disable cash in advance (de: Vorkasse)
+        enabled = 0
+      }
+      2 {
+          // Disable invoide (de: Rechnung)
+        enabled = 0
+      }
+      3 {
+          // Disable cash on delivery (de: Nachnahem)
+        enabled = 0
+      }
+    }
+  }
+}
+
+
+plugin.caddy {
 
   e-payment.provider = Paymill
 
@@ -58,30 +78,30 @@ plugin.caddy {
   # cat=caddy - e-payment - powermail paths/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   e-payment.powermail.paths.sponsors = Click me!
 
-  # cat=caddy - options payment/enable/100; type=options[0,1,2,3,4,5,6];  label= Default payment option:0: no preset. 1: 1st payment option. 2: 2nd payment option. 3rd payment option.
-  options.payment.default = 1
-  # cat=caddy - options payment/enable/501; type=string; label= 4. label:Label for 1st payment option. Example: cash in advance (German: Vorkasse)
-  options.payment.4.lll = EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
-  # cat=caddy - options payment/enable/502; type=boolean; label= 4. enabled:Disable it, if you don't want to offer the 1st payment option.
-  options.payment.4.enabled = 1
-  # cat=caddy - options payment/enable/503; type=string; label= 4. costs:Extra costs for 1st payment option. Example: 9.99
-  options.payment.4.costs = 0.00
-  # cat=caddy - options payment/enable/504; type=options[normal,reduced]; label= 4. tax rate:Tax rate for extra costs for 1st payment option.
-  options.payment.4.taxrate = normal
-  # cat=caddy - options payment/enable/601; type=string; label= 5. label:Label for 2nd payment option. Example: cash in advance (German: Vorkasse)
-  options.payment.5.lll = EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
-  # cat=caddy - options payment/enable/602; type=boolean; label= 5. enabled:Disable it, if you don't want to offer the 2nd payment option.
-  options.payment.5.enabled = 1
-  # cat=caddy - options payment/enable/603; type=string; label= 5. costs:Extra costs for 2nd payment option. Example: 9.99
-  options.payment.5.costs = 0.00
-  # cat=caddy - options payment/enable/604; type=options[normal,reduced]; label= 5. tax rate:Tax rate for extra costs for 2nd payment option.
-  options.payment.5.taxrate = normal
-  # cat=caddy - options payment/enable/701; type=string; label= 6. label:Label for 3rd payment option. Example: cash in advance (German: Vorkasse)
-  options.payment.6.lll = EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
-  # cat=caddy - options payment/enable/702; type=boolean; label= 6. enabled:Disable it, if you don't want to offer the 3rd payment option.
-  options.payment.6.enabled = 1
-  # cat=caddy - options payment/enable/703; type=string; label= 6. costs:Extra costs for 3rd payment option. Example: 9.99
-  options.payment.6.costs = 0.00
-  # cat=caddy - options payment/enable/704; type=options[normal,reduced]; label= 6. tax rate:Tax rate for extra costs for 3rd payment option.
-  options.payment.6.taxrate = normal
+  # cat=caddy - options payment/enable/100; type=options[0,1,2,3,4,11,12,13];  label= Default payment option:0: no preset. 1: cash in advance (de: Vorkasse). 2: invoice (de: Rechnung). 3: cash on delivery (de: Nachnahme). 4: cash on pick up (de: Bar bei Abholung). 11: credit card (de: Kreditkarte). 12: direct debit (de: Lastschrift). 13: direct debit (IBAN) (de: Lastschrift mit IBAN).
+  options.payment.default = 11
+  # cat=caddy - options payment/enable/301; type=boolean; label= 11. Credit card - enabled:Disable it, if you don't want to offer the payment option credit card (de: Kreditkarte).
+  options.payment.11.enabled = 1
+  # cat=caddy - options payment/enable/302; type=string; label= 11. Credit card - discount (%):Cash discount for the payment option credit card in per cent. Example: 3.00.
+  options.payment.11.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/303; type=string; label= 11. Credit card - costs:Extra costs for the payment option credit card. Example: 9.99.
+  options.payment.11.costs = 0.00
+  # cat=caddy - options payment/enable/304; type=options[normal,reduced]; label= 11. Credit card - tax rate:Tax rate for extra costs for the payment option credit card.
+  options.payment.11.taxrate = normal
+  # cat=caddy - options payment/enable/311; type=boolean; label= 12. Direct debit - enabled:Disable it, if you don't want to offer the payment option direct debit (de: Lastschrift).
+  options.payment.12.enabled = 1
+  # cat=caddy - options payment/enable/312; type=string; label= 12. Direct debit - discount (%):Cash discount for the payment option direct debit in per cent. Example: 3.00.
+  options.payment.12.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/313; type=string; label= 12. Direct debit - costs:Extra costs for the payment option direct debit. Example: 9.99.
+  options.payment.12.costs = 0.00
+  # cat=caddy - options payment/enable/314; type=options[normal,reduced]; label= 12. Direct debit - tax rate:Tax rate for extra costs for the payment option direct debit.
+  options.payment.12.taxrate = normal
+  # cat=caddy - options payment/enable/321; type=boolean; label= 13. Direct debit (IBAN) - enabled:Disable it, if you don't want to offer the payment option direct debit (IBAN) (de: Lastschrift mit IBAN).
+  options.payment.13.enabled = 1
+  # cat=caddy - options payment/enable/322; type=string; label= 13. Direct debit (IBAN) - discount (%):Cash discount for the payment option direct debit (IBAN) in per cent. Example: 3.00.
+  options.payment.13.cashdiscount = 0.00
+  # cat=caddy - options payment/enable/323; type=string; label= 13. Direct debit (IBAN) - costs:Extra costs for payment option direct debit (IBAN). Example: 9.99.
+  options.payment.13.costs = 0.00
+  # cat=caddy - options payment/enable/324; type=options[normal,reduced]; label= 13. Direct debit (IBAN) - tax rate:Tax rate for extra costs for the payment option direct debit (IBAN).
+  options.payment.13.taxrate = normal
 }

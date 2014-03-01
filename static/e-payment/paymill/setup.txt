@@ -105,140 +105,80 @@ plugin.tx_caddy_pi1 {
       payment {
           // default method
         preset = {$plugin.caddy.options.payment.default}
-          // credit card, elv, elv-iban
+          // credit card, direct debit, direct debit (IBAN)
         options =
         options {
-            // credit card: enabled, title, extra, tax
-          4 =
-          4 {
-            enabled = {$plugin.caddy.options.payment.4.enabled}
-              // label, gross
-            title = COA
+          11 < .1
+          11 = credit card (de: Kreditkarte)
+          11 {
+            enabled = {$plugin.caddy.options.payment.11.enabled}
             title {
-              10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.4.lll}
-                noTrimWrap  = || |
+                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
-                      value = {$plugin.caddy.options.payment.4.costs}
+                      value = {$plugin.caddy.options.payment.11.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
-            extra = {$plugin.caddy.options.payment.4.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.4.taxrate}
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.11.cashdiscount}
+            }
+            extra = {$plugin.caddy.options.payment.11.costs}
+            tax   = {$plugin.caddy.options.payment.11.taxrate}
           }
-            // elv: enabled, title, extra, tax
-          5 =
-          5 {
-            enabled = {$plugin.caddy.options.payment.5.enabled}
-              // label, gross
-            title = COA
+          12 < .1
+          12 = direct debit (de: Lastschrift)
+          12 {
+            enabled = {$plugin.caddy.options.payment.12.enabled}
             title {
-              10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.5.lll}
-                noTrimWrap  = || |
+                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
-                      value = {$plugin.caddy.options.payment.5.costs}
+                      value = {$plugin.caddy.options.payment.12.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
-            extra = {$plugin.caddy.options.payment.5.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.5.taxrate}
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.12.cashdiscount}
+            }
+            extra = {$plugin.caddy.options.payment.12.costs}
+            tax   = {$plugin.caddy.options.payment.12.taxrate}
           }
-            // elv-iban: enabled, title, extra, tax
-          6 =
-          6 {
-            enabled = {$plugin.caddy.options.payment.6.enabled}
-              // label, gross
-            title = COA
+          13 < .1
+          13 = direct debit (IBAN) (de: Lastschrift mit IBAN)
+          13 {
+            enabled = {$plugin.caddy.options.payment.13.enabled}
             title {
-              10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.6.lll}
-                noTrimWrap  = || |
+                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
               }
-                // amount
-              20 = COA
               20 {
-                  // gross
-                10 = USER
                 10 {
-                  userFunc = tx_caddy_userfunc->numberformat
                   userFunc {
-                    number = TEXT
                     number {
-                      value = {$plugin.caddy.options.payment.6.costs}
+                      value = {$plugin.caddy.options.payment.13.costs}
                     }
-                    decimal       = {$plugin.caddy.main.decimal}
-                    dec_point     = {$plugin.caddy.main.dec_point}
-                    thousands_sep = {$plugin.caddy.main.thousands_sep}
-                    drs           = {$plugin.caddy.debug.userfunc}
                   }
                 }
-                  // currency symbol
-                20 = TEXT
-                20 {
-                  value = {$plugin.caddy.main.currencySymbol}
-                  noTrimWrap = | ||
-                }
-                wrap = (|)
               }
             }
-              // extra cost (gross price) of payment method
-            extra = {$plugin.caddy.options.payment.6.costs}
-              // tax rate which will be applied (reduced or normal)
-            tax = {$plugin.caddy.options.payment.6.taxrate}
+            cash-discount {
+              percent = {$plugin.caddy.options.payment.13.cashdiscount}
+            }
+            extra = {$plugin.caddy.options.payment.13.costs}
+            tax   = {$plugin.caddy.options.payment.13.taxrate}
           }
         }
       }
@@ -248,6 +188,114 @@ plugin.tx_caddy_pi1 {
 
 plugin.tx_caddy_pi1 {
   _HTMLMARKER {
+    caddy_header_paymentmethod_creditcard < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_creditcard {
+      10 {
+        10 {
+          data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.11.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.11.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.11.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.11.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
+    caddy_header_paymentmethod_elv < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_elv {
+      10 {
+        10 {
+          data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.12.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.12.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.12.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.12.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
+    caddy_header_paymentmethod_elv-iban < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
+    caddy_header_paymentmethod_elv-iban {
+      10 {
+        10 {
+        data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
+        }
+        20 {
+          if {
+            isGreaterThan = {$plugin.caddy.options.payment.13.costs}
+          }
+          20 {
+            20 {
+              userFunc {
+                number {
+                  value = {$plugin.caddy.options.payment.13.costs}
+                }
+              }
+            }
+          }
+        }
+      }
+      20 {
+        if {
+          isGreaterThan = {$plugin.caddy.options.payment.13.cashdiscount}
+        }
+        20 {
+          10 {
+            userFunc {
+              number {
+                value = {$plugin.caddy.options.payment.13.cashdiscount}
+              }
+            }
+          }
+        }
+      }
+    }
     paymill_public_key < plugin.tx_caddy_pi1.api.e-payment.provider.paymill.keys.public
   }
 }

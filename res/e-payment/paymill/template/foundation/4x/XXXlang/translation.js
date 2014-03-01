@@ -41,6 +41,7 @@ translation["de"]["error"]["invalid-elv-holdername"] = 'Bitte geben Sie den korr
 translation["de"]["error"]["invalid-elv-iban"] = 'Bitte geben Sie eine gültige IBAN ein.';
 translation["de"]["error"]["invalid-elv-iban-holdername"] = 'Bitte geben Sie den korrekten Kontoinhaber an.';
 translation["de"]["error"]["unknown_error"] = 'Unbekannter Fehler: Möglicherweise fehlt im Formular der Paymill-Public-API-Key.';
+translation["de"]["error"]["unknown_payment-method"] = 'System-Fehler: Die gewählte Zahlungsmethode ist nicht definiert. ';
 
 //English
 //Creditcard
@@ -83,3 +84,4 @@ translation["en"]["error"]["invalid-elv-iban"] = 'Please enter a valid IBAN.';
 translation["en"]["error"]["invalid-elv-iban-holdername"] = 'Please enter the proper name of the account holder.';
 translation["en"]["error"]["invalid-elv-bic"] = 'Please enter a valid BIC.';
 translation["en"]["error"]["unknown_error"] = 'Undefined error: Maybe the Paymill public API key is missing in the form.';
+translation["de"]["error"]["unknown_payment-method"] = 'Fatal error: The selected payment method isn\'t defined.';
