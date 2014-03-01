@@ -587,7 +587,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.2.lll}
+                data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_invoice
                 noTrimWrap  = || |
               }
                 // amount
@@ -631,7 +631,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.3.lll}
+                data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
                 noTrimWrap  = || |
               }
                 // amount
@@ -675,7 +675,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.4.lll}
+                data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashonpickup
                 noTrimWrap  = || |
               }
                 // amount
