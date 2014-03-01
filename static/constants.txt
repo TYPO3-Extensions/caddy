@@ -2,7 +2,7 @@ plugin.caddy {
 
   # cat=caddy - main//101;          type=text; label= Uid of storage folder: Uid of the folder with the caddy records. Leave it empty (recommended!), to store records at the same page like the caddy plugin.
   main.pid =
-  # cat=caddy - main//201;          type=options[now,+1day, +2 days, +3 days, +4 days, +5 days, +6 days, +1 week, +2 weeks, +3 weeks, +1 month];  label= Due date: Due date for payment. 
+  # cat=caddy - main//201;          type=options[now,+1day, +2 days, +3 days, +4 days, +5 days, +6 days, +1 week, +2 weeks, +3 weeks, +1 month];  label= Due date: Due date for payment.
   main.dueDate = +2 weeks
   # cat=caddy - main//202;          type=string; label= Date format: Format of the due date. Examples: %Y-%m-%d, %d. %b. %Y
   main.dueDateFormat = %Y-%m-%d
@@ -70,8 +70,8 @@ plugin.caddy {
 
   # cat=caddy - e-payment//100;           type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptEpayment]; label=How to configure e-payment?
   e-payment.prompt = Click me!
-  # cat=caddy - e-payment//101;           type=options[,Paymill];  label= Provider: 
-  e-payment.provider = 
+  # cat=caddy - e-payment//101;           type=options[,Paymill];  label= Provider:
+  e-payment.provider =
   # cat=caddy - e-payment//102;           type=string;  label= Currency:I.e: EUR, USD. Currency has an effect for transactions! Currency have to accord with the currency of your Shop (see: CADDY - MAIN NUMBERFORMAT).
   e-payment.currency = EUR
   # cat=caddy - e-payment/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
@@ -162,7 +162,7 @@ plugin.caddy {
   # cat=caddy - inventory control/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   api.inventorycontrol.externalLinks = Click me!
   # cat=caddy - inventory control/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  api.inventorycontrol.sponsors = Click me!        
+  api.inventorycontrol.sponsors = Click me!
 
   # cat=caddy - options payment/enable/100; type=options[0,1,2,3];  label= Default payment option:0: no preset. 1: 1st payment option. 2: 2nd payment option. 3rd payment option.
   options.payment.default = 1
@@ -174,26 +174,34 @@ plugin.caddy {
   options.payment.1.costs = 0.00
   # cat=caddy - options payment/enable/204; type=options[normal,reduced]; label= 1. tax rate:Tax rate for extra costs for 1st payment option.
   options.payment.1.taxrate = normal
-  # cat=caddy - options payment/enable/301; type=string; label= 2. label:Label for 2nd payment option. Example: cash in advance (German: Vorkasse)
+  # cat=caddy - options payment/enable/211; type=string; label= 2. label:Label for 2nd payment option. Example: cash in advance (German: Vorkasse)
   options.payment.2.lll = EXT:caddy/pi1/locallang.xml:paymentoption_invoice
-  # cat=caddy - options payment/enable/302; type=boolean; label= 2. enabled:Disable it, if you don't want to offer the 2nd payment option.
+  # cat=caddy - options payment/enable/212; type=boolean; label= 2. enabled:Disable it, if you don't want to offer the 2nd payment option.
   options.payment.2.enabled = 1
-  # cat=caddy - options payment/enable/303; type=string; label= 2. costs:Extra costs for 2nd payment option. Example: 9.99
+  # cat=caddy - options payment/enable/213; type=string; label= 2. costs:Extra costs for 2nd payment option. Example: 9.99
   options.payment.2.costs = 3.00
-  # cat=caddy - options payment/enable/304; type=options[normal,reduced]; label= 2. tax rate:Tax rate for extra costs for 2nd payment option.
+  # cat=caddy - options payment/enable/214; type=options[normal,reduced]; label= 2. tax rate:Tax rate for extra costs for 2nd payment option.
   options.payment.2.taxrate = normal
-  # cat=caddy - options payment/enable/401; type=string; label= 3. label:Label for 3rd payment option. Example: cash in advance (German: Vorkasse)
+  # cat=caddy - options payment/enable/221; type=string; label= 3. label:Label for 3rd payment option. Example: cash in advance (German: Vorkasse)
   options.payment.3.lll = EXT:caddy/pi1/locallang.xml:paymentoption_cashondelivery
-  # cat=caddy - options payment/enable/402; type=boolean; label= 3. enabled:Disable it, if you don't want to offer the 3rd payment option.
+  # cat=caddy - options payment/enable/222; type=boolean; label= 3. enabled:Disable it, if you don't want to offer the 3rd payment option.
   options.payment.3.enabled = 1
-  # cat=caddy - options payment/enable/403; type=string; label= 3. costs:Extra costs for 3rd payment option. Example: 9.99
+  # cat=caddy - options payment/enable/223; type=string; label= 3. costs:Extra costs for 3rd payment option. Example: 9.99
   options.payment.3.costs = 12.50
-  # cat=caddy - options payment/enable/404; type=options[normal,reduced]; label= 3. tax rate:Tax rate for extra costs for 3rd payment option.
+  # cat=caddy - options payment/enable/224; type=options[normal,reduced]; label= 3. tax rate:Tax rate for extra costs for 3rd payment option.
   options.payment.3.taxrate = normal
+  # cat=caddy - options payment/enable/231; type=string; label= 4. label:Label for 4th payment option. Example: cash in advance (German: Vorkasse)
+  options.payment.4.lll = EXT:caddy/pi1/locallang.xml:paymentoption_cashonpickup
+  # cat=caddy - options payment/enable/232; type=boolean; label= 4. enabled:Disable it, if you don't want to offer the 3rd payment option.
+  options.payment.4.enabled = 1
+  # cat=caddy - options payment/enable/233; type=string; label= 4. costs:Extra costs for 3rd payment option. Example: 9.99
+  options.payment.4.costs = 0.00
+  # cat=caddy - options payment/enable/234; type=options[normal,reduced]; label= 4. tax rate:Tax rate for extra costs for 3rd payment option.
+  options.payment.4.taxrate = normal
   # cat=caddy - options payment/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   options.payment.externalLinks = Click me!
   # cat=caddy - options payment/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  options.payment.sponsors = Click me!        
+  options.payment.sponsors = Click me!
 
   # cat=caddy - options shipping/enable/100; type=options[0,1,2];  label= Default shipping option:0: no preset. 1: mail. 2: mail express.
   options.shipping.default = 1
@@ -212,7 +220,7 @@ plugin.caddy {
   # cat=caddy - options shipping/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   options.shipping.externalLinks = Click me!
   # cat=caddy - options shipping/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  options.shipping.sponsors = Click me!        
+  options.shipping.sponsors = Click me!
 
   # cat=caddy - options specials/enable/100; type=options[0,1,2];  label= Default specials option:0: no preset. 1: neutral package. 2: fee for islands (German: Versandkosten Deutsche Inseln).
   options.specials.default = 0
@@ -231,22 +239,22 @@ plugin.caddy {
   # cat=caddy - options specials/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   options.specials.externalLinks = Click me!
   # cat=caddy - options specials/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  options.specials.sponsors = Click me!        
+  options.specials.sponsors = Click me!
 
   # cat=caddy - pages*/enable/301; type=int+; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart
-  pages.caddy = 
+  pages.caddy =
   # cat=caddy - pages*/enable/302; type=int+; label= Caddy mini:Uid of the page with the caddy mini - the cart for marginal column
-  pages.caddymini = 
+  pages.caddymini =
   # cat=caddy - pages*/enable/303; type=int+; label= Shop*:*Obligate! Uid of the page which contains the items. Usually the root page.
-  pages.shop = 
+  pages.shop =
   # cat=caddy - pages*/enable/304; type=int+; label= Power of Revocation:Uid of the page with the revocation info (German: Widerrufsbelehrung)
-  pages.revocation = 
+  pages.revocation =
   # cat=caddy - pages*/enable/306; type=int+; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
-  pages.terms = 
+  pages.terms =
   # cat=caddy - pages*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pages.externalLinks = Click me!
   # cat=caddy - pages*/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  pages.sponsors = Click me!        
+  pages.sponsors = Click me!
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
@@ -300,7 +308,7 @@ plugin.caddy {
   # cat=caddy - pdf delivery order//304; type=int+; label= Number font-size: Font-size of the delivery number in points
   pdf.deliveryorder.number.fontsize = 24
   # cat=caddy - pdf delivery order//306; type=string; label= Number prefix: Prefix for the delivery number. Example : D-
-  pdf.deliveryorder.number.prefix = 
+  pdf.deliveryorder.number.prefix =
   # cat=caddy - pdf delivery order//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
   pdf.deliveryorder.termOfCredit.x = 25
   # cat=caddy - pdf delivery order//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
@@ -325,7 +333,7 @@ plugin.caddy {
   # cat=caddy - pdf invoice//304; type=int+; label= Number font-size: Font-size of the invoice number in points
   pdf.invoice.number.fontsize = 24
   # cat=caddy - pdf invoice//306; type=string; label= Number prefix: Prefix for the invoice number. Example : I-
-  pdf.invoice.number.prefix = 
+  pdf.invoice.number.prefix =
   # cat=caddy - pdf invoice//401; type=int+; label= Term of credit position left: Position of the term of credit from the left margin in millimeters
   pdf.invoice.termOfCredit.x = 25
   # cat=caddy - pdf invoice//402; type=int+; label= Term of credit position top: Position of the term of credit from the top margin in millimeters
@@ -338,14 +346,14 @@ plugin.caddy {
   pdf.invoice.sponsors = Click me!
 
   # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number. Example : O-
-  pdf.order.number.prefix = 
+  pdf.order.number.prefix =
   # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.order.externalLinks = Click me!
   # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.order.sponsors = Click me!
 
   # cat=caddy - pdf revocation//101; type=options[,L,C,R];  label= Revocation alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
-  pdf.revocation.align = 
+  pdf.revocation.align =
   # cat=caddy - pdf revocation//101; type=int+; label= Revocation position left: Position of the revocation from the left margin in millimeters
   pdf.revocation.x = 25
   # cat=caddy - pdf revocation//102; type=int+; label= Revocation position top: Position of the revocation from the top margin in millimeters
@@ -360,7 +368,7 @@ plugin.caddy {
   pdf.revocation.sponsors = Click me!
 
   # cat=caddy - pdf terms//101; type=options[,L,C,R];  label= Terms alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
-  pdf.terms.align = 
+  pdf.terms.align =
   # cat=caddy - pdf terms//101; type=int+; label= Terms position left: Position of the terms from the left margin in millimeters
   pdf.terms.x = 25
   # cat=caddy - pdf terms//102; type=int+; label= Terms position top: Position of the terms from the top margin in millimeters

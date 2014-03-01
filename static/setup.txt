@@ -534,7 +534,7 @@ plugin.tx_caddy_pi1 {
           // cash in advance, invoice, cash on delivery
         options =
         options {
-            // cash in advance: enabled, title, extra, tax
+            // enabled, title, extra, tax
           1 = cash in advance
           1 {
             enabled = {$plugin.caddy.options.payment.1.enabled}
@@ -578,8 +578,8 @@ plugin.tx_caddy_pi1 {
               // tax rate which will be applied (reduced or normal)
             tax = {$plugin.caddy.options.payment.1.taxrate}
           }
-            // invoice: enabled, title, extra, tax
-          2 =
+            // enabled, title, extra, tax
+          2 = invoice
           2 {
             enabled = {$plugin.caddy.options.payment.2.enabled}
               // label, gross
@@ -622,8 +622,8 @@ plugin.tx_caddy_pi1 {
               // tax rate which will be applied (reduced or normal)
             tax = {$plugin.caddy.options.payment.2.taxrate}
           }
-            // cash on delivery: enabled, title, extra, tax
-          3 =
+            // enabled, title, extra, tax
+          3 = cash on delivery
           3 {
             enabled = {$plugin.caddy.options.payment.3.enabled}
               // label, gross
@@ -665,6 +665,50 @@ plugin.tx_caddy_pi1 {
             extra = {$plugin.caddy.options.payment.3.costs}
               // tax rate which will be applied (reduced or normal)
             tax = {$plugin.caddy.options.payment.3.taxrate}
+          }
+            // enabled, title, extra, tax
+          4 = cash on pick up
+          4 {
+            enabled = {$plugin.caddy.options.payment.4.enabled}
+              // label, gross
+            title = COA
+            title {
+              10 = TEXT
+              10 {
+                data        = LLL:{$plugin.caddy.options.payment.4.lll}
+                noTrimWrap  = || |
+              }
+                // amount
+              20 = COA
+              20 {
+                  // gross
+                10 = USER
+                10 {
+                  userFunc = tx_caddy_userfunc->numberformat
+                  userFunc {
+                    number = TEXT
+                    number {
+                      value = {$plugin.caddy.options.payment.4.costs}
+                    }
+                    decimal       = {$plugin.caddy.main.decimal}
+                    dec_point     = {$plugin.caddy.main.dec_point}
+                    thousands_sep = {$plugin.caddy.main.thousands_sep}
+                    drs           = {$plugin.caddy.debug.userfunc}
+                  }
+                }
+                  // currency symbol
+                20 = TEXT
+                20 {
+                  value = {$plugin.caddy.main.currencySymbol}
+                  noTrimWrap = | ||
+                }
+                wrap = (|)
+              }
+            }
+              // extra cost (gross price) of payment method
+            extra = {$plugin.caddy.options.payment.4.costs}
+              // tax rate which will be applied (reduced or normal)
+            tax = {$plugin.caddy.options.payment.4.taxrate}
           }
         }
       }
