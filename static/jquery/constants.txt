@@ -1,9 +1,0 @@
-plugin.caddy {
-
-  # cat=caddy - typeNum//100;             type=int+; label= Caddy check-out:      typeNum of a PAGE with the caddy check out workflow. Is needed for AJAX.
-  typeNum.caddyCheckOut       = 53679
-  # cat=caddy - typeNum/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
-  typeNum.externalLinks       = Click me!
-  # cat=caddy - typeNum/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
-  typeNum.sponsors            = Click me!
-}

@@ -1,5 +1,0 @@
-Composer installieren und starten
-
-# apt-get install curl
-# curl -sS https://getcomposer.org/installer | php
-# php composer.phar install
