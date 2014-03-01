@@ -543,7 +543,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 = TEXT
               10 {
-                data        = LLL:{$plugin.caddy.options.payment.1.lll}
+                data        = LLL:EXT:caddy/pi1/locallang.xml:paymentoption_cashinadvance
                 noTrimWrap  = || |
               }
                 // amount
