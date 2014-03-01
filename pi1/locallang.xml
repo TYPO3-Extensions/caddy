@@ -115,7 +115,7 @@
       <label index="order">Bestellung</label>
       <label index="ordernumber">Bestellnummer</label>
       <label index="paymentEnterMethod">Bitte wählen Sie eine Zahlungsmethode aus.</label>
-      <label index="paymentlabel">Zahlung per</label>
+      <label index="paymentlabel">Zahlungsweise</label>
       <label index="paymentoption_cashinadvance">Vorkasse</label>
       <label index="paymentoption_cashondelivery">Nachnahme</label>
       <label index="paymentoption_cashonpickup">Bar bei Abholung</label>
