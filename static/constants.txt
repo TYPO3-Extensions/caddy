@@ -166,11 +166,11 @@ plugin.caddy {
 
   # cat=caddy - options payment/enable/100; type=options[0,1,2,3,4];  label= Default payment option:0: no preset. 1: cash in advance (de: Vorkasse). 2: invoice (de: Rechnung). 3: cash on delivery (de: Nachnahme). 4: cash on pick up (de: Bar bei Abholung)
   options.payment.default = 1
-  # cat=caddy - options payment/enable/202; type=boolean; label= Cash on advance enabled:Disable it, if you don't want to offer the payment option cash on advance (de: Vorkasse).
+  # cat=caddy - options payment/enable/202; type=boolean; label= Cash on advance: enabled:Disable it, if you don't want to offer the payment option cash on advance (de: Vorkasse).
   options.payment.1.enabled = 1
-  # cat=caddy - options payment/enable/203; type=string; label= Cash on advance costs:Extra costs for the payment option cash on advance. Example: 9.99.
+  # cat=caddy - options payment/enable/203; type=string; label= Cash on advance: costs:Extra costs for the payment option cash on advance. Example: 9.99.
   options.payment.1.costs = 0.00
-  # cat=caddy - options payment/enable/204; type=options[normal,reduced]; label= Cash on advance tax rate:Tax rate for extra costs for the payment option cash on advance.
+  # cat=caddy - options payment/enable/204; type=options[normal,reduced]; label= Cash on advance: tax rate:Tax rate for extra costs for the payment option cash on advance.
   options.payment.1.taxrate = normal
   # cat=caddy - options payment/enable/211; type=string; label= 2. label:Label for 2nd payment option. Example: cash in advance (German: Vorkasse)
   options.payment.2.lll = EXT:caddy/pi1/locallang.xml:paymentoption_invoice
