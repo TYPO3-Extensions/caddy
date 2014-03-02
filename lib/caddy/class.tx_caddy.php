@@ -898,7 +898,7 @@ class tx_caddy extends tslib_pibase
     $marker = array( );
 
     $paymentId  = $calcedCaddy['options']['payment']['id'];
-    $paymentId = $this->session->paymentGet( $this->pidCaddy );
+    $paymentId  = $this->session->paymentGet( $this->pidCaddy );
     $shippingId = $calcedCaddy['options']['shipping']['id'];
     $specialIds = $calcedCaddy['options']['specials']['ids'];
 
@@ -907,6 +907,15 @@ class tx_caddy extends tslib_pibase
             + ( array ) $this->caddyWiItemsOptionsShipping(  $shippingId )
             + ( array ) $this->caddyWiItemsOptionsSpecials(  $specialIds )
             ;
+
+//var_dump( __METHOD__, __LINE__, $calcedCaddy['sum']['options']['gross'] );
+
+    if( ( double ) $calcedCaddy['sum']['options']['gross'] > 0.00 )
+    {
+      return $marker;
+    }
+
+    $marker['###OPTIONCOSTS###'] = null;
 
     return $marker;
   }
