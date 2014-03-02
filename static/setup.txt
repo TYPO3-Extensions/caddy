@@ -451,11 +451,11 @@ plugin.tx_caddy_pi1 {
           optionsspecialssumtaxreduced.10.userFunc.number.field = optionsspecialssumtaxreduced
 
             // Sum gross of cash discount
-          sumcashdiscountgross  < .optionspaymentsumgross
-          sumcashdiscountgross.10.userFunc.number.field = sumcashdiscountgross
+          sumcashdiscountsumgross  < .optionspaymentsumgross
+          sumcashdiscountsumgross.10.userFunc.number.field = sumcashdiscountsumgross
             // Sum net of cash discount
-          sumcashdiscountnet    < .optionspaymentsumgross
-          sumcashdiscountnet.10.userFunc.number.field   = sumcashdiscountnet
+          sumcashdiscountsumnet    < .optionspaymentsumgross
+          sumcashdiscountsumnet.10.userFunc.number.field   = sumcashdiscountsumnet
 
             // Sum gross of items
           sumitemsgross         < .optionspaymentsumgross
@@ -590,10 +590,10 @@ plugin.tx_caddy_pi1 {
                 items     = 1
                   // [Boolean] false (default): payment costs don't get the cash discount. true: payment costs get the cash discount.
                 payment   = 0
-                  // [Boolean] false (default): service costs don't get the cash discount. true: service costs get the cash discount.
-                service   = 0
                   // [Boolean] false (default): shipping costs don't get the cash discount. true: shipping costs get the cash discount.
                 shipping  = 0
+                  // [Boolean] false (default): specials costs don't get the cash discount. true: specials costs get the cash discount.
+                specials  = 0
               }
                 // [Double]
               percent = {$plugin.caddy.options.payment.1.cashdiscount}
@@ -2796,7 +2796,7 @@ plugin.tx_caddy_pi1 {
           drs           = {$plugin.caddy.debug.userfunc}
           number        = TEXT
           number {
-            field = sumcashdiscountgross
+            field = sumcashdiscountsumgross
           }
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}
@@ -3326,7 +3326,7 @@ plugin.tx_caddy_pi1 {
           drs           = {$plugin.caddy.debug.userfunc}
           number        = TEXT
           number {
-            field = sumcashdiscountgross
+            field = sumcashdiscountsumgross
           }
           decimal       = 2
           dec_point     = {$plugin.caddy.main.dec_point}

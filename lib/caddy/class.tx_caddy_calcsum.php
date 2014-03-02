@@ -90,6 +90,7 @@ class tx_caddy_calcsum
   public  $prefixId       = 'tx_caddy_pi1';
   public  $scriptRelPath  = 'pi1/class.tx_caddy_pi1.php';
 
+  private $conf           = null; // Current typoscript configuration
   public  $drs            = null;
   private $initInstances  = null;
   private $pidCaddy       = null;
@@ -105,15 +106,17 @@ class tx_caddy_calcsum
  /**
   * init( )
   *
+  * @param	array		$conf     : current typoscript configuration
   * @return	void
   * @access private
   * @internal   #54628
   * @version    4.0.3
   * @since      4.0.3
   */
-  private function init( )
+  private function init( $conf= null )
   {
     $this->initInstances( );
+    $this->initVars( $conf );
   }
 
  /**
@@ -162,6 +165,21 @@ class tx_caddy_calcsum
     $this->pidCaddy = $pidCaddy;
   }
 
+ /**
+  * initVars( )
+  *
+  * @param	array		$conf     : current typoscript configuration
+  * @return	void
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function initVars( $conf=null )
+  {
+    $this->conf = $conf;
+
+  }
+
 
 
   /***********************************************
@@ -184,30 +202,32 @@ class tx_caddy_calcsum
   *
   * @param	array		$items    : array with element sum with gross, net, tax.normal, tax.reduced
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
+  * @param	array		$conf     : current typoscript configuration
   * @return	array		$sum (see above)
   * @access public
   * @version    4.0.8
   * @since      2.0.2
   */
-  public function sum( $items, $options )
+  public function sum( $items, $options, $conf=null )
   {
       // #54628, 131229, dwildt, 1+
-    $this->init( );
+    $this->init( $conf );
 
     $sumItems             = $this->sumItems( $items );
     $sumOptions           = $this->sumOptions( $options );
       // #i0039, 131230, dwildt, 1+
     $sumOptionsWoPayment  = $this->sumOptionsWoPayment( $options );
       // #i0047, 140302, dwildt, 1+
-    $sumCashdiscount      = $this->sumCashdiscount( $options );
+    $sumCashdiscount      = $this->sumCashdiscount( $options, $sumItems );
 
     $sum = array(
+        // #i0047, 140302, dwildt, 1+
       'cashdiscount'      => $sumCashdiscount,
       'items'             => $sumItems,
       'options'           => $sumOptions,
         // #i0039, 131230, dwildt, 1+
       'optionswopayment'  => $sumOptionsWoPayment,
-      'sum'               => $this->sumSum( $sumItems, $sumOptions ),
+      'sum'               => $this->sumSum( $sumItems, $sumOptions, $sumCashdiscount ),
     );
 //var_dump( __METHOD__, __LINE__, $sum );
 
@@ -224,13 +244,6 @@ class tx_caddy_calcsum
 
  /**
   * sumCashdiscount( )  : Returns sum for
-  *                       * shipping and specials (without payment)
-  *                       for
-  *                       * gross
-  *                       * net
-  *                       * tax
-  *                       * normal
-  *                       * reduced
   *
   * @param	array		$options  : array with options payment, shipping, specials and sum with gross, net, tax.normal, tax.reduced
   * @return	array		$sum (see above)
@@ -238,16 +251,288 @@ class tx_caddy_calcsum
   * @version    4.0.8
   * @since      4.0.8
   */
-  private function sumCashdiscount( $options )
+  private function sumCashdiscount( $options, $sumItems )
   {
-    $sum = array
-    (
-      'gross' =>  $this->sumOptionsWoPaymentGross( $options ),
-      'net'   =>  $this->sumOptionsWoPaymentNet(   $options ),
-      'tax'   =>  $this->sumOptionsWoPaymentTax(   $options ),
+    $paymentId = $options['payment']['id'];
+
+    $defArray = array(
+      'gross' =>  0.00,
+      'net'   =>  0.00,
+      'tax'   => array(
+        'normal'  =>  0.00,
+        'reduced' =>  0.00,
+        'sum'     =>  0.00
+      )
     );
 
-    return $sum;
+    $sumCashdiscount = array(
+      'items' => $defArray,
+      'options' => array(
+        'payment'   =>  $defArray,
+        'shipping'  =>  $defArray,
+        'specials'  =>  $defArray
+      ),
+      'sum'   => $defArray
+    );
+
+    // RETURN : cash discount isn't configured
+    if( ! $this->sumCashdiscountRequirements( $paymentId ) )
+    {
+      return $sumCashdiscount;
+    }
+
+    $confCashdiscount = $this->conf['api.']['options.']['payment.']['options.'][$paymentId . '.']['cash-discount.'];
+
+    $sumCashdiscount = array(
+      'items' => $this->sumCashdiscountItems( $confCashdiscount, $sumItems ),
+      'options' => array(
+        'payment'   =>  $this->sumCashdiscountOptionsPayment( $confCashdiscount, $options ),
+        'shipping'  =>  $this->sumCashdiscountOptionsShipping( $confCashdiscount, $options ),
+        'specials'  =>  $this->sumCashdiscountOptionsSpecials( $confCashdiscount, $options )
+      ),
+      'sum'   => $defArray
+    );
+
+    $sumCashdiscount = $this->sumCashdiscountSum( $sumCashdiscount );
+    //var_dump( __METHOD__, __LINE__, $sumCashdiscount, $sumItems, $options );
+//var_dump( __METHOD__, __LINE__, $sumCashdiscount );
+//die( );
+
+    return $sumCashdiscount;
+  }
+
+ /**
+  * sumCashdiscountItems( ) : Returns cash discount for the items
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountItems( $confCashdiscount, $sumItems )
+  {
+      // RETURN : No cash discount for items
+    if( ! $confCashdiscount['on.']['items'] )
+    {
+      return array(
+        'gross' =>  0.00,
+        'net'   =>  0.00,
+        'tax'   => array(
+          'normal'  =>  0.00,
+          'reduced' =>  0.00
+        )
+      );
+    }
+
+    $percent  = ( double ) $confCashdiscount['percent'];
+
+    return array(
+      'gross' =>  ( double ) ($sumItems['gross']  * ( $percent / 100 ) ),
+      'net'   =>  ( double ) ($sumItems['net']    * ( $percent / 100 ) ),
+      'tax'   => array(
+        'normal'  =>  ( double ) ($sumItems['tax']['normal']  * ( $percent / 100 ) ),
+        'reduced' =>  ( double ) ($sumItems['tax']['reduced'] * ( $percent / 100 ) )
+      )
+    );
+  }
+
+ /**
+  * sumCashdiscountOptionsPayment( ) : Returns cash discount for payment options
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountOptionsPayment( $confCashdiscount, $options )
+  {
+      // RETURN : No cash discount for items
+    if( ! $confCashdiscount['on.']['payment'] )
+    {
+      return array(
+        'gross' =>  0.00,
+        'net'   =>  0.00,
+        'tax'   => array(
+          'normal'  =>  0.00,
+          'reduced' =>  0.00
+        )
+      );
+    }
+
+    $percent  = ( double ) $confCashdiscount['percent'];
+
+    return array(
+      'gross' =>  ( double ) ($options['payment']['sum']['gross']  * ( $percent / 100 ) ),
+      'net'   =>  ( double ) ($options['payment']['sum']['net']    * ( $percent / 100 ) ),
+      'tax'   => array(
+        'normal'  =>  ( double ) ($options['payment']['sum']['tax']['normal']  * ( $percent / 100 ) ),
+        'reduced' =>  ( double ) ($options['payment']['sum']['tax']['reduced'] * ( $percent / 100 ) )
+      )
+    );
+  }
+
+ /**
+  * sumCashdiscountOptionsShipping( ) : Returns cash discount for shipping
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountOptionsShipping( $confCashdiscount, $options )
+  {
+      // RETURN : No cash discount for items
+    if( ! $confCashdiscount['on.']['shipping'] )
+    {
+      return array(
+        'gross' =>  0.00,
+        'net'   =>  0.00,
+        'tax'   => array(
+          'normal'  =>  0.00,
+          'reduced' =>  0.00
+        )
+      );
+    }
+
+    $percent  = ( double ) $confCashdiscount['percent'];
+
+    return array(
+      'gross' =>  ( double ) ($options['shipping']['sum']['gross']  * ( $percent / 100 ) ),
+      'net'   =>  ( double ) ($options['shipping']['sum']['net']    * ( $percent / 100 ) ),
+      'tax'   => array(
+        'normal'  =>  ( double ) ($options['shipping']['sum']['tax']['normal']  * ( $percent / 100 ) ),
+        'reduced' =>  ( double ) ($options['shipping']['sum']['tax']['reduced'] * ( $percent / 100 ) )
+      )
+    );
+  }
+
+ /**
+  * sumCashdiscountOptionsSpecials( ) : Returns cash discount for specials
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountOptionsSpecials( $confCashdiscount, $options )
+  {
+      // RETURN : No cash discount for items
+    if( ! $confCashdiscount['on.']['specials'] )
+    {
+      return array(
+        'gross' =>  0.00,
+        'net'   =>  0.00,
+        'tax'   => array(
+          'normal'  =>  0.00,
+          'reduced' =>  0.00
+        )
+      );
+    }
+
+    $percent  = ( double ) $confCashdiscount['percent'];
+
+    return array(
+      'gross' =>  ( double ) ($options['specials']['sum']['gross']  * ( $percent / 100 ) ),
+      'net'   =>  ( double ) ($options['specials']['sum']['net']    * ( $percent / 100 ) ),
+      'tax'   => array(
+        'normal'  =>  ( double ) ($options['specials']['sum']['tax']['normal']  * ( $percent / 100 ) ),
+        'reduced' =>  ( double ) ($options['specials']['sum']['tax']['reduced'] * ( $percent / 100 ) )
+      )
+    );
+  }
+
+ /**
+  * sumCashdiscountRequirements( )  :
+  *
+  * @param	array		$paymentId  :
+  * @return	boolean
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountRequirements( $paymentId )
+  {
+    $confCashdiscount  = $this->conf['api.']['options.']['payment.']['options.'][$paymentId . '.']['cash-discount.'];
+
+      // RETURN : cash discount isn't configured
+    if( ! is_array( $confCashdiscount ) )
+    {
+      return false;
+    }
+
+      // RETURN : cash discount array on isn't configured
+    if( ! is_array( $confCashdiscount['on.'] ) )
+    {
+      return false;
+    }
+
+      // RETURN : cash discount is 0.00
+    if( ( double ) $confCashdiscount['percent'] <= ( double ) 0 )
+    {
+      return false;
+    }
+
+    return true;
+  }
+
+ /**
+  * sumCashdiscountSum( ) : Sum the cash discount of items and the options payment, shipping and specials
+  *
+  * @param	array
+  * @return	array
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function sumCashdiscountSum( $sumCashdiscount )
+  {
+      // Sum gross
+    $sumCashdiscount['sum']['gross']  = $sumCashdiscount['items']['gross']
+                                      + $sumCashdiscount['options']['payment']['gross']
+                                      + $sumCashdiscount['options']['shipping']['gross']
+                                      + $sumCashdiscount['options']['specials']['gross']
+                                      ;
+    $sumCashdiscount['sum']['gross']  = $sumCashdiscount['sum']['gross']
+                                      * -1
+                                      ;
+
+      // Sum net
+    $sumCashdiscount['sum']['net']  = $sumCashdiscount['items']['net']
+                                    + $sumCashdiscount['options']['payment']['net']
+                                    + $sumCashdiscount['options']['shipping']['net']
+                                    + $sumCashdiscount['options']['specials']['net']
+                                    ;
+    $sumCashdiscount['sum']['net']  = $sumCashdiscount['sum']['net']
+                                      * -1
+                                      ;
+
+    $sumCashdiscount['sum']['tax']['normal']  = $sumCashdiscount['items']['tax']['normal']
+                                              + $sumCashdiscount['options']['payment']['tax']['normal']
+                                              + $sumCashdiscount['options']['shipping']['tax']['normal']
+                                              + $sumCashdiscount['options']['specials']['tax']['normal']
+                                              ;
+    $sumCashdiscount['sum']['tax']['normal']  = $sumCashdiscount['sum']['tax']['normal']
+                                              * -1
+                                              ;
+
+    $sumCashdiscount['sum']['tax']['reduced'] = $sumCashdiscount['items']['tax']['reduced']
+                                              + $sumCashdiscount['options']['payment']['tax']['reduced']
+                                              + $sumCashdiscount['options']['shipping']['tax']['reduced']
+                                              + $sumCashdiscount['options']['specials']['tax']['reduced']
+                                              ;
+    $sumCashdiscount['sum']['tax']['reduced'] = $sumCashdiscount['sum']['tax']['reduced']
+                                              * -1
+                                              ;
+
+    $sumCashdiscount['sum']['tax']['sum'] = $sumCashdiscount['sum']['tax']['normal']
+                                          + $sumCashdiscount['sum']['tax']['reduced']
+                                          ;
+
+    return $sumCashdiscount;
   }
 
 
@@ -568,22 +853,25 @@ class tx_caddy_calcsum
   *               * normal
   *               * reduced
   *
-  * @param	array		$items    : array with element sum with gross, net, tax.normal, tax.reduced
-  * @param	array		$options  : array with element sum with gross, net, tax.normal, tax.reduced
+  * @param	array		$items            : array with element sum with gross, net, tax.normal, tax.reduced
+  * @param	array		$options          : array with element sum with gross, net, tax.normal, tax.reduced
+  * @param	array		$sumCashdiscount  :
   * @return	array		$sum (see above)
   * @access private
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumSum( $items, $options )
+  private function sumSum( $items, $options, $sumCashdiscount )
   {
     $sum = array
     (
         // #54628, 131229, dwildt, 1+
       'qty'   =>  $this->sumSumQty( ),
-      'gross' =>  $this->sumSumGross( $items, $options ),
-      'net'   =>  $this->sumSumNet(   $items, $options ),
-      'tax'   =>  $this->sumSumTax(   $items, $options ),
+      'gross' =>  $this->sumSumGross( $items, $options )
+              +   $sumCashdiscount['sum']['gross'],
+      'net'   =>  $this->sumSumNet(   $items, $options )
+              +   $sumCashdiscount['sum']['net'],
+      'tax'   =>  $this->sumSumTax(   $items, $options, $sumCashdiscount['sum'] ),
     );
 
     return $sum;
@@ -661,17 +949,17 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumSumTax( $items, $options )
+  private function sumSumTax( $items, $options, $cashdiscount )
   {
     $sum = array
     (
-      'normal'  => $this->sumSumTaxNormal(  $items, $options ),
-      'reduced' => $this->sumSumTaxReduced( $items, $options ),
-      'sum'     => $this->sumSumTaxNormal(  $items, $options )
-                +  $this->sumSumTaxReduced(  $items, $options )
-                ,
+      'normal'  => $this->sumSumTaxNormal(  $items, $options, $cashdiscount ),
+      'reduced' => $this->sumSumTaxReduced( $items, $options, $cashdiscount )
     );
 
+    $sum['sum'] = $sum['normal']
+                + $sum['reduced']
+                 ;
     return $sum;
   }
 
@@ -685,10 +973,11 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumSumTaxNormal( $items, $options )
+  private function sumSumTaxNormal( $items, $options, $cashdiscount )
   {
     $sum  = $items['tax']['normal']
           + $options['tax']['normal']
+          + $cashdiscount['tax']['normal']
           ;
 
     return $sum;
@@ -704,10 +993,11 @@ class tx_caddy_calcsum
   * @version    2.0.2
   * @since      2.0.2
   */
-  private function sumSumTaxReduced( $items, $options )
+  private function sumSumTaxReduced( $items, $options, $cashdiscount )
   {
     $sum  = $items['tax']['reduced']
           + $options['tax']['reduced']
+          + $cashdiscount['tax']['reduced']
           ;
 
     return $sum;

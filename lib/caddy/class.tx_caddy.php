@@ -159,7 +159,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.4
+ * @version	4.0.8
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -277,6 +277,30 @@ class tx_caddy extends tslib_pibase
   }
 
  /**
+  * caddyWiItemsCashdiscount( )  :
+  *
+  * @param	array		$calcedCaddy  :
+  * @return	array		$marker       :
+  * @access private
+  * @version    4.0.8
+  * @since      4.0.8
+  */
+  private function caddyWiItemsCashdiscount( $calcedCaddy )
+  {
+//var_dump( __METHOD__, __LINE__, $calcedCaddy );
+    if( ( double ) $calcedCaddy['sum']['cashdiscount']['sum']['gross'] < 0.00 )
+    {
+      return;
+    }
+
+    $marker = array(
+      '###CASHDISCOUNT###' => null
+    );
+
+    return $marker;
+  }
+
+ /**
   * caddyWiMinPriceUndercut( )  :
   *
   * @return	string		: $content
@@ -348,6 +372,7 @@ class tx_caddy extends tslib_pibase
                   ;
         $subparts = ( array ) $this->caddyWiItemsMarkerItems( $calcedCaddy )
                   + ( array ) $this->caddyWiItemsOptions( $calcedCaddy )
+                  + ( array ) $this->caddyWiItemsCashdiscount( $calcedCaddy )
                   ;
         break;
     }
@@ -359,6 +384,8 @@ class tx_caddy extends tslib_pibase
       'subparts'  => $subparts,
       'tmpl'      => $this->tmpl['all']
     );
+//var_dump( __METHOD__, __LINE__, $caddy );
+//die( );
 
       // Remove subparts, if they aren't needed
     $caddy = $this->caddyWiItemsSetSubpartsToNull( $caddy );
@@ -860,9 +887,7 @@ class tx_caddy extends tslib_pibase
  /**
   * caddyWiItemsOptions( )  :
   *
-  * @param	integer		$paymentId    :
-  * @param	integer		$shippingId   :
-  * @param	integer		$specialIds   :
+  * @param	integer		$calcedCaddy    :
   * @return	array		$marker :
   * @access private
   * @version    2.0.2
@@ -1178,7 +1203,7 @@ class tx_caddy extends tslib_pibase
     // #54634, 131229, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
     // #54634, 131229, dwildt, 1+
-//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pidCaddy, $sesArray );
 
     return $sesArray;
@@ -2119,13 +2144,13 @@ class tx_caddy extends tslib_pibase
   * @param	[type]		$options: ...
   * @return	array		:
   * @access private
-  * @version    2.0.2
+  * @version    4.08
   * @since      2.0.2
   */
   private function calcSum( $items, $options )
   {
     $this->calcSumInitInstance( );
-    $sum = $this->tx_caddy_calcsum->sum( $items, $options);
+    $sum = $this->tx_caddy_calcsum->sum( $items, $options, $this->conf );
 
     return $sum;
   }
