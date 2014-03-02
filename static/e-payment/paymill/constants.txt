@@ -10,7 +10,7 @@ plugin.caddy {
         enabled = 0
       }
       3 {
-          // Disable cash on delivery (de: Nachnahem)
+          // Disable cash on delivery (de: Nachnahme)
         enabled = 0
       }
     }

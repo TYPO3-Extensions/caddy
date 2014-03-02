@@ -13,6 +13,7 @@
       <label index="caddyempty">Caddy is empty</label>
       <label index="caddyemptyyou">Your caddy is empty</label>
       <label index="cashdiscount">Cash discount</label>
+      <label index="cashdiscountnet">Cash discount (net)</label>
       <label index="delete">Remove this item from cart.</label>
       <label index="deliveryaddress">Delivery Address</label>
       <label index="deliveryorder">Delivery order</label>
@@ -35,8 +36,8 @@
       <label index="linktoshop">Forward with Shopping</label>
       <label index="minprice">The minimum order value of %d has not been reached yet.</label>
       <label index="net">Net</label>
-      <label index="optionsgross">Billing-, Service- and Shipping costs</label>
-      <label index="optionsnet">Billing-, Service- and Shipping costs (net)</label>
+      <label index="optionsgross">Billing-, service- and shipping costs</label>
+      <label index="optionsnet">Billing-, service- and shipping costs (net)</label>
       <label index="order">Order</label>
       <label index="ordernumber">Order number</label>
       <label index="paymentEnterMethod">Please select a payment method.</label>
@@ -74,9 +75,9 @@
       <label index="specials_each">%s each</label>
       <label index="specials_free_from">free special option from</label>
       <label index="specials_free_until">free special option until</label>
-      <label index="sum">Sum</label>
-      <label index="sumnet">Sum (wo tax)</label>
-      <label index="sumgross">Sum (w tax)</label>
+      <label index="sum">Total</label>
+      <label index="sumnet">Total (net)</label>
+      <label index="sumgross">Total (gross)</label>
       <label index="tableheaderdelete">Remove</label>
       <label index="tax">Value added Tax</label>
       <label index="tax_abbr">VAT</label>
@@ -90,6 +91,7 @@
       <label index="caddyempty">Der Warenkorb ist leer</label>
       <label index="caddyemptyyou">Dein Warenkorb ist leer</label>
       <label index="cashdiscount">Skonto</label>
+      <label index="cashdiscountnet">Skonto (netto)</label>
       <label index="delete">Diesen Artikel aus dem Warenkorb entfernen.</label>
       <label index="deliveryaddress">Lieferadresse</label>
       <label index="deliveryorder">Lieferschein</label>

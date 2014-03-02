@@ -1,6 +1,6 @@
 VERSION
 =======
-2.1.1: 13-09-13
+4.0.8: 14-03-02
 
 INDEX
 =====
@@ -40,6 +40,7 @@ INDEX
   <form name="caddy" id="caddy" action="###TARGET###" method="post">
     <input type="hidden" name="tx_caddy_pi1[updateByCaddy]" value="1" />
     ###VARIANTS###
+    <!-- ###HEADER### begin -->
     <div class="caddy_header">
       <div class="caddy_col caddy_col1">###_LOCAL_LANG_QTY###</div>
       <div class="caddy_col caddy_col2">###_LOCAL_LANG_SKU_SHORT###</div>
@@ -50,6 +51,7 @@ INDEX
       <div class="caddy_col caddy_col7">###_LOCAL_LANG_TABLEHEADERDELETE###</div>
       <div class="caddy_cleaner"></div>
     </div>
+    <!-- ###HEADER### end -->
     <!-- ###CONTENT### begin -->
     <!-- ###ITEM### begin  -->
     <div class="caddy_product">
@@ -67,6 +69,7 @@ INDEX
     </div>
     <!-- ###ITEM### end -->
     <!-- ###CONTENT### end -->
+    <!-- ###FOOTER### begin -->
     <div class="caddy_footer">
       <div class="caddy_col caddy_col1 caddy_col_strong">#</div>
       <div class="caddy_col caddy_col2_5 caddy_col_strong">###_LOCAL_LANG_ITEMSSUMGROSS###</div>
@@ -95,6 +98,7 @@ INDEX
       ###SPECIALS_CHECKBOX###
       <div class="caddy_cleaner"></div>
     </div>
+    <!-- ###FOOTER### end -->
   </form>
   <!-- ###CADDY_REQUIREMENTS### begin -->
   <div class="caddy-requirements-prompt">
@@ -195,6 +199,7 @@ INDEX
 
 <!-- ###CADDY_EMAIL### begin -->
 <table border="0" cellpadding="0" cellspacing="0">
+  <!-- ###HEADER### begin -->
   <thead style="text-align:left;">
     <tr style="font-weight:bold;">
       <th style="border-bottom:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_QTY###;">
@@ -217,8 +222,9 @@ INDEX
       </th>
     </tr>
   </thead>
-  <!-- ###CONTENT### -->
-  <!-- ###ITEM### -->
+  <!-- ###HEADER### end -->
+  <!-- ###CONTENT### begin-->
+  <!-- ###ITEM### begin -->
   <tbody>
     <tr>
       <td style="padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
@@ -241,8 +247,9 @@ INDEX
       </td>
     </tr>
   </tbody>
-  <!-- ###ITEM### -->
-  <!-- ###CONTENT### -->
+  <!-- ###ITEM### end -->
+  <!-- ###CONTENT### end -->
+  <!-- ###FOOTER### begin -->
   <tfoot>
     <tr>
       <td style="border-bottom:1px solid ###BORDERCOLOR###;border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
@@ -308,6 +315,19 @@ INDEX
         &nbsp;
       </td>
     </tr>
+    <!-- ###CASHDISCOUNT### begin -->
+    <tr>
+      <td style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
+        ./.
+      </td>
+      <td colspan="4" style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;width:###WIDTH_TD_SKUITEMTAXNET###;">
+        ###_LOCAL_LANG_CASHDISCOUNTNET###
+      </td>
+      <td style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 0em .2em 0;text-align:right;width:###WIDTH_TD_SUM###;">
+        ###SUMCASHDISCOUNTSUMNET###
+      </td>
+    </tr>
+    <!-- ###CASHDISCOUNT### end -->
     <tr>
       <td style="border-top:1px solid ###BORDERCOLOR###;padding:.2em 1em .2em 0;text-align:right;width:###WIDTH_TD_QTY###;">
         +
@@ -342,6 +362,7 @@ INDEX
       </td>
     </tr>
   </tfoot>
+  <!-- ###FOOTER### begin -->
 </table>
 <br />
 <!-- ###CADDY_EMAIL### end -->

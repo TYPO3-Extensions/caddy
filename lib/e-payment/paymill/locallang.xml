@@ -137,7 +137,7 @@
       <label index="cashinadvance">Vorkasse</label>
       <label index="cashinadvance-submit">Vorkasse prüfen und auswählen</label>
       <label index="cashondelivery">Nachnahme</label>
-      <label index="cashondelivery-submit">Nachnahem prüfen und auswählen</label>
+      <label index="cashondelivery-submit">Nachnahme prüfen und auswählen</label>
       <label index="cashonpickup">Bar bei Abholung</label>
       <label index="cashonpickup-submit">Bar bei Abholung prüfen und auswählen</label>
       <label index="creditcard">Kreditkarte</label>

@@ -908,8 +908,6 @@ class tx_caddy extends tslib_pibase
             + ( array ) $this->caddyWiItemsOptionsSpecials(  $specialIds )
             ;
 
-//var_dump( __METHOD__, __LINE__, $calcedCaddy['sum']['options']['gross'] );
-
     if( ( double ) $calcedCaddy['sum']['options']['gross'] > 0.00 )
     {
       return $marker;

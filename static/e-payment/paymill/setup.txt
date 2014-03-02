@@ -108,19 +108,40 @@ plugin.tx_caddy_pi1 {
           // credit card, direct debit, direct debit (IBAN)
         options =
         options {
-          11 < .1
+          11 < plugin.tx_caddy_pi1.api.options.payment.options.1
           11 = credit card (de: Kreditkarte)
           11 {
             enabled = {$plugin.caddy.options.payment.11.enabled}
             title {
               10 {
-                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
+                10 {
+                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
+                }
+                20 {
+                  if {
+                    isGreaterThan = {$plugin.caddy.options.payment.11.costs}
+                  }
+                  20 {
+                    10 {
+                      userFunc {
+                        number {
+                          value = {$plugin.caddy.options.payment.11.costs}
+                        }
+                      }
+                    }
+                  }
+                }
               }
               20 {
-                10 {
-                  userFunc {
-                    number {
-                      value = {$plugin.caddy.options.payment.11.costs}
+                if {
+                  isGreaterThan = {$plugin.caddy.options.payment.11.cashdiscount}
+                }
+                20 {
+                  10 {
+                    userFunc {
+                      number {
+                        value = {$plugin.caddy.options.payment.11.cashdiscount}
+                      }
                     }
                   }
                 }
@@ -132,19 +153,40 @@ plugin.tx_caddy_pi1 {
             extra = {$plugin.caddy.options.payment.11.costs}
             tax   = {$plugin.caddy.options.payment.11.taxrate}
           }
-          12 < .1
+          12 < plugin.tx_caddy_pi1.api.options.payment.options.1
           12 = direct debit (de: Lastschrift)
           12 {
             enabled = {$plugin.caddy.options.payment.12.enabled}
             title {
               10 {
-                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
+                10 {
+                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
+                }
+                20 {
+                  if {
+                    isGreaterThan = {$plugin.caddy.options.payment.12.costs}
+                  }
+                  20 {
+                    10 {
+                      userFunc {
+                        number {
+                          value = {$plugin.caddy.options.payment.12.costs}
+                        }
+                      }
+                    }
+                  }
+                }
               }
               20 {
-                10 {
-                  userFunc {
-                    number {
-                      value = {$plugin.caddy.options.payment.12.costs}
+                if {
+                  isGreaterThan = {$plugin.caddy.options.payment.12.cashdiscount}
+                }
+                20 {
+                  10 {
+                    userFunc {
+                      number {
+                        value = {$plugin.caddy.options.payment.12.cashdiscount}
+                      }
                     }
                   }
                 }
@@ -156,19 +198,40 @@ plugin.tx_caddy_pi1 {
             extra = {$plugin.caddy.options.payment.12.costs}
             tax   = {$plugin.caddy.options.payment.12.taxrate}
           }
-          13 < .1
+          13 < plugin.tx_caddy_pi1.api.options.payment.options.1
           13 = direct debit (IBAN) (de: Lastschrift mit IBAN)
           13 {
             enabled = {$plugin.caddy.options.payment.13.enabled}
             title {
               10 {
-                data        = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
+                10 {
+                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
+                }
+                20 {
+                  if {
+                    isGreaterThan = {$plugin.caddy.options.payment.13.costs}
+                  }
+                  20 {
+                    10 {
+                      userFunc {
+                        number {
+                          value = {$plugin.caddy.options.payment.13.costs}
+                        }
+                      }
+                    }
+                  }
+                }
               }
               20 {
-                10 {
-                  userFunc {
-                    number {
-                      value = {$plugin.caddy.options.payment.13.costs}
+                if {
+                  isGreaterThan = {$plugin.caddy.options.payment.13.cashdiscount}
+                }
+                20 {
+                  10 {
+                    userFunc {
+                      number {
+                        value = {$plugin.caddy.options.payment.13.cashdiscount}
+                      }
                     }
                   }
                 }
@@ -188,115 +251,10 @@ plugin.tx_caddy_pi1 {
 
 plugin.tx_caddy_pi1 {
   _HTMLMARKER {
-    caddy_header_paymentmethod_creditcard < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
-    caddy_header_paymentmethod_creditcard {
-      10 {
-        10 {
-          data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
-        }
-        20 {
-          if {
-            isGreaterThan = {$plugin.caddy.options.payment.11.costs}
-          }
-          20 {
-            20 {
-              userFunc {
-                number {
-                  value = {$plugin.caddy.options.payment.11.costs}
-                }
-              }
-            }
-          }
-        }
-      }
-      20 {
-        if {
-          isGreaterThan = {$plugin.caddy.options.payment.11.cashdiscount}
-        }
-        20 {
-          10 {
-            userFunc {
-              number {
-                value = {$plugin.caddy.options.payment.11.cashdiscount}
-              }
-            }
-          }
-        }
-      }
-    }
-    caddy_header_paymentmethod_elv < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
-    caddy_header_paymentmethod_elv {
-      10 {
-        10 {
-          data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
-        }
-        20 {
-          if {
-            isGreaterThan = {$plugin.caddy.options.payment.12.costs}
-          }
-          20 {
-            20 {
-              userFunc {
-                number {
-                  value = {$plugin.caddy.options.payment.12.costs}
-                }
-              }
-            }
-          }
-        }
-      }
-      20 {
-        if {
-          isGreaterThan = {$plugin.caddy.options.payment.12.cashdiscount}
-        }
-        20 {
-          10 {
-            userFunc {
-              number {
-                value = {$plugin.caddy.options.payment.12.cashdiscount}
-              }
-            }
-          }
-        }
-      }
-    }
-    caddy_header_paymentmethod_elv-iban < plugin.tx_caddy_pi1._HTMLMARKER.caddy_header_paymentmethod_cashinadvance
-    caddy_header_paymentmethod_elv-iban {
-      10 {
-        10 {
-        data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
-        }
-        20 {
-          if {
-            isGreaterThan = {$plugin.caddy.options.payment.13.costs}
-          }
-          20 {
-            20 {
-              userFunc {
-                number {
-                  value = {$plugin.caddy.options.payment.13.costs}
-                }
-              }
-            }
-          }
-        }
-      }
-      20 {
-        if {
-          isGreaterThan = {$plugin.caddy.options.payment.13.cashdiscount}
-        }
-        20 {
-          10 {
-            userFunc {
-              number {
-                value = {$plugin.caddy.options.payment.13.cashdiscount}
-              }
-            }
-          }
-        }
-      }
-    }
-    paymill_public_key < plugin.tx_caddy_pi1.api.e-payment.provider.paymill.keys.public
+    caddy_header_paymentmethod_creditcard < plugin.tx_caddy_pi1.api.options.payment.options.11.title
+    caddy_header_paymentmethod_elv        < plugin.tx_caddy_pi1.api.options.payment.options.12.title
+    caddy_header_paymentmethod_elv-iban   < plugin.tx_caddy_pi1.api.options.payment.options.13.title
+    paymill_public_key                    < plugin.tx_caddy_pi1.api.e-payment.provider.paymill.keys.public
   }
 }
   // plugin.tx_caddy_pi1

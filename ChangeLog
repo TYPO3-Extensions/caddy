@@ -5,6 +5,9 @@ TODO
 4.0.8
   2014-03-01
   Feature
+  * #i0049: Tax is removed from HTML template
+  * #i0048: Billing-, service- and shipping costs are displayed only, if sum is greater than 0.00
+            * new fields: sumcashdiscountnet, sumcashdiscountgross
   * #i0047: cash discount
             * new fields: sumcashdiscountnet, sumcashdiscountgross
   * #i0046: new payment option cash on pick up (german: Bar bei Abholung)
@@ -58,7 +61,8 @@ TODO
   * #54968: Powermail improvement
   * #54967: Responsive framework foundation
   * #54858: Split the form in different parts
-  * #54832: Another label wrap for radiobuttons and checkboxes  * #i0047: Foundation
+  * #54832: Another label wrap for radiobuttons and checkboxes
+  * #i0047: Foundation
   * #i0046: Validator
 
 4.0.3

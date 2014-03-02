@@ -126,20 +126,20 @@ class tx_caddy_powermail extends tslib_pibase
 
   public $versionInt  = null;
   public $versionStr  = null;
-  
+
     // [Object]
   private $pdf      = null;
-  
+
     // [Object]
   private $userfunc = null;
-  
+
     // caddyEmail
   private $calc                     = null;
   public  $cartCount                = 0;
   public  $cartServiceAttribute1Sum = 0;
   public  $cartServiceAttribute1Max = 0;
   public  $cartServiceAttribute2Sum = 0;
-  public  $cartServiceAttribute2Max = 0; 
+  public  $cartServiceAttribute2Max = 0;
   public  $cartServiceAttribute3Sum = 0;
   public  $cartServiceAttribute3Max = 0;
   private $content                  = null;
@@ -150,18 +150,18 @@ class tx_caddy_powermail extends tslib_pibase
   private $render                   = null;
   private $session                  = null;
   public  $tmpl                     = null;
-  
+
   private $pmVersAppendix = null;
 
-  
-  
+
+
  /***********************************************
   *
   * Caddy E-Payment
   *
   **********************************************/
 
-  
+
  /**
   * caddyEpayment( ) : Dies, if there is an error with the e-payment
   *
@@ -171,8 +171,8 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.5
   */
   private function caddyEpayment( )
-  {   
-    $arrReturn = array( 
+  {
+    $arrReturn = array(
       'content' => null,
       'isPayed' => false
     );
@@ -180,7 +180,7 @@ class tx_caddy_powermail extends tslib_pibase
     $isPayed = $this->caddyEpaymentOrderIsPayed( );
     if( $isPayed )
     {
-      $arrReturn = array( 
+      $arrReturn = array(
         'content' => null,
         'isPayed' => true
       );
@@ -210,13 +210,13 @@ class tx_caddy_powermail extends tslib_pibase
       default:
           // Die
         $this->caddyEpaymentDie( );
-        break;      
+        break;
     }
-    
+
     var_dump( __METHOD__, __LINE__, 'Expected: return within switch. But there was no return.' );
     die( );
   }
-  
+
  /**
   * caddyEpaymentDie( ) : Dies, if there is an undefined e-payment provider
   *
@@ -226,7 +226,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.5
   */
   private function caddyEpaymentDie( )
-  {   
+  {
       // DRS
     if( $this->drsUserfunc )
     {
@@ -241,7 +241,7 @@ class tx_caddy_powermail extends tslib_pibase
       <a href="javascript:history.back( )">Back</a><br />
       Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
       TYPO3 extension: ' . $this->extKey;
-    die( $prompt );   
+    die( $prompt );
   }
 
  /**
@@ -253,14 +253,14 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.5
   */
   private function caddyEpaymentOrderIsPayed( )
-  {   
+  {
     $isPayed = false;
-    
+
     $sesArray     = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    
+
     $currentOrderNumber   = $sesArray['numberOrderCurrent'];
     $epaymentOrderNumber  = $sesArray['e-payment']['order']['numberOrderCurrent'];
-    
+
 //var_dump( __FILE__, __LINE__, $sesArray['numberOrderCurrent'], $sesArray['e-payment']['order']['numberOrderCurrent'] );
       // RETURN false : Order isn't payed
     if( $currentOrderNumber != $epaymentOrderNumber )
@@ -287,13 +287,13 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.6
   */
   private function caddyEpaymentOrderSetPayed( $isPayed )
-  {   
+  {
     $sesArray             = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $currentOrderNumber   = $sesArray['numberOrderCurrent'];
-    
+
     $sesArray['e-payment']['order']['numberOrderCurrent'] = $currentOrderNumber;
     $sesArray['e-payment']['order']['isPayed']            = $isPayed;
-    
+
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray );
       // save session
     $GLOBALS['TSFE']->storeSessionData( );
@@ -302,16 +302,16 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
-  * caddyEpaymentPaymill( ) : 
+  * caddyEpaymentPaymill( ) :
   *
-  * @return  array      $arrReturn  : 
+  * @return  array      $arrReturn  :
   * @access private
   * @version 4.0.6
   * @since  4.0.5
   */
   private function caddyEpaymentPaymill( )
-  {   
-    $arrReturn = array( 
+  {
+    $arrReturn = array(
       'content' => null,
       'isPayed' => false
     );
@@ -322,7 +322,7 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
-  * caddyEpaymentPaymillInit( ) : 
+  * caddyEpaymentPaymillInit( ) :
   *
   * @return  void
   * @access private
@@ -330,25 +330,25 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.6
   */
   private function caddyEpaymentPaymillInit( )
-  {   
+  {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'e-payment/powermail/class.tx_caddy_epayment_powermail.php' );
     $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_powermail' );
     $this->epayment->setParentObject( $this );
   }
-  
+
  /**
-  * caddyEpaymentPaymillTemplateAfterTransaction( ) : 
+  * caddyEpaymentPaymillTemplateAfterTransaction( ) :
   *
-  * @return  array    $arrReturn  : 
+  * @return  array    $arrReturn  :
   * @access private
   * @version 4.0.6
   * @since  4.0.5
   */
   private function caddyEpaymentPaymillTemplateAfterTransaction( )
-  {   
-    $arrReturn = array( 
+  {
+    $arrReturn = array(
       'content' => null,
       'isPayed' => false
     );
@@ -356,10 +356,10 @@ class tx_caddy_powermail extends tslib_pibase
     $arrReturn = $this->epayment->getContentAfterTransaction( );
 //var_dump( __FILE__, __LINE__, $arrReturn );
     return $arrReturn;
-  }  
+  }
 
-  
-  
+
+
  /***********************************************
   *
   * Caddy
@@ -375,10 +375,10 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  2.0.2
   */
   public function caddyEmail( $content = '', $conf = array( ) )
-  {   
+  {
     unset( $content );
     $this->conf = $conf;
-        
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -387,7 +387,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // #54634, 140103, dwildt, 9+
     if( ( int ) $this->conf['userFunc.']['caddyPid'] )
     {
@@ -398,10 +398,10 @@ class tx_caddy_powermail extends tslib_pibase
       }
       $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
     }
-      
+
       // Get the typoscript configuration of the caddy plugin 1
     $this->conf = $this->caddyEmailInitConf( );
-    
+
       // RETURN null, if init is unproper
     if( ! $this->caddyEmailInit( ) )
     {
@@ -410,8 +410,8 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
       // RETURN null, if init is unproper
-    
-    $this->caddyEmailEpayment( );    
+
+    $this->caddyEmailEpayment( );
 
       // Get the caddy
     $caddy    = $this->caddy->caddy( );
@@ -427,9 +427,6 @@ class tx_caddy_powermail extends tslib_pibase
                             $subparts
                           );
 
-//var_dump( __METHOD__, __LINE__, $content );
-//die( );
-
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     $content = preg_replace( '|###.*?###|i', '', $content ); // Finally clear not filled markers
 
@@ -441,11 +438,14 @@ class tx_caddy_powermail extends tslib_pibase
       // Decode code for UTF8
     $content = utf8_encode( $content );
 
+//var_dump( __METHOD__, __LINE__, $content );
+//die( );
+//
     return $content;
   }
 
  /**
-  * caddyEmailInit( )  : 
+  * caddyEmailInit( )  :
   *
   * @return  boolean      : true in case of products
   * @access private
@@ -453,7 +453,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  1.4.6
   */
   private function caddyEmailInit( )
-  {   
+  {
     $this->pi_loadLL();
 
       // DRS
@@ -464,14 +464,14 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // Get the HTML template for CADDY_EMAIL
     $this->tmpl = $this->caddyEmailInitTemplate( );
-    
+
     $this->cObj = $GLOBALS['TSFE']->cObj;
 
       // Init instances
-    $this->caddyEmailInstances( );    
+    $this->caddyEmailInstances( );
 
       // RETURN false : no products
     if( ! $this->caddyEmailInitProducts( ) )
@@ -479,13 +479,13 @@ class tx_caddy_powermail extends tslib_pibase
       return false;
     }
       // RETURN false : no products
-    
+
       // RETURN true : there are products
     return true;
   }
 
  /**
-  * caddyEmailEpayment( )  : 
+  * caddyEmailEpayment( )  :
   *
   * @return  void
   * @access private
@@ -493,10 +493,10 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  4.0.6
   */
   private function caddyEmailEpayment( )
-  {   
+  {
     $this->caddyEpayment( );
   }
-  
+
  /**
   * caddyEmailInitConf( )  : Take the conf from plugin.tx_caddy_pi1
   *
@@ -505,15 +505,15 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  2.0.0
   */
   private function caddyEmailInitConf( )
-  {   
+  {
     $conf = $GLOBALS['TSFE']->tmpl->setup['plugin.']['tx_caddy_pi1.'];
     $conf = array_merge( ( array ) $this->conf, ( array ) $conf );
-    
+
     return $conf;
   }
-  
+
  /**
-  * caddyEmailInitProducts( )  : 
+  * caddyEmailInitProducts( )  :
   *
   * @return  boolean          : true in case of products
   * @access private
@@ -521,7 +521,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  1.4.6
   */
   private function caddyEmailInitProducts( )
-  {   
+  {
       // Get products from session
     $this->products = $this->session->productsGet( );
 
@@ -535,14 +535,14 @@ class tx_caddy_powermail extends tslib_pibase
         t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
-      
+
       return false;
     }
       // RETURN : empty content, no product in session
-    
+
     return true;
   }
-  
+
  /**
   * caddyEmailInitTemplate( )  : Get teh template CADDY_EMAIL
   *
@@ -551,7 +551,7 @@ class tx_caddy_powermail extends tslib_pibase
   * @since  2.0.0
   */
   private function caddyEmailInitTemplate( )
-  {   
+  {
     $file       = $this->conf['templates.']['e-mail.']['file'];
     $markerAll  = $this->conf['templates.']['e-mail.']['marker.']['all'];
     $markerItem = $this->conf['templates.']['e-mail.']['marker.']['item'];
@@ -561,15 +561,15 @@ class tx_caddy_powermail extends tslib_pibase
     $tmpl['all']  = $GLOBALS['TSFE']->cObj->getSubpart( $tmplFile,    $markerAll );
     $tmpl['item'] = $GLOBALS['TSFE']->cObj->getSubpart( $tmpl['all'], $markerItem );
 
-    $tmpl = $this->caddyEmailInitTemplateTable( $tmpl ); 
+    $tmpl = $this->caddyEmailInitTemplateTable( $tmpl );
     return $tmpl;
   }
 
  /**
   * caddyEmailInitTemplateTable( )
   *
-  * @param      string        $tmpl : 
-  * @return	string        $tmpl : 
+  * @param      string        $tmpl :
+  * @return	string        $tmpl :
   * @access private
   * @version    2.0.0
   * @since      2.0.0
@@ -581,8 +581,8 @@ class tx_caddy_powermail extends tslib_pibase
     foreach( $table as $property => $value )
     {
       $marker       = '###' . strtoupper( $property ) . '###';
-      $tmpl['all']  = str_replace( $marker, $value, $tmpl['all'] );     
-      $tmpl['item'] = str_replace( $marker, $value, $tmpl['item'] );     
+      $tmpl['all']  = str_replace( $marker, $value, $tmpl['all'] );
+      $tmpl['item'] = str_replace( $marker, $value, $tmpl['item'] );
     }
 
     return $tmpl;
@@ -608,14 +608,14 @@ class tx_caddy_powermail extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
-    
+
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session        = t3lib_div::makeInstance( 'tx_caddy_session' );
-    
-  } 
 
-  
-  
+  }
+
+
+
  /***********************************************
   *
   * Powermail
@@ -765,7 +765,7 @@ class tx_caddy_powermail extends tslib_pibase
       default:
         $value = $this->getFieldById1xWiConfirm( $uid );
         break;
-        
+
     }
     return $value;
   }
@@ -834,7 +834,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function getFieldByIdFromPost( $uid )
   {
     $value = null;
-    
+
     if( empty( $uid ) )
     {
       $prompt = 'FATAL ERROR: getFieldByIdFromPost( $uid ) is called with an empty uid<br />
@@ -842,7 +842,7 @@ class tx_caddy_powermail extends tslib_pibase
                 TYPO3 extension: ' . $this->extKey;
       die( $prompt );
     }
-    
+
     switch( true )
     {
       case( $this->pmVersAppendix == '1x' ):
@@ -876,7 +876,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function getFieldByIdFromPost1x( $uid )
   {
     $value = null;
-    
+
     $uid1x = 'uid' . $uid;
     $value = $this->paramPost[$uid1x];
       // DRS
@@ -906,7 +906,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function getFieldByIdFromPost2x( $uid2x )
   {
     $value = null;
-    
+
     $value = $this->paramPost['field'][$uid2x];
       // DRS
     if( $this->pObj->drs->drsError )
@@ -923,7 +923,7 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
-  * getFieldByIdFromSession( ) :  
+  * getFieldByIdFromSession( ) :
   *
   * @param      integer     $uid    : The uid of the value, which should returned
   * @return	string      $value  : The value of the given uid
@@ -962,7 +962,7 @@ class tx_caddy_powermail extends tslib_pibase
   }
 
  /**
-  * getFieldByIdFromSession1x( ) :  
+  * getFieldByIdFromSession1x( ) :
   *
   * @param      integer     $uid    : The uid of the value, which should returned
   * @return	string      $value  : The value of the given uid
@@ -973,7 +973,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function getFieldByIdFromSession1x( $uid )
   {
     $value = null;
-    
+
     $sessionData = $this->sessionData( );
 
     $uid1x = 'uid' . $uid;
@@ -988,13 +988,13 @@ class tx_caddy_powermail extends tslib_pibase
         t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
       }
     }
-      // DRS    
-    
+      // DRS
+
     return $value;
   }
 
  /**
-  * getFieldByIdFromSession2x( ) :  
+  * getFieldByIdFromSession2x( ) :
   *
   * @param      integer     $uid    : The uid of the value, which should returned
   * @return	string      $value  : The value of the given uid
@@ -1006,7 +1006,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $value = null;
     unset( $uid );
-    
+
     $prompt = 'TODO: powermail 2.x<br />
       Please maintain the code!<br />
       Method: ' . __METHOD__ . ' (line ' . __LINE__ . ')<br />
@@ -1042,7 +1042,7 @@ class tx_caddy_powermail extends tslib_pibase
   public function init( $row )
   {
     $this->initInstances( );
-    
+
     if( ! $this->initVersion( ) )
     {
       return;
@@ -1187,7 +1187,7 @@ class tx_caddy_powermail extends tslib_pibase
         $pmFfMailsender       = $pmRecord['tx_powermail_mailsender'];
         $pmFfSubjectReceiver  = $pmRecord['tx_powermail_subject_r'];
         $pmFfSubjectSender    = $pmRecord['tx_powermail_subject_s'];
-        $pmFfThanks           = $pmRecord['tx_powermail_thanks'];         
+        $pmFfThanks           = $pmRecord['tx_powermail_thanks'];
         break;
       case( $this->versionInt < 3000000 ):
       default:
@@ -1197,7 +1197,7 @@ class tx_caddy_powermail extends tslib_pibase
         $pmFfSubjectReceiver  = $pmFlexform['data']['receiver']['lDEF']['settings.flexform.receiver.subject']['vDEF'];
         $pmFfMailsender       = $pmFlexform['data']['sender']['lDEF']['settings.flexform.sender.body']['vDEF'];
         $pmFfSubjectSender    = $pmFlexform['data']['sender']['lDEF']['settings.flexform.sender.subject']['vDEF'];
-        $pmFfThanks           = $pmFlexform['data']['thx']['lDEF']['settings.flexform.thx.body']['vDEF'];;         
+        $pmFfThanks           = $pmFlexform['data']['thx']['lDEF']['settings.flexform.thx.body']['vDEF'];;
         break;
     }
 
@@ -1244,7 +1244,7 @@ class tx_caddy_powermail extends tslib_pibase
       return;
     }
       // RETURN : no DRS
-      
+
       // DRS
     $prompt = 'GET[tx_powermail_pi1]: ' . var_export( $this->paramGet, true );
     t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
@@ -1293,7 +1293,7 @@ class tx_caddy_powermail extends tslib_pibase
   private function initMarker( )
   {
     $this->initMarkerValues( );
-    
+
     $this->initMarkerReceiver( );
     $this->initMarkerReceiverWtcart( );
     $this->initMarkerSender( );
@@ -1442,7 +1442,7 @@ class tx_caddy_powermail extends tslib_pibase
       $this->markerThanks = true;
     }
   }
-  
+
 /**
  * initMarkerValues( ):
  *
@@ -1469,7 +1469,7 @@ class tx_caddy_powermail extends tslib_pibase
         die( $prompt );
         break;
     }
-  
+
   }
 
 /**
@@ -1526,7 +1526,7 @@ class tx_caddy_powermail extends tslib_pibase
     {
       return;
     }
-      
+
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'pdf/class.tx_caddy_pdf.php' );
@@ -1540,9 +1540,9 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
   }
-  
+
 
 
 
@@ -1554,7 +1554,7 @@ class tx_caddy_powermail extends tslib_pibase
 
 
  /**
-  * initPowermailVersionAppendix( ): 
+  * initPowermailVersionAppendix( ):
   *
   * @return	void
   * @access private
@@ -1567,7 +1567,7 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $this->initVersion( );
     }
-    
+
     switch( true )
     {
       case( $this->versionInt < 1000000 ):
@@ -1784,12 +1784,12 @@ class tx_caddy_powermail extends tslib_pibase
   * @since   2.0.0
   */
   private function initVersion( )
-  {   
+  {
     if( !is_object( $this->userfunc ) )
     {
       $this->initInstances( );
     }
-    
+
     $arrResult = $this->userfunc->extMgmVersion( 'powermail' );
 
     $this->versionInt = $arrResult['int'];
@@ -1815,7 +1815,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
-    
+
     return true;
   }
 
@@ -1835,12 +1835,12 @@ class tx_caddy_powermail extends tslib_pibase
   * @access     public
   * @version    2.0.0
   * @since      2.0.0
-  * 
+  *
   */
   public function paramGetByKey( $key )
   {
     $value = null;
-    
+
     if( empty( $key ) )
     {
       $prompt = 'FATAL ERROR: paramGetByKey( $key ) is called with an empty uid<br />
@@ -1848,7 +1848,7 @@ class tx_caddy_powermail extends tslib_pibase
                 TYPO3 extension: ' . $this->extKey;
       die( $prompt );
     }
-    
+
     switch( true )
     {
       case( $this->versionInt < 1000000 ):
@@ -1905,11 +1905,11 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $path   = null;
     $paths  = null;
-    
+
     unset( $content );
-    
+
     $this->conf = $conf;
-    
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -1918,7 +1918,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
       // #54634, 140103, dwildt, 9+
     if( ( int ) $this->conf['userFunc.']['caddyPid'] )
     {
@@ -1929,9 +1929,9 @@ class tx_caddy_powermail extends tslib_pibase
       }
       $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
     }
-      
+
     $this->initPowermailVersionAppendix( );
-    
+
     $this->initPdf( );
     $this->pdf->setParentObject( $this );
 
@@ -1955,15 +1955,15 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $paths[] = $path;
     }
-    
-    if( empty( $paths ) ) 
+
+    if( empty( $paths ) )
     {
       return null;
     }
-    
+
     $path = implode( ',', $paths );
     $path = ',' . $path . ',';
-    
+
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
     {
@@ -1971,9 +1971,9 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
-    
+
   }
 
  /**
@@ -1988,7 +1988,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerDeliveryorder'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2010,7 +2010,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
 
   }
@@ -2027,7 +2027,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerInvoice'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2049,7 +2049,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2065,7 +2065,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerRevocation'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2087,7 +2087,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2103,7 +2103,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendCustomerTerms'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2125,10 +2125,10 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
-  
+
  /**
   * sendToVendor( ):
   *
@@ -2141,11 +2141,11 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $path   = null;
     $paths  = null;
-    
+
     unset( $content );
-    
+
     $this->conf = $conf;
-    
+
       // DRS
     if( $this->conf['userFunc.']['drs'] )
     {
@@ -2154,7 +2154,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-      
+
       // #54634, 140103, dwildt, 9+
     if( ( int ) $this->conf['userFunc.']['caddyPid'] )
     {
@@ -2165,7 +2165,7 @@ class tx_caddy_powermail extends tslib_pibase
       }
       $GLOBALS["TSFE"]->id = ( int ) $this->conf['userFunc.']['caddyPid'];
     }
-      
+
     $this->initPowermailVersionAppendix( );
 
     $this->initPdf( );
@@ -2191,15 +2191,15 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $paths[] = $path;
     }
-    
-    if( empty( $paths ) ) 
+
+    if( empty( $paths ) )
     {
       return null;
     }
-    
+
     $path = implode( ',', $paths );
     $path = ',' . $path . ',';
-    
+
       // DRS
     if( $this->drs->drsSession || $this->drsUserfunc )
     {
@@ -2207,11 +2207,11 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
-    
+
   }
-  
+
  /**
   * sendToVendorDeliveryorder( ):
   *
@@ -2224,7 +2224,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorDeliveryorder'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2246,7 +2246,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2260,10 +2260,10 @@ class tx_caddy_powermail extends tslib_pibase
   */
   private function sendToVendorInvoice( )
   {
-      
+
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorInvoice'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2286,7 +2286,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2299,10 +2299,10 @@ class tx_caddy_powermail extends tslib_pibase
   * @since   2.0.0
   */
   private function sendToVendorRevocation( )
-  {      
+  {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorRevocation'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2324,7 +2324,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2337,10 +2337,10 @@ class tx_caddy_powermail extends tslib_pibase
   * @since   2.0.0
   */
   private function sendToVendorTerms( )
-  {      
+  {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
     $path     = $sesArray['sendVendorTerms'];
-    
+
     if( empty ( $path ) )
     {
         // DRS
@@ -2362,7 +2362,7 @@ class tx_caddy_powermail extends tslib_pibase
       t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
-    
+
     return $path;
   }
 
@@ -2385,7 +2385,7 @@ class tx_caddy_powermail extends tslib_pibase
  */
   public function sessionData(  )
   {
-    $sessionData = null; 
+    $sessionData = null;
 
     switch( true )
     {
@@ -2485,17 +2485,17 @@ class tx_caddy_powermail extends tslib_pibase
       return null;
     }
       // RETURN: no session data
-    
+
     if( $this->pObj->drsPowermail || $this->pObj->drsWarn )
     {
       $prompt = 'powermail session uid: _LOCALIZED_UID will not respected!';
       t3lib_div::devlog(' [WARN/POWERMAIL] '. $prompt, $this->extKey, 2 );
     }
       // RETURN: no session data
-    
+
     return $sessionData;
   }
-  
+
 }
 
 if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/powermail/class.tx_caddy_powermail.php'])
