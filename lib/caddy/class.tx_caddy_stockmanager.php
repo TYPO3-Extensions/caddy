@@ -64,14 +64,14 @@ class tx_caddy_stockmanager
   public  $extKey         = 'caddy';
   public  $prefixId       = 'tx_caddy_pi1';
   public  $scriptRelPath  = 'pi1/class.tx_caddy_pi1.php';
-  
-  private $quantityIndefinitely = 9999999;  
+
+  private $quantityIndefinitely = 9999999;
 
   private $drs            = null;   // Object   : Caddy DRS
   private $initInstances  = null;   // Boolean  : true, if instances are init
-  private $session        = null;   // Object   : Caddy session 
-  
-  private $conf           = null;   // Array    : TypoScript configuration of the parent object 
+  private $session        = null;   // Object   : Caddy session
+
+  private $conf           = null;   // Array    : TypoScript configuration of the parent object
   private $pObj           = null;   // Object   : parent object
   private $pid            = null;   // Integer  : pid of the page with the current Caddy plugin
 
@@ -84,7 +84,7 @@ class tx_caddy_stockmanager
   **********************************************/
 
  /**
-  * getItemQuantity( )  : Get the quantity of the given item in stock. 
+  * getItemQuantity( )  : Get the quantity of the given item in stock.
   *
   * @param	string		$table    : label of the SQL items table
   * @param	string		$field    : label of the SQL stock quantity field
@@ -101,10 +101,10 @@ class tx_caddy_stockmanager
     {
       return $this->quantityIndefinitely;
     }
-    
+
       // RETURN : quantity of the item in stock
-    $stockquantity =  intval( $item['stockquantity'] );
-    
+    $stockquantity = intval( $item['stockquantity'] );
+
     if( $stockquantity < 0 )
     {
       $stockquantity = 0;
@@ -124,9 +124,9 @@ class tx_caddy_stockmanager
   {
     return $this->stateIsDisabled( );
   }
-  
-  
-  
+
+
+
  /***********************************************
   *
   * Init
@@ -195,7 +195,7 @@ class tx_caddy_stockmanager
   **********************************************/
 
  /**
-  * dieQtyError( )  : 
+  * dieQtyError( )  :
   *
   * @param	string		$title      : item title
   * @param	integer		$qtyByOrder : quantity of the item for ordering
@@ -264,14 +264,14 @@ class tx_caddy_stockmanager
     {
       return;
     }
-    
+
     $table          = $this->conf['db.']['table'];
     $stockquantity  = $this->conf['db.']['stockquantity'];
     $orderquantity  = $item['qty'];
     $uid            = $item['uid'];
-    
+
       // Build the query
-    $query  = 'UPDATE ' . $table . ' ' 
+    $query  = 'UPDATE ' . $table . ' '
             . 'SET ' . $stockquantity . ' = ' . $stockquantity . ' - ' . $orderquantity . ' '
             . 'WHERE  uid = ' . $uid ;
 
@@ -299,14 +299,14 @@ class tx_caddy_stockmanager
       die( );
     }
       // ERROR: debug report in the frontend
-    
+
     if( $affected_rows )
     {
       $TCE = t3lib_div::makeInstance('t3lib_TCEmain');
       $TCE->admin = 1;
       $TCE->clear_cacheCmd('pages');
     }
-    
+
     return $affected_rows;
   }
 
@@ -319,7 +319,7 @@ class tx_caddy_stockmanager
   **********************************************/
 
  /**
-  * setItemQuantity( )  : Changes the quantity of the given item in stock. 
+  * setItemQuantity( )  : Changes the quantity of the given item in stock.
   *                       If given quantity is minus, quantity in stock will decreased.
   *
   * @param	string		$table    : label of the SQL items table
@@ -346,7 +346,7 @@ var_dump( __METHOD__, __LINE__ );
   }
 
  /**
-  * setItemsDecrease( )  : Changes the quantity of the given item in stock. 
+  * setItemsDecrease( )  : Changes the quantity of the given item in stock.
   *                       If given quantity is minus, quantity in stock will decreased.
   *
   * @param	array		$table    : label of the SQL items table
@@ -364,7 +364,7 @@ var_dump( __METHOD__, __LINE__ );
       die( );
       return;
     }
-    
+
     $this->initPidCaddy( $pid );
     $items = $this->session->productsGet( $this->pidCaddy );
 var_dump( __METHOD__, __LINE__, $items );
@@ -411,7 +411,7 @@ die( );
   private function setParentObjectConf( )
   {
     $conf = $this->pObj->getConf( );
-    
+
     if( ! is_array( $conf ) || empty( $conf ) )
     {
 //$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
@@ -440,7 +440,7 @@ die( );
   private function setParentObjectDrs( )
   {
     $drs = $this->pObj->getDrs( );
-    
+
     if( ! is_object( $drs ) || empty( $drs ) )
     {
 //$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
@@ -469,7 +469,7 @@ die( );
   private function setParentObjectPid( )
   {
     $pid = $this->pObj->getPid( );
-    
+
     if( ! empty( $pid ) )
     {
 //$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
@@ -523,7 +523,7 @@ die( );
     }
 
     unset( $item );
-    
+
     return $stateIsDisabled;
   }
 
@@ -545,7 +545,7 @@ die( );
       return ! $disabled;
     }
       // RETURN : no DRS
-      
+
       // DRS
     switch( $disabled )
     {
@@ -562,7 +562,7 @@ die( );
     $prompt = 'See Constant Editor > Category [CADDY - INVENTORY CONTROL]';
     t3lib_div::devlog( '[HELP/STOCKMANAGER] ' . $prompt, $this->extKey, 1 );
       // DRS
-   
+
     return $disabled;
   }
 
@@ -581,10 +581,10 @@ die( );
       // RETURN : no DRS
     if( ! $this->drs->drsStockmanager )
     {
-      return ! $disabled;
+      return $disabled;
     }
       // RETURN : no DRS
-      
+
       // DRS
     switch( $disabled )
     {
@@ -601,7 +601,7 @@ die( );
     $prompt = 'See the stockmanager field of the item.';
     t3lib_div::devlog( '[HELP/STOCKMANAGER] ' . $prompt, $this->extKey, 1 );
       // DRS
-   
+
     return $disabled;
   }
 
@@ -616,7 +616,7 @@ die( );
   private function stateIsDisabledByShop( )
   {
     $disabled = false;
-    
+
     $stockquantity    = $this->conf['db.']['stockquantity'];
     $stockmanagement  = $this->conf['db.']['stockmanagement'];
 
@@ -630,7 +630,7 @@ die( );
         $disabled = false;
         break;
     }
-    
+
     unset( $stockquantity   );
     unset( $stockmanagement );
 
@@ -640,7 +640,7 @@ die( );
       return $disabled;
     }
       // RETURN : no DRS
-      
+
       // DRS
     switch( $disabled )
     {
@@ -657,7 +657,7 @@ die( );
     $prompt = 'Inventory control is enabled by the shop, if the TypoScript properties db.stockquantity and db.stockmanagement are set.';
     t3lib_div::devlog( '[HELP/STOCKMANAGER] ' . $prompt, $this->extKey, 1 );
       // DRS
-   
+
     return $disabled;
   }
 

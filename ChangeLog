@@ -7,7 +7,9 @@ TODO
   Feature
   * #i0049: Tax is removed from HTML template
   * #i0048: Billing-, service- and shipping costs are displayed only, if sum is greater than 0.00
-            * new fields: sumcashdiscountnet, sumcashdiscountgross
+            * Rule is set for HTML template only
+            * The seller and the client need the information for shipping, payment and specials in the e-mail template in every case.
+            * new fields sumcashdiscountsumnet and sumcashdiscountsumgross among others
   * #i0047: cash discount
             * new fields: sumcashdiscountnet, sumcashdiscountgross
   * #i0046: new payment option cash on pick up (german: Bar bei Abholung)

@@ -36,7 +36,7 @@ $version = $version + ( ( int ) $bugfix ) * 1;
 $typo3Version = $version;
   // Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
 
-if( $typo3Version < 3000000 ) 
+if( $typo3Version < 3000000 )
 {
   $prompt = '<h1>ERROR</h1>
     <h2>Unproper TYPO3 version</h2>
@@ -57,7 +57,7 @@ if( $typo3Version < 3000000 )
   // Set TYPO3 version
 
 
-    
+
 
   ////////////////////////////////////////////////////////////////////////////
   //
@@ -86,7 +86,7 @@ switch( true )
     $pmVers = '1x';
     break;
   case( $versionInt < 3000000 ):
-    $pmVers = '2x'; 
+    $pmVers = '2x';
     break;
   case( $versionInt >= 3000000 ):
   default:
@@ -103,7 +103,7 @@ switch( true )
   // Set powermail version
 
 
-    
+
 
   ////////////////////////////////////////////////////////////////////////////
   //
@@ -132,7 +132,7 @@ switch( $beLanguage )
   // Enables the Include Static Templates
 
   // Case $beLanguage
-switch( true ) 
+switch( true )
 {
   case( $beLanguage == 'de' ):
       // German
@@ -189,7 +189,7 @@ switch( true )
 }
   // Case $beLanguage
   // Enables the Include Static Templates
-  
+
 
 
   ////////////////////////////////////////////////////////////////////////////
@@ -244,7 +244,7 @@ t3lib_extMgm::addPlugin(array(
   $_EXTKEY . '_pi1',
   t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png'
 ),'list_type');
-t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform' . $pmVers . '.xml' ); 
+t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform' . $pmVers . '.xml' );
 
 $TCA['tt_content']['types']['list']['subtypes_excludelist'][ $_EXTKEY . '_pi2']  = 'layout,select_key,recursive,pages';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][ $_EXTKEY . '_pi2']      ='pi_flexform';
@@ -275,21 +275,21 @@ t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/
 $TCA['tx_caddy_order'] = array (
   'ctrl' => array (
     'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
-    'label'             => 'numberOrder',  
-    'label_alt'         => 'numberDeliveryorder,numberInvoice,customerEmail',  
-    'label_alt_force'   => true,  
+    'label'             => 'numberOrder',
+    'label_alt'         => 'numberDeliveryorder,numberInvoice,customerEmail',
+    'label_alt_force'   => true,
     'tstamp'            => 'tstamp',
     'crdate'            => 'crdate',
     'cruser_id'         => 'cruser_id',
-    'delete'            => 'deleted',  
-    'default_sortby'    => 'ORDER BY numberOrder DESC, tstamp DESC',  
+    'delete'            => 'deleted',
+    'default_sortby'    => 'ORDER BY numberOrder DESC, tstamp DESC',
     'readOnly'          => $confArr['databaseReadonly'],
     'hideAtCopy'        => true,
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
     'iconfile'          => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'files/img/caddy_100_02.png',
-    'searchFields'      =>  'customerEmail,' . 
-                            'numberDeliveryorder,numberInvoice,numberOrder,' . 
+    'searchFields'      =>  'customerEmail,' .
+                            'numberDeliveryorder,numberInvoice,numberOrder,' .
                             'sumGross,sumNet,sumTaxReduced,sumTaxNormal,'
   ),
 );
@@ -299,14 +299,14 @@ $TCA['tx_caddy_order'] = array (
 $TCA['tx_caddy_item'] = array (
   'ctrl' => array (
     'title'             => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
-    'label'             => 'uid',  
-    'label_alt'         => 'title',  
-    'label_alt_force'   => true,  
+    'label'             => 'uid',
+    'label_alt'         => 'title',
+    'label_alt_force'   => true,
     'tstamp'            => 'tstamp',
     'crdate'            => 'crdate',
     'cruser_id'         => 'cruser_id',
     'delete'            => 'deleted',
-    'default_sortby'    => 'ORDER BY uid DESC',  
+    'default_sortby'    => 'ORDER BY uid DESC',
     'readOnly'          => $confArr['databaseReadonly'],
     'dividers2tabs'     => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
