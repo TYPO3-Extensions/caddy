@@ -67,7 +67,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  *
  *              SECTION: Session
  *  774:     private function session( )
- *  800:     private function sessionDataAdd( )
+ *  800:     private function sessionDataAddWiEpayment( )
  *  825:     private function sessionDataRemove( $force=false )
  *
  *              SECTION: Setting methods
@@ -661,6 +661,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   *
   * @return	boolean
   * @access private
+  * @internal #i0050
   * @version     4.0.9
   * @since       4.0.9
   */
@@ -800,6 +801,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   *
   * @return	boolen
   * @access private
+  * @internal #i0050
   * @version     4.0.9
   * @since       4.0.9
   */
@@ -902,11 +904,14 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     switch( true )
     {
+      case( $this->requirementsWoEpayment( ) ):
+//var_dump( __METHOD__, __LINE__ );
+        $this->sessionDataAddWoEpayment( );
+        break;
       case( $this->paymillLib->getPaymillToken( ) ):
 //var_dump( __METHOD__, __LINE__ );
-        $this->sessionDataAdd( );
+        $this->sessionDataAddWiEpayment( );
         break;
-      case( ! $this->paymillLib->getPaymillToken( ) ):
       default:
         $this->sessionDataRemove( );
         break;
@@ -914,7 +919,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   }
 
  /**
-  * sessionDataAdd( ):
+  * sessionDataAddWiEpayment( ):
   *
   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
   * @return	void
@@ -922,15 +927,45 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   * @version     4.0.6
   * @since       4.0.6
   */
-  private function sessionDataAdd( )
+  private function sessionDataAddWiEpayment( )
   {
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
 
-    unset( $sesArray['e-payment']['paymill'] );
+    // #i0050, 140310, dwildt, 1-
+    //unset( $sesArray['e-payment']['paymill'] );
+    // #i0050, 140310, dwildt, 1+
+    unset( $sesArray['e-payment'] );
 
     $sesArray['e-payment']['paymill']['token']          = $this->paymillLib->getPaymillToken( );
     $sesArray['e-payment']['paymill']['client']['id']   = $this->paymillLib->getPaymillClientId( );
     $sesArray['e-payment']['paymill']['payment']['id']  = $this->paymillLib->getPaymillPaymentId( );
+
+    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+      // save session
+    $GLOBALS['TSFE']->storeSessionData( );
+//    var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
+  }
+
+ /**
+  * sessionDataAddWoEpayment( ):
+  *
+  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  * @return	void
+  * @internal #i0050
+  * @access private
+  * @version     4.0.9
+  * @since       4.0.9
+  */
+  private function sessionDataAddWoEpayment( )
+  {
+    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+
+    // #i0050, 140310, dwildt, 1-
+    //unset( $sesArray['e-payment']['paymill'] );
+    // #i0050, 140310, dwildt, 1+
+    unset( $sesArray['e-payment'] );
+
+    $sesArray['e-payment']['woEpayment'] = true;
 
     $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
       // save session
@@ -977,7 +1012,10 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
       // :TODO: Recalculte option costs (option costs without payment)
       // Remove paymill data
-    unset( $sesArray['e-payment']['paymill'] );
+    // #i0050, 140310, dwildt, 1-
+    //unset( $sesArray['e-payment']['paymill'] );
+    // #i0050, 140310, dwildt, 1+
+    unset( $sesArray['e-payment'] );
       // Remove payment id
     unset( $sesArray['payment'] );
       // Remove options payment

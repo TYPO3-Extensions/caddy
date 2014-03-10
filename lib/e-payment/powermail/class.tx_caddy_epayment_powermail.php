@@ -70,7 +70,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  */
 
 /**
- * Class is for extending the powermail class. Class returns back the content (HTML) after an e-payment transaction.
+ * Class is for extending the powermail class. Class returns the content (HTML) after an e-payment transaction.
  *
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
@@ -118,7 +118,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   public function getContentAfterTransaction( )
   {
 //var_dump( __METHOD__, __LINE__ );
-    $arrReturn = array( 
+    $arrReturn = array(
       'content' => null,
       'isPayed' => false
     );
@@ -144,14 +144,14 @@ class tx_caddy_epayment_powermail extends tslib_pibase
       // Next two lines is for development only!
       //$this->sessionErrorAdd( );
       //die( $this->content );
-      $arrReturn = array( 
+      $arrReturn = array(
         'content' => $this->content,
         'isPayed' => true
       );
 //var_dump( __FILE__, __LINE__, $arrReturn );
       return $arrReturn;
     }
-    
+
       // error: transaction wasn't possible
     $marker = array(
       '###TITLE###'   => $this->pi_getLL( 'transaction-error-title'  ),
@@ -233,7 +233,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   private function epaymentProviderPaymill( )
   {
     $success = false;
-    
+
       // Init paymill
     $this->epaymentProviderPaymillInit( );
 
@@ -322,9 +322,9 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   {
     // Nur ausfuehren, wenn nicht bereits ausgefuehrt
     // Session merkt sich order number und status bezahlt/nicht bezahlt
-    
+
     $success = false;
-    
+
       // Execute the transaction
     $success = $this->epaymentProviderPaymillTransactionExec( );
     return $success;
@@ -345,7 +345,7 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   {
     // Nur ausfuehren, wenn nicht bereits ausgefuehrt
     // Session merkt sich order number und status bezahlt/nicht bezahlt
-    
+
     $prompts = $this->paymillTransaction->transaction( );
     if( ! empty( $prompts ) )
     {
