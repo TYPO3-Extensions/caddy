@@ -97,7 +97,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.6
+ * @version     4.0.9
  * @since       4.0.6
  */
 class tx_caddy_paymill_paymentMethods extends tslib_pibase
@@ -219,6 +219,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     );
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 //var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
+//var_dump( __METHOD__, __LINE__, $arrReturn );
     return $arrReturn;
   }
 
@@ -418,6 +419,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     {
       case( $this->paymillLib->getPaymillToken( ) ):
       case( $this->paymentWiPowermail( ) ):
+      case( $this->paymentWoEpayment( ) ):
 //var_dump( __METHOD__, __LINE__ );
         $followTheWorkflow = true;
         break;
@@ -654,6 +656,19 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return $this->powermailInAction( );
   }
 
+ /**
+  * paymentWoEpayment( ):
+  *
+  * @return	boolean
+  * @access private
+  * @version     4.0.9
+  * @since       4.0.9
+  */
+  private function paymentWoEpayment( )
+  {
+    return $this->requirementsWoEpayment( );
+  }
+
 
 
   /***********************************************
@@ -682,10 +697,10 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
       case( $GP['tx_powermail_pi1']['action'] == 'create' ):
       case( $GP['tx_powermail_pi1']['action'] == 'form' ):
         return true;
-        break;
+        //break;
       default:
         return false;
-        break;
+        //break;
     }
 
     unset( $GP );
@@ -713,6 +728,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     switch( true )
     {
+      case( $this->requirementsWoEpayment( ) ):
       case( $this->requirementsToken( ) ):
       case( $this->requirementsWiPowermail( ) ):
         $requirementsMatched = true;
@@ -775,6 +791,27 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|alert|' . $this->pi_getLL( 'prompt-token-error' );
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART||' . $this->pi_getLL( 'prompt-token-info1' );
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART||' . $this->pi_getLL( 'prompt-token-info2' );
+
+    return false;
+  }
+
+ /**
+  * requirementsWoEpayment( ): Returns true, if current payment method isn't an e-payment method
+  *
+  * @return	boolen
+  * @access private
+  * @version     4.0.9
+  * @since       4.0.9
+  */
+  private function requirementsWoEpayment( )
+  {
+    $conf           = $this->pObj->conf;
+    $isEpayment = $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.']['e-payment'];
+
+    if( ! $isEpayment )
+    {
+      return true;
+    }
 
     return false;
   }
@@ -871,7 +908,6 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
         break;
       case( ! $this->paymillLib->getPaymillToken( ) ):
       default:
-var_dump( __METHOD__, __LINE__ );
         $this->sessionDataRemove( );
         break;
     }

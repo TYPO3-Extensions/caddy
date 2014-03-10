@@ -112,6 +112,8 @@ plugin.tx_caddy_pi1 {
           11 = credit card (de: Kreditkarte)
           11 {
             enabled = {$plugin.caddy.options.payment.11.enabled}
+              // [Boolean]: true, if it is an e-payment-method
+            e-payment = 1
             title {
               10 {
                 10 {
@@ -157,6 +159,8 @@ plugin.tx_caddy_pi1 {
           12 = direct debit (de: Lastschrift)
           12 {
             enabled = {$plugin.caddy.options.payment.12.enabled}
+              // [Boolean]: true, if it is an e-payment-method
+            e-payment = 1
             title {
               10 {
                 10 {
@@ -202,6 +206,8 @@ plugin.tx_caddy_pi1 {
           13 = direct debit (IBAN) (de: Lastschrift mit IBAN)
           13 {
             enabled = {$plugin.caddy.options.payment.13.enabled}
+              // [Boolean]: true, if it is an e-payment-method
+            e-payment = 1
             title {
               10 {
                 10 {
