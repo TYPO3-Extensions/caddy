@@ -6,7 +6,7 @@ plugin.caddy {
         enabled = 0
       }
       2 {
-          // Disable invoide (de: Rechnung)
+          // Disable invoice (de: Rechnung)
         enabled = 0
       }
       3 {

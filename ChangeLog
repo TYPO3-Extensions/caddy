@@ -5,6 +5,7 @@ TODO
 4.0.9
   2014-03-10
   Bugfix
+  * #i0051: condition is placed outside the label
   * #i0050: Non e-payment-methods are enable only, if an e-payment-method is enabled before.
 
 4.0.8
