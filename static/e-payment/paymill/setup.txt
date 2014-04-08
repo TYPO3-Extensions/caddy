@@ -257,6 +257,28 @@ plugin.tx_caddy_pi1 {
 
 plugin.tx_caddy_pi1 {
   _HTMLMARKER {
+    caddy_bankaccount {
+        // credit card (de: Kreditkarte): term of credit, recommend us
+      11 = TEXT
+      11 {
+        value = We debit the amount from your creditcard account.
+        lang {
+          de = Wir buchen den Betrag von Ihrem Kreditkartenkonto ab.
+          en = We debit the amount from your creditcard account.
+        }
+      }
+        // direct debit (de: Lastschrift): term of credit, recommend us
+      12 = TEXT
+      12 {
+        value = We debit the amount from your account directly.
+        lang {
+          de = Wir buchen den Betrag von Ihrem Konto per Lastschrift ab.
+          en = We debit the amount from your creditcard account directly.
+        }
+      }
+        // direct debit (IBAN) (de: Lastschrift mit IBAN): term of credit, recommend us
+      13 < .12
+    }
     caddy_header_paymentmethod_creditcard < plugin.tx_caddy_pi1.api.options.payment.options.11.title
     caddy_header_paymentmethod_elv        < plugin.tx_caddy_pi1.api.options.payment.options.12.title
     caddy_header_paymentmethod_elv-iban   < plugin.tx_caddy_pi1.api.options.payment.options.13.title

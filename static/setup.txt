@@ -2006,36 +2006,29 @@ plugin.tx_caddy_pi1 {
             content = COA
             content {
                 // Line 1: Term of credit
+              wrap = <p>|</p>
               10 = COA
               10 {
+                if {
+                  equals {
+                    field = optionspaymentid
+                  }
+                  // 1: cash in advance
+                  value = 1
+                }
                   // Pay until
                 10 = TEXT
                 10 {
-                  value = Please pay until
+                  value = You have enabled cash in advance. Kindly remit the balance
                   lang {
-                    de = Zahlen Sie bitte bis sp&auml;testens
-                    en = Please pay until
+                    de = Sie haben als Zahlungsmethode Vorkasse gewählt. Bitte überweisen Sie
+                    en = You have enabled cash in advance. Kindly remit the balance
                   }
-                  noTrimWrap = || |
-                }
-                  // due date
-                20 = USER
-                20 {
-                  userFunc = tx_caddy_userfunc->calcDueDate
-                  userFunc {
-                    strtotime = {$plugin.caddy.main.dueDate}
-                    strftime  = {$plugin.caddy.main.dueDateFormat}
-                  }
-                }
-                  // space
-                21 = TEXT
-                21 {
-                  value =
                   noTrimWrap = || |
                 }
                   // amount
-                30 = COA
-                30 {
+                20 = COA
+                20 {
                     // sum gross
                   10 = USER
                   10 {
@@ -2058,6 +2051,25 @@ plugin.tx_caddy_pi1 {
                     noTrimWrap = | ||
                   }
                   wrap = <b>|</b>
+                }
+                  // until
+                21 = TEXT
+                21 {
+                  value = until
+                  lang {
+                    de = bis
+                    en = until
+                  }
+                  noTrimWrap = || |
+                }
+                  // due date
+                30 = USER
+                30 {
+                  userFunc = tx_caddy_userfunc->calcDueDate
+                  userFunc {
+                    strtotime = {$plugin.caddy.main.dueDate}
+                    strftime  = {$plugin.caddy.main.dueDateFormat}
+                  }
                 }
                   // invoice number
                 40 = COA
@@ -2097,12 +2109,31 @@ plugin.tx_caddy_pi1 {
                   // to account
                 50 = TEXT
                 50 {
-                  value = to the account below.
+                  value = to our account
                   lang {
-                    de = auf das unten angegebene Konto.
-                    en = to the account below.
+                    de = auf unser Konto
+                    en = to our account
                   }
-                  noTrimWrap = | ||
+                  noTrimWrap = | |<br />|
+                }
+                  // IBAN
+                60 = TEXT
+                60 {
+                  value = IBAN: {$plugin.caddy.bankaccount.iban}
+                  lang {
+                    de = IBAN: {$plugin.caddy.bankaccount.iban}
+                    en = IBAN: {$plugin.caddy.bankaccount.iban}
+                  }
+                  noTrimWrap = ||, |
+                }
+                  // BIC
+                61 = TEXT
+                61 {
+                  value = BIC: {$plugin.caddy.bankaccount.bic}
+                  lang {
+                    de = BIC: {$plugin.caddy.bankaccount.bic}
+                    en = BIC: {$plugin.caddy.bankaccount.bic}
+                  }
                 }
                 wrap  = |<br />
               }
@@ -2118,6 +2149,7 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
+        termOfCredit >
       }
     }
       // revocation PDF
@@ -2806,45 +2838,200 @@ plugin.tx_caddy_pi1 {
     // linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
-    caddy_bankaccount = COA
+    caddy_bankaccount = CASE
     caddy_bankaccount {
-      if {
-        equals {
+        // optionspaymentid
+      key = TEXT
+      key {
+        field = optionspaymentid
+      }
+        // default error message
+      default = COA
+      default {
+        10 = TEXT
+        10 {
+          value =
+          lang {
+            de = TYPOSCRIPT FEHLER: key für CASE ist nicht definiert. Siehe: plugin.tx_caddy_pi1._HTMLMARKER.caddy_bankaccount. key =
+            en = TYPOSCRIPT ERROR: key for CASE is undefined. See: plugin.tx_caddy_pi1._HTMLMARKER.caddy_bankaccount. key =
+          }
+          noTrimWrap = || |
+        }
+        20 = TEXT
+        20 {
           field = optionspaymentid
         }
-        // 1: cash in advance
-        value = 1
+        wrap = <p>|</p>
       }
-        // Our bank account
-      10 = TEXT
-      10 {
-        value = You have enabled cash in advance. Kindly remit the balance. Our bank account:
-        lang {
-          de = Sie haben als Zahlungsmethode Vorkasse gewählt. Bitte überweisen Sie den Rechnungsbetrag auf unser Konto:
-          en = You have enabled cash in advance. Kindly remit the balance. Our bank account:
+        // default invoice: term of credit, recommend us
+      draftInvoice = COA
+      draftInvoice {
+        wrap = <p>|</p>
+          // Line 1: Term of credit
+        10 = COA
+        10 {
+            // Pay
+          10 = TEXT
+          10 {
+            value = Kindly remit the balance
+            lang {
+              de = Bitte überweisen Sie
+              en = Kindly remit the balance
+            }
+            noTrimWrap = || |
+          }
+            // amount
+          20 = COA
+          20 {
+              // sum gross
+            10 = USER
+            10 {
+              userFunc = tx_caddy_userfunc->numberformat
+              userFunc {
+                number = TEXT
+                number {
+                  field = sumsumgross
+                }
+                decimal       = {$plugin.caddy.main.decimal}
+                dec_point     = {$plugin.caddy.main.dec_point}
+                thousands_sep = {$plugin.caddy.main.thousands_sep}
+                drs           = {$plugin.caddy.debug.userfunc}
+              }
+            }
+              // currency symbol
+            20 = TEXT
+            20 {
+              value = {$plugin.caddy.main.currencySymbol}
+              noTrimWrap = | ||
+            }
+            wrap = <b>|</b>
+          }
+            // until
+          21 = TEXT
+          21 {
+            value = until
+            lang {
+              de = bis
+              en = until
+            }
+            noTrimWrap = | | |
+          }
+            // due date
+          30 = USER
+          30 {
+            userFunc = tx_caddy_userfunc->calcDueDate
+            userFunc {
+              strtotime = {$plugin.caddy.main.dueDate}
+              strftime  = {$plugin.caddy.main.dueDateFormat}
+            }
+          }
+            // invoice number
+          40 = COA
+          40 {
+              // text
+            10 = TEXT
+            10 {
+              value = with the annotation
+              lang {
+                de = mit dem Vermerk
+                en = with the annotation
+              }
+              noTrimWrap  = | | |
+            }
+              // invoice number
+            20 = COA
+            20 {
+                // label
+              10 = TEXT
+              10 {
+                data = LLL:EXT:caddy/pi1/locallang.xml:invoicenumber
+                noTrimWrap = || |
+              }
+                // prefix
+              20 = TEXT
+              20 {
+                value = {$plugin.caddy.pdf.invoice.number.prefix}
+              }
+                // number
+              30 = TEXT
+              30 {
+                field = numberInvoiceCurrent
+              }
+              wrap = "<b>|</b>"
+            }
+          }
+            // to account
+          50 = TEXT
+          50 {
+            value = to our account
+            lang {
+              de = auf unser Konto
+              en = to our account
+            }
+            noTrimWrap = | |:<br />|
+          }
+            // IBAN
+          60 = TEXT
+          60 {
+            value = IBAN: {$plugin.caddy.bankaccount.iban}
+            lang {
+              de = IBAN: {$plugin.caddy.bankaccount.iban}
+              en = IBAN: {$plugin.caddy.bankaccount.iban}
+            }
+            noTrimWrap = ||, |
+          }
+            // BIC
+          61 = TEXT
+          61 {
+            value = BIC: {$plugin.caddy.bankaccount.bic}
+            lang {
+              de = BIC: {$plugin.caddy.bankaccount.bic}
+              en = BIC: {$plugin.caddy.bankaccount.bic}
+            }
+          }
+          wrap  = |<br />
         }
-        noTrimWrap = ||<br />|
-      }
-        // IBAN
-      20 = TEXT
-      20 {
-        value = IBAN {$plugin.caddy.bankaccount.iban}
-        lang {
-          de = IBAN {$plugin.caddy.bankaccount.iban}
-          en = IBAN {$plugin.caddy.bankaccount.iban}
-        }
-        noTrimWrap = ||, |
-      }
-        // BIC
-      30 = TEXT
-      30 {
-        value = BIC {$plugin.caddy.bankaccount.bic}
-        lang {
-          de = BIC {$plugin.caddy.bankaccount.bic}
-          en = BIC {$plugin.caddy.bankaccount.bic}
+          // Line 2: Recommend us
+        20 = TEXT
+        20 {
+          value = We will be happy, if you recommend us.
+          lang {
+            de = Wir w&uuml;rden uns freuen, wenn Sie uns weiterempfehlen.
+            en = We will be happy, if you recommend us.
+          }
         }
       }
-      wrap = <p>|</p>
+        // cash in advance: term of credit, recommend us
+      1 < .draftInvoice
+      1 {
+        10 {
+          21 >
+          30 >
+        }
+      }
+        // invoice (de: Rechnung): term of credit, recommend us
+      2 < .draftInvoice
+        // cash on delivery (de: Nachnahme): term of credit, recommend us
+      3 = TEXT
+      3 {
+        value = Please pay the cash on delivery.
+        lang {
+          de = Bitte bezahlen Sie die Ware bei der Lieferung.
+          en = Please pay the cash on delivery.
+        }
+      }
+        // cash on pick up (de: Bar bei Abholung): term of credit, recommend us
+      4 = TEXT
+      4 {
+        value = Please pay the cash on pick up.
+        lang {
+          de = Bitte bezahlen Sie die Ware bei Abholung.
+          en = Please pay the cash on pick up.
+        }
+      }
+//[11] = credit card (de: Kreditkarte): term of credit, recommend us
+//[12] = direct debit (de: Lastschrift): term of credit, recommend us
+//[13] = direct debit (IBAN) (de: Lastschrift mit IBAN): term of credit, recommend us
     }
     caddy_buttonsubmit = COA
     caddy_buttonsubmit {
