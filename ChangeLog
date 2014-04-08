@@ -6,6 +6,9 @@ TODO
   2014-04-08
   Feature
   * #i0055: Tax info in the simple caddy HTML
+            Effected files:
+            * files/templates/foundation/4x/caddy.html
+            * static/setup.tx
 
 4.0.10
   2014-04-08
