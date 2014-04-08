@@ -78,7 +78,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.6
+ * @version     4.0.10
  * @since       4.0.5
  */
 class tx_caddy_paymill_transaction extends tslib_pibase
@@ -472,23 +472,32 @@ class tx_caddy_paymill_transaction extends tslib_pibase
  /**
   * transactionInit( ) :
   *
-  * @return	boolean
+  * @return	boolean   true, if paymill is initiated. False, if paymill insn't initiated.
   * @access private
-  * @version    4.0.5
+  * @version    4.0.10
   * @since      4.0.5
   */
   private function transactionInit( )
   {
     $this->init( );
 
-    $this->prompts = $this->paymillLib->paymillInit( );
-    if( $this->prompts )
-    {
-//var_dump( __METHOD__, __LINE__, $this->prompts );
+    // #i0053, 140408, dwildt, +
+    $isInitiated = $this->paymillLib->paymillInit( );
+    if( $isInitiated )
+    { return true;
+
+    } else {
       return false;
     }
 
-    return true;
+    // #i0053, 140408, dwildt, -
+//    $this->prompts = $this->paymillLib->paymillInit( );
+//    if( $this->prompts )
+//    {
+//      return false;
+//    }
+//
+//    return true;
   }
 
  /**
@@ -636,7 +645,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   *
   * @return	array		$arrReturn  : See method description
   * @access private
-  * @version    4.0.6
+  * @version    4.0.10
   * @since      4.0.4
   */
   private function transactionSendTry( )
@@ -656,10 +665,10 @@ class tx_caddy_paymill_transaction extends tslib_pibase
       // Set transaction params
       // Get paymill payment id and client id from caddy session
     $paymentId  = $this->sessionGetPaymentId( );
-    $paymillTransaction->setPayment(      $paymentId                          );
-    $paymillTransaction->setAmount(       $this->transactionAmount * 100      );
-    $paymillTransaction->setCurrency(     $this->transactionCurrency          );
-    $paymillTransaction->setDescription(  $this->transactionDescription       );
+    $paymillTransaction->setPayment(      $paymentId                                  );
+    $paymillTransaction->setAmount(       round( $this->transactionAmount, 2 ) * 100  ); // #i0052
+    $paymillTransaction->setCurrency(     $this->transactionCurrency                  );
+    $paymillTransaction->setDescription(  $this->transactionDescription               );
       // Execute the transaction
     $paymillTransactionResponse = $paymillService->create($paymillTransaction);
       // Set the response code

@@ -76,7 +76,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.6
+ * @version     4.0.10
  * @since       4.0.5
  */
 class tx_caddy_paymill_lib extends tslib_pibase
@@ -228,11 +228,11 @@ class tx_caddy_paymill_lib extends tslib_pibase
 //$prompt = str_replace( '//' , PHP_EOL . '//' , $prompt );
 //var_dump( __METHOD__, __LINE__, $prompt);
     $token = $this->piVars['e-payment']['paymill']['token'];
-//var_dump( __METHOD__, __LINE__, $token );
+#var_dump( __METHOD__, __LINE__, $token );
     if( ! $token )
     {
       $token = $this->sessionGetToken( );
-//var_dump( __METHOD__, __LINE__, $token );
+#var_dump( __METHOD__, __LINE__, $token );
     }
     return $token;
   }
@@ -320,16 +320,16 @@ class tx_caddy_paymill_lib extends tslib_pibase
  /**
   * paymillInit( ):
   *
-  * @return	array		$prompts  : In case of an error
+  * @return	boolean   true, if paymill is initiated. false, if paymill isn't initiated.
   * @access public
-  * @version     4.0.5
+  * @version     4.0.10
   * @since       4.0.5
   */
   public function paymillInit( )
   {
     if( ! $this->paymillInitWiTokenOnly( ) )
     {
-      return;
+      return false;
     }
 
     $this->paymillInitVars( );
@@ -339,7 +339,7 @@ class tx_caddy_paymill_lib extends tslib_pibase
 
     if( ! empty( $prompts ) )
     {
-      return $prompts;
+      return true;
     }
 
     return false;
@@ -348,7 +348,7 @@ class tx_caddy_paymill_lib extends tslib_pibase
  /**
   * paymillInitWiTokenOnly( ):
   *
-  * @return	boolean
+  * @return	boolean   true, if there is a paymill token. false, if there isn't any paymill token.
   * @access public
   * @version     4.0.5
   * @since       4.0.5
@@ -422,14 +422,6 @@ class tx_caddy_paymill_lib extends tslib_pibase
 
     return $this->paymillInitPaymentBySession( $sessionToken );
 
-//      // Get session token (used token)
-//    $sessionToken  = $this->sessionGetToken( );
-//
-//    if( $sessionToken )
-//    {
-//      return $this->paymillInitPaymentBySession( $sessionToken );
-//    }
-//    return $this->paymillInitPaymentByToken( );
   }
 
  /**
