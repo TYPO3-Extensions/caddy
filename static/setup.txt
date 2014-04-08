@@ -3029,9 +3029,6 @@ plugin.tx_caddy_pi1 {
           en = Please pay the cash on pick up.
         }
       }
-//[11] = credit card (de: Kreditkarte): term of credit, recommend us
-//[12] = direct debit (de: Lastschrift): term of credit, recommend us
-//[13] = direct debit (IBAN) (de: Lastschrift mit IBAN): term of credit, recommend us
     }
     caddy_buttonsubmit = COA
     caddy_buttonsubmit {
@@ -3281,13 +3278,65 @@ plugin.tx_caddy_pi1 {
     caddy_header_order {
       wrap = <a href="#">|</a>
         // label
-      10 = TEXT
+      10 = COA
       10 {
         wrap = <span class="small-7 large-7 columns">|</span>
-        value = Amount
-        lang {
-          de = Summe
-          en = Amount
+          // Amount
+        10 = TEXT
+        10 {
+          value = Amount
+          lang {
+            de = Summe
+            en = Amount
+          }
+          noTrimWrap = || |
+        }
+          // TAX
+        20 = COA
+        20 {
+            // incl.
+          10 = TEXT
+          10 {
+            value = incl.
+            lang {
+              de = inkl.
+              en = incl.
+            }
+            noTrimWrap = || |
+          }
+            // value, currency
+          20 = COA
+          20 {
+              // value
+            10 = USER
+            10.userFunc = tx_caddy_userfunc->numberformat
+            10.userFunc {
+              drs           = {$plugin.caddy.debug.userfunc}
+              number        = TEXT
+              number {
+                field = sumsumtaxsum
+              }
+              decimal       = 2
+              dec_point     = {$plugin.caddy.main.dec_point}
+              thousands_sep = {$plugin.caddy.main.thousands_sep}
+            }
+              // currency
+            20 = TEXT
+            20 {
+              value = {$plugin.caddy.main.currencySymbol}
+              noTrimWrap = | | |
+            }
+          }
+            // VAT
+          30 = TEXT
+          30 {
+            value = VAT
+            lang {
+              de = MWSt.
+              en = VAT
+            }
+          }
+          wrap = (|)
         }
       }
         // &nbsp;
@@ -3465,37 +3514,123 @@ plugin.tx_caddy_pi1 {
     }
     caddy_prompt_order = COA
     caddy_prompt_order {
-        // label
-      10 = TEXT
+        // sumsumnet
+      10 = COA
       10 {
-        value = Amount of your order
-        lang {
-          de = Gesamtsumme Ihrer Bestellung
-          en = Amount of your order
-        }
-        noTrimWrap = ||: |
-      }
-        // value, currency
-      20 = COA
-      20 {
-          // value
-        10 = USER
-        10.userFunc = tx_caddy_userfunc->numberformat
-        10.userFunc {
-          drs           = {$plugin.caddy.debug.userfunc}
-          number        = TEXT
-          number {
-            field = sumsumgross
+        wrap = <div class="row">|</div>
+          // label
+        10 = COA
+        10 {
+          wrap = <span class="small-7 large-7 columns">|</span>
+            // net
+          10 = TEXT
+          10 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:sumnet
           }
-          decimal       = 2
-          dec_point     = {$plugin.caddy.main.dec_point}
-          thousands_sep = {$plugin.caddy.main.thousands_sep}
         }
-          // currency
-        20 = TEXT
-        20 {
-          value = {$plugin.caddy.main.currencySymbol}
-          noTrimWrap = | ||
+          // &nbsp;
+        30 = TEXT
+        30 {
+          value = &nbsp;
+          wrap  = <span class="small-2 large-2 columns">|</span>
+        }
+          // value, currency
+        40 = COA
+        40 {
+            // value
+          10 = USER
+          10.userFunc = tx_caddy_userfunc->numberformat
+          10.userFunc {
+            drs           = {$plugin.caddy.debug.userfunc}
+            number        = TEXT
+            number {
+              field = sumsumnet
+            }
+            decimal       = 2
+            dec_point     = {$plugin.caddy.main.dec_point}
+            thousands_sep = {$plugin.caddy.main.thousands_sep}
+          }
+            // currency
+          20 = TEXT
+          20 {
+            value = {$plugin.caddy.main.currencySymbol}
+            noTrimWrap = | ||
+          }
+          wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        }
+          // &nbsp;
+        50 = TEXT
+        50 {
+          value = &nbsp;
+          wrap  = <span class="small-1 large-1 columns">|</span>
+        }
+      }
+        // tax normal
+      20 < .10
+      20 {
+        10 {
+          10 >
+          10 = TEXT
+          10 {
+            value = plus {$plugin.caddy.tax.normal}% VAT
+            lang {
+              de = zzgl. {$plugin.caddy.tax.normal}% MWSt.
+              en = plus {$plugin.caddy.tax.normal}% VAT
+            }
+          }
+        }
+        40 {
+          10.userFunc {
+            number {
+              field = sumsumtaxnormal
+            }
+          }
+        }
+      }
+        // tax reduced
+      30 < .10
+      30 {
+        10 {
+          10 >
+          10 = TEXT
+          10 {
+            value = plus {$plugin.caddy.tax.reduced}% VAT
+            lang {
+              de = zzgl. {$plugin.caddy.tax.reduced}% MWSt.
+              en = plus {$plugin.caddy.tax.reduced}% VAT
+            }
+          }
+        }
+        40 {
+          10.userFunc {
+            number {
+              field = sumsumtaxreduced
+            }
+          }
+        }
+      }
+        // hr
+      40 = TEXT
+      40 {
+        value = <hr />
+        wrap = <div class="row">|</div>
+      }
+        // sumsumgross
+      50 < .10
+      50 {
+        10 {
+          10 >
+          10 = TEXT
+          10 {
+            data = LLL:EXT:caddy/pi1/locallang.xml:sumgross
+          }
+        }
+        40 {
+          10.userFunc {
+            number {
+              field = sumsumgross
+            }
+          }
         }
       }
     }
