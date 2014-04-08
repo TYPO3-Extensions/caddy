@@ -4,6 +4,17 @@ TODO
 
 4.0.10
   2014-04-08
+  Feature
+  * #i0054: Bank account in case of cash in advance for email and pdf
+            Effected files:
+            * files
+              * templates
+                * 2.0.0/caddy.html
+                * 4.0.0/caddy.html
+                * foundation/4x/caddy.html
+            * static
+              * constants.txt
+              * setup.txt
   Bugfix
   * #i0053: Fatal error: Class 'Paymill\Request' not found in lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php on line 765
             * lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php

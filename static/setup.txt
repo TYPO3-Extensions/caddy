@@ -2806,6 +2806,46 @@ plugin.tx_caddy_pi1 {
     // linktoshop
   _HTMLMARKER =
   _HTMLMARKER {
+    caddy_bankaccount = COA
+    caddy_bankaccount {
+      if {
+        equals {
+          field = optionspaymentid
+        }
+        // 1: cash in advance
+        value = 1
+      }
+        // Our bank account
+      10 = TEXT
+      10 {
+        value = You have enabled cash in advance. Kindly remit the balance. Our bank account:
+        lang {
+          de = Sie haben als Zahlungsmethode Vorkasse gewählt. Bitte überweisen Sie den Rechnungsbetrag auf unser Konto:
+          en = You have enabled cash in advance. Kindly remit the balance. Our bank account:
+        }
+        noTrimWrap = ||<br />|
+      }
+        // IBAN
+      20 = TEXT
+      20 {
+        value = IBAN {$plugin.caddy.bankaccount.iban}
+        lang {
+          de = IBAN {$plugin.caddy.bankaccount.iban}
+          en = IBAN {$plugin.caddy.bankaccount.iban}
+        }
+        noTrimWrap = ||, |
+      }
+        // BIC
+      30 = TEXT
+      30 {
+        value = BIC {$plugin.caddy.bankaccount.bic}
+        lang {
+          de = BIC {$plugin.caddy.bankaccount.bic}
+          en = BIC {$plugin.caddy.bankaccount.bic}
+        }
+      }
+      wrap = <p>|</p>
+    }
     caddy_buttonsubmit = COA
     caddy_buttonsubmit {
         // label

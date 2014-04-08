@@ -28,6 +28,15 @@ plugin.caddy {
   # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   main.numberformat.sponsors = Click me!
 
+  # cat=caddy - bankaccount//202; type=text; label= IBAN: International Bank Account Number (IBAN). Is needed for the payment option cash in advance.
+  bankaccount.iban = See: Constant Editor [CADDY - BANKACCOUNT] > IBAN
+  # cat=caddy - bankaccount//203; type=text; label= BIC: Bank identifier code (BIC). Is needed for the payment option cash in advance.
+  bankaccount.bic = See: Constant Editor [CADDY - BANKACCOUNT] > BIC
+  # cat=caddy - bankaccount/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  bankaccount.externalLinks = Click me!
+  # cat=caddy - bankaccount/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  bankaccount.sponsors = Click me!
+
   # cat=caddy - database*//200; type=text; label= Table*: *Obligate! Name of the table with the items (products). Examples: tx_myextension_products, tx_quickshop_products, tx_cars_model
   db.table =
   # cat=caddy - database*//210; type=text; label= Title*: *Obligate! Label of the field with the title of the item (product).
