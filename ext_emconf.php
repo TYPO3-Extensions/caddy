@@ -1,21 +1,17 @@
 <?php
 
-/***************************************************************
- * Extension Manager/Repository config file for ext "caddy".
- *
- * Auto generated 29-12-2013 19:49
- *
- * Manual updates:
- * Only the data in the array - everything else is removed by next
- * writing. "version" and "dependencies" must not be touched!
- ***************************************************************/
-
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'Caddy - your Shopping Cart',
-	'description' => 'Caddy is your shopping cart. See http://typo3-caddy.de. Manual at http://typo3-caddy.de/typo3conf/ext/caddy/doc/manual.pdf. You can use it for your own needs. You need a database with products or any other items and the extension powermail. You can install Caddy with one mouse click.',
+	'description' => 'Caddy is your shopping cart. '
+  . 'See http://typo3-caddy.de. '
+  . 'Manual at http://typo3-caddy.de/typo3conf/ext/caddy/doc/manual.pdf. '
+  . 'You can use caddy for your own needs. You need a database with products or any other items and the extension powermail. '
+  . 'You can install Caddy with one mouse click. '
+  . 'Quick Shop is using Caddy. '
+  ,
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '4.0.11',
+	'version' => '4.0.12',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',

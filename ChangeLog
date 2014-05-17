@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+4.0.12
+  2014-05-17
+  Bugfix
+  * #58646: Currency symbol in email is crippled
+
 4.0.11
   2014-04-08
   Feature
