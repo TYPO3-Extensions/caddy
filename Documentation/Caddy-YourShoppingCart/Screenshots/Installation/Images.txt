@@ -1,5 +1,0 @@
-﻿.. |img-15|     image:: ../../Images/manual_html_m2ac18593.gif
-   :alt: Frame43
-.. :align: bottom
-.. :name: Frame43
-

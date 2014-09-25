@@ -1,5 +1,0 @@
-﻿.. |img-55|     image:: ../../Images/manual_html_m61831755.gif
-   :alt: Frame35
-.. :align: bottom
-.. :name: Frame35
-
