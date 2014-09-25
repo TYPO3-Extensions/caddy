@@ -459,4 +459,9 @@ plugin.caddy {
   # cat=caddy - templates/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   templates.sponsors = Click me!
 
+  # cat=caddy - url//101;         type=string; label= showUid: Alias for the URL parameter showUid. I.e: calendarUid
+  url.showUid   = showUid
+  # cat=caddy - url/others/999;   type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  url.sponsors  = Click me!
+
 }

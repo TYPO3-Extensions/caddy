@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2009 Dirk Wildt <wildt.at.die-netzmacher.de>
+ *  (c) 2013-2014 Dirk Wildt <wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -22,7 +22,19 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_tslib.'class.tslib_pibase.php');
+// #61634, 140916, dwildt, 1-
+//require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, +
+list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
+$version = ( ( int ) $main ) * 1000000;
+$version = $version + ( ( int ) $sub ) * 1000;
+$version = $version + ( ( int ) $bugfix ) * 1;
+// Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
+if ( $version < 6002002 )
+{
+  require_once(PATH_tslib . 'class.tslib_pibase.php');
+}
+// #61634, 140916, dwildt, +
 
 /**
  * Plugin 'Browser' for the 'caddy' extension - the fastest way for your data into the TYPO3 frontend.
@@ -30,6 +42,8 @@ require_once(PATH_tslib.'class.tslib_pibase.php');
  * @author    Dirk Wildt <dirk.wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage  caddy
+ * @version 6.0.0
+ * @since 2.0.0
  */
 
 /**
@@ -69,14 +83,14 @@ class tx_caddy_pi1_updatewizard extends tslib_pibase {
 
   // Variables set by children classes
 
-  
+
 /**
  * Constructor. The method initiate the parent object
  *
  * @param    object        The parent object
  * @return    void
  */
-  function __construct( $parentObj, $conf ) 
+  function __construct( $parentObj, $conf )
   {
     $this->pObj = $parentObj;
     $this->conf = $parentObj->conf;
@@ -99,7 +113,7 @@ class tx_caddy_pi1_updatewizard extends tslib_pibase {
  * @param	string		$content: The content of the PlugIn
  * @return	string		The content that should be displayed on the website
  */
-  function main( $content ) 
+  function main( $content )
   {
 
     $this->pi_loadLL();

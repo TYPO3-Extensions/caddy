@@ -26,7 +26,19 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, 1-
+//require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, +
+list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
+$version = ( ( int ) $main ) * 1000000;
+$version = $version + ( ( int ) $sub ) * 1000;
+$version = $version + ( ( int ) $bugfix ) * 1;
+// Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
+if ( $version < 6002002 )
+{
+  require_once(PATH_tslib . 'class.tslib_pibase.php');
+}
+// #61634, 140916, dwildt, +
 
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -106,7 +118,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.6
+ * @version	6.0.0
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -228,7 +240,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $content = $this->caddyHide( $content );
 
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
 //var_dump( __METHOD__, __LINE__, $this->pObj->local_cObj->data );
     $content = $this->dynamicMarkers->main( $content, $this ); // Fill dynamic locallang or typoscript markers
     return $this->pi_wrapInBaseClass( $content );
@@ -293,7 +305,7 @@ class tx_caddy_pi1 extends tslib_pibase
     {
       return;
     }
-    
+
       // add further product to session
     $this->newProduct = $this->session->productGetDetails( $this->gpvar );
     if( $this->newProduct !== false )
@@ -375,14 +387,14 @@ class tx_caddy_pi1 extends tslib_pibase
 //    $GP = t3lib_div::_GET( )
 //        + t3lib_div::_POST( )
 //        ;
-//    var_dump( __METHOD__, __LINE__, $GP );    
+//    var_dump( __METHOD__, __LINE__, $GP );
 
       // RETURN : Don't update options, if form isn't by itself
     if( ! intval( $this->piVars['updateByCaddy'] ) )
     {
       return;
     }
-    
+
     $this->caddyUpdateOptionsPayment( );
     $this->caddyUpdateOptionsShipping( );
     $this->caddyUpdateOptionsSpecials( );
@@ -399,7 +411,7 @@ class tx_caddy_pi1 extends tslib_pibase
   private function caddyUpdateOptionsPayment( )
   {
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );    
+//var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
       // #54858, 140109, dwildt, 1-
     //$payment = null;
       // #54858, 140109, dwildt, 1+
@@ -854,7 +866,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
       $name = $this->conf['api.']['getpost.'][ $getpostKey ];
       $conf = $this->conf['api.']['getpost.'][ $getpostKey . '.' ];
-      
+
         // 140207, dwildt, +
       $value = $this->zz_cObjGetSingle( $name, $conf );
       if( empty( $value ) && $value !== 0 )

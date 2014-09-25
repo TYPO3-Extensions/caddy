@@ -23,7 +23,19 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-require_once( PATH_tslib . 'class.tslib_pibase.php' );
+// #61634, 140916, dwildt, 1-
+//require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, +
+list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
+$version = ( ( int ) $main ) * 1000000;
+$version = $version + ( ( int ) $sub ) * 1000;
+$version = $version + ( ( int ) $bugfix ) * 1;
+// Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
+if ( $version < 6002002 )
+{
+  require_once(PATH_tslib . 'class.tslib_pibase.php');
+}
+// #61634, 140916, dwildt, +
 
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -97,7 +109,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php' );
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     4.0.9
+ * @version     6.0.0
  * @since       4.0.6
  */
 class tx_caddy_paymill_paymentMethods extends tslib_pibase

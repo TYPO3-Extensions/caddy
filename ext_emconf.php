@@ -11,7 +11,7 @@ $EM_CONF[$_EXTKEY] = array(
   ,
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '4.0.12',
+	'version' => '6.0.0',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
@@ -32,7 +32,7 @@ $EM_CONF[$_EXTKEY] = array(
 		'depends' => array(
 			'powermail' => '',
 			't3_tcpdf' => '',
-			'typo3' => '4.5.0-6.1.99',
+			'typo3' => '4.5.0-6.2.99',
 		),
 		'conflicts' => array(
 		),

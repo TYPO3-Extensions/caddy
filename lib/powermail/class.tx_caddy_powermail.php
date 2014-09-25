@@ -65,7 +65,19 @@
  * (This index is automatically created/updated by the extension "extdeveval")
  *
  */
-require_once( PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, 1-
+//require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, +
+list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
+$version = ( ( int ) $main ) * 1000000;
+$version = $version + ( ( int ) $sub ) * 1000;
+$version = $version + ( ( int ) $bugfix ) * 1;
+// Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
+if ( $version < 6002002 )
+{
+  require_once(PATH_tslib . 'class.tslib_pibase.php');
+}
+// #61634, 140916, dwildt, +
 
 /**
  * powermail controlling for the 'caddy' extension.
@@ -73,7 +85,7 @@ require_once( PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.12
+ * @version	6.0.0
  * @since       2.0.0
  */
 class tx_caddy_powermail extends tslib_pibase

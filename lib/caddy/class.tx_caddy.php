@@ -23,7 +23,19 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
-require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, 1-
+//require_once(PATH_tslib . 'class.tslib_pibase.php');
+// #61634, 140916, dwildt, +
+list( $main, $sub, $bugfix ) = explode( '.', TYPO3_version );
+$version = ( ( int ) $main ) * 1000000;
+$version = $version + ( ( int ) $sub ) * 1000;
+$version = $version + ( ( int ) $bugfix ) * 1;
+// Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
+if ( $version < 6002002 )
+{
+  require_once(PATH_tslib . 'class.tslib_pibase.php');
+}
+// #61634, 140916, dwildt, +
 
 /**
  * [CLASS/FUNCTION INDEX of SCRIPT]
@@ -159,7 +171,7 @@ require_once(PATH_tslib . 'class.tslib_pibase.php');
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.8
+ * @version	6.0.0
  * @since       2.0.0
  */
 class tx_caddy extends tslib_pibase
@@ -3323,7 +3335,7 @@ class tx_caddy extends tslib_pibase
    * @param	array		$pobj: Parent Object
    * @return	array		$markerArray: with added element ###VARIANTS### in case of variants
    * @access private
-   * @version 2.0.0
+   * @version 6.0.0
    * @since 1.4.6
    */
   private function zz_addQtynameMarker($product, $markerArray, $pObj)
@@ -3337,17 +3349,19 @@ class tx_caddy extends tslib_pibase
       return $markerArray;
     }
 
-    $str_marker = null;
     // get all variant key/value pairs from the current product
     $array_add_gpvar = $this->session->productGetVariantTs($product, $pObj);
+    //// #61877, dwildt, 2-
     $array_add_gpvar['uid'] = $product['uid'];
+    $str_marker = null;
+    //// #61877, dwildt, 1+
+    //$str_marker = '[' . $product['uid'] . ']';
     // generate the marker array
     foreach ((array) $array_add_gpvar as $key => $value)
     {
       $str_marker = $str_marker . '[' . $key . '=' . $value . ']';
     }
     $markerArray['###QTY_NAME###'] = 'tx_caddy_pi1[qty]' . $str_marker;
-
     return $markerArray;
   }
 

@@ -2,6 +2,36 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.0
+  14-09-16
+  Major Feature
+  * #61879: Foundation 5.x for Powermail 2.x
+            * files/templates/2.0.0/caddy.css
+              * powermail css removed (annotated)
+  * #61865: Foundation 5.x
+  * #61624: Upgrade TYPO3 6.2
+            * #61631: Replace the static method t3lib_div::debug
+            * #61632: Replace the call to mysql_escape_string
+            * #61633: Remove constant path PATH_t3lib
+            * #61634: Remove require_once (piBase, PATH_tslib)
+  Workflow
+  * #61877: Min and Max failed in case of variants
+            * Not solved but workflow:
+              * Min and Max won't checked in case of variants.
+                  Cause is another param in the url.
+                  Param for quantity without variants is f.e:
+                    * tx_caddy_pi1[qty][126]
+                  Param for quantity in case of variants is f.e:
+                    * tx_caddy_pi1[qty][tx_org_calentrance.uid=106][uid=105]
+                  Workflow is:
+                    * Don't check Min and Max in case of variants.
+                  Solution would be, to improve among others
+                    * lib/caddy/class.tx_caddy.php::zz_addQtynameMarker
+                    * lib/class.tx_caddy_session.php::quantityUpdate
+  Bugfix
+  * #61870: Delete an item fails in case of variants
+  * #47370: t3lib_div::getIndpEnv( 'TYPO3_DOCUMENT_ROOT' )
+
 4.0.12
   2014-05-17
   Bugfix
