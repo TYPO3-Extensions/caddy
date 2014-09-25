@@ -1,0 +1,5 @@
+﻿.. |img-31|     image:: ../../Images/manual_html_1f8de5ea.gif
+   :alt: Frame9
+.. :align: bottom
+.. :name: Frame9
+

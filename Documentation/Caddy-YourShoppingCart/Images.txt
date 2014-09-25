@@ -1,0 +1,7 @@
+﻿.. |img-4|      image:: Images/manual_html_m561ec1d7.gif
+   :height: 269
+   :width: 269
+.. :align: bottom
+.. :border: 0
+.. :name: graphics69
+

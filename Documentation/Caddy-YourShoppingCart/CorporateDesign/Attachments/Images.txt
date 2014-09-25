@@ -1,0 +1,27 @@
+﻿.. |img-50|     image:: ../../Images/manual_html_m1ab909c2.gif
+   :alt: Frame29
+.. :align: bottom
+.. :name: Frame29
+
+.. |img-51|     image:: ../../Images/manual_html_7acee935.gif
+   :alt: Frame30
+.. :align: bottom
+.. :name: Frame30
+
+.. |img-52|     image:: ../../Images/manual_html_m14cb8f3a.gif
+   :alt: Frame31
+.. :align: bottom
+.. :name: Frame31
+
+.. |img-53|     image:: ../../Images/manual_html_20380b0a.gif
+   :alt: Frame32
+.. :align: bottom
+.. :name: Frame32
+
+.. |img-54|     image:: ../../Images/manual_html_m31e7f0ea.jpg
+   :height: 535
+   :width: 378
+.. :align: left
+.. :border: 0
+.. :name: graphics31
+

@@ -1,0 +1,25 @@
+﻿.. |img-5|      image:: ../../Images/manual_html_c7ed797.gif
+   :alt: Frame1
+.. :align: bottom
+.. :name: Frame1
+
+.. |img-6|      image:: ../../Images/manual_html_m7e0189d2.gif
+   :alt: Frame2
+.. :align: bottom
+.. :name: Frame2
+
+.. |img-7|      image:: ../../Images/manual_html_27de7ebd.gif
+   :alt: Frame44
+.. :align: bottom
+.. :name: Frame44
+
+.. |img-8|      image:: ../../Images/manual_html_6e21fb68.gif
+   :alt: Frame46
+.. :align: bottom
+.. :name: Frame46
+
+.. |img-9|      image:: ../../Images/manual_html_70b10426.gif
+   :alt: Frame50
+.. :align: bottom
+.. :name: Frame50
+

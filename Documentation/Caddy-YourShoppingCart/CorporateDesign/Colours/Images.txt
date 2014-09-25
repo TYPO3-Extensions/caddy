@@ -1,0 +1,20 @@
+﻿.. |img-42|     image:: ../../Images/manual_html_m6463fa12.gif
+   :alt: Frame23
+.. :align: bottom
+.. :name: Frame23
+
+.. |img-43|     image:: ../../Images/manual_html_6e3e4999.gif
+   :alt: Frame24
+.. :align: bottom
+.. :name: Frame24
+
+.. |img-44|     image:: ../../Images/manual_html_34daed0a.gif
+   :alt: Frame25
+.. :align: bottom
+.. :name: Frame25
+
+.. |img-45|     image:: ../../Images/manual_html_m3f04f805.gif
+   :alt: Frame26
+.. :align: bottom
+.. :name: Frame26
+

@@ -1,0 +1,52 @@
+﻿.. |img-32|     image:: ../../Images/manual_html_5b529348.gif
+   :alt: Frame10
+.. :align: bottom
+.. :name: Frame10
+
+.. |img-33|     image:: ../../Images/manual_html_32309595.gif
+   :alt: Frame11
+.. :align: bottom
+.. :name: Frame11
+
+.. |img-34|     image:: ../../Images/manual_html_6d958ab6.gif
+   :alt: Frame12
+.. :align: bottom
+.. :name: Frame12
+
+.. |img-35|     image:: ../../Images/manual_html_5bc6bf01.gif
+   :alt: Frame13
+.. :align: bottom
+.. :name: Frame13
+
+.. |img-36|     image:: ../../Images/manual_html_36f491e.gif
+   :alt: Frame14
+.. :align: bottom
+.. :name: Frame14
+
+.. |img-37|     image:: ../../Images/manual_html_37099742.gif
+   :alt: Frame15
+.. :align: bottom
+.. :name: Frame15
+
+.. |img-38|     image:: ../../Images/manual_html_m5396af41.gif
+   :alt: Frame16
+.. :align: bottom
+.. :name: Frame16
+
+.. |img-39|     image:: ../../Images/manual_html_165ffbdd.png
+   :height: 76
+   :width: 76
+.. :align: left
+.. :border: 0
+.. :name: graphics45
+
+.. |img-40|     image:: ../../Images/manual_html_m2e8f6e67.gif
+   :alt: Frame17
+.. :align: bottom
+.. :name: Frame17
+
+.. |img-41|     image:: ../../Images/manual_html_m1150d004.gif
+   :alt: Frame18
+.. :align: bottom
+.. :name: Frame18
+
