@@ -1,0 +1,21 @@
+.caddy-right {
+  text-align:right;
+}
+#caddy_powermail {
+  margin:1em 0 0 0;
+}
+#caddy_powermail fieldset {
+  border:0;
+  margin:0;
+  padding: 1em 0;
+}
+#caddy_powermail legend {
+  display:none;
+}
+div.caddy-requirements-prompt-foundation {
+  margin-top:1em;
+}
+dd.tab-error > a {
+  background-color:#F04124;
+  color:#FFF;
+}
