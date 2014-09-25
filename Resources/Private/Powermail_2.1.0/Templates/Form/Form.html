@@ -1,0 +1,83 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:layout name="Default" />
+
+Render Powermail Form
+{forms} 			All Forms with their Pages and their Fields
+
+
+<f:section name="main">
+
+  <f:comment>#61879, 140925, dwildt, 2+</f:comment>
+  <div class="row">
+    <div id="caddy_powermail" class="small-12 large-12 columns">
+      <f:flashMessages class="powermail_message powermail_message_error" />
+
+      <f:if condition="{forms}">
+        <f:then>
+          <f:for each="{forms}" as="form">
+
+            <f:comment>
+              #61879, 140925, dwildt: First tab should be active like in the line below
+              <dd class="active"><a href="#tab1">Tab 1</a></dd>
+            </f:comment>
+            <f:comment>#61879, 140925, dwildt, 7+</f:comment>
+            <dl class="tabs" data-tab="">
+              <f:for each="{form.pages}" as="page">
+                <dd id="tab_{page.uid}"><a href="#powermail_tab_{page.uid}">{page.title}</a></dd>
+              </f:for>
+            </dl>
+            <div class="row">
+              <div class="small-12 large-6 columns">
+
+                <f:comment>
+                  #61879, 140925, dwildt:
+                  additionalAttributes is moved from {vh:Validation.EnableParsleyAndAjax(form:form)} to {data-abide:'data-abide'}
+                </f:comment>
+                <f:form
+                  action="{action}"
+                  name="field"
+                  enctype="multipart/form-data"
+                  additionalAttributes="{data-abide:'data-abide'}"
+                  class="powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate:settings.main.moresteps, class:'powermail_morestep')}">
+
+                  <f:comment>
+                    // #61879, 140925, dwildt, 1-
+                    <h3>{form.title}</h3>
+                  </f:comment>
+
+                  <f:render partial="Misc/FormError" arguments="{_all}" />
+
+                  <f:comment>#61879, 140925, dwildt, 1+</f:comment>
+                  <div class="tabs-content">
+                    <f:for each="{form.pages}" as="page">
+                      <f:comment>#61879, 140925, dwildt, 1+</f:comment>
+                      <div class="content" id="powermail_tab_{page.uid}" name="tab_{page.uid}">
+                        <fieldset class="powermail_fieldset powermail_fieldset_{page.uid} {page.css}">
+                          <legend class="powermail_legend">{page.title}</legend>
+                          <f:for each="{page.fields}" as="field">
+                            <f:render partial="Form/{vh:String.Upper(string:field.type)}" arguments="{field:field}" />
+                          </f:for>
+                        </fieldset>
+                        <f:comment>#61879, 140925, dwildt, 1+</f:comment>
+                      </div>
+                    </f:for>
+                    <f:comment>#61879, 140925, dwildt, 1+</f:comment>
+                  </div>
+
+                  <f:form.hidden name="mail[form]" value="{form.uid}" class="powermail_form_uid" />
+                  <f:render partial="Misc/HoneyPod" arguments="{form:form}" />
+                  <f:comment>#61879, 140925, dwildt, 2+</f:comment>
+              </div>
+            </div>
+            </f:form>
+          </f:for>
+        </f:then>
+        <f:else>
+          <f:translate key="error_no_form" />
+        </f:else>
+      </f:if>
+      <f:comment>#61879, 140925, dwildt, 2+</f:comment>
+    </div>
+  </div>
+
+</f:section>
