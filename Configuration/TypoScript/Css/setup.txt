@@ -1,0 +1,71 @@
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // INDEX
+  //
+  // plugin.tx_caddy_pi1
+  // page
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // plugin.tx_caddy_pi1
+
+plugin.tx_caddy_pi1 {
+  _CSS_DEFAULT_STYLE (
+    div.caddy form {
+      border-bottom: 1px solid {$plugin.caddy.html.color.border};
+    }
+    div.caddy_footer {
+      border-bottom: 1px solid {$plugin.caddy.html.color.border};
+    }
+    div.caddy_header {
+      background-color: {$plugin.caddy.html.color.table.head.background};
+      color: {$plugin.caddy.html.color.table.head.text};
+    }
+    div.caddy_product {
+      border-bottom: 1px solid {$plugin.caddy.html.color.border};
+    }
+    div.linktocaddy,
+    div.linktoshop,
+    .caddy select,
+    form.caddy button.submit,
+    img.caddy_delete,
+    .caddy-powermail input[type=submit]
+    { 
+      background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
+      background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{$plugin.caddy.html.color.button.gradient1}), color-stop(50%,{$plugin.caddy.html.color.button.gradient2}), color-stop(51%,{$plugin.caddy.html.color.button.gradient3}), color-stop(100%,{$plugin.caddy.html.color.button.gradient4})); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{$plugin.caddy.html.color.button.gradient3}', endColorstr='{$plugin.caddy.html.color.button.gradient4}',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* W3C */
+      border: 0 none;
+      border-radius: .4em;
+      box-shadow: 0 .2em .4em 0 #AAA;
+      color: {$plugin.caddy.html.color.button.text};
+      cursor:pointer;
+      font-weight:bold;
+      padding: .4em .5em;
+      position:relative;
+      top:.1em;
+    }
+)
+}
+  // plugin.tx_caddy_pi1
+
+
+
+  ///////////////////////////////////////////////////////////////
+  //
+  // page
+
+page {
+  includeCSS {
+    caddy = EXT:caddy/files/templates/2.0.0/caddy.css
+  }
+}
+  // page

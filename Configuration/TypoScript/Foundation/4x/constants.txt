@@ -1,0 +1,3 @@
+plugin.caddy {
+  templates.html.caddy = EXT:caddy/files/templates/foundation/4x/caddy.html
+}

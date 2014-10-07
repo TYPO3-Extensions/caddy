@@ -1,0 +1,74 @@
+plugin.tx_caddy_pi1_powermail {
+  _CSS_DEFAULT_STYLE (
+      /* powermail */
+    form.powermail_form input.powermail_confirmation_form,
+    form.powermail_form input.powermail_confirmation_submit,
+    form.powermail_form input.powermail_submit,
+    form.tx_powermail_pi1_formconfirmation_back input.tx-powermail-pi1_confirmation_back,
+    form.tx_powermail_pi1_formconfirmation_submit input.tx-powermail-pi1_confirmation_submit {
+      background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
+      background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{$plugin.caddy.html.color.button.gradient1}), color-stop(50%,{$plugin.caddy.html.color.button.gradient2}), color-stop(51%,{$plugin.caddy.html.color.button.gradient3}), color-stop(100%,{$plugin.caddy.html.color.button.gradient4})); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{$plugin.caddy.html.color.button.gradient3}', endColorstr='{$plugin.caddy.html.color.button.gradient4}',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* W3C */
+      border: 0 none;
+      border-radius: .4em;
+      box-shadow: 0 .2em .4em 0 #AAA;
+      color: {$plugin.caddy.html.color.button.text};
+      cursor:pointer;
+      padding: 5px 20px;
+      position:relative;
+      top:.1em;
+    }
+    form.tx_powermail_pi1_formconfirmation_back {
+      float:right;
+    }
+    fieldset.powermail_fieldset,
+    div.tx-powermail div.powermail_confirmation,
+    div.tx-powermail div.powermail_create,
+    div.tx-powermail ul.powermail_tabmenu,
+    fieldset.tx-powermail-pi1_fieldset {
+      border-radius: 0;
+      box-shadow: 0 0 .2em 0 #AAA;
+      margin-bottom:1em;
+    }
+    div.tx-powermail div.powermail_confirmation {
+      margin-top:1em;
+    }
+    div.tx-powermail ul.powermail_tabmenu li,
+    fieldset.powermail_fieldset legend,
+    fieldset.tx-powermail-pi1_fieldset legend,
+    ul.powermail_multiplejs_tabs li a {
+      color: {$plugin.caddy.html.color.powermail.text};
+    }
+    div.tx-powermail ul.powermail_tabmenu li.act {
+      text-shadow: 0 .2em .4em #999;
+      text-decoration: underline;
+    }
+    fieldset.powermail_fieldset label,
+    fieldset.tx-powermail-pi1_fieldset label {
+      color: {$plugin.caddy.html.color.powermail.text};
+    }
+    fieldset.tx-powermail-pi1_fieldset legend.tx_powermail_pi1_fieldwrap_html_checkbox_title {
+      color: {$plugin.caddy.html.color.powermail.text};
+    }
+    fieldset.tx-powermail-pi1_fieldset input.powermail_submit {
+      background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
+      background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{$plugin.caddy.html.color.button.gradient1}), color-stop(50%,{$plugin.caddy.html.color.button.gradient2}), color-stop(51%,{$plugin.caddy.html.color.button.gradient3}), color-stop(100%,{$plugin.caddy.html.color.button.gradient4})); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* Opera11.10+ */
+      background: -ms-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* IE10+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{$plugin.caddy.html.color.button.gradient3}', endColorstr='{$plugin.caddy.html.color.button.gradient4}',GradientType=0 ); /* IE6-9 */
+      background: linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%,{$plugin.caddy.html.color.button.gradient2} 50%,{$plugin.caddy.html.color.button.gradient3} 51%,{$plugin.caddy.html.color.button.gradient4} 100%); /* W3C */
+      border: 0 none;
+      border-radius: .4em;
+      box-shadow: 0 .2em .4em 0 #AAA;
+      color: {$plugin.caddy.html.color.button.text};
+      padding: 5px 20px;
+    }
+  )
+}

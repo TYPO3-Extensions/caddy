@@ -1,0 +1,11 @@
+plugin.tx_powermail {
+  settings {
+    javascript {
+      powermailJQuery = 
+      powermailJQueryUi = 
+    }
+    misc {
+      showOnlyFilledValues = 1
+    }
+  }
+}
