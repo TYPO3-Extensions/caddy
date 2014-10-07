@@ -263,3 +263,30 @@ table.caddy_table caddy_right {
   position: absolute;
   z-index:10000;
 }
+
+
+/* tx_caddy */
+form.caddy fieldset {
+  border:0;
+  margin: 0 0 1em 0;
+  padding: 1em 0;
+}
+.caddyWoMargin form.caddy {
+  margin: 0;
+}
+.caddyWoMargin form.caddy fieldset {
+  margin: 0;
+  padding: 0;
+}
+.caddyWoMargin form.caddy fieldset select {
+  margin-bottom: 0;
+}
+.caddyWoMargin form.caddy fieldset .button {
+  margin-bottom: 0;
+}
+
+form.caddy fieldset legend {
+  display:none;
+}
+
+/* tx_caddy */

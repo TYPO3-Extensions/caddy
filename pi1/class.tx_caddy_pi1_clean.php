@@ -460,7 +460,7 @@ class tx_caddy_pi1_clean
 
     return $record;
   }
-  
+
  /***********************************************
   *
   * Getting methods
@@ -651,7 +651,6 @@ class tx_caddy_pi1_clean
   {
     $pmUid  = $this->pObj->flexform->emailCustomerEmail;
     $value  = $this->pObj->powermail->getFieldById( $pmUid );
-
     return $value;
   }
 
@@ -1018,12 +1017,12 @@ class tx_caddy_pi1_clean
   private function stockCheck( )
   {
     $itemsSession = $this->session->productsGet( $this->pidCaddy );
-    
+
     foreach( $itemsSession as $itemSession )
     {
       $uid          = $itemSession['uid'];
       $qtyByOrder   = $itemSession['qty'];
-      $itemRealLive = $this->session->getItemFromDatabase( $uid );
+      $itemRealLive = $this->session->productGet( $uid );
       $qtyInStock   = $this->stockmanager->getItemQuantity( $itemRealLive );
 
       switch( true )

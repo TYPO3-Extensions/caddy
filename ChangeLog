@@ -5,6 +5,12 @@ TODO
 6.0.0
   14-09-16
   Major Feature
+  * #62044: TypoScript file structure
+  * #62043: Button template
+            * New constant plugin.caddy.url.extension
+              * Context with plugin.caddy.getpost.uid !
+            See:
+            * plugin.tx_caddy_pi1.templates.html.form.order.foundation.5x
   * #61879: Foundation 5.x for Powermail 2.x
             * files/templates/2.0.0/caddy.css
               * powermail css removed (annotated)
@@ -29,6 +35,11 @@ TODO
                     * lib/caddy/class.tx_caddy.php::zz_addQtynameMarker
                     * lib/class.tx_caddy_session.php::quantityUpdate
   Bugfix
+  * #i0056: Moved code in contest with #61892
+  * #61893: PDF attachments without any address data
+	* #61892: Database record without value for customer e-mail
+            * powermail 2.0 to 2.1 moved the POST params from ids to labels.
+  * #61889: Variants: Bug in the SQL query for powermail
   * #61870: Delete an item fails in case of variants
   * #47370: t3lib_div::getIndpEnv( 'TYPO3_DOCUMENT_ROOT' )
 

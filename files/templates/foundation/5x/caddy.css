@@ -16,6 +16,6 @@ div.caddy-requirements-prompt-foundation {
   margin-top:1em;
 }
 dd.tab-error > a {
-  background-color:#F04124;
-  color:#FFF;
+  background-color:#F04124 !important;
+  color:#FFF !important;
 }

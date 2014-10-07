@@ -27,6 +27,8 @@
       <label index="error_min">The minimum order quantity for this item is %d. The quantity of this item is increased to %d.</label>
       <label index="error_max">The maximum order quantity for this item is %d. The quantity of this item is decreased to %d.</label>
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
+      <label index="formButton">Buy now</label>
+      <label index="formLegend">Order form</label>
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
@@ -105,6 +107,8 @@
       <label index="error_min">Sie m<![CDATA[&uuml;]]>ssen von diesem Artikel mindestens %d St<![CDATA[&uuml;]]>ck bestellen. Ihre Bestellmenge wurde auf %d erh<![CDATA[&ouml;]]>ht.</label>
       <label index="error_max">Sie k<![CDATA[&ouml;]]>nnen von diesem Artikel h<![CDATA[&ouml;]]>chstens %d St<![CDATA[&uuml;]]>ck bestellen. Ihre Bestellmenge wurde auf %d reduziert.</label>
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
+      <label index="formButton">Kaufen</label>
+      <label index="formLegend">Bestellformular</label>
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>

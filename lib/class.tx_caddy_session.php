@@ -48,7 +48,7 @@
  *  396:     public function productAdd( $newProduct, $pid=null )
  *  467:     private function productAddRequirements( $product )
  *  507:     public function productDelete( $pid=null )
- *  588:     public function productGetDetails( $gpvar )
+ *  588:     public function productGet( $gpvar )
  *  609:     private function productsGetFirstKey( )
  *  627:     private function productGetDetailsSql( $gpvar )
  *  757:     private function productGetDetailsSqlIsNotNeeded( )
@@ -349,22 +349,6 @@ class tx_caddy_session
     }
 
     return $pid;
-  }
-
-  /**
-   * getItemFromDatabase( ) : Get the item data from database
-   *
-   * @param	integer		$uid  : uid of the current item
-   * @return	array		$item : SQL row of the current item
-   * @internal    #54634
-   * @access      public
-   * @version     4.0.7
-   * @since       4.0.7
-   */
-  public function getItemFromDatabase( $uid )
-  {
-    $item = $this->productGetDetailsTs( $uid );
-    return $item;
   }
 
   /*   * *********************************************
@@ -707,25 +691,20 @@ class tx_caddy_session
    * read product details (title, price from table)
    * the method productGetDetails of version 1.2.1 became productGetDetailsTs from version 1.2.2
    *
-   * @param	array		$gpvar: array with product uid, title, tax, etc...
+   * @param	array		$uid: product uid
    * @return	array		$arr: array with title and price
-   * @version 4.0.7
+   * @version 6.0.0
    * @since 1.2.2
    */
-  public function productGetDetails( $gpvar )
+  public function productGet( $uid )
   {
-    $product = null;
-
-    // build own sql query
-    // handle query by db.sql
     if ( !empty( $this->pObj->conf[ 'db.' ][ 'sql' ] ) )
     {
-      $product = $this->productGetDetailsSql( $gpvar );
+      $product = $this->productGetDetailsSql( $uid );
       return $product;
     }
 
-    // handle query by db.table and db.fields
-    $product = $this->productGetDetailsTs( $gpvar[ 'uid' ] );
+    $product = $this->productGetDetailsTs( $uid );
     return $product;
   }
 
@@ -749,13 +728,13 @@ class tx_caddy_session
   /**
    * productGetDetailsSql( )  :   read product details by a manually configured sql query
    *
-   * @param	array		$gpvar: array with product uid, title, tax, etc...
+   * @param	array		$uid: product uid
    * @return	array		$arr: array with title and price
    * @access private
    * @version 2.0.11
    * @since 1.4.6
    */
-  private function productGetDetailsSql( $gpvar )
+  private function productGetDetailsSql( $uid )
   {
     // RETURN : any sql result isn't needed
     if ( $this->productGetDetailsSqlIsNotNeeded() )
@@ -807,7 +786,6 @@ class tx_caddy_session
       die( $prompt );
     }
 //var_dump( __METHOD__, __LINE__, $query );
-
     // DRS
     if ( $this->drs->drsSql )
     {
@@ -858,7 +836,7 @@ class tx_caddy_session
     }
 
     // Add or overwrite uid field
-    $row[ 'uid' ] = $gpvar[ 'uid' ];
+    $row[ 'uid' ] = $uid;
 
     // DRS
     if ( $this->drs->drsSql )
@@ -882,7 +860,6 @@ class tx_caddy_session
   private function productGetDetailsSqlIsNotNeeded()
   {
     // RETURN : there isn't any GET or POST parameter
-//var_dump( __METHOD__, __LINE__, t3lib_div::_GET( ), t3lib_div::_POST( ) );
     if ( (!t3lib_div::_GET() ) && (!t3lib_div::_POST() ) )
     {
       return true;
@@ -908,11 +885,9 @@ class tx_caddy_session
       // ordering is canceled
       case( $GP[ 'tx_powermail_pi1' ][ 'action' ] == 'form' ):
         return true;
-        break;
       // 130913, dwildt, 3+
       case( isset( $GP[ 'tx_powermail_pi1' ][ 'mailID' ] ) ):
         return true;
-        break;
       default:
         // Follow the workflow
         break;
@@ -1019,7 +994,7 @@ class tx_caddy_session
               . 'Please take care for a proper configuration at plugin.tx_caddy_pi1.db<br />' . PHP_EOL
               . 'Sorry for the trouble.<br />' . PHP_EOL
               . 'TYPO3 Caddy<br />' . PHP_EOL
-              . __METHOD__ . ' (' . __LINE__ . ')';
+              . __METHOD__ . ' (' . __LINE__ . ')'
       ;
       die( $prompt );
     }
@@ -1067,7 +1042,7 @@ class tx_caddy_session
    *
    * @return	string      $select :
    * @access private
-   * @version 4.0.7
+   * @version 6.0.0
    * @since 4.0.7
    */
   private function productGetDetailsTsSqlSelect()
@@ -1080,6 +1055,9 @@ class tx_caddy_session
     {
       switch ( true )
       {
+        // #61889, 140925, dwildt, 2+
+        case( $property == 'sql' ):
+        case( $property == 'sql.' ):
         case( $property == 'table' ):
         case( empty( $label ) ):
           continue 2;
@@ -1808,7 +1786,7 @@ class tx_caddy_session
     // DRS
     if ( $this->drs->drsCalc )
     {
-      $prompt = 'Quantity of current product is: ' . $quantity;
+      $prompt = 'Quantity of current product should increased by: ' . $quantityAdd;
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
@@ -1879,11 +1857,11 @@ class tx_caddy_session
   private function quantityGetUpdate()
   {
     $quantity = 0;
-var_dump(__METHOD__, __LINE__, $this->pObj->piVars[ 'qty' ] );
+    //var_dump( __METHOD__, __LINE__, $this->pObj->piVars[ 'qty' ] );
 
     foreach ( ( array ) $this->pObj->piVars[ 'qty' ] as $value )
     {
-var_dump(__METHOD__, __LINE__, $value );
+      //var_dump( __METHOD__, __LINE__, $value );
       $quantity = $quantity + ( int ) $value
       ;
     }
@@ -2629,21 +2607,27 @@ var_dump(__METHOD__, __LINE__, $value );
       default: // error
         $wrap = '<div class="' . $this->extKey . '_msg_error" style="background-color: #FBB19B; background-position: 4px 4px; background-image: url(' . $URLprefix . 'typo3/gfx/error.png); background-repeat: no-repeat; padding: 5px 30px; font-weight: bold; border: 1px solid #DC4C42; margin-bottom: 20px; font-family: arial, verdana; color: #444; font-size: 12px;"';
         if ( $id )
+        {
           $wrap .= ' id="' . $id . '"'; // add css id
+        }
         $wrap .= '>';
         break;
 
       case 1: // success
         $wrap = '<div class="' . $this->extKey . '_msg_status" style="background-color: #CDEACA; background-position: 4px 4px; background-image: url(' . $URLprefix . 'typo3/gfx/ok.png); background-repeat: no-repeat; padding: 5px 30px; font-weight: bold; border: 1px solid #58B548; margin-bottom: 20px; font-family: arial, verdana; color: #444; font-size: 12px;"';
         if ( $id )
+        {
           $wrap .= ' id="' . $id . '"'; // add css id
+        }
         $wrap .= '>';
         break;
 
       case 2: // note
         $wrap = '<div class="' . $this->extKey . '_msg_error" style="background-color: #DDEEF9; background-position: 4px 4px; background-image: url(' . $URLprefix . 'typo3/gfx/information.png); background-repeat: no-repeat; padding: 5px 30px; font-weight: bold; border: 1px solid #8AAFC4; margin-bottom: 20px; font-family: arial, verdana; color: #444; font-size: 12px;"';
         if ( $id )
+        {
           $wrap .= ' id="' . $id . '"'; // add css id
+        }
         $wrap .= '>';
         break;
     }
@@ -2678,7 +2662,7 @@ var_dump(__METHOD__, __LINE__, $value );
 //    $string = $GLOBALS['TYPO3_DB']->escapeStrForLike( $string, $table ) . "'";
     // #61870, 140925, dwildt, 2+
     // #61632, 140916, dwildt, 1+
-    $string = $GLOBALS['TYPO3_DB']->escapeStrForLike( $string, $table );
+    $string = $GLOBALS[ 'TYPO3_DB' ]->escapeStrForLike( $string, $table );
     return $string;
 
     // #61632, 140916, dwildt, -
@@ -2715,7 +2699,7 @@ var_dump(__METHOD__, __LINE__, $value );
    *                             - ###ENABLE_FIELD:TABLE.FIELD###
    *
    * @return	void
-   * @version 1.4.5
+   * @version 6.0.0
    * @since 1.2.2
    */
   private function zz_sqlReplaceMarker()
@@ -2748,13 +2732,13 @@ var_dump(__METHOD__, __LINE__, $value );
         foreach ( $arr_fields as $field => $value )
         {
           $tableField = strtoupper( $table . '.' . $field );
-                  // #61632, 140916, dwildt: +$table
+          // #61632, 140916, dwildt: +$table
           $marker[ '###GP:' . strtoupper( $tableField ) . '###' ] = $this->zz_escapeStrForLike( $value, $table );
         }
       }
       if ( !is_array( $arr_fields ) )
       {
-                // #61632, 140916, dwildt: +$table
+        // #61632, 140916, dwildt: +$table
         $marker[ '###GP:' . strtoupper( $table ) . '###' ] = $this->zz_escapeStrForLike( $arr_fields, $table );
       }
     }
@@ -2804,6 +2788,9 @@ var_dump(__METHOD__, __LINE__, $value );
 
     // #42154, 121203, dwildt, 1-
 //    $pObj->conf['db.']['sql'] = $query;
+    // #61889, 140925, dwildt, 2+
+    unset( $this->pObj->conf[ 'db.' ][ 'sql' ] );
+    unset( $this->pObj->conf[ 'db.' ][ 'sql.' ] );
     // #42154, 121203, dwildt, 2+
     $this->pObj->conf[ 'db.' ][ 'sql' ] = 'TEXT';
     $this->pObj->conf[ 'db.' ][ 'sql.' ][ 'value' ] = $query;

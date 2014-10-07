@@ -1,0 +1,5 @@
+EXT:caddy/Configuration/TypoScript/Basis/,
+EXT:caddy/Configuration/TypoScript/Css/orange/,
+EXT:caddy/Configuration/TypoScript/Foundation/5x/,
+EXT:caddy/Configuration/TypoScript/Foundation/5x/Css/,
+EXT:caddy/Configuration/TypoScript/Properties/de/,
