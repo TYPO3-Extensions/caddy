@@ -140,7 +140,7 @@ switch ( true )
     break;
   default:
     // English
-    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Basis/', 'Caddy [1]' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Basis/', 'Caddy [1] Basis' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/', 'Caddy [2] + CSS (blue)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/orange/', 'Caddy [2.1] + orange' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/green/', 'Caddy [2.1] + green' );

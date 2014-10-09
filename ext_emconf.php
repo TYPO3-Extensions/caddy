@@ -1,13 +1,16 @@
 <?php
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Caddy - your Shopping Cart',
-	'description' => 'Caddy is your shopping cart. '
-  . 'See http://typo3-caddy.de. '
+	'title' => 'Caddy – responsive Shopping Cart',
+	'description' => ''
+  . 'http://typo3-caddy.de. '
+  . 'Caddy is the TYPO3 responsive Shopping Cart. '
+  . 'It is optimised for desktops, tablets and smartphones. '
+  . 'Caddy is e-commerce for small budget and small-scale enterprises. '
+  . 'You are welcome to install Caddy with one mouse-click – ready-to-use. '
+  . 'Caddy is the shopping cart of the TYPO3 Quick Shop. '
+  . 'You can use caddy for your own needs with your own database and without Quick Shop too. '
   . 'Manual at http://typo3-caddy.de/typo3conf/ext/caddy/doc/manual.pdf. '
-  . 'You can use caddy for your own needs. You need a database with products or any other items and the extension powermail. '
-  . 'You can install Caddy with one mouse click. '
-  . 'Quick Shop is using Caddy. '
   ,
 	'category' => 'plugin',
 	'shy' => 0,
