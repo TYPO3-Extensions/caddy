@@ -297,7 +297,7 @@ page {
   includeCSS {
     caddyEpaymentPaymill = {$plugin.caddy.e-payment.paymill.files.css}
   }
-  includeJSlibs {
+  includeJSFooterlibs {
     caddyEpaymentPaymillBridge = {$plugin.caddy.e-payment.paymill.files.js.bridge}
     caddyEpaymentPaymillBridge.external = 1
   }

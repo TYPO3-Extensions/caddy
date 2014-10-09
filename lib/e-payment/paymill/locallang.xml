@@ -95,7 +95,6 @@
       <label index="prompt-creditcard-ok">The data of your credit card seem to be proper.</label>
       <label index="prompt-elv-ok">Your data for the direct debit seem to be proper.</label>
       <label index="prompt-elv-iban-ok">Your data for the direct debit (IBAN/BIC) seem to be proper.</label>
-      <label index="prompt-guineapig">Guinea pig</label>
       <label index="prompt-invoice-ok">Invoice is proper.</label>
       <label index="prompt-paywith-cashinadvance">Cash in advance is accepted. Please continue the order transaction.</label>
       <label index="prompt-paywith-cashondelivery">Cash on delivery is accepted. Please continue the order transaction.</label>
@@ -185,7 +184,6 @@
       <label index="prompt-creditcard-ok">Ihre Kreditkarten-Daten wurden erfolgreich geprüft.</label>
       <label index="prompt-elv-ok">Ihre Konto-Daten (Lastschrift) wurden erfolgreich geprüft.</label>
       <label index="prompt-elv-iban-ok">Ihre Konto-Daten (Lastschrift IBAN/BIC) wurden erfolgreich geprüft.</label>
-      <label index="prompt-guineapig">Versuchskaninchen</label>
       <label index="prompt-invoice-ok">Auf Rechnung wurde erfolgreich geprüft.</label>
       <label index="prompt-paywith-cashinadvance">Vorkasse wird akzeptiert. Sie können die Bestellung fortsetzen.</label>
       <label index="prompt-paywith-cashondelivery">Nachnahme wird akzeptiert. Sie können die Bestellung fortsetzen.</label>

@@ -31,7 +31,7 @@ $version = ( ( int ) $main ) * 1000000;
 $version = $version + ( ( int ) $sub ) * 1000;
 $version = $version + ( ( int ) $bugfix ) * 1;
 // Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
-if ( $version < 6002002 )
+if ( $version < 6002000 )
 {
   require_once(PATH_tslib . 'class.tslib_pibase.php');
 }
@@ -1293,9 +1293,9 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
   {
 
     $marker = array(
-      '###VALUE_CREDITCARD-NUMBER###' => '30000000000004',
+      '###VALUE_CREDITCARD-NUMBER###' => '4111111111111111',  // Visa
       '###VALUE_CREDITCARD-EXPIRY###' => strftime( '%m/%g', strtotime( "+2 years" ) ),
-      '###VALUE_CREDITCARD-HOLDER###' => $this->pi_getLL( 'prompt-guineapig' ),
+      '###VALUE_CREDITCARD-HOLDER###' => 'Alois Schäfer',
       '###VALUE_CREDITCARD-CVC###'    => '123'
     );
 
@@ -1307,15 +1307,15 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
   *
   * @return	void
   * @access private
-  * @version    4.0.6
+  * @version    6.0.0
   * @since      4.0.6
   */
   private function templateModeTestDataElv( )
   {
     $marker = array(
-      '###VALUE_ELV-ACCOUNT###' => '12345678',
-      '###VALUE_ELV-BANKCODE###' => '10050000',
-      '###VALUE_ELV-HOLDER###' => $this->pi_getLL( 'prompt-guineapig' )
+      '###VALUE_ELV-ACCOUNT###' => '648489890',
+      '###VALUE_ELV-BANKCODE###' => '50010517',
+      '###VALUE_ELV-HOLDER###' => 'Chris Hansen'
     );
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
@@ -1332,9 +1332,9 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
   private function templateModeTestDataElvIban( )
   {
     $marker = array(
-      '###VALUE_ELV-IBAN###'        => 'DE10100500001234567890',
-      '###VALUE_ELV-BIC###'         => 'BELADEBEXXX',
-      '###VALUE_ELV-IBAN-HOLDER###' => $this->pi_getLL( 'prompt-guineapig' ),
+      '###VALUE_ELV-IBAN###'        => 'DE12500105170648489890',
+      '###VALUE_ELV-BIC###'         => 'BENEDEPPYYY',
+      '###VALUE_ELV-IBAN-HOLDER###' => 'Alex Tabo'
     );
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
@@ -1364,6 +1364,7 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
   */
   private function templateSectionActive( $template )
   {
+//var_dump( __METHOD__, __LINE__, $template);
       // Set default value;
     $active = 1; // 1: credit card, 2: elv. 3: sepa (elv-iban).
     if( $this->paymentId !== null )

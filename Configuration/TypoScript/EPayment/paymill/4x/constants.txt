@@ -42,7 +42,7 @@ plugin.caddy {
   # cat=caddy - e-payment - paymill files//101;           type=string;  label= CSS:CSS for paymill
   e-payment.paymill.files.css = EXT:caddy/res/e-payment/paymill/template/foundation/4x/css/paymill.css
   # cat=caddy - e-payment - paymill files//102;           type=string;  label= JavaScript API:
-  e-payment.paymill.files.js.api = EXT:caddy/res/e-payment/paymill/api/js/paymill-cc-elv-iban.js
+  e-payment.paymill.files.js.api = EXT:caddy/res/e-payment/paymill/api/js/paymill-cc-elv-iban_4x.js
   # cat=caddy - e-payment - paymill files//103;           type=string;  label= JavaScript localization:
   e-payment.paymill.files.js.bridge = https://bridge.paymill.com/
   # cat=caddy - e-payment - paymill files//104;           type=string;  label= JavaScript localization:

@@ -32,13 +32,13 @@ $version = $version + ( ( int ) $bugfix ) * 1;
 $typo3Version = $version;
 // Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
 
-if ( $typo3Version < 3000000 )
+if ( $typo3Version < 4005000 )
 {
   $prompt = '<h1>ERROR</h1>
     <h2>Unproper TYPO3 version</h2>
     <ul>
       <li>
-        TYPO3 version is smaller than 3.0.0
+        TYPO3 version is smaller than 4.5.0
       </li>
       <li>
         constant TYPO3_version: ' . TYPO3_version . '
@@ -134,7 +134,8 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/css/', 'Caddy [5.1] + Powermail 2.x CSS fancy' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Foundation_5x/', 'Caddy [6] + Powermail 2.x Foundation 5.x' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Properties/de/', 'Caddy [7] + Sprache: Deutsch' );
-    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/', 'Caddy [8] + E-Payment: Paymill' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/5x/', 'Caddy [8] + E-Payment: Paymill Foundation 5.x' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/4x/', 'Caddy [8] + E-Payment: Paymill Foundation 4.x' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'JQuery/', 'Caddy [90] + v4.x jQuery (nur Dev!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Reset/', 'Caddy [99] Reset' );
     break;
@@ -154,7 +155,8 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/css/', 'Caddy [5.1] + Powermail 2.x CSS fancy' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Foundation_5x/', 'Caddy [6] + Powermail 2.x Foundation 5.x' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Properties/de/', 'Caddy [7] + Language: German' );
-    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/', 'Caddy [8] + E-Payment: Paymill' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/5x/', 'Caddy [8] + E-Payment: Paymill Foundation 5.x' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/4x/', 'Caddy [8] + E-Payment: Paymill Foundation 4.x' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'JQuery/', 'Caddy [90] + v4.x jQuery (dev only!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Reset/', 'Caddy [99] Reset' );
     break;

@@ -39,7 +39,7 @@ jQuery(document).ready(function($) {
 
   function PaymillResponseHandler(error, result) {
     if (error) {
-      // Zeigt den Fehler überhalb des Formulars an
+      // Zeigt den Fehler oberhalb des Formulars an
       switch (error.apierror)
       {
         case("field_invalid_account_holder"):
@@ -60,6 +60,9 @@ jQuery(document).ready(function($) {
           break;
         case("invalid_public_key"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid_public_key"]);
+          break;
+        case("payment_not_testdata"):
+          $(".paymill_alert .prompt").text(translation[formlang]["error"]["payment_not_testdata"]);
           break;
         case("unknown_error"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["unknown_error"]);
@@ -106,16 +109,21 @@ jQuery(document).ready(function($) {
   $(".paymill-form").submit(function(event) {
     // Workflow for PaymillResponseHandler(): get the index of the current form. 2+
     var formId = $(this).attr("id");
+    //console.debug("formId: " + formId);
     var formItem = document.getElementById(formId);
     formIndex = $(".paymill-form").index(formItem);
+    //console.debug("formIndex: " + formIndex);
     // Absenden Button deaktivieren um weitere Klicks zu vermeiden
     $('.submit-button').attr("disabled", "disabled");
 
     // 140301, dwildt, 1-
     //paymenttype = $('.payment-type-active').length ? $('.payment-type-active').attr( 'href' ) : '#payment-type-cc';
+    // 141009, dwildt, 2-: version 4
     // 140301, dwildt, 1+
-    var paymenttype = $('.payment-type-active').attr('href');
-    //console.debug(paymenttype);
+    //var paymenttype = $('.payment-type-active').attr('href');
+    // 141009, dwildt, 2-: version 5
+    var paymenttype = '#' + $('.payment-type-active').attr('id');
+    //console.debug("paymenttype: " + paymenttype);
     var defaultToken = null;
     switch (paymenttype) {
       case "#payment-type-cashinadvance":
@@ -131,7 +139,7 @@ jQuery(document).ready(function($) {
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-card-holdername"]);
           $(".paymill_alert").css("display", "block");
           $(".submit-button").removeAttr("disabled");
-          console.debug('paymill-cc-elv-iban.js#96');
+          //console.debug('paymill-cc-elv-iban.js#96');
           return false;
         }
         if (false == paymill.validateCardNumber($('#card-number').val())) {
@@ -178,18 +186,21 @@ jQuery(document).ready(function($) {
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-elv-holder"]);
           $(".paymill_alert").css("display", "block");
           $(".submit-button").removeAttr("disabled");
+          //console.debug('payment-type-elv #186');
           return false;
         }
         if (false == paymill.validateAccountNumber($('#elv-account').val())) {
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-elv-accountnumber"]);
           $(".paymill_alert").css("display", "block");
           $(".submit-button").removeAttr("disabled");
+          //console.debug('payment-type-elv #193');
           return false;
         }
         if (false == paymill.validateBankCode($('#elv-bankcode').val())) {
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-elv-bankcode"]);
           $(".paymill_alert").css("display", "block");
           $(".submit-button").removeAttr("disabled");
+          //console.debug('payment-type-elv #200');
           return false;
         }
         params = {
@@ -201,6 +212,7 @@ jQuery(document).ready(function($) {
           bank: $('#elv-bankcode').val(),
           accountholder: $('#elv-holder').val()
         };
+      //console.debug('payment-type-elv #212');
         break;
       case "#payment-type-iban":
         $('.submit-button').attr("disabled", "disabled");
@@ -233,9 +245,15 @@ jQuery(document).ready(function($) {
         };
         break;
       default:
-        $(".payment_errors").text(translation[formlang]["error"]["unknown_payment-method"]);
-        $(".payment_errors").css("display", "block");
+      //console.debug(translation[formlang]["error"]["unknown_payment-method"]);
+        // 141009, dwildt, 3+
+        $(".paymill_alert .prompt").text(translation[formlang]["error"]["unknown_payment-method"]);
+        $(".paymill_alert").css("display", "block");
         $(".submit-button").removeAttr("disabled");
+        // 141009, dwildt, 3-
+//        $(".payment_errors").text(translation[formlang]["error"]["unknown_payment-method"]);
+//        $(".payment_errors").css("display", "block");
+//        $(".submit-button").removeAttr("disabled");
         return false;
         //break;
     }
@@ -243,9 +261,12 @@ jQuery(document).ready(function($) {
     try
     {
       paymill.createToken(params, PaymillResponseHandler);
+    //console.debug("try paymill.createToken()");
+    //console.debug(PaymillResponseHandler);
     }
     catch (err)
     {
+    //console.debug("err.message: " + err.message);
       $(".paymill_alert .prompt").text(err.message);
       $(".paymill_alert").css("display", "block");
       $(".submit-button").removeAttr("disabled");

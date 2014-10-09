@@ -5,6 +5,9 @@ TODO
 6.0.0
   14-09-16
   Major Feature
+  * #i0057: Paymill
+            * Upgrade for Foundation 5.x
+            * New test data since Aug. 2014
   * #62044: TypoScript file structure
   * #62043: Button template
             * New constant plugin.caddy.url.extension

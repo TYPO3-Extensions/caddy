@@ -1351,7 +1351,7 @@ class tx_caddy_userfunc
     // #61633, 140916, dwildt, 1-
     //require_once( PATH_t3lib . 'class.t3lib_page.php' );
     // #61633, 140916, dwildt, 4+
-    if ( $this->set_TYPO3Version() < 6002002 )
+    if ( $this->set_TYPO3Version() < 6002000 )
     {
       require_once(PATH_t3lib . 'class.t3lib_page.php');
     }
@@ -1418,7 +1418,7 @@ class tx_caddy_userfunc
     //require_once( PATH_t3lib . 'class.t3lib_tstemplate.php' );
     //require_once( PATH_t3lib . 'class.t3lib_tsparser_ext.php' );
     // #61633, 140916, dwildt, 5+
-    if ( $this->set_TYPO3Version() < 6002002 )
+    if ( $this->set_TYPO3Version() < 6002000 )
     {
       require_once( PATH_t3lib . 'class.t3lib_tstemplate.php' );
       require_once( PATH_t3lib . 'class.t3lib_tsparser_ext.php' );

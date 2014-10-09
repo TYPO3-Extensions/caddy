@@ -34,7 +34,7 @@ $version = ( ( int ) $main ) * 1000000;
 $version = $version + ( ( int ) $sub ) * 1000;
 $version = $version + ( ( int ) $bugfix ) * 1;
 // Set TYPO3 version as integer (sample: 4.7.7 -> 4007007)
-if ( $version < 6002002 )
+if ( $version < 6002000 )
 {
   require_once(PATH_tslib . 'class.tslib_pibase.php');
 }

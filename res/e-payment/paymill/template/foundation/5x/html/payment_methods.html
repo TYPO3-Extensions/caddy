@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script type="text/javascript">
+      var PAYMILL_PUBLIC_KEY = 'YOUR-PUBLIC-KEY';
+      //var VALIDATE_CVC = true;
+    </script>
+    <link rel="stylesheet" href="foundation-4.3.2/css/foundation.css" />
+    <link rel="stylesheet" href="css/paymill-card-icons.css" />
+    <script src="foundation-4.3.2/js/vendor/custom.modernizr.js"></script>
+  </head>
+  <body>
+    <em>
+      VERSION
+      =======
+      6.0.0: 14-10-09
+      For foundation 5.x
+
+      INDEX
+      =====
+
+      * CONTENT
+      * PAYMILL_TEST_MODE
+      * CC
+      * ELV
+      * IBAN
+      * SERVER_PROMPT_WICLOSE_SUBPART
+      * SERVER_PROMPT_WOCLOSE_SUBPART
+    </em>
+
+
+    <!-- ###CONTENT### begin -->
+    <!--<form id="payment-form" action="payment.php" method="POST">-->
+    <script type="text/javascript">
+      var PAYMILL_PUBLIC_KEY = '###_HTMLMARKER_PAYMILL_PUBLIC_KEY###';
+    </script>
+    <dl class="accordion paymill-###TEST_OR_LIVE_MODE###" data-accordion>
+      <!-- ###PAYMILL_TEST_MODE### begin -->
+      <div data-alert class="alert-box">
+        <span class="prompt">###PAYMILL_TEST_MODE_PROMPT###</span>
+        <a href="#" class="close">&times;</a>
+      </div>
+      <div data-alert class="alert-box secondary">
+        <span class="prompt">###PAYMILL_LIVE_MODE_PROMPT###</span>
+        <a href="#" class="close">&times;</a>
+      </div>
+      <!-- ###PAYMILL_TEST_MODE### end -->
+      <!-- ###SECTION_1### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_1###">
+        <a href="#payment-type-cashinadvance">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_CASHINADVANCE###
+          </div>
+        </a>
+        <div id="payment-type-cashinadvance" class="content###CADDY_PAYMENT_TYPE_1######CADDY_PAYMENT_SECTION_1###">
+          <form id="e-payment_cashinadvance" name="e-payment_cashinadvance" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="1" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="me" />
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_CASHINADVANCE-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_1### end -->
+      <!-- ###SECTION_2### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_2###">
+        <a href="#payment-type-invoice">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_INVOICE###
+          </div>
+        </a>
+        <div id="payment-type-invoice" class="content###CADDY_PAYMENT_TYPE_2######CADDY_PAYMENT_SECTION_2###">
+          <form id="e-payment_invoice" name="e-payment_invoice" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="2" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="me" />
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_INVOICE-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_2### end -->
+      <!-- ###SECTION_3### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_3###">
+        <a href="#payment-type-cashondelivery">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_CASHONDELIVERY###
+          </div>
+        </a>
+        <div id="payment-type-cashondelivery" class="content###CADDY_PAYMENT_TYPE_3######CADDY_PAYMENT_SECTION_3###">
+          <form id="e-payment_cashondelivery" name="e-payment_cashondelivery" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="3" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="me" />
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_CASHONDELIVERY-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_3### end -->
+      <!-- ###SECTION_4### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_4###">
+        <a href="#payment-type-cashonpickup">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_CASHONPICKUP###
+          </div>
+        </a>
+        <div id="payment-type-cashonpickup" class="content###CADDY_PAYMENT_TYPE_4######CADDY_PAYMENT_SECTION_4###" >
+          <form id="e-payment_cashonpickup" name="e-payment_cashonpickup" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="4" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="me" />
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_CASHONPICKUP-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_4### end -->
+      <!-- ###SECTION_11### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_11###">
+        <a href="#payment-type-cc">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_CREDITCARD###
+          </div>
+        </a>
+        <div id="payment-type-cc" class="content###CADDY_PAYMENT_TYPE_11######CADDY_PAYMENT_SECTION_11###" >
+          <form id="e-payment_creditcard" name="e-payment_creditcard" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="11" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="paymill" />
+            <fieldset>
+              <div class="row">
+                <div class="medium-8 large-10 columns">
+                  <label for="card-number" class="card-number-label">###_LOCAL_LANG_CREDITCARD-NUMBER###</label>
+                  <input id ="card-number" class="card-number" type="text" placeholder="**** **** **** ****" maxlength="19" value="###VALUE_CREDITCARD-NUMBER###"/>
+                </div>
+                <div class="medium-4 large-2 columns">
+                  <label for="card-expiry" class="card-expiry-label">###_LOCAL_LANG_CREDITCARD-EXPIRY###</label>
+                  <input id="card-expiry" class="card-expiry" type="text" placeholder="MM/YY" maxlength="7" value="###VALUE_CREDITCARD-EXPIRY###"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="medium-6 large-8 columns">
+                  <label for="card-holdername" class="card-holdername-label">###_LOCAL_LANG_CREDITCARD-HOLDER###</label>
+                  <input id="card-holdername" class="card-holdername" type="text" value="###VALUE_CREDITCARD-HOLDER###"/>
+                </div>
+                <div class="medium-3 large-2 columns">
+                  <label for="card-cvc" class="card-cvc-label">###_LOCAL_LANG_CREDITCARD-CVC###<span data-tooltip class="has-tip" title="###_LOCAL_LANG_CREDITCARD-CVC-TOOLTIP###">?</span></label>
+                  <input id="card-cvc" class="card-cvc" type="text" placeholder="CVC" maxlength="4" value="###VALUE_CREDITCARD-CVC###"/>
+                </div>
+                <div class="medium-3 large-2 columns">
+                  <label for="card-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="card-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_CREDITCARD-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_11### end -->
+      <!-- ###SECTION_12### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_12###">
+        <a href="#payment-type-elv">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_ELV###
+          </div>
+        </a>
+        <div id="payment-type-elv" class="content###CADDY_PAYMENT_TYPE_12######CADDY_PAYMENT_SECTION_12###">
+          <form id="e-payment_elv" name="e-payment_elv" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="12" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="paymill" />
+            <fieldset>
+              <div class="row">
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-account" class="elv-account-label">###_LOCAL_LANG_ELV-ACCOUNT###</label>
+                  <input id="elv-account" class="elv-account" type="text" value="###VALUE_ELV-ACCOUNT###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-bankcode" class="elv-bankcode-label">###_LOCAL_LANG_ELV-BANKCODE###</label>
+                  <input id="elv-bankcode" class="elv-bankcode" type="text" value="###VALUE_ELV-BANKCODE###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <!--[if gte IE 8]><!-->
+                  <label for="elv-bankname" class="elv-bankname-label">###_LOCAL_LANG_ELV-BANKNAME###</label>
+                  <input id="elv-bankname" type="text" size="20" disabled="disabled" style="background-color:#eee;" />
+                  <!--<![endif]-->
+                </div>
+              </div>
+              <div class="row">
+                <div class="medium-6 large-6 columns">
+                  <label for="elv-holder" class="elv-holder-label field-full">###_LOCAL_LANG_ELV-HOLDER###</label>
+                  <input id="elv-holder" class="elv-holder field-full" type="text" value="###VALUE_ELV-HOLDER###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="elv-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_ELV-SUBMIT###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_12### end -->
+      <!-- ###SECTION_13### begin -->
+      <dd class="accordion-navigation###CADDY_PAYMENT_SECTION_13###">
+        <a href="#payment-type-iban">
+          <div class="row">
+          ###_HTMLMARKER_CADDY_HEADER_PAYMENTMETHOD_ELV-IBAN###
+          </div>
+        </a>
+        <div id="payment-type-iban" class="content###CADDY_PAYMENT_TYPE_13######CADDY_PAYMENT_SECTION_13###">
+          <form id="e-payment_elv-iban" name="e-payment_elv-iban" class="paymill-form" action="###TARGET###" method="post">
+            <input type="hidden" name="tx_caddy_pi1[updateByCaddy]"       value="1" />
+            <input type="hidden" name="tx_caddy_pi1[accordion]"           value="3" />
+            <input type="hidden" name="tx_caddy_pi1[payment]"             value="12" />
+            <input type="hidden" name="tx_caddy_pi1[e-payment][provider]" value="paymill" />
+            <fieldset>
+              <div class="row">
+                <div class="medium-6 large-6 columns">
+                  <label for="elv-iban" class="elv-iban-label">###_LOCAL_LANG_ELV-IBAN###</label>
+                  <input id="elv-iban" class="elv-iban" type="text" value="###VALUE_ELV-IBAN###"/>
+                </div>
+                <div class="medium-6 large-6 columns">
+                  <label for="elv-bic" class="elv-bic-label">###_LOCAL_LANG_ELV-BIC###</label>
+                  <input id="elv-bic" class="elv-bic" type="text" value="###VALUE_ELV-BIC###"/>
+                </div>
+              </div>
+              <div class="row">
+                <div class="medium-6 large-6 columns">
+                  <label for="elv-iban-holder" class="elv-iban-holder-label field-full">###_LOCAL_LANG_ELV-HOLDER###</label>
+                  <input id="elv-iban-holder" class="elv-iban-holder field-full" type="text" value="###VALUE_ELV-IBAN-HOLDER###"/>
+                </div>
+                <div class="medium-4 large-4 columns">
+                  <label for="elv-iban-currency" class="currency-label">###_LOCAL_LANG_CURRENCY###</label>
+                  <input id="elv-iban-currency" type="text" size="3" disabled="disabled" style="background-color:#eee;" value="###_HTMLMARKER_CADDY_CURRENCY###"/>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset id="buttonWrapper">
+              <div data-alert class="alert-box paymill_alert">
+                <span class="prompt">All proper!</span>
+              </div>
+              <button class="submit-button" type="submit">###_LOCAL_LANG_ELV-SUBMIT-IBAN###</button>
+              ###SERVER_PROMPT###
+            </fieldset>
+          </form>
+        </div>
+      </dd>
+      <!-- ###SECTION_13### end -->
+    </dl>
+    <!-- ###CONTENT### end -->
+    <!-- ###SERVER_PROMPT_WICLOSE_SUBPART### begin -->
+    <div data-alert class="alert-box server_prompt ###TYPE###">
+      <span class="prompt">###PROMPT###</span>
+      <a href="#" class="close">&times;</a>
+    </div>
+    <!-- ###SERVER_PROMPT_WICLOSE_SUBPART### end -->
+    <!-- ###SERVER_PROMPT_WOCLOSE_SUBPART### begin -->
+    <div data-alert class="alert-box server_prompt ###TYPE###">
+      <span class="prompt">###PROMPT###</span>
+    </div>
+    <!-- ###SERVER_PROMPT_WOCLOSE_SUBPART### end -->
+    <script src="foundation-4.3.2/js/vendor/jquery.js"></script>
+    <script src="foundation-4.3.2/js/foundation.min.js"></script>
+    <script>
+      $( document ).foundation();
+    </script>
+    <script type="text/javascript" src="https://bridge.paymill.de/"></script>
+    <script type="text/javascript" src="lang/translation.js"></script>
+    <script type="text/javascript" src="js/paymill-cc-elv-iban.js"></script>
+  </body>
+</html>
