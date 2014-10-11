@@ -384,17 +384,39 @@ plugin.tx_caddy_pi1 {
         10 = TEXT
         10 {
           typolink {
-            parameter = {$plugin.caddy.pages.shop}
-            title {
-              data = LLL:EXT:caddy/pi1/locallang.xml:linktoshop
+            parameter {
+              cObject = COA
+              cObject {
+                  // url
+                10 = TEXT
+                10 {
+                  value = {$plugin.caddy.pages.shop}
+                }
+                  // target
+                20 = TEXT
+                20 {
+                  value       = -
+                  noTrimWrap  = | "|"|
+                }
+                  // class
+                30 = TEXT
+                30 {
+                  value       = button
+                  noTrimWrap  = | "|"|
+                }
+                  // title
+                40 = TEXT
+                40 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:linktoshop
+                  noTrimWrap  = | "|"|
+                }
+              }
             }
-            returnLast = url
           }
-          wrap = <button onclick="location='|'" role="button">
         }
           // label, icon
-        20 = COA
-        20 {
+        XX20 = COA
+        XX20 {
             // Label
           10 = TEXT
           10 {
@@ -420,7 +442,7 @@ plugin.tx_caddy_pi1 {
           value = </button>
         }
       }
-      wrap = <div class="linktoshopwofloat linktoshop caddylinktoshop">|</div>
+      XXwrap = <div class="linktoshopwofloat linktoshop caddylinktoshop">|</div>
     }
   }
 }
