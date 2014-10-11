@@ -827,7 +827,8 @@ class tx_caddy_powermail extends tslib_pibase
     {
       return $uid;
     }
-
+var_dump(__METHOD__, __LINE__, $uid );
+die();
     // 141009, dwildt, 2+
     // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
     $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
