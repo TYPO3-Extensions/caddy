@@ -848,8 +848,8 @@ class tx_caddy_powermail extends tslib_pibase
       default:
         // Equal to or greater than 2.1.0
         // 141011, dwildt
-var_dump( __METHOD__, __LINE__, (int) $uid, $uid, ((int) $uid ) == $uid)        ;
-        if( ((int) $uid ) == $uid )
+var_dump( __METHOD__, __LINE__, (int) $uid, $uid, (int) $uid != 0 );
+        if( (int) $uid != 0 )
         {
           break;
         }
