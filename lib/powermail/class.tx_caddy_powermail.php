@@ -709,6 +709,9 @@ class tx_caddy_powermail extends tslib_pibase
   {
     switch ( true )
     {
+      // #58645, 141011, dwildt, 2+
+      case( empty( $uid ) ):
+        return;
       case( $this->pmVersAppendix == '1x' ):
         $value = $this->getFieldById1x( $uid );
         break;
@@ -732,11 +735,11 @@ class tx_caddy_powermail extends tslib_pibase
    *
    * @param      integer     $uid    : The uid of the value, which should returned
    * @return	string      $value  : The value of the given uid
-   * @access     public
+   * @access     private
    * @version    2.0.0
    * @since      2.0.0
    */
-  public function getFieldById1x( $uid )
+  private function getFieldById1x( $uid )
   {
     switch ( $this->fieldFfConfirm )
     {
@@ -757,11 +760,11 @@ class tx_caddy_powermail extends tslib_pibase
    *
    * @param      integer     $uid    : The uid of the value, which should returned
    * @return	string      $value  : The value of the given uid
-   * @access     public
+   * @access     private
    * @version    2.0.0
    * @since      2.0.0
    */
-  public function getFieldById1xWiConfirm( $uid )
+  private function getFieldById1xWiConfirm( $uid )
   {
     $value = $this->getFieldByIdFromSession( $uid );
 
@@ -774,11 +777,11 @@ class tx_caddy_powermail extends tslib_pibase
    *
    * @param      integer     $uid    : The uid of the value, which should returned
    * @return	string      $value  : The value of the given uid
-   * @access     public
+   * @access     private
    * @version    2.0.0
    * @since      2.0.0
    */
-  public function getFieldById1xWoConfirm( $uid )
+  private function getFieldById1xWoConfirm( $uid )
   {
     $value = $this->getFieldByIdFromPost( $uid );
 
@@ -845,6 +848,10 @@ class tx_caddy_powermail extends tslib_pibase
       default:
         // Equal to or greater than 2.1.0
         // 141011, dwildt
+        if( (int) $uid == $uid )
+        {
+          return $uid;
+        }
         // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
         $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
         break;

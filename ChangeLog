@@ -46,6 +46,7 @@ TODO
             * powermail 2.0 to 2.1 moved the POST params from ids to labels.
   * #61889: Variants: Bug in the SQL query for powermail
   * #61870: Delete an item fails in case of variants
+  * #58645: Empty powermail mapping causes fatal exception
   * #47370: t3lib_div::getIndpEnv( 'TYPO3_DOCUMENT_ROOT' )
 
 4.0.12
