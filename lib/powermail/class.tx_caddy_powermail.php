@@ -850,7 +850,7 @@ class tx_caddy_powermail extends tslib_pibase
         // 141011, dwildt
         if( (int) $uid == $uid )
         {
-          return $uid;
+          break;
         }
         // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
         $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
