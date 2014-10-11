@@ -1,6 +1,5 @@
 .paymill-test {
-  background: yellow;
-  border:1em #000 dashed;
+  border:1em red dashed;
 }
 
 /** CC-Icons **/

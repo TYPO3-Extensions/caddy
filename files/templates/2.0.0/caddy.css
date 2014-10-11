@@ -222,6 +222,9 @@ div.tx-powermail input[type=text] {
   left:12em;
   position:absolute;
 }*/
+div.tx-powermail dd a {
+  text-decoration: inherit;
+}
 
 /* table based caddy */
 
