@@ -1,6 +1,10 @@
 .paymill-test {
-  background: yellow;
-  border:1em #000 dashed;
+  /*background: yellow;*/
+  border:0.2em red dashed;
+}
+
+#caddy_powermail dd a {
+  text-decoration: inherit;
 }
 
 /** CC-Icons **/

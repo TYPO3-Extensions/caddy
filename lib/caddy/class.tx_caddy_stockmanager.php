@@ -362,11 +362,11 @@ var_dump( __METHOD__, __LINE__ );
       $prompt = ':TODO: stateisdisabled( )';
       var_dump( __METHOD__, __LINE__, $prompt );
       die( );
-      return;
     }
 
     $this->initPidCaddy( $pid );
     $items = $this->session->productsGet( $this->pidCaddy );
+// 141010: Returns noting ????
 var_dump( __METHOD__, __LINE__, $items );
 die( );
 

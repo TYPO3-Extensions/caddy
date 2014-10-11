@@ -88,7 +88,8 @@
       <label index="invoice">Invoice</label>
       <label index="invoice-submit">Check invoice and select it</label>
       <label index="paymill-live-mode">Enable live mode: Constant Editor > Category [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
-      <label index="paymill-test-mode">Paymill is running in test mode: Test it with the proposed data!</label>
+      <label index="paymill-test-mode"><![CDATA[Test mode: Pay with the proposed data!
+No data? <a href="https://developers.paymill.com/en/reference/testing/" target="_blank" title="Paymill test data">Fetch test data &raquo;</a>]]></label>
       <label index="prompt-cashinadvance-ok">Cash in advance is proper.</label>
       <label index="prompt-cashondelivery-ok">Cash on delivery is proper.</label>
       <label index="prompt-cashonpickup-ok">Cash on pickup is proper.</label>
@@ -177,7 +178,8 @@
       <label index="invoice">Auf Rechnung</label>
       <label index="invoice-submit">Auf Rechnung prüfen und auswählen</label>
       <label index="paymill-live-mode">Live-Modus aktivieren: Konstanten Editor > Kategorie [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
-      <label index="paymill-test-mode">Paymill läuft im Test-Modus: Teste Zahlungen mit den vorgeschlagenen Daten!</label>
+      <label index="paymill-test-mode"><![CDATA[Test-Modus:
+Bezahle mit den vorgeschlagenen Daten! Keine Daten? <a href="https://developers.paymill.com/en/reference/testing/" target="_blank" title="Paymill Testdaten">Testdaten holen &raquo;</a>]]></label>
       <label index="prompt-cashinadvance-ok">Vorkasse wurde erfolgreich geprüft.</label>
       <label index="prompt-cashondelivery-ok">Nachnahme wurde erfolgreich geprüft.</label>
       <label index="prompt-cashonpickup-ok">Bar bei Abholung wurde erfolgreich geprüft.</label>

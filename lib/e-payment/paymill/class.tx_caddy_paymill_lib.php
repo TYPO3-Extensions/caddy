@@ -316,7 +316,6 @@ class tx_caddy_paymill_lib extends tslib_pibase
       case( ! empty( $lastFour ) ):
         return null;
         // no error
-        break;
       default:
         $error    = $this->pi_getLL( 'error-account-empty' );
         $prompts  = $this->paymillError( $error );
@@ -464,7 +463,10 @@ class tx_caddy_paymill_lib extends tslib_pibase
 //var_dump( __METHOD__, __LINE__, $paymillClient );
       $this->paymillPaymentResponse = $paymillService->getOne( $paymillPayment );
 //var_dump( __METHOD__, __LINE__, $this->paymillPaymentResponse );
-      return $this->paymillCheckAccount( );
+      $paymillCheckAccount = $this->paymillCheckAccount( );
+//var_dump( __METHOD__, __LINE__, $paymillCheckAccount );
+      return $paymillCheckAccount;
+
     }
     catch( \Paymill\Services\PaymillException $e )
     {

@@ -816,13 +816,21 @@ class tx_caddy_powermail extends tslib_pibase
    */
   private function getFieldById2x210( $uid )
   {
-    // #i0056, 141004, dwildt, 1-
-    //if ( $this->versionInt < 2001000 )
     // #i0056, 141004, dwildt, 1+
-    if ( $this->versionInt >= 2001000 )
+    // 141009, dwildt, 4+
+    if ( $this->versionInt === null )
+    {
+      $this->initVersion();
+    }
+
+    if ( $this->versionInt < 2001000 )
     {
       return $uid;
     }
+
+    // 141009, dwildt, 2+
+    // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
+    $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
 
     $select = 'marker';
     $table = 'tx_powermail_domain_model_fields';
@@ -853,6 +861,7 @@ class tx_caddy_powermail extends tslib_pibase
 //    var_dump( __METHOD__, __LINE__, $row );
 //    var_dump( __METHOD__, __LINE__, $this->versionInt, $uid );
     $uid = $row[ 'marker' ];
+    //var_dump(__METHOD__, __LINE__, $this->versionInt, $uid );
     return $uid;
   }
 

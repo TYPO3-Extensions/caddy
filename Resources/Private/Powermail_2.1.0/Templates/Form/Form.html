@@ -21,9 +21,11 @@ Render Powermail Form
               <dd class="active"><a href="#tab1">Tab 1</a></dd>
             </f:comment>
             <f:comment>#61879, 140925, dwildt, 7+</f:comment>
-            <dl class="row tabs" data-tab="">
+            <dl class="row collapse tabs" data-tab="">
               <f:for each="{form.pages}" as="page">
-                <dd id="tab_{page.uid}" class="columns small-6 medium-3 large-3"><a href="#powermail_tab_{page.uid}">{page.title}</a></dd>
+                <dd id="tab_{page.uid}" class="columns small-6 medium-3 large-3">
+                  <a href="#powermail_tab_{page.uid}">{page.title}</a>
+                </dd>
               </f:for>
             </dl>
             <div class="row">

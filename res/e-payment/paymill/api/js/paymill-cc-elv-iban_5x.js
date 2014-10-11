@@ -122,8 +122,8 @@ jQuery(document).ready(function($) {
     // 140301, dwildt, 1+
     //var paymenttype = $('.payment-type-active').attr('href');
     // 141009, dwildt, 2-: version 5
-    var paymenttype = '#' + $('.payment-type-active').attr('id');
-    //console.debug("paymenttype: " + paymenttype);
+    var paymenttype = '#' + $('div.payment-type-active').attr('id');
+    console.debug("paymenttype: " + paymenttype);
     var defaultToken = null;
     switch (paymenttype) {
       case "#payment-type-cashinadvance":
@@ -276,7 +276,7 @@ jQuery(document).ready(function($) {
   });
 
   // Toggle buttons and forms
-  $(".payment-type").click(function(event) {
+  $("a.payment-type").click(function(event) {
     if ($(this).hasClass('payment-type-active')) {
       return false;
     }
@@ -284,6 +284,8 @@ jQuery(document).ready(function($) {
     $(".paymill_alert .prompt").text("");
     $('.payment-type-active').removeClass('payment-type-active');
     $($(this).attr('href')).addClass('payment-type-active');
+    // 141011, dwildt
+    $($(this)).next().addClass('payment-type-active');
   });
 
   $("#elv-bankcode").bind("paste cut keydown", function(e) {

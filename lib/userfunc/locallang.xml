@@ -109,7 +109,7 @@
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         There isn't any powermail form at the current page.<br />
-        Sorry, but it isn't possible, to order products without a powermail form.<br /> 
+        Sorry, but it isn't possible, to order products without a powermail form.<br />
         Please add the powermail form!
       ]]></label>
       <label index="promptCurrIPBody">Your current IP</label>
@@ -139,7 +139,7 @@
           More information about Caddy and e-payment
         </h2>
         <p>
-          <a href="../typo3conf/ext/caddy/doc/manual.pdf" 
+          <a href="../typo3conf/ext/caddy/doc/manual.pdf"
             style="background:none;border:none;float:none;text-decoration:underline;"
             alt="Caddy manual"
             title="Caddy manual"
@@ -156,21 +156,21 @@
         </p>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="https://www.paymill.com/en-gb/" 
+            <a href="https://www.paymill.com/en-gb/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="paymill.com"
               title="paymill.com"
               target="_blank">Paymill &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://www.paymill.com/en-gb/pricing/" 
+            <a href="http://www.paymill.com/en-gb/pricing/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="paymill.com"
               title="paymill.com"
               target="_blank">Paymill pricing &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="https://app.paymill.com/en-gb/auth/register" 
+            <a href="https://app.paymill.com/en-gb/auth/register"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="paymill.com"
               title="paymill.com"
@@ -186,7 +186,7 @@
         </p>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            Test mode: 
+            Test mode:
             <ul style="list-style:outside;margin-left:2em;">
               <li style="margin-bottom:.6em;">
                 Payment: You can check, if payment is proper. Paymill will display each transaction on the dashboard. <br />
@@ -198,7 +198,7 @@
             </ul>
           </li>
           <li style="margin-bottom:.6em;">
-            Live mode: 
+            Live mode:
             <ul style="list-style:outside;margin-left:2em;">
               <li style="margin-bottom:.6em;">
                 Payment: each transaction is a real transaction. You will receive the money at your bank account.<br />
@@ -221,14 +221,14 @@
         </p>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="http://forge.typo3.org/projects/extension-caddy" 
+            <a href="http://forge.typo3.org/projects/extension-caddy"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="Caddy on TYPO3 forge"
               title="Caddy on TYPO3 forge"
               target="_blank">Caddy on TYPO3 forge &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://wildt.at.die-netzmacher.de/" 
+            <a href="http://wildt.at.die-netzmacher.de/"
               alt="Send an e-mail to the developer of Caddy"
               title="Send an e-mail to the developer of Caddy"
               target="_blank">E-mail to Dirk Wildt - the developer of Caddy &raquo;</a>
@@ -242,7 +242,7 @@
         </p>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="../typo3conf/ext/caddy/doc/manual.pdf" 
+            <a href="../typo3conf/ext/caddy/doc/manual.pdf"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="Caddy manual"
               title="Caddy manual"
@@ -256,7 +256,8 @@
       <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version61smaller">You are using TYPO3 4.6. This is perfect!</label>
       <label index="promptEvaluatorTYPO3version62smaller">You are using TYPO3 6.1. This is perfect!</label>
-      <label index="promptEvaluatorTYPO3version62orGreater">You are using TYPO3 greater than 6.1. Caddy isn't tested in this version. Try it!</label>
+      <label index="promptEvaluatorTYPO3version63smaller">You are using TYPO3 6.2. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version63orGreater">You are using TYPO3 greater than 6.2. Caddy isn't tested in this version. Try it!</label>
       <label index="promptExternalLinksBody"><![CDATA[
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
@@ -264,16 +265,16 @@
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
-              width="80" 
-              height="80" 
+              width="80"
+              height="80"
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
-          <a href="http://wildt.at.die-netzmacher.de/" 
+          <a href="http://wildt.at.die-netzmacher.de/"
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="80" 
-              height="80" 
+              width="80"
+              height="80"
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <h1 style="text-align:left;">
@@ -305,7 +306,7 @@
               target="_blank">Homepage &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/forum/" 
+            <a href="http://typo3-caddy.de/forum/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
@@ -331,14 +332,14 @@
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-organiser.de/en/one-click/" 
+            <a href="http://typo3-organiser.de/en/one-click/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3 Organiser Installer"
               title="TYPO3 Organiser Installer"
               target="_blank">Organiser &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-quick-shop.de/en/one-click/" 
+            <a href="http://typo3-quick-shop.de/en/one-click/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3 Quick Shop Installer"
               title="TYPO3 Quick Shop Installer"
@@ -350,7 +351,7 @@
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="http://wildt.at.die-netzmacher.de/" 
+            <a href="http://wildt.at.die-netzmacher.de/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
               title="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
@@ -366,7 +367,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
             width="30"
             height="30"
-            title="Please support my job!" />        
+            title="Please support my job!" />
         </div>
         <p>
           Please donate to Caddy or sponsor it!<br />
@@ -404,27 +405,27 @@
           alt="Your logo with your URL. 120 x 90 pixel."
           title="Your logo with your URL. 120 x 90 pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-blue.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-blue.gif"
+            width="120"
+            height="90"
             title="Your logo with your URL. 120 x 90 pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
           title="Your logo with your URL. 120 x 90 pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif"
+            width="120"
+            height="90"
             title="Your logo with your URL. 120 x 90 pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/en/sponsoring/"
           alt="Your logo with your URL. 120 x 90 pixel."
           title="Your logo with your URL. 120 x 90 pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_default-grey.gif"
+            width="120"
+            height="90"
             title="Your logo with your URL. 120 x 90 pixel." /></a>
       ]]></label>
       <label index="typoscriptMissing"><![CDATA[
@@ -440,7 +441,7 @@
       ]]></label>
       <label index="flexformCheckAddresses"><![CDATA[
         Einige Felder in den Bl&auml;ttern [Lieferadresse] und [Rechnungsadresse] sind leer.<br />
-        Pr&uuml;fe Deine Einstellungen, wenn Angaben in der Lieferadresse oder der Rechnungsadresse 
+        Pr&uuml;fe Deine Einstellungen, wenn Angaben in der Lieferadresse oder der Rechnungsadresse
         fehlen sollten.
       ]]></label>
       <label index="flexformCheckNoteNote"><![CDATA[
@@ -455,7 +456,7 @@
         Mit einer nie gespeicherten Flexform bekommst Du fehlerhafte Ergebnisse!
       ]]></label>
       <label index="pi1FfSdefReportDisabled"><![CDATA[
-        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br /> 
+        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br />
         Aber wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht oben in der Check-Box ein.
       ]]></label>
       <label index="pi1FfSdefReportOk"><![CDATA[
@@ -521,18 +522,18 @@
         Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
       ]]></label>
       <label index="pmThanksMarkerWo1x"><![CDATA[
-        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker 
+        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker
         ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
         Ohne diesen Marker wird die Session nicht gel&ouml;scht und das Bestellformular kann nicht versendet werden.
       ]]></label>
       <label index="pmThanksMarkerWo2x"><![CDATA[
-        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker 
+        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker
         {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.clearcaddysession')} auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
         Ohne diesen Marker wird die Session nicht gel&ouml;scht und das Bestellformular kann nicht versendet werden.
       ]]></label>
       <label index="powermailNocontent"><![CDATA[
         Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
-        Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br /> 
+        Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br />
         Bitte f&uuml;ge das Powermail Formular ein.
       ]]></label>
       <label index="promptCurrIPBody">Deine aktuelle IP-Adresse</label>
@@ -542,7 +543,8 @@
       <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version61smaller">Du verwendest TYPO3 6.0.x. Das ist perfekt.</label>
       <label index="promptEvaluatorTYPO3version62smaller">Du verwendest TYPO3 6.1.x. Das ist perfekt.</label>
-      <label index="promptEvaluatorTYPO3version62orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 6.1. Caddy ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
+      <label index="promptEvaluatorTYPO3version63smaller">Du verwendest TYPO3 6.2.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version63orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 6.2. Caddy ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
       <label index="promptExternalLinksBody"><![CDATA[
         <div style="float:right;padding-left:1em;">
           <a href="http://typo3-caddy.de/en/" th
@@ -550,16 +552,16 @@
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/caddy_80x80.gif"
-              width="80" 
-              height="80" 
+              width="80"
+              height="80"
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
-          <a href="http://wildt.at.die-netzmacher.de/" 
+          <a href="http://wildt.at.die-netzmacher.de/"
             alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
             target="_blank">
             <img src="../../../../typo3conf/ext/caddy/lib/icons/die-netzmacher-logo-quadrat.png"
-              width="80" 
-              height="80" 
+              width="80"
+              height="80"
               title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
         </div>
         <h1 style="text-align:left;">
@@ -591,21 +593,21 @@
               target="_blank">Homepage &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/forum/" 
+            <a href="http://typo3-caddy.de/forum/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3-Caddy - Forum"
               title="TYPO3-Caddy - Forum"
               target="_blank">Forum &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/support/" 
+            <a href="http://typo3-caddy.de/support/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3-Caddy - Support"
               title="TYPO3-Caddy - Support"
               target="_blank">Support &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-caddy.de/sponsoring/" 
+            <a href="http://typo3-caddy.de/sponsoring/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3-Caddy - Sponsoring"
               title="TYPO3-Caddy - Sponsoring"
@@ -617,14 +619,14 @@
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-organiser.de/en/one-click/" 
+            <a href="http://typo3-organiser.de/en/one-click/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3 Organiser Installer"
               title="TYPO3 Organiser Installer"
               target="_blank">Organiser &raquo;</a>
           </li>
           <li style="margin-bottom:.6em;">
-            <a href="http://typo3-quick-shop.de/en/one-click/" 
+            <a href="http://typo3-quick-shop.de/en/one-click/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="TYPO3 Quick Shop Installer"
               title="TYPO3 Quick Shop Installer"
@@ -636,7 +638,7 @@
         </h2>
         <ul style="list-style:outside;margin-left:2em;">
           <li style="margin-bottom:.6em;">
-            <a href="http://wildt.at.die-netzmacher.de/" 
+            <a href="http://wildt.at.die-netzmacher.de/"
               style="background:none;border:none;float:none;text-decoration:underline;"
               alt="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
               title="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
@@ -652,7 +654,7 @@
           <img src="../../../../typo3conf/ext/caddy/lib/icons/dirk_wildt_30x30.gif"
             width="30"
             height="30"
-            title="Bitte unterst&uuml;tze meine Arbeit!" />        
+            title="Bitte unterst&uuml;tze meine Arbeit!" />
         </div>
         <p>
           Bitte spende f&uuml;r Caddy oder sponser die Extension!<br />
@@ -690,27 +692,27 @@
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-blue.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-blue.gif"
+            width="120"
+            height="90"
             title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/sponsoring/"
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif"
+            width="120"
+            height="90"
             title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
         &nbsp;&nbsp;
         <a href="http://typo3-caddy.de/sponsoring/"
           alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
           target="_blank">
-          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif" 
-            width="120" 
-            height="90" 
+          <img src="../../../../typo3conf/ext/caddy/lib/icons/your-logo_de-grey.gif"
+            width="120"
+            height="90"
             title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
       ]]></label>
       <label index="typoscriptMissing"><![CDATA[
