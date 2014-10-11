@@ -225,6 +225,10 @@ div.tx-powermail input[type=text] {
 div.tx-powermail dd a {
   text-decoration: inherit;
 }
+div.tx-powermail dt.powermail_all_label  {
+  float:left;
+  padding-right:1em;
+}
 
 /* table based caddy */
 
