@@ -55,8 +55,8 @@ if ( $version < 6002000 )
  *  265:     private function initVars( $paymentId, $pid )
  *
  *              SECTION: Session
- *  295:     private function sessionGetClientId( )
- *  311:     private function sessionGetPaymentId( )
+ *  295:     private function sessionGetPaymillClientId( )
+ *  311:     private function sessionGetPaymillPaymentId( )
  *
  *              SECTION: Setting methods
  *  336:     public function setParentObject( $pObj )
@@ -273,14 +273,34 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   {
     $this->conf = $this->pObj->conf;
     $this->local_cObj = $GLOBALS[ 'TSFE' ]->cObj;
-    $this->paymentId = $paymentId;
-
-
+    // #i0058, 141011, dwildt, 1-
+    //$this->paymentId = $paymentId;
 
     $this->initVarsPid( $pid );
+    // #i0058, 141011, dwildt, 4+
+    if ( $paymentId === NULL )
+    {
+      $this->paymentId = $this->sessionGetPaymentId( $this->pid );
+    }
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     //$this->pi_initPIflexForm( );
+  }
+
+  /**
+   * isEpayment( ) : Returns true, if current cash method is e-payment, false, if it isn't
+   *
+   * @return	boolean $isEpayment: true, if current cash method is e-payment, false, if it isn't
+   * @access private
+   * @internal   #i0058
+   * @version    6.0.0
+   * @since      6.0.0
+   */
+  private function isEpayment()
+  {
+    $isEpayment = $this->conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ][ $this->paymentId . '.' ][ 'e-payment' ];
+    //var_dump( __METHOD__, __LINE__, $this->conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ], $isEpayment );
+    return $isEpayment;
   }
 
   /*   * *********************************************
@@ -290,14 +310,31 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    * ******************************************** */
 
   /**
-   * sessionGetClientId( ):
+   * sessionGetPaymillPaymentId( ):
+   *
+   * @return	string		$value  : paymill payment id
+   * @access private
+   * @internal    #i0058
+   * @version     6.0.0
+   * @since       6.0.0
+   */
+  private function sessionGetPaymentId()
+  {
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $value = $sesArray[ 'options' ][ 'payment' ][ 'id' ];
+
+    return $value;
+  }
+
+  /**
+   * sessionGetPaymillClientId( ):
    *
    * @return	string		$value  : paymill client id
    * @access private
    * @version     4.0.5
    * @since       4.0.5
    */
-  private function sessionGetClientId()
+  private function sessionGetPaymillClientId()
   {
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     $value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'client' ][ 'id' ];
@@ -306,17 +343,20 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   }
 
   /**
-   * sessionGetPaymentId( ):
+   * sessionGetPaymillPaymentId( ):
    *
    * @return	string		$value  : paymill payment id
    * @access private
    * @version     4.0.5
    * @since       4.0.5
    */
-  private function sessionGetPaymentId()
+  private function sessionGetPaymillPaymentId()
   {
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-    $value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ];
+    // #i0058, 141011, dwildt, 1-
+    //$value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ];
+    // #i0058, 141011, dwildt, 1+
+    $value = $sesArray[ 'options' ][ 'payment' ][ 'id' ];
 
     return $value;
   }
@@ -364,6 +404,20 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     }
     $this->drs = $pObj->drs;
   }
+//
+//  /**
+//   * setTransactionPaymentId( )  :
+//   *
+//   * @param	double		$amount  :
+//   * @return	void
+//   * @access public
+//   * @version    6.0.0
+//   * @since      6.0.0
+//   */
+//  public function setPaymentId( $paymentId )
+//  {
+//    $this->paymentId = $paymentId;
+//  }
 
   /**
    * setTransactionAmount( )  :
@@ -394,20 +448,6 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   }
 
   /**
-   * setTransactionDescription( )  :
-   *
-   * @param	string		$description  :
-   * @return	void
-   * @access public
-   * @version    4.0.5
-   * @since      4.0.5
-   */
-  public function setTransactionDescription( $description )
-  {
-    $this->transactionDescription = $description;
-  }
-
-  /**
    * setTransactionClientEmail( )  :
    *
    * @param	string		$email  :
@@ -435,6 +475,20 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     $this->transactionClientName = $name;
   }
 
+  /**
+   * setTransactionDescription( )  :
+   *
+   * @param	string		$description  :
+   * @return	void
+   * @access public
+   * @version    4.0.5
+   * @since      4.0.5
+   */
+  public function setTransactionDescription( $description )
+  {
+    $this->transactionDescription = $description;
+  }
+
   /*   * *********************************************
    *
    * Transaction
@@ -451,9 +505,11 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    */
   public function transaction()
   {
-    $conf           = $this->pObj->conf;
-    $isEpayment = $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.']['e-payment'];
-var_dump( __METHOD__, __LINE__, $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.'])    ;
+    // #i0058, 141011, dwildt, 4+
+    if ( !$this->isEpayment() )
+    {
+      return;
+    }
 
     if ( $this->transactionInit() )
     {
@@ -667,7 +723,7 @@ var_dump( __METHOD__, __LINE__, $conf['api.']['options.']['payment.']['options.'
 
     // Set transaction params
     // Get paymill payment id and client id from caddy session
-    $paymentId = $this->sessionGetPaymentId();
+    $paymentId = $this->sessionGetPaymillPaymentId();
     $paymillTransaction->setPayment( $paymentId );
     $paymillTransaction->setAmount( round( $this->transactionAmount, 2 ) * 100 ); // #i0052
     $paymillTransaction->setCurrency( $this->transactionCurrency );
@@ -777,7 +833,7 @@ var_dump( __METHOD__, __LINE__, $conf['api.']['options.']['payment.']['options.'
     $paymillClient = new Paymill\Models\Request\Client();
 
     // Get paymill client id from caddy session
-    $clientId = $this->sessionGetClientId();
+    $clientId = $this->sessionGetPaymillClientId();
 
     // try transaction
     try

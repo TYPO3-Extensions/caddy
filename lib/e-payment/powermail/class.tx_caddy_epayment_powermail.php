@@ -301,6 +301,8 @@ class tx_caddy_epayment_powermail extends tslib_pibase
   {
       // Get caddy sesssion
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+//var_dump(__METHOD__, __LINE__, $sesArray);
+//die();
 
       // Get values
     $amount         = $sesArray['sumsumgross'];
@@ -310,13 +312,15 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     $numberOrder    = $this->pi_getLL( 'label-short-number-order'   ) . ': ' . $sesArray['numberOrderCurrent'];
     $numberInvoice  = $this->pi_getLL( 'label-short-number-invoice' ) . ': ' . $sesArray['numberInvoiceCurrent'];
     $description    = $numberOrder . ', ' . $numberInvoice;
+//    $paymentId      = $sesArray['sumsumgross'];
 
       // Set values
-    $this->paymillTransaction->setTransactionAmount(       $amount );
-    $this->paymillTransaction->setTransactionCurrency(     $currency );
-    $this->paymillTransaction->setTransactionDescription(  $description );
-    $this->paymillTransaction->setTransactionClientEmail(  $clientEmail );
-    $this->paymillTransaction->setTransactionClientName(   $clientName );
+//    $this->paymillTransaction->setPaymentId(                $paymentId );
+    $this->paymillTransaction->setTransactionAmount(        $amount );
+    $this->paymillTransaction->setTransactionDescription(   $description );
+    $this->paymillTransaction->setTransactionClientEmail(   $clientEmail );
+    $this->paymillTransaction->setTransactionClientName(    $clientName );
+    $this->paymillTransaction->setTransactionCurrency(      $currency );
   }
 
  /**

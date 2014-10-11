@@ -308,8 +308,26 @@ class tx_caddy_powermail extends tslib_pibase
       'isPayed' => false
     );
 
+    $this->caddyEpaymentPaymillInit();
     $arrReturn = $this->caddyEpaymentPaymillTemplateAfterTransaction();
     return $arrReturn;
+  }
+
+  /**
+   * caddyEpaymentPaymillInit( ) :
+   *
+   * @return  void
+   * @access private
+   * @version 4.0.6
+   * @since  4.0.6
+   */
+  private function caddyEpaymentPaymillInit()
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+
+    require_once( $path2lib . 'e-payment/powermail/class.tx_caddy_epayment_powermail.php' );
+    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_powermail' );
+    $this->epayment->setParentObject( $this );
   }
 
   /**
@@ -1288,13 +1306,20 @@ class tx_caddy_powermail extends tslib_pibase
    */
   private function initInstances()
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $this->initInstancesUserfunc();
+  }
 
-//      // 140131, dwildt, 4+
-//    require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-//    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-//    $this->drs->pObj        = $this;
-//    $this->drs->row         = $this->cObj->data;
+  /**
+   * initInstances( )
+   *
+   * @return	void
+   * @access private
+   * @version    6.0.0
+   * @since      6.0.0
+   */
+  private function initInstancesUserfunc()
+  {
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
     $this->userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
