@@ -828,19 +828,25 @@ class tx_caddy_powermail extends tslib_pibase
       case($this->versionInt < 2001000):
         // Smaller than 2.1.0
         return $uid;
-      case($this->versionInt < 2001004):
-        // Smaller than 2.1.4
-        // 2.1.0 released at 2014-09-10
-        // 141009, dwildt, 2+
+//      case($this->versionInt < 2001004):
+//        // Smaller than 2.1.4
+//        // 2.1.0 released at 2014-09-10
+//        // 141009, dwildt, 2+
+//        // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
+//        $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
+//        break;
+//      case($this->versionInt >= 2001004):
+//      default:
+//        // Equal to or greater than 2.1.4
+//        // 141011, dwildt
+//        // 2.1.4 released at 06.10.2014
+//        // do nothing: $uid is the uid.
+//        break;
+      default:
+        // Equal to or greater than 2.1.0
+        // 141011, dwildt
         // Remove tx_powermail_domain_model_fields_ from tx_powermail_domain_model_fields_435
         $uid = substr( $uid, strlen( 'tx_powermail_domain_model_fields_' ) );
-        break;
-      case($this->versionInt >= 2001004):
-      default:
-        // Equal to or greater than 2.1.4
-        // 141011, dwildt
-        // 2.1.4 released at 06.10.2014
-        // do nothing: $uid is the uid.
         break;
     }
 
