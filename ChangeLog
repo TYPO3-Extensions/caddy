@@ -38,6 +38,7 @@ TODO
                     * lib/caddy/class.tx_caddy.php::zz_addQtynameMarker
                     * lib/class.tx_caddy_session.php::quantityUpdate
   Bugfix
+  * #i0059: A second item is added withouit any quantity
   * #i0058: Paymill error in case of a non-e-payment method
   * #i0056: Moved code in contest with #61892
   * #61893: PDF attachments without any address data

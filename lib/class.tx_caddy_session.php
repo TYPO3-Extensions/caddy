@@ -519,6 +519,10 @@ class tx_caddy_session
     {
       return false;
     }
+
+    // #i0059
+    $newProduct[ 'qty' ] = $this->productAddGetDefaultQty( $newProduct['qty'] );
+
     // RETURN : requirements aren't matched
     // #55726, 140206, dwildt, 1+
     $this->init();
@@ -545,10 +549,10 @@ class tx_caddy_session
       }
     }
     // FOREACH  : current product
+
     // remove product from current products, sum quantity
     // limit quantity
     $newProduct = $this->quantityCheckMinMax( $newProduct );
-
     // move comma to dot
     $newProduct[ 'gross' ] = $this->zz_commaToDot( $newProduct[ 'gross' ] );
 
@@ -566,6 +570,25 @@ class tx_caddy_session
     $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $pid, $sesArray );
     // save session
     $GLOBALS[ 'TSFE' ]->storeSessionData();
+  }
+
+  /**
+   * productAddGetDefaultQty( )  : Returns 1, if given qty isn't set or is 0
+   *
+   * @param	integer     $qty  : quantity of the current item
+   * @return	integer
+   * @access private
+   * @version     6.0.0
+   * @since       6.0.0
+   */
+  private function productAddGetDefaultQty( $qty )
+  {
+    if( $qty > 0 )
+    {
+      return $qty;
+    }
+
+    return 1;
   }
 
   /**

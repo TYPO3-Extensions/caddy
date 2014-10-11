@@ -78,7 +78,7 @@ plugin.tx_caddy_pi1 {
                     10 = TEXT
                     10 {
                       value (
-                        <select name="quantity" size="1">
+                        <select name="tx_quickshop_qty" size="1">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
