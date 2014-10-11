@@ -308,26 +308,8 @@ class tx_caddy_powermail extends tslib_pibase
       'isPayed' => false
     );
 
-    $this->caddyEpaymentPaymillinit();
     $arrReturn = $this->caddyEpaymentPaymillTemplateAfterTransaction();
     return $arrReturn;
-  }
-
-  /**
-   * caddyEpaymentPaymillInit( ) :
-   *
-   * @return  void
-   * @access private
-   * @version 4.0.6
-   * @since  4.0.6
-   */
-  private function caddyEpaymentPaymillInit()
-  {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
-
-    require_once( $path2lib . 'e-payment/powermail/class.tx_caddy_epayment_powermail.php' );
-    $this->epayment = t3lib_div::makeInstance( 'tx_caddy_epayment_powermail' );
-    $this->epayment->setParentObject( $this );
   }
 
   /**

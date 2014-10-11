@@ -451,9 +451,10 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    */
   public function transaction()
   {
-    // 141010, dwildt, 1-
-    //if ( $this->transactionInit() )
-    // 141010, dwildt, 1+
+    $conf           = $this->pObj->conf;
+    $isEpayment = $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.']['e-payment'];
+var_dump( __METHOD__, __LINE__, $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.'])    ;
+
     if ( $this->transactionInit() )
     {
       return $this->prompts;
