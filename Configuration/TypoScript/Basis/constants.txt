@@ -88,7 +88,7 @@ plugin.caddy {
   # cat=caddy - e-payment/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   e-payment.sponsors = Click me!
 
-  # cat=caddy - getpost*//100; type=text; label= Uid*: *Obligate! Parameter name for a unique id (integer) of your item. caddy uses this id for SQL requests. I.e. tx_browser_pi1|showUid
+  # cat=caddy - getpost*//100; type=text; label= Uid*: *Obligate! Parameter name for a unique id (integer) of your item. caddy uses this id for SQL requests. It must correspond with [CADDY - URL]. I.e. tx_browser_pi1|showUid
   getpost.uid =
   # cat=caddy - getpost*//110; type=text; label= Quantity*: *Obligate! Parameter name for the quantity/amount field of your order form (e.g. tx_trbooks_qty). The provided parameter must be equal to the name in your HTML template. Default: qty.
   getpost.qty = qty
@@ -459,9 +459,9 @@ plugin.caddy {
   # cat=caddy - templates/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   templates.sponsors = Click me!
 
-  # cat=caddy - url*//101;         type=string; label= showUid: Alias for the URL parameter showUid. I.e: calendarUid
+  # cat=caddy - url*//101;         type=string; label= showUid: Alias for the URL parameter showUid. It must correspond with [CADDY - GETPOST: uid]. I.e: calendarUid
   url.showUid   = showUid
-  # cat=caddy - url*//102;         type=string; label= Extension parameter: Parameter of your extension (sends the item uid). If you are using Browser - TYPO3 without PHP, it is tx_browser_pi1.
+  # cat=caddy - url*//102;         type=string; label= Extension parameter: Parameter of your extension (sends the item uid). If you are using Browser - TYPO3 without PHP, it is tx_browser_pi1. It must correspond with [CADDY - GETPOST: uid].
   url.extension = tx_browser_pi1
   # cat=caddy - url*/others/999;   type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   url.sponsors  = Click me!
