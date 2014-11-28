@@ -136,7 +136,6 @@ class tx_caddy_powermail extends tx_caddy_pi1
   // [Object]
   private $userfunc = null;
   // caddyEmail
-  private $calc = null;
   public $cartCount = 0;
   public $cartServiceAttribute1Sum = 0;
   public $cartServiceAttribute1Max = 0;
@@ -144,12 +143,7 @@ class tx_caddy_powermail extends tx_caddy_pi1
   public $cartServiceAttribute2Max = 0;
   public $cartServiceAttribute3Sum = 0;
   public $cartServiceAttribute3Max = 0;
-  private $content = null;
-  private $dynamicMarkers = null;
-  private $markerArray = null;
-  private $outerMarkerArray = null;
-  private $product = null;
-  private $render = null;
+  //private $dynamicMarkers = null;
   private $session = null;
   public $tmpl = null;
   private $pmVersAppendix = null;
