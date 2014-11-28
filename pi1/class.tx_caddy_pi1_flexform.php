@@ -436,7 +436,8 @@ class tx_caddy_pi1_flexform
   public function zzFfValue( $sheet, $field, $drs=true )
   {
     $pi_flexform = $this->row['pi_flexform'];
-    $value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
+    //$value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
+    $value = $this->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );
 
       // RETURN : Don't prompt to DRS
     if( ! $drs )

@@ -893,6 +893,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->flexform = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
     // #i0063, 141128, dwildt, +
     //$this->flexform->pObj = $this;
+    $this->flexform->pi_getFFvalue() = $this->pi_getFFvalue();
     $this->flexform->row = $this->cObj->data;
 
     // #53679, 131115, dwildt, 4+
