@@ -80,10 +80,7 @@
  */
 class tx_caddy_pi1_clean extends tx_caddy_pi1
 {
-
   private $pidCaddy = null;
-
-  private $local_cObj = null;
 
 
  /**
