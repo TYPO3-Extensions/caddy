@@ -61,14 +61,14 @@ class tx_caddy_pi1_template extends tx_caddy_pi1
 
 
  /**
-  * main( ): Returns template subparts
+  * templateMain( ): Returns template subparts
   *
   * @return	array		$tmplSubparts : array with template subparts;
   * @access public
-  * @version    2.0.0
+  * @version    6.0.3
   * @since      2.0.0
   */
-  public function main( )
+  public function templateMain( )
   {
     $cObj = $this->cObj;
     $conf = $this->conf;

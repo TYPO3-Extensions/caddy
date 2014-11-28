@@ -467,7 +467,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function clean()
   {
-    $this->clean->main();
+    $this->clean->cleanMain();
   }
 
   /*   * *********************************************
@@ -574,7 +574,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->pi_initPIflexForm();
 
     $this->initInstances();
-    $this->drs->init();
+    $this->drs->drsInit();
     $this->initFlexform();
     $this->initPid();
     $this->initAccessByIp();
@@ -888,7 +888,6 @@ class tx_caddy_pi1 extends tslib_pibase
     // #i0063, 141128, dwildt, 2-
     //$this->flexform->pObj = $this;
     //$this->flexform->row = $this->cObj->data;
-
     // #53679, 131115, dwildt, 4+
     require_once( 'class.tx_caddy_pi1_javascript.php' );
     $this->javascript = t3lib_div::makeInstance( 'tx_caddy_pi1_javascript' );
@@ -1000,7 +999,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initTemplate()
   {
-    $this->tmpl = $this->template->main();
+    $this->tmpl = $this->template->templateMain();
   }
 
   /*   * *********************************************

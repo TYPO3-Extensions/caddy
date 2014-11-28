@@ -52,8 +52,6 @@ class tx_caddy_drs extends tx_caddy_pi1
 {
 
     // Current row
-  // 141128, dwildt: public -> private
-  private $row = null;
 
   public $drsError        = false;
   public $drsWarn         = false;
@@ -83,14 +81,14 @@ class tx_caddy_drs extends tx_caddy_pi1
 
 
  /**
-  * init( ): Init the DRS - Development Reportinmg System
+  * drsInit( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function init( )
+  public function drsInit( )
   {
     $this->initByExtmngr( );
 

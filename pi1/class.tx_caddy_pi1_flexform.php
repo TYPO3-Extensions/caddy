@@ -113,14 +113,14 @@ class tx_caddy_pi1_flexform extends tx_caddy_pi1
   // [sdef]
 
   /**
-   * main():  Process the values from the pi_flexform field.
-   *          Process each sheet.
-   *          Allocates values to TypoScript.
+   * flexform():  Process the values from the pi_flexform field.
+   *              Process each sheet.
+   *              Allocates values to TypoScript.
    *
    * @return	void
-   * @version 4.1.10
+   * @version 6.0.3
    */
-  function main()
+  function flexform()
   {
 
     // Sheets

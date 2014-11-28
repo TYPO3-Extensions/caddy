@@ -84,14 +84,14 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
 
 
  /**
-  * main( )
+  * cleanMain( )
   *
   * @return	void
   * @access public
-  * @version    2.0.0
+  * @version    6.0.3
   * @since      2.0.0
   */
-  public function main( )
+  public function cleanMain( )
   {
     $this->init( $this->pidCaddy );
 
