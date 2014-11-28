@@ -911,8 +911,7 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'class.tx_caddy_template.php' );
     $this->template = t3lib_div::makeInstance( 'tx_caddy_template' );
-    // #i0063, 141128, dwildt, +
-    //$this->template->pObj = $this;
+    $this->template->pObj = $this;
   }
 
   /**
