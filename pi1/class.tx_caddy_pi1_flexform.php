@@ -57,7 +57,7 @@
  * @version 2.0.0
  * @since   2.0.0
  */
-class tx_caddy_pi1_flexform
+class tx_caddy_pi1_flexform extends tx_caddy_pi1
 {
     // Parent object
   public $pObj = null;
