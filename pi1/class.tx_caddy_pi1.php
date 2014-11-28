@@ -6,9 +6,6 @@
  *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
- *  Caddy is a fork of wt_cart (version 1.4.6)
- *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
- *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -118,7 +115,7 @@ if ( $version < 6002000 )
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.0
+ * @version	6.0.3
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -128,10 +125,7 @@ class tx_caddy_pi1 extends tslib_pibase
   public $prefixId = 'tx_caddy_pi1';
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
   private $accessByIP = null;
-  private $product = array();
   private $newProduct = array();
-  private $markerArray = array();
-  private $outerMarkerArray = array();
   public $gpvar = array();
   public $pid = null;
   private $caddy = null;
@@ -891,16 +885,16 @@ class tx_caddy_pi1 extends tslib_pibase
     // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
-    // #i0063, 141128, dwildt, 1-
+    // #i0063, 141128, dwildt, 2-
     //$this->flexform->pObj = $this;
-    $this->flexform->row = $this->cObj->data;
+    //$this->flexform->row = $this->cObj->data;
 
     // #53679, 131115, dwildt, 4+
     require_once( 'class.tx_caddy_pi1_javascript.php' );
     $this->javascript = t3lib_div::makeInstance( 'tx_caddy_pi1_javascript' );
-    // #i0063, 141128, dwildt, 1-
+    // #i0063, 141128, dwildt, 2-
     //$this->javascript->pObj = $this;
-    $this->javascript->row = $this->cObj->data;
+    //$this->javascript->row = $this->cObj->data;
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail = t3lib_div::makeInstance( 'tx_caddy_powermail' );
@@ -910,8 +904,8 @@ class tx_caddy_pi1 extends tslib_pibase
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session = t3lib_div::makeInstance( 'tx_caddy_session' );
 
-    require_once( $path2lib . 'class.tx_caddy_template.php' );
-    $this->template = t3lib_div::makeInstance( 'tx_caddy_template' );
+    require_once( 'class.tx_caddy_pi1_template.php' );
+    $this->template = t3lib_div::makeInstance( 'tx_caddy_pi1_template' );
     // #i0063, 141128, dwildt, 1-
     //$this->template->pObj = $this;
   }

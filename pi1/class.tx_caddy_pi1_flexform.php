@@ -54,7 +54,7 @@
  * @author    Dirk Wildt http://wildt.at.die-netzmacher.de
  * @package    TYPO3
  * @subpackage    caddy
- * @version 2.0.0
+ * @version 6.0.3
  * @since   2.0.0
  */
 class tx_caddy_pi1_flexform extends tx_caddy_pi1
@@ -388,10 +388,6 @@ class tx_caddy_pi1_flexform extends tx_caddy_pi1
    */
   public function zzFfValue( $sheet, $field, $drs = true )
   {
-    // #i0061, 141126, dwildt+
-    var_dump( __METHOD__, __LINE__, $this->extKey );
-    die( );
-
     $pi_flexform = $this->row[ 'pi_flexform' ];
     // #i0063, 141128, dwildt, 1-/+
     //$value = $this->pObj->pi_getFFvalue( $pi_flexform, $field, $sheet, 'lDEF', 'vDEF' );

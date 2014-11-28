@@ -75,24 +75,11 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	4.0.7
+ * @version	6.0.3
  * @since       1.4.6
  */
-class tx_caddy_pi1_clean
+class tx_caddy_pi1_clean extends tx_caddy_pi1
 {
-
-  public $prefixId = 'tx_caddy_pi1';
-
-  // same as class name
-  public $scriptRelPath = 'pi1/class.tx_caddy_pi1_clean.php';
-
-  // path to this script relative to the extension dir.
-  public $extKey = 'caddy';
-
-    // Parent object
-  public $pObj = null;
-    // Current row
-  public $row = null;
 
   private $pidCaddy = null;
 
@@ -112,13 +99,13 @@ class tx_caddy_pi1_clean
     $this->init( $this->pidCaddy );
 
       // RETURN : powermail form isn't sent. Nothing to clean
-    if( empty( $this->pObj->powermail->sent ) )
+    if( empty( $this->powermail->sent ) )
     {
         // DRS
-      if( $this->pObj->drs->drsClean )
+      if( $this->drs->drsClean )
       {
         $prompt = 'The powermail form isn\'t sent, nothing to clean up.';
-        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
       }
         // DRS
       return;
@@ -126,10 +113,10 @@ class tx_caddy_pi1_clean
       // RETURN : powermail form isn't sent. Nothing to clean
 
       // DRS
-    if( $this->pObj->drs->drsClean )
+    if( $this->drs->drsClean )
     {
       $prompt = 'The powermail form is sent. Database, numbers and session will cleaned up.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
 
@@ -171,10 +158,10 @@ class tx_caddy_pi1_clean
     }
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
+    $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
 
       // DRS
-    if( $this->pObj->drs->drsCobj )
+    if( $this->drs->drsCobj )
     {
       $data   = var_export( $this->local_cObj->data, true );
       $prompt = 'cObj->data: ' . $data;
@@ -184,7 +171,7 @@ class tx_caddy_pi1_clean
 
       // Set record
     $record = array(
-      'pid'           => $this->pObj->pid,
+      'pid'           => $this->pid,
       'tstamp'        => $time,
       'crdate'        => $time,
       'customerEmail' => $this->getPmFieldEmailCustomerEmail( ),
@@ -213,10 +200,10 @@ class tx_caddy_pi1_clean
       // exit in case of error
 
       // DRS
-    if( $this->pObj->drs->drsClean )
+    if( $this->drs->drsClean )
     {
       $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
 
@@ -273,7 +260,7 @@ class tx_caddy_pi1_clean
     unset( $_GET[ 'tx_powermail_pi1' ] );
     unset( $_POST[ 'tx_powermail_pi1' ] );
 
-    if( ! $this->pObj->drs->drsError )
+    if( ! $this->drs->drsError )
     {
       return true;
     }
@@ -357,8 +344,8 @@ class tx_caddy_pi1_clean
       case( $pdfDeliveryorderToVendor ):
         $fileDeliveryorder  = $this->local_cObj->cObjGetSingle
                               (
-                                $this->pObj->conf['pdf.']['deliveryorder.']['filename'],
-                                $this->pObj->conf['pdf.']['deliveryorder.']['filename.']
+                                $this->conf['pdf.']['deliveryorder.']['filename'],
+                                $this->conf['pdf.']['deliveryorder.']['filename.']
                               );
         break;
     }
@@ -368,8 +355,8 @@ class tx_caddy_pi1_clean
       case( $pdfInvoiceToVendor ):
         $fileInvoice  = $this->local_cObj->cObjGetSingle
                         (
-                          $this->pObj->conf['pdf.']['invoice.']['filename'],
-                          $this->pObj->conf['pdf.']['invoice.']['filename.']
+                          $this->conf['pdf.']['invoice.']['filename'],
+                          $this->conf['pdf.']['invoice.']['filename.']
                         );
         break;
     }
@@ -379,8 +366,8 @@ class tx_caddy_pi1_clean
       case( $pdfRevocationToVendor ):
         $fileRevocation  = $this->local_cObj->cObjGetSingle
                       (
-                        $this->pObj->conf['pdf.']['revocation.']['filename'],
-                        $this->pObj->conf['pdf.']['revocation.']['filename.']
+                        $this->conf['pdf.']['revocation.']['filename'],
+                        $this->conf['pdf.']['revocation.']['filename.']
                       );
         break;
     }
@@ -390,8 +377,8 @@ class tx_caddy_pi1_clean
       case( $pdfTermsToVendor ):
         $fileTerms  = $this->local_cObj->cObjGetSingle
                       (
-                        $this->pObj->conf['pdf.']['terms.']['filename'],
-                        $this->pObj->conf['pdf.']['terms.']['filename.']
+                        $this->conf['pdf.']['terms.']['filename'],
+                        $this->conf['pdf.']['terms.']['filename.']
                       );
         break;
     }
@@ -544,8 +531,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderAddress( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderAddress;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderAddress;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -559,8 +546,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderCity( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderCity;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderCity;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -574,8 +561,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderCompany( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderCompany;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -589,8 +576,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderCountry( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderCountry;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderCountry;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -604,8 +591,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderFirstname( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderFirstname;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -619,8 +606,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderLastname( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderLastname;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -634,8 +621,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldDeliveryorderZip( )
   {
-    $pmUid  = $this->pObj->flexform->deliveryorderZip;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->deliveryorderZip;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -649,8 +636,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldEmailCustomerEmail( )
   {
-    $pmUid  = $this->pObj->flexform->emailCustomerEmail;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->emailCustomerEmail;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -664,8 +651,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceAddress( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceAddress;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceAddress;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -679,8 +666,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCity( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceCity;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceCity;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -694,8 +681,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCompany( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceCompany;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceCompany;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -709,8 +696,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceCountry( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceCountry;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceCountry;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -724,8 +711,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceFirstname( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceFirstname;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceFirstname;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -739,8 +726,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceLastname( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceLastname;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceLastname;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -754,8 +741,8 @@ class tx_caddy_pi1_clean
   */
   private function getPmFieldInvoiceZip( )
   {
-    $pmUid  = $this->pObj->flexform->invoiceZip;
-    $value  = $this->pObj->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->flexform->invoiceZip;
+    $value  = $this->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -779,7 +766,6 @@ class tx_caddy_pi1_clean
   */
   private function init( $pidCaddy=null )
   {
-    $this->initVars( );
     $this->initInstances( );
     $this->initPidCaddy( $pidCaddy );
   }
@@ -841,23 +827,6 @@ class tx_caddy_pi1_clean
     require_once( $path2lib . 'caddy/class.tx_caddy_stockmanager.php' );
     $this->stockmanager = t3lib_div::makeInstance( 'tx_caddy_stockmanager' );
     $this->stockmanager->setParentObject( $this );
-  }
-
- /**
-  * initVars( )
-  *
-  * @return	void
-  * @access private
-  * @internal   #54628
-  * @version    4.0.7
-  * @since      4.0.7
-  */
-  private function initVars( )
-  {
-    $this->cObj       = $this->pObj->cObj;
-    $this->conf       = $this->pObj->conf;
-    $this->drs        = $this->pObj->drs;
-    $this->local_cObj = $this->pObj->local_cObj;
   }
 
  /**
@@ -933,10 +902,10 @@ class tx_caddy_pi1_clean
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS
-    if( $this->pObj->drs->drsClean )
+    if( $this->drs->drsClean )
     {
       $prompt = 'Delivery order data are added to the session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
   }
@@ -972,10 +941,10 @@ class tx_caddy_pi1_clean
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS
-    if( $this->pObj->drs->drsClean )
+    if( $this->drs->drsClean )
     {
       $prompt = 'Invoice data are added to the session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
     }
       // DRS
   }

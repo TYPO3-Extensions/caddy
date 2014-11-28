@@ -85,19 +85,20 @@ if ( $version < 6002000 )
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.0
+ * @version	6.0.3
  * @since       2.0.0
  */
-class tx_caddy_powermail extends tslib_pibase
+//class tx_caddy_powermail extends tslib_pibase
+class tx_caddy_powermail extends tx_caddy_pi1
 {
 
-  public $prefixId = 'tx_caddy_powermail';
-  // same as class name
-  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
-  // path to this script relative to the extension dir.
-  public $extKey = 'caddy';
-  public $pObj = null;
-  public $conf = null;
+//  public $prefixId = 'tx_caddy_powermail';
+//  // same as class name
+//  public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+//  // path to this script relative to the extension dir.
+//  public $extKey = 'caddy';
+//  public $pObj = null;
+//  public $conf = null;
   public $drsUserfunc = false;
   public $fieldFfConfirm = null;
   public $fieldFfMailreceiver = null;
@@ -625,20 +626,20 @@ class tx_caddy_powermail extends tslib_pibase
     if ( empty( $this->fieldFormCss ) )
     {
       // DRS
-      if ( $this->pObj->drs->drsPowermail )
+      if ( $this->drs->drsPowermail )
       {
         $prompt = 'Caddy contains a product, powermail form will displayed.';
-        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       }
       // DRS
       return $content;
     }
     // RETURN : there isn't any CSS for powermail
 //      // DRS
-//    if( $this->pObj->drs->drsPowermail )
+//    if( $this->drs->drsPowermail )
 //    {
 //      $prompt = 'Caddy is empty, powermail form will hidden.';
-//      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+//      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
 //    }
 //      // DRS
     $content = $content . $this->fieldFormCss;
@@ -657,7 +658,7 @@ class tx_caddy_powermail extends tslib_pibase
    */
   public function formHide()
   {
-    if ( $this->pObj->drs->drsPowermail )
+    if ( $this->drs->drsPowermail )
     {
       $prompt = 'Caddy is empty, powermail form will hidden by CSS: #c' . $this->fieldUid . ' {display: none;}';
       t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
@@ -949,12 +950,12 @@ class tx_caddy_powermail extends tslib_pibase
     $uid1x = 'uid' . $uid;
     $value = $this->paramPost[ $uid1x ];
     // DRS
-    if ( $this->pObj->drs->drsError )
+    if ( $this->drs->drsError )
     {
       if ( !isset( $this->paramPost[ $uid1x ] ) )
       {
         $prompt = 'POST[' . $uid1x . '] isn\'t set!';
-        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
       }
     }
     // DRS
@@ -978,12 +979,12 @@ class tx_caddy_powermail extends tslib_pibase
 
     $value = $this->paramPost[ 'field' ][ $uid2x ];
     // DRS
-    if ( $this->pObj->drs->drsError )
+    if ( $this->drs->drsError )
     {
       if ( !isset( $this->paramPost[ 'field' ][ $uid2x ] ) )
       {
         $prompt = 'POST[field][' . $uid2x . '] isn\'t set!';
-        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
       }
     }
     // DRS
@@ -1049,12 +1050,12 @@ class tx_caddy_powermail extends tslib_pibase
     $value = $sessionData[ $uid1x ];
 
     // DRS
-    if ( $this->pObj->drs->drsError )
+    if ( $this->drs->drsError )
     {
       if ( !isset( $sessionData[ $uid1x ] ) )
       {
         $prompt = 'SESSION[' . $uid1x . '] isn\'t set!';
-        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
       }
     }
     // DRS
@@ -1146,7 +1147,7 @@ class tx_caddy_powermail extends tslib_pibase
   {
     //$arrReturn = null;
     // Page uid
-//    $pid = $this->pObj->cObj->data['pid'];
+//    $pid = $this->cObj->data['pid'];
     $pid = $row[ 'pid' ];
 
     if ( !$pid )
@@ -1191,14 +1192,14 @@ class tx_caddy_powermail extends tslib_pibase
     $limit = '1';
     // Query
     // DRS
-    if ( $this->pObj->drs->drsSql )
+    if ( $this->drs->drsSql )
     {
       $query = $GLOBALS[ 'TYPO3_DB' ]->SELECTquery
               (
               $select_fields, $from_table, $where_clause, $groupBy, $orderBy, $limit
       );
       $prompt = $query;
-      t3lib_div::devlog( ' [INFO/SQL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( ' [INFO/SQL] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
     // Execute SELECT
@@ -1213,10 +1214,10 @@ class tx_caddy_powermail extends tslib_pibase
     // RETURN : no row
     if ( empty( $pmRecord ) )
     {
-      if ( $this->pObj->drs->drsError )
+      if ( $this->drs->drsError )
       {
         $prompt = 'Abort. SQL query is empty!';
-        t3lib_div::devlog( ' [WARN/SQL] ' . $prompt, $this->pObj->extKey, 2 );
+        t3lib_div::devlog( ' [WARN/SQL] ' . $prompt, $this->extKey, 2 );
       }
       return false;
     }
@@ -1263,14 +1264,14 @@ class tx_caddy_powermail extends tslib_pibase
     $this->fieldUid = $pmUid;
 
     // DRS
-    if ( $this->pObj->drs->drsPowermail )
+    if ( $this->drs->drsPowermail )
     {
       $prompt = 'powermail.uid: "' . $this->fieldUid . '"';
-      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       $prompt = 'powermail.title: "' . $this->fieldTitle . '"';
-      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       $prompt = 'powermail.confirm: "' . $this->fieldFfConfirm . '"';
-      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
 
@@ -1298,9 +1299,9 @@ class tx_caddy_powermail extends tslib_pibase
     // RETURN : no DRS
     // DRS
     $prompt = 'GET[tx_powermail_pi1]: ' . var_export( $this->paramGet, true );
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     $prompt = 'POST[tx_powermail_pi1]: ' . var_export( $this->paramPost, true );
-    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+    t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
   }
 
   /**
@@ -1733,20 +1734,20 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $this->sent = true;
       // DRS
-      if ( $this->pObj->drs->drsPowermail )
+      if ( $this->drs->drsPowermail )
       {
         $prompt = 'Powermail form is sent. Version 1.x with confirmation mode and with $GET[sendNow].';
-        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       }
       // DRS
       return;
     }
 
     // DRS
-    if ( $this->pObj->drs->drsPowermail )
+    if ( $this->drs->drsPowermail )
     {
       $prompt = 'Powermail form isn\'t sent. Version 1.x with confirmation mode but without any $GET[sendNow].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
 
@@ -1770,20 +1771,20 @@ class tx_caddy_powermail extends tslib_pibase
     {
       $this->sent = true;
       // DRS
-      if ( $this->pObj->drs->drsPowermail )
+      if ( $this->drs->drsPowermail )
       {
         $prompt = 'Powermail form is sent. Version 1.x without confirmation mode and with $GET[mailID].';
-        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+        t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
       }
       // DRS
       return;
     }
 
     // DRS
-    if ( $this->pObj->drs->drsPowermail )
+    if ( $this->drs->drsPowermail )
     {
       $prompt = 'Powermail form isn\'t sent. Version 1.x without confirmation mode and without any $GET[mailID].';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
 
@@ -1842,21 +1843,21 @@ class tx_caddy_powermail extends tslib_pibase
     if ( empty( $this->versionInt ) )
     {
       // DRS
-      if ( $this->pObj->drs->drsError )
+      if ( $this->drs->drsError )
       {
         $prompt = 'Powermail version is 0!';
-        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->pObj->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/POWERMAIL] ' . $prompt, $this->extKey, 3 );
       }
       // DRS
       return false;
     }
 
     // DRS
-    if ( $this->pObj->drs->drsPowermail )
+    if ( $this->drs->drsPowermail )
     {
       $prompt = 'Powermail version is ' . $this->versionStr . ' ' .
               '(internal ' . $this->versionInt . ')';
-      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->pObj->extKey, 0 );
+      t3lib_div::devlog( '[INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
 
@@ -2475,7 +2476,7 @@ class tx_caddy_powermail extends tslib_pibase
     // RETURN: no session data
     if ( empty( $sessionData ) )
     {
-      if ( $this->pObj->drsPowermail )
+      if ( $this->drsPowermail )
       {
         $prompt = 'There isn\'t any powermail session data (powermail 1.x)!';
         t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
@@ -2508,7 +2509,7 @@ class tx_caddy_powermail extends tslib_pibase
     // RETURN: no session data
     if ( empty( $sessionData ) )
     {
-      if ( $this->pObj->drsPowermail )
+      if ( $this->drsPowermail )
       {
         $prompt = 'There isn\'t any powermail session data (powermail 2.x)!';
         t3lib_div::devlog( ' [INFO/POWERMAIL] ' . $prompt, $this->extKey, 0 );
@@ -2517,7 +2518,7 @@ class tx_caddy_powermail extends tslib_pibase
     }
     // RETURN: no session data
 
-    if ( $this->pObj->drsPowermail || $this->pObj->drsWarn )
+    if ( $this->drs->drsPowermail || $this->drs->drsWarn )
     {
       $prompt = 'powermail session uid: _LOCALIZED_UID will not respected!';
       t3lib_div::devlog( ' [WARN/POWERMAIL] ' . $prompt, $this->extKey, 2 );
