@@ -875,7 +875,8 @@ class tx_caddy_pi1 extends tslib_pibase
     // Class with methods for get clean values
     require_once( 'class.tx_caddy_pi1_clean.php' );
     $this->clean = t3lib_div::makeInstance( 'tx_caddy_pi1_clean' );
-    $this->clean->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->clean->pObj = $this;
     $this->clean->row = $this->cObj->data;
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
@@ -883,31 +884,36 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->drs->pObj = $this;
     $this->drs->row = $this->cObj->data;
 
     // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
-    $this->flexform->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->flexform->pObj = $this;
     $this->flexform->row = $this->cObj->data;
 
     // #53679, 131115, dwildt, 4+
     require_once( 'class.tx_caddy_pi1_javascript.php' );
     $this->javascript = t3lib_div::makeInstance( 'tx_caddy_pi1_javascript' );
-    $this->javascript->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->javascript->pObj = $this;
     $this->javascript->row = $this->cObj->data;
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    $this->powermail->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->powermail->pObj = $this;
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session = t3lib_div::makeInstance( 'tx_caddy_session' );
 
     require_once( $path2lib . 'class.tx_caddy_template.php' );
     $this->template = t3lib_div::makeInstance( 'tx_caddy_template' );
-    $this->template->pObj = $this;
+    // #i0063, 141128, dwildt, +
+    //$this->template->pObj = $this;
   }
 
   /**
