@@ -150,10 +150,6 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   private function initDrs()
   {
     $this->drs->init();
-
-    // #i0061, 141126, dwildt+
-    var_dump( __METHOD__, __LINE__, $this->drs );
-    die( );
   }
 
   /**
