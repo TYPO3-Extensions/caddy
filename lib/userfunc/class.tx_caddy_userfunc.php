@@ -725,8 +725,10 @@ class tx_caddy_userfunc
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj = $this;
-    $this->drs->row = $this->plugin->row;
+    // #i0063, 141128, dwildt 2-/1+
+    //$this->drs->pObj = $this;
+    //$this->drs->row = $this->cObj->data;
+    $this->drs->cObj->data = $this->cObj->data;
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail = t3lib_div::makeInstance( 'tx_caddy_powermail' );

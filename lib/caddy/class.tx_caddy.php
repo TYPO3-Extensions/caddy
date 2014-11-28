@@ -3237,9 +3237,10 @@ class tx_caddy extends tslib_pibase
       $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
       require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
       $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-      // #i0061, 141126, dwildt+
+      // #i0063, 141128, dwildt 2-/1+
       //$this->drs->pObj = $this;
-      $this->drs->row = $this->cObj->data;
+      //$this->drs->row = $this->cObj->data;
+      $this->drs->cObj->data = $this->cObj->data;
     }
     else
     {
