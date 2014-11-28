@@ -79,6 +79,9 @@ if ( $version < 6002000 )
 }
 // #61634, 140916, dwildt, +
 
+$path2pi1 = t3lib_extMgm::extPath( 'caddy' ) . 'pi1/';
+require_once($path2pi1 . 'class.tx_caddy_pi1.php');
+
 /**
  * powermail controlling for the 'caddy' extension.
  *
@@ -849,7 +852,7 @@ class tx_caddy_powermail extends tx_caddy_pi1
       default:
         // Equal to or greater than 2.1.0
         // 141011, dwildt
-        if( (int) $uid != 0 )
+        if ( ( int ) $uid != 0 )
         {
           break;
         }
