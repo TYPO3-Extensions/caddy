@@ -880,7 +880,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
     // #i0063, 141128, dwildt, 1-
     //$this->drs->pObj = $this;
-    $this->drs->row = $this->cObj->data;
+    $this->drs->cObj->data = $this->cObj->data;
 
     // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
