@@ -150,6 +150,10 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   private function initDrs()
   {
     $this->drs->init();
+
+    // #i0061, 141126, dwildt+
+    var_dump( __METHOD__, __LINE__, $this->drs );
+    die( );
   }
 
   /**
@@ -183,6 +187,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
     $this->drs->pObj = $this;
     $this->drs->row = $this->cObj->data;
+
   }
 
   /**
@@ -248,6 +253,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
 
     if ( $pid === null || $pid === '' )
     {
+      // #i0061, 141126: Lines below won't have any effect, because DRS init will be after this method.
       if ( $this->drs->drsError || $this->drsUserfunc )
       {
         $prompt = 'Given pid of the Caddy is empty!';
@@ -404,6 +410,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     }
     $this->drs = $pObj->drs;
   }
+
 //
 //  /**
 //   * setTransactionPaymentId( )  :
@@ -569,6 +576,18 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   private function transactionRequirements()
   {
     $prompts = array();
+
+    if ( !is_object( $pObj->drs ) )
+    {
+      $prompt = 'ERROR: no DRS object!<br />' . PHP_EOL .
+              'Sorry for the trouble.<br />' . PHP_EOL .
+//                'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
+              'TYPO3 Caddy<br />' . PHP_EOL .
+              __METHOD__ . ' (' . __LINE__ . ')';
+      die( $prompt );
+    }
+
+    $this->drs = $pObj->drs;
 
     // Check requirements for transaction
     $error = $this->paymillLib->paymillCheckAccount();

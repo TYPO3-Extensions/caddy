@@ -130,7 +130,6 @@ class tx_caddy_drs
       case( 'Disabled' ):
       case( null ):
         return;
-        break;
       case( 'Enabled (for debugging only!)' ):
           // Follow the workflow
         break;
