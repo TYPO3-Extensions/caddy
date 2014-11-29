@@ -1000,8 +1000,8 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     {
       return;
     }
-$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
-var_dump( __METHOD__, __LINE__, $prompt);
+//$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
+//var_dump( __METHOD__, __LINE__, $prompt);
 
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     // :TODO: Recalculte option costs (option costs without payment)
