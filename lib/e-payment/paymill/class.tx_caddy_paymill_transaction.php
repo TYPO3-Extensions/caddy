@@ -282,7 +282,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     // #i0058, 141011, dwildt, 4+
     if ( $paymentId === NULL )
     {
-      $this->paymentId = $this->sessionGetPaymentId( );
+      $this->paymentId = $this->sessionGetPaymentId();
     }
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -714,32 +714,45 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    * @param	[type]		$$exception: ...
    * @return	array		$arrReturn  : See method description
    * @access private
-   * @version    4.0.6
+   * @version    6.0.3
    * @since      4.0.6
    */
   private function transactionSendCatch( $exception )
   {
-    // transaction failed
-    $prompt = $exception->getErrorMessage();
-    if ( empty( $prompt ) )
-    {
-      $prompt = 'sorry, error prompt is empty.';
-    }
-    $prompt = 'Paymill exception while transaction: ' . $prompt;
+    $responseCode = $exception->getResponseCode();
+    $statusCode = $exception->getStatusCode();
+    $errorMessage = $exception->getErrorMessage();
 
-    $prompts = array(
-      'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $prompt,
-      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'transaction-not-operated' ),
-      'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'transaction-todo-default' )
-    );
+    $prompts = array();
+
+    if ( !empty($this->pi_getLL( $responseCode )) )
+    {
+      // secondary (grey), [empty!] (blue), success (green), error (red)
+      $prompts[0] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $this->pi_getLL( $responseCode );
+    }
+    else
+    {
+      $prompts[0] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|Respsonse code: ' . $responseCode;
+    }
+
+    if ( !empty($errorMessage ) )
+    {
+      $prompts[1] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $errorMessage;
+    }
+
+    if ( $statusCode > 0 )
+    {
+      $prompts[2] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|Status code' . $statusCode;
+    }
 
     $arrReturn = array(
       'error' => true,
       'errors' => $prompts,
       'exception' => true,
-      'responseCode' => null,
+      'responseCode' => $responseCode,
       'transactionId' => null
     );
+
     return $arrReturn;
   }
 
@@ -824,7 +837,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   /**
    * transactionSentEval( )  :
    *
-   * @param	[type]		$$paymillTransactionResponse: ...
+   * @param	[type]		$paymillTransactionResponse: ...
    * @return	array		$prompts  : prompts, in case of an error
    * @access private
    * @version    4.0.6
