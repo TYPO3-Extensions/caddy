@@ -85,7 +85,7 @@
       <label index="error-invalid-elv-iban">Please enter a valid IBAN.</label>
       <label index="error-invalid-elv-iban-holder">Please enter the proper name of the account holder.</label>
       <label index="error-parameter-is-mandatory">Another payment isn't possible. The Paymill token is wasted.</label>
-      <label index="error-unknown_error">Undefined error: Maybe the Paymill public API key is missing in the form.</label>
+      <label index="error-unknown_error">Undefined error: Maybe your account data aren't proper. Maybe the Paymill public API key is missing in the form.</label>
       <label index="invoice">Invoice</label>
       <label index="invoice-submit">Check invoice and select it</label>
       <label index="paymill-live-mode">Enable live mode: Constant Editor > Category [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
@@ -176,7 +176,7 @@ No data? <a href="https://developers.paymill.com/en/reference/testing/" target="
       <label index="error-invalid-elv-iban">Bitte geben Sie eine gültige IBAN ein.</label>
       <label index="error-invalid-elv-iban-holder">Bitte geben Sie den korrekten Kontoinhaber an.</label>
       <label index="error-parameter-is-mandatory">Eine (weitere) Zahlung ist nicht möglich. Der Paymill-Token ist verbraucht.</label>
-      <label index="error-unknown_error">Unbekannter Fehler: Möglicherweise fehlt im Formular der Paymill-Public-API-Key.</label>
+      <label index="error-unknown_error">Unbekannter Fehler: Möglicherweise sind Ihre Kontodaten falsch. Oder es fehlt im Formular der Paymill-Public-API-Key.</label>
       <label index="invoice">Auf Rechnung</label>
       <label index="invoice-submit">Auf Rechnung prüfen und auswählen</label>
       <label index="paymill-live-mode">Live-Modus aktivieren: Konstanten Editor > Kategorie [CADDY - E-PAYMENT - PAYMILL] > Mode: live</label>
