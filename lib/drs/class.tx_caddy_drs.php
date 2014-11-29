@@ -113,7 +113,7 @@ class tx_caddy_drs
   private function initByExtmngr()
   {
 
-    switch ( $this->pObj->extConf[ 'debuggingDrs' ] )
+    switch ( $this->extConf[ 'debuggingDrs' ] )
     {
       case( 'Disabled' ):
       case( null ):
@@ -124,7 +124,7 @@ class tx_caddy_drs
         break;
       default:
         $prompt = 'Error: debuggingDrs is undefined.<br />
-          value is ' . $this->pObj->extConf[ 'debuggingDrs' ] . '<br />
+          value is ' . $this->extConf[ 'debuggingDrs' ] . '<br />
           <br />
           ' . __METHOD__ . ' line(' . __LINE__ . ')';
         die( $prompt );
@@ -132,7 +132,7 @@ class tx_caddy_drs
 
     $this->zzDrsPromptsTrue();
 
-    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->pObj->extConf[ 'debuggingDrs' ];
+    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->extConf[ 'debuggingDrs' ];
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
     t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
@@ -155,17 +155,17 @@ class tx_caddy_drs
   {
 
     // RETURN : parent object doesn't have any flexform
-    if ( !is_object( $this->pObj->flexform ) )
+    if ( !is_object( $this->flexform ) )
     {
       return;
     }
     // sdefDrs
     $sheet = 'sDEF';
     $field = 'sdefDrs';
-    $this->pObj->flexform->sdefDrs = $this->pObj->flexform->zzFfValue( $sheet, $field, false );
+    $this->flexform->sdefDrs = $this->flexform->zzFfValue( $sheet, $field, false );
     // sdefDrs
     // Enable the DRS by TypoScript
-    if ( empty( $this->pObj->flexform->sdefDrs ) )
+    if ( empty( $this->flexform->sdefDrs ) )
     {
       return;
     }

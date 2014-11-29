@@ -976,7 +976,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initPidClasses()
   {
-    $this->clean->cleanInitPidCaddy( $this->pid );
+    $this->clean->initPidCaddy( $this->pid );
     $this->dynamicMarkers->initPidCaddy( $this->pid );
   }
 

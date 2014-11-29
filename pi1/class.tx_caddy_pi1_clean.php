@@ -109,7 +109,7 @@ class tx_caddy_pi1_clean
   */
   public function main( )
   {
-    $this->cleanInit( $this->pidCaddy );
+    $this->init( $this->pidCaddy );
 
       // RETURN : powermail form isn't sent. Nothing to clean
     if( empty( $this->pObj->powermail->sent ) )
@@ -522,7 +522,7 @@ class tx_caddy_pi1_clean
  */
   public function getPid( $pid=null )
   {
-    $this->cleanInitPidCaddy( $pid );
+    $this->initPidCaddy( $pid );
     return $this->pidCaddy;
   }
 
@@ -768,7 +768,7 @@ class tx_caddy_pi1_clean
   **********************************************/
 
  /**
-  * cleanInit( )
+  * init( )
   *
   * @param	integer		$pidCaddy: pid of the page with the current Caddy plugin
   * @return	void
@@ -777,7 +777,7 @@ class tx_caddy_pi1_clean
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function cleanInit( $pidCaddy=null )
+  private function init( $pidCaddy=null )
   {
     $this->initVars( );
     $this->initInstances( );
@@ -785,7 +785,7 @@ class tx_caddy_pi1_clean
   }
 
  /**
-  * cleanInitInstances( )
+  * initInstances( )
   *
   * @return	void
   * @access private
@@ -793,22 +793,22 @@ class tx_caddy_pi1_clean
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function cleanInitInstances( )
+  private function initInstances( )
   {
-    if( ! ( $this->cleanInitInstances === null ) )
+    if( ! ( $this->initInstances === null ) )
     {
       return;
     }
 
-    $this->cleanInitInstancesSession( );
-    $this->cleanInitInstancesStockmanager( );
+    $this->initInstancesSession( );
+    $this->initInstancesStockmanager( );
 
-    $this->cleanInitInstances = true;
+    $this->initInstances = true;
   }
 
 
  /**
-  * cleanInitInstancesSession( )
+  * initInstancesSession( )
   *
   * @return	void
   * @access private
@@ -816,7 +816,7 @@ class tx_caddy_pi1_clean
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function cleanInitInstancesSession( )
+  private function initInstancesSession( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
@@ -826,7 +826,7 @@ class tx_caddy_pi1_clean
   }
 
  /**
-  * cleanInitInstancesStockmanager( )
+  * initInstancesStockmanager( )
   *
   * @return	void
   * @access private
@@ -834,7 +834,7 @@ class tx_caddy_pi1_clean
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function cleanInitInstancesStockmanager( )
+  private function initInstancesStockmanager( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
@@ -870,7 +870,7 @@ class tx_caddy_pi1_clean
   * @version    4.0.3
   * @since      4.0.3
   */
-  public function cleanInitPidCaddy( $pidCaddy=null )
+  public function initPidCaddy( $pidCaddy=null )
   {
     $this->pidCaddy = ( int ) $pidCaddy;
     if( $pidCaddy === null )
