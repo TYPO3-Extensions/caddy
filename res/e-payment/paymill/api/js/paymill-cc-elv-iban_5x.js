@@ -100,6 +100,7 @@ jQuery(document).ready(function($) {
     {
       // Token in das Formular einfügen damit es an den Server übergeben wird
       form.append("<input type='hidden' name='tx_caddy_pi1[e-payment][paymill][token]' value='" + token + "'/>");
+console.debug("token: " + token);
     }
     form.get(formIndex).submit();
   }
