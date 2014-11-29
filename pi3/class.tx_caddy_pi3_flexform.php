@@ -167,7 +167,7 @@ class tx_caddy_pi3_flexform
       // RETURN : Don't prompt to DRS
 
       // RETURN : DRS is disabled
-    if( ! $this->pObj->b_drs_flexform )
+    if( ! $this->pObj->drs->drs_flexform )
     {
       return $value;
     }

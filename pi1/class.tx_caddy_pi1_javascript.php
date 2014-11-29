@@ -224,7 +224,7 @@ class tx_caddy_pi1_javascript
       // RETURN file is loaded
     if( isset ( $GLOBALS['TSFE']->additionalHeaderData[ $this->extKey . '_' . $name ] ) )
     {
-      if( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
+      if( $this->pObj->drs->drs_flexform || $this->pObj->drs->drs_javascript )
       {
         $prompt = 'file isn\'t added again: ' . $path;
         t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
@@ -257,7 +257,7 @@ class tx_caddy_pi1_javascript
     $GLOBALS['TSFE']->additionalHeaderData[ $this->pObj->extKey.'_'.$name ] = $css;
 
       // DRS
-    if ($this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript)
+    if ($this->pObj->drs->drs_flexform || $this->pObj->drs->drs_javascript)
     {
       $prompt = 'file is included: ' . $path;
       t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
