@@ -135,7 +135,7 @@ No data? <a href="https://developers.paymill.com/en/reference/testing/" target="
       ]]></label>
     </languageKey>
     <languageKey index="de" type="array">
-      <label index="50000">Generelles Problem. Möglierweise sind Ihre Kontodaten nicht richtig.</label>
+      <label index="50000">Generelles Problem. Möglicherweise sind Ihre Kontodaten nicht richtig.</label>
       <label index="cashinadvance">Vorkasse</label>
       <label index="cashinadvance-submit">Vorkasse prüfen und auswählen</label>
       <label index="cashondelivery">Nachnahme</label>
