@@ -724,25 +724,26 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     $errorMessage = $exception->getErrorMessage();
 
     $prompts = array();
+    $strResponseCode = $this->pi_getLL( $responseCode );
 
-    if ( !empty($this->pi_getLL( $responseCode )) )
+    if ( !empty( $strResponseCode ) )
     {
       // secondary (grey), [empty!] (blue), success (green), error (red)
-      $prompts[0] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $this->pi_getLL( $responseCode );
+      $prompts[ 0 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $strResponseCode;
     }
     else
     {
-      $prompts[0] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|Respsonse code: ' . $responseCode;
+      $prompts[ 0 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|Respsonse code: ' . $responseCode;
     }
 
-    if ( !empty($errorMessage ) )
+    if ( !empty( $errorMessage ) )
     {
-      $prompts[1] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $errorMessage;
+      $prompts[ 1 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $errorMessage;
     }
 
     if ( $statusCode > 0 )
     {
-      $prompts[2] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|Status code' . $statusCode;
+      $prompts[ 2 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|Status code' . $statusCode;
     }
 
     $arrReturn = array(
