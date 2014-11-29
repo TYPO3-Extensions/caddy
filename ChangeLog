@@ -4,10 +4,11 @@ TODO
 
 6.0.3
   14-11-29
+  Improvement
+  * #i0063: foundation is supported by the browser and not any longer by t3foundation
+  * #i0061: DRS
   Bugfix
   * #i0062: Paymill transaction (conflict with #i0058)
-  Improvement
-  * #i0061: DRS
 
 6.0.2
   14-11-02

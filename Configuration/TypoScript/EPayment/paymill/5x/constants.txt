@@ -72,7 +72,7 @@ plugin.caddy {
   e-payment.powermail.files.sponsors = Click me!
 
   # cat=caddy - e-payment - powermail paths//101;           type=string;  label= Path to foundation
-  e-payment.powermail.paths.foundation = typo3conf/ext/t3foundation/res/foundation-4.3.2/
+  e-payment.powermail.paths.foundation = typo3conf/ext/browser/res/foundation-5.4.5/
   # cat=caddy - e-payment - powermail paths/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   e-payment.powermail.paths.externalLinks = Click me!
   # cat=caddy - e-payment - powermail paths/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
