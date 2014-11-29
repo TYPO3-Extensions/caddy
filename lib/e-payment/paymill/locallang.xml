@@ -118,7 +118,7 @@ No data? <a href="https://developers.paymill.com/en/reference/testing/" target="
           go back to your order
         </li>
         <li>
-          reload the form with your mouse or the key <F5> or the keys <CTRL> + <R>
+          reload the form with your mouse or the key &lt;F5&gt; or the keys &lt;CTRL&gt; + &lt;R&gt;
         </li>
         <li>
           Check your payment data
@@ -207,7 +207,7 @@ Bezahle mit den vorgeschlagenen Daten! Keine Daten? <a href="https://developers.
           Gehen Sie zurück zu Ihrer Bestellung.
         </li>
         <li>
-          Laden Sie das Formular neu mit der Maus oder der Taste <F5> oder den Tasten <STRG> + <R>
+          Laden Sie das Formular neu mit der Maus oder der Taste &lt;F5&gt; oder den Tasten &lt;STRG&gt; + &lt;R&gt;
         </li>
         <li>
           Prüfen Sie, ob Sie bei der Zahlmethode die richtigen Daten angegeben haben.
