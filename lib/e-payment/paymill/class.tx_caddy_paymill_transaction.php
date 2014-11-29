@@ -181,8 +181,12 @@ class tx_caddy_paymill_transaction extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj = $this;
-    $this->drs->row = $this->cObj->data;
+    // #i0061, 141129, dwildt, 2-/3+
+    //$this->drs->pObj = $this;
+    //$this->drs->row = $this->cObj->data;
+    $this->drs->setExtConf( $this->arr_extConf );
+    $this->drs->setFlexform( $this->flexform );
+    $this->drs->setRow( $this->cObj->data );
   }
 
   /**
@@ -404,6 +408,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     }
     $this->drs = $pObj->drs;
   }
+
 //
 //  /**
 //   * setTransactionPaymentId( )  :

@@ -125,7 +125,7 @@ class tx_caddy_calcsum
   * @return	void
   * @access private
   * @internal   #54628
-  * @version    4.0.3
+  * @version    6.0.1
   * @since      4.0.3
   */
   private function initInstances( )
@@ -141,8 +141,12 @@ class tx_caddy_calcsum
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj        = $this;
-    $this->drs->row         = $this->cObj->data;
+    // #i0061, 141129, dwildt, 2-/3+
+    //$this->drs->pObj = $this;
+    //$this->drs->row = $this->cObj->data;
+    $this->drs->setExtConf( $this->arr_extConf );
+    $this->drs->setFlexform( $this->flexform );
+    $this->drs->setRow( $this->cObj->data );
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session          = t3lib_div::makeInstance( 'tx_caddy_session' );

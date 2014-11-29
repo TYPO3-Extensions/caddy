@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.3
+  14-11-29
+  Improvement
+  * #i0061: DRS
+
 6.0.2
   14-11-02
   Improvement

@@ -129,12 +129,6 @@ class tx_caddy_pi1 extends tslib_pibase
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
   public $arr_extConf = null;
   private $accessByIP = null;
-  private $product = array();
-  private $newProduct = array();
-  private $markerArray = array();
-  private $outerMarkerArray = array();
-  public $gpvar = array();
-  public $pid = null;
   private $caddy = null;
   private $clean = null;
   public $cObj = null;
@@ -721,10 +715,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initFlexform()
   {
-    $this->flexform->drs = $this->drs;
-    $this->flexform->pi_getFFvalue = $this->pi_getFFvalue;
-    $this->flexform->row = $this->row;
-    $this->flexform->flexform();
+    $this->flexform->main();
   }
 
   /**
@@ -892,8 +883,12 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj = $this;
-    $this->drs->row = $this->cObj->data;
+    // #i0061, 141129, dwildt, 2-/3+
+    //$this->drs->pObj = $this;
+    //$this->drs->row = $this->cObj->data;
+    $this->drs->setExtConf( $this->arr_extConf );
+    $this->drs->setFlexform( $this->flexform );
+    $this->drs->setRow( $this->cObj->data );
 
     // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );

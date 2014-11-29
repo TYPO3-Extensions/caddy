@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
@@ -21,7 +21,7 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 // #61634, 140916, dwildt, 1-
 //require_once(PATH_tslib . 'class.tslib_pibase.php');
@@ -114,51 +114,44 @@ if ( $version < 6002000 )
  */
 class tx_caddy_paymill_paymentMethods extends tslib_pibase
 {
-    public $extKey        = 'caddy';
-    public $prefixId      = 'tx_caddy_paymill_paymentMethods';
-    public $scriptRelPath = 'lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php';
 
-    public  $conf           = null;       // array    : current TypoScript configuration
-    private $content        = null;       // string   : content. Will returned by main( )
-    public  $drs            = null;       // object   : instance of drs class.
-    private $dynamicMarkers = null;       // object   : instance of dynamicMarkers class.
-    public  $local_cObj     = null;
-    private $paymentId      = null;       // integer  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-    private $pObj           = null;       // object   : parent object
-    private $pid            = null;       // integer  : pid of the current page
-    private $prompts        = array( );   // array    : prompts
+  public $extKey = 'caddy';
+  public $prefixId = 'tx_caddy_paymill_paymentMethods';
+  public $scriptRelPath = 'lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php';
+  public $conf = null;       // array    : current TypoScript configuration
+  private $content = null;       // string   : content. Will returned by main( )
+  public $drs = null;       // object   : instance of drs class.
+  private $dynamicMarkers = null;       // object   : instance of dynamicMarkers class.
+  public $local_cObj = null;
+  private $paymentId = null;       // integer  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+  private $pObj = null;       // object   : parent object
+  private $pid = null;       // integer  : pid of the current page
+  private $prompts = array();   // array    : prompts
+  private $paymillClientResponse = null;       // object   : Paymill payment response object
+  private $paymillPaymentResponse = null;       // object   : Paymill payment response object
+  private $transactionAmount = '0.00';
+  private $transactionCurrency = 'EUR';
+  private $transactionDescription = 'Transaction by TYPO3 Caddy';
+  private $transactionClientEmail = 'default@typo3-caddy.de';
+  private $transactionClientName = 'TYPO3 Caddy';
 
-    private $paymillClientResponse  = null;       // object   : Paymill payment response object
-    private $paymillPaymentResponse = null;       // object   : Paymill payment response object
+  /*   * *********************************************
+   *
+   * Main
+   *
+   * ******************************************** */
 
-    private $transactionAmount      = '0.00';
-    private $transactionCurrency    = 'EUR';
-    private $transactionDescription = 'Transaction by TYPO3 Caddy';
-    private $transactionClientEmail = 'default@typo3-caddy.de';
-    private $transactionClientName  = 'TYPO3 Caddy';
-
-
-
-
-
-
-  /***********************************************
-  *
-  * Main
-  *
-  **********************************************/
-
- /**
-  * main( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @param	integer		$pid        : ...
-  * @return	array		$payment    : true, if payment was successful
-  * @access public
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  public function main( $paymentId=null, $pid=null )
+  /**
+   * main( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @param	integer		$pid        : ...
+   * @return	array		$payment    : true, if payment was successful
+   * @access public
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  public function main( $paymentId = null, $pid = null )
   {
 //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 //var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
@@ -173,19 +166,19 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     $this->init( $paymentId, $pid );
 
-    $this->requirementsDie( );
+    $this->requirementsDie();
 
     $this->content = $this->template( '###CONTENT###' );
     $this->content = $this->templateSectionRemove( $this->content );
     $this->content = $this->templateSectionActive( $this->content );
 
-    $this->prompts = $this->paymillLib->paymillInit( );
-    if( $this->prompts )
+    $this->prompts = $this->paymillLib->paymillInit();
+    if ( $this->prompts )
     {
 //var_dump( __METHOD__, __LINE__, $this->prompts );
-      $this->sessionDataRemove( );
-      $this->serverPrompt( );
-      $this->templateMode( );
+      $this->sessionDataRemove();
+      $this->serverPrompt();
+      $this->templateMode();
       $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
       $this->content = $this->dynamicMarkers->main( $this->content, $this );
 
@@ -198,12 +191,12 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
       return $arrReturn;
     }
 
-    $this->templateMode( );
+    $this->templateMode();
 
 
-    if( ! $this->requirements( ) )
+    if ( !$this->requirements() )
     {
-      $this->sessionDataRemove( );
+      $this->sessionDataRemove();
       $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
       $this->content = $this->dynamicMarkers->main( $this->content, $this );
       $arrReturn = array(
@@ -215,12 +208,12 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
       return $arrReturn;
     }
 
-      // Insert payment data into content
-    $payment = $this->paymentMethods( );
-      // Insert prompt into content
-    $this->serverPrompt( );
-      // Insert
-    $this->session( );
+    // Insert payment data into content
+    $payment = $this->paymentMethods();
+    // Insert prompt into content
+    $this->serverPrompt();
+    // Insert
+    $this->session();
 
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $this->content = $this->dynamicMarkers->main( $this->content, $this );
@@ -235,87 +228,88 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return $arrReturn;
   }
 
+  /*   * *********************************************
+   *
+   * Init
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Init
-  *
-  **********************************************/
-
- /**
-  * init( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @param	[type]		$pid: ...
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function init( $paymentId=null, $pid=null )
+  /**
+   * init( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @param	[type]		$pid: ...
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function init( $paymentId = null, $pid = null )
   {
     $this->initVars( $paymentId, $pid );
-    $this->initInstances( );
-    $this->initDrs( );
+    $this->initInstances();
+    $this->initDrs();
   }
 
-
- /**
-  * initDrs( )
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function initDrs( )
+  /**
+   * initDrs( )
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function initDrs()
   {
-    $this->drs->init( );
+    $this->drs->init();
   }
 
- /**
-  * initInstances( ):
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function initInstances( )
+  /**
+   * initInstances( ):
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function initInstances()
   {
-    $this->initInstancesDrs( );
-    $this->initInstancesDynamicMarkers( );
-    $this->initInstancesPaymillLib( );
+    $this->initInstancesDrs();
+    $this->initInstancesDynamicMarkers();
+    $this->initInstancesPaymillLib();
   }
 
- /**
-  * initInstancesDrs( ):
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function initInstancesDrs( )
+  /**
+   * initInstancesDrs( ):
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function initInstancesDrs()
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    $this->drs->pObj        = $this;
-    $this->drs->row         = $this->cObj->data;
+    $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    // #i0061, 141129, dwildt, 2-/3+
+    //$this->drs->pObj = $this;
+    //$this->drs->row = $this->cObj->data;
+    $this->drs->setExtConf( $this->arr_extConf );
+    $this->drs->setFlexform( $this->flexform );
+    $this->drs->setRow( $this->cObj->data );
   }
 
- /**
-  * initInstancesDynamicMarkers( ):
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function initInstancesDynamicMarkers( )
+  /**
+   * initInstancesDynamicMarkers( ):
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function initInstancesDynamicMarkers()
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
@@ -324,43 +318,43 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
   }
 
- /**
-  * initInstancesPaymillLib( ) :  Requires and initiate the class of the current e-payment provider.
-  *                               If no e-payment provider is enabled, nothing will happen.
-  *
-  * @return	void
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function initInstancesPaymillLib( )
+  /**
+   * initInstancesPaymillLib( ) :  Requires and initiate the class of the current e-payment provider.
+   *                               If no e-payment provider is enabled, nothing will happen.
+   *
+   * @return	void
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function initInstancesPaymillLib()
   {
-    $path2paymillLib  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/paymill/class.tx_caddy_paymill_lib.php';
+    $path2paymillLib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/paymill/class.tx_caddy_paymill_lib.php';
 
-      // Initiate the provider class
+    // Initiate the provider class
     require_once( $path2paymillLib );
     $this->paymillLib = t3lib_div::makeInstance( 'tx_caddy_paymill_lib' );
-    $this->paymillLib->setParentObject( $this               );
-    $this->paymillLib->setPiVars(       $this->pObj->piVars );
-    $this->paymillLib->setPid(          $this->pid    );
+    $this->paymillLib->setParentObject( $this );
+    $this->paymillLib->setPiVars( $this->pObj->piVars );
+    $this->paymillLib->setPid( $this->pid );
   }
 
- /**
-  * initVars( )
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @param	[type]		$pid: ...
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
+  /**
+   * initVars( )
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @param	[type]		$pid: ...
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
   private function initVars( $paymentId, $pid )
   {
-    $this->conf         = $this->pObj->conf;
-    $this->local_cObj   = $GLOBALS['TSFE']->cObj;
-    $this->paymentId    = $paymentId;
+    $this->conf = $this->pObj->conf;
+    $this->local_cObj = $GLOBALS[ 'TSFE' ]->cObj;
+    $this->paymentId = $paymentId;
 
 
 
@@ -370,68 +364,66 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     //$this->pi_initPIflexForm( );
   }
 
-/**
- * initPid( )  : Returns the globlas tsfe id, if the given pid is null
- *
- * @param	integer		$pid  : given pid (may be null)
- * @return	integer		$pid  : id of the page with the caddy plugin
- * @internal    #54634
- * @version     4.0.3
- * @since       4.0.6
- */
-  private function initVarsPid( $pid=null )
+  /**
+   * initPid( )  : Returns the globlas tsfe id, if the given pid is null
+   *
+   * @param	integer		$pid  : given pid (may be null)
+   * @return	integer		$pid  : id of the page with the caddy plugin
+   * @internal    #54634
+   * @version     4.0.3
+   * @since       4.0.6
+   */
+  private function initVarsPid( $pid = null )
   {
-    if( $pid !== null )
+    if ( $pid !== null )
     {
       $this->pid = $pid;
       return;
     }
 
-    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    if ( ( int ) $this->conf[ 'userFunc.' ][ 'caddyPid' ] )
     {
-      $pid = ( int ) $this->conf['userFunc.']['caddyPid'];
+      $pid = ( int ) $this->conf[ 'userFunc.' ][ 'caddyPid' ];
     }
 
-    if( $pid === null || $pid === '' )
+    if ( $pid === null || $pid === '' )
     {
-      if( $this->drs->drsError || $this->drsUserfunc )
+      if ( $this->drs->drsError || $this->drsUserfunc )
       {
         $prompt = 'Given pid of the Caddy is empty!';
         t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
       }
-      $pid = $GLOBALS["TSFE"]->id;
+      $pid = $GLOBALS[ "TSFE" ]->id;
     }
 
     $this->pid = $pid;
   }
 
+  /*   * *********************************************
+   *
+   * Payment Methods
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Payment Methods
-  *
-  **********************************************/
-
- /**
-  * paymentMethods( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	boolean		$paymill  : true, if paymill was successful
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentMethods( )
+  /**
+   * paymentMethods( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	boolean		$paymill  : true, if paymill was successful
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentMethods()
   {
-    $paymill            = false;
-    $followTheWorkflow  = false;
+    $paymill = false;
+    $followTheWorkflow = false;
 
-    switch( true )
+    switch ( true )
     {
-      case( $this->paymillLib->getPaymillToken( ) ):
-      case( $this->paymentWiPowermail( ) ):
-      case( $this->paymentWoEpayment( ) ):
+      case( $this->paymillLib->getPaymillToken() ):
+      case( $this->paymentWiPowermail() ):
+      case( $this->paymentWoEpayment() ):
 //var_dump( __METHOD__, __LINE__ );
         $followTheWorkflow = true;
         break;
@@ -440,7 +432,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
         $followTheWorkflow = false;
         break;
     }
-    if( ! $followTheWorkflow )
+    if ( !$followTheWorkflow )
     {
 //var_dump( __METHOD__, __LINE__ );
       $paymill = false;
@@ -456,31 +448,31 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 //      return $paymill;
 //    }
 
-    switch( $this->paymentId )
+    switch ( $this->paymentId )
     {
       case( 1 ):
-        $this->paymentMethodsCashinadvance( );
+        $this->paymentMethodsCashinadvance();
         break;
       case( 2 ):
-        $this->paymentMethodsInvoice( );
+        $this->paymentMethodsInvoice();
         break;
       case( 3 ):
-        $this->paymentMethodsCashondelivery( );
+        $this->paymentMethodsCashondelivery();
         break;
       case( 4 ):
-        $this->paymentMethodsCashonpickup( );
+        $this->paymentMethodsCashonpickup();
         break;
       case( 11 ):
-        $this->paymentMethodsCreditcard( );
+        $this->paymentMethodsCreditcard();
         break;
       case( 12 ):
-        $this->paymentMethodsElv( );
+        $this->paymentMethodsElv();
         break;
       case( 13 ):
-        $this->paymentMethodsElvIban( );
+        $this->paymentMethodsElvIban();
         break;
       default:
-        $this->paymentMethodsUndefined( );
+        $this->paymentMethodsUndefined();
         break;
     }
 
@@ -489,261 +481,256 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return $paymill;
   }
 
- /**
-  * paymentMethodsCashinadvance( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.8
-  * @since       4.0.8
-  */
-  private function paymentMethodsCashinadvance( )
+  /**
+   * paymentMethodsCashinadvance( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.8
+   * @since       4.0.8
+   */
+  private function paymentMethodsCashinadvance()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashinadvance-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashinadvance' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-cashinadvance' );
 
     //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
     //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsCashondelivery( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.8
-  * @since       4.0.8
-  */
-  private function paymentMethodsCashondelivery( )
+  /**
+   * paymentMethodsCashondelivery( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.8
+   * @since       4.0.8
+   */
+  private function paymentMethodsCashondelivery()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashondelivery-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashondelivery' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-cashondelivery' );
 
     //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
     //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsCashonpickup( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.8
-  * @since       4.0.8
-  */
-  private function paymentMethodsCashonpickup( )
+  /**
+   * paymentMethodsCashonpickup( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.8
+   * @since       4.0.8
+   */
+  private function paymentMethodsCashonpickup()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-cashonpickup-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-cashonpickup' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-cashonpickup' );
 
     //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
     //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
-/**
-  * paymentMethodsCreditcard( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentMethodsCreditcard( )
+  /**
+   * paymentMethodsCreditcard( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentMethodsCreditcard()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-creditcard-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-creditcard' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-creditcard' );
 //    var_dump( __FILE__, __LINE__,
 //            $this->paymillLib->paymillPaymentResponse
 ////            $this->paymillLib->paymillPaymentResponse->getCode( ),
 ////            $this->paymillLib->paymillPaymentResponse->getAccount( ),
 ////            $this->paymillLib->paymillPaymentResponse->getHolder( )
 //            );
-    $expiry = $this->paymillLib->getCardMonth( ) . '/' . $this->paymillLib->getCardYear( );
-    $marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
-    $marker['###VALUE_CREDITCARD-EXPIRY###']  = $expiry;
-    $marker['###VALUE_CREDITCARD-HOLDER###']  = $this->paymillLib->getCardHolder( );
-    $marker['###VALUE_CREDITCARD-CVC###']     = '****';
+    $expiry = $this->paymillLib->getCardMonth() . '/' . $this->paymillLib->getCardYear();
+    $marker[ '###VALUE_CREDITCARD-NUMBER###' ] = '**** **** **** ' . $this->paymillLib->getCardNumber();
+    $marker[ '###VALUE_CREDITCARD-EXPIRY###' ] = $expiry;
+    $marker[ '###VALUE_CREDITCARD-HOLDER###' ] = $this->paymillLib->getCardHolder();
+    $marker[ '###VALUE_CREDITCARD-CVC###' ] = '****';
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsElv( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentMethodsElv( )
+  /**
+   * paymentMethodsElv( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentMethodsElv()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-elv-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-elv' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-elv' );
 
-    $marker['###VALUE_ELV-ACCOUNT###']  = $this->paymillLib->getBankAccount( );
-    $marker['###VALUE_ELV-BANKCODE###'] = $this->paymillLib->getBankCode( );
-    $marker['###VALUE_ELV-HOLDER###']   = $this->paymillLib->getBankHolder( );
+    $marker[ '###VALUE_ELV-ACCOUNT###' ] = $this->paymillLib->getBankAccount();
+    $marker[ '###VALUE_ELV-BANKCODE###' ] = $this->paymillLib->getBankCode();
+    $marker[ '###VALUE_ELV-HOLDER###' ] = $this->paymillLib->getBankHolder();
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsElvIban( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentMethodsElvIban( )
+  /**
+   * paymentMethodsElvIban( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentMethodsElvIban()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-elv-iban-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-elv-iban' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-elv-iban' );
 
     //$iban = '****' . $this->paymillLib->paymillPaymentResponse->getCode( ) . $this->paymillLib->paymillPaymentResponse->getAccount( );
-    $iban = '****' . $this->paymillLib->getBankCode( ) . $this->paymillLib->getBankAccount( );
-    $marker['###VALUE_ELV-IBAN###']         = $iban;
-    $marker['###VALUE_ELV-BIC###']          = '**********';
-    $marker['###VALUE_ELV-IBAN-HOLDER###']  = $this->paymillLib->getBankHolder( );
+    $iban = '****' . $this->paymillLib->getBankCode() . $this->paymillLib->getBankAccount();
+    $marker[ '###VALUE_ELV-IBAN###' ] = $iban;
+    $marker[ '###VALUE_ELV-BIC###' ] = '**********';
+    $marker[ '###VALUE_ELV-IBAN-HOLDER###' ] = $this->paymillLib->getBankHolder();
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsInvoice( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.8
-  * @since       4.0.8
-  */
-  private function paymentMethodsInvoice( )
+  /**
+   * paymentMethodsInvoice( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.8
+   * @since       4.0.8
+   */
+  private function paymentMethodsInvoice()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'prompt-invoice-ok' );
-    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|'   . $this->pi_getLL( 'prompt-paywith-invoice' );
+    $this->prompts[] = 'SERVER_PROMPT_WOCLOSE_SUBPART|success|' . $this->pi_getLL( 'prompt-paywith-invoice' );
 
     //$marker['###VALUE_CREDITCARD-NUMBER###']  = '**** **** **** ' . $this->paymillLib->getCardNumber( );
     //$this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * paymentMethodsUndefined( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentMethodsUndefined( )
+  /**
+   * paymentMethodsUndefined( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentMethodsUndefined()
   {
-      // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
+    // notice (grey) = secondary, info (blue) = [empty!], ok (green) = success, error (red) = alert
     $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|alert|' . $this->pi_getLL( 'prompt-paywith-undefined' );
   }
 
- /**
-  * paymentWiPowermail( ):
-  *
-  * @return	boolean
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function paymentWiPowermail( )
+  /**
+   * paymentWiPowermail( ):
+   *
+   * @return	boolean
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function paymentWiPowermail()
   {
-    return $this->powermailInAction( );
+    return $this->powermailInAction();
   }
 
- /**
-  * paymentWoEpayment( ):
-  *
-  * @return	boolean
-  * @access private
-  * @internal #i0050
-  * @version     4.0.9
-  * @since       4.0.9
-  */
-  private function paymentWoEpayment( )
+  /**
+   * paymentWoEpayment( ):
+   *
+   * @return	boolean
+   * @access private
+   * @internal #i0050
+   * @version     4.0.9
+   * @since       4.0.9
+   */
+  private function paymentWoEpayment()
   {
-    return $this->requirementsWoEpayment( );
+    return $this->requirementsWoEpayment();
   }
 
+  /*   * *********************************************
+   *
+   * Powermail
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Powermail
-  *
-  **********************************************/
-
- /**
-  * powermailInAction( ):
-  *
-  * @return	boolean
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function powermailInAction( )
+  /**
+   * powermailInAction( ):
+   *
+   * @return	boolean
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function powermailInAction()
   {
-    $GP = t3lib_div::_GET( )
-        + t3lib_div::_POST( )
-        ;
+    $GP = t3lib_div::_GET() + t3lib_div::_POST()
+    ;
 
-    switch( true )
+    switch ( true )
     {
-      case( $GP['tx_powermail_pi1']['action'] == 'confirmation' ):
-      case( $GP['tx_powermail_pi1']['action'] == 'create' ):
-      case( $GP['tx_powermail_pi1']['action'] == 'form' ):
+      case( $GP[ 'tx_powermail_pi1' ][ 'action' ] == 'confirmation' ):
+      case( $GP[ 'tx_powermail_pi1' ][ 'action' ] == 'create' ):
+      case( $GP[ 'tx_powermail_pi1' ][ 'action' ] == 'form' ):
         return true;
-        //break;
+      //break;
       default:
         return false;
-        //break;
+      //break;
     }
 
     unset( $GP );
   }
 
+  /*   * *********************************************
+   *
+   * Requirements
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Requirements
-  *
-  **********************************************/
-
- /**
-  * requirements( ):
-  *
-  * @return	boolean
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function requirements( )
+  /**
+   * requirements( ):
+   *
+   * @return	boolean
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function requirements()
   {
     $requirementsMatched = false;
 
-    switch( true )
+    switch ( true )
     {
-      case( $this->requirementsWoEpayment( ) ):
-      case( $this->requirementsToken( ) ):
-      case( $this->requirementsWiPowermail( ) ):
+      case( $this->requirementsWoEpayment() ):
+      case( $this->requirementsToken() ):
+      case( $this->requirementsWiPowermail() ):
         $requirementsMatched = true;
         break;
       default:
@@ -754,35 +741,35 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return $requirementsMatched;
   }
 
- /**
-  * requirementsDie( ) :
-  *
-  * @return	void
-  * @access public
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function requirementsDie( )
+  /**
+   * requirementsDie( ) :
+   *
+   * @return	void
+   * @access public
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function requirementsDie()
   {
-    if( ! is_object( $this->pObj ) )
+    if ( !is_object( $this->pObj ) )
     {
       $prompt = 'ERROR: no parent object!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
+              'Sorry for the trouble.<br />' . PHP_EOL .
+              'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
     }
   }
 
- /**
-  * requirementsToken( ): Returns false, if token isn't part of the URL params
-  *
-  * @return	boolen
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function requirementsToken( )
+  /**
+   * requirementsToken( ): Returns false, if token isn't part of the URL params
+   *
+   * @return	boolen
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function requirementsToken()
   {
 //      // Token is proper
 //    if( $this->paymillLib->paymillTokenByPivar( ) )
@@ -796,7 +783,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 //      return false;
 //    }
 
-    if( $this->paymillLib->getPaymillToken( ) )
+    if ( $this->paymillLib->getPaymillToken() )
     {
       return true;
     }
@@ -808,21 +795,21 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return false;
   }
 
- /**
-  * requirementsWoEpayment( ): Returns true, if current payment method isn't an e-payment method
-  *
-  * @return	boolen
-  * @access private
-  * @internal #i0050
-  * @version     4.0.9
-  * @since       4.0.9
-  */
-  private function requirementsWoEpayment( )
+  /**
+   * requirementsWoEpayment( ): Returns true, if current payment method isn't an e-payment method
+   *
+   * @return	boolen
+   * @access private
+   * @internal #i0050
+   * @version     4.0.9
+   * @since       4.0.9
+   */
+  private function requirementsWoEpayment()
   {
-    $conf           = $this->pObj->conf;
-    $isEpayment = $conf['api.']['options.']['payment.']['options.'][$this->paymentId . '.']['e-payment'];
+    $conf = $this->pObj->conf;
+    $isEpayment = $conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ][ $this->paymentId . '.' ][ 'e-payment' ];
 
-    if( ! $isEpayment )
+    if ( !$isEpayment )
     {
       return true;
     }
@@ -830,181 +817,177 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     return false;
   }
 
- /**
-  * requirementsWiPowermail( ) :
-  *
-  * @return	boolean
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function requirementsWiPowermail( )
+  /**
+   * requirementsWiPowermail( ) :
+   *
+   * @return	boolean
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function requirementsWiPowermail()
   {
-    return $this->powermailInAction( );
+    return $this->powermailInAction();
   }
 
+  /*   * *********************************************
+   *
+   * Prompts
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Prompts
-  *
-  **********************************************/
-
- /**
-  * serverPrompt( ):  Prompts the items of $prompts below the submit buttons.
-  *                   An item has the format: marker|type|prompt
-  *                   * marker  :
-  *                               * SERVER_PROMPT_WICLOSE_SUBPART
-  *                               * SERVER_PROMPT_WOCLOSE_SUBPART
-  *                   * type    :
-  *                               * secondary (grey)
-  *                               * [empty!]  (blue)
-  *                               * success   (green)
-  *                               * error     (red)
-  *                   Example: SERVER_PROMPT_WOCLOSE_SUBPART|alert|message
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function serverPrompt( )
+  /**
+   * serverPrompt( ):  Prompts the items of $prompts below the submit buttons.
+   *                   An item has the format: marker|type|prompt
+   *                   * marker  :
+   *                               * SERVER_PROMPT_WICLOSE_SUBPART
+   *                               * SERVER_PROMPT_WOCLOSE_SUBPART
+   *                   * type    :
+   *                               * secondary (grey)
+   *                               * [empty!]  (blue)
+   *                               * success   (green)
+   *                               * error     (red)
+   *                   Example: SERVER_PROMPT_WOCLOSE_SUBPART|alert|message
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function serverPrompt()
   {
 
-    $marker         = array( );
-    $server_prompt  = null;
+    $marker = array();
+    $server_prompt = null;
 
-    if( empty( $this->prompts ) )
+    if ( empty( $this->prompts ) )
     {
       return;
     }
 
-    foreach( $this->prompts as $prompt )
+    foreach ( $this->prompts as $prompt )
     {
-      list( $subpartMarker, $marker['###TYPE###'], $marker['###PROMPT###'] ) = explode( '|', $prompt );
+      list( $subpartMarker, $marker[ '###TYPE###' ], $marker[ '###PROMPT###' ] ) = explode( '|', $prompt );
       $subpart = $this->template( '###' . $subpartMarker . '###' );
       $subpart = $this->pObj->cObj->substituteMarkerArray( $subpart, $marker );
-      $server_prompt  = $server_prompt
-                      . $subpart;
+      $server_prompt = $server_prompt
+              . $subpart;
     }
 
     unset( $marker );
-    $marker['###SERVER_PROMPT###'] = $server_prompt;
+    $marker[ '###SERVER_PROMPT###' ] = $server_prompt;
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
+  /*   * *********************************************
+   *
+   * Session
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Session
-  *
-  **********************************************/
-
- /**
-  * session( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function session( )
+  /**
+   * session( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function session()
   {
 
-    switch( true )
+    switch ( true )
     {
-      case( $this->requirementsWoEpayment( ) ):
+      case( $this->requirementsWoEpayment() ):
 //var_dump( __METHOD__, __LINE__ );
-        $this->sessionDataAddWoEpayment( );
+        $this->sessionDataAddWoEpayment();
         break;
-      case( $this->paymillLib->getPaymillToken( ) ):
+      case( $this->paymillLib->getPaymillToken() ):
 //var_dump( __METHOD__, __LINE__ );
-        $this->sessionDataAddWiEpayment( );
+        $this->sessionDataAddWiEpayment();
         break;
       default:
-        $this->sessionDataRemove( );
+        $this->sessionDataRemove();
         break;
     }
   }
 
- /**
-  * sessionDataAddWiEpayment( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function sessionDataAddWiEpayment( )
+  /**
+   * sessionDataAddWiEpayment( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function sessionDataAddWiEpayment()
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
 
     // #i0050, 140310, dwildt, 1-
     //unset( $sesArray['e-payment']['paymill'] );
     // #i0050, 140310, dwildt, 1+
-    unset( $sesArray['e-payment'] );
+    unset( $sesArray[ 'e-payment' ] );
 
-    $sesArray['e-payment']['paymill']['token']          = $this->paymillLib->getPaymillToken( );
-    $sesArray['e-payment']['paymill']['client']['id']   = $this->paymillLib->getPaymillClientId( );
-    $sesArray['e-payment']['paymill']['payment']['id']  = $this->paymillLib->getPaymillPaymentId( );
+    $sesArray[ 'e-payment' ][ 'paymill' ][ 'token' ] = $this->paymillLib->getPaymillToken();
+    $sesArray[ 'e-payment' ][ 'paymill' ][ 'client' ][ 'id' ] = $this->paymillLib->getPaymillClientId();
+    $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ] = $this->paymillLib->getPaymillPaymentId();
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
-      // save session
-    $GLOBALS['TSFE']->storeSessionData( );
+    $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    // save session
+    $GLOBALS[ 'TSFE' ]->storeSessionData();
 //    var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
   }
 
- /**
-  * sessionDataAddWoEpayment( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @internal #i0050
-  * @access private
-  * @version     4.0.9
-  * @since       4.0.9
-  */
-  private function sessionDataAddWoEpayment( )
+  /**
+   * sessionDataAddWoEpayment( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @internal #i0050
+   * @access private
+   * @version     4.0.9
+   * @since       4.0.9
+   */
+  private function sessionDataAddWoEpayment()
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
 
     // #i0050, 140310, dwildt, 1-
     //unset( $sesArray['e-payment']['paymill'] );
     // #i0050, 140310, dwildt, 1+
-    unset( $sesArray['e-payment'] );
+    unset( $sesArray[ 'e-payment' ] );
 
-    $sesArray['e-payment']['woEpayment'] = true;
+    $sesArray[ 'e-payment' ][ 'woEpayment' ] = true;
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
-      // save session
-    $GLOBALS['TSFE']->storeSessionData( );
+    $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    // save session
+    $GLOBALS[ 'TSFE' ]->storeSessionData();
 //    var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
   }
 
- /**
-  * sessionDataRemove( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  private function sessionDataRemove( $force=false )
+  /**
+   * sessionDataRemove( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  private function sessionDataRemove( $force = false )
   {
     $sessionDataRemove = false;
 
-    switch( true )
+    switch ( true )
     {
       case( $force ):
         $sessionDataRemove = true;
         break;
-      case( $this->requirementsToken( ) ):
-      case( $this->requirementsWiPowermail( ) ):
+      case( $this->requirementsToken() ):
+      case( $this->requirementsWiPowermail() ):
         $sessionDataRemove = false;
         break;
       default:
@@ -1014,58 +997,55 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     unset( $force );
 
-    if( ! $sessionDataRemove )
+    if ( !$sessionDataRemove )
     {
       return;
     }
 //$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
 //var_dump( __METHOD__, __LINE__, $prompt);
 
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-      // :TODO: Recalculte option costs (option costs without payment)
-      // Remove paymill data
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    // :TODO: Recalculte option costs (option costs without payment)
+    // Remove paymill data
     // #i0050, 140310, dwildt, 1-
     //unset( $sesArray['e-payment']['paymill'] );
     // #i0050, 140310, dwildt, 1+
-    unset( $sesArray['e-payment'] );
-      // Remove payment id
-    unset( $sesArray['payment'] );
-      // Remove options payment
-    unset( $sesArray['options']['payment'] );
+    unset( $sesArray[ 'e-payment' ] );
+    // Remove payment id
+    unset( $sesArray[ 'payment' ] );
+    // Remove options payment
+    unset( $sesArray[ 'options' ][ 'payment' ] );
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
-      // save session
-    $GLOBALS['TSFE']->storeSessionData( );
+    $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    // save session
+    $GLOBALS[ 'TSFE' ]->storeSessionData();
 //var_dump( __FILE__, __LINE__, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
   }
 
+  /*   * *********************************************
+   *
+   * Setting methods
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Setting methods
-  *
-  **********************************************/
-
- /**
-  * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
-  *
-  * @param	[type]		$$pObj: ...
-  * @return	void
-  * @access public
-  * @version    2.0.0
-  * @since      2.0.0
-  */
+  /**
+   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
+   *
+   * @param	[type]		$$pObj: ...
+   * @return	void
+   * @access public
+   * @version    2.0.0
+   * @since      2.0.0
+   */
   public function setParentObject( $pObj )
   {
-    if( ! is_object( $pObj ) )
+    if ( !is_object( $pObj ) )
     {
       $prompt = 'ERROR: no parent object!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
+              'Sorry for the trouble.<br />' . PHP_EOL .
+              'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-
     }
     $this->pObj = $pObj;
 
@@ -1074,45 +1054,41 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 //        __METHOD__ . ' (' . __LINE__ . ')';
 //echo $prompt;
 
-    if( ! is_object( $pObj->drs ) )
+    if ( !is_object( $pObj->drs ) )
     {
       $prompt = 'ERROR: no DRS object!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
+              'Sorry for the trouble.<br />' . PHP_EOL .
 //                'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
+              'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-
     }
     $this->drs = $pObj->drs;
-
   }
 
+  /*   * *********************************************
+   *
+   * Template
+   *
+   * ******************************************** */
 
-
- /***********************************************
-  *
-  * Template
-  *
-  **********************************************/
-
- /**
-  * template( ): Returns the template
-  *
-  * @param	string		$subpart  :
-  * @return	string		$template : HTML template
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.6
-  */
+  /**
+   * template( ): Returns the template
+   *
+   * @param	string		$subpart  :
+   * @return	string		$template : HTML template
+   * @access private
+   * @version     4.0.6
+   * @since       4.0.6
+   */
   private function template( $subpart )
   {
-    $cObj     = $this->pObj->cObj;
-    $conf     = $this->pObj->conf;
-    $template = $cObj->fileResource( $conf['api.']['e-payment.']['provider.']['paymill.']['files.']['html'] );
+    $cObj = $this->pObj->cObj;
+    $conf = $this->pObj->conf;
+    $template = $cObj->fileResource( $conf[ 'api.' ][ 'e-payment.' ][ 'provider.' ][ 'paymill.' ][ 'files.' ][ 'html' ] );
 
-      // Die if there isn't any HTML template
-    if( empty ( $template ) )
+    // Die if there isn't any HTML template
+    if ( empty( $template ) )
     {
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
@@ -1147,11 +1123,11 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     $template = $cObj->getSubpart( $template, $subpart );
 
-      // Die if there isn't any HTML template
-    if( empty ( $template ) )
+    // Die if there isn't any HTML template
+    if ( empty( $template ) )
     {
-$debugTrail = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
-$debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
+      $debugTrail = 'debug trail: ' . t3lib_utility_Debug::debugTrail();
+      $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
 //var_dump( __METHOD__, __LINE__, $prompt);
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
@@ -1190,55 +1166,54 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
     return $template;
   }
 
- /**
-  * templateMode( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateMode( )
+  /**
+   * templateMode( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateMode()
   {
     //plugin.tx_caddy_pi1.api.e-payment.provider.paymill.mode
-    $mode = $this->conf['api.']['e-payment.']['provider.']['paymill.']['mode'];
+    $mode = $this->conf[ 'api.' ][ 'e-payment.' ][ 'provider.' ][ 'paymill.' ][ 'mode' ];
 
-    switch( $mode )
+    switch ( $mode )
     {
       case( 'live' ):
-        $this->templateModeLive( );
+        $this->templateModeLive();
         break;
       case( 'test' ):
       default:
-        $this->templateModeTest( );
+        $this->templateModeTest();
         break;
-
     }
   }
 
- /**
-  * templateModeLive( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeLive( )
+  /**
+   * templateModeLive( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeLive()
   {
     $this->content = str_replace( '###TEST_OR_LIVE_MODE###', 'live', $this->content );
     $this->content = $this->pObj->cObj->substituteSubpart( $this->content, '###PAYMILL_TEST_MODE###', null );
   }
 
- /**
-  * templateModeTest( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeTest( )
+  /**
+   * templateModeTest( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeTest()
   {
     $this->content = str_replace( '###TEST_OR_LIVE_MODE###', 'test', $this->content );
 
@@ -1251,66 +1226,66 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
 
     $this->content = $this->pObj->cObj->substituteSubpart( $this->content, '###PAYMILL_TEST_MODE###', $subpart );
 
-    $this->templateModeTestData( );
+    $this->templateModeTestData();
   }
 
- /**
-  * templateModeTestData( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeTestData( )
+  /**
+   * templateModeTestData( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeTestData()
   {
-    if( $this->paymillLib->getPaymillToken( ) )
+    if ( $this->paymillLib->getPaymillToken() )
     {
 //var_dump( __METHOD__, __LINE__ );
       return;
     }
 
-    if( $this->templateModeTestDataWiPowermail( ) )
+    if ( $this->templateModeTestDataWiPowermail() )
     {
 //var_dump( __METHOD__, __LINE__ );
       return;
     }
-    $this->templateModeTestDataCreditcard( );
-    $this->templateModeTestDataElv( );
-    $this->templateModeTestDataElvIban( );
+    $this->templateModeTestDataCreditcard();
+    $this->templateModeTestDataElv();
+    $this->templateModeTestDataElvIban();
 //var_dump( __METHOD__, __LINE__ );
   }
 
- /**
-  * templateModeTestDataCreditcard( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeTestDataCreditcard( )
+  /**
+   * templateModeTestDataCreditcard( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeTestDataCreditcard()
   {
 
     $marker = array(
-      '###VALUE_CREDITCARD-NUMBER###' => '4111111111111111',  // Visa
+      '###VALUE_CREDITCARD-NUMBER###' => '4111111111111111', // Visa
       '###VALUE_CREDITCARD-EXPIRY###' => strftime( '%m/%g', strtotime( "+2 years" ) ),
       '###VALUE_CREDITCARD-HOLDER###' => 'Alois Schäfer',
-      '###VALUE_CREDITCARD-CVC###'    => '123'
+      '###VALUE_CREDITCARD-CVC###' => '123'
     );
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * templateModeTestDataElv( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    6.0.0
-  * @since      4.0.6
-  */
-  private function templateModeTestDataElv( )
+  /**
+   * templateModeTestDataElv( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    6.0.0
+   * @since      4.0.6
+   */
+  private function templateModeTestDataElv()
   {
     $marker = array(
       '###VALUE_ELV-ACCOUNT###' => '648489890',
@@ -1321,60 +1296,60 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * templateModeTestDataElvIban( ) :
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeTestDataElvIban( )
+  /**
+   * templateModeTestDataElvIban( ) :
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeTestDataElvIban()
   {
     $marker = array(
-      '###VALUE_ELV-IBAN###'        => 'DE12500105170648489890',
-      '###VALUE_ELV-BIC###'         => 'BENEDEPPYYY',
+      '###VALUE_ELV-IBAN###' => 'DE12500105170648489890',
+      '###VALUE_ELV-BIC###' => 'BENEDEPPYYY',
       '###VALUE_ELV-IBAN-HOLDER###' => 'Alex Tabo'
     );
 
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
- /**
-  * templateModeTestDataWiPowermail( ) :
-  *
-  * @return	boolean
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function templateModeTestDataWiPowermail( )
+  /**
+   * templateModeTestDataWiPowermail( ) :
+   *
+   * @return	boolean
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function templateModeTestDataWiPowermail()
   {
-    return $this->powermailInAction( );
+    return $this->powermailInAction();
   }
 
- /**
-  * templateSectionActive( ) : Replace the ###ACTIVE### marker
-  *
-  * @param	string		$template : HTML template
-  * @return	string		$template : HTML template
-  * @access private
-  * @version    4.0.6
-  * @since      4.0.6
-  */
+  /**
+   * templateSectionActive( ) : Replace the ###ACTIVE### marker
+   *
+   * @param	string		$template : HTML template
+   * @return	string		$template : HTML template
+   * @access private
+   * @version    4.0.6
+   * @since      4.0.6
+   */
   private function templateSectionActive( $template )
   {
 //var_dump( __METHOD__, __LINE__, $template);
-      // Set default value;
+    // Set default value;
     $active = 1; // 1: credit card, 2: elv. 3: sepa (elv-iban).
-    if( $this->paymentId !== null )
+    if ( $this->paymentId !== null )
     {
       $active = $this->paymentId;
     }
 
     $markers = array(
-      0 => '###CADDY_PAYMENT_SECTION_'  . $active . '###',
-      1 => '###CADDY_PAYMENT_TYPE_'     . $active . '###'
+      0 => '###CADDY_PAYMENT_SECTION_' . $active . '###',
+      1 => '###CADDY_PAYMENT_TYPE_' . $active . '###'
     );
 
     $values = array(
@@ -1382,9 +1357,9 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
       1 => 'payment-type-active'
     );
 
-    foreach( $markers as $key => $marker )
+    foreach ( $markers as $key => $marker )
     {
-      $value = $values[$key];
+      $value = $values[ $key ];
       $template = str_replace( $marker, ' ' . $value . ' ', $template );
       $template = str_replace( '  ' . $value, ' ' . $value, $template );
       $template = str_replace( $value . '  ', $value . ' ', $template );
@@ -1395,36 +1370,36 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
     return $template;
   }
 
- /**
-  * templateSectionRemove( ) :  Remove the subpart ###SECTION_X###, if correspond payment method is disabled.
-  *                             X is the key of the payment method.
-  *
-  * @param	string		$template : HTML template
-  * @return	string		$template : HTML template
-  * @access private
-  * @version    4.0.8
-  * @since      4.0.8
-  */
+  /**
+   * templateSectionRemove( ) :  Remove the subpart ###SECTION_X###, if correspond payment method is disabled.
+   *                             X is the key of the payment method.
+   *
+   * @param	string		$template : HTML template
+   * @return	string		$template : HTML template
+   * @access private
+   * @version    4.0.8
+   * @since      4.0.8
+   */
   private function templateSectionRemove( $template )
   {
-    $conf           = $this->pObj->conf;
-    $paymentOptions = $conf['api.']['options.']['payment.']['options.'];
+    $conf = $this->pObj->conf;
+    $paymentOptions = $conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ];
 
-    foreach( array_keys( ( array ) $paymentOptions ) as $key )
+    foreach ( array_keys( ( array ) $paymentOptions ) as $key )
     {
-      if( stristr( $key, '.' ) )
+      if ( stristr( $key, '.' ) )
       {
         continue;
       }
 
-      $enabled = $paymentOptions[$key . '.']['enabled'];
+      $enabled = $paymentOptions[ $key . '.' ][ 'enabled' ];
 
-      if( $enabled )
+      if ( $enabled )
       {
         continue;
       }
 
-      $section  = '###SECTION_' . $key . '###';
+      $section = '###SECTION_' . $key . '###';
       $template = $this->pObj->cObj->substituteSubpart( $template, $section, null );
     }
 
@@ -1433,8 +1408,8 @@ $debugTrail = str_replace( '//', '<br />' . PHP_EOL . '//', $debugTrail );
 
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php'])
+if ( defined( 'TYPO3_MODE' ) && $TYPO3_CONF_VARS[ TYPO3_MODE ][ 'XCLASS' ][ 'ext/caddy/lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php' ] )
 {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php']);
+  include_once($TYPO3_CONF_VARS[ TYPO3_MODE ][ 'XCLASS' ][ 'ext/caddy/lib/e-payment/paymill/class.tx_caddy_paymill_paymentMethods.php' ]);
 }
 ?>
