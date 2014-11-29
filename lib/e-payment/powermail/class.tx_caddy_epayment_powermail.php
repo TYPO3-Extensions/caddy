@@ -1,6 +1,6 @@
 <?php
 
-/***************************************************************
+/* * *************************************************************
  *  Copyright notice
  *
  *  (c) 2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
@@ -21,7 +21,7 @@
  *  GNU General Public License for more details.
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+ * ************************************************************* */
 
 // #61634, 140916, dwildt, 1-
 //require_once(PATH_tslib . 'class.tslib_pibase.php');
@@ -88,46 +88,40 @@ if ( $version < 6002000 )
  * @package    TYPO3
  * @subpackage    tx_caddy
  * @internal    #53678
- * @version     6.0.0
+ * @version     6.0.3
  * @since       4.0.5
  */
 class tx_caddy_epayment_powermail extends tslib_pibase
 {
-    public $extKey          = 'caddy';
-    public $prefixId        = 'tx_caddy_epayment_powermail';
-    public $scriptRelPath   = 'lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php';
 
-    public  $conf           = null;       // array    : current TypoScript configuration
-    private $content        = null;       // string   : content. Will returned by main( )
-    public  $drs            = null;       // object   : instance of drs class.
-    private $dynamicMarkers = null;       // object   : instance of dynamicMarkers class.
-    public  $local_cObj     = null;
-    private $pObj           = null;       // object   : parent object
-    private $pid            = null;       // integer  : pid of the current page
-    private $prompts        = array( );   // array    : prompts
+  public $extKey = 'caddy';
+  public $prefixId = 'tx_caddy_epayment_powermail';
+  public $scriptRelPath = 'lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php';
+  public $conf = null;       // array    : current TypoScript configuration
+  private $content = null;       // string   : content. Will returned by main( )
+  public $drs = null;       // object   : instance of drs class.
+  private $dynamicMarkers = null;       // object   : instance of dynamicMarkers class.
+  public $local_cObj = null;
+  private $pObj = null;       // object   : parent object
+  private $pid = null;       // integer  : pid of the current page
+  private $prompts = array();   // array    : prompts
 
-    private $paymill        = null;       // object   : Paymill object
+  /*   * *********************************************
+   *
+   * Main
+   *
+   * ******************************************** */
 
-
-
-
-
-  /***********************************************
-  *
-  * Main
-  *
-  **********************************************/
-
- /**
-  * getContentAfterTransaction( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	string		$template   : HTML template
-  * @access public
-  * @version     4.0.6
-  * @since       4.0.6
-  */
-  public function getContentAfterTransaction( )
+  /**
+   * getContentAfterTransaction( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	string		$template   : HTML template
+   * @access public
+   * @version     4.0.6
+   * @since       4.0.6
+   */
+  public function getContentAfterTransaction()
   {
 //var_dump( __METHOD__, __LINE__ );
     $arrReturn = array(
@@ -135,24 +129,24 @@ class tx_caddy_epayment_powermail extends tslib_pibase
       'isPayed' => false
     );
 
-    $this->init( );
+    $this->init();
 
     $this->content = $this->template( '###HTML###' );
 
-    $successEpayment = $this->epayment( );
+    $successEpayment = $this->epayment();
 
-    if( $successEpayment )
+    if ( $successEpayment )
     {
-        // success: transaction is done
+      // success: transaction is done
       $marker = array(
-        '###TITLE###'   => $this->pi_getLL( 'transaction-success-title'  ),
-        '###HEADER###'  => $this->pi_getLL( 'transaction-success-header'  )
+        '###TITLE###' => $this->pi_getLL( 'transaction-success-title' ),
+        '###HEADER###' => $this->pi_getLL( 'transaction-success-header' )
       );
       $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
-      $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|success|' . $this->pi_getLL( 'transaction-success-prompt'  );
-      $this->serverPrompt( );
-      $this->sessionErrorRemove( );
-      $this->templateCleanUp( );
+      $this->prompts[] = 'SERVER_PROMPT_WICLOSE_SUBPART|success|' . $this->pi_getLL( 'transaction-success-prompt' );
+      $this->serverPrompt();
+      $this->sessionErrorRemove();
+      $this->templateCleanUp();
       // Next two lines is for development only!
       //$this->sessionErrorAdd( );
       //die( $this->content );
@@ -164,244 +158,247 @@ class tx_caddy_epayment_powermail extends tslib_pibase
       return $arrReturn;
     }
 
-      // error: transaction wasn't possible
+    // error: transaction wasn't possible
     $marker = array(
-      '###TITLE###'   => $this->pi_getLL( 'transaction-error-title'  ),
-      '###HEADER###'  => $this->pi_getLL( 'transaction-error-header'  )
+      '###TITLE###' => $this->pi_getLL( 'transaction-error-title' ),
+      '###HEADER###' => $this->pi_getLL( 'transaction-error-header' )
     );
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
-    $this->serverPrompt( );
-    $this->sessionErrorAdd( );
-    $this->templateCleanUp( );
+    $this->serverPrompt();
+    $this->sessionErrorAdd();
+    $this->templateCleanUp();
     die( $this->content );
   }
 
+  /*   * *********************************************
+   *
+   * E-payment
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * E-payment
-  *
-  **********************************************/
-
- /**
-  * epayment( ):
-  *
-  * @return	boolean
-  * @access private
-  * @version     4.0.6
-  * @since       4.0.5
-  */
-  private function epayment( )
+  /**
+   * epayment( ):
+   *
+   * @return	boolean
+   * @access private
+   * @version     6.0.3
+   * @since       4.0.5
+   */
+  private function epayment()
   {
-    $success  = false;
-    $provider = $this->getEpaymentProvider( );
+    $success = false;
+    $provider = $this->getEpaymentProvider();
 
-    switch( $provider )
+    // #i0061, 141129, dwilt, 5+
+    if ( $this->drs->drsEpayment || $this->pObj->drsUserfunc )
+    {
+      $prompt = 'Current e-payment provider: ' . $provider;
+      t3lib_div::devlog( '[INFO/E-PAYMENT] ' . $prompt, $this->extKey, 0 );
+    }
+
+    switch ( $provider )
     {
       case( 'Paymill' ):
-        $success = $this->epaymentProviderPaymill( );
+        $success = $this->epaymentProviderPaymill();
         break;
       case( null ):
       case( false ):
       default:
         $this->epaymentProviderDie( $provider );
-        $success  = false;
+        $success = false;
         break;
     }
 
     return $success;
   }
 
- /**
-  * epaymentProviderDie( ) :
-  *
-  * @return	boolean
-  * @access private
-  * @internal   #53678
-  * @version    4.0.5
-  * @since      4.0.5
-  */
+  /**
+   * epaymentProviderDie( ) :
+   *
+   * @return	boolean
+   * @access private
+   * @internal   #53678
+   * @version    4.0.5
+   * @since      4.0.5
+   */
   private function epaymentProviderDie( $provider )
   {
     $prompt = 'Fatal error: undefined e-payment provider "' . $provider . '"<br />'
             . 'Method ' . __METHOD__ . ' at line ' . __LINE__ . ' <br />'
             . 'Sorry for the trouble<br />'
             . 'Caddy - your TYPO3 shopping cart<br />'
-            ;
+    ;
     die( $prompt );
   }
 
- /**
-  * epaymentProviderPaymill( ) :  Returns true, if tasaction was successfull.
-  *                               Returns false in case of an error. Error prompts will written to $this->prompts.
-  *
-  * @return	boolean
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.5
-  */
-  private function epaymentProviderPaymill( )
+  /**
+   * epaymentProviderPaymill( ) :  Returns true, if tasaction was successfull.
+   *                               Returns false in case of an error. Error prompts will written to $this->prompts.
+   *
+   * @return	boolean
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.5
+   */
+  private function epaymentProviderPaymill()
   {
     $success = false;
 
-      // Init paymill
-    $this->epaymentProviderPaymillInit( );
+    // Init paymill
+    $this->epaymentProviderPaymillInit();
 
-      // Execute the transaction
-    $success = $this->epaymentProviderPaymillTransaction( );
+    // Execute the transaction
+    $success = $this->epaymentProviderPaymillTransaction();
     return $success;
   }
 
- /**
-  * epaymentProviderPaymillInit( ) :
-  *
-  * @return	void
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.5
-  */
-  private function epaymentProviderPaymillInit( )
+  /**
+   * epaymentProviderPaymillInit( ) :
+   *
+   * @return	void
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.5
+   */
+  private function epaymentProviderPaymillInit()
   {
-    $this->epaymentProviderPaymillInitClass( );
-    $this->epaymentProviderPaymillInitValues( );
+    $this->epaymentProviderPaymillInitClass();
+    $this->epaymentProviderPaymillInitValues();
   }
 
- /**
-  * epaymentProviderPaymillInitClass( ) :
-  *
-  * @return	void
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function epaymentProviderPaymillInitClass( )
+  /**
+   * epaymentProviderPaymillInitClass( ) :
+   *
+   * @return	void
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function epaymentProviderPaymillInitClass()
   {
-    $path2provider  = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php';
+    $path2provider = t3lib_extMgm::extPath( 'caddy' ) . 'lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php';
 
-      // Initiate the provider class
+    // Initiate the provider class
     require_once( $path2provider );
     $this->paymillTransaction = t3lib_div::makeInstance( 'tx_caddy_paymill_transaction' );
     $this->paymillTransaction->setParentObject( $this );
   }
 
- /**
-  * epaymentProviderPaymillInitValues( ) :
-  *
-  * @return	void
-  * @access private
-  * @internal   #53678
-  * @version    4.0.5
-  * @since      4.0.5
-  */
-  private function epaymentProviderPaymillInitValues( )
+  /**
+   * epaymentProviderPaymillInitValues( ) :
+   *
+   * @return	void
+   * @access private
+   * @internal   #53678
+   * @version    6.0.3
+   * @since      4.0.5
+   */
+  private function epaymentProviderPaymillInitValues()
   {
-      // Get caddy sesssion
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    // Get caddy sesssion
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
 //var_dump(__METHOD__, __LINE__, $sesArray);
 //die();
-
-      // Get values
-    $amount         = $sesArray['sumsumgross'];
-    $clientEmail    = $sesArray['powermail']['values']['customer']['email'];
-    $clientName     = $sesArray['invoiceFirstname'] . ' ' . $sesArray['invoiceLastname'];
-    $currency       = $this->conf['api.']['e-payment.']['currency'];
-    $numberOrder    = $this->pi_getLL( 'label-short-number-order'   ) . ': ' . $sesArray['numberOrderCurrent'];
-    $numberInvoice  = $this->pi_getLL( 'label-short-number-invoice' ) . ': ' . $sesArray['numberInvoiceCurrent'];
-    $description    = $numberOrder . ', ' . $numberInvoice;
+    // Get values
+    $amount = $sesArray[ 'sumsumgross' ];
+    $clientEmail = $sesArray[ 'powermail' ][ 'values' ][ 'customer' ][ 'email' ];
+    $clientName = $sesArray[ 'invoiceFirstname' ] . ' ' . $sesArray[ 'invoiceLastname' ];
+    $currency = $this->conf[ 'api.' ][ 'e-payment.' ][ 'currency' ];
+    $numberOrder = $this->pi_getLL( 'label-short-number-order' ) . ': ' . $sesArray[ 'numberOrderCurrent' ];
+    $numberInvoice = $this->pi_getLL( 'label-short-number-invoice' ) . ': ' . $sesArray[ 'numberInvoiceCurrent' ];
+    $description = $numberOrder . ', ' . $numberInvoice;
 //    $paymentId      = $sesArray['sumsumgross'];
-
-      // Set values
+    // Set values
 //    $this->paymillTransaction->setPaymentId(                $paymentId );
-    $this->paymillTransaction->setTransactionAmount(        $amount );
-    $this->paymillTransaction->setTransactionDescription(   $description );
-    $this->paymillTransaction->setTransactionClientEmail(   $clientEmail );
-    $this->paymillTransaction->setTransactionClientName(    $clientName );
-    $this->paymillTransaction->setTransactionCurrency(      $currency );
+    // #i0061, 141129, dwildt, 1+
+    $this->paymillTransaction->setDrsUserfunc( $this->pObj->drsUserfunc );
+    $this->paymillTransaction->setTransactionAmount( $amount );
+    $this->paymillTransaction->setTransactionDescription( $description );
+    $this->paymillTransaction->setTransactionClientEmail( $clientEmail );
+    $this->paymillTransaction->setTransactionClientName( $clientName );
+    $this->paymillTransaction->setTransactionCurrency( $currency );
   }
 
- /**
-  * epaymentProviderTransaction( )  : Returns
-  *                                   * true, if tasaction was successfull.
-  *                                   * false in case of an error. Error prompts will written to $this->prompts.
-  *
-  * @return	boolean
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function epaymentProviderPaymillTransaction( )
+  /**
+   * epaymentProviderTransaction( )  : Returns
+   *                                   * true, if tasaction was successfull.
+   *                                   * false in case of an error. Error prompts will written to $this->prompts.
+   *
+   * @return	boolean
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function epaymentProviderPaymillTransaction()
   {
     // Nur ausfuehren, wenn nicht bereits ausgefuehrt
     // Session merkt sich order number und status bezahlt/nicht bezahlt
 
     $success = false;
 
-      // Execute the transaction
-    $success = $this->epaymentProviderPaymillTransactionExec( );
+    // Execute the transaction
+    $success = $this->epaymentProviderPaymillTransactionExec();
     return $success;
   }
 
- /**
-  * epaymentProviderTransactionExec( )  : Returns
-  *                                       * true, if tasaction was successfull.
-  *                                       * false in case of an error. Error prompts will written to $this->prompts.
-  *
-  * @return	boolean
-  * @access private
-  * @internal   #53678
-  * @version    4.0.6
-  * @since      4.0.6
-  */
-  private function epaymentProviderPaymillTransactionExec( )
+  /**
+   * epaymentProviderTransactionExec( )  : Returns
+   *                                       * true, if tasaction was successfull.
+   *                                       * false in case of an error. Error prompts will written to $this->prompts.
+   *
+   * @return	boolean
+   * @access private
+   * @internal   #53678
+   * @version    4.0.6
+   * @since      4.0.6
+   */
+  private function epaymentProviderPaymillTransactionExec()
   {
     // Nur ausfuehren, wenn nicht bereits ausgefuehrt
     // Session merkt sich order number und status bezahlt/nicht bezahlt
 
-    $prompts = $this->paymillTransaction->transaction( );
-    if( ! empty( $prompts ) )
+    $prompts = $this->paymillTransaction->transaction();
+    if ( !empty( $prompts ) )
     {
-      $this->prompts  = $this->prompts
-                      + $prompts
-                      ;
+      $this->prompts = $this->prompts + $prompts;
       return false;
     }
 
     return true;
   }
 
- /**
-  * getEpaymentProvider( ) :
-  *
-  * @return	string		$provider :
-  * @access private
-  * @internal   #53678
-  * @version    4.0.5
-  * @since      4.0.5
-  */
-  private function getEpaymentProvider( )
+  /**
+   * getEpaymentProvider( ) :
+   *
+   * @return	string		$provider :
+   * @access private
+   * @internal   #53678
+   * @version    4.0.5
+   * @since      4.0.5
+   */
+  private function getEpaymentProvider()
   {
-    $provider = $this->conf['api.']['e-payment.']['provider'];
+    $provider = $this->conf[ 'api.' ][ 'e-payment.' ][ 'provider' ];
 
-    switch( $provider )
+    switch ( $provider )
     {
       case( 'Paymill' ):
-          // Follow the workflow;
+        // Follow the workflow;
         break;
       case( null ):
       case( false ):
-          // Don't do anything
+        // Don't do anything
         return;
       default:
         $prompt = 'Fatal error: undefined e-payment provider "' . $provider . '"<br />'
                 . 'Method ' . __METHOD__ . ' at line ' . __LINE__ . ' <br />'
                 . 'Sorry for the trouble<br />'
                 . 'Caddy - your TYPO3 shopping cart<br />'
-                ;
+        ;
         die( $prompt );
         break;
     }
@@ -409,170 +406,166 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     return $provider;
   }
 
+  /*   * *********************************************
+   *
+   * Init
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Init
-  *
-  **********************************************/
-
- /**
-  * init( ):
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function init( )
+  /**
+   * init( ):
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function init()
   {
-    $this->initVars( );
-    $this->initInstances( );
-    $this->initDrs( );
-    $this->initPid( );
+    $this->initVars();
+    $this->initInstances();
+    $this->initDrs();
+    $this->initPid();
   }
 
-
- /**
-  * initDrs( )
-  *
-  * @return	void
-  * @access private
-  * @version    4.0.5
-  * @since      4.0.5
-  */
-  private function initDrs( )
+  /**
+   * initDrs( )
+   *
+   * @return	void
+   * @access private
+   * @version    4.0.5
+   * @since      4.0.5
+   */
+  private function initDrs()
   {
-    $this->drs->init( );
+    $this->drs->init();
+//var_dump( __METHOD__, __LINE__, $this->drs );
   }
 
- /**
-  * initInstances( ):
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function initInstances( )
+  /**
+   * initInstances( ):
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function initInstances()
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
-    $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
+    $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
     // #i0061, 141129, dwildt, 2-/3+
     //$this->drs->pObj = $this;
     //$this->drs->row = $this->cObj->data;
+//var_dump( __METHOD__, __LINE__, $this->flexform );
     $this->drs->setExtConf( $this->arr_extConf );
     $this->drs->setFlexform( $this->flexform );
     $this->drs->setRow( $this->cObj->data );
-    
+
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
-
   }
 
-/**
- * initPid( )  : Returns the globlas tsfe id, if the given pid is null
- *
- * @param	integer		$pid  : given pid (may be null)
- * @return	integer		$pid  : id of the page with the caddy plugin
- * @internal    #54634
- * @version     4.0.5
- * @since       4.0.5
- */
-  private function initPid( $pid=null )
+  /**
+   * initPid( )  : Returns the globlas tsfe id, if the given pid is null
+   *
+   * @param	integer		$pid  : given pid (may be null)
+   * @return	integer		$pid  : id of the page with the caddy plugin
+   * @internal    #54634
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function initPid( $pid = null )
   {
-    if( $pid !== null )
+    if ( $pid !== null )
     {
       $this->pid = $pid;
       return;
     }
 
-    if( ( int ) $this->conf['userFunc.']['caddyPid'] )
+    if ( ( int ) $this->conf[ 'userFunc.' ][ 'caddyPid' ] )
     {
-      $pid = ( int ) $this->conf['userFunc.']['caddyPid'];
+      $pid = ( int ) $this->conf[ 'userFunc.' ][ 'caddyPid' ];
     }
 
-    if( $pid === null || $pid === '' )
+    if ( $pid === null || $pid === '' )
     {
-      if( $this->drs->drsError || $this->drsUserfunc )
+      if ( $this->drs->drsError || $this->drsUserfunc )
       {
         $prompt = 'Given pid of the Caddy is empty!';
         t3lib_div::devlog( '[ERROR/SESSION] ' . $prompt, $this->extKey, 3 );
       }
-      $pid = $GLOBALS["TSFE"]->id;
+      $pid = $GLOBALS[ "TSFE" ]->id;
     }
 
     $this->pid = $pid;
   }
 
- /**
-  * initVars( )
-  *
-  * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
-  * @return	void
-  * @access private
-  * @version    4.0.5
-  * @since      4.0.5
-  */
-  private function initVars( )
+  /**
+   * initVars( )
+   *
+   * @param	integer		$paymentId  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
+   * @return	void
+   * @access private
+   * @version    4.0.5
+   * @since      4.0.5
+   */
+  private function initVars()
   {
-    $this->conf         = $this->pObj->conf;
-    $this->local_cObj   = $GLOBALS['TSFE']->cObj;
+    $this->conf = $this->pObj->conf;
+    $this->local_cObj = $GLOBALS[ 'TSFE' ]->cObj;
 
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
     //$this->pi_initPIflexForm( );
   }
 
+  /*   * *********************************************
+   *
+   * Prompt
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Prompt
-  *
-  **********************************************/
-
- /**
-  * serverPrompt( ):  Prompts the items of $prompts below the submit buttons.
-  *                   An item has the format: marker|type|prompt
-  *                   * marker  :
-  *                               * SERVER_PROMPT_WICLOSE_SUBPART
-  *                               * SERVER_PROMPT_WOCLOSE_SUBPART
-  *                   * type    :
-  *                               * secondary (grey)
-  *                               * [empty!]  (blue)
-  *                               * success   (green)
-  *                               * error     (red)
-  *                   Example: SERVER_PROMPT_WOCLOSE_SUBPART|alert|message
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function serverPrompt( )
+  /**
+   * serverPrompt( ):  Prompts the items of $prompts below the submit buttons.
+   *                   An item has the format: marker|type|prompt
+   *                   * marker  :
+   *                               * SERVER_PROMPT_WICLOSE_SUBPART
+   *                               * SERVER_PROMPT_WOCLOSE_SUBPART
+   *                   * type    :
+   *                               * secondary (grey)
+   *                               * [empty!]  (blue)
+   *                               * success   (green)
+   *                               * error     (red)
+   *                   Example: SERVER_PROMPT_WOCLOSE_SUBPART|alert|message
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function serverPrompt()
   {
 
-    $server_prompt  = null;
+    $server_prompt = null;
 
-    if( empty( $this->prompts ) )
+    if ( empty( $this->prompts ) )
     {
       return;
     }
 
-    foreach( $this->prompts as $prompt )
+    foreach ( $this->prompts as $prompt )
     {
-      list( $subpartMarker, $marker['###TYPE###'], $marker['###PROMPT###'] ) = explode( '|', $prompt );
+      list( $subpartMarker, $marker[ '###TYPE###' ], $marker[ '###PROMPT###' ] ) = explode( '|', $prompt );
 //var_dump( __METHOD__, __LINE__, $prompt );
       $subpart = $this->template( '###' . $subpartMarker . '###' );
       $subpart = $this->pObj->cObj->substituteMarkerArray( $subpart, $marker );
-      $server_prompt  = $server_prompt
-                      . $subpart;
+      $server_prompt = $server_prompt
+              . $subpart;
     }
 
     $marker = array(
@@ -582,109 +575,101 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
   }
 
+  /*   * *********************************************
+   *
+   * Session
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Session
-  *
-  **********************************************/
-
- /**
-  * sessionErrorAdd( ): Error is needed by class tx_caddy_pi1_clean
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function sessionErrorAdd( )
+  /**
+   * sessionErrorAdd( ): Error is needed by class tx_caddy_pi1_clean
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function sessionErrorAdd()
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-    $sesArray['e-payment']['powermail']['error'] = true;
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $sesArray[ 'e-payment' ][ 'powermail' ][ 'error' ] = true;
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
-      // save session
-    $GLOBALS['TSFE']->storeSessionData( );
+    $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    // save session
+    $GLOBALS[ 'TSFE' ]->storeSessionData();
     //var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
   }
 
- /**
-  * sessionErrorRemove( ): Error is needed by class tx_caddy_pi1_clean
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function sessionErrorRemove( )
+  /**
+   * sessionErrorRemove( ): Error is needed by class tx_caddy_pi1_clean
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function sessionErrorRemove()
   {
-    $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-    unset( $sesArray['e-payment']['powermail']['error'] );
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    unset( $sesArray[ 'e-payment' ][ 'powermail' ][ 'error' ] );
 
-    $GLOBALS['TSFE']->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
-      // save session
-    $GLOBALS['TSFE']->storeSessionData( );
+    $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
+    // save session
+    $GLOBALS[ 'TSFE' ]->storeSessionData();
     //var_dump( __FILE__, __LINE__, $this->extKey . '_' . $this->pid, $sesArray, $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid ) );
   }
 
+  /*   * *********************************************
+   *
+   * Setting methods
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Setting methods
-  *
-  **********************************************/
-
- /**
-  * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
-  *
-  * @param	[type]		$$pObj: ...
-  * @return	void
-  * @access public
-  * @version    4.0.5
-  * @since      4.0.5
-  */
+  /**
+   * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
+   *
+   * @param	[type]		$$pObj: ...
+   * @return	void
+   * @access public
+   * @version    4.0.5
+   * @since      4.0.5
+   */
   public function setParentObject( $pObj )
   {
-    if( ! is_object( $pObj ) )
+    if ( !is_object( $pObj ) )
     {
       $prompt = 'ERROR: no parent object!<br />' . PHP_EOL .
-                'Sorry for the trouble.<br />' . PHP_EOL .
-                'TYPO3 Caddy<br />' . PHP_EOL .
+              'Sorry for the trouble.<br />' . PHP_EOL .
+              'TYPO3 Caddy<br />' . PHP_EOL .
               __METHOD__ . ' (' . __LINE__ . ')';
       die( $prompt );
-
     }
     $this->pObj = $pObj;
   }
 
+  /*   * *********************************************
+   *
+   * Templating
+   *
+   * ******************************************** */
 
-
-  /***********************************************
-  *
-  * Templating
-  *
-  **********************************************/
-
-
- /**
-  * template( ): Returns the template
-  *
-  * @param	string		$subpart  :
-  * @return	string		$template : HTML template
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
+  /**
+   * template( ): Returns the template
+   *
+   * @param	string		$subpart  :
+   * @return	string		$template : HTML template
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
   private function template( $subpart )
   {
-    $cObj     = $this->pObj->cObj;
-    $conf     = $this->pObj->conf;
-    $template = $cObj->fileResource( $conf['api.']['e-payment.']['powermail.']['files.']['html.']['transactionPrompts'] );
+    $cObj = $this->pObj->cObj;
+    $conf = $this->pObj->conf;
+    $template = $cObj->fileResource( $conf[ 'api.' ][ 'e-payment.' ][ 'powermail.' ][ 'files.' ][ 'html.' ][ 'transactionPrompts' ] );
 
-      // Die if there isn't any HTML template
-    if( empty ( $template ) )
+    // Die if there isn't any HTML template
+    if ( empty( $template ) )
     {
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
@@ -719,8 +704,8 @@ class tx_caddy_epayment_powermail extends tslib_pibase
 
     $template = $cObj->getSubpart( $template, $subpart );
 
-      // Die if there isn't any HTML template
-    if( empty ( $template ) )
+    // Die if there isn't any HTML template
+    if ( empty( $template ) )
     {
       $prompt = '
         <div style="border:1em solid red;color:red;padding:1em;text-align:center">
@@ -756,18 +741,18 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     return $template;
   }
 
- /**
-  * templateCleanUp( ):
-  *
-  * @return	void
-  * @access private
-  * @version     4.0.5
-  * @since       4.0.5
-  */
-  private function templateCleanUp( )
+  /**
+   * templateCleanUp( ):
+   *
+   * @return	void
+   * @access private
+   * @version     4.0.5
+   * @since       4.0.5
+   */
+  private function templateCleanUp()
   {
 
-    $marker['###PATH_TO_FOUNDATION###'] = $this->conf['api.']['e-payment.']['powermail.']['paths.']['foundation'];
+    $marker[ '###PATH_TO_FOUNDATION###' ] = $this->conf[ 'api.' ][ 'e-payment.' ][ 'powermail.' ][ 'paths.' ][ 'foundation' ];
     $this->content = $this->pObj->cObj->substituteMarkerArray( $this->content, $marker );
 
     $this->content = $this->pObj->cObj->substituteSubpart( $this->content, '###SERVER_PROMPT_WICLOSE_SUBPART###', null );
@@ -776,10 +761,11 @@ class tx_caddy_epayment_powermail extends tslib_pibase
     $this->dynamicMarkers->scriptRelPath = $this->scriptRelPath;
     $this->content = $this->dynamicMarkers->main( $this->content, $this );
   }
+
 }
 
-if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php'])
+if ( defined( 'TYPO3_MODE' ) && $TYPO3_CONF_VARS[ TYPO3_MODE ][ 'XCLASS' ][ 'ext/caddy/lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php' ] )
 {
-  include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/caddy/lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php']);
+  include_once($TYPO3_CONF_VARS[ TYPO3_MODE ][ 'XCLASS' ][ 'ext/caddy/lib/e-payment/powermail/class.tx_caddy_epayment_powermail.php' ]);
 }
 ?>

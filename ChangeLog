@@ -4,6 +4,8 @@ TODO
 
 6.0.3
   14-11-29
+  Bugfix
+  * #i0062: Paymill transaction (conflict with #i0058)
   Improvement
   * #i0061: DRS
 
@@ -54,7 +56,7 @@ TODO
                     * lib/class.tx_caddy_session.php::quantityUpdate
   Bugfix
   * #i0059: A second item is added withouit any quantity
-  * #i0058: Paymill error in case of a non-e-payment method
+  * #i0058: Paymill error in case of a non-e-payment method  (conflict with #i0062)
   * #i0056: Moved code in contest with #61892
   * #61893: PDF attachments without any address data
 	* #61892: Database record without value for customer e-mail

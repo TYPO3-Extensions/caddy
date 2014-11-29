@@ -361,7 +361,7 @@ class tx_caddy_powermail extends tslib_pibase
    *
    * @return  string    caddy content
    * @access public
-   * @version 4.0.12
+   * @version 6.0.3
    * @since  2.0.2
    */
   public function caddyEmail( $content = '', $conf = array() )
@@ -369,14 +369,8 @@ class tx_caddy_powermail extends tslib_pibase
     unset( $content );
     $this->conf = $conf;
 
-    // DRS
-    if ( $this->conf[ 'userFunc.' ][ 'drs' ] )
-    {
-      $this->drsUserfunc = true;
-      $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
-      t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
-    }
-    // DRS
+    $this->caddyEmailInitDrs();
+
     // #54634, 140103, dwildt, 9+
     if ( ( int ) $this->conf[ 'userFunc.' ][ 'caddyPid' ] )
     {
@@ -498,6 +492,50 @@ class tx_caddy_powermail extends tslib_pibase
     $conf = array_merge( ( array ) $this->conf, ( array ) $conf );
 
     return $conf;
+  }
+
+  /**
+   * caddyEmailInitDrs( )  :
+   *
+   * @access private
+   * @version 6.0.3
+   * @since  2.0.0
+   */
+  private function caddyEmailInitDrs()
+  {
+    $this->caddyEmailInitDrsByUserfunc();
+//    $this->caddyEmailInitDrsByPObj();
+  }
+
+//  /**
+//   * caddyEmailInitDrsByPObj( )  :
+//   *
+//   * @access private
+//   * @version 6.0.3
+//   * @since  6.0.3
+//   */
+//  private function caddyEmailInitDrsByPObj()
+//  {
+//    $this->drs = $this->pObj->drs;
+//  }
+
+  /**
+   * caddyEmailInitDrsByUserfunc( )  :
+   *
+   * @access private
+   * @version 6.0.3
+   * @since  2.0.0
+   */
+  private function caddyEmailInitDrsByUserfunc()
+  {
+    if ( ! $this->conf[ 'userFunc.' ][ 'drs' ] )
+    {
+      return;
+    }
+
+    $this->drsUserfunc = true;
+    $prompt = 'DRS is enabled by userfunc ' . __METHOD__ . '[userFunc.][drs].';
+    t3lib_div::devlog( '[INFO/USERFUNC] ' . $prompt, $this->extKey, 0 );
   }
 
   /**

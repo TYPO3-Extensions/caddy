@@ -100,16 +100,14 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   public $prefixId = 'tx_caddy_paymill_transaction';
   public $scriptRelPath = 'lib/e-payment/paymill/class.tx_caddy_paymill_transaction.php';
   public $conf = null;       // array    : current TypoScript configuration
-  private $content = null;       // string   : content. Will returned by main( )
   public $drs = null;       // object   : instance of drs class.
+  private $drsUserfunc = null;
   private $dynamicMarkers = null;       // object   : instance of dynamicMarkers class.
   public $local_cObj = null;
   private $paymentId = null;       // integer  : current payment id. 1: credit card, 2: elv. 3: sepa (elv-iban).
   private $pObj = null;       // object   : parent object
   private $pid = null;       // integer  : pid of the current page
   private $prompts = array();   // array    : prompts
-  private $paymillClientResponse = null;       // object   : Paymill payment response object
-  private $paymillPaymentResponse = null;       // object   : Paymill payment response object
   private $transactionAmount = '0.00';
   private $transactionCurrency = 'EUR';
   private $transactionDescription = 'Transaction by TYPO3 Caddy';
@@ -284,7 +282,7 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     // #i0058, 141011, dwildt, 4+
     if ( $paymentId === NULL )
     {
-      $this->paymentId = $this->sessionGetPaymentId( $this->pid );
+      $this->paymentId = $this->sessionGetPaymentId( );
     }
     $this->pi_setPiVarDefaults();
     $this->pi_loadLL();
@@ -296,15 +294,29 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    *
    * @return	boolean $isEpayment: true, if current cash method is e-payment, false, if it isn't
    * @access private
-   * @internal   #i0058
-   * @version    6.0.0
+   * @internal   #i0058, #i0062
+   * @version    6.0.3
    * @since      6.0.0
    */
   private function isEpayment()
   {
-    $isEpayment = $this->conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ][ $this->paymentId . '.' ][ 'e-payment' ];
-    //var_dump( __METHOD__, __LINE__, $this->conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ], $isEpayment );
-    return $isEpayment;
+    $woEpayment = $this->sessionGetWoEpayment();
+    //var_dump( __METHOD__, __LINE__, $woEpayment, !$woEpayment );
+
+    if ( !$this->drsUserfunc )
+    {
+      return !$woEpayment;
+    }
+
+    $paymentId = $this->sessionGetPaymentId();
+
+    $prompt = 'Current payment method with the id "' . $paymentId . '" isn\'t defined as an e-payment method.';
+    t3lib_div::devlog( '[INFO/E-PAYMENT] ' . $prompt, $this->extKey, 0 );
+
+    $prompt = 'Change it: Please configure api.options.payment.options.' . $paymentId . '.e-payment';
+    t3lib_div::devlog( '[HELP/E-PAYMENT] ' . $prompt, $this->extKey, 1 );
+
+    return !$woEpayment;
   }
 
   /*   * *********************************************
@@ -312,6 +324,24 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    * Session
    *
    * ******************************************** */
+
+  /**
+   * sessionGetWoEpayment( ):
+   *
+   * @return	string		$value  : e-payment.woEpayment
+   * @access private
+   * @internal    #i0062
+   * @version     6.0.3
+   * @since       6.0.3
+   */
+  private function sessionGetWoEpayment()
+  {
+    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
+    $value = $sesArray[ 'e-payment' ][ 'woEpayment' ];
+    //var_dump( __METHOD__, __LINE__, $value, $sesArray[ 'e-payment' ] );
+
+    return $value;
+  }
 
   /**
    * sessionGetPaymillPaymentId( ):
@@ -357,10 +387,12 @@ class tx_caddy_paymill_transaction extends tslib_pibase
   private function sessionGetPaymillPaymentId()
   {
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
-    // #i0058, 141011, dwildt, 1-
-    //$value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ];
-    // #i0058, 141011, dwildt, 1+
-    $value = $sesArray[ 'options' ][ 'payment' ][ 'id' ];
+    // #i0062, 141129, dwildt, 4-, 1+
+//    // #i0058, 141011, dwildt, 1-
+//    //$value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ];
+//    // #i0058, 141011, dwildt, 1+
+//    $value = $sesArray[ 'options' ][ 'payment' ][ 'id' ];
+    $value = $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ];
 
     return $value;
   }
@@ -370,6 +402,20 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    * Setting methods
    *
    * ******************************************** */
+
+  /**
+   * setDrsUserfunc( )  :
+   *
+   * @param	[type]		$$pObj: ...
+   * @return	void
+   * @access public
+   * @version    6.0.3
+   * @since      6.0.3
+   */
+  public function setDrsUserfunc( $drsUserfunc )
+  {
+    $this->drsUserfunc = $drsUserfunc;
+  }
 
   /**
    * setParentObject( )  : Returns a caddy with HTML form and HTML options among others
@@ -505,28 +551,33 @@ class tx_caddy_paymill_transaction extends tslib_pibase
    *
    * @return	array		$this->prompts  : prompts, in case of an error
    * @access public
-   * @version    4.0.5
+   * @version    6.0.3
    * @since      4.0.5
    */
   public function transaction()
   {
-    // #i0058, 141011, dwildt, 4+
-    if ( !$this->isEpayment() )
-    {
-      return;
-    }
-
     if ( $this->transactionInit() )
     {
       return $this->prompts;
+    }
+
+    // #i0062, 141129, dwildt, 4+
+    if ( !$this->isEpayment() )
+    {
+      return;
     }
 
     $arrResult = $this->transactionSend();
     if ( $arrResult[ 'errors' ] )
     {
       $prompts = $arrResult[ 'errors' ];
+      //var_dump( __METHOD__, __LINE__, $prompts );
+      //die( ":(" );
       return $prompts;
     }
+
+    //var_dump( __METHOD__, __LINE__, $prompts );
+    //die( ":(" );
     return $prompts;
   }
 
@@ -638,13 +689,15 @@ class tx_caddy_paymill_transaction extends tslib_pibase
     try
     {
       $arrReturn = $this->transactionSendTry();
-//var_dump( __FILE__, __LINE__, $arrReturn );
+      //var_dump( __METHOD__, __LINE__, $arrReturn );
+      //die( ":(" );
       return $arrReturn;
     }
     catch ( \Paymill\Services\PaymillException $e )
     {
       $arrReturn = $this->transactionSendCatch( $e );
-//var_dump( __FILE__, __LINE__, $arrReturn );
+      //var_dump( __METHOD__, __LINE__, $arrReturn );
+      //die( ":(" );
       return $arrReturn;
     }
   }
@@ -724,17 +777,22 @@ class tx_caddy_paymill_transaction extends tslib_pibase
 
     // Initiate paymill objects
     $paymillService = new Paymill\Request( PAYMILL_API_KEY );
+    //var_dump( __METHOD__, __LINE__, $paymillService );
     $paymillTransaction = new Paymill\Models\Request\Transaction();
-
+    //var_dump( __METHOD__, __LINE__, $paymillTransaction );
     // Set transaction params
     // Get paymill payment id and client id from caddy session
     $paymentId = $this->sessionGetPaymillPaymentId();
+    //var_dump( __METHOD__, __LINE__, $paymentId );
     $paymillTransaction->setPayment( $paymentId );
     $paymillTransaction->setAmount( round( $this->transactionAmount, 2 ) * 100 ); // #i0052
     $paymillTransaction->setCurrency( $this->transactionCurrency );
     $paymillTransaction->setDescription( $this->transactionDescription );
     // Execute the transaction
+    //var_dump( __METHOD__, __LINE__, $paymillTransaction );
     $paymillTransactionResponse = $paymillService->create( $paymillTransaction );
+    //var_dump( __METHOD__, __LINE__, $paymillTransactionResponse );
+    //die( ":(" );
     // Set the response code
     // Evaluate the executed transaction object
     $prompts = $this->transactionSentEval( $paymillTransactionResponse );

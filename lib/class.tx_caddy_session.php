@@ -111,7 +111,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage    tx_caddy
- * @version     4.0.7
+ * @version     6.0.3
  * @since       1.4.6
  */
 class tx_caddy_session
@@ -440,7 +440,7 @@ class tx_caddy_session
    * @param	integer		: $pid   : uid of the page, which contains the caddy plugin
    * @return	void
    * @access public
-   * @version     3.0.1
+   * @version     6.0.3
    * @since       1.4.6
    */
   public function paymentUpdate( $value, $pid = null )
@@ -454,7 +454,12 @@ class tx_caddy_session
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
 //var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
     $sesArray[ 'payment' ] = intval( $value );
-
+    // #i0062, 141129, dwildt, 2+
+    $epayment = $this->pObj->conf['api.']['options.']['payment.']['options.'][$value . '.']['e-payment'];
+    $sesArray[ 'e-payment' ]['woEpayment'] = !$epayment;
+//var_dump( __METHOD__, __LINE__, $sesArray, $this->pObj->conf );
+//var_dump( __METHOD__, __LINE__, $sesArray );
+//die( ":(" );
     // #54634, 131128, dwildt, 1-
     //$GLOBALS['TSFE']->fe_user->setKey('ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id, $sesArray);
     // #54634, 131128, dwildt, 1+

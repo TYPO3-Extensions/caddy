@@ -900,11 +900,9 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     switch ( true )
     {
       case( $this->requirementsWoEpayment() ):
-//var_dump( __METHOD__, __LINE__ );
         $this->sessionDataAddWoEpayment();
         break;
       case( $this->paymillLib->getPaymillToken() ):
-//var_dump( __METHOD__, __LINE__ );
         $this->sessionDataAddWiEpayment();
         break;
       default:
@@ -934,6 +932,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     $sesArray[ 'e-payment' ][ 'paymill' ][ 'token' ] = $this->paymillLib->getPaymillToken();
     $sesArray[ 'e-payment' ][ 'paymill' ][ 'client' ][ 'id' ] = $this->paymillLib->getPaymillClientId();
     $sesArray[ 'e-payment' ][ 'paymill' ][ 'payment' ][ 'id' ] = $this->paymillLib->getPaymillPaymentId();
+    $sesArray[ 'e-payment' ][ 'woEpayment' ] = false;
 
     $GLOBALS[ 'TSFE' ]->fe_user->setKey( 'ses', $this->extKey . '_' . $this->pid, $sesArray );
     // save session
@@ -1001,8 +1000,8 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
     {
       return;
     }
-//$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
-//var_dump( __METHOD__, __LINE__, $prompt);
+$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( );
+var_dump( __METHOD__, __LINE__, $prompt);
 
     $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pid );
     // :TODO: Recalculte option costs (option costs without payment)

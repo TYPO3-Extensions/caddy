@@ -219,7 +219,7 @@ Bezahle mit den vorgeschlagenen Daten! Keine Daten? <a href="https://developers.
           Erhalten Sie weiterhin einen Fehler, ändern Sie Ihre Zahlungsmethode.
         </li>
       </ul>
-      Bitte benachrichtigen Sie uns, falls der Fehler dann immer auftreten sollte.
+      Bitte benachrichtigen Sie uns, falls der Fehler dann immer noch auftreten sollte.
       ]]></label>
       <label index="transaction-not-operated">Es wurde keine Zahlung ausgelöst.</label>
     </languageKey>
