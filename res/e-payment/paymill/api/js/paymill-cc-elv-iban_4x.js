@@ -45,6 +45,9 @@ jQuery(document).ready(function($) {
         case("field_invalid_account_holder"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-elv-holder"]);
           break;
+        case("field_invalid_amount"):
+          $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-amount"]);
+          break;
         case("field_invalid_amount_int"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-amount-int"] + ": " + ($('#amount').val() * 100));
           break;
@@ -164,9 +167,7 @@ jQuery(document).ready(function($) {
         }
         params = {
           //amount_int:     $('#amount').val() * 100,  // E.g. "15" for 0.15 Eur
-//          141129
-//          amount_int: Math.round($('#amount').val() * 100), // E.g. "15" for 0.15 Eur
-          amount_int: 100, // E.g. "15" for 0.15 Eur
+          amount_int: Math.round($('#amount').text() * 100), // E.g. "15" for 0.15 Eur
           currency: $('#card-currency').val(), // ISO 4217 e.g. "EUR"
           number: $('#card-number').val(),
           exp_month: expiry[0],

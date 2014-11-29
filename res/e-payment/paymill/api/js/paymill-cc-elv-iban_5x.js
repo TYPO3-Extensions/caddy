@@ -45,6 +45,9 @@ jQuery(document).ready(function($) {
         case("field_invalid_account_holder"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-elv-holder"]);
           break;
+        case("field_invalid_amount"):
+          $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-amount"]);
+          break;
         case("field_invalid_amount_int"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-amount-int"] + ": " + ($('#amount').val() * 100));
           break;
@@ -57,6 +60,9 @@ jQuery(document).ready(function($) {
           break;
         case("field_invalid_currency"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-currency"]);
+          break;
+        case("invalid_payment_data"):
+          $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid_payment_data"]);
           break;
         case("invalid_public_key"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid_public_key"]);
@@ -100,7 +106,7 @@ jQuery(document).ready(function($) {
     {
       // Token in das Formular einfügen damit es an den Server übergeben wird
       form.append("<input type='hidden' name='tx_caddy_pi1[e-payment][paymill][token]' value='" + token + "'/>");
-console.debug("token: " + token);
+      //console.debug("token: " + token);
     }
     form.get(formIndex).submit();
   }
@@ -124,7 +130,7 @@ console.debug("token: " + token);
     //var paymenttype = $('.payment-type-active').attr('href');
     // 141009, dwildt, 2-: version 5
     var paymenttype = '#' + $('div.payment-type-active').attr('id');
-    console.debug("paymenttype: " + paymenttype);
+    //console.debug("paymenttype: " + paymenttype);
     var defaultToken = null;
     switch (paymenttype) {
       case "#payment-type-cashinadvance":
@@ -170,11 +176,12 @@ console.debug("token: " + token);
             $('#card-cvc').val("000");
           }
         }
+console.debug("#amount: " + Math.round($('#amount').text() * 100));
+console.debug("#card-currency: " + $('#card-currency').val());
         params = {
           //amount_int:     $('#amount').val() * 100,  // E.g. "15" for 0.15 Eur
-//          141129
-//          amount_int: Math.round($('#amount').val() * 100), // E.g. "15" for 0.15 Eur
-          amount_int: 100, // E.g. "15" for 0.15 Eur
+          //amount_int: Math.round($('#amount').text() * 100), // E.g. "15" for 0.15 Eur
+          amount_int: 29997, // E.g. "15" for 0.15 Eur
           currency: $('#card-currency').val(), // ISO 4217 e.g. "EUR"
           number: $('#card-number').val(),
           exp_month: expiry[0],
