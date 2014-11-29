@@ -6,6 +6,9 @@
  *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
+ *  Caddy is a fork of wt_cart (version 1.4.6)
+ *  (c) wt_cart 2010-2012 - wt_cart Development Team <info@wt-cart.com>
+ *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -115,7 +118,7 @@ if ( $version < 6002000 )
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.3
+ * @version	6.0.0
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -124,28 +127,35 @@ class tx_caddy_pi1 extends tslib_pibase
   public $extKey = 'caddy';
   public $prefixId = 'tx_caddy_pi1';
   public $scriptRelPath = 'pi1/class.tx_caddy_pi1.php';
+  public $arr_extConf = null;
   private $accessByIP = null;
+  private $product = array();
   private $newProduct = array();
+  private $markerArray = array();
+  private $outerMarkerArray = array();
   public $gpvar = array();
   public $pid = null;
   private $caddy = null;
   private $clean = null;
-  public $dynamicMarkers = null;
-  public $drs = null;
-  public $flexform = null;
-  public $powermail = null;
-  private $session = null;
-  private $template = null;
-  public $local_cObj = null;
+  public $cObj = null;
   public $conf = null;
-  public $arr_extConf = null;
-  public $tmpl = null;
+  public $drs = null;
+  public $dynamicMarkers = null;
+  public $flexform = null;
+  public $gpvar = array();
+  public $local_cObj = null;
+  private $newProduct = array();
   private $numberDeliveryorderCurrent = null;
   private $numberDeliveryorderRegistry = null;
   private $numberInvoiceCurrent = null;
   private $numberInvoiceRegistry = null;
   private $numberOrderCurrent = null;
   private $numberOrderRegistry = null;
+  public $pid = null;
+  public $powermail = null;
+  private $session = null;
+  private $template = null;
+  public $tmpl = null;
 
   /*   * *********************************************
    *
@@ -467,7 +477,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function clean()
   {
-    $this->clean->cleanMain();
+    $this->clean->main();
   }
 
   /*   * *********************************************
@@ -574,7 +584,7 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->pi_initPIflexForm();
 
     $this->initInstances();
-    $this->drs->drsInit();
+    $this->drs->init();
     $this->initFlexform();
     $this->initPid();
     $this->initAccessByIp();
@@ -591,6 +601,8 @@ class tx_caddy_pi1 extends tslib_pibase
     $this->caddy->setContentRow( $this->cObj->data );
 
     $this->session->setParentObject( $this );
+//    var_dump( __METHOD__, __LINE__ );
+//    die( ":(" );
   }
 
   /**
@@ -709,7 +721,10 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initFlexform()
   {
-    $this->flexform->main();
+    $this->flexform->drs = $this->drs;
+    $this->flexform->pi_getFFvalue = $this->pi_getFFvalue;
+    $this->flexform->row = $this->row;
+    $this->flexform->flexform();
   }
 
   /**
@@ -869,8 +884,7 @@ class tx_caddy_pi1 extends tslib_pibase
     // Class with methods for get clean values
     require_once( 'class.tx_caddy_pi1_clean.php' );
     $this->clean = t3lib_div::makeInstance( 'tx_caddy_pi1_clean' );
-    // #i0063, 141128, dwildt, 1-
-    //$this->clean->pObj = $this;
+    $this->clean->pObj = $this;
     $this->clean->row = $this->cObj->data;
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
@@ -878,35 +892,31 @@ class tx_caddy_pi1 extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    // #i0063, 141128, dwildt, 1-
-    //$this->drs->pObj = $this;
-    $this->drs->cObj->data = $this->cObj->data;
+    $this->drs->pObj = $this;
+    $this->drs->row = $this->cObj->data;
 
     // Class with methods for get flexform values
     require_once( 'class.tx_caddy_pi1_flexform.php' );
     $this->flexform = t3lib_div::makeInstance( 'tx_caddy_pi1_flexform' );
-    // #i0063, 141128, dwildt, 2-
-    //$this->flexform->pObj = $this;
-    //$this->flexform->row = $this->cObj->data;
+    $this->flexform->pObj = $this;
+    $this->flexform->row = $this->cObj->data;
+
     // #53679, 131115, dwildt, 4+
     require_once( 'class.tx_caddy_pi1_javascript.php' );
     $this->javascript = t3lib_div::makeInstance( 'tx_caddy_pi1_javascript' );
-    // #i0063, 141128, dwildt, 2-
-    //$this->javascript->pObj = $this;
-    //$this->javascript->row = $this->cObj->data;
+    $this->javascript->pObj = $this;
+    $this->javascript->row = $this->cObj->data;
 
     require_once( $path2lib . 'powermail/class.tx_caddy_powermail.php' );
     $this->powermail = t3lib_div::makeInstance( 'tx_caddy_powermail' );
-    // #i0063, 141128, dwildt, 1-
     $this->powermail->pObj = $this;
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session = t3lib_div::makeInstance( 'tx_caddy_session' );
 
-    require_once( 'class.tx_caddy_pi1_template.php' );
-    $this->template = t3lib_div::makeInstance( 'tx_caddy_pi1_template' );
-    // #i0063, 141128, dwildt, 1-
-    //$this->template->pObj = $this;
+    require_once( $path2lib . 'class.tx_caddy_template.php' );
+    $this->template = t3lib_div::makeInstance( 'tx_caddy_template' );
+    $this->template->pObj = $this;
   }
 
   /**
@@ -971,7 +981,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initPidClasses()
   {
-    $this->clean->initPidCaddy( $this->pid );
+    $this->clean->cleanInitPidCaddy( $this->pid );
     $this->dynamicMarkers->initPidCaddy( $this->pid );
   }
 
@@ -999,7 +1009,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initTemplate()
   {
-    $this->tmpl = $this->template->templateMain();
+    $this->tmpl = $this->template->main();
   }
 
   /*   * *********************************************

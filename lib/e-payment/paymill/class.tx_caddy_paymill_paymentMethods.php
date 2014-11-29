@@ -294,7 +294,7 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version     6.0.3
+  * @version     4.0.6
   * @since       4.0.6
   */
   private function initInstancesDrs( )
@@ -303,10 +303,8 @@ class tx_caddy_paymill_paymentMethods extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    // #i0063, 141128, dwildt 2-/1+
-    //$this->drs->pObj = $this;
-    //$this->drs->row = $this->cObj->data;
-    $this->drs->cObj->data = $this->cObj->data;
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
   }
 
  /**

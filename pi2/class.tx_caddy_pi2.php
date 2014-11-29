@@ -261,7 +261,7 @@ class tx_caddy_pi2 extends tslib_pibase
   *
   * @return	void
   * @access private
-  * @version    6.0.3
+  * @version    2.1.0
   * @since      2.1.0
   */
   private function initInstances( )
@@ -270,10 +270,8 @@ class tx_caddy_pi2 extends tslib_pibase
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
-    // #i0063, 141128, dwildt 2-/1+
-    //$this->drs->pObj = $this;
-    //$this->drs->row = $this->cObj->data;
-    $this->drs->cObj->data = $this->cObj->data;
+    $this->drs->pObj        = $this;
+    $this->drs->row         = $this->cObj->data;
 
     require_once( $path2lib . 'class.tx_caddy_dynamicmarkers.php' );
     $this->dynamicMarkers = t3lib_div::makeInstance( 'tx_caddy_dynamicmarkers' );

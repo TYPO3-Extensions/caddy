@@ -45,13 +45,25 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.3
+ * @version	4.0.5
  * @since       1.4.6
  */
-class tx_caddy_drs extends tx_caddy_pi1
+class tx_caddy_drs
 {
 
+  public $prefixId = 'tx_caddy_drs';
+
+  // same as class name
+  public $scriptRelPath = 'lib/drs/class.tx_caddy_drs.php';
+
+  // path to this script relative to the extension dir.
+  public $extKey = 'caddy';
+
+    // Parent object
+  public $pObj = null;
+
     // Current row
+  public $row = null;
 
   public $drsError        = false;
   public $drsWarn         = false;
@@ -81,14 +93,14 @@ class tx_caddy_drs extends tx_caddy_pi1
 
 
  /**
-  * drsInit( ): Init the DRS - Development Reportinmg System
+  * init( ): Init the DRS - Development Reportinmg System
   *
   * @return	void
   * @access public
   * @version    2.0.0
   * @since      2.0.0
   */
-  public function drsInit( )
+  public function init( )
   {
     $this->initByExtmngr( );
 
@@ -113,17 +125,18 @@ class tx_caddy_drs extends tx_caddy_pi1
   private function initByExtmngr( )
   {
 
-    switch( $this->arr_extConf['debuggingDrs'] )
+    switch( $this->pObj->arr_extConf['debuggingDrs'] )
     {
       case( 'Disabled' ):
       case( null ):
         return;
+        break;
       case( 'Enabled (for debugging only!)' ):
           // Follow the workflow
         break;
       default:
         $prompt = 'Error: debuggingDrs is undefined.<br />
-          value is ' . $this->arr_extConf['debuggingDrs'] . '<br />
+          value is ' . $this->pObj->arr_extConf['debuggingDrs'] . '<br />
           <br />
           ' . __METHOD__ . ' line(' . __LINE__. ')';
         die( $prompt );
@@ -131,15 +144,15 @@ class tx_caddy_drs extends tx_caddy_pi1
 
     $this->zzDrsPromptsTrue( );
 
-    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->arr_extConf['debuggingDrs'];
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
+    $prompt = 'The DRS - Development Reporting System is enabled: ' . $this->pObj->arr_extConf['debuggingDrs'];
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
     $prompt = 'The DRS is enabled by the extension manager.';
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $str_header = $this->cObj->data['header'];
-    $int_uid    = $this->cObj->data['uid'];
-    $int_pid    = $this->cObj->data['pid'];
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
+    $str_header = $this->row['header'];
+    $int_uid    = $this->row['uid'];
+    $int_pid    = $this->row['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
  /**
@@ -154,7 +167,7 @@ class tx_caddy_drs extends tx_caddy_pi1
   {
 
       // RETURN : parent object doesn't have any flexform
-    if( ! is_object( $this->flexform ) )
+    if( ! is_object( $this->pObj->flexform ) )
     {
       return;
 
@@ -162,11 +175,11 @@ class tx_caddy_drs extends tx_caddy_pi1
       // sdefDrs
     $sheet = 'sDEF';
     $field = 'sdefDrs';
-    $this->flexform->sdefDrs = $this->flexform->zzFfValue( $sheet, $field, false );
+    $this->pObj->flexform->sdefDrs = $this->pObj->flexform->zzFfValue( $sheet, $field, false );
       // sdefDrs
 
       // Enable the DRS by TypoScript
-    if( empty( $this->flexform->sdefDrs ) )
+    if( empty( $this->pObj->flexform->sdefDrs ) )
     {
       return;
     }
@@ -174,12 +187,12 @@ class tx_caddy_drs extends tx_caddy_pi1
     $this->zzDrsPromptsTrue( );
 
     $prompt = 'The DRS - Development Reporting System is enabled by the flexform (frontend mode).';
-    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->extKey, 0 );
-    $str_header = $this->cObj->data['header'];
-    $int_uid    = $this->cObj->data['uid'];
-    $int_pid    = $this->cObj->data['pid'];
+    t3lib_div::devlog( '[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0 );
+    $str_header = $this->row['header'];
+    $int_uid    = $this->row['uid'];
+    $int_pid    = $this->row['pid'];
     $prompt = '"' . $str_header . '" (pid: ' . $int_pid . ', uid: ' . $int_uid . ')';
-    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->extKey, 0);
+    t3lib_div :: devlog('[INFO/DRS] ' . $prompt, $this->pObj->extKey, 0);
   }
 
  /**

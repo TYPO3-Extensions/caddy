@@ -637,10 +637,6 @@ class tx_caddy_paymill_lib extends tslib_pibase
     }
 
     $this->drs = $pObj->drs;
-
-    // #i0061, 141126, dwildt+
-    var_dump( __METHOD__, __LINE__, $this->drs );
-    die( );
   }
 
  /**

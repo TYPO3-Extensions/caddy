@@ -429,13 +429,13 @@ plugin.caddy {
   # cat=caddy - symbols and service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   symbol.sponsors = Click me!
 
-  # cat=caddy - tax//150; type=text; label= Reduced: Tax rate for reduced items (e.g. 7). Value will be displayed.
+  # cat=caddy - tax//150; type=text; label= Tax rate: Tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
-  # cat=caddy - tax//155; type=text; label= Reduced per cent: Tax rate for reduced items (e.g. 0.07). Used for calculation.
+  # cat=caddy - tax//155; type=text; label= Tax rate: Tax rate for reduced items (e.g. 0.07). Used for calculation.
   tax.reducedCalc = 0.07
-  # cat=caddy - tax//160; type=text; label= Normal: Tax rate for normal items (e.g. 19). Value will be displayed.
+  # cat=caddy - tax//160; type=text; label= Tax rate: Tax rate for normal items (e.g. 19). Value will be displayed.
   tax.normal = 19
-  # cat=caddy - tax//165; type=text; label= Normal reduced: Tax rate for normal items (e.g. 0.19). Used for calculation.
+  # cat=caddy - tax//165; type=text; label= Tax rate: Tax rate for normal items (e.g. 0.19). Used for calculation.
   tax.normalCalc = 0.19
   # cat=caddy - tax/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   tax.externalLinks = Click me!

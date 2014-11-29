@@ -75,34 +75,50 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.3
+ * @version	4.0.7
  * @since       1.4.6
  */
-class tx_caddy_pi1_clean extends tx_caddy_pi1
+class tx_caddy_pi1_clean
 {
+
+  public $prefixId = 'tx_caddy_pi1';
+
+  // same as class name
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1_clean.php';
+
+  // path to this script relative to the extension dir.
+  public $extKey = 'caddy';
+
+    // Parent object
+  public $pObj = null;
+    // Current row
+  public $row = null;
+
   private $pidCaddy = null;
+
+  private $local_cObj = null;
 
 
  /**
-  * cleanMain( )
+  * main( )
   *
   * @return	void
   * @access public
-  * @version    6.0.3
+  * @version    2.0.0
   * @since      2.0.0
   */
-  public function cleanMain( )
+  public function main( )
   {
-    $this->init( $this->pidCaddy );
+    $this->cleanInit( $this->pidCaddy );
 
       // RETURN : powermail form isn't sent. Nothing to clean
-    if( empty( $this->powermail->sent ) )
+    if( empty( $this->pObj->powermail->sent ) )
     {
         // DRS
-      if( $this->drs->drsClean )
+      if( $this->pObj->drs->drsClean )
       {
         $prompt = 'The powermail form isn\'t sent, nothing to clean up.';
-        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS
       return;
@@ -110,10 +126,10 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       // RETURN : powermail form isn't sent. Nothing to clean
 
       // DRS
-    if( $this->drs->drsClean )
+    if( $this->pObj->drs->drsClean )
     {
       $prompt = 'The powermail form is sent. Database, numbers and session will cleaned up.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
 
@@ -155,10 +171,10 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
     }
 
     $sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $this->pidCaddy );
-    $this->local_cObj->start( $sesArray, $this->conf['db.']['table'] );
+    $this->local_cObj->start( $sesArray, $this->pObj->conf['db.']['table'] );
 
       // DRS
-    if( $this->drs->drsCobj )
+    if( $this->pObj->drs->drsCobj )
     {
       $data   = var_export( $this->local_cObj->data, true );
       $prompt = 'cObj->data: ' . $data;
@@ -168,7 +184,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
 
       // Set record
     $record = array(
-      'pid'           => $this->pid,
+      'pid'           => $this->pObj->pid,
       'tstamp'        => $time,
       'crdate'        => $time,
       'customerEmail' => $this->getPmFieldEmailCustomerEmail( ),
@@ -197,10 +213,10 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       // exit in case of error
 
       // DRS
-    if( $this->drs->drsClean )
+    if( $this->pObj->drs->drsClean )
     {
       $prompt = 'The powermail form is sent, a tx_caddy_order record is inserted into the database.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
 
@@ -257,7 +273,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
     unset( $_GET[ 'tx_powermail_pi1' ] );
     unset( $_POST[ 'tx_powermail_pi1' ] );
 
-    if( ! $this->drs->drsError )
+    if( ! $this->pObj->drs->drsError )
     {
       return true;
     }
@@ -341,8 +357,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       case( $pdfDeliveryorderToVendor ):
         $fileDeliveryorder  = $this->local_cObj->cObjGetSingle
                               (
-                                $this->conf['pdf.']['deliveryorder.']['filename'],
-                                $this->conf['pdf.']['deliveryorder.']['filename.']
+                                $this->pObj->conf['pdf.']['deliveryorder.']['filename'],
+                                $this->pObj->conf['pdf.']['deliveryorder.']['filename.']
                               );
         break;
     }
@@ -352,8 +368,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       case( $pdfInvoiceToVendor ):
         $fileInvoice  = $this->local_cObj->cObjGetSingle
                         (
-                          $this->conf['pdf.']['invoice.']['filename'],
-                          $this->conf['pdf.']['invoice.']['filename.']
+                          $this->pObj->conf['pdf.']['invoice.']['filename'],
+                          $this->pObj->conf['pdf.']['invoice.']['filename.']
                         );
         break;
     }
@@ -363,8 +379,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       case( $pdfRevocationToVendor ):
         $fileRevocation  = $this->local_cObj->cObjGetSingle
                       (
-                        $this->conf['pdf.']['revocation.']['filename'],
-                        $this->conf['pdf.']['revocation.']['filename.']
+                        $this->pObj->conf['pdf.']['revocation.']['filename'],
+                        $this->pObj->conf['pdf.']['revocation.']['filename.']
                       );
         break;
     }
@@ -374,8 +390,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
       case( $pdfTermsToVendor ):
         $fileTerms  = $this->local_cObj->cObjGetSingle
                       (
-                        $this->conf['pdf.']['terms.']['filename'],
-                        $this->conf['pdf.']['terms.']['filename.']
+                        $this->pObj->conf['pdf.']['terms.']['filename'],
+                        $this->pObj->conf['pdf.']['terms.']['filename.']
                       );
         break;
     }
@@ -506,7 +522,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
  */
   public function getPid( $pid=null )
   {
-    $this->initPidCaddy( $pid );
+    $this->cleanInitPidCaddy( $pid );
     return $this->pidCaddy;
   }
 
@@ -528,8 +544,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderAddress( )
   {
-    $pmUid  = $this->flexform->deliveryorderAddress;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderAddress;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -543,8 +559,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderCity( )
   {
-    $pmUid  = $this->flexform->deliveryorderCity;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderCity;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -558,8 +574,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderCompany( )
   {
-    $pmUid  = $this->flexform->deliveryorderCompany;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderCompany;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -573,8 +589,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderCountry( )
   {
-    $pmUid  = $this->flexform->deliveryorderCountry;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderCountry;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -588,8 +604,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderFirstname( )
   {
-    $pmUid  = $this->flexform->deliveryorderFirstname;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderFirstname;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -603,8 +619,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderLastname( )
   {
-    $pmUid  = $this->flexform->deliveryorderLastname;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderLastname;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -618,8 +634,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldDeliveryorderZip( )
   {
-    $pmUid  = $this->flexform->deliveryorderZip;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->deliveryorderZip;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -633,8 +649,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldEmailCustomerEmail( )
   {
-    $pmUid  = $this->flexform->emailCustomerEmail;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->emailCustomerEmail;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -648,8 +664,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceAddress( )
   {
-    $pmUid  = $this->flexform->invoiceAddress;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceAddress;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -663,8 +679,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceCity( )
   {
-    $pmUid  = $this->flexform->invoiceCity;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceCity;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -678,8 +694,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceCompany( )
   {
-    $pmUid  = $this->flexform->invoiceCompany;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceCompany;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -693,8 +709,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceCountry( )
   {
-    $pmUid  = $this->flexform->invoiceCountry;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceCountry;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -708,8 +724,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceFirstname( )
   {
-    $pmUid  = $this->flexform->invoiceFirstname;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceFirstname;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -723,8 +739,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceLastname( )
   {
-    $pmUid  = $this->flexform->invoiceLastname;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceLastname;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -738,8 +754,8 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   */
   private function getPmFieldInvoiceZip( )
   {
-    $pmUid  = $this->flexform->invoiceZip;
-    $value  = $this->powermail->getFieldById( $pmUid );
+    $pmUid  = $this->pObj->flexform->invoiceZip;
+    $value  = $this->pObj->powermail->getFieldById( $pmUid );
     return $value;
   }
 
@@ -752,7 +768,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   **********************************************/
 
  /**
-  * init( )
+  * cleanInit( )
   *
   * @param	integer		$pidCaddy: pid of the page with the current Caddy plugin
   * @return	void
@@ -761,14 +777,15 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function init( $pidCaddy=null )
+  private function cleanInit( $pidCaddy=null )
   {
+    $this->initVars( );
     $this->initInstances( );
     $this->initPidCaddy( $pidCaddy );
   }
 
  /**
-  * initInstances( )
+  * cleanInitInstances( )
   *
   * @return	void
   * @access private
@@ -776,22 +793,22 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function initInstances( )
+  private function cleanInitInstances( )
   {
-    if( ! ( $this->initInstances === null ) )
+    if( ! ( $this->cleanInitInstances === null ) )
     {
       return;
     }
 
-    $this->initInstancesSession( );
-    $this->initInstancesStockmanager( );
+    $this->cleanInitInstancesSession( );
+    $this->cleanInitInstancesStockmanager( );
 
-    $this->initInstances = true;
+    $this->cleanInitInstances = true;
   }
 
 
  /**
-  * initInstancesSession( )
+  * cleanInitInstancesSession( )
   *
   * @return	void
   * @access private
@@ -799,7 +816,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function initInstancesSession( )
+  private function cleanInitInstancesSession( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
@@ -809,7 +826,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   }
 
  /**
-  * initInstancesStockmanager( )
+  * cleanInitInstancesStockmanager( )
   *
   * @return	void
   * @access private
@@ -817,13 +834,30 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   * @version    4.0.7
   * @since      4.0.7
   */
-  private function initInstancesStockmanager( )
+  private function cleanInitInstancesStockmanager( )
   {
     $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
 
     require_once( $path2lib . 'caddy/class.tx_caddy_stockmanager.php' );
     $this->stockmanager = t3lib_div::makeInstance( 'tx_caddy_stockmanager' );
     $this->stockmanager->setParentObject( $this );
+  }
+
+ /**
+  * initVars( )
+  *
+  * @return	void
+  * @access private
+  * @internal   #54628
+  * @version    4.0.7
+  * @since      4.0.7
+  */
+  private function initVars( )
+  {
+    $this->cObj       = $this->pObj->cObj;
+    $this->conf       = $this->pObj->conf;
+    $this->drs        = $this->pObj->drs;
+    $this->local_cObj = $this->pObj->local_cObj;
   }
 
  /**
@@ -836,7 +870,7 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
   * @version    4.0.3
   * @since      4.0.3
   */
-  public function initPidCaddy( $pidCaddy=null )
+  public function cleanInitPidCaddy( $pidCaddy=null )
   {
     $this->pidCaddy = ( int ) $pidCaddy;
     if( $pidCaddy === null )
@@ -899,10 +933,10 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS
-    if( $this->drs->drsClean )
+    if( $this->pObj->drs->drsClean )
     {
       $prompt = 'Delivery order data are added to the session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
   }
@@ -938,10 +972,10 @@ class tx_caddy_pi1_clean extends tx_caddy_pi1
     $GLOBALS['TSFE']->storeSessionData(); // Save session
 
       // DRS
-    if( $this->drs->drsClean )
+    if( $this->pObj->drs->drsClean )
     {
       $prompt = 'Invoice data are added to the session.';
-      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/CLEAN] ' . $prompt, $this->pObj->extKey, 0 );
     }
       // DRS
   }

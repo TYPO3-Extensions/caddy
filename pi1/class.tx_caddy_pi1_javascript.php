@@ -2,7 +2,7 @@
 /***************************************************************
 *  Copyright notice
 *
-*  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+*  (c) 2013 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
 *  All rights reserved
 *
 *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -27,7 +27,7 @@
 *
 * @author    Dirk Wildt <http://wildt.at.die-netzmacher.de>
 *
-* @version  6.0.3
+* @version  4.0.0
 * @since    4.0.0
 *
 * @internal     #53679
@@ -66,18 +66,18 @@
 class tx_caddy_pi1_javascript
 {
 
-//  public $prefixId = 'tx_caddy_pi1';
-//
-//  // same as class name
-//  public $scriptRelPath = 'pi1/class.tx_caddy_pi1_javascript.php';
-//
-//  // path to this script relative to the extension dir.
-//  public $extKey = 'caddy';
-//
-//    // Parent object
-//  public $pObj = null;
-//    // Current row
-//  public $row = null;
+  public $prefixId = 'tx_caddy_pi1';
+
+  // same as class name
+  public $scriptRelPath = 'pi1/class.tx_caddy_pi1_javascript.php';
+
+  // path to this script relative to the extension dir.
+  public $extKey = 'caddy';
+
+    // Parent object
+  public $pObj = null;
+    // Current row
+  public $row = null;
 
   private $local_cObj = null;
 
@@ -96,6 +96,8 @@ class tx_caddy_pi1_javascript
 //      // #i0034, 131128, dwildt, 1+
 //    return;
 
+    $this->local_cObj = $this->pObj->local_cObj;
+
     $this->addJssFilesJqueryPluginsCaddyCSS( );
     $this->addJssFilesJqueryPluginsCaddyPlugin( );
     $this->addJssFilesJqueryPluginsCaddyLocalisation( );
@@ -113,7 +115,7 @@ class tx_caddy_pi1_javascript
   private function addJssFilesJqueryPluginsCaddyCSS( )
   {
       // Short variable
-    $tsPathToCaddy = $this->conf['javascript.']['jquery.']['plugins.']['caddy.'];
+    $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
 
       // Include the inline css
     $name         = 'jquery_plugins_caddy_css';
@@ -135,7 +137,7 @@ class tx_caddy_pi1_javascript
   private function addJssFilesJqueryPluginsCaddyLibrary( )
   {
       // Short variable
-    $tsPathToCaddy = $this->conf['javascript.']['jquery.']['plugins.']['caddy.'];
+    $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
 
       // Include the library code
     $name         = 'jquery_plugins_caddy_library';
@@ -166,7 +168,7 @@ class tx_caddy_pi1_javascript
       // RETURN : current language is English
 
       // Short variable
-    $tsPathToCaddy = $this->conf['javascript.']['jquery.']['plugins.']['caddy.'];
+    $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
 
       // Include localised file, if current language isn't English
     $name         = 'jquery_plugins_caddy_localisation';
@@ -193,7 +195,7 @@ class tx_caddy_pi1_javascript
   private function addJssFilesJqueryPluginsCaddyPlugin( )
   {
       // Short variable
-    $tsPathToCaddy = $this->conf['javascript.']['jquery.']['plugins.']['caddy.'];
+    $tsPathToCaddy = $this->pObj->conf['javascript.']['jquery.']['plugins.']['caddy.'];
 
       // Include the plugin code
     $name         = 'jquery_plugins_caddy_plugin';
@@ -222,10 +224,10 @@ class tx_caddy_pi1_javascript
       // RETURN file is loaded
     if( isset ( $GLOBALS['TSFE']->additionalHeaderData[ $this->extKey . '_' . $name ] ) )
     {
-      if( $this->drs->drsFlexform || $this->drs->drsJavascript )
+      if( $this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript )
       {
         $prompt = 'file isn\'t added again: ' . $path;
-        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
       }
       return true;
     }
@@ -249,18 +251,18 @@ class tx_caddy_pi1_javascript
 
     $marker = $this->getHashMarker( $marker );
 //var_dump( __METHOD__, __LINE__, $marker );
-    $css    = $this->cObj->substituteMarkerArray( $css, $marker );
-    $css = $this->dynamicMarkers->main( $css, $this );
+    $css    = $this->pObj->cObj->substituteMarkerArray( $css, $marker );
+    $css = $this->pObj->dynamicMarkers->main( $css, $this->pObj );
 
-    $GLOBALS['TSFE']->additionalHeaderData[ $this->extKey.'_'.$name ] = $css;
+    $GLOBALS['TSFE']->additionalHeaderData[ $this->pObj->extKey.'_'.$name ] = $css;
 
       // DRS
-    if ($this->drs->drsFlexform || $this->drs->drsJavascript)
+    if ($this->pObj->b_drs_flexform || $this->pObj->b_drs_javascript)
     {
       $prompt = 'file is included: ' . $path;
-      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
       $prompt = 'Change it? Configure: \''.$keyPathTs.'\'';
-      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
     }
       // DRS
 
@@ -278,15 +280,15 @@ class tx_caddy_pi1_javascript
  */
   private function addJssFilePromptError( $path, $keyPathTs )
   {
-    if( empty( $this->objFlexform->str_caddy_libraries ) )
+    if( empty( $this->pObj->objFlexform->str_caddy_libraries ) )
     {
         // DRS
-      if( $this->drs->drsJavascript )
+      if( $this->pObj->drs->drsJavascript )
       {
         $prompt = 'Flexform Javascript|caddy_libraries is empty.';
-        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
         $prompt = 'Script isn\'t included.';
-        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+        t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
       }
         // DRS
       return true;
@@ -294,12 +296,12 @@ class tx_caddy_pi1_javascript
       // RETURN, there isn't any file for embedding
 
       // DRS
-    if( $this->drs->drsError )
+    if( $this->pObj->drs->drsError )
     {
       $prompt = 'Script can not be included: ' . $path;
-      t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->extKey, 3 );
+      t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->pObj->extKey, 3 );
       $prompt = 'Solve it? Configure: \''.$keyPathTs.'\'';
-      t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->pObj->extKey, 1 );
     }
       // DRS
 
@@ -374,25 +376,25 @@ class tx_caddy_pi1_javascript
   private function addJssFileToHead( $path, $absPath, $name, $keyPathTs, $inline, $marker )
   {
       // RETURN : script is included
-    if( isset( $GLOBALS[ 'TSFE' ]->additionalHeaderData[ $this->extKey . '_' . $name ] ) )
+    if( isset( $GLOBALS[ 'TSFE' ]->additionalHeaderData[ $this->pObj->extKey . '_' . $name ] ) )
     {
       return true;
     }
       // RETURN : script is included
 
     $script = $this->getTagScript( $inline, $absPath, $path, $marker );
-    $key    = $this->extKey . '_' . $name;
+    $key    = $this->pObj->extKey . '_' . $name;
     $GLOBALS[ 'TSFE' ]->additionalHeaderData[ $key ] = $script;
 
       // DRS
-    if( $this->drs->drsJavascript )
+    if( $this->pObj->drs->drsJavascript )
     {
       $prompt = 'file is placed in the header section: ' . $path;
-      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
       $prompt = 'Change the path? Configure: \'' . $keyPathTs . '\'';
-      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
       $prompt = 'Change the section for all JSS files? Take the Constant Editor: [Browser - JAVASCRIPT]';
-      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
     }
       // DRS
 
@@ -416,24 +418,24 @@ class tx_caddy_pi1_javascript
  */
   private function addJssFileToFooter( $path, $absPath, $name, $keyPathTs, $inline, $marker )
   {
-    if( isset( $GLOBALS[ 'TSFE' ]->additionalFooterData[ $this->extKey . '_' . $name ] ) )
+    if( isset( $GLOBALS[ 'TSFE' ]->additionalFooterData[ $this->pObj->extKey . '_' . $name ] ) )
     {
       return true;
     }
 
     $script = $this->getTagScript( $inline, $absPath, $path, $marker );
-    $key    = $this->extKey . '_' . $name;
+    $key    = $this->pObj->extKey . '_' . $name;
     $GLOBALS[ 'TSFE' ]->additionalFooterData[ $key ] = $script;
 
       // DRS
-    if( $this->drs->drsJavascript )
+    if( $this->pObj->drs->drsJavascript )
     {
       $prompt = 'file is placed in the footer section: ' . $path;
-      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->extKey, 0 );
+      t3lib_div::devlog( '[INFO/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 0 );
       $prompt = 'Change the path? Configure: \'' . $keyPathTs . '\'';
-      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
       $prompt = 'Change the section for all JSS files? Take the Constant Editor: [Browser - JAVASCRIPT]';
-      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->extKey, 1 );
+      t3lib_div::devlog( '[HELP/FLEXFORM+JSS] ' . $prompt, $this->pObj->extKey, 1 );
     }
       // DRS
 
@@ -462,13 +464,13 @@ class tx_caddy_pi1_javascript
       $hashKey          = '###' . strtoupper( $keyWoDot ) . '###';
       $coa              = $marker[ $keyWoDot ];
       $conf             = $marker[ $key ];
-      $marker[$hashKey] = $this->cObj->cObjGetSingle( $coa, $conf );
+      $marker[$hashKey] = $this->pObj->cObj->cObjGetSingle( $coa, $conf );
       unset( $marker[ $keyWoDot ] );
       unset( $marker[ $key ] );
     }
 
       // #i0041, 131231, dwildt, 1+
-    $marker['###UID_POWERMAIL_FORM###'] = $this->powermail->fieldUid;
+    $marker['###UID_POWERMAIL_FORM###'] = $this->pObj->powermail->fieldUid;
     return $marker;
   }
 
@@ -487,12 +489,12 @@ class tx_caddy_pi1_javascript
     if( empty( $path ) )
     {
         // DRS
-      if( $this->drs->drsWarn )
+      if( $this->pObj->drs->drsWarn )
       {
         $prompt = 'file can not be included. Path is empty. Maybe it is ok.';
-        t3lib_div::devlog( '[WARN/JSS] ' . $prompt, $this->extKey, 2 );
+        t3lib_div::devlog( '[WARN/JSS] ' . $prompt, $this->pObj->extKey, 2 );
         $prompt = 'Change it? Configure: \'' . $keyPathTs . '\'';
-        t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->extKey, 1 );
+        t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->pObj->extKey, 1 );
       }
         // DRS
       return false;
@@ -531,12 +533,12 @@ class tx_caddy_pi1_javascript
     if( ! $bool_file_exists )
     {
         // DRS
-      if ( $this->drs->drsError )
+      if ( $this->pObj->drs->drsError )
       {
         $prompt = 'Script can not be included. File doesn\'t exist: ' . $path;
-        t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->extKey, 3 );
+        t3lib_div::devlog( '[ERROR/JSS] ' . $prompt, $this->pObj->extKey, 3 );
         $prompt = 'Solve it? Configure: \''.$keyPathTs.'\'';
-        t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->extKey, 1 );
+        t3lib_div::devlog( '[HELP/JSS] ' . $prompt, $this->pObj->extKey, 1 );
       }
         // DRS
       return false;
@@ -663,8 +665,8 @@ class tx_caddy_pi1_javascript
 //var_dump( __METHOD__, __LINE__, $this->pObj->cObj->data );
 //var_dump( __METHOD__, __LINE__, $marker );
 
-    $script = $this->cObj->substituteMarkerArray( $script, $marker );
-    $script = $this->dynamicMarkers->main( $script, $this );
+    $script = $this->pObj->cObj->substituteMarkerArray( $script, $marker );
+    $script = $this->pObj->dynamicMarkers->main( $script, $this->pObj );
 
     return $script;
   }
