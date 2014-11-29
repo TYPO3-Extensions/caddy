@@ -174,7 +174,7 @@ console.debug("token: " + token);
           //amount_int:     $('#amount').val() * 100,  // E.g. "15" for 0.15 Eur
 //          141129
 //          amount_int: Math.round($('#amount').val() * 100), // E.g. "15" for 0.15 Eur
-          amount_int: 20, // E.g. "15" for 0.15 Eur
+          amount_int: 100, // E.g. "15" for 0.15 Eur
           currency: $('#card-currency').val(), // ISO 4217 e.g. "EUR"
           number: $('#card-number').val(),
           exp_month: expiry[0],
