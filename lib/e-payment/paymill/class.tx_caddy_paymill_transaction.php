@@ -743,8 +743,11 @@ class tx_caddy_paymill_transaction extends tslib_pibase
 
     if ( $statusCode > 0 )
     {
-      $prompts[ 2 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|Status code' . $statusCode;
+      $prompts[ 2 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|Status code: ' . $statusCode;
     }
+
+    $prompts[ 3 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'transaction-not-operated' );
+    $prompts[ 4 ] = 'SERVER_PROMPT_WICLOSE_SUBPART|secondary|' . $this->pi_getLL( 'transaction-todo-default' );
 
     $arrReturn = array(
       'error' => true,
