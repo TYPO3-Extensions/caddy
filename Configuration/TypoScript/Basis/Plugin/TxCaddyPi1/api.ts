@@ -474,6 +474,21 @@ plugin.tx_caddy_pi1 {
             // Sum gross over all
           sumsumgross           < .optionspaymentsumgross
           sumsumgross.10.userFunc.number.field          = sumsumgross
+            // Sum gross without currency for e-payment
+          sumsumgrossepayment = USER
+          sumsumgrossepayment {
+            userFunc = tx_caddy_userfunc->numberformat
+            userFunc {
+              drs           = {$plugin.caddy.debug.userfunc}
+              number        = TEXT
+              number {
+                field = sumsumgross
+              }
+              decimal       = 2
+              dec_point     = .
+              thousands_sep =
+            }
+          }
             // Sum net over all
           sumsumnet             < .optionspaymentsumgross
           sumsumnet.10.userFunc.number.field            = sumsumnet

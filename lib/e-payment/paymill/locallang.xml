@@ -23,7 +23,8 @@
       <label index="40201">Bank account data combination mismatch.</label>
       <label index="40202">User authentication failed.</label>
       <label index="40300">Problem with 3d secure data.</label>
-      <label index="40301">Currency / amount mismatch.</label>
+      <label index="40301XX">Currency / amount mismatch.</label>
+      <label index="40301">Currency / amount mismatch: maybe the amount is to less for the current payment method.</label>
       <label index="40400">Problem with input data.</label>
       <label index="40401">Amount too low or zero.</label>
       <label index="40402">Usage field too long.</label>
@@ -136,6 +137,7 @@ No data? <a href="https://developers.paymill.com/en/reference/testing/" target="
     </languageKey>
     <languageKey index="de" type="array">
       <label index="50000">Generelles Problem. Möglicherweise sind Ihre Kontodaten nicht richtig.</label>
+      <label index="40301">Betrag und Währung passen nicht: möglicherweise ist der Betrag zu klein für die gewählte Zahlmethode.</label>
       <label index="cashinadvance">Vorkasse</label>
       <label index="cashinadvance-submit">Vorkasse prüfen und auswählen</label>
       <label index="cashondelivery">Nachnahme</label>

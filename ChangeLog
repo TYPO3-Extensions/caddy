@@ -5,6 +5,7 @@ TODO
 6.0.3
   14-11-29
   Improvement
+  * #i0065: sumsumgrossepayment: amount for e-payment
   * #i0064: Paymill response code 50000
   * #i0063: some foundation files are integrated
   * #i0061: DRS
