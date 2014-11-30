@@ -61,6 +61,9 @@ jQuery(document).ready(function($) {
         case("field_invalid_currency"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid-currency"]);
           break;
+        case("invalid_payment_data"):
+          $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid_payment_data"]);
+          break;
         case("invalid_public_key"):
           $(".paymill_alert .prompt").text(translation[formlang]["error"]["invalid_public_key"]);
           break;
@@ -165,6 +168,8 @@ jQuery(document).ready(function($) {
             $('#card-cvc').val("000");
           }
         }
+console.debug("#amount: " + Math.round($('#amount').text() * 100));
+console.debug("#card-currency: " + $('#card-currency').val());
         params = {
           //amount_int:     $('#amount').val() * 100,  // E.g. "15" for 0.15 Eur
           amount_int: Math.round($('#amount').text() * 100), // E.g. "15" for 0.15 Eur
