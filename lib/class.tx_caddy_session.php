@@ -1968,7 +1968,8 @@ class tx_caddy_session
         // piVars contain variant key
         if ( !empty( $arr_from_qty[ $key ][ $tableField ] ) )
         {
-          $arr_variant[ $key ][ $tableField ] = $this->zz_escapeStrForLike( $arr_from_qty[ $key ][ $tableField ] );
+          list( $table ) = explode( '.', $tableField );
+          $arr_variant[ $key ][ $tableField ] = $this->zz_escapeStrForLike( $arr_from_qty[ $key ][ $tableField ], $table );
         }
       }
     }
@@ -2488,7 +2489,7 @@ class tx_caddy_session
         continue;
       }
 
-      $variant = $this->zz_escapeStrForLike( $GP[ $table ][ $field ] );
+      $variant = $this->zz_escapeStrForLike( $GP[ $table ][ $field ], $table );
 
       // DRS
       if ( $this->drs->drsVariants )

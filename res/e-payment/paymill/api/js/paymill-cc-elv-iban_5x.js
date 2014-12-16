@@ -176,12 +176,10 @@ jQuery(document).ready(function($) {
             $('#card-cvc').val("000");
           }
         }
-console.debug("#amount: " + Math.round($('#amount').text() * 100));
-console.debug("#card-currency: " + $('#card-currency').val());
+//console.debug("#amount: " + Math.round($('#amount').text() * 100));
+//console.debug("#card-currency: " + $('#card-currency').val());
         params = {
-          //amount_int:     $('#amount').val() * 100,  // E.g. "15" for 0.15 Eur
-          //amount_int: Math.round($('#amount').text() * 100), // E.g. "15" for 0.15 Eur
-          amount_int: 29997, // E.g. "15" for 0.15 Eur
+          amount_int: Math.round($('#amount').text() * 100), // E.g. "15" for 0.15 Eur
           currency: $('#card-currency').val(), // ISO 4217 e.g. "EUR"
           number: $('#card-number').val(),
           exp_month: expiry[0],
