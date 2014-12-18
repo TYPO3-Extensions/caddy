@@ -4,12 +4,12 @@
 Render Powermail Form
 {forms} 			All Forms with their Pages and their Fields
 
-
 <f:section name="main">
 
   <f:comment>#61879, 140925, dwildt, 2+</f:comment>
   <div class="row">
-    <div id="caddy_powermail" class="small-12 large-12 columns">
+    <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.form')}">
+
       <f:flashMessages class="powermail_message powermail_message_error" />
 
       <f:if condition="{forms}">
@@ -23,13 +23,13 @@ Render Powermail Form
             <f:comment>#61879, 140925, dwildt, 7+</f:comment>
             <dl class="row collapse tabs" data-tab="">
               <f:for each="{form.pages}" as="page">
-                <dd id="tab_{page.uid}" class="columns small-6 medium-3 large-3">
+                <dd id="tab_{page.uid}" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.tab')}">
                   <a href="#powermail_tab_{page.uid}">{page.title}</a>
                 </dd>
               </f:for>
             </dl>
             <div class="row">
-              <div class="small-12 large-6 columns">
+              <div class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.fieldsWrap')}">
 
                 <f:comment>
                   #61879, 140925, dwildt:

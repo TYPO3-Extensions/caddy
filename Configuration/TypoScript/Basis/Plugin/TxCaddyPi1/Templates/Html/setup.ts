@@ -50,6 +50,22 @@ plugin.tx_caddy_pi1 {
           all   = ###CADDYSUM###
         }
       }
+      powermail {
+        classes {
+          fieldsWrap = TEXT
+          fieldsWrap {
+            value = {$plugin.caddy.html.powermail.classes.fieldsWrap}
+          }
+          form = TEXT
+          form {
+            value = {$plugin.caddy.html.powermail.classes.form}
+          }
+          tab = TEXT
+          tab {
+            value = {$plugin.caddy.html.powermail.classes.tab}
+          }
+        }
+      }
     }
   }
 }
