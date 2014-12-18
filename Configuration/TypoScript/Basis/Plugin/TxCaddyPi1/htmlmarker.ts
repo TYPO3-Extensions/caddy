@@ -318,7 +318,7 @@ plugin.tx_caddy_pi1 {
           // label
         10 = COA
         10 {
-          wrap = <span class="small-7 large-7 columns">|</span>
+          wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
             // net
           10 = TEXT
           10 {
@@ -329,7 +329,7 @@ plugin.tx_caddy_pi1 {
         30 = TEXT
         30 {
           value = &nbsp;
-          wrap  = <span class="small-2 large-2 columns">|</span>
+          wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
         }
           // value, currency
         40 = COA
@@ -353,13 +353,13 @@ plugin.tx_caddy_pi1 {
             value = {$plugin.caddy.main.currencySymbol}
             noTrimWrap = | ||
           }
-          wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+          wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
         }
           // &nbsp;
         50 = TEXT
         50 {
           value = &nbsp;
-          wrap  = <span class="small-1 large-1 columns">|</span>
+          wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
         }
       }
         // tax normal

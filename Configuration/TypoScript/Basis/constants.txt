@@ -113,6 +113,17 @@ plugin.caddy {
   # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
 
+  # cat=caddy - html accordion//100;          type=Class columns 1; label= CSS class for the first column of an accordion.
+  html.accordion.classes.column.0 = small-7 large-7 columns
+  # cat=caddy - html accordion//101;          type=Class columns 2; label= CSS class for the second column of an accordion.
+  html.accordion.classes.column.1 = small-2 large-2 columns
+  # cat=caddy - html accordion//102;          type=Class columns 3; label= CSS class for the third column of an accordion.
+  html.accordion.classes.column.2 = small-2 large-2 columns caddy-right
+  # cat=caddy - html accordion//103;          type=Class columns 4; label= CSS class for the fourth column of an accordion.
+  html.accordion.classes.column.3 = small-1 large-1 columns
+  # cat=caddy - html accordion/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  html.accordion.classes.sponsors = Click me!
+
   # cat=caddy - html colors//100;              type=color;  label= Border color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
   html.color.border = #207CCA
   # cat=caddy - html colors//200;              type=color;  label= Button text color
@@ -145,13 +156,13 @@ plugin.caddy {
   # cat=caddy - html marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.marker.sponsors = Click me!
 
-  # cat=caddy - html powermail//102;          type=Class buttons; label= CSS class of a button wrap - a div tag.
+  # cat=caddy - html powermail//100;          type=Class buttons; label= CSS class of a button wrap - a div tag.
   html.powermail.classes.buttonWrap = large-6 columns
-  # cat=caddy - html powermail//102;          type=Class fields;  label= CSS class of the fields wrap - a div tag.
+  # cat=caddy - html powermail//101;          type=Class fields;  label= CSS class of the fields wrap - a div tag.
   html.powermail.classes.fieldsWrap = large-6 columns
-  # cat=caddy - html powermail//100;          type=Class form;    label= CSS class of the form.
+  # cat=caddy - html powermail//102;          type=Class form;    label= CSS class of the form.
   html.powermail.classes.form = columns
-  # cat=caddy - html powermail//101;          type=Class tab;     label= CSS class of a tab.
+  # cat=caddy - html powermail//103;          type=Class tab;     label= CSS class of a tab.
   html.powermail.classes.tab = columns small-6 medium-3 large-3
   # cat=caddy - html powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.powermail.classes.sponsors = Click me!
