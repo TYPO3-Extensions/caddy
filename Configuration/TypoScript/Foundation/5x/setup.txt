@@ -12,7 +12,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = TEXT
       10 {
-        wrap = <span class="small-7 large-7 columns">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
         value = Cash discount
         lang {
           de = Skonto
@@ -23,7 +23,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-2 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
       }
         // value, currency
       40 = COA
@@ -47,13 +47,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
       }
         // &nbsp;
       50 = TEXT
       50 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-1 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
       }
     }
       // label, content, value
@@ -63,7 +63,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = COA
       10 {
-        wrap = <span class="small-7 large-7 columns">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
         10 = TEXT
         10 {
           value = Caddy
@@ -115,7 +115,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-2 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
       }
         // value, currency
       40 = COA
@@ -139,13 +139,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
       }
         // &nbsp;
       50 = TEXT
       50 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-1 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
       }
     }
     caddy_header_optionswopayment = COA
@@ -154,7 +154,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = TEXT
       10 {
-        wrap = <span class="small-7 large-7 columns">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
         value = Shipping and service
         lang {
           de = Service- und Versand
@@ -165,7 +165,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-2 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
       }
         // value, currency
       40 = COA
@@ -189,13 +189,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
       }
         // &nbsp;
       50 = TEXT
       50 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-1 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
       }
     }
     caddy_header_order = COA
@@ -204,7 +204,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = COA
       10 {
-        wrap = <span class="small-7 large-7 columns">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
           // Amount
         10 = TEXT
         10 {
@@ -267,7 +267,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-2 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
       }
         // value, currency
       40 = COA
@@ -291,13 +291,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
       }
         // &nbsp;
       50 = TEXT
       50 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-1 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
       }
     }
     caddy_header_paymentmethod = COA
@@ -306,7 +306,7 @@ plugin.tx_caddy_pi1 {
         // label
       10 = COA
       10 {
-        wrap = <span class="small-7 large-7 columns">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
           // label
         10 = TEXT
         10 {
@@ -327,7 +327,7 @@ plugin.tx_caddy_pi1 {
       30 = TEXT
       30 {
         value = &nbsp;
-        wrap  = <span class="small-2 large-2 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.1}">|</span>
       }
         // value, currency
       40 = COA
@@ -351,13 +351,13 @@ plugin.tx_caddy_pi1 {
           value = {$plugin.caddy.main.currencySymbol}
           noTrimWrap = | ||
         }
-        wrap = <span class="small-2 large-2 columns caddy-right">|</span>
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
       }
         // &nbsp;
       50 = TEXT
       50 {
         value = &nbsp;
-        wrap  = <span class="small-1 large-1 columns">|</span>
+        wrap  = <span class="{$plugin.caddy.html.accordion.classes.column.3}">|</span>
       }
     }
     caddy_header_paymentmethod_cashinadvance  < plugin.tx_caddy_pi1.api.options.payment.options.1.title
@@ -366,8 +366,8 @@ plugin.tx_caddy_pi1 {
     caddy_header_paymentmethod_invoice        < plugin.tx_caddy_pi1.api.options.payment.options.2.title
     caddy_header_powermail = TEXT
     caddy_header_powermail {
-      //wrap = <a href="#"><span class="small-7 large-7 columns">|</span></a>
-      wrap = <span class="small-7 large-7 columns">|</span>
+      //wrap = <a href="#"><span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span></a>
+      wrap = <span class="{$plugin.caddy.html.accordion.classes.column.0}">|</span>
       value = Your data, power of revocation
       lang {
         de = Ihre Daten, Widerrufsbelehrung
