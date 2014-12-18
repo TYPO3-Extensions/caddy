@@ -52,6 +52,10 @@ plugin.tx_caddy_pi1 {
       }
       powermail {
         classes {
+          buttonWrap = TEXT
+          buttonWrap {
+            value = {$plugin.caddy.html.powermail.classes.buttonWrap}
+          }
           fieldsWrap = TEXT
           fieldsWrap {
             value = {$plugin.caddy.html.powermail.classes.fieldsWrap}

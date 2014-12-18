@@ -145,12 +145,14 @@ plugin.caddy {
   # cat=caddy - html marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.marker.sponsors = Click me!
 
+  # cat=caddy - html powermail//102;          type=Class buttons; label= CSS class of a button wrap - a div tag.
+  html.powermail.classes.buttonWrap = large-6 columns
+  # cat=caddy - html powermail//102;          type=Class fields;  label= CSS class of the fields wrap - a div tag.
+  html.powermail.classes.fieldsWrap = large-6 columns
   # cat=caddy - html powermail//100;          type=Class form;    label= CSS class of the form.
   html.powermail.classes.form = columns
   # cat=caddy - html powermail//101;          type=Class tab;     label= CSS class of a tab.
   html.powermail.classes.tab = columns small-6 medium-3 large-3
-  # cat=caddy - html powermail//102;          type=Class fields;  label= CSS class of the fields wrap - a div tag.
-  html.powermail.classes.fieldsWrap = large-6 columns
   # cat=caddy - html powermail/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.powermail.classes.sponsors = Click me!
 

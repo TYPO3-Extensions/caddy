@@ -11,7 +11,7 @@ Show Confirmation Page
 <f:section name="main">
   <f:comment>#61879, 140925, dwildt, 2+</f:comment>
   <div class="row">
-    <div id="caddy_powermail" class="small-12 large-12 columns">
+    <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.form')}">
       <div class="powermail_confirmation" data-powermail-form="{mail.form.uid}">
         <h4><f:translate key="confirmation_message" /></h4>
 
@@ -25,7 +25,7 @@ Show Confirmation Page
             Link: Back to form
           </f:comment>
           <f:comment>#61879, 140925, dwildt, 1+</f:comment>
-          <div id="caddy_powermail" class="small-12 large-6 columns">
+          <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.buttonWrap')}">
             <f:form
               action="form"
               name="field"
@@ -39,7 +39,7 @@ Show Confirmation Page
             </f:form>
             <f:comment>#61879, 140925, dwildt, 2+</f:comment>
           </div>
-          <div id="caddy_powermail" class="small-12 large-6 columns">
+          <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.buttonWrap')}">
 
             <f:comment>
               Link: Submit form
