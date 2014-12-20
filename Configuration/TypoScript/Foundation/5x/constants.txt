@@ -1,3 +1,4 @@
 plugin.caddy {
-  templates.html.caddy = EXT:caddy/files/templates/foundation/5x/caddy.html
+  templates.html.caddy      = EXT:caddy/files/templates/foundation/5x/caddy.html
+  templates.html.caddymini  = EXT:caddy/files/templates/foundation/5x/caddy.html
 }
