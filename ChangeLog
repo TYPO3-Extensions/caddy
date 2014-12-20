@@ -8,6 +8,8 @@ TODO
   * #i0069: Different caddy icons are possible depending on an empty or full caddy
   * #i0068: Foundation classes for caddy mini
   * #i0067: Classes for powermail by TypoScript
+  Improvement
+  * #i0070: moved: files/img to Resources/Public/Images
 
 6.0.4
   14-12-16

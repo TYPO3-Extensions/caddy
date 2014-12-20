@@ -168,6 +168,7 @@ plugin.tx_caddy_pi3 {
             }
             negate  = 1
           }
+          file = {$plugin.caddy.html.color.icon.caddyempty}
         }
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
@@ -225,6 +226,7 @@ plugin.tx_caddy_pi3 {
             }
             negate  = 1
           }
+          file = {$plugin.caddy.html.color.icon.caddy}
         }
       }
       wrap = <div class="linktoshop minicaddylinktoshop">|</div>
