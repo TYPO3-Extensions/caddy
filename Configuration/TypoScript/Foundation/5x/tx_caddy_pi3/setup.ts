@@ -10,7 +10,7 @@ plugin.tx_caddy_pi3 {
       30 {
         wrap = <div class="columns large-2 caddy-right"><span class="gross itemgross">|</span></div>
       }
-      wrap = <div class="row"><div class="item minicaddyitem">|</div></div>
+      wrap = <div class="row collapse item minicaddyitem">|</div>
     }
       // quantity, label, gross
     sum = COA
@@ -24,7 +24,7 @@ plugin.tx_caddy_pi3 {
       30 {
         wrap = <div class="columns large-2 caddy-right"><span class="gross sumgross">|</span></div>
       }
-      wrap = <div class="row"><div class="sum minicaddysum">|</div></div>
+      wrap = <div class="row collapse sum minicaddysum">|</div>
     }
   }
     // linktocaddy, linktoshop
