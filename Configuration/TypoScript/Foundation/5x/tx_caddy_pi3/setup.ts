@@ -31,10 +31,10 @@ plugin.tx_caddy_pi3 {
       // label, icon. Replaces _HTMLMARKER_LINTOCADDY
     linktocaddy = COA
     linktocaddy {
-      wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
+      wrap = <div class="row"><div class="columns linktocaddy minicaddylinktocaddy">|</div></div>
     }
     linktoshop {
-      wrap = <div class="linktoshop minicaddylinktoshop">|</div>
+      wrap = <div class="row"><div class="columns linktoshop minicaddylinktoshop">|</div></div>
     }
   }
 }
