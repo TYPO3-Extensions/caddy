@@ -2,27 +2,25 @@ plugin.tx_caddy_pi3 {
   content {
     item {
       10 {
-        wrap = <div class="columns large-2"><span class="quantity itemquantity">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.0}">|</div>
       }
       20 {
-        wrap  = <div class="columns large-6"><span class="label itemlabel">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.1}">|</div>
       }
       30 {
-        wrap = <div class="columns large-2 caddy-right"><span class="gross itemgross">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.2}">|</div>
       }
       wrap = <div class="row collapse item minicaddyitem">|</div>
     }
-      // quantity, label, gross
-    sum = COA
     sum {
       10 {
-        wrap = <div class="columns large-2"><span class="quantity sumquantity">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.0}">|</div>
       }
       20 {
-        wrap  = <div class="columns large-6"><span class="label sumlabel">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.1}">|</div>
       }
       30 {
-        wrap = <div class="columns large-2 caddy-right"><span class="gross sumgross">|</span></div>
+        wrap = <div class="{$plugin.caddy.html.minicaddy.classes.column.2}">|</div>
       }
       wrap = <div class="row collapse sum minicaddysum">|</div>
     }

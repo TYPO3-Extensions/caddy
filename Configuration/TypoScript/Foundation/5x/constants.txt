@@ -1,4 +1,8 @@
 plugin.caddy {
+  html.minicaddy.classes.column.0 = large-2 columns
+  html.minicaddy.classes.column.1 = large-5 columns
+  html.minicaddy.classes.column.2 = large-5 columns caddy-right
+
   templates.html.caddy      = EXT:caddy/files/templates/foundation/5x/caddy.html
   templates.html.caddymini  = EXT:caddy/files/templates/foundation/5x/caddy.html
 }

@@ -114,13 +114,13 @@ plugin.caddy {
   getpost.sponsors = Click me!
 
   # cat=caddy - html accordion//100;          type=Class columns 1; label= CSS class for the first column of an accordion.
-  html.accordion.classes.column.0 = small-7 large-7 columns
+  html.accordion.classes.column.0 = large-7 columns
   # cat=caddy - html accordion//101;          type=Class columns 2; label= CSS class for the second column of an accordion.
-  html.accordion.classes.column.1 = small-2 large-2 columns
+  html.accordion.classes.column.1 = large-2 columns
   # cat=caddy - html accordion//102;          type=Class columns 3; label= CSS class for the third column of an accordion.
-  html.accordion.classes.column.2 = small-2 large-2 columns caddy-right
+  html.accordion.classes.column.2 = large-2 columns caddy-right
   # cat=caddy - html accordion//103;          type=Class columns 4; label= CSS class for the fourth column of an accordion.
-  html.accordion.classes.column.3 = small-1 large-1 columns
+  html.accordion.classes.column.3 = large-1 columns
   # cat=caddy - html accordion/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.accordion.classes.sponsors = Click me!
 
@@ -155,6 +155,15 @@ plugin.caddy {
   html.marker.caddy = CADDY
   # cat=caddy - html marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.marker.sponsors = Click me!
+
+  # cat=caddy - html minicaddy//100;          type=Class columns 1; label= CSS class for the first column of the minicaddy: the quantity.
+  html.minicaddy.classes.column.0 = quantity
+  # cat=caddy - html minicaddy//101;          type=Class columns 2; label= CSS class for the second column of an minicaddy: the label.
+  html.minicaddy.classes.column.1 = large-5 columns
+  # cat=caddy - html minicaddy//102;          type=Class columns 3; label= CSS class for the third column of an minicaddy: the sum.
+  html.minicaddy.classes.column.2 = large-5 columns caddy-right
+  # cat=caddy - html minicaddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  html.minicaddy.classes.sponsors = Click me!
 
   # cat=caddy - html powermail//100;          type=Class buttons; label= CSS class of a button wrap - a div tag.
   html.powermail.classes.buttonWrap = large-6 columns
