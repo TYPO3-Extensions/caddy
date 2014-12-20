@@ -442,7 +442,6 @@ plugin.tx_caddy_pi1 {
           value = </button>
         }
       }
-      XXwrap = <div class="linktoshopwofloat linktoshop caddylinktoshop">|</div>
     }
   }
 }
