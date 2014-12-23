@@ -131,40 +131,22 @@ plugin.tx_caddy_pi3 {
         noTrimWrap  = || |
       }
         // Icon
-      20 = COA
+      20 = IMAGE
       20 {
-          // Icon in case of an empty caddy
-        10 = IMAGE
-        10 {
-          if {
-            isTrue {
-              field = quantity
-            }
-            negate  = 1
-          }
-          file = {$plugin.caddy.html.color.icon.caddyempty}
-          altText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
-          }
-          titleText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:caddy
-          }
-          params = class="linktocaddy"
-          imageLinkWrap = 1
-          imageLinkWrap {
-            enable = 1
-            typolink {
-              parameter = {$plugin.caddy.pages.caddy}
-            }
-          }
+        file = {$plugin.caddy.html.color.icon.caddy}
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
         }
-          // Icon in case of a full caddy
-        20 < .10
-        20 {
-          if {
-            negate >
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:caddy
+        }
+        params = class="linktocaddy"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.caddy}
           }
-          file = {$plugin.caddy.html.color.icon.caddy}
         }
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
@@ -185,44 +167,22 @@ plugin.tx_caddy_pi3 {
         noTrimWrap  = || |
       }
         // Icon
-      20 = COA
+      20 = IMAGE
       20 {
-          // Icon in case of an empty caddy
-        10 = IMAGE
-        10 {
-          if {
-            value = 1
-            isLessThan {
-              field = quantity
-            }
-          }
-          file = {$plugin.caddy.html.color.icon.caddy}
-          altText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:shop
-          }
-          titleText {
-            data = LLL:EXT:caddy/pi3/locallang.xml:shop
-          }
-          params = class="linktoshop"
-          imageLinkWrap = 1
-          imageLinkWrap {
-            enable = 1
-            typolink {
-              parameter = {$plugin.caddy.pages.shop}
-            }
-          }
+        file = {$plugin.caddy.html.color.icon.caddyempty}
+        altText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
         }
-          // Icon in case of a full caddy
-        20 < .10
-        20 {
-          if {
-            value = 1
-            isLessThan {
-              field = quantity
-            }
-            negate  = 1
+        titleText {
+          data = LLL:EXT:caddy/pi3/locallang.xml:shop
+        }
+        params = class="linktoshop"
+        imageLinkWrap = 1
+        imageLinkWrap {
+          enable = 1
+          typolink {
+            parameter = {$plugin.caddy.pages.shop}
           }
-          file = {$plugin.caddy.html.color.icon.caddy}
         }
       }
       wrap = <div class="linktoshop minicaddylinktoshop">|</div>
