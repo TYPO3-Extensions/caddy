@@ -139,7 +139,7 @@ plugin.caddy {
   # cat=caddy - html colors/others/300;        type=string;  label= Icon caddy
   html.color.icon.caddy       = EXT:caddy/Resources/Public/Images/caddy_080_08.png
   # cat=caddy - html colors/others/301;        type=string;  label= Icon caddy
-  html.color.icon.caddyempty  = EXT:caddy/Resources/Public/Images/caddy_080_08.png
+  html.color.icon.shop  = EXT:caddy/Resources/Public/Images/caddy_080_08.png
   # cat=caddy - html colors/others/302;        type=string;  label= Icon delete
   html.color.icon.delete = EXT:caddy/Resources/Public/Images/delete_080_08.png
   # cat=caddy - html colors/others/400;        type=color;  label= Powermail text
