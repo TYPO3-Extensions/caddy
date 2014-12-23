@@ -142,7 +142,7 @@ plugin.tx_caddy_pi3 {
               field = quantity
             }
           }
-          file = {$plugin.caddy.html.color.icon.caddy}
+          file = {$plugin.caddy.html.color.icon.caddyempty}
           altText {
             data = LLL:EXT:caddy/pi3/locallang.xml:caddy
           }
@@ -168,7 +168,7 @@ plugin.tx_caddy_pi3 {
             }
             negate  = 1
           }
-          file = {$plugin.caddy.html.color.icon.caddyempty}
+          file = {$plugin.caddy.html.color.icon.caddy}
         }
       }
       wrap = <div class="linktocaddy minicaddylinktocaddy">|</div>
