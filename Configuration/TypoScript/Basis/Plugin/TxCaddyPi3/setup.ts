@@ -137,10 +137,10 @@ plugin.tx_caddy_pi3 {
         10 = IMAGE
         10 {
           if {
-            value = 1
-            isLessThan {
+            isTrue {
               field = quantity
             }
+            negate  = 1
           }
           file = {$plugin.caddy.html.color.icon.caddyempty}
           altText {
@@ -162,11 +162,7 @@ plugin.tx_caddy_pi3 {
         20 < .10
         20 {
           if {
-            value = 1
-            isLessThan {
-              field = quantity
-            }
-            negate  = 1
+            negate >
           }
           file = {$plugin.caddy.html.color.icon.caddy}
         }
