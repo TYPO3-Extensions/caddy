@@ -446,12 +446,3 @@ plugin.tx_caddy_pi1 {
   }
 }
   // plugin.tx_caddy_pi1._HTMLMARKER
-
-plugin.tx_caddy_pi3 {
-    // linktoshop
-  _HTMLMARKER {
-    linktoshop >
-      // <button ...>label icon</button>
-    linktoshop < plugin.tx_caddy_pi1._HTMLMARKER.linktoshop
-  }
-}
