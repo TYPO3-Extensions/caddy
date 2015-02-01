@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.8
+  15-02-01
+  Improvement
+  * #i0071/#161:  Labelling: formButton is moved from "Buy now" to "Into the caddy"
+
 6.0.7
   14-12-18
   Feature
