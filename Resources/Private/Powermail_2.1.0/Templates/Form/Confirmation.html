@@ -13,6 +13,47 @@ Show Confirmation Page
   <div class="row">
     <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.form')}">
       <div class="powermail_confirmation" data-powermail-form="{mail.form.uid}">
+        <f:comment>
+          * #i0072/#156:  Powermail confirmation form got a second button line at the top
+        </f:comment>
+        <div class="row">
+          <f:comment>
+            Link: Back to form
+          </f:comment>
+          <f:comment>#61879, 140925, dwildt, 1+</f:comment>
+          <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.buttonWrap')}">
+            <f:form
+              action="form"
+              name="field"
+              enctype="multipart/form-data"
+              additionalAttributes="{vh:Validation.EnableParsleyAndAjax(form: mail.form)}">
+
+              <f:render section="HiddenFields" arguments="{_all}" />
+
+              <f:comment>#61879, 140925, dwildt, class + button expand alert</f:comment>
+              <f:form.submit value="{f:translate(key: 'confirmation_prev')}" class="button expand alert powermail_confirmation_form" />
+            </f:form>
+            <f:comment>#61879, 140925, dwildt, 2+</f:comment>
+          </div>
+          <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.buttonWrap')}">
+
+            <f:comment>
+              Link: Submit form
+            </f:comment>
+            <f:form
+              action="create"
+              name="field"
+              enctype="multipart/form-data"
+              additionalAttributes="{vh:Validation.EnableParsleyAndAjax(form: mail.form)}">
+
+              <f:render section="HiddenFields" arguments="{_all}" />
+
+              <f:comment>#61879, 140925, dwildt, class + button expand</f:comment>
+              <f:form.submit value="{f:translate(key: 'confirmation_next')}" class="button expand powermail_confirmation_submit" />
+            </f:form>
+          </div>
+          <f:comment>#61879, 140925, dwildt, 2+</f:comment>
+        </div>
         <h4><f:translate key="confirmation_message" /></h4>
 
         <vh:string.RawAndRemoveXss>

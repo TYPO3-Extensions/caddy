@@ -5,6 +5,10 @@ TODO
 6.0.8
   15-02-01
   Improvement
+  * #i0073/#156:  Accordion with caddy items must be open while the confirmation the order.
+                  It is a legal need in Germany.
+  * #i0072/#156:  Powermail confirmation form got a second button line at the top
+                  See: Resources/Private/Powermail_2.1.0/Templates/Form/Confirmation.html
   * #i0071/#161:  Labelling: formButton is moved from "Buy now" to "Into the caddy"
 
 6.0.7

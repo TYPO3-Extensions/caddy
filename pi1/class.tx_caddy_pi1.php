@@ -535,10 +535,11 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function htmlActiveSection( $tmpl )
   {
-    if ( t3lib_div::_GP( 'tx_powermail_pi1' ) )
-    {
-      return $tmpl;
-    }
+    // #i0073/#156, 150201, dwildt, 4-
+//    if ( t3lib_div::_GP( 'tx_powermail_pi1' ) )
+//    {
+//      return $tmpl;
+//    }
 
     // Set default value;
     $accordion = 1;
