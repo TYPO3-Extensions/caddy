@@ -462,6 +462,8 @@ plugin.caddy {
   # cat=caddy - symbols and service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   symbol.sponsors = Click me!
 
+  # cat=caddy - tax//100; type=text; label= VAT Reg.No.:VAT Reg.No. (German: USt-IdNr.)
+  tax.vatregno = See: Constant Editor [CADDY - TAX] > VAT Reg.No.
   # cat=caddy - tax//150; type=text; label= Tax rate: Tax rate for reduced items (e.g. 7). Value will be displayed.
   tax.reduced = 7
   # cat=caddy - tax//155; type=text; label= Tax rate: Tax rate for reduced items (e.g. 0.07). Used for calculation.

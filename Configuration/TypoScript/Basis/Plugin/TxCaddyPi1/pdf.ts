@@ -1094,22 +1094,56 @@ plugin.tx_caddy_pi1 {
                   noTrimWrap = | |<br />|
                 }
                   // IBAN
-                60 = TEXT
+                60 = COA
                 60 {
-                  value = IBAN: {$plugin.caddy.bankaccount.iban}
-                  lang {
-                    de = IBAN: {$plugin.caddy.bankaccount.iban}
-                    en = IBAN: {$plugin.caddy.bankaccount.iban}
+                  10 = TEXT
+                  10 {
+                    data = data = LLL:EXT:caddy/pi1/locallang.xml:IBAN
+                    noTrimWrap = ||: |
+                  }
+                  20 = TEXT
+                  20 {
+                    value = {$plugin.caddy.bankaccount.iban}
+                    lang {
+                      de = {$plugin.caddy.bankaccount.iban}
+                      en = {$plugin.caddy.bankaccount.iban}
+                    }
                   }
                   noTrimWrap = ||, |
                 }
                   // BIC
-                61 = TEXT
+                61 = COA
                 61 {
-                  value = BIC: {$plugin.caddy.bankaccount.bic}
-                  lang {
-                    de = BIC: {$plugin.caddy.bankaccount.bic}
-                    en = BIC: {$plugin.caddy.bankaccount.bic}
+                  10 = TEXT
+                  10 {
+                    data = data = LLL:EXT:caddy/pi1/locallang.xml:BIC
+                    noTrimWrap = ||: |
+                  }
+                  20 = TEXT
+                  20 {
+                    value = IBAN: {$plugin.caddy.bankaccount.bic}
+                    lang {
+                      de = IBAN: {$plugin.caddy.bankaccount.bic}
+                      en = IBAN: {$plugin.caddy.bankaccount.bic}
+                    }
+                  }
+                  noTrimWrap = ||, |
+                }
+                  // VAT Reg.No.
+                62 = COA
+                62 {
+                  10 = TEXT
+                  10 {
+                    data = data = LLL:EXT:caddy/pi1/locallang.xml:tax_reg_no
+                    noTrimWrap = ||: |
+                  }
+                  20 = TEXT
+                  20 {
+                    value = IBAN: {$plugin.caddy.tax.vatregno}
+                    lang {
+                      de = IBAN: {$plugin.caddy.tax.vatregno}
+                      en = IBAN: {$plugin.caddy.tax.vatregno}
+                    }
                   }
                 }
                 wrap  = |<br />

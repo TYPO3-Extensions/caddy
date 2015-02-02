@@ -4,6 +4,15 @@ TODO
 
 6.0.8
   15-02-01
+  New Feature
+  * #i0074:       VAT Reg.No. (USt-IdNr.)
+                  Effected files:
+                  * pi1/locallang.xml
+                  * Configuration/TypoScript/Basis
+                    * constants.txt
+                    * Plugin/TxCaddyPi1
+                      * htmlmarker.ts
+                      * pdf.ts
   Improvement
   * #i0073/#156:  Accordion with caddy items must be open while the confirmation the order.
                   It is a legal need in Germany.

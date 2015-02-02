@@ -8,6 +8,7 @@
     <languageKey index="default" type="array">
       <label index="accordionnext">Next</label>
       <label index="accordionprev">Prev</label>
+      <label index="BIC">BIC</label>
       <label index="caddyempty">Caddy is empty</label>
       <label index="caddyemptyyou">Your caddy is empty</label>
       <label index="caddyempty">Caddy is empty</label>
@@ -29,6 +30,7 @@
       <label index="error_noTemplate">No Template found. Do you have included the Static Template?</label>
       <label index="formButton">Into the caddy</label>
       <label index="formLegend">Order form</label>
+      <label index="IBAN">IBAN</label>
       <label index="invoice">Invoice</label>
       <label index="invoicenumber">Invoice number</label>
       <label index="item">Item</label>
@@ -86,10 +88,12 @@
       <label index="tax_turnover">turnover tax</label>
       <label index="tax_turnover_abbr">VAT</label>
       <label index="tax_turnover_abbr_percent">VAT %</label>
+      <label index="tax_reg_no">VAT Reg.No.</label>
     </languageKey>
     <languageKey index="de" type="array">
       <label index="accordionnext">Weiter</label>
       <label index="accordionprev">Zur<![CDATA[&uuml;]]>ck</label>
+      <label index="BIC">BIC</label>
       <label index="caddyempty">Der Warenkorb ist leer</label>
       <label index="caddyemptyyou">Dein Warenkorb ist leer</label>
       <label index="cashdiscount">Skonto</label>
@@ -109,6 +113,7 @@
       <label index="error_noTemplate">Kein Template gefunden. Hast Du das Static Template eingebunden?</label>
       <label index="formButton">In den Warenkorb</label>
       <label index="formLegend">Bestellformular</label>
+      <label index="IBAN">IBAN</label>
       <label index="invoice">Rechnung</label>
       <label index="invoicenumber">Rechnungsnummer</label>
       <label index="item">Artikel</label>
@@ -166,6 +171,7 @@
       <label index="tax_turnover">Umsatzsteuer</label>
       <label index="tax_turnover_abbr">USt.</label>
       <label index="tax_turnover_abbr_percent">USt. %</label>
+      <label index="tax_reg_no">USt-IdNr.</label>
     </languageKey>
   </data>
 </T3locallang>
