@@ -1108,8 +1108,8 @@ plugin.tx_caddy_pi1 {
                       de = {$plugin.caddy.bankaccount.iban}
                       en = {$plugin.caddy.bankaccount.iban}
                     }
+                    noTrimWrap = ||, |
                   }
-                  noTrimWrap = ||, |
                 }
                   // BIC
                 61 = COA
@@ -1126,8 +1126,8 @@ plugin.tx_caddy_pi1 {
                       de = {$plugin.caddy.bankaccount.bic}
                       en = {$plugin.caddy.bankaccount.bic}
                     }
+                    noTrimWrap = ||, |
                   }
-                  noTrimWrap = ||, |
                 }
                   // VAT Reg.No.
                 62 = COA
