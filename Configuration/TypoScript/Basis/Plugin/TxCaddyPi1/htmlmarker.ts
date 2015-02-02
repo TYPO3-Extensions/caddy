@@ -139,7 +139,7 @@ plugin.tx_caddy_pi1 {
           60 {
             10 = TEXT
             10 {
-              data = data = LLL:EXT:caddy/pi1/locallang.xml:IBAN
+              data = LLL:EXT:caddy/pi1/locallang.xml:IBAN
               noTrimWrap = ||: |
             }
             20 = TEXT
@@ -157,7 +157,7 @@ plugin.tx_caddy_pi1 {
           61 {
             10 = TEXT
             10 {
-              data = data = LLL:EXT:caddy/pi1/locallang.xml:BIC
+              data = LLL:EXT:caddy/pi1/locallang.xml:BIC
               noTrimWrap = ||: |
             }
             20 = TEXT
@@ -175,7 +175,7 @@ plugin.tx_caddy_pi1 {
           62 {
             10 = TEXT
             10 {
-              data = data = LLL:EXT:caddy/pi1/locallang.xml:tax_reg_no
+              data = LLL:EXT:caddy/pi1/locallang.xml:tax_reg_no
               noTrimWrap = ||: |
             }
             20 = TEXT

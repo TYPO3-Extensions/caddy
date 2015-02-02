@@ -1098,7 +1098,7 @@ plugin.tx_caddy_pi1 {
                 60 {
                   10 = TEXT
                   10 {
-                    data = data = LLL:EXT:caddy/pi1/locallang.xml:IBAN
+                    data = LLL:EXT:caddy/pi1/locallang.xml:IBAN
                     noTrimWrap = ||: |
                   }
                   20 = TEXT
@@ -1116,15 +1116,15 @@ plugin.tx_caddy_pi1 {
                 61 {
                   10 = TEXT
                   10 {
-                    data = data = LLL:EXT:caddy/pi1/locallang.xml:BIC
+                    data = LLL:EXT:caddy/pi1/locallang.xml:BIC
                     noTrimWrap = ||: |
                   }
                   20 = TEXT
                   20 {
-                    value = IBAN: {$plugin.caddy.bankaccount.bic}
+                    value = {$plugin.caddy.bankaccount.bic}
                     lang {
-                      de = IBAN: {$plugin.caddy.bankaccount.bic}
-                      en = IBAN: {$plugin.caddy.bankaccount.bic}
+                      de = {$plugin.caddy.bankaccount.bic}
+                      en = {$plugin.caddy.bankaccount.bic}
                     }
                   }
                   noTrimWrap = ||, |
@@ -1134,15 +1134,15 @@ plugin.tx_caddy_pi1 {
                 62 {
                   10 = TEXT
                   10 {
-                    data = data = LLL:EXT:caddy/pi1/locallang.xml:tax_reg_no
+                    data = LLL:EXT:caddy/pi1/locallang.xml:tax_reg_no
                     noTrimWrap = ||: |
                   }
                   20 = TEXT
                   20 {
-                    value = IBAN: {$plugin.caddy.tax.vatregno}
+                    value = {$plugin.caddy.tax.vatregno}
                     lang {
-                      de = IBAN: {$plugin.caddy.tax.vatregno}
-                      en = IBAN: {$plugin.caddy.tax.vatregno}
+                      de = {$plugin.caddy.tax.vatregno}
+                      en = {$plugin.caddy.tax.vatregno}
                     }
                   }
                 }
