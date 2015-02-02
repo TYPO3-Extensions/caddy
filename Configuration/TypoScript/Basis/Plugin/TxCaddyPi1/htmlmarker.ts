@@ -162,10 +162,10 @@ plugin.tx_caddy_pi1 {
             }
             20 = TEXT
             20 {
-              value = IBAN: {$plugin.caddy.bankaccount.bic}
+              value = {$plugin.caddy.bankaccount.bic}
               lang {
-                de = IBAN: {$plugin.caddy.bankaccount.bic}
-                en = IBAN: {$plugin.caddy.bankaccount.bic}
+                de = {$plugin.caddy.bankaccount.bic}
+                en = {$plugin.caddy.bankaccount.bic}
               }
             }
             noTrimWrap = ||, |
@@ -180,10 +180,10 @@ plugin.tx_caddy_pi1 {
             }
             20 = TEXT
             20 {
-              value = IBAN: {$plugin.caddy.tax.vatregno}
+              value = {$plugin.caddy.tax.vatregno}
               lang {
-                de = IBAN: {$plugin.caddy.tax.vatregno}
-                en = IBAN: {$plugin.caddy.tax.vatregno}
+                de = {$plugin.caddy.tax.vatregno}
+                en = {$plugin.caddy.tax.vatregno}
               }
             }
           }
