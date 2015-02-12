@@ -1,13 +1,13 @@
 /**
  * jquery.t3caddy-4.0.0.js
  *
- * Copyright (c) 2013-2014 Dirk Wildt
+ * Copyright (c) 2013-2015 Dirk Wildt
  * http://wildt.at.die-netzmacher.de/
  *
  * Version 4.0.3
  * http://docs.jquery.com/Plugins/t3caddy
  *
- * Copyright (c) 2013-2014 - Dirk Wildt
+ * Copyright (c) 2013-2015 - Dirk Wildt
  * http://wildt.at.die-netzmacher.de/
  *
  * Dual licensed under the MIT and GPL licenses:

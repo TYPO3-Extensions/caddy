@@ -68,6 +68,78 @@ plugin.tx_caddy_pi1 {
                       field = {$plugin.caddy.db.table}.uid
                       wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[{$plugin.caddy.url.showUid}]" value="|" />
                     }
+                      // quantity of the item
+                    11 = TEXT
+                    11 {
+                      value = {$plugin.caddy.getpost.qty}
+                      wrap  = <input type="hidden" name="|" value="1" />
+                    }
+                      // service_attribute
+                    20 = COA
+                    20 {
+                        // local table ...
+                      10 = COA
+                      10 {
+                          // service_attribute_1
+                        10 = TEXT
+                        10 {
+                          if {
+                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                          }
+                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_1]" value="|" />
+                        }
+                          // service_attribute_2
+                        20 = TEXT
+                        20 {
+                          if {
+                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_2}
+                          }
+                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_2}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_2]" value="|" />
+                        }
+                          // service_attribute_3
+                        30 = TEXT
+                        30 {
+                          if {
+                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                          }
+                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_3]" value="|" />
+                        }
+                      }
+                        // ... or foreign table
+                      20 = COA
+                      20 {
+                          // service_attribute_1
+                        10 = TEXT
+                        10 {
+                          if {
+                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                          }
+                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_1]" value="|" />
+                        }
+                          // service_attribute_2
+                        20 = TEXT
+                        20 {
+                          if {
+                            isTrue = {$plugin.caddy.db.service_attribute_2}
+                          }
+                          field = {$plugin.caddy.db.service_attribute_2}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_2]" value="|" />
+                        }
+                          // service_attribute_3
+                        30 = TEXT
+                        30 {
+                          if {
+                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                          }
+                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                          wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_3]" value="|" />
+                        }
+                      }
+                    }
                   }
                     // select and button
                   30 = COA

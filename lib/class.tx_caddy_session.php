@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2015 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -289,33 +289,6 @@ class tx_caddy_session
   }
 
   /**
-   * getQuantityItems( )  : Get the amount of quantities
-   *
-   * @param	integer		: $pid  : uid of the page, which contains the caddy plugin
-   * @return	integer		$quantityItems :
-   * @access private
-   * @version     3.0.1
-   * @since       2.0.0
-   */
-  private function getQuantityItems( $pid = null )
-  {
-    $quantityItems = 0;
-    $pid = $this->getPid( $pid );
-
-    // #54634, 131128, dwildt, 1-
-    //$sesArray = $GLOBALS['TSFE']->fe_user->getKey( 'ses', $this->extKey . '_' . $GLOBALS["TSFE"]->id );
-    // #54634, 131128, dwildt, 1+
-    $sesArray = $GLOBALS[ 'TSFE' ]->fe_user->getKey( 'ses', $this->extKey . '_' . $pid );
-    $products = $sesArray[ 'products' ];
-
-    foreach ( $products as $product )
-    {
-      $quantityItems = $quantityItems + $product[ 'qty' ];
-    }
-    return ( int ) $quantityItems;
-  }
-
-  /**
    * getPid( )  : Returns the globlas tsfe id, if the given pid is null
    *
    * @param	integer		$pid  : given pid (may be null)
@@ -455,8 +428,8 @@ class tx_caddy_session
 //var_dump( __METHOD__, __LINE__, $sesArray['e-payment'] );
     $sesArray[ 'payment' ] = intval( $value );
     // #i0062, 141129, dwildt, 2+
-    $epayment = $this->pObj->conf['api.']['options.']['payment.']['options.'][$value . '.']['e-payment'];
-    $sesArray[ 'e-payment' ]['woEpayment'] = !$epayment;
+    $epayment = $this->pObj->conf[ 'api.' ][ 'options.' ][ 'payment.' ][ 'options.' ][ $value . '.' ][ 'e-payment' ];
+    $sesArray[ 'e-payment' ][ 'woEpayment' ] = !$epayment;
 //var_dump( __METHOD__, __LINE__, $sesArray, $this->pObj->conf );
 //var_dump( __METHOD__, __LINE__, $sesArray );
 //die( ":(" );
@@ -526,7 +499,7 @@ class tx_caddy_session
     }
 
     // #i0059
-    $newProduct[ 'qty' ] = $this->productAddGetDefaultQty( $newProduct['qty'] );
+    $newProduct[ 'qty' ] = $this->productAddGetDefaultQty( $newProduct[ 'qty' ] );
 
     // RETURN : requirements aren't matched
     // #55726, 140206, dwildt, 1+
@@ -554,7 +527,6 @@ class tx_caddy_session
       }
     }
     // FOREACH  : current product
-
     // remove product from current products, sum quantity
     // limit quantity
     $newProduct = $this->quantityCheckMinMax( $newProduct );
@@ -588,7 +560,7 @@ class tx_caddy_session
    */
   private function productAddGetDefaultQty( $qty )
   {
-    if( $qty > 0 )
+    if ( $qty > 0 )
     {
       return $qty;
     }
@@ -751,6 +723,26 @@ class tx_caddy_session
     $uid = $productsKey[ 0 ];
 
     return $uid;
+  }
+
+  /**
+   * productGetDefaultQty( )  : Returns 1 if the quantity of the added product is 0
+   *
+   * @param	integer		$qty: quantity of the added product
+   * @return	integer		$qty: 1 if the quantity of the added product is 0
+   * @access private
+   * @internal #i0079
+   * @version 6.0.9
+   * @since 6.0.9
+   */
+  private function productGetDefaultQty( $qty )
+  {
+    if ( !empty( $qty ) )
+    {
+      return $qty;
+    }
+
+    return 1;
   }
 
   /**
@@ -1093,12 +1085,35 @@ class tx_caddy_session
           // follow the workflow
           break;
       }
-      $fields[] = $table . '.' . $label . ' AS ' . $property;
+      $fields[] = $this->productGetDetailsTsSqlSelectField( $table, $label, $property );
       unset( $property );
     }
+    $fields = array_filter( $fields );
     $select = implode( ', ', $fields );
 
     return $select;
+  }
+
+  /**
+   * productGetDetailsTsSqlSelectField( ) :
+   *
+   * @return	string      field :
+   * @access private
+   * @internal #i0077
+   * @version 6.0.9
+   * @since 6.0.9
+   */
+  private function productGetDetailsTsSqlSelectField( $table, $field, $alias )
+  {
+    $pos = strpos( $field, '.' );
+    if ( $pos === false )
+    {
+      $content = $table . '.' . $field . ' AS ' . $alias;
+      return $content;
+    }
+
+    // Workaround: $field is a table.field. Don't use it.
+    return NULL;
   }
 
   /**
@@ -1365,16 +1380,6 @@ class tx_caddy_session
    */
   private function quantityCheckMinMaxDrs()
   {
-//$prompt = 'debug trail: ' . t3lib_utility_Debug::debugTrail( ) . PHP_EOL .
-//          'TYPO3 Caddy<br />' . PHP_EOL .
-//        __METHOD__ . ' (' . __LINE__ . ')';
-//$prompt = str_replace( '//', PHP_EOL . '//', $prompt );
-//var_dump( __METHOD__, __LINE__, $prompt, $this->pObj->gpvar, $this->pObj->piVars );
-    if ( !$this->drs->drsCalc )
-    {
-      return;
-    }
-
     // SWITCH : add, update, delete
     switch ( true )
     {
@@ -1687,12 +1692,12 @@ class tx_caddy_session
     }
     // DRS
     // Get the undercut quantity
-    $itemsQuantityUndercut = $itemsQuantityMin - $itemsQuantity
-    ;
-
-    // INcrease quantity of the current product
-    $quantity = $product[ 'qty' ] + $itemsQuantityUndercut
-    ;
+    $itemsQuantityUndercut = $itemsQuantityMin - $itemsQuantity;
+    //var_dump( __METHOD__, __LINE__, $itemsQuantityMin, $itemsQuantity, $itemsQuantityUndercut );
+    // #i0079, 150211, dwildt, 1+
+    $product[ 'qty' ] = $this->productGetDefaultQty( $product[ 'qty' ] );
+    // Increase quantity of the current product
+    $quantity = $product[ 'qty' ] + $itemsQuantityUndercut;
     $product[ 'qty' ] = $this->productSetQuantity( $quantity, $product[ 'uid' ] );
 
     // DRS
@@ -1838,8 +1843,7 @@ class tx_caddy_session
     }
     // SWITCH : products or any product
 
-    $quantitySum = $quantityAll + $quantityAdd
-    ;
+    $quantitySum = $quantityAll + $quantityAdd;
     // DRS
     if ( $this->drs->drsCalc )
     {
@@ -1847,7 +1851,6 @@ class tx_caddy_session
       t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
     }
     // DRS
-
     return $quantitySum;
   }
 

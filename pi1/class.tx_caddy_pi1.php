@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2015 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  Caddy is a fork of wt_cart (version 1.4.6)
@@ -268,7 +268,7 @@ class tx_caddy_pi1 extends tslib_pibase
    *
    * @return	void
    * @access private
-   * @version    6.0.0
+   * @version    6.0.9
    * @since      2.0.0
    */
   private function caddyProductAdd()
@@ -285,9 +285,7 @@ class tx_caddy_pi1 extends tslib_pibase
     if ( $this->newProduct !== false )
     {
       $this->newProduct[ 'qty' ] = $this->gpvar[ 'qty' ];
-      $this->newProduct[ 'service_attribute_1' ] = $this->gpvar[ 'service_attribute_1' ];
-      $this->newProduct[ 'service_attribute_2' ] = $this->gpvar[ 'service_attribute_2' ];
-      $this->newProduct[ 'service_attribute_3' ] = $this->gpvar[ 'service_attribute_3' ];
+      $this->newProduct = $this->caddyProductServiceAttributes();
       $this->session->productAdd( $this->newProduct, $this->pid );
     }
   }
@@ -324,6 +322,71 @@ class tx_caddy_pi1 extends tslib_pibase
     // #54634, 131128, dwildt, 1+
     $arrReturn = $this->caddy->caddy( $this->pid );
     return $arrReturn;
+  }
+
+  /**
+   * caddyProductServiceAttributes( )
+   *
+   * @return	void
+   * @access private
+   * @internal #i0077
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyProductServiceAttributes()
+  {
+    $this->caddyProductServiceAttributes01();
+    $this->caddyProductServiceAttributes02();
+    $this->caddyProductServiceAttributes03();
+
+    return $this->newProduct;
+  }
+
+  /**
+   * caddyProductServiceAttributes01( )
+   *
+   * @return	void
+   * @access private
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyProductServiceAttributes01()
+  {
+    if ( isset( $this->gpvar[ 'service_attribute_1' ] ) )
+    {
+      $this->newProduct[ 'service_attribute_1' ] = $this->gpvar[ 'service_attribute_1' ];
+      return;
+    }
+  }
+
+  /**
+   * caddyProductServiceAttributes02( )
+   *
+   * @return	void
+   * @access private
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyProductServiceAttributes02()
+  {
+    if ( isset( $this->gpvar[ 'service_attribute_2' ] ) )
+    {
+      $this->newProduct[ 'service_attribute_2' ] = $this->gpvar[ 'service_attribute_2' ];
+      return;
+    }
+  }
+
+  /**
+   * caddyProductServiceAttributes01( )
+   *
+   * @return	void
+   * @access private
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyProductServiceAttributes03()
+  {
+    $this->newProduct[ 'service_attribute_3' ] = $this->gpvar[ 'service_attribute_3' ];
   }
 
   /**
@@ -540,7 +603,6 @@ class tx_caddy_pi1 extends tslib_pibase
 //    {
 //      return $tmpl;
 //    }
-
     // Set default value;
     $accordion = 1;
     if ( isset( $this->piVars[ 'accordion' ] ) )

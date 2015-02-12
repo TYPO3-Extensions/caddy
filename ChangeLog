@@ -2,9 +2,22 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.9
+  15-02-10
+  Feature
+  * #i0077: Service attributes in MM relation
+            New TypoScript property option extras with label
+  Improvement
+  * #i0078: New TypoScript array constant_editor.getpost
+  Manual
+  * #i0076: New section calculation
+  * #i0075: Cash discount is documented
+  Bugfix
+  * #i0079: Adding a product will overrun the limit, if there is a limit.
+
 6.0.8
   15-02-01
-  New Feature
+  Feature
   * #i0074:       VAT Reg.No. (USt-IdNr.)
                   Effected files:
                   * pi1/locallang.xml

@@ -1,7 +1,7 @@
 /**
  * jquery.t3caddy-4.0.0.js
  *
- * Copyright (c) 2013-2014 - Dirk Wildt (Die Netzmacher)
+ * Copyright (c) 2013-2015 - Dirk Wildt (Die Netzmacher)
  * http://wildt.at.die-netzmacher.de/
  *
  * Version 4.0.3

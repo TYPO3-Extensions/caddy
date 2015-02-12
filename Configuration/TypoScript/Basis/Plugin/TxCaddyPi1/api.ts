@@ -54,6 +54,21 @@ plugin.tx_caddy_pi1 {
         data = GP:{$plugin.caddy.getpost.qty}
         intval = 1
       }
+      service_attribute_1 = TEXT
+      service_attribute_1 {
+        data = GP:{$plugin.caddy.getpost.service_attribute_1}
+        htmlSpecialChars = 1
+      }
+      service_attribute_2 = TEXT
+      service_attribute_2 {
+        data = GP:{$plugin.caddy.getpost.service_attribute_2}
+        htmlSpecialChars = 1
+      }
+      service_attribute_3 = TEXT
+      service_attribute_3 {
+        data = GP:{$plugin.caddy.getpost.service_attribute_3}
+        htmlSpecialChars = 1
+      }
       sku = TEXT
       sku {
         data = GP:{$plugin.caddy.getpost.sku}

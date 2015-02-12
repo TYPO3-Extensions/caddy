@@ -3,7 +3,7 @@
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2013-2014 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
+ *  (c) 2013-2015 - Dirk Wildt <http://wildt.at.die-netzmacher.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -195,8 +195,6 @@ class tx_caddy extends tslib_pibase
   private $optionsSpecialsAreEmpty = false;
   // [array] current typoscript configuration
   public $conf = null;
-  private $markerArray = array();
-  // [object] parent DRS object
   private $calc = null;
   public $drs = null;
   private $userfunc = null;
@@ -210,11 +208,9 @@ class tx_caddy extends tslib_pibase
   // [object] parent session object
   private $session = null;
   private $products = array();
-  private $outerMarkerArray = array();
   // [array] current tt_content row or current pi_flexform row
   private $row = null;
   private $tmpl = null;
-  private $smarkerArray = null;
 
   /*   * *********************************************
    *
@@ -1085,11 +1081,13 @@ class tx_caddy extends tslib_pibase
    * @param	array		$product :
    * @return	void
    * @access private
-   * @version    2.0.0
+   * @version    6.0.9
    * @since      2.0.0
    */
   private function caddyWiItemsItemServiceAttributes( $product )
   {
+    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+
     // DRS
     if ( $this->drs->drsTodo )
     {
@@ -1104,11 +1102,7 @@ class tx_caddy extends tslib_pibase
             $product[ 'service_attribute_1' ] * $product[ 'qty' ]
             )
     ;
-    if ( $this->caddyServiceAttribute1Max > $product[ 'service_attribute_1' ] )
-    {
-      $this->caddyServiceAttribute1Max = $this->caddyServiceAttribute1Max;
-    }
-    else
+    if ( $this->caddyServiceAttribute1Max <= $product[ 'service_attribute_1' ] )
     {
       $this->caddyServiceAttribute1Max = $product[ 'service_attribute_1' ];
     }
@@ -1117,24 +1111,17 @@ class tx_caddy extends tslib_pibase
             $product[ 'service_attribute_2' ] * $product[ 'qty' ]
             )
     ;
-    if ( $this->caddyServiceAttribute2Max > $product[ 'service_attribute_2' ] )
-    {
-      $this->caddyServiceAttribute2Max = $this->caddyServiceAttribute2Max;
-    }
-    else
+    if ( $this->caddyServiceAttribute2Max <= $product[ 'service_attribute_2' ] )
     {
       $this->caddyServiceAttribute2Max = $product[ 'service_attribute_2' ];
     }
+//var_dump( __METHOD__, __LINE__, $this->caddyServiceAttribute2Max, $this->caddyServiceAttribute2Sum );
 
     $this->caddyServiceAttribute3Sum = $this->caddyServiceAttribute3Sum + (
             $product[ 'service_attribute_3' ] * $product[ 'qty' ]
             )
     ;
-    if ( $this->caddyServiceAttribute3Max > $product[ 'service_attribute_3' ] )
-    {
-      $this->caddyServiceAttribute3Max = $this->caddyServiceAttribute3Max;
-    }
-    else
+    if ( $this->caddyServiceAttribute3Max <= $product[ 'service_attribute_3' ] )
     {
       $this->caddyServiceAttribute3Max = $product[ 'service_attribute_3' ];
     }
@@ -1324,6 +1311,8 @@ class tx_caddy extends tslib_pibase
    */
   private function calcItems()
   {
+    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+
     // DIE  : $row is empty
     if ( empty( $this->products ) )
     {
@@ -1349,23 +1338,6 @@ class tx_caddy extends tslib_pibase
     {
       // calculate tax
       $product = $this->calcItemsTax( $product );
-
-//        // cObject become current record
-//      $this->zz_setData( $product, $this->conf['db.']['table'] );
-//
-//        // update product settings
-//      $markerArray  = ( array ) null
-//                    + ( array ) $this->caddyWiItemsMarkerItemsItem( $product )
-//                    + ( array ) $this->caddyWiItemsMarkerItemsItemErrorMsg( $product )
-//                    ;
-//
-//         // add inner html to variable
-//      $content  = $content
-//                . $this->cObj->substituteMarkerArrayCached
-//                  (
-//                    $this->tmpl['item'], $markerArray
-//                  )
-//                ;
       // update product gross
       $productsGross = $productsGross + $product[ 'sumgross' ]
       ;
@@ -1404,6 +1376,8 @@ class tx_caddy extends tslib_pibase
    */
   private function calcItemsTax( $product )
   {
+    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+
     // calculate gross total
     $product[ 'sumgross' ] = $product[ 'gross' ] * $product[ 'qty' ]
     ;
@@ -1482,15 +1456,8 @@ class tx_caddy extends tslib_pibase
         exit;
     }
 
-    // #50045, dwildt, 7+
-//    $net                  = $product['gross'] / ( 1 + $product['taxrate'] );
-//    $product['net']       = round( $net, 2 );
-//    $product['sumnet']    = $product['net'] * $product['qty'];
-//    $product['sumgross']  = $product['sumnet'] * ( 1 + $product['taxrate'] );
-//    $product['sumtax']    = $product['sumgross'] - $product['sumnet'];
     $product[ 'sumnet' ] = round( ( $product[ 'sumgross' ] / ( 1 + $product[ 'taxrate' ] ) ), 2 );
     $product[ 'sumtax' ] = $product[ 'sumgross' ] - $product[ 'sumnet' ];
-    // #50045, dwildt, 7+
     // #50045, dwildt, +
     switch ( $product[ 'tax' ] )
     {
@@ -1660,7 +1627,7 @@ class tx_caddy extends tslib_pibase
     }
     // DRS
     // SWITCH : extra costs
-    switch ( $extras )
+    switch ( $extra )
     {
       case 'by_price':
         $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->productsGross );
@@ -1687,8 +1654,7 @@ class tx_caddy extends tslib_pibase
         $gross = $this->calcOptionCostsGrossByExtra( $extras, $this->caddyServiceAttribute3Max );
         break;
       case 'each':
-        $gross = floatval( $extras[ '1.' ][ 'extra' ] ) * $this->numberOfItems
-        ;
+        $gross = floatval( $extras[ '1.' ][ 'extra' ] ) * $this->numberOfItems;
         break;
       default:
         $gross = floatval( $extra );
@@ -2716,27 +2682,70 @@ class tx_caddy extends tslib_pibase
    */
   private function optionListConditionNotEach( $optionType, $conf )
   {
+//    var_dump( __METHOD__, __LINE__, $this->products );
     $content = null;
-    $gross = null;
 
 //      // #55333
 //    $unit   = $this->optionListSymbolByExtra( $conf['extras'] );
 //    $extras = ( array ) $conf['extras.'];
     $unit = $this->optionListSymbolByExtra( $conf[ 'extra' ] );
     $extras = ( array ) $conf[ 'extra.' ];
+    $llLabel = $this->pi_getLL( 'service_from' );
+    $tmpl = $this->tmpl[ $optionType . '_condition_item' ];
 
     foreach ( $extras as $extra )
     {
-      $gross = $this->zz_price_format( $extra[ 'extra' ] );
-      $llLabel = $this->pi_getLL( 'service_from' );
-      $tmpl = $this->tmpl[ $optionType . '_condition_item' ];
-
-      $marker[ '###CONDITION###' ] = $llLabel . ' ' . $extra[ 'value' ] . ' ' . $unit . ' : ' . $gross;
+      if ( $extra[ 'label' ] )
+      {
+        $marker[ '###CONDITION###' ] = $this->optionListConditionNotEachWiLabel( $extra );
+      }
+      else
+      {
+        $marker[ '###CONDITION###' ] = $this->optionListConditionNotEachWoLabel( $extra, $unit, $llLabel );
+      }
       $content = $content
               . $this->cObj->substituteMarkerArrayCached( $tmpl, $marker );
     }
 
     return $content;
+  }
+
+  /**
+   * optionListConditionNotEachWiLabel( )
+   *
+   * @param	string		$optionItemKey        :
+   * @param	string		$optionType : payment, shipping, special
+   * @param	array		$conf       : configuration of current option item
+   * @return	array		$arrReturn  : content, gross
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function optionListConditionNotEachWiLabel( $extra )
+  {
+//var_dump( __METHOD__, __LINE__, $this->products );
+    $marker = $this->zz_cObjGetSingle( $extra[ 'label' ], $extra[ 'label.' ] );
+
+    return $marker;
+  }
+
+  /**
+   * optionListConditionNotEachWoLabel( )
+   *
+   * @param	string		$optionItemKey        :
+   * @param	string		$optionType : payment, shipping, special
+   * @param	array		$conf       : configuration of current option item
+   * @return	array		$arrReturn  : content, gross
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function optionListConditionNotEachWoLabel( $extra, $unit, $llLabel )
+  {
+//var_dump( __METHOD__, __LINE__, $this->products );
+    $gross = $this->zz_price_format( $extra[ 'extra' ] );
+    $llLabel = $this->pi_getLL( 'service_from' );
+    $marker = $llLabel . ' ' . $extra[ 'value' ] . ' ' . $unit . ' : ' . $gross;
+
+    return $marker;
   }
 
   /**
