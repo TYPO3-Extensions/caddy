@@ -1086,7 +1086,7 @@ class tx_caddy extends tslib_pibase
    */
   private function caddyWiItemsItemServiceAttributes( $product )
   {
-    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+    $qty = $this->conf[ 'constant_editor.' ][ 'getpost.' ][ 'qty' ];
 
     // DRS
     if ( $this->drs->drsTodo )
@@ -1311,7 +1311,7 @@ class tx_caddy extends tslib_pibase
    */
   private function calcItems()
   {
-    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+    $qty = $this->conf[ 'constant_editor.' ][ 'getpost.' ][ 'qty' ];
 
     // DIE  : $row is empty
     if ( empty( $this->products ) )
@@ -1336,17 +1336,19 @@ class tx_caddy extends tslib_pibase
 //var_dump( __METHOD__, __LINE__, $this->product );
     foreach ( ( array ) $this->products as $product )
     {
+      // #i0079, 150212, dwildt, +
+      if( empty( $product[ 'qty' ] ))
+      {
+        continue;
+      }
+
       // calculate tax
       $product = $this->calcItemsTax( $product );
       // update product gross
-      $productsGross = $productsGross + $product[ 'sumgross' ]
-      ;
-      $productsNet = $productsNet + $product[ 'sumnet' ]
-      ;
-      $productsTaxNormal = $productsTaxNormal + $product[ 'taxNormal' ]
-      ;
-      $productsTaxReduced = $productsTaxReduced + $product[ 'taxReduced' ]
-      ;
+      $productsGross = $productsGross + $product[ 'sumgross' ];
+      $productsNet = $productsNet + $product[ 'sumnet' ];
+      $productsTaxNormal = $productsTaxNormal + $product[ 'taxNormal' ];
+      $productsTaxReduced = $productsTaxReduced + $product[ 'taxReduced' ];
       // update number of products
       $this->numberOfItems = $this->numberOfItems + $product[ 'qty' ];
 
@@ -1371,12 +1373,12 @@ class tx_caddy extends tslib_pibase
    * @param	array		$product  :
    * @return	array		$tax      : cartNet, cartTaxReduced, cartTaxNormal
    * @access private
-   * @version    2.0.10
+   * @version    6.0.9
    * @since      2.0.0
    */
   private function calcItemsTax( $product )
   {
-    $qty = $this->conf[ 'constant_editor.']['getpost.']['qty'];
+    $qty = $this->conf[ 'constant_editor.' ][ 'getpost.' ][ 'qty' ];
 
     // calculate gross total
     $product[ 'sumgross' ] = $product[ 'gross' ] * $product[ 'qty' ]
@@ -1497,7 +1499,17 @@ class tx_caddy extends tslib_pibase
     }
     // #50045, dwildt, +
 
-    $product[ 'net' ] = round( ( $product[ 'sumnet' ] / $product[ 'qty' ] ), 2 );
+    switch ( TRUE )
+    {
+      // #i0079, 150212, dwildt, +
+      case( empty( $product[ 'qty' ] )):
+        $product[ 'net' ] = 0;
+        break;
+      case(!empty( $product[ 'qty' ] )):
+      default:
+        $product[ 'net' ] = round( ( $product[ 'sumnet' ] / $product[ 'qty' ] ), 2 );
+        break;
+    }
 
     // price netto
 

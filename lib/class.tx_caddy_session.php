@@ -742,6 +742,11 @@ class tx_caddy_session
       return $qty;
     }
 
+    if ( $this->pObj->piVars[ 'del' ] )
+    {
+      return 0;
+    }
+
     return 1;
   }
 
@@ -1339,11 +1344,25 @@ class tx_caddy_session
    */
   private function quantityCheckMinMax( $product )
   {
-    // #61877, dwildt, 5+
-    // RETURN without any check: variants are configured
-    if ( is_array( $this->pObj->conf[ 'settings.' ][ 'variant.' ] ) )
+//var_dump( __METHOD__, __LINE__, $this->pObj->piVars[ 'qty' ], $product[ 'uid' ]);
+    switch ( TRUE )
     {
-      return $product;
+      case( is_array( $this->pObj->conf[ 'settings.' ][ 'variant.' ] ) ):
+        // #61877, dwildt, 5+
+        // RETURN without any check: variants are configured
+        return $product;
+      // #i0080, 150212, dwildt, +
+      case(empty( $product )):
+        return NULL;
+      // #i0080, 150212, dwildt, +
+      case(isset( $this->pObj->piVars[ 'qty' ] )):
+        if (empty( $this->pObj->piVars[ 'qty' ][ $product[ 'uid' ] ] )) {
+          return NULL;
+        }
+        break;
+      default:
+        // follow the workflow
+        break;
     }
 
     // Prompt case add, update or delete to DRS
@@ -1888,7 +1907,6 @@ class tx_caddy_session
   private function quantityGetUpdate()
   {
     $quantity = 0;
-    //var_dump( __METHOD__, __LINE__, $this->pObj->piVars[ 'qty' ] );
 
     foreach ( ( array ) $this->pObj->piVars[ 'qty' ] as $value )
     {
@@ -2048,7 +2066,14 @@ class tx_caddy_session
           unset( $sesArray[ 'products' ][ $key_session ] );
           $productId = $this->productsGetFirstKey();
         }
-        $sesArray[ 'products' ][ $productId ] = $this->quantityCheckMinMax( $sesArray[ 'products' ][ $productId ] );
+        // #i0080, 150212, dwildt, -
+        //$sesArray[ 'products' ][ $productId ] = $this->quantityCheckMinMax( $sesArray[ 'products' ][ $productId ] );
+        // #i0080, 150212, dwildt, +
+        $product = $this->quantityCheckMinMax( $sesArray[ 'products' ][ $productId ] );
+        if ( !empty( $product ) )
+        {
+          $sesArray[ 'products' ][ $productId ] = $product;
+        }
       }
       else
       {

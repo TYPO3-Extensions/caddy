@@ -394,21 +394,72 @@ class tx_caddy_pi1 extends tslib_pibase
    *
    * @return	void
    * @access private
-   * @version    3.0.1
+   * @version    6.0.9
    * @since      2.0.0
    */
   private function caddyUpdate()
   {
-    // change qty
-    if ( isset( $this->piVars[ 'qty' ] ) && is_array( $this->piVars[ 'qty' ] ) )
+    // #i0080, 150212, dwildt, +
+    $this->caddyUpdateItemDelete();
+    $this->caddyUpdateItemsUpdate();
+    $this->caddyUpdateOptions();
+  }
+
+  /**
+   * caddyUpdateItemDelete( ) : Deletes an item, if there is an item set to 0.
+   *
+   * @return	void
+   * @access private
+   * @internal #i0080
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyUpdateItemDelete()
+  {
+    if ( !isset( $this->piVars[ 'qty' ] ) )
     {
-      // #54634, 131128, dwildt, 1-
-      //$this->session->quantityUpdate( );
-      // #54634, 131128, dwildt, 1+
-      $this->session->quantityUpdate( $this->pid );
+      return;
     }
 
-    $this->caddyUpdateOptions();
+    foreach ( ( array ) $this->piVars[ 'qty' ] as $uid => $quantity )
+    {
+      if ( $quantity > 0 )
+      {
+        continue;
+      }
+      $this->piVars[ 'del' ] = $uid;
+      $this->caddyProductDelete();
+      return;
+    }
+
+    return;
+  }
+
+  /**
+   * caddyUpdateItemsUpdate( ) : Updates the caddy, if
+   *
+   * @return	void
+   * @access private
+   * @internal #i0080
+   * @version    6.0.9
+   * @since      6.0.9
+   */
+  private function caddyUpdateItemsUpdate()
+  {
+    switch ( TRUE )
+    {
+      case(isset( $this->piVars[ 'del' ] )):
+        return;
+      case(!isset( $this->piVars[ 'qty' ] )):
+        return;
+      case(!is_array( $this->piVars[ 'qty' ] )):
+        return;
+      default:
+        // Follow the workflow
+        break;
+    }
+
+    $this->session->quantityUpdate( $this->pid );
   }
 
   /**
@@ -421,14 +472,16 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function caddyUpdateOptions()
   {
-//    $GP = t3lib_div::_GET( )
-//        + t3lib_div::_POST( )
-//        ;
-//    var_dump( __METHOD__, __LINE__, $GP );
-    // RETURN : Don't update options, if form isn't by itself
-    if ( !intval( $this->piVars[ 'updateByCaddy' ] ) )
+    switch ( TRUE )
     {
-      return;
+      case(isset( $this->piVars[ 'del' ] )):
+        return;
+      case(!intval( $this->piVars[ 'updateByCaddy' ] )):
+        // RETURN : Don't update options, if form isn't by itself
+        return;
+      default:
+        // Follow the workflow
+        break;
     }
 
     $this->caddyUpdateOptionsPayment();

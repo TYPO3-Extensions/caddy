@@ -13,6 +13,7 @@ TODO
   * #i0076: New section calculation
   * #i0075: Cash discount is documented
   Bugfix
+  * #i0080: Min and Max failed in case of an update with an item with 0 quantity
   * #i0079: Adding a product will overrun the limit, if there is a limit.
 
 6.0.8
