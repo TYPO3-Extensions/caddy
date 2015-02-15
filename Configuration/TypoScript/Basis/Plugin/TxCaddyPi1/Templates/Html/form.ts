@@ -84,7 +84,9 @@ plugin.tx_caddy_pi1 {
                         10 = TEXT
                         10 {
                           if {
-                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                            isTrue {
+                              field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                            }
                           }
                           field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_1]" value="|" />
@@ -93,7 +95,9 @@ plugin.tx_caddy_pi1 {
                         20 = TEXT
                         20 {
                           if {
-                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_2}
+                            isTrue {
+                              field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_2}
+                            }
                           }
                           field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_2}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_2]" value="|" />
@@ -102,7 +106,9 @@ plugin.tx_caddy_pi1 {
                         30 = TEXT
                         30 {
                           if {
-                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                            isTrue {
+                              field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                            }
                           }
                           field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_3]" value="|" />
@@ -115,16 +121,20 @@ plugin.tx_caddy_pi1 {
                         10 = TEXT
                         10 {
                           if {
-                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                            isTrue {
+                              field = {$plugin.caddy.db.service_attribute_1}
+                            }
                           }
-                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_1}
+                          field = {$plugin.caddy.db.service_attribute_1}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_1]" value="|" />
                         }
                           // service_attribute_2
                         20 = TEXT
                         20 {
                           if {
-                            isTrue = {$plugin.caddy.db.service_attribute_2}
+                            isTrue {
+                              field = {$plugin.caddy.db.service_attribute_2}
+                            }
                           }
                           field = {$plugin.caddy.db.service_attribute_2}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_2]" value="|" />
@@ -133,9 +143,11 @@ plugin.tx_caddy_pi1 {
                         30 = TEXT
                         30 {
                           if {
-                            isTrue = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                            isTrue {
+                              field = {$plugin.caddy.db.service_attribute_3}
+                            }
                           }
-                          field = {$plugin.caddy.db.table}.{$plugin.caddy.db.service_attribute_3}
+                          field = {$plugin.caddy.db.service_attribute_3}
                           wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[service_attribute_3]" value="|" />
                         }
                       }

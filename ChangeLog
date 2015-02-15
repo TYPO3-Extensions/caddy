@@ -3,7 +3,7 @@ TODO
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
 6.0.9
-  15-02-10
+  15-02-15
   Feature
   * #i0077: Service attributes in MM relation
             New TypoScript property option extras with label
