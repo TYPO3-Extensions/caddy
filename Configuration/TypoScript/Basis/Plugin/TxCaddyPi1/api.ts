@@ -876,6 +876,31 @@ plugin.tx_caddy_pi1 {
             extra = {$plugin.caddy.options.shipping.2.costs}
             tax   = {$plugin.caddy.options.shipping.2.taxrate}
           }
+            // pick up: enabled, title, extra, tax
+          3 < .1
+          3 =
+          3 {
+            enabled = {$plugin.caddy.options.shipping.3.enabled}
+            title {
+              10 {
+                data = LLL:EXT:caddy/pi1/locallang.xml:shippingoption_pickup
+              }
+              20 {
+                if {
+                  isGreaterThan = {$plugin.caddy.options.shipping.3.costs}
+                }
+                10 {
+                  userFunc {
+                    number {
+                      value = {$plugin.caddy.options.shipping.3.costs}
+                    }
+                  }
+                }
+              }
+            }
+            extra = {$plugin.caddy.options.shipping.3.costs}
+            tax   = {$plugin.caddy.options.shipping.3.taxrate}
+          }
         }
       }
         // preset, options

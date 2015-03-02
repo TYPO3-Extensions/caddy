@@ -259,6 +259,12 @@ plugin.caddy {
   options.shipping.2.costs = 12.00
   # cat=caddy - options shipping/enable/303; type=options[normal,reduced]; label= 2. mail express - tax rate:Tax rate for extra costs for mail express.
   options.shipping.2.taxrate = reduced
+  # cat=caddy - options shipping/enable/401; type=boolean; label= 3. pick up - enabled:Disable it, if you don't want to offer the shipping option pick up.
+  options.shipping.3.enabled = 1
+  # cat=caddy - options shipping/enable/402; type=string; label= 3. pick up - costs:Extra costs for pick up. Example: 9.99.
+  options.shipping.3.costs = 0.00
+  # cat=caddy - options shipping/enable/403; type=options[normal,reduced]; label= 3. pick up - tax rate:Tax rate for extra costs for pick up.
+  options.shipping.3.taxrate = reduced
   # cat=caddy - options shipping/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   options.shipping.externalLinks = Click me!
   # cat=caddy - options shipping/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

@@ -65,6 +65,7 @@
       <label index="shippinglabel">Shipping</label>
       <label index="shippingoption_maildefault">Post</label>
       <label index="shippingoption_mailexpress">Post express</label>
+      <label index="shippingoption_pickup">Pick up</label>
       <label index="shipping_available_from">shipping available from</label>
       <label index="shipping_available_until">shipping available until</label>
       <label index="shipping_free_from">free shipping from</label>
@@ -148,6 +149,7 @@
       <label index="shippinglabel">Versand</label>
       <label index="shippingoption_maildefault">DHL Standard</label>
       <label index="shippingoption_mailexpress">DHL Express</label>
+      <label index="shippingoption_pickup">Selbstabholer</label>
       <label index="shipping_available_from">verf<![CDATA[&uuml;]]>gbar ab</label>
       <label index="shipping_available_until">verf<![CDATA[&uuml;]]>gbar bis</label>
       <label index="shipping_free_from">versandkostenfrei ab</label>

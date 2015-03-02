@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.10
+  15-03-02
+  Improvement
+  * #65458: Shipping Option Pick Up
+
 6.0.9
   15-02-15
   Feature
