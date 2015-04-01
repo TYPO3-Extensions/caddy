@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.11
+  15-04-01
+  Improvement
+  * #i0078: PHP Warning: Invalid argument supplied for foreach() in lib/class.tx_caddy_dynamicmarkers.php line 212
+
 6.0.10
   15-03-02
   Improvement

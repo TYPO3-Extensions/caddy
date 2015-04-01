@@ -204,12 +204,12 @@ class tx_caddy_dynamicmarkers extends tslib_pibase {
   * @return	string		$content  : current content with replaced HTML marker
   * @access private
   * @internal   #i0037
-  * @version    3.0.1
+  * @version    6.0.11
   * @since      1.4.0
   */
   private function cObjData( )
   {
-    foreach( $this->cObj->data as $key => $value )
+    foreach( ( array ) $this->cObj->data as $key => $value )
     {
       if( empty( $value ) )
       {
