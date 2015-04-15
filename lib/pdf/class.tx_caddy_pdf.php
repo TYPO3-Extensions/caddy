@@ -724,7 +724,7 @@ class tx_caddy_pdf extends tslib_pibase
                 );
     // #i0079, 150416, dwildt, 1+/-
     //$destPath = 'uploads/tx_caddy/' . $destFile;
-    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
+    $destPath = "XYZ" . PATH_site . 'uploads/tx_caddy/' . $destFile;
 
       // Get the path of the destination file
 
