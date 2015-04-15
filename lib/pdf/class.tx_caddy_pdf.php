@@ -233,11 +233,15 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['deliveryorder.']['filename'],
                   $this->confPdf['deliveryorder.']['filename.']
                 );
-    $destPath = 'uploads/tx_caddy/' . $destFile;
+    // #i0079, 150416, dwildt, 1+/-
+    //$destPath = 'uploads/tx_caddy/' . $destFile;
+    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
       // Get the path of the destination file
 
       // RETURN : destination file already exists
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    // #i0079, 150416, dwildt, 1+/-
+    //if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    if( file_exists( $destPath ) )
     {
         // DRS
       if( $this->pObj->drsUserfunc )
@@ -724,12 +728,13 @@ class tx_caddy_pdf extends tslib_pibase
                 );
     // #i0079, 150416, dwildt, 1+/-
     //$destPath = 'uploads/tx_caddy/' . $destFile;
-    $destPath = "XYZ" . PATH_site . 'uploads/tx_caddy/' . $destFile;
-
+    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
       // Get the path of the destination file
 
       // RETURN : destination file already exists
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    // #i0079, 150416, dwildt, 1+/-
+    //if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    if( file_exists( $destPath ) )
     {
         // DRS
       if( $this->pObj->drsUserfunc )
@@ -1269,11 +1274,15 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['revocation.']['filename'],
                   $this->confPdf['revocation.']['filename.']
                 );
-    $destPath = 'uploads/tx_caddy/' . $destFile;
+    // #i0079, 150416, dwildt, 1+/-
+    //$destPath = 'uploads/tx_caddy/' . $destFile;
+    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
       // Get the path of the destination file
 
       // RETURN : destination file already exists
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    // #i0079, 150416, dwildt, 1+/-
+    //if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    if( file_exists( $destPath ) )
     {
         // DRS
       if( $this->pObj->drsUserfunc )
@@ -1476,11 +1485,15 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['terms.']['filename'],
                   $this->confPdf['terms.']['filename.']
                 );
-    $destPath = 'uploads/tx_caddy/' . $destFile;
+    // #i0079, 150416, dwildt, 1+/-
+    //$destPath = 'uploads/tx_caddy/' . $destFile;
+    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
       // Get the path of the destination file
 
       // RETURN : destination file already exists
-    if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    // #i0079, 150416, dwildt, 1+/-
+    //if( file_exists( 'uploads/tx_caddy' . '/' . $destFile ) )
+    if( file_exists( $destPath ) )
     {
         // DRS
       if( $this->pObj->drsUserfunc )
