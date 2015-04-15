@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.12
+  15-04-16
+  Improvement
+  * #i0079: absolute path to the PDF document
+
 6.0.11
   15-04-01
   Improvement

@@ -722,7 +722,10 @@ class tx_caddy_pdf extends tslib_pibase
                   $this->confPdf['invoice.']['filename'],
                   $this->confPdf['invoice.']['filename.']
                 );
-    $destPath = 'uploads/tx_caddy/' . $destFile;
+    // #i0079, 150416, dwildt, 1+/-
+    //$destPath = 'uploads/tx_caddy/' . $destFile;
+    $destPath = PATH_site . 'uploads/tx_caddy/' . $destFile;
+
       // Get the path of the destination file
 
       // RETURN : destination file already exists
