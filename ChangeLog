@@ -5,6 +5,7 @@ TODO
 6.0.12
   15-04-16
   Improvement
+  * #i0080: state is set from alpha to beta
   * #i0079: absolute path to the PDF document
 
 6.0.11
