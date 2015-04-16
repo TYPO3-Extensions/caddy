@@ -1,4 +1,5 @@
-$.noConflict();
+/* #i0081, 150416, dwildt, 1- */
+/* $.noConflict(); */
 
 jQuery(document).ready(function($) {
   var formlang = 'de';

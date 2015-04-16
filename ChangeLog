@@ -2,6 +2,11 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.0.13
+  15-04-16
+  Bugfix
+  * #i0081: Remove conflict mode from paymill api
+
 6.0.12
   15-04-16
   Improvement
