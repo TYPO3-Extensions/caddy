@@ -2,6 +2,16 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.1.0
+  15-04-22
+  Feature
+  * #66534:	Mini-Caddy: Foundation Reveal Modal
+            New static templates
+            * Caddy [3.2] + Foundation Minicaddy Dropdown
+            * Caddy [3.2] + Foundation Minicaddy Reveal
+  * #i0084: Delete icon is an icon of the foundation font. Extension start is needed.
+  * #i0083: HTML/CSS: optimise for small
+
 6.0.14
   15-04-18
   Bugfix

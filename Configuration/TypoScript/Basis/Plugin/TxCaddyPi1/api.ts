@@ -162,6 +162,47 @@ plugin.tx_caddy_pi1 {
             }
           }
         }
+        delete >
+          // delete icon: for removing the current item from the caddy (#i0084)
+        delete = TEXT
+        delete {
+          value = &#215;
+          value = <i class="fi-trash"></i>
+          typolink {
+            parameter {
+              cObject = COA
+              cObject {
+                  // URL
+                10 = TEXT
+                10 {
+                  data = page:alias//TSFE:id
+                }
+                  // target
+                20 = TEXT
+                20 {
+                  value       = -
+                  noTrimWrap  = | ||
+                }
+                  // class
+                30 = TEXT
+                30 {
+                  value       = button delete mytiny alert onClickloadCaddyByAjax
+                  noTrimWrap  = | "|"|
+                }
+                  // title
+                40 = TEXT
+                40 {
+                  data = LLL:EXT:caddy/pi1/locallang.xml:delete
+                  noTrimWrap  = | "|"|
+                }
+              }
+            }
+            additionalParams {
+              wrap  = &tx_caddy_pi1[del]=|
+              field = uid
+            }
+          }
+        }
           // gross costs of the item
         gross = COA
         gross {

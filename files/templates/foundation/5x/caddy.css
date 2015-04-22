@@ -1,3 +1,19 @@
+div.caddymini {
+  margin: 0;
+  padding: 0;
+}
+.caddy_product .button.delete.mytiny {
+  padding:0.2em 0.4em 0.4em;
+}
+
+.caddy_product .button.delete.mytiny {
+  background: inherit;
+  color: #F00;
+  font-size: 1.4em;
+  position: relative;
+  top: -0.2em;
+}
+
 .caddy-right {
   text-align:right;
 }

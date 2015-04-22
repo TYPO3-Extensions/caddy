@@ -114,13 +114,13 @@ plugin.caddy {
   getpost.sponsors = Click me!
 
   # cat=caddy - html accordion//100;          type=Class columns 1; label= CSS class for the first column of an accordion.
-  html.accordion.classes.column.0 = medium-7 columns
+  html.accordion.classes.column.0 = small-7 columns
   # cat=caddy - html accordion//101;          type=Class columns 2; label= CSS class for the second column of an accordion.
-  html.accordion.classes.column.1 = medium-2 columns
+  html.accordion.classes.column.1 = small-2 columns
   # cat=caddy - html accordion//102;          type=Class columns 3; label= CSS class for the third column of an accordion.
-  html.accordion.classes.column.2 = medium-2 columns caddy-right
+  html.accordion.classes.column.2 = small-2 columns caddy-right
   # cat=caddy - html accordion//103;          type=Class columns 4; label= CSS class for the fourth column of an accordion.
-  html.accordion.classes.column.3 = medium-1 columns
+  html.accordion.classes.column.3 = small-1 columns
   # cat=caddy - html accordion/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.accordion.classes.sponsors = Click me!
 

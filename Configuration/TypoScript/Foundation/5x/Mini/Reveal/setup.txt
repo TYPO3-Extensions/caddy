@@ -1,0 +1,16 @@
+page {
+  includeCSS {
+    caddyMiniDropdown = EXT:caddy/files/templates/foundation/5x/caddyminireveal.css
+  }
+}
+
+plugin.tx_caddy_pi3 {
+  content {
+    item {
+      wrap = <div class="row item minicaddyitem">|</div>
+    }
+    sum {
+      wrap = <div class="row sum minicaddysum">|</div>
+    }
+  }
+}

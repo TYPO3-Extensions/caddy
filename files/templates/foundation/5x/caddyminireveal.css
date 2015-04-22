@@ -1,0 +1,24 @@
+.minicaddy {
+  top: -1em;
+  right:4em;
+  position: relative;
+  text-align: right;
+}
+.minicaddy .button.mytiny {
+  padding:0.4em 0.8em;
+}
+.minicaddy .button.mytiny i {
+  font-size: 3em;
+  line-height:1;
+}
+.minicaddy-button {
+  margin: 1em 0 0;
+}
+#modal-button {
+  position:fixed;
+  z-index:88;
+}
+#modal-content {
+  padding:4em 0 1em;
+  z-index:999999;
+}

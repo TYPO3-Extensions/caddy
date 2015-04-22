@@ -1,0 +1,57 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundation | Caddy mini - reveal</title>
+  </head>
+  <body>
+    <em>
+      VERSION
+      =======
+      #61865, 141009
+      For foundation 5.x
+
+      INDEX
+      =====
+
+      * CADDYMINI
+      * CADDYMINIEMPTY
+      * CADDYSUM
+      * CADDYSUMEMPTY
+
+    </em>
+
+
+    <!-- ###CADDYMINI### begin -->
+    <div class="minicaddy">
+      <a id="modal-button" href="#" data-reveal-id="modal-content" class="button mytiny"><i class="fi-shopping-cart"></i></a>
+      <div id="modal-content" class="reveal-modal tiny" data-reveal aria-hidden="true" role="dialog">
+        <!-- ###ITEMS### beginn -->
+        ###ITEM###
+        <!-- ###ITEMS### end -->
+        ###SUM###
+        ###_HTMLMARKER_LINKTOCADDY###
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+      </div>
+    </div>
+    <!-- ###CADDYMINI### end -->
+
+    <!-- ###CADDYMINIEMPTY### begin -->
+    <!-- Caddy mini is empty: display nothing. -->
+    <!-- ###CADDYMINIEMPTY### end -->
+
+    <!-- ###CADDYSUM### begin -->
+    <div class="caddysum">
+      ###SUM###
+    </div>
+    <!-- ###CADDYSUM### end -->
+
+    <!-- ###CADDYSUMEMPTY### begin -->
+    <div class="caddysum caddysumempty">
+      ###_LOCAL_LANG_CADDYSUMEMPTY###
+    </div>
+    <!-- ###CADDYSUMEMPTY### end -->
+
+  </body>
+</html>
