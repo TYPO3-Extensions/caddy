@@ -14,6 +14,9 @@
 .minicaddy-button {
   margin: 1em 0 0;
 }
+.minicaddysum {
+  font-weight: bold;
+}
 #modal-button {
   position:fixed;
   z-index:88;
