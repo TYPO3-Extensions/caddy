@@ -1,0 +1,299 @@
+.clear {
+  clear:both;
+}
+
+/* order form */
+
+form.caddy {
+  text-align: right;
+}
+form.caddy button.submit img {
+  position:relative;
+  top:.1em;
+}
+
+/* div based caddy */
+
+.caddy-product-table {
+  height: 3.2em;
+}
+
+div.caddy_product {
+  padding:.6em .5em .3em .5em;
+}
+div.caddy_options {
+  padding: 0.4em 0 0 4.3em;
+}
+#caddy_payment,
+#caddy_shipping,
+#caddy_specials {
+  float:left;
+  padding: 1em 3em 0 0;
+}
+#caddy_payment fieldset legend,
+#caddy_shipping fieldset legend,
+#caddy_specials fieldset legend {
+  padding: 0 0 .6em 0;
+}
+div.caddy_header {
+  font-weight:bold;
+  margin-bottom:.5em;
+  padding:.5em .5em 0 .5em;
+}
+div.caddy_footer {
+  padding:1em 0 0 5px;
+}
+div.caddy_product {
+  padding:.6em .5em .3em .5em;
+}
+div.caddy_product div.caddy_col {
+  padding:.3em 0 0 0;
+}
+div.caddy_product div.caddy_col1 {
+  padding:0;
+}
+div.caddy_product div.caddy_col4 {
+  padding-right:1em;
+  text-align: right;
+  width:3em;
+}
+div.caddy_product div.caddy_col6 {
+  padding-right: 1em;
+}
+div.caddy_product div.caddy_col7 {
+  padding:0;
+  position:relative;
+  top:-.3em;
+}
+div.caddy_col {
+  display:block;
+  float:left;
+}
+div.caddy_col input {
+  text-align:right;
+  width:2em;
+}
+div.caddy_col_strong {
+  font-weight: bold;
+}
+div.caddy_col1 {
+  height: 1.8em;
+  width:4em;
+}
+div.caddy_footer .caddy_col1 {
+  text-align:center;
+}
+div.caddy_col2 {
+  width:12em;
+}
+div.caddy_col2_4 {
+  width:32em;
+}
+div.caddy_col2_5 {
+  width:37em;
+}
+div.caddy_col3 {
+  width:16em;
+}
+div.caddy_col4 {
+  width:4em;
+}
+div.caddy_col5 {
+  text-align:right;
+  width:5em;
+}
+div.caddy_col6 {
+  text-align:right;
+  width:7em;
+}
+div.caddy_col7 {
+  padding-left: 1em;
+  width:2em;
+}
+div.caddy_error,
+div.caddy-requirements-prompt {
+  background:#F00;
+  color:#FFF;
+  font-weight:bold;
+  padding:.2em .6em;
+}
+div.caddymini {
+  background: #FFF;
+  margin: 0 0 1em 0;
+  padding: 1em 1em 3.5em 0;
+}
+div.caddymini .empty,
+div.caddymini .item,
+div.caddymini .sum {
+  font-size:.9em;
+}
+div.caddymini .empty,
+div.caddymini .sum {
+  font-weight:bold;
+  padding: 0 0 1em 0;
+}
+div.caddymini .empty {
+  padding-left: 1em;
+}
+div.caddymini .quantity,
+div.caddymini .label,
+div.caddymini .gross {
+  display:block;
+  float:left;
+}
+div.caddymini .quantity {
+  padding: 0 1em 0 0;
+  text-align:right;
+  width:2em;
+}
+div.caddymini .label {
+}
+div.caddymini .gross {
+  float:right;
+  text-align:right;
+  width:6em;
+}
+
+div.caddysum {
+  background: #FFF;
+  float: right;
+  margin: 0 0 1em 0;
+}
+div.caddysum .label,
+div.caddysum .gross {
+  font-size:2em;
+}
+div.caddysum .gross {
+  font-weight:bold;
+}
+
+div.caddy_cleaner {
+  clear: both;
+  margin: 0;
+  padding: 0;
+}
+.caddy select  {
+  padding: .7em 0 .4em .5em
+}
+.filter .caddy select  {
+  margin: 0 1em 0 0;
+  padding-top: .4em;
+}
+.caddy select option
+{
+  color: black;
+  padding: 0 0 0 .4em;
+  font-weight:normal;
+}
+img.linktocaddy,
+img.linktoshop {
+  cursor:pointer;
+  position:relative;
+  top:.1em;
+}
+div.linktocaddy,
+div.linktoshop {
+  display:inline;
+  float:right;
+  font-family: Trebuchet MS,Geneva,Arial,Helvetica,Verdana,sans serif;
+  font-weight:bold;
+  text-align:right;
+}
+div.linktoshopwofloat {
+  float:none;
+}
+div.linktoshop a,
+div.linktoshop a:link,
+div.linktoshop a:visited,
+div.linktocaddy a,
+div.linktocaddy a:link,
+div.linktocaddy a:visited {
+  color:white;
+}
+/* #61879, 140925, dwidlt, - */
+/*.caddy-powermail input[type=submit] {
+  margin: 1em 0;
+}
+div.tx-powermail .powermail_fieldwrap {
+  padding: 0 0 1em 0;
+}
+div.tx-powermail input[type=email],
+div.tx-powermail input[type=text] {
+  left:12em;
+  position:absolute;
+}*/
+div.tx-powermail dd a {
+  text-decoration: inherit;
+}
+div.tx-powermail dt.powermail_all_label  {
+  float:left;
+  padding-right:1em;
+}
+
+/* table based caddy */
+
+table.caddy_table {
+  border:1px solid #336699;
+  margin:0 0 10px 0;
+  width:100%;
+}
+table.caddy_table th {
+  font-weight:normal;
+  background:#cedbde;
+  color:#000;
+  height:30px;
+  line-height:30px;
+  padding:0 10px;
+}
+table.caddy_table tbody td {
+  padding:5px 10px;
+  vertical-align:top;
+}
+table.caddy_table tbody td input {
+  width:20px;
+}
+table.caddy_table tfoot td {
+  background:#336699;
+  color:#fff;
+  padding:3px 10px 2px 10px;
+  text-align:right;
+}
+table.caddy_table caddy_right {
+  text-align:right;
+}
+
+#tx-caddy-pi1-loader {
+  background: #fff url(/typo3conf/ext/caddy/Resources/Public/Images/loader.gif) no-repeat  center ;
+  cursor:wait;
+  display:none;
+  opacity:.8;
+  position: absolute;
+  z-index:10000;
+}
+
+
+/* tx_caddy */
+form.caddy fieldset {
+  border:0;
+  margin: 0 0 1em 0;
+  padding: 1em 0;
+}
+.caddyWoMargin form.caddy {
+  margin: 0;
+}
+.caddyWoMargin form.caddy fieldset {
+  margin: 0;
+  padding: 0;
+}
+.caddyWoMargin form.caddy fieldset select {
+  margin-bottom: 0;
+}
+.caddyWoMargin form.caddy fieldset .button {
+  margin-bottom: 0;
+}
+
+form.caddy fieldset legend {
+  display:none;
+}
+
+/* tx_caddy */
