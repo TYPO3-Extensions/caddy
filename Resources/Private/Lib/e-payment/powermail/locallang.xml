@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="label-short-number-invoice">invoice</label>
+      <label index="label-short-number-order">order</label>
+      <label index="submit-back">Back to the order</label>
+      <label index="transaction-error-header">E-payment error</label>
+      <label index="transaction-error-title">TYPO3 Quick Shop: e-payment error</label>
+      <label index="transaction-success-header">Thanks for your payment</label>
+      <label index="transaction-success-title">TYPO3 Quick Shop: e-payment</label>
+      <label index="transaction-success-prompt">And thanks for your order.</label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="label-short-number-invoice">R-Nr.</label>
+      <label index="label-short-number-order">Best-Nr.</label>
+      <label index="submit-back">Zurück zur Bestellung</label>
+      <label index="transaction-error-header">Fehler bei der Online-Bezahlung</label>
+      <label index="transaction-error-title">TYPO3 Quick Shop: Online-Bezahlung Fehler</label>
+      <label index="transaction-success-header">Danke für Ihre Bezahlung</label>
+      <label index="transaction-success-title">TYPO3 Quick Shop: Online-Bezahlung</label>
+      <label index="transaction-success-prompt">Und herzlichen Dank für Ihre Bestellung.</label>
+    </languageKey>
+  </data>
+</T3locallang>

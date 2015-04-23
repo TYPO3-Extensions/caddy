@@ -818,7 +818,7 @@ class tx_caddy_pi1_clean
   */
   private function initInstancesSession( )
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'Resources/Private/Lib/';
 
     require_once( $path2lib . 'class.tx_caddy_session.php' );
     $this->session = t3lib_div::makeInstance( 'tx_caddy_session' );
@@ -836,7 +836,7 @@ class tx_caddy_pi1_clean
   */
   private function initInstancesStockmanager( )
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'Resources/Private/Lib/';
 
     require_once( $path2lib . 'caddy/class.tx_caddy_stockmanager.php' );
     $this->stockmanager = t3lib_div::makeInstance( 'tx_caddy_stockmanager' );

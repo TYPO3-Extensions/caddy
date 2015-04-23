@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>module</type>
+    <description>Language labels for plugin &quot;tx_caddy_pi1&quot;</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="dbTableEmpty"><![CDATA[
+        The typoscript property db.table is empty.<br />
+        Please configure the table, which delivers the products to caddy.<br />
+        See: constant editor > CADDY - DATABASE > table name
+      ]]></label>
+      <label index="flexformCheckAddresses"><![CDATA[
+        Some fields in the sheets [delivery order address] and [billing address] aren't set.<br />
+        Please update your configuration, if values are missing in the delivery order address
+        or the billing address.
+      ]]></label>
+      <label index="flexformCheckEmailCustomeremail"><![CDATA[
+        The customer e-mail is missing in the sheet [email].<br />
+        Any e-mail can't sent without this address. Please upate the sheet!
+      ]]></label>
+      <label index="flexformCheckNoteNote"><![CDATA[
+        You have an internal annotation at the tab [Notes]. Please attend it!
+      ]]></label>
+      <label index="flexformIsEmpty"><![CDATA[
+        This flexform is never saved. Please save it.<br />
+        Without saving you will get unproper results!
+      ]]></label>
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        The Check it! report is disabled and this is proper for performance needs.<br />
+        But if you have any unexpected result, enable the report by the check box above.
+      ]]></label>
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        The Check it! report is disabled and this is proper for performance needs.<br />
+        But if you have any unexpected result, enable the report by the check box above.
+      ]]></label>
+      <label index="pi1FfSdefReportOk"><![CDATA[
+        Congratulations: your configuration seem's to be proper!
+      ]]></label>
+      <label index="pi1FfSdefReportPerformance"><![CDATA[
+        Please disable the check it!-report. It costs performance!
+      ]]></label>
+      <label index="pmReceiverMarkerWo1x"><![CDATA[
+        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
+        the Email-Text for the receiver in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
+      ]]></label>
+      <label index="pmReceiverMarkerWo2x"><![CDATA[
+        No caddy marker! Please add the marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')} to
+        the Email-Text for the receiver in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
+      ]]></label>
+      <label index="pmReceiverMarkerWiWtcart1x"><![CDATA[
+        The Email-Text for the receiver in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmReceiverMarkerWiWtcart2x"><![CDATA[
+        The Email-Text for the receiver in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')}.
+      ]]></label>
+      <label index="pmSenderMarkerWo1x"><![CDATA[
+        No caddy marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDY### to
+        the Email-Text for the sender in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
+      ]]></label>
+      <label index="pmSenderMarkerWo2x"><![CDATA[
+        No caddy marker! Please add the marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')} to
+        the Email-Text for the sender in the powermail form!<br />
+        Emails doesn't contain caddy values without this marker.
+      ]]></label>
+      <label index="pmSenderMarkerWiWtcart1x"><![CDATA[
+        The Email-Text for the sender in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmSenderMarkerWiWtcart2x"><![CDATA[
+        The Email-Text for the sender in the powermail form contains a deprecated marker.<br />
+        Please move ###POWERMAIL_TYPOSCRIPT_CART### to {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')}.
+      ]]></label>
+      <label index="pmSubjectReceiverMarkerWo1x"><![CDATA[
+        No order number marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER### to
+        the subject field of the receiver in the powermail form!<br />
+        The subject doesn't contain the order number without this marker.
+      ]]></label>
+      <label index="pmSubjectReceiverMarkerWo2x"><![CDATA[
+        No order number marker! Please add the marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddyordernumber')} to
+        the subject field of the receiver in the powermail form!<br />
+        The subject doesn't contain the order number without this marker.
+      ]]></label>
+      <label index="pmSubjectSenderMarkerWo1x"><![CDATA[
+        No order number marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER### to
+        the subject field of the sender in the powermail form!<br />
+        The subject doesn't contain the order number without this marker.
+      ]]></label>
+      <label index="pmSubjectSenderMarkerWo2x"><![CDATA[
+        No order number marker! Please add the marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddyordernumber')} to
+        the subject field of the sender in the powermail form!<br />
+        The subject doesn't contain the order number without this marker.
+      ]]></label>
+      <label index="pmThanksMarkerWo1x"><![CDATA[
+        No caddy clear session marker! Please add the marker ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### to
+        the response text field in the powermail form!<br />
+        The caddy session won't cleaned up without this marker and the order form can't send!
+      ]]></label>
+      <label index="pmThanksMarkerWo2x"><![CDATA[
+        No caddy clear session marker! Please add the marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.clearcaddysession')} to
+        the response text field in the powermail form!<br />
+        The caddy session won't cleaned up without this marker and the order form can't send!
+      ]]></label>
+      <label index="powermailNocontent"><![CDATA[
+        There isn't any powermail form at the current page.<br />
+        Sorry, but it isn't possible, to order products without a powermail form.<br />
+        Please add the powermail form!
+      ]]></label>
+      <label index="promptCurrIPBody">Your current IP</label>
+      <label index="promptEpayment"><![CDATA[
+        <h1 style="text-align:left;">
+          E-Payment
+        </h1>
+        <h2 style="text-align:left;">
+          Configuration steps
+        </h2>
+        <p>
+          ...
+        </p>
+        <ol style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            Please include the static template of your e-payment provider.<br />
+            You will get the new category [CADDY - EPAYMENT <i>PROVIDER</i>] in your Constant Editor.
+          </li>
+          <li style="margin-bottom:.6em;">
+            Please configure than the new category [CADDY - EPAYMENT <i>PROVIDER</i>].<br />
+          </li>
+        </ol>
+        <p>
+          That's all.
+        </p>
+        <h2 style="text-align:left;">
+          More information about Caddy and e-payment
+        </h2>
+        <p>
+          <a href="../typo3conf/ext/caddy/doc/manual.pdf"
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Caddy manual"
+            title="Caddy manual"
+            target="_blank">Caddy manual (PDF) &raquo;</a><br />
+            Look for the section e-payment.
+        </p>
+      ]]></label>
+      <label index="promptEpaymentPaymill"><![CDATA[
+        <h1 style="text-align:left;">
+          Paymill
+        </h1>
+        <p>
+          You need a Paymill account. The account is without costs in test mode.
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="https://www.paymill.com/en-gb/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://www.paymill.com/en-gb/pricing/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill pricing &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="https://app.paymill.com/en-gb/auth/register"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="paymill.com"
+              title="paymill.com"
+              target="_blank">Paymill register &raquo;</a>
+          </li>
+        </ul>
+        <p>
+          You have to enable Paymill with the Constant Editor > [CADDY - E-PAYMENT] > Provider: Paymill.<br />
+          Without enabling Paymill the configuration below won't have any effect.
+        </p>
+        <p>
+          You can use Paymill in a test mode and in a live mode:
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            Test mode:
+            <ul style="list-style:outside;margin-left:2em;">
+              <li style="margin-bottom:.6em;">
+                Payment: You can check, if payment is proper. Paymill will display each transaction on the dashboard. <br />
+                BE AWARE that transactions hasn't any effect in test mode: You won't get any money!
+              </li>
+              <li style="margin-bottom:.6em;">
+                Shop: The test mode hasn't any effect to your shop! BE AWARE that customer can order and "pay" your items, but you won't get any money!
+              </li>
+            </ul>
+          </li>
+          <li style="margin-bottom:.6em;">
+            Live mode:
+            <ul style="list-style:outside;margin-left:2em;">
+              <li style="margin-bottom:.6em;">
+                Payment: each transaction is a real transaction. You will receive the money at your bank account.<br />
+                BE AWARE: each transaction costs money!
+              </li>
+              <li style="margin-bottom:.6em;">
+                Shop: everything should run proper. A customer can order an item only, if he pays this items.
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h1 style="text-align:left;">
+          No warranty - if you have any bug ...
+        </h1>
+        <p>
+          Caddy is open source software. You didn't pay anything for using this software. This is a big advantage. The disadvantage is: there isn't any warranty.
+        </p>
+        <p>
+          But if you have any bug, please report this bug at
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://forge.typo3.org/projects/extension-caddy"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy on TYPO3 forge"
+              title="Caddy on TYPO3 forge"
+              target="_blank">Caddy on TYPO3 forge &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://wildt.at.die-netzmacher.de/"
+              alt="Send an e-mail to the developer of Caddy"
+              title="Send an e-mail to the developer of Caddy"
+              target="_blank">E-mail to Dirk Wildt - the developer of Caddy &raquo;</a>
+          </li>
+        </ul>
+        <h1 style="text-align:left;">
+          More information about Caddy and e-payment
+        </h1>
+        <p>
+          Please take a look in the manual:
+        </p>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="../typo3conf/ext/caddy/doc/manual.pdf"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy manual"
+              title="Caddy manual"
+              target="_blank">Caddy manual (PDF) &raquo;</a>
+          </li>
+        </ul>
+      ]]></label>
+      <label index="promptEvaluatorTYPO3version45smaller">Your are using a TYPO3 version smaller than 4.5. Caddy isn't tested in this version. Try it!</label>
+      <label index="promptEvaluatorTYPO3version46smaller">You are using TYPO3 4.5. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version47smaller">You are using TYPO3 4.6. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version48smaller">You are using TYPO3 4.7. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version61smaller">You are using TYPO3 4.6. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version62smaller">You are using TYPO3 6.1. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version63smaller">You are using TYPO3 6.2. This is perfect!</label>
+      <label index="promptEvaluatorTYPO3version63orGreater">You are using TYPO3 greater than 6.2. Caddy isn't tested in this version. Try it!</label>
+      <label index="promptExternalLinksBody"><![CDATA[
+        <div style="float:right;padding-left:1em;">
+          <a href="http://typo3-caddy.de/en/" th
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/caddy_80x80.gif"
+              width="80"
+              height="80"
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+          <a href="http://wildt.at.die-netzmacher.de/"
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/die-netzmacher-logo-quadrat.png"
+              width="80"
+              height="80"
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+        </div>
+        <h1 style="text-align:left;">
+          Helpful Links
+        </h1>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Caddy
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3.org/extension-manuals/caddy/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - online manual"
+              title="Caddy - online manual"
+              target="_blank">Manual (HTML) &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - PDF manual"
+              title="Caddy - PDF manual"
+              target="_blank">Manual (PDF) &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">Homepage &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/forum/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3-Caddy - Forum"
+              title="TYPO3-Caddy - Forum"
+              target="_blank">Forum &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en/support"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">Support &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en/sponsoring"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+                target="_blank">Sponsoring &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          One-Click-Installer
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-organiser.de/en/one-click/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3 Organiser Installer"
+              title="TYPO3 Organiser Installer"
+              target="_blank">Organiser &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-quick-shop.de/en/one-click/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3 Quick Shop Installer"
+              title="TYPO3 Quick Shop Installer"
+              target="_blank">Quick Shop &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Developer and professional support
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://wildt.at.die-netzmacher.de/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
+              title="Dirk Wildt (Die Netzmacher) - the developer of TYPO3-Caddy."
+              target="_blank">Dirk Wildt (Die Netzmacher) &raquo;</a>
+          </li>
+        </ul>
+      ]]></label>
+      <label index="promptSponsors"><![CDATA[
+        <h1 style="text-align:left;">
+          Donating and Sponsoring
+        </h1>
+        <div style="float:left;padding-right:1em;">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/dirk_wildt_30x30.gif"
+            width="30"
+            height="30"
+            title="Please support my job!" />
+        </div>
+        <p>
+          Please donate to Caddy or sponsor it!<br />
+          I need the money for improving and developing Caddy.<br />
+          <br />
+          Dirk Wildt<br />
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Donating and Sponsoring"
+            title="Donating and Sponsoring"
+            target="_blank">
+            Donating and Sponsoring &raquo;</a>.
+        </p>
+        <p style="font-weight:bold;padding:1em 0;">
+          The TYPO3-Caddy project is sponsored by:
+        </p>
+        <a href="http://www.made-in-nature.de/"
+          alt="made in nature, Germany, sponsors the TYPO3-Caddy project"
+          title="made in nature, Germany, sponsors the TYPO3-Caddy project"
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/made-in-nature.de_120x90.gif"
+            width="120"
+            height="90"
+            alt="made in nature, Germany, sponsors the TYPO3-Caddy project" /></a>
+        <p style="padding:0 0 1em 0;">
+          You like to subsidise the TYPO3-Caddy project?
+          <a href="http://typo3-caddy.de/en/sponsoring/"
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Your logo with your URL. 120 x 90 pixel."
+            title="Your logo with your URL. 120 x 90 pixel."
+            target="_blank">
+            Further information &raquo;</a>.
+        </p>
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_default-blue.gif"
+            width="120"
+            height="90"
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_default-grey.gif"
+            width="120"
+            height="90"
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/en/sponsoring/"
+          alt="Your logo with your URL. 120 x 90 pixel."
+          title="Your logo with your URL. 120 x 90 pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_default-grey.gif"
+            width="120"
+            height="90"
+            title="Your logo with your URL. 120 x 90 pixel." /></a>
+      ]]></label>
+      <label index="typoscriptMissing"><![CDATA[
+        There isn't any typoscript template for caddy.<br />
+        Please add the include static template!
+      ]]></label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="dbTableEmpty"><![CDATA[
+        Die Typoscript-Eigenschaft db.table ist leer.<br />
+        Bitte gebe die Tabelle an, die die Produkte f&uuml;r Caddy enth&auml;lt.<br />
+        Siehe: Constant Editor > CADDY - DATABASE > table name
+      ]]></label>
+      <label index="flexformCheckAddresses"><![CDATA[
+        Einige Felder in den Bl&auml;ttern [Lieferadresse] und [Rechnungsadresse] sind leer.<br />
+        Pr&uuml;fe Deine Einstellungen, wenn Angaben in der Lieferadresse oder der Rechnungsadresse
+        fehlen sollten.
+      ]]></label>
+      <label index="flexformCheckNoteNote"><![CDATA[
+        Der Reiter [Notizen] enthält Deine interne Bemerkung. Beachte den Hinweis!
+      ]]></label>
+      <label index="flexformCheckEmailCustomeremail"><![CDATA[
+        Du hast keine Kunden E-Mail im Blatt [E-Mail] angegeben.<br />
+        Ohne die Adresse kann keine E-Mail zugestellt werden. Bitte korrigiere die Einstellung!
+      ]]></label>
+      <label index="flexformIsEmpty"><![CDATA[
+        Diese Flexform wurde nie gespeichert. Bitte speichere die Form einmal ab.<br />
+        Mit einer nie gespeicherten Flexform bekommst Du fehlerhafte Ergebnisse!
+      ]]></label>
+      <label index="pi1FfSdefReportDisabled"><![CDATA[
+        Der Check-it!-Bericht ist ausgeschaltet und das ist gut f&uuml;r die Performance.<br />
+        Aber wenn Du ein unerwartetes Ergebnis hast, schalte den Bericht oben in der Check-Box ein.
+      ]]></label>
+      <label index="pi1FfSdefReportOk"><![CDATA[
+        Gl&uuml;ckwunsch: Deine Konfiguration scheint in Ordnung zu sein!
+      ]]></label>
+      <label index="pi1FfSdefReportPerformance"><![CDATA[
+        Bitte schalte den Check it!-Bericht ab. Der Bericht belastet die Performance!
+      ]]></label>
+      <label index="pmReceiverMarkerWo1x"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
+        Feld E-Mail-Text f&uuml;r den Empf&auml;nger in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmReceiverMarkerWo2x"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')} im
+        Feld E-Mail-Text f&uuml;r den Empf&auml;nger in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmReceiverMarkerWiWtcart1x"><![CDATA[
+        Der E-Mail-Text im Empf&auml;nger-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmReceiverMarkerWiWtcart2x"><![CDATA[
+        Der E-Mail-Text im Empf&auml;nger-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmSenderMarkerWo1x"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDY### im
+        Feld E-Mail-Text f&uuml;r den Absender in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmSenderMarkerWo2x"><![CDATA[
+        Caddy-Marker fehlt! Bitte f&uuml;ge den Marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')} im
+        Feld E-Mail-Text f&uuml;r den Absender in das Powermail Formular ein!<br />
+        E-Mails ohne diesen Marker enthalten keine Caddy-Bestelldaten.
+      ]]></label>
+      <label index="pmSenderMarkerWiWtcart1x"><![CDATA[
+        Der E-Mail-Text im Absender-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in ###POWERMAIL_TYPOSCRIPT_CADDY###.
+      ]]></label>
+      <label index="pmSenderMarkerWiWtcart2x"><![CDATA[
+        Der E-Mail-Text im Absender-Feld des Powermail-Formulars enth&auml;lt einen veralteten Marker.<br />
+        Bitte &auml;ndere ###POWERMAIL_TYPOSCRIPT_CART### in {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddy')}.
+      ]]></label>
+      <label index="pmSubjectReceiverMarkerWo1x"><![CDATA[
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###
+        in das Betreff-Feld des Empf&auml;ngers im Powermail-Formular!<br />
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
+      ]]></label>
+      <label index="pmSubjectReceiverMarkerWo2x"><![CDATA[
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddyordernumber')}
+        in das Betreff-Feld des Empf&auml;ngers im Powermail-Formular!<br />
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
+      ]]></label>
+      <label index="pmSubjectSenderMarkerWo1x"><![CDATA[
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker ###POWERMAIL_TYPOSCRIPT_CADDYORDERNUMBER###
+        in das Betreff-Feld des Absenders im Powermail-Formular!<br />
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
+      ]]></label>
+      <label index="pmSubjectSenderMarkerWo2x"><![CDATA[
+        Kein Marker f&uuml;r die Bestellnummer! Bitte f&uuml;ge den Marker {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.caddyordernumber')}
+        in das Betreff-Feld des Absenders im Powermail-Formular!<br />
+        Der Betreff enth&auml;lt ohne den Marker keine Bestellnummer.
+      ]]></label>
+      <label index="pmThanksMarkerWo1x"><![CDATA[
+        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker
+        ###POWERMAIL_TYPOSCRIPT_CLEARCADDYSESSION### auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
+        Ohne diesen Marker wird die Session nicht gel&ouml;scht und das Bestellformular kann nicht versendet werden.
+      ]]></label>
+      <label index="pmThanksMarkerWo2x"><![CDATA[
+        Kein Marker f&uuml;r das L&ouml;schen der Session! Bitte f&uuml;ge im Powermail-Formular den Marker
+        {f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.powermail.clearcaddysession')} auf der [Antwortseite ] in das Feld [Antworttext] ein.<br />
+        Ohne diesen Marker wird die Session nicht gel&ouml;scht und das Bestellformular kann nicht versendet werden.
+      ]]></label>
+      <label index="powermailNocontent"><![CDATA[
+        Es gibt kein Powermail Formular auf der aktuellen Seite.<br />
+        Sorry, aber ohne ein das Formular k&ouml;nnen keine Produkte bestellt werden.<br />
+        Bitte f&uuml;ge das Powermail Formular ein.
+      ]]></label>
+      <label index="promptCurrIPBody">Deine aktuelle IP-Adresse</label>
+      <label index="promptEvaluatorTYPO3version45smaller">Du verwendest eine TYPO3-Version, die kleiner ist als 4.5. Caddy ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
+      <label index="promptEvaluatorTYPO3version46smaller">Du verwendest TYPO3 4.5.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version47smaller">Du verwendest TYPO3 4.6.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version48smaller">Du verwendest TYPO3 4.7.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version61smaller">Du verwendest TYPO3 6.0.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version62smaller">Du verwendest TYPO3 6.1.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version63smaller">Du verwendest TYPO3 6.2.x. Das ist perfekt.</label>
+      <label index="promptEvaluatorTYPO3version63orGreater">Du verwendest eine TYPO3 Version, die gr<![CDATA[&ouml;]]><![CDATA[&szlig;]]>er ist als 6.2. Caddy ist f<![CDATA[&uuml;]]>r diese Version nicht getestet. Aber probier es einfach aus!</label>
+      <label index="promptExternalLinksBody"><![CDATA[
+        <div style="float:right;padding-left:1em;">
+          <a href="http://typo3-caddy.de/en/" th
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/caddy_80x80.gif"
+              width="80"
+              height="80"
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+          <a href="http://wildt.at.die-netzmacher.de/"
+            alt="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            title="Caddy is powered by Dirk Wildt (die-netzmacher.de)"
+            target="_blank">
+            <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/die-netzmacher-logo-quadrat.png"
+              width="80"
+              height="80"
+              title="Caddy is powered by Dirk Wildt (die-netzmacher.de)" /></a>
+        </div>
+        <h1 style="text-align:left;">
+          Hilfreiche Links
+        </h1>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Caddy
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3.org/extension-manuals/caddy/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - Online-Handbuch"
+              title="Caddy - Online-Handbuch"
+              target="_blank">Handbuch (HTML) &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="../../../../typo3conf/ext/caddy/doc/manual.pdf"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - PDF-Handbuch"
+              title="Caddy - PDF-Handbuch"
+              target="_blank">Handbuch (PDF) &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/en"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Caddy - the Shopping Cart"
+              title="Caddy - the Shopping Cart"
+              target="_blank">Homepage &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/forum/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3-Caddy - Forum"
+              title="TYPO3-Caddy - Forum"
+              target="_blank">Forum &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/support/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3-Caddy - Support"
+              title="TYPO3-Caddy - Support"
+              target="_blank">Support &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-caddy.de/sponsoring/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3-Caddy - Sponsoring"
+              title="TYPO3-Caddy - Sponsoring"
+              target="_blank">Sponsoring &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Ein-Klick-Installer
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-organiser.de/en/one-click/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3 Organiser Installer"
+              title="TYPO3 Organiser Installer"
+              target="_blank">Organiser &raquo;</a>
+          </li>
+          <li style="margin-bottom:.6em;">
+            <a href="http://typo3-quick-shop.de/en/one-click/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="TYPO3 Quick Shop Installer"
+              title="TYPO3 Quick Shop Installer"
+              target="_blank">Quick Shop &raquo;</a>
+          </li>
+        </ul>
+        <h2 style="font-size: 1em;margin: 1em 0 0.4em;text-align: left;">
+          Entwickler und professionelle Unterstützung
+        </h2>
+        <ul style="list-style:outside;margin-left:2em;">
+          <li style="margin-bottom:.6em;">
+            <a href="http://wildt.at.die-netzmacher.de/"
+              style="background:none;border:none;float:none;text-decoration:underline;"
+              alt="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
+              title="Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy."
+              target="_blank">Dirk Wildt (Die Netzmacher) - der Entwickler von TYPO3-Caddy &raquo;</a>
+          </li>
+        </ul>
+      ]]></label>
+      <label index="promptSponsors"><![CDATA[
+        <h1 style="text-align:left;">
+          Spenden und Sponsern
+        </h1>
+        <div style="float:left;padding-right:1em;">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/dirk_wildt_30x30.gif"
+            width="30"
+            height="30"
+            title="Bitte unterst&uuml;tze meine Arbeit!" />
+        </div>
+        <p>
+          Bitte spende f&uuml;r Caddy oder sponser die Extension!<br />
+          Ich brauche das Geld f&uuml;r die Verbesserung und Weiterentwicklung von Caddy.<br />
+          <br />
+          Dirk Wildt<br />
+          <a href="http://typo3-caddy.de/sponsoring/"
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Spenden und Sponsern"
+            title="Spenden und Sponsern"
+            target="_blank">
+            Spenden und Sponsern &raquo;</a>.
+        </p>
+        <p style="font-weight:bold;padding:1em 0;">
+          Das TYPO3-Caddy-Projekt wird gesponsert von
+        </p>
+        <a href="http://www.made-in-nature.de/"
+          alt="made in nature, Deutschland, Sponsor des TYPO3-Caddy-Projekts"
+          title="made in nature, Deutschland, Sponsor des TYPO3-Caddy-Projekts"
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/made-in-nature.de_120x90.gif"
+            width="120"
+            height="90"
+            title="made in nature, Deutschland, Sponsor des TYPO3-Caddy-Projekts" /></a>
+        <p style="padding:0 0 1em 0;">
+          M&ouml;chtest Du das TYPO3-Caddy-Projekt unterst&uuml;tzen?
+          <a href="http://typo3-caddy.de/sponsoring/"
+            style="background:none;border:none;float:none;text-decoration:underline;"
+            alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+            target="_blank">
+            Mehr Infos &raquo;</a>.
+        </p>
+        <a href="http://typo3-caddy.de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_de-blue.gif"
+            width="120"
+            height="90"
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_de-grey.gif"
+            width="120"
+            height="90"
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+        &nbsp;&nbsp;
+        <a href="http://typo3-caddy.de/sponsoring/"
+          alt="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          title="Dein Logo mit Deiner URL. 120 x 90 Pixel."
+          target="_blank">
+          <img src="../../../../typo3conf/ext/caddy/Resources/Private/Lib/icons/your-logo_de-grey.gif"
+            width="120"
+            height="90"
+            title="Dein Logo mit Deiner URL. 120 x 90 Pixel." /></a>
+      ]]></label>
+      <label index="typoscriptMissing"><![CDATA[
+        Es gibt keine Typoscript f&uuml;r Caddy.<br />
+        Bitte f&uuml;ge das Include-Static-Template ein!
+      ]]></label>
+    </languageKey>
+  </data>
+</T3locallang>

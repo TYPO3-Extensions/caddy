@@ -1,6 +1,6 @@
   // BUG: t3jquery has a bug: You have to select ToolsTabs manually before create a custom jQuery JS library
 
-  // res/javascript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js
-  // res/javascript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
-script=res/javascript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js,res/javascript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
+  // Resources/Public/JavaScript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js
+  // Resources/Public/JavaScript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
+script=Resources/Public/JavaScript/jquery.caddy-4.0.0/library/tx_caddy_pi1-4.0.0.js,Resources/Public/JavaScript/jquery.caddy-4.0.0/plugin/jquery.t3caddy-4.0.0.js
 components=ToolsTabs

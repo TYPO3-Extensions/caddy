@@ -55,7 +55,7 @@ if ( $typo3Version < 4005000 )
 //
 // Set powermail version
 
-$path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+$path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'Resources/Private/Lib/';
 require_once( $path2lib . 'userfunc/class.tx_caddy_userfunc.php' );
 $userfunc = t3lib_div::makeInstance( 'tx_caddy_userfunc' );
 
@@ -175,24 +175,24 @@ switch ( true )
 {
   case( $beLanguage == 'de' ):
     // German
-    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_100_02.png' );
-    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy Mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_050_03.png' );
+    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif' );
+    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy Mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif' );
     break;
   default:
     // English
-    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_100_02.png' );
-    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_050_03.png' );
+    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy', 'caddy', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif' );
+    $TCA[ 'pages' ][ 'columns' ][ 'module' ][ 'config' ][ 'items' ][] = array( 'Caddy mini', 'caddymini', t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif' );
 }
 // Case $beLanguage
 
-t3lib_SpriteManager::addTcaTypeIcon( 'pages', 'contains-caddy', '../typo3conf/ext/caddy/Resources/Public/Images/caddy_100_02.png' );
-t3lib_SpriteManager::addTcaTypeIcon( 'pages', 'contains-caddymini', '../typo3conf/ext/caddy/Resources/Public/Images/caddy_050_03.png' );
+t3lib_SpriteManager::addTcaTypeIcon( 'pages', 'contains-caddy', '../typo3conf/ext/caddy/ext_icon.gif' );
+t3lib_SpriteManager::addTcaTypeIcon( 'pages', 'contains-caddymini', '../typo3conf/ext/caddy/ext_icon.gif' );
 // Add pagetree icons
 ///////////////////////////////////////////////////////////
 //
 // Methods for backend workflows
-//require_once(t3lib_extMgm::extPath($_EXTKEY).'lib/flexform/class.tx_caddy_flexform.php');
-require_once(t3lib_extMgm::extPath( $_EXTKEY ) . 'lib/userfunc/class.tx_caddy_userfunc.php');
+//require_once(t3lib_extMgm::extPath($_EXTKEY).'Resources/Private/Lib/flexform/class.tx_caddy_flexform.php');
+require_once(t3lib_extMgm::extPath( $_EXTKEY ) . 'Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php');
 // Methods for backend workflows
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -205,7 +205,7 @@ $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_addlist' ][ $_EXTKEY . '_pi
 t3lib_extMgm::addPlugin( array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi1',
   $_EXTKEY . '_pi1',
-  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_100_02.png'
+  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif'
         ), 'list_type' );
 t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform' . $pmVers . '.xml' );
 
@@ -223,7 +223,7 @@ $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_addlist' ][ $_EXTKEY . '_pi
 t3lib_extMgm::addPlugin( array(
   'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi3',
   $_EXTKEY . '_pi3',
-  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_050_03.png'
+  t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif'
         ), 'list_type' );
 t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/pi3/flexform.xml' );
 // Plugin Configuration
@@ -246,7 +246,7 @@ $TCA[ 'tx_caddy_order' ] = array(
     'hideAtCopy' => true,
     'dividers2tabs' => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
-    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_100_02.png',
+    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif',
     'searchFields' => 'customerEmail,' .
     'numberDeliveryorder,numberInvoice,numberOrder,' .
     'sumGross,sumNet,sumTaxReduced,sumTaxNormal,'
@@ -268,7 +268,7 @@ $TCA[ 'tx_caddy_item' ] = array(
     'readOnly' => $confArr[ 'databaseReadonly' ],
     'dividers2tabs' => true,
     'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
-    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_100_02.png',
+    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif',
     'searchFields' => 'title'
   ),
 );

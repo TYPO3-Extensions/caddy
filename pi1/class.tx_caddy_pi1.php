@@ -981,7 +981,7 @@ class tx_caddy_pi1 extends tslib_pibase
    */
   private function initInstances()
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'Resources/Private/Lib/';
 
     require_once( $path2lib . 'caddy/class.tx_caddy.php' );
     $this->caddy = t3lib_div::makeInstance( 'tx_caddy' );
@@ -1512,7 +1512,7 @@ class tx_caddy_pi1 extends tslib_pibase
     }
     // RETURN : current IP isn't part of list with allowed IP
 
-    require_once( PATH_typo3conf . 'ext/' . $this->extKey . '/lib/updatewizard/class.tx_caddy_pi1_updatewizard.php' );
+    require_once( PATH_typo3conf . 'ext/' . $this->extKey . '/Resources/Private/Lib/updatewizard/class.tx_caddy_pi1_updatewizard.php' );
 
     // Class with methods for Update Checking
     $updatewizard = new tx_caddy_pi1_updatewizard( $this );
