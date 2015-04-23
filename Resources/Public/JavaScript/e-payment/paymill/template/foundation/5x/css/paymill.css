@@ -1,0 +1,42 @@
+.paymill-form fieldset {
+  border:inherit;
+  margin:0;
+  padding:0;
+}
+
+.paymill-test {
+  border:0.2em red dashed;
+}
+
+/** CC-Icons **/
+.paymill-card-number-visa {
+    background: #EAEFF1 url('../image/32x20_visa.png')no-repeat center right !important;
+}
+
+.paymill-card-number-mastercard {
+    background: #EAEFF1  url('../image/32x20_mastercard.png')no-repeat center right !important;
+}
+
+.paymill-card-number-amex {
+    background: #EAEFF1  url('../image/32x20_amex.png')no-repeat center right !important;
+}
+
+.paymill-card-number-jcb {
+    background: #EAEFF1  url('../image/32x20_jcb.png')no-repeat center right !important;
+}
+
+.paymill-card-number-maestro {
+    background: #EAEFF1  url('../image/32x20_maestro.png')no-repeat center right !important;
+}
+
+.paymill-card-number-carte-bleue {
+    background: #EAEFF1  url('../image/32x20_unionpay.png')no-repeat center right !important;
+    }
+
+.paymill-card-number-diners {
+    background: #EAEFF1  url('../image/32x20_dinersclub.png')no-repeat center right !important;
+}
+
+.paymill-card-number-discover {
+    background: #EAEFF1  url('../image/32x20_discover.png') no-repeat center right !important;
+}
