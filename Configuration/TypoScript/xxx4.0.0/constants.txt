@@ -6,9 +6,9 @@ plugin.caddy {
   main.dueDate = +2 weeks
   # cat=caddy - main//202;          type=string; label= Date format: Format of the due date. Examples: %Y-%m-%d, %d. %b. %Y
   main.dueDateFormat = %Y-%m-%d
-  # cat=caddy - main/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - main/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   main.externalLinks = Click me!
-  # cat=caddy - main/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - main/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   main.sponsors = Click me!
 
   # cat=caddy - main numberformat//202; type=text; label= Decimal: e.g. 2. This setting will be used for formatting prices.
@@ -23,9 +23,9 @@ plugin.caddy {
   main.currencySymbolBeforePrice = 1
   # cat=caddy - main numberformat//207; type=string; label= Percent symbol
   main.percentSymbol = %
-  # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - main numberformat/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   main.numberformat.externalLinks = Click me!
-  # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - main numberformat/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   main.numberformat.sponsors = Click me!
 
   # cat=caddy - database*//200; type=text; label= Table*: *Obligate! Name of the table with the items (products). Examples: tx_myextension_products, tx_quickshop_products, tx_cars_model
@@ -48,9 +48,9 @@ plugin.caddy {
   db.service_attribute_2 =
   # cat=caddy - database*//252; type=text; label= Service Attribute 3: Label of the field with the service attribute 3 of the item (product).
   db.service_attribute_3 =
-  # cat=caddy - database*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - database*/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   db.externalLinks = Click me!
-  # cat=caddy - database*/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - database*/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   db.sponsors = Click me!
 
   # cat=caddy - debug//100;           type=boolean; label= Debug params/typoscript (frontend): Get a report in the frontend with received GET-/POST-parameters and typoscript configuration
@@ -59,9 +59,9 @@ plugin.caddy {
   debug.userfunc = 0
   # cat=caddy - debug//102;           type=boolean; label= Don't replace empty marker: Enable it, if empty HTML markers should not removed.
   debug.dontReplaceEmptyMarker = 0
-  # cat=caddy - debug/others/998;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - debug/others/998;     type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   debug.externalLinks = Click me!
-  # cat=caddy - debug/others/999;     type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - debug/others/999;     type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   debug.sponsors = Click me!
 
   # cat=caddy - getpost*//100; type=text; label= Uid*: *Obligate! Parameter name for a unique id (integer) of your item. caddy uses this id for SQL requests. I.e. tx_browser_pi1|showUid
@@ -80,9 +80,9 @@ plugin.caddy {
   getpost.service_attribute_3 =
   # cat=caddy - getpost*//140; type=text; label= SKU: Parameter name for your SKU (stock keeping unit).
   getpost.sku =
-  # cat=caddy - getpost*/others/998;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - getpost*/others/998;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   getpost.externalLinks = Click me!
-  # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
 
   # cat=caddy - html colors//100;              type=color;  label= Border color: border color as CSS name or HTML notation like #FFF or #123456. It is used in the HTML table, which is placed in e-mails and pdf attachments.
@@ -107,14 +107,14 @@ plugin.caddy {
   html.color.table.head.background = #207CCA
   # cat=caddy - html colors/others/501;        type=color;  label= Table header text
   html.color.table.head.text = #FFF
-  # cat=caddy - html colors/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - html colors/others/998;        type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   html.color.externalLinks = Click me!
-  # cat=caddy - html colors/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - html colors/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.color.sponsors = Click me!
 
   # cat=caddy - marker//200;              type=options[CADDY,CADDYACCORDION];  label= Type of caddy: CADDY: form without tabs (2.x). CADDYACCORDION: accordion with tabs (4.x).
   html.marker.caddy = CADDYACCORDION
-  # cat=caddy - marker/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - marker/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.marker.sponsors = Click me!
 
   # cat=caddy - html width//200;              type=text;  label= Width column Quantity: The width of the caddy column quantity in HTML tables for CSS. Units can be px, em or % among others.
@@ -133,9 +133,9 @@ plugin.caddy {
   html.width.table.td.skuitemtax = 60%
   # cat=caddy - html width//302;              type=text;  label= Width 4 columns: The total width of the caddy columns sku, item, tax and net in HTML tables for CSS. Units can be px, em or % among others.
   html.width.table.td.skuitemtaxnet = 75%
-  # cat=caddy - html width/others/998;        type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - html width/others/998;        type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   html.width.externalLinks = Click me!
-  # cat=caddy - html width/others/999;       type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - html width/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.width.sponsors = Click me!
 
   # cat=caddy - pages*/enable/301; type=integer; label= Caddy*:*Obligate! Uid of the page with the caddy - your shopping cart
@@ -148,18 +148,18 @@ plugin.caddy {
   pages.revocation = 
   # cat=caddy - pages*/enable/306; type=integer; label= Terms & Conditions:Uid of the page with the terms & conditions (German: AGB)
   pages.terms = 
-  # cat=caddy - pages*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pages*/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pages.externalLinks = Click me!
-  # cat=caddy - pages*/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pages*/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pages.sponsors = Click me!        
 
   # cat=caddy - pdf//101;          type=options[Courier,Helvetica,Symbol,Times,ZapfDingbats];  label= Font family: The font family of your PDF attachments
   pdfGeneral.fontfamily = Helvetica
   # cat=caddy - pdf//102;          type=integer;  label= Font Stretching: In percent. 100: no effect. 90: smaller. 110: expanded
   pdfGeneral.fontStretching = 90
-  # cat=caddy - pdf/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdfGeneral.externalLinks = Click me!
-  # cat=caddy - pdf/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdfGeneral.sponsors = Click me!
 
   # cat=caddy - pdf caddy//101; type=int+; label= Caddy position left: Position of the caddy (items) from the left margin in millimeters
@@ -170,9 +170,9 @@ plugin.caddy {
   pdf.caddy.width = 165
   # cat=caddy - pdf caddy//104; type=int+; label= Caddy font-size: Font-size of the caddy (items) in points
   pdf.caddy.fontsize = 10
-  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf caddy/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.caddy.externalLinks = Click me!
-  # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf caddy/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.caddy.sponsors = Click me!
 
   # cat=caddy - pdf date//101; type=options[,L,C,R];  label= Date alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -187,9 +187,9 @@ plugin.caddy {
   pdf.date.fontsize = 10
   # cat=caddy - pdf date//104; type=string; label= Date format: Format of the date. Examples: %Y-m-%d, %d. %M %Y
   pdf.date.strftime = %Y-%m-%d
-  # cat=caddy - pdf date/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf date/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.date.externalLinks = Click me!
-  # cat=caddy - pdf date/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf date/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.date.sponsors = Click me!
 
   # cat=caddy - pdf delivery order//202; type=int+; label= Address position left: Position of the delivery order address from the left margin in millimeters
@@ -212,9 +212,9 @@ plugin.caddy {
   pdf.deliveryorder.termOfCredit.y = 250
   # cat=caddy - pdf delivery order//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
   pdf.deliveryorder.termOfCredit.fontsize = 10
-  # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf delivery order/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.deliveryorder.externalLinks = Click me!
-  # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf delivery order/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.deliveryorder.sponsors = Click me!
 
   # cat=caddy - pdf invoice//202; type=int+; label= Address position left: Position of the invoice address from the left margin in millimeters
@@ -237,16 +237,16 @@ plugin.caddy {
   pdf.invoice.termOfCredit.y = 220
   # cat=caddy - pdf invoice//403; type=int+; label= Term of credit font-size: Font-size of the term of credit in points
   pdf.invoice.termOfCredit.fontsize = 10
-  # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf invoice/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.invoice.externalLinks = Click me!
-  # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf invoice/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.invoice.sponsors = Click me!
 
   # cat=caddy - pdf order//306; type=string; label= Number prefix: Prefix for the order number. Example : O-
   pdf.order.number.prefix = 
-  # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf order/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.order.externalLinks = Click me!
-  # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf order/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.order.sponsors = Click me!
 
   # cat=caddy - pdf revocation//101; type=options[,L,C,R];  label= Revocation alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -259,9 +259,9 @@ plugin.caddy {
   pdf.revocation.width = 165
   # cat=caddy - pdf revocation//104; type=int+; label= Revocation font-size: Font-size of the revocation in points
   pdf.revocation.fontsize = 10
-  # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf revocation/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.revocation.externalLinks = Click me!
-  # cat=caddy - pdf revocation/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf revocation/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.revocation.sponsors = Click me!
 
   # cat=caddy - pdf terms//101; type=options[,L,C,R];  label= Terms alignment: L: left. C: center. R: right. empty: left for LTR or right for RTL
@@ -274,9 +274,9 @@ plugin.caddy {
   pdf.terms.width = 165
   # cat=caddy - pdf terms//104; type=int+; label= Terms font-size: Font-size of the terms in points
   pdf.terms.fontsize = 10
-  # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf terms/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.terms.externalLinks = Click me!
-  # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf terms/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.terms.sponsors = Click me!
 
   # cat=caddy - pdf textcolor//101;          type=color;  label= Address: font color as CSS name or HTML notation like #FFF or #123456
@@ -299,9 +299,9 @@ plugin.caddy {
   pdf.textColor.termOfCredit = navy
   # cat=caddy - pdf textcolor//110;          type=color;  label= Terms: font color as CSS name or HTML notation like #FFF or #123456
   pdf.textColor.terms = navy
-  # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - pdf textcolor/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   pdf.textColor.externalLinks = Click me!
-  # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - pdf textcolor/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   pdf.textColor.sponsors = Click me!
 
   # cat=caddy - powermail fields*/enable/101; type=+int;    label= Uid field e-mail*:*Obligate! Uid of the powermail field e-mail. 
@@ -310,9 +310,9 @@ plugin.caddy {
   powermail.fields.revocation = 
   # cat=caddy - powermail fields*/enable/103; type=+int;    label= Uid field terms*:*Obligate! Uid of the powermail field terms and conditons.
   powermail.fields.terms = 
-  # cat=caddy - powermail fields*/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - powermail fields*/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   powermail.fields.externalLinks = Click me!
-  # cat=caddy - powermail fields*/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - powermail fields*/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   powermail.fields.sponsors = Click me!        
 
   # cat=caddy - symbols and service attributes//707;          type=text; label= Quantity symbol: for example: pc. (English), St. (German)
@@ -323,9 +323,9 @@ plugin.caddy {
   symbol.service_attribute_2_symbol =
   # cat=caddy - symbols and service attributes//710;          type=text; label= Service Attribute 3 symbol: e.g. Length: m, cm, inch
   symbol.service_attribute_3_symbol =
-  # cat=caddy - symbols and service attributes/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - symbols and service attributes/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   symbol.externalLinks = Click me!
-  # cat=caddy - symbols and service attributes/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - symbols and service attributes/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   symbol.sponsors = Click me!
 
   # cat=caddy - tax//150; type=text; label= Tax rate: Tax rate for reduced items (e.g. 7). Value will be displayed.
@@ -336,9 +336,9 @@ plugin.caddy {
   tax.normal = 19
   # cat=caddy - tax//165; type=text; label= Tax rate: Tax rate for normal items (e.g. 0.19). Used for calculation.
   tax.normalCalc = 0.19
-  # cat=caddy - tax/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - tax/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   tax.externalLinks = Click me!
-  # cat=caddy - tax/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - tax/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   tax.sponsors = Click me!
 
   # cat=caddy - templates//101; type=string; label= E-mails: Path to the HTML template file, which is used in e-mails (i.e. EXT:caddy/files/templates/4.0.0/caddy.html or EXT:caddy/files/templates/4.0.0/caddy_wo_options.html)
@@ -353,9 +353,9 @@ plugin.caddy {
   templates.pdf.deliveryorder = EXT:caddy/files/templates/4.0.0/caddy.html
   # cat=caddy - templates//301; type=string; label= PDF invoice: Path to the HTML template file, which is used in the invoice - a PDF attachment (i.e. EXT:caddy/files/templates/4.0.0/caddy.html or EXT:caddy/files/templates/4.0.0/caddy_wo_options.html)
   templates.pdf.invoice       = EXT:caddy/files/templates/4.0.0/caddy.html
-  # cat=caddy - templates/others/998;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  # cat=caddy - templates/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   templates.externalLinks = Click me!
-  # cat=caddy - templates/others/999;    type=user[EXT:caddy/lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  # cat=caddy - templates/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   templates.sponsors = Click me!
 
 }

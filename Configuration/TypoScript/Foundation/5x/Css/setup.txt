@@ -1,6 +1,6 @@
 page {
   includeCSS {
-    caddy           = EXT:caddy/files/templates/2.0.0/caddy.css
-    caddyFoundation = EXT:caddy/files/templates/foundation/5x/caddy.css
+    caddy           = EXT:caddy/Resources/Public/Css/2.0.0/caddy.css
+    caddyFoundation = EXT:caddy/Resources/Public/Css/Foundation/5x/caddy.css
   }
 }

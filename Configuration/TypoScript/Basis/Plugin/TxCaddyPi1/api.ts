@@ -167,7 +167,7 @@ plugin.tx_caddy_pi1 {
         delete = TEXT
         delete {
           value = &#215;
-          value = <i class="fi-trash"></i>
+          //value = <i class="fi-trash"></i>
           typolink {
             parameter {
               cObject = COA
@@ -186,7 +186,8 @@ plugin.tx_caddy_pi1 {
                   // class
                 30 = TEXT
                 30 {
-                  value       = button delete mytiny alert onClickloadCaddyByAjax
+                  //value       = button delete mytiny alert onClickloadCaddyByAjax
+                  value       = button delete mytiny onClickloadCaddyByAjax
                   noTrimWrap  = | "|"|
                 }
                   // title

@@ -117,7 +117,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 {
                 10 {
-                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:creditcard
+                  data = LLL:EXT:caddy/Resources/Private/Lib/e-payment/paymill/locallang.xml:creditcard
                 }
                 20 {
                   if {
@@ -164,7 +164,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 {
                 10 {
-                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname
+                  data = LLL:EXT:caddy/Resources/Private/Lib/e-payment/paymill/locallang.xml:elv-paymentname
                 }
                 20 {
                   if {
@@ -211,7 +211,7 @@ plugin.tx_caddy_pi1 {
             title {
               10 {
                 10 {
-                  data = LLL:EXT:caddy/lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
+                  data = LLL:EXT:caddy/Resources/Private/Lib/e-payment/paymill/locallang.xml:elv-paymentname-iban
                 }
                 20 {
                   if {

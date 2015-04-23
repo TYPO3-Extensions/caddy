@@ -8,7 +8,7 @@ plugin.caddy {
       button.gradient4      = #FFB366
       button.text           = #FFF
       icon.caddy            = EXT:caddy/Resources/Public/Images/caddy_100_02.png
-      icon.shop       = EXT:caddy/Resources/Public/Images/caddy_100_02.png
+      icon.shop             = EXT:caddy/Resources/Public/Images/caddy_100_02.png
       icon.delete           = EXT:caddy/Resources/Public/Images/delete_100_02.png
       powermail.text        = #FF8800
       table.head.background = #FF8800

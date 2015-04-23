@@ -34,7 +34,7 @@ plugin.tx_caddy_pi1 {
     form.caddy button.submit,
     img.caddy_delete,
     .caddy-powermail input[type=submit]
-    { 
+    {
       background: {$plugin.caddy.html.color.button.gradient3}; /* Old browsers */
       background: -moz-linear-gradient(top, {$plugin.caddy.html.color.button.gradient1} 0%, {$plugin.caddy.html.color.button.gradient2} 50%, {$plugin.caddy.html.color.button.gradient3} 51%, {$plugin.caddy.html.color.button.gradient4} 100%); /* FF3.6+ */
       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,{$plugin.caddy.html.color.button.gradient1}), color-stop(50%,{$plugin.caddy.html.color.button.gradient2}), color-stop(51%,{$plugin.caddy.html.color.button.gradient3}), color-stop(100%,{$plugin.caddy.html.color.button.gradient4})); /* Chrome,Safari4+ */
@@ -65,7 +65,7 @@ plugin.tx_caddy_pi1 {
 
 page {
   includeCSS {
-    caddy = EXT:caddy/files/templates/2.0.0/caddy.css
+    caddy = EXT:caddy/Resources/Public/Css/2.0.0/caddy.css
   }
 }
   // page
