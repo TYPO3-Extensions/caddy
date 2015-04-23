@@ -331,7 +331,7 @@ class tx_caddy_pi3 extends tslib_pibase
   */
   private function initInstances( )
   {
-    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'lib/';
+    $path2lib = t3lib_extMgm::extPath( 'caddy' ) . 'Resources/Private/Lib/';
 
     require_once( $path2lib . 'drs/class.tx_caddy_drs.php' );
     $this->drs              = t3lib_div::makeInstance( 'tx_caddy_drs' );
