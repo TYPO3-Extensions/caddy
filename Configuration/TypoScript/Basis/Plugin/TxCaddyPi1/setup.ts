@@ -17,7 +17,7 @@ plugin.tx_caddy_pi1 {
 
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Basis/Plugin/TxCaddyPi1/db.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Basis/Plugin/TxCaddyPi1/debug.ts">
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Basis/Plugin/TxCaddyPi1/pdf.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Basis/Plugin/TxCaddyPi1/pdf/_setup.ts">
 
 plugin.tx_caddy_pi1 {
     // page id of the caddy

@@ -17,6 +17,6 @@ plugin.tx_powermail {
 
 page {
   includeJSFooter {
-    caddy4Powermail2x = EXT:caddy/Resources/Public/Powermail_2.1.0/caddy.js
+    caddy4Powermail2x = EXT:caddy/Resources/Public/Powermail_2.17.0/caddy.js
   }
 }

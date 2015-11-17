@@ -14,7 +14,7 @@ $EM_CONF[$_EXTKEY] = array(
   ,
 	'category' => 'plugin',
 	'shy' => 0,
-	'version' => '6.1.0',
+	'version' => '6.2.1',
 	'dependencies' => 'powermail',
 	'conflicts' => '',
 	'priority' => '',
