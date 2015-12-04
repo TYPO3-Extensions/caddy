@@ -1,0 +1,22 @@
+div.caddymini {
+  margin: 0;
+  padding: 0;
+}
+.caddy_product .button.delete.mytiny {
+  padding:0.2em 0.4em 0.4em;
+  font-weight:bold;
+}
+
+
+.form-section {
+  display: none;
+}
+.form-section.current {
+  display: inherit;
+}
+.form-navigation .btn-info,
+.form-navigation .btn-default,
+.form-navigation .btn-primary
+{
+  margin: 1em 0;
+}

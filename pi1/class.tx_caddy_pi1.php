@@ -118,7 +118,7 @@ if ( $version < 6002000 )
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package	TYPO3
  * @subpackage	tx_caddy
- * @version	6.0.0
+ * @version	6.3.0
  * @since       1.4.6
  */
 class tx_caddy_pi1 extends tslib_pibase
@@ -646,7 +646,7 @@ class tx_caddy_pi1 extends tslib_pibase
    * @param	string		$tmpl: current template
    * @return	string		$tmpl: handled template
    * @access private
-   * @version    4.0.4
+   * @version    6.3.0
    * @since      4.0.4
    */
   private function htmlActiveSection( $tmpl )
@@ -665,11 +665,16 @@ class tx_caddy_pi1 extends tslib_pibase
 
     $marker = '###CADDY_SECTION_' . $accordion . '###';
 
-    $tmpl = str_replace( $marker, ' active ', $tmpl );
-    $tmpl = str_replace( '  active', ' active', $tmpl );
-    $tmpl = str_replace( 'active  ', 'active ', $tmpl );
-    $tmpl = str_replace( '" active', '"active', $tmpl );
-    $tmpl = str_replace( 'active "', 'active"', $tmpl );
+    // #i0093, 151203, dwildt, 3+
+    $name = $this->conf[ '_HTMLMARKER.' ][ 'cssAccordionActive' ];
+    $conf = $this->conf[ '_HTMLMARKER.' ][ 'cssAccordionActive.' ];
+    $value = $this->zz_cObjGetSingle( $name, $conf );
+
+    $tmpl = str_replace( $marker, ' ' . $value . ' ', $tmpl );
+    $tmpl = str_replace( '  ' . $value, ' ' . $value, $tmpl );
+    $tmpl = str_replace( $value . '  ', $value . ' ', $tmpl );
+    $tmpl = str_replace( '" ' . $value, '"' . $value, $tmpl );
+    $tmpl = str_replace( $value . ' "', $value . '"', $tmpl );
 
     return $tmpl;
   }

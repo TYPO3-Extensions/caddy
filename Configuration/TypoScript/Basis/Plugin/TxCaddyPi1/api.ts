@@ -166,7 +166,7 @@ plugin.tx_caddy_pi1 {
           // delete icon: for removing the current item from the caddy (#i0084)
         delete = TEXT
         delete {
-          value = &#215;
+          value = &times;
           //value = <i class="fi-trash"></i>
           typolink {
             parameter {

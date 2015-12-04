@@ -1,0 +1,12 @@
+plugin.tx_powermail {
+  settings {
+    javascript {
+      addAdditionalJavaScript = 0
+    }
+  }
+  view {
+    // #61879, 140925, dwildt, 2+
+    partialRootPath   = EXT:caddy/Resources/Private/Templates/Powermail_2.18.0/Foundation/Partials/
+    templateRootPath  = EXT:caddy/Resources/Private/Templates/Powermail_2.18.0/Foundation/Templates/
+  }
+}

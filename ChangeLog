@@ -2,6 +2,28 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.3.0
+  15-12-04
+  Feature
+  * #i0093: Bootstrap
+            Effected files among others:
+            * Configuration/TypoScript/Bootstrap/* (new)
+            * Resources/Public/Html/Bootstrap/* (new)
+  Improvement
+  * #i0096: Templates are moved
+            from Resources/Private/Powermail* to Resources/Private/Templates/Powermail*
+  * #i0095: Templates are moved
+            from Resources/Public/Html to Resources/Private/Templates
+  * #i0094: Path to Powermail static template moved. You have to include again once:
+            * Caddy [6] + Powermail 2.x Foundation
+
+6.2.2
+  15-12-02
+  Improvement
+  * #i0092: Powermail update from 2.17.0 > 2.18.0
+            Effected files:
+            * Resources/Private/Powermail_2.18.0/Foundation/
+
 6.2.1
   15-11-17
   Improvement
@@ -104,7 +126,7 @@ TODO
   * #i0073/#156:  Accordion with caddy items must be open while the confirmation the order.
                   It is a legal need in Germany.
   * #i0072/#156:  Powermail confirmation form got a second button line at the top
-                  See: Resources/Private/Powermail_2.17.0/Templates/Form/Confirmation.html
+                  See: Resources/Private/Powermail_2.18.0/Foundation/Templates/Form/Confirmation.html
   * #i0071/#161:  Labelling: formButton is moved from "Buy now" to "Into the caddy"
 
 6.0.7

@@ -1,0 +1,26 @@
+plugin.tx_powermail {
+  _LOCAL_LANG {
+    default {
+      abide_check_required  = A confirmation is required.
+      abide_email_required  = An email address is required.
+      abide_input_required  = An input is required.
+      abide_radio_required  = A select is required.
+      order_next_step       = Next step
+      order_previous_step   = Back
+    }
+    de {
+      abide_check_required  = Eine Bestätigung ist erforderlich.
+      abide_email_required  = Eine E-Mail-Adresse ist erforderlich.
+      abide_input_required  = Eine Eingabe ist erforderlich.
+      abide_radio_required  = Eine Auswahl ist erforderlich.
+      order_next_step       = N&auml;chster Schritt
+      order_previous_step   = Zur&uuml;ck
+    }
+  }
+}
+
+page {
+  includeJSFooter {
+    caddy4Powermail2x = EXT:caddy/Resources/Public/Powermail_2.18.0/Bootstrap/caddy.js
+  }
+}

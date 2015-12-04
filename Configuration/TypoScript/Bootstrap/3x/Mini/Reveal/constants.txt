@@ -1,0 +1,3 @@
+plugin.caddy {
+  templates.html.caddymini  = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/caddyminireveal.html
+}

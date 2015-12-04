@@ -1,0 +1,6 @@
+page {
+  includeCSS {
+    caddy           = EXT:caddy/Resources/Public/Css/2.0.0/caddy.css
+    caddyBootstrap  = EXT:caddy/Resources/Public/Css/Bootstrap/3x/caddy.css
+  }
+}

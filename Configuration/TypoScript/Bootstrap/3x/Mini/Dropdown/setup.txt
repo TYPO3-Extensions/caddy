@@ -1,0 +1,5 @@
+page {
+  includeCSS {
+    caddyMiniDropdown = EXT:caddy/Resources/Public/Css/Bootstrap/3x/caddyminidropdown.css
+  }
+}

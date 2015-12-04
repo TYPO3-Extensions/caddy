@@ -3,6 +3,6 @@ plugin.caddy {
   html.minicaddy.classes.column.1 = small-5 columns
   html.minicaddy.classes.column.2 = small-5 columns caddy-right
 
-  templates.html.caddy      = EXT:caddy/Resources/Public/Html/Foundation/5x/caddy.html
-  templates.html.caddymini  = EXT:caddy/Resources/Public/Html/Foundation/5x/caddy.html
+  templates.html.caddy      = EXT:caddy/Resources/Private/Templates/Foundation/5x/caddy.html
+  templates.html.caddymini  = EXT:caddy/Resources/Private/Templates/Foundation/5x/caddy.html
 }

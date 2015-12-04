@@ -1,0 +1,18 @@
+plugin.caddy {
+  html.accordion.classes.column.0 = col-xs-7
+  html.accordion.classes.column.1 = col-xs-2
+  html.accordion.classes.column.2 = col-xs-2 text-right
+  html.accordion.classes.column.3 = col-xs-1
+  html.accordion.classes.active   = in
+  html.minicaddy.classes.column.0 = col-xs-2
+  html.minicaddy.classes.column.1 = col-xs-5
+  html.minicaddy.classes.column.2 = col-xs-5 text-right
+
+  html.powermail.classes.buttonWrap = col-lg-6
+  html.powermail.classes.fieldsWrap = col-lg-12
+  html.powermail.classes.form       = col-lg-12
+  html.powermail.classes.tab        =
+
+  templates.html.caddy      = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/caddy.html
+  templates.html.caddymini  = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/caddy.html
+}

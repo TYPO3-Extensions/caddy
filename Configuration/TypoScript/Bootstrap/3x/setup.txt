@@ -1,0 +1,3 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Bootstrap/3x/Page/setup.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Bootstrap/3x/tx_caddy_pi1/setup.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:caddy/Configuration/TypoScript/Bootstrap/3x/tx_caddy_pi3/setup.ts">

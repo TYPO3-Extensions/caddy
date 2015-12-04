@@ -1,6 +1,6 @@
 page {
   includeCSS {
-    caddyMiniDropdown = EXT:caddy/Resources/Public/Css/Foundation/5x/caddyminireveal.css
+    caddyMiniReveal = EXT:caddy/Resources/Public/Css/Foundation/5x/caddyminireveal.css
   }
 }
 

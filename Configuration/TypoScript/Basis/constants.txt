@@ -113,14 +113,16 @@ plugin.caddy {
   # cat=caddy - getpost*/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   getpost.sponsors = Click me!
 
-  # cat=caddy - html accordion//100;          type=Class columns 1; label= CSS class for the first column of an accordion.
+  # cat=caddy - html accordion//100;          type=string; label= CSS class for the first column of an accordion.
   html.accordion.classes.column.0 = small-7 columns
-  # cat=caddy - html accordion//101;          type=Class columns 2; label= CSS class for the second column of an accordion.
+  # cat=caddy - html accordion//101;          type=string; label= CSS class for the second column of an accordion.
   html.accordion.classes.column.1 = small-2 columns
-  # cat=caddy - html accordion//102;          type=Class columns 3; label= CSS class for the third column of an accordion.
+  # cat=caddy - html accordion//102;          type=string; label= CSS class for the third column of an accordion.
   html.accordion.classes.column.2 = small-2 columns caddy-right
-  # cat=caddy - html accordion//103;          type=Class columns 4; label= CSS class for the fourth column of an accordion.
+  # cat=caddy - html accordion//103;          type=string; label= CSS class for the fourth column of an accordion.
   html.accordion.classes.column.3 = small-1 columns
+  # cat=caddy - html accordion//104;          type=string; label= CSS class for an active accordion.
+  html.accordion.classes.active = active
   # cat=caddy - html accordion/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.accordion.classes.sponsors = Click me!
 
@@ -483,18 +485,18 @@ plugin.caddy {
   # cat=caddy - tax/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   tax.sponsors = Click me!
 
-  # cat=caddy - templates//101; type=string; label= E-mails: Path to the HTML template file, which is used in e-mails (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/Resources/Public/Html/2.0.0/caddy_wo_options.html)
-  templates.e-mail            = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
-  # cat=caddy - templates//201; type=string; label= HTML caddy: Path to the HTML template file, which is used in HTML pages for the caddy (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/Resources/Public/Html/2.0.0/caddy_wo_options.html)
-  templates.html.caddy        = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
-  # cat=caddy - templates//202; type=string; label= HTML caddy mini: Path to the HTML template file, which is used in HTML pages for the mini caddy (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/Resources/Public/Html/2.0.0/caddy_wo_options.html)
-  templates.html.caddymini    = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
-  # cat=caddy - templates//203; type=string; label= HTML caddy sum: Path to the HTML template file, which is used in HTML pages for the caddy sum (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/files/templates/caddysum.html)
-  templates.html.caddysum    = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
-  # cat=caddy - templates//301; type=string; label= PDF delivery order: Path to the HTML template file, which is used in the delivery order - a PDF attachment  (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/Resources/Public/Html/2.0.0/caddy_wo_options.html)
-  templates.pdf.deliveryorder = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
-  # cat=caddy - templates//301; type=string; label= PDF invoice: Path to the HTML template file, which is used in the invoice - a PDF attachment (i.e. EXT:caddy/Resources/Public/Html/2.0.0/caddy.html or EXT:caddy/Resources/Public/Html/2.0.0/caddy_wo_options.html)
-  templates.pdf.invoice       = EXT:caddy/Resources/Public/Html/2.0.0/caddy.html
+  # cat=caddy - templates//101; type=string; label= E-mails: Path to the HTML template file, which is used in e-mails (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/Resources/Private/Templates/2.0.0/caddy_wo_options.html)
+  templates.e-mail            = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
+  # cat=caddy - templates//201; type=string; label= HTML caddy: Path to the HTML template file, which is used in HTML pages for the caddy (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/Resources/Private/Templates/2.0.0/caddy_wo_options.html)
+  templates.html.caddy        = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
+  # cat=caddy - templates//202; type=string; label= HTML caddy mini: Path to the HTML template file, which is used in HTML pages for the mini caddy (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/Resources/Private/Templates/2.0.0/caddy_wo_options.html)
+  templates.html.caddymini    = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
+  # cat=caddy - templates//203; type=string; label= HTML caddy sum: Path to the HTML template file, which is used in HTML pages for the caddy sum (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/files/templates/caddysum.html)
+  templates.html.caddysum    = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
+  # cat=caddy - templates//301; type=string; label= PDF delivery order: Path to the HTML template file, which is used in the delivery order - a PDF attachment  (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/Resources/Private/Templates/2.0.0/caddy_wo_options.html)
+  templates.pdf.deliveryorder = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
+  # cat=caddy - templates//301; type=string; label= PDF invoice: Path to the HTML template file, which is used in the invoice - a PDF attachment (i.e. EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html or EXT:caddy/Resources/Private/Templates/2.0.0/caddy_wo_options.html)
+  templates.pdf.invoice       = EXT:caddy/Resources/Private/Templates/2.0.0/caddy.html
   # cat=caddy - templates/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
   templates.externalLinks = Click me!
   # cat=caddy - templates/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!

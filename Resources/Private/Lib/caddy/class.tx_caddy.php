@@ -2926,20 +2926,6 @@ class tx_caddy extends tslib_pibase
 
     // #54832, 140108, dwildt, 1+
     return $content;
-
-    $marker = array(
-      '###' . $hashMarker . '_CHECKBOX###' => $content
-    );
-
-    // DRS
-    if ( $this->drs->drsMarker )
-    {
-      $prompt = '###' . $hashMarker . '_CHECKBOX###: ' . $content;
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
-    }
-    // DRS
-
-    return $marker;
   }
 
   /**
@@ -3061,21 +3047,6 @@ class tx_caddy extends tslib_pibase
 
     // #54832, 140108, dwildt, 1+
     return $content;
-
-    $marker = array
-      (
-      '###' . $hashMarker . '_RADIO###' => $content
-    );
-
-    // DRS
-    if ( $this->drs->drsMarker )
-    {
-      $prompt = '###' . $hashMarker . '_RADIO###: ' . $content;
-      t3lib_div::devlog( '[INFO/MARKER] ' . $prompt, $this->extKey, 0 );
-    }
-    // DRS
-
-    return $marker;
   }
 
   /**

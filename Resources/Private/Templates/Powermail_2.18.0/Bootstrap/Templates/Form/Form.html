@@ -1,0 +1,68 @@
+{namespace vh=In2code\Powermail\ViewHelpers}
+<f:layout name="Default" />
+
+Render Powermail Form
+{forms} 			All Forms with their Pages and their Fields
+
+<f:section name="main">
+
+  <f:comment>#i0093, 151204, dwildt, 2+</f:comment>
+  <div class="row">
+    <div id="caddy_powermail" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.form')}">
+
+      <f:flashMessages class="powermail_message powermail_message_error" />
+
+      <f:if condition="{forms}">
+        <f:then>
+          <f:for each="{forms}" as="form">
+            <f:comment>
+              #i0093, 151204, dwildt: form.class +demo-form
+            </f:comment>
+            <f:form
+              action="{action}"
+              name="field"
+              enctype="multipart/form-data"
+              additionalAttributes="{vh:Validation.EnableParsleyAndAjax(form:form)}"
+              addQueryString="{settings.misc.addQueryString}"
+              class="demo-form powermail_form powermail_form_{form.uid} {form.css} {vh:Misc.MorestepClass(activate:settings.main.moresteps)}">
+
+              <f:render partial="Misc/FormError" arguments="{_all}" />
+
+              <f:comment>#i0093, 151204, dwildt, 6+</f:comment>
+              <div class="form-navigation">
+                <button type="button" class="previous btn btn-default pull-left">&laquo; <f:translate key="order_previous_step" /></button>
+                <button type="button" class="next btn btn-primary pull-right"><f:translate key="order_next_step" /> &raquo;</button>
+                <!--<input class="btn btn-default pull-right" type="submit">-->
+                <span class="clearfix"></span>
+              </div>
+              <f:comment>#i0093, 151204, dwildt, 1+</f:comment>
+              <f:for each="{form.pages}" as="page">
+                <f:comment>#i0093, 151204, dwildt, 1+</f:comment>
+                <fieldset class="form-section">
+                  <legend class="powermail_legend">{page.title}</legend>
+                  <f:for each="{page.fields}" as="field">
+                    <f:render partial="Form/{vh:String.Upper(string:field.type)}" arguments="{field:field}" />
+                  </f:for>
+                </fieldset>
+              </f:for>
+              <f:form.hidden name="mail[form]" value="{form.uid}" class="powermail_form_uid" />
+              <f:render partial="Misc/HoneyPod" arguments="{form:form}" />
+
+              <f:comment>#i0093, 151204, dwildt, 6+</f:comment>
+              <div class="form-navigation">
+                <button type="button" class="previous btn btn-default pull-left">&laquo; <f:translate key="order_previous_step" /></button>
+                <button type="button" class="next btn btn-primary pull-right"><f:translate key="order_next_step" /> &raquo;</button>
+                <!--<input class="btn btn-default pull-right" type="submit">-->
+                <span class="clearfix"></span>
+              </div>
+            </f:form>
+          </f:for>
+        </f:then>
+        <f:else>
+          <f:translate key="error_no_form" />
+        </f:else>
+      </f:if>
+    </div>
+  </div>
+
+</f:section>

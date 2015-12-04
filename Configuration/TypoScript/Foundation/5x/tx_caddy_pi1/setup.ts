@@ -374,6 +374,10 @@ plugin.tx_caddy_pi1 {
         en = Your data, power of revocation
       }
     }
+    cssAccordionActive = TEXT
+    cssAccordionActive {
+      value = {$plugin.caddy.html.accordion.classes.active}
+    }
     linktoshop >
       // <button ...>label icon</button>
     linktoshop = COA
