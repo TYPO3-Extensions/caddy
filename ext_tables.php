@@ -19,7 +19,6 @@ if ( !defined( 'TYPO3_MODE' ) )
 // Add pagetree icons
 // Methods for backend workflows
 // Plugin Configuration
-// TCA for tables
 // Allow tables on pages
 ////////////////////////////////////////////////////////////////////////////
 //
@@ -209,84 +208,36 @@ t3lib_div::loadTCA( 'tt_content' );
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_excludelist' ][ $_EXTKEY . '_pi1' ] = 'layout,select_key,recursive,pages';
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_addlist' ][ $_EXTKEY . '_pi1' ] = 'pi_flexform';
 t3lib_extMgm::addPlugin( array(
-  'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi1',
+  'LLL:EXT:caddy/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi1',
   $_EXTKEY . '_pi1',
   t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif'
         ), 'list_type' );
-t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/pi1/flexform' . $pmVers . '.xml' );
+t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi1', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Pi1/flexform' . $pmVers . '.xml' );
 
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_excludelist' ][ $_EXTKEY . '_pi2' ] = 'layout,select_key,recursive,pages';
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_addlist' ][ $_EXTKEY . '_pi2' ] = 'pi_flexform';
 t3lib_extMgm::addPlugin( array(
-  'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi2',
+  'LLL:EXT:caddy/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi2',
   $_EXTKEY . '_pi2',
   t3lib_extMgm::extRelPath( $_EXTKEY ) . 'Resources/Public/Images/caddy_000_13.png'
         ), 'list_type' );
-t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi2', 'FILE:EXT:' . $_EXTKEY . '/pi2/flexform.xml' );
+t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi2', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Pi2/flexform.xml' );
 
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_excludelist' ][ $_EXTKEY . '_pi3' ] = 'layout,select_key,recursive,pages';
 $TCA[ 'tt_content' ][ 'types' ][ 'list' ][ 'subtypes_addlist' ][ $_EXTKEY . '_pi3' ] = 'pi_flexform';
 t3lib_extMgm::addPlugin( array(
-  'LLL:EXT:caddy/locallang_db.xml:tt_content.list_type_pi3',
+  'LLL:EXT:caddy/Resources/Private/Language/locallang_db.xml:tt_content.list_type_pi3',
   $_EXTKEY . '_pi3',
   t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif'
         ), 'list_type' );
-t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/pi3/flexform.xml' );
+t3lib_extMgm::addPiFlexFormValue( $_EXTKEY . '_pi3', 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Pi3/flexform.xml' );
 // Plugin Configuration
-////////////////////////////////////
-//
-// TCA for tables
-// Orders
-$TCA[ 'tx_caddy_order' ] = array(
-  'ctrl' => array(
-    'title' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_order',
-    'label' => 'numberOrder',
-    'label_alt' => 'numberDeliveryorder,numberInvoice,customerEmail',
-    'label_alt_force' => true,
-    'tstamp' => 'tstamp',
-    'crdate' => 'crdate',
-    'cruser_id' => 'cruser_id',
-    'delete' => 'deleted',
-    'default_sortby' => 'ORDER BY numberOrder DESC, tstamp DESC',
-    'readOnly' => $confArr[ 'databaseReadonly' ],
-    'hideAtCopy' => true,
-    'dividers2tabs' => true,
-    'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
-    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif',
-    'searchFields' => 'customerEmail,' .
-    'numberDeliveryorder,numberInvoice,numberOrder,' .
-    'sumGross,sumNet,sumTaxReduced,sumTaxNormal,'
-  ),
-);
-// Orders
-// Items
-$TCA[ 'tx_caddy_item' ] = array(
-  'ctrl' => array(
-    'title' => 'LLL:EXT:caddy/locallang_db.xml:tx_caddy_item',
-    'label' => 'uid',
-    'label_alt' => 'title',
-    'label_alt_force' => true,
-    'tstamp' => 'tstamp',
-    'crdate' => 'crdate',
-    'cruser_id' => 'cruser_id',
-    'delete' => 'deleted',
-    'default_sortby' => 'ORDER BY uid DESC',
-    'readOnly' => $confArr[ 'databaseReadonly' ],
-    'dividers2tabs' => true,
-    'dynamicConfigFile' => t3lib_extMgm::extPath( $_EXTKEY ) . 'tca.php',
-    'iconfile' => t3lib_extMgm::extRelPath( $_EXTKEY ) . 'ext_icon.gif',
-    'searchFields' => 'title'
-  ),
-);
-// Items
-// TCA for tables
 ////////////////////////////////////
 //
 // Allow tables on pages
 
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_item ' );
 t3lib_extMgm::allowTableOnStandardPages( 'tx_caddy_order ' );
-t3lib_extMgm::addToInsertRecords( 'tx_caddy_item ' );
-t3lib_extMgm::addToInsertRecords( 'tx_caddy_order ' );
+//t3lib_extMgm::addToInsertRecords( 'tx_caddy_item ' );
+//t3lib_extMgm::addToInsertRecords( 'tx_caddy_order ' );
 // Allow tables on pages
-?>

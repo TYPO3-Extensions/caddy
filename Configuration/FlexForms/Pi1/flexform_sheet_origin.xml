@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <min>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.min</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin.min</label>
           <config>
             <type>input</type>
             <size>10</size>
@@ -20,7 +20,7 @@
       </min>
       <max>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.max</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin.max</label>
           <config>
             <type>input</type>
             <size>10</size>
@@ -32,7 +32,7 @@
       </max>
       <order>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.order</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin.order</label>
           <config>
             <type>input</type>
             <size>10</size>
@@ -44,7 +44,7 @@
       </order>
       <invoice>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.invoice</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin.invoice</label>
           <config>
             <type>input</type>
             <size>10</size>
@@ -56,7 +56,7 @@
       </invoice>
       <deliveryorder>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:origin.deliveryorder</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:origin.deliveryorder</label>
           <config>
             <type>input</type>
             <size>10</size>

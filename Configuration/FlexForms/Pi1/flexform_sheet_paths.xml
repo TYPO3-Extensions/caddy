@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:paths</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <terms>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.terms</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:paths.terms</label>
           <config>
             <type>input</type>
             <size>40</size>
@@ -20,7 +20,7 @@
       </terms>
       <revocation>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.revocation</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:paths.revocation</label>
           <config>
             <type>input</type>
             <size>40</size>
@@ -32,7 +32,7 @@
       </revocation>
       <invoice>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.invoice</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:paths.invoice</label>
           <config>
             <type>input</type>
             <size>40</size>
@@ -44,7 +44,7 @@
       </invoice>
       <deliveryorder>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:paths.deliveryorder</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:paths.deliveryorder</label>
           <config>
             <type>input</type>
             <size>40</size>

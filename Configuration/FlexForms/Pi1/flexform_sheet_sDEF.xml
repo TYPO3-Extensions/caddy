@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdef</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:sdef</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <sdefReportEnable>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReportEnable</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:sdefReportEnable</label>
           <onChange>reload</onChange>
           <config>
             <type>check</type>
@@ -17,7 +17,7 @@
         </TCEforms>
       </sdefReportEnable>
       <sdefReport>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefReport</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:sdefReport</label>
         <TCEforms>
           <config>
             <type>user</type>
@@ -27,7 +27,7 @@
       </sdefReport>
       <sdefDrs>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:sdefDrs</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:sdefDrs</label>
           <config>
             <type>check</type>
             <default>0</default>

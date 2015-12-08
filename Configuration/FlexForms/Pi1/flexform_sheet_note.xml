@@ -2,13 +2,13 @@
 <T3DataStructure>
   <ROOT>
     <TCEforms>
-      <sheetTitle>LLL:EXT:caddy/pi1/locallang_flexform.xml:note</sheetTitle>
+      <sheetTitle>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:note</sheetTitle>
     </TCEforms>
     <type>array</type>
     <el>
       <note>
         <TCEforms>
-          <label>LLL:EXT:caddy/pi1/locallang_flexform.xml:note.note</label>
+          <label>LLL:EXT:caddy/Configuration/FlexForms/Pi1/locallang_flexform.xml:note.note</label>
           <config>
             <type>text</type>
             <cols>60</cols>

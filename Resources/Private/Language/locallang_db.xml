@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+  <meta type="array">
+    <type>database</type>
+    <description>Language labels for database tables/fields belonging to extension 'Caddy'</description>
+  </meta>
+  <data type="array">
+    <languageKey index="default" type="array">
+      <label index="tt_content.list_type_pi1">Caddy</label>
+      <label index="tt_content.list_type_pi2">Caddy : sum gross</label>
+      <label index="tt_content.list_type_pi3">Caddy : mini</label>
+      <label index="tx_caddy_item">Item</label>
+      <label index="tx_caddy_item.numberOrder">Order</label>
+      <label index="tx_caddy_item.price">Price</label>
+      <label index="tx_caddy_item.quantity">Quantity</label>
+      <label index="tx_caddy_item.sku">SKU</label>
+      <label index="tx_caddy_item.tax">Tax</label>
+      <label index="tx_caddy_item.tax.I.0">Reduced</label>
+      <label index="tx_caddy_item.tax.I.1">Normal</label>
+      <label index="tx_caddy_item.tax.I.2">Without</label>
+      <label index="tx_caddy_item.title">Title</label>
+      <label index="tx_caddy_item.weight">Weight</label>
+      <label index="tx_caddy_order">Order</label>
+      <label index="tx_caddy_order.customerEmail">to</label>
+      <label index="tx_caddy_order.div.email">E-mail</label>
+      <label index="tx_caddy_order.div.items">Items</label>
+      <label index="tx_caddy_order.div.numbers">Numbers</label>
+      <label index="tx_caddy_order.div.sum">Sum</label>
+      <label index="tx_caddy_order.fileDeliveryorder">Delivery order</label>
+      <label index="tx_caddy_order.fileInvoice">Invoice</label>
+      <label index="tx_caddy_order.fileRevocation">Power of Revocation</label>
+      <label index="tx_caddy_order.fileTerms"><![CDATA[Terms & Conditions]]></label>
+      <label index="tx_caddy_order.item">Items</label>
+      <label index="tx_caddy_order.numberDeliveryorder">Delivery order</label>
+      <label index="tx_caddy_order.numberInvoice">Invoice</label>
+      <label index="tx_caddy_order.numberOrder">Order</label>
+      <label index="tx_caddy_order.palette.emailDate">Sent</label>
+      <label index="tx_caddy_order.palette.isSentToCustomer">Is sent to customer</label>
+      <label index="tx_caddy_order.palette.isSentToVendor">Is sent to vendor</label>
+      <label index="tx_caddy_order.palette.files">Files</label>
+      <label index="tx_caddy_order.palette.items">Items</label>
+      <label index="tx_caddy_order.palette.numbers">Numbers</label>
+      <label index="tx_caddy_order.palette.sum">Total</label>
+      <label index="tx_caddy_order.pdfDeliveryorderToCustomer">Delivery order</label>
+      <label index="tx_caddy_order.pdfDeliveryorderToVendor">Delivery order</label>
+      <label index="tx_caddy_order.pdfInvoiceToCustomer">Invoice</label>
+      <label index="tx_caddy_order.pdfInvoiceToVendor">Invoice</label>
+      <label index="tx_caddy_order.pdfRevocationToCustomer">Power of Revocation</label>
+      <label index="tx_caddy_order.pdfRevocationToVendor">Power of Revocation</label>
+      <label index="tx_caddy_order.pdfTermsToCustomer"><![CDATA[Terms & Conditions]]></label>
+      <label index="tx_caddy_order.pdfTermsToVendor"><![CDATA[Terms & Conditions]]></label>
+      <label index="tx_caddy_order.quantity">Number of items</label>
+      <label index="tx_caddy_order.sumNet">net</label>
+      <label index="tx_caddy_order.sumGross">gross</label>
+      <label index="tx_caddy_order.sumTaxNormal">tax (normal)</label>
+      <label index="tx_caddy_order.sumTaxReduced">tax (reduced)</label>
+      <label index="tx_caddy_order.tstamp">at</label>
+    </languageKey>
+    <languageKey index="de" type="array">
+      <label index="tt_content.list_type_pi1">Caddy</label>
+      <label index="tt_content.list_type_pi2">Caddy : Brutto-Betrag</label>
+      <label index="tt_content.list_type_pi3">Caddy : Mini</label>
+      <label index="tx_caddy_item">Artikel</label>
+      <label index="tx_caddy_item.numberOrder">Bestellung</label>
+      <label index="tx_caddy_item.price">Preis</label>
+      <label index="tx_caddy_item.quantity">Menge</label>
+      <label index="tx_caddy_item.sku">SKU</label>
+      <label index="tx_caddy_item.tax">MwSt.</label>
+      <label index="tx_caddy_item.tax.I.0">Reduziert</label>
+      <label index="tx_caddy_item.tax.I.1">Normal</label>
+      <label index="tx_caddy_item.tax.I.2">Ohne</label>
+      <label index="tx_caddy_item.title">Titel</label>
+      <label index="tx_caddy_item.weight">Gewicht</label>
+      <label index="tx_caddy_order">Bestellung</label>
+      <label index="tx_caddy_order.customerEmail">an</label>
+      <label index="tx_caddy_order.div.email">E-Mail</label>
+      <label index="tx_caddy_order.div.items">Artikel</label>
+      <label index="tx_caddy_order.div.numbers">Nummern</label>
+      <label index="tx_caddy_order.div.sum">Summe</label>
+      <label index="tx_caddy_order.fileDeliveryorder">Lieferschein</label>
+      <label index="tx_caddy_order.fileInvoice">Rechnung</label>
+      <label index="tx_caddy_order.fileRevocation">Widerrufsbelehrung</label>
+      <label index="tx_caddy_order.fileTerms">AGB</label>
+      <label index="tx_caddy_order.item">Artikel</label>
+      <label index="tx_caddy_order.numberDeliveryorder">Lieferschein</label>
+      <label index="tx_caddy_order.numberInvoice">Rechnung</label>
+      <label index="tx_caddy_order.numberOrder">Bestellung</label>
+      <label index="tx_caddy_order.palette.emailDate">Gesendet</label>
+      <label index="tx_caddy_order.palette.isSentToCustomer">An Kunden gesendet</label>
+      <label index="tx_caddy_order.palette.isSentToVendor">An Anbieter gesendet</label>
+      <label index="tx_caddy_order.palette.files">Dateien</label>
+      <label index="tx_caddy_order.palette.items">Artikel</label>
+      <label index="tx_caddy_order.palette.numbers">Nummern</label>
+      <label index="tx_caddy_order.palette.sum">Gesamtsumme</label>
+      <label index="tx_caddy_order.pdfDeliveryorderToCustomer">Lieferschein</label>
+      <label index="tx_caddy_order.pdfDeliveryorderToVendor">Lieferschein</label>
+      <label index="tx_caddy_order.pdfInvoiceToCustomer">Rechnung</label>
+      <label index="tx_caddy_order.pdfInvoiceToVendor">Rechnung</label>
+      <label index="tx_caddy_order.pdfRevocationToCustomer">Widerrufsbelehrung</label>
+      <label index="tx_caddy_order.pdfRevocationToVendor">Widerrufsbelehrung</label>
+      <label index="tx_caddy_order.pdfTermsToCustomer">AGB</label>
+      <label index="tx_caddy_order.pdfTermsToVendor">AGB</label>
+      <label index="tx_caddy_order.quantity">Anzahl der Artikel</label>
+      <label index="tx_caddy_order.sumNet">Netto</label>
+      <label index="tx_caddy_order.sumGross">Brutto</label>
+      <label index="tx_caddy_order.sumTaxNormal">MWSt. (normal)</label>
+      <label index="tx_caddy_order.sumTaxReduced">MWSt. (reduziert)</label>
+      <label index="tx_caddy_order.tstamp">am</label>
+    </languageKey>
+  </data>
+</T3locallang>

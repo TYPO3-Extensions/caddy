@@ -5,11 +5,16 @@ TODO
 6.3.0
   15-12-04
   Feature
+  * #i0099: Items are saved (TCA inline)
   * #i0093: Bootstrap
             Effected files among others:
             * Configuration/TypoScript/Bootstrap/* (new)
             * Resources/Public/Html/Bootstrap/* (new)
   Improvement
+  * #i0098: tca.php is moved to Configuration/TCA
+            * proper TYPO3 6.x architecture
+  * #i0097: Flexforms are moved
+            * caddy/pi1 -> Configuration/FlexForms/Pi1
   * #i0096: Templates are moved
             from Resources/Private/Powermail* to Resources/Private/Templates/Powermail*
   * #i0095: Templates are moved

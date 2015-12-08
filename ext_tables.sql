@@ -3,7 +3,6 @@
 #
 # tx_caddy_item
 # tx_caddy_order
-# tx_caddy_order_mm_tx_caddy_item
 
 
 
@@ -17,8 +16,17 @@ CREATE TABLE tx_caddy_item (
   crdate int(11) DEFAULT '0' NOT NULL,
   cruser_id int(11) DEFAULT '0' NOT NULL,
   deleted tinyint(4) DEFAULT '0' NOT NULL,
+	sorting int(10) DEFAULT '0' NOT NULL,
+
+  numberOrder int(11) DEFAULT '0' NOT NULL,
+  price double(11,2) DEFAULT '0.00' NOT NULL,
+  quantity int(11) DEFAULT '0' NOT NULL,
+  sku tinytext,
+  tax int(11) DEFAULT '0' NOT NULL,
   title tinytext,
-  
+	tx_caddy_order int(11) unsigned DEFAULT '0' NOT NULL,
+  weight double(11,2) DEFAULT '0.00' NOT NULL,
+
   PRIMARY KEY (uid),
   KEY parent (pid)
 );
@@ -67,18 +75,4 @@ CREATE TABLE tx_caddy_order (
 
   PRIMARY KEY (uid),
   KEY parent (pid)
-);
-
-
-
-#
-# Table structure for table 'tx_caddy_order_mm_tx_caddy_item'
-# 
-CREATE TABLE tx_caddy_order_mm_tx_caddy_item (
-  uid_local int(11) DEFAULT '0' NOT NULL,
-  uid_foreign int(11) DEFAULT '0' NOT NULL,
-  tablenames varchar(30) DEFAULT '' NOT NULL,
-  sorting int(11) DEFAULT '0' NOT NULL,
-  KEY uid_local (uid_local),
-  KEY uid_foreign (uid_foreign)
 );

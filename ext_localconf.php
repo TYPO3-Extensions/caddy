@@ -13,5 +13,3 @@ t3lib_extMgm::addPItoST43( $_EXTKEY, 'pi2/class.tx_caddy_pi2.php', '_pi2', 'list
 
 $cached = false;
 t3lib_extMgm::addPItoST43( $_EXTKEY, 'pi3/class.tx_caddy_pi3.php', '_pi3', 'list_type', $cached );
-
-?>
