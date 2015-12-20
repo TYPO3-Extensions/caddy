@@ -125,6 +125,7 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/green/', 'Caddy [2.1] + gruen' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/red/', 'Caddy [2.1] + rot' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/', 'Caddy [3] + Bootstrap' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/tx_caddy_pi1/woOptionsWoFee/', 'Caddy [3] + Bootstrap ohne Caddy Optionen und Kosten' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Foundation/5x/', 'Caddy [3] + Foundation' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Foundation/4x/', 'Caddy [3] + Foundation 4.x (veraltet!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/Css/', 'Caddy [3.1] + Bootstrap CSS' );
@@ -136,7 +137,6 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/1x/', 'Caddy [5] Powermail 1.x (veraltet!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/css/', 'Caddy [5.1] + Powermail CSS fancy' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Bootstrap/3x/', 'Caddy [6] + Powermail Bootstrap' );
-    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Bootstrap/3x/woOptionsWoFee/', 'Caddy [6] + Powermaill 2.x Bootstrap ohne Caddy Optionen und Kosten' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Foundation/5x/', 'Caddy [6] + Powermail Foundation' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Properties/de/', 'Caddy [7] + Sprache: Deutsch' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/5x/', 'Caddy [8] + E-Payment: Paymill Foundation' );
@@ -152,6 +152,7 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/green/', 'Caddy [2.1] + green' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Css/red/', 'Caddy [2.1] + red' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/', 'Caddy [3] + Bootstrap' );
+    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/tx_caddy_pi1/woOptionsWoFee/', 'Caddy [3] + Bootstrap without Caddy options and costs' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Foundation/5x/', 'Caddy [3] + Foundation' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Foundation/4x/', 'Caddy [3] + Foundation 4.x (deprecated!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Bootstrap/3x/Css/', 'Caddy [3.1] + Bootstrap CSS' );
@@ -163,7 +164,6 @@ switch ( true )
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/1x/', 'Caddy [5] Powermail 1.x (deprecated!)' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/css/', 'Caddy [5.1] + Powermail CSS fancy' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Bootstrap/3x/', 'Caddy [6] + Powermail Bootstrap' );
-    t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Bootstrap/3x/woOptionsWoFee/', 'Caddy [6] + Powermail Bootstrap without Caddy options and fee' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Powermail/2x/Foundation/5x/', 'Caddy [6] + Powermail Foundation' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'Properties/de/', 'Caddy [7] + Language: German' );
     t3lib_extMgm::addStaticFile( $_EXTKEY, $path2Ts . 'EPayment/paymill/5x/', 'Caddy [8] + E-Payment: Paymill Foundation' );

@@ -7,6 +7,13 @@ TODO
   Feature
   * #i0099: Items are saved (TCA inline)
 
+6.3.1
+  15-12-20
+  Improvement
+  * #i0103: If you like a simple Caddy, please include the static template:
+            "Caddy [3] + Bootstrap without Caddy options and costs"
+            This is working in context with Bootstrap only
+
 6.3.0
   15-12-20
   Feature
@@ -16,7 +23,7 @@ TODO
             * Configuration/TypoScript/Bootstrap/* (new)
             * Resources/Public/Html/Bootstrap/* (new)
   Improvement
-  * #i0100: caddy.js: $ is moved to jQuery.
+  * #i0102: caddy.js: $ is moved to jQuery.
   * #i0098: tca.php is moved to Configuration/TCA
             * proper TYPO3 6.x architecture
   * #i0097: Flexforms are moved
