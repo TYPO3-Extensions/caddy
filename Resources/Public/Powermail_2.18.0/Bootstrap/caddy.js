@@ -1,4 +1,7 @@
-$( function() {
+
+// caddy/Resources/Public/Powermail_2.18.0/Bootstrap/caddy.js
+
+jQuery( function( $ ) {
   var $sections = $( '.form-section' );
 
   function navigateTo( index ) {

@@ -111,7 +111,7 @@
  * @author	Dirk Wildt <http://wildt.at.die-netzmacher.de>
  * @package    TYPO3
  * @subpackage    tx_caddy
- * @version     6.0.3
+ * @version     6.3.0
  * @since       1.4.6
  */
 class tx_caddy_session
@@ -1356,7 +1356,8 @@ class tx_caddy_session
         return NULL;
       // #i0080, 150212, dwildt, +
       case(isset( $this->pObj->piVars[ 'qty' ] )):
-        if (empty( $this->pObj->piVars[ 'qty' ][ $product[ 'uid' ] ] )) {
+        if ( empty( $this->pObj->piVars[ 'qty' ][ $product[ 'uid' ] ] ) )
+        {
           return NULL;
         }
         break;
@@ -1394,7 +1395,7 @@ class tx_caddy_session
    *
    * @return	void
    * @access private
-   * @version 2.0.0
+   * @version 6.3.0
    * @since 2.0.0
    */
   private function quantityCheckMinMaxDrs()
@@ -1404,15 +1405,18 @@ class tx_caddy_session
     {
       case( $this->pObj->gpvar[ 'uid' ] ):
         $prompt = 'Case: add an item';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        // #i0100, 151219, dwildt, 1-
+        //t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         break;
       case( $this->pObj->piVars[ 'qty' ] ):
         $prompt = 'Case: update item quantity';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        // #i0100, 151219, dwildt, 1-
+        //t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         break;
       case( $this->pObj->piVars[ 'del' ] ):
         $prompt = 'Case: delete an item';
-        t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
+        // #i0100, 151219, dwildt, 1-
+        //t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
         break;
       default:
         $prompt = 'ERROR: no value for switch' . PHP_EOL .
@@ -1423,6 +1427,13 @@ class tx_caddy_session
         break;
     }
     // SWITCH : add, update, delete
+
+    // #i0100, 151219, dwildt, 5+
+    if ( !$this->drs->drsCalc )
+    {
+      return;
+    }
+    t3lib_div::devlog( '[INFO/CALC] ' . $prompt, $this->extKey, 0 );
 
     return;
   }

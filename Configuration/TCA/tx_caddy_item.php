@@ -6,12 +6,13 @@ if ( !defined( 'TYPO3_MODE' ) )
 }
 
 $_EXTKEY = 'caddy';
+$confArr = unserialize( $GLOBALS[ 'TYPO3_CONF_VARS' ][ 'EXT' ][ 'extConf' ][ 'caddy' ] );
 
 return array(
   'ctrl' => array(
     'title' => 'LLL:EXT:caddy/Resources/Private/Language/locallang_db.xml:tx_caddy_item',
     'label' => 'title',
-    'label_alt' => '',
+    'label_alt' => 'price',
     'label_alt_force' => true,
     'tstamp' => 'tstamp',
     'crdate' => 'crdate',

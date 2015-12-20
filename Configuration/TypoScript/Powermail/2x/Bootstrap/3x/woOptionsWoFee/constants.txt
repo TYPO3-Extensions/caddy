@@ -1,0 +1,17 @@
+plugin.caddy {
+
+  templates {
+    e-mail  = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/woOptionsWoFee/caddy.html
+    html {
+      caddy   = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/woOptionsWoFee/caddy.html
+    }
+    pdf {
+      invoice = EXT:caddy/Resources/Private/Templates/Bootstrap/3x/woOptionsWoFee/caddy.html
+    }
+  }
+
+}
+
+
+
+

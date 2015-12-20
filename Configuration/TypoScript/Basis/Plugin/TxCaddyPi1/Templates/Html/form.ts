@@ -8,29 +8,47 @@ plugin.tx_caddy_pi1 {
         // order
       form =
       form {
-          // default, foundation
-        order =
+          // default, bootstrap, foundation
+        order = CASE
         order {
+          key = default
+          key = bootstrap
+          key = foundation
             // empty: not configured
-          default =
+          default = TEXT
           default {
+            value = You are here: plugin.tx_caddy_pi1.templates.html.form.order.default
+          }
+            // 3x
+          bootstrap = COA
+          bootstrap {
+              // wiSelect, woSelect
+            10 = COA
+            10 {
+              wiSelect = TEXT
+              wiSelect {
+                value = BOOTSTRAP 3X
+              }
+              10 < .wiSelect
+            }
           }
             // 5x
-          foundation =
+          foundation = COA
           foundation {
               // wiSelect, woSelect
-            5x =
+            5x = CASE
             5x {
+              key = wiSelect
                 // <form ...>, <fieldset>...</fieldset>, </form>
               wiSelect = COA
               wiSelect {
                   // <form ...>
                 10 = COA
                 10 {
-                    // <form class="caddy"
+                    // <form class="{$plugin.caddy.html.intothecaddy.form.class}"
                   10 = TEXT
                   10 {
-                    value = <form class="caddy"
+                    value = <form class="{$plugin.caddy.html.intothecaddy.form.class}"
                     noTrimWrap = || |
                   }
                     // action="..."
@@ -52,10 +70,34 @@ plugin.tx_caddy_pi1 {
                   // <fieldset>...</fieldset>
                 20 = COA
                 20 {
-                  wrap = <fieldset>|</fieldset>
+                  stdWrap {
+                    wrap {
+                      cObject = COA
+                      cObject {
+                        10 = TEXT
+                        10 {
+                          if {
+                            isTrue = {$plugin.caddy.html.intothecaddy.form.fieldset}
+                          }
+                          value = <fieldset>|</fieldset>
+                        }
+                        20 = TEXT
+                        20 {
+                          if {
+                            isTrue  = {$plugin.caddy.html.intothecaddy.form.fieldset}
+                            negate  = 1
+                          }
+                          value = |
+                        }
+                      }
+                    }
+                  }
                     // <legend>...</legend>
                   10 = TEXT
                   10 {
+                    if {
+                      isTrue = {$plugin.caddy.html.intothecaddy.form.legend}
+                    }
                     data = LLL:EXT:caddy/pi1/locallang.xml:formLegend
                     wrap = <legend>|</legend>
                   }
@@ -65,7 +107,7 @@ plugin.tx_caddy_pi1 {
                       // uid of the item
                     10 = TEXT
                     10 {
-                      field = {$plugin.caddy.db.table}.uid
+                      field = {$plugin.caddy.db.table}.uid // uid
                       wrap  = <input type="hidden" name="{$plugin.caddy.url.extension}[{$plugin.caddy.url.showUid}]" value="|" />
                     }
                       // quantity of the item
@@ -157,12 +199,15 @@ plugin.tx_caddy_pi1 {
                   30 = COA
                   30 {
                       // foundation row
-                    wrap = <div class="row collapse">|</div>
+                    wrap = {$plugin.caddy.html.intothecaddy.form.wrap.selectbutton}
                       // <select>...</select>
                     10 = TEXT
                     10 {
+                      if {
+                        isTrue = {$plugin.caddy.html.intothecaddy.form.select}
+                      }
                       value (
-                        <select name="{$plugin.caddy.getpost.qty}" size="1">
+                        <select name="{$plugin.caddy.getpost.qty}" class="{$plugin.caddy.html.intothecaddy.form.select.class}" size="1">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -186,17 +231,17 @@ plugin.tx_caddy_pi1 {
                         </select>
 )
                         // foundation column
-                      wrap = <div class="small-12 large-3 columns">|</div>
+                      wrap = {$plugin.caddy.html.intothecaddy.form.wrap.select}
                     }
                       // <button>...</button>
                     90 = COA
                     90 {
                         // <button>...</button>
-                      wrap = <div class="small-12 large-9 columns">|</div>
+                      wrap = {$plugin.caddy.html.intothecaddy.form.wrap.button}
                       10 = TEXT
                       10 {
                         data  = LLL:EXT:caddy/pi1/locallang.xml:formButton
-                        wrap  = <button class="button postfix" role="button ">|</button>
+                        wrap  = <button class="{$plugin.caddy.html.intothecaddy.button.classes.wiselect}" role="button ">|</button>
                       }
                     }
                   }
@@ -212,12 +257,18 @@ plugin.tx_caddy_pi1 {
                 20 {
                   30 {
                     10 >
-                    90.wrap >
+                    90 {
+                      wrap >
+                      10 {
+                        wrap  = <button class="{$plugin.caddy.html.intothecaddy.button.classes.woselect}" role="button ">|</button>
+                      }
+                    }
                     wrap >
                   }
                 }
               }
             }
+            10 < .5x
           }
         }
       }

@@ -187,7 +187,7 @@ plugin.tx_caddy_pi1 {
                 30 = TEXT
                 30 {
                   //value       = button delete mytiny alert onClickloadCaddyByAjax
-                  value       = button delete mytiny onClickloadCaddyByAjax
+                  value       = btn btn-primary button delete mytiny onClickloadCaddyByAjax
                   noTrimWrap  = | "|"|
                 }
                   // title

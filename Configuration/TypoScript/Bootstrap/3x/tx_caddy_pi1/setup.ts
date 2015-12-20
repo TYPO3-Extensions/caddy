@@ -539,7 +539,7 @@ plugin.tx_caddy_pi1 {
                   // class
                 30 = TEXT
                 30 {
-                  value       = button
+                  value       = btn btn-primary
                   noTrimWrap  = | "|"|
                 }
                   // title

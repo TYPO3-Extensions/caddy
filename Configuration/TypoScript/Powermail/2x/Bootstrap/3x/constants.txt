@@ -10,3 +10,16 @@ plugin.tx_powermail {
     templateRootPath  = EXT:caddy/Resources/Private/Templates/Powermail_2.18.0/Bootstrap/Templates/
   }
 }
+
+plugin.caddy {
+
+  # cat=caddy - powermail - javascript//100;          type=text; label= JavaScript: path to the JavaScript file
+  powermail {
+    javascript = EXT:caddy/Resources/Public/Powermail_2.18.0/Bootstrap/caddy.js
+  }
+  # cat=caddy - powermail - javascript/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de
+  powermail.externalLinks = Click me!
+  # cat=caddy - powermail - javascript/others/999;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  powermail.sponsors = Click me!
+
+}

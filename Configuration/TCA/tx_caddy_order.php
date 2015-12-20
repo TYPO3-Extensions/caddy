@@ -6,6 +6,7 @@ if ( !defined( 'TYPO3_MODE' ) )
 }
 
 $_EXTKEY = 'caddy';
+$confArr = unserialize( $GLOBALS[ 'TYPO3_CONF_VARS' ][ 'EXT' ][ 'extConf' ][ 'caddy' ] );
 
 return array(
   'ctrl' => array(

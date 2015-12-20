@@ -201,6 +201,29 @@ plugin.caddy {
   # cat=caddy - html width/others/999;       type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
   html.width.sponsors = Click me!
 
+  # cat=caddy - html - into the caddy//100;                 type=string;  label= Button CSS class without select: For the button "into the caddy" without the quantity select box
+  html.intothecaddy.button.classes.woselect = button postfix
+  # cat=caddy - html - into the caddy//101;                 type=string;  label= Button CSS class with select: For the button "into the caddy" with the quantity select box
+  html.intothecaddy.button.classes.wiselect = button postfix
+  # cat=caddy - html - into the caddy//200;                 type=string;  label= Form CSS class: CSS class of the form
+  html.intothecaddy.form.class              = caddy
+  # cat=caddy - html - into the caddy//201;                 type=string;  label= Form select CSS class: CSS class of the select box of the form
+  html.intothecaddy.form.select.class       =
+  # cat=caddy - html - into the caddy//301;                 type=boolean; label= Form fieldset: If enabled, form has a fieldset
+  html.intothecaddy.form.fieldset           = 1
+  # cat=caddy - html - into the caddy//302;                 type=boolean; label= Form legend: If enabled, form has a legend
+  html.intothecaddy.form.legend             = 1
+  # cat=caddy - html - into the caddy//303;                 type=boolean; label= Form select box: If enabled, form has a select box with quantities
+  html.intothecaddy.form.select             = 1
+  # cat=caddy - html - into the caddy//400;                 type=string;  label= Wrap select box and button: Wrap of both - the select box and the button
+  html.intothecaddy.form.wrap.selectbutton  = <div class="row collapse">|</div>
+  # cat=caddy - html - into the caddy//401;                 type=string;  label= Wrap button: Wrap of the button
+  html.intothecaddy.form.wrap.button        = <div class="small-12 large-9 columns">|</div>
+  # cat=caddy - html - into the caddy//402;                 type=string;  label= Wrap select box: Wrap of the select box
+  html.intothecaddy.form.wrap.select        = <div class="small-12 large-3 columns">|</div>
+  # cat=caddy - html - into the caddy/others/999;           type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptSponsors]; label=Subsidise the Caddy project!
+  html.intothecaddy.sponsors = Click me!
+
   # cat=caddy - inventory control/enable/202; type=boolean; label= Enabled:Disable it, if you don't want an inventory control in principle. Requirement for an inventory control is, that your shop has the needed fields like stockmanagement and stockquantity. See "Inventory Control" in the manual.
   api.inventorycontrol.enabled = 0
   # cat=caddy - inventory control/others/998;    type=user[EXT:caddy/Resources/Private/Lib/userfunc/class.tx_caddy_userfunc.php:tx_caddy_userfunc->promptExternalLinks]; label=External Links:typo3-caddy.de

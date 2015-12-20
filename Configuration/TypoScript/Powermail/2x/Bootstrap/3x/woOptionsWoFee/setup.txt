@@ -1,0 +1,13 @@
+plugin.tx_caddy_pi1 {
+  _HTMLMARKER {
+    caddy_header_items {
+      40 >
+        // value, currency: &nbsp;
+      40 = TEXT
+      40 {
+        value = &nbsp;
+        wrap = <span class="{$plugin.caddy.html.accordion.classes.column.2}">|</span>
+      }
+    }
+  }
+}

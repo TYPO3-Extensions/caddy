@@ -39,7 +39,7 @@ plugin.tx_caddy_pi3 {
           title {
             data = LLL:EXT:caddy/pi3/locallang.xml:linktocaddy
           }
-          ATagParams = class="minicaddy-button button tiny expand"
+          ATagParams = class="btn btn-primary btn-block minicaddy-button button tiny expand"
         }
         noTrimWrap  = || |
       }
@@ -58,7 +58,7 @@ plugin.tx_caddy_pi3 {
           title {
             data = LLL:EXT:caddy/pi3/locallang.xml:linktoshop
           }
-          ATagParams = class="minicaddy-button button tiny expand"
+          ATagParams = class="btn btn-primary btn-block minicaddy-button button tiny expand"
         }
         noTrimWrap  = || |
       }
