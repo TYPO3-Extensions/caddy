@@ -2,17 +2,21 @@ TODO
   * Remove jquery.t3caddy-4.0.0.js from tx_caddy_pi1_javascript
   * jquery.t3caddy-4.0.0.js: possible lang is en and de only!
 
+6.4.0
+  16-xx-xx
+  Feature
+  * #i0099: Items are saved (TCA inline)
+
 6.3.0
   15-12-20
   Feature
   * #i0101: JavaScript for responsive powermail can select by Constant Editor: See [CADDY - POWERMAIL - JAVASCRIPT]
-  * #i0099: Items are saved (TCA inline)
   * #i0093: Bootstrap
             Effected files among others:
             * Configuration/TypoScript/Bootstrap/* (new)
             * Resources/Public/Html/Bootstrap/* (new)
   Improvement
-  * #i0100: caddy.js: $ is moved to jQuery. Script got the first line jQuery.noConflict();
+  * #i0100: caddy.js: $ is moved to jQuery.
   * #i0098: tca.php is moved to Configuration/TCA
             * proper TYPO3 6.x architecture
   * #i0097: Flexforms are moved
