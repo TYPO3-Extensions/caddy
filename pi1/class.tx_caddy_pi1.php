@@ -1198,10 +1198,8 @@ class tx_caddy_pi1 extends tslib_pibase
 //      case( $GP['tx_powermail_pi1']['action'] == 'form' ):
       case( $GP[ 'tx_powermail_pi1' ] ):
         return true;
-        break;
       default:
         return false;
-        break;
     }
 
     unset( $GP );

@@ -22,8 +22,8 @@ Render Powermail Form
             </f:comment>
             <f:comment>#61879, 140925, dwildt, 7+</f:comment>
             <dl class="row collapse tabs" data-tab="">
-              <f:for each="{form.pages}" as="page">
-                <dd id="tab_{page.uid}" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.tab')}">
+              <f:for each="{form.pages}" as="page" iteration="pageIndex">
+                <dd id="tab_{page.uid}" class="{f:cObject(typoscriptObjectPath:'plugin.tx_caddy_pi1.templates.html.powermail.classes.tab')}{f:if(condition: pageIndex.isLast, then: ' end')}">
                   <a href="#powermail_tab_{page.uid}">{page.title}</a>
                 </dd>
               </f:for>

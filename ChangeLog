@@ -7,6 +7,13 @@ TODO
   Feature
   * #i0099: Items are saved (TCA inline)
 
+6.3.2
+  15-12-30
+  Improvement
+  * #i0104: Last Powermail tab got the CSS class "end"
+            Effected file:
+            * Resources/Private/Templates/Powermail_2.18.0/Foundation/Templates/Form/Form.html
+
 6.3.1
   15-12-20
   Improvement
